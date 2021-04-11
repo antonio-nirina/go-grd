@@ -2,4 +2,5 @@
 - Server in Golang
 - Client Reactjs
 - Graphql And Database MongoDb
-- Redis 
+- Redis
+- Pub/Sub Redis 
