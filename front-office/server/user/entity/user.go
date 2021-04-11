@@ -21,3 +21,8 @@ type User struct {
 	IdGameAccount [] AccountGame 				`json:"id_gameAccount"`
 	Point         int         					`json:"point"`
 }
+
+type UserEntity interface {
+	CreatedUser() (User,error)
+	FindOneUser()(User,error)
+}

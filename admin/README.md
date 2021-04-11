@@ -1,3 +1,3 @@
-### Client GRD App
+# Getting Started with GRIND
 
 
