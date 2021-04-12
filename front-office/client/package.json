@@ -42,7 +42,6 @@
     "save": "^2.4.0",
     "slick-carousel": "^1.8.1",
     "subscriptions-transport-ws": "^0.9.18",
-    "typescript": "^4.2.4",
     "web-vitals": "^1.1.1"
   },
   "scripts": {
@@ -68,5 +67,12 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^4.21.0",
+    "@typescript-eslint/parser": "^4.21.0",
+    "eslint": "^7.24.0",
+    "tslint-react": "^5.0.0",
+    "typescript": "^4.2.4"
   }
 }
