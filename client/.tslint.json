@@ -1,0 +1,32 @@
+{
+	"extends": [
+		"eslint:recommended",
+		"tslint-config-standard",
+		"tslint-react"
+	  ],
+	  "parser": "@typescript-eslint/parser",
+    "plugins": [
+		"@typescript-eslint",
+        "react"
+    ],
+    "rules": {
+        "react/jsx-uses-react": "error",
+        "react/jsx-uses-vars": "error",
+        "indent": [
+            "error",
+            4
+        ],
+        "linebreak-style": [
+            "error",
+            "unix"
+        ],
+        "quotes": [
+            "error",
+            "single"
+        ],
+        "semi": [
+            "error",
+            "never"
+        ]
+    }
+}
