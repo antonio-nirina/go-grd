@@ -1,0 +1,36 @@
+@charset "UTF-8";
+.wrap{	
+	padding: 10px 30px;
+}
+.header{
+	border-bottom : 2px solid #f5cc22;
+}
+.logo{
+	width: 150px;
+	height: auto;
+	display: inline-block;
+}
+.navmenu{
+	display: inline-block;
+	vertical-align: top;
+	vertical-align: middle;
+	max-width: 1024px;
+	width: 100%;
+	text-align: center;
+}
+.navmenu li{
+	display: inline-block;
+	padding: 0 20px;
+}
+.navmenu li a{	
+	
+	font-size: 17px;
+	font-family: "Russo One";
+}
+.v-align{
+	vertical-align: top;
+	display: inline-block;
+}
+.lang{
+
+}
