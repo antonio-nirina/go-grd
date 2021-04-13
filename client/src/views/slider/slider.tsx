@@ -13,7 +13,7 @@ const Slider: React.FC = function() {
       	<img src={home} alt="Grid" className="Imgresp"/>
       	<div className="slogan">
       		<p className="title">La plateforme compétitive pour consoles</p>
-      		<a href="#" title="Lance toi"><button className="btn">Lance toi</button></a>
+      		<button className="btn"><a href="#" title="Lance toi">Lance toi</a></button>
       	</div>
     </div>
   );

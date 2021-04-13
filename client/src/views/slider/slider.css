@@ -18,16 +18,14 @@ p.title{
 }
 .slogan a{
 	font-weight: bold;
-	display: block;
-	font-size: 25px;
-	
-
+    display: block;
+    font-size: 18px;
 }
 .slogan .btn{
 	font-family: "quicksand regular";
 	text-transform: uppercase;
-	padding: 15px 20px;
-    opacity: 0.6;
+	padding: 7px 20px;
+    opacity: 0.7;
     border: none;
     margin-top: 15px;
     background: #000;

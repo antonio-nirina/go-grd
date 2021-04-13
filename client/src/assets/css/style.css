@@ -71,7 +71,16 @@ h1{}
 }
 /*********  Media query ***************/
 @media screen and (max-width: 1296px) {
-.navmenu{
-      width: 55%;
-  }
+    .navmenu{
+          width: 55%;
+    }
+    header.header .wrap{
+        padding: 3px 0px;
+    }
+    .slogan{
+        top: 38%;
+    }
+    p.title{
+        font-size: 39px;
+    }
 }
