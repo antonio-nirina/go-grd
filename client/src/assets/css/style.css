@@ -69,4 +69,9 @@ h1{}
         url('../../assets/fonts/quicksand/static/Quicksand-Regular.woff') format('woff'),
         url('../../assets/fonts/quicksand/static/Quicksand-Regular.svg#RussoOne') format('svg');  
 }
-
+/*********  Media query ***************/
+@media screen and (max-width: 1296px) {
+.navmenu{
+      width: 55%;
+  }
+}
