@@ -1,0 +1,50 @@
+@charset "UTF-8";
+.wrap{	
+	padding: 10px 30px;
+}
+.header{
+	border-bottom : 2px solid #f5cc22;
+}
+
+.logo{
+	width: 266px;
+	height: auto;
+	display: inline-block;
+	vertical-align: top;	
+}
+.imglogo{
+	width: 97px;
+}
+.navmenu{
+	display: inline-block;	
+	vertical-align: top;
+	width: calc(100% - 532px);
+	text-align: center;
+}
+.navmenu li{
+	display: inline-block;
+	padding: 0 20px;
+}
+.navmenu li a{	
+	
+	font-size: 17px;
+	font-family: "Russo One";
+}
+.v-align{
+	vertical-align: top;
+	display: inline-block;
+}
+.tag{
+	width: 266px;
+	display: inline-block;
+}
+.lang{
+
+}
+.itemsTag{
+	position: relative;
+	background: url("../../assets/image/game-tag.png");
+}
+.dropdown{
+	position: absolute;
+}

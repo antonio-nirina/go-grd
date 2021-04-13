@@ -1,0 +1,72 @@
+/*
+Description:  Grid
+Version:    1.0
+*/
+@charset "UTF-8";
+/* CSS Document */
+html{
+	font-size:100%;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+	padding: 0;
+}
+
+a{
+   text-decoration:none;     
+}
+a:hover{
+	
+}
+label{
+	
+}
+textarea{ 
+	
+}
+p{ 
+
+ }
+span{
+
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6{
+	
+}
+h2{
+
+}
+h3{ 
+
+}
+ul,
+li{
+
+}
+h1{}
+
+/********** Fonts *********/
+@font-face {
+	font-family: 'Russo One';
+    src: url('../../assets/fonts/russoone/RussoOne.eot');
+    src: url('../../assets/fonts/russoone/RussoOne.eot?#iefix') format('embedded-opentype'),
+        url('../../assets/fonts/russoone/RussoOne.woff2') format('woff2'),
+        url('../../assets/fonts/russoone/RussoOne.woff') format('woff'),
+        url('../../assets/fonts/russoone/RussoOne.svg#RussoOne') format('svg');  
+}
+@font-face {
+	font-family: 'quicksand regular';
+    src: url('../../assets/fonts/quicksand/static/Quicksand-Regular.eot');
+    src: url('../../assets/fonts/quicksand/static/Quicksand-Regular.eot?#iefix') format('embedded-opentype'),
+        url('../../assets/fonts/quicksand/static/Quicksand-Regular.woff2') format('woff2'),
+        url('../../assets/fonts/quicksand/static/Quicksand-Regular.woff') format('woff'),
+        url('../../assets/fonts/quicksand/static/Quicksand-Regular.svg#RussoOne') format('svg');  
+}
+

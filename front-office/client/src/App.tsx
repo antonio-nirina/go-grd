@@ -1,14 +1,18 @@
-import React from 'react'
-import './App.css'
+import React from "react"
+import { BrowserRouter } from "react-router-dom"
+
+import Router from "./views/commons/router"
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-		  Hello
+      <header className="app-header">
+      	<BrowserRouter>
+		  <Router />
+		</BrowserRouter>
       </header>
     </div>
   );
 }
 
-export default App;
+export default App
