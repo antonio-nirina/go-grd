@@ -1,15 +1,12 @@
 import React from "react"
 import { Link } from 'react-router-dom'
 
-
 import "../header/header.css"
 import logo from "../../assets/image/logo.png"
 import fr from "../../assets/image/fr.png"
 import gb from "../../assets/image/gb.png"
 import ps from "../../assets/image/playstation.png"
-import { faBars } from "@fortawesome/free-solid-svg-icons";
-import { faPlus } from "@fortawesome/free-solid-svg-icons";
-import { faUsers } from "@fortawesome/free-solid-svg-icons";
+import { faBars, faPlus, faUsers } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 

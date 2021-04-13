@@ -1,0 +1,36 @@
+@charset "UTF-8";
+
+.Imgresp{
+	width: 100%;	
+}
+.sliderGrid{
+	
+}
+.slogan{
+	position: absolute;
+	top: 42%;
+	text-align: center;
+	width: 100%;
+}
+p.title{
+	font-family: "Russo One";
+	font-size: 45px;
+}
+.slogan a{
+	font-weight: bold;
+	display: block;
+	font-size: 25px;
+	
+
+}
+.slogan .btn{
+	font-family: "quicksand regular";
+	text-transform: uppercase;
+	padding: 15px 20px;
+    opacity: 0.6;
+    border: none;
+    margin-top: 15px;
+    background: #000;
+    color: #fff;
+
+}
