@@ -1,4 +1,7 @@
 import React from "react"
+import { Link } from 'react-router-dom'
+
+
 import "../header/header.css"
 import logo from "../../assets/image/logo.png"
 import fr from "../../assets/image/fr.png"
@@ -11,8 +14,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 
 
-const Header: React.FC = function() {    
-  return(    
+const Header: React.FC = function() {
+  return(
 
         <header className="header">
     	 	<div className="wrap">
@@ -21,17 +24,26 @@ const Header: React.FC = function() {
 	    	 			<a href="/" title="Grid" className="v-align">
 	    	 				<img src={logo} alt="Grid" className="imglogo"/>
 	    	 			</a>
-	    	 		</h1>   
+	    	 		</h1>
 	    	 	</div>
     	 		<nav className="navmenu">
     	 			<ul>
-    	 				<li><a href="#">Ligues</a></li>
-    	 				<li><a href="#">Tournois</a></li>
-    	 				<li><a href="#">Wagers</a></li>
-    	 				<li><a href="#">Communauté</a></li>
+    	 				<li>
+    	 					<Link to="/ligue"> </Link>
+	 					</li>
+    	 				<li>
+    	 					<Link to="/tournament">Tournois</Link>
+	 					</li>
+    	 				<li>
+    	 					<Link to="/wager">Wagers</Link>
+	 					</li>
+    	 				<li>
+    	 					<Link to="/communaute">Communauté</Link>
+	 					</li>
     	 			</ul>
     	 		</nav>
     	 		<div className="tag">
+
                     <div className="box">
     	 			   <div className="lang">
                         
@@ -43,6 +55,7 @@ const Header: React.FC = function() {
                             <i className="square"><FontAwesomeIcon icon={faPlus} size="xs"/></i>
                             <i className="relative"><FontAwesomeIcon icon={faUsers} size="lg"/><span className="counter">2</span></i>
                         </div>
+
                     </div>
                     <div className="gametag">
                         <div className="itemsTag">
@@ -63,11 +76,11 @@ const Header: React.FC = function() {
                                 <li><a href="#" title="Wager">Wager</a></li>
                                 <li><a href="#" title="Assistance">Assistance</a></li>
                             </ul>
-                        </div>                        
+                        </div>
                     </div>
-    	 		</div>         			
+    	 		</div>
             </div>
-		</header>    
+		</header>
   );
 
 }
