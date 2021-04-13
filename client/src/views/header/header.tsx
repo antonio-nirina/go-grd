@@ -48,7 +48,7 @@ const Header: React.FC = function() {
                             <img src={ps} className="itemTag" alt="" width="15" height="auto"/>
                             <img src={fr} className="itemTag" alt="" width="15" height="auto"/>
                             <div><FontAwesomeIcon icon="coffee" /></div>
-                            <div><FontAwesomeIcon icon={['far', 'coffee']} /></div>
+                            <div><FontAwesomeIcon icon="coffee" size="xs" /></div>
                         </div>
                         <div className="dropdown">
                             <ul>
