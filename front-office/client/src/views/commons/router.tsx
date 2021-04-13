@@ -1,11 +1,19 @@
 import React from "react"
 import { Route, Switch } from "react-router-dom"
 import Home from "../home/home"
+import Ligue from "../ligue/ligue"
+import Tournament from "../tournament/tournament"
+import Wager from "../wager/wager"
+import Communaute from "../communaute/communaute"
 
 const Router = function() {
 	return (
 		<Switch>
 			<Route path="/" exact component={Home} />
+			<Route path="/tournament" exact component={Tournament} />
+			<Route path="/ligue" exact component={Ligue} />
+			<Route path="/wager" exact component={Wager} />
+			<Route path="/communaute" exact component={Communaute} />
 		</Switch>
 	)
 }
