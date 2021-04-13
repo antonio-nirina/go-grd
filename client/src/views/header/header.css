@@ -5,17 +5,20 @@
 .header{
 	border-bottom : 2px solid #f5cc22;
 }
+
 .logo{
-	width: 150px;
+	width: 266px;
 	height: auto;
 	display: inline-block;
+	vertical-align: top;	
+}
+.imglogo{
+	width: 97px;
 }
 .navmenu{
-	display: inline-block;
+	display: inline-block;	
 	vertical-align: top;
-	vertical-align: middle;
-	max-width: 1024px;
-	width: 100%;
+	width: calc(100% - 532px);
 	text-align: center;
 }
 .navmenu li{
@@ -31,6 +34,17 @@
 	vertical-align: top;
 	display: inline-block;
 }
+.tag{
+	width: 266px;
+	display: inline-block;
+}
 .lang{
 
+}
+.itemsTag{
+	position: relative;
+	background: url("../../assets/image/game-tag.png");
+}
+.dropdown{
+	position: absolute;
 }

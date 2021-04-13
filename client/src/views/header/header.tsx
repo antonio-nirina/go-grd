@@ -4,7 +4,11 @@ import logo from "../../assets/image/logo.png"
 import fr from "../../assets/image/fr.png"
 import gb from "../../assets/image/gb.png"
 import ps from "../../assets/image/playstation.png"
+import { faBars } from "@fortawesome/free-solid-svg-icons";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faUsers } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
 
 
 const Header: React.FC = function() {    
@@ -15,7 +19,7 @@ const Header: React.FC = function() {
     	 		<div className="logo">
 	    	 		<h1>
 	    	 			<a href="/" title="Grid" className="v-align">
-	    	 				<img src={logo} alt="Grid" className="logo"/>
+	    	 				<img src={logo} alt="Grid" className="imglogo"/>
 	    	 			</a>
 	    	 		</h1>   
 	    	 	</div>
@@ -29,26 +33,23 @@ const Header: React.FC = function() {
     	 		</nav>
     	 		<div className="tag">
     	 			<div className="lang">
-                        <div className="fr">
-                            <img src={fr} alt="" className="lang" width="25" height="auto"/>
-                        </div>
-                        <div className="fr">
-                            <img src={gb} alt="" className="lang" width="25" height="auto" style={{display : "none"}}/>
-                        </div>                        
+                        
+                            <span><img src={fr} alt="" className="lang" width="28" height="29"/></span>                                               
+                            <span><img src={gb} alt="" className="lang" width="28" height="29" style={{display : "none"}}/></span>                    
+                            <i className="square"><FontAwesomeIcon icon={faPlus} /></i>
+                        
                     </div>
     	 			<div className="search">
                         <i></i>
                     </div>
                     <div className="connex">
-                        <i><span></span></i>
+                        <i><FontAwesomeIcon icon={faUsers} /><span>2</span></i>
                     </div>
                     <div className="gametag">
                         <div className="itemsTag">
-
-                            <img src={ps} className="itemTag" alt="" width="15" height="auto"/>
-                            <img src={fr} className="itemTag" alt="" width="15" height="auto"/>
-                            <div><FontAwesomeIcon icon="coffee" /></div>
-                            <div><FontAwesomeIcon icon="coffee" size="xs" /></div>
+                            <img src={ps} className="itemTag" alt="" width="18" height="14"/>
+                            <img src={fr} className="itemTag" alt="" width="18" height="14"/>
+                            <i className="itemTag"><FontAwesomeIcon icon={faBars} /></i>
                         </div>
                         <div className="dropdown">
                             <ul>
