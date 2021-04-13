@@ -3,7 +3,7 @@
 	position: relative;
 }
 .wrap{	
-	padding: 15px 50px;
+	padding: 3px 50px;
 }
 .header{
 	border-bottom : 2px solid #f5cc22;
@@ -45,8 +45,7 @@
 }
 .box{
 	width: 115px;
-	display: inline-block;
-	vertical-align: top;
+	display: inline-block;	
 }
 
 .lang{
@@ -64,7 +63,22 @@
 .gametag{
 	width: 140px;
 	display: inline-block;
-
+	position: relative;
+	border: 2px solid #4c4d4f;
+	background: url("../../assets/image/game-tag.png") no-repeat;
+	padding: 5px 12px;
+	vertical-align: middle;
+	background-size: 54px 58px;
+	border-radius: 36px;
+	background-position: -2px;
+}
+.bg-game p{
+	font-family: "russo One";
+}
+.itemTag{
+	margin: 6px 3px;
+	display: inline-block;
+	vertical-align: top;
 }
 .lang span{
 	display: block;	
@@ -87,10 +101,7 @@
 	padding: 3px;
 	border-radius: 50%;
 }
-.itemsTag{
-	position: relative;
-	/*background: url("../../assets/image/game-tag.png");*/
-}
+
 .counter{
 	position: absolute;
 	top: 2px;
@@ -105,8 +116,9 @@
 	padding: 2px;
 }
 .bg-game{
-	text-align: center;
+	text-align: right;
 }
 .dropdown{
 	display: none;
+	position: absolute;
 }
