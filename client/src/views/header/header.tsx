@@ -29,7 +29,7 @@ const Header: React.FC = function() {
     	 		<nav className="navmenu">
     	 			<ul>
     	 				<li>
-    	 					<Link to="/ligue"> </Link>
+    	 					<Link to="/ligue"> Ligues</Link>
 	 					</li>
     	 				<li>
     	 					<Link to="/tournament">Tournois</Link>
