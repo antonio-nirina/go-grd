@@ -1,15 +1,12 @@
 import React from "react"
 import { Link } from 'react-router-dom'
 
-
 import "../header/header.css"
 import logo from "../../assets/image/logo.png"
 import fr from "../../assets/image/fr.png"
 import gb from "../../assets/image/gb.png"
 import ps from "../../assets/image/playstation.png"
-import { faBars } from "@fortawesome/free-solid-svg-icons";
-import { faPlus } from "@fortawesome/free-solid-svg-icons";
-import { faUsers } from "@fortawesome/free-solid-svg-icons";
+import { faBars, faPlus, faUsers } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 
@@ -29,7 +26,7 @@ const Header: React.FC = function() {
     	 		<nav className="navmenu">
     	 			<ul>
     	 				<li>
-    	 					<Link to="/ligue"> </Link>
+    	 					<Link to="/ligue"> Ligues</Link>
 	 					</li>
     	 				<li>
     	 					<Link to="/tournament">Tournois</Link>
@@ -43,24 +40,30 @@ const Header: React.FC = function() {
     	 			</ul>
     	 		</nav>
     	 		<div className="tag">
-    	 			<div className="lang">
 
-                            <span><img src={fr} alt="" className="lang" width="28" height="29"/></span>
-                            <span><img src={gb} alt="" className="lang" width="28" height="29" style={{display : "none"}}/></span>
-                            <i className="square"><FontAwesomeIcon icon={faPlus} /></i>
+                    <div className="box">
+    	 			   <div className="lang">
+                        
+                            <span><img src={fr} alt="" className="lang" width="28" height="29"/></span>                                               
+                            <span><img src={gb} alt="" className="lang" width="28" height="29" style={{display : "none"}}/></span>                                                
+                        
+                        </div>    	 			
+                        <div className="connex">
+                            <i className="square"><FontAwesomeIcon icon={faPlus} size="xs"/></i>
+                            <i className="relative"><FontAwesomeIcon icon={faUsers} size="lg"/><span className="counter">2</span></i>
+                        </div>
 
-                    </div>
-    	 			<div className="search">
-                        <i></i>
-                    </div>
-                    <div className="connex">
-                        <i><FontAwesomeIcon icon={faUsers} /><span>2</span></i>
                     </div>
                     <div className="gametag">
                         <div className="itemsTag">
-                            <img src={ps} className="itemTag" alt="" width="18" height="14"/>
-                            <img src={fr} className="itemTag" alt="" width="18" height="14"/>
-                            <i className="itemTag"><FontAwesomeIcon icon={faBars} /></i>
+                            <div className="bg-game">
+                                <p>GameTag</p>
+                                <p>
+                                <img src={ps} className="itemTag" alt="" width="18" height="14"/>
+                                <img src={fr} className="itemTag" alt="" width="18" height="14"/>
+                                <i className="itemTag"><FontAwesomeIcon icon={faBars} /></i>
+                                </p>
+                            </div>
                         </div>
                         <div className="dropdown">
                             <ul>

@@ -1,29 +1,41 @@
 @charset "UTF-8";
+.relative{
+	position: relative;
+}
 .wrap{	
-	padding: 10px 30px;
+	padding: 3px 50px;
+	text-align: center;
+	position: fixed;
+	width: 100%;
+	border-bottom : 2px solid #f5cc22;
+	background: black;
 }
 .header{
-	border-bottom : 2px solid #f5cc22;
+	
 }
 
 .logo{
-	width: 266px;
-	height: auto;
+	max-width: 99px;
+	width: 100%;
 	display: inline-block;
-	vertical-align: top;	
+	vertical-align: middle;
 }
 .imglogo{
-	width: 97px;
+	max-width: 99px;
+	height: 26px;
+	width: 100%;
 }
 .navmenu{
-	display: inline-block;	
-	vertical-align: top;
-	width: calc(100% - 532px);
-	text-align: center;
+	max-width: 875px;
+    text-align: center;
+    display: inline-block;
+    vertical-align: middle;
+    margin-bottom: 5px;
+    width: 70%;
 }
 .navmenu li{
 	display: inline-block;
-	padding: 0 20px;
+	padding: 0 18px;
 }
 .navmenu li a{	
 	
@@ -31,20 +43,94 @@
 	font-family: "Russo One";
 }
 .v-align{
-	vertical-align: top;
+	vertical-align: middle;
 	display: inline-block;
 }
 .tag{
-	width: 266px;
+	max-width: 260px;
+	width: 100%;
 	display: inline-block;
+	vertical-align: middle;
 }
-.lang{
+.box{
+	max-width: 98px;
+	width: 100%;
+	display: inline-block;
+	margin-right: 17px;	
+}
 
+.lang{
+ width: 28px;
+ display: inline-block;
+ vertical-align: middle;
+ margin-right: 15px;
 }
-.itemsTag{
+.connex{
+	width: 55px;
+	display: inline-block;
+	vertical-align: middle;
+	
+}
+.gametag{
+	max-width: 145px;
+	width: 100%;
+	display: inline-block;
 	position: relative;
-	background: url("../../assets/image/game-tag.png");
+	border: 2px solid #4c4d4f;
+	background: url("../../assets/image/game-tag.png") no-repeat;
+	padding: 5px 16px;
+	vertical-align: middle;
+	background-size: 54px 58px;
+	border-radius: 36px;
+	background-position: -2px;
+}
+.bg-game p{
+	font-family: "russo One";
+}
+.itemTag{
+	margin: 6px 3px;
+	display: inline-block;
+	vertical-align: top;
+}
+.lang span{
+	display: block;	
+}
+.square{
+	border: 1px solid #c4c4c4;
+	padding: 1px;
+	margin-right: 7px;
+	display: inline-block;
+	height: 16px;
+	line-height: 10px;
+	vertical-align: top;
+	margin-top: 9px;
+}
+.relative svg{
+	color: #fcfcfc;
+	background: #bcbcbc;
+	width: 31px !important;
+	height: 32px;
+	padding: 3px;
+	border-radius: 50%;
+}
+
+.counter{
+	position: absolute;
+	top: 2px;
+	background: #ffcb15;
+	display: inline-block;
+	width: 19px;
+	text-align: center;
+	font-style: normal;
+	border-radius: 50%;
+	left: 23px;
+	font-size: 12px;
+	padding: 2px;
+}
+.bg-game{
+	text-align: right;
 }
 .dropdown{
+	display: none;
 	position: absolute;
 }
