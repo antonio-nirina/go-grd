@@ -4,6 +4,7 @@ import Home from "../home/home"
 import Ligue from "../ligue/ligue"
 import Tournament from "../tournament/tournament"
 import Wager from "../wager/wager"
+import Assistant from "../assistant/assistant"
 import Communaute from "../communaute/communaute"
 
 const Router = function() {
@@ -14,6 +15,7 @@ const Router = function() {
 			<Route path="/ligue" exact component={Ligue} />
 			<Route path="/wager" exact component={Wager} />
 			<Route path="/communaute" exact component={Communaute} />
+			<Route path="/assistant" exact component={Assistant} />
 		</Switch>
 	)
 }

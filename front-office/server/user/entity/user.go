@@ -7,7 +7,7 @@ import (
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
-var userCollection = ConfigMongo().Database("grd_database").Collection("users")
+var UserCollection = ConfigMongo().Database("grd_database").Collection("users")
 
 type User struct {
 	Uid           primitive.NewObjectID()       `json:"uid"`
@@ -20,9 +20,4 @@ type User struct {
 	Language      string      					`json:"language"`
 	IdGameAccount [] AccountGame 				`json:"id_gameAccount"`
 	Point         int         					`json:"point"`
-}
-
-type UserEntity interface {
-	CreatedUser() (User,error)
-	FindOneUser()(User,error)
 }
