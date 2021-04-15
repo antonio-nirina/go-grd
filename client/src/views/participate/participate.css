@@ -25,7 +25,7 @@
 }
 .block{
 	background: #2c2c2c;
-    width: 208px;
+    width: 200px;
     padding: 15px;
     display: inline-block;
     vertical-align: top;
@@ -90,5 +90,14 @@
 .gamecash span{
 	display: block;
 }
-
+.block-tournois{
+	margin-top: 5em;
+}
+.block-tournois .undertitle{
+	text-align: right
+}
+.block-tournois .undertitle:before{
+	float: right;
+	margin-left: 15px;
+}
 

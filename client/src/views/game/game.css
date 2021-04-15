@@ -1,0 +1,31 @@
+@charset "UTF-8";
+.jeux{
+	background: url("../../assets/image/bg-map.jpg") no-repeat;
+	background-size: 100%;
+	padding-top: 0em;
+	padding-bottom: 7em;
+
+}
+.logo-game{
+	width: 240px;
+	height: auto;
+	display: inline-block;
+	margin-right: 72px;
+	vertical-align: middle;
+	margin-bottom: 29px;
+
+}
+.logo-game img{
+	width: 240px;
+}
+.jeux h2{
+	font-family: "russo one";
+	font-size: 45px ;
+	width: 100%;
+	text-align: center;
+	padding-bottom: 1em;
+	padding-top: 35px;
+	font-weight: 200;
+	text-transform: uppercase;
+}
+
