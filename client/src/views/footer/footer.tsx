@@ -1,5 +1,6 @@
 import React from "react"
 import ReactDOM from 'react-dom'
+
 import logo from "../../assets/image/logo.png"
 import "../../assets/css/style.css"
 import "../footer/footer.css"
