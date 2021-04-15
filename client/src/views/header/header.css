@@ -91,6 +91,7 @@
 	margin: 6px 3px;
 	display: inline-block;
 	vertical-align: top;
+	cursor: pointer;
 }
 .lang span{
 	display: block;	
@@ -131,6 +132,45 @@
 	text-align: right;
 }
 .dropdown{
-	display: none;
+	display: block;
 	position: absolute;
+	background: #101010;
+	padding: 5px 15px 15px 15px;
+	top: 66px;	
+}
+.dropdown:before{
+  content:"";  
+  width: 0; 
+  height: 0; 
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;  
+  border-bottom: 10px solid #101010;
+  position: relative;
+  top: -33px;
+  left: 30px;
+
+}
+.dropdown li a{
+	margin-bottom: 5px;	
+}
+.dropdown li a{
+	display: block;
+	padding: 0 5px;	
+}
+
+.dropdown li:first-child a:first-child:after{
+	content:"";
+	display: block;
+	width: 100px;
+	height: 2px;
+	background: #f2cf1d;
+	margin: 5px 0px;
+}
+.dropdown li:last-child a:first-child:before{
+	content:"";
+	display: block;
+	width: 100px;
+	height: 2px;
+	background: #f2cf1d;
+	margin: 5px 0px;
 }
