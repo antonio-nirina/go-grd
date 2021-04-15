@@ -4,6 +4,8 @@ import Header from "../header/header"
 import Slider from "../slider/slider"
 import Participate from "../participate/participate"
 import Game from "../game/game"
+import Community from "../community/community"
+import Join from "../join/join"
 import Footer from "../footer/footer"
 
 import "../home/home.css"
@@ -25,6 +27,8 @@ const Home: React.FC = function() {
 	        </div>
 	      </div>
 	      <Game/>
+	      <Community/>
+	      <Join/>
 	      <Footer/>
 	  </div>
     </div>
