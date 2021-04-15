@@ -1,6 +1,7 @@
 @charset "UTF-8";
 .jeux{
-	background: url("../../assets/image/bg-map.jpg") no-repeat;
+	background: url("../../assets/image/bg-map.jpg");
+	background-repeat: no-repeat;	
 	background-size: 100%;
 	padding-top: 0em;
 	padding-bottom: 7em;
@@ -13,6 +14,7 @@
 	margin-right: 72px;
 	vertical-align: middle;
 	margin-bottom: 29px;
+	filter: none !important;
 
 }
 .logo-game img{
@@ -28,4 +30,5 @@
 	font-weight: 200;
 	text-transform: uppercase;
 }
+
 

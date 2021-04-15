@@ -1,7 +1,8 @@
 @charset "UTF-8";
 
 .Imgresp{
-	width: 100%;	
+	width: 100%;
+	filter: brightness(0.75);
 }
 .sliderGrid{
 	
@@ -30,5 +31,7 @@ p.title{
     margin-top: 15px;
     background: #000;
     color: #fff;
-
+}
+.carousel-status{
+	display: none !Important;
 }
