@@ -6,7 +6,7 @@ type Schema struct {
 	userResolver Resolver
 }
 
-func (s Schema) Query() *graphql.Object {
+func (s *Schema) Query() *graphql.Object {
 	objectConfig := graphql.ObjectConfig{
 		Name: "Query",
 		Fields: graphql.Fields{
@@ -26,7 +26,7 @@ func (s Schema) Query() *graphql.Object {
 	return graphql.NewObject(objectConfig)
 }
 
-func (s Schema) Mutation() *graphql.Object {
+func (s *Schema) Mutation() *graphql.Object {
 	objectConfig := graphql.ObjectConfig{
 		Name: "Mutation",
 		Fields: graphql.Fields{
