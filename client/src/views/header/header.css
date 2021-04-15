@@ -136,7 +136,8 @@
 	position: absolute;
 	background: #101010;
 	padding: 5px 15px 15px 15px;
-	top: 66px;	
+	top: 66px;
+	z-index: 2;
 }
 .dropdown:before{
   content:"";  
