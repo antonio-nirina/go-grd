@@ -7,6 +7,6 @@ import (
 )
 
 type Usecase interface {
-	GetById(ctx context.Context, id string)
-	Save(ctx context.Context, *entity.User) error
+	GetByIdUsecase(ctx context.Context, id string) (*entity.User, error)
+	SaveUseCase(ctx context.Context, u *entity.User) (interface{}, error)
 }

@@ -2,20 +2,31 @@ package repository
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/thoussei/antonio/front-office/server/user/entity"
 	"go.mongodb.org/mongo-driver/bson"
-	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
-func GetById(ctx context.Context, id string) {
+func GetByIdRepository(id string) (*entity.User, error) {
 	var usercollection = entity.UserCollection
-	var result primitive.M
-	err := usercollection.FindOne(context.TODO(), bson.D{{"name", body.Name}}).Decode(&result)
+	var result entity.User
+	err := usercollection.FindOne(context.TODO(), bson.D{{"_id", id}}).Decode(&result)
+
 	if err != nil {
-
-		fmt.Println(err)
-
+		return nil, err
 	}
+
+	return &result, nil
+}
+
+func SavedRepository(user entity.User) (interface{}, error) {
+	var usercollection = entity.UserCollection
+
+	saveUser, err := usercollection.InsertOne(context.TODO(), user)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return saveUser.InsertedID, nil
 }

@@ -2,24 +2,23 @@ package main
 
 import (
 	"fmt"
+	"net/http"
 
-	"github.com/sirupsen/logrus"
-	"github.com/graphql-go/graphql"
+	graph "github.com/graphql-go/graphql"
 	"github.com/graphql-go/handler"
+	"github.com/sirupsen/logrus"
+	"github.com/thoussei/antonio/front-office/server/graphql"
 )
 
 func main() {
-	schemaConfig := graphql.SchemaConfig{
-		Query: graphql.NewObject(graphql.ObjectConfig{
-			Name:   "RootQuery",
-			Fields: queries.GetRootFields(),
-		}),
-		Mutation: graphql.NewObject(graphql.ObjectConfig{
-			Name:   "RootMutation",
-			Fields: mutations.GetRootFields(),
-		}),
+	schm := graphql.Schema{}
+	query := schm.Query()
+	mutation := schm.Mutation()
+	schemaConfig := graph.SchemaConfig{
+		Query:    query,
+		Mutation: mutation,
 	}
-	schema, err := graphql.NewSchema(schemaConfig)
+	schema, err := graph.NewSchema(schemaConfig)
 
 	if err != nil {
 		logrus.Fatalf("Failed to create new schema, error: %v", err)
@@ -31,7 +30,7 @@ func main() {
 		GraphiQL: true,
 	})
 
-	http.Handle("/",httpHandler)
+	http.Handle("/", httpHandler)
 	fmt.Println("ready: listening 4000")
 	http.ListenAndServe(":4000", nil)
 }

@@ -18,7 +18,7 @@ type Resolver interface {
 	StoreUser(params graphql.ResolveParams) (interface{}, error)
 }
 
-func (u userUseCase) GetUserByID(p graphql.ResolveParams) (interface{}, error) {
+func (u *userUseCase) GetUserByID(p graphql.ResolveParams) (interface{}, error) {
 	var id string
 	var ok bool
 
@@ -27,7 +27,7 @@ func (u userUseCase) GetUserByID(p graphql.ResolveParams) (interface{}, error) {
 	}
 
 	ctx := context.Background()
-	result, err := u.userHandler.GetById(ctx, id)
+	result, err := u.userHandler.GetByIdUsecase(ctx, id)
 	if err != nil {
 		return nil, err
 	}
