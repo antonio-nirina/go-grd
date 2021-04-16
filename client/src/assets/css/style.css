@@ -89,5 +89,8 @@ h1{}
     }
     p.title{
         font-size: 39px;
+    }    
+    .block{
+        max-width: 196px;
     }
 }
