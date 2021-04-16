@@ -1,5 +1,6 @@
 import React from "react"
 import { Link } from 'react-router-dom'
+import {useState} from "react";
 
 import "../header/header.css"
 import logo from "../../assets/image/logo.png"
@@ -12,7 +13,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
   
 
 const Header: React.FC = function() {
-
+    const [showList, setShowList] = useState(false);
+    const onShow = function(){
+        setShowList(!showList);
+    }
   return(
 
         <header className="header">
@@ -62,11 +66,11 @@ const Header: React.FC = function() {
                                 <p>
                                 <a href="#"><img src={ps} className="itemTag" alt="" width="18" height="14"/></a>
                                 <a href="#"><img src={fr} className="itemTag" alt="" width="18" height="14"/></a>
-                                <i className="itemTag"><FontAwesomeIcon icon={faBars} /></i>
+                                <i className="itemTag" onClick={onShow}><FontAwesomeIcon icon={faBars} /></i>
                                 </p>
                             </div>
                         </div>
-                        <div className="dropdown">
+                        <div className={!showList ? "dropdown" :"dropdown show"}>
                             <ul>
                                 <li><a href="#" title="Profil">Profil</a></li>
                                 <li><a href="#" title="Tournois">Tournois</a></li>

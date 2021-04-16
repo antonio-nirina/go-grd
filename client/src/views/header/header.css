@@ -92,6 +92,8 @@
 	display: inline-block;
 	vertical-align: top;
 	cursor: pointer;
+	position: relative;
+	z-index: 3;
 }
 .lang span{
 	display: block;	
@@ -132,13 +134,19 @@
 	text-align: right;
 }
 .dropdown{
-	display: block;
+	display: none;
 	position: absolute;
 	background: #101010;
 	padding: 5px 15px 15px 15px;
 	top: 66px;
 	z-index: 2;
+
 }
+
+.dropdown.show{
+	display: block;
+}
+
 .dropdown:before{
   content:"";  
   width: 0; 
