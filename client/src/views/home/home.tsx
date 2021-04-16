@@ -1,5 +1,6 @@
 import React from "react"
 import ReactDOM from 'react-dom'
+import {useState} from "react";
 
 import Header from "../header/header" 
 import Slider from "../slider/slider"
@@ -12,7 +13,7 @@ import "../home/home.css"
 import "../../assets/css/style.css"
 
 
-const Home: React.FC = function() {
+const Home: React.FC = function() {	
   return(
     <div>
       <div className="container">

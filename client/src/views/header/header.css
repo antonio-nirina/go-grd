@@ -94,6 +94,7 @@
 	cursor: pointer;
 	position: relative;
 	z-index: 3;
+	height: auto;
 }
 .lang span{
 	display: block;	
