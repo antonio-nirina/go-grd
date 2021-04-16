@@ -1,10 +1,11 @@
 import React from "react"
 import ReactDOM from 'react-dom'
+
 import "../../assets/css/style.css"
 import "../community/community.css"
 import warzone from "../../assets/image/warzone-.png"
 import rlchampionsip from "../../assets/image/rlchampionsip.png"
-import video from "../../assets/image/video.png"
+import thumbnail from "../../assets/image/video.png"
 import promo from "../../assets/image/promo.png"
 
 
@@ -39,7 +40,9 @@ const Community: React.FC = function() {
         <div className="clip">
           <h3>Clip du mois</h3>
           <div className="video">
-            <img src={video} alt=""/>
+            <video controls poster={thumbnail} width="477" height="268">
+              <source src="../../assets/image/video.mp4" type="video/mp4"/>
+            </video>
           </div>
         </div>
         <div className="shop">
