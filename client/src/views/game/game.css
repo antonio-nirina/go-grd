@@ -7,18 +7,26 @@
 	padding-bottom: 7em;
 
 }
+.w100{
+	width: 100%;
+}
+.bg-game{
+	width: 100%;
+	text-align: left;
+}
 .logo-game{
-	width: 240px;
+	width: 22%;
 	height: auto;
-	display: inline-block;
-	margin-right: 72px;
+	display: inline-block;	
 	vertical-align: middle;
 	margin-bottom: 29px;
 	filter: none !important;
-
+	margin-left: 29px;
+	text-align: center;
 }
 .logo-game img{
-	width: 240px;
+	max-width: 240px;
+	width: 100%;
 }
 .jeux h2{
 	font-family: "russo one";

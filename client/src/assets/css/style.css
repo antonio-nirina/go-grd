@@ -115,4 +115,28 @@ h1{}
     margin-right: 0;
     border-radius: 15px;
    }
+   .home .logo-game{
+    width: 20%;
+   }
+   .home .actuality{
+    width: 100%;
+    display: block;    
+    margin-bottom: 15px;
+   }
+   .home .article{
+    width: 47%;    
+
+   }
+   .home .article img{
+    width: 100%;
+   }
+   .home .clip{
+    margin-bottom: 15px;
+    margin-left: 0px;
+    width: 100%;
+   }
+   .home .shop, .home .shop img{
+    width: 100%;
+   }
+
 }

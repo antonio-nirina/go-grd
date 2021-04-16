@@ -84,8 +84,12 @@
 	border-radius: 36px;
 	background-position: -2px;
 }
-.bg-game p{
+.bg-gametag a{
+	display: inline-block;
+}
+.bg-gametag p{
 	font-family: "russo One";
+	font-size: 13px;
 }
 .itemTag{
 	margin: 6px 3px;
@@ -95,6 +99,9 @@
 	position: relative;
 	z-index: 3;
 	height: auto;
+}
+.itemTag.drop{
+	height: 15px;
 }
 .lang span{
 	display: block;	
@@ -131,7 +138,7 @@
 	font-size: 12px;
 	padding: 2px;
 }
-.bg-game{
+.bg-gametag{
 	text-align: right;
 }
 .dropdown{

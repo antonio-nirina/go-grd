@@ -16,13 +16,14 @@
 .community-block{
 	margin: auto;
 	padding: 50px;
-	width: 1280px;
+	width: 100%;
 }
 .actuality{
 	background: #2c2c2c;	
 	display: inline-block;
 	padding: 20px;
 	border-radius: 10px;
+	width: 52%;
 
 
 }
@@ -56,6 +57,10 @@
 	margin-top: 15px;
 	margin-bottom: 5px;
 }
+.community video{
+	width: 100%;
+	height: auto;
+}
 .clip{
 	display: inline-block;
 	vertical-align: top;
@@ -63,6 +68,7 @@
 	padding: 25px;
 	border-radius: 10px;
 	margin-left: 15px;
+	width: 45%;
 }
 .clip h3{
 	font-family: "russo one";
@@ -72,7 +78,11 @@
 	background: #2c2c2c;	
 	display: inline-block;
 	padding: 20px;
-	border-radius: 10px;
+	border-radius: 10px;	
+	max-width: 543px;
+}
+.shop .img{
+	width: 100%;
 }
 .shop h3{
 	font-family: "russo one";
