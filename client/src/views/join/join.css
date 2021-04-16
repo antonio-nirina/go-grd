@@ -18,11 +18,12 @@
 }
 .join input{
 	background: none;
-	border-bottom: 1px solid #acacac;
+	border-bottom: 1px solid #acacac !important;
 	width: 240px;
 	padding: 3px;
 	color: #ffffff;
 	font-size: 14px;
+	border: none;
 }
 .join a{
 	font-size: 15px;
