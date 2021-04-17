@@ -2,6 +2,8 @@ package graphql
 
 import "github.com/graphql-go/graphql"
 
+// Struct for implementation Interface graphql
+
 type Schema struct {
 	userResolver Resolver
 }

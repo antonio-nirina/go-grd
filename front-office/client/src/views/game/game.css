@@ -1,0 +1,42 @@
+@charset "UTF-8";
+.jeux{
+	background: url("../../assets/image/bg-map.jpg");
+	background-repeat: no-repeat;	
+	background-size: 100%;
+	padding-top: 0em;
+	padding-bottom: 7em;
+
+}
+.w100{
+	width: 100%;
+}
+.bg-game{
+	width: 100%;
+	text-align: left;
+}
+.logo-game{
+	width: 22%;
+	height: auto;
+	display: inline-block;	
+	vertical-align: middle;
+	margin-bottom: 29px;
+	filter: none !important;
+	margin-left: 29px;
+	text-align: center;
+}
+.logo-game img{
+	max-width: 240px;
+	width: 100%;
+}
+.jeux h2{
+	font-family: "russo one";
+	font-size: 45px ;
+	width: 100%;
+	text-align: center;
+	padding-bottom: 1em;
+	padding-top: 35px;
+	font-weight: 200;
+	text-transform: uppercase;
+}
+
+

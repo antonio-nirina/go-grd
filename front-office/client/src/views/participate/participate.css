@@ -1,9 +1,12 @@
 @charset "UTF-8";
 .participate{
-	padding: 25px 0px;
+	padding: 25px 0px 0px;
 }
 .marg{
-	margin: 0 0em 0em 7em;
+	
+}
+.part{
+	padding: 3em 0em 3em 3em;
 }
 .undertitle{
 	display: inline-block;
@@ -23,22 +26,33 @@
 	float: left;
 	margin-right: 10px;
 }
-.block{
-	background: #2c2c2c;
-    width: 208px;
-    padding: 15px;
-    display: inline-block;
-    vertical-align: top;
-    border-radius: 15px;
-    height: 100%;
-    margin-right: 15px;
+.content{
+	display: grid;
+	grid-auto-flow: column;
 }
+.clear{
+	display: none;
+}
+.block{
+	background: #2c2c2c;    
+    height: 150px;
+    padding: 15px;    
+    vertical-align: top;
+    border-radius: 15px;    
+    margin-right: 15px;
+    position: relative;
+}
+
 .block p{
 	font-family: "russo one";
 }
 .block p.legend{
 	font-size: 12px;
-	margin-bottom: 55px;
+	text-align: left;	
+}
+.block .info{
+	position: absolute;
+	bottom: 0;
 }
 .block .info p{
 	font-size: 11px;
@@ -46,8 +60,9 @@
 	margin: 15px 0;
 }
 .block.last{
-	width: 167px;
+	
     margin-right: 0;
+    border-radius: 15px 0px 0px 15px;
 }
 .last p{
 	text-transform: uppercase;
@@ -58,8 +73,9 @@
 }
 .gamecash .lot p{
 	display: inline-block;
-	margin-right: 15px;
-	width: 31%;
+	margin-right: 13px;
+	width: 28.5%;
+	text-align: center;
 }
 .gamecash .lot{
 	width: 60%;
@@ -90,5 +106,20 @@
 .gamecash span{
 	display: block;
 }
-
+.block-tournois{
+	margin-top: 2em;
+	padding: 3em 0em 3em 3em ;	
+	background: #2c2c2c;
+	
+}
+.block-tournois .block{
+	background: #101010;
+}
+.block-tournois .undertitle{
+	text-align: right
+}
+.block-tournois .undertitle:before{
+	float: right;
+	margin-left: 15px;
+}
 

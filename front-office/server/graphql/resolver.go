@@ -28,8 +28,10 @@ func (u *userUseCase) GetUserByID(p graphql.ResolveParams) (interface{}, error) 
 
 	ctx := context.Background()
 	result, err := u.userHandler.GetByIdUsecase(ctx, id)
+	
 	if err != nil {
 		return nil, err
 	}
+
 	return *result, nil
 }

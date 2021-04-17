@@ -35,6 +35,10 @@ p{
 span{
 
 }
+h2{
+
+	
+}
 h1,
 h2,
 h3,
@@ -74,16 +78,65 @@ h1{}
 }
 /*********  Media query ***************/
 @media screen and (max-width: 1296px) {
-    .navmenu{
+    .home .navmenu{
           width: 55%;
     }
-    header.header .wrap{
+    .home header.header .wrap{
         padding: 3px 0px;
     }
-    .slogan{
+    .home .slogan{
         top: 38%;
     }
-    p.title{
+    .home p.title{
         font-size: 39px;
-    }
+    }    
+    
+}
+@media screen and (max-width: 991px){
+   .part{
+     padding: 0 2em;
+   }
+   .home p.title{
+        font-size: 23px;
+   }
+   .home .slogan{
+        top: 44%;
+   }
+   .home .content{
+    display: inherit;
+   }
+   .home .block{
+        width: 30%;
+        display: inline-block;
+        margin-bottom: 15px;
+   }
+   .home .block.last{
+    width: 31%;
+    margin-right: 0;
+    border-radius: 15px;
+   }
+   .home .logo-game{
+    width: 20%;
+   }
+   .home .actuality{
+    width: 100%;
+    display: block;    
+    margin-bottom: 15px;
+   }
+   .home .article{
+    width: 47%;    
+
+   }
+   .home .article img{
+    width: 100%;
+   }
+   .home .clip{
+    margin-bottom: 15px;
+    margin-left: 0px;
+    width: 100%;
+   }
+   .home .shop, .home .shop img{
+    width: 100%;
+   }
+
 }

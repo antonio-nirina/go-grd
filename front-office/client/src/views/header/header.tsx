@@ -1,5 +1,6 @@
 import React from "react"
 import { Link } from 'react-router-dom'
+import {useState} from "react";
 
 import "../header/header.css"
 import logo from "../../assets/image/logo.png"
@@ -9,9 +10,13 @@ import ps from "../../assets/image/playstation.png"
 import { faBars, faPlus, faUsers } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-
+  
 
 const Header: React.FC = function() {
+    const [showList, setShowList] = useState(false);
+    const onShow = function(){
+        setShowList(!showList);
+    }    
   return(
 
         <header className="header">
@@ -44,28 +49,28 @@ const Header: React.FC = function() {
                     <div className="box">
     	 			   <div className="lang">
                         
-                            <span><img src={fr} alt="" className="lang" width="28" height="29"/></span>                                               
-                            <span><img src={gb} alt="" className="lang" width="28" height="29" style={{display : "none"}}/></span>                                                
+                            <span><a href="#" title=""><img src={fr} alt="" className="lang" width="28" height="29"/></a></span>                                               
+                            <span><a href="#" title=""><img src={gb} alt="" className="lang" width="28" height="29" style={{display : "none"}}/></a></span>                                                
                         
                         </div>    	 			
                         <div className="connex">
-                            <i className="square"><FontAwesomeIcon icon={faPlus} size="xs"/></i>
-                            <i className="relative"><FontAwesomeIcon icon={faUsers} size="lg"/><span className="counter">2</span></i>
+                            <a href="#"><i className="square"><FontAwesomeIcon icon={faPlus} size="xs"/></i></a>
+                            <a href="#"><i className="relative"><FontAwesomeIcon icon={faUsers} size="lg"/><span className="counter">2</span></i></a>
                         </div>
 
                     </div>
                     <div className="gametag">
                         <div className="itemsTag">
-                            <div className="bg-game">
+                            <div className="bg-gametag">
                                 <p>GameTag</p>
                                 <p>
-                                <img src={ps} className="itemTag" alt="" width="18" height="14"/>
-                                <img src={fr} className="itemTag" alt="" width="18" height="14"/>
-                                <i className="itemTag"><FontAwesomeIcon icon={faBars} /></i>
+                                <a href="#"><img src={ps} className="itemTag" alt="" width="18" height="14"/></a>
+                                <a href="#"><img src={fr} className="itemTag" alt="" width="15" height="14"/></a>
+                                <i className="itemTag drop" onClick={onShow}><FontAwesomeIcon icon={faBars} /></i>
                                 </p>
                             </div>
                         </div>
-                        <div className="dropdown">
+                        <div className={!showList ? "dropdown" :"dropdown show"}>
                             <ul>
                                 <li><a href="#" title="Profil">Profil</a></li>
                                 <li><a href="#" title="Tournois">Tournois</a></li>
