@@ -1,7 +1,78 @@
 input,textarea:focus{
 	outline: none;
 }
-input,textarea{
-	border: none transparent;
+.d-none{
+	display: none;
+}
+.contact-assist input,textarea {
+	border:none;
 	outline: none;
+	border-width: 0px;
+	background: 0 0;
+	color: #fff;
+	width: 100%;
+
+}
+.contact-arround{
+	width: 60%;
+	margin: 0 auto;
+}
+.contact-wrap {
+	display: inline;
+}
+.swrap{
+	width: 20%;
+}
+.contact-assist textarea {
+	width: 100%;
+	height: 95px;
+}
+.contact-assist .btn-send{
+	margin: 0 auto;
+	display: block;
+	text-align: center;
+}
+.block-info {
+	margin-bottom: 19px;
+}
+
+.block-info .focus-first::after{
+	font-size: 22px;
+	color: #fff;
+	content: attr(data-placeholder);
+	display: block;
+	width: 100%;
+	position: absolute;
+	top: 6px;
+	left: 0;
+	padding-left: 5px;
+}
+.wrap-info {
+	border-bottom: 1px solid;
+}
+.cnt-name .wrap-first-name {
+	width: 50%;
+	margin-left: 19px;
+}
+.cnt-name .wrap-name {
+	width: 48%;
+}
+
+.contact-assist .cnt-name {
+	display: flex;
+	margin-bottom: 60px;
+	margin-top: 80px;
+}
+.contact-assist .btn-send {
+	margin-top: 25px;
+}
+.btn-send button {
+	background-color: #f5cc22;
+}
+.contact-arround .contact {
+	text-align: center;
+	font-size: 22px;
+	margin-top: 45px;
+	color: #f5cc22;
+	font-weight: bold;
 }
