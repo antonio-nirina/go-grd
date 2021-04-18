@@ -12,7 +12,7 @@ import (
 )
 
 type resolver struct {
-	userHandler handler.Usecase
+	userHandler handler.UserUseCase
 }
 
 type Resolver interface {
@@ -21,7 +21,7 @@ type Resolver interface {
 	StoreUser(params graphql.ResolveParams) (interface{}, error)
 }
 
-func newResolver(userService handler.Usecase) Resolver {
+func newResolver(userService handler.UserUseCase) Resolver {
 	return &resolver{
 		userHandler: userService,
 	}
@@ -59,7 +59,7 @@ func (r *resolver) StoreUser(params graphql.ResolveParams) (interface{}, error) 
 		Point:         params.Args["point"].(int),
 	}
 	ctx := context.Background()
-	res, err := r.userHandler.SaveUseCase(ctx, user)
+	res, err := r.userHandler.SaveUseCase(ctx, *user)
 
 	if err != nil {
 		return nil, err

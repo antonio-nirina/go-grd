@@ -24,9 +24,10 @@ func main() {
 	}
 
 	httpHandler := handler.New(&handler.Config{
-		Schema:   &schema,
-		Pretty:   true,
-		GraphiQL: true,
+		Schema:     &schema,
+		Pretty:     true,
+		GraphiQL:   true,
+		Playground: true,
 	})
 
 	http.Handle("/", httpHandler)
