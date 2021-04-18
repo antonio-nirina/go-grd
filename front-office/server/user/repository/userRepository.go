@@ -7,10 +7,13 @@ import (
 	"go.mongodb.org/mongo-driver/bson"
 )
 
-func GetByIdRepository(id string) (*entity.User, error) {
-	var usercollection = entity.UserCollection
+type NewUserRepository struct{}
+
+var usercollection = entity.UserCollection
+
+func (repo *NewUserRepository) GetByIdRepository(id string) (*entity.User, error) {
 	var result entity.User
-	err := usercollection.FindOne(context.TODO(), bson.D{{"_id", id}}).Decode(&result)
+	err := usercollection.FindOne(context.TODO(), bson.D{{"uid", id}}).Decode(&result)
 
 	if err != nil {
 		return nil, err
@@ -19,9 +22,7 @@ func GetByIdRepository(id string) (*entity.User, error) {
 	return &result, nil
 }
 
-func SavedRepository(user entity.User) (interface{}, error) {
-	var usercollection = entity.UserCollection
-
+func (repo *NewUserRepository) SavedRepository(user entity.User) (interface{}, error) {
 	saveUser, err := usercollection.InsertOne(context.TODO(), user)
 
 	if err != nil {

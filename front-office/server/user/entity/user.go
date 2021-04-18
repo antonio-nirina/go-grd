@@ -17,6 +17,6 @@ type User struct {
 	IsBanned      bool                 `json:"is_banned"`
 	Avatar        string               `json:"avatar,omitempty"`
 	Language      string               `json:"language"`
-	IdGameAccount []entity.AccountGame `json:"id_gameAccount,omitempty"`
+	IdGameAccount []entity.GameAccount `json:"gameAccount,omitempty"`
 	Point         int                  `json:"point"`
 }
