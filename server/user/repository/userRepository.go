@@ -10,7 +10,7 @@ import (
 func GetByIdRepository(id string) (*entity.User, error) {
 	var usercollection = entity.UserCollection
 	var result entity.User
-	err := usercollection.FindOne(context.TODO(), bson.D{{"_id", id}}).Decode(&result)
+	err := usercollection.FindOne(context.TODO(), bson.D{{"uid", id}}).Decode(&result)
 
 	if err != nil {
 		return nil, err

@@ -20,3 +20,9 @@ type AccountGame struct {
 	Game      Game         `json:"game"`
 	Plateform GamePlatform `json:"plateform"`
 }
+
+type GameAccount struct {
+	Uid       string      `json:"uid"`
+	IdAccount string      `json:"idAccount"`
+	Account   AccountGame `json:"account"`
+}

@@ -1,6 +1,8 @@
 package graphql
 
-import "github.com/graphql-go/graphql"
+import (
+	"github.com/graphql-go/graphql"
+)
 
 // Struct for implementation Interface graphql
 
@@ -8,7 +10,9 @@ type Schema struct {
 	userResolver Resolver
 }
 
-func (s *Schema) Query() *graphql.Object {
+var schm = Schema{}
+
+func Query() *graphql.Object {
 	objectConfig := graphql.ObjectConfig{
 		Name: "Query",
 		Fields: graphql.Fields{
@@ -20,7 +24,7 @@ func (s *Schema) Query() *graphql.Object {
 						Type: graphql.String,
 					},
 				},
-				Resolve: s.userResolver.GetUserByID,
+				Resolve: schm.userResolver.GetUserByID,
 			},
 		},
 	}
@@ -28,7 +32,8 @@ func (s *Schema) Query() *graphql.Object {
 	return graphql.NewObject(objectConfig)
 }
 
-func (s *Schema) Mutation() *graphql.Object {
+// (s *Schema)
+func Mutation() *graphql.Object {
 	objectConfig := graphql.ObjectConfig{
 		Name: "Mutation",
 		Fields: graphql.Fields{
@@ -58,7 +63,7 @@ func (s *Schema) Mutation() *graphql.Object {
 						Type: graphql.String,
 					},
 				},
-				Resolve: s.userResolver.StoreUser,
+				Resolve: schm.userResolver.StoreUser,
 			},
 		},
 	}

@@ -11,9 +11,8 @@ import (
 )
 
 func main() {
-	schm := graphql.Schema{}
-	query := schm.Query()
-	mutation := schm.Mutation()
+	query := graphql.Query()
+	mutation := graphql.Mutation()
 	schemaConfig := graph.SchemaConfig{
 		Query:    query,
 		Mutation: mutation,
