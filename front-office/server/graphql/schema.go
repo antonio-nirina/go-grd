@@ -2,10 +2,9 @@ package graphql
 
 import (
 	"github.com/graphql-go/graphql"
-	gameEntity "github.com/thoussei/antonio/front-office/server/games/entity"
+	schemaType "github.com/thoussei/antonio/front-office/server/graphql/type"
 	"github.com/thoussei/antonio/front-office/server/user/handler"
 	"github.com/thoussei/antonio/front-office/server/user/repository"
-	"github.com/thoussei/antonio/front-office/server/graphql/type"
 )
 
 // Struct for implementation Interface graphql
@@ -40,7 +39,7 @@ func Query() *graphql.Object {
 
 func Mutation() *graphql.Object {
 	objectConfig := graphql.ObjectConfig{
-		Type: type.UserSchemaType
+		Type: schemaType.UserSchemaType,
 		Name: "Mutation",
 		Fields: graphql.Fields{
 			"create": &graphql.Field{

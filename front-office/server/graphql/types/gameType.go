@@ -1,4 +1,4 @@
-package type
+package types
 
 import (
 	"github.com/graphql-go/graphql"
@@ -20,7 +20,7 @@ var GameAccountType = graphql.NewObject(graphql.ObjectConfig{
 })
 
 var GameSchemaType = graphql.NewObject(graphql.ObjectConfig{
-	Name:"GameSchema",
+	Name: "GameSchema",
 	Fields: graphql.Fields{
 		"uid": &graphql.Field{
 			Type: graphql.String,
@@ -31,11 +31,11 @@ var GameSchemaType = graphql.NewObject(graphql.ObjectConfig{
 		"description": &graphql.Field{
 			Type: graphql.String,
 		},
-	}
+	},
 })
 
 var GamePlatformSchemaType = graphql.NewObject(graphql.ObjectConfig{
-	Name:"GamePlatformSchema",
+	Name: "GamePlatformSchema",
 	Fields: graphql.Fields{
 		"uid": &graphql.Field{
 			Type: graphql.String,
@@ -46,26 +46,26 @@ var GamePlatformSchemaType = graphql.NewObject(graphql.ObjectConfig{
 		"description": &graphql.Field{
 			Type: graphql.String,
 		},
-	}
+	},
 })
 
 var AccountGameSchemaType = graphql.NewObject(graphql.ObjectConfig{
-	Name:"GamePlatformSchema",
+	Name: "GamePlatformSchema",
 	Fields: graphql.Fields{
-		"uid": &graphql.ArgumentConfig{
+		"uid": &graphql.Field{
 			Type: graphql.String,
 		},
-		"name": &graphql.ArgumentConfig{
+		"name": &graphql.Field{
 			Type: graphql.String,
 		},
-		"logo": &graphql.ArgumentConfig{
+		"logo": &graphql.Field{
 			Type: graphql.String,
 		},
-		"game": &graphql.ArgumentConfig{
+		"game": &graphql.Field{
 			Type: graphql.String,
 		},
-		"plateform": &graphql.ArgumentConfig{
+		"plateform": &graphql.Field{
 			Type: GamePlatformSchemaType,
 		},
-	}
+	},
 })
