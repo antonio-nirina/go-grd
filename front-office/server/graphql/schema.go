@@ -2,7 +2,7 @@ package graphql
 
 import (
 	"github.com/graphql-go/graphql"
-	schemaType "github.com/thoussei/antonio/front-office/server/graphql/type"
+	schemaType "github.com/thoussei/antonio/front-office/server/graphql/types"
 	"github.com/thoussei/antonio/front-office/server/user/handler"
 	"github.com/thoussei/antonio/front-office/server/user/repository"
 )
@@ -22,7 +22,7 @@ func Query() *graphql.Object {
 		Name: "Query",
 		Fields: graphql.Fields{
 			"GetUserByID": &graphql.Field{
-				Type:        UserGraphQL,
+				Type:        schemaType.UserSchemaType,
 				Description: "Get User By uid",
 				Args: graphql.FieldConfigArgument{
 					"uid": &graphql.ArgumentConfig{
@@ -39,11 +39,10 @@ func Query() *graphql.Object {
 
 func Mutation() *graphql.Object {
 	objectConfig := graphql.ObjectConfig{
-		Type: schemaType.UserSchemaType,
 		Name: "Mutation",
 		Fields: graphql.Fields{
 			"create": &graphql.Field{
-				Type:        graphql.String,
+				Type:        schemaType.UserSchemaType,
 				Description: "Create a new user",
 				Args: graphql.FieldConfigArgument{
 					"uid": &graphql.ArgumentConfig{
