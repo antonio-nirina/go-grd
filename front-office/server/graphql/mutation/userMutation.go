@@ -3,9 +3,15 @@ package mutation
 import (
 	"github.com/graphql-go/graphql"
 
-	myGraph "github.com/thoussei/antonio/front-office/server/graphql"
+	schema "github.com/thoussei/antonio/front-office/server/graphql/resolver"
 	"github.com/thoussei/antonio/front-office/server/graphql/types"
+	"github.com/thoussei/antonio/front-office/server/graphql/user/handler"
+	"github.com/thoussei/antonio/front-office/server/graphql/user/repository"
 )
+
+var UserRepo = repository.NewUserRepository{}
+var UserUseCase = handler.NewUserUsecase(UserRepo)
+var SchResolver = schema.NewResolver(UserUseCase)
 
 func CreatedUser() graphql.ObjectConfig {
 	return graphql.ObjectConfig{
@@ -40,7 +46,7 @@ func CreatedUser() graphql.ObjectConfig {
 						Type: graphql.Int,
 					},
 				},
-				Resolve: myGraph.SchResolver.StoreUser,
+				Resolve: SchResolver.StoreUser,
 			},
 		},
 	}
