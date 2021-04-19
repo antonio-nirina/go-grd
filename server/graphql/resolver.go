@@ -31,7 +31,7 @@ func (u *resolver) GetUserByID(p graphql.ResolveParams) (interface{}, error) {
 	var id string
 	var ok bool
 
-	if id, ok = p.Args["id"].(string); !ok || id == "" {
+	if id, ok = p.Args["uid"].(string); !ok || id == "" {
 		return nil, fmt.Errorf("id is not blank")
 	}
 

@@ -2,8 +2,10 @@ package graphql
 
 import (
 	"github.com/graphql-go/graphql"
+	gameEntity "github.com/thoussei/antonio/front-office/server/games/entity"
 	"github.com/thoussei/antonio/front-office/server/user/handler"
 	"github.com/thoussei/antonio/front-office/server/user/repository"
+	"github.com/thoussei/antonio/front-office/server/graphql/type"
 )
 
 // Struct for implementation Interface graphql
@@ -22,9 +24,9 @@ func Query() *graphql.Object {
 		Fields: graphql.Fields{
 			"GetUserByID": &graphql.Field{
 				Type:        UserGraphQL,
-				Description: "Get User By ID",
+				Description: "Get User By uid",
 				Args: graphql.FieldConfigArgument{
-					"id": &graphql.ArgumentConfig{
+					"uid": &graphql.ArgumentConfig{
 						Type: graphql.String,
 					},
 				},
@@ -38,6 +40,7 @@ func Query() *graphql.Object {
 
 func Mutation() *graphql.Object {
 	objectConfig := graphql.ObjectConfig{
+		Type: type.UserSchemaType
 		Name: "Mutation",
 		Fields: graphql.Fields{
 			"create": &graphql.Field{
@@ -64,6 +67,9 @@ func Mutation() *graphql.Object {
 					},
 					"language": &graphql.ArgumentConfig{
 						Type: graphql.String,
+					},
+					"point": &graphql.ArgumentConfig{
+						Type: graphql.Int,
 					},
 				},
 				Resolve: schResolver.StoreUser,
