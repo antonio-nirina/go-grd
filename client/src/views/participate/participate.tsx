@@ -1,13 +1,12 @@
 import React from "react"
 import ReactDOM from 'react-dom'
+import { Link } from 'react-router-dom'
 import {useState} from "react";
+import { faGamepad } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import "../../assets/css/style.css"
 import "../participate/participate.css"
-
-
 
 const Slider: React.FC = function() {
 	
@@ -29,7 +28,7 @@ const Slider: React.FC = function() {
 					</div>
 			
 				<div className="apex block">
-					<p className="legend">Fortnite Weekly Cup <i></i></p>
+					<p className="legend">Fortnite Weekly Cup <i><FontAwesomeIcon icon={faGamepad}/></i></p>
 					<div className="info">         					
 						<p className="price"><i></i> 50€ Cash Prize</p>
 						<p className="date"><i></i> 03/04/2021 - 5:00 PM</p>

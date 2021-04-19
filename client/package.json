@@ -40,10 +40,12 @@
     "react-scripts": "4.0.3",
     "react-select": "^4.3.0",
     "react-slick": "^0.28.1",
+    "reactjs-media": "^1.5.1",
     "redux": "^4.0.5",
     "save": "^2.4.0",
     "slick-carousel": "^1.8.1",
     "subscriptions-transport-ws": "^0.9.18",
+    "video-react": "^0.14.1",
     "web-vitals": "^1.1.1"
   },
   "scripts": {
