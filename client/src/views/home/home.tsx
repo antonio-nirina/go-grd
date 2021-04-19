@@ -15,7 +15,7 @@ import "../../assets/css/style.css"
 
 const Home: React.FC = function() {	
   return(
-    <div>
+    <div className="home">
       <div className="container">
 	      <Header/>
 	      <div className="main">

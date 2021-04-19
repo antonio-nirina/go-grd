@@ -11,9 +11,8 @@ import (
 )
 
 func main() {
-	schm := graphql.Schema{}
-	query := schm.Query()
-	mutation := schm.Mutation()
+	query := graphql.Query()
+	mutation := graphql.Mutation()
 	schemaConfig := graph.SchemaConfig{
 		Query:    query,
 		Mutation: mutation,
@@ -25,9 +24,10 @@ func main() {
 	}
 
 	httpHandler := handler.New(&handler.Config{
-		Schema:   &schema,
-		Pretty:   true,
-		GraphiQL: true,
+		Schema:     &schema,
+		Pretty:     true,
+		GraphiQL:   true,
+		Playground: true,
 	})
 
 	http.Handle("/", httpHandler)

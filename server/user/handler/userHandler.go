@@ -11,12 +11,17 @@ import (
 	"github.com/thoussei/antonio/front-office/server/user/repository"
 )
 
-type userUseCase struct {
-	userRepository repository.Repository
+type UserUseCase struct {
+	userRepository repository.NewUserRepository
 }
 
-func (u *userUseCase) GetByID(c context.Context, id string) (*entity.User, error) {
+func NewUserUsecase(userRepo repository.NewUserRepository) UserUseCase {
+	return UserUseCase{
+		userRepository: userRepo,
+	}
+}
 
+func (u *UserUseCase) GetByIdUsecase(c context.Context, id string) (*entity.User, error) {
 	result, err := u.userRepository.GetByIdRepository(id)
 
 	if err != nil {
@@ -26,8 +31,8 @@ func (u *userUseCase) GetByID(c context.Context, id string) (*entity.User, error
 	return result, nil
 }
 
-func (u *userUseCase) SaveUser(c context.Context, user entity.User) (interface{}, error) {
-	result, err := u.userRepository.SavedRepository(&user)
+func (u *UserUseCase) SaveUseCase(c context.Context, user entity.User) (interface{}, error) {
+	result, err := u.userRepository.SavedRepository(user)
 
 	if err != nil {
 		return nil, err

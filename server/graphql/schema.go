@@ -1,6 +1,12 @@
 package graphql
 
-import "github.com/graphql-go/graphql"
+import (
+	"github.com/graphql-go/graphql"
+	gameEntity "github.com/thoussei/antonio/front-office/server/games/entity"
+	"github.com/thoussei/antonio/front-office/server/user/handler"
+	"github.com/thoussei/antonio/front-office/server/user/repository"
+	"github.com/thoussei/antonio/front-office/server/graphql/type"
+)
 
 // Struct for implementation Interface graphql
 
@@ -8,19 +14,23 @@ type Schema struct {
 	userResolver Resolver
 }
 
-func (s *Schema) Query() *graphql.Object {
+var userRepo = repository.NewUserRepository{}
+var userUseCase = handler.NewUserUsecase(userRepo)
+var schResolver = newResolver(userUseCase)
+
+func Query() *graphql.Object {
 	objectConfig := graphql.ObjectConfig{
 		Name: "Query",
 		Fields: graphql.Fields{
 			"GetUserByID": &graphql.Field{
 				Type:        UserGraphQL,
-				Description: "Get User By ID",
+				Description: "Get User By uid",
 				Args: graphql.FieldConfigArgument{
-					"id": &graphql.ArgumentConfig{
+					"uid": &graphql.ArgumentConfig{
 						Type: graphql.String,
 					},
 				},
-				Resolve: s.userResolver.GetUserByID,
+				Resolve: schResolver.GetUserByID,
 			},
 		},
 	}
@@ -28,8 +38,9 @@ func (s *Schema) Query() *graphql.Object {
 	return graphql.NewObject(objectConfig)
 }
 
-func (s *Schema) Mutation() *graphql.Object {
+func Mutation() *graphql.Object {
 	objectConfig := graphql.ObjectConfig{
+		Type: type.UserSchemaType
 		Name: "Mutation",
 		Fields: graphql.Fields{
 			"create": &graphql.Field{
@@ -57,8 +68,11 @@ func (s *Schema) Mutation() *graphql.Object {
 					"language": &graphql.ArgumentConfig{
 						Type: graphql.String,
 					},
+					"point": &graphql.ArgumentConfig{
+						Type: graphql.Int,
+					},
 				},
-				Resolve: s.userResolver.StoreUser,
+				Resolve: schResolver.StoreUser,
 			},
 		},
 	}

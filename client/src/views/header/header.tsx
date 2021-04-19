@@ -61,12 +61,12 @@ const Header: React.FC = function() {
                     </div>
                     <div className="gametag">
                         <div className="itemsTag">
-                            <div className="bg-game">
+                            <div className="bg-gametag">
                                 <p>GameTag</p>
                                 <p>
                                 <a href="#"><img src={ps} className="itemTag" alt="" width="18" height="14"/></a>
-                                <a href="#"><img src={fr} className="itemTag" alt="" width="18" height="14"/></a>
-                                <i className="itemTag" onClick={onShow}><FontAwesomeIcon icon={faBars} /></i>
+                                <a href="#"><img src={fr} className="itemTag" alt="" width="15" height="14"/></a>
+                                <i className="itemTag drop" onClick={onShow}><FontAwesomeIcon icon={faBars} /></i>
                                 </p>
                             </div>
                         </div>

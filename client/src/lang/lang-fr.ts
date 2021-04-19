@@ -1,8 +1,8 @@
 export const FR = {
 	"assistant":{
-		"contact":"contact",
-		"name":"nom",
-		"firstname":"prenom",
+		"contact":"Comment pouvons-nous vous aider ?",
+		"name":"Nom",
+		"firstname":"Prénom",
 		"email": "E-mail",
 		"message": "message",
 		"send":"envoyer"

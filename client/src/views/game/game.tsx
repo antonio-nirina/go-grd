@@ -16,7 +16,7 @@ const Game: React.FC = function() {
   <div className="jeux">
     <h2>Jeux</h2>
   	<div className="bg-game">
-      <div className="firstblock">
+      <div className="firstblock w100">
         <div className="logo-game">
             <a href="#"><img src={apexlegends} alt="Apex Legends" /></a>
         </div>
@@ -30,7 +30,7 @@ const Game: React.FC = function() {
             <a href="#"><img src={rocketleague} alt="Rocket League" /></a>
         </div>
       </div>
-      <div className="lastblock">
+      <div className="lastblock w100">
         <div className="logo-game">
             <a href="#"><img src={cod_Modernwarfare} alt="Call of Duty Modern Warfare" /></a>
         </div>
