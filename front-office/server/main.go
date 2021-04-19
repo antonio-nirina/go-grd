@@ -1,12 +1,13 @@
 package main
 
 import (
+	"errors"
 	"fmt"
 	"net/http"
 
 	graph "github.com/graphql-go/graphql"
 	"github.com/graphql-go/handler"
-	"github.com/sirupsen/logrus"
+	"github.com/thoussei/antonio/front-office/server/external"
 	"github.com/thoussei/antonio/front-office/server/graphql"
 )
 
@@ -20,7 +21,8 @@ func main() {
 	schema, err := graph.NewSchema(schemaConfig)
 
 	if err != nil {
-		logrus.Fatalf("Failed to create new schema, error: %v", err)
+		message := errors.New(fmt.Sprintf("Failed to create new schema, error: %v", err))
+		external.Logger(message.Error())
 	}
 
 	httpHandler := handler.New(&handler.Config{
@@ -31,6 +33,6 @@ func main() {
 	})
 
 	http.Handle("/", httpHandler)
-	fmt.Println("ready: listening 4000")
+	fmt.Println("🚀 Query at 4000")
 	http.ListenAndServe(":4000", nil)
 }

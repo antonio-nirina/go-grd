@@ -50,7 +50,7 @@ var GamePlatformSchemaType = graphql.NewObject(graphql.ObjectConfig{
 })
 
 var AccountGameSchemaType = graphql.NewObject(graphql.ObjectConfig{
-	Name: "GamePlatformSchema",
+	Name: "AccountGameSchema",
 	Fields: graphql.Fields{
 		"uid": &graphql.Field{
 			Type: graphql.String,

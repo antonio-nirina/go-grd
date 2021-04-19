@@ -1,6 +1,15 @@
 package graphql
 
-import "github.com/graphql-go/graphql"
+import (
+	"github.com/graphql-go/graphql"
+
+	"github.com/thoussei/antonio/front-office/server/user/handler"
+	"github.com/thoussei/antonio/front-office/server/user/repository"
+)
+
+var UserRepo = repository.NewUserRepository{}
+var UserUseCase = handler.NewUserUsecase(UserRepo)
+var SchResolver = NewResolver(UserUseCase)
 
 var UserGraphQL = graphql.NewObject(
 	graphql.ObjectConfig{

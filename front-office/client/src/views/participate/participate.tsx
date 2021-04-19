@@ -1,16 +1,13 @@
 import React from "react"
-import ReactDOM from 'react-dom'
-import {useState} from "react";
 
-
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import "../../assets/css/style.css"
 import "../participate/participate.css"
 
 
 
 const Slider: React.FC = function() {
-	
+
   return(
     <div className="marg">
     	<div className="part">
@@ -27,10 +24,10 @@ const Slider: React.FC = function() {
 							<p className="date"><i></i> 02/04/2021 - 5:00 PM</p>
 						</div>
 					</div>
-			
+
 				<div className="apex block">
 					<p className="legend">Fortnite Weekly Cup <i></i></p>
-					<div className="info">         					
+					<div className="info">
 						<p className="price"><i></i> 50€ Cash Prize</p>
 						<p className="date"><i></i> 03/04/2021 - 5:00 PM</p>
 					</div>
@@ -66,7 +63,7 @@ const Slider: React.FC = function() {
 						<p><i></i> 04/04/2021 - 7:30 PM</p>
 					</div>
 				</div>
-			</div>		
+			</div>
 			<div className="gamecash">
 				<div className="lot">
 				<p><strong>+250</strong><span>Tournois/Semaine</span></p>
@@ -94,8 +91,8 @@ const Slider: React.FC = function() {
 			</div>
 			<div className="apex block">
 				<p className="legend">Fortnite Weekly Cup <i></i></p>
-				<div className="info">         
-					<p className="price"><i></i> 5€ Cash Prize</p> 
+				<div className="info">
+					<p className="price"><i></i> 5€ Cash Prize</p>
 					<p className="price"><i></i> 50€ Cash Prize</p>
 					<p className="date"><i></i> 03/04/2021 - 5:00 PM</p>
 				</div>
@@ -145,7 +142,7 @@ const Slider: React.FC = function() {
 		</div>
     </div>
 
-  );
+  )
 }
 
 export default Slider;

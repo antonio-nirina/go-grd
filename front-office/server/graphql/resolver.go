@@ -21,7 +21,7 @@ type Resolver interface {
 	StoreUser(params graphql.ResolveParams) (interface{}, error)
 }
 
-func newResolver(userService handler.UserUseCase) Resolver {
+func NewResolver(userService handler.UserUseCase) Resolver {
 	return &resolver{
 		userHandler: userService,
 	}
