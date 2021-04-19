@@ -1,8 +1,11 @@
 import React from "react"
 import ReactDOM from 'react-dom'
-import { Link } from 'react-router-dom'
-import {useState} from "react";
+
+import { faXbox, faPlaystation } from '@fortawesome/free-brands-svg-icons';
 import { faGamepad } from "@fortawesome/free-solid-svg-icons";
+import {useState} from "react";
+
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import "../../assets/css/style.css"
@@ -20,7 +23,7 @@ const Slider: React.FC = function() {
 			<div className="content">
 				<div className="clear"></div>
 					<div className="apex block">
-						<p className="legend">Apex Legends Daily Cup <i></i></p>
+						<p className="legend">Apex Legends Daily Cup <i><FontAwesomeIcon icon={faXbox}/></i></p>
 						<div className="info">
 							<p className="price"><i></i> 100€ Cash Prize</p>
 							<p className="date"><i></i> 02/04/2021 - 5:00 PM</p>
@@ -35,7 +38,7 @@ const Slider: React.FC = function() {
 					</div>
 				</div>
 				<div className="apex block">
-					<p className="legend">Rocket League Champions <i></i></p>
+					<p className="legend">Rocket League Champions <i><FontAwesomeIcon icon={faPlaystation}/></i></p>
 					<div className="info">
 						<p className="price"><i></i> 5€ Cash Prize</p>
 						<p className="price"><i></i> 500€ Cash Prize</p>
@@ -43,14 +46,14 @@ const Slider: React.FC = function() {
 					</div>
 				</div>
 				<div className="apex block">
-					<p className="legend">Warzone Xbox Daily<i></i></p>
+					<p className="legend">Warzone Xbox Daily<i><FontAwesomeIcon icon={faXbox}/></i></p>
 					<div className="info">
 					<p className="price"><i></i> 100€ Cash Prize</p>
 					<p className="date"><i></i> 02/04/2021 - 5:00 PM</p>
 				</div>
 				</div>
 					<div className="apex block">
-						<p className="legend">R6 Squad Tournament <i></i></p>
+						<p className="legend">R6 Squad Tournament <i><FontAwesomeIcon icon={faGamepad}/></i></p>
 						<div className="info">
 						<p className="price"><i></i> 100€ Cash Prize</p>
 						<p className="date"><i></i> 02/04/2021 - 5:00 PM</p>
