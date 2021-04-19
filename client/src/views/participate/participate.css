@@ -48,7 +48,8 @@
 }
 .block p.legend{
 	font-size: 12px;
-	text-align: left;	
+	text-align: left;
+	position: relative;	
 }
 .block .info{
 	position: absolute;
@@ -122,4 +123,14 @@
 	float: right;
 	margin-left: 15px;
 }
-
+.iconGame{
+	display: inline-block;
+	vertical-align: middle;
+}
+.iconGame svg{
+	width: 24px !important;
+	height: 19px;
+	position: absolute;
+	top: -2px;
+	right: 0px;
+}
