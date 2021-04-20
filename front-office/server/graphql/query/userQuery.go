@@ -5,8 +5,8 @@ import (
 
 	schema "github.com/thoussei/antonio/front-office/server/graphql/resolver"
 	"github.com/thoussei/antonio/front-office/server/graphql/types"
-	"github.com/thoussei/antonio/front-office/server/graphql/user/handler"
-	"github.com/thoussei/antonio/front-office/server/graphql/user/repository"
+	"github.com/thoussei/antonio/front-office/server/user/handler"
+	"github.com/thoussei/antonio/front-office/server/user/repository"
 )
 
 var UserRepo = repository.NewUserRepository{}

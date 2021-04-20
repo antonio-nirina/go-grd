@@ -5,8 +5,8 @@ import (
 
 	schema "github.com/thoussei/antonio/front-office/server/graphql/resolver"
 	"github.com/thoussei/antonio/front-office/server/graphql/types"
-	"github.com/thoussei/antonio/front-office/server/graphql/user/handler"
-	"github.com/thoussei/antonio/front-office/server/graphql/user/repository"
+	"github.com/thoussei/antonio/front-office/server/user/handler"
+	"github.com/thoussei/antonio/front-office/server/user/repository"
 )
 
 var UserRepo = repository.NewUserRepository{}
@@ -33,7 +33,7 @@ func CreatedUser() graphql.ObjectConfig {
 					"username": &graphql.ArgumentConfig{
 						Type: graphql.String,
 					},
-					"is_banned": &graphql.ArgumentConfig{
+					"isBanned": &graphql.ArgumentConfig{
 						Type: graphql.Boolean,
 					},
 					"avatar": &graphql.ArgumentConfig{
@@ -44,6 +44,9 @@ func CreatedUser() graphql.ObjectConfig {
 					},
 					"point": &graphql.ArgumentConfig{
 						Type: graphql.Int,
+					},
+					"gameAccount": &graphql.ArgumentConfig{
+						Type: types.GameAccountType,
 					},
 				},
 				Resolve: SchResolver.StoreUser,
