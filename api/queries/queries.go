@@ -1,13 +1,13 @@
 package queries
 
 import (
+	"context"
 	"fmt"
 	"log"
-	"context"
 
-	"github.com/antonio-nirina/go-grd/config"
-	"github.com/antonio-nirina/go-grd/entity"
-	"github.com/antonio-nirina/go-grd/types"
+	"github.com/antonio-nirina/go-grd/api/config"
+	"github.com/antonio-nirina/go-grd/api/entity"
+	"github.com/antonio-nirina/go-grd/api/types"
 	"github.com/graphql-go/graphql"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
@@ -52,13 +52,13 @@ func GetOneUserQuery() *graphql.Field {
 	}
 }
 
-func findOneUser(uid string)(interface{}, error) {
+func findOneUser(uid string) (interface{}, error) {
 	var result entity.User
 	filter := bson.D{primitive.E{Key: "uid", Value: uid}}
 	err := UserCollection.FindOne(context.TODO(), filter).Decode(&result)
 	if err != nil {
 		return nil, err
 	}
-	return result,nil
+	return result, nil
 
 }

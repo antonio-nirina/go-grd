@@ -5,9 +5,9 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/antonio-nirina/go-grd/config"
-	"github.com/antonio-nirina/go-grd/entity"
-	"github.com/antonio-nirina/go-grd/types"
+	"github.com/antonio-nirina/go-grd/api/config"
+	"github.com/antonio-nirina/go-grd/api/entity"
+	"github.com/antonio-nirina/go-grd/api/types"
 	"github.com/graphql-go/graphql"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
