@@ -61,6 +61,23 @@
  display: inline-block;
  vertical-align: middle;
  margin-right: 15px;
+ position: relative; 
+}
+.lang span a{
+	display: block;
+}
+.lang.gb.show{
+	display: block;
+}
+.lang.gb.hide{
+	display: none;
+	position: absolute;	
+	top: 35px;
+	z-index: 2;
+	padding: 5px;
+	background: #000000;
+	left: 0px;
+	border: 1px solid #4c4d4f;
 }
 .connex{
 	width: 55px;
