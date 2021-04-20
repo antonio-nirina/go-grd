@@ -1,6 +1,8 @@
-package graphql
+package schema
 
-import "github.com/graphql-go/graphql"
+import (
+	"github.com/graphql-go/graphql"
+)
 
 var UserGraphQL = graphql.NewObject(
 	graphql.ObjectConfig{

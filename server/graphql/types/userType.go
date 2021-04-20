@@ -1,11 +1,11 @@
-package type
+package types
 
 import (
 	"github.com/graphql-go/graphql"
 )
 
 var UserSchemaType = graphql.NewObject(graphql.ObjectConfig{
-	Name:"UserType",
+	Name: "UserType",
 	Fields: graphql.Fields{
 		"uid": &graphql.Field{
 			Type: graphql.String,
