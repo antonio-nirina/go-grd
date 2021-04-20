@@ -23,7 +23,7 @@ const Community: React.FC = function() {
               <img src={warzone} alt="" />
               <div className="text">
                 <p className="title">Warzone Patch 1.15.x</p>
-                <p>Retrouvez toutes les informations sur la sortie du pach 1.15.x</p>
+                <p>Retrouvez toutes les informations sur la sortie du patch 1.15.x</p>
                 <a href="#">Voir plus</a>
               </div>
             </div>
