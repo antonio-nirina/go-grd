@@ -5,7 +5,7 @@
 	background-position: center center;
 	background-size: 100%;
 	padding-top: 0em;
-	padding-bottom: 7em;
+	padding-bottom: 11em;
 
 }
 .w100{
@@ -40,4 +40,6 @@
 	text-transform: uppercase;
 }
 
-
+.lastblock{
+	padding-top: 2em;
+}
