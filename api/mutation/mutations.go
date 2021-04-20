@@ -26,7 +26,25 @@ func createdUser() *graphql.Field {
 		Type:        types.UserType,
 		Description: "Get single user",
 		Args: graphql.FieldConfigArgument{
-			"uid": &graphql.ArgumentConfig{
+			"firstname": &graphql.ArgumentConfig{
+				Type: graphql.String,
+			},
+			"lastname": &graphql.ArgumentConfig{
+				Type: graphql.String,
+			},
+			"password": &graphql.ArgumentConfig{
+				Type: graphql.String,
+			},
+			"username": &graphql.ArgumentConfig{
+				Type: graphql.String,
+			},
+			"isBanned": &graphql.ArgumentConfig{
+				Type: graphql.Boolean,
+			},
+			"avatar": &graphql.ArgumentConfig{
+				Type: graphql.String,
+			},
+			"language": &graphql.ArgumentConfig{
 				Type: graphql.String,
 			},
 		},
