@@ -35,7 +35,7 @@
 }
 .block{
 	background: #2c2c2c;    
-    height: 150px;
+    height: 160px;
     padding: 15px;    
     vertical-align: top;
     border-radius: 15px;    
@@ -48,7 +48,8 @@
 }
 .block p.legend{
 	font-size: 12px;
-	text-align: left;	
+	text-align: left;
+	position: relative;	
 }
 .block .info{
 	position: absolute;
@@ -57,7 +58,6 @@
 .block .info p{
 	font-size: 11px;
 	font-weight: 200;	
-	margin: 15px 0;
 }
 .block.last{
 	
@@ -122,4 +122,37 @@
 	float: right;
 	margin-left: 15px;
 }
-
+.iconGame{
+	display: inline-block;
+	vertical-align: middle;
+}
+.iconGame svg{
+	width: 24px !important;
+	height: 19px;
+	position: absolute;
+	top: -2px;
+	right: 0px;
+}
+.sprite {
+	background: url("../../assets/image/sprite.png") no-repeat;	
+	display: inline-block;
+	width: 23px;
+	height: 34px;
+	background-size: 81px 23px;
+}
+.inblock span{	
+	padding: 5px 5px;
+}
+.inblock i, .inblock span{
+	display: inline-block;
+	vertical-align: top;
+}
+.sprite.ticket{
+	background-position: -56px 0px;
+}
+.sprite.cup{
+	background-position: 0 0;
+}
+.sprite.calendar{
+	background-position: -28px 0;
+}
