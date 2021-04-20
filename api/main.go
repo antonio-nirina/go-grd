@@ -14,7 +14,7 @@ import (
 func main() {
 	schemaConfig := graphql.SchemaConfig{
 		Query: graphql.NewObject(graphql.ObjectConfig{
-			Name:   "RootQuery",
+			Name:   "Query",
 			Fields: queries.GetRootFields(),
 		}),
 		Mutation: graphql.NewObject(graphql.ObjectConfig{

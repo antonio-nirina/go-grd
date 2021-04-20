@@ -23,6 +23,9 @@ var UserSchemaType = graphql.NewObject(graphql.ObjectConfig{
 		"username": &graphql.Field{
 			Type: graphql.String,
 		},
+		"email": &graphql.Field{
+			Type: graphql.String,
+		},
 		"isBanned": &graphql.Field{
 			Type: graphql.Boolean,
 		},

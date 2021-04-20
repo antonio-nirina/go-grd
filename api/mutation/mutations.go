@@ -14,8 +14,8 @@ import (
 
 var UserCollection = config.ConfigMongo().Database("grd_database").Collection("users")
 
-func GetRootFields() *graphql.Fields {
-	return &graphql.Fields{
+func GetRootFields() graphql.Fields {
+	return graphql.Fields{
 		"createdUser": createdUser(),
 	}
 }
@@ -37,6 +37,9 @@ func createdUser() *graphql.Field {
 			"username": &graphql.ArgumentConfig{
 				Type: graphql.String,
 			},
+			"email": &graphql.ArgumentConfig{
+				Type: graphql.String,
+			},
 			"avatar": &graphql.ArgumentConfig{
 				Type: graphql.String,
 			},
@@ -46,16 +49,20 @@ func createdUser() *graphql.Field {
 		},
 		Resolve: func(params graphql.ResolveParams) (interface{}, error) {
 			// Validation
+			userEntity := entity.User{}
+			password := params.Args["password"].(string)
+			hashed := userEntity.CreatedHash(password)
 			userSaved := &entity.User{
-				Uid:       primitive.NewObjectID().String(),
+				Uid:       primitive.NewObjectID(),
 				FirstName: params.Args["firstname"].(string),
 				LastName:  params.Args["lastname"].(string),
-				Password:  params.Args["password"].(string),
+				Password:  hashed,
 				Username:  params.Args["username"].(string),
+				Email:     params.Args["email"].(string),
 				IsBanned:  false,
 				Avatar:    params.Args["avatar"].(string),
 				Language:  params.Args["language"].(string),
-				Point:     20,
+				Point:     entity.POINT,
 			}
 			user, err := savedUser(userSaved)
 

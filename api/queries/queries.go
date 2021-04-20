@@ -2,6 +2,7 @@ package queries
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"log"
 
@@ -18,7 +19,7 @@ var UserCollection = config.ConfigMongo().Database("grd_database").Collection("u
 // GetRootFields returns all the available queries.
 func GetRootFields() graphql.Fields {
 	return graphql.Fields{
-		"user": GetOneUserQuery(),
+		"FindOneUser": GetOneUserQuery(),
 	}
 }
 
@@ -31,34 +32,62 @@ func GetOneUserQuery() *graphql.Field {
 		Type:        types.UserSchemaType,
 		Description: "Get single user",
 		Args: graphql.FieldConfigArgument{
-			"uid": &graphql.ArgumentConfig{
+			"id": &graphql.ArgumentConfig{
 				Type: graphql.String,
 			},
 		},
 		Resolve: func(params graphql.ResolveParams) (interface{}, error) {
-			idQuery, isOK := params.Args["uid"].(string)
+			idQuery, isOK := params.Args["id"].(string)
 			if !isOK {
-				// Search for el with id
-				fmt.Println("error uid")
+				return nil, errors.New("id not valid")
 			}
 
 			user, err := findOneUser(idQuery)
+
 			if err != nil {
-				log.Fatal(err)
+				return nil, err
 			}
 
 			return user, nil
 		},
 	}
 }
-
-func findOneUser(uid string) (interface{}, error) {
+func findOneUser(idQuery string) (interface{}, error) {
 	var result entity.User
-	filter := bson.D{primitive.E{Key: "uid", Value: uid}}
-	err := UserCollection.FindOne(context.TODO(), filter).Decode(&result)
+	objectId, err := primitive.ObjectIDFromHex(idQuery)
+
+	if err != nil {
+		log.Println("Invalid id")
+	}
+
+	err = UserCollection.FindOne(context.TODO(), bson.M{"_id": objectId}).Decode(&result)
+
 	if err != nil {
 		return nil, err
 	}
-	return result, nil
 
+	return result, nil
+}
+
+func findAll() (interface{}, error) {
+	var results []primitive.M
+	cur, err := UserCollection.Find(context.TODO(), bson.D{{}})
+
+	if err != nil {
+		return nil, err
+	}
+
+	for cur.Next(context.TODO()) {
+		var elem primitive.M
+		err := cur.Decode(&elem)
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		results = append(results, elem)
+	}
+	cur.Close(context.TODO())
+	fmt.Println("resll", results)
+
+	return results, nil
 }
