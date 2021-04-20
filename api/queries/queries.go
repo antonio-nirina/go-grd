@@ -2,11 +2,15 @@ package queries
 
 import (
 	"fmt"
+	"log"
+	"context"
 
-	"github.com/antonio-nirina/go-example/config"
-	"github.com/antonio-nirina/go-example/entity"
-	"github.com/antonio-nirina/go-example/types"
+	"github.com/antonio-nirina/go-grd/config"
+	"github.com/antonio-nirina/go-grd/entity"
+	"github.com/antonio-nirina/go-grd/types"
 	"github.com/graphql-go/graphql"
+	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
 var UserCollection = config.ConfigMongo().Database("grd_database").Collection("users")
@@ -24,7 +28,7 @@ func GetUserQuery() {
 
 func GetOneUserQuery() *graphql.Field {
 	return &graphql.Field{
-		Type:        types.UserType,
+		Type:        types.UserSchemaType,
 		Description: "Get single user",
 		Args: graphql.FieldConfigArgument{
 			"uid": &graphql.ArgumentConfig{
@@ -39,19 +43,19 @@ func GetOneUserQuery() *graphql.Field {
 			}
 
 			user, err := findOneUser(idQuery)
-			if err =! nil {
+			if err != nil {
 				log.Fatal(err)
 			}
 
-			return *user, nil
+			return user, nil
 		},
 	}
 }
 
 func findOneUser(uid string)(interface{}, error) {
-	var result entity.User{}
-	filter := bson.D{{"uid", uid}}
-	err = UserCollection.FindOne(context.TODO(), filter).Decode(&result)
+	var result entity.User
+	filter := bson.D{primitive.E{Key: "uid", Value: uid}}
+	err := UserCollection.FindOne(context.TODO(), filter).Decode(&result)
 	if err != nil {
 		return nil, err
 	}

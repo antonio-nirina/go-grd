@@ -5,8 +5,8 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/antonio-nirina/go-example/mutation"
-	"github.com/antonio-nirina/go-example/queries"
+	"github.com/antonio-nirina/go-grd/api/mutation"
+	"github.com/antonio-nirina/go-grd/api/queries"
 	"github.com/graphql-go/graphql"
 	"github.com/graphql-go/handler"
 )
@@ -18,7 +18,7 @@ func main() {
 			Fields: queries.GetRootFields(),
 		}),
 		Mutation: graphql.NewObject(graphql.ObjectConfig{
-			Name:   "RootMutation",
+			Name:   "Mutation",
 			Fields: mutation.GetRootFields(),
 		}),
 	}

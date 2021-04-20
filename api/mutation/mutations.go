@@ -5,11 +5,10 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/antonio-nirina/go-example/config"
-	"github.com/antonio-nirina/go-example/entity"
-	"github.com/antonio-nirina/go-example/types"
+	"github.com/antonio-nirina/go-grd/config"
+	"github.com/antonio-nirina/go-grd/entity"
+	"github.com/antonio-nirina/go-grd/types"
 	"github.com/graphql-go/graphql"
-	"github.com/thoussei/antonio/front-office/server/user/entity"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
@@ -17,13 +16,13 @@ var UserCollection = config.ConfigMongo().Database("grd_database").Collection("u
 
 func GetRootFields() *graphql.Fields {
 	return &graphql.Fields{
-		"user": createdUser(),
+		"createdUser": createdUser(),
 	}
 }
 
 func createdUser() *graphql.Field {
 	return &graphql.Field{
-		Type:        types.UserType,
+		Type:        types.UserSchemaType,
 		Description: "Get single user",
 		Args: graphql.FieldConfigArgument{
 			"firstname": &graphql.ArgumentConfig{
@@ -37,9 +36,6 @@ func createdUser() *graphql.Field {
 			},
 			"username": &graphql.ArgumentConfig{
 				Type: graphql.String,
-			},
-			"isBanned": &graphql.ArgumentConfig{
-				Type: graphql.Boolean,
 			},
 			"avatar": &graphql.ArgumentConfig{
 				Type: graphql.String,
@@ -56,7 +52,7 @@ func createdUser() *graphql.Field {
 				LastName:  params.Args["lastname"].(string),
 				Password:  params.Args["password"].(string),
 				Username:  params.Args["username"].(string),
-				IsBanned:  params.Args["isBanned"].(string),
+				IsBanned:  false,
 				Avatar:    params.Args["avatar"].(string),
 				Language:  params.Args["language"].(string),
 				Point:     20,
