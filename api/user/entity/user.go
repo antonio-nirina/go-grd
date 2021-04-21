@@ -8,7 +8,10 @@ import (
 	"golang.org/x/crypto/bcrypt"
 )
 
-const POINT = 20
+const (
+	POINT = 20
+)
+
 
 type User struct {
 	Uid       primitive.ObjectID `bson:"uid"`

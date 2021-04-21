@@ -5,8 +5,8 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/antonio-nirina/go-grd/api/mutation"
-	"github.com/antonio-nirina/go-grd/api/queries"
+	"github.com/antonio-nirina/go-grd/api/graphql/mutation"
+	"github.com/antonio-nirina/go-grd/api/graphql/queries"
 	"github.com/graphql-go/graphql"
 	"github.com/graphql-go/handler"
 )
