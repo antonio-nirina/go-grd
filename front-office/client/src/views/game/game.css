@@ -1,10 +1,11 @@
 @charset "UTF-8";
 .jeux{
-	background: url("../../assets/image/image_2021_04_17T20_13_09_624Z-newt.png");
+	background: url("../../assets/image/background-img.jpg") no-repeat;
 	background-repeat: no-repeat;
+	background-position: center center;
 	background-size: 100%;
 	padding-top: 0em;
-	padding-bottom: 7em;
+	padding-bottom: 11em;
 
 }
 .w100{
@@ -39,4 +40,6 @@
 	text-transform: uppercase;
 }
 
-
+.lastblock{
+	padding-top: 2em;
+}

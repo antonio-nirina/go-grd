@@ -133,9 +133,8 @@ const Slider: React.FC = function() {
 		</div>
 		<div className="gamecash">
 			<div className="lot">
-				<p><strong>+250</strong><span>Tournois/Semaine</span></p>
-				<p><strong>8</strong><span>Jeux</span></p>
-				<p><strong>+2500€</strong><span>Cash prizes/Semaine</span></p>
+				<p><strong>+6000</strong><span>Membres</span></p>				
+				<p><strong>+5000€</strong><span>Cash prizes/Semaine</span></p>
 			</div>
 			<div className="more">
 				<p><a href="#">voir plus</a></p>
