@@ -7,7 +7,7 @@ import (
 	"log"
 
 	"github.com/antonio-nirina/go-grd/api/config"
-	"github.com/antonio-nirina/go-grd/api/entity"
+	"github.com/antonio-nirina/go-grd/api/user/entity"
 	"github.com/antonio-nirina/go-grd/api/graphql/types"
 	"github.com/graphql-go/graphql"
 	"go.mongodb.org/mongo-driver/bson"
