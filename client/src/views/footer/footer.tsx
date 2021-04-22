@@ -1,13 +1,11 @@
 import React from "react"
-import ReactDOM from 'react-dom'
+
+import { faInstagram, faTwitter, faFacebook, faYoutube} from "@fortawesome/free-brands-svg-icons"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import logo from "../../assets/image/logo.png"
 import "../../assets/css/style.css"
 import "../footer/footer.css"
-import { library } from "@fortawesome/fontawesome-svg-core";
-import {fab, faFacebookF, faInstagram, faTwitter, faFacebook, faLinkedin, faYoutube} from "@fortawesome/free-brands-svg-icons";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-
 
 
 const Footer: React.FC = function() {
@@ -15,11 +13,11 @@ const Footer: React.FC = function() {
     <div>
       <footer className="footer">
     	 	<div className="wrap">
-    	 		<div className="logo">	    	 		
+    	 		<div className="logo">
     	 			<a href="/" title="Grid" className="v-a lign">
     	 				<img src={logo} alt="Grid" className="imglogo"/>
-    	 			</a>	    	 		
-	    	 	</div>    	 		
+    	 			</a>
+	    	 	</div>
 	    	 	<div className="rss">
     	 			<ul>
     	 				<li>
@@ -40,7 +38,7 @@ const Footer: React.FC = function() {
                     <span>Mentions Légales</span>
                 </div>
     	 	</div>
-    	</footer>    	 		
+    	</footer>
     </div>
   );
 }

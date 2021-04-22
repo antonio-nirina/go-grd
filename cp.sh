@@ -1,9 +1,9 @@
 #!/bin/bash
 
 dir="${HOME}/Documents/faceit/new-project/grind/front-office/client"
-server="${HOME}/Documents/faceit/new-project/grind/front-office/server"
+server="${HOME}/Documents/faceit/new-project/grind/front-office/api"
 orginame="${HOME}/Documents/faceit/new-project/go-example/client"
-org_server="${HOME}/Documents/faceit/new-project/go-example/server"
+org_server="${HOME}/Documents/faceit/new-project/go-example/api"
 
 if [ -d ${dir} ] ; then
     rm -rf $dir 
