@@ -1,6 +1,7 @@
 github.com/BurntSushi/toml v0.3.1/go.mod h1:xHWCNGjB5oqiDr8zfno3MHue2Ht5sIBksp03qcyfWMU=
 github.com/antonio-nirina/go-grd v0.0.0-20210420190316-f780211cabf3 h1:6BmX2XncfhbqoN5/ldCltEJX4bTbYiEvq1hkK3elW1s=
 github.com/antonio-nirina/go-grd v0.0.0-20210420213527-3c242a47c82c h1:r3GiTQAlrOymZiAcN37WkEZ8DGPGAcpPrweqkSAPgC8=
+github.com/antonio-nirina/go-grd v0.0.0-20210421043818-77c17c3b81d8 h1:2gtsVtG4jYD9q23hoCuGTHpGI0keVuwlKqjTrY15Q6I=
 github.com/aws/aws-sdk-go v1.34.28 h1:sscPpn/Ns3i0F4HPEWAVcwdIRaZZCuL7llJ2/60yPIk=
 github.com/aws/aws-sdk-go v1.34.28/go.mod h1:H7NKnBqNVzoTJpGfLrQkkD+ytBA93eiDYi/+8rV9s48=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=

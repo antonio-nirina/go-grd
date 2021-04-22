@@ -6,8 +6,8 @@ import (
 	"log"
 
 	"github.com/antonio-nirina/go-grd/api/user/entity"
-	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
@@ -17,15 +17,14 @@ type driverRepository struct {
 }
 
 // Return Interface User Repository
-func NewUserRepository (client *mongo.Client) Repository {
+func NewUserRepository(client *mongo.Client) *driverRepository {
 	return &driverRepository{client}
 }
-
 
 func (c *driverRepository) SavedUser(user *entity.User) (interface{}, error) {
 	var collection = c.client.Database("grd_database").Collection("users")
 	insertResult, err := collection.InsertOne(context.TODO(), user)
-	
+
 	if err != nil {
 		return nil, err
 	}
@@ -34,7 +33,6 @@ func (c *driverRepository) SavedUser(user *entity.User) (interface{}, error) {
 
 	return user, nil
 }
-
 
 func (c *driverRepository) FindOneUser(objectId string) (interface{}, error) {
 	var collection = c.client.Database("grd_database").Collection("users")

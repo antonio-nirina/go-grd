@@ -5,11 +5,9 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/antonio-nirina/go-grd/api/config"
-	"github.com/antonio-nirina/go-grd/api/user/entity"
+	
 	"github.com/antonio-nirina/go-grd/api/graphql/types"
 	"github.com/graphql-go/graphql"
-	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
 func createdUser() *graphql.Field {
@@ -39,30 +37,6 @@ func createdUser() *graphql.Field {
 				Type: graphql.String,
 			},
 		},
-		Resolve: func(params graphql.ResolveParams) (interface{}, error) {
-			// Validation
-			userEntity := entity.User{}
-			password := params.Args["password"].(string)
-			hashed := userEntity.CreatedHash(password)
-			userSaved := &entity.User{
-				Uid:       primitive.NewObjectID(),
-				FirstName: params.Args["firstname"].(string),
-				LastName:  params.Args["lastname"].(string),
-				Password:  hashed,
-				Username:  params.Args["username"].(string),
-				Email:     params.Args["email"].(string),
-				IsBanned:  false,
-				Avatar:    params.Args["avatar"].(string),
-				Language:  params.Args["language"].(string),
-				Point:     entity.POINT,
-			}
-			user, err := SavedUser(userSaved)
-
-			if err != nil {
-				log.Fatal(err)
-			}
-
-			return user, nil
-		},
+		Resolve: UserRolve.SavedUserResolver,
 	}
 }
