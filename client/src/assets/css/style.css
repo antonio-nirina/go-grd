@@ -49,6 +49,9 @@ html{
 .mgt10{
   margin-top: 15px;
 }
+.link-btn{
+  color: #010101;
+}
 
 a{
    text-decoration:none;     
@@ -74,6 +77,9 @@ h1{
   font-size: 35px;
   text-transform: uppercase;
   padding-bottom: 15px;
+}
+.header h1{
+  padding-bottom: inherit;
 }
 h2{
 
