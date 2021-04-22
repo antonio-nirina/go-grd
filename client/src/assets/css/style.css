@@ -17,6 +17,39 @@ html{
 .clear{
     clear: both;
 }
+.bg-yellow{
+  background: #f2cf1c;
+}
+.cl-yellow{
+  color: yellow;
+}
+.btn{
+  font-size: 14px;
+  text-transform: uppercase;  
+  padding: 10px 15px;
+  border-radius: 5px;
+  color: #010101;
+  border:none;
+}
+.mg15{
+  margin: 15px 0;
+}
+.italic{
+  font-style: italic;
+}
+.bloc{
+  display: block;
+}
+.center{
+  text-align: center;
+}
+.mb15{
+  margin-bottom: 15px;
+}
+.mgt10{
+  margin-top: 15px;
+}
+
 a{
    text-decoration:none;     
 }
@@ -34,6 +67,13 @@ p{
  }
 span{
 
+}
+h1{
+  font-family: "russo one";
+  font-weight: 200;
+  font-size: 35px;
+  text-transform: uppercase;
+  padding-bottom: 15px;
 }
 h2{
 
@@ -96,12 +136,21 @@ h1{}
   }
 }
 @media screen and (max-width: 1296px) {
-  .home .navmenu{
+  .home .navmenu,
+  .login .navmenu
+  {
         width: 55%;
   }
-  .home header.header .wrap{
+  .home header.header .wrap,
+  .wrap
+  {
       padding: 3px 0px;
   }
+  footer .wrap{
+    padding: 3px 50px;
+  }
+
+  
   .home .slogan{
       top: 38%;
   }

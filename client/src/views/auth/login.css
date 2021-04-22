@@ -1,2 +1,76 @@
 @charset "UTF-8";
+.login{
+	position: relative;
+	height: 100vh;
+}
+.containt{
+	margin-top: 50px;
+	width: 60%;	
+	padding-top: 5em;
+	margin: auto;
+	
+}
+.group{	
+	padding: 15px 45px;
+	border-radius: 15px;
+	/*position: relative;*/
+	background: #2c2c2c
+}
+.group h1{
+	/*position: absolute;*/
+	/*background: #101010;*/
+    padding: 0 5px;
+    top: -20px;
+    display: inline-block;
+    vertical-align: middle;
+    width: 100%;
+}
+.group .logo{
+	width: 25%;
+}
+.group input{
+	background: none;
+    border-bottom: 1px solid #acacac !important;
+    width: 100%;
+    padding: 10px;
+    color: #ffffff;
+    font-size: 14px;
+    border: none;
+    display: block;
+    margin-bottom: 15px;    
 
+}
+.group h1 img{
+	width: 8%;
+    float: right;
+    display: inline-block;
+    vertical-align: middle;
+    padding-top: 5px;
+}
+
+.login .footer{
+	position: absolute;
+	width: 100%;
+	bottom: 0px;
+}
+
+.other-account{
+	margin-bottom: 10px;
+}
+.other-account a{
+	background: #bcbcbc;
+	padding: 5px;
+	display: inline-block;
+	margin-right: 15px;
+	margin-top: 15px;
+	border-radius: 5px;
+}
+.other-account i.iconG svg{
+	width: 70px;
+	height: 18px;
+	color: #000000;
+
+}
+.infos p{
+	font-size: 13px;	
+}
