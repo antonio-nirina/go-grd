@@ -1,7 +1,6 @@
 @charset "UTF-8";
-.login{
-	position: relative;
-	height: 100vh;
+.inscription{
+	position: relative;	
 }
 .containt{
 	margin-top: 50px;
@@ -14,7 +13,8 @@
 	padding: 15px 45px;
 	border-radius: 15px;
 	/*position: relative;*/
-	background: #2c2c2c
+	background: #2c2c2c;
+	margin-bottom: 5em;
 }
 .group h1{
 	/*position: absolute;*/
@@ -66,7 +66,7 @@
 	margin-right: 15px;
 	margin-top: 15px;
 	border-radius: 5px;	
-	width: 85px;
+	width: 100px;
 	border: 1px solid #525050;
 }
 .other-account a img{

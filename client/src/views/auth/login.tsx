@@ -19,7 +19,7 @@ const Login: React.FC = function() {
 					<div className="group">					
 					<h1>Connexion <img src={joystick} alt=""/></h1>
 						<input className="mgt10" type = "email" placeholder = "Ton email"/>
-						<input type ="text" placeholder = "Ton mot de passe"/>
+						<input type ="password" placeholder = "Ton mot de passe"/>
 						<button className="btn bg-yellow mg15"><a href="#" title="Se connecter" className="link-btn">Se connecter</a></button>
 						<div className="infos">
 							<p className="mb15">Vous n'avez pas encore de compte ? <a href="#" title="Inscrivez-vous" className="italic cl-yellow">Inscrivez-vous !</a></p>

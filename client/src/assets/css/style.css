@@ -143,7 +143,8 @@ h1{}
 }
 @media screen and (max-width: 1296px) {
   .home .navmenu,
-  .login .navmenu
+  .login .navmenu,
+  .inscription .navmenu
   {
         width: 55%;
   }
