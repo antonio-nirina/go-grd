@@ -1,5 +1,5 @@
 import React from "react"
-
+import { Link } from 'react-router-dom'
 import Header0 from "../header/header0"
 import Footer from "../footer/footer"
 import joystick from "../../assets/image/joystick.png"
