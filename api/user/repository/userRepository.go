@@ -11,6 +11,7 @@ import (
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
+// Driver database
 type driverRepository struct {
 	client *mongo.Client
 }
@@ -35,16 +36,11 @@ func (c *driverRepository) SavedUser(user *entity.User) (interface{}, error) {
 }
 
 
-func (c *driverRepository) FindOneUser(idQuery string) (interface{}, error) {
+func (c *driverRepository) FindOneUser(objectId string) (interface{}, error) {
 	var collection = c.client.Database("grd_database").Collection("users")
 	var result entity.User
-	objectId, err := primitive.ObjectIDFromHex(idQuery)
 
-	if err != nil {
-		return nil, err
-	}
-
-	err = collection.FindOne(context.TODO(), bson.M{"_id": objectId}).Decode(&result)
+	err := collection.FindOne(context.TODO(), bson.M{"_id": objectId}).Decode(&result)
 
 	if err != nil {
 		return nil, err
@@ -53,7 +49,7 @@ func (c *driverRepository) FindOneUser(idQuery string) (interface{}, error) {
 	return result, nil
 }
 
-func (c *driverRepository) FindAll() (interface{}, error) {
+func (c *driverRepository) FindAllUser() (interface{}, error) {
 	var collection = c.client.Database("grd_database").Collection("users")
 	var results []primitive.M
 	cur, err := collection.Find(context.TODO(), bson.D{{}})
