@@ -13,9 +13,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
   
 
 const Header: React.FC = function() {
-    const [showList, setShowList] = useState(false);
+    const [showList, setShowList] = useState(false)
     const onShow = function(){
-        setShowList(!showList);
+        setShowList(!showList)
     }    
   return(
 
@@ -47,14 +47,20 @@ const Header: React.FC = function() {
     	 		<div className="tag">
 
                     <div className="box">
-    	 			   <div className="lang">
-                        
-                            <span><a href="#" title=""><img src={fr} alt="" className="lang" width="28" height="29"/></a></span>                                               
-                            <span><a href="#" title=""><img src={gb} alt="" className="lang" width="28" height="29" style={{display : "none"}}/></a></span>                                                
-                        
+    	 			   <div className="lang">                        
+                            <span>
+                                <a href="#" title="">
+                                    <img src={fr} alt="" className="lang show" width="28" height="29"/>                                    
+                                    <img src={gb} alt="" className="lang gb hide" width="28" height="29"/>
+                                </a>
+                            </span>
                         </div>    	 			
                         <div className="connex">
-                            <a href="#"><i className="square"><FontAwesomeIcon icon={faPlus} size="xs"/></i></a>
+                            <a href="#">
+                                <i className="square">
+                                    <FontAwesomeIcon icon={faPlus} size="xs"/>                                    
+                                </i>
+                            </a>
                             <a href="#"><i className="relative"><FontAwesomeIcon icon={faUsers} size="lg"/><span className="counter">2</span></i></a>
                         </div>
 

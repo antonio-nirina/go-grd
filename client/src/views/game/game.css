@@ -1,10 +1,11 @@
 @charset "UTF-8";
 .jeux{
-	background: url("../../assets/image/bg-map.png");
-	background-repeat: no-repeat;	
+	background: url("../../assets/image/background-img.jpg") no-repeat;
+	background-repeat: no-repeat;
+	background-position: center center;
 	background-size: 100%;
 	padding-top: 0em;
-	padding-bottom: 7em;
+	padding-bottom: 11em;
 
 }
 .w100{
@@ -17,7 +18,7 @@
 .logo-game{
 	width: 22%;
 	height: auto;
-	display: inline-block;	
+	display: inline-block;
 	vertical-align: middle;
 	margin-bottom: 29px;
 	filter: none !important;
@@ -39,4 +40,6 @@
 	text-transform: uppercase;
 }
 
-
+.lastblock{
+	padding-top: 2em;
+}

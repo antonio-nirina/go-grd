@@ -77,66 +77,83 @@ h1{}
         url('../../assets/fonts/quicksand/static/Quicksand-Regular.svg#RussoOne') format('svg');  
 }
 /*********  Media query ***************/
-@media screen and (max-width: 1296px) {
-    .home .navmenu{
-          width: 55%;
-    }
-    .home header.header .wrap{
-        padding: 3px 0px;
-    }
-    .home .slogan{
-        top: 38%;
-    }
-    .home p.title{
-        font-size: 39px;
-    }    
-    
+@media screen and (min-width: 1330px) {  
+
+
 }
+@media screen and (max-width: 1302px) {
+  .home .block{    
+    width: 80%;    
+    display: inline-block;
+    margin-bottom: 15px;
+
+  }
+  .home .block.last{    
+    width: 100%;
+  }
+  .home .content{
+    display: grid;
+  }
+}
+@media screen and (max-width: 1296px) {
+  .home .navmenu{
+        width: 55%;
+  }
+  .home header.header .wrap{
+      padding: 3px 0px;
+  }
+  .home .slogan{
+      top: 38%;
+  }
+  .home p.title{
+      font-size: 39px;
+  } 
+}
+
 @media screen and (max-width: 991px){
-   .part{
-     padding: 0 2em;
-   }
-   .home p.title{
-        font-size: 23px;
-   }
-   .home .slogan{
-        top: 44%;
-   }
-   .home .content{
-    display: inherit;
-   }
-   .home .block{
-        width: 30%;
-        display: inline-block;
-        margin-bottom: 15px;
-   }
-   .home .block.last{
-    width: 31%;
-    margin-right: 0;
-    border-radius: 15px;
-   }
-   .home .logo-game{
-    width: 20%;
-   }
-   .home .actuality{
-    width: 100%;
-    display: block;    
+  .part{
+   padding: 0 2em;
+  }
+  .home p.title{
+      font-size: 23px;
+  }
+  .home .slogan{
+      top: 44%;
+  }
+  .home .content{
+  display: inherit;
+  }
+  .home .block{
+    width: 30%;
+    display: inline-block;
     margin-bottom: 15px;
-   }
-   .home .article{
-    width: 47%;    
+  }
+  .home .block.last{
+  width: 31%;
+  margin-right: 0;
+  border-radius: 15px;
+  }
+  .home .logo-game{
+  width: 20%;
+  }
+  .home .actuality{
+  width: 100%;
+  display: block;    
+  margin-bottom: 15px;
+  }
+  .home .article{
+  width: 47%;    
 
-   }
-   .home .article img{
-    width: 100%;
-   }
-   .home .clip{
-    margin-bottom: 15px;
-    margin-left: 0px;
-    width: 100%;
-   }
-   .home .shop, .home .shop img{
-    width: 100%;
-   }
-
+  }
+  .home .article img{
+  width: 100%;
+  }
+  .home .clip{
+  margin-bottom: 15px;
+  margin-left: 0px;
+  width: 100%;
+  }
+  .home .shop, .home .shop img{
+  width: 100%;
+  }
 }
