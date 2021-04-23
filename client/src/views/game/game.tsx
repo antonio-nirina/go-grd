@@ -1,5 +1,4 @@
 import React from "react"
-import ReactDOM from 'react-dom'
 import "../../assets/css/style.css"
 import "../game/game.css"
 import apexlegends from "../../assets/image/apex-legends.png"
@@ -25,7 +24,7 @@ const Game: React.FC = function() {
         </div>
         <div className="logo-game">
             <a href="#"><img src={rainboxsix} alt="RainbowSIx Siege" /></a>
-        </div>        
+        </div>
         <div className="logo-game">
             <a href="#"><img src={rocketleague} alt="Rocket League" /></a>
         </div>
@@ -42,7 +41,7 @@ const Game: React.FC = function() {
         </div>
          <div className="logo-game">
             <a href="#"><img src={fifa} alt="Call of Duty Warzone" /></a>
-        </div>        
+        </div>
       </div>
     </div>
   </div>

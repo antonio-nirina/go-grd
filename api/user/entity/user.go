@@ -2,9 +2,12 @@ package entity
 
 import (
 	"bytes"
+	"fmt"
 	"crypto/sha512"
 
 	"go.mongodb.org/mongo-driver/bson/primitive"
+	"github.com/antonio-nirina/go-grd/api/external"
+	game "github.com/antonio-nirina/go-grd/api/games/entity"
 	"golang.org/x/crypto/bcrypt"
 )
 
@@ -23,6 +26,7 @@ type User struct {
 	IsBanned  bool               `json:"isBanned"`
 	Avatar    string             `json:"avatar,omitempty"`
 	Language  string             `json:"language"`
+	IdGameAccount []game.GameAccount `json:"idGameAccount,omitempty"`
 	Point     int                `json:"point"`
 }
 
@@ -31,7 +35,8 @@ func (u *User) CreatedHash(plainText string) (hashText string) {
 	passwordHashInBytes, err := bcrypt.GenerateFromPassword([]byte(preparedPlainText), bcrypt.DefaultCost)
 
 	if err != nil {
-		panic(err)
+		external.Logger("encrypted err")
+		fmt.Println(err)
 	}
 
 	hashText = string(passwordHashInBytes)

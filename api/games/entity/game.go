@@ -25,34 +25,28 @@ type AccountGame struct {
 	Plateform GamePlatform `json:"plateform"`
 }
 
-type AccountUser struct {
-	Uid       primitive.ObjectID `bson:"uid"`
-	IdAccount string      `json:"idAccount"`
-	Account   AccountGame `json:"account"`
-}
-
 type GameSchema struct {
-	Uid         string
+	Uid         primitive.ObjectID
 	Name        string
 	Description string
 }
 
 type GamePlatformSchema struct {
-	Uid         string
+	Uid         primitive.ObjectID
 	Name        string
 	Description string
 }
 
 type AccountGameSchema struct {
-	Uid       string
+	Uid       primitive.ObjectID
 	Name      string
 	Logo      string
 	Game      GameSchema
 	Plateform GamePlatformSchema
 }
 
-type GameAccountSchema struct {
-	Uid       string
+type GameAccount struct {
+	Uid       primitive.ObjectID
 	IdAccount string
 	Account   AccountGameSchema
 }
