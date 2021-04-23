@@ -5,6 +5,7 @@ package handler
  */
 
 import (
+
 	"github.com/antonio-nirina/go-grd/api/user/entity"
 	"github.com/antonio-nirina/go-grd/api/user/repository"
 	"go.mongodb.org/mongo-driver/bson/primitive"
@@ -14,14 +15,14 @@ type userUsecase struct {
 	userRepository repository.Repository
 }
 
-func NewUsecaseUser(r repository.Repository) *userUsecase {
+func NewUsecaseUser(r repository.Repository) Usecase {
 	return &userUsecase{
 		userRepository: r,
 	}
 }
 
 func (u *userUsecase) SavedUser(user *entity.User) (interface{}, error) {
-	result, err := u.SavedUser(user)
+	result, err := u.userRepository.SavedUser(user)
 
 	if err != nil {
 		return nil, err
@@ -37,7 +38,7 @@ func (u *userUsecase) FindOneUser(idQuery string) (interface{}, error) {
 		return nil, err
 	}
 
-	user, err := u.FindOneUser(objectId)
+	user, err := u.userRepository.FindOneUser(objectId)
 
 	if err != nil {
 		return nil, err
@@ -47,7 +48,7 @@ func (u *userUsecase) FindOneUser(idQuery string) (interface{}, error) {
 }
 
 func (u *userUsecase) FindAllUser() (interface{}, error) {
-	result, err := u.FindAllUser()
+	result, err := u.userRepository.FindAllUser()
 
 	if err != nil {
 		return nil, err

@@ -4,8 +4,8 @@ import (
 
 	"github.com/antonio-nirina/go-grd/api/config"
 	"github.com/antonio-nirina/go-grd/api/user/delivery"
-	"github.com/antonio-nirina/go-grd/api/repository"
-	"github.com/antonio-nirina/go-grd/api/handler"
+	"github.com/antonio-nirina/go-grd/api/user/repository"
+	"github.com/antonio-nirina/go-grd/api/user/handler"
 
 	"github.com/graphql-go/graphql"
 )

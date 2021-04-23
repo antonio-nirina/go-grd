@@ -2,10 +2,10 @@ package delivery
 
 import (
 	"errors"
-	"fmt"
 
-	"github.com/antonio-nirina/go-grd/api/handler"
+	"github.com/antonio-nirina/go-grd/api/user/handler"
 	"github.com/antonio-nirina/go-grd/api/user/entity"
+	game "github.com/antonio-nirina/go-grd/api/games/entity"
 	"github.com/graphql-go/graphql"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
@@ -26,7 +26,6 @@ func NewResolver(userUseCase handler.Usecase) Resolver {
 }
 
 func (r *resolver) SavedUserResolver(params graphql.ResolveParams) (interface{}, error) {
-	fmt.Println("params", params)
 	userEntity := entity.User{}
 	password := params.Args["password"].(string)
 	hashed := userEntity.CreatedHash(password)
@@ -41,6 +40,7 @@ func (r *resolver) SavedUserResolver(params graphql.ResolveParams) (interface{},
 		Avatar:    params.Args["avatar"].(string),
 		Language:  params.Args["language"].(string),
 		Point:     entity.POINT,
+		IdGameAccount: []game.GameAccount{},
 	}
 
 	res, err := r.userHandler.SavedUser(userSaved)

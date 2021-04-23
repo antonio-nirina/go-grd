@@ -1,11 +1,6 @@
 package mutation
 
 import (
-	"context"
-	"fmt"
-	"log"
-
-	
 	"github.com/antonio-nirina/go-grd/api/graphql/types"
 	"github.com/graphql-go/graphql"
 )
@@ -13,7 +8,7 @@ import (
 func createdUser() *graphql.Field {
 	return &graphql.Field{
 		Type:        types.UserSchemaType,
-		Description: "Get single user",
+		Description: "Created user",
 		Args: graphql.FieldConfigArgument{
 			"firstname": &graphql.ArgumentConfig{
 				Type: graphql.String,

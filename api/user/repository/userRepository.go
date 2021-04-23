@@ -34,7 +34,7 @@ func (c *driverRepository) SavedUser(user *entity.User) (interface{}, error) {
 	return user, nil
 }
 
-func (c *driverRepository) FindOneUser(objectId string) (interface{}, error) {
+func (c *driverRepository) FindOneUser(objectId primitive.ObjectID) (interface{}, error) {
 	var collection = c.client.Database("grd_database").Collection("users")
 	var result entity.User
 
