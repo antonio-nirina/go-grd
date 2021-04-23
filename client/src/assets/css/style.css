@@ -128,18 +128,20 @@ h1{}
 
 }
 @media screen and (max-width: 1302px) {
+  .home .content{
+    display: block;
+  }
   .home .block{    
-    width: 80%;    
+    width: 16%;    
     display: inline-block;
     margin-bottom: 15px;
-
+    margin-right: 10px;
   }
   .home .block.last{    
-    width: 100%;
+    width: 15%;
+    border-radius: 15px;
   }
-  .home .content{
-    display: grid;
-  }
+  
 }
 @media screen and (max-width: 1296px) {
   .home .navmenu,
@@ -155,9 +157,7 @@ h1{}
   }
   footer .wrap{
     padding: 3px 50px;
-  }
-
-  
+  }  
   .home .slogan{
       top: 38%;
   }
@@ -165,7 +165,11 @@ h1{}
       font-size: 39px;
   } 
 }
-
+@media screen and (max-width: 1173px){
+  .home .block,.home .block.last{
+    width: 23%;
+  }
+}
 @media screen and (max-width: 991px){
   .part{
    padding: 0 2em;
@@ -179,13 +183,14 @@ h1{}
   .home .content{
   display: inherit;
   }
-  .home .block{
+  .home .block  
+  {
     width: 30%;
     display: inline-block;
     margin-bottom: 15px;
   }
   .home .block.last{
-  width: 31%;
+  width: 30%;
   margin-right: 0;
   border-radius: 15px;
   }
@@ -211,5 +216,44 @@ h1{}
   }
   .home .shop, .home .shop img{
   width: 100%;
+  }
+}
+@media screen and (max-width: 827px){
+  .home .header .wrap{
+    text-align: right;
+    padding-right: 5px;    
+  }
+  .home .header .dropdown{
+    text-align: center;
+    width: 90%;
+  }
+  .home .navmenu{
+    display: none;
+  }  
+  .home .header .logo{
+    float: left;
+    margin: 5px 30px;
+  }
+  .home .header .tag{
+    width: 60%;
+    max-width: inherit;
+
+  }
+  .home .header .gametag{
+    margin-right: 5px;
+  }
+}
+@media screen and (max-width: 600px){
+
+  .home .block,
+  .home .block.last{
+    width: 90%;
+  }
+
+}
+@media screen and (max-width: 450px){
+  .home .header .logo{
+    float: none;
+    clear: both;
   }
 }
