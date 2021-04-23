@@ -101,7 +101,8 @@
 	padding: 10px 15px;
 	border-radius: 15px;
 	color: #010101;
-
+	display: inline-block;
+	margin-top: 12px;
 }
 .gamecash strong{
 	font-family: "russo one";

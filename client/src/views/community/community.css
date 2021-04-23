@@ -24,8 +24,7 @@
 	padding: 20px;
 	border-radius: 10px;
 	width: 52%;
-
-
+	margin-bottom: 15px;
 }
 .actuality h3{
 	font-family: "russo one";
@@ -38,9 +37,12 @@
 }
 .article{
 	display: inline-block;
-	width: 250px;
+	width: 47%;
 	margin-left: 15px;
-	vertical-align: top;
+	vertical-align: top;	
+}
+.article img{
+	width: 100%;
 }
 .article p{
 	font-size: 12px;
