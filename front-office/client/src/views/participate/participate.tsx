@@ -1,9 +1,7 @@
 import React from "react"
-import ReactDOM from 'react-dom'
 
 import { faXbox, faPlaystation } from "@fortawesome/free-brands-svg-icons"
 import { faGamepad } from "@fortawesome/free-solid-svg-icons"
-import {useState} from "react"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import "../../assets/css/style.css"
 import "../participate/participate.css"
@@ -133,7 +131,7 @@ const Slider: React.FC = function() {
 		</div>
 		<div className="gamecash">
 			<div className="lot">
-				<p><strong>+6000</strong><span>Membres</span></p>				
+				<p><strong>+6000</strong><span>Membres</span></p>
 				<p><strong>+5000€</strong><span>Cash prizes/Semaine</span></p>
 			</div>
 			<div className="more">
