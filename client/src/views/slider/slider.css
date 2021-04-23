@@ -4,7 +4,21 @@
 	width: 100%;
 	filter: brightness(0.75);
 }
-.sliderGrid{
+.slick-track{
+	width: inherit !Important;
+}
+/*.sliderGrid .slick-slide[aria-hidden="true"]{
+	left: 0px !Important;
+	top: 0px !Important;
+
+}
+.sliderGrid .slick-slide[aria-hidden="false"]{
+	left: 0px !Important;
+	top: -12px !Important;
+	background: red !Important;
+	
+}*/
+.sliderGrid .slick-track .slick-slide.slick-active.slick-current:second-child{
 	
 }
 .slogan{
