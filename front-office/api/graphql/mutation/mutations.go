@@ -18,6 +18,7 @@ var UserRolve = delivery.NewResolver(usecase)
 func GetRootFields() graphql.Fields {
 	return graphql.Fields{
 		"createdUser": createdUser(),
+		"login": 	login(),
 	}
 }
 

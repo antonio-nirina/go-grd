@@ -1,0 +1,84 @@
+@charset "UTF-8";
+.inscription{
+	position: relative;	
+}
+.containt{
+	margin-top: 50px;
+	width: 46%;	
+	padding-top: 5em;
+	margin: auto;
+	
+}
+.group{	
+	padding: 15px 45px;
+	border-radius: 15px;
+	/*position: relative;*/
+	background: #2c2c2c;
+	margin-bottom: 5em;
+}
+.group h1{
+	/*position: absolute;*/
+	/*background: #101010;*/
+    padding: 0 5px;
+    top: -20px;
+    display: inline-block;
+    vertical-align: middle;
+    width: 100%;
+}
+.group .logo{
+	width: 25%;
+}
+.group input{
+	background: none;
+    border-bottom: 1px solid #acacac !important;
+    width: 100%;
+    padding: 10px;
+    color: #ffffff;
+    font-size: 14px;
+    border: none;
+    display: block;
+    margin-bottom: 15px;    
+
+}
+.group h1 img{
+	width: 8%;
+    float: right;
+    display: inline-block;
+    vertical-align: middle;
+    padding-top: 10px;
+}
+
+.login .footer{
+	position: absolute;
+	width: 100%;
+	bottom: 0px;
+}
+
+.other-account{
+	padding-top: 15px;
+	margin-bottom: 10px;
+	text-align: center;
+}
+.other-account a{
+	background: #383434;
+	padding: 5px 15px;
+	display: inline-block;
+	margin-right: 15px;
+	margin-top: 15px;
+	border-radius: 5px;	
+	width: 75px;
+	border: 1px solid #525050;
+}
+.other-account a img{
+	width: 15px;
+	height: 15px;
+}
+/*.other-account i.iconG svg{
+	width: 70px;
+	height: 18px;
+	color: #000000;
+
+}*/
+.infos p{
+	font-size: 13px;	
+}

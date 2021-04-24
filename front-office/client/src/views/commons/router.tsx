@@ -6,6 +6,8 @@ import Tournament from "../tournament/tournament"
 import Wager from "../wager/wager"
 import Assistant from "../assistant/assistant"
 import Communaute from "../communaute/communaute"
+import Login from "../auth/login"
+import Inscription from "../auth/inscription"
 
 const Router = function() {
 	return (
@@ -16,6 +18,8 @@ const Router = function() {
 			<Route path="/wager" exact component={Wager} />
 			<Route path="/communaute" exact component={Communaute} />
 			<Route path="/assistant" exact component={Assistant} />
+			<Route path="/login" exact component={Login} />
+			<Route path="/inscription" exact component={Inscription} />
 		</Switch>
 	)
 }

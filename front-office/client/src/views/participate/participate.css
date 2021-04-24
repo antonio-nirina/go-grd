@@ -34,12 +34,13 @@
 	display: none;
 }
 .block{
-	background: #2c2c2c;    
+	background: #2c2c2c; 
+	display: inline-block;
+	width: 90%;  
     height: 160px;
-    padding: 15px;    
+    padding: 10px;    
     vertical-align: top;
     border-radius: 15px;    
-    margin-right: 15px;
     position: relative;
 }
 
@@ -48,19 +49,23 @@
 }
 .block p.legend{
 	font-size: 12px;
-	text-align: left;
-	position: relative;	
+	text-align: left;	
+	display: inline-block;	
+	padding: 5px 0;
+	width: 81%;
+	vertical-align: middle;
 }
 .block .info{
 	position: absolute;
 	bottom: 0;
+	width: 92%;	
 }
 .block .info p{
 	font-size: 11px;
 	font-weight: 200;	
 }
 .block.last{
-	
+	width: 100%;
     margin-right: 0;
     border-radius: 15px 0px 0px 15px;
 }
@@ -96,7 +101,8 @@
 	padding: 10px 15px;
 	border-radius: 15px;
 	color: #010101;
-
+	display: inline-block;
+	margin-top: 12px;
 }
 .gamecash strong{
 	font-family: "russo one";
@@ -125,13 +131,13 @@
 .iconGame{
 	display: inline-block;
 	vertical-align: middle;
+	display: inline-block;
+	float: right;
+	margin-top: 2px;
 }
-.iconGame svg{
-	width: 24px !important;
-	height: 19px;
-	position: absolute;
-	top: -2px;
-	right: 0px;
+.iconGame svg{	
+	
+	height: 19px;	
 }
 .sprite {
 	background: url("../../assets/image/sprite.png") no-repeat;	
@@ -141,8 +147,9 @@
 	background-size: 81px 23px;
 }
 .inblock span{	
-	padding: 5px 5px;
+	padding: 5px 5px;	
 }
+
 .inblock i, .inblock span{
 	display: inline-block;
 	vertical-align: top;

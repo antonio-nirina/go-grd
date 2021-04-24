@@ -7,7 +7,9 @@ import (
 var UserSchemaType = graphql.NewObject(graphql.ObjectConfig{
 	Name: "UserType",
 	Fields: graphql.Fields{
-		"_id": &graphql.Field{Type: graphql.String},
+		"_id": &graphql.Field{
+			Type: graphql.String,
+		},
 		"uid": &graphql.Field{
 			Type: graphql.String,
 		},
@@ -37,6 +39,15 @@ var UserSchemaType = graphql.NewObject(graphql.ObjectConfig{
 		},
 		"point": &graphql.Field{
 			Type: graphql.Int,
+		},
+	},
+})
+
+var AuthSchemaType = graphql.NewObject(graphql.ObjectConfig{
+	Name: "AuthType",
+	Fields: graphql.Fields{
+		"token": &graphql.Field{
+			Type: graphql.String,
 		},
 	},
 })

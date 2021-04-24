@@ -69,3 +69,29 @@ func (c *driverRepository) FindAllUser() (interface{}, error) {
 
 	return results, nil
 }
+
+func (c *driverRepository) FindUserByEmail(email string) (entity.User, error)  {
+	var collection = c.client.Database("grd_database").Collection("users")
+	var result entity.User
+
+	err := collection.FindOne(context.TODO(), bson.M{"email": email}).Decode(&result)
+
+	if err != nil {
+		return result, err
+	}
+
+	return result, nil
+}
+
+func (c *driverRepository) FindUserByUsername(username string) (entity.User, error) {
+	var collection = c.client.Database("grd_database").Collection("users")
+	var result entity.User
+
+	err := collection.FindOne(context.TODO(), bson.M{"username": username}).Decode(&result)
+
+	if err != nil {
+		return result, err
+	}
+
+	return result, nil
+}
