@@ -49,6 +49,9 @@ html{
 .mgt10{
   margin-top: 15px;
 }
+.link-btn{
+  color: #010101;
+}
 
 a{
    text-decoration:none;     
@@ -74,6 +77,9 @@ h1{
   font-size: 35px;
   text-transform: uppercase;
   padding-bottom: 15px;
+}
+.header h1{
+  padding-bottom: inherit;
 }
 h2{
 
@@ -122,22 +128,23 @@ h1{}
 
 }
 @media screen and (max-width: 1302px) {
+  .home .content{
+    display: block;
+  }
   .home .block{    
-    width: 80%;    
+    width: 16%;    
     display: inline-block;
     margin-bottom: 15px;
-
+    margin-right: 10px;
   }
   .home .block.last{    
-    width: 100%;
+    width: 15%;
+    border-radius: 15px;
   }
-  .home .content{
-    display: grid;
-  }
+  
 }
 @media screen and (max-width: 1296px) {
-  .home .navmenu,
-  .login .navmenu
+  .navmenu  
   {
         width: 55%;
   }
@@ -148,9 +155,7 @@ h1{}
   }
   footer .wrap{
     padding: 3px 50px;
-  }
-
-  
+  }  
   .home .slogan{
       top: 38%;
   }
@@ -158,7 +163,22 @@ h1{}
       font-size: 39px;
   } 
 }
-
+@media screen and (max-width: 1173px){
+  .home .block,.home .block.last{
+    width: 23%;
+  }
+  .home .jeux{
+    padding-bottom: 0px;
+  }
+  .home .rss{
+    width: 90%;
+    margin: auto;
+  }
+  .home .rss {
+    width: 60%;
+    margin: auto;
+  }
+}
 @media screen and (max-width: 991px){
   .part{
    padding: 0 2em;
@@ -172,13 +192,14 @@ h1{}
   .home .content{
   display: inherit;
   }
-  .home .block{
+  .home .block  
+  {
     width: 30%;
     display: inline-block;
     margin-bottom: 15px;
   }
   .home .block.last{
-  width: 31%;
+  width: 30%;
   margin-right: 0;
   border-radius: 15px;
   }
@@ -205,4 +226,204 @@ h1{}
   .home .shop, .home .shop img{
   width: 100%;
   }
+  .home .gamecash .lot{
+    width: 100%;
+  }
+  .home .shop{
+    max-width: inherit;
+  }
+  .home .gamecash .more{
+    width: 100%;
+    text-align: center;
+    margin-top: 40px;
+  }
+  .login .containt,
+  .inscription .containt
+  {
+    width: 80%;
+  }
+  .containt h1{
+    font-size: 25px;
+  }
+  .containt .group{
+    padding: 15px 15px;
+  }
+  .login footer .rss,
+  .inscription footer .rss
+  {
+    width: 60%; 
+  }
 }
+@media screen and (max-width: 827px){
+  .header .wrap{
+    text-align: right;
+    padding-right: 5px;    
+  }
+  .header .dropdown,
+  .header .dropdown
+  {
+    text-align: center;
+    width: 90%;
+  }
+  .navmenu  
+  {
+    display: none;
+  }  
+  .header .logo{
+    float: left;
+    margin: 5px 30px;
+  }
+  .header .tag{
+    width: 60%;
+    max-width: inherit;
+
+  }
+  .header .gametag{
+    margin-right: 5px;
+  }
+}
+@media screen and (max-width: 640px){
+  .home .article{
+    width: 100%;    
+    margin-bottom: 15px;    
+  }
+  .home .article img{
+    width: 95%;
+  }
+  .home .join{
+
+  }
+  .home .join input{
+    width: 30%;
+  }
+  .home .join a{
+    width: 40%;
+  }
+}
+@media screen and (max-width: 600px){
+  .home .block,
+  .home .block.last{
+    width: 90%;
+  }
+  .footer .logo, .login footer .rss, .inscription footer .rss{
+    max-width: inherit;
+    display: block;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 15px;
+  }
+  .footer .rss, .login footer .rss, .inscription footer .rss{
+    width: 90%;
+    max-width: inherit;
+    margin-bottom: 15px;
+  }
+  .footer .mention, .login footer .mention, .inscription footer .mention{
+    width: 90%;
+    text-align: center;
+  }
+}
+@media screen and (max-width: 690px){
+  .home .jeux{
+    padding-bottom: 0px;
+  }  
+  .home .logo-game{
+    width: 17%;
+  }
+  .home .jeux h2{
+    font-size: 23px; 
+    padding-bottom: 0px;
+    padding-top: 15px;
+  }
+  .home .lastblock{
+    padding-top: 0px;
+  }
+  .home .bg-game .logo-game{
+    margin-left: 20px;
+  }
+  .home .community-block{
+    padding: 0px 15px;
+  }
+  .home .shop{
+    max-width: inherit;
+  }
+  .home .join{
+    margin-top: 15px;
+  }
+  .home .community h2, .home .join h2{
+    font-size: 23px;
+  }
+}
+@media screen and (max-width: 500px){
+  .home .slogan{
+    top: 20%;
+  }
+  .home .community h2{
+    font-size: 23px;
+  }
+  
+  .home .join input{
+    display: block;
+    width: 70%;
+    margin: auto;
+  }
+  .home .join a{
+    width: 70%;
+    margin: auto;
+    margin-top: 15px;
+    display: block;
+  }
+}
+@media screen and (max-width: 450px){
+  .header .logo{
+    float: none;
+    clear: both;
+    width: 100%; 
+    max-width: inherit;
+    text-align: center;
+    margin: 0 0px 8px;   
+  }
+  .header .tag{
+    width: 100%;
+    text-align: center;
+  }
+  .home .gamecash .lot p{    
+    display: inine-block;
+    width: 50%;
+    text-align: left; 
+    margin-bottom: 15px;
+  }
+  .footer .logo{
+    text-align: center;
+    margin-bottom: 15px;
+    max-width: inherit;
+    width: 90%
+  }
+  .footer .logo a{
+    display: block;
+  }
+  .footer .rss{    
+    margin:auto;
+    width: 100%;
+    margin-bottom: 15px;    
+  }
+  .footer .rss li{
+    padding-left: 15px;
+  }
+  .footer .mention{
+    width: 100%;
+    text-align: center;
+  }
+}
+@media screen and (max-width: 400px){
+  .home .slogan{
+    top: 9%;
+  }
+  .home p.title{
+    font-size: 20px;
+  }
+
+}
+@media screen and (max-width: 320px){
+
+}
+
