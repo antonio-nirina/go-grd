@@ -56,3 +56,25 @@ func (u *userUsecase) FindAllUser() (interface{}, error) {
 
 	return result, nil
 }
+
+func (u *userUsecase) FindUserByEmail(email string) (entity.User, error) {
+	user, err := u.userRepository.FindUserByEmail(email)
+
+	if err != nil {
+		return entity.User{}, err
+	}
+
+	return user, nil
+}
+
+func (u *userUsecase) FindUserByUsername(email string) (entity.User, error) {
+	user, err := u.userRepository.FindUserByUsername(email)
+
+	if err != nil {
+		return entity.User{}, err
+	}
+
+	return user, nil
+}
+
+

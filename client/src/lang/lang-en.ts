@@ -1,4 +1,12 @@
 export const EN = {
+	"assistant":{
+		"contact":"How help you",
+		"name":"Nom",
+		"firstname":"Prénom",
+		"email": "E-mail",
+		"message": "message",
+		"send":"envoyer"
+	},
 	"home":{
 		"ligues": "leagues",
 		"wagers": "wagers",
