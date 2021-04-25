@@ -2,7 +2,7 @@ package repository
 
 import (
 	"go.mongodb.org/mongo-driver/bson/primitive"
-	"github.com/antonio-nirina/go-grd/api/games/entity"
+	"github.com/thoussei/antonio/main/front-office/api/games/entity"
 )
 
 

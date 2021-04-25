@@ -4,7 +4,7 @@ import (
 	"github.com/thoussei/antonio/main/front-office/api/config"
 	"github.com/thoussei/antonio/main/front-office/api/user/delivery"
 	"github.com/thoussei/antonio/main/front-office/api/user/handler"
-	"github.com/antonio-nirina/go-grd/api/user/repository"
+	"github.com/thoussei/antonio/main/front-office/api/user/repository"
 
 	gameDelivery "github.com/thoussei/antonio/main/front-office/api/games/delivery"
 	gameHandler "github.com/thoussei/antonio/main/front-office/api/games/handler"
