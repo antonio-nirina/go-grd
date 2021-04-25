@@ -6,23 +6,26 @@ import (
 
 // primitive.NewObjectID()
 type Game struct {
-	Uid         primitive.ObjectID `bson:"uid"`
-	Name        string `json:"name"`
-	Description string `json:"description"`
+	Uid        primitive.ObjectID `bson:"uid"`
+	Image      string             `json:"image,omitempty"`
+	Logo       string             `json:"logo,omitempty"`
+	Popularity int                `json:"popularity"`
+	Notes      int                `json:"notes"`
+	Slug       string             `json:"slug"`
 }
 
 type GamePlatform struct {
 	Uid         primitive.ObjectID `bson:"uid"`
-	Name        string `json:"name"`
-	Description string `json:"description"`
+	Name        string             `json:"name"`
+	Description string             `json:"description"`
 }
 
 type AccountGame struct {
 	Uid       primitive.ObjectID `bson:"uid"`
-	Name      string       `json:"name"`
-	Logo      string       `json:"logo"`
-	Game      Game         `json:"game"`
-	Plateform GamePlatform `json:"plateform"`
+	Name      string             `json:"name"`
+	Logo      string             `json:"logo"`
+	Game      Game               `json:"game"`
+	Plateform GamePlatform       `json:"plateform"`
 }
 
 type GameSchema struct {

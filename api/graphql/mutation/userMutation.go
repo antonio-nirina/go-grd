@@ -1,7 +1,7 @@
 package mutation
 
 import (
-	"github.com/antonio-nirina/go-grd/api/graphql/types"
+	"github.com/thoussei/antonio/main/front-office/api/graphql/types"
 	"github.com/graphql-go/graphql"
 )
 
@@ -38,7 +38,7 @@ func createdUser() *graphql.Field {
 
 func login() *graphql.Field {
 	return &graphql.Field{
-		Type:        types.AuthSchemaType,
+		Type:        graphql.String,
 		Description: "Auth user",
 		Args: graphql.FieldConfigArgument{
 			"email": &graphql.ArgumentConfig{
