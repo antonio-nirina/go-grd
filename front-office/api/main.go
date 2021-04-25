@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/antonio-nirina/go-grd/api/external"
-	"github.com/antonio-nirina/go-grd/api/graphql/mutation"
-	"github.com/antonio-nirina/go-grd/api/graphql/queries"
+	"github.com/thoussei/antonio/main/front-office/api/external"
+	"github.com/thoussei/antonio/main/front-office/api/graphql/mutation"
+	"github.com/thoussei/antonio/main/front-office/api/graphql/queries"
 	"github.com/graphql-go/graphql"
 	"github.com/graphql-go/handler"
 )

@@ -6,8 +6,8 @@ package handler
 
 import (
 
-	"github.com/antonio-nirina/go-grd/api/user/entity"
-	"github.com/antonio-nirina/go-grd/api/user/repository"
+	"github.com/thoussei/antonio/main/front-office/api/user/entity"
+	"github.com/thoussei/antonio/main/front-office/api/user/repository"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 

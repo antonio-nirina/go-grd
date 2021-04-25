@@ -1,7 +1,7 @@
 package repository
 
 import (
-	"github.com/antonio-nirina/go-grd/api/user/entity"
+	"github.com/thoussei/antonio/main/front-office/api/user/entity"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
@@ -11,4 +11,5 @@ type Repository interface {
 	FindUserByEmail(email string) (entity.User, error)
 	FindUserByUsername(username string) (entity.User, error)
 	FindAllUser() (interface{}, error)
+	// UpdateAccountGame(email string) (entity.User, error)
 }

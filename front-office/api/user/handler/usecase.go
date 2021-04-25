@@ -1,6 +1,6 @@
 package handler
 
-import "github.com/antonio-nirina/go-grd/api/user/entity"
+import "github.com/thoussei/antonio/main/front-office/api/user/entity"
 
 type Usecase interface {
 	SavedUser(user *entity.User) (interface{}, error)

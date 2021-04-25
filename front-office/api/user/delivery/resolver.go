@@ -2,12 +2,11 @@ package delivery
 
 import (
 	"errors"
-	"fmt"
 	"os"
 
-	game "github.com/antonio-nirina/go-grd/api/games/entity"
-	"github.com/antonio-nirina/go-grd/api/user/entity"
-	"github.com/antonio-nirina/go-grd/api/user/handler"
+	game "github.com/thoussei/antonio/main/front-office/api/games/entity"
+	"github.com/thoussei/antonio/main/front-office/api/user/entity"
+	"github.com/thoussei/antonio/main/front-office/api/user/handler"
 	_jwt "github.com/dgrijalva/jwt-go"
 	"github.com/graphql-go/graphql"
 	"github.com/joho/godotenv"
@@ -79,7 +78,7 @@ func (r *resolver) FindOneUserResolver(params graphql.ResolveParams) (interface{
 	if err != nil {
 		return nil, err
 	}
-	fmt.Println(res)
+
 	return res, nil
 }
 
@@ -124,7 +123,7 @@ func (r *resolver) AuthUserResolver(params graphql.ResolveParams) (interface{}, 
 	if err != nil {
 		return "", errors.New("Error interne try after an moment")
 	}
-	
+
 	return token, nil
 }
 

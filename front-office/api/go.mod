@@ -1,8 +1,9 @@
-module github.com/antonio-nirina/go-grd/api
+module github.com/thoussei/antonio/main/front-office/api
 
 go 1.14
 
 require (
+	github.com/antonio-nirina/go-grd/api v0.0.0-20210424142750-ff1bb81bd033
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/graphql-go/graphql v0.7.9
 	github.com/graphql-go/handler v0.2.3
