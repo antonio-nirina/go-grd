@@ -8,7 +8,7 @@
 
 ### Install project:
 #### Install Api:
-- Install Golang
+- Install Golang [Here](https://golang.org/) if not installed
 - Add conf your database Mongodb 
 - go build
 - go run main.go

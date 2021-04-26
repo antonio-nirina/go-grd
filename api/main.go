@@ -4,11 +4,11 @@ import (
 	"fmt"
 	"net/http"
 
+	"github.com/graphql-go/graphql"
+	"github.com/graphql-go/handler"
 	"github.com/thoussei/antonio/main/front-office/api/external"
 	"github.com/thoussei/antonio/main/front-office/api/graphql/mutation"
 	"github.com/thoussei/antonio/main/front-office/api/graphql/queries"
-	"github.com/graphql-go/graphql"
-	"github.com/graphql-go/handler"
 )
 
 func main() {
@@ -36,7 +36,7 @@ func main() {
 		// FormatErrorFn: ,
 	})
 
-	http.Handle("/", httpHandler)
+	http.Handle("/", external.Handle(httpHandler))
 	fmt.Println("ready: listening 4000")
 	http.ListenAndServe(":4000", nil)
 }

@@ -50,5 +50,15 @@ export const mockPictures = [
   	url:"https://ibb.co/HxbzGCB",
   	logo:"https://ibb.co/r5bPh0C"
   },
+  {
+  	name:"PES21",
+  	url:"https://ibb.co/MGrv8rq",
+  	logo:"https://ibb.co/4m7kHJJ"
+  },
+  {
+  	name:"FIFA21",
+  	url:"https://ibb.co/PCBYmwJ",
+  	logo:"https://ibb.co/G2NWY7h"
+  }
 
 ]

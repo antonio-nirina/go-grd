@@ -35,28 +35,16 @@ func GetOnePlateformQuery() *graphql.Field {
 
 func GetAllGameQuery() *graphql.Field {
 	return &graphql.Field{
-		Type:        types.GameSchemaType,
+		Type:        graphql.NewList(types.GameSchemaType),
 		Description: "Get all games",
-		Args: graphql.FieldConfigArgument{
-			"id": &graphql.ArgumentConfig{
-				Type: graphql.String,
-			},
-		},
-
 		Resolve: gameResolver.FindAllGameResolver,
 	}
 }
 
 func GetAllPlateformQuery() *graphql.Field {
 	return &graphql.Field{
-		Type:        types.PlateformSchemaType,
+		Type:        graphql.NewList(types.PlateformSchemaType),
 		Description: "Get all plateforms",
-		Args: graphql.FieldConfigArgument{
-			"id": &graphql.ArgumentConfig{
-				Type: graphql.String,
-			},
-		},
-
 		Resolve: plateformResolver.FindAllGamePlateformResolver,
 	}
 }

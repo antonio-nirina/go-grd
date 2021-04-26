@@ -16,7 +16,19 @@ var GameSchemaType = graphql.NewObject(graphql.ObjectConfig{
 		"name": &graphql.Field{
 			Type: graphql.String,
 		},
-		"description": &graphql.Field{
+		"image": &graphql.Field{
+			Type: graphql.String,
+		},
+		"logo": &graphql.Field{
+			Type: graphql.String,
+		},
+		"popularity": &graphql.Field{
+			Type: graphql.Int,
+		},
+		"notes": &graphql.Field{
+			Type: graphql.Int,
+		},
+		"slug": &graphql.Field{
 			Type: graphql.String,
 		},
 	},
