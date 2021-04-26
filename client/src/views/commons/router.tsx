@@ -8,6 +8,7 @@ import Assistant from "../assistant/assistant"
 import Communaute from "../communaute/communaute"
 import Login from "../auth/login"
 import Inscription from "../auth/inscription"
+import Profil from "../profil/profil"
 
 const Router = function() {
 	return (
@@ -20,6 +21,7 @@ const Router = function() {
 			<Route path="/assistant" exact component={Assistant} />
 			<Route path="/login" exact component={Login} />
 			<Route path="/inscription" exact component={Inscription} />
+			<Route path="/profil" exact component={Profil} />
 		</Switch>
 	)
 }
