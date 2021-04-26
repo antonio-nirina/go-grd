@@ -7,8 +7,12 @@ export const FR = {
 		"message": "message",
 		"send":"envoyer"
 	},
+	"login":{
+		"password":"Ton mot de passe",
+		"errorForm":"Email n'est pas valide"
+	},
 	"home":{
-		"ligues": "leagues",		
+		"ligues": "leagues",
 		"wagers": "wagers",
 		"communauté": "community",
 		"gameTag": "Gametag",
@@ -29,12 +33,12 @@ export const FR = {
 		"d'autre": "other",
 		"joueurs": "players",
 		"monde": "world",
-		"entier": "whole",		
-		"gagne": "wins",		
+		"entier": "whole",
+		"gagne": "wins",
 		"prix": "price",
 		"semaine": "week",
-		"plus de": "more than",		
-		"jeux": "games",		
+		"plus de": "more than",
+		"jeux": "games",
 		"actualités": "news",
 		"retrouvez": "find",
 		"toutes": "all",
@@ -44,7 +48,7 @@ export const FR = {
 		"sortie": "exit",
 		"patch": "patch",
 		"résultats": "results",
-		"suivez": "follow",				
+		"suivez": "follow",
 		"infos": "info",
 		"résumés": "summaries",
 		"matchs": "matches",
@@ -65,5 +69,5 @@ export const FR = {
 		"gratuit": "free",
 		"mentions": "mentions",
 		"légales": "legal"
-	}	
+	}
 }

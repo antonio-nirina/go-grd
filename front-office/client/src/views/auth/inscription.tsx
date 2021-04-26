@@ -1,5 +1,4 @@
 import React from "react"
-import { Link } from 'react-router-dom'
 import Header0 from "../header/header0"
 import Footer from "../footer/footer"
 import joystick from "../../assets/image/joystick.png"
@@ -14,8 +13,8 @@ const Inscription: React.FC = function() {
 		<div className="container">
 			<Header0/>
 			<div className="main">
-				<div className="containt">					
-					<div className="group">					
+				<div className="containt">
+					<div className="group">
 					<h1>Inscription <img src={joystick} alt=""/></h1>
 						<input className="mgt10" type = "text" placeholder = "Ton nom"/>
 						<input className="mgt10" type = "text" placeholder = "Pseudo"/>
@@ -24,7 +23,7 @@ const Inscription: React.FC = function() {
 						<input className="mgt10" type = "password" placeholder = "Mot de passe"/>
 						<button className="btn bg-yellow mg15"><a href="#" title="Inscription" className="link-btn">Inscription</a></button>
 						<div className="infos">
-							<p className="mb15">Vous avez déjà un compte ? <a href="#" title="Connectez-vous" className="italic cl-yellow">Connectez-vous !</a></p>							
+							<p className="mb15">Vous avez déjà un compte ? <a href="#" title="Connectez-vous" className="italic cl-yellow">Connectez-vous !</a></p>
 							<div className="other-account">
 								<p>Connectez-vous avec votre compte : </p>
 								<a href="#" title="Xbox"><img src={IconXbox} alt=""/></a>

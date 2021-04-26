@@ -7,6 +7,7 @@ import (
 // primitive.NewObjectID()
 type Game struct {
 	Uid        primitive.ObjectID `bson:"uid"`
+	Name 	   string             `json:"name"`
 	Image      string             `json:"image,omitempty"`
 	Logo       string             `json:"logo,omitempty"`
 	Popularity int                `json:"popularity"`

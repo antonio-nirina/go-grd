@@ -3,9 +3,9 @@ package delivery
 import (
 	"errors"
 
+	"github.com/graphql-go/graphql"
 	"github.com/thoussei/antonio/main/front-office/api/games/entity"
 	"github.com/thoussei/antonio/main/front-office/api/games/handler"
-	"github.com/graphql-go/graphql"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
@@ -22,6 +22,8 @@ func NewResolverGame(gameUseCase handler.UsecaseGameInterface) ResolverGame {
 func (r *resolverGame) SavedGameResolver(params graphql.ResolveParams) (interface{}, error) {
 	gameSaved := &entity.Game{
 		Uid:        primitive.NewObjectID(),
+		Name:		params.Args["name"].(string),
+		Image:		params.Args["image"].(string),
 		Logo:       params.Args["logo"].(string),
 		Popularity: params.Args["popularity"].(int),
 		Notes:      params.Args["notes"].(int),

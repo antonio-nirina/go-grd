@@ -1,27 +1,52 @@
 package mutation
 
 import (
-	"github.com/thoussei/antonio/main/front-office/api/graphql/types"
 	"github.com/graphql-go/graphql"
+	"github.com/thoussei/antonio/main/front-office/api/graphql/types"
 )
 
-func createdGame() *graphql.Field{
-	return &graphql.Field{
-		Type:        types.GameSchemaType,
-		Description: "Created game",
-		Args: graphql.FieldConfigArgument{
-			"name": &graphql.ArgumentConfig{
+var gameInputType = graphql.NewInputObject(
+	graphql.InputObjectConfig{
+		Name: "gameInputType",
+		Fields: graphql.InputObjectConfigFieldMap{
+			"name": &graphql.InputObjectFieldConfig{
 				Type: graphql.String,
 			},
-			"description": &graphql.ArgumentConfig{
+			"image": &graphql.InputObjectFieldConfig{
+				Type: graphql.String,
+			},
+			"logo": &graphql.InputObjectFieldConfig{
+				Type: graphql.String,
+			},
+			"popularity": &graphql.InputObjectFieldConfig{
+				Type: graphql.String,
+			},
+			"notes": &graphql.InputObjectFieldConfig{
+				Type: graphql.String,
+			},
+			"slug": &graphql.InputObjectFieldConfig{
 				Type: graphql.String,
 			},
 		},
-		Resolve: gameResolver.SavedGameResolver,
+	},
+)
+
+var argsGame = graphql.FieldConfigArgument{
+	"gameInput": &graphql.ArgumentConfig{
+		Type: gameInputType,
+	},
+}
+
+func createdGame() *graphql.Field {
+	return &graphql.Field{
+		Type:        types.GameSchemaType,
+		Description: "Created game",
+		Args:        argsGame,
+		Resolve:     gameResolver.SavedGameResolver,
 	}
 }
 
-func createdPlateform() *graphql.Field{
+func createdPlateform() *graphql.Field {
 	return &graphql.Field{
 		Type:        types.GameSchemaType,
 		Description: "Plateform game",
@@ -36,4 +61,3 @@ func createdPlateform() *graphql.Field{
 		Resolve: plateformResolver.SavedGamePlateformResolver,
 	}
 }
-

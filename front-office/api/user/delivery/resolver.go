@@ -4,12 +4,12 @@ import (
 	"errors"
 	"os"
 
-	game "github.com/thoussei/antonio/main/front-office/api/games/entity"
-	"github.com/thoussei/antonio/main/front-office/api/user/entity"
-	"github.com/thoussei/antonio/main/front-office/api/user/handler"
 	_jwt "github.com/dgrijalva/jwt-go"
 	"github.com/graphql-go/graphql"
 	"github.com/joho/godotenv"
+	game "github.com/thoussei/antonio/main/front-office/api/games/entity"
+	"github.com/thoussei/antonio/main/front-office/api/user/entity"
+	"github.com/thoussei/antonio/main/front-office/api/user/handler"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
@@ -45,14 +45,14 @@ func (r *resolver) SavedUserResolver(params graphql.ResolveParams) (interface{},
 	}
 	userSaved := &entity.User{
 		Uid:           primitive.NewObjectID(),
-		FirstName:     params.Args["firstname"].(string),
-		LastName:      params.Args["lastname"].(string),
+		FirstName:     "",
+		LastName:      "",
 		Password:      hashed,
 		Username:      params.Args["username"].(string),
 		Email:         params.Args["email"].(string),
 		IsBanned:      false,
-		Avatar:        params.Args["avatar"].(string),
-		Language:      params.Args["language"].(string),
+		Avatar:        "",
+		Language:      "fr",
 		Point:         entity.POINT,
 		IdGameAccount: []game.GameAccount{},
 	}
