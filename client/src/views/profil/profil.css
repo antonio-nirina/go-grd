@@ -1,3 +1,37 @@
 @charset "UTF-8";
-
-
+.main-content{	
+	width: 100%;
+	/*background: url("../../assets/image/ban.jpg") no-repeat;*/
+	background-position: center top;
+}
+.main{		
+	min-height: 100vh;
+	/*background: blue;*/
+	width: calc(100% - 240px);
+	display: inline-block;	
+	vertical-align: top;
+	padding-top: 25px;
+}
+.main h1{
+	text-align: center;
+}
+.main .avatar{
+	width: 240px;
+	height: 140px;
+	/*background: green;*/
+	float: left;
+}
+.main .premium{
+	width: 240px;
+	height: 140px;
+	/*background: green;*/
+	float: right;
+}
+.aside{
+	width: 240px;
+	height: 100vh;
+	/*background: red;*/
+	min-height:  100vh;
+	display: inline-block;
+	vertical-align: top;
+}
