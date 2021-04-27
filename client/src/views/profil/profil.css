@@ -1,32 +1,62 @@
 @charset "UTF-8";
-.main-pro-content{	
+.content{	
 	width: 100%;
-	/*background: url("../../assets/image/ban.jpg") no-repeat;*/
+	
 	background-position: center top;
 }
-.main-pro-pro{		
-	min-height: 100vh;
-	/*background: blue;*/
+.main-pro{
+	/*background: url("../../assets/image/ban1.jpg") no-repeat;	*/
+	min-height: 100vh;	
 	width: calc(100% - 240px);
 	display: inline-block;	
 	vertical-align: top;
 	padding-top: 25px;
+	padding: 5px 3em;
+	background-size: 100% 50%;
 }
-.main-pro h1{
+
+.tabs{	
+	width: 100%;
 	text-align: center;
 }
+.tabs li{
+	background: #2c2c2c;
+	display: inline-block;	
+	border-right: 1px solid #4e4e4e;
+}
+.tabs li:last-child{
+	border-right: none;
+}
+.tabs li a{
+	display: block;
+	padding: 10px 30px;
+	color: #ffffff;	
+	font-weight: normal;	
+}
+
+.wall{	
+	padding: 15px;
+}
+.main-pro h1{
+	text-align: left;
+}
 .main-pro .avatar{
-	width: 240px;
-	height: 140px;
-	/*background: green;*/
-	float: left;
+	width: 73px;
+    height: 76px;
+    float: left;
+}
+.main-pro .avatar img{
+	width: 100%;
 }
 .main-pro .premium{
-	width: 240px;
-	height: 140px;
-	/*background: green;*/
-	float: right;
+	
 }
+.cell{
+	display: table-cell;
+    padding: 17px;
+    text-align: center;
+}
+
 .aside{
 	width: 240px;
 	height: 100vh;
