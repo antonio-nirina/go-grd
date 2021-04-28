@@ -76,7 +76,7 @@ const Profil: React.FC = function() {
 		      	<div className="about-bloc">
 		      		<div className="about-me">
 		      			<div className="field">
-		      				<h2>Modifier votre</h2>
+		      				<h2>Modifier votre profil</h2>
 		      				<input type="text" placeholder="Pseudo"/>		      				
 		      				<input type="number" placeholder="Numéro de téléphone"/>
 		      				<input type="text" placeholder="Date de naissance"/>		      				
