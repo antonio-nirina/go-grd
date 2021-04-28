@@ -7,21 +7,43 @@
 .main-pro{
 	/*background: url("../../assets/image/ban1.jpg") no-repeat;	*/
 	min-height: 100vh;	
-	width: calc(100% - 240px);
+	/*width: calc(100% - 240px);*/
+	width: 100%;
 	display: inline-block;	
 	vertical-align: top;
-	padding-top: 25px;
-	padding: 5px 3em;
+	padding-top: 25px;	
 	background-size: 100% 50%;
+	/*background: red;*/
 }
-
+.wall-bloc{
+	background: #101010;
+	padding: 5px 3em;
+}
+.float{
+	display: inline-block;
+    width: 306px;
+    vertical-align: middle;
+    text-align: right;
+}
 .tabs{	
-	width: 100%;	
+	width: 100%;
+	text-align: center;	
+	margin-bottom: 5px;
 }
 .tabs li{
 	background: #2c2c2c;
 	display: inline-block;	
-	border-right: 1px solid #4e4e4e;
+	border-right: 1px solid #4e4e4e;	
+}
+.tabs li:first-child{
+	border-radius: 5px 0px 0px 5px;
+}
+.tabs li:last-child{
+	border-radius: 0px 5px 5px 0px;	
+}
+
+.tabs li a.active{
+	color: #f2cf1d;
 }
 .tabs li:last-child{
 	border-right: none;
@@ -35,7 +57,55 @@
 
 .wall{	
 	padding: 15px;
+	background: #2c2c2c;
+	border-radius: 15px;
 }
+.stat{
+	
+    display: inline-block;
+    vertical-align: top;
+    width: 380px;
+    text-align: center;
+}
+.stat h2{
+	text-align: center;
+}
+.cell h2, .float h2{
+	font-size: 17px;
+}
+.cell p{
+	font-size: 16px;
+    margin-top: 8px;
+}
+.float{
+
+}
+.float p{	
+	padding: 0;
+	font-size: 13px;
+
+
+}
+.percent{
+	width: 240px;	
+	display: inline-block;
+	vertical-align: top;
+
+}
+
+.myProgress{
+	width: 100%;
+	background: #24252c;
+	border-radius: 5px;
+}
+.myBar{
+	
+	height: 5px;
+	background: green;
+	border-radius: 5px;
+	
+}
+
 .main-pro h1{
 	text-align: left;
 }
@@ -43,9 +113,11 @@
 	width: 73px;
 	display: inline-block;
 }
+.avatar .pseudo{
+	margin-top: 10px;
+}
 .avatar-info{
-	max-width: 490px;
-    background: green;
+	max-width: 750px;    
     display: inline-block;
     vertical-align: top;
     width: 100%;
@@ -58,15 +130,17 @@
 }
 .cell{
 	display: table-cell;
-    padding: 17px;
-    text-align: center;
+    padding: 28px;    
+    width: 23%;
 }
-
+.about-me{
+	background: #2c2c2c
+}
 .aside{
-	width: 240px;
+	/*width: 240px;
 	height: 100vh;
-	/*background: red;*/
+	background: red;
 	min-height:  100vh;
 	display: inline-block;
-	vertical-align: top;
+	vertical-align: top;*/
 }
