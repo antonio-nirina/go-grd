@@ -1,37 +1,54 @@
 package mutation
 
 import (
-	"github.com/antonio-nirina/go-grd/api/graphql/types"
 	"github.com/graphql-go/graphql"
+	"github.com/thoussei/antonio/main/front-office/api/graphql/types"
 )
+
+var inputType = graphql.NewInputObject(
+	graphql.InputObjectConfig{
+		Name: "userInputType",
+		Fields: graphql.InputObjectConfigFieldMap{
+			"password": &graphql.InputObjectFieldConfig{
+				Type: graphql.String,
+			},
+			"username": &graphql.InputObjectFieldConfig{
+				Type: graphql.String,
+			},
+			"email": &graphql.InputObjectFieldConfig{
+				Type: graphql.String,
+			},
+		},
+	},
+)
+
+var args = graphql.FieldConfigArgument{
+	"userInput": &graphql.ArgumentConfig{
+		Type: inputType,
+	},
+}
 
 func createdUser() *graphql.Field {
 	return &graphql.Field{
 		Type:        types.UserSchemaType,
 		Description: "Created user",
+		Args:        args,
+		Resolve:     UserRolve.SavedUserResolver,
+	}
+}
+
+func login() *graphql.Field {
+	return &graphql.Field{
+		Type:        graphql.String,
+		Description: "Auth user",
 		Args: graphql.FieldConfigArgument{
-			"firstname": &graphql.ArgumentConfig{
-				Type: graphql.String,
-			},
-			"lastname": &graphql.ArgumentConfig{
+			"email": &graphql.ArgumentConfig{
 				Type: graphql.String,
 			},
 			"password": &graphql.ArgumentConfig{
 				Type: graphql.String,
 			},
-			"username": &graphql.ArgumentConfig{
-				Type: graphql.String,
-			},
-			"email": &graphql.ArgumentConfig{
-				Type: graphql.String,
-			},
-			"avatar": &graphql.ArgumentConfig{
-				Type: graphql.String,
-			},
-			"language": &graphql.ArgumentConfig{
-				Type: graphql.String,
-			},
 		},
-		Resolve: UserRolve.SavedUserResolver,
+		Resolve: UserRolve.AuthUserResolver,
 	}
 }

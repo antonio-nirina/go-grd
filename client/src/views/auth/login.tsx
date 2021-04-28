@@ -1,48 +1,78 @@
-import React from "react"
-import {Link} from 'react-router-dom'
+import React,{useState} from "react"
+import { Link } from 'react-router-dom'
+import { useForm } from "react-hook-form"
+import {useMutation} from "@apollo/client"
 
-import ReactDOM from 'react-dom'
-import { Provider } from 'react-redux'
-import {Field} from 'redux-form'
-import Header from "../header/header"
-import Slider from "../slider/slider"
-import Participate from "../participate/participate"
-import Game from "../game/game"
-import Community from "../community/community"
-import Join from "../join/join"
+import Header0 from "../header/header0"
+import {checkValidEmail} from "./utils"
+import {FR} from "../../lang/lang-fr"
+import {LOGIN} from "../../gql/user/auth"
+
 import Footer from "../footer/footer"
-import "../home/home.css"
+import joystick from "../../assets/image/joystick.png"
+import IconXbox from "../../assets/image/icon-xbox.png"
+import IconPs from "../../assets/image/playstation.png"
+import "../auth/login.css"
 import "../../assets/css/style.css"
 
+type Inputs = {
+	password: string,
+	email:string
+}
 
 const Login: React.FC = function() {
+	const { register, handleSubmit, formState: { errors } } = useForm<Inputs>()
+	const [errorForm,setErrorForm] = useState<boolean>(false)
+	const [login]  = useMutation(LOGIN)
+	const onSubmit = async function(data:any){
+		const email: string = data.email
+		const password: string = data.password
+
+		if(checkValidEmail(email)) {
+			const result = await login({ variables: { email: email,password:password } })
+			console.log(result)
+		} else {
+			setErrorForm(true)
+		}
+	}
+
   return(
-    <div className="home">
-      <div className="container">
-	      <Header/>
-	      <div className="main">
-	        <div className="content">
-				    <div className="wrap connexion formulaire">
-					    <div className="bloc noborder">
-							<h1 className="text-center">Connexion</h1>
-							<form>
-					          	<Field name="email" component={this.renderInput} type="text" placeholder="Email" />
-					          	<Field name="password" component={this.renderInput} type="password" label="Mot de passe" placeholder="Mot de passe" />
-					          	<div className="text-center bottom">
-					          		<button type="submit" className="btn bt btBlue" >Se connecter</button><br/>
-					          		Vous n'avez pas encore un compte?<br/>
-	                                 <Link to="/signup">Inscrivez vous!</Link><br/><br/>
-	                                 <Link to="/mot-de-passe-oublie">Mot de passe oublié?</Link>
-					          	</div>
-					        </form>
-					    </div>														        					   
-		    		</div>
-		    	</div>
-	      </div>
-	      <Footer/>
-	  </div>
-    </div>
-  );
+	<div className="login">
+		<div className="container">
+			<Header0/>
+			<div className="main">
+				<div className="containt">
+					<div className="group">
+					<h1>
+						Connexion
+						<img src={joystick} alt=""/>
+					</h1>
+						<div>
+							<span style={{"color":"red"}}>{errorForm ? FR.login.errorForm : ""}</span>
+						</div>
+						<form onSubmit={handleSubmit(onSubmit)}>
+							<input className="mgt10" type = "email" placeholder = "Ton email" {...register("email", { required: true })} name="email" />
+							<input type ="password" placeholder ={FR.login.password}  {...register("password", { required: true })} name="password" />
+							<button className="btn bg-yellow mg15">
+								Se connecter
+							</button>
+						</form>
+						<div className="infos">
+							<p className="mb15">Vous n'avez pas encore de compte ? <Link to = "/inscription" title="Inscrivez-vous" className="italic cl-yellow">Inscrivez-vous !</Link></p>
+							<p className="mb15"><a href="#" title="Mot de passe oublié ?" className="italic cl-yellow">Mot de passe oublié ?</a></p>
+							<div className="other-account">
+								<p>Connectez-vous avec votre compte : </p>
+								<a href="#" title="Xbox"><img src={IconXbox} alt=""/></a>
+								<a href="#" title="Playstation"><img src={IconPs} alt=""/></a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<Footer/>
+		</div>
+	</div>
+	);
 }
 
 export default Login;

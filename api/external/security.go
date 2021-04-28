@@ -1,0 +1,79 @@
+package external
+
+import (
+	"fmt"
+	"log"
+	"net/http"
+	"os"
+
+	jwt "github.com/dgrijalva/jwt-go"
+	"github.com/joho/godotenv"
+)
+
+// Handle security middleware aims to implement a JWT authentication.
+func Handle(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		err := godotenv.Load()
+
+		if err != nil {
+			log.Fatal("Error loading .env file")
+		}
+
+		w.Header().Set("Access-Control-Allow-Origin", "*")
+		w.Header().Set("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE")
+		w.Header().Set("Access-Control-Allow-Headers", "Accept, Authorization, Content-Type, Content-Length, Accept-Encoding")
+
+		if r.Method == "OPTIONS" {
+			w.Header().Set("Access-Control-Max-Age", "86400")
+			w.WriteHeader(http.StatusOK)
+			return
+		}
+		fmt.Println(r.Host)
+		tokenString := r.Header.Get("Authorization")
+
+		if tokenString != "" {
+			token, _ := jwt.Parse(tokenString, func(token *jwt.Token) (interface{}, error) {
+				if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
+					return nil, fmt.Errorf("Unexpected signing method: %v", token.Header["alg"])
+				}
+
+				return []byte(os.Getenv("SECRET")), nil
+			})
+
+			if claims, ok := token.Claims.(jwt.MapClaims); ok && token.Valid {
+				log.Printf("JWT Authenticated OK (app: %s)", claims["app"])
+
+				next.ServeHTTP(w, r)
+			}
+		}
+
+		next.ServeHTTP(w, r)
+	})
+}
+
+/*
+username, err := jwt.ParseToken(tokenStr)
+            if err != nil {
+                http.Error(w, "Invalid token", http.StatusForbidden)
+                return
+            }
+
+            // create user and check if user exists in db
+            user := users.User{Username: username}
+            id, err := users.GetUserIdByUsername(username)
+            if err != nil {
+                next.ServeHTTP(w, r)
+                return
+            }
+            user.ID = strconv.Itoa(id)
+
+            // put it in context
+            ctx := context.WithValue(r.Context(), userCtxKey, user)
+
+            // and call the next with our new context
+            r = r.WithContext(ctx)
+            next.ServeHTTP(w, r)
+        })
+    }
+
+*/
