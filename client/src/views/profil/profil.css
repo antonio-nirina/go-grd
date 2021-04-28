@@ -17,7 +17,7 @@
 }
 .wall-bloc{
 	background: #101010;
-	padding: 5px 3em;
+	padding: 5px 3em 3em;
 }
 .float{
 	display: inline-block;
@@ -133,8 +133,45 @@
     padding: 28px;    
     width: 23%;
 }
+.about-bloc{
+	
+}
 .about-me{
-	background: #2c2c2c
+	background: black;
+    padding: 5em 3em;
+}
+.about-me input,textarea{
+	background: none;
+    border-bottom: 1px solid #acacac !important;
+    width: 353px;
+    margin-left: 50px;    
+    padding: 15px;
+    color: #ffffff;
+    font-size: 15px;
+    border: none;
+    margin-bottom: 15px;
+
+}
+.field{
+	text-align: center;
+}
+.profil h1{
+
+}
+.field h2{
+	font-family: "russo one";
+    font-size: 45px;
+    width: 100%;
+    text-align: center;
+    padding-bottom: 1em;
+    padding-top: 35px;
+    font-weight: 200;
+    text-transform: uppercase;
+}
+.btn-container{
+	text-align: center;
+	width: 100%;
+	margin-top: 15px;
 }
 .aside{
 	/*width: 240px;

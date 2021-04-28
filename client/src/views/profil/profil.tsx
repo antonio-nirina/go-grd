@@ -15,7 +15,7 @@ const Profil: React.FC = function() {
 	      <Header/>
 	      <div className="main-content">	      	
 	      	<div className="main-pro">
-	      		<div className="wall-bloc">
+	      		<div className="wall-bloc">	      			
 		      		<div className="tabs">
 		      			<ul>
 		      				<li><a href="#" className="active">Mon mur</a></li>
@@ -75,44 +75,41 @@ const Profil: React.FC = function() {
 		      	</div>
 		      	<div className="about-bloc">
 		      		<div className="about-me">
-		      			<div className="first">
-		      				<input type="text" placeholder="Changer de pseudo"/>
-		      				<input type="numéro" placeholder="Numéro de téléphone"/>
-		      				<div className="lang">
-		      					<p>Langue <span></span></p>
+		      			<div className="field">
+		      				<h2>Modifier votre</h2>
+		      				<input type="text" placeholder="Pseudo"/>		      				
+		      				<input type="number" placeholder="Numéro de téléphone"/>
+		      				<input type="text" placeholder="Date de naissance"/>		      				
+		      				<input type="text" placeholder="Entrez la date d'adhésion"/>		      				
+		      				<input type="age" placeholder="Votre age"/>
+		      				<input type="text" placeholder="Description"/>
+
+
+		      				<div className="btn-container">
+		      					<button className="btn bg-yellow mg15">Valider</button>
 		      				</div>
-		      			</div>
-		      			<div className="second">
-		      				<div className="audience">
-		      					<h2>Stats globale</h2>
-		      					<p>Nombre de victoire : <span>540</span></p>
-		      					<p>Nombre de défaite : <span>230</span></p>
-		      				</div>
-		      			</div>
-		      			<div className="third">
-		      				<div className="graph"></div>
-		      			</div>
+		      			</div>		      					      			
 		      		</div>
 		      	</div>
 	      		<div className="my-games">
-	      			<h2>Mes jeux</h2>
-	      			<div className="img-game"></div>
+	      			{/*<h2>Mes jeux</h2>
+	      			<div className="img-game"></div>*/}
 	      		</div>
 	      		<div className="my-teams">
-	      			<h2>Mes équipes</h2>
-	      			<div className="img-game"></div>
+	      			{/*<h2>Mes équipes</h2>
+	      			<div className="img-game"></div>*/}
 	      		</div>
 	      		<div className="mes-tournois">
-	      			<h2>Mes tournois</h2>
-	      			<div className="img-game"></div>
+	      			{/*<h2>Mes tournois</h2>
+	      			<div className="img-game"></div>*/}
 	      		</div>
 	      		<div className="mes-resultats">
-	      			<h2>Mes résultats</h2>
-	      			<div className="img-game"></div>
+	      			{/*<h2>Mes résultats</h2>
+	      			<div className="img-game"></div>*/}
 	      		</div>
 	      		<div className="premium">
-	      			<h2>Premium</h2>
-	      			<div className="img-game"></div>
+	      			{/*<h2>Premium</h2>
+	      			<div className="img-game"></div>*/}
 	      		</div>
 
 	      	</div>	      	
