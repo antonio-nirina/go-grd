@@ -16,8 +16,7 @@
 }
 
 .tabs{	
-	width: 100%;
-	text-align: center;
+	width: 100%;	
 }
 .tabs li{
 	background: #2c2c2c;
@@ -42,8 +41,14 @@
 }
 .main-pro .avatar{
 	width: 73px;
-    height: 76px;
-    float: left;
+	display: inline-block;
+}
+.avatar-info{
+	max-width: 490px;
+    background: green;
+    display: inline-block;
+    vertical-align: top;
+    width: 100%;
 }
 .main-pro .avatar img{
 	width: 100%;
