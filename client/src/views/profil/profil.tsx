@@ -1,6 +1,6 @@
 import React from "react"
 
-import Header from "../header/header"
+import Header0 from "../header/header0"
 import Footer from "../footer/footer"
 import "../profil/profil.css"
 import Avatar from "../../assets/image/avatar.png"
@@ -10,9 +10,9 @@ import ReactDOM from "react-dom"
 
 const Profil: React.FC = function() {
   return(
-    <div className="profil">
+    <div className="profil connected">
       <div className="container">
-	      <Header/>
+	      <Header0/>
 	      <div className="main-content">	      	
 	      	<div className="main-pro">
 	      		<div className="wall-bloc">	      			

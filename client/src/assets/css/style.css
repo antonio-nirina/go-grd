@@ -52,7 +52,19 @@ html{
 .link-btn{
   color: #010101;
 }
-
+.connected .tag{
+  display: inline-block;
+}
+.connected .bt-container{
+  display: none;
+}
+.bt-container{
+  display: inline-block; 
+  float: none;
+}
+.tag{
+  display: none;
+}
 a{
    text-decoration:none;     
 }
@@ -123,6 +135,7 @@ h1{}
         url('../../assets/fonts/quicksand/static/Quicksand-Regular.svg#RussoOne') format('svg');  
 }
 /*********  Media query ***************/
+
 @media screen and (min-width: 1330px) {  
 
 

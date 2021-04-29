@@ -46,6 +46,7 @@
 .bt-container{
 	max-width: 250px;	
 	float: right;
+	margin-right: 10px;
 }
 .bt-container .btn.bg-white{
 	background: #ffffff;
