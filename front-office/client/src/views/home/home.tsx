@@ -1,4 +1,4 @@
-import React from "react"
+import React,{useEffect} from "react"
 
 import Header from "../header/header"
 import Slider from "../slider/slider"
@@ -12,6 +12,13 @@ import "../../assets/css/style.css"
 
 
 const Home: React.FC = function() {
+	useEffect(() => {
+		const params = window.location.search
+		if (window.opener) {
+		   window.opener.postMessage(params)
+		   window.close()
+		}
+	})
   return(
     <div className="home">
       <div className="container">

@@ -78,7 +78,7 @@ const Header: React.FC = function() {
                         </div>
                         <div className={!showList ? "dropdown" :"dropdown show"}>
                             <ul>
-                                <li><a href="#" title="Profil">Profil</a></li>
+                                <li><Link to="/profil">Profil</Link></li>                                
                                 <li><a href="#" title="Tournois">Tournois</a></li>
                                 <li><a href="#" title="Ligues">Ligues</a></li>
                                 <li><a href="#" title="Wager">Wager</a></li>

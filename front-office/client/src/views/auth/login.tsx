@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form"
 import {useMutation} from "@apollo/client"
 
 import Header0 from "../header/header0"
-import {checkValidEmail} from "./utils"
+import {checkValidEmail,Siging} from "./utils"
 import {FR} from "../../lang/lang-fr"
 import {LOGIN} from "../../gql/user/auth"
 
@@ -20,7 +20,7 @@ type Inputs = {
 	email:string
 }
 
-const Login: React.FC = function() {
+const Login: React.FC = function(props:any) {
 	const { register, handleSubmit, formState: { errors } } = useForm<Inputs>()
 	const [errorForm,setErrorForm] = useState<boolean>(false)
 	const [login]  = useMutation(LOGIN)
@@ -62,8 +62,8 @@ const Login: React.FC = function() {
 							<p className="mb15"><a href="#" title="Mot de passe oublié ?" className="italic cl-yellow">Mot de passe oublié ?</a></p>
 							<div className="other-account">
 								<p>Connectez-vous avec votre compte : </p>
-								<a href="#" title="Xbox"><img src={IconXbox} alt=""/></a>
-								<a href="#" title="Playstation"><img src={IconPs} alt=""/></a>
+								<div onClick={Siging}><img src={IconXbox} alt="xbox" /></div>
+								<a href="#" title="Playstation"><img src={IconPs} alt="ps"/></a>
 							</div>
 						</div>
 					</div>
@@ -72,7 +72,7 @@ const Login: React.FC = function() {
 			<Footer/>
 		</div>
 	</div>
-	);
+	)
 }
 
 export default Login;
