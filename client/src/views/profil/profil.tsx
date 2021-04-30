@@ -6,6 +6,8 @@ import "../profil/profil.css"
 import Avatar from "../../assets/image/avatar.png"
 import "../../assets/css/style.css"
 import ReactDOM from "react-dom"
+import "react-responsive-carousel/lib/styles/carousel.min.css"
+import { Carousel } from 'react-responsive-carousel'
 
 
 const Profil: React.FC = function() {
@@ -92,8 +94,22 @@ const Profil: React.FC = function() {
 		      		</div>
 		      	</div>
 	      		<div className="my-games">
-	      			{/*<h2>Mes jeux</h2>
-	      			<div className="img-game"></div>*/}
+	      			<h2>Mes jeux</h2>
+	      			<div className="img-game">
+	      				<Carousel showArrows={false} autoPlay={true} interval={8000} infiniteLoop={true} showThumbs={false} transitionTime={1000}>
+					        <div><img src="https://i.ibb.co/ByGkhS1/apexlegend.jpg" alt="apexlegend" /></div>
+					      	<div><img src="https://i.ibb.co/Yd2v60Q/blackops.jpg" alt="blackops"/></div>
+					      	<div><img src="https://i.ibb.co/TK5JYMz/fifa21.jpg" alt="fifa21" /></div>
+					      	<div><img src="https://i.ibb.co/Dtym1JK/fortnite.jpg" alt="fortnite" /></div>
+					      	<div><img src="https://i.ibb.co/9VPnb7p/mwarfare.jpg" alt="mwarfare" /></div>
+					      	<div><img src="https://i.ibb.co/89xKdw2/rainbowsix-siege.jpg" alt="rainbowsix-siege"/></div>
+					      	<div><img src="https://i.ibb.co/CPDzC7n/rocketl.jpg" alt="rocketl" /></div>
+					      	<div><img src="https://i.ibb.co/8Y0r1NH/warzone.jpg" alt="warzone" /></div>
+	    				</Carousel>
+	    				<div className="bt-container">
+	    					<a href="#">Ajouter</a>
+	    				</div>
+	      			</div>
 	      		</div>
 	      		<div className="my-teams">
 	      			{/*<h2>Mes équipes</h2>
