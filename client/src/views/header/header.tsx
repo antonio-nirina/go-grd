@@ -44,8 +44,11 @@ const Header: React.FC = function() {
 	 					</li>
     	 			</ul>
     	 		</nav>
-    	 		<div className="tag">
-
+                <div className="bt-container">
+                    <Link to="/login" className="btn bg-yellow">Connexion</Link>
+                    <Link to="/inscription" className="btn bg-white">Inscription</Link>
+                </div>
+    	 		<div className="tag" style={{"display":"none"}}>                    
                     <div className="box">
     	 			   <div className="lang">                        
                             <span>
@@ -55,7 +58,7 @@ const Header: React.FC = function() {
                                 </a>
                             </span>
                         </div>    	 			
-                        <div className="connex">
+                        <div className="connex" >
                             <a href="#">
                                 <i className="square">
                                     <FontAwesomeIcon icon={faPlus} size="xs"/>                                    
