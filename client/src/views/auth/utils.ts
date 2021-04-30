@@ -13,7 +13,6 @@ export const Siging = function() {
 }
 
 const receiveMessage = function(event: any) {
-	console.log("url", event.origin)
 	if (URL_REDIRECT !== event.origin) {
 		return ""
 	}
