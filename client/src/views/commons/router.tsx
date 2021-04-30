@@ -9,6 +9,7 @@ import Communaute from "../communaute/communaute"
 import Login from "../auth/login"
 import Inscription from "../auth/inscription"
 import Profil from "../profil/profil"
+// import ProtectedRoute from "./protectedRoute"
 
 const Router = function() {
 	return (

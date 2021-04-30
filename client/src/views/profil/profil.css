@@ -1,37 +1,183 @@
 @charset "UTF-8";
-.main-content{	
+.content{	
 	width: 100%;
-	/*background: url("../../assets/image/ban.jpg") no-repeat;*/
+	
 	background-position: center top;
 }
-.main-pro{		
-	min-height: 100vh;
-	background: blue;
-	width: calc(100% - 240px);
+.main-pro{
+	/*background: url("../../assets/image/ban1.jpg") no-repeat;	*/
+	min-height: 100vh;	
+	/*width: calc(100% - 240px);*/
+	width: 100%;
 	display: inline-block;	
 	vertical-align: top;
-	padding-top: 25px;
+	padding-top: 25px;	
+	background-size: 100% 50%;
+	/*background: red;*/
 }
-.main-pro h1{
+.wall-bloc{
+	background: #101010;
+	padding: 5px 3em 3em;
+}
+.float{
+	display: inline-block;
+    width: 306px;
+    vertical-align: middle;
+    text-align: right;
+}
+.tabs{	
+	width: 100%;
+	text-align: center;	
+	margin-bottom: 5px;
+}
+.tabs li{
+	background: #2c2c2c;
+	display: inline-block;	
+	border-right: 1px solid #4e4e4e;	
+}
+.tabs li:first-child{
+	border-radius: 5px 0px 0px 5px;
+}
+.tabs li:last-child{
+	border-radius: 0px 5px 5px 0px;	
+}
+
+.tabs li a.active{
+	color: #f2cf1d;
+}
+.tabs li:last-child{
+	border-right: none;
+}
+.tabs li a{
+	display: block;
+	padding: 10px 30px;
+	color: #ffffff;	
+	font-weight: normal;	
+}
+
+.wall{	
+	padding: 15px;
+	background: #2c2c2c;
+	border-radius: 15px;
+}
+.stat{
+	
+    display: inline-block;
+    vertical-align: top;
+    width: 380px;
+    text-align: center;
+}
+.stat h2{
 	text-align: center;
 }
-.main-pro .avatar{
-	width: 240px;
-	height: 140px;
+.cell h2, .float h2{
+	font-size: 17px;
+}
+.cell p{
+	font-size: 16px;
+    margin-top: 8px;
+}
+.float{
+
+}
+.float p{	
+	padding: 0;
+	font-size: 13px;
+
+
+}
+.percent{
+	width: 240px;	
+	display: inline-block;
+	vertical-align: top;
+
+}
+
+.myProgress{
+	width: 100%;
+	background: #24252c;
+	border-radius: 5px;
+}
+.myBar{
+	
+	height: 5px;
 	background: green;
-	float: left;
+	border-radius: 5px;
+	
+}
+
+.main-pro h1{
+	text-align: left;
+}
+.main-pro .avatar{
+	width: 73px;
+	display: inline-block;
+}
+.avatar .pseudo{
+	margin-top: 10px;
+}
+.avatar-info{
+	max-width: 750px;    
+    display: inline-block;
+    vertical-align: top;
+    width: 100%;
+}
+.main-pro .avatar img{
+	width: 100%;
 }
 .main-pro .premium{
-	width: 240px;
-	height: 140px;
-	background: green;
-	float: right;
+	
+}
+.cell{
+	display: table-cell;
+    padding: 28px;    
+    width: 23%;
+}
+.about-bloc{
+	
+}
+.about-me{
+	background: black;
+    padding: 5em 3em;
+}
+.about-me input,textarea{
+	background: none;
+    border-bottom: 1px solid #acacac !important;
+    width: 353px;
+    margin-left: 50px;    
+    padding: 15px;
+    color: #ffffff;
+    font-size: 15px;
+    border: none;
+    margin-bottom: 15px;
+
+}
+.field{
+	text-align: center;
+}
+.profil h1{
+
+}
+.field h2{
+	font-family: "russo one";
+    font-size: 45px;
+    width: 100%;
+    text-align: center;
+    padding-bottom: 1em;
+    padding-top: 35px;
+    font-weight: 200;
+    text-transform: uppercase;
+}
+.btn-container{
+	text-align: center;
+	width: 100%;
+	margin-top: 15px;
 }
 .aside{
-	width: 240px;
+	/*width: 240px;
 	height: 100vh;
 	background: red;
 	min-height:  100vh;
 	display: inline-block;
-	vertical-align: top;
+	vertical-align: top;*/
 }

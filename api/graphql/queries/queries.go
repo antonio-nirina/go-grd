@@ -26,6 +26,7 @@ var repositoryPlateform = gameRepo.NewPlateformRepository(database)
 var usecasePlateform = gameHandler.NewUsecasePlateform(repositoryPlateform)
 var plateformResolver = gameDelivery.NewResolverPlateform(usecasePlateform)
 
+
 // GetRootFields returns all the available queries.
 func GetRootFields() graphql.Fields {
 	return graphql.Fields{
@@ -34,5 +35,6 @@ func GetRootFields() graphql.Fields {
 		"FindOnePlateform": GetOnePlateformQuery(),
 		"FindAllGame":      GetAllGameQuery(),
 		"FindAllPlateform": GetAllPlateformQuery(),
+		"GetAccessTokenXbox": GetAccessTokenXbox(),
 	}
 }
