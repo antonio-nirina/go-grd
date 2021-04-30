@@ -1,15 +1,15 @@
 @charset "UTF-8";
 .inscription{
-	position: relative;	
+	position: relative;
 }
 .containt{
 	margin-top: 50px;
-	width: 46%;	
+	width: 46%;
 	padding-top: 5em;
 	margin: auto;
-	
+
 }
-.group{	
+.group{
 	padding: 15px 45px;
 	border-radius: 15px;
 	/*position: relative;*/
@@ -37,7 +37,7 @@
     font-size: 14px;
     border: none;
     display: block;
-    margin-bottom: 15px;    
+    margin-bottom: 15px;
 
 }
 .group h1 img{
@@ -59,17 +59,18 @@
 	margin-bottom: 10px;
 	text-align: center;
 }
-.other-account a{
+.other-account div{
 	background: #383434;
 	padding: 5px 15px;
 	display: inline-block;
 	margin-right: 15px;
 	margin-top: 15px;
-	border-radius: 5px;	
+	border-radius: 5px;
 	width: 75px;
 	border: 1px solid #525050;
+	cursor: pointer;
 }
-.other-account a img{
+.other-account div img{
 	width: 15px;
 	height: 15px;
 }
@@ -80,5 +81,5 @@
 
 }*/
 .infos p{
-	font-size: 13px;	
+	font-size: 13px;
 }
