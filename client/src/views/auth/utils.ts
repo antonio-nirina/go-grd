@@ -1,5 +1,5 @@
-
-const REDIRECT_URI = encodeURI("http://localhost:3000/ligue")
+const URL_REDIRECT = "http://localhost:3000"
+const REDIRECT_URI = encodeURI(URL_REDIRECT)
 const BASE_URI = `https://login.live.com/oauth20_authorize.srf?response_type=code&client_id=43ecdb9b-5301-4d89-ab72-52daca2f648b&approval_prompt=auto&redirect_uri=${REDIRECT_URI}&scope=Xboxlive.signin+Xboxlive.offline_access`
 
 export const checkValidEmail = (mail: string) => {
@@ -8,5 +8,18 @@ export const checkValidEmail = (mail: string) => {
 }
 
 export const Siging = function() {
-	window.open(BASE_URI,"","width=800,height=400")
+	window.open(BASE_URI,"","width=600,height=400")
+	window.addEventListener('message', event => receiveMessage(event), false)
+}
+
+const receiveMessage = function(event: any) {
+	console.log("url", event.origin)
+	if (URL_REDIRECT !== event.origin) {
+		return ""
+	}
+
+	const { data } = event
+	localStorage.setItem("access_token",data.split("=")[1])
+	window.location.pathname = "/profil"
+
 }

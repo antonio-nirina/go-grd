@@ -62,7 +62,7 @@ const Login: React.FC = function(props:any) {
 							<p className="mb15"><a href="#" title="Mot de passe oublié ?" className="italic cl-yellow">Mot de passe oublié ?</a></p>
 							<div className="other-account">
 								<p>Connectez-vous avec votre compte : </p>
-								<div><img src={IconXbox} alt="xbox" onClick={Siging} /></div>
+								<div onClick={Siging}><img src={IconXbox} alt="xbox" /></div>
 								<a href="#" title="Playstation"><img src={IconPs} alt="ps"/></a>
 							</div>
 						</div>
