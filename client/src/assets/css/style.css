@@ -179,7 +179,7 @@ h1{}
     margin: auto;
   }
 }
-@media screen and (max-width: 991px){
+@media screen and (max-width: 991px){  
   .part{
    padding: 0 2em;
   }
@@ -255,9 +255,17 @@ h1{}
   }
 }
 @media screen and (max-width: 827px){
+
   .header .wrap{
     text-align: right;
     padding-right: 5px;    
+  }
+  .bt-container{
+    height: 48px;
+    display: inline-block;
+    padding-top: 3px;
+    margin-right: 25px;
+    float: none;
   }
   .header .dropdown,
   .header .dropdown
@@ -381,6 +389,11 @@ h1{}
     max-width: inherit;
     text-align: center;
     margin: 0 0px 8px;   
+  }
+  .bt-container{
+    max-width: inherit;
+    text-align: center;
+    width: 100%;
   }
   .header .tag{
     width: 100%;
