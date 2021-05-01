@@ -61,6 +61,12 @@ html{
 .bt-container{
   display: inline-block; 
   float: none;
+  padding: 8px 0px;
+}
+.login .main,.inscription .main,
+.profil .main-content
+{
+  padding-top: 50px;
 }
 .tag{
   display: none;
@@ -92,6 +98,11 @@ h1{
 }
 .header h1{
   padding-bottom: inherit;
+}
+.header{
+  position: fixed;
+  z-index: 99;
+  width: 100%;
 }
 h2{
 
@@ -279,6 +290,7 @@ h1{}
     padding-top: 3px;
     margin-right: 25px;
     float: none;
+    padding: 8px 0px;
   }
   .header .dropdown,
   .header .dropdown
