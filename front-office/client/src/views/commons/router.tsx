@@ -9,20 +9,20 @@ import Communaute from "../communaute/communaute"
 import Login from "../auth/login"
 import Inscription from "../auth/inscription"
 import Profil from "../profil/profil"
-// import ProtectedRoute from "./protectedRoute"
+import ProtectedRoute from "./protectedRoute"
 
 const Router = function() {
 	return (
 		<Switch>
 			<Route path="/" exact component={Home} />
-			<Route path="/tournament" exact component={Tournament} />
-			<Route path="/ligue" exact component={Ligue} />
-			<Route path="/wager" exact component={Wager} />
-			<Route path="/communaute" exact component={Communaute} />
-			<Route path="/assistant" exact component={Assistant} />
+			<ProtectedRoute path="/tournament" exact component={Tournament} />
+			<ProtectedRoute path="/ligue" exact component={Ligue} />
+			<ProtectedRoute path="/wager" exact component={Wager} />
+			<ProtectedRoute path="/communaute" exact component={Communaute} />
+			<ProtectedRoute path="/assistant" exact component={Assistant} />
 			<Route path="/login" exact component={Login} />
 			<Route path="/inscription" exact component={Inscription} />
-			<Route path="/profil" exact component={Profil} />
+			<ProtectedRoute path="/profil" exact component={Profil} />
 		</Switch>
 	)
 }

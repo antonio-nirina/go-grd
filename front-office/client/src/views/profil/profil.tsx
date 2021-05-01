@@ -1,32 +1,34 @@
 import React from "react"
 
-import Header from "../header/header"
+import Header0 from "../header/header0"
 import Footer from "../footer/footer"
 import "../profil/profil.css"
 import Avatar from "../../assets/image/avatar.png"
 import "../../assets/css/style.css"
 import ReactDOM from "react-dom"
+import "react-responsive-carousel/lib/styles/carousel.min.css"
+import { Carousel } from 'react-responsive-carousel'
 
 
 const Profil: React.FC = function() {
   return(
-    <div className="profil">
+    <div className="profil connected">
       <div className="container">
-	      <Header/>
+	      <Header0/>
 	      <div className="main-content">	      	
 	      	<div className="main-pro">
 	      		<div className="wall-bloc">	      			
 		      		<div className="tabs">
 		      			<ul>
-		      				<li><a href="#" className="active">Mon mur</a></li>
-		      				<li><a href="#">Mes jeux</a></li>
+		      				<li><a href="#wall" className="active">Mon mur</a></li>
+		      				<li><a href="#game">Mes jeux</a></li>
 		      				<li><a href="#">Mes équipes</a></li>
 		      				<li><a href="#">Mes tournois</a></li>
 		      				<li><a href="#">Mes resultats</a></li>
 		      				<li><a href="#">Premium</a></li>
 		      			</ul>
 		      		</div>
-		      		<div className="wall">
+		      		<div className="wall" id="wall">
 		      			<div className="avatar">
 			      			<p><img src = {Avatar} /></p>
 			      			<p className="pseudo"><strong>Noob_021</strong></p>
@@ -86,14 +88,28 @@ const Profil: React.FC = function() {
 
 
 		      				<div className="btn-container">
-		      					<button className="btn bg-yellow mg15">Valider</button>
+		      					<a href="#" className="btn bg-yellow mg15">Valider</a>
 		      				</div>
 		      			</div>		      					      			
 		      		</div>
 		      	</div>
-	      		<div className="my-games">
-	      			{/*<h2>Mes jeux</h2>
-	      			<div className="img-game"></div>*/}
+	      		<div id="game" className="my-games">
+	      			<h2>Mes jeux</h2>
+	      			<div className="img-game">
+	      				<Carousel swipeable={true} centerSlidePercentage={20} dynamicHeight={false} centerMode={true} showArrows={true} autoPlay={true} interval={8000} infiniteLoop={true} showThumbs={false} transitionTime={1000}>
+					        <div className="game-slide"><img src="https://i.ibb.co/ByGkhS1/apexlegend.jpg" alt="apexlegend" /></div>
+					      	<div className="game-slide"><img src="https://i.ibb.co/Yd2v60Q/blackops.jpg" alt="blackops"/></div>
+					      	<div className="game-slide"><img src="https://i.ibb.co/TK5JYMz/fifa21.jpg" alt="fifa21" /></div>
+					      	<div className="game-slide"><img src="https://i.ibb.co/Dtym1JK/fortnite.jpg" alt="fortnite" /></div>
+					      	<div className="game-slide"><img src="https://i.ibb.co/9VPnb7p/mwarfare.jpg" alt="mwarfare" /></div>
+					      	<div className="game-slide"><img src="https://i.ibb.co/89xKdw2/rainbowsix-siege.jpg" alt="rainbowsix-siege"/></div>
+					      	<div className="game-slide"><img src="https://i.ibb.co/CPDzC7n/rocketl.jpg" alt="rocketl" /></div>
+					      	<div className="game-slide"><img src="https://i.ibb.co/8Y0r1NH/warzone.jpg" alt="warzone" /></div>
+	    				</Carousel>
+	    				<div className="bt-game-container">
+	    					<a href="#" className="btn bg-yellow">Ajouter jeux</a>
+	    				</div>
+	      			</div>
 	      		</div>
 	      		<div className="my-teams">
 	      			{/*<h2>Mes équipes</h2>

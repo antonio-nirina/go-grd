@@ -20,7 +20,7 @@ const Home: React.FC = function() {
 		}
 	})
   return(
-    <div className="home">
+    <div className="home connected">
       <div className="container">
 	      <Header/>
 	      <div className="main">
