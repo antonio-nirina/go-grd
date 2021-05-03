@@ -51,3 +51,5 @@ var AuthSchemaType = graphql.NewObject(graphql.ObjectConfig{
 		},
 	},
 })
+
+
