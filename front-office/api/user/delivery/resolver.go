@@ -40,6 +40,7 @@ func (r *resolver) SavedUserResolver(params graphql.ResolveParams) (interface{},
 	password := params.Args["password"].(string)
 	hashed := userEntity.CreatedHash(password)
 	check, _ := r.ValidateUserResolver(params)
+	roles := []string{"role_user"}
 
 	if check {
 		return nil, errors.New("email or username already existe")
@@ -56,6 +57,7 @@ func (r *resolver) SavedUserResolver(params graphql.ResolveParams) (interface{},
 		Language:      "fr",
 		Point:         entity.POINT,
 		IdGameAccount: []game.GameAccount{},
+		Roles: 	roles,		
 	}
 
 	res, err := r.userHandler.SavedUser(userSaved)
