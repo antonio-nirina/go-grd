@@ -181,7 +181,9 @@
 	display: inline-block;
 	vertical-align: top;*/
 }
-.my-games h2{
+.my-games h2,
+.my-teams h2
+{
 	font-family: "russo one";
     font-size: 45px;
     width: 100%;
@@ -189,7 +191,7 @@
     padding-bottom: 1em;
     padding-top: 35px;
     font-weight: 200;
-    text-transform: uppercase;
+    
 }
 
 .game-slide img{
@@ -209,5 +211,38 @@
 .bt-game-container a{
 	display: block;
 	margin: auto;
-	width: 140px;
+	width: 193px;
+}
+.my-teams{
+	background: #000000;
+}
+.team-mate{
+	padding: 5px 3em 3em;
+}
+.team-bloc{
+	background:#2c2c2c;
+	max-width: 300px;
+	width: 100%;	
+	border-radius: 5px;
+	padding-bottom: 
+
+}
+.imgcontainer img{
+	border-radius: 5px 5px 0px 0px;
+}
+.team-logo{	
+	width: 100%;    
+    text-align: center;    
+    background: #101010;
+    border-radius: 0px 0px 5px;
+    padding: 5px;
+    display: inline-block;
+    text-align: left
+}
+.team-name{	
+	display: inline-block;
+	width: 50%;
+	vertical-align: top;
+	padding: 25px;
+	margin-left: 5px;
 }

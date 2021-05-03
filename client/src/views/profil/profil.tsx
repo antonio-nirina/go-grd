@@ -85,8 +85,6 @@ const Profil: React.FC = function() {
 		      				<input type="text" placeholder="Entrez la date d'adhésion"/>		      				
 		      				<input type="age" placeholder="Votre age"/>
 		      				<input type="text" placeholder="Description"/>
-
-
 		      				<div className="btn-container">
 		      					<a href="#" className="btn bg-yellow mg15">Valider</a>
 		      				</div>
@@ -112,8 +110,26 @@ const Profil: React.FC = function() {
 	      			</div>
 	      		</div>
 	      		<div className="my-teams">
-	      			{/*<h2>Mes équipes</h2>
-	      			<div className="img-game"></div>*/}
+	      			<h2>Mes équipes</h2>
+	      			<div className="team-mate">
+	      				<div className="team-bloc">
+	      					<div className="team-banniere">
+	      						<div className="imgcontainer">
+	      							<img src="https://i.ibb.co/C59KCSd/team-mate.png" alt="team-mate" className="imgresp"/>
+	      						</div>
+	      						<div className="team-logo">
+	      							<img src="https://i.ibb.co/dQPw2Vd/teamlogo.png" alt="teamlogo" width="75"/>
+	      							<div className="team-name">
+	      								<p>TEAM NAME</p>
+	      								<p>#Tag</p>
+	      							</div>	      					
+	      						</div>	      							      						
+	      					</div>
+	      				</div>
+	      				<div className="bt-game-container">
+	    					<a href="#" className="btn bg-yellow">Ajouter une équipe</a>
+	    				</div>
+	      			</div>
 	      		</div>
 	      		<div className="mes-tournois">
 	      			{/*<h2>Mes tournois</h2>

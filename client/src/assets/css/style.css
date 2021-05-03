@@ -71,6 +71,9 @@ html{
 .tag{
   display: none;
 }
+.imgresp{
+  width: 100%;
+}
 a{
    text-decoration:none;     
 }
