@@ -13,12 +13,13 @@ export const Siging = function() {
 }
 
 const receiveMessage = function(event: any) {
-	console.log("url", event.origin)
 	if (URL_REDIRECT !== event.origin) {
 		return ""
 	}
 
 	const { data } = event
+	// console.log("uri", REDIRECT_URI)
+	// console.log("data", data)
 	localStorage.setItem("access_token",data.split("=")[1])
 	window.location.pathname = "/profil"
 

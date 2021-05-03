@@ -27,6 +27,7 @@ type User struct {
 	Language      string             `json:"language,omitempty"`
 	IdGameAccount []game.GameAccount `json:"idGameAccount,omitempty"`
 	Point         int                `json:"point"`
+	Roles      	 []string             `json:"roles"`
 }
 
 func (u *User) CreatedHash(plainText string) (hashText string) {

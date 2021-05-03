@@ -44,7 +44,7 @@ const Header0: React.FC = function() {
 	 					</li>
     	 			</ul>
     	 		</nav>
-                <div className="bt-container" style={{display:"none"}}>
+                <div className="bt-container">
                     <Link to="/login" className="btn bg-yellow">Connexion</Link>
                     <Link to="/inscription" className="btn bg-white">Inscription</Link>
                 </div>

@@ -52,7 +52,28 @@ html{
 .link-btn{
   color: #010101;
 }
-
+.connected .tag{
+  display: inline-block;
+}
+.connected .bt-container{
+  display: none;
+}
+.bt-container{
+  display: inline-block; 
+  float: none;
+  padding: 8px 0px;
+}
+.login .main,.inscription .main,
+.profil .main-content
+{
+  padding-top: 50px;
+}
+.tag{
+  display: none;
+}
+.imgresp{
+  width: 100%;
+}
 a{
    text-decoration:none;     
 }
@@ -80,6 +101,11 @@ h1{
 }
 .header h1{
   padding-bottom: inherit;
+}
+.header{
+  position: fixed;
+  z-index: 99;
+  width: 100%;
 }
 h2{
 
@@ -123,6 +149,7 @@ h1{}
         url('../../assets/fonts/quicksand/static/Quicksand-Regular.svg#RussoOne') format('svg');  
 }
 /*********  Media query ***************/
+
 @media screen and (min-width: 1330px) {  
 
 
@@ -266,6 +293,7 @@ h1{}
     padding-top: 3px;
     margin-right: 25px;
     float: none;
+    padding: 8px 0px;
   }
   .header .dropdown,
   .header .dropdown
