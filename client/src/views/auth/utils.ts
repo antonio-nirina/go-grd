@@ -20,7 +20,7 @@ const receiveMessage = function(event: any) {
 	const { data } = event
 	// console.log("uri", REDIRECT_URI)
 	console.log("data", data)
-	// localStorage.setItem("access_token",data.split("=")[1])
-	// window.location.pathname = "/profil"
+	localStorage.setItem("access_token",data.split("=")[1])
+	window.location.pathname = "/profil"
 
 }

@@ -11,3 +11,8 @@ export const LOGIN = gql`
         login(email: $email, password: $password)
     }
 `
+export const XBoxToken = gql`
+    queries GetAccessTokenXbox($code: String!) {
+        GetAccessTokenXbox($code: $code)
+    }
+`
