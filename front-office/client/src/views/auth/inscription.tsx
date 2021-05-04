@@ -18,7 +18,7 @@ const Inscription: React.FC = function() {
 					<h1>Inscription <img src={joystick} alt=""/></h1>
 						<input className="mgt10" type = "text" placeholder = "Ton nom"/>
 						<input className="mgt10" type = "text" placeholder = "Pseudo"/>
-						<input type ="telephone" placeholder = "Numéro de téléphone"/>
+						{/*<input type ="telephone" placeholder = "Numéro de téléphone"/>*/}
 						<input className="mgt10" type = "email" placeholder = "Email"/>
 						<input className="mgt10" type = "password" placeholder = "Mot de passe"/>
 						<button className="btn bg-yellow mg15"><a href="#" title="Inscription" className="link-btn">Inscription</a></button>

@@ -2,6 +2,7 @@ package delivery
 
 import (
 	"bytes"
+	"crypto/tls"
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
@@ -9,12 +10,18 @@ import (
 	"net/http"
 	"net/url"
 	"os"
-	"strings"
 
 	"github.com/graphql-go/graphql"
 	"github.com/joho/godotenv"
 	"github.com/thoussei/antonio/main/front-office/api/external"
 )
+
+var tr = &http.Transport{
+	TLSClientConfig: &tls.Config{
+		Renegotiation:      tls.RenegotiateOnceAsClient,
+		InsecureSkipVerify: true,
+	},
+}
 
 type XboxClient struct {
 	client   *http.Client
@@ -29,20 +36,36 @@ type oauthToken struct {
 }
 
 type authenticate struct {
-	RelyingParty string `json:"pelying_party"`
-	TokenType string `json:"token_type"`
-	Properties *properties `json:"properties"`
+	RelyingParty string `json:"RelyingParty"`
+	TokenType string `json:"TokenType"`
+	Properties *properties `json:"Properties"`
 }
 type properties struct {
-	AuthMethod string `json:"auth_method"`
-	SiteName string `json:"site_name"`
-	RpsTicket string `json:"rps_ticket"`
+	AuthMethod string `json:"AuthMethod"`
+	SiteName string `json:"SiteName"`
+	RpsTicket string `json:"RpsTicket"`
 }
 
 type DataToken struct {
 	AccessToken string `json:"access_token"`
 	RefreshToken string `json:"refresh_token"`
+	TokenUsers string `json:"token_users"`
 }
+
+type userToken struct {
+	IssueInstant string `json:"IssueInstant"`
+	NotAfter string `json:"NotAfter"`
+	Token string `json:"Token"`
+	DisplayClaims displayCl `json:"DisplayClaims"`
+}
+type displayCl struct {
+	Xui []uhs  `json:"xui"`
+}
+
+type uhs struct {
+	Uhs string `json:"uhs"`
+}
+
 
 var xboxClient = &XboxClient{}
 
@@ -57,6 +80,7 @@ func (r *resolver) GetAccessTokenXboxApi(params graphql.ResolveParams) (interfac
 	}
 	
 	xboxClient.client = http.DefaultClient
+	xboxClient.client.Transport = tr
 	data := url.Values{}
 	data.Set("client_id", os.Getenv("ID_CLIENT_XBOX"))
 	data.Add("client_secret", os.Getenv("SECRET_XBOX"))
@@ -81,29 +105,36 @@ func (r *resolver) GetAccessTokenXboxApi(params graphql.ResolveParams) (interfac
 	token := &DataToken{}
 	defer resp.Body.Close()
 	body, err := ioutil.ReadAll(resp.Body)
-	getTokenUser()
-	if !strings.Contains(string(body), "error") { 
+	
+	if resp.StatusCode == 200 { 
 		err = json.Unmarshal(body, resSuccess)
 		if err != nil {
 			external.Logger(fmt.Sprintf("%v", err))
 		}
-		// getTokenUser(resSuccess.AccessToken)
+		respToken, err := getTokenUser(resSuccess.AccessToken)
+		
+		if err != nil {
+			external.Logger(fmt.Sprintf("%v", err))
+		}
+
 		token.AccessToken = resSuccess.AccessToken
 		token.RefreshToken = resSuccess.RefreshToken
+		token.TokenUsers = respToken
 		// store in Redis
 		// json,_ := json.Marshal(token)
 		// external.SetDataRedis(KEY_ACCESS_TOKEN,string(json))
+
+		return token,nil
 	}
 	
-	return string(body),nil
+	return nil,err
 }
 
-func getTokenUser()(interface{},error) {
-
+func getTokenUser(accessToken string)(string,error) {
 	pr := &properties{
 		AuthMethod:"RPS",
 		SiteName:"user.auth.xboxlive.com",
-		RpsTicket:"EwAoA+pvBAAUKods63Ys1fGlwiccIFJ+qE1hANsAAfgG8tEuzbaOLqKES7RMvK0cxxhNnMAhGSiajIAeb22JWvDC9n4UAJjIFJdzzbMtIjioaVZNrO4KeGwbYe7n6Bxzk5ZkhIUA1/h3AK/xfjRahdIVuTpsoRnOoed+NCuiDnoR8Adqj03EHvXDMQl9JCynSXQ10PgTm2ET1mBFTBefeehMS4Q9q27pG0+mS3CVryjsIJwNQj774YhDVBNnbX7ZgTGzKaoOBxkSkhJECeAVmrKan++wXKsj+jLY6j9ieBfz1ER0czL8o2H81068lnkzimyKXWWguN2eN/bBqzZPnCuwyQ/0Q2y1vOh0/VrpvU4dNtEQnk7YfEplSvbUsE0DZgAACBJX9/QtfoAw+AEek1qz9L9jhM73jOSbCNIIwcBu+me9xOLcerpNqA3HAYkMWHLvzoKpfRCK72R17nI+t45eusXAwG3qiedfBlcykKYdJOdYm0e49vPIrcC+nZUC2Q5/i1hlfo35YxBaOXkOrFSqzl2JmgO1tdTgVDdGUy0dOf11HmUTgXCSIt7cXwKXuFjLDAF+VBcNjR/WnNizL6QzyJWF5mxwC3dA82f5k8SAD1AOGFxRYFCBtxrvmzPRWzB6/MgJ4NmJdC3fQxMcNCis1KSKevcbfX3ispEmDRIicWEEXm333y9a8Yx6FxffIo1ibRDJYHnOkOnpWsEel/dUL01oRmfLKG896g54oiq0kMDRFS+SD8fd6aTm2kMhLXS/osH2C8TLRNGJPW0kmrKo3wIpLCpEXeT0n91eypGFZ+PXtmEAhxGkeh8td5o9Qeq94+x9xIGuV/QiC+uFq/Fc/mTqcKckpq4N+a2yQO39r3HDoWMsrPq1i6fhai86PweEW3zgB9NaluHAYLJj3Ce7mOINDNelUbGVIID9Qw1evzGILDRZ6vRZYyAKAUcdGN/IBF4gjxuVomNbp9nPPcaoK/LyMOND4EmFguW5Np8h2BlElYKN/nUBo1Qj8bybHjRxgvF+gDgXgDPf+M2Uqbum8CDnqxtEUG44VcWqFh5HKYtW91UuAg==",
+		RpsTicket:"d="+accessToken, //"d=EwAoA+pvBAAUKods63Ys1fGlwiccIFJ+qE1hANsAAepnxGGvhrADN72N0j5B5q56UeCA3uUGZoXKsseZ9A9eyDjIFH30NXmFJ0HRVuGtmSJ78IBxqNXVKj61r1xRP5TDkD/YNaU7k+2fZJMy7UMp6jyI18UsKl2dEf3oQs2SCwiTatYYKEdrYoNn7j49lWPx13ktALqJ1ozZdJ8n4yuzI0UnDqBRWHCFcLrwcorZNvNjz9qWk23FqSYh+wBpzTXpPvVKZxiSF+hy6ZgziJtra8jm9SIQnld7a5Iv1F83nuF6ETj/SNtz3KE83BPpmOtSZ5i7rmhE9v5QqccTb/2HXnzW8Sf2nmbDrMhy8C7YNgNg2B0MwmNvsYS7W4kY+H0DZgAACMzwc/odB7Xz+AFHY4NdvoGywMvaNFpMZF22ET3nUjltR3T7ATKAR3nIpp5vP5Rq9NpBen5iBIphed1H+Gu2Q7G2jnOvtw7KvT3CzhS9YRmVc5/W96/4IIX/UltGCd0sKikg985Btk3bp1hXgEqzYCSBcjCR5Zu+BjSWMkw8Of/4MG2HwXF8MRjemGzHQeK7tnBYNZRHzbLSzRVhE631GWHVMafK1U/NXnW1Txc8Z8Zv++WH5bt14r4beFdeEVc3q4pv88/iRnAxu3TRCyvXwQdW40jRzoB6gS1iHR+2WlVf7ltfIJ3F1ujljSuwzHwW/uZxzLcQoobI9isna6lDW2cxFBLOp/+2Aj/PlvCd+Y6lmnbaazSl2JDbJTS3+NptfwY4NKDX3p/L+GCS8TlGfv/v0iutBt4UUQS2E9CSE9mKsl5swWQio7BtKdmoXQevExbiuk1l8Ly8TeOI4iBWNLMKoaVAt87a7lN7DA1wn2K1wx4iKFXGsOjyV4Jh/jRR2igV3Q3E7iWXaMkr9b9iJBzvIsUkbe1HLq7oHxyJNkr1CvT/HHB6RRGbfMSaUJq0qpAYpDMhXLZ5DNc9VOb4+DGBDeOGf1E8GS6y8+ZIAdaPfLrhg6V/UUJ53N3kJVnptj70w74njbc84D5v6gR4i3ol6yiY3seDgXH1kWJyaDXojsEuAg==",
 	}
 	payload := &authenticate{
 		RelyingParty:"http://auth.xboxlive.com",
@@ -113,21 +144,29 @@ func getTokenUser()(interface{},error) {
 	reqBodyBytes := new(bytes.Buffer)
 	json.NewEncoder(reqBodyBytes).Encode(payload)
 	req, err := http.NewRequest("POST", XboxApi_URL, reqBodyBytes)
-
+	req.Header.Set("x-xbl-contract-version","1")
+	req.Header.Set("Content-Type", "application/json")
 	if err != nil {
-		return nil,err
+		return "",err
 	}
-	
+
 	resp, err := xboxClient.client.Do(req)
 	if err != nil {
-		fmt.Println(err)
+		return "", err
 	}
 	defer resp.Body.Close()
-	fmt.Println("rrrrrr", resp)
 	body, err := ioutil.ReadAll(resp.Body)
-	fmt.Println("token_user", string(body))
 
-	return string(body),nil
+	if resp.StatusCode == 200 {
+		uToken := &userToken{}
+		err = json.Unmarshal(body, uToken)
+		if err != nil {
+			external.Logger(fmt.Sprintf("%v", err))
+		}
+		return uToken.Token, nil
+	}
+	
+	return "", err
 }
 
 /*

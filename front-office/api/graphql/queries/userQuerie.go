@@ -22,7 +22,7 @@ func GetOneUserQuery() *graphql.Field {
 
 func GetAccessTokenXbox() *graphql.Field {
 	return &graphql.Field{
-		Type:        graphql.String,
+		Type:        types.XboxSchemaType,
 		Description: "Get token access",
 		Args: graphql.FieldConfigArgument{
 			"code": &graphql.ArgumentConfig{
