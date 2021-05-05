@@ -5,6 +5,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"strings"
 
 	jwt "github.com/dgrijalva/jwt-go"
 	"github.com/joho/godotenv"
@@ -28,10 +29,10 @@ func Handle(next http.Handler) http.Handler {
 			w.WriteHeader(http.StatusOK)
 			return
 		}
-		fmt.Println(r.Host)
+		
 		tokenString := r.Header.Get("Authorization")
-
-		if tokenString != "" {
+		array := strings.SplitAfter(tokenString,"=")
+		if array[0] != "" {
 			token, _ := jwt.Parse(tokenString, func(token *jwt.Token) (interface{}, error) {
 				if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
 					return nil, fmt.Errorf("Unexpected signing method: %v", token.Header["alg"])

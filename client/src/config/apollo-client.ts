@@ -8,11 +8,17 @@ const httpLink = new HttpLink({
 const ACCESS_TOKEN: string  = "access_token"
 
 export const createApolloClient = () => {
+	let token = ""
+	const storage = localStorage.getItem(ACCESS_TOKEN)
+	if (storage) {
+		const type  = JSON.parse(storage).type
+		token = `${type}=${JSON.parse(storage).access_token}`
+	}
 	const authLink = setContext((_, { headers }) => {
 		return {
 			headers: {
 				...headers,
-				authorization: localStorage.getItem(ACCESS_TOKEN) ? `Bearer ${localStorage.getItem(ACCESS_TOKEN)}` : "",
+				authorization: token ? `Bearer ${token}` : "",
 			}
 		}
 	})

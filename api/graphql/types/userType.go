@@ -51,3 +51,15 @@ var AuthSchemaType = graphql.NewObject(graphql.ObjectConfig{
 		},
 	},
 })
+var XboxSchemaType = graphql.NewObject(graphql.ObjectConfig{
+	Name: "XboxType",
+	Fields: graphql.Fields{
+		"AccessToken": &graphql.Field{
+			Type: graphql.String,
+		},
+		"RefreshToken": &graphql.Field{
+			Type: graphql.String,
+		},
+	},
+})
+

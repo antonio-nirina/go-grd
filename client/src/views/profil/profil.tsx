@@ -6,6 +6,7 @@ import "../profil/profil.css"
 import Avatar from "../../assets/image/avatar.png"
 import "../../assets/css/style.css"
 import ReactDOM from "react-dom"
+import Participate from "../participate/participate"
 import "react-responsive-carousel/lib/styles/carousel.min.css"
 import { Carousel } from 'react-responsive-carousel'
 import Popup from 'reactjs-popup';
@@ -164,9 +165,10 @@ const Profil: React.FC = function() {
 	    				</div>
 	      			</div>
 	      		</div>
-	      		<div className="mes-tournois">
-	      			{/*<h2>Mes tournois</h2>
-	      			<div className="img-game"></div>*/}
+	      		<div className="mes-tournois">	      			
+      				<div className="participate">
+        				<Participate/>
+        			</div>
 	      		</div>
 	      		<div className="mes-resultats">
 	      			{/*<h2>Mes résultats</h2>

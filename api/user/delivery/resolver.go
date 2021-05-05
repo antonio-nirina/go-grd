@@ -2,6 +2,7 @@ package delivery
 
 import (
 	"errors"
+	"fmt"
 	"os"
 
 	_jwt "github.com/dgrijalva/jwt-go"
@@ -37,9 +38,12 @@ func NewResolver(userUseCase handler.Usecase) Resolver {
 var userEntity = entity.User{}
 
 func (r *resolver) SavedUserResolver(params graphql.ResolveParams) (interface{}, error) {
+	args := params.Args["userInput"]
+	fmt.Println("xxx", args)
 	password := params.Args["password"].(string)
 	hashed := userEntity.CreatedHash(password)
 	check, _ := r.ValidateUserResolver(params)
+	roles := []string{"role_user"}
 
 	if check {
 		return nil, errors.New("email or username already existe")
@@ -56,6 +60,7 @@ func (r *resolver) SavedUserResolver(params graphql.ResolveParams) (interface{},
 		Language:      "fr",
 		Point:         entity.POINT,
 		IdGameAccount: []game.GameAccount{},
+		Roles: 	roles,		
 	}
 
 	res, err := r.userHandler.SavedUser(userSaved)
