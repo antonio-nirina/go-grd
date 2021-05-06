@@ -7,9 +7,9 @@ import Wager from "../wager/wager"
 import Assistant from "../assistant/assistant"
 import Communaute from "../communaute/communaute"
 import Login from "../auth/login"
-import Inscription from "../auth/inscription"
 import Profil from "../profil/profil"
 import ProtectedRoute from "./protectedRoute"
+import Register from "../auth/register"
 
 const Router = function() {
 	return (
@@ -21,7 +21,7 @@ const Router = function() {
 			<ProtectedRoute path="/communaute" exact component={Communaute} />
 			<ProtectedRoute path="/assistant" exact component={Assistant} />
 			<Route path="/login" exact component={Login} />
-			<Route path="/inscription" exact component={Inscription} />
+			<Route path="/register" exact component={Register} />
 			<ProtectedRoute path="/profil" exact component={Profil} />
 		</Switch>
 	)

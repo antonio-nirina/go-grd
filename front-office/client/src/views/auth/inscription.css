@@ -84,4 +84,7 @@
 .infos p{
 	font-size: 13px;
 }
+button {
+	cursor: pointer;
+}
 
