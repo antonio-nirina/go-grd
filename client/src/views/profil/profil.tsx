@@ -6,7 +6,6 @@ import "../profil/profil.css"
 import Avatar from "../../assets/image/avatar.png"
 import "../../assets/css/style.css"
 import ReactDOM from "react-dom"
-import Participate from "../participate/participate"
 import "react-responsive-carousel/lib/styles/carousel.min.css"
 import { Carousel } from 'react-responsive-carousel'
 import Popup from 'reactjs-popup';
@@ -22,13 +21,13 @@ const Profil: React.FC = function() {
 	      	<div className="main-pro">
 	      		<div className="wall-bloc">	      			
 		      		<div className="tabs">
-		      			<ul>		      				
-		      				<li><a href="#wall" className="active"><i></i>Mon mur</a></li>
-		      				<li><a href="#game"><i></i>Mes jeux</a></li>
-		      				<li><a href="#"><i></i>Mes équipes</a></li>
-		      				<li><a href="#"><i></i>Mes tournois</a></li>
-		      				<li><a href="#"><i></i>Mes resultats</a></li>
-		      				<li><a href="#"><i></i>Premium</a></li>
+		      			<ul>
+		      				<li><a href="#wall" className="active">Mon mur</a></li>
+		      				<li><a href="#game">Mes jeux</a></li>
+		      				<li><a href="#">Mes équipes</a></li>
+		      				<li><a href="#">Mes tournois</a></li>
+		      				<li><a href="#">Mes resultats</a></li>
+		      				<li><a href="#">Premium</a></li>
 		      			</ul>
 		      		</div>
 		      		<div className="wall" id="wall">
@@ -38,10 +37,43 @@ const Profil: React.FC = function() {
 		      			</div>
 		      			<div className="avatar-info">
 		      				
-		      								
+		      				<div className="table">
+		      					<div className="cell">
+		      						<h2>Plateform</h2>
+		      						<p><span>Playstation</span></p>
+		      					</div>
+		      					<div className="cell">
+		      						<h2>Serveur location</h2>
+		      						<p><span>Asia</span></p>
+		      					</div>
+		      					<div className="cell">
+		      						<h2>Expérience</h2>
+		      						<p><span>5</span></p>
+		      					</div>
+		      					<div className="cell">
+		      						<h2>Game duration</h2>
+		      						<p><span>6 heures</span></p>
+		      					</div>
+		      				</div>	      				
 		      			</div>
 		      			<div className="stat">
-		      				
+		      				<div className="float">
+		      					<h2>Mes stats</h2>
+		      				</div>
+		      				<div className="float">
+			      				<p>Victoire : <span>40%</span></p>
+			      				<div className="myProgress">    						
+		    						<div className="myBar" style={{width:"40%", background:"#6642a9"}}></div>    						
+		    					</div>
+		    					<p>Defaite : <span>25%</span></p>
+		    					<div className="myProgress">
+		    						<div className="myBar" style={{width:"25%", background:"#1da1f2"}}></div>    						
+		    					</div>
+		    					<p>Abandon : <span>75%</span></p>
+		    					<div className="myProgress">
+		    						<div className="myBar" style={{width:"75%", background:"#f9753d"}}></div>    						
+		    					</div>
+		    				</div>
 		      			</div>	      			
 		      		</div>
 		      	</div>
@@ -133,8 +165,8 @@ const Profil: React.FC = function() {
 	      			</div>
 	      		</div>
 	      		<div className="mes-tournois">	      			
-      				<div className="participate">
-        				<Participate/>
+      				<div className="tournois">
+        				<h2>Mes tournois</h2>
         			</div>
 	      		</div>
 	      		<div className="mes-resultats">
@@ -155,4 +187,3 @@ const Profil: React.FC = function() {
 }
 
 export default Profil;
-
