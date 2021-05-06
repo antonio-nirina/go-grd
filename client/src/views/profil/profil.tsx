@@ -167,6 +167,26 @@ const Profil: React.FC = function() {
 	      		<div className="mes-tournois">	      			
       				<div className="tournois">
         				<h2>Mes tournois</h2>
+        				<div className="">
+        					<table>
+        						<thead>
+        							<tr>
+        								<td>Date</td>
+        								<td>Game</td>
+        								<td>Tournament</td>
+        								<td>Rank</td>
+        								<td>Notif</td>
+        							</tr>
+        						</thead>
+        						<tr>
+        							<td>0404/2021</td>
+        							<td>Fifa21</td>
+        							<td>Classic Cup</td>
+        							<td>Top 8</td>
+        							<td>I</td>
+        						</tr>
+        					</table>	
+        				</div>
         			</div>
 	      		</div>
 	      		<div className="mes-resultats">

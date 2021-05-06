@@ -269,3 +269,16 @@
 	margin-right: 15px;
 	cursor: pointer;
 }
+.mes-tournois table{
+	width: 100%;
+	padding: 25px;
+	background: #292d30;
+}
+.mes-tournois table thead{
+	color: gray;
+	font-size: 16px;
+	border-bottom: 1px solid gray;
+}
+.mes-tournois table td{
+	padding-top: 10px;
+}
