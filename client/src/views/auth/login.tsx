@@ -24,7 +24,7 @@ const Login: React.FC = function(props:any) {
 	const { register, handleSubmit, formState: { errors } } = useForm<Inputs>()
 	const [errorForm,setErrorForm] = useState<boolean>(false)
 	const [login]  = useMutation(LOGIN)
-	const onSubmit = async function(data:any){
+	const onSubmit = async function(data:Inputs){
 		const email: string = data.email
 		const password: string = data.password
 

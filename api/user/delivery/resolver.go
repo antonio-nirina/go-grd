@@ -2,6 +2,7 @@ package delivery
 
 import (
 	"errors"
+	"fmt"
 	"os"
 
 	_jwt "github.com/dgrijalva/jwt-go"
@@ -37,6 +38,8 @@ func NewResolver(userUseCase handler.Usecase) Resolver {
 var userEntity = entity.User{}
 
 func (r *resolver) SavedUserResolver(params graphql.ResolveParams) (interface{}, error) {
+	args := params.Args["userInput"]
+	fmt.Println("xxx", args)
 	password := params.Args["password"].(string)
 	hashed := userEntity.CreatedHash(password)
 	check, _ := r.ValidateUserResolver(params)

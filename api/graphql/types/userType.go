@@ -60,9 +60,6 @@ var XboxSchemaType = graphql.NewObject(graphql.ObjectConfig{
 		"RefreshToken": &graphql.Field{
 			Type: graphql.String,
 		},
-		"TokenUsers": &graphql.Field{
-			Type: graphql.String,
-		},
 	},
 })
 
