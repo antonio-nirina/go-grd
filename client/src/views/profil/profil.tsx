@@ -45,11 +45,11 @@ const Profil: React.FC = function() {
 		      				
 		      				<div className="table">
 		      					<div className="cell">
-		      						<strong>Plateform</strong>
+		      						<strong>Plateforme</strong>
 		      						<p><span>Playstation</span></p>
 		      					</div>
 		      					<div className="cell">
-		      						<strong>Serveur location</strong>
+		      						<strong>Serveur</strong>
 		      						<p><span>Asia</span></p>
 		      					</div>
 		      					<div className="cell">
@@ -57,7 +57,7 @@ const Profil: React.FC = function() {
 		      						<p><span>5</span></p>
 		      					</div>
 		      					<div className="cell">
-		      						<strong>Game duration</strong>
+		      						<strong>Durée de jeux</strong>
 		      						<p><span>6 heures</span></p>
 		      					</div>
 		      				</div>	      				
@@ -179,9 +179,9 @@ const Profil: React.FC = function() {
         						<thead>
         							<tr>
         								<td><i className="iconStatus"><FontAwesomeIcon icon={faCalendarAlt}/></i>Date</td>
-        								<td><i className="iconStatus"><FontAwesomeIcon icon={faGamepad}/></i>Game</td>
-        								<td><i className="iconStatus"><FontAwesomeIcon icon={faTrophy}/></i>Tournament</td>
-        								<td><i className="iconStatus"><FontAwesomeIcon icon={faMedal}/></i>Rank</td>
+        								<td><i className="iconStatus"><FontAwesomeIcon icon={faGamepad}/></i>Jeux</td>
+        								<td><i className="iconStatus"><FontAwesomeIcon icon={faTrophy}/></i>Trounois</td>
+        								<td><i className="iconStatus"><FontAwesomeIcon icon={faMedal}/></i>Rang</td>
         								<td></td>
         							</tr>
         						</thead>
@@ -238,9 +238,9 @@ const Profil: React.FC = function() {
         						<thead>
         							<tr>
         								<td><i className="iconStatus"><FontAwesomeIcon icon={faCalendarAlt}/></i>Date</td>
-        								<td><i className="iconStatus"><FontAwesomeIcon icon={faGamepad}/></i>Game</td>
-        								<td><i className="iconStatus"><FontAwesomeIcon icon={faTrophy}/></i>Tournament</td>
-        								<td><i className="iconStatus"><FontAwesomeIcon icon={faMedal}/></i>Rank</td>
+        								<td><i className="iconStatus"><FontAwesomeIcon icon={faGamepad}/></i>Jeux</td>
+        								<td><i className="iconStatus"><FontAwesomeIcon icon={faTrophy}/></i>Tournois</td>
+        								<td><i className="iconStatus"><FontAwesomeIcon icon={faMedal}/></i>Rang</td>
         								<td></td>
         							</tr>
         						</thead>
@@ -299,11 +299,10 @@ const Profil: React.FC = function() {
     						<thead>
     							<tr>
 									<td><i className="iconStatus"><FontAwesomeIcon icon={faCalendarAlt}/></i>Date</td>
-    								<td><i className="iconStatus"><FontAwesomeIcon icon={faGamepad}/></i>Game</td>
-    								<td><i className="iconStatus"><FontAwesomeIcon icon={faTrophy}/></i>Tournament</td>
+    								<td><i className="iconStatus"><FontAwesomeIcon icon={faGamepad}/></i>Jeux</td>
+    								<td><i className="iconStatus"><FontAwesomeIcon icon={faTrophy}/></i>Tournois</td>
     								<td><i className="iconStatus"><FontAwesomeIcon icon={faTrophy}/></i>Ligues</td>
-    								<td><i className="iconStatus"><FontAwesomeIcon icon={faMedal}/></i>Rank</td>
-    								<td>Status</td>
+    								<td><i className="iconStatus"><FontAwesomeIcon icon={faMedal}/></i>Rang</td>    								
     								<td></td>
     							</tr>
     						</thead>
@@ -314,8 +313,7 @@ const Profil: React.FC = function() {
 									CoD Mobile</td>
     							<td><i className="iconStatus"><FontAwesomeIcon icon={faMobile}/></i>
 									CoD Mobile</td>
-    							<td>Top 10</td>
-    							<td>Victoire</td>
+    							<td>Top 10</td>    							
     							<td><i className="iconStatus"><FontAwesomeIcon icon={faInfoCircle}/></i></td>
     						</tr>
     						<tr>
@@ -324,8 +322,7 @@ const Profil: React.FC = function() {
     							<td><i className="iconStatus"><FontAwesomeIcon icon={faPlaystation}/></i>Classic Cup</td>
     							<td><i className="iconStatus"><FontAwesomeIcon icon={faMobile}/></i>
 									CoD Mobile</td>
-    							<td>Top 5</td>
-    							<td>Victoire</td>
+    							<td>Top 5</td>    							
     							<td><i className="iconStatus"><FontAwesomeIcon icon={faInfoCircle}/></i></td>
     						</tr>
     						<tr>
@@ -333,8 +330,7 @@ const Profil: React.FC = function() {
     							<td>Fifa21</td>
     							<td><i className="iconStatus"><FontAwesomeIcon icon={faPlaystation}/></i>Classic Cup</td>
     							<td><i className="iconStatus"><FontAwesomeIcon icon={faPlaystation}/></i>Classic Cup</td>
-    							<td>Top 40</td>
-    							<td>Defaite</td>
+    							<td>Top 40</td>    							
     							<td><i className="iconStatus"><FontAwesomeIcon icon={faInfoCircle}/></i></td>
     						</tr>
     					</table> 
@@ -381,7 +377,7 @@ const Profil: React.FC = function() {
 	      					</div>
 	      				</div>
 	      				<div className="btn-container">
-	      					<a href="#" className="btn bg-yellow">4.99 € / month</a>
+	      					<a href="#" className="btn bg-yellow">4.99 € / Mois</a>
 	      				</div>
 	      			</div>	      			      			
 				</div>
