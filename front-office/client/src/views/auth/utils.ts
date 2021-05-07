@@ -5,10 +5,10 @@ const URL_REDIRECT = "http://localhost:3000"
 const REDIRECT_URI = encodeURI(URL_REDIRECT)
 const BASE_URI = `https://login.live.com/oauth20_authorize.srf?response_type=code&client_id=43ecdb9b-5301-4d89-ab72-52daca2f648b&approval_prompt=auto&redirect_uri=${REDIRECT_URI}&scope=Xboxlive.signin+Xboxlive.offline_access`
 
-interface TokenType {
+export interface TokenType {
 	access_token:string|""
 	refresh_token:string|""
-	type:string
+	type:string|""
 }
 export const checkValidEmail = (mail: string) => {
 	const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
@@ -30,7 +30,6 @@ const receiveMessage = function(event: any) {
 }
 
 export const getTokenUser = async function(code: string) {
-	console.log("code", code)
 	try {
 		const data = await client().query({query:XBoxToken,variables:{code:code}})
 		const token:TokenType = {
@@ -38,12 +37,15 @@ export const getTokenUser = async function(code: string) {
 			refresh_token:data.data.GetAccessTokenXbox.RefreshToken,
 			type:"xbox"
 		}
-
-		// localStorage.setItem("access_token",JSON.stringify(token))
-		// window.location.pathname = "/profil"
+		SendToken(token)
+		window.location.pathname = "/profil"
 	} catch(errors) {
 		console.log("errors_get_one_match", errors)
 	}
+}
+
+export const SendToken = function(token:TokenType) {
+	localStorage.setItem("access_token",JSON.stringify(token))
 }
 
 

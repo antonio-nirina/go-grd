@@ -37,7 +37,7 @@ const Register: React.FC = function() {
 				email:email,
 				password:password,
 			}
-			console.log("e", userInput)
+
 			const result = await createdUser({ variables: { userInput: userInput } })
 			if (result && result.data) history.push("/login")
 		} else {

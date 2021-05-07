@@ -11,12 +11,12 @@ import "../home/home.css"
 import "../../assets/css/style.css"
 
 
-const Home: React.FC = function() {
+const Home: React.FC = function(props:any) {
 	useEffect(() => {
-		const params = window.location.search
 		if (window.opener) {
-		   window.opener.postMessage(params)
-		   window.close()
+			const params = window.location.search
+		   	window.opener.postMessage(params)
+		   	window.close()
 		}
 	})
   return(
@@ -37,7 +37,7 @@ const Home: React.FC = function() {
 	      <Footer/>
 	  </div>
     </div>
-  );
+  )
 }
 
-export default Home;
+export default Home

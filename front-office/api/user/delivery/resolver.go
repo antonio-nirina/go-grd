@@ -1,8 +1,8 @@
 package delivery
 
 import (
+	"encoding/json"
 	"errors"
-	"fmt"
 	"os"
 
 	_jwt "github.com/dgrijalva/jwt-go"
@@ -35,14 +35,25 @@ func NewResolver(userUseCase handler.Usecase) Resolver {
 	}
 }
 
+type inputRegister struct {
+	UserInput inputElements `json:"userInput"`
+}
+
+type inputElements struct {
+	Email string `json:"email"`
+	Username string `json:"username"`
+	Password string `json:"password"`
+}
+
 var userEntity = entity.User{}
 
 func (r *resolver) SavedUserResolver(params graphql.ResolveParams) (interface{}, error) {
-	args := params.Args["userInput"]
-	fmt.Println("xxx", args)
-	password := params.Args["password"].(string)
-	hashed := userEntity.CreatedHash(password)
-	check, _ := r.ValidateUserResolver(params)
+	jsonString, _ := json.Marshal(params.Args)
+	input := inputRegister{}
+	json.Unmarshal([]byte(jsonString), &input)
+
+	hashed := userEntity.CreatedHash(input.UserInput.Password)
+	check, _ := r.ValidateUserResolver(&input)
 	roles := []string{"role_user"}
 
 	if check {
@@ -53,8 +64,8 @@ func (r *resolver) SavedUserResolver(params graphql.ResolveParams) (interface{},
 		FirstName:     "",
 		LastName:      "",
 		Password:      hashed,
-		Username:      params.Args["username"].(string),
-		Email:         params.Args["email"].(string),
+		Username:      input.UserInput.Username,
+		Email:         input.UserInput.Email,
 		IsBanned:      false,
 		Avatar:        "",
 		Language:      "fr",
@@ -88,18 +99,21 @@ func (r *resolver) FindOneUserResolver(params graphql.ResolveParams) (interface{
 	return res, nil
 }
 
-func (r *resolver) ValidateUserResolver(params graphql.ResolveParams) (bool, error) {
-	email := params.Args["email"].(string)
-	username := params.Args["username"].(string)
+func (r *resolver) ValidateUserResolver(input *inputRegister) (bool, error) {
+	email := input.UserInput.Email
+	username := input.UserInput.Username
 	res, _ := r.userHandler.FindUserByEmail(email)
-	resUsername, _ := r.userHandler.FindUserByUsername(username)
 
 	if res.Email != "" {
 		return true, nil
 	}
 
-	if resUsername.Username != "" {
-		return true, nil
+
+	if username != "" {
+		resUsername, _ := r.userHandler.FindUserByUsername(username)
+		if resUsername.Username != "" {
+			return true, nil
+		}
 	}
 
 	return false, nil

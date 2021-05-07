@@ -2,12 +2,14 @@ import React,{useState} from "react"
 import { Link } from 'react-router-dom'
 import { useForm } from "react-hook-form"
 import {useMutation} from "@apollo/client"
+import {useHistory } from "react-router-dom"
+
+import {TokenType,SendToken} from "./utils"
 
 import Header0 from "../header/header0"
 import {checkValidEmail,Siging} from "./utils"
 import {FR} from "../../lang/lang-fr"
 import {LOGIN} from "../../gql/user/auth"
-
 import Footer from "../footer/footer"
 import joystick from "../../assets/image/joystick.png"
 import IconXbox from "../../assets/image/icon-xbox.png"
@@ -20,7 +22,8 @@ type Inputs = {
 	email:string
 }
 
-const Login: React.FC = function(props:any) {
+const Login: React.FC = function() {
+	const history = useHistory()
 	const { register, handleSubmit, formState: { errors } } = useForm<Inputs>()
 	const [errorForm,setErrorForm] = useState<boolean>(false)
 	const [login]  = useMutation(LOGIN)
@@ -30,7 +33,16 @@ const Login: React.FC = function(props:any) {
 
 		if(checkValidEmail(email)) {
 			const result = await login({ variables: { email: email,password:password } })
-			console.log(result)
+			if (result.data.login) {
+				const token:TokenType = {
+					access_token:result.data.login,
+					refresh_token:"",
+					type:""
+				}
+				SendToken(token)
+			}
+
+			history.push("/",{isConnected:true})
 		} else {
 			setErrorForm(true)
 		}
@@ -58,7 +70,7 @@ const Login: React.FC = function(props:any) {
 							</button>
 						</form>
 						<div className="infos">
-							<p className="mb15">Vous n'avez pas encore de compte ? <Link to = "/inscription" title="Inscrivez-vous" className="italic cl-yellow">Inscrivez-vous !</Link></p>
+							<p className="mb15">Vous n'avez pas encore de compte ? <Link to = "/register" title="Inscrivez-vous" className="italic cl-yellow">Inscrivez-vous !</Link></p>
 							<p className="mb15"><a href="#" title="Mot de passe oublié ?" className="italic cl-yellow">Mot de passe oublié ?</a></p>
 							<div className="other-account">
 								<p>Connectez-vous avec votre compte : </p>

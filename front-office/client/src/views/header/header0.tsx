@@ -7,16 +7,16 @@ import logo from "../../assets/image/logo.png"
 import fr from "../../assets/image/fr.png"
 import gb from "../../assets/image/gb.png"
 import ps from "../../assets/image/playstation.png"
-import { faBars, faPlus, faUsers } from "@fortawesome/free-solid-svg-icons";
+import { faBars, faPlus, faUsers } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-  
+
 
 const Header0: React.FC = function() {
     const [showList, setShowList] = useState(false)
     const onShow = function(){
         setShowList(!showList)
-    }    
+    }
   return(
 
         <header className="header">
@@ -46,23 +46,22 @@ const Header0: React.FC = function() {
     	 		</nav>
                 <div className="bt-container">
                     <Link to="/login" className="btn bg-yellow">Connexion</Link>
-                    <Link to="/inscription" className="btn bg-white">Inscription</Link>
+                    <Link to="/register" className="btn bg-white">Inscription</Link>
                 </div>
     	 		<div className="tag">
-
                     <div className="box">
-    	 			   <div className="lang">                        
+    	 			   <div className="lang">
                             <span>
                                 <a href="#" title="">
-                                    <img src={fr} alt="" className="lang show" width="28" height="29"/>                                    
+                                    <img src={fr} alt="" className="lang show" width="28" height="29"/>
                                     <img src={gb} alt="" className="lang gb hide" width="28" height="29"/>
                                 </a>
                             </span>
-                        </div>    	 			
+                        </div>
                         <div className="connex">
                             <a href="#">
                                 <i className="square">
-                                    <FontAwesomeIcon icon={faPlus} size="xs"/>                                    
+                                    <FontAwesomeIcon icon={faPlus} size="xs"/>
                                 </i>
                             </a>
                             <a href="#"><i className="relative"><FontAwesomeIcon icon={faUsers} size="lg"/><span className="counter">2</span></i></a>
@@ -93,7 +92,7 @@ const Header0: React.FC = function() {
     	 		</div>
             </div>
 		</header>
-  );
+  )
 
 }
-export default Header0;
+export default Header0
