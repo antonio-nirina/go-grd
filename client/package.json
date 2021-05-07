@@ -50,6 +50,7 @@
     "react-slideshow-image": "^3.4.6",
     "react-web-media-player": "^1.1.6",
     "reactjs-percentage-circle": "^1.0.0",
+    "reactjs-popup": "^2.0.4",
     "redux": "^4.1.0",
     "redux-form": "^8.3.7",
     "save": "^2.4.0",

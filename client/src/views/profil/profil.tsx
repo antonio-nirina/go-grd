@@ -9,6 +9,8 @@ import ReactDOM from "react-dom"
 import Participate from "../participate/participate"
 import "react-responsive-carousel/lib/styles/carousel.min.css"
 import { Carousel } from 'react-responsive-carousel'
+import Popup from 'reactjs-popup';
+import 'reactjs-popup/dist/index.css';
 
 
 const Profil: React.FC = function() {
@@ -106,7 +108,38 @@ const Profil: React.FC = function() {
 					      	<div className="game-slide"><img src="https://i.ibb.co/8Y0r1NH/warzone.jpg" alt="warzone" /></div>
 	    				</Carousel>
 	    				<div className="bt-game-container">
-	    					<a href="#" className="btn bg-yellow">Ajouter jeux</a>
+	    					<Popup
+							    trigger={<button className="btn bg-yellow"> Ajouter jeux </button>}
+							    modal
+							    nested
+  							>
+					    	<div className="modal">
+						        <button className="close">
+						          &times;
+						        </button>
+						        <div className="header"> <h3>Selectionner parmis nos listes de jeux</h3></div>
+							        <div className="content">
+							          {' '}
+							          <img src="https://i.ibb.co/8Y0r1NH/warzone.jpg" alt="warzone" />
+							          <img src="https://i.ibb.co/CPDzC7n/rocketl.jpg" alt="rocketl" />
+							        </div>
+						        	<div className="actions">
+							          	<Popup
+							            	trigger={<button className="btn bg-yellow"> Ajouter jeux </button>}
+							            	position="top center"
+							            	nested
+							          	>
+						            		<span>
+												Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae
+												magni omnis delectus nemo, maxime molestiae dolorem numquam
+												mollitia, voluptate ea, accusamus excepturi deleniti ratione
+												sapiente! Laudantium, aperiam doloribus. Odit, aut.
+						            		</span>
+										</Popup>
+						          		<button className="btn bg-white">Valider</button>
+						        	</div>
+						     	</div>
+						    </Popup>
 	    				</div>
 	      			</div>
 	      		</div>
