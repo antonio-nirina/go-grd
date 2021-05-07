@@ -38,43 +38,10 @@ const Profil: React.FC = function() {
 		      			</div>
 		      			<div className="avatar-info">
 		      				
-		      				<div className="table">
-		      					<div className="cell">
-		      						<h2>Plateform</h2>
-		      						<p><span>Playstation</span></p>
-		      					</div>
-		      					<div className="cell">
-		      						<h2>Serveur location</h2>
-		      						<p><span>Asia</span></p>
-		      					</div>
-		      					<div className="cell">
-		      						<h2>Expérience</h2>
-		      						<p><span>5</span></p>
-		      					</div>
-		      					<div className="cell">
-		      						<h2>Game duration</h2>
-		      						<p><span>6 heures</span></p>
-		      					</div>
-		      				</div>	      				
+		      								
 		      			</div>
 		      			<div className="stat">
-		      				<div className="float">
-		      					<h2>Mes stats</h2>
-		      				</div>
-		      				<div className="float">
-			      				<p>Victoire : <span>40%</span></p>
-			      				<div className="myProgress">    						
-		    						<div className="myBar" style={{width:"40%", background:"#6642a9"}}></div>    						
-		    					</div>
-		    					<p>Defaite : <span>25%</span></p>
-		    					<div className="myProgress">
-		    						<div className="myBar" style={{width:"25%", background:"#1da1f2"}}></div>    						
-		    					</div>
-		    					<p>Abandon : <span>75%</span></p>
-		    					<div className="myProgress">
-		    						<div className="myBar" style={{width:"75%", background:"#f9753d"}}></div>    						
-		    					</div>
-		    				</div>
+		      				
 		      			</div>	      			
 		      		</div>
 		      	</div>
