@@ -13,6 +13,10 @@ import 'reactjs-popup/dist/index.css';
 import { CircularProgressbar, CircularProgressbarWithChildren, buildStyles} from "react-circular-progressbar"
 import "react-circular-progressbar/dist/styles.css"
 
+import { faXbox, faPlaystation } from "@fortawesome/free-brands-svg-icons"
+import { faCalendarAlt, faInfoCircle, faGamepad, faTrophy, faMedal, faStepBackward, faStepForward, faChevronRight, faChevronLeft, faMobile } from "@fortawesome/free-solid-svg-icons"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+
 
 const Profil: React.FC = function() {
   return(
@@ -174,42 +178,117 @@ const Profil: React.FC = function() {
         					<table>
         						<thead>
         							<tr>
-        								<td>Date</td>
-        								<td>Game</td>
-        								<td>Tournament</td>
-        								<td>Rank</td>
-        								<td>Notif</td>
+        								<td><i className="iconStatus"><FontAwesomeIcon icon={faCalendarAlt}/></i>Date</td>
+        								<td><i className="iconStatus"><FontAwesomeIcon icon={faGamepad}/></i>Game</td>
+        								<td><i className="iconStatus"><FontAwesomeIcon icon={faTrophy}/></i>Tournament</td>
+        								<td><i className="iconStatus"><FontAwesomeIcon icon={faMedal}/></i>Rank</td>
+        								<td></td>
         							</tr>
         						</thead>
         						<tr>
-        							<td>0404/2021</td>
+        							<td>04/04/2021</td>
         							<td>Fifa21</td>
-        							<td>Classic Cup</td>
+        							<td><i className="iconStatus"><FontAwesomeIcon icon={faPlaystation}/></i>Classic Cup</td>
         							<td>Top 8</td>
-        							<td>I</td>
+        							<td><i className="iconStatus"><FontAwesomeIcon icon={faInfoCircle}/></i></td>
         						</tr>
-        					</table>	
+        						<tr>
+        							<td>04/04/2021</td>
+        							<td>Fifa21</td>
+        							<td><i className="iconStatus"><FontAwesomeIcon icon={faPlaystation}/></i>Classic Cup</td>
+        							<td>Top 8</td>
+        							<td><i className="iconStatus"><FontAwesomeIcon icon={faInfoCircle}/></i></td>
+        						</tr>
+        						<tr>
+        							<td>04/04/2021</td>
+        							<td>Fifa21</td>
+        							<td><i className="iconStatus"><FontAwesomeIcon icon={faMobile}/></i>
+									CoD Mobile</td>
+        							<td>Top 8</td>
+        							<td><i className="iconStatus"><FontAwesomeIcon icon={faInfoCircle}/></i></td>
+        						</tr>
+        						<tr>
+        							<td>04/04/2021</td>
+        							<td>Fifa21</td>
+        							<td><i className="iconStatus"><FontAwesomeIcon icon={faPlaystation}/></i>Classic Cup</td>
+        							<td>Top 8</td>
+        							<td><i className="iconStatus"><FontAwesomeIcon icon={faInfoCircle}/></i></td>
+        						</tr>
+        						<tr>
+        							<td>04/04/2021</td>
+        							<td>Fifa21</td>
+        							<td><i className="iconStatus"><FontAwesomeIcon icon={faPlaystation}/></i>Classic Cup</td>
+        							<td>Top 8</td>
+        							<td><i className="iconStatus"><FontAwesomeIcon icon={faInfoCircle}/></i></td>
+        						</tr>
+        					</table>        					
+        					<div className="filter">
+        						<p>Items per page: 10 <span>1 - 10 of 10</span></p>
+        						<p>
+        							<i className="iconPager"><FontAwesomeIcon icon={faStepBackward}/></i>
+        							<i className="iconPager"><FontAwesomeIcon icon={faChevronLeft}/></i>
+        							<i className="iconPager"><FontAwesomeIcon icon={faChevronRight}/></i>
+        							<i className="iconPager"><FontAwesomeIcon icon={faStepForward}/></i>
+        						</p>
+        					</div>
         				</div>
         				<div className="tab-content">
         					<strong>Leagues</strong>
         					<table>
         						<thead>
         							<tr>
-        								<td>Date</td>
-        								<td>Game</td>
-        								<td>Tournament</td>
-        								<td>Rank</td>
-        								<td>Notif</td>
+        								<td><i className="iconStatus"><FontAwesomeIcon icon={faCalendarAlt}/></i>Date</td>
+        								<td><i className="iconStatus"><FontAwesomeIcon icon={faGamepad}/></i>Game</td>
+        								<td><i className="iconStatus"><FontAwesomeIcon icon={faTrophy}/></i>Tournament</td>
+        								<td><i className="iconStatus"><FontAwesomeIcon icon={faMedal}/></i>Rank</td>
+        								<td></td>
         							</tr>
         						</thead>
         						<tr>
-        							<td>0404/2021</td>
+        							<td>04/04/2021</td>
         							<td>Fifa21</td>
-        							<td>Classic Cup</td>
+        							<td><i className="iconStatus"><FontAwesomeIcon icon={faPlaystation}/></i>Classic Cup</td>
         							<td>Top 8</td>
-        							<td>I</td>
+        							<td><i className="iconStatus"><FontAwesomeIcon icon={faInfoCircle}/></i></td>
         						</tr>
-        					</table>	
+        						<tr>
+        							<td>04/04/2021</td>
+        							<td>Fifa21</td>
+        							<td><i className="iconStatus"><FontAwesomeIcon icon={faPlaystation}/></i>Classic Cup</td>
+        							<td>Top 8</td>
+        							<td><i className="iconStatus"><FontAwesomeIcon icon={faInfoCircle}/></i></td>
+        						</tr>
+        						<tr>
+        							<td>04/04/2021</td>
+        							<td>Fifa21</td>
+        							<td><i className="iconStatus"><FontAwesomeIcon icon={faPlaystation}/></i>Classic Cup</td>
+        							<td>Top 8</td>
+        							<td><i className="iconStatus"><FontAwesomeIcon icon={faInfoCircle}/></i></td>
+        						</tr>
+        						<tr>
+        							<td>04/04/2021</td>
+        							<td>Fifa21</td>
+        							<td><i className="iconStatus"><FontAwesomeIcon icon={faPlaystation}/></i>Classic Cup</td>
+        							<td>Top 8</td>
+        							<td><i className="iconStatus"><FontAwesomeIcon icon={faInfoCircle}/></i></td>
+        						</tr>
+        						<tr>
+        							<td>04/04/2021</td>
+        							<td>Fifa21</td>
+        							<td><i className="iconStatus"><FontAwesomeIcon icon={faPlaystation}/></i>Classic Cup</td>
+        							<td>Top 8</td>
+        							<td><i className="iconStatus"><FontAwesomeIcon icon={faInfoCircle}/></i></td>
+        						</tr>
+        					</table>        					
+        					<div className="filter">
+        						<p>Items per page: 10 <span>1 - 10 of 10</span></p>
+        						<p>
+        							<i className="iconPager"><FontAwesomeIcon icon={faStepBackward}/></i>
+        							<i className="iconPager"><FontAwesomeIcon icon={faChevronLeft}/></i>
+        							<i className="iconPager"><FontAwesomeIcon icon={faChevronRight}/></i>
+        							<i className="iconPager"><FontAwesomeIcon icon={faStepForward}/></i>
+        						</p>
+        					</div>
         				</div>
         			</div>
 	      		</div>
