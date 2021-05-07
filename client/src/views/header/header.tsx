@@ -1,22 +1,26 @@
 import React from "react"
 import { Link } from 'react-router-dom'
 import {useState} from "react";
+import { useSelector } from 'react-redux'
 
 import "../header/header.css"
 import logo from "../../assets/image/logo.png"
 import fr from "../../assets/image/fr.png"
 import gb from "../../assets/image/gb.png"
 import ps from "../../assets/image/playstation.png"
-import { faBars, faPlus, faUsers } from "@fortawesome/free-solid-svg-icons";
+import { faBars, faPlus, faUsers } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {RootState} from '../../reducer'
 
-  
+
 
 const Header: React.FC = function() {
+	const userConnectedRedux = useSelector((state:RootState) => state.userConnected)
     const [showList, setShowList] = useState(false)
     const onShow = function(){
         setShowList(!showList)
-    }    
+    }
+	console.log("userConnectedRedux", userConnectedRedux)
   return(
 
         <header className="header">
@@ -46,22 +50,22 @@ const Header: React.FC = function() {
     	 		</nav>
                 <div className="bt-container">
                     <Link to="/login" className="btn bg-yellow">Connexion</Link>
-                    <Link to="/inscription" className="btn bg-white">Inscription</Link>
+                    <Link to="/register" className="btn bg-white">Inscription</Link>
                 </div>
-    	 		<div className="tag">                    
+    	 		<div className="tag">
                     <div className="box">
-    	 			   <div className="lang">                        
+    	 			   <div className="lang">
                             <span>
                                 <a href="#" title="">
-                                    <img src={fr} alt="" className="lang show" width="28" height="29"/>                                    
+                                    <img src={fr} alt="" className="lang show" width="28" height="29"/>
                                     <img src={gb} alt="" className="lang gb hide" width="28" height="29"/>
                                 </a>
                             </span>
-                        </div>    	 			
+                        </div>
                         <div className="connex" >
                             <a href="#">
                                 <i className="square">
-                                    <FontAwesomeIcon icon={faPlus} size="xs"/>                                    
+                                    <FontAwesomeIcon icon={faPlus} size="xs"/>
                                 </i>
                             </a>
                             <a href="#"><i className="relative"><FontAwesomeIcon icon={faUsers} size="lg"/><span className="counter">2</span></i></a>
@@ -81,7 +85,7 @@ const Header: React.FC = function() {
                         </div>
                         <div className={!showList ? "dropdown" :"dropdown show"}>
                             <ul>
-                                <li><Link to="/profil">Profil</Link></li>                                
+                                <li><Link to="/profil">Profil</Link></li>
                                 <li><a href="#" title="Tournois">Tournois</a></li>
                                 <li><a href="#" title="Ligues">Ligues</a></li>
                                 <li><a href="#" title="Wager">Wager</a></li>
@@ -92,7 +96,7 @@ const Header: React.FC = function() {
     	 		</div>
             </div>
 		</header>
-  );
+  )
 
 }
-export default Header;
+export default Header
