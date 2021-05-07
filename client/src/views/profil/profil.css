@@ -26,20 +26,40 @@
     text-align: right;
 }
 .tabs{	
-	width: 100%;
+	/*width: 100%;
 	text-align: center;	
-	margin-bottom: 5px;
-}
-.tabs li{
+	margin-bottom: 5px;*/
+	width: 45px;
+	position: fixed;
+	z-index: 999;
+	left: 0px;
+	height: 100%;
 	background: #2c2c2c;
-	display: inline-block;	
-	border-right: 1px solid #4e4e4e;	
+	top:0;
+	/*overflow: hidden;*/
+}
+.tabs ul{
+	background: red;
+}
+.tabs li{	
+	/*display: inline-block;*/	
+	width: 200px;
+	background: #2c2c2c;
+	height: 100%;
+}
+.tabs li i{
+	display: inline-block;
+	width: 25px;
+	height: 25px;
+	border: 1px solid #cccccc;
+	vertical-align: middle;
+	margin-right: 15px;	
 }
 .tabs li:first-child{
-	border-radius: 5px 0px 0px 5px;
+	/*border-radius: 5px 0px 0px 5px;*/
 }
 .tabs li:last-child{
-	border-radius: 0px 5px 5px 0px;	
+	/*border-radius: 0px 5px 5px 0px;	*/
 }
 
 .tabs li a.active{
@@ -50,9 +70,9 @@
 }
 .tabs li a{
 	display: block;
-	padding: 10px 30px;
+	padding: 10px 10px;
 	color: #ffffff;	
-	font-weight: normal;	
+	font-weight: normal;
 }
 
 .wall{	

@@ -22,13 +22,13 @@ const Profil: React.FC = function() {
 	      	<div className="main-pro">
 	      		<div className="wall-bloc">	      			
 		      		<div className="tabs">
-		      			<ul>
-		      				<li><a href="#wall" className="active">Mon mur</a></li>
-		      				<li><a href="#game">Mes jeux</a></li>
-		      				<li><a href="#">Mes équipes</a></li>
-		      				<li><a href="#">Mes tournois</a></li>
-		      				<li><a href="#">Mes resultats</a></li>
-		      				<li><a href="#">Premium</a></li>
+		      			<ul>		      				
+		      				<li><a href="#wall" className="active"><i></i>Mon mur</a></li>
+		      				<li><a href="#game"><i></i>Mes jeux</a></li>
+		      				<li><a href="#"><i></i>Mes équipes</a></li>
+		      				<li><a href="#"><i></i>Mes tournois</a></li>
+		      				<li><a href="#"><i></i>Mes resultats</a></li>
+		      				<li><a href="#"><i></i>Premium</a></li>
 		      			</ul>
 		      		</div>
 		      		<div className="wall" id="wall">
