@@ -332,15 +332,38 @@
 }
 .premium{	
 	width: 100%;
-	padding: 5px 3em 3em;
+	padding: 5px 0em 3em 3em;
 }
 .item-bloc{
 	background: #2c2c2c;
-	width: 47%;	
-	margin-right: 15px;
+	width: 23%;	
+	margin-right: 20px;
 	padding: 20px;
 	text-align: center;
 	display: inline-block;
 	margin-bottom: 15px;
 	border-radius: 5px;
+	vertical-align: top;
+}
+
+.img-prem img{
+	width: 75px;	
+	display: block;
+	height: auto;	
+	margin:auto;
+	margin-bottom: 15px;
+}
+.img-prem strong{
+	display: block;
+	padding: 10px;
+	font-size: 13px;
+}
+.img-prem.fist img{
+	padding-bottom: 11px;
+}
+.img-prem p{
+	font-size: 14px;
+}
+.ht75{
+	height: 75px !important;
 }

@@ -250,31 +250,31 @@ const Profil: React.FC = function() {
 	      		<div className="premium">
 	      			<h2>Premium</h2>
 	      			<div className="prem-bloc">
-	      				<div className="item-bloc">
-	      					<strong>Formation avancée</strong>
+	      				<div className="item-bloc">	      					
 	      					<div className="img-prem">
-	      						<img src="#"/>
+	      						<img src="https://i.ibb.co/80vD8kD/stat.png" alt="stat" width="75" height="75"/>
+	      						<strong>Formation avancée</strong>
 	      						<p>Entraîne-toi comme un champion avec nos guides confirmés et experts crées avec des pro</p>
 	      					</div>
 	      				</div>
-	      				<div className="item-bloc">
-	      					<strong>Etre repéré par les pro</strong>
-	      					<div className="img-prem">
-	      						<img src="#"/>
+	      				<div className="item-bloc">	      					
+	      					<div className="img-prem">	      						
+	      						<img src="https://i.ibb.co/mXW82Tt/seek.png" alt="seek" width="75" height="75" className="ht75"/>
+	      						<strong>Etre repéré par les pro</strong>
 	      						<p>Entraîne-toi comme un champion avec nos guides confirmés et experts crées avec des pro</p>
 	      					</div>
 	      				</div>
-	      				<div className="item-bloc">
-	      					<strong>Paiement rapide</strong>
+	      				<div className="item-bloc">	      					
 	      					<div className="img-prem">
-	      						<img src="#"/>
+	      						<img src="https://i.ibb.co/0KkJNYk/paiment.png" alt="paiment" width="75" height="75"/>
+	      						<strong>Paiement rapide</strong>
 	      						<p>Entraîne-toi comme un champion avec nos guides confirmés et experts crées avec des pro</p>
 	      					</div>
 	      				</div>
-	      				<div className="item-bloc">
-	      					<strong>Porte-monnaie de paiement minimum</strong>
+	      				<div className="item-bloc">	      					
 	      					<div className="img-prem">
-	      						<img src="#"/>
+	      						<img src="https://i.ibb.co/xDfySTm/wallet.png" alt="wallet" width="75" height="75"/>
+	      						<strong>Porte-monnaie de paiement minimum</strong>
 	      						<p>Entraîne-toi comme un champion avec nos guides confirmés et experts crées avec des pro</p>
 	      					</div>
 	      				</div>
