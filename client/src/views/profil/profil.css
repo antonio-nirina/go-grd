@@ -270,12 +270,18 @@
 	margin-right: 15px;
 	cursor: pointer;
 }
+.mes-tournois{
+	padding: 5px 3em 3em;
+}
+.mes-resultats{
+	background: #000000;
+	padding: 5px 3em 3em;
+}
 .mes-tournois table,
 .mes-resultats table
 {
 	width: 100%;
 	padding: 25px;
-	background: #292d30;
 }
 .mes-tournois table thead
 .mes-resultats table thead,
@@ -284,11 +290,34 @@
 	font-size: 16px;
 	border-bottom: 1px solid gray;
 }
+
+
+.tab-content{
+	width: 48%;
+	display: inline-block;
+	margin-right: 18px;
+	background: #000000;
+	border-radius: 5px;
+
+}
+.tab-content strong{
+	padding: 15px;
+	width: 100%;
+	text-align: center;
+	display: block;
+	border-bottom: 1px solid #4e4e4e;
+	margin-bottom: 5px;
+}
 .mes-tournois table td
-.mes-resultats table td
+
 {
 	padding-top: 10px;
 }
+.mes-resultats table{
+	background: #2c2c2c;
+	border-radius: 5px;	
+}
+
 .CircularProgressbar-path {
   stroke: red;
 }
@@ -303,7 +332,7 @@
 }
 .premium{	
 	width: 100%;
-	padding-left: 3em;
+	padding: 5px 3em 3em;
 }
 .item-bloc{
 	background: #2c2c2c;
