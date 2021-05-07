@@ -183,7 +183,8 @@
 }
 .my-games h2,
 .my-teams h2,
-.mes-tournois h2
+.mes-tournois h2,
+.profil h2
 {
 	font-family: "russo one";
     font-size: 45px;
@@ -269,16 +270,48 @@
 	margin-right: 15px;
 	cursor: pointer;
 }
-.mes-tournois table{
+.mes-tournois table,
+.mes-resultats table
+{
 	width: 100%;
 	padding: 25px;
 	background: #292d30;
 }
-.mes-tournois table thead{
+.mes-tournois table thead
+.mes-resultats table thead,
+{
 	color: gray;
 	font-size: 16px;
 	border-bottom: 1px solid gray;
 }
-.mes-tournois table td{
+.mes-tournois table td
+.mes-resultats table td
+{
 	padding-top: 10px;
+}
+.CircularProgressbar-path {
+  stroke: red;
+}
+.CircularProgressbar-trail {
+  stroke: gray;
+}
+.CircularProgressbar-text {
+  fill: yellow;
+}
+.CircularProgressbar-background {
+  fill: green;
+}
+.premium{	
+	width: 100%;
+	padding-left: 3em;
+}
+.item-bloc{
+	background: #2c2c2c;
+	width: 47%;	
+	margin-right: 15px;
+	padding: 20px;
+	text-align: center;
+	display: inline-block;
+	margin-bottom: 15px;
+	border-radius: 5px;
 }

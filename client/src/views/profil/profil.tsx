@@ -10,6 +10,8 @@ import "react-responsive-carousel/lib/styles/carousel.min.css"
 import { Carousel } from 'react-responsive-carousel'
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
+import { CircularProgressbar, CircularProgressbarWithChildren, buildStyles} from "react-circular-progressbar"
+import "react-circular-progressbar/dist/styles.css"
 
 
 const Profil: React.FC = function() {
@@ -39,26 +41,26 @@ const Profil: React.FC = function() {
 		      				
 		      				<div className="table">
 		      					<div className="cell">
-		      						<h2>Plateform</h2>
+		      						<strong>Plateform</strong>
 		      						<p><span>Playstation</span></p>
 		      					</div>
 		      					<div className="cell">
-		      						<h2>Serveur location</h2>
+		      						<strong>Serveur location</strong>
 		      						<p><span>Asia</span></p>
 		      					</div>
 		      					<div className="cell">
-		      						<h2>Expérience</h2>
+		      						<strong>Expérience</strong>
 		      						<p><span>5</span></p>
 		      					</div>
 		      					<div className="cell">
-		      						<h2>Game duration</h2>
+		      						<strong>Game duration</strong>
 		      						<p><span>6 heures</span></p>
 		      					</div>
 		      				</div>	      				
 		      			</div>
 		      			<div className="stat">
 		      				<div className="float">
-		      					<h2>Mes stats</h2>
+		      					<strong>Mes stats</strong>
 		      				</div>
 		      				<div className="float">
 			      				<p>Victoire : <span>40%</span></p>
@@ -190,14 +192,76 @@ const Profil: React.FC = function() {
         			</div>
 	      		</div>
 	      		<div className="mes-resultats">
-	      			{/*<h2>Mes résultats</h2>
-	      			<div className="img-game"></div>*/}
+	      			<h2>Mes résultats</h2>
+	      			<div>
+	      				<table>
+    						<thead>
+    							<tr>
+    								<td>Date</td>
+    								<td>Game</td>
+    								<td>Tournament</td>
+    								<td>Rank</td>
+    								<td>Resultats</td>
+    								<td>Notif</td>
+
+    							</tr>
+    						</thead>
+    						<tr>
+    							<td>04/04/2021</td>
+    							<td>Fifa21</td>
+    							<td>Classic Cup</td>
+    							<td>Top 8</td>
+    							<td>Victoire</td>
+    							<td>I</td>
+    						</tr>
+    						<tr>
+    							<td>04/04/2021</td>
+    							<td>Fifa21</td>
+    							<td>Classic Cup</td>
+    							<td>Top 8</td>
+    							<td>Victoire</td>
+    							<td>I</td>
+    						</tr>
+    					</table>
+    					
+	      			</div>
 	      		</div>
 	      		<div className="premium">
-	      			{/*<h2>Premium</h2>
-	      			<div className="img-game"></div>*/}
-	      		</div>
-
+	      			<h2>Premium</h2>
+	      			<div className="prem-bloc">
+	      				<div className="item-bloc">
+	      					<strong>Formation avancée</strong>
+	      					<div className="img-prem">
+	      						<img src="#"/>
+	      						<p>Entraîne-toi comme un champion avec nos guides confirmés et experts crées avec des pro</p>
+	      					</div>
+	      				</div>
+	      				<div className="item-bloc">
+	      					<strong>Etre repéré par les pro</strong>
+	      					<div className="img-prem">
+	      						<img src="#"/>
+	      						<p>Entraîne-toi comme un champion avec nos guides confirmés et experts crées avec des pro</p>
+	      					</div>
+	      				</div>
+	      				<div className="item-bloc">
+	      					<strong>Paiement rapide</strong>
+	      					<div className="img-prem">
+	      						<img src="#"/>
+	      						<p>Entraîne-toi comme un champion avec nos guides confirmés et experts crées avec des pro</p>
+	      					</div>
+	      				</div>
+	      				<div className="item-bloc">
+	      					<strong>Porte-monnaie de paiement minimum</strong>
+	      					<div className="img-prem">
+	      						<img src="#"/>
+	      						<p>Entraîne-toi comme un champion avec nos guides confirmés et experts crées avec des pro</p>
+	      					</div>
+	      				</div>
+	      				<div className="btn-container">
+	      					<a href="#" className="btn bg-yellow">4.99 € / month</a>
+	      				</div>
+	      			</div>	      			      			
+				</div>
 	      	</div>	      	
 	      </div>	      
 	      <Footer/>
