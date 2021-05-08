@@ -25,7 +25,7 @@ html{
 }
 .btn{
   font-size: 14px;
-  text-transform: uppercase;  
+  text-transform: uppercase;
   padding: 10px 15px;
   border-radius: 5px;
   color: #010101;
@@ -59,7 +59,7 @@ html{
   display: none;
 }
 .bt-container{
-  display: inline-block; 
+  display: inline-block;
   float: none;
   padding: 8px 0px;
 }
@@ -75,18 +75,18 @@ html{
   width: 100%;
 }
 a{
-   text-decoration:none;     
+   text-decoration:none;
 }
 a:hover{
-	
+
 }
 label{
-	
+
 }
-textarea{ 
-	
+textarea{
+
 }
-p{ 
+p{
     font-size: 16px;
  }
 span{
@@ -109,7 +109,7 @@ h1{
 }
 h2{
 
-	
+
 }
 h1,
 h2,
@@ -117,12 +117,12 @@ h3,
 h4,
 h5,
 h6{
-	
+
 }
 h2{
 
 }
-h3{ 
+h3{
 
 }
 ul,
@@ -138,7 +138,7 @@ h1{}
     src: url('../../assets/fonts/russoone/RussoOne.eot?#iefix') format('embedded-opentype'),
         url('../../assets/fonts/russoone/RussoOne.woff2') format('woff2'),
         url('../../assets/fonts/russoone/RussoOne.woff') format('woff'),
-        url('../../assets/fonts/russoone/RussoOne.svg#RussoOne') format('svg');  
+        url('../../assets/fonts/russoone/RussoOne.svg#RussoOne') format('svg');
 }
 @font-face {
 	font-family: 'quicksand regular';
@@ -146,11 +146,11 @@ h1{}
     src: url('../../assets/fonts/quicksand/static/Quicksand-Regular.eot?#iefix') format('embedded-opentype'),
         url('../../assets/fonts/quicksand/static/Quicksand-Regular.woff2') format('woff2'),
         url('../../assets/fonts/quicksand/static/Quicksand-Regular.woff') format('woff'),
-        url('../../assets/fonts/quicksand/static/Quicksand-Regular.svg#RussoOne') format('svg');  
+        url('../../assets/fonts/quicksand/static/Quicksand-Regular.svg#RussoOne') format('svg');
 }
 /*********  Media query ***************/
 
-@media screen and (min-width: 1330px) {  
+@media screen and (min-width: 1330px) {
 
 
 }
@@ -158,20 +158,20 @@ h1{}
   .home .content{
     display: block;
   }
-  .home .block{    
-    width: 16%;    
+  .home .block{
+    width: 16%;
     display: inline-block;
     margin-bottom: 15px;
     margin-right: 10px;
   }
-  .home .block.last{    
+  .home .block.last{
     width: 15%;
     border-radius: 15px;
   }
-  
+
 }
 @media screen and (max-width: 1296px) {
-  .navmenu  
+  .navmenu
   {
         width: 55%;
   }
@@ -182,13 +182,13 @@ h1{}
   }
   footer .wrap{
     padding: 3px 50px;
-  }  
+  }
   .home .slogan{
       top: 38%;
   }
   .home p.title{
       font-size: 39px;
-  } 
+  }
 }
 @media screen and (max-width: 1173px){
   .home .block,.home .block.last{
@@ -206,7 +206,7 @@ h1{}
     margin: auto;
   }
 }
-@media screen and (max-width: 991px){  
+@media screen and (max-width: 991px){
   .part{
    padding: 0 2em;
   }
@@ -219,7 +219,7 @@ h1{}
   .home .content{
   display: inherit;
   }
-  .home .block  
+  .home .block
   {
     width: 30%;
     display: inline-block;
@@ -235,11 +235,11 @@ h1{}
   }
   .home .actuality{
   width: 100%;
-  display: block;    
+  display: block;
   margin-bottom: 15px;
   }
   .home .article{
-  width: 47%;    
+  width: 47%;
 
   }
   .home .article img{
@@ -278,14 +278,14 @@ h1{}
   .login footer .rss,
   .inscription footer .rss
   {
-    width: 60%; 
+    width: 60%;
   }
 }
 @media screen and (max-width: 827px){
 
   .header .wrap{
     text-align: right;
-    padding-right: 5px;    
+    padding-right: 5px;
   }
   .bt-container{
     height: 48px;
@@ -301,10 +301,10 @@ h1{}
     text-align: center;
     width: 90%;
   }
-  .navmenu  
+  .navmenu
   {
     display: none;
-  }  
+  }
   .header .logo{
     float: left;
     margin: 5px 30px;
@@ -320,8 +320,8 @@ h1{}
 }
 @media screen and (max-width: 640px){
   .home .article{
-    width: 100%;    
-    margin-bottom: 15px;    
+    width: 100%;
+    margin-bottom: 15px;
   }
   .home .article img{
     width: 95%;
@@ -361,12 +361,12 @@ h1{}
 @media screen and (max-width: 690px){
   .home .jeux{
     padding-bottom: 0px;
-  }  
+  }
   .home .logo-game{
     width: 17%;
   }
   .home .jeux h2{
-    font-size: 23px; 
+    font-size: 23px;
     padding-bottom: 0px;
     padding-top: 15px;
   }
@@ -396,7 +396,7 @@ h1{}
   .home .community h2{
     font-size: 23px;
   }
-  
+
   .home .join input{
     display: block;
     width: 70%;
@@ -413,10 +413,10 @@ h1{}
   .header .logo{
     float: none;
     clear: both;
-    width: 100%; 
+    width: 100%;
     max-width: inherit;
     text-align: center;
-    margin: 0 0px 8px;   
+    margin: 0 0px 8px;
   }
   .bt-container{
     max-width: inherit;
@@ -427,10 +427,10 @@ h1{}
     width: 100%;
     text-align: center;
   }
-  .home .gamecash .lot p{    
+  .home .gamecash .lot p{
     display: inine-block;
     width: 50%;
-    text-align: left; 
+    text-align: left;
     margin-bottom: 15px;
   }
   .footer .logo{
@@ -442,10 +442,10 @@ h1{}
   .footer .logo a{
     display: block;
   }
-  .footer .rss{    
+  .footer .rss{
     margin:auto;
     width: 100%;
-    margin-bottom: 15px;    
+    margin-bottom: 15px;
   }
   .footer .rss li{
     padding-left: 15px;

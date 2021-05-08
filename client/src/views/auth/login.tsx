@@ -1,10 +1,12 @@
-import React,{useState} from "react"
+import React,{useState,useEffect} from "react"
 import { Link } from 'react-router-dom'
 import { useForm } from "react-hook-form"
 import {useMutation} from "@apollo/client"
 import {useHistory } from "react-router-dom"
+import { useDispatch } from "react-redux"
 
 import {TokenType,SendToken} from "./utils"
+import {sendUserConectedAction} from "./action/userAction"
 
 import Header0 from "../header/header0"
 import {checkValidEmail,Siging} from "./utils"
@@ -24,6 +26,7 @@ type Inputs = {
 
 const Login: React.FC = function() {
 	const history = useHistory()
+	const dispatch = useDispatch()
 	const { register, handleSubmit, formState: { errors } } = useForm<Inputs>()
 	const [errorForm,setErrorForm] = useState<boolean>(false)
 	const [login]  = useMutation(LOGIN)
@@ -40,9 +43,10 @@ const Login: React.FC = function() {
 					type:""
 				}
 				SendToken(token)
+				dispatch(sendUserConectedAction(result.data.login))
 			}
 
-			history.push("/",{isConnected:true})
+			history.push("/")
 		} else {
 			setErrorForm(true)
 		}

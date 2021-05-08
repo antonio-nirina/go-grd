@@ -18,14 +18,13 @@ const Header0: React.FC = function() {
         setShowList(!showList)
     }
   return(
-
-        <header className="header">
+        <header className="header ooo">
     	 	<div className="wrap">
     	 		<div className="logo">
 	    	 		<div>
-	    	 			<a href="/" title="Grid" className="v-align">
-	    	 				<img src={logo} alt="Grid" className="imglogo"/>
-	    	 			</a>
+					 	<Link to="/" className="v-align">
+                            <img src={logo} alt="Grid" className="imglogo"/>
+                     	</Link>
 	    	 		</div>
 	    	 	</div>
     	 		<nav className="navmenu">
@@ -64,9 +63,11 @@ const Header0: React.FC = function() {
                                     <FontAwesomeIcon icon={faPlus} size="xs"/>
                                 </i>
                             </a>
-                            <a href="#"><i className="relative"><FontAwesomeIcon icon={faUsers} size="lg"/><span className="counter">2</span></i></a>
+                            <a href="#"><i className="relative">
+								<FontAwesomeIcon icon={faUsers} size="lg"/>
+								<span className="counter">2</span></i>
+							</a>
                         </div>
-
                     </div>
                     <div className="gametag">
                         <div className="itemsTag">
@@ -75,7 +76,9 @@ const Header0: React.FC = function() {
                                 <p>
                                 <a href="#"><img src={ps} className="itemTag" alt="" width="18" height="14"/></a>
                                 <a href="#"><img src={fr} className="itemTag" alt="" width="15" height="14"/></a>
-                                <i className="itemTag drop" onClick={onShow}><FontAwesomeIcon icon={faBars} /></i>
+                                <i className="itemTag drop" onClick={onShow}>
+									<FontAwesomeIcon icon={faBars} />
+								</i>
                                 </p>
                             </div>
                         </div>

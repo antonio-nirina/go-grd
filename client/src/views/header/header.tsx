@@ -20,22 +20,21 @@ const Header: React.FC = function() {
     const onShow = function(){
         setShowList(!showList)
     }
-	console.log("userConnectedRedux", userConnectedRedux)
-  return(
 
-        <header className="header">
+  return(
+        <header className={Object.keys(userConnectedRedux.user).length == 0 ? "header" : "header connected"}>
     	 	<div className="wrap">
     	 		<div className="logo">
 	    	 		<h1>
-	    	 			<a href="/" title="Grid" className="v-align">
-	    	 				<img src={logo} alt="Grid" className="imglogo"/>
-	    	 			</a>
+                    <Link to="/" className="v-align">
+                        <img src={logo} alt="Grid" className="imglogo"/>
+                    </Link>
 	    	 		</h1>
 	    	 	</div>
     	 		<nav className="navmenu">
     	 			<ul>
     	 				<li>
-    	 					<Link to="/ligue"> Ligues</Link>
+    	 					<Link to="/ligue">Ligues</Link>
 	 					</li>
     	 				<li>
     	 					<Link to="/tournament">Tournois</Link>
@@ -57,8 +56,8 @@ const Header: React.FC = function() {
     	 			   <div className="lang">
                             <span>
                                 <a href="#" title="">
-                                    <img src={fr} alt="" className="lang show" width="28" height="29"/>
-                                    <img src={gb} alt="" className="lang gb hide" width="28" height="29"/>
+                                    <img src={fr} alt="" className={userConnectedRedux.user.language === "fr" ? "lang show" : "hide" }  width="28" height="29"/>
+                                    <img src={gb} alt="" className={userConnectedRedux.user.language === "fr" ? "hide" : "lang gb" } width="28" height="29"/>
                                 </a>
                             </span>
                         </div>
@@ -70,7 +69,6 @@ const Header: React.FC = function() {
                             </a>
                             <a href="#"><i className="relative"><FontAwesomeIcon icon={faUsers} size="lg"/><span className="counter">2</span></i></a>
                         </div>
-
                     </div>
                     <div className="gametag">
                         <div className="itemsTag">
@@ -78,7 +76,7 @@ const Header: React.FC = function() {
                                 <p>GameTag</p>
                                 <p>
                                 <a href="#"><img src={ps} className="itemTag" alt="" width="18" height="14"/></a>
-                                <a href="#"><img src={fr} className="itemTag" alt="" width="15" height="14"/></a>
+                                <a href="#"><img src={userConnectedRedux.user.language === "fr" ? fr : gb} className="itemTag" alt="" width="15" height="14"/></a>
                                 <i className="itemTag drop" onClick={onShow}><FontAwesomeIcon icon={faBars} /></i>
                                 </p>
                             </div>
@@ -86,10 +84,10 @@ const Header: React.FC = function() {
                         <div className={!showList ? "dropdown" :"dropdown show"}>
                             <ul>
                                 <li><Link to="/profil">Profil</Link></li>
-                                <li><a href="#" title="Tournois">Tournois</a></li>
-                                <li><a href="#" title="Ligues">Ligues</a></li>
-                                <li><a href="#" title="Wager">Wager</a></li>
-                                <li><a href="#" title="Assistance">Assistance</a></li>
+                                <li><Link to="/tournament">Tournois</Link></li>
+                                <li><Link to="/ligue">Ligues</Link></li>
+                                <li><Link to="/wager">Wager</Link></li>
+                                <li><Link to="/assistant">Assistance</Link></li>
                             </ul>
                         </div>
                     </div>

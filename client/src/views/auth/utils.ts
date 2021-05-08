@@ -1,5 +1,6 @@
 import {createApolloClient as client} from "../../config/apollo-client"
 import {XBoxToken} from "../../gql/user/auth"
+import jwt from "jsonwebtoken"
 
 const URL_REDIRECT = "http://localhost:3000"
 const REDIRECT_URI = encodeURI(URL_REDIRECT)
@@ -47,5 +48,7 @@ export const getTokenUser = async function(code: string) {
 export const SendToken = function(token:TokenType) {
 	localStorage.setItem("access_token",JSON.stringify(token))
 }
+
+
 
 
