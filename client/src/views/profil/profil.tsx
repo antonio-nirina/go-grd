@@ -1,17 +1,17 @@
 import React from "react"
-import Popup from "reactjs-popup"
-import { Carousel } from "react-responsive-carousel"
 
 import Header0 from "../header/header0"
 import Footer from "../footer/footer"
 import "../profil/profil.css"
 import Avatar from "../../assets/image/avatar.png"
 import "../../assets/css/style.css"
-import Participate from "../participate/participate"
+import ReactDOM from "react-dom"
 import "react-responsive-carousel/lib/styles/carousel.min.css"
-
-
-import 'reactjs-popup/dist/index.css'
+import { Carousel } from 'react-responsive-carousel'
+import Popup from 'reactjs-popup';
+import 'reactjs-popup/dist/index.css';
+import { CircularProgressbar, CircularProgressbarWithChildren, buildStyles} from "react-circular-progressbar"
+import "react-circular-progressbar/dist/styles.css"
 
 
 const Profil: React.FC = function() {
@@ -41,26 +41,26 @@ const Profil: React.FC = function() {
 
 		      				<div className="table">
 		      					<div className="cell">
-		      						<h2>Plateform</h2>
+		      						<strong>Plateform</strong>
 		      						<p><span>Playstation</span></p>
 		      					</div>
 		      					<div className="cell">
-		      						<h2>Serveur location</h2>
+		      						<strong>Serveur location</strong>
 		      						<p><span>Asia</span></p>
 		      					</div>
 		      					<div className="cell">
-		      						<h2>Expérience</h2>
+		      						<strong>Expérience</strong>
 		      						<p><span>5</span></p>
 		      					</div>
 		      					<div className="cell">
-		      						<h2>Game duration</h2>
+		      						<strong>Game duration</strong>
 		      						<p><span>6 heures</span></p>
 		      					</div>
 		      				</div>
 		      			</div>
 		      			<div className="stat">
 		      				<div className="float">
-		      					<h2>Mes stats</h2>
+		      					<strong>Mes stats</strong>
 		      				</div>
 		      				<div className="float">
 			      				<p>Victoire : <span>40%</span></p>
@@ -167,19 +167,122 @@ const Profil: React.FC = function() {
 	      			</div>
 	      		</div>
 	      		<div className="mes-tournois">
-      				<div className="participate">
-        				<Participate/>
+      				<div className="tournois">
+        				<h2>Mes tournois</h2>
+        				<div className="tab-content">
+        					<strong>Tournois</strong>
+        					<table>
+        						<thead>
+        							<tr>
+        								<td>Date</td>
+        								<td>Game</td>
+        								<td>Tournament</td>
+        								<td>Rank</td>
+        								<td>Notif</td>
+        							</tr>
+        						</thead>
+        						<tr>
+        							<td>0404/2021</td>
+        							<td>Fifa21</td>
+        							<td>Classic Cup</td>
+        							<td>Top 8</td>
+        							<td>I</td>
+        						</tr>
+        					</table>
+        				</div>
+        				<div className="tab-content">
+        					<strong>Leagues</strong>
+        					<table>
+        						<thead>
+        							<tr>
+        								<td>Date</td>
+        								<td>Game</td>
+        								<td>Tournament</td>
+        								<td>Rank</td>
+        								<td>Notif</td>
+        							</tr>
+        						</thead>
+        						<tr>
+        							<td>0404/2021</td>
+        							<td>Fifa21</td>
+        							<td>Classic Cup</td>
+        							<td>Top 8</td>
+        							<td>I</td>
+        						</tr>
+        					</table>
+        				</div>
         			</div>
 	      		</div>
 	      		<div className="mes-resultats">
-	      			{/*<h2>Mes résultats</h2>
-	      			<div className="img-game"></div>*/}
+	      			<h2>Mes résultats</h2>
+	      			<div>
+	      				<table>
+    						<thead>
+    							<tr>
+    								<td>Date</td>
+    								<td>Game</td>
+    								<td>Tournament</td>
+    								<td>Rank</td>
+    								<td>Resultats</td>
+    								<td>Notif</td>
+
+    							</tr>
+    						</thead>
+    						<tr>
+    							<td>04/04/2021</td>
+    							<td>Fifa21</td>
+    							<td>Classic Cup</td>
+    							<td>Top 8</td>
+    							<td>Victoire</td>
+    							<td>I</td>
+    						</tr>
+    						<tr>
+    							<td>04/04/2021</td>
+    							<td>Fifa21</td>
+    							<td>Classic Cup</td>
+    							<td>Top 8</td>
+    							<td>Victoire</td>
+    							<td>I</td>
+    						</tr>
+    					</table>
+	      			</div>
 	      		</div>
 	      		<div className="premium">
-	      			{/*<h2>Premium</h2>
-	      			<div className="img-game"></div>*/}
-	      		</div>
-
+	      			<h2>Premium</h2>
+	      			<div className="prem-bloc">
+	      				<div className="item-bloc">
+	      					<div className="img-prem">
+	      						<img src="https://i.ibb.co/80vD8kD/stat.png" alt="stat" width="75" height="75"/>
+	      						<strong>Formation avancée</strong>
+	      						<p>Entraîne-toi comme un champion avec nos guides confirmés et experts crées avec des pro</p>
+	      					</div>
+	      				</div>
+	      				<div className="item-bloc">
+	      					<div className="img-prem">
+	      						<img src="https://i.ibb.co/mXW82Tt/seek.png" alt="seek" width="75" height="75" className="ht75"/>
+	      						<strong>Etre repéré par les pro</strong>
+	      						<p>Entraîne-toi comme un champion avec nos guides confirmés et experts crées avec des pro</p>
+	      					</div>
+	      				</div>
+	      				<div className="item-bloc">
+	      					<div className="img-prem">
+	      						<img src="https://i.ibb.co/0KkJNYk/paiment.png" alt="paiment" width="75" height="75"/>
+	      						<strong>Paiement rapide</strong>
+	      						<p>Entraîne-toi comme un champion avec nos guides confirmés et experts crées avec des pro</p>
+	      					</div>
+	      				</div>
+	      				<div className="item-bloc">
+	      					<div className="img-prem">
+	      						<img src="https://i.ibb.co/xDfySTm/wallet.png" alt="wallet" width="75" height="75"/>
+	      						<strong>Porte-monnaie de paiement minimum</strong>
+	      						<p>Entraîne-toi comme un champion avec nos guides confirmés et experts crées avec des pro</p>
+	      					</div>
+	      				</div>
+	      				<div className="btn-container">
+	      					<a href="#" className="btn bg-yellow">4.99 € / month</a>
+	      				</div>
+	      			</div>
+				</div>
 	      	</div>
 	      </div>
 	      <Footer/>
@@ -189,4 +292,3 @@ const Profil: React.FC = function() {
 }
 
 export default Profil;
-
