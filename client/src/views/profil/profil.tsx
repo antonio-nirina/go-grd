@@ -34,376 +34,372 @@ const Profil: React.FC = function() {
 	}
   return(
 	<div className="profil connected">
-	  <div className="container">
-		  <Header/>
-		  <div className="main-content">
-			<div className="main-pro">
-				<div className="wall-bloc">
-					<div className="tabs">
-						<ul>
-							<li><a href="#wall" className="active">Mon mur</a></li>
-							<li><a href="#game">Mes jeux</a></li>
-							<li><a href="#">Mes équipes</a></li>
-							<li><a href="#">Mes tournois</a></li>
-							<li><a href="#">Mes resultats</a></li>
-							<li><a href="#">Premium</a></li>
-						</ul>
-					</div>
-					<div className="wall" id="wall">
-						<div className="avatar">
-							<p><img src = {Avatar} /></p>
-							<p className="pseudo"><strong>Noob_021</strong></p>
-						</div>
-						<div className="avatar-info">
+      <div className="container">
+	      <Header/>
+	      <div className="main-content">
+	      	<div className="main-pro">
+	      		<div className="wall-bloc">
+		      		<div className="tabs">
+		      			<ul>
+		      				<li><a href="#wall" className="active">Mon mur</a></li>
+		      				<li><a href="#game">Mes jeux</a></li>
+		      				<li><a href="#">Mes équipes</a></li>
+		      				<li><a href="#">Mes tournois</a></li>
+		      				<li><a href="#">Mes resultats</a></li>
+		      				<li><a href="#">Premium</a></li>
+		      			</ul>
+		      		</div>
+		      		<div className="wall" id="wall">
+		      			<div className="avatar">
+			      			<p><img src = {Avatar} /></p>
+			      			<p className="pseudo"><strong>Noob_021</strong></p>
+		      			</div>
+		      			<div className="avatar-info">
 
-							<div className="table">
-								<div className="cell">
-									<strong>Plateform</strong>
-									<p><span>Playstation</span></p>
-								</div>
-								<div className="cell">
-									<strong>Serveur location</strong>
-									<p><span>Asia</span></p>
-								</div>
-								<div className="cell">
-									<strong>Expérience</strong>
-									<p><span>5</span></p>
-								</div>
-								<div className="cell">
-									<strong>Game duration</strong>
-									<p><span>6 heures</span></p>
-								</div>
-							</div>
-						</div>
-						<div className="stat">
-							<div className="float">
-								<strong>Mes stats</strong>
-							</div>
-							<div className="float">
-								<p>Victoire : <span>40%</span></p>
-								<div className="myProgress">
-									<div className="myBar" style={{width:"40%", background:"#6642a9"}}></div>
-								</div>
-								<p>Defaite : <span>25%</span></p>
-								<div className="myProgress">
-									<div className="myBar" style={{width:"25%", background:"#1da1f2"}}></div>
-								</div>
-								<p>Abandon : <span>75%</span></p>
-								<div className="myProgress">
-									<div className="myBar" style={{width:"75%", background:"#f9753d"}}></div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div className="about-bloc">
-					<div className="about-me">
-						<div className="field">
-							<h2>Modifier votre profil</h2>
-							<input type="text" placeholder="Pseudo"/>
-							<input type="number" placeholder="Numéro de téléphone"/>
-							<input type="text" placeholder="Entrez la date d'adhésion"/>
+		      				<div className="table">
+		      					<div className="cell">
+		      						<strong>Plateforme</strong>
+		      						<p><span>Playstation</span></p>
+		      					</div>
+		      					<div className="cell">
+		      						<strong>Serveur</strong>
+		      						<p><span>Asia</span></p>
+		      					</div>
+		      					<div className="cell">
+		      						<strong>Expérience</strong>
+		      						<p><span>5</span></p>
+		      					</div>
+		      					<div className="cell">
+		      						<strong>Durée de jeux</strong>
+		      						<p><span>6 heures</span></p>
+		      					</div>
+		      				</div>
+		      			</div>
+		      			<div className="stat">
+		      				<div className="float">
+		      					<strong>Mes stats</strong>
+		      				</div>
+		      				<div className="float">
+			      				<p>Victoire : <span>40%</span></p>
+			      				<div className="myProgress">
+		    						<div className="myBar" style={{width:"40%", background:"#6642a9"}}></div>
+		    					</div>
+		    					<p>Defaite : <span>25%</span></p>
+		    					<div className="myProgress">
+		    						<div className="myBar" style={{width:"25%", background:"#1da1f2"}}></div>
+		    					</div>
+		    					<p>Abandon : <span>75%</span></p>
+		    					<div className="myProgress">
+		    						<div className="myBar" style={{width:"75%", background:"#f9753d"}}></div>
+		    					</div>
+		    				</div>
+		      			</div>
+		      		</div>
+		      	</div>
+		      	<div className="about-bloc">
+		      		<div className="about-me">
+		      			<div className="field">
+		      				<h2>Modifier votre profil</h2>
+		      				<input type="text" placeholder="Pseudo"/>
+		      				<input type="number" placeholder="Numéro de téléphone"/>
+		      				<input type="text" placeholder="Entrez la date d'adhésion"/>
 							<select onChange={onChangeLanguage}>
-								<option value="0">FR</option>
-								<option value="1">EN</option>
-							</select>
-							<div className="btn-container">
-								<a href="#" className="btn bg-yellow mg15">Valider</a>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div id="game" className="my-games">
-					<h2>Mes jeux</h2>
-					<div className="img-game">
-						<Carousel swipeable={true} centerSlidePercentage={20} dynamicHeight={false} centerMode={true} showArrows={true} autoPlay={true} interval={8000} infiniteLoop={true} showThumbs={false} transitionTime={1000}>
-							<div className="game-slide"><img src="https://i.ibb.co/ByGkhS1/apexlegend.jpg" alt="apexlegend" /></div>
-							<div className="game-slide"><img src="https://i.ibb.co/Yd2v60Q/blackops.jpg" alt="blackops"/></div>
-							<div className="game-slide"><img src="https://i.ibb.co/TK5JYMz/fifa21.jpg" alt="fifa21" /></div>
-							<div className="game-slide"><img src="https://i.ibb.co/Dtym1JK/fortnite.jpg" alt="fortnite" /></div>
-							<div className="game-slide"><img src="https://i.ibb.co/9VPnb7p/mwarfare.jpg" alt="mwarfare" /></div>
-							<div className="game-slide"><img src="https://i.ibb.co/89xKdw2/rainbowsix-siege.jpg" alt="rainbowsix-siege"/></div>
-							<div className="game-slide"><img src="https://i.ibb.co/CPDzC7n/rocketl.jpg" alt="rocketl" /></div>
-							<div className="game-slide"><img src="https://i.ibb.co/8Y0r1NH/warzone.jpg" alt="warzone" /></div>
-						</Carousel>
-						<div className="bt-game-container">
-							<Popup
-								trigger={<button className="btn bg-yellow"> Ajouter jeux </button>}
-								modal
-								nested
-							>
-							<div className="modal">
-								<button className="close">
-								  &times;
-								</button>
-								<div className="header"> <h3>Selectionner parmis nos listes de jeux</h3></div>
-									<div className="content">
-									  {' '}
-									  <img src="https://i.ibb.co/8Y0r1NH/warzone.jpg" alt="warzone" />
-									  <img src="https://i.ibb.co/CPDzC7n/rocketl.jpg" alt="rocketl" />
-									</div>
-									<div className="actions">
-										<Popup
-											trigger={<button className="btn bg-yellow"> Ajouter jeux </button>}
-											position="top center"
-											nested
-										>
-											<span>
+								<option>FR</option>
+								<option>EN</option>
+							  </select>
+		      				<div className="btn-container">
+		      					<a href="#" className="btn bg-yellow mg15">Valider</a>
+		      				</div>
+		      			</div>
+		      		</div>
+		      	</div>
+	      		<div id="game" className="my-games">
+	      			<h2>Mes jeux</h2>
+	      			<div className="img-game">
+	      				<Carousel swipeable={true} centerSlidePercentage={20} dynamicHeight={false} centerMode={true} showArrows={true} autoPlay={true} interval={8000} infiniteLoop={true} showThumbs={false} transitionTime={1000}>
+					        <div className="game-slide"><img src="https://i.ibb.co/ByGkhS1/apexlegend.jpg" alt="apexlegend" /></div>
+					      	<div className="game-slide"><img src="https://i.ibb.co/Yd2v60Q/blackops.jpg" alt="blackops"/></div>
+					      	<div className="game-slide"><img src="https://i.ibb.co/TK5JYMz/fifa21.jpg" alt="fifa21" /></div>
+					      	<div className="game-slide"><img src="https://i.ibb.co/Dtym1JK/fortnite.jpg" alt="fortnite" /></div>
+					      	<div className="game-slide"><img src="https://i.ibb.co/9VPnb7p/mwarfare.jpg" alt="mwarfare" /></div>
+					      	<div className="game-slide"><img src="https://i.ibb.co/89xKdw2/rainbowsix-siege.jpg" alt="rainbowsix-siege"/></div>
+					      	<div className="game-slide"><img src="https://i.ibb.co/CPDzC7n/rocketl.jpg" alt="rocketl" /></div>
+					      	<div className="game-slide"><img src="https://i.ibb.co/8Y0r1NH/warzone.jpg" alt="warzone" /></div>
+	    				</Carousel>
+	    				<div className="bt-game-container">
+	    					<Popup
+							    trigger={<button className="btn bg-yellow"> Ajouter jeux </button>}
+							    modal
+							    nested
+  							>
+					    	<div className="modal">
+						        <button className="close">
+						          &times;
+						        </button>
+						        <div className="header"> <h3>Selectionner parmis nos listes de jeux</h3></div>
+							        <div className="content">
+							          {' '}
+							          <img src="https://i.ibb.co/8Y0r1NH/warzone.jpg" alt="warzone" />
+							          <img src="https://i.ibb.co/CPDzC7n/rocketl.jpg" alt="rocketl" />
+							        </div>
+						        	<div className="actions">
+							          	<Popup
+							            	trigger={<button className="btn bg-yellow"> Ajouter jeux </button>}
+							            	position="top center"
+							            	nested
+							          	>
+						            		<span>
 												Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae
 												magni omnis delectus nemo, maxime molestiae dolorem numquam
 												mollitia, voluptate ea, accusamus excepturi deleniti ratione
 												sapiente! Laudantium, aperiam doloribus. Odit, aut.
-											</span>
+						            		</span>
 										</Popup>
-										<button className="btn bg-white">Valider</button>
-									</div>
-								</div>
-							</Popup>
-						</div>
-					</div>
-				</div>
-				<div className="my-teams">
-					<h2>Mes équipes</h2>
-					<div className="team-mate">
-						<div className="team-bloc">
-							<div className="team-banniere">
-								<div className="imgcontainer">
-									<img src="https://i.ibb.co/C59KCSd/team-mate.png" alt="team-mate" className="imgresp"/>
-								</div>
-								<div className="team-logo">
-									<img src="https://i.ibb.co/dQPw2Vd/teamlogo.png" alt="teamlogo" width="75"/>
-									<div className="team-name">
-										<p>TEAM NAME</p>
-										<p>#Tag</p>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div className="bt-game-container">
-							<a href="#" className="btn bg-yellow">Ajouter une équipe</a>
-						</div>
-					</div>
-				</div>
-				<div className="mes-tournois">
-					<div className="tournois">
-						<h2>Mes tournois</h2>
-						<div className="tab-content">
-							<strong>Tournois</strong>
-							<table>
-								<thead>
-									<tr>
-										<td><i className="iconStatus"><FontAwesomeIcon icon={faCalendarAlt}/></i>Date</td>
-										<td><i className="iconStatus"><FontAwesomeIcon icon={faGamepad}/></i>Game</td>
-										<td><i className="iconStatus"><FontAwesomeIcon icon={faTrophy}/></i>Tournament</td>
-										<td><i className="iconStatus"><FontAwesomeIcon icon={faMedal}/></i>Rank</td>
-										<td></td>
-									</tr>
-								</thead>
-								<tr>
-									<td>04/04/2021</td>
-									<td>Fifa21</td>
-									<td><i className="iconStatus"><FontAwesomeIcon icon={faPlaystation}/></i>Classic Cup</td>
-									<td>Top 8</td>
-									<td><i className="iconStatus"><FontAwesomeIcon icon={faInfoCircle}/></i></td>
-								</tr>
-								<tr>
-									<td>04/04/2021</td>
-									<td>Fifa21</td>
-									<td><i className="iconStatus"><FontAwesomeIcon icon={faPlaystation}/></i>Classic Cup</td>
-									<td>Top 8</td>
-									<td><i className="iconStatus"><FontAwesomeIcon icon={faInfoCircle}/></i></td>
-								</tr>
-								<tr>
-									<td>04/04/2021</td>
-									<td>Fifa21</td>
-									<td><i className="iconStatus"><FontAwesomeIcon icon={faMobile}/></i>
+						          		<button className="btn bg-white">Valider</button>
+						        	</div>
+						     	</div>
+						    </Popup>
+	    				</div>
+	      			</div>
+	      		</div>
+	      		<div className="my-teams">
+	      			<h2>Mes équipes</h2>
+	      			<div className="team-mate">
+	      				<div className="team-bloc">
+	      					<div className="team-banniere">
+	      						<div className="imgcontainer">
+	      							<img src="https://i.ibb.co/C59KCSd/team-mate.png" alt="team-mate" className="imgresp"/>
+	      						</div>
+	      						<div className="team-logo">
+	      							<img src="https://i.ibb.co/dQPw2Vd/teamlogo.png" alt="teamlogo" width="75"/>
+	      							<div className="team-name">
+	      								<p>TEAM NAME</p>
+	      								<p>#Tag</p>
+	      							</div>
+	      						</div>
+	      					</div>
+	      				</div>
+	      				<div className="bt-game-container">
+	    					<a href="#" className="btn bg-yellow">Ajouter une équipe</a>
+	    				</div>
+	      			</div>
+	      		</div>
+	      		<div className="mes-tournois">
+      				<div className="tournois">
+        				<h2>Mes tournois</h2>
+        				<div className="tab-content">
+        					<strong>Tournois</strong>
+        					<table>
+        						<thead>
+        							<tr>
+        								<td><i className="iconStatus"><FontAwesomeIcon icon={faCalendarAlt}/></i>Date</td>
+        								<td><i className="iconStatus"><FontAwesomeIcon icon={faGamepad}/></i>Jeux</td>
+        								<td><i className="iconStatus"><FontAwesomeIcon icon={faTrophy}/></i>Trounois</td>
+        								<td><i className="iconStatus"><FontAwesomeIcon icon={faMedal}/></i>Rang</td>
+        								<td></td>
+        							</tr>
+        						</thead>
+        						<tr>
+        							<td>04/04/2021</td>
+        							<td>Fifa21</td>
+        							<td><i className="iconStatus"><FontAwesomeIcon icon={faPlaystation}/></i>Classic Cup</td>
+        							<td>Top 8</td>
+        							<td><i className="iconStatus"><FontAwesomeIcon icon={faInfoCircle}/></i></td>
+        						</tr>
+        						<tr>
+        							<td>04/04/2021</td>
+        							<td>Fifa21</td>
+        							<td><i className="iconStatus"><FontAwesomeIcon icon={faPlaystation}/></i>Classic Cup</td>
+        							<td>Top 8</td>
+        							<td><i className="iconStatus"><FontAwesomeIcon icon={faInfoCircle}/></i></td>
+        						</tr>
+        						<tr>
+        							<td>04/04/2021</td>
+        							<td>Fifa21</td>
+        							<td><i className="iconStatus"><FontAwesomeIcon icon={faMobile}/></i>
 									CoD Mobile</td>
-									<td>Top 8</td>
-									<td><i className="iconStatus"><FontAwesomeIcon icon={faInfoCircle}/></i></td>
-								</tr>
-								<tr>
-									<td>04/04/2021</td>
-									<td>Fifa21</td>
-									<td><i className="iconStatus"><FontAwesomeIcon icon={faPlaystation}/></i>Classic Cup</td>
-									<td>Top 8</td>
-									<td><i className="iconStatus"><FontAwesomeIcon icon={faInfoCircle}/></i></td>
-								</tr>
-								<tr>
-									<td>04/04/2021</td>
-									<td>Fifa21</td>
-									<td><i className="iconStatus"><FontAwesomeIcon icon={faPlaystation}/></i>Classic Cup</td>
-									<td>Top 8</td>
-									<td><i className="iconStatus"><FontAwesomeIcon icon={faInfoCircle}/></i></td>
-								</tr>
-							</table>
-							<div className="filter">
-								<p>Items per page: 10 <span>1 - 10 of 10</span></p>
-								<p>
-									<i className="iconPager"><FontAwesomeIcon icon={faStepBackward}/></i>
-									<i className="iconPager"><FontAwesomeIcon icon={faChevronLeft}/></i>
-									<i className="iconPager"><FontAwesomeIcon icon={faChevronRight}/></i>
-									<i className="iconPager"><FontAwesomeIcon icon={faStepForward}/></i>
-								</p>
-							</div>
-						</div>
-						<div className="tab-content">
-							<strong>Leagues</strong>
-							<table>
-								<thead>
-									<tr>
-										<td><i className="iconStatus"><FontAwesomeIcon icon={faCalendarAlt}/></i>Date</td>
-										<td><i className="iconStatus"><FontAwesomeIcon icon={faGamepad}/></i>Game</td>
-										<td><i className="iconStatus"><FontAwesomeIcon icon={faTrophy}/></i>Tournament</td>
-										<td><i className="iconStatus"><FontAwesomeIcon icon={faMedal}/></i>Rank</td>
-										<td></td>
-									</tr>
-								</thead>
-								<tr>
-									<td>04/04/2021</td>
-									<td>Fifa21</td>
-									<td><i className="iconStatus"><FontAwesomeIcon icon={faPlaystation}/></i>Classic Cup</td>
-									<td>Top 8</td>
-									<td><i className="iconStatus"><FontAwesomeIcon icon={faInfoCircle}/></i></td>
-								</tr>
-								<tr>
-									<td>04/04/2021</td>
-									<td>Fifa21</td>
-									<td><i className="iconStatus"><FontAwesomeIcon icon={faPlaystation}/></i>Classic Cup</td>
-									<td>Top 8</td>
-									<td><i className="iconStatus"><FontAwesomeIcon icon={faInfoCircle}/></i></td>
-								</tr>
-								<tr>
-									<td>04/04/2021</td>
-									<td>Fifa21</td>
-									<td><i className="iconStatus"><FontAwesomeIcon icon={faPlaystation}/></i>Classic Cup</td>
-									<td>Top 8</td>
-									<td><i className="iconStatus"><FontAwesomeIcon icon={faInfoCircle}/></i></td>
-								</tr>
-								<tr>
-									<td>04/04/2021</td>
-									<td>Fifa21</td>
-									<td><i className="iconStatus"><FontAwesomeIcon icon={faPlaystation}/></i>Classic Cup</td>
-									<td>Top 8</td>
-									<td><i className="iconStatus"><FontAwesomeIcon icon={faInfoCircle}/></i></td>
-								</tr>
-								<tr>
-									<td>04/04/2021</td>
-									<td>Fifa21</td>
-									<td><i className="iconStatus"><FontAwesomeIcon icon={faPlaystation}/></i>Classic Cup</td>
-									<td>Top 8</td>
-									<td><i className="iconStatus"><FontAwesomeIcon icon={faInfoCircle}/></i></td>
-								</tr>
-							</table>
-							<div className="filter">
-								<p>Items per page: 10 <span>1 - 10 of 10</span></p>
-								<p>
-									<i className="iconPager"><FontAwesomeIcon icon={faStepBackward}/></i>
-									<i className="iconPager"><FontAwesomeIcon icon={faChevronLeft}/></i>
-									<i className="iconPager"><FontAwesomeIcon icon={faChevronRight}/></i>
-									<i className="iconPager"><FontAwesomeIcon icon={faStepForward}/></i>
-								</p>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div className="mes-resultats">
-					<h2>Mes résultats</h2>
-					<div className="tab-content">
-						<table>
-							<thead>
-								<tr>
+        							<td>Top 8</td>
+        							<td><i className="iconStatus"><FontAwesomeIcon icon={faInfoCircle}/></i></td>
+        						</tr>
+        						<tr>
+        							<td>04/04/2021</td>
+        							<td>Fifa21</td>
+        							<td><i className="iconStatus"><FontAwesomeIcon icon={faPlaystation}/></i>Classic Cup</td>
+        							<td>Top 8</td>
+        							<td><i className="iconStatus"><FontAwesomeIcon icon={faInfoCircle}/></i></td>
+        						</tr>
+        						<tr>
+        							<td>04/04/2021</td>
+        							<td>Fifa21</td>
+        							<td><i className="iconStatus"><FontAwesomeIcon icon={faPlaystation}/></i>Classic Cup</td>
+        							<td>Top 8</td>
+        							<td><i className="iconStatus"><FontAwesomeIcon icon={faInfoCircle}/></i></td>
+        						</tr>
+        					</table>
+        					<div className="filter">
+        						<p>Items per page: 10 <span>1 - 10 of 10</span></p>
+        						<p>
+        							<i className="iconPager"><FontAwesomeIcon icon={faStepBackward}/></i>
+        							<i className="iconPager"><FontAwesomeIcon icon={faChevronLeft}/></i>
+        							<i className="iconPager"><FontAwesomeIcon icon={faChevronRight}/></i>
+        							<i className="iconPager"><FontAwesomeIcon icon={faStepForward}/></i>
+        						</p>
+        					</div>
+        				</div>
+        				<div className="tab-content">
+        					<strong>Leagues</strong>
+        					<table>
+        						<thead>
+        							<tr>
+        								<td><i className="iconStatus"><FontAwesomeIcon icon={faCalendarAlt}/></i>Date</td>
+        								<td><i className="iconStatus"><FontAwesomeIcon icon={faGamepad}/></i>Jeux</td>
+        								<td><i className="iconStatus"><FontAwesomeIcon icon={faTrophy}/></i>Tournois</td>
+        								<td><i className="iconStatus"><FontAwesomeIcon icon={faMedal}/></i>Rang</td>
+        								<td></td>
+        							</tr>
+        						</thead>
+        						<tr>
+        							<td>04/04/2021</td>
+        							<td>Fifa21</td>
+        							<td><i className="iconStatus"><FontAwesomeIcon icon={faPlaystation}/></i>Classic Cup</td>
+        							<td>Top 8</td>
+        							<td><i className="iconStatus"><FontAwesomeIcon icon={faInfoCircle}/></i></td>
+        						</tr>
+        						<tr>
+        							<td>04/04/2021</td>
+        							<td>Fifa21</td>
+        							<td><i className="iconStatus"><FontAwesomeIcon icon={faPlaystation}/></i>Classic Cup</td>
+        							<td>Top 8</td>
+        							<td><i className="iconStatus"><FontAwesomeIcon icon={faInfoCircle}/></i></td>
+        						</tr>
+        						<tr>
+        							<td>04/04/2021</td>
+        							<td>Fifa21</td>
+        							<td><i className="iconStatus"><FontAwesomeIcon icon={faPlaystation}/></i>Classic Cup</td>
+        							<td>Top 8</td>
+        							<td><i className="iconStatus"><FontAwesomeIcon icon={faInfoCircle}/></i></td>
+        						</tr>
+        						<tr>
+        							<td>04/04/2021</td>
+        							<td>Fifa21</td>
+        							<td><i className="iconStatus"><FontAwesomeIcon icon={faPlaystation}/></i>Classic Cup</td>
+        							<td>Top 8</td>
+        							<td><i className="iconStatus"><FontAwesomeIcon icon={faInfoCircle}/></i></td>
+        						</tr>
+        						<tr>
+        							<td>04/04/2021</td>
+        							<td>Fifa21</td>
+        							<td><i className="iconStatus"><FontAwesomeIcon icon={faPlaystation}/></i>Classic Cup</td>
+        							<td>Top 8</td>
+        							<td><i className="iconStatus"><FontAwesomeIcon icon={faInfoCircle}/></i></td>
+        						</tr>
+        					</table>
+        					<div className="filter">
+        						<p>Items per page: 10 <span>1 - 10 of 10</span></p>
+        						<p>
+        							<i className="iconPager"><FontAwesomeIcon icon={faStepBackward}/></i>
+        							<i className="iconPager"><FontAwesomeIcon icon={faChevronLeft}/></i>
+        							<i className="iconPager"><FontAwesomeIcon icon={faChevronRight}/></i>
+        							<i className="iconPager"><FontAwesomeIcon icon={faStepForward}/></i>
+        						</p>
+        					</div>
+        				</div>
+        			</div>
+	      		</div>
+	      		<div className="mes-resultats">
+	      			<h2>Mes résultats</h2>
+	      			<div className="tab-content">
+	      				<table>
+    						<thead>
+    							<tr>
 									<td><i className="iconStatus"><FontAwesomeIcon icon={faCalendarAlt}/></i>Date</td>
-									<td><i className="iconStatus"><FontAwesomeIcon icon={faGamepad}/></i>Game</td>
-									<td><i className="iconStatus"><FontAwesomeIcon icon={faTrophy}/></i>Tournament</td>
-									<td><i className="iconStatus"><FontAwesomeIcon icon={faTrophy}/></i>Ligues</td>
-									<td><i className="iconStatus"><FontAwesomeIcon icon={faMedal}/></i>Rank</td>
-									<td>Status</td>
-									<td></td>
-								</tr>
-							</thead>
-							<tr>
-								<td>04/04/2021</td>
-								<td>Fifa21</td>
-								<td><i className="iconStatus"><FontAwesomeIcon icon={faMobile}/></i>
+    								<td><i className="iconStatus"><FontAwesomeIcon icon={faGamepad}/></i>Jeux</td>
+    								<td><i className="iconStatus"><FontAwesomeIcon icon={faTrophy}/></i>Tournois</td>
+    								<td><i className="iconStatus"><FontAwesomeIcon icon={faTrophy}/></i>Ligues</td>
+    								<td><i className="iconStatus"><FontAwesomeIcon icon={faMedal}/></i>Rang</td>
+    								<td></td>
+    							</tr>
+    						</thead>
+    						<tr>
+    							<td>04/04/2021</td>
+    							<td>Fifa21</td>
+    							<td><i className="iconStatus"><FontAwesomeIcon icon={faMobile}/></i>
 									CoD Mobile</td>
-								<td><i className="iconStatus"><FontAwesomeIcon icon={faMobile}/></i>
+    							<td><i className="iconStatus"><FontAwesomeIcon icon={faMobile}/></i>
 									CoD Mobile</td>
-								<td>Top 10</td>
-								<td>Victoire</td>
-								<td><i className="iconStatus"><FontAwesomeIcon icon={faInfoCircle}/></i></td>
-							</tr>
-							<tr>
-								<td>04/04/2021</td>
-								<td>Fifa21</td>
-								<td><i className="iconStatus"><FontAwesomeIcon icon={faPlaystation}/></i>Classic Cup</td>
-								<td><i className="iconStatus"><FontAwesomeIcon icon={faMobile}/></i>
+    							<td>Top 10</td>
+    							<td><i className="iconStatus"><FontAwesomeIcon icon={faInfoCircle}/></i></td>
+    						</tr>
+    						<tr>
+    							<td>04/04/2021</td>
+    							<td>Fifa21</td>
+    							<td><i className="iconStatus"><FontAwesomeIcon icon={faPlaystation}/></i>Classic Cup</td>
+    							<td><i className="iconStatus"><FontAwesomeIcon icon={faMobile}/></i>
 									CoD Mobile</td>
-								<td>Top 5</td>
-								<td>Victoire</td>
-								<td><i className="iconStatus"><FontAwesomeIcon icon={faInfoCircle}/></i></td>
-							</tr>
-							<tr>
-								<td>04/04/2021</td>
-								<td>Fifa21</td>
-								<td><i className="iconStatus"><FontAwesomeIcon icon={faPlaystation}/></i>Classic Cup</td>
-								<td><i className="iconStatus"><FontAwesomeIcon icon={faPlaystation}/></i>Classic Cup</td>
-								<td>Top 40</td>
-								<td>Defaite</td>
-								<td><i className="iconStatus"><FontAwesomeIcon icon={faInfoCircle}/></i></td>
-							</tr>
-						</table>
-						<div className="filter">
-							<p>Items per page: 10 <span>1 - 10 of 10</span></p>
-							<p>
-								<i className="iconPager"><FontAwesomeIcon icon={faStepBackward}/></i>
-								<i className="iconPager"><FontAwesomeIcon icon={faChevronLeft}/></i>
-								<i className="iconPager"><FontAwesomeIcon icon={faChevronRight}/></i>
-								<i className="iconPager"><FontAwesomeIcon icon={faStepForward}/></i>
-							</p>
-						</div>
-					</div>
+    							<td>Top 5</td>
+    							<td><i className="iconStatus"><FontAwesomeIcon icon={faInfoCircle}/></i></td>
+    						</tr>
+    						<tr>
+    							<td>04/04/2021</td>
+    							<td>Fifa21</td>
+    							<td><i className="iconStatus"><FontAwesomeIcon icon={faPlaystation}/></i>Classic Cup</td>
+    							<td><i className="iconStatus"><FontAwesomeIcon icon={faPlaystation}/></i>Classic Cup</td>
+    							<td>Top 40</td>
+    							<td><i className="iconStatus"><FontAwesomeIcon icon={faInfoCircle}/></i></td>
+    						</tr>
+    					</table>
+    					<div className="filter">
+    						<p>Items per page: 10 <span>1 - 10 of 10</span></p>
+    						<p>
+    							<i className="iconPager"><FontAwesomeIcon icon={faStepBackward}/></i>
+    							<i className="iconPager"><FontAwesomeIcon icon={faChevronLeft}/></i>
+    							<i className="iconPager"><FontAwesomeIcon icon={faChevronRight}/></i>
+    							<i className="iconPager"><FontAwesomeIcon icon={faStepForward}/></i>
+    						</p>
+        				</div>
+	      			</div>
+	      		</div>
+	      		<div className="premium">
+	      			<h2>Premium</h2>
+	      			<div className="prem-bloc">
+	      				<div className="item-bloc">
+	      					<div className="img-prem">
+	      						<img src="https://i.ibb.co/80vD8kD/stat.png" alt="stat" width="75" height="75"/>
+	      						<strong>Formation avancée</strong>
+	      						<p>Entraîne-toi comme un champion avec nos guides confirmés et experts crées avec des pro</p>
+	      					</div>
+	      				</div>
+	      				<div className="item-bloc">
+	      					<div className="img-prem">
+	      						<img src="https://i.ibb.co/mXW82Tt/seek.png" alt="seek" width="75" height="75" className="ht75"/>
+	      						<strong>Etre repéré par les pro</strong>
+	      						<p>Entraîne-toi comme un champion avec nos guides confirmés et experts crées avec des pro</p>
+	      					</div>
+	      				</div>
+	      				<div className="item-bloc">
+	      					<div className="img-prem">
+	      						<img src="https://i.ibb.co/0KkJNYk/paiment.png" alt="paiment" width="75" height="75"/>
+	      						<strong>Paiement rapide</strong>
+	      						<p>Entraîne-toi comme un champion avec nos guides confirmés et experts crées avec des pro</p>
+	      					</div>
+	      				</div>
+	      				<div className="item-bloc">
+	      					<div className="img-prem">
+	      						<img src="https://i.ibb.co/xDfySTm/wallet.png" alt="wallet" width="75" height="75"/>
+	      						<strong>Porte-monnaie de paiement minimum</strong>
+	      						<p>Entraîne-toi comme un champion avec nos guides confirmés et experts crées avec des pro</p>
+	      					</div>
+	      				</div>
+	      				<div className="btn-container">
+	      					<a href="#" className="btn bg-yellow">4.99 € / Mois</a>
+	      				</div>
+	      			</div>
 				</div>
-				<div className="premium">
-					<h2>Premium</h2>
-					<div className="prem-bloc">
-						<div className="item-bloc">
-							<div className="img-prem">
-								<img src="https://i.ibb.co/80vD8kD/stat.png" alt="stat" width="75" height="75"/>
-								<strong>Formation avancée</strong>
-								<p>Entraîne-toi comme un champion avec nos guides confirmés et experts crées avec des pro</p>
-							</div>
-						</div>
-						<div className="item-bloc">
-							<div className="img-prem">
-								<img src="https://i.ibb.co/mXW82Tt/seek.png" alt="seek" width="75" height="75" className="ht75"/>
-								<strong>Etre repéré par les pro</strong>
-								<p>Entraîne-toi comme un champion avec nos guides confirmés et experts crées avec des pro</p>
-							</div>
-						</div>
-						<div className="item-bloc">
-							<div className="img-prem">
-								<img src="https://i.ibb.co/0KkJNYk/paiment.png" alt="paiment" width="75" height="75"/>
-								<strong>Paiement rapide</strong>
-								<p>Entraîne-toi comme un champion avec nos guides confirmés et experts crées avec des pro</p>
-							</div>
-						</div>
-						<div className="item-bloc">
-							<div className="img-prem">
-								<img src="https://i.ibb.co/xDfySTm/wallet.png" alt="wallet" width="75" height="75"/>
-								<strong>Porte-monnaie de paiement minimum</strong>
-								<p>Entraîne-toi comme un champion avec nos guides confirmés et experts crées avec des pro</p>
-							</div>
-						</div>
-						<div className="btn-container">
-							<a href="#" className="btn bg-yellow">4.99 € / month</a>
-						</div>
-					</div>
-				</div>
-			</div>
-		  </div>
-		  <Footer/>
+	      	</div>
+	      </div>
+	      <Footer/>
 	  </div>
-	</div>
+    </div>
   )
 }
 

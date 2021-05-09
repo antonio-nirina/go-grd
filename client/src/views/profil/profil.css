@@ -319,9 +319,9 @@
 	color: #888888;	
 	font-style: italic;	
 }
-border
+
 .mes-resultats .tab-content thead{
-	border-bottom: 1px solid #888888 ;
+	border-bottom: 1px solid #888888;
 }
 .tab-content thead tr:hover{
 	background: none;
