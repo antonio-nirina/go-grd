@@ -20,9 +20,9 @@ const Home: React.FC = function(props:any) {
 		}
 	})
   return(
-    <div className="home connected">
+    <div className="home">
       <div className="container">
-	      <Header/>
+	      <Header />
 	      <div className="main">
 	        <div className="slider">
 	        	<Slider/>

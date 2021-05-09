@@ -8,8 +8,6 @@ import "../../assets/css/style.css"
 import "../slider/slider.css"
 
 
-
-
 const Slider: React.FC = function() {
   return(
     <div className="sliderGrid">

@@ -1,8 +1,50 @@
+import jwt from "jsonwebtoken"
+import {ACCESS_TOKEN} from "../utils"
+
 export const USER_CONNECTED = "user_connected"
 
-export const sendUserConectedAction = function(data:any) {
+export interface UserType {
+	email:string|""
+	avatar:string|""
+	roles:Array<string>
+	firstname:string|""
+	language:string|""
+	lastname:string|""
+	isBaned:Boolean
+	id:string|""
+}
+
+export const sendUserConectedAction = function(data:string) {
+	let tokenData = jwt.decode(data)
+
 	return {
    		type:USER_CONNECTED,
-   		res:data
+   		res:tokenData??""
  	}
+}
+
+export const changeLanguageUserConnected = function(user:UserType,lang:string) {
+	const newUserObject:UserType = {
+		email:user.email,
+		avatar:user.avatar,
+		roles:user.roles,
+		firstname:user.firstname,
+		language:lang,
+		lastname:user.lastname,
+		isBaned:user.isBaned,
+		id:user.id
+	}
+	return {
+		type:USER_CONNECTED,
+		res:newUserObject??""
+  	}
+}
+
+export const removeDataUser = function() {
+	localStorage.removeItem(ACCESS_TOKEN)
+	localStorage.removeItem("userConnected")
+	return {
+		type:USER_CONNECTED,
+		res:{}
+  	}
 }

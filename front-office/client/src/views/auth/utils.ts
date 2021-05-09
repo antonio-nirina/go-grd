@@ -1,10 +1,11 @@
 import {createApolloClient as client} from "../../config/apollo-client"
 import {XBoxToken} from "../../gql/user/auth"
 
+
 const URL_REDIRECT = "http://localhost:3000"
 const REDIRECT_URI = encodeURI(URL_REDIRECT)
 const BASE_URI = `https://login.live.com/oauth20_authorize.srf?response_type=code&client_id=43ecdb9b-5301-4d89-ab72-52daca2f648b&approval_prompt=auto&redirect_uri=${REDIRECT_URI}&scope=Xboxlive.signin+Xboxlive.offline_access`
-
+export const ACCESS_TOKEN = "access_token"
 export interface TokenType {
 	access_token:string|""
 	refresh_token:string|""
@@ -45,7 +46,9 @@ export const getTokenUser = async function(code: string) {
 }
 
 export const SendToken = function(token:TokenType) {
-	localStorage.setItem("access_token",JSON.stringify(token))
+	localStorage.setItem(ACCESS_TOKEN,JSON.stringify(token))
 }
+
+
 
 

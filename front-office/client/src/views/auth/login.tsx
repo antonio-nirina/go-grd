@@ -1,14 +1,16 @@
-import React,{useState} from "react"
+import React,{useState,useEffect} from "react"
 import { Link } from 'react-router-dom'
 import { useForm } from "react-hook-form"
 import {useMutation} from "@apollo/client"
 import {useHistory } from "react-router-dom"
+import { useDispatch } from "react-redux"
 
 import {TokenType,SendToken} from "./utils"
+import {sendUserConectedAction} from "./action/userAction"
 
 import Header0 from "../header/header0"
 import {checkValidEmail,Siging} from "./utils"
-import {FR} from "../../lang/lang-fr"
+import {Translation} from "../../lang/translation"
 import {LOGIN} from "../../gql/user/auth"
 import Footer from "../footer/footer"
 import joystick from "../../assets/image/joystick.png"
@@ -24,6 +26,7 @@ type Inputs = {
 
 const Login: React.FC = function() {
 	const history = useHistory()
+	const dispatch = useDispatch()
 	const { register, handleSubmit, formState: { errors } } = useForm<Inputs>()
 	const [errorForm,setErrorForm] = useState<boolean>(false)
 	const [login]  = useMutation(LOGIN)
@@ -40,9 +43,10 @@ const Login: React.FC = function() {
 					type:""
 				}
 				SendToken(token)
+				dispatch(sendUserConectedAction(result.data.login))
 			}
 
-			history.push("/",{isConnected:true})
+			history.push("/")
 		} else {
 			setErrorForm(true)
 		}
@@ -60,11 +64,11 @@ const Login: React.FC = function() {
 						<img src={joystick} alt=""/>
 					</h1>
 						<div>
-							<span style={{"color":"red"}}>{errorForm ? FR.login.errorForm : ""}</span>
+							<span style={{"color":"red"}}>{errorForm ? Translation("fr").login.errorForm : ""}</span>
 						</div>
 						<form onSubmit={handleSubmit(onSubmit)}>
 							<input className="mgt10" type = "email" placeholder = "Ton email" {...register("email", { required: true })} name="email" />
-							<input type ="password" placeholder ={FR.login.password}  {...register("password", { required: true })} name="password" />
+							<input type ="password" placeholder ={Translation("fr").login.password}  {...register("password", { required: true })} name="password" />
 							<button className="btn bg-yellow mg15">
 								Se connecter
 							</button>

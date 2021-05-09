@@ -1,4 +1,4 @@
-export const EN = {
+{
 	"assistant":{
 		"contact":"How help you",
 		"name":"lastname",
@@ -7,10 +7,13 @@ export const EN = {
 		"message": "message",
 		"send":"send"
 	},
-	"home":{
+	"header":{
 		"leagues": "leagues",
 		"wagers": "wagers",
 		"community": "community",
+		"tournaments": "tournaments"
+	},
+	"home":{
 		"gameTag": "Gametag",
 		"the": "the",
 		"platform": "platform",
@@ -21,7 +24,6 @@ export const EN = {
 		"participate": "participate",
 		"at": "at",
 		"of": "of",
-		"tournaments": "tournaments",
 		"play": "play",
 		"on": "on",
 		"line": "line",

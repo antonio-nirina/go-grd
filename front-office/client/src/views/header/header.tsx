@@ -1,7 +1,7 @@
-import React from "react"
+import React,{useState} from "react"
 import { Link } from 'react-router-dom'
-import {useState} from "react";
-import { useSelector } from 'react-redux'
+import { useSelector,useDispatch } from "react-redux"
+import {useHistory } from "react-router-dom"
 
 import "../header/header.css"
 import logo from "../../assets/image/logo.png"
@@ -10,41 +10,78 @@ import gb from "../../assets/image/gb.png"
 import ps from "../../assets/image/playstation.png"
 import { faBars, faPlus, faUsers } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {RootState} from '../../reducer'
-
+import {RootState} from "../../reducer"
+import {Translation} from "../../lang/translation"
+import {removeDataUser} from "../auth/action/userAction"
 
 
 const Header: React.FC = function() {
+	const history = useHistory()
+	const dispatch = useDispatch()
 	const userConnectedRedux = useSelector((state:RootState) => state.userConnected)
-    const [showList, setShowList] = useState(false)
+    const [showList, setShowList] = useState<Boolean>(false)
+	const [isDeconnect, setIsDeconnect] = useState<Boolean>(false)
     const onShow = function(){
         setShowList(!showList)
     }
-	console.log("userConnectedRedux", userConnectedRedux)
-  return(
 
-        <header className="header">
+	const onDeconnect = function() {
+		dispatch(removeDataUser())
+		setIsDeconnect(true)
+		history.push("/")
+	}
+
+  return(
+        <header className={isDeconnect || Object.keys(userConnectedRedux.user).length === 0 ? "header" : "header connected"}>
     	 	<div className="wrap">
     	 		<div className="logo">
 	    	 		<h1>
-	    	 			<a href="/" title="Grid" className="v-align">
-	    	 				<img src={logo} alt="Grid" className="imglogo"/>
-	    	 			</a>
+						<Link to="/" className="v-align">
+							<img src={logo} alt="Grid" className="imglogo"/>
+						</Link>
 	    	 		</h1>
 	    	 	</div>
     	 		<nav className="navmenu">
     	 			<ul>
     	 				<li>
-    	 					<Link to="/ligue"> Ligues</Link>
+    	 					<Link to="/ligue">
+								{
+									Object.keys(userConnectedRedux.user).length > 0 ?
+									Translation(userConnectedRedux.user.language).header.leagues
+									:
+									Translation("fr").header.leagues
+								}
+							</Link>
 	 					</li>
     	 				<li>
-    	 					<Link to="/tournament">Tournois</Link>
+    	 					<Link to="/tournament">
+								{
+									Object.keys(userConnectedRedux.user).length > 0 ?
+									Translation(userConnectedRedux.user.language).header.tournaments
+									:
+									Translation("fr").header.tournaments
+								}
+							</Link>
 	 					</li>
     	 				<li>
-    	 					<Link to="/wager">Wagers</Link>
+    	 					<Link to="/wager">
+								{
+									Object.keys(userConnectedRedux.user).length > 0 ?
+									Translation(userConnectedRedux.user.language).header.wagers
+									:
+									Translation("fr").header.wagers
+								}
+							</Link>
 	 					</li>
     	 				<li>
-    	 					<Link to="/communaute">Communauté</Link>
+    	 					<Link to="/communaute">
+							 {
+									Object.keys(userConnectedRedux.user).length > 0 ?
+									Translation(userConnectedRedux.user.language).header.community
+									:
+									Translation("fr").header.community
+								}
+							</Link>
 	 					</li>
     	 			</ul>
     	 		</nav>
@@ -57,8 +94,8 @@ const Header: React.FC = function() {
     	 			   <div className="lang">
                             <span>
                                 <a href="#" title="">
-                                    <img src={fr} alt="" className="lang show" width="28" height="29"/>
-                                    <img src={gb} alt="" className="lang gb hide" width="28" height="29"/>
+                                    <img src={fr} alt="" className={userConnectedRedux.user.language && userConnectedRedux.user.language === "fr" ? "lang show" : "hide" }  width="28" height="29"/>
+                                    <img src={gb} alt="" className={userConnectedRedux.user.language && userConnectedRedux.user.language === "fr" ? "hide" : "lang gb" } width="28" height="29"/>
                                 </a>
                             </span>
                         </div>
@@ -70,7 +107,6 @@ const Header: React.FC = function() {
                             </a>
                             <a href="#"><i className="relative"><FontAwesomeIcon icon={faUsers} size="lg"/><span className="counter">2</span></i></a>
                         </div>
-
                     </div>
                     <div className="gametag">
                         <div className="itemsTag">
@@ -78,7 +114,7 @@ const Header: React.FC = function() {
                                 <p>GameTag</p>
                                 <p>
                                 <a href="#"><img src={ps} className="itemTag" alt="" width="18" height="14"/></a>
-                                <a href="#"><img src={fr} className="itemTag" alt="" width="15" height="14"/></a>
+                                <a href="#"><img src={userConnectedRedux.user.language && userConnectedRedux.user.language === "fr" ? fr : gb} className="itemTag" alt="" width="15" height="14"/></a>
                                 <i className="itemTag drop" onClick={onShow}><FontAwesomeIcon icon={faBars} /></i>
                                 </p>
                             </div>
@@ -86,10 +122,11 @@ const Header: React.FC = function() {
                         <div className={!showList ? "dropdown" :"dropdown show"}>
                             <ul>
                                 <li><Link to="/profil">Profil</Link></li>
-                                <li><a href="#" title="Tournois">Tournois</a></li>
-                                <li><a href="#" title="Ligues">Ligues</a></li>
-                                <li><a href="#" title="Wager">Wager</a></li>
-                                <li><a href="#" title="Assistance">Assistance</a></li>
+                                <li><Link to="/tournament">Tournois</Link></li>
+                                <li><Link to="/ligue">Ligues</Link></li>
+                                <li><Link to="/wager">Wager</Link></li>
+                                <li><Link to="/assistant">Assistance</Link></li>
+								<li style={{"cursor":"pointer"}} onClick={onDeconnect}>Deconnexion</li>
                             </ul>
                         </div>
                     </div>

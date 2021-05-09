@@ -182,7 +182,9 @@
 	vertical-align: top;*/
 }
 .my-games h2,
-.my-teams h2
+.my-teams h2,
+.mes-tournois h2,
+.profil h2
 {
 	font-family: "russo one";
     font-size: 45px;
@@ -267,4 +269,150 @@
 .popup-content .btn{
 	margin-right: 15px;
 	cursor: pointer;
+}
+.mes-tournois{
+	padding: 5px 0px 3em 3em;
+}
+.iconStatus{
+	display: inline-block;
+    margin-right: 5px;
+}
+.filter{
+	text-align: right;
+	padding: 15px 3.5em;
+	border-top: 1px solid #212020;
+}
+.mes-resultats .filter{
+	background: #2c2c2c;
+	border-radius: 0px 0px 5px 5px;
+}
+
+.filter p{
+	display: inline-block;
+	font-size: 13px;
+	color: #ffffff;
+
+}
+.filter p span{	
+	display: inline-block;
+	margin: 0 25px;
+}
+.filter i{	
+	margin-left: 15px;
+	color: #888888;
+}
+.iconPager{
+
+}
+.mes-resultats{
+	background: #000000;
+	padding: 5px 3em 3em;
+}
+.mes-tournois table,
+.mes-resultats table
+{
+	width: 100%;	
+	border-collapse: collapse;
+}
+.tab-content thead
+{
+	color: #888888;	
+	font-style: italic;	
+}
+
+.mes-resultats .tab-content thead{
+	border-bottom: 1px solid #888888;
+}
+.tab-content thead tr:hover{
+	background: none;
+	color: inherit;
+}
+
+.tab-content tr:hover{
+	background: #f2cf1c;
+	color: #000000;
+}
+
+.tab-content{
+	width: 48%;
+	display: inline-block;
+	margin-right: 18px;
+	background: #000000;
+	border-radius: 5px;	
+	vertical-align: top;
+
+}
+.tab-content strong{
+	padding: 15px;
+	width: 100%;
+	text-align: center;
+	display: block;
+	border-bottom: 1px solid #212020;
+	margin-bottom: 5px;
+}
+
+.mes-tournois table td,
+.mes-resultats table td
+{
+	padding: 10px 20px
+}
+.mes-resultats table{
+	background: #2c2c2c;
+	border-radius: 5px;	
+}
+.mes-resultats .tab-content{
+	width: 100%;
+}
+.mes-resultats .tab-content table{
+	border-radius: 5px 5px 0px 0px;
+}
+
+.CircularProgressbar-path {
+  stroke: red;
+}
+.CircularProgressbar-trail {
+  stroke: gray;
+}
+.CircularProgressbar-text {
+  fill: yellow;
+}
+.CircularProgressbar-background {
+  fill: green;
+}
+.premium{	
+	width: 100%;
+	padding: 5px 0em 3em 3em;
+}
+.item-bloc{
+	background: #2c2c2c;
+	width: 23%;	
+	margin-right: 20px;
+	padding: 20px;
+	text-align: center;
+	display: inline-block;
+	margin-bottom: 15px;
+	border-radius: 5px;
+	vertical-align: top;
+}
+
+.img-prem img{
+	width: 75px;	
+	display: block;
+	height: auto;	
+	margin:auto;
+	margin-bottom: 15px;
+}
+.img-prem strong{
+	display: block;
+	padding: 10px;
+	font-size: 13px;
+}
+.img-prem.fist img{
+	padding-bottom: 11px;
+}
+.img-prem p{
+	font-size: 14px;
+}
+.ht75{
+	height: 75px !important;
 }
