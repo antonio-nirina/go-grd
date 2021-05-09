@@ -21,3 +21,20 @@ export const sendUserConectedAction = function(data:string) {
    		res:tokenData??""
  	}
 }
+
+export const changeLanguageUserConnected = function(user:UserType,lang:string) {
+	const newUserObject:UserType = {
+		email:user.email,
+		avatar:user.avatar,
+		roles:user.roles,
+		firstname:user.firstname,
+		language:lang,
+		lastname:user.lastname,
+		isBaned:user.isBaned,
+		id:user.id
+	}
+	return {
+		type:USER_CONNECTED,
+		res:newUserObject??""
+  }
+}

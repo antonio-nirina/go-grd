@@ -10,7 +10,7 @@ import {sendUserConectedAction} from "./action/userAction"
 
 import Header0 from "../header/header0"
 import {checkValidEmail,Siging} from "./utils"
-import {FR} from "../../lang/lang-fr"
+import {Translation} from "../../lang/translation"
 import {LOGIN} from "../../gql/user/auth"
 import Footer from "../footer/footer"
 import joystick from "../../assets/image/joystick.png"
@@ -64,11 +64,11 @@ const Login: React.FC = function() {
 						<img src={joystick} alt=""/>
 					</h1>
 						<div>
-							<span style={{"color":"red"}}>{errorForm ? FR.login.errorForm : ""}</span>
+							<span style={{"color":"red"}}>{errorForm ? Translation("fr").login.errorForm : ""}</span>
 						</div>
 						<form onSubmit={handleSubmit(onSubmit)}>
 							<input className="mgt10" type = "email" placeholder = "Ton email" {...register("email", { required: true })} name="email" />
-							<input type ="password" placeholder ={FR.login.password}  {...register("password", { required: true })} name="password" />
+							<input type ="password" placeholder ={Translation("fr").login.password}  {...register("password", { required: true })} name="password" />
 							<button className="btn bg-yellow mg15">
 								Se connecter
 							</button>
