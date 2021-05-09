@@ -218,17 +218,35 @@
 .my-teams{
 	background: #000000;
 }
+.team-banniere{
+	position: relative;
+}
 .team-mate{
 	padding: 5px 3em 3em;
 }
 .team-bloc{
 	background:#2c2c2c;
-	max-width: 300px;
+	max-width: 430px;
 	width: 100%;	
 	border-radius: 5px;
 	padding-bottom: 
 
 }
+.set-team{	
+	padding: 10px 5px;	
+}
+.set-team input{
+	display: block;
+	background: none;
+    border-bottom: 1px solid #acacac !important;
+    width: 100%;    
+    padding: 15px;
+    color: #acacac;
+    font-size: 15px;
+    border: none;
+    margin-bottom: 15px;
+}
+
 .imgcontainer img{
 	border-radius: 5px 5px 0px 0px;
 }
@@ -241,12 +259,21 @@
     display: inline-block;
     text-align: left
 }
+.team-img{
+	width: 100%;
+	text-align: center;
+	position: absolute;
+	top: 30%;
+}
 .team-name{	
-	display: inline-block;
-	width: 50%;
+	display: inline-block;	
 	vertical-align: top;
-	padding: 25px;
+	width: 100%;
+	padding: 10px;
 	margin-left: 5px;
+}
+.team-name p{
+	font-size: 14px;
 }
 .popup-content .content img {
     width: 296px;
