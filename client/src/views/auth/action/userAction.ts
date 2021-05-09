@@ -1,4 +1,5 @@
 import jwt from "jsonwebtoken"
+import {ACCESS_TOKEN} from "../utils"
 
 export const USER_CONNECTED = "user_connected"
 
@@ -36,5 +37,14 @@ export const changeLanguageUserConnected = function(user:UserType,lang:string) {
 	return {
 		type:USER_CONNECTED,
 		res:newUserObject??""
-  }
+  	}
+}
+
+export const removeDataUser = function() {
+	localStorage.removeItem(ACCESS_TOKEN)
+	localStorage.removeItem("userConnected")
+	return {
+		type:USER_CONNECTED,
+		res:{}
+  	}
 }

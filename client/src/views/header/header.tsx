@@ -1,7 +1,7 @@
-import React from "react"
+import React,{useState} from "react"
 import { Link } from 'react-router-dom'
-import {useState} from "react"
-import { useSelector } from "react-redux"
+import { useSelector,useDispatch } from "react-redux"
+import {useHistory } from "react-router-dom"
 
 import "../header/header.css"
 import logo from "../../assets/image/logo.png"
@@ -12,17 +12,27 @@ import { faBars, faPlus, faUsers } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {RootState} from "../../reducer"
 import {Translation} from "../../lang/translation"
+import {removeDataUser} from "../auth/action/userAction"
 
 
 const Header: React.FC = function() {
+	const history = useHistory()
+	const dispatch = useDispatch()
 	const userConnectedRedux = useSelector((state:RootState) => state.userConnected)
-    const [showList, setShowList] = useState(false)
+    const [showList, setShowList] = useState<Boolean>(false)
+	const [isDeconnect, setIsDeconnect] = useState<Boolean>(false)
     const onShow = function(){
         setShowList(!showList)
     }
 
+	const onDeconnect = function() {
+		dispatch(removeDataUser())
+		setIsDeconnect(true)
+		history.push("/")
+	}
+
   return(
-        <header className={Object.keys(userConnectedRedux.user).length === 0 ? "header" : "header connected"}>
+        <header className={isDeconnect || Object.keys(userConnectedRedux.user).length === 0 ? "header" : "header connected"}>
     	 	<div className="wrap">
     	 		<div className="logo">
 	    	 		<h1>
@@ -116,6 +126,7 @@ const Header: React.FC = function() {
                                 <li><Link to="/ligue">Ligues</Link></li>
                                 <li><Link to="/wager">Wager</Link></li>
                                 <li><Link to="/assistant">Assistance</Link></li>
+								<li style={{"cursor":"pointer"}} onClick={onDeconnect}>Deconnexion</li>
                             </ul>
                         </div>
                     </div>
