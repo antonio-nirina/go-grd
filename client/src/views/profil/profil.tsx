@@ -20,7 +20,7 @@ import {RootState} from "../../reducer"
 import {changeLanguageUserConnected} from "../auth/action/userAction"
 import IconXbox from "../../assets/image/icon-xbox.png"
 import IconPs from "../../assets/image/playstation.png"
-
+import {Translation} from "../../lang/translation"
 
 const Profil: React.FC = function() {
 	const userConnectedRedux = useSelector((state:RootState) => state.userConnected)
@@ -45,7 +45,6 @@ const Profil: React.FC = function() {
 		      			<ul>
 		      				<li><a href="#wall" className="active">Mon mur</a></li>
 		      				<li><a href="#">Compte de jeux</a></li>
-
 		      				<li><a href="#game">Mes jeux</a></li>
 		      				<li><a href="#">Mes équipes</a></li>
 		      				<li><a href="#">Mes tournois</a></li>
@@ -65,37 +64,90 @@ const Profil: React.FC = function() {
 
 		      				<div className="table">
 		      					<div className="cell">
-		      						<strong>Plateforme</strong>
+		      						<strong>
+		      						{
+			      						Object.keys(userConnectedRedux.user).length > 0 ?
+										Translation(userConnectedRedux.user.language).profil.platform
+										:
+										Translation("fr").profil.platform
+									}
+		      						</strong>
 		      						<p><span>Playstation</span></p>
 		      					</div>
 		      					<div className="cell">
-		      						<strong>Serveur</strong>
-		      						<p><span>Asia</span></p>
+		      						<strong>
+		      						{
+		      							Object.keys(userConnectedRedux.user).length > 0 ?
+										Translation(userConnectedRedux.user.language).profil.server
+										:
+										Translation("fr").profil.server
+									}
+									</strong>
+		      						<p>
+		      							<span>
+		      							{
+		      								Object.keys(userConnectedRedux.user).length > 0 ?
+											Translation(userConnectedRedux.user.language).profil.asia
+											:
+											Translation("fr").profil.asia
+										}
+										</span>
+									</p>
 		      					</div>
 		      					<div className="cell">
 		      						<strong>Expérience</strong>
 		      						<p><span>5</span></p>
 		      					</div>
 		      					<div className="cell">
-		      						<strong>Durée de jeux</strong>
-		      						<p><span>6 heures</span></p>
+		      						<strong>{
+		      								Object.keys(userConnectedRedux.user).length > 0 ?
+											Translation(userConnectedRedux.user.language).profil.exp
+											:
+											Translation("fr").profil.exp
+										}</strong>
+		      						<p><span>6 {Object.keys(userConnectedRedux.user).length > 0 ?
+											Translation(userConnectedRedux.user.language).profil.hours
+											:
+											Translation("fr").profil.hours}</span></p>
 		      					</div>
 		      				</div>
 		      			</div>
 		      			<div className="stat">
 		      				<div className="float">
-		      					<strong>Mes stats</strong>
+		      					<strong>
+		      					{
+		      						Object.keys(userConnectedRedux.user).length > 0 ?
+									Translation(userConnectedRedux.user.language).profil.stats
+									:
+									Translation("fr").profil.stats
+								}
+		      					</strong>
 		      				</div>
 		      				<div className="float">
-			      				<p>Victoire : <span>40%</span></p>
+			      				<p>{
+		      						Object.keys(userConnectedRedux.user).length > 0 ?
+									Translation(userConnectedRedux.user.language).profil.victory
+									:
+									Translation("fr").profil.victory
+								} : <span>40%</span></p>
 			      				<div className="myProgress">
 		    						<div className="myBar" style={{width:"40%", background:"#6642a9"}}></div>
 		    					</div>
-		    					<p>Defaite : <span>25%</span></p>
+		    					<p>{
+		      						Object.keys(userConnectedRedux.user).length > 0 ?
+									Translation(userConnectedRedux.user.language).profil.defeat
+									:
+									Translation("fr").profil.defeat
+								} : <span>25%</span></p>
 		    					<div className="myProgress">
 		    						<div className="myBar" style={{width:"25%", background:"#1da1f2"}}></div>
 		    					</div>
-		    					<p>Abandon : <span>75%</span></p>
+		    					<p>{
+		      						Object.keys(userConnectedRedux.user).length > 0 ?
+									Translation(userConnectedRedux.user.language).profil.retreat
+									:
+									Translation("fr").profil.retreat
+								} : <span>75%</span></p>
 		    					<div className="myProgress">
 		    						<div className="myBar" style={{width:"75%", background:"#f9753d"}}></div>
 		    					</div>
@@ -106,7 +158,12 @@ const Profil: React.FC = function() {
 		      	<div className="about-bloc">
 		      		<div className="about-me">
 		      			<div className="field">
-		      				<h2>Modifier votre profil</h2>
+		      				<h2>{
+		      						Object.keys(userConnectedRedux.user).length > 0 ?
+									Translation(userConnectedRedux.user.language).profil.set
+									:
+									Translation("fr").profil.set
+								}</h2>
 		      				<input type="text" placeholder="Pseudo"/>
 		      				<input type="number" placeholder="Numéro de téléphone"/>
 		      				<input type="text" placeholder="Entrez la date d'adhésion"/>
