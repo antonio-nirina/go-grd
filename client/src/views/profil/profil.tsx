@@ -164,30 +164,53 @@ const Profil: React.FC = function() {
 									:
 									Translation("fr").profil.set
 								}</h2>
-		      				<input type="text" placeholder="Pseudo"/>
-		      				<input type="number" placeholder="Numéro de téléphone"/>
-		      				<input type="text" placeholder="Entrez la date d'adhésion"/>
+		      				<input type="text" placeholder={
+		      						Object.keys(userConnectedRedux.user).length > 0 ?
+									Translation(userConnectedRedux.user.language).profil.pseudonym
+									:
+									Translation("fr").profil.pseudonym
+								}/>
+		      				<input type="number" placeholder={Object.keys(userConnectedRedux.user).length > 0 ?
+									Translation(userConnectedRedux.user.language).profil.number
+									:
+									Translation("fr").profil.number}/>
+		      				<input type="text" placeholder={Object.keys(userConnectedRedux.user).length > 0 ?
+									Translation(userConnectedRedux.user.language).profil.adhesion
+									:
+									Translation("fr").profil.adhesion}/>
+									<div className="btn-container">
+		      							<a href="#" className="btn bg-yellow mg15">{Object.keys(userConnectedRedux.user).length > 0 ?
+									Translation(userConnectedRedux.user.language).profil.validate
+									:
+									Translation("fr").profil.validate}</a>
+		      						</div>
 		      				<div className="lang-container">
 		      					<div className="lang-setting">
 		      						<i><FontAwesomeIcon className="little-icon" icon={faCogs}/></i>
 		      						<div className="lgdrpdwn">
-		      							<p className="lg-opt">Langue et région</p>
-		      							<p className="lg-desc">Choisissez la langue affichée dans le profil</p>
+		      							<p className="lg-opt">{Object.keys(userConnectedRedux.user).length > 0 ?
+									Translation(userConnectedRedux.user.language).profil.lang
+									:
+									Translation("fr").profil.lang}</p>
+		      							<p className="lg-desc">{Object.keys(userConnectedRedux.user).length > 0 ?
+									Translation(userConnectedRedux.user.language).profil.choice
+									:
+									Translation("fr").profil.choice}</p>
 										<select onChange={onChangeLanguage}>
 											<option>FR</option>
 											<option>EN</option>
 							  			</select>
 									</div>
 		      					</div>
-							</div>
-	      					<div className="btn-container">
-		      					<a href="#" className="btn bg-yellow mg15">Valider</a>
-		      				</div>
+							</div>	      					
 		      			</div>
 		      		</div>
 		      	</div>
 		      	<div className="account-game">
-		      		<h2>Mes comptes de jeux</h2>
+		      		<h2>{Object.keys(userConnectedRedux.user).length > 0 ?
+									Translation(userConnectedRedux.user.language).profil.account
+									:
+									Translation("fr").profil.account}</h2>
 		      		<div className="itemGame">
 		      			<p className="img-account"><img src={IconPs} alt="xbox" width="45" height="45"/></p>
 		      			<p>PSN id</p>
@@ -200,7 +223,10 @@ const Profil: React.FC = function() {
 						        <button className="close">
 						          &times;
 						        </button>
-						        <div className="header"> <h3>Modifier votre compte de jeux</h3></div>
+						        <div className="header"> <h3>{Object.keys(userConnectedRedux.user).length > 0 ?
+									Translation(userConnectedRedux.user.language).profil.setAccount
+									:
+									Translation("fr").profil.setAccount}</h3></div>
 							        <div className="content set-team">
 							          {' '}
 										<div className="set-account">
@@ -209,7 +235,10 @@ const Profil: React.FC = function() {
 							        </div>
 						        	<div className="actions">
 							          	<Popup
-							            	trigger={<button className="btn bg-yellow"> Valider </button>}
+							            	trigger={<button className="btn bg-yellow"> {Object.keys(userConnectedRedux.user).length > 0 ?
+									Translation(userConnectedRedux.user.language).profil.validate
+									:
+									Translation("fr").profil.validate} </button>}
 
 							          	>
 
@@ -231,7 +260,10 @@ const Profil: React.FC = function() {
 						        <button className="close">
 						          &times;
 						        </button>
-						        <div className="header"> <h3>Modifier votre compte de jeux</h3></div>
+						        <div className="header"> <h3>{Object.keys(userConnectedRedux.user).length > 0 ?
+									Translation(userConnectedRedux.user.language).profil.setAccount
+									:
+									Translation("fr").profil.setAccount}</h3></div>
 							        <div className="content set-team">
 							          {' '}
 										<div className="set-account">
@@ -240,7 +272,10 @@ const Profil: React.FC = function() {
 							        </div>
 						        	<div className="actions">
 							          	<Popup
-							            	trigger={<button className="btn bg-yellow"> Valider </button>}
+							            	trigger={<button className="btn bg-yellow"> {Object.keys(userConnectedRedux.user).length > 0 ?
+									Translation(userConnectedRedux.user.language).profil.validate
+									:
+									Translation("fr").profil.validate} </button>}
 
 							          	>
 
@@ -251,7 +286,10 @@ const Profil: React.FC = function() {
 		      		</div>
 		      	</div>
 	      		<div id="game" className="my-games">
-	      			<h2>Mes jeux</h2>
+	      			<h2>{Object.keys(userConnectedRedux.user).length > 0 ?
+									Translation(userConnectedRedux.user.language).profil.game
+									:
+									Translation("fr").profil.game}</h2>
 	      			<div className="img-game">
 	      				<Carousel swipeable={true} centerSlidePercentage={20} dynamicHeight={false} centerMode={true} showArrows={true} autoPlay={true} interval={8000} infiniteLoop={true} showThumbs={false} transitionTime={1000}>
 					        <div className="game-slide"><img src="https://i.ibb.co/ByGkhS1/apexlegend.jpg" alt="apexlegend" /></div>
@@ -265,7 +303,10 @@ const Profil: React.FC = function() {
 	    				</Carousel>
 	    				<div className="bt-game-container">
 	    					<Popup
-							    trigger={<button className="btn bg-yellow"> Ajouter jeux </button>}
+							    trigger={<button className="btn bg-yellow"> {Object.keys(userConnectedRedux.user).length > 0 ?
+									Translation(userConnectedRedux.user.language).profil.addGame
+									:
+									Translation("fr").profil.addGame} </button>}
 							    modal
 							    nested
   							>
@@ -273,7 +314,10 @@ const Profil: React.FC = function() {
 						        <button className="close">
 						          &times;
 						        </button>
-						        <div className="header"> <h3>Selectionner parmis nos listes de jeux</h3></div>
+						        <div className="header"> <h3> {Object.keys(userConnectedRedux.user).length > 0 ?
+									Translation(userConnectedRedux.user.language).profil.selectGame
+									:
+									Translation("fr").profil.selectGame}</h3></div>
 							        <div className="content">
 							          {' '}
 							          <img src="https://i.ibb.co/8Y0r1NH/warzone.jpg" alt="warzone" />
@@ -281,7 +325,10 @@ const Profil: React.FC = function() {
 							        </div>
 						        	<div className="actions">
 							          	<Popup
-							            	trigger={<button className="btn bg-yellow"> Ajouter jeux </button>}
+							            	trigger={<button className="btn bg-yellow"> {Object.keys(userConnectedRedux.user).length > 0 ?
+											Translation(userConnectedRedux.user.language).profil.addGame
+											:
+											Translation("fr").profil.addGame} </button>}
 							            	position="top center"
 							            	nested
 							          	>
@@ -292,7 +339,10 @@ const Profil: React.FC = function() {
 												sapiente! Laudantium, aperiam doloribus. Odit, aut.
 						            		</span>
 										</Popup>
-						          		<button className="btn bg-white">Valider</button>
+						          		<button className="btn bg-white">{Object.keys(userConnectedRedux.user).length > 0 ?
+									Translation(userConnectedRedux.user.language).profil.validate
+									:
+									Translation("fr").profil.validate}</button>
 						        	</div>
 						     	</div>
 						    </Popup>
@@ -300,7 +350,10 @@ const Profil: React.FC = function() {
 	      			</div>
 	      		</div>
 	      		<div className="my-teams">
-	      			<h2>Mes équipes</h2>
+	      			<h2>{Object.keys(userConnectedRedux.user).length > 0 ?
+									Translation(userConnectedRedux.user.language).profil.team
+									:
+									Translation("fr").profil.team}</h2>
 	      			<div className="team-mate">
 	      				<div className="team-bloc">
 	      					<div className="team-banniere">
@@ -311,17 +364,35 @@ const Profil: React.FC = function() {
 	      							<img src="https://i.ibb.co/dQPw2Vd/teamlogo.png" alt="teamlogo" width="75"/>
 	      						</div>
       							<div className="team-name">
-      								<p>MY TEAM NAME</p>
+      								<p>{Object.keys(userConnectedRedux.user).length > 0 ?
+									Translation(userConnectedRedux.user.language).profil.teamName
+									:
+									Translation("fr").profil.teamName} : </p>
       								<p>#Tag</p>
-      								<p>Créee le 05/03/2020</p>
-      								<p>Propriétaire</p>
-      								<p>1 joueurs</p>
+      								<p>
+      								{Object.keys(userConnectedRedux.user).length > 0 ?
+									Translation(userConnectedRedux.user.language).profil.create
+									:
+									Translation("fr").profil.create} : 05/03/2020</p>
+      								
+      								<p>{Object.keys(userConnectedRedux.user).length > 0 ?
+									Translation(userConnectedRedux.user.language).profil.owner
+									:
+									Translation("fr").profil.owner} : </p>
+
+      								<p>1 {Object.keys(userConnectedRedux.user).length > 0 ?
+									Translation(userConnectedRedux.user.language).profil.gamer
+									:
+									Translation("fr").profil.gamer}</p>
       							</div>
 	      					</div>
 	      				</div>
 	      				<div className="bt-game-container">
 	    					<Popup
-							    trigger={<button className="btn bg-yellow"> Ajouter une équipe </button>}
+							    trigger={<button className="btn bg-yellow"> {Object.keys(userConnectedRedux.user).length > 0 ?
+									Translation(userConnectedRedux.user.language).profil.createTeam
+									:
+									Translation("fr").profil.createTeam} </button>}
 							    modal
 							    nested
   							>
@@ -329,17 +400,29 @@ const Profil: React.FC = function() {
 						        <button className="close">
 						          &times;
 						        </button>
-						        <div className="header"> <h3>Ajouter une équipe</h3></div>
+						        <div className="header"> <h3>{Object.keys(userConnectedRedux.user).length > 0 ?
+									Translation(userConnectedRedux.user.language).profil.addTeam
+									:
+									Translation("fr").profil.addTeam}</h3></div>
 							        <div className="content set-team">
 							          {' '}
 										<div className="set-team">
-											<input type="text" placeholder="Nom de l'équipe" />
-											<input type="text" placeholder="Tag de l'équipe" />
+											<input type="text" placeholder={Object.keys(userConnectedRedux.user).length > 0 ?
+									Translation(userConnectedRedux.user.language).profil.teamName
+									:
+									Translation("fr").profil.teamName} />
+											<input type="text" placeholder={Object.keys(userConnectedRedux.user).length > 0 ?
+									Translation(userConnectedRedux.user.language).profil.tagTeam
+									:
+									Translation("fr").profil.tagTeam} />
 										</div>
 							        </div>
 						        	<div className="actions">
 							          	<Popup
-							            	trigger={<button className="btn bg-yellow"> Créer l'équipe </button>}
+							            	trigger={<button className="btn bg-yellow">{ Object.keys(userConnectedRedux.user).length > 0 ?
+									Translation(userConnectedRedux.user.language).profil.createTeam
+									:
+									Translation("fr").profil.createTeam} </button>}
 							            	position="top center"
 							            	nested
 							          	>
@@ -353,16 +436,34 @@ const Profil: React.FC = function() {
 	      		</div>
 	      		<div className="mes-tournois">
       				<div className="tournois">
-        				<h2>Mes tournois</h2>
+        				<h2>{Object.keys(userConnectedRedux.user).length > 0 ?
+									Translation(userConnectedRedux.user.language).profil.tournaments
+									:
+									Translation("fr").profil.tournaments}</h2>
         				<div className="tab-content">
-        					<strong>Tournois</strong>
+        					<strong>{Object.keys(userConnectedRedux.user).length > 0 ?
+									Translation(userConnectedRedux.user.language).profil.tournament
+									:
+									Translation("fr").profil.tournament}</strong>
         					<table>
         						<thead>
         							<tr>
-        								<td><i className="iconStatus"><FontAwesomeIcon icon={faCalendarAlt}/></i>Date</td>
-        								<td><i className="iconStatus"><FontAwesomeIcon icon={faGamepad}/></i>Jeux</td>
-        								<td><i className="iconStatus"><FontAwesomeIcon icon={faTrophy}/></i>Trounois</td>
-        								<td><i className="iconStatus"><FontAwesomeIcon icon={faMedal}/></i>Rang</td>
+        								<td><i className="iconStatus"><FontAwesomeIcon icon={faCalendarAlt}/></i>{Object.keys(userConnectedRedux.user).length > 0 ?
+									Translation(userConnectedRedux.user.language).profil.date
+									:
+									Translation("fr").profil.date}</td>
+        								<td><i className="iconStatus"><FontAwesomeIcon icon={faGamepad}/></i>{Object.keys(userConnectedRedux.user).length > 0 ?
+									Translation(userConnectedRedux.user.language).profil.game
+									:
+									Translation("fr").profil.game}</td>
+        								<td><i className="iconStatus"><FontAwesomeIcon icon={faTrophy}/></i>{Object.keys(userConnectedRedux.user).length > 0 ?
+									Translation(userConnectedRedux.user.language).profil.tournament
+									:
+									Translation("fr").profil.tournament}</td>
+        								<td><i className="iconStatus"><FontAwesomeIcon icon={faMedal}/></i>{Object.keys(userConnectedRedux.user).length > 0 ?
+									Translation(userConnectedRedux.user.language).profil.rank
+									:
+									Translation("fr").profil.rank}</td>
         								<td></td>
         							</tr>
         						</thead>
@@ -404,7 +505,10 @@ const Profil: React.FC = function() {
         						</tr>
         					</table>
         					<div className="filter">
-        						<p>Items per page: 10 <span>1 - 10 of 10</span></p>
+        						<p>{Object.keys(userConnectedRedux.user).length > 0 ?
+									Translation(userConnectedRedux.user.language).profil.item
+									:
+									Translation("fr").profil.item} : 10 <span>1 - 10 of 10</span></p>
         						<p>
         							<i className="iconPager"><FontAwesomeIcon icon={faStepBackward}/></i>
         							<i className="iconPager"><FontAwesomeIcon icon={faChevronLeft}/></i>
@@ -418,10 +522,22 @@ const Profil: React.FC = function() {
         					<table>
         						<thead>
         							<tr>
-        								<td><i className="iconStatus"><FontAwesomeIcon icon={faCalendarAlt}/></i>Date</td>
-        								<td><i className="iconStatus"><FontAwesomeIcon icon={faGamepad}/></i>Jeux</td>
-        								<td><i className="iconStatus"><FontAwesomeIcon icon={faTrophy}/></i>Tournois</td>
-        								<td><i className="iconStatus"><FontAwesomeIcon icon={faMedal}/></i>Rang</td>
+        								<td><i className="iconStatus"><FontAwesomeIcon icon={faCalendarAlt}/></i>{Object.keys(userConnectedRedux.user).length > 0 ?
+									Translation(userConnectedRedux.user.language).profil.date
+									:
+									Translation("fr").profil.date}</td>
+        								<td><i className="iconStatus"><FontAwesomeIcon icon={faGamepad}/></i>{Object.keys(userConnectedRedux.user).length > 0 ?
+									Translation(userConnectedRedux.user.language).profil.game
+									:
+									Translation("fr").profil.game}</td>
+        								<td><i className="iconStatus"><FontAwesomeIcon icon={faTrophy}/></i>{Object.keys(userConnectedRedux.user).length > 0 ?
+									Translation(userConnectedRedux.user.language).profil.tournament
+									:
+									Translation("fr").profil.tournament}</td>
+        								<td><i className="iconStatus"><FontAwesomeIcon icon={faMedal}/></i>{Object.keys(userConnectedRedux.user).length > 0 ?
+									Translation(userConnectedRedux.user.language).profil.rank
+									:
+									Translation("fr").profil.rank}</td>
         								<td></td>
         							</tr>
         						</thead>
@@ -462,7 +578,10 @@ const Profil: React.FC = function() {
         						</tr>
         					</table>
         					<div className="filter">
-        						<p>Items per page: 10 <span>1 - 10 of 10</span></p>
+        						<p>{Object.keys(userConnectedRedux.user).length > 0 ?
+									Translation(userConnectedRedux.user.language).profil.item
+									:
+									Translation("fr").profil.item}: 10 <span>1 - 10 of 10</span></p>
         						<p>
         							<i className="iconPager"><FontAwesomeIcon icon={faStepBackward}/></i>
         							<i className="iconPager"><FontAwesomeIcon icon={faChevronLeft}/></i>
@@ -479,11 +598,26 @@ const Profil: React.FC = function() {
 	      				<table>
     						<thead>
     							<tr>
-									<td><i className="iconStatus"><FontAwesomeIcon icon={faCalendarAlt}/></i>Date</td>
-    								<td><i className="iconStatus"><FontAwesomeIcon icon={faGamepad}/></i>Jeux</td>
-    								<td><i className="iconStatus"><FontAwesomeIcon icon={faTrophy}/></i>Tournois</td>
-    								<td><i className="iconStatus"><FontAwesomeIcon icon={faTrophy}/></i>Ligues</td>
-    								<td><i className="iconStatus"><FontAwesomeIcon icon={faMedal}/></i>Rang</td>
+									<td><i className="iconStatus"><FontAwesomeIcon icon={faCalendarAlt}/></i>{Object.keys(userConnectedRedux.user).length > 0 ?
+									Translation(userConnectedRedux.user.language).profil.date
+									:
+									Translation("fr").profil.date}</td>
+    								<td><i className="iconStatus"><FontAwesomeIcon icon={faGamepad}/></i>{Object.keys(userConnectedRedux.user).length > 0 ?
+									Translation(userConnectedRedux.user.language).profil.game
+									:
+									Translation("fr").profil.game}</td>
+    								<td><i className="iconStatus"><FontAwesomeIcon icon={faTrophy}/></i>{Object.keys(userConnectedRedux.user).length > 0 ?
+									Translation(userConnectedRedux.user.language).profil.tournament
+									:
+									Translation("fr").profil.tournament}</td>
+    								<td><i className="iconStatus"><FontAwesomeIcon icon={faTrophy}/></i>{Object.keys(userConnectedRedux.user).length > 0 ?
+									Translation(userConnectedRedux.user.language).profil.leagues
+									:
+									Translation("fr").profil.leagues}</td>
+    								<td><i className="iconStatus"><FontAwesomeIcon icon={faMedal}/></i>{Object.keys(userConnectedRedux.user).length > 0 ?
+									Translation(userConnectedRedux.user.language).profil.rank
+									:
+									Translation("fr").profil.rank}</td>
     								<td></td>
     							</tr>
     						</thead>
@@ -516,7 +650,10 @@ const Profil: React.FC = function() {
     						</tr>
     					</table>
     					<div className="filter">
-    						<p>Items per page: 10 <span>1 - 10 of 10</span></p>
+    						<p>{Object.keys(userConnectedRedux.user).length > 0 ?
+									Translation(userConnectedRedux.user.language).profil.item
+									:
+									Translation("fr").profil.item}: 10 <span>1 - 10 of 10</span></p>
     						<p>
     							<i className="iconPager"><FontAwesomeIcon icon={faStepBackward}/></i>
     							<i className="iconPager"><FontAwesomeIcon icon={faChevronLeft}/></i>
@@ -532,33 +669,60 @@ const Profil: React.FC = function() {
 	      				<div className="item-bloc">
 	      					<div className="img-prem">
 	      						<img src="https://i.ibb.co/80vD8kD/stat.png" alt="stat" width="75" height="75"/>
-	      						<strong>Formation avancée</strong>
-	      						<p>Entraîne-toi comme un champion avec nos guides confirmés et experts crées avec des pro</p>
+	      						<strong>{Object.keys(userConnectedRedux.user).length > 0 ?
+									Translation(userConnectedRedux.user.language).profil.formation
+									:
+									Translation("fr").profil.formation}</strong>
+	      						<p>{Object.keys(userConnectedRedux.user).length > 0 ?
+									Translation(userConnectedRedux.user.language).profil.training
+									:
+									Translation("fr").profil.training}</p>
 	      					</div>
 	      				</div>
 	      				<div className="item-bloc">
 	      					<div className="img-prem">
 	      						<img src="https://i.ibb.co/mXW82Tt/seek.png" alt="seek" width="75" height="75" className="ht75"/>
-	      						<strong>Etre repéré par les pro</strong>
-	      						<p>Entraîne-toi comme un champion avec nos guides confirmés et experts crées avec des pro</p>
+	      						<strong>{Object.keys(userConnectedRedux.user).length > 0 ?
+									Translation(userConnectedRedux.user.language).profil.pro
+									:
+									Translation("fr").profil.pro}</strong>
+	      						<p>{Object.keys(userConnectedRedux.user).length > 0 ?
+									Translation(userConnectedRedux.user.language).profil.training
+									:
+									Translation("fr").profil.training}</p>
 	      					</div>
 	      				</div>
 	      				<div className="item-bloc">
 	      					<div className="img-prem">
 	      						<img src="https://i.ibb.co/0KkJNYk/paiment.png" alt="paiment" width="75" height="75"/>
-	      						<strong>Paiement rapide</strong>
-	      						<p>Entraîne-toi comme un champion avec nos guides confirmés et experts crées avec des pro</p>
+	      						<strong>{Object.keys(userConnectedRedux.user).length > 0 ?
+									Translation(userConnectedRedux.user.language).profil.pro
+									:
+									Translation("fr").profil.paiement}</strong>
+	      						<p>{Object.keys(userConnectedRedux.user).length > 0 ?
+									Translation(userConnectedRedux.user.language).profil.training
+									:
+									Translation("fr").profil.training}</p>
 	      					</div>
 	      				</div>
 	      				<div className="item-bloc">
 	      					<div className="img-prem">
 	      						<img src="https://i.ibb.co/xDfySTm/wallet.png" alt="wallet" width="75" height="75"/>
-	      						<strong>Porte-monnaie de paiement minimum</strong>
-	      						<p>Entraîne-toi comme un champion avec nos guides confirmés et experts crées avec des pro</p>
+	      						<strong>{Object.keys(userConnectedRedux.user).length > 0 ?
+									Translation(userConnectedRedux.user.language).profil.wallet
+									:
+									Translation("fr").profil.wallet}</strong>
+	      						<p>{Object.keys(userConnectedRedux.user).length > 0 ?
+									Translation(userConnectedRedux.user.language).profil.training
+									:
+									Translation("fr").profil.training}</p>
 	      					</div>
 	      				</div>
 	      				<div className="btn-container">
-	      					<a href="#" className="btn bg-yellow">4.99 € / Mois</a>
+	      					<a href="#" className="btn bg-yellow">4.99 € / {Object.keys(userConnectedRedux.user).length > 0 ?
+									Translation(userConnectedRedux.user.language).profil.month
+									:
+									Translation("fr").profil.month}</a>
 	      				</div>
 	      			</div>
 				</div>
