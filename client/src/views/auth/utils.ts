@@ -3,8 +3,11 @@ import {XBoxToken} from "../../gql/user/auth"
 
 
 const URL_REDIRECT = "http://localhost:3000"
+
 const REDIRECT_URI = encodeURI(URL_REDIRECT)
-const BASE_URI = `https://login.live.com/oauth20_authorize.srf?response_type=code&client_id=43ecdb9b-5301-4d89-ab72-52daca2f648b&approval_prompt=auto&redirect_uri=${REDIRECT_URI}&scope=Xboxlive.signin+Xboxlive.offline_access`
+const BASE_URI = `https://login.microsoftonline.com/common/oauth2/v2.0/authorize?response_type=code&client_id=43ecdb9b-5301-4d89-ab72-52daca2f648b&redirect_uri=${REDIRECT_URI}&response_mode=query
+&scope=offline_access%20user.read%20mail.read`
+// const BASE_URI = `https://login.live.com/oauth20_authorize.srf?response_type=code&client_id=43ecdb9b-5301-4d89-ab72-52daca2f648b&approval_prompt=auto&redirect_uri=${REDIRECT_URI}&scope=Xboxlive.signin+Xboxlive.offline_access`
 export const ACCESS_TOKEN = "access_token"
 export interface TokenType {
 	access_token:string|""
@@ -39,7 +42,7 @@ export const getTokenUser = async function(code: string) {
 			type:"xbox"
 		}
 		SendToken(token)
-		window.location.pathname = "/profil"
+		window.location.pathname = "/"
 	} catch(errors) {
 		console.log("errors_get_one_match", errors)
 	}

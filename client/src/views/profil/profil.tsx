@@ -106,7 +106,7 @@ const Profil: React.FC = function() {
 							<select onChange={onChangeLanguage}>
 								<option>FR</option>
 								<option>EN</option>
-							  </select>
+						  	</select>
 		      				<div className="btn-container">
 		      					<a href="#" className="btn bg-yellow mg15">Valider</a>
 		      				</div>
@@ -172,17 +172,17 @@ const Profil: React.FC = function() {
 	      						</div>
 	      						<div className="team-img">
 	      							<img src="https://i.ibb.co/dQPw2Vd/teamlogo.png" alt="teamlogo" width="75"/>
-	      						</div>	      											
+	      						</div>
       							<div className="team-name">
       								<p>MY TEAM NAME</p>
       								<p>#Tag</p>
       								<p>Créee le 05/03/2020</p>
       								<p>Propriétaire</p>
       								<p>1 joueurs</p>
-      							</div>	      						
+      							</div>
 	      					</div>
 	      				</div>
-	      				<div className="bt-game-container">	    					
+	      				<div className="bt-game-container">
 	    					<Popup
 							    trigger={<button className="btn bg-yellow"> Ajouter une équipe </button>}
 							    modal
@@ -198,7 +198,7 @@ const Profil: React.FC = function() {
 										<div className="set-team">
 											<input type="text" placeholder="Nom de l'équipe" />
 											<input type="text" placeholder="Tag de l'équipe" />
-										</div>						          
+										</div>
 							        </div>
 						        	<div className="actions">
 							          	<Popup
@@ -206,8 +206,8 @@ const Profil: React.FC = function() {
 							            	position="top center"
 							            	nested
 							          	>
-						            		
-										</Popup>						          		
+
+										</Popup>
 						        	</div>
 						     	</div>
 						    </Popup>
