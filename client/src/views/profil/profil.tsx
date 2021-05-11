@@ -6,7 +6,7 @@ import Popup from "reactjs-popup"
 import Header from "../header/header"
 import Footer from "../footer/footer"
 import "../profil/profil.css"
-import Avatar from "../../assets/image/avatar.png"
+import Avatar from "../../assets/image/game-tag.png"
 import "../../assets/css/style.css"
 import "react-responsive-carousel/lib/styles/carousel.min.css"
 import 'reactjs-popup/dist/index.css'
@@ -55,7 +55,10 @@ const Profil: React.FC = function() {
 		      		</div>
 		      		<div className="wall" id="wall">
 		      			<div className="avatar">
-			      			<p className="setavatar"><img src = {Avatar} /><i><FontAwesomeIcon icon={faPen}/></i></p>
+			      			<p className="setavatar"><img src = {Avatar} />
+			      			<label htmlFor="setavatar"><FontAwesomeIcon icon={faPen} /></label>
+			      			<input type="file" id="setavatar" className="uploadFile" name="file"/>
+			      			</p>
 			      			<p className="pseudo"><strong>Noob_021</strong></p>
 		      			</div>
 		      			<div className="avatar-info">
@@ -120,7 +123,7 @@ const Profil: React.FC = function() {
 		      	<div className="account-game">
 		      		<h2>Mes comptes de jeux</h2>
 		      		<div className="itemGame">
-		      			<p className="img-account"><img src={IconXbox} alt="xbox" width="84" height="83"/></p>
+		      			<p className="img-account"><img src={IconPs} alt="xbox" width="45" height="45"/></p>
 		      			<p>PSN id</p>		      			
 		      			<Popup
 							    trigger={<button className="btn bg-white">Preuve-Platree<i></i></button>}
@@ -151,10 +154,10 @@ const Profil: React.FC = function() {
 
 		      		</div>
 		      		<div className="itemGame">
-		      			<p className="img-account"><img src={IconPs} alt="xbox" width="84" height="83"/></p>
+		      			<p className="img-account"><img src={IconXbox} alt="xbox" width="45" height="45"/></p>
 		      			<p>XboxLive</p>
 		      			<Popup
-							    trigger={<button className="btn bg-white">Preuve-Platree<i></i></button>}
+							    trigger={<button className="btn bg-white">XXXXXXXX<i></i></button>}
 							    modal
 							    nested
   							>
@@ -166,7 +169,7 @@ const Profil: React.FC = function() {
 							        <div className="content set-team">
 							          {' '}
 										<div className="set-account">
-											<label>PSN id</label><input type="text" placeholder="Preuve-platree"/>										
+											<label>PSN id</label><input type="text" placeholder="XXXXXXXX"/>										
 										</div>						          
 							        </div>
 						        	<div className="actions">

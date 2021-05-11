@@ -116,7 +116,7 @@
 .setavatar{	
 	position: relative;
 }
-.setavatar i{
+.setavatar label{
 	display: none;
 	position: absolute;
 	width: 100%;	
@@ -125,14 +125,19 @@
 	text-align: center;
 	background: rgba(0,0,0,0.5);
 	border-radius: 50%;
-
+	border: none;	
 }
-.setavatar:hover i{
+.setavatar:hover label{
 	display: block;
 }
-.setavatar i svg{
+.setavatar label svg{
 	position: relative;
-	top: 35%;
+	top: 37%;
+	color: #ffffff;
+}
+
+.uploadFile{
+	display: none;
 }
 .avatar .pseudo{
 	margin-top: 10px;
@@ -151,7 +156,7 @@
 }
 .cell{
 	display: table-cell;
-    padding: 28px;    
+    padding: 15px 30px;    
     width: 23%;
 }
 .about-bloc{
@@ -191,7 +196,7 @@
 	border-radius: 5px;
 }
 .itemGame img{
-	width: 40%;	
+	
 }
 .itemGame p{
 	margin-bottom: 15px;
