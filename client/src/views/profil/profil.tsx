@@ -14,7 +14,7 @@ import 'reactjs-popup/dist/index.css'
 import "react-circular-progressbar/dist/styles.css"
 
 import { faXbox, faPlaystation } from "@fortawesome/free-brands-svg-icons"
-import { faCalendarAlt, faInfoCircle, faGamepad, faTrophy, faMedal, faStepBackward, faStepForward, faChevronRight, faChevronLeft, faMobile } from "@fortawesome/free-solid-svg-icons"
+import { faCalendarAlt, faInfoCircle, faGamepad, faTrophy, faMedal, faStepBackward, faStepForward, faChevronRight, faChevronLeft, faMobile, faPen } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import {RootState} from "../../reducer"
 import {changeLanguageUserConnected} from "../auth/action/userAction"
@@ -55,7 +55,7 @@ const Profil: React.FC = function() {
 		      		</div>
 		      		<div className="wall" id="wall">
 		      			<div className="avatar">
-			      			<p><img src = {Avatar} /></p>
+			      			<p className="setavatar"><img src = {Avatar} /><i><FontAwesomeIcon icon={faPen}/></i></p>
 			      			<p className="pseudo"><strong>Noob_021</strong></p>
 		      			</div>
 		      			<div className="avatar-info">
