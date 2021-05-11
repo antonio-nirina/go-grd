@@ -55,6 +55,7 @@ type authenticateXs struct {
 
 type propertiesXs struct {
 	UserTokens string `json:"UserTokens"`
+	SandboxId string `json:"SandboxId"`
 }
 type DataToken struct {
 	AccessToken string `json:"access_token"`
@@ -182,12 +183,12 @@ func getXsTokenXbox(tokenUser string)(string,error) {
 	fmt.Println("tokenUser", tokenUser)
 	prUser := &propertiesXs{
 		UserTokens: tokenUser,
+		SandboxId:"RETAIL",
 	}
 	payload := &authenticateXs{
 		RelyingParty:"http://xboxlive.com",
 		TokenType:"JWT",
 		Properties: prUser, 
-		SandboxId:"RETAIL",
 	}
 	reqBodyBytes := new(bytes.Buffer)
 	json.NewEncoder(reqBodyBytes).Encode(payload)

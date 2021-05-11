@@ -75,7 +75,7 @@ const Header: React.FC = function() {
 	 					</li>
     	 				<li>
     	 					<Link to="/communaute">
-							 {
+							 	{
 									Object.keys(userConnectedRedux.user).length > 0 ?
 									Translation(userConnectedRedux.user.language).header.community
 									:

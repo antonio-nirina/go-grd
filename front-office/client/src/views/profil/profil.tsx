@@ -170,17 +170,47 @@ const Profil: React.FC = function() {
 	      						<div className="imgcontainer">
 	      							<img src="https://i.ibb.co/C59KCSd/team-mate.png" alt="team-mate" className="imgresp"/>
 	      						</div>
-	      						<div className="team-logo">
+	      						<div className="team-img">
 	      							<img src="https://i.ibb.co/dQPw2Vd/teamlogo.png" alt="teamlogo" width="75"/>
-	      							<div className="team-name">
-	      								<p>TEAM NAME</p>
-	      								<p>#Tag</p>
-	      							</div>
-	      						</div>
+	      						</div>	      											
+      							<div className="team-name">
+      								<p>MY TEAM NAME</p>
+      								<p>#Tag</p>
+      								<p>Créee le 05/03/2020</p>
+      								<p>Propriétaire</p>
+      								<p>1 joueurs</p>
+      							</div>	      						
 	      					</div>
 	      				</div>
-	      				<div className="bt-game-container">
-	    					<a href="#" className="btn bg-yellow">Ajouter une équipe</a>
+	      				<div className="bt-game-container">	    					
+	    					<Popup
+							    trigger={<button className="btn bg-yellow"> Ajouter une équipe </button>}
+							    modal
+							    nested
+  							>
+					    	<div className="modal">
+						        <button className="close">
+						          &times;
+						        </button>
+						        <div className="header"> <h3>Ajouter une équipe</h3></div>
+							        <div className="content set-team">
+							          {' '}
+										<div className="set-team">
+											<input type="text" placeholder="Nom de l'équipe" />
+											<input type="text" placeholder="Tag de l'équipe" />
+										</div>						          
+							        </div>
+						        	<div className="actions">
+							          	<Popup
+							            	trigger={<button className="btn bg-yellow"> Créer l'équipe </button>}
+							            	position="top center"
+							            	nested
+							          	>
+						            		
+										</Popup>						          		
+						        	</div>
+						     	</div>
+						    </Popup>
 	    				</div>
 	      			</div>
 	      		</div>

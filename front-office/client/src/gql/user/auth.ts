@@ -11,7 +11,6 @@ export const XBoxToken = gql`
         GetAccessTokenXbox(code: $code) {
 			AccessToken
 			RefreshToken
-			TokenUsers
 		}
     }
 `
