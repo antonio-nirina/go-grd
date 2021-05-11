@@ -14,10 +14,12 @@ import 'reactjs-popup/dist/index.css'
 import "react-circular-progressbar/dist/styles.css"
 
 import { faXbox, faPlaystation } from "@fortawesome/free-brands-svg-icons"
-import { faCalendarAlt, faInfoCircle, faGamepad, faTrophy, faMedal, faStepBackward, faStepForward, faChevronRight, faChevronLeft, faMobile } from "@fortawesome/free-solid-svg-icons"
+import { faCalendarAlt, faInfoCircle, faGamepad, faTrophy, faMedal, faStepBackward, faStepForward, faChevronRight, faChevronLeft, faMobile, faPen } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import {RootState} from "../../reducer"
 import {changeLanguageUserConnected} from "../auth/action/userAction"
+import IconXbox from "../../assets/image/icon-xbox.png"
+import IconPs from "../../assets/image/playstation.png"
 
 
 const Profil: React.FC = function() {
@@ -42,16 +44,18 @@ const Profil: React.FC = function() {
 		      		<div className="tabs">
 		      			<ul>
 		      				<li><a href="#wall" className="active">Mon mur</a></li>
+		      				<li><a href="#">Compte de jeux</a></li>
+
 		      				<li><a href="#game">Mes jeux</a></li>
 		      				<li><a href="#">Mes équipes</a></li>
 		      				<li><a href="#">Mes tournois</a></li>
-		      				<li><a href="#">Mes resultats</a></li>
-		      				<li><a href="#">Premium</a></li>
+		      				<li><a href="#">Mes resultats</a></li>		      				
+		      				<li><a href="#">Premium</a></li>		      				
 		      			</ul>
 		      		</div>
 		      		<div className="wall" id="wall">
 		      			<div className="avatar">
-			      			<p><img src = {Avatar} /></p>
+			      			<p className="setavatar"><img src = {Avatar} /><i><FontAwesomeIcon icon={faPen}/></i></p>
 			      			<p className="pseudo"><strong>Noob_021</strong></p>
 		      			</div>
 		      			<div className="avatar-info">
@@ -111,6 +115,70 @@ const Profil: React.FC = function() {
 		      					<a href="#" className="btn bg-yellow mg15">Valider</a>
 		      				</div>
 		      			</div>
+		      		</div>
+		      	</div>
+		      	<div className="account-game">
+		      		<h2>Mes comptes de jeux</h2>
+		      		<div className="itemGame">
+		      			<p className="img-account"><img src={IconXbox} alt="xbox" width="84" height="83"/></p>
+		      			<p>PSN id</p>		      			
+		      			<Popup
+							    trigger={<button className="btn bg-white">Preuve-Platree<i></i></button>}
+							    modal
+							    nested
+  							>
+					    	<div className="modal">
+						        <button className="close">
+						          &times;
+						        </button>
+						        <div className="header"> <h3>Modifier votre compte de jeux</h3></div>
+							        <div className="content set-team">
+							          {' '}
+										<div className="set-account">
+											<label>PSN id</label><input type="text" placeholder="Preuve-platree"/>										
+										</div>						          
+							        </div>
+						        	<div className="actions">
+							          	<Popup
+							            	trigger={<button className="btn bg-yellow"> Valider </button>}
+							            	
+							          	>
+						            		
+										</Popup>						          		
+						        	</div>
+						     	</div>
+						    </Popup>
+
+		      		</div>
+		      		<div className="itemGame">
+		      			<p className="img-account"><img src={IconPs} alt="xbox" width="84" height="83"/></p>
+		      			<p>XboxLive</p>
+		      			<Popup
+							    trigger={<button className="btn bg-white">Preuve-Platree<i></i></button>}
+							    modal
+							    nested
+  							>
+					    	<div className="modal">
+						        <button className="close">
+						          &times;
+						        </button>
+						        <div className="header"> <h3>Modifier votre compte de jeux</h3></div>
+							        <div className="content set-team">
+							          {' '}
+										<div className="set-account">
+											<label>PSN id</label><input type="text" placeholder="Preuve-platree"/>										
+										</div>						          
+							        </div>
+						        	<div className="actions">
+							          	<Popup
+							            	trigger={<button className="btn bg-yellow"> Valider </button>}
+							            	
+							          	>
+						            		
+										</Popup>						          		
+						        	</div>
+						     	</div>
+						    </Popup>
 		      		</div>
 		      	</div>
 	      		<div id="game" className="my-games">
