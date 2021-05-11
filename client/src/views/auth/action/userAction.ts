@@ -4,6 +4,7 @@ import {ACCESS_TOKEN} from "../utils"
 export const USER_CONNECTED = "user_connected"
 
 export interface UserType {
+	username:string|""
 	email:string|""
 	avatar:string|""
 	roles:Array<string>
@@ -25,6 +26,7 @@ export const sendUserConectedAction = function(data:string) {
 
 export const changeLanguageUserConnected = function(user:UserType,lang:string) {
 	const newUserObject:UserType = {
+		username:user.username,
 		email:user.email,
 		avatar:user.avatar,
 		roles:user.roles,

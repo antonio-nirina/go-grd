@@ -30,6 +30,7 @@ const receiveMessage = function(event: any) {
 	}
 
 	const { data } = event
+	console.log(data)
 	if (data) getTokenUser(data.split("=")[1])
 }
 
