@@ -14,7 +14,7 @@ import 'reactjs-popup/dist/index.css'
 import "react-circular-progressbar/dist/styles.css"
 
 import { faXbox, faPlaystation } from "@fortawesome/free-brands-svg-icons"
-import { faCalendarAlt, faInfoCircle, faGamepad, faTrophy, faMedal, faStepBackward, faStepForward, faChevronRight, faChevronLeft, faMobile, faPen } from "@fortawesome/free-solid-svg-icons"
+import { faCalendarAlt, faInfoCircle, faGamepad, faTrophy, faMedal, faStepBackward, faStepForward, faChevronRight, faChevronLeft, faMobile, faPen, faCogs,  } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import {RootState} from "../../reducer"
 import {changeLanguageUserConnected} from "../auth/action/userAction"
@@ -110,11 +110,20 @@ const Profil: React.FC = function() {
 		      				<input type="text" placeholder="Pseudo"/>
 		      				<input type="number" placeholder="Numéro de téléphone"/>
 		      				<input type="text" placeholder="Entrez la date d'adhésion"/>
-							<select onChange={onChangeLanguage}>
-								<option>FR</option>
-								<option>EN</option>
-							  </select>
-		      				<div className="btn-container">
+		      				<div className="lang-container">
+		      					<div className="lang-setting">
+		      						<i><FontAwesomeIcon className="little-icon" icon={faCogs}/></i>
+		      						<div className="lgdrpdwn">
+		      							<p className="lg-opt">Langue et région</p>
+		      							<p className="lg-desc">Choisissez la langue affichée dans le profil</p>
+										<select onChange={onChangeLanguage}>
+											<option>FR</option>
+											<option>EN</option>
+							  			</select>
+									</div>
+		      					</div>
+							</div>
+	      					<div className="btn-container">
 		      					<a href="#" className="btn bg-yellow mg15">Valider</a>
 		      				</div>
 		      			</div>

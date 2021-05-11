@@ -163,8 +163,10 @@
 	
 }
 .about-me{
-	background: black;
+	background: #000000;
     padding: 5em 3em;
+    position: relative;
+    overflow: hidden;
 }
 .about-me input,textarea{
 	background: none;
@@ -178,12 +180,86 @@
     margin-bottom: 15px;
 
 }
+.lang-container{
+	max-width: 250px;
+	width: 100%;
+	position: absolute;
+	top: 0px;
+	right: -208px;
+	padding: 15px;
+	background: #2c2c2c;
+	border-radius: 5px;
+	-webkit-transition: all 500ms ease-in-out;
+}
+.lang-container:hover{
+	right: 0;
+	-webkit-transition: all 500ms ease-in-out;
+}
+.lang-setting i{
+	display: block;
+}
+.lang-setting i svg{
+	height: 60px;
+	width: 50px !important;
+}
+.lgdrpdwn{
+	background: #101010;
+	padding: 15px;
+	display: none;
+	-webkit-transition: all 500ms ease-in-out;
+}
+.little-icon{
+	position: relative;
+	left: -20px;
+	padding: 15px;
+	display: block;
+}
+.lang-setting:hover .little-icon{
+	position: initial;
+	padding: 0px;
+}
+.lang-setting:hover .lgdrpdwn{
+	display: block;
+	-webkit-transition: all 500ms ease-in-out;
+}
+.lang-setting:hover .little-icon{
+	display: none;
+}
+.lgdrpdwn p{
+	font-size: 14px;
+}
+.lgdrpdwn select{
+	display: block;
+	background: none;
+    border-bottom: 1px solid #acacac !important;
+    width: 100%;    
+    padding: 15px;
+    color: #acacac;
+    font-size: 15px;
+    border: none;
+    margin-bottom: 15px;
+}
+.lgdrpdwn p{
+	text-align: left;
+}
+p.lg-desc{
+	font-size: 12px;
+	font-style: italic;
+}
+.lg-opt{
+	border-bottom: 2px solid #f5cc22;
+	margin-bottom: 5px;
+	padding: 5px;
+}
+
 .field{
 	text-align: center;
 }
 .account-game{
 	padding: 5px 3em 3em;
+	text-align: center;
 }
+
 .itemGame{
 	max-width: 250px;
 	width: 100%;	
