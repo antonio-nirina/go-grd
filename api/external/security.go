@@ -31,23 +31,27 @@ func Handle(next http.Handler) http.Handler {
 		}
 		
 		tokenString := r.Header.Get("Authorization")
-		array := strings.SplitAfter(tokenString,"=")
-		if array[0] != "" {
-			token, _ := jwt.Parse(tokenString, func(token *jwt.Token) (interface{}, error) {
-				if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
-					return nil, fmt.Errorf("Unexpected signing method: %v", token.Header["alg"])
+		arrayToken := strings.SplitAfter(tokenString," ")
+
+		if len(arrayToken) > 1 {
+			array := strings.SplitAfter(arrayToken[1],"=")
+			if array[0] != "" {
+				token, _ := jwt.Parse(tokenString, func(token *jwt.Token) (interface{}, error) {
+					if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
+						return nil, fmt.Errorf("Unexpected signing method: %v", token.Header["alg"])
+					}
+
+					return []byte(os.Getenv("SECRET")), nil
+				})
+
+				if claims, ok := token.Claims.(jwt.MapClaims); ok && token.Valid {
+					log.Printf("JWT Authenticated OK (app: %s)", claims["app"])
+
+					next.ServeHTTP(w, r)
 				}
-
-				return []byte(os.Getenv("SECRET")), nil
-			})
-
-			if claims, ok := token.Claims.(jwt.MapClaims); ok && token.Valid {
-				log.Printf("JWT Authenticated OK (app: %s)", claims["app"])
-
-				next.ServeHTTP(w, r)
 			}
-		}
-
+		} 
+		
 		next.ServeHTTP(w, r)
 	})
 }

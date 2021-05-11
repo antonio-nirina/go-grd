@@ -13,9 +13,10 @@ import "../../assets/css/style.css"
 
 const Home: React.FC = function(props:any) {
 	useEffect(() => {
+		const params = window.location.search
+
 		if (window.opener) {
-			const params = window.location.search
-		   	window.opener.postMessage(params)
+			window.opener.postMessage(params)
 		   	window.close()
 		}
 	})
