@@ -12,6 +12,15 @@ export const XBoxToken = gql`
 			AccessToken
 			RefreshToken
 			UserId
+			User{
+				CodeStatut
+				DisplayName
+				Surname
+				Username
+				Id
+				Email
+				PreferredLanguage
+			}
 		}
     }
 `

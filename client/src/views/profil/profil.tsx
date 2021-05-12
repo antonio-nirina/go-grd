@@ -6,7 +6,7 @@ import Popup from "reactjs-popup"
 import Header from "../header/header"
 import Footer from "../footer/footer"
 import "../profil/profil.css"
-import Avatar from "../../assets/image/avatar.png"
+import Avatar from "../../assets/image/game-tag.png"
 import "../../assets/css/style.css"
 import "react-responsive-carousel/lib/styles/carousel.min.css"
 import 'reactjs-popup/dist/index.css'
@@ -14,13 +14,13 @@ import 'reactjs-popup/dist/index.css'
 import "react-circular-progressbar/dist/styles.css"
 
 import { faXbox, faPlaystation } from "@fortawesome/free-brands-svg-icons"
-import { faCalendarAlt, faInfoCircle, faGamepad, faTrophy, faMedal, faStepBackward, faStepForward, faChevronRight, faChevronLeft, faMobile, faPen } from "@fortawesome/free-solid-svg-icons"
+import { faCalendarAlt, faInfoCircle, faGamepad, faTrophy, faMedal, faStepBackward, faStepForward, faChevronRight, faChevronLeft, faMobile, faPen, faCogs,  } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import {RootState} from "../../reducer"
 import {changeLanguageUserConnected} from "../auth/action/userAction"
 import IconXbox from "../../assets/image/icon-xbox.png"
 import IconPs from "../../assets/image/playstation.png"
-
+import {Translation} from "../../lang/translation"
 
 const Profil: React.FC = function() {
 	const userConnectedRedux = useSelector((state:RootState) => state.userConnected)
@@ -45,54 +45,109 @@ const Profil: React.FC = function() {
 		      			<ul>
 		      				<li><a href="#wall" className="active">Mon mur</a></li>
 		      				<li><a href="#">Compte de jeux</a></li>
-
 		      				<li><a href="#game">Mes jeux</a></li>
 		      				<li><a href="#">Mes équipes</a></li>
 		      				<li><a href="#">Mes tournois</a></li>
-		      				<li><a href="#">Mes resultats</a></li>		      				
-		      				<li><a href="#">Premium</a></li>		      				
+		      				<li><a href="#">Mes resultats</a></li>
+		      				<li><a href="#">Premium</a></li>
 		      			</ul>
 		      		</div>
 		      		<div className="wall" id="wall">
 		      			<div className="avatar">
-			      			<p className="setavatar"><img src = {Avatar} /><i><FontAwesomeIcon icon={faPen}/></i></p>
+			      			<p className="setavatar"><img src = {Avatar} />
+			      			<label htmlFor="setavatar"><FontAwesomeIcon icon={faPen} /></label>
+			      			<input type="file" id="setavatar" className="uploadFile" name="file"/>
+			      			</p>
 			      			<p className="pseudo"><strong>Noob_021</strong></p>
 		      			</div>
 		      			<div className="avatar-info">
 
 		      				<div className="table">
 		      					<div className="cell">
-		      						<strong>Plateforme</strong>
+		      						<strong>
+		      						{
+			      						Object.keys(userConnectedRedux.user).length > 0 ?
+										Translation(userConnectedRedux.user.language).profil.platform
+										:
+										Translation("fr").profil.platform
+									}
+		      						</strong>
 		      						<p><span>Playstation</span></p>
 		      					</div>
 		      					<div className="cell">
-		      						<strong>Serveur</strong>
-		      						<p><span>Asia</span></p>
+		      						<strong>
+		      						{
+		      							Object.keys(userConnectedRedux.user).length > 0 ?
+										Translation(userConnectedRedux.user.language).profil.server
+										:
+										Translation("fr").profil.server
+									}
+									</strong>
+		      						<p>
+		      							<span>
+		      							{
+		      								Object.keys(userConnectedRedux.user).length > 0 ?
+											Translation(userConnectedRedux.user.language).profil.asia
+											:
+											Translation("fr").profil.asia
+										}
+										</span>
+									</p>
 		      					</div>
 		      					<div className="cell">
 		      						<strong>Expérience</strong>
 		      						<p><span>5</span></p>
 		      					</div>
 		      					<div className="cell">
-		      						<strong>Durée de jeux</strong>
-		      						<p><span>6 heures</span></p>
+		      						<strong>{
+		      								Object.keys(userConnectedRedux.user).length > 0 ?
+											Translation(userConnectedRedux.user.language).profil.exp
+											:
+											Translation("fr").profil.exp
+										}</strong>
+		      						<p><span>6 {Object.keys(userConnectedRedux.user).length > 0 ?
+											Translation(userConnectedRedux.user.language).profil.hours
+											:
+											Translation("fr").profil.hours}</span></p>
 		      					</div>
 		      				</div>
 		      			</div>
 		      			<div className="stat">
 		      				<div className="float">
-		      					<strong>Mes stats</strong>
+		      					<strong>
+		      					{
+		      						Object.keys(userConnectedRedux.user).length > 0 ?
+									Translation(userConnectedRedux.user.language).profil.stats
+									:
+									Translation("fr").profil.stats
+								}
+		      					</strong>
 		      				</div>
 		      				<div className="float">
-			      				<p>Victoire : <span>40%</span></p>
+			      				<p>{
+		      						Object.keys(userConnectedRedux.user).length > 0 ?
+									Translation(userConnectedRedux.user.language).profil.victory
+									:
+									Translation("fr").profil.victory
+								} : <span>40%</span></p>
 			      				<div className="myProgress">
 		    						<div className="myBar" style={{width:"40%", background:"#6642a9"}}></div>
 		    					</div>
-		    					<p>Defaite : <span>25%</span></p>
+		    					<p>{
+		      						Object.keys(userConnectedRedux.user).length > 0 ?
+									Translation(userConnectedRedux.user.language).profil.defeat
+									:
+									Translation("fr").profil.defeat
+								} : <span>25%</span></p>
 		    					<div className="myProgress">
 		    						<div className="myBar" style={{width:"25%", background:"#1da1f2"}}></div>
 		    					</div>
-		    					<p>Abandon : <span>75%</span></p>
+		    					<p>{
+		      						Object.keys(userConnectedRedux.user).length > 0 ?
+									Translation(userConnectedRedux.user.language).profil.retreat
+									:
+									Translation("fr").profil.retreat
+								} : <span>75%</span></p>
 		    					<div className="myProgress">
 		    						<div className="myBar" style={{width:"75%", background:"#f9753d"}}></div>
 		    					</div>
@@ -103,15 +158,29 @@ const Profil: React.FC = function() {
 		      	<div className="about-bloc">
 		      		<div className="about-me">
 		      			<div className="field">
-		      				<h2>Modifier votre profil</h2>
+		      				<h2>{
+		      						Object.keys(userConnectedRedux.user).length > 0 ?
+									Translation(userConnectedRedux.user.language).profil.set
+									:
+									Translation("fr").profil.set
+								}</h2>
 		      				<input type="text" placeholder="Pseudo"/>
 		      				<input type="number" placeholder="Numéro de téléphone"/>
 		      				<input type="text" placeholder="Entrez la date d'adhésion"/>
-							<select onChange={onChangeLanguage}>
-								<option>FR</option>
-								<option>EN</option>
-						  	</select>
-		      				<div className="btn-container">
+		      				<div className="lang-container">
+		      					<div className="lang-setting">
+		      						<i><FontAwesomeIcon className="little-icon" icon={faCogs}/></i>
+		      						<div className="lgdrpdwn">
+		      							<p className="lg-opt">Langue et région</p>
+		      							<p className="lg-desc">Choisissez la langue affichée dans le profil</p>
+										<select onChange={onChangeLanguage}>
+											<option>FR</option>
+											<option>EN</option>
+							  			</select>
+									</div>
+		      					</div>
+							</div>
+	      					<div className="btn-container">
 		      					<a href="#" className="btn bg-yellow mg15">Valider</a>
 		      				</div>
 		      			</div>
@@ -120,8 +189,8 @@ const Profil: React.FC = function() {
 		      	<div className="account-game">
 		      		<h2>Mes comptes de jeux</h2>
 		      		<div className="itemGame">
-		      			<p className="img-account"><img src={IconXbox} alt="xbox" width="84" height="83"/></p>
-		      			<p>PSN id</p>		      			
+		      			<p className="img-account"><img src={IconPs} alt="xbox" width="45" height="45"/></p>
+		      			<p>PSN id</p>
 		      			<Popup
 							    trigger={<button className="btn bg-white">Preuve-Platree<i></i></button>}
 							    modal
@@ -135,26 +204,26 @@ const Profil: React.FC = function() {
 							        <div className="content set-team">
 							          {' '}
 										<div className="set-account">
-											<label>PSN id</label><input type="text" placeholder="Preuve-platree"/>										
-										</div>						          
+											<label>PSN id</label><input type="text" placeholder="Preuve-platree"/>
+										</div>
 							        </div>
 						        	<div className="actions">
 							          	<Popup
 							            	trigger={<button className="btn bg-yellow"> Valider </button>}
-							            	
+
 							          	>
-						            		
-										</Popup>						          		
+
+										</Popup>
 						        	</div>
 						     	</div>
 						    </Popup>
 
 		      		</div>
 		      		<div className="itemGame">
-		      			<p className="img-account"><img src={IconPs} alt="xbox" width="84" height="83"/></p>
+		      			<p className="img-account"><img src={IconXbox} alt="xbox" width="45" height="45"/></p>
 		      			<p>XboxLive</p>
 		      			<Popup
-							    trigger={<button className="btn bg-white">Preuve-Platree<i></i></button>}
+							    trigger={<button className="btn bg-white">XXXXXXXX<i></i></button>}
 							    modal
 							    nested
   							>
@@ -166,16 +235,16 @@ const Profil: React.FC = function() {
 							        <div className="content set-team">
 							          {' '}
 										<div className="set-account">
-											<label>PSN id</label><input type="text" placeholder="Preuve-platree"/>										
-										</div>						          
+											<label>PSN id</label><input type="text" placeholder="XXXXXXXX"/>
+										</div>
 							        </div>
 						        	<div className="actions">
 							          	<Popup
 							            	trigger={<button className="btn bg-yellow"> Valider </button>}
-							            	
+
 							          	>
-						            		
-										</Popup>						          		
+
+										</Popup>
 						        	</div>
 						     	</div>
 						    </Popup>

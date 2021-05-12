@@ -24,6 +24,24 @@ export const sendUserConectedAction = function(data:string) {
  	}
 }
 
+export const sendUserConnectedXboxAction = function(user:any) {
+	const newUserObject:UserType = {
+		username:user.Username,
+		email:user.Email,
+		avatar:"",
+		roles:[],
+		firstname:user.Surname,
+		language:user.PreferredLanguage,
+		lastname:user.DisplayName,
+		isBaned:false,
+		id:user.Id
+	}
+	return {
+		type:USER_CONNECTED,
+		res:newUserObject??""
+  	}
+}
+
 export const changeLanguageUserConnected = function(user:UserType,lang:string) {
 	const newUserObject:UserType = {
 		username:user.username,

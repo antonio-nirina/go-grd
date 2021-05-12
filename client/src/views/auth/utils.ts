@@ -1,5 +1,6 @@
 import {createApolloClient as client} from "../../config/apollo-client"
 import {XBoxToken} from "../../gql/user/auth"
+import {sendUserConectedAction} from "./action/userAction"
 
 
 const URL_REDIRECT = "http://localhost:3000"
@@ -35,6 +36,7 @@ const receiveMessage = function(event: any) {
 }
 
 export const getTokenUser = async function(code: string) {
+
 	try {
 		const data = await client().query({query:XBoxToken,variables:{code:code}})
 		const token:TokenType = {
@@ -42,8 +44,9 @@ export const getTokenUser = async function(code: string) {
 			refresh_token:data.data.GetAccessTokenXbox.RefreshToken,
 			type:"xbox"
 		}
-		SendToken(token)
-		window.location.pathname = "/"
+		sendUserConectedAction(data.data.User)
+		// SendToken(token)
+		// window.location.pathname = "/"
 	} catch(errors) {
 		console.log("errors_get_one_match", errors)
 	}
@@ -51,6 +54,10 @@ export const getTokenUser = async function(code: string) {
 
 export const SendToken = function(token:TokenType) {
 	localStorage.setItem(ACCESS_TOKEN,JSON.stringify(token))
+}
+
+export const sendDataStore = function(state:any) {
+	console.log(state)
 }
 
 
