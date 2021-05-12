@@ -6,4 +6,7 @@ const (
 	XboxApi_Xst = "https://xsts.auth.xboxlive.com/xsts/authorize"
 	XboxApi_Profil = "https://profile.xboxlive.com/users/gamertag/profile/settings"
 	KEY_ACCESS_TOKEN = "key_acces_token"
+	ME_URL = "https://graph.microsoft.com/beta/me"
+	PHOT0_URL = "https://graph.microsoft.com/beta/me/photo"
+	// PUT https://graph.microsoft.com/v1.0/me/photo/$value
 )

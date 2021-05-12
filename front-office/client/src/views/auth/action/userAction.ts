@@ -4,6 +4,7 @@ import {ACCESS_TOKEN} from "../utils"
 export const USER_CONNECTED = "user_connected"
 
 export interface UserType {
+	username:string|""
 	email:string|""
 	avatar:string|""
 	roles:Array<string>
@@ -23,8 +24,27 @@ export const sendUserConectedAction = function(data:string) {
  	}
 }
 
+export const sendUserConnectedXboxAction = function(user:any) {
+	const newUserObject:UserType = {
+		username:user.Username,
+		email:user.Email,
+		avatar:"",
+		roles:[],
+		firstname:user.Surname,
+		language:user.PreferredLanguage,
+		lastname:user.DisplayName,
+		isBaned:false,
+		id:user.Id
+	}
+	return {
+		type:USER_CONNECTED,
+		res:newUserObject??""
+  	}
+}
+
 export const changeLanguageUserConnected = function(user:UserType,lang:string) {
 	const newUserObject:UserType = {
+		username:user.username,
 		email:user.email,
 		avatar:user.avatar,
 		roles:user.roles,

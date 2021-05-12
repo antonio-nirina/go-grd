@@ -1,10 +1,14 @@
 import {createApolloClient as client} from "../../config/apollo-client"
 import {XBoxToken} from "../../gql/user/auth"
+import {sendUserConectedAction} from "./action/userAction"
 
 
 const URL_REDIRECT = "http://localhost:3000"
+
 const REDIRECT_URI = encodeURI(URL_REDIRECT)
-const BASE_URI = `https://login.live.com/oauth20_authorize.srf?response_type=code&client_id=43ecdb9b-5301-4d89-ab72-52daca2f648b&approval_prompt=auto&redirect_uri=${REDIRECT_URI}&scope=Xboxlive.signin+Xboxlive.offline_access`
+const BASE_URI = `https://login.microsoftonline.com/common/oauth2/v2.0/authorize?response_type=code&client_id=43ecdb9b-5301-4d89-ab72-52daca2f648b&redirect_uri=${REDIRECT_URI}&response_mode=query
+&scope=offline_access%20user.read%20mail.read`
+// const BASE_URI = `https://login.live.com/oauth20_authorize.srf?response_type=code&client_id=43ecdb9b-5301-4d89-ab72-52daca2f648b&approval_prompt=auto&redirect_uri=${REDIRECT_URI}&scope=Xboxlive.signin+Xboxlive.offline_access`
 export const ACCESS_TOKEN = "access_token"
 export interface TokenType {
 	access_token:string|""
@@ -27,10 +31,12 @@ const receiveMessage = function(event: any) {
 	}
 
 	const { data } = event
+	console.log(data)
 	if (data) getTokenUser(data.split("=")[1])
 }
 
 export const getTokenUser = async function(code: string) {
+
 	try {
 		const data = await client().query({query:XBoxToken,variables:{code:code}})
 		const token:TokenType = {
@@ -38,8 +44,9 @@ export const getTokenUser = async function(code: string) {
 			refresh_token:data.data.GetAccessTokenXbox.RefreshToken,
 			type:"xbox"
 		}
-		SendToken(token)
-		window.location.pathname = "/profil"
+		sendUserConectedAction(data.data.User)
+		// SendToken(token)
+		// window.location.pathname = "/"
 	} catch(errors) {
 		console.log("errors_get_one_match", errors)
 	}
@@ -47,6 +54,10 @@ export const getTokenUser = async function(code: string) {
 
 export const SendToken = function(token:TokenType) {
 	localStorage.setItem(ACCESS_TOKEN,JSON.stringify(token))
+}
+
+export const sendDataStore = function(state:any) {
+	console.log(state)
 }
 
 

@@ -60,6 +60,8 @@ type propertiesXs struct {
 type DataToken struct {
 	AccessToken string `json:"access_token"`
 	RefreshToken string `json:"refresh_token"`
+	UserId string `json:"user_id"`
+	User *ResponseUser
 }
 
 type userToken struct {
@@ -75,7 +77,6 @@ type displayCl struct {
 type uhs struct {
 	Uhs string `json:"uhs"`
 }
-
 
 var xboxClient = &XboxClient{}
 
@@ -121,15 +122,17 @@ func (r *resolver) GetAccessTokenXboxApi(params graphql.ResolveParams) (interfac
 		if err != nil {
 			external.Logger(fmt.Sprintf("%v", err))
 		}
-		respToken, err := getTokenUser(resSuccess.AccessToken)
 		
+		token.AccessToken 	= resSuccess.AccessToken
+		token.RefreshToken 	= resSuccess.RefreshToken
+		token.UserId 		= resSuccess.UserId
+		fmt.Println("AccessToken", token.AccessToken)
+		user,err := GetUserConnectedXbox(token.AccessToken)
 		if err != nil {
 			external.Logger(fmt.Sprintf("%v", err))
 		}
 
-		token.AccessToken = resSuccess.AccessToken
-		token.RefreshToken = resSuccess.RefreshToken
-		getXsTokenXbox(respToken)
+		token.User = user
 		// store in Redis
 		// json,_ := json.Marshal(token)
 		// external.SetDataRedis(KEY_ACCESS_TOKEN,string(json))
@@ -140,6 +143,14 @@ func (r *resolver) GetAccessTokenXboxApi(params graphql.ResolveParams) (interfac
 	return nil,err
 }
 
+func getUserMicrosoft(accessToken string) {
+	
+}
+
+/*
+	Use For Xbox Token
+	TODO
+*/
 func getTokenUser(accessToken string)(string,error) {
 	pr := &properties{
 		AuthMethod:"RPS",
