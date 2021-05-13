@@ -7,7 +7,6 @@ import Router from "./views/commons/router"
 
 import {createApolloClient} from "./config/apollo-client"
 import { loadState, saveState } from "./storage/loadstate"
-import {sendDataStore} from "./views/auth/utils"
 
 
 const store = createStore(rootReducer, loadState())
@@ -15,7 +14,6 @@ const store = createStore(rootReducer, loadState())
 store.subscribe(function() {
 	const nameState = 'userConnected'
 	saveState(store.getState().userConnected.user,nameState)
-	sendDataStore(store.getState())
 
 })
 

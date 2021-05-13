@@ -14,6 +14,9 @@ import (
 	"github.com/graphql-go/graphql"
 	"github.com/joho/godotenv"
 	"github.com/thoussei/antonio/main/front-office/api/external"
+	game "github.com/thoussei/antonio/main/front-office/api/games/entity"
+	"github.com/thoussei/antonio/main/front-office/api/user/entity"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
 var tr = &http.Transport{
@@ -60,8 +63,7 @@ type propertiesXs struct {
 type DataToken struct {
 	AccessToken string `json:"access_token"`
 	RefreshToken string `json:"refresh_token"`
-	UserId string `json:"user_id"`
-	User *ResponseUser
+	User *ResponseUserApi
 }
 
 type userToken struct {
@@ -125,33 +127,53 @@ func (r *resolver) GetAccessTokenXboxApi(params graphql.ResolveParams) (interfac
 		
 		token.AccessToken 	= resSuccess.AccessToken
 		token.RefreshToken 	= resSuccess.RefreshToken
-		token.UserId 		= resSuccess.UserId
-		fmt.Println("AccessToken", token.AccessToken)
+		
 		user,err := GetUserConnectedXbox(token.AccessToken)
 		if err != nil {
 			external.Logger(fmt.Sprintf("%v", err))
 		}
 
 		token.User = user
+		lang := "fr"
+		if user.PreferredLanguage == "en" {
+			lang = "en"
+		}
+		userMicrosoft := &entity.User{
+			Uid:           primitive.NewObjectID(),
+			FirstName:     user.GivenName,
+			LastName:      user.Surname,
+			Password:      "",
+			Username:      user.DisplayName,
+			Email:         user.UserPrincipalName,
+			IsBanned:      false,
+			Avatar:        "",
+			Language:      lang,
+			Point:         entity.POINT,
+			IdGameAccount: []game.GameAccount{},
+			Roles: 	roles,
+			TypeConnexion:"xbox",		
+		}
+
+		res, _ := r.userHandler.FindUserByEmail(user.UserPrincipalName)
+		
+		if res.Email == "" {
+			r.userHandler.SavedUser(userMicrosoft)
+		}
+		
 		// store in Redis
 		// json,_ := json.Marshal(token)
 		// external.SetDataRedis(KEY_ACCESS_TOKEN,string(json))
-
 		return token,nil
 	}
 	
 	return nil,err
 }
 
-func getUserMicrosoft(accessToken string) {
-	
-}
-
 /*
 	Use For Xbox Token
 	TODO
 */
-func getTokenUser(accessToken string)(string,error) {
+func (r *resolver) getTokenUser(accessToken string)(string,error) {
 	pr := &properties{
 		AuthMethod:"RPS",
 		SiteName:"user.auth.xboxlive.com",
@@ -224,12 +246,3 @@ func getXsTokenXbox(tokenUser string)(string,error) {
 
 	return "",nil
 }
-
-/*
-	string to json
-	str := `{"page": 1, "fruits": ["apple", "peach"]}`
-    res := response2{}
-    json.Unmarshal([]byte(str), &res)
-    fmt.Println(res)
-
-*/

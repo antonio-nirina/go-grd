@@ -45,6 +45,8 @@ type inputElements struct {
 	Password string `json:"password"`
 }
 
+var roles = []string{"role_user"}
+
 var userEntity = entity.User{}
 
 func (r *resolver) SavedUserResolver(params graphql.ResolveParams) (interface{}, error) {
@@ -54,7 +56,7 @@ func (r *resolver) SavedUserResolver(params graphql.ResolveParams) (interface{},
 
 	hashed := userEntity.CreatedHash(input.UserInput.Password)
 	check, _ := r.ValidateUserResolver(&input)
-	roles := []string{"role_user"}
+	
 
 	if check {
 		return nil, errors.New("email or username already existe")
@@ -71,7 +73,8 @@ func (r *resolver) SavedUserResolver(params graphql.ResolveParams) (interface{},
 		Language:      "fr",
 		Point:         entity.POINT,
 		IdGameAccount: []game.GameAccount{},
-		Roles: 	roles,		
+		Roles: 	roles,
+		TypeConnexion:"site",		
 	}
 
 	res, err := r.userHandler.SavedUser(userSaved)
