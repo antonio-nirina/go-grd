@@ -96,6 +96,19 @@ func (c *driverRepository) FindUserByUsername(username string) (entity.User, err
 	return result, nil
 }
 
+func (c *driverRepository) SavedUserXbox(user *entity.User) (interface{}, error) {
+	var collection = c.client.Database("grd_database").Collection("users")
+	insertResult, err := collection.InsertOne(context.TODO(), user)
+
+	if err != nil {
+		return nil, err
+	}
+
+	fmt.Println("Inserted a single document: ", insertResult)
+
+	return user, nil
+}
+
 /*func (c *driverRepository) UpdateAccountGame(email string) (entity.User, error) {
 	var collection = c.client.Database("grd_database").Collection("users")
 	var result entity.User

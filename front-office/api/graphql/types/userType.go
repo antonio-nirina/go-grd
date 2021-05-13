@@ -51,9 +51,6 @@ var AuthSchemaType = graphql.NewObject(graphql.ObjectConfig{
 var userTypeXbox = graphql.NewObject(graphql.ObjectConfig{
 	Name: "UserboxType",
 	Fields: graphql.Fields{
-		"CodeStatut": &graphql.Field{
-			Type: graphql.Int,
-		},
 		"DisplayName": &graphql.Field{
 			Type: graphql.String,
 		},
@@ -72,6 +69,9 @@ var userTypeXbox = graphql.NewObject(graphql.ObjectConfig{
 		"PreferredLanguage": &graphql.Field{
 			Type: graphql.String,
 		},
+		"userPrincipalName": &graphql.Field{
+			Type: graphql.String,
+		},
 	},
 })
 var XboxSchemaType = graphql.NewObject(graphql.ObjectConfig{
@@ -81,9 +81,6 @@ var XboxSchemaType = graphql.NewObject(graphql.ObjectConfig{
 			Type: graphql.String,
 		},
 		"RefreshToken": &graphql.Field{
-			Type: graphql.String,
-		},
-		"UserId": &graphql.Field{
 			Type: graphql.String,
 		},
 		"User": &graphql.Field{

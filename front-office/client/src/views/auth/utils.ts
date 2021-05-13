@@ -36,7 +36,6 @@ const receiveMessage = function(event: any) {
 }
 
 export const getTokenUser = async function(code: string) {
-
 	try {
 		const data = await client().query({query:XBoxToken,variables:{code:code}})
 		const token:TokenType = {
@@ -44,7 +43,8 @@ export const getTokenUser = async function(code: string) {
 			refresh_token:data.data.GetAccessTokenXbox.RefreshToken,
 			type:"xbox"
 		}
-		sendUserConectedAction(data.data.User)
+		console.log("user", data.data.GetAccessTokenXbox.User)
+		//sendUserConectedAction(data.data.User)
 		// SendToken(token)
 		// window.location.pathname = "/"
 	} catch(errors) {

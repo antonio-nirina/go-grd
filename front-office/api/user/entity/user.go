@@ -28,6 +28,7 @@ type User struct {
 	IdGameAccount []game.GameAccount `json:"idGameAccount,omitempty"`
 	Point         int                `json:"point"`
 	Roles      	 []string             `json:"roles"`
+	TypeConnexion   string            `json:"type_connexion"`
 }
 
 func (u *User) CreatedHash(plainText string) (hashText string) {

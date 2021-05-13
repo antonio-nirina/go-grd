@@ -5,7 +5,6 @@ package handler
  */
 
 import (
-
 	"github.com/thoussei/antonio/main/front-office/api/user/entity"
 	"github.com/thoussei/antonio/main/front-office/api/user/repository"
 	"go.mongodb.org/mongo-driver/bson/primitive"
@@ -76,5 +75,6 @@ func (u *userUsecase) FindUserByUsername(email string) (entity.User, error) {
 
 	return user, nil
 }
+
 
 

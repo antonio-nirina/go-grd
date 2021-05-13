@@ -35,6 +35,7 @@ func Handle(next http.Handler) http.Handler {
 
 		if len(arrayToken) > 1 {
 			array := strings.SplitAfter(arrayToken[1],"=")
+			fmt.Println("secur", array[0])
 			if array[0] != "" {
 				token, _ := jwt.Parse(tokenString, func(token *jwt.Token) (interface{}, error) {
 					if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
