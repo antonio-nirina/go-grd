@@ -3,6 +3,10 @@
 	padding: 5em;
     height: 100vh;
 }
+.full-container h1{
+	width: 100%;
+	text-align: center;
+}
 .full-container h2{
 	width: 76%;
 	display: inline-block;

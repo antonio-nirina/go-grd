@@ -14,6 +14,7 @@ const Tournament: React.FC = function(props:any) {
 		<div className="container">
 			<Header/>
 			<div className="full-container">
+				<h1>Liste des tournois disponibles</h1>
 				<h2>Tournois en direct (15)</h2>
 				<div className="bt-container"><Link to="#" className="btn bg-yellow">Voir plus</Link></div>
 				<div className="live">					
