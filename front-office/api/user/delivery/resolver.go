@@ -19,6 +19,7 @@ type Resolver interface {
 	FindOneUserResolver(params graphql.ResolveParams) (interface{}, error)
 	AuthUserResolver(params graphql.ResolveParams) (interface{}, error)
 	GetAccessTokenXboxApi(params graphql.ResolveParams) (interface{}, error)
+	GetXboxProfil(params graphql.ResolveParams) (interface{}, error)
 }
 
 type resolver struct {

@@ -60,6 +60,13 @@ export const changeLanguageUserConnected = function(user:UserType,lang:string) {
   	}
 }
 
+export const sendProfilXboxOrPsn = function(user:UserType) {
+	return {
+		type:USER_CONNECTED,
+		res:user??""
+  	}
+}
+
 export const removeDataUser = function() {
 	localStorage.removeItem(ACCESS_TOKEN)
 	localStorage.removeItem("userConnected")

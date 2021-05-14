@@ -36,5 +36,6 @@ func GetRootFields() graphql.Fields {
 		"FindAllGame":      GetAllGameQuery(),
 		"FindAllPlateform": GetAllPlateformQuery(),
 		"GetAccessTokenXbox": GetAccessTokenXbox(),
+		"GetProfilUserXbox": GetProfilUserXbox(),
 	}
 }

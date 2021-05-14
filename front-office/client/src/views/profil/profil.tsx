@@ -34,6 +34,7 @@ const Profil: React.FC = function() {
 		}
 		//
 	}
+
   return(
 	<div className="profil connected">
       <div className="container">
@@ -202,7 +203,7 @@ const Profil: React.FC = function() {
 							  			</select>
 									</div>
 		      					</div>
-							</div>	      					
+							</div>
 		      			</div>
 		      		</div>
 		      	</div>
@@ -374,7 +375,7 @@ const Profil: React.FC = function() {
 									Translation(userConnectedRedux.user.language).profil.create
 									:
 									Translation("fr").profil.create} : 05/03/2020</p>
-      								
+
       								<p>{Object.keys(userConnectedRedux.user).length > 0 ?
 									Translation(userConnectedRedux.user.language).profil.owner
 									:

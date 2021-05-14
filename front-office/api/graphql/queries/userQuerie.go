@@ -33,3 +33,17 @@ func GetAccessTokenXbox() *graphql.Field {
 		Resolve: UserRolve.GetAccessTokenXboxApi,
 	}
 }
+
+func GetProfilUserXbox() *graphql.Field{
+	return &graphql.Field{
+		Type:        types.XboxProfilSchemaType,
+		Description: "Get profil user xbox",
+		Args: graphql.FieldConfigArgument{
+			"accessToken": &graphql.ArgumentConfig{
+				Type: graphql.String,
+			},
+		},
+		
+		Resolve: UserRolve.GetXboxProfil,
+	}
+}

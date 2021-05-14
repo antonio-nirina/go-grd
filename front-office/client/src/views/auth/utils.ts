@@ -31,22 +31,22 @@ const receiveMessage = function(event: any) {
 	}
 
 	const { data } = event
-	console.log(data)
+
 	if (data) getTokenUser(data.split("=")[1])
 }
 
 export const getTokenUser = async function(code: string) {
 	try {
 		const data = await client().query({query:XBoxToken,variables:{code:code}})
+		console.log(data.data.GetAccessTokenXbox.AccessToken)
 		const token:TokenType = {
 			access_token: data.data.GetAccessTokenXbox.AccessToken,
 			refresh_token:data.data.GetAccessTokenXbox.RefreshToken,
 			type:"xbox"
 		}
-		console.log("user", data.data.GetAccessTokenXbox.User)
-		//sendUserConectedAction(data.data.User)
-		// SendToken(token)
-		// window.location.pathname = "/"
+
+		SendToken(token)
+		window.location.pathname = "/"
 	} catch(errors) {
 		console.log("errors_get_one_match", errors)
 	}
@@ -56,9 +56,6 @@ export const SendToken = function(token:TokenType) {
 	localStorage.setItem(ACCESS_TOKEN,JSON.stringify(token))
 }
 
-export const sendDataStore = function(state:any) {
-	console.log(state)
-}
 
 
 
