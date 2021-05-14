@@ -17,25 +17,18 @@ import 'reactjs-popup/dist/index.css'
 // import { CircularProgressbar, CircularProgressbarWithChildren, buildStyles} from "react-circular-progressbar"
 import "react-circular-progressbar/dist/styles.css"
 import {RootState} from "../../reducer"
-import {changeLanguageUserConnected} from "../auth/action/userAction"
+
 import {Translation} from "../../lang/translation"
 import HistoryTournament from "./historyTournament"
 import HistoryResult from "./historyResult"
 import AccountGame from "./accountGame"
+import Me from "./me"
 
 
 const Profil: React.FC = function() {
 	const userConnectedRedux = useSelector((state:RootState) => state.userConnected)
-	const dispatch = useDispatch()
 
-	const onChangeLanguage = function(e:any) {
-		if(parseInt(e.target.value) === 1) {
-			dispatch(changeLanguageUserConnected(userConnectedRedux.user,"en"))
-		} else {
-			dispatch(changeLanguageUserConnected(userConnectedRedux.user,"fr"))
-		}
-		//
-	}
+
 
   return(
 	<div className="profil connected">
@@ -205,57 +198,7 @@ const Profil: React.FC = function() {
 		      			</div>
 		      		</div>
 		      	</div>
-		      	<div className="about-bloc">
-		      		<div className="about-me">
-		      			<div className="field">
-		      				<h2>{
-		      						Object.keys(userConnectedRedux.user).length > 0 ?
-									Translation(userConnectedRedux.user.language).profil.set
-									:
-									Translation("fr").profil.set
-								}</h2>
-							<div className="col">
-	      						<input type="text" placeholder={
-	      							Object.keys(userConnectedRedux.user).length > 0 ?
-									Translation(userConnectedRedux.user.language).profil.pseudonym
-									:
-									Translation("fr").profil.pseudonym
-								}/>
-							</div>
-							<div className="col">
-	      						<input type="number" placeholder={Object.keys(userConnectedRedux.user).length > 0 ?
-									Translation(userConnectedRedux.user.language).profil.number
-									:
-									Translation("fr").profil.number}
-								/>
-							</div>
-							<div className="col">
-		      					<input type="text" placeholder={Object.keys(userConnectedRedux.user).length > 0 ?
-									Translation(userConnectedRedux.user.language).profil.adhesion
-									:
-									Translation("fr").profil.adhesion}
-								/>								
-		      				</div>		      				
-		      				<div className="lang-container col">
-		      					<div className="lang-setting">		      						
-		      						<div className="lgdrpdwn">		      							
-										<select onChange={onChangeLanguage}>
-											<option>FR</option>
-											<option>EN</option>
-							  			</select>
-									</div>
-		      					</div>
-							</div>
-		      			</div>
-		      			<div className="btn-container">
-  							<a href="#" className="btn bg-yellow mg15">{Object.keys(userConnectedRedux.user).length > 0 ?
-								Translation(userConnectedRedux.user.language).profil.validate
-								:
-								Translation("fr").profil.validate}
-							</a>
-		      			</div>
-		      		</div>
-		      	</div>
+		      	<Me />
 		      	<AccountGame />
 
 	      		<div className="my-teams" id="myteams">

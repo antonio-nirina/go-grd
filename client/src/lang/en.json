@@ -115,7 +115,9 @@
 		"paiement": "Fast paiement",
 		"wallet": "Porte-monnaie de paiement minimum",
 		"month":  "month",
-		"accountGame":"Unspecified game account"
+		"accountGame":"Unspecified game account",
+		"firstname":"Firstname",
+		"lastname":"Lastname"
 	},
 	"participHome": {
 		"participateTournament":"Participate in tournaments",
