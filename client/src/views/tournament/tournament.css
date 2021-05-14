@@ -16,3 +16,41 @@
 	display: inline-block;
 	text-align: right;
 }
+.side{
+	max-width: 350px;
+	background: #2c2c2c;
+	width: 100%;
+	border-radius: 5px;
+}
+.side img{
+	border-radius: 5px 5px 0px 0px;
+}
+.side-infos{
+
+}
+.side table{
+	width: 100%;
+	text-align: left;
+	padding: 0 15px;
+
+}
+.name-section{
+	padding: 0 15px;
+}
+.prize-section{
+	padding: 5px 15px;
+}	
+.btn-full{
+	width: 100%;
+	text-align: center;
+	background: #f2cf1c;
+	border-radius: 0px 0px 5px 5px;	
+}
+.btn-full .bg-yellow{
+	padding: 15px;
+	display: block;
+	border-radius: 0px 0px 5px 5px;
+	text-transform: uppercase;
+	color: #010101;
+	text-align: center;
+}

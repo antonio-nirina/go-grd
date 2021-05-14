@@ -17,37 +17,42 @@ const Tournament: React.FC = function(props:any) {
 				<h1>Liste des tournois disponibles</h1>
 				<h2>Tournois en direct (15)</h2>
 				<div className="bt-container"><Link to="#" className="btn bg-yellow">Voir plus</Link></div>
-				<div className="live">					
+				<div className="live side">					
 					<Link to="#">
 						<div className="items">
-
-							<div className="meta">
-								<table>
-									<tr>
-										<th>Date</th>
-										<th>Equipe</th>
-										<th>Genre</th>
-										<th>Genre</th>								
-									</tr>
-									<tr>
-										<td>19 Jan 17:00</td>
-										<td>12/16</td>
-										<td>5 ON 5</td>
-										<td>France</td>
-									</tr>
-								</table>								
+							<img src="https://i.ibb.co/Vw39G5b/championship-rl.jpg" alt="championship-rl" className="imgresp"/>
+							<div className="side-infos">
+								<div className="meta">
+									<table>
+										<tr>
+											<th>Date</th>
+											<th>Equipe</th>
+											<th>Genre</th>
+											<th>Région</th>								
+										</tr>
+										<tr>
+											<td>19 Jan 17:00</td>
+											<td>12/16</td>
+											<td>5 ON 5</td>
+											<td>France</td>
+										</tr>
+									</table>								
+								</div>
+								<div className="name-section">
+									<p>Tournois Rocket League</p>
+								</div>
+								<div className="prize-section">
+									<div className="prize-warp"><i></i>Prix</div>
+									<div className="prize">100€ Prix Cache</div>
+								</div>								
 							</div>
-							<div className="name-section">
-								<p>EMSL saison 2</p>
+							<div className="btn-full">
+								<a className="signup-btn bg-yellow">Inscrivez vous</a>
 							</div>
-							<div className="prize-section">
-								<div className="prize-warp">Prize</div>
-							</div>
-							<a className="signup-btn">Inscrivez vous</a>
 						</div>
 					</Link>
 				</div>
-				<div className="upcoming">
+				<div className="upcoming side">
 					<div className="items"></div>
 				</div>
 			</div>
