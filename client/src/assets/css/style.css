@@ -17,8 +17,20 @@ html{
 .clear{
     clear: both;
 }
+.bg-yellow.btn:hover, .bg-white.btn:hover{
+  background: #383434;
+  color: #f2cf1c;
+}
+.bg-white.btn:hover{
+    border: 1px solid #ffffff !important;
+    color: #ffffff;
+}
+.bg-white{
+  border: 1px solid #ffffff !important;
+}
 .bg-yellow{
   background: #f2cf1c;
+  border: 1px solid #f2cf1c !important;
 }
 .cl-yellow{
   color: yellow;

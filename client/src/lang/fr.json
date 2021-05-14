@@ -11,6 +11,14 @@
 		"password":"Ton mot de passe",
 		"errorForm":"Email n'est pas valide"
 	},
+	"register":{
+		
+	},
+	"initpass":{
+		"init":"Réinitialisation mot de passe",
+		"validateInit": "réinitialiser mon mot de passe",
+		"connex": "Connectez-vous avec votre compte"
+	},
 	"header":{
 		"leagues": "ligues",
 		"wagers": "wagers",
