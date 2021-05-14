@@ -24,7 +24,7 @@ const Tournament: React.FC = function(props:any) {
 						<Link to="#" className="btn bg-yellow">Voir plus</Link>
 					</div>
 					<div className="live side">					
-						<Link to="/" title="">
+						<Link to="/info" title="info">
 							<div className="items">
 								<div className="side-img">
 									<img src="https://i.ibb.co/Vw39G5b/championship-rl.jpg" alt="championship-rl"/>
@@ -61,7 +61,7 @@ const Tournament: React.FC = function(props:any) {
 						</Link>						
 					</div>	
 					<div className="live side">					
-						<Link to="/" title="">
+						<Link to="/info" title="">
 							<div className="items">
 								<div className="side-img">
 									<img src="https://i.ibb.co/Vw39G5b/championship-rl.jpg" alt="championship-rl"/>
@@ -98,7 +98,7 @@ const Tournament: React.FC = function(props:any) {
 						</Link>						
 					</div>
 					<div className="live side">					
-						<Link to="/" title="">
+						<Link to="/info" title="">
 							<div className="items">
 								<div className="side-img">
 									<img src="https://i.ibb.co/Vw39G5b/championship-rl.jpg" alt="championship-rl"/>
@@ -141,7 +141,7 @@ const Tournament: React.FC = function(props:any) {
 						<Link to="#" className="btn bg-yellow">Voir plus</Link>
 					</div>
 					<div className="upcomming side">					
-						<Link to="/" title="">
+						<Link to="/info" title="">
 							<div className="items">
 								<div className="side-img">
 									<img src="https://i.ibb.co/Vw39G5b/championship-rl.jpg" alt="championship-rl"/>
@@ -178,7 +178,7 @@ const Tournament: React.FC = function(props:any) {
 						</Link>						
 					</div>
 					<div className="upcomming side">					
-						<Link to="/" title="">
+						<Link to="/info" title="">
 							<div className="items">
 								<div className="side-img">
 									<img src="https://i.ibb.co/Vw39G5b/championship-rl.jpg" alt="championship-rl"/>
@@ -215,7 +215,7 @@ const Tournament: React.FC = function(props:any) {
 						</Link>						
 					</div>	
 					<div className="upcomming side">					
-						<Link to="/" title="">
+						<Link to="/info" title="">
 							<div className="items">
 								<div className="side-img">
 									<img src="https://i.ibb.co/Vw39G5b/championship-rl.jpg" alt="championship-rl"/>
