@@ -63,7 +63,6 @@ type propertiesXs struct {
 type DataToken struct {
 	AccessToken string `json:"access_token"`
 	RefreshToken string `json:"refresh_token"`
-	User *ResponseUserApi
 }
 
 type userToken struct {
@@ -133,7 +132,6 @@ func (r *resolver) GetAccessTokenXboxApi(params graphql.ResolveParams) (interfac
 			external.Logger(fmt.Sprintf("%v", err))
 		}
 
-		token.User = user
 		lang := "fr"
 		if user.PreferredLanguage == "en" {
 			lang = "en"

@@ -49,28 +49,28 @@ var AuthSchemaType = graphql.NewObject(graphql.ObjectConfig{
 	},
 })
 var userTypeXbox = graphql.NewObject(graphql.ObjectConfig{
-	Name: "UserboxType",
+	Name: "UserXboxType",
 	Fields: graphql.Fields{
 		"DisplayName": &graphql.Field{
-			Type: graphql.String,
+			Type: graphql.NewNonNull(graphql.String),
 		},
 		"Surname": &graphql.Field{
-			Type: graphql.String,
+			Type: graphql.NewNonNull(graphql.String),
 		},
 		"Username": &graphql.Field{
-			Type: graphql.String,
+			Type: graphql.NewNonNull(graphql.String),
 		},
 		"Id": &graphql.Field{
-			Type: graphql.String,
+			Type: graphql.NewNonNull(graphql.String),
 		},
 		"Email": &graphql.Field{
-			Type: graphql.String,
+			Type: graphql.NewNonNull(graphql.String),
 		},
 		"PreferredLanguage": &graphql.Field{
 			Type: graphql.String,
 		},
 		"userPrincipalName": &graphql.Field{
-			Type: graphql.String,
+			Type: graphql.NewNonNull(graphql.String),
 		},
 	},
 })
@@ -83,8 +83,29 @@ var XboxSchemaType = graphql.NewObject(graphql.ObjectConfig{
 		"RefreshToken": &graphql.Field{
 			Type: graphql.String,
 		},
-		"User": &graphql.Field{
-			Type: userTypeXbox,
+	},
+})
+
+var XboxProfilSchemaType = graphql.NewObject(graphql.ObjectConfig{
+	Name: "XboxProfilType",
+	Fields: graphql.Fields{
+		"DisplayName": &graphql.Field{
+			Type: graphql.NewNonNull(graphql.String),
+		},
+		"Surname": &graphql.Field{
+			Type: graphql.NewNonNull(graphql.String),
+		},
+		"Id": &graphql.Field{
+			Type: graphql.NewNonNull(graphql.String),
+		},
+		"Mail": &graphql.Field{
+			Type: graphql.NewNonNull(graphql.String),
+		},
+		"PreferredLanguage": &graphql.Field{
+			Type: graphql.NewNonNull(graphql.String),
+		},
+		"userPrincipalName": &graphql.Field{
+			Type: graphql.NewNonNull(graphql.String),
 		},
 	},
 })

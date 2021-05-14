@@ -11,14 +11,20 @@ export const XBoxToken = gql`
         GetAccessTokenXbox(code: $code) {
 			AccessToken
 			RefreshToken
-			User{
-				DisplayName
-				Surname
-				Username
-				Id
-				Email
-				PreferredLanguage
-			}
 		}
     }
+`
+
+export const XboxProfil = gql`
+	query GetProfilUserXbox($accessToken: String!) {
+		GetProfilUserXbox(accessToken: $accessToken) {
+				DisplayName
+				Surname
+				userPrincipalName
+				Id
+				Mail
+				PreferredLanguage
+			}
+
+	}
 `

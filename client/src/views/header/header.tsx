@@ -93,28 +93,31 @@ const Header: React.FC = function() {
                     <div className="box">
     	 			   <div className="lang">
                             <span>
-                                <a href="#" title="">
+                                <>
                                     <img src={fr} alt="" className={userConnectedRedux.user.language && userConnectedRedux.user.language === "fr" ? "lang show" : "hide" }  width="28" height="29"/>
                                     <img src={gb} alt="" className={userConnectedRedux.user.language && userConnectedRedux.user.language === "fr" ? "hide" : "lang gb" } width="28" height="29"/>
-                                </a>
+                                </>
                             </span>
                         </div>
                         <div className="connex" >
-                            <a href="#">
+                            <>
                                 <i className="square">
                                     <FontAwesomeIcon icon={faPlus} size="xs"/>
                                 </i>
-                            </a>
-                            <a href="#"><i className="relative"><FontAwesomeIcon icon={faUsers} size="lg"/><span className="counter">2</span></i></a>
+                            </>
+                            <><i className="relative">
+								<FontAwesomeIcon icon={faUsers} size="lg"/>
+								<span className="counter">2</span></i>
+							</>
                         </div>
                     </div>
                     <div className="gametag">
                         <div className="itemsTag">
                             <div className="bg-gametag">
-                                <p>GameTag</p>
+                                <p>{userConnectedRedux.user.username}</p>
                                 <p>
-                                <a href="#"><img src={ps} className="itemTag" alt="" width="18" height="14"/></a>
-                                <a href="#"><img src={userConnectedRedux.user.language && userConnectedRedux.user.language === "fr" ? fr : gb} className="itemTag" alt="" width="15" height="14"/></a>
+									<><img src={ps} className="itemTag" alt="" width="18" height="14"/></>
+									<><img src={userConnectedRedux.user.language && userConnectedRedux.user.language === "fr" ? fr : gb} className="itemTag" alt="" width="15" height="14"/></>
                                 <i className="itemTag drop" onClick={onShow}><FontAwesomeIcon icon={faBars} /></i>
                                 </p>
                             </div>
