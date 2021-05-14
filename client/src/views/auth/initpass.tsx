@@ -56,10 +56,10 @@ const InitPass: React.FC = function() {
 			<div className="main">
 				<div className="containt">
 					<div className="group">
-					<h4>
+					<h1>
 						Réinitialisation mot de passe
 						<img src={joystick} alt=""/>
-					</h4>
+					</h1>
 						<div>
 							<span style={{"color":"red"}}>{errorForm ? Translation("fr").login.errorForm : ""}</span>
 						</div>
