@@ -123,5 +123,16 @@
 		"clipMonth":"Clip du mois",
 		"shop":"Boutique",
 		"result":"Mes résultats"
+	},
+	"tournament":{
+		"live": "Tournois en direct",
+		"more": "Voir plus",
+		"date": "Date",
+		"team": "Equipe",
+		"type": "Type",
+		"region": "Région",
+		"tournament": "Tournois",
+		"Signup": "Inscrivez-vous",
+		"upcomming" : "Trounoir à venir"
 	}
 }

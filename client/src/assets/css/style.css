@@ -86,6 +86,9 @@ html{
 .imgresp{
   width: 100%;
 }
+.awesome{
+  margin-right: 5px;
+}
 a{
    text-decoration:none;
 }
