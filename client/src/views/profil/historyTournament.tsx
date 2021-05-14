@@ -10,7 +10,7 @@ const HistoryTournament : React.FC = function() {
 	const userConnectedRedux = useSelector((state:RootState) => state.userConnected)
 
 	return (
-		<div className="mes-tournois">
+		<div className="mes-tournois" id="story">
 		<div className="tournois">
 			<h2>{Object.keys(userConnectedRedux.user).length > 0 ?
 						Translation(userConnectedRedux.user.language).profil.tournaments

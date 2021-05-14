@@ -43,7 +43,7 @@ const Profil: React.FC = function() {
 	      <Header/>
 	      <div className="main-content">
 	      	<div className="main-pro">
-	      		<div className="wall-bloc">
+	      		<div className="wall-bloc" id="wall">
 		      		<div className="tabs">
 		      			<ul>
 		      				<li><a href="#wall" className="active">
@@ -54,7 +54,7 @@ const Profil: React.FC = function() {
 										Translation("fr").profil.wall
 									}
 							  </a></li>
-		      				<li><a href="#">
+		      				<li><a href="#account">
 								  {
 			      						Object.keys(userConnectedRedux.user).length > 0 ?
 										Translation(userConnectedRedux.user.language).profil.account
@@ -70,7 +70,7 @@ const Profil: React.FC = function() {
 									Translation("fr").profil.games
 								}
 							  </a></li>
-		      				<li><a href="#">
+		      				<li><a href="#myteams">
 							  {
 									Object.keys(userConnectedRedux.user).length > 0 ?
 									Translation(userConnectedRedux.user.language).profil.team
@@ -78,7 +78,7 @@ const Profil: React.FC = function() {
 									Translation("fr").profil.team
 								}
 							  </a></li>
-		      				<li><a href="#">
+		      				<li><a href="#story">
 							  {
 									Object.keys(userConnectedRedux.user).length > 0 ?
 									Translation(userConnectedRedux.user.language).profil.tournaments
@@ -86,14 +86,14 @@ const Profil: React.FC = function() {
 									Translation("fr").profil.tournaments
 								}
 							  </a></li>
-		      				<li><a href="#">
+		      				<li><a href="#results">
 							   {
 									Object.keys(userConnectedRedux.user).length > 0 ?
 									Translation(userConnectedRedux.user.language).profil.result
 									:
 									Translation("fr").profil.result
 								}</a></li>
-		      				<li><a href="#">
+		      				<li><a href="#premium">
 							  {
 									Object.keys(userConnectedRedux.user).length > 0 ?
 									Translation(userConnectedRedux.user.language).profil.premium
@@ -214,38 +214,31 @@ const Profil: React.FC = function() {
 									:
 									Translation("fr").profil.set
 								}</h2>
-		      				<input type="text" placeholder={
-		      						Object.keys(userConnectedRedux.user).length > 0 ?
+							<div className="col">
+	      						<input type="text" placeholder={
+	      							Object.keys(userConnectedRedux.user).length > 0 ?
 									Translation(userConnectedRedux.user.language).profil.pseudonym
 									:
 									Translation("fr").profil.pseudonym
 								}/>
-		      				<input type="number" placeholder={Object.keys(userConnectedRedux.user).length > 0 ?
+							</div>
+							<div className="col">
+	      						<input type="number" placeholder={Object.keys(userConnectedRedux.user).length > 0 ?
 									Translation(userConnectedRedux.user.language).profil.number
 									:
-									Translation("fr").profil.number}/>
-		      				<input type="text" placeholder={Object.keys(userConnectedRedux.user).length > 0 ?
+									Translation("fr").profil.number}
+								/>
+							</div>
+							<div className="col">
+		      					<input type="text" placeholder={Object.keys(userConnectedRedux.user).length > 0 ?
 									Translation(userConnectedRedux.user.language).profil.adhesion
 									:
-									Translation("fr").profil.adhesion}/>
-									<div className="btn-container">
-		      							<a href="#" className="btn bg-yellow mg15">{Object.keys(userConnectedRedux.user).length > 0 ?
-									Translation(userConnectedRedux.user.language).profil.validate
-									:
-									Translation("fr").profil.validate}</a>
-		      						</div>
-		      				<div className="lang-container">
-		      					<div className="lang-setting">
-		      						<i><FontAwesomeIcon className="little-icon" icon={faCogs}/></i>
-		      						<div className="lgdrpdwn">
-		      							<p className="lg-opt">{Object.keys(userConnectedRedux.user).length > 0 ?
-									Translation(userConnectedRedux.user.language).profil.lang
-									:
-									Translation("fr").profil.lang}</p>
-		      							<p className="lg-desc">{Object.keys(userConnectedRedux.user).length > 0 ?
-									Translation(userConnectedRedux.user.language).profil.choice
-									:
-									Translation("fr").profil.choice}</p>
+									Translation("fr").profil.adhesion}
+								/>								
+		      				</div>		      				
+		      				<div className="lang-container col">
+		      					<div className="lang-setting">		      						
+		      						<div className="lgdrpdwn">		      							
 										<select onChange={onChangeLanguage}>
 											<option>FR</option>
 											<option>EN</option>
@@ -254,11 +247,18 @@ const Profil: React.FC = function() {
 		      					</div>
 							</div>
 		      			</div>
+		      			<div className="btn-container">
+  							<a href="#" className="btn bg-yellow mg15">{Object.keys(userConnectedRedux.user).length > 0 ?
+								Translation(userConnectedRedux.user.language).profil.validate
+								:
+								Translation("fr").profil.validate}
+							</a>
+		      			</div>
 		      		</div>
 		      	</div>
 		      	<AccountGame />
 
-	      		<div className="my-teams">
+	      		<div className="my-teams" id="myteams">
 	      			<h2>{Object.keys(userConnectedRedux.user).length > 0 ?
 						Translation(userConnectedRedux.user.language).profil.team
 						:
@@ -345,7 +345,7 @@ const Profil: React.FC = function() {
 	      		</div>
 	      		<HistoryTournament />
 	      		<HistoryResult />
-	      		<div className="premium">
+	      		<div className="premium" id="premium">
 	      			<h2>Premium</h2>
 	      			<div className="prem-bloc">
 	      				<div className="item-bloc">

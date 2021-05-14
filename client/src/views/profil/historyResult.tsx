@@ -10,7 +10,7 @@ const HistoryResult : React.FC = function() {
 const userConnectedRedux = useSelector((state:RootState) => state.userConnected)
 
 	return (
-		<div className="mes-resultats">
+		<div className="mes-resultats" id="results">
 		<h2>
 			{Object.keys(userConnectedRedux.user).length > 0 ?
 				Translation(userConnectedRedux.user.language).participHome.result

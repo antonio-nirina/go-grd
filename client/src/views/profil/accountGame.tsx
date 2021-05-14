@@ -11,7 +11,7 @@ import IconPs from "../../assets/image/playstation.png"
 const AccountGame : React.FC = function() {
 	const userConnectedRedux = useSelector((state:RootState) => state.userConnected)
 	return (
-<div className="account-game">
+<div className="account-game" id="account">
 			<h2>{Object.keys(userConnectedRedux.user).length > 0 ?
 					Translation(userConnectedRedux.user.language).profil.account
 					:

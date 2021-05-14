@@ -73,7 +73,7 @@
 		"description" : "Description",
 		"validate" : "valider",
 		"Lang" : "Langue et région",
-		"choice" : "Choisissez la langue affichée dans le profil",
+		"choice" : "Choix de langues",
 		"account": "Mes comptes de jeux",
 		"setAccount": "Modifier votre compte de jeux",
 		"date" : "Date",

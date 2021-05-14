@@ -168,32 +168,28 @@
     position: relative;
     overflow: hidden;
 }
-.about-me input,textarea{
+.about-me .col{
+	max-width: 296px;
+	display: inline-block;
+	width: 100%;
+	margin-right: 20px;
+}
+.about-me input{
 	background: none;
-    border-bottom: 1px solid #acacac !important;
-    width: 353px;
-    margin-left: 50px;    
+    border-bottom: 1px solid #acacac !important;      
     padding: 15px;
     color: #ffffff;
     font-size: 15px;
     border: none;
     margin-bottom: 15px;
+    width: 100%;
 
 }
-.lang-container{
-	max-width: 250px;
-	width: 100%;
-	position: absolute;
-	top: 0px;
-	right: -208px;
-	padding: 15px;
-	background: #2c2c2c;
-	border-radius: 5px;
-	-webkit-transition: all 500ms ease-in-out;
-}
-.lang-container:hover{
-	right: 0;
-	-webkit-transition: all 500ms ease-in-out;
+.lang-container{	
+	width: 100%;	
+	top: 0px;	
+	padding: 15px;	
+	border-radius: 5px;	
 }
 .lang-setting i{
 	display: block;
@@ -202,11 +198,9 @@
 	height: 60px;
 	width: 50px !important;
 }
-.lgdrpdwn{
-	background: #101010;
+.lgdrpdwn{	
 	padding: 15px;
-	display: none;
-	-webkit-transition: all 500ms ease-in-out;
+	display: block;	
 }
 .little-icon{
 	position: relative;
@@ -214,17 +208,11 @@
 	padding: 15px;
 	display: block;
 }
-.lang-setting:hover .little-icon{
-	position: initial;
-	padding: 0px;
-}
-.lang-setting:hover .lgdrpdwn{
+
+/*.lang-setting:hover .lgdrpdwn{
 	display: block;
 	-webkit-transition: all 500ms ease-in-out;
-}
-.lang-setting:hover .little-icon{
-	display: none;
-}
+}*/
 .lgdrpdwn p{
 	font-size: 14px;
 }
@@ -238,6 +226,7 @@
     font-size: 15px;
     border: none;
     margin-bottom: 15px;
+    margin-top: 15px;
 }
 .lgdrpdwn p{
 	text-align: left;
@@ -246,14 +235,11 @@ p.lg-desc{
 	font-size: 12px;
 	font-style: italic;
 }
-.lg-opt{
-	border-bottom: 2px solid #f5cc22;
-	margin-bottom: 5px;
-	padding: 5px;
+.lg-opt{			
 }
 
 .field{
-	text-align: center;
+	/*text-align: center;*/
 }
 .account-game{
 	padding: 5px 3em 3em;
@@ -542,8 +528,12 @@ p.lg-desc{
 	margin-bottom: 15px;
 	border-radius: 5px;
 	vertical-align: top;
+	transition: 300ms ease-in-out;
 }
-
+.item-bloc:hover{
+	box-shadow: 5px 5px 5px #000000;
+	transition: 300ms ease-in-out;
+}
 .img-prem img{
 	width: 75px;	
 	display: block;
