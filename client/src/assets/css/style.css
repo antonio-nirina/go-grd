@@ -297,9 +297,10 @@ h1{}
   }
 }
 @media screen and (max-width: 827px){
-  .container{
-    padding: 6em 0em;
-  }
+ 
+  .container footer{
+    position: inherit !important;
+  }    
   .header .wrap{
     text-align: right;
     padding-right: 5px;
@@ -310,7 +311,7 @@ h1{}
     padding-top: 3px;
     margin-right: 25px;
     float: none;
-    padding: 8px 0px;
+    padding: 2px 0px;
   }
   .header .dropdown,
   .header .dropdown
@@ -324,7 +325,7 @@ h1{}
   }
   .header .logo{
     float: left;
-    margin: 5px 30px;
+    margin: 10px 30px;
   }
   .header .tag{
     width: 60%;
@@ -411,6 +412,9 @@ h1{}
   }
 }
 @media screen and (max-width: 500px){
+  .home .container{
+     padding: 3em 0em 0em;
+  }
   .home .slogan{
     top: 20%;
   }
@@ -431,6 +435,9 @@ h1{}
   }
 }
 @media screen and (max-width: 450px){
+  .home .container{
+     padding: 6em 0em 0em;
+  }
   .header .logo{
     float: none;
     clear: both;
