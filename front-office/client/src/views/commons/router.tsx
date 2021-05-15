@@ -9,6 +9,7 @@ import Communaute from "../communaute/communaute"
 import Login from "../auth/login"
 import Profil from "../profil/profil"
 import Inscription from "../auth/inscription"
+import InitPass from "../auth/initpass"
 import ProtectedRoute from "./protectedRoute"
 import Register from "../auth/register"
 
@@ -24,7 +25,8 @@ const Router = function() {
 			<Route path="/login" exact component={Login} />
 			<Route path="/inscription" exact component={Inscription} />
 			<Route path="/register" exact component={Register} />
-			<ProtectedRoute path="/profil" exact component={Profil} />
+			<Route path="/InitPass" exact component={InitPass} />
+			<ProtectedRoute path="/profil" exact component={Profil} />			
 		</Switch>
 	)
 }

@@ -2,6 +2,7 @@ import React,{useState} from "react"
 import { useForm } from "react-hook-form"
 import {useMutation} from "@apollo/client"
 import {useHistory } from "react-router-dom"
+import { Link } from 'react-router-dom'
 
 import {CREATED_USER} from "../../gql/user/mutation"
 import {checkValidEmail} from "../auth/utils"
@@ -54,19 +55,22 @@ const Register: React.FC = function() {
 					<h1>Inscription <img src={joystick} alt=""/></h1>
 						<div style={{"color":"red"}} >{ errorForm ? "Email not valid" : ""}</div>
 						<form onSubmit={handleSubmit(onSubmit)}>
-							<input className="mgt10" type="text" placeholder = "Username" {...register("username")} name="username"/>
+							{errors.username && <span style={{"color":"red"}}>Username ne peut être vide</span>}
+							<input className="mgt10" type="text" placeholder = "Username" {...register("username",{ required: true })} name="username"/>
+							{errors.email && <span style={{"color":"red"}}>Email ne peut être vide</span>}
 							<input className="mgt10" type="email" placeholder = "Email" {...register("email", { required: true })} name="email"/>
+							{errors.password && <span style={{"color":"red"}}>Password ne peut être vide</span>}
 							<input className="mgt10" type="password" placeholder = "Mot de passe" {...register("password", { required: true })} name="password"/>
 							<button className="btn bg-yellow mg15" type="submit">
 								Inscription
 							</button>
 						</form>
 						<div className="infos">
-							<p className="mb15">Vous avez déjà un compte ? <a href="#" title="Connectez-vous" className="italic cl-yellow">Connectez-vous !</a></p>
+							<p className="mb15">Vous avez déjà un compte ? <Link className="italic cl-yellow" to="/communaute">Connectez-vous !</Link></p>
 							<div className="other-account">
 								<p>Connectez-vous avec votre compte : </p>
-								<a href="#" title="Xbox"><img src={IconXbox} alt=""/></a>
-								<a href="#" title="Playstation"><img src={IconPs} alt=""/></a>
+								<span><img src={IconXbox} alt=""/></span>
+								<span><img src={IconPs} alt=""/></span>
 							</div>
 						</div>
 					</div>

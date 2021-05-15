@@ -1,4 +1,3 @@
-
 @charset "UTF-8";
 .inscription{
 	position: relative;
@@ -41,7 +40,7 @@
     margin-bottom: 15px;
 
 }
-.group h1 img{
+.group h4 img{
 	width: 8%;
     float: right;
     display: inline-block;
@@ -79,7 +78,6 @@
 	width: 70px;
 	height: 18px;
 	color: #000000;
-
 }*/
 .infos p{
 	font-size: 13px;
@@ -87,4 +85,3 @@
 button {
 	cursor: pointer;
 }
-

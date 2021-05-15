@@ -17,8 +17,20 @@ html{
 .clear{
     clear: both;
 }
+.bg-yellow.btn:hover, .bg-white.btn:hover{
+  background: #383434;
+  color: #f2cf1c;
+}
+.bg-white.btn:hover{
+    border: 1px solid #ffffff !important;
+    color: #ffffff;
+}
+.bg-white{
+  border: 1px solid #ffffff !important;
+}
 .bg-yellow{
   background: #f2cf1c;
+  border: 1px solid #f2cf1c !important;
 }
 .cl-yellow{
   color: yellow;
@@ -98,6 +110,9 @@ h1{
   font-size: 35px;
   text-transform: uppercase;
   padding-bottom: 15px;
+}
+.header{
+  top: 0;
 }
 .header h1{
   padding-bottom: inherit;
@@ -282,18 +297,21 @@ h1{}
   }
 }
 @media screen and (max-width: 827px){
-
+ 
+  .container footer{
+    position: inherit !important;
+  }    
   .header .wrap{
     text-align: right;
     padding-right: 5px;
-  }
+  }  
   .bt-container{
     height: 48px;
     display: inline-block;
     padding-top: 3px;
     margin-right: 25px;
     float: none;
-    padding: 8px 0px;
+    padding: 2px 0px;
   }
   .header .dropdown,
   .header .dropdown
@@ -307,7 +325,7 @@ h1{}
   }
   .header .logo{
     float: left;
-    margin: 5px 30px;
+    margin: 10px 30px;
   }
   .header .tag{
     width: 60%;
@@ -317,6 +335,10 @@ h1{}
   .header .gametag{
     margin-right: 5px;
   }
+  .logo h1{
+   font-size: inherit;
+  } 
+
 }
 @media screen and (max-width: 640px){
   .home .article{
@@ -390,6 +412,9 @@ h1{}
   }
 }
 @media screen and (max-width: 500px){
+  .home .container{
+     padding: 3em 0em 0em;
+  }
   .home .slogan{
     top: 20%;
   }
@@ -410,6 +435,9 @@ h1{}
   }
 }
 @media screen and (max-width: 450px){
+  .home .container{
+     padding: 6em 0em 0em;
+  }
   .header .logo{
     float: none;
     clear: both;

@@ -4,7 +4,7 @@ import Footer from "../footer/footer"
 import joystick from "../../assets/image/joystick.png"
 import IconXbox from "../../assets/image/icon-xbox.png"
 import IconPs from "../../assets/image/playstation.png"
-import "../auth/inscription.css"
+import "../auth/login.css"
 import "../../assets/css/style.css"
 
 const Inscription: React.FC = function() {
@@ -26,8 +26,8 @@ const Inscription: React.FC = function() {
 							<p className="mb15">Vous avez déjà un compte ? <a href="#" title="Connectez-vous" className="italic cl-yellow">Connectez-vous !</a></p>
 							<div className="other-account">
 								<p>Connectez-vous avec votre compte : </p>
-								<a href="#" title="Xbox"><img src={IconXbox} alt=""/></a>
-								<a href="#" title="Playstation"><img src={IconPs} alt=""/></a>
+								<span><a href="#" title="Xbox"><img src={IconXbox} alt=""/></a></span>
+								<span><a href="#" title="Playstation"><img src={IconPs} alt=""/></a></span>
 							</div>
 						</div>
 					</div>

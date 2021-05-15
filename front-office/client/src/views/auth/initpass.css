@@ -1,5 +1,5 @@
 @charset "UTF-8";
-.login, .inscription, .initpass
+.initpass
 {
 	position: relative;
 	height: 100vh;
@@ -9,7 +9,6 @@
 	width: 46%;
 	padding-top: 5em;
 	margin: auto;
-
 }
 .group{
 	padding: 15px 45px;
@@ -49,7 +48,7 @@
     padding-top: 10px;
 }
 
-.login .footer
+.login.initpass .footer
 {
 	position: absolute;
 	width: 100%;
@@ -84,4 +83,18 @@
 }*/
 .infos p{
 	font-size: 13px;
+}
+.alert-success{
+	background: #383434;
+	padding: 15px;
+	border-radius: 5px;
+	margin: 15px auto;
+	text-align: center;
+	border: 1px solid #525050;
+}
+.invisible{
+	display: none;
+}
+.visible{
+	display: block;
 }

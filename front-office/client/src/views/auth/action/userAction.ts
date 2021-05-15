@@ -7,7 +7,6 @@ export interface UserType {
 	username:string|""
 	email:string|""
 	avatar:string|""
-	roles:Array<string>
 	firstname:string|""
 	language:string|""
 	lastname:string|""
@@ -29,7 +28,6 @@ export const sendUserConnectedXboxAction = function(user:any) {
 		username:user.Username,
 		email:user.Email,
 		avatar:"",
-		roles:[],
 		firstname:user.Surname,
 		language:user.PreferredLanguage,
 		lastname:user.DisplayName,
@@ -47,7 +45,6 @@ export const changeLanguageUserConnected = function(user:UserType,lang:string) {
 		username:user.username,
 		email:user.email,
 		avatar:user.avatar,
-		roles:user.roles,
 		firstname:user.firstname,
 		language:lang,
 		lastname:user.lastname,

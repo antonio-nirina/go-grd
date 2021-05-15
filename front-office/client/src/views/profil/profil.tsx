@@ -2,6 +2,10 @@ import React from "react"
 import { useSelector,useDispatch } from "react-redux"
 import { Carousel } from "react-responsive-carousel"
 import Popup from "reactjs-popup"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+// import { faXbox, faPlaystation } from "@fortawesome/free-brands-svg-icons"
+// faCalendarAlt, faInfoCircle, faGamepad, faTrophy, faMedal, faStepBackward, faStepForward, faChevronRight, faChevronLeft, faMobile,
+import { faPen, faCogs,  } from "@fortawesome/free-solid-svg-icons"
 
 import Header from "../header/header"
 import Footer from "../footer/footer"
@@ -12,15 +16,14 @@ import "react-responsive-carousel/lib/styles/carousel.min.css"
 import 'reactjs-popup/dist/index.css'
 // import { CircularProgressbar, CircularProgressbarWithChildren, buildStyles} from "react-circular-progressbar"
 import "react-circular-progressbar/dist/styles.css"
-
-import { faXbox, faPlaystation } from "@fortawesome/free-brands-svg-icons"
-import { faCalendarAlt, faInfoCircle, faGamepad, faTrophy, faMedal, faStepBackward, faStepForward, faChevronRight, faChevronLeft, faMobile, faPen, faCogs,  } from "@fortawesome/free-solid-svg-icons"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import {RootState} from "../../reducer"
 import {changeLanguageUserConnected} from "../auth/action/userAction"
 import IconXbox from "../../assets/image/icon-xbox.png"
 import IconPs from "../../assets/image/playstation.png"
 import {Translation} from "../../lang/translation"
+import HistoryTournament from "./historyTournament"
+import HistoryResult from "./historyResult"
+
 
 const Profil: React.FC = function() {
 	const userConnectedRedux = useSelector((state:RootState) => state.userConnected)
@@ -59,10 +62,9 @@ const Profil: React.FC = function() {
 			      			<label htmlFor="setavatar"><FontAwesomeIcon icon={faPen} /></label>
 			      			<input type="file" id="setavatar" className="uploadFile" name="file"/>
 			      			</p>
-			      			<p className="pseudo"><strong>Noob_021</strong></p>
+			      			<p className="pseudo"><strong>{userConnectedRedux.user.username}</strong></p>
 		      			</div>
 		      			<div className="avatar-info">
-
 		      				<div className="table">
 		      					<div className="cell">
 		      						<strong>
@@ -240,9 +242,7 @@ const Profil: React.FC = function() {
 									Translation(userConnectedRedux.user.language).profil.validate
 									:
 									Translation("fr").profil.validate} </button>}
-
 							          	>
-
 										</Popup>
 						        	</div>
 						     	</div>
@@ -435,235 +435,8 @@ const Profil: React.FC = function() {
 	    				</div>
 	      			</div>
 	      		</div>
-	      		<div className="mes-tournois">
-      				<div className="tournois">
-        				<h2>{Object.keys(userConnectedRedux.user).length > 0 ?
-									Translation(userConnectedRedux.user.language).profil.tournaments
-									:
-									Translation("fr").profil.tournaments}</h2>
-        				<div className="tab-content">
-        					<strong>{Object.keys(userConnectedRedux.user).length > 0 ?
-									Translation(userConnectedRedux.user.language).profil.tournament
-									:
-									Translation("fr").profil.tournament}</strong>
-        					<table>
-        						<thead>
-        							<tr>
-        								<td><i className="iconStatus"><FontAwesomeIcon icon={faCalendarAlt}/></i>{Object.keys(userConnectedRedux.user).length > 0 ?
-									Translation(userConnectedRedux.user.language).profil.date
-									:
-									Translation("fr").profil.date}</td>
-        								<td><i className="iconStatus"><FontAwesomeIcon icon={faGamepad}/></i>{Object.keys(userConnectedRedux.user).length > 0 ?
-									Translation(userConnectedRedux.user.language).profil.game
-									:
-									Translation("fr").profil.game}</td>
-        								<td><i className="iconStatus"><FontAwesomeIcon icon={faTrophy}/></i>{Object.keys(userConnectedRedux.user).length > 0 ?
-									Translation(userConnectedRedux.user.language).profil.tournament
-									:
-									Translation("fr").profil.tournament}</td>
-        								<td><i className="iconStatus"><FontAwesomeIcon icon={faMedal}/></i>{Object.keys(userConnectedRedux.user).length > 0 ?
-									Translation(userConnectedRedux.user.language).profil.rank
-									:
-									Translation("fr").profil.rank}</td>
-        								<td></td>
-        							</tr>
-        						</thead>
-        						<tr>
-        							<td>04/04/2021</td>
-        							<td>Fifa21</td>
-        							<td><i className="iconStatus"><FontAwesomeIcon icon={faPlaystation}/></i>Classic Cup</td>
-        							<td>Top 8</td>
-        							<td><i className="iconStatus"><FontAwesomeIcon icon={faInfoCircle}/></i></td>
-        						</tr>
-        						<tr>
-        							<td>04/04/2021</td>
-        							<td>Fifa21</td>
-        							<td><i className="iconStatus"><FontAwesomeIcon icon={faPlaystation}/></i>Classic Cup</td>
-        							<td>Top 8</td>
-        							<td><i className="iconStatus"><FontAwesomeIcon icon={faInfoCircle}/></i></td>
-        						</tr>
-        						<tr>
-        							<td>04/04/2021</td>
-        							<td>Fifa21</td>
-        							<td><i className="iconStatus"><FontAwesomeIcon icon={faMobile}/></i>
-									CoD Mobile</td>
-        							<td>Top 8</td>
-        							<td><i className="iconStatus"><FontAwesomeIcon icon={faInfoCircle}/></i></td>
-        						</tr>
-        						<tr>
-        							<td>04/04/2021</td>
-        							<td>Fifa21</td>
-        							<td><i className="iconStatus"><FontAwesomeIcon icon={faPlaystation}/></i>Classic Cup</td>
-        							<td>Top 8</td>
-        							<td><i className="iconStatus"><FontAwesomeIcon icon={faInfoCircle}/></i></td>
-        						</tr>
-        						<tr>
-        							<td>04/04/2021</td>
-        							<td>Fifa21</td>
-        							<td><i className="iconStatus"><FontAwesomeIcon icon={faPlaystation}/></i>Classic Cup</td>
-        							<td>Top 8</td>
-        							<td><i className="iconStatus"><FontAwesomeIcon icon={faInfoCircle}/></i></td>
-        						</tr>
-        					</table>
-        					<div className="filter">
-        						<p>{Object.keys(userConnectedRedux.user).length > 0 ?
-									Translation(userConnectedRedux.user.language).profil.item
-									:
-									Translation("fr").profil.item} : 10 <span>1 - 10 of 10</span></p>
-        						<p>
-        							<i className="iconPager"><FontAwesomeIcon icon={faStepBackward}/></i>
-        							<i className="iconPager"><FontAwesomeIcon icon={faChevronLeft}/></i>
-        							<i className="iconPager"><FontAwesomeIcon icon={faChevronRight}/></i>
-        							<i className="iconPager"><FontAwesomeIcon icon={faStepForward}/></i>
-        						</p>
-        					</div>
-        				</div>
-        				<div className="tab-content">
-        					<strong>Leagues</strong>
-        					<table>
-        						<thead>
-        							<tr>
-        								<td><i className="iconStatus"><FontAwesomeIcon icon={faCalendarAlt}/></i>{Object.keys(userConnectedRedux.user).length > 0 ?
-									Translation(userConnectedRedux.user.language).profil.date
-									:
-									Translation("fr").profil.date}</td>
-        								<td><i className="iconStatus"><FontAwesomeIcon icon={faGamepad}/></i>{Object.keys(userConnectedRedux.user).length > 0 ?
-									Translation(userConnectedRedux.user.language).profil.game
-									:
-									Translation("fr").profil.game}</td>
-        								<td><i className="iconStatus"><FontAwesomeIcon icon={faTrophy}/></i>{Object.keys(userConnectedRedux.user).length > 0 ?
-									Translation(userConnectedRedux.user.language).profil.tournament
-									:
-									Translation("fr").profil.tournament}</td>
-        								<td><i className="iconStatus"><FontAwesomeIcon icon={faMedal}/></i>{Object.keys(userConnectedRedux.user).length > 0 ?
-									Translation(userConnectedRedux.user.language).profil.rank
-									:
-									Translation("fr").profil.rank}</td>
-        								<td></td>
-        							</tr>
-        						</thead>
-        						<tr>
-        							<td>04/04/2021</td>
-        							<td>Fifa21</td>
-        							<td><i className="iconStatus"><FontAwesomeIcon icon={faPlaystation}/></i>Classic Cup</td>
-        							<td>Top 8</td>
-        							<td><i className="iconStatus"><FontAwesomeIcon icon={faInfoCircle}/></i></td>
-        						</tr>
-        						<tr>
-        							<td>04/04/2021</td>
-        							<td>Fifa21</td>
-        							<td><i className="iconStatus"><FontAwesomeIcon icon={faPlaystation}/></i>Classic Cup</td>
-        							<td>Top 8</td>
-        							<td><i className="iconStatus"><FontAwesomeIcon icon={faInfoCircle}/></i></td>
-        						</tr>
-        						<tr>
-        							<td>04/04/2021</td>
-        							<td>Fifa21</td>
-        							<td><i className="iconStatus"><FontAwesomeIcon icon={faPlaystation}/></i>Classic Cup</td>
-        							<td>Top 8</td>
-        							<td><i className="iconStatus"><FontAwesomeIcon icon={faInfoCircle}/></i></td>
-        						</tr>
-        						<tr>
-        							<td>04/04/2021</td>
-        							<td>Fifa21</td>
-        							<td><i className="iconStatus"><FontAwesomeIcon icon={faPlaystation}/></i>Classic Cup</td>
-        							<td>Top 8</td>
-        							<td><i className="iconStatus"><FontAwesomeIcon icon={faInfoCircle}/></i></td>
-        						</tr>
-        						<tr>
-        							<td>04/04/2021</td>
-        							<td>Fifa21</td>
-        							<td><i className="iconStatus"><FontAwesomeIcon icon={faPlaystation}/></i>Classic Cup</td>
-        							<td>Top 8</td>
-        							<td><i className="iconStatus"><FontAwesomeIcon icon={faInfoCircle}/></i></td>
-        						</tr>
-        					</table>
-        					<div className="filter">
-        						<p>{Object.keys(userConnectedRedux.user).length > 0 ?
-									Translation(userConnectedRedux.user.language).profil.item
-									:
-									Translation("fr").profil.item}: 10 <span>1 - 10 of 10</span></p>
-        						<p>
-        							<i className="iconPager"><FontAwesomeIcon icon={faStepBackward}/></i>
-        							<i className="iconPager"><FontAwesomeIcon icon={faChevronLeft}/></i>
-        							<i className="iconPager"><FontAwesomeIcon icon={faChevronRight}/></i>
-        							<i className="iconPager"><FontAwesomeIcon icon={faStepForward}/></i>
-        						</p>
-        					</div>
-        				</div>
-        			</div>
-	      		</div>
-	      		<div className="mes-resultats">
-	      			<h2>Mes résultats</h2>
-	      			<div className="tab-content">
-	      				<table>
-    						<thead>
-    							<tr>
-									<td><i className="iconStatus"><FontAwesomeIcon icon={faCalendarAlt}/></i>{Object.keys(userConnectedRedux.user).length > 0 ?
-									Translation(userConnectedRedux.user.language).profil.date
-									:
-									Translation("fr").profil.date}</td>
-    								<td><i className="iconStatus"><FontAwesomeIcon icon={faGamepad}/></i>{Object.keys(userConnectedRedux.user).length > 0 ?
-									Translation(userConnectedRedux.user.language).profil.game
-									:
-									Translation("fr").profil.game}</td>
-    								<td><i className="iconStatus"><FontAwesomeIcon icon={faTrophy}/></i>{Object.keys(userConnectedRedux.user).length > 0 ?
-									Translation(userConnectedRedux.user.language).profil.tournament
-									:
-									Translation("fr").profil.tournament}</td>
-    								<td><i className="iconStatus"><FontAwesomeIcon icon={faTrophy}/></i>{Object.keys(userConnectedRedux.user).length > 0 ?
-									Translation(userConnectedRedux.user.language).profil.leagues
-									:
-									Translation("fr").profil.leagues}</td>
-    								<td><i className="iconStatus"><FontAwesomeIcon icon={faMedal}/></i>{Object.keys(userConnectedRedux.user).length > 0 ?
-									Translation(userConnectedRedux.user.language).profil.rank
-									:
-									Translation("fr").profil.rank}</td>
-    								<td></td>
-    							</tr>
-    						</thead>
-    						<tr>
-    							<td>04/04/2021</td>
-    							<td>Fifa21</td>
-    							<td><i className="iconStatus"><FontAwesomeIcon icon={faMobile}/></i>
-									CoD Mobile</td>
-    							<td><i className="iconStatus"><FontAwesomeIcon icon={faMobile}/></i>
-									CoD Mobile</td>
-    							<td>Top 10</td>
-    							<td><i className="iconStatus"><FontAwesomeIcon icon={faInfoCircle}/></i></td>
-    						</tr>
-    						<tr>
-    							<td>04/04/2021</td>
-    							<td>Fifa21</td>
-    							<td><i className="iconStatus"><FontAwesomeIcon icon={faPlaystation}/></i>Classic Cup</td>
-    							<td><i className="iconStatus"><FontAwesomeIcon icon={faMobile}/></i>
-									CoD Mobile</td>
-    							<td>Top 5</td>
-    							<td><i className="iconStatus"><FontAwesomeIcon icon={faInfoCircle}/></i></td>
-    						</tr>
-    						<tr>
-    							<td>04/04/2021</td>
-    							<td>Fifa21</td>
-    							<td><i className="iconStatus"><FontAwesomeIcon icon={faPlaystation}/></i>Classic Cup</td>
-    							<td><i className="iconStatus"><FontAwesomeIcon icon={faPlaystation}/></i>Classic Cup</td>
-    							<td>Top 40</td>
-    							<td><i className="iconStatus"><FontAwesomeIcon icon={faInfoCircle}/></i></td>
-    						</tr>
-    					</table>
-    					<div className="filter">
-    						<p>{Object.keys(userConnectedRedux.user).length > 0 ?
-									Translation(userConnectedRedux.user.language).profil.item
-									:
-									Translation("fr").profil.item}: 10 <span>1 - 10 of 10</span></p>
-    						<p>
-    							<i className="iconPager"><FontAwesomeIcon icon={faStepBackward}/></i>
-    							<i className="iconPager"><FontAwesomeIcon icon={faChevronLeft}/></i>
-    							<i className="iconPager"><FontAwesomeIcon icon={faChevronRight}/></i>
-    							<i className="iconPager"><FontAwesomeIcon icon={faStepForward}/></i>
-    						</p>
-        				</div>
-	      			</div>
-	      		</div>
+	      		<HistoryTournament />
+	      		<HistoryResult />
 	      		<div className="premium">
 	      			<h2>Premium</h2>
 	      			<div className="prem-bloc">

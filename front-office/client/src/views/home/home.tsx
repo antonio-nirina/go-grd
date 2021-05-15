@@ -30,7 +30,6 @@ const GetProfilUser = function ({token}:any) {
 				username:name[0],
 				email:data.GetProfilUserXbox.userPrincipalName,
 				avatar:"",
-				roles:[],
 				firstname:name[0],
 				language:data.GetProfilUserXbox.PreferredLanguage? data.GetProfilUserXbox.PreferredLanguage : "fr",
 				lastname:name[1],

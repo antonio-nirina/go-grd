@@ -11,6 +11,14 @@
 		"password":"Ton mot de passe",
 		"errorForm":"Email n'est pas valide"
 	},
+	"register":{
+
+	},
+	"initpass":{
+		"init":"Réinitialisation mot de passe",
+		"validateInit": "réinitialiser mon mot de passe",
+		"connex": "Connectez-vous avec votre compte"
+	},
 	"header":{
 		"leagues": "ligues",
 		"wagers": "wagers",
@@ -92,5 +100,24 @@
 	},
 	"footer":{
 		"note":  "Mentions Légales"
+	},
+	"participHome": {
+		"participateTournament":"Participer à des tournois",
+		"gameAgainst":"Joue en ligne contre d'autres joueurs du monde entier et gagne des prix",
+		"againstCommunity":"Affronte les membres de la communauté en duels",
+		"see":"voir plus",
+		"member":"Membres",
+		"plateform":"La plateforme compétitive pour consoles",
+		"run":"Lance toi",
+		"game":"JEUX",
+		"community":"Communauté",
+		"joincomunity":"Rejoins la communauté gratuitement",
+		"createaccount":"Creer ton compte gratuit",
+		"yourmail":"Ton email",
+		"actuality":"Actualités",
+		"retrieve":"Retrouvez toutes les informations sur la sortie du patch 1.15.x",
+		"follow":"Suivez l'actualité des RLCS. Toutes les infos, résumés de matchs, et bien plus",
+		"clipMonth":"Clip du mois",
+		"shop":"Boutique"
 	}
 }

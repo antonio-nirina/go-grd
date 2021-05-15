@@ -1,5 +1,4 @@
 import React,{useState} from "react"
-import { Link } from 'react-router-dom'
 import { useForm } from "react-hook-form"
 import {useMutation} from "@apollo/client"
 import {useHistory } from "react-router-dom"
@@ -16,15 +15,14 @@ import Footer from "../footer/footer"
 import joystick from "../../assets/image/joystick.png"
 import IconXbox from "../../assets/image/icon-xbox.png"
 import IconPs from "../../assets/image/playstation.png"
-import "../auth/login.css"
+import "../auth/initpass.css"
 import "../../assets/css/style.css"
 
 type Inputs = {
-	password: string,
 	email:string
 }
 
-const Login: React.FC = function() {
+const InitPass: React.FC = function() {
 	const history = useHistory()
 	const dispatch = useDispatch()
 	const { register, handleSubmit, formState: { errors } } = useForm<Inputs>()
@@ -32,10 +30,9 @@ const Login: React.FC = function() {
 	const [login]  = useMutation(LOGIN)
 	const onSubmit = async function(data:Inputs){
 		const email: string = data.email
-		const password: string = data.password
 
 		if(checkValidEmail(email)) {
-			const result = await login({ variables: { email: email,password:password } })
+			const result = await login({ variables: { email: email} })
 			if (result.data.login) {
 				const token:TokenType = {
 					access_token:result.data.login,
@@ -53,35 +50,26 @@ const Login: React.FC = function() {
 	}
 
   return(
-	<div className="login">
+	<div className="login initpass">
 		<div className="container">
 			<Header0/>
 			<div className="main">
 				<div className="containt">
 					<div className="group">
-					<h1>
-						Connexion
+					<h4>
+						Réinitialisation mot de passe
 						<img src={joystick} alt=""/>
-					</h1>
+					</h4>
 						<div>
 							<span style={{"color":"red"}}>{errorForm ? Translation("fr").login.errorForm : ""}</span>
 						</div>
+						<div className="alert alert-success text-center invisible">Un mail de changement de mot de passe vous a été envoyé</div>
 						<form onSubmit={handleSubmit(onSubmit)}>
-							<input className="mgt10" type = "email" placeholder = "Ton email" {...register("email", { required: true })} name="email" />
-							<input type ="password" placeholder ={Translation("fr").login.password}  {...register("password", { required: true })} name="password" />
+							<input className="mgt10" type = "email" placeholder = "Ton email" {...register("email", { required: true })} name="email" required/>
 							<button className="btn bg-yellow mg15">
-								Se connecter
+								Réinitialiser mon mot de passe
 							</button>
 						</form>
-						<div className="infos">
-							<p className="mb15">Vous n'avez pas encore de compte ? <Link to = "/register" title="Inscrivez-vous" className="italic cl-yellow">Inscrivez-vous !</Link></p>
-							<p className="mb15"><Link to ="/initpass" title="Mot de passe oublié ?" className="italic cl-yellow">Mot de passe oublié ?</Link></p>
-							<div className="other-account">
-								<p>Connectez-vous avec votre compte : </p>
-								<span onClick={Siging}><img src={IconXbox} alt="xbox" /></span>
-								<span><img src={IconPs} alt=""/></span>
-							</div>
-						</div>
 					</div>
 				</div>
 			</div>
@@ -91,4 +79,4 @@ const Login: React.FC = function() {
 	)
 }
 
-export default Login;
+export default InitPass;

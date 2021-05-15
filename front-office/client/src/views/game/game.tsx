@@ -1,4 +1,8 @@
 import React from "react"
+import { useSelector } from "react-redux"
+
+import {Translation} from "../../lang/translation"
+import {RootState} from "../../reducer"
 import "../../assets/css/style.css"
 import "../game/game.css"
 import apexlegends from "../../assets/image/apex-legends.png"
@@ -11,36 +15,44 @@ import cod_coldwar from "../../assets/image/cod-coldwar.png"
 import fifa from "../../assets/image/fifa21.png"
 
 const Game: React.FC = function() {
+	const userConnectedRedux = useSelector((state:RootState) => state.userConnected)
   return(
   <div className="jeux">
-    <h2>Jeux</h2>
+    <h2>
+	{
+		Object.keys(userConnectedRedux.user).length > 0 ?
+		Translation(userConnectedRedux.user.language).participHome.game
+		:
+		Translation("fr").participHome.game
+	}
+	</h2>
   	<div className="bg-game">
       <div className="firstblock w100">
         <div className="logo-game">
-            <a href="#"><img src={apexlegends} alt="Apex Legends" /></a>
+            <><img src={apexlegends} alt="Apex Legends" /></>
         </div>
         <div className="logo-game">
-            <a href="#"><img src={fortnite} alt="Fortnite" /></a>
+            <><img src={fortnite} alt="Fortnite" /></>
         </div>
         <div className="logo-game">
-            <a href="#"><img src={rainboxsix} alt="RainbowSIx Siege" /></a>
+            <><img src={rainboxsix} alt="RainbowSIx Siege" /></>
         </div>
         <div className="logo-game">
-            <a href="#"><img src={rocketleague} alt="Rocket League" /></a>
+            <><img src={rocketleague} alt="Rocket League" /></>
         </div>
       </div>
       <div className="lastblock w100">
         <div className="logo-game">
-            <a href="#"><img src={cod_Modernwarfare} alt="Call of Duty Modern Warfare" /></a>
+            <><img src={cod_Modernwarfare} alt="Call of Duty Modern Warfare" /></>
         </div>
         <div className="logo-game">
-            <a href="#"><img src={cod_warzone} alt="Call of Duty Warzone" /></a>
+            <><img src={cod_warzone} alt="Call of Duty Warzone" /></>
         </div>
         <div className="logo-game">
-            <a href="#"><img src={cod_coldwar} alt="Call of Duty Cold War" /></a>
+            <><img src={cod_coldwar} alt="Call of Duty Cold War" /></>
         </div>
          <div className="logo-game">
-            <a href="#"><img src={fifa} alt="Call of Duty Warzone" /></a>
+            <><img src={fifa} alt="Call of Duty Warzone" /></>
         </div>
       </div>
     </div>
@@ -48,4 +60,4 @@ const Game: React.FC = function() {
   );
 }
 
-export default Game;
+export default Game

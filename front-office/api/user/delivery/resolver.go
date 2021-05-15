@@ -161,11 +161,11 @@ func GetToken(user entity.User) (interface{}, error) {
 	claims := _jwt.MapClaims{}
 	claims["email"] = user.Email
 	claims["avatar"] = user.Avatar
-	claims["roles"] = user.Roles
 	claims["firstname"] = user.FirstName
 	claims["language"] = user.Language
 	claims["lastname"] = user.LastName
 	claims["isBaned"] = user.IsBanned
+	claims["username"] = user.Username
 	claims["id"] = user.Uid.String()
 	// claims["exp"] = time.Now().Add(time.Hour * 1).Unix() //Token expires after 1 hour
 	token := _jwt.NewWithClaims(_jwt.SigningMethodHS256, claims)

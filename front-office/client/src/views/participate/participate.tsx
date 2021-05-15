@@ -1,22 +1,38 @@
 import React from "react"
-import ReactDOM from 'react-dom'
-
+import { useSelector } from "react-redux"
 import { faXbox, faPlaystation } from "@fortawesome/free-brands-svg-icons"
 import { faGamepad } from "@fortawesome/free-solid-svg-icons"
-import {useState} from "react"
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+
+
+import {Translation} from "../../lang/translation"
+import {RootState} from "../../reducer"
 import "../../assets/css/style.css"
 import "../participate/participate.css"
 
 const Slider: React.FC = function() {
-
+	const userConnectedRedux = useSelector((state:RootState) => state.userConnected)
   return(
     <div className="marg">
         <div className="part">
 			<div className="undertitle">
-				<h2>Participer à des tournois</h2>
-				<p>Joue en ligne contre d'autres joueurs du monde entier et gagne des prix</p>
+				<h2>
+				{
+					Object.keys(userConnectedRedux.user).length > 0 ?
+					Translation(userConnectedRedux.user.language).participHome.participateTournament
+					:
+					Translation("fr").participHome.participateTournament
+				}
+
+				</h2>
+				<p>
+				{
+					Object.keys(userConnectedRedux.user).length > 0 ?
+					Translation(userConnectedRedux.user.language).participHome.gameAgainst
+					:
+					Translation("fr").participHome.gameAgainst
+				}
+				</p>
 			</div>
 			<div className="content">
 				<div className="clear"></div>
@@ -81,7 +97,14 @@ const Slider: React.FC = function() {
 	<div className="block-tournois">
 		<div className="undertitle">
 			<h2>Wagers</h2>
-			<p>Affronte les membres de la communauté en duels</p>
+			<p>
+				{
+					Object.keys(userConnectedRedux.user).length > 0 ?
+					Translation(userConnectedRedux.user.language).participHome.againstCommunity
+					:
+					Translation("fr").participHome.againstCommunity
+				}
+			</p>
 		</div>
 		<div className="clear"></div>
 		<div className="content">
@@ -134,11 +157,29 @@ const Slider: React.FC = function() {
 		</div>
 		<div className="gamecash">
 			<div className="lot">
-				<p><strong>+6000</strong><span>Membres</span></p>
+				<p><strong>+6000</strong>
+					<span>
+					{
+						Object.keys(userConnectedRedux.user).length > 0 ?
+						Translation(userConnectedRedux.user.language).participHome.member
+						:
+						Translation("fr").participHome.member
+					}
+					</span>
+				</p>
 				<p><strong>+5000€</strong><span>Cash prizes/Semaine</span></p>
 			</div>
 			<div className="more">
-				<p><a href="#">voir plus</a></p>
+				<p>
+					<>
+					{
+						Object.keys(userConnectedRedux.user).length > 0 ?
+						Translation(userConnectedRedux.user.language).participHome.see
+						:
+						Translation("fr").participHome.see
+					}
+					</>
+				</p>
 			</div>
 			</div>
 		</div>
@@ -147,4 +188,4 @@ const Slider: React.FC = function() {
   );
 }
 
-export default Slider;
+export default Slider
