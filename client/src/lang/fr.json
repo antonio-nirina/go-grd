@@ -51,7 +51,7 @@
 		"wall":"Mon mur",
 		"games":"Mes jeux",
 		"team": "Mes équipes",
-		"tournaments": "Mes tournois",
+		"tournaments": "Historique de tournoi",
 		"result": "mes resultats",
 		"premium": "premium",
 		"platform": "Plateforme",
@@ -96,7 +96,8 @@
 		"pro": "Etre repéré par les pro",
 		"paiement": "Paiement rapide",
 		"wallet": "Porte-monnaie de paiement minimum",
-		"month":  "mois"
+		"month":  "mois",
+		"accountGame":"Compte de jeu non renseigné"
 	},
 	"footer":{
 		"note":  "Mentions Légales"
@@ -118,6 +119,7 @@
 		"retrieve":"Retrouvez toutes les informations sur la sortie du patch 1.15.x",
 		"follow":"Suivez l'actualité des RLCS. Toutes les infos, résumés de matchs, et bien plus",
 		"clipMonth":"Clip du mois",
-		"shop":"Boutique"
+		"shop":"Boutique",
+		"result":"Mes résultats"
 	}
 }

@@ -1,6 +1,6 @@
 import React from "react"
 import { useSelector,useDispatch } from "react-redux"
-import { Carousel } from "react-responsive-carousel"
+
 import Popup from "reactjs-popup"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 // import { faXbox, faPlaystation } from "@fortawesome/free-brands-svg-icons"
@@ -18,11 +18,10 @@ import 'reactjs-popup/dist/index.css'
 import "react-circular-progressbar/dist/styles.css"
 import {RootState} from "../../reducer"
 import {changeLanguageUserConnected} from "../auth/action/userAction"
-import IconXbox from "../../assets/image/icon-xbox.png"
-import IconPs from "../../assets/image/playstation.png"
 import {Translation} from "../../lang/translation"
 import HistoryTournament from "./historyTournament"
 import HistoryResult from "./historyResult"
+import AccountGame from "./accountGame"
 
 
 const Profil: React.FC = function() {
@@ -47,13 +46,61 @@ const Profil: React.FC = function() {
 	      		<div className="wall-bloc">
 		      		<div className="tabs">
 		      			<ul>
-		      				<li><a href="#wall" className="active">Mon mur</a></li>
-		      				<li><a href="#">Compte de jeux</a></li>
-		      				<li><a href="#game">Mes jeux</a></li>
-		      				<li><a href="#">Mes équipes</a></li>
-		      				<li><a href="#">Mes tournois</a></li>
-		      				<li><a href="#">Mes resultats</a></li>
-		      				<li><a href="#">Premium</a></li>
+		      				<li><a href="#wall" className="active">
+							  		{
+			      						Object.keys(userConnectedRedux.user).length > 0 ?
+										Translation(userConnectedRedux.user.language).profil.wall
+										:
+										Translation("fr").profil.wall
+									}
+							  </a></li>
+		      				<li><a href="#">
+								  {
+			      						Object.keys(userConnectedRedux.user).length > 0 ?
+										Translation(userConnectedRedux.user.language).profil.account
+										:
+										Translation("fr").profil.account
+									}
+							</a></li>
+		      				<li><a href="#game">
+							   {
+									Object.keys(userConnectedRedux.user).length > 0 ?
+									Translation(userConnectedRedux.user.language).profil.games
+									:
+									Translation("fr").profil.games
+								}
+							  </a></li>
+		      				<li><a href="#">
+							  {
+									Object.keys(userConnectedRedux.user).length > 0 ?
+									Translation(userConnectedRedux.user.language).profil.team
+									:
+									Translation("fr").profil.team
+								}
+							  </a></li>
+		      				<li><a href="#">
+							  {
+									Object.keys(userConnectedRedux.user).length > 0 ?
+									Translation(userConnectedRedux.user.language).profil.tournaments
+									:
+									Translation("fr").profil.tournaments
+								}
+							  </a></li>
+		      				<li><a href="#">
+							   {
+									Object.keys(userConnectedRedux.user).length > 0 ?
+									Translation(userConnectedRedux.user.language).profil.result
+									:
+									Translation("fr").profil.result
+								}</a></li>
+		      				<li><a href="#">
+							  {
+									Object.keys(userConnectedRedux.user).length > 0 ?
+									Translation(userConnectedRedux.user.language).profil.premium
+									:
+									Translation("fr").profil.premium
+								}
+							  </a></li>
 		      			</ul>
 		      		</div>
 		      		<div className="wall" id="wall">
@@ -209,152 +256,13 @@ const Profil: React.FC = function() {
 		      			</div>
 		      		</div>
 		      	</div>
-		      	<div className="account-game">
-		      		<h2>{Object.keys(userConnectedRedux.user).length > 0 ?
-									Translation(userConnectedRedux.user.language).profil.account
-									:
-									Translation("fr").profil.account}</h2>
-		      		<div className="itemGame">
-		      			<p className="img-account"><img src={IconPs} alt="xbox" width="45" height="45"/></p>
-		      			<p>PSN id</p>
-		      			<Popup
-							    trigger={<button className="btn bg-white">Preuve-Platree<i></i></button>}
-							    modal
-							    nested
-  							>
-					    	<div className="modal">
-						        <button className="close">
-						          &times;
-						        </button>
-						        <div className="header"> <h3>{Object.keys(userConnectedRedux.user).length > 0 ?
-									Translation(userConnectedRedux.user.language).profil.setAccount
-									:
-									Translation("fr").profil.setAccount}</h3></div>
-							        <div className="content set-team">
-							          {' '}
-										<div className="set-account">
-											<label>PSN id</label><input type="text" placeholder="Preuve-platree"/>
-										</div>
-							        </div>
-						        	<div className="actions">
-							          	<Popup
-							            	trigger={<button className="btn bg-yellow"> {Object.keys(userConnectedRedux.user).length > 0 ?
-									Translation(userConnectedRedux.user.language).profil.validate
-									:
-									Translation("fr").profil.validate} </button>}
-							          	>
-										</Popup>
-						        	</div>
-						     	</div>
-						    </Popup>
+		      	<AccountGame />
 
-		      		</div>
-		      		<div className="itemGame">
-		      			<p className="img-account"><img src={IconXbox} alt="xbox" width="45" height="45"/></p>
-		      			<p>XboxLive</p>
-		      			<Popup
-							    trigger={<button className="btn bg-white">XXXXXXXX<i></i></button>}
-							    modal
-							    nested
-  							>
-					    	<div className="modal">
-						        <button className="close">
-						          &times;
-						        </button>
-						        <div className="header"> <h3>{Object.keys(userConnectedRedux.user).length > 0 ?
-									Translation(userConnectedRedux.user.language).profil.setAccount
-									:
-									Translation("fr").profil.setAccount}</h3></div>
-							        <div className="content set-team">
-							          {' '}
-										<div className="set-account">
-											<label>PSN id</label><input type="text" placeholder="XXXXXXXX"/>
-										</div>
-							        </div>
-						        	<div className="actions">
-							          	<Popup
-							            	trigger={<button className="btn bg-yellow"> {Object.keys(userConnectedRedux.user).length > 0 ?
-									Translation(userConnectedRedux.user.language).profil.validate
-									:
-									Translation("fr").profil.validate} </button>}
-
-							          	>
-
-										</Popup>
-						        	</div>
-						     	</div>
-						    </Popup>
-		      		</div>
-		      	</div>
-	      		<div id="game" className="my-games">
-	      			<h2>{Object.keys(userConnectedRedux.user).length > 0 ?
-									Translation(userConnectedRedux.user.language).profil.game
-									:
-									Translation("fr").profil.game}</h2>
-	      			<div className="img-game">
-	      				<Carousel swipeable={true} centerSlidePercentage={20} dynamicHeight={false} centerMode={true} showArrows={true} autoPlay={true} interval={8000} infiniteLoop={true} showThumbs={false} transitionTime={1000}>
-					        <div className="game-slide"><img src="https://i.ibb.co/ByGkhS1/apexlegend.jpg" alt="apexlegend" /></div>
-					      	<div className="game-slide"><img src="https://i.ibb.co/Yd2v60Q/blackops.jpg" alt="blackops"/></div>
-					      	<div className="game-slide"><img src="https://i.ibb.co/TK5JYMz/fifa21.jpg" alt="fifa21" /></div>
-					      	<div className="game-slide"><img src="https://i.ibb.co/Dtym1JK/fortnite.jpg" alt="fortnite" /></div>
-					      	<div className="game-slide"><img src="https://i.ibb.co/9VPnb7p/mwarfare.jpg" alt="mwarfare" /></div>
-					      	<div className="game-slide"><img src="https://i.ibb.co/89xKdw2/rainbowsix-siege.jpg" alt="rainbowsix-siege"/></div>
-					      	<div className="game-slide"><img src="https://i.ibb.co/CPDzC7n/rocketl.jpg" alt="rocketl" /></div>
-					      	<div className="game-slide"><img src="https://i.ibb.co/8Y0r1NH/warzone.jpg" alt="warzone" /></div>
-	    				</Carousel>
-	    				<div className="bt-game-container">
-	    					<Popup
-							    trigger={<button className="btn bg-yellow"> {Object.keys(userConnectedRedux.user).length > 0 ?
-									Translation(userConnectedRedux.user.language).profil.addGame
-									:
-									Translation("fr").profil.addGame} </button>}
-							    modal
-							    nested
-  							>
-					    	<div className="modal">
-						        <button className="close">
-						          &times;
-						        </button>
-						        <div className="header"> <h3> {Object.keys(userConnectedRedux.user).length > 0 ?
-									Translation(userConnectedRedux.user.language).profil.selectGame
-									:
-									Translation("fr").profil.selectGame}</h3></div>
-							        <div className="content">
-							          {' '}
-							          <img src="https://i.ibb.co/8Y0r1NH/warzone.jpg" alt="warzone" />
-							          <img src="https://i.ibb.co/CPDzC7n/rocketl.jpg" alt="rocketl" />
-							        </div>
-						        	<div className="actions">
-							          	<Popup
-							            	trigger={<button className="btn bg-yellow"> {Object.keys(userConnectedRedux.user).length > 0 ?
-											Translation(userConnectedRedux.user.language).profil.addGame
-											:
-											Translation("fr").profil.addGame} </button>}
-							            	position="top center"
-							            	nested
-							          	>
-						            		<span>
-												Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae
-												magni omnis delectus nemo, maxime molestiae dolorem numquam
-												mollitia, voluptate ea, accusamus excepturi deleniti ratione
-												sapiente! Laudantium, aperiam doloribus. Odit, aut.
-						            		</span>
-										</Popup>
-						          		<button className="btn bg-white">{Object.keys(userConnectedRedux.user).length > 0 ?
-									Translation(userConnectedRedux.user.language).profil.validate
-									:
-									Translation("fr").profil.validate}</button>
-						        	</div>
-						     	</div>
-						    </Popup>
-	    				</div>
-	      			</div>
-	      		</div>
 	      		<div className="my-teams">
 	      			<h2>{Object.keys(userConnectedRedux.user).length > 0 ?
-									Translation(userConnectedRedux.user.language).profil.team
-									:
-									Translation("fr").profil.team}</h2>
+						Translation(userConnectedRedux.user.language).profil.team
+						:
+						Translation("fr").profil.team}</h2>
 	      			<div className="team-mate">
 	      				<div className="team-bloc">
 	      					<div className="team-banniere">

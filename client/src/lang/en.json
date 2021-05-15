@@ -67,10 +67,10 @@
 	"profil":{
 		"leagues": "leagues",
 		"wall":"Wall",
-		"games":"My games",
-		"team": "My team",
-		"tournaments": "My tournaments",
-		"result": "My score",
+		"games":"Games",
+		"team": "Team",
+		"tournaments": "Tournament history",
+		"result": "Score",
 		"premium": "premium",
 		"platform": "Plateform",
 		"server": "Server",
@@ -92,7 +92,7 @@
 		"validate" : "validate",
 		"Lang" : "Langue and region",
 		"choice" : "Choice your langue in your profil",
-		"account": "My account",
+		"account": "Account",
 		"setAccount": "Update my account",
 		"date" : "Date",
 		"game" : "Game",
@@ -114,7 +114,8 @@
 		"pro": "Be pro",
 		"paiement": "Fast paiement",
 		"wallet": "Porte-monnaie de paiement minimum",
-		"month":  "month"
+		"month":  "month",
+		"accountGame":"Unspecified game account"
 	},
 	"participHome": {
 		"participateTournament":"Participate in tournaments",
@@ -133,6 +134,7 @@
 		"retrieve":"Find all the information on the release of patch 1.15.x",
 		"follow":"Follow the news of the RLCS. All the info, match summaries, and more",
 		"clipMonth":"Clip of the month",
-		"shop":"Shop"
+		"shop":"Shop",
+		"result":"My results"
 	}
 }

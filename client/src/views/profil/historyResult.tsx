@@ -11,7 +11,13 @@ const userConnectedRedux = useSelector((state:RootState) => state.userConnected)
 
 	return (
 		<div className="mes-resultats">
-		<h2>Mes résultats</h2>
+		<h2>
+			{Object.keys(userConnectedRedux.user).length > 0 ?
+				Translation(userConnectedRedux.user.language).participHome.result
+				:
+				Translation("fr").participHome.result
+			}
+		</h2>
 		<div className="tab-content">
 			<table>
 				<thead>

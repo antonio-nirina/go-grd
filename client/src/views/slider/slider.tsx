@@ -62,4 +62,4 @@ const Slider: React.FC = function() {
   );
 }
 
-export default Slider;
+export default Slider
