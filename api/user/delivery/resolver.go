@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"errors"
 	"os"
+	"time"
 
 	_jwt "github.com/dgrijalva/jwt-go"
 	"github.com/graphql-go/graphql"
@@ -75,7 +76,8 @@ func (r *resolver) SavedUserResolver(params graphql.ResolveParams) (interface{},
 		Point:         entity.POINT,
 		IdGameAccount: []game.GameAccount{},
 		Roles: 	roles,
-		TypeConnexion:"site",		
+		TypeConnexion:"site",
+		Created: time.Now().String(),		
 	}
 
 	res, err := r.userHandler.SavedUser(userSaved)
@@ -158,15 +160,16 @@ func GetToken(user entity.User) (interface{}, error) {
 		return "", errors.New("Error interne")
 	}
 
-	claims := _jwt.MapClaims{}
-	claims["email"] = user.Email
-	claims["avatar"] = user.Avatar
+	claims 				:= _jwt.MapClaims{}
+	claims["email"] 	= user.Email
+	claims["avatar"] 	= user.Avatar
 	claims["firstname"] = user.FirstName
-	claims["language"] = user.Language
-	claims["lastname"] = user.LastName
-	claims["isBaned"] = user.IsBanned
-	claims["username"] = user.Username
-	claims["id"] = user.Uid.String()
+	claims["language"] 	= user.Language
+	claims["lastname"] 	= user.LastName
+	claims["isBaned"] 	= user.IsBanned
+	claims["username"] 	= user.Username
+	claims["created"] 	= user.Created
+	claims["id"] 		= user.Uid.String()
 	// claims["exp"] = time.Now().Add(time.Hour * 1).Unix() //Token expires after 1 hour
 	token := _jwt.NewWithClaims(_jwt.SigningMethodHS256, claims)
 	result, err := token.SignedString([]byte(os.Getenv("SECRET")))

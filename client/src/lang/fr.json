@@ -97,7 +97,9 @@
 		"paiement": "Paiement rapide",
 		"wallet": "Porte-monnaie de paiement minimum",
 		"month":  "mois",
-		"accountGame":"Compte de jeu non renseigné"
+		"accountGame":"Compte de jeu non renseigné",
+		"firstname":"Prenom",
+		"lastname":"Nom"
 	},
 	"footer":{
 		"note":  "Mentions Légales"

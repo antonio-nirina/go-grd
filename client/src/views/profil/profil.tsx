@@ -220,10 +220,18 @@ const Profil: React.FC = function() {
 									:
 									Translation("fr").profil.pseudonym
 								}/>
-		      				<input type="number" placeholder={Object.keys(userConnectedRedux.user).length > 0 ?
-									Translation(userConnectedRedux.user.language).profil.number
+							<input type="text" placeholder={
+		      						Object.keys(userConnectedRedux.user).length > 0 ?
+									Translation(userConnectedRedux.user.language).profil.firstname
 									:
-									Translation("fr").profil.number}/>
+									Translation("fr").profil.firstname
+								}/>
+							<input type="text" placeholder={
+								Object.keys(userConnectedRedux.user).length > 0 ?
+								Translation(userConnectedRedux.user.language).profil.lastname
+								:
+								Translation("fr").profil.lastname
+							}/>
 		      				<input type="text" placeholder={Object.keys(userConnectedRedux.user).length > 0 ?
 									Translation(userConnectedRedux.user.language).profil.adhesion
 									:
