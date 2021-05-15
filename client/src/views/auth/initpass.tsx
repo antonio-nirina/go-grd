@@ -1,5 +1,4 @@
 import React,{useState} from "react"
-import { Link } from 'react-router-dom'
 import { useForm } from "react-hook-form"
 import {useMutation} from "@apollo/client"
 import {useHistory } from "react-router-dom"
@@ -20,7 +19,6 @@ import "../auth/initpass.css"
 import "../../assets/css/style.css"
 
 type Inputs = {
-	password: string,
 	email:string
 }
 
@@ -32,10 +30,9 @@ const InitPass: React.FC = function() {
 	const [login]  = useMutation(LOGIN)
 	const onSubmit = async function(data:Inputs){
 		const email: string = data.email
-		const password: string = data.password
 
 		if(checkValidEmail(email)) {
-			const result = await login({ variables: { email: email,password:password } })
+			const result = await login({ variables: { email: email} })
 			if (result.data.login) {
 				const token:TokenType = {
 					access_token:result.data.login,
@@ -59,27 +56,20 @@ const InitPass: React.FC = function() {
 			<div className="main">
 				<div className="containt">
 					<div className="group">
-					<h1>
+					<h4>
 						Réinitialisation mot de passe
 						<img src={joystick} alt=""/>
-					</h1>
+					</h4>
 						<div>
 							<span style={{"color":"red"}}>{errorForm ? Translation("fr").login.errorForm : ""}</span>
 						</div>
 						<div className="alert alert-success text-center invisible">Un mail de changement de mot de passe vous a été envoyé</div>
 						<form onSubmit={handleSubmit(onSubmit)}>
-							<input className="mgt10" type = "email" placeholder = "Ton email" {...register("email", { required: true })} name="email" required/>							
+							<input className="mgt10" type = "email" placeholder = "Ton email" {...register("email", { required: true })} name="email" required/>
 							<button className="btn bg-yellow mg15">
 								Réinitialiser mon mot de passe
 							</button>
-						</form>						
-						<div className="infos">							
-							<div className="other-account">
-								<p>Connectez-vous avec votre compte : </p>
-								<span onClick={Siging}><img src={IconXbox} alt="xbox" /></span>
-								<span><img src={IconPs} alt=""/></span>
-							</div>
-						</div>
+						</form>
 					</div>
 				</div>
 			</div>

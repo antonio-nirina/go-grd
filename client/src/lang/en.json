@@ -115,5 +115,24 @@
 		"paiement": "Fast paiement",
 		"wallet": "Porte-monnaie de paiement minimum",
 		"month":  "month"
+	},
+	"participHome": {
+		"participateTournament":"Participate in tournaments",
+		"gameAgainst":"Play online against other players around the world and win prizes",
+		"againstCommunity":"Face off against community members in duels",
+		"see":"See more",
+		"member":"Member",
+		"plateform":"The competitive platform for consoles",
+		"run":"Go ahead",
+		"game":"Game",
+		"community":"Community",
+		"joincomunity":"Join the community for free",
+		"createaccount":"Create your free account",
+		"yourmail":"Email",
+		"actuality":"Actuality",
+		"retrieve":"Find all the information on the release of patch 1.15.x",
+		"follow":"Follow the news of the RLCS. All the info, match summaries, and more",
+		"clipMonth":"Clip of the month",
+		"shop":"Shop"
 	}
 }

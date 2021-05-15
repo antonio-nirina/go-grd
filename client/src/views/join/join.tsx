@@ -1,17 +1,37 @@
 import React from "react"
+import { useSelector } from "react-redux"
+
+import {Translation} from "../../lang/translation"
+import {RootState} from "../../reducer"
 import "../../assets/css/style.css"
 import "../join/join.css"
 
 
-
-
-
 const Join: React.FC = function() {
+	const userConnectedRedux = useSelector((state:RootState) => state.userConnected)
   return(
     <div className="join">
-      <h2>Rejoins la communauté gratuitement</h2>
+      <h2>
+	  	{
+			Object.keys(userConnectedRedux.user).length > 0 ?
+			Translation(userConnectedRedux.user.language).participHome.joincomunity
+			:
+			Translation("fr").participHome.joincomunity
+		}
+	  </h2>
       <div className="email">
-        <p><input type="text" placeholder="Ton email" /><a href="#">Creer ton compte gratuit</a></p>
+        <p><input
+			type="text"
+			placeholder={Object.keys(userConnectedRedux.user).length > 0 ? Translation(userConnectedRedux.user.language).participHome.yourmail : Translation("fr").participHome.yourmail}/>
+		<>
+		{
+			Object.keys(userConnectedRedux.user).length > 0 ?
+			Translation(userConnectedRedux.user.language).participHome.createaccount
+			:
+			Translation("fr").participHome.createaccount
+		}
+		</>
+		</p>
       </div>
     </div>
   );
