@@ -29,7 +29,7 @@ func Handle(next http.Handler) http.Handler {
 			w.WriteHeader(http.StatusOK)
 			return
 		}
-		
+
 		tokenString := r.Header.Get("Authorization")
 		arrayToken := strings.SplitAfter(tokenString," ")
 
@@ -57,29 +57,3 @@ func Handle(next http.Handler) http.Handler {
 	})
 }
 
-/*
-username, err := jwt.ParseToken(tokenStr)
-            if err != nil {
-                http.Error(w, "Invalid token", http.StatusForbidden)
-                return
-            }
-
-            // create user and check if user exists in db
-            user := users.User{Username: username}
-            id, err := users.GetUserIdByUsername(username)
-            if err != nil {
-                next.ServeHTTP(w, r)
-                return
-            }
-            user.ID = strconv.Itoa(id)
-
-            // put it in context
-            ctx := context.WithValue(r.Context(), userCtxKey, user)
-
-            // and call the next with our new context
-            r = r.WithContext(ctx)
-            next.ServeHTTP(w, r)
-        })
-    }
-
-*/

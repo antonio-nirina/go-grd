@@ -11,5 +11,6 @@ type Repository interface {
 	FindUserByEmail(email string) (entity.User, error)
 	FindUserByUsername(username string) (entity.User, error)
 	FindAllUser() (interface{}, error)
+	UpdatedUser(user *entity.User) (interface{}, error)
 	// UpdateAccountGame(email string) (entity.User, error)
 }

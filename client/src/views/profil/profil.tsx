@@ -15,20 +15,17 @@ import "../../assets/css/style.css"
 import "react-responsive-carousel/lib/styles/carousel.min.css"
 import 'reactjs-popup/dist/index.css'
 // import { CircularProgressbar, CircularProgressbarWithChildren, buildStyles} from "react-circular-progressbar"
+
 import "react-circular-progressbar/dist/styles.css"
 import {RootState} from "../../reducer"
-
 import {Translation} from "../../lang/translation"
 import HistoryTournament from "./historyTournament"
 import HistoryResult from "./historyResult"
 import AccountGame from "./accountGame"
 import Me from "./me"
 
-
 const Profil: React.FC = function() {
 	const userConnectedRedux = useSelector((state:RootState) => state.userConnected)
-
-
 
   return(
 	<div className="profil connected">

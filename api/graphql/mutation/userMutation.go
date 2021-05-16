@@ -22,9 +22,38 @@ var inputType = graphql.NewInputObject(
 	},
 )
 
+var userUpatedType = graphql.NewInputObject(
+	graphql.InputObjectConfig{
+		Name: "userUpdatedType",
+		Fields: graphql.InputObjectConfigFieldMap{
+			"firstname": &graphql.InputObjectFieldConfig{
+				Type: graphql.String,
+			},
+			"username": &graphql.InputObjectFieldConfig{
+				Type: graphql.String,
+			},
+			"lastname": &graphql.InputObjectFieldConfig{
+				Type: graphql.String,
+			},
+			"language": &graphql.InputObjectFieldConfig{
+				Type: graphql.String,
+			},
+			"email": &graphql.InputObjectFieldConfig{
+				Type: graphql.String,
+			},
+		},
+	},
+)
+
 var args = graphql.FieldConfigArgument{
 	"userInput": &graphql.ArgumentConfig{
 		Type: inputType,
+	},
+}
+
+var argsUpated = graphql.FieldConfigArgument{
+	"userUpated": &graphql.ArgumentConfig{
+		Type: userUpatedType,
 	},
 }
 
@@ -50,5 +79,14 @@ func login() *graphql.Field {
 			},
 		},
 		Resolve: UserRolve.AuthUserResolver,
+	}
+}
+// 
+func updatedUser() *graphql.Field {
+	return &graphql.Field{
+		Type:        types.UserSchemaType,
+		Description: "Updated user",
+		Args:        argsUpated,
+		Resolve:     UserRolve.UpdatedUserResolver,
 	}
 }

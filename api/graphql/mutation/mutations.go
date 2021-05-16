@@ -32,5 +32,6 @@ func GetRootFields() graphql.Fields {
 		"login":            login(),
 		"createdGame":      createdGame(),
 		"createdPlateform": createdPlateform(),
+		"updatedUser": 		updatedUser(),
 	}
 }

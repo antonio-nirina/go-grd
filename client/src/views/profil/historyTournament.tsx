@@ -43,42 +43,23 @@ const HistoryTournament : React.FC = function() {
 							<td></td>
 						</tr>
 					</thead>
-					<tr>
-						<td>04/04/2021</td>
-						<td>Fifa21</td>
-						<td><i className="iconStatus"><FontAwesomeIcon icon={faPlaystation}/></i>Classic Cup</td>
-						<td>Top 8</td>
-						<td><i className="iconStatus"><FontAwesomeIcon icon={faInfoCircle}/></i></td>
-					</tr>
-					<tr>
-						<td>04/04/2021</td>
-						<td>Fifa21</td>
-						<td><i className="iconStatus"><FontAwesomeIcon icon={faPlaystation}/></i>Classic Cup</td>
-						<td>Top 8</td>
-						<td><i className="iconStatus"><FontAwesomeIcon icon={faInfoCircle}/></i></td>
-					</tr>
-					<tr>
-						<td>04/04/2021</td>
-						<td>Fifa21</td>
-						<td><i className="iconStatus"><FontAwesomeIcon icon={faMobile}/></i>
-						CoD Mobile</td>
-						<td>Top 8</td>
-						<td><i className="iconStatus"><FontAwesomeIcon icon={faInfoCircle}/></i></td>
-					</tr>
-					<tr>
-						<td>04/04/2021</td>
-						<td>Fifa21</td>
-						<td><i className="iconStatus"><FontAwesomeIcon icon={faPlaystation}/></i>Classic Cup</td>
-						<td>Top 8</td>
-						<td><i className="iconStatus"><FontAwesomeIcon icon={faInfoCircle}/></i></td>
-					</tr>
-					<tr>
-						<td>04/04/2021</td>
-						<td>Fifa21</td>
-						<td><i className="iconStatus"><FontAwesomeIcon icon={faPlaystation}/></i>Classic Cup</td>
-						<td>Top 8</td>
-						<td><i className="iconStatus"><FontAwesomeIcon icon={faInfoCircle}/></i></td>
-					</tr>
+					<tbody>
+						<tr>
+							<td>04/04/2021</td>
+							<td>Fifa21</td>
+							<td><i className="iconStatus"><FontAwesomeIcon icon={faPlaystation}/></i>Classic Cup</td>
+							<td>Top 8</td>
+							<td><i className="iconStatus"><FontAwesomeIcon icon={faInfoCircle}/></i></td>
+						</tr>
+						<tr>
+							<td>04/04/2021</td>
+							<td>Fifa21</td>
+							<td><i className="iconStatus"><FontAwesomeIcon icon={faPlaystation}/></i>Classic Cup</td>
+							<td>Top 8</td>
+							<td><i className="iconStatus"><FontAwesomeIcon icon={faInfoCircle}/></i></td>
+						</tr>
+					</tbody>
+
 				</table>
 				<div className="filter">
 					<p>{Object.keys(userConnectedRedux.user).length > 0 ?
@@ -117,7 +98,8 @@ const HistoryTournament : React.FC = function() {
 							<td></td>
 						</tr>
 					</thead>
-					<tr>
+					<tbody>
+						<tr>
 						<td>04/04/2021</td>
 						<td>Fifa21</td>
 						<td><i className="iconStatus"><FontAwesomeIcon icon={faPlaystation}/></i>Classic Cup</td>
@@ -131,27 +113,7 @@ const HistoryTournament : React.FC = function() {
 						<td>Top 8</td>
 						<td><i className="iconStatus"><FontAwesomeIcon icon={faInfoCircle}/></i></td>
 					</tr>
-					<tr>
-						<td>04/04/2021</td>
-						<td>Fifa21</td>
-						<td><i className="iconStatus"><FontAwesomeIcon icon={faPlaystation}/></i>Classic Cup</td>
-						<td>Top 8</td>
-						<td><i className="iconStatus"><FontAwesomeIcon icon={faInfoCircle}/></i></td>
-					</tr>
-					<tr>
-						<td>04/04/2021</td>
-						<td>Fifa21</td>
-						<td><i className="iconStatus"><FontAwesomeIcon icon={faPlaystation}/></i>Classic Cup</td>
-						<td>Top 8</td>
-						<td><i className="iconStatus"><FontAwesomeIcon icon={faInfoCircle}/></i></td>
-					</tr>
-					<tr>
-						<td>04/04/2021</td>
-						<td>Fifa21</td>
-						<td><i className="iconStatus"><FontAwesomeIcon icon={faPlaystation}/></i>Classic Cup</td>
-						<td>Top 8</td>
-						<td><i className="iconStatus"><FontAwesomeIcon icon={faInfoCircle}/></i></td>
-					</tr>
+					</tbody>
 				</table>
 				<div className="filter">
 					<p>{Object.keys(userConnectedRedux.user).length > 0 ?

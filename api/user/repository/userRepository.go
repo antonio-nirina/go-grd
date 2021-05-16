@@ -109,6 +109,32 @@ func (c *driverRepository) SavedUserXbox(user *entity.User) (interface{}, error)
 	return user, nil
 }
 
+func (c *driverRepository) UpdatedUser(user *entity.User) (interface{}, error) {
+	var collection = c.client.Database("grd_database").Collection("users")
+	filter := bson.D{{"email", user.Email}}
+	update := bson.D{
+		{"$set", bson.D{
+			{
+				"lastname", user.LastName,
+			},
+			{
+				"firstname", user.FirstName,
+			},
+			{
+				"language", user.Language,
+			},
+	}}}
+	updateResult, err := collection.UpdateOne(context.TODO(), filter, update)
+
+	if err != nil {
+		return nil,err
+	}
+
+	fmt.Println("Document Updated: ", updateResult)
+	
+	return updateResult.ModifiedCount,nil
+}
+
 /*func (c *driverRepository) UpdateAccountGame(email string) (entity.User, error) {
 	var collection = c.client.Database("grd_database").Collection("users")
 	var result entity.User

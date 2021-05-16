@@ -50,7 +50,7 @@ type ResponseUserApi struct {
 func (r *resolver) GetXboxProfil(params graphql.ResolveParams) (interface{}, error){
 	accessToken := params.Args["accessToken"].(string)
 	user,_ := GetUserConnectedXbox(accessToken)
-	fmt.Println("user", user)
+
 	return user,nil
 }
 
@@ -76,6 +76,7 @@ func GetUserConnectedXbox(accessToken string)(*profilXboxUserApi,error) {
 	body, err := ioutil.ReadAll(resp.Body)
 	response := &ResponseUserApi{}
 	profil := &profilXboxUserApi{}
+	
 	if resp.StatusCode == 200 {
 		err = json.Unmarshal(body, response)
 		if err != nil {

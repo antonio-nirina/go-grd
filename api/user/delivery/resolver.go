@@ -21,6 +21,7 @@ type Resolver interface {
 	AuthUserResolver(params graphql.ResolveParams) (interface{}, error)
 	GetAccessTokenXboxApi(params graphql.ResolveParams) (interface{}, error)
 	GetXboxProfil(params graphql.ResolveParams) (interface{}, error)
+	UpdatedUserResolver(params graphql.ResolveParams) (interface{}, error)
 }
 
 type resolver struct {
@@ -48,7 +49,6 @@ type inputElements struct {
 }
 
 var roles = []string{"role_user"}
-
 var userEntity = entity.User{}
 
 func (r *resolver) SavedUserResolver(params graphql.ResolveParams) (interface{}, error) {
@@ -59,7 +59,6 @@ func (r *resolver) SavedUserResolver(params graphql.ResolveParams) (interface{},
 	hashed := userEntity.CreatedHash(input.UserInput.Password)
 	check, _ := r.ValidateUserResolver(&input)
 	
-
 	if check {
 		return nil, errors.New("email or username already existe")
 	}
@@ -77,7 +76,7 @@ func (r *resolver) SavedUserResolver(params graphql.ResolveParams) (interface{},
 		IdGameAccount: []game.GameAccount{},
 		Roles: 	roles,
 		TypeConnexion:"site",
-		Created: time.Now().String(),		
+		Created: time.Now().Format(time.RFC3339),		
 	}
 
 	res, err := r.userHandler.SavedUser(userSaved)
@@ -153,6 +152,7 @@ func (r *resolver) AuthUserResolver(params graphql.ResolveParams) (interface{}, 
 	return token, nil
 }
 
+
 func GetToken(user entity.User) (interface{}, error) {
 	err := godotenv.Load()
 
@@ -166,7 +166,6 @@ func GetToken(user entity.User) (interface{}, error) {
 	claims["firstname"] = user.FirstName
 	claims["language"] 	= user.Language
 	claims["lastname"] 	= user.LastName
-	claims["isBaned"] 	= user.IsBanned
 	claims["username"] 	= user.Username
 	claims["created"] 	= user.Created
 	claims["id"] 		= user.Uid.String()

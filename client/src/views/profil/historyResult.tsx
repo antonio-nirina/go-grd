@@ -45,33 +45,18 @@ const userConnectedRedux = useSelector((state:RootState) => state.userConnected)
 						<td></td>
 					</tr>
 				</thead>
-				<tr>
-					<td>04/04/2021</td>
-					<td>Fifa21</td>
-					<td><i className="iconStatus"><FontAwesomeIcon icon={faMobile}/></i>
-						CoD Mobile</td>
-					<td><i className="iconStatus"><FontAwesomeIcon icon={faMobile}/></i>
-						CoD Mobile</td>
-					<td>Top 10</td>
-					<td><i className="iconStatus"><FontAwesomeIcon icon={faInfoCircle}/></i></td>
-				</tr>
-				<tr>
-					<td>04/04/2021</td>
-					<td>Fifa21</td>
-					<td><i className="iconStatus"><FontAwesomeIcon icon={faPlaystation}/></i>Classic Cup</td>
-					<td><i className="iconStatus"><FontAwesomeIcon icon={faMobile}/></i>
-						CoD Mobile</td>
-					<td>Top 5</td>
-					<td><i className="iconStatus"><FontAwesomeIcon icon={faInfoCircle}/></i></td>
-				</tr>
-				<tr>
-					<td>04/04/2021</td>
-					<td>Fifa21</td>
-					<td><i className="iconStatus"><FontAwesomeIcon icon={faPlaystation}/></i>Classic Cup</td>
-					<td><i className="iconStatus"><FontAwesomeIcon icon={faPlaystation}/></i>Classic Cup</td>
-					<td>Top 40</td>
-					<td><i className="iconStatus"><FontAwesomeIcon icon={faInfoCircle}/></i></td>
-				</tr>
+				<tbody>
+					<tr>
+						<td>04/04/2021</td>
+						<td>Fifa21</td>
+						<td><i className="iconStatus"><FontAwesomeIcon icon={faMobile}/></i>
+							CoD Mobile</td>
+						<td><i className="iconStatus"><FontAwesomeIcon icon={faMobile}/></i>
+							CoD Mobile</td>
+						<td>Top 10</td>
+						<td><i className="iconStatus"><FontAwesomeIcon icon={faInfoCircle}/></i></td>
+					</tr>
+				</tbody>
 			</table>
 			<div className="filter">
 				<p>{Object.keys(userConnectedRedux.user).length > 0 ?

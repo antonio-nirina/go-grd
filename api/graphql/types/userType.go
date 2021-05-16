@@ -37,6 +37,9 @@ var UserSchemaType = graphql.NewObject(graphql.ObjectConfig{
 		"point": &graphql.Field{
 			Type: graphql.Int,
 		},
+		"created": &graphql.Field{
+			Type: graphql.String,
+		},
 	},
 })
 
