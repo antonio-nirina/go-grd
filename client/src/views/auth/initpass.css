@@ -2,8 +2,16 @@
 .initpass
 {
 	position: relative;
+
+}
+.initpass .main{
 	height: 100vh;
 }
+.initpass h1{
+	text-transform: inherit;
+	font-size: 24px;
+}
+
 .containt{
 	margin-top: 50px;
 	width: 46%;

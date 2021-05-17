@@ -1,11 +1,11 @@
 import React from "react"
-import { useSelector,useDispatch } from "react-redux"
+import { useSelector } from "react-redux"
 
 import Popup from "reactjs-popup"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 // import { faXbox, faPlaystation } from "@fortawesome/free-brands-svg-icons"
-// faCalendarAlt, faInfoCircle, faGamepad, faTrophy, faMedal, faStepBackward, faStepForward, faChevronRight, faChevronLeft, faMobile,
-import { faPen, faCogs,  } from "@fortawesome/free-solid-svg-icons"
+// faCogs, faCalendarAlt, faInfoCircle, faGamepad, faTrophy, faMedal, faStepBackward, faStepForward, faChevronRight, faChevronLeft, faMobile,
+import { faPen } from "@fortawesome/free-solid-svg-icons"
 
 import Header from "../header/header"
 import Footer from "../footer/footer"
@@ -33,7 +33,7 @@ const Profil: React.FC = function() {
 	      <Header/>
 	      <div className="main-content">
 	      	<div className="main-pro">
-	      		<div className="wall-bloc">
+	      		<div className="wall-bloc" id="wall">
 		      		<div className="tabs">
 		      			<ul>
 		      				<li><a href="#wall" className="active">
@@ -44,7 +44,7 @@ const Profil: React.FC = function() {
 										Translation("fr").profil.wall
 									}
 							  </a></li>
-		      				<li><a href="#">
+		      				<li><a href="#account">
 								  {
 			      						Object.keys(userConnectedRedux.user).length > 0 ?
 										Translation(userConnectedRedux.user.language).profil.account
@@ -60,7 +60,7 @@ const Profil: React.FC = function() {
 									Translation("fr").profil.games
 								}
 							  </a></li>
-		      				<li><a href="#">
+		      				<li><a href="#myteams">
 							  {
 									Object.keys(userConnectedRedux.user).length > 0 ?
 									Translation(userConnectedRedux.user.language).profil.team
@@ -68,7 +68,7 @@ const Profil: React.FC = function() {
 									Translation("fr").profil.team
 								}
 							  </a></li>
-		      				<li><a href="#">
+		      				<li><a href="#story">
 							  {
 									Object.keys(userConnectedRedux.user).length > 0 ?
 									Translation(userConnectedRedux.user.language).profil.tournaments
@@ -76,14 +76,14 @@ const Profil: React.FC = function() {
 									Translation("fr").profil.tournaments
 								}
 							  </a></li>
-		      				<li><a href="#">
+		      				<li><a href="#results">
 							   {
 									Object.keys(userConnectedRedux.user).length > 0 ?
 									Translation(userConnectedRedux.user.language).profil.result
 									:
 									Translation("fr").profil.result
 								}</a></li>
-		      				<li><a href="#">
+		      				<li><a href="#premium">
 							  {
 									Object.keys(userConnectedRedux.user).length > 0 ?
 									Translation(userConnectedRedux.user.language).profil.premium
@@ -198,7 +198,7 @@ const Profil: React.FC = function() {
 		      	<Me />
 		      	<AccountGame />
 
-	      		<div className="my-teams">
+	      		<div className="my-teams" id="myteams">
 	      			<h2>{Object.keys(userConnectedRedux.user).length > 0 ?
 						Translation(userConnectedRedux.user.language).profil.team
 						:
@@ -285,7 +285,7 @@ const Profil: React.FC = function() {
 	      		</div>
 	      		<HistoryTournament />
 	      		<HistoryResult />
-	      		<div className="premium">
+	      		<div className="premium" id="premium">
 	      			<h2>Premium</h2>
 	      			<div className="prem-bloc">
 	      				<div className="item-bloc">

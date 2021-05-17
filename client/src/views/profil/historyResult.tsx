@@ -1,7 +1,7 @@
 import React from "react"
 import { useSelector } from "react-redux"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faPlaystation } from "@fortawesome/free-brands-svg-icons"
+// import { faPlaystation } from "@fortawesome/free-brands-svg-icons"
 import { faCalendarAlt, faInfoCircle, faGamepad, faTrophy, faMedal, faStepBackward, faStepForward, faChevronRight, faChevronLeft, faMobile } from "@fortawesome/free-solid-svg-icons"
 import {Translation} from "../../lang/translation"
 import {RootState} from "../../reducer"
@@ -10,7 +10,7 @@ const HistoryResult : React.FC = function() {
 const userConnectedRedux = useSelector((state:RootState) => state.userConnected)
 
 	return (
-		<div className="mes-resultats">
+		<div className="mes-resultats" id="results">
 		<h2>
 			{Object.keys(userConnectedRedux.user).length > 0 ?
 				Translation(userConnectedRedux.user.language).participHome.result
