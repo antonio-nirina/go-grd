@@ -9,3 +9,16 @@ export const CREATED_USER = gql`
 	}
 }
 `
+export const UPDATED_USER = gql`
+	mutation updatedUser($userUpated: userUpdatedType) {
+		updatedUser(userUpated: $userUpated){
+			firstname
+			email
+			language
+			lastname
+			username
+			created
+			avatar
+	}
+}
+`

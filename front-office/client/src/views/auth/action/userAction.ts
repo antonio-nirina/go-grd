@@ -10,8 +10,8 @@ export interface UserType {
 	firstname:string|""
 	language:string|""
 	lastname:string|""
-	isBaned:Boolean
 	id:string|""
+	created:string|""
 }
 
 export const sendUserConectedAction = function(data:string) {
@@ -31,8 +31,8 @@ export const sendUserConnectedXboxAction = function(user:any) {
 		firstname:user.Surname,
 		language:user.PreferredLanguage,
 		lastname:user.DisplayName,
-		isBaned:false,
-		id:user.Id
+		id:user.Id,
+		created:user.created
 	}
 	return {
 		type:USER_CONNECTED,
@@ -48,8 +48,25 @@ export const changeLanguageUserConnected = function(user:UserType,lang:string) {
 		firstname:user.firstname,
 		language:lang,
 		lastname:user.lastname,
-		isBaned:user.isBaned,
-		id:user.id
+		id:user.id,
+		created:user.created,
+	}
+	return {
+		type:USER_CONNECTED,
+		res:newUserObject??""
+  	}
+}
+
+export const changeProfilUserConnected = function(user:any) {
+	const newUserObject:UserType = {
+		username:user.username,
+		email:user.email,
+		avatar:user.avatar,
+		firstname:user.firstname,
+		language:user.language,
+		lastname:user.lastname,
+		id:user.id,
+		created:user.created
 	}
 	return {
 		type:USER_CONNECTED,

@@ -62,5 +62,16 @@ export const FR = {
 		"pro": "Etre repéré par les pro",
 		"paiment": "Paiement rapide",
 		"wallet": "Porte-monnaie de paiement minimum"
+	},
+	"tournament":{
+		"live": "Tournois en direct",
+		"more": "Voir plus",
+		"date": "Date",
+		"team": "Equipe",
+		"type": "Type",
+		"region": "Région",
+		"tournament": "Tournois",
+		"Signup": "Inscrivez-vous",
+		"upcomming" : "Trounoir à venir"
 	}
 }

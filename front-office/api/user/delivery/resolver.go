@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"errors"
 	"os"
+	"time"
 
 	_jwt "github.com/dgrijalva/jwt-go"
 	"github.com/graphql-go/graphql"
@@ -20,6 +21,7 @@ type Resolver interface {
 	AuthUserResolver(params graphql.ResolveParams) (interface{}, error)
 	GetAccessTokenXboxApi(params graphql.ResolveParams) (interface{}, error)
 	GetXboxProfil(params graphql.ResolveParams) (interface{}, error)
+	UpdatedUserResolver(params graphql.ResolveParams) (interface{}, error)
 }
 
 type resolver struct {
@@ -47,7 +49,6 @@ type inputElements struct {
 }
 
 var roles = []string{"role_user"}
-
 var userEntity = entity.User{}
 
 func (r *resolver) SavedUserResolver(params graphql.ResolveParams) (interface{}, error) {
@@ -58,7 +59,6 @@ func (r *resolver) SavedUserResolver(params graphql.ResolveParams) (interface{},
 	hashed := userEntity.CreatedHash(input.UserInput.Password)
 	check, _ := r.ValidateUserResolver(&input)
 	
-
 	if check {
 		return nil, errors.New("email or username already existe")
 	}
@@ -75,7 +75,8 @@ func (r *resolver) SavedUserResolver(params graphql.ResolveParams) (interface{},
 		Point:         entity.POINT,
 		IdGameAccount: []game.GameAccount{},
 		Roles: 	roles,
-		TypeConnexion:"site",		
+		TypeConnexion:"site",
+		Created: time.Now().Format(time.RFC3339),		
 	}
 
 	res, err := r.userHandler.SavedUser(userSaved)
@@ -151,6 +152,7 @@ func (r *resolver) AuthUserResolver(params graphql.ResolveParams) (interface{}, 
 	return token, nil
 }
 
+
 func GetToken(user entity.User) (interface{}, error) {
 	err := godotenv.Load()
 
@@ -158,15 +160,15 @@ func GetToken(user entity.User) (interface{}, error) {
 		return "", errors.New("Error interne")
 	}
 
-	claims := _jwt.MapClaims{}
-	claims["email"] = user.Email
-	claims["avatar"] = user.Avatar
+	claims 				:= _jwt.MapClaims{}
+	claims["email"] 	= user.Email
+	claims["avatar"] 	= user.Avatar
 	claims["firstname"] = user.FirstName
-	claims["language"] = user.Language
-	claims["lastname"] = user.LastName
-	claims["isBaned"] = user.IsBanned
-	claims["username"] = user.Username
-	claims["id"] = user.Uid.String()
+	claims["language"] 	= user.Language
+	claims["lastname"] 	= user.LastName
+	claims["username"] 	= user.Username
+	claims["created"] 	= user.Created
+	claims["id"] 		= user.Uid.String()
 	// claims["exp"] = time.Now().Add(time.Hour * 1).Unix() //Token expires after 1 hour
 	token := _jwt.NewWithClaims(_jwt.SigningMethodHS256, claims)
 	result, err := token.SignedString([]byte(os.Getenv("SECRET")))

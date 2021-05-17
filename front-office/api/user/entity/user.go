@@ -29,6 +29,7 @@ type User struct {
 	Point         int                `json:"point"`
 	Roles      	 []string             `json:"roles"`
 	TypeConnexion   string            `json:"type_connexion"`
+	Created 		string 			`json:"created"`
 }
 
 func (u *User) CreatedHash(plainText string) (hashText string) {

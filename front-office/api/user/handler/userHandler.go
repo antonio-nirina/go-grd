@@ -76,5 +76,14 @@ func (u *userUsecase) FindUserByUsername(email string) (entity.User, error) {
 	return user, nil
 }
 
+func (u *userUsecase) UpdatedUser(user *entity.User) (interface{}, error) {
+	result, err := u.userRepository.UpdatedUser(user)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return result, nil
+}
 
 

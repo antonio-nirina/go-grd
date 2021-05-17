@@ -51,7 +51,7 @@
 		"wall":"Mon mur",
 		"games":"Mes jeux",
 		"team": "Mes équipes",
-		"tournaments": "Mes tournois",
+		"tournaments": "Historique de tournoi",
 		"result": "mes resultats",
 		"premium": "premium",
 		"platform": "Plateforme",
@@ -73,7 +73,7 @@
 		"description" : "Description",
 		"validate" : "valider",
 		"Lang" : "Langue et région",
-		"choice" : "Choisissez la langue affichée dans le profil",
+		"choice" : "Choix de langues",
 		"account": "Mes comptes de jeux",
 		"setAccount": "Modifier votre compte de jeux",
 		"date" : "Date",
@@ -96,7 +96,10 @@
 		"pro": "Etre repéré par les pro",
 		"paiement": "Paiement rapide",
 		"wallet": "Porte-monnaie de paiement minimum",
-		"month":  "mois"
+		"month":  "mois",
+		"accountGame":"Compte de jeu non renseigné",
+		"firstname":"Prenom",
+		"lastname":"Nom"
 	},
 	"footer":{
 		"note":  "Mentions Légales"
@@ -118,6 +121,18 @@
 		"retrieve":"Retrouvez toutes les informations sur la sortie du patch 1.15.x",
 		"follow":"Suivez l'actualité des RLCS. Toutes les infos, résumés de matchs, et bien plus",
 		"clipMonth":"Clip du mois",
-		"shop":"Boutique"
+		"shop":"Boutique",
+		"result":"Mes résultats"
+	},
+	"tournament":{
+		"live": "Tournois en direct",
+		"more": "Voir plus",
+		"date": "Date",
+		"team": "Equipe",
+		"type": "Type",
+		"region": "Région",
+		"tournament": "Tournois",
+		"Signup": "Inscrivez-vous",
+		"upcomming" : "Trounoir à venir"
 	}
 }
