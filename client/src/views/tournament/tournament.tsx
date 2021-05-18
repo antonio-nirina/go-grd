@@ -12,7 +12,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faTrophy } from "@fortawesome/free-solid-svg-icons"
 
 
-const Tournament: React.FC = function(props:any) {
+const Tournament: React.FC = function() {
 
   return(
   	<div className="Tournament">
@@ -34,18 +34,22 @@ const Tournament: React.FC = function(props:any) {
 								<div className="side-infos">
 									<div className="meta">
 										<table>
-											<tr>
-												<th>Date</th>
-												<th>Equipe</th>
-												<th>Genre</th>
-												<th>Région</th>
-											</tr>
-											<tr>
-												<td>19 Jan 17:00</td>
-												<td>12/16</td>
-												<td>5 ON 5</td>
-												<td>France</td>
-											</tr>
+											<thead>
+												<tr>
+													<td>Date</td>
+													<td>Equipe</td>
+													<td>Genre</td>
+													<td>Région</td>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td>19 Jan 17:00</td>
+													<td>12/16</td>
+													<td>5 ON 5</td>
+													<td>France</td>
+												</tr>
+											</tbody>
 										</table>
 									</div>
 									<div className="name-section">
@@ -71,18 +75,22 @@ const Tournament: React.FC = function(props:any) {
 								<div className="side-infos">
 									<div className="meta">
 										<table>
-											<tr>
-												<th>Date</th>
-												<th>Equipe</th>
-												<th>Genre</th>
-												<th>Région</th>
-											</tr>
-											<tr>
-												<td>19 Jan 17:00</td>
-												<td>12/16</td>
-												<td>5 ON 5</td>
-												<td>France</td>
-											</tr>
+											<thead>
+												<tr>
+													<td>Date</td>
+													<td>Equipe</td>
+													<td>Genre</td>
+													<td>Région</td>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td>19 Jan 17:00</td>
+													<td>12/16</td>
+													<td>5 ON 5</td>
+													<td>France</td>
+												</tr>
+											</tbody>
 										</table>
 									</div>
 									<div className="name-section">
@@ -108,18 +116,22 @@ const Tournament: React.FC = function(props:any) {
 								<div className="side-infos">
 									<div className="meta">
 										<table>
-											<tr>
-												<th>Date</th>
-												<th>Equipe</th>
-												<th>Genre</th>
-												<th>Région</th>
-											</tr>
-											<tr>
-												<td>19 Jan 17:00</td>
-												<td>12/16</td>
-												<td>5 ON 5</td>
-												<td>France</td>
-											</tr>
+											<thead>
+												<tr>
+													<td>Date</td>
+													<td>Equipe</td>
+													<td>Genre</td>
+													<td>Région</td>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td>19 Jan 17:00</td>
+													<td>12/16</td>
+													<td>5 ON 5</td>
+													<td>France</td>
+												</tr>
+											</tbody>
 										</table>
 									</div>
 									<div className="name-section">
@@ -151,18 +163,22 @@ const Tournament: React.FC = function(props:any) {
 								<div className="side-infos">
 									<div className="meta">
 										<table>
-											<tr>
-												<th>Date</th>
-												<th>Equipe</th>
-												<th>Genre</th>
-												<th>Région</th>
-											</tr>
-											<tr>
-												<td>19 Jan 17:00</td>
-												<td>12/16</td>
-												<td>5 ON 5</td>
-												<td>France</td>
-											</tr>
+											<thead>
+												<tr>
+													<td>Date</td>
+													<td>Equipe</td>
+													<td>Genre</td>
+													<td>Région</td>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td>19 Jan 17:00</td>
+													<td>12/16</td>
+													<td>5 ON 5</td>
+													<td>France</td>
+												</tr>
+											</tbody>
 										</table>
 									</div>
 									<div className="name-section">
@@ -188,18 +204,22 @@ const Tournament: React.FC = function(props:any) {
 								<div className="side-infos">
 									<div className="meta">
 										<table>
-											<tr>
-												<th>Date</th>
-												<th>Equipe</th>
-												<th>Genre</th>
-												<th>Région</th>
-											</tr>
-											<tr>
-												<td>19 Jan 17:00</td>
-												<td>12/16</td>
-												<td>5 ON 5</td>
-												<td>France</td>
-											</tr>
+											<thead>
+												<tr>
+													<td>Date</td>
+													<td>Equipe</td>
+													<td>Genre</td>
+													<td>Région</td>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td>19 Jan 17:00</td>
+													<td>12/16</td>
+													<td>5 ON 5</td>
+													<td>France</td>
+												</tr>
+											</tbody>
 										</table>
 									</div>
 									<div className="name-section">
@@ -225,18 +245,22 @@ const Tournament: React.FC = function(props:any) {
 								<div className="side-infos">
 									<div className="meta">
 										<table>
-											<tr>
-												<th>Date</th>
-												<th>Equipe</th>
-												<th>Genre</th>
-												<th>Région</th>
-											</tr>
-											<tr>
-												<td>19 Jan 17:00</td>
-												<td>12/16</td>
-												<td>5 ON 5</td>
-												<td>France</td>
-											</tr>
+											<thead>
+												<tr>
+													<td>Date</td>
+													<td>Equipe</td>
+													<td>Genre</td>
+													<td>Région</td>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td>19 Jan 17:00</td>
+													<td>12/16</td>
+													<td>5 ON 5</td>
+													<td>France</td>
+												</tr>
+											</tbody>
 										</table>
 									</div>
 									<div className="name-section">
