@@ -75,7 +75,7 @@ const Login: React.FC = function() {
 						</form>
 						<div className="infos">
 							<p className="mb15">Vous n'avez pas encore de compte ? <Link to = "/register" title="Inscrivez-vous" className="italic cl-yellow">Inscrivez-vous !</Link></p>
-							<p className="mb15"><Link to ="/initpass" title="Mot de passe oublié ?" className="italic cl-yellow">Mot de passe oublié ?</Link></p>
+							<p className="mb15"><Link to ="/forgot-password" title="Mot de passe oublié ?" className="italic cl-yellow">Mot de passe oublié ?</Link></p>
 							<div className="other-account">
 								<p>Connectez-vous avec votre compte : </p>
 								<span onClick={Siging}><img src={IconXbox} alt="xbox" /></span>

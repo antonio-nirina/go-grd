@@ -28,11 +28,12 @@ var plateformResolver = gameDelivery.NewResolverPlateform(usecasePlateform)
 
 func GetRootFields() graphql.Fields {
 	return graphql.Fields{
-		"createdUser":      createdUser(),
-		"login":            login(),
-		"createdGame":      createdGame(),
-		"createdPlateform": createdPlateform(),
-		"updatedUser": 		updatedUser(),
-		"forgotPassword":	forgotPassword(),
+		"createdUser":      	createdUser(),
+		"login":            	login(),
+		"createdGame":      	createdGame(),
+		"createdPlateform": 	createdPlateform(),
+		"updatedUser": 			updatedUser(),
+		"forgotPassword":		forgotPassword(),
+		"updatedPasswordUser": 	updatedPasswordUser(),
 	}
 }

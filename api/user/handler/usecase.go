@@ -12,4 +12,6 @@ type Usecase interface {
 	// GetToken(user *entity.User) (interface{}, error)
 	FindAllUser() (interface{}, error)
 	UpdatedUser(user *entity.User) (interface{}, error)
+	UpdatedTokenUser(email string,token string) (interface{}, error)
+	FindUserByToken(token string) (entity.User, error)
 }
