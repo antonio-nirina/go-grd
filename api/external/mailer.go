@@ -44,9 +44,10 @@ func (e *ToMailer) Sender (data map[string]string) (bool,error) {
 		messages := mailjet.MessagesV31{Info: messagesInfo }
 		res, err := mailjetClient.SendMailV31(&messages)
         if err != nil {
-            Logger("[MAILER] Email send failure via Mailjet")
+            return false,err
         }
-        fmt.Println(res)
+        
+		fmt.Println(res)
         
         return true,nil
 }

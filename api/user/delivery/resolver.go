@@ -9,6 +9,8 @@ import (
 	_jwt "github.com/dgrijalva/jwt-go"
 	"github.com/graphql-go/graphql"
 	"github.com/joho/godotenv"
+	uuid "github.com/satori/go.uuid"
+	"github.com/thoussei/antonio/main/front-office/api/external"
 	game "github.com/thoussei/antonio/main/front-office/api/games/entity"
 	"github.com/thoussei/antonio/main/front-office/api/user/entity"
 	"github.com/thoussei/antonio/main/front-office/api/user/handler"
@@ -22,6 +24,7 @@ type Resolver interface {
 	GetAccessTokenXboxApi(params graphql.ResolveParams) (interface{}, error)
 	GetXboxProfil(params graphql.ResolveParams) (interface{}, error)
 	UpdatedUserResolver(params graphql.ResolveParams) (interface{}, error)
+	ForgotResolver(params graphql.ResolveParams) (interface{}, error)
 }
 
 type resolver struct {
@@ -152,6 +155,46 @@ func (r *resolver) AuthUserResolver(params graphql.ResolveParams) (interface{}, 
 	return token, nil
 }
 
+func (r *resolver)ForgotResolver(params graphql.ResolveParams) (interface{}, error) {
+	email := params.Args["email"].(string)
+	res, err := r.userHandler.FindUserByEmail(email)
+
+	if err != nil {
+		return "error",nil
+	}
+
+	name := ""
+	if res.FirstName != "" {
+		name = res.FirstName	
+	} else {
+		name = res.Username
+	}
+	subject := "Mot de pass oublie"
+	text := "Tu as oublié ton mot de passe ?"
+	if res.Language == "en" {
+		subject = "Forgot password"
+		text = "Are you forgot your password ?"
+	}
+
+	message := "Hello "+name+"\n"+text
+	to := external.ToMailer{
+		Firstname: res.FirstName,
+		Lastname: res.LastName,
+		Email: res.Email,
+		Subject: subject,
+		Message: message,
+	}
+	data := make(map[string]string)
+	u := uuid.NewV4()
+	data["token"] =  u.String()
+	_,err = to.Sender(data)
+
+	if err != nil {
+		external.Logger("[MAILER] Email send failure via Mailjet")
+	}
+	
+	return "Ok",nil
+}
 
 func GetToken(user entity.User) (interface{}, error) {
 	err := godotenv.Load()
