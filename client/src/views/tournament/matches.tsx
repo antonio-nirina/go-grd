@@ -29,8 +29,8 @@ const Matches: React.FC = function(props:any) {
 					<ul>
 						<li><Link to="/info">Info</Link></li>
 						<li><Link to="/matches" className="active">Match</Link></li>
-						<li><Link to="#">Teams</Link></li>
-						<li><Link to="#">Règles</Link></li>
+						<li><Link to="/teams">Equipes</Link></li>
+						<li><Link to="/rules">Règles</Link></li>
 					</ul>
 				</div>				
 				<div className="matches">

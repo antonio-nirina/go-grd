@@ -11,7 +11,7 @@ import { Link } from "react-router-dom"
 // import { faCalendarAlt, faInfoCircle, faGamepad, faTrophy, faMedal, faStepBackward, faStepForward, faChevronRight, faChevronLeft, faMobile } from "@fortawesome/free-solid-svg-icons"
 
 
-const Info: React.FC = function(props:any) {
+const Rules: React.FC = function(props:any) {
 
   return(
   	<div className="Tournament info">
@@ -27,10 +27,10 @@ const Info: React.FC = function(props:any) {
 				<div className="banniere"></div>
 				<div className="tabs">
 					<ul>
-						<li><Link to="/info" className="active">Info</Link></li>
+						<li><Link to="/info">Info</Link></li>
 						<li><Link to="/matches">Match</Link></li>
 						<li><Link to="/teams">Equipes</Link></li>
-						<li><Link to="#">Règles</Link></li>
+						<li><Link to="/rules" className="active">Règles</Link></li>
 					</ul>
 				</div>
 				<div className="txt">
@@ -92,4 +92,4 @@ const Info: React.FC = function(props:any) {
   )
 }
 
-export default Info
+export default Rules
