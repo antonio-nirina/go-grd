@@ -90,3 +90,17 @@ func updatedUser() *graphql.Field {
 		Resolve:     UserRolve.UpdatedUserResolver,
 	}
 }
+
+func forgotPassword() *graphql.Field {
+	return &graphql.Field{
+		Type:        graphql.String,
+		Description: "Forgot password",
+		Args: graphql.FieldConfigArgument{
+			"email": &graphql.ArgumentConfig{
+				Type: graphql.String,
+			},
+			
+		},
+		Resolve: UserRolve.ForgotResolver,
+	}
+}

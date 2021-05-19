@@ -9,7 +9,8 @@ require (
 	github.com/graphql-go/graphql v0.7.9
 	github.com/graphql-go/handler v0.2.3
 	github.com/joho/godotenv v1.3.0
-	github.com/mailjet/mailjet-apiv3-go/v3 v3.0.0 // indirect
+	github.com/mailjet/mailjet-apiv3-go/v3 v3.0.0
+	github.com/satori/go.uuid v1.2.0 // indirect
 	github.com/sirupsen/logrus v1.4.2
 	go.mongodb.org/mongo-driver v1.5.1
 	golang.org/x/crypto v0.0.0-20210415154028-4f45737414dc
