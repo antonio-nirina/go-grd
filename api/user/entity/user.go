@@ -30,6 +30,7 @@ type User struct {
 	Roles      	 []string             `json:"roles"`
 	TypeConnexion   string            `json:"type_connexion"`
 	Created 		string 			`json:"created"`
+	ConfirmationToken string 		`json:"confirmation_token,omitempty"`
 }
 
 func (u *User) CreatedHash(plainText string) (hashText string) {

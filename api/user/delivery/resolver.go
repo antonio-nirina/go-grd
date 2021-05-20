@@ -1,6 +1,7 @@
 package delivery
 
 import (
+	"encoding/base64"
 	"encoding/json"
 	"errors"
 	"os"
@@ -25,6 +26,7 @@ type Resolver interface {
 	GetXboxProfil(params graphql.ResolveParams) (interface{}, error)
 	UpdatedUserResolver(params graphql.ResolveParams) (interface{}, error)
 	ForgotResolver(params graphql.ResolveParams) (interface{}, error)
+	UpdatePasswordResolver(params graphql.ResolveParams) (interface{}, error)
 }
 
 type resolver struct {
@@ -158,7 +160,15 @@ func (r *resolver) AuthUserResolver(params graphql.ResolveParams) (interface{}, 
 func (r *resolver)ForgotResolver(params graphql.ResolveParams) (interface{}, error) {
 	email := params.Args["email"].(string)
 	res, err := r.userHandler.FindUserByEmail(email)
-
+	if err != nil {
+		return "error",nil
+	}
+	data := make(map[string]string)
+	u := uuid.NewV4()
+	encoded := base64.StdEncoding.EncodeToString([]byte(u.String()))
+	data["token"] =  encoded
+	_,err = r.userHandler.UpdatedTokenUser(email,encoded)
+	
 	if err != nil {
 		return "error",nil
 	}
@@ -169,11 +179,15 @@ func (r *resolver)ForgotResolver(params graphql.ResolveParams) (interface{}, err
 	} else {
 		name = res.Username
 	}
+
 	subject := "Mot de pass oublie"
 	text := "Tu as oublié ton mot de passe ?"
+	data["msg"] =  "Clique ici pour re-initialiser votre password"
+
 	if res.Language == "en" {
 		subject = "Forgot password"
 		text = "Are you forgot your password ?"
+		data["msg"] =  "Click here for init your password"
 	}
 
 	message := "Hello "+name+"\n"+text
@@ -184,9 +198,7 @@ func (r *resolver)ForgotResolver(params graphql.ResolveParams) (interface{}, err
 		Subject: subject,
 		Message: message,
 	}
-	data := make(map[string]string)
-	u := uuid.NewV4()
-	data["token"] =  u.String()
+	
 	_,err = to.Sender(data)
 
 	if err != nil {
