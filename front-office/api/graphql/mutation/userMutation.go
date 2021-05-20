@@ -104,3 +104,19 @@ func forgotPassword() *graphql.Field {
 		Resolve: UserRolve.ForgotResolver,
 	}
 }
+
+func updatedPasswordUser() *graphql.Field {
+	return &graphql.Field{
+		Type:        graphql.String,
+		Description: "Update password",
+		Args: graphql.FieldConfigArgument{
+			"token": &graphql.ArgumentConfig{
+				Type: graphql.String,
+			},
+			"newPassword": &graphql.ArgumentConfig{
+				Type: graphql.String,
+			},			
+		},
+		Resolve: UserRolve.UpdatePasswordResolver,
+	}
+}

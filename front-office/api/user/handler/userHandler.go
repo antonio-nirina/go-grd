@@ -86,4 +86,23 @@ func (u *userUsecase) UpdatedUser(user *entity.User) (interface{}, error) {
 	return result, nil
 }
 
+func (u *userUsecase) UpdatedTokenUser(email string,token string) (interface{}, error) {
+	result, err := u.userRepository.UpdatedTokenUser(email,token)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return result, nil
+}
+
+func (u *userUsecase) FindUserByToken(token string) (entity.User, error) {
+	result, err := u.userRepository.FindUserByToken(token)
+
+	if err != nil {
+		return entity.User{}, err
+	}
+
+	return result, nil
+}
 

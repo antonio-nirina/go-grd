@@ -103,4 +103,60 @@
 .confirm{
 	color: #f2cf1d;
 }
-
+/****************Matches*******************/
+.matches h2{
+	padding: 15px;
+}
+.matches{	
+	
+	border-radius: 5px;
+	width: 100%;
+	display: inline-block;
+	margin-right: 15px;
+}
+.matches table{
+	border-collapse: collapse;
+	width: 100%;
+}
+.matches p{
+	font-size: 15px;
+	margin: 10px;
+}
+.matches strong{
+	font-weight: 700;
+	color: #f2cf1d;
+}
+.matches td{	
+	
+}
+.matches .schedule{
+	/*width: 43%;*/
+	padding-left: 15px;
+}
+.matches .about-team{
+	text-align: center;
+}
+.matches .vs{
+	color: #f2cf1d;
+	font-weight: bold;
+	/*width: 12%;*/
+	text-align: center;
+}
+.matches span{
+	font-weight: 700;
+}
+.matches span img{
+	border: 2px solid #f2cf1d;	
+	border-radius: 50%;
+}
+.matches .versus span{	
+	display: inline-block;
+	padding: 10px;
+	vertical-align: middle;	
+}
+.matches tr:nth-child(even){
+	background: #101010;
+}
+.matches tr:nth-child(odd){
+	background: #2c2c2c;
+}

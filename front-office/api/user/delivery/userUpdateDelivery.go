@@ -70,3 +70,37 @@ func (r *resolver) UpdatedUserResolver(params graphql.ResolveParams) (interface{
 
 	return newRes, nil
 }
+
+func (r *resolver) UpdatePasswordResolver(params graphql.ResolveParams) (interface{}, error) {
+	token := params.Args["token"].(string)
+	newPwd := params.Args["newPassword"].(string)
+	res, err := r.userHandler.FindUserByToken(token)
+	
+	if err != nil {
+		return "error",nil
+	}
+	hashedPwd := userEntity.CreatedHash(newPwd)
+	userToUpdated := &entity.User{
+		Uid:           	res.Uid,
+		FirstName:     	res.FirstName,
+		LastName:      	res.LastName,
+		Password:      	hashedPwd,
+		Username:      	res.Username,
+		Email:         	res.Email,
+		IsBanned:      	res.IsBanned,
+		Avatar:        	res.Avatar,
+		Language:      	res.Language,
+		Point:         	res.Point,
+		IdGameAccount: 	res.IdGameAccount,
+		Roles: 			res.Roles,
+		TypeConnexion:	res.TypeConnexion,
+		Created: 		res.Created,		
+	}
+	_, err = r.userHandler.UpdatedUser(userToUpdated)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return "Ok",nil
+}

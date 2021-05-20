@@ -123,6 +123,9 @@ func (c *driverRepository) UpdatedUser(user *entity.User) (interface{}, error) {
 			{
 				"language", user.Language,
 			},
+			{
+				"password",user.Password,
+			},
 	}}}
 	updateResult, err := collection.UpdateOne(context.TODO(), filter, update)
 
@@ -130,9 +133,38 @@ func (c *driverRepository) UpdatedUser(user *entity.User) (interface{}, error) {
 		return nil,err
 	}
 
-	fmt.Println("Document Updated: ", updateResult)
-	
 	return updateResult.ModifiedCount,nil
+}
+
+func (c *driverRepository) UpdatedTokenUser(email string,token string) (interface{}, error) {
+	var collection = c.client.Database("grd_database").Collection("users")
+	filter := bson.D{{"email", email}}
+	update := bson.D{
+		{"$set", bson.D{
+			{
+				"confirmation_token", token,
+			},
+	}}}
+	updateResult, err := collection.UpdateOne(context.TODO(), filter, update)
+
+	if err != nil {
+		return nil,err
+	}
+
+	return updateResult.ModifiedCount,nil
+}
+
+func (c *driverRepository) FindUserByToken(token string) (entity.User, error) {
+	var collection = c.client.Database("grd_database").Collection("users")
+	var result entity.User
+
+	err := collection.FindOne(context.TODO(), bson.M{"confirmation_token": token}).Decode(&result)
+
+	if err != nil {
+		return result, err
+	}
+
+	return result, nil
 }
 
 /*func (c *driverRepository) UpdateAccountGame(email string) (entity.User, error) {
