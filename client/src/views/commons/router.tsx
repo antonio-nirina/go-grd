@@ -4,6 +4,7 @@ import Home from "../home/home"
 import Ligue from "../ligue/ligue"
 import Tournament from "../tournament/tournament"
 import Info from "../tournament/info"
+import Matches from "../tournament/matches"
 import Wager from "../wager/wager"
 import Assistant from "../assistant/assistant"
 import Communaute from "../communaute/communaute"
@@ -21,6 +22,7 @@ const Router = function() {
 			<Route path="/" exact component={Home} />
 			<ProtectedRoute path="/tournament" exact component={Tournament} />
 			<ProtectedRoute path="/info" exact component={Info} />
+			<ProtectedRoute path="/matches" exact component={Matches} />
 			<ProtectedRoute path="/ligue" exact component={Ligue} />
 			<ProtectedRoute path="/wager" exact component={Wager} />
 			<ProtectedRoute path="/communaute" exact component={Communaute} />

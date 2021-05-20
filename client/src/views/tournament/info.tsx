@@ -24,13 +24,11 @@ const Info: React.FC = function(props:any) {
 					<p className="status">Status : <span>ouvert</span></p>
 				</div>
 				
-				<div className="banniere">
-					
-				</div>
+				<div className="banniere"></div>
 				<div className="tabs">
 					<ul>
-						<li><Link to="#" className="active">Info</Link></li>
-						<li><Link to="#">Match</Link></li>
+						<li><Link to="/info" className="active">Info</Link></li>
+						<li><Link to="/matches">Match</Link></li>
 						<li><Link to="#">Teams</Link></li>
 						<li><Link to="#">Règles</Link></li>
 					</ul>
