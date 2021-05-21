@@ -29,8 +29,8 @@ const Matches: React.FC = function(props:any) {
 					<ul>
 						<li><Link to="/info">Info</Link></li>
 						<li><Link to="/matches" className="active">Match</Link></li>
-						<li><Link to="#">Teams</Link></li>
-						<li><Link to="#">Règles</Link></li>
+						<li><Link to="/teams">Equipes</Link></li>
+						<li><Link to="/rules">Règles</Link></li>
 					</ul>
 				</div>				
 				<div className="matches">
@@ -75,7 +75,7 @@ const Matches: React.FC = function(props:any) {
 							<td className="vs">vs</td>
 							<td className="about-team">
 								<span className="team-flag"><img src="https://i.ibb.co/dQPw2Vd/teamlogo.png" alt="teamlogo" width="25" height="25" /></span>
-								<span className="tag-name">TIKIS Esports</span>
+								<span className="tag-name">Random team</span>
 								<span className="flag"><img src="https://i.ibb.co/gvSwfSp/gb.png" alt="gb" width="25" height="25" /></span>
 							</td>
 						</tr>
@@ -83,7 +83,7 @@ const Matches: React.FC = function(props:any) {
 							<td className="schedule">19 Juillet, 2021 17:00</td>
 							<td className="about-team">
 								<span className="team-flag"><img src="https://i.ibb.co/dQPw2Vd/teamlogo.png" alt="teamlogo" width="25" height="25" /></span>
-								<span className="tag-name">TIKIS Esports</span>
+								<span className="tag-name">Random team</span>
 								<span className="flag"><img src="https://i.ibb.co/mC6JsHb/fr.png" alt="fr" width="25" height="25" /></span>
 							</td>
 							<td className="vs">vs</td>
@@ -103,7 +103,7 @@ const Matches: React.FC = function(props:any) {
 							<td className="vs">vs</td>
 							<td className="about-team">
 								<span className="team-flag"><img src="https://i.ibb.co/dQPw2Vd/teamlogo.png" alt="teamlogo" width="25" height="25" /></span>
-								<span className="tag-name">TIKIS Esports</span>
+								<span className="tag-name">Random team</span>
 								<span className="flag"><img src="https://i.ibb.co/gvSwfSp/gb.png" alt="gb" width="25" height="25" /></span>
 							</td>
 						</tr>

@@ -160,3 +160,92 @@
 .matches tr:nth-child(odd){
 	background: #2c2c2c;
 }
+/****************Teams*******************/
+.teams h2{
+	padding: 15px;
+}
+.teams table{
+	border-collapse: collapse;
+}
+.teams table th{
+	padding: 15px 0;
+}
+.teams table td{
+	width: 246px;    
+    text-align: center;
+    padding: 15px;
+    vertical-align: middle;
+}
+.teams td img{
+	border: 2px solid #f2cf1d;
+    border-radius: 50%;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 5px;
+}
+.score{
+	max-width: 300px;
+	background: #2c2c2c;
+	width: 100%;
+	margin: 15px 0px;
+	border-radius: 5px;
+	display: inline-block;
+	vertical-align: middle;
+}
+.score th{
+	font-size: 25px;
+}
+.score i{
+	display: block;	
+}
+.score i svg{
+	width: 30px !important;
+	height: 50px !important;
+}
+.score table th{
+	padding: 15px;
+}
+.score table tr{
+	background: inherit;
+}
+.score .win svg, .score .win{
+	color: #96b900;
+}
+.score .win, .score .lose{
+	background: #373535;	
+}
+.score .lose svg, .score .lose{
+	color: #cf0023;
+}
+
+tr:nth-child(even){
+	background: #101010;
+}
+tr:nth-child(odd){
+	background: #2c2c2c;
+}
+.rating{
+	max-width: 250px;
+	width: 100%;
+	text-align: center;
+	display: inline-block;
+}
+.numb{
+	display: inline-block;
+	margin-right: 15px;
+	font-weight: bold;	
+	padding: 15px;
+}
+
+.numb span{
+	font-size: 25px;
+}
+.onshow{
+	display: block;
+}
+.onhide{
+	display: none;
+}
+.pointer{
+	cursor: pointer;
+}
