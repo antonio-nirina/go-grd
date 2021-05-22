@@ -14,6 +14,7 @@ import Login from "../auth/login"
 import Profil from "../profil/profil"
 import Inscription from "../auth/inscription"
 import InitPass from "../auth/initpass"
+import UpdatePassword from "../auth/updatePassword"
 import ProtectedRoute from "./protectedRoute"
 import Register from "../auth/register"
 
@@ -34,6 +35,7 @@ const Router = function() {
 			<Route path="/inscription" exact component={Inscription} />
 			<Route path="/register" exact component={Register} />
 			<Route path="/InitPass" exact component={InitPass} />
+			<Route path="/updatePassword" exact component={UpdatePassword} />
 			<ProtectedRoute path="/profil" exact component={Profil} />			
 		</Switch>
 	)
