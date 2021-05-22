@@ -4,10 +4,12 @@ type FileUpload struct {
 	Filename string
 	ApiKey string
 	ApiSecret string
-	BaseUrl string
+	Path string
 	Data string
 }
 
+const BASE_URL = "https://api.imgbb.com/1/upload"
+
 func (f *FileUpload) uploaderFile() {
-	// curl --location --request POST "https://api.imgbb.com/1/upload?expiration=600&key=YOUR_CLIENT_API_KEY" --form "image=R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+
 }
