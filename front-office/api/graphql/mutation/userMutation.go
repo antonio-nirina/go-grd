@@ -120,3 +120,22 @@ func updatedPasswordUser() *graphql.Field {
 		Resolve: UserRolve.UpdatePasswordResolver,
 	}
 }
+
+func updatedAvatar() *graphql.Field {
+	return &graphql.Field{
+		Type:        types.UserSchemaType,
+		Description: "Update avatar",
+		Args: graphql.FieldConfigArgument{
+			"email": &graphql.ArgumentConfig{
+				Type: graphql.String,
+			},
+			"avatar": &graphql.ArgumentConfig{
+				Type: graphql.String,
+			},
+			"typeFile": &graphql.ArgumentConfig{
+				Type: graphql.String,
+			},
+		},
+		Resolve: UserRolve.UpdateAvatarResolver,
+	}
+}

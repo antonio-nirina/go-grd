@@ -13,10 +13,10 @@ import (
 	"github.com/graphql-go/graphql"
 )
 
-var database = config.ConfigMongo()
-var repUser = repository.NewUserRepository(database)
-var usecase = handler.NewUsecaseUser(repUser)
-var UserRolve = delivery.NewResolver(usecase)
+var database 	= config.ConfigMongo()
+var repUser 	= repository.NewUserRepository(database)
+var usecase 	= handler.NewUsecaseUser(repUser)
+var UserRolve 	= delivery.NewResolver(usecase)
 
 var repositoryGame = gameRepo.NewGameRepository(database)
 var usecaseGame = gameHandler.NewUsecaseGame(repositoryGame)
@@ -35,5 +35,6 @@ func GetRootFields() graphql.Fields {
 		"updatedUser": 			updatedUser(),
 		"forgotPassword":		forgotPassword(),
 		"updatedPasswordUser": 	updatedPasswordUser(),
+		"updatedAvatar":		updatedAvatar(),	
 	}
 }
