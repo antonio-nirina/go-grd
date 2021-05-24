@@ -29,24 +29,28 @@ const Login: React.FC = function() {
 	const dispatch = useDispatch()
 	const { register, handleSubmit, formState: { errors } } = useForm<Inputs>()
 	const [errorForm,setErrorForm] = useState<boolean>(false)
+	const [passwd,setPasswd] = useState<boolean>(false)
 	const [login]  = useMutation(LOGIN)
 	const onSubmit = async function(data:Inputs){
 		const email: string = data.email
 		const password: string = data.password
 
 		if(checkValidEmail(email)) {
-			const result = await login({ variables: { email: email,password:password } })
-			if (result.data.login) {
-				const token:TokenType = {
-					access_token:result.data.login,
-					refresh_token:"",
-					type:""
+			try {
+				const result = await login({ variables: { email: email,password:password } })
+				if (result.data.login) {
+					const token:TokenType = {
+						access_token:result.data.login,
+						refresh_token:"",
+						type:""
+					}
+					SendToken(token)
+					dispatch(sendUserConectedAction(result.data.login))
 				}
-				SendToken(token)
-				dispatch(sendUserConectedAction(result.data.login))
+				history.push("/")
+			} catch(e) {
+				setPasswd(true)
 			}
-
-			history.push("/")
 		} else {
 			setErrorForm(true)
 		}
@@ -65,6 +69,9 @@ const Login: React.FC = function() {
 					</h1>
 						<div>
 							<span style={{"color":"red"}}>{errorForm ? Translation("fr").login.errorForm : ""}</span>
+						</div>
+						<div>
+							{passwd ? <span style={{"color":"red"}}>Passord or username invalid </span> : ""}
 						</div>
 						<form onSubmit={handleSubmit(onSubmit)}>
 							<input className="mgt10" type = "email" placeholder = "Ton email" {...register("email", { required: true })} name="email" />

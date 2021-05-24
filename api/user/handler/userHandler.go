@@ -5,6 +5,8 @@ package handler
  */
 
 import (
+	uuid "github.com/satori/go.uuid"
+	"github.com/thoussei/antonio/main/front-office/api/external"
 	"github.com/thoussei/antonio/main/front-office/api/user/entity"
 	"github.com/thoussei/antonio/main/front-office/api/user/repository"
 	"go.mongodb.org/mongo-driver/bson/primitive"
@@ -101,6 +103,47 @@ func (u *userUsecase) FindUserByToken(token string) (entity.User, error) {
 
 	if err != nil {
 		return entity.User{}, err
+	}
+
+	return result, nil
+}
+
+func (u *userUsecase) UpdateAvatar(user entity.User,avatar string,typeFile string) (interface{}, error)  {
+	upl := &external.FileUpload{}
+	path := "/tmpFile"
+	upl.Path = path
+
+	if !upl.DirectoryExists() {
+		err := upl.CreateDirectory()
+
+		if err != nil {
+			return nil, err
+		}
+	}
+	
+	upl.Filename = (uuid.NewV4()).String()+"."+typeFile
+	
+	userToUpdated := &entity.User{
+		Uid:           	user.Uid,
+		FirstName:     	user.FirstName,
+		LastName:      	user.LastName,
+		Password:      	user.Password,
+		Username:      	user.Username,
+		Email:         	user.Email,
+		IsBanned:      	user.IsBanned,
+		Avatar:        	user.Avatar,
+		Language:      	user.Language,
+		Point:         	user.Point,
+		IdGameAccount: 	user.IdGameAccount,
+		Roles: 			user.Roles,
+		TypeConnexion:	user.TypeConnexion,
+		Created: 		user.Created,		
+	}
+	
+	result, err := u.userRepository.UpdatedUser(userToUpdated)
+
+	if err != nil {
+		return nil, err
 	}
 
 	return result, nil

@@ -27,3 +27,8 @@ export const FORGOT_PASSWORD = gql`
 		forgotPassword(email:$email)
 	}
 `
+export const UPDATE_PASSWORD = gql`
+	mutation updatedPasswordUser($token:String,$newPassword:String) {
+		updatedPasswordUser(token:$token,newPassword:$newPassword)
+	}
+`

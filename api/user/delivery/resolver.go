@@ -27,6 +27,7 @@ type Resolver interface {
 	UpdatedUserResolver(params graphql.ResolveParams) (interface{}, error)
 	ForgotResolver(params graphql.ResolveParams) (interface{}, error)
 	UpdatePasswordResolver(params graphql.ResolveParams) (interface{}, error)
+	UpdateAvatarResolver(params graphql.ResolveParams) (interface{}, error)
 }
 
 type resolver struct {

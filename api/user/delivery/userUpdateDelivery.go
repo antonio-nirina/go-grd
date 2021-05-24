@@ -104,3 +104,23 @@ func (r *resolver) UpdatePasswordResolver(params graphql.ResolveParams) (interfa
 
 	return "Ok",nil
 }
+
+func (r *resolver) UpdateAvatarResolver(params graphql.ResolveParams) (interface{}, error) {
+	email := params.Args["email"].(string)
+	avatar := params.Args["avatar"].(string)
+	typeFile := params.Args["typeFile"].(string)
+	user, err := r.userHandler.FindUserByEmail(email)
+
+	if err != nil {
+		return entity.User{}, err
+	}
+
+	res, err := r.userHandler.UpdateAvatar(user,avatar,typeFile)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return res,nil
+
+}
