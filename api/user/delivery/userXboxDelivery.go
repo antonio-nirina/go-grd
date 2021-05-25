@@ -239,7 +239,6 @@ func getXsTokenXbox(tokenUser string)(string,error) {
 
 	defer resp.Body.Close()
 	body, err := ioutil.ReadAll(resp.Body)
-	fmt.Println("resp...", resp)
 	fmt.Println(string(body))
 
 	return "",nil

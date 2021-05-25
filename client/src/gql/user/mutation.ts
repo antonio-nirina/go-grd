@@ -32,3 +32,8 @@ export const UPDATE_PASSWORD = gql`
 		updatedPasswordUser(token:$token,newPassword:$newPassword)
 	}
 `
+export const UPDATE_AVATAR = gql`
+	mutation updatedAvatar($email:String,$avatar:String,$typeFile:String) {
+		updatedAvatar(email:$email,avatar:$avatar,$typeFile:$typeFile)
+	}
+`
