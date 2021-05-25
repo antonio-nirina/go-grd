@@ -64,41 +64,54 @@ const Me : React.FC = function() {
 							Translation(userConnectedRedux.user.language).profil.set
 							:
 							Translation("fr").profil.set
-						}</h2>
+						}
+					</h2>
 					<form onSubmit={handleSubmit(onSubmit)}>
-						<input type="text" placeholder={
-								Object.keys(userConnectedRedux.user).length > 0 ?
-								Translation(userConnectedRedux.user.language).profil.pseudonym
-								:
-								Translation("fr").profil.pseudonym
-							}
-							{...register("username")} name="username"
-							defaultValue={userConnectedRedux.user.username}
+						<div className="group-input">
+							<strong><label htmlFor="pseudo">Pseudo</label></strong>
+							<input id="pseudo" type="text"
+								{...register("username")} name="username"
+								defaultValue={userConnectedRedux.user.username}
 							/>
-						<input type="text" placeholder={
-								Object.keys(userConnectedRedux.user).length > 0 ?
-								Translation(userConnectedRedux.user.language).profil.firstname
-								:
-								Translation("fr").profil.firstname
-							}
-							defaultValue={userConnectedRedux.user.firstname}
-							{...register("firstname")} name="firstname"
+							<strong><label htmlFor="first">Prénom</label></strong>
+							<input type="text" id="first" 
+								defaultValue={userConnectedRedux.user.firstname}
+								{...register("firstname")} name="firstname"
 							/>
-						<input type="text" placeholder={
-								Object.keys(userConnectedRedux.user).length > 0 ?
-								Translation(userConnectedRedux.user.language).profil.lastname
+							<strong><label htmlFor="last">Nom</label></strong>
+							<input type="text" id="last" 
+								{...register("lastname")} name="lastname"
+								defaultValue={userConnectedRedux.user.lastname}
+							/>
+						</div>
+						<div className="group-input">
+							<strong><label htmlFor="dateof">Date d'ahésion</label></strong>
+							<input type="text" id="dateof" readOnly placeholder={Object.keys(userConnectedRedux.user).length > 0 ?
+								Translation(userConnectedRedux.user.language).profil.adhesion
 								:
-								Translation("fr").profil.lastname
-							}
-							{...register("lastname")} name="lastname"
-							defaultValue={userConnectedRedux.user.lastname}
-						/>
-						<input type="text" placeholder={Object.keys(userConnectedRedux.user).length > 0 ?
-							Translation(userConnectedRedux.user.language).profil.adhesion
-							:
-							Translation("fr").profil.adhesion}
-							defaultValue={userConnectedRedux.user.language === "en" ? dateStringToDHStringEN(userConnectedRedux.user.created) : dateStringToDHString(userConnectedRedux.user.created)}
-						/>
+								Translation("fr").profil.adhesion}
+								defaultValue={userConnectedRedux.user.language === "en" ? dateStringToDHStringEN(userConnectedRedux.user.created) : dateStringToDHString(userConnectedRedux.user.created)}
+							/>
+							<div className="lgdrpdwn">
+								<strong><label htmlFor="country">Pays</label></strong>
+								<select id="country">
+									<option>France</option>
+									<option>Madagascar</option>
+								</select>
+							</div>
+							<div className="lang-container">
+								<div className="lang-setting">									
+									<div className="lgdrpdwn">
+										<strong><label htmlFor="lang">Choix de langue</label></strong>										
+										<select id="lang" onChange={onChangeLanguage}>
+											<option>FR</option>
+											<option>EN</option>
+										</select>
+									</div>
+								</div>								
+							</div>				
+										
+						</div>
 						<div className="btn-container">
 							<button className="btn bg-yellow mg15">
 								{Object.keys(userConnectedRedux.user).length > 0 ?
@@ -107,35 +120,9 @@ const Me : React.FC = function() {
 							Translation("fr").profil.validate}
 							</button>
 						</div>
-					</form>
-					<div className="lang-container">
-						<div className="lang-setting">
-							<i><FontAwesomeIcon className="little-icon" icon={faCogs}/></i>
-							<div className="lgdrpdwn">
-								<p className="lg-opt">{Object.keys(userConnectedRedux.user).length > 0 ?
-							Translation(userConnectedRedux.user.language).profil.lang
-							:
-							Translation("fr").profil.lang}</p>
-								<p className="lg-desc">{Object.keys(userConnectedRedux.user).length > 0 ?
-							Translation(userConnectedRedux.user.language).profil.choice
-							:
-							Translation("fr").profil.choice}</p>
-								<select onChange={onChangeLanguage}>
-									<option>FR</option>
-									<option>EN</option>
-								</select>
-							</div>
-						</div>
-						<div className="btn-container">
-								<span className="btn bg-yellow mg15">{Object.keys(userConnectedRedux.user).length > 0 ?
-									Translation(userConnectedRedux.user.language).profil.validate
-									:
-									Translation("fr").profil.validate}
-								</span>
-							</div>
-						</div>
-					</div>
+					</form>					
 				</div>
+			</div>
 		</div>
 	)
 }
