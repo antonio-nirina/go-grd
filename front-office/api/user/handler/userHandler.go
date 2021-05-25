@@ -5,6 +5,9 @@ package handler
  */
 
 import (
+	"fmt"
+	"io/ioutil"
+
 	uuid "github.com/satori/go.uuid"
 	"github.com/thoussei/antonio/main/front-office/api/external"
 	"github.com/thoussei/antonio/main/front-office/api/user/entity"
@@ -122,30 +125,40 @@ func (u *userUsecase) UpdateAvatar(user entity.User,avatar string,typeFile strin
 	}
 	
 	upl.Filename = (uuid.NewV4()).String()+"."+typeFile
+	err := ioutil.WriteFile(fmt.Sprintf("%s,%s",path,upl.Filename), []byte(avatar), 0755)
 	
-	userToUpdated := &entity.User{
-		Uid:           	user.Uid,
-		FirstName:     	user.FirstName,
-		LastName:      	user.LastName,
-		Password:      	user.Password,
-		Username:      	user.Username,
-		Email:         	user.Email,
-		IsBanned:      	user.IsBanned,
-		Avatar:        	user.Avatar,
-		Language:      	user.Language,
-		Point:         	user.Point,
-		IdGameAccount: 	user.IdGameAccount,
-		Roles: 			user.Roles,
-		TypeConnexion:	user.TypeConnexion,
-		Created: 		user.Created,		
-	}
-	
-	result, err := u.userRepository.UpdatedUser(userToUpdated)
-
 	if err != nil {
 		return nil, err
 	}
+	resfile,err := upl.SenderFile()
 
-	return result, nil
+	if resfile != "" {
+		userToUpdated := &entity.User{
+			Uid:           	user.Uid,
+			FirstName:     	user.FirstName,
+			LastName:      	user.LastName,
+			Password:      	user.Password,
+			Username:      	user.Username,
+			Email:         	user.Email,
+			IsBanned:      	user.IsBanned,
+			Avatar:        	user.Avatar,
+			Language:      	user.Language,
+			Point:         	user.Point,
+			IdGameAccount: 	user.IdGameAccount,
+			Roles: 			user.Roles,
+			TypeConnexion:	user.TypeConnexion,
+			Created: 		user.Created,		
+		}
+		
+		result, err := u.userRepository.UpdatedUser(userToUpdated)
+	
+		if err != nil {
+			return nil, err
+		}
+	
+		return result, nil
+	}
+
+	return nil, err
 }
 

@@ -5,6 +5,7 @@ package external
 
 import (
 	"bytes"
+	"encoding/json"
 	"fmt"
 	"io"
 	"io/ioutil"
@@ -13,12 +14,31 @@ import (
 	"os"
 	"path/filepath"
 	"runtime"
+
+	"github.com/antonio-nirina/go-grd/api/external"
 )
 
 type FileUpload struct {
 	Filename string
 	ApiKey string
 	Path string
+}
+
+type ImgBB struct {
+	Data Element `json:"data"`
+} 
+
+type Element struct {
+	Success bool `json:"success"`
+	Status  int `json:"status"`
+	Id string `json:"id"`
+	Title string `json:"title"`
+	UrlViewer string  `json:"url_viewer"`
+	Url string `json:"url"`
+	Display_url string `json:"display_url"`
+	Size int `json:"size"`
+	Time string`json:"time"`
+	Expiration string `json:"expiration"`
 }
 
 const BASE_URL_IMG_BB = "https://api.imgbb.com/1/upload"
@@ -59,12 +79,19 @@ func (f *FileUpload) SenderFile() (string, error) {
 	defer res.Body.Close()
 
 	body, err := ioutil.ReadAll(res.Body)
-	if err != nil {
-		return "", err
+
+	if res.StatusCode == 200 {
+		fileBbImg := &ImgBB{}
+		err = json.Unmarshal(body, fileBbImg)
+		if err != nil {
+			external.Logger(fmt.Sprintf("%v", err))
+		}
+		return fileBbImg.Data.Url, nil
 	}
+
 	fmt.Println(string(body))
 
-	return "file upload success",nil
+	return "",err
 }
 
 func (f *FileUpload) DirectoryExists() bool {
