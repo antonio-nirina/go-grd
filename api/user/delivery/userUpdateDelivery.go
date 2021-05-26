@@ -2,7 +2,6 @@ package delivery
 
 import (
 	"encoding/json"
-	"fmt"
 
 	"github.com/graphql-go/graphql"
 	"github.com/thoussei/antonio/main/front-office/api/user/entity"
@@ -119,17 +118,17 @@ func (r *resolver) UpdateAvatarResolver(params graphql.ResolveParams) (interface
 	input := inputAvatar{}
 	json.Unmarshal([]byte(jsonString), &input)
 	user, err := r.userHandler.FindUserByEmail(input.AvatarInput.Email)
-	fmt.Println(user)
+	
 	if err != nil {
 		return nil, err
 	}
 
 	res, err := r.userHandler.UpdateAvatar(user,input.AvatarInput.Data,input.AvatarInput.Type)
-	fmt.Println(res)
+
 	if err != nil {
 		return nil, err
 	}
 
-	return user,nil
+	return res,nil
 
 }

@@ -2,12 +2,14 @@ package handler
 
 /**
 * Usecase
-*/
+ */
 
 import (
 	"fmt"
-	"io/ioutil"
+	"os"
+	"path/filepath"
 
+	"github.com/joho/godotenv"
 	uuid "github.com/satori/go.uuid"
 	"github.com/thoussei/antonio/main/front-office/api/external"
 	"github.com/thoussei/antonio/main/front-office/api/user/entity"
@@ -112,24 +114,39 @@ func (u *userUsecase) FindUserByToken(token string) (entity.User, error) {
 }
 
 func (u *userUsecase) UpdateAvatar(user entity.User,avatar string,typeFile string) (interface{}, error)  {
+	err := godotenv.Load()
+	
+	if err != nil {
+		return nil, err
+	}
+
 	upl := &external.FileUpload{}
-	path := "/tmpFile"
+	path := fmt.Sprintf("%s%s", filepath.Dir(""), "/tmpFile")
 	upl.Path = path
 
 	if !upl.DirectoryExists() {
 		err := upl.CreateDirectory()
-
 		if err != nil {
 			return nil, err
 		}
 	}
 	
 	upl.Filename = (uuid.NewV4()).String()+"."+typeFile
-	err := ioutil.WriteFile(fmt.Sprintf("%s,%s",path,upl.Filename), []byte(avatar), 0755)
+	upl.Data = avatar
+	/*
+		Upload file in local
+		dec, err := base64.StdEncoding.DecodeString(avatar)
+		if err != nil {
+			return nil, err
+		}
+		err = ioutil.WriteFile(fmt.Sprintf("%s%s%s",path,"/",upl.Filename), dec, 0777)
+		
+		if err != nil {
+			return nil, err
+		}
+	*/
 	
-	if err != nil {
-		return nil, err
-	}
+	upl.ApiKey = os.Getenv("BB_IMAGE_KEY")
 	resfile,err := upl.SenderFile()
 
 	if resfile != "" {
@@ -150,13 +167,19 @@ func (u *userUsecase) UpdateAvatar(user entity.User,avatar string,typeFile strin
 			Created: 		user.Created,		
 		}
 		
-		result, err := u.userRepository.UpdatedUser(userToUpdated)
+		_, err := u.userRepository.UpdatedUser(userToUpdated)
 	
 		if err != nil {
 			return nil, err
 		}
-	
-		return result, nil
+
+		userUpdated, err := u.userRepository.FindUserByEmail(user.Email)
+
+		if err != nil {
+			return entity.User{}, err
+		}
+
+		return userUpdated, nil
 	}
 
 	return nil, err

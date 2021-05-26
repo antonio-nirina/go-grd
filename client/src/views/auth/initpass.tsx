@@ -2,7 +2,6 @@ import React,{useState} from "react"
 import { useForm } from "react-hook-form"
 import {useMutation} from "@apollo/client"
 import {useHistory } from "react-router-dom"
-import { useDispatch } from "react-redux"
 
 import Header0 from "../header/header0"
 import {checkValidEmail} from "./utils"
