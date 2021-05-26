@@ -5,6 +5,8 @@ import { useSelector } from "react-redux"
 // faCogs, faCalendarAlt, faInfoCircle, faGamepad, faTrophy, faMedal, faStepBackward, faStepForward, faChevronRight, faChevronLeft, faMobile,
 
 import Header from "../header/header"
+import Participate from "../participate/participate"
+import Join from "../join/join"
 import Footer from "../footer/footer"
 import "../annexe/profile.css"
 import "../../assets/css/style.css"
@@ -18,11 +20,13 @@ const Profile: React.FC = function() {
 	const userConnectedRedux = useSelector((state:RootState) => state.userConnected)
 
   return(
-	<div className="profil connected">
+	<div className="profile connected">
       <div className="container">
 	      <Header/>
 	      <div className="main-content">
 	      	<div className="main-pro">
+	      		<Participate/>
+	      		<Join/>
 	      	</div>
 	      </div>
 	      <Footer/>
