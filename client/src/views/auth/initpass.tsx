@@ -4,11 +4,8 @@ import {useMutation} from "@apollo/client"
 import {useHistory } from "react-router-dom"
 import { useDispatch } from "react-redux"
 
-import {TokenType,SendToken} from "./utils"
-import {sendUserConectedAction} from "./action/userAction"
-
 import Header0 from "../header/header0"
-import {checkValidEmail,Siging} from "./utils"
+import {checkValidEmail} from "./utils"
 import {Translation} from "../../lang/translation"
 import {FORGOT_PASSWORD} from "../../gql/user/mutation"
 import Footer from "../footer/footer"
@@ -22,7 +19,6 @@ type Inputs = {
 
 const InitPass: React.FC = function() {
 	const history = useHistory()
-	const dispatch = useDispatch()
 	const { register, handleSubmit, formState: { errors } } = useForm<Inputs>()
 	const [errorForm,setErrorForm] = useState<boolean>(false)
 	const [forgotPassword]  = useMutation(FORGOT_PASSWORD)

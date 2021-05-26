@@ -33,7 +33,15 @@ export const UPDATE_PASSWORD = gql`
 	}
 `
 export const UPDATE_AVATAR = gql`
-	mutation updatedAvatar($email:String,$avatar:String,$typeFile:String) {
-		updatedAvatar(email:$email,avatar:$avatar,$typeFile:$typeFile)
+	mutation updatedAvatar($avatarInput:userAvatarType) {
+		updatedAvatar(avatarInput:$avatarInput){
+			firstname
+			email
+			language
+			lastname
+			username
+			created
+			avatar
+		}
 	}
 `

@@ -45,9 +45,32 @@ var userUpatedType = graphql.NewInputObject(
 	},
 )
 
+var avatarInputType = graphql.NewInputObject(
+	graphql.InputObjectConfig{
+		Name: "userAvatarType",
+		Fields: graphql.InputObjectConfigFieldMap{
+			"type": &graphql.InputObjectFieldConfig{
+				Type: graphql.String,
+			},
+			"data": &graphql.InputObjectFieldConfig{
+				Type: graphql.String,
+			},
+			"email": &graphql.InputObjectFieldConfig{
+				Type: graphql.String,
+			},
+		},
+	},
+)
+
 var args = graphql.FieldConfigArgument{
 	"userInput": &graphql.ArgumentConfig{
 		Type: inputType,
+	},
+}
+
+var argsAvatar = graphql.FieldConfigArgument{
+	"avatarInput": &graphql.ArgumentConfig{
+		Type: avatarInputType,
 	},
 }
 
@@ -125,17 +148,7 @@ func updatedAvatar() *graphql.Field {
 	return &graphql.Field{
 		Type:        types.UserSchemaType,
 		Description: "Update avatar",
-		Args: graphql.FieldConfigArgument{
-			"email": &graphql.ArgumentConfig{
-				Type: graphql.String,
-			},
-			"avatar": &graphql.ArgumentConfig{
-				Type: graphql.String,
-			},
-			"typeFile": &graphql.ArgumentConfig{
-				Type: graphql.String,
-			},
-		},
+		Args: argsAvatar,
 		Resolve: UserRolve.UpdateAvatarResolver,
 	}
 }

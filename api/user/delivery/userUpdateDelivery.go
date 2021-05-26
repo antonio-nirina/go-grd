@@ -2,6 +2,7 @@ package delivery
 
 import (
 	"encoding/json"
+	"fmt"
 
 	"github.com/graphql-go/graphql"
 	"github.com/thoussei/antonio/main/front-office/api/user/entity"
@@ -20,6 +21,14 @@ type updatedElements struct {
 	Email string 		`json:"email"`
 }
 
+type inputAvatar struct {
+	AvatarInput avatarElement  `json:"avatarInput"`
+}
+type avatarElement struct {
+	Type string `json:"type"`
+	Data string `json:"data"`
+	Email string `json:"email"`
+}
 
 func (r *resolver) UpdatedUserResolver(params graphql.ResolveParams) (interface{}, error) {
 	jsonString, _ := json.Marshal(params.Args)
@@ -106,21 +115,21 @@ func (r *resolver) UpdatePasswordResolver(params graphql.ResolveParams) (interfa
 }
 
 func (r *resolver) UpdateAvatarResolver(params graphql.ResolveParams) (interface{}, error) {
-	email := params.Args["email"].(string)
-	avatar := params.Args["avatar"].(string)
-	typeFile := params.Args["typeFile"].(string)
-	user, err := r.userHandler.FindUserByEmail(email)
-
-	if err != nil {
-		return entity.User{}, err
-	}
-
-	res, err := r.userHandler.UpdateAvatar(user,avatar,typeFile)
-
+	jsonString, _ := json.Marshal(params.Args)
+	input := inputAvatar{}
+	json.Unmarshal([]byte(jsonString), &input)
+	user, err := r.userHandler.FindUserByEmail(input.AvatarInput.Email)
+	fmt.Println(user)
 	if err != nil {
 		return nil, err
 	}
 
-	return res,nil
+	res, err := r.userHandler.UpdateAvatar(user,input.AvatarInput.Data,input.AvatarInput.Type)
+	fmt.Println(res)
+	if err != nil {
+		return nil, err
+	}
+
+	return user,nil
 
 }

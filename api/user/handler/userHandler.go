@@ -2,7 +2,7 @@ package handler
 
 /**
 * Usecase
- */
+*/
 
 import (
 	"fmt"
@@ -141,7 +141,7 @@ func (u *userUsecase) UpdateAvatar(user entity.User,avatar string,typeFile strin
 			Username:      	user.Username,
 			Email:         	user.Email,
 			IsBanned:      	user.IsBanned,
-			Avatar:        	user.Avatar,
+			Avatar:        	resfile,
 			Language:      	user.Language,
 			Point:         	user.Point,
 			IdGameAccount: 	user.IdGameAccount,
