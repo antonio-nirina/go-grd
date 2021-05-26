@@ -7,8 +7,7 @@ import "../tournament/info.css"
 import "../../assets/css/style.css"
 import { Link } from "react-router-dom"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faPlaystation } from "@fortawesome/free-brands-svg-icons"
-import { faAngleDown, faCalendarAlt, faInfoCircle, faGamepad, faTrophy, faMedal, faStepBackward, faStepForward, faChevronRight, faChevronLeft, faMobile } from "@fortawesome/free-solid-svg-icons"
+import { faAngleDown, faTrophy } from "@fortawesome/free-solid-svg-icons"
 
 
 const Teams: React.FC = function(props:any) {
@@ -26,7 +25,7 @@ const Teams: React.FC = function(props:any) {
 					<p className="starting">Date de commencement : <span>19 Juin 2022, 17:00</span></p>
 					<p className="status">Status : <span>ouvert</span></p>
 				</div>
-				
+
 				<div className="banniere"></div>
 				<div className="tabs">
 					<ul>
@@ -35,7 +34,7 @@ const Teams: React.FC = function(props:any) {
 						<li><Link to="/teams" className="active">Equipes</Link></li>
 						<li><Link to="/rules">Règles</Link></li>
 					</ul>
-				</div>				
+				</div>
 				<div className="teams">
 					<h2>Equipes</h2>
 					<table>
@@ -59,7 +58,7 @@ const Teams: React.FC = function(props:any) {
 							<td>2</td>
 							<td>Oui</td>
 						</tr>
-						
+
 					</table>
 					<div className={!showList ? "onshow" :"onhide"}>
 						<div className="score">
@@ -76,17 +75,17 @@ const Teams: React.FC = function(props:any) {
 									<td>4</td>
 									<td className="lose">L.L.S</td>
 								</tr>
-							</table>							
+							</table>
 						</div>
 						<div className="rating">
 							<div className="numb"><span>1841</span><p>Classement</p></div>
 							<div className="numb"><span>7</span><p>Members</p></div>
-						</div>						
+						</div>
 						<table className="gamers">
 							<tr>
 								<th>Joueur</th>
 								<th></th>
-								<th>Classement</th>								
+								<th>Classement</th>
 								<th>Victoire</th>
 								<th>Défaite</th>
 								<th>Assists</th>
@@ -110,10 +109,10 @@ const Teams: React.FC = function(props:any) {
 								<td>2073</td>
 								<td>0.02</td>
 							</tr>
-						</table>					
+						</table>
 					</div>
-				</div>					
-			</div>			
+				</div>
+			</div>
 			<Footer/>
 		</div>
     </div>
