@@ -7,7 +7,6 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
-	"io"
 	"io/ioutil"
 	"mime/multipart"
 	"net/http"
@@ -22,15 +21,16 @@ type FileUpload struct {
 	Filename string
 	ApiKey string
 	Path string
+	Data string
 }
 
 type ImgBB struct {
+	Success bool `json:"success"`
+	Status  int `json:"status"`
 	Data Element `json:"data"`
 } 
 
 type Element struct {
-	Success bool `json:"success"`
-	Status  int `json:"status"`
 	Id string `json:"id"`
 	Title string `json:"title"`
 	UrlViewer string  `json:"url_viewer"`
@@ -39,30 +39,84 @@ type Element struct {
 	Size int `json:"size"`
 	Time string`json:"time"`
 	Expiration string `json:"expiration"`
+	Image imageElement  `json:"image"`
+	Thumb imageElement  `json:"thumb"`
+	Medium imageElement  `json:"medium"`
+	Delete_url string`json:"delete_url"`
 }
+
+type imageElement struct {
+	Filename string `json:"filename"`
+	Name string `json:"name"`
+	Mime string `json:"mime"`
+	Extension string `json:"extension"`
+	Url string `json:"url"`
+}
+
+/*
+	"data": {
+        "id": "6YQnv25",
+        "title": "85eec352c053",
+        "url_viewer": "https://ibb.co/6YQnv25",
+        "url": "https://i.ibb.co/F6pxs9t/85eec352c053.png",
+        "display_url": "https://i.ibb.co/8MkKzJV/85eec352c053.png",
+        "size": 116083,
+        "time": "1622069082",
+        "expiration": "0",
+        "image": {
+            "filename": "85eec352c053.png",
+            "name": "85eec352c053",
+            "mime": "image/png",
+            "extension": "png",
+            "url": "https://i.ibb.co/F6pxs9t/85eec352c053.png"
+        },
+        "thumb": {
+            "filename": "85eec352c053.png",
+            "name": "85eec352c053",
+            "mime": "image/png",
+            "extension": "png",
+            "url": "https://i.ibb.co/6YQnv25/85eec352c053.png"
+        },
+        "medium": {
+            "filename": "85eec352c053.png",
+            "name": "85eec352c053",
+            "mime": "image/png",
+            "extension": "png",
+            "url": "https://i.ibb.co/8MkKzJV/85eec352c053.png"
+        },
+        "delete_url": "https://ibb.co/6YQnv25/bd29674d884a48902b95b098456f49a1"
+    },
+    "success": true,
+    "status": 200
+
+*/
 
 const BASE_URL_IMG_BB = "https://api.imgbb.com/1/upload"
 
 func (f *FileUpload) SenderFile() (string, error) {
-	filename 		:= fmt.Sprintf("%s,%s",f.Path,f.Filename)
-	payload 		:= &bytes.Buffer{}
-  	writer 			:= multipart.NewWriter(payload)
-  	file, errFile1 	:= os.Open(filename)
-  	defer file.Close()
-	part1,errFile1 := writer.CreateFormFile("image",filepath.Base(filename))
-	_, errFile1 = io.Copy(part1, file)
-	
-	if errFile1 != nil {
-		return "", errFile1
-	}
 	/*
-		_ = writer.WriteField("param", "value")
-		err := writer.Close()
-		if err != nil {
-			return
+		Formdata file	
+		filename 		:= fmt.Sprintf("%s%s%s",f.Path,"/",f.Filename)
+		payload 		:= &bytes.Buffer{}
+		writer 			:= multipart.NewWriter(payload)
+		file, errFile1 	:= os.Open(filename)
+		defer file.Close()
+		part1,errFile1 := writer.CreateFormFile("image",filepath.Base(filename))
+		_, errFile1 = io.Copy(part1, file)
+		
+		if errFile1 != nil {
+			return "", errFile1
 		}
 	*/
-	url := fmt.Sprintf("%s,%s,%s",BASE_URL_IMG_BB,"/",f.ApiKey)
+	
+	payload := &bytes.Buffer{}
+	writer := multipart.NewWriter(payload)
+	_ = writer.WriteField("image",f.Data)
+	err := writer.Close()
+	if err != nil {
+		return "",err
+	}
+	url := fmt.Sprintf("%s%s%s",BASE_URL_IMG_BB,"?key=",f.ApiKey)
 	client := &http.Client {}
 	req, err := http.NewRequest("POST",url, payload)
 
@@ -86,6 +140,7 @@ func (f *FileUpload) SenderFile() (string, error) {
 		if err != nil {
 			external.Logger(fmt.Sprintf("%v", err))
 		}
+
 		return fileBbImg.Data.Url, nil
 	}
 
