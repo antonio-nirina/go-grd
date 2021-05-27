@@ -18,8 +18,8 @@ const Router = function() {
 	return (
 		<Switch>
 			<Route path="/" exact component={Home} />
-			<ProtectedRoute path="/tournament" exact component={Tournament} />
-			<ProtectedRoute path="/info" exact component={Info} />
+			<Route path="/tournament" exact component={Tournament} />
+			<Route path="/info" exact component={Info} />
 			<ProtectedRoute path="/ligue" exact component={Ligue} />
 			<ProtectedRoute path="/wager" exact component={Wager} />
 			<ProtectedRoute path="/communaute" exact component={Communaute} />
@@ -28,7 +28,8 @@ const Router = function() {
 			<Route path="/inscription" exact component={Inscription} />
 			<Route path="/register" exact component={Register} />
 			<Route path="/InitPass" exact component={InitPass} />
-			<ProtectedRoute path="/profil" exact component={Profil} />			
+			<ProtectedRoute path="/profil" exact component={Profil} />
+			
 		</Switch>
 	)
 }
