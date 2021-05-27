@@ -19,11 +19,13 @@
 .join input{
 	background: none;
 	border-bottom: 1px solid #acacac !important;
-	width: 240px;
+	max-width: 350px;
+	width: 100%;
 	padding: 3px;
 	color: #ffffff;
 	font-size: 14px;
 	border: none;
+	margin-right: 15px;
 }
 .join a{
 	font-size: 15px;

@@ -5,6 +5,7 @@ import {useHistory } from "react-router-dom"
 
 import "../header/header.css"
 import logo from "../../assets/image/logo.png"
+import avatar from "../../assets/image/game-tag.png"
 import fr from "../../assets/image/fr.png"
 import gb from "../../assets/image/gb.png"
 import ps from "../../assets/image/playstation.png"
@@ -114,8 +115,9 @@ const Header: React.FC = function() {
                     <div className="gametag">
                         <div className="itemsTag">
                             <div className="bg-gametag">
-                                <p>{userConnectedRedux.user.username}</p>
-                                <p>
+                                <p><img src={avatar} className="avatar"/></p>
+                                <p className="user">{userConnectedRedux.user.username}</p>
+                                <p className="user-setting">
 									<><img src={ps} className="itemTag" alt="" width="18" height="14"/></>
 									<><img src={userConnectedRedux.user.language && userConnectedRedux.user.language === "fr" ? fr : gb} className="itemTag" alt="" width="15" height="14"/></>
                                 <i className="itemTag drop" onClick={onShow}><FontAwesomeIcon icon={faBars} /></i>

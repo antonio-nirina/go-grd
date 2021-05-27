@@ -105,13 +105,25 @@
 	width: 100%;
 	display: inline-block;
 	position: relative;
-	border: 2px solid #4c4d4f;
-	background: url("../../assets/image/game-tag.png") no-repeat;
-	padding: 5px 16px;
-	vertical-align: middle;
-	background-size: 54px 58px;
+	border: 2px solid #4c4d4f;	
+	vertical-align: middle;	
 	border-radius: 36px;
 	background-position: -2px;
+}
+.bg-gametag .avatar{
+	width: 57px;
+	height: auto;
+	border: 1px solid #4c4d4f;
+	border-radius: 50%;
+	float: left;
+	position: absolute;
+	left: -2px;
+	top: -5px;
+}
+.bg-gametag p.user{
+	width: 100%;
+	text-align: right;
+	padding-right: 4px;
 }
 .bg-gametag a{
 	display: inline-block;
@@ -119,6 +131,11 @@
 .bg-gametag p{
 	font-family: "russo One";
 	font-size: 13px;
+}
+.user-setting{
+	position: absolute;
+	bottom: 0;
+	right: 16px;
 }
 .itemTag{
 	margin: 6px 3px;
@@ -169,6 +186,8 @@
 }
 .bg-gametag{
 	text-align: right;
+	padding: 3px 10px;
+	height: 48px;
 }
 .dropdown{
 	display: none;
