@@ -13,26 +13,28 @@ import (
 	"github.com/graphql-go/graphql"
 )
 
-var database = config.ConfigMongo()
-var repUser = repository.NewUserRepository(database)
-var usecase = handler.NewUsecaseUser(repUser)
-var UserRolve = delivery.NewResolver(usecase)
+var database 	= config.ConfigMongo()
+var repUser 	= repository.NewUserRepository(database)
+var usecase 	= handler.NewUsecaseUser(repUser)
+var UserRolve 	= delivery.NewResolver(usecase)
 
-var repositoryGame = gameRepo.NewGameRepository(database)
-var usecaseGame = gameHandler.NewUsecaseGame(repositoryGame)
-var gameResolver = gameDelivery.NewResolverGame(usecaseGame)
+var repositoryGame 	= gameRepo.NewGameRepository(database)
+var usecaseGame 	= gameHandler.NewUsecaseGame(repositoryGame)
+var gameResolver 	= gameDelivery.NewResolverGame(usecaseGame)
 
 var repositoryPlateform = gameRepo.NewPlateformRepository(database)
-var usecasePlateform = gameHandler.NewUsecasePlateform(repositoryPlateform)
-var plateformResolver = gameDelivery.NewResolverPlateform(usecasePlateform)
+var usecasePlateform 	= gameHandler.NewUsecasePlateform(repositoryPlateform)
+var plateformResolver 	= gameDelivery.NewResolverPlateform(usecasePlateform)
 
 func GetRootFields() graphql.Fields {
 	return graphql.Fields{
-		"createdUser":      createdUser(),
-		"login":            login(),
-		"createdGame":      createdGame(),
-		"createdPlateform": createdPlateform(),
-		"updatedUser": 		updatedUser(),
-		"forgotPassword":	forgotPassword(),
+		"createdUser":      	createdUser(),
+		"login":            	login(),
+		"createdGame":      	createdGame(),
+		"createdPlateform": 	createdPlateform(),
+		"updatedUser": 			updatedUser(),
+		"forgotPassword":		forgotPassword(),
+		"updatedPasswordUser": 	updatedPasswordUser(),
+		"updatedAvatar":		updatedAvatar(),	
 	}
 }

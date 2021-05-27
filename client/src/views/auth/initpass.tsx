@@ -2,15 +2,11 @@ import React,{useState} from "react"
 import { useForm } from "react-hook-form"
 import {useMutation} from "@apollo/client"
 import {useHistory } from "react-router-dom"
-import { useDispatch } from "react-redux"
-
-import {TokenType,SendToken} from "./utils"
-import {sendUserConectedAction} from "./action/userAction"
 
 import Header0 from "../header/header0"
-import {checkValidEmail,Siging} from "./utils"
+import {checkValidEmail} from "./utils"
 import {Translation} from "../../lang/translation"
-import {LOGIN} from "../../gql/user/auth"
+import {FORGOT_PASSWORD} from "../../gql/user/mutation"
 import Footer from "../footer/footer"
 import joystick from "../../assets/image/joystick.png"
 import "../auth/initpass.css"
@@ -22,26 +18,15 @@ type Inputs = {
 
 const InitPass: React.FC = function() {
 	const history = useHistory()
-	const dispatch = useDispatch()
 	const { register, handleSubmit, formState: { errors } } = useForm<Inputs>()
 	const [errorForm,setErrorForm] = useState<boolean>(false)
-	const [login]  = useMutation(LOGIN)
+	const [forgotPassword]  = useMutation(FORGOT_PASSWORD)
 	const onSubmit = async function(data:Inputs){
 		const email: string = data.email
 
 		if(checkValidEmail(email)) {
-			const result = await login({ variables: { email: email} })
-			if (result.data.login) {
-				const token:TokenType = {
-					access_token:result.data.login,
-					refresh_token:"",
-					type:""
-				}
-				SendToken(token)
-				dispatch(sendUserConectedAction(result.data.login))
-			}
-
-			history.push("/")
+			const result = await forgotPassword({ variables: { email: email} })
+			if (result.data.forgotPassword) history.push("/")
 		} else {
 			setErrorForm(true)
 		}

@@ -5,6 +5,13 @@ package handler
  */
 
 import (
+	"fmt"
+	"os"
+	"path/filepath"
+
+	"github.com/joho/godotenv"
+	uuid "github.com/satori/go.uuid"
+	"github.com/thoussei/antonio/main/front-office/api/external"
 	"github.com/thoussei/antonio/main/front-office/api/user/entity"
 	"github.com/thoussei/antonio/main/front-office/api/user/repository"
 	"go.mongodb.org/mongo-driver/bson/primitive"
@@ -86,4 +93,95 @@ func (u *userUsecase) UpdatedUser(user *entity.User) (interface{}, error) {
 	return result, nil
 }
 
+func (u *userUsecase) UpdatedTokenUser(email string,token string) (interface{}, error) {
+	result, err := u.userRepository.UpdatedTokenUser(email,token)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return result, nil
+}
+
+func (u *userUsecase) FindUserByToken(token string) (entity.User, error) {
+	result, err := u.userRepository.FindUserByToken(token)
+
+	if err != nil {
+		return entity.User{}, err
+	}
+
+	return result, nil
+}
+
+func (u *userUsecase) UpdateAvatar(user entity.User,avatar string,typeFile string) (interface{}, error)  {
+	err := godotenv.Load()
+	
+	if err != nil {
+		return nil, err
+	}
+
+	upl := &external.FileUpload{}
+	path := fmt.Sprintf("%s%s", filepath.Dir(""), "/tmpFile")
+	upl.Path = path
+
+	if !upl.DirectoryExists() {
+		err := upl.CreateDirectory()
+		if err != nil {
+			return nil, err
+		}
+	}
+	
+	upl.Filename = (uuid.NewV4()).String()+"."+typeFile
+	upl.Data = avatar
+	/*
+		Upload file in local
+		dec, err := base64.StdEncoding.DecodeString(avatar)
+		if err != nil {
+			return nil, err
+		}
+		err = ioutil.WriteFile(fmt.Sprintf("%s%s%s",path,"/",upl.Filename), dec, 0777)
+		
+		if err != nil {
+			return nil, err
+		}
+	*/
+	
+	upl.ApiKey = os.Getenv("BB_IMAGE_KEY")
+	resfile,err := upl.SenderFile()
+
+	if resfile != "" {
+		userToUpdated := &entity.User{
+			Uid:           	user.Uid,
+			FirstName:     	user.FirstName,
+			LastName:      	user.LastName,
+			Password:      	user.Password,
+			Username:      	user.Username,
+			Email:         	user.Email,
+			IsBanned:      	user.IsBanned,
+			Avatar:        	resfile,
+			Language:      	user.Language,
+			Point:         	user.Point,
+			IdGameAccount: 	user.IdGameAccount,
+			Roles: 			user.Roles,
+			TypeConnexion:	user.TypeConnexion,
+			Created: 		user.Created,		
+		}
+		
+		_, err := u.userRepository.UpdatedUser(userToUpdated)
+	
+		if err != nil {
+			return nil, err
+		}
+
+		userUpdated, err := u.userRepository.FindUserByEmail(user.Email)
+
+		if err != nil {
+			return entity.User{}, err
+		}
+
+		return userUpdated, nil
+	}
+
+	return nil, err
+}
 

@@ -22,7 +22,8 @@ func (e *ToMailer) Sender (data map[string]string) (bool,error) {
 	if err != nil {
 		Logger(fmt.Sprintf("%v", err))
 	}
-    uri := fmt.Sprintf("%s%s%s",os.Getenv("SERVER_HOST"),"forgot-password",data["token"])
+	
+    uri := fmt.Sprintf("%s%s%s",os.Getenv("REDIRECT_URI"),"/update-password?token=",data["token"])
 	mailjetClient := mailjet.NewMailjetClient(os.Getenv("MJ_APIKEY_PUBLIC"), os.Getenv("MJ_APIKEY_PRIVATE"))
 		messagesInfo := []mailjet.InfoMessagesV31 {
 			mailjet.InfoMessagesV31{
@@ -37,8 +38,8 @@ func (e *ToMailer) Sender (data map[string]string) (bool,error) {
 					},
 				},
 				Subject: e.Subject,
-				TextPart: e.Message,
-				HTMLPart: "<p><a href=\""+uri+">Clique ici pour re-initialiser votre password</a>",
+				TextPart: "",
+				HTMLPart: "<p>"+e.Message+"</p><p><a href="+uri+">"+data["msg"]+"</a></p>",
 			},
 		}
 		messages := mailjet.MessagesV31{Info: messagesInfo }

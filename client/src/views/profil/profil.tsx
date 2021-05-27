@@ -2,15 +2,13 @@ import React from "react"
 import { useSelector } from "react-redux"
 
 import Popup from "reactjs-popup"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 // import { faXbox, faPlaystation } from "@fortawesome/free-brands-svg-icons"
 // faCogs, faCalendarAlt, faInfoCircle, faGamepad, faTrophy, faMedal, faStepBackward, faStepForward, faChevronRight, faChevronLeft, faMobile,
-import { faPen } from "@fortawesome/free-solid-svg-icons"
 
 import Header from "../header/header"
 import Footer from "../footer/footer"
 import "../profil/profil.css"
-import Avatar from "../../assets/image/game-tag.png"
+import Avatar from "./avatar"
 import "../../assets/css/style.css"
 import "react-responsive-carousel/lib/styles/carousel.min.css"
 import 'reactjs-popup/dist/index.css'
@@ -94,13 +92,7 @@ const Profil: React.FC = function() {
 		      			</ul>
 		      		</div>
 		      		<div className="wall" id="wall">
-		      			<div className="avatar">
-			      			<p className="setavatar"><img src = {Avatar} />
-			      			<label htmlFor="setavatar"><FontAwesomeIcon icon={faPen} /></label>
-			      			<input type="file" id="setavatar" className="uploadFile" name="file"/>
-			      			</p>
-			      			<p className="pseudo"><strong>{userConnectedRedux.user.username}</strong></p>
-		      			</div>
+		      			<Avatar />
 		      			<div className="avatar-info">
 		      				<div className="table">
 		      					<div className="cell">

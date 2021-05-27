@@ -176,19 +176,38 @@
 }
 .about-me input{
 	background: none;
-    border-bottom: 1px solid #acacac !important;      
+    border: 2px solid #424242;      
     padding: 15px;
     color: #ffffff;
-    font-size: 15px;
-    border: none;
+    font-size: 15px;    
     margin-bottom: 15px;
     width: 100%;
-
+    border-radius: 5px;
+    background: #2c2c2c;
+}
+.about-me input:focus,
+.about-me select:focus
+{
+	background: #4a4a4a;
+}
+.group-input {
+    max-width: 589px;
+    width: 100%;    
+    padding: 15px 40px;
+    display: inline-block;
+    vertical-align: top;
+    border-right: 1px solid #14151d;
+}
+.group-input:nth-child(2){
+	border-right: none;
+}
+.about-me .group-input strong{
+	margin-bottom: 10px;
+	display: block;
 }
 .lang-container{	
 	width: 100%;	
 	top: 0px;	
-	padding: 15px;	
 	border-radius: 5px;	
 }
 .lang-setting i{
@@ -198,8 +217,7 @@
 	height: 60px;
 	width: 50px !important;
 }
-.lgdrpdwn{	
-	padding: 15px;
+.lgdrpdwn{		
 	display: block;	
 }
 .little-icon{
@@ -219,14 +237,14 @@
 .lgdrpdwn select{
 	display: block;
 	background: none;
-    border-bottom: 1px solid #acacac !important;
+    border: 2px solid #424242;
+    background: #2c2c2c;
     width: 100%;    
     padding: 15px;
     color: #acacac;
-    font-size: 15px;
-    border: none;
-    margin-bottom: 15px;
-    margin-top: 15px;
+    font-size: 15px;    
+    margin-bottom: 15px;    
+    border-radius: 5px;
 }
 .lgdrpdwn p{
 	text-align: left;

@@ -20,6 +20,14 @@ type updatedElements struct {
 	Email string 		`json:"email"`
 }
 
+type inputAvatar struct {
+	AvatarInput avatarElement  `json:"avatarInput"`
+}
+type avatarElement struct {
+	Type string `json:"type"`
+	Data string `json:"data"`
+	Email string `json:"email"`
+}
 
 func (r *resolver) UpdatedUserResolver(params graphql.ResolveParams) (interface{}, error) {
 	jsonString, _ := json.Marshal(params.Args)
@@ -69,4 +77,58 @@ func (r *resolver) UpdatedUserResolver(params graphql.ResolveParams) (interface{
 	}
 
 	return newRes, nil
+}
+
+func (r *resolver) UpdatePasswordResolver(params graphql.ResolveParams) (interface{}, error) {
+	token := params.Args["token"].(string)
+	newPwd := params.Args["newPassword"].(string)
+	res, err := r.userHandler.FindUserByToken(token)
+	
+	if err != nil {
+		return "error",nil
+	}
+	hashedPwd := userEntity.CreatedHash(newPwd)
+	userToUpdated := &entity.User{
+		Uid:           	res.Uid,
+		FirstName:     	res.FirstName,
+		LastName:      	res.LastName,
+		Password:      	hashedPwd,
+		Username:      	res.Username,
+		Email:         	res.Email,
+		IsBanned:      	res.IsBanned,
+		Avatar:        	res.Avatar,
+		Language:      	res.Language,
+		Point:         	res.Point,
+		IdGameAccount: 	res.IdGameAccount,
+		Roles: 			res.Roles,
+		TypeConnexion:	res.TypeConnexion,
+		Created: 		res.Created,		
+	}
+	_, err = r.userHandler.UpdatedUser(userToUpdated)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return "Ok",nil
+}
+
+func (r *resolver) UpdateAvatarResolver(params graphql.ResolveParams) (interface{}, error) {
+	jsonString, _ := json.Marshal(params.Args)
+	input := inputAvatar{}
+	json.Unmarshal([]byte(jsonString), &input)
+	user, err := r.userHandler.FindUserByEmail(input.AvatarInput.Email)
+	
+	if err != nil {
+		return nil, err
+	}
+
+	res, err := r.userHandler.UpdateAvatar(user,input.AvatarInput.Data,input.AvatarInput.Type)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return res,nil
+
 }

@@ -22,3 +22,26 @@ export const UPDATED_USER = gql`
 	}
 }
 `
+export const FORGOT_PASSWORD = gql`
+	mutation forgotPassword($email:String) {
+		forgotPassword(email:$email)
+	}
+`
+export const UPDATE_PASSWORD = gql`
+	mutation updatedPasswordUser($token:String,$newPassword:String) {
+		updatedPasswordUser(token:$token,newPassword:$newPassword)
+	}
+`
+export const UPDATE_AVATAR = gql`
+	mutation updatedAvatar($avatarInput:userAvatarType) {
+		updatedAvatar(avatarInput:$avatarInput){
+			firstname
+			email
+			language
+			lastname
+			username
+			created
+			avatar
+		}
+	}
+`
