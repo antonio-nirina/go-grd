@@ -126,6 +126,15 @@ func (c *driverRepository) UpdatedUser(user *entity.User) (interface{}, error) {
 			{
 				"password",user.Password,
 			},
+			{
+				"email",user.Email,
+			},
+			{
+				"avatar",user.Avatar,
+			},
+			{
+				"point",user.Point,
+			},
 	}}}
 	updateResult, err := collection.UpdateOne(context.TODO(), filter, update)
 
