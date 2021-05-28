@@ -10,6 +10,7 @@ import {Translation} from "../../lang/translation"
 import {RootState} from "../../reducer"
 import {UPDATED_USER} from "../../gql/user/mutation"
 import {dateStringToDHStringEN,dateStringToDHString} from "../tools/dateConvert"
+import {countries} from "../tools/country"
 
 type Inputs = {
 	username: string,
@@ -95,8 +96,11 @@ const Me : React.FC = function() {
 							<div className="lgdrpdwn">
 								<strong><label htmlFor="country">Pays</label></strong>
 								<select id="country">
-									<option>France</option>
-									<option>Madagascar</option>
+									{countries.map(function(el:any,index:number) {
+										return(
+											<option key={index.toString()} value={el.code === "FR" ? 0 :index}>{el.label}</option>
+										)
+									})}
 								</select>
 							</div>
 							<div className="lang-container">
