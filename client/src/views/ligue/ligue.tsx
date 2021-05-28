@@ -1,4 +1,5 @@
 import React from "react"
+import { Link } from "react-router-dom"
 import Header from "../header/header"
 import Footer from "../footer/footer"
 import Community from "../community/community"
@@ -7,18 +8,17 @@ import { useSelector } from "react-redux"
 import { faXbox, faPlaystation } from "@fortawesome/free-brands-svg-icons"
 import { faGamepad } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-
 import {Translation} from "../../lang/translation"
 import {RootState} from "../../reducer"
 import "../../assets/css/style.css"
-import "../participate/participate.css"
+import "../ligue/ligue.css"
 
 const Ligue: React.FC = function() {
 
   return(
   	<div className="container">
   		<Header/>
-		<div className="participate ligue">
+		<div className="participate league">
 			<div className="marg">
 				<div className="part">
 					<div className="undertitle">
@@ -82,10 +82,67 @@ const Ligue: React.FC = function() {
 							<p><strong>8</strong><span>Jeux</span></p>
 							<p><strong>+2500€</strong><span>Cash prizes/Semaine</span></p>
 						</div>							
-					</div>
-				</div>						
-			</div>
+					</div>					
+				</div>
+			</div>			
 		</div>
+		<div className="tabs-content">
+			<div className="tab-league">
+				<h3>Toutes les ligues</h3>
+				<div className="filter-bar">
+					<div className="custom-select filters">
+						<select className="slot">
+							<option value="">Slot</option>
+						    <option value="">32</option>
+						    <option value="">16</option>
+						    <option value="">64</option>								    
+						    <option value="">128</option>
+						</select>
+					</div>
+					<div className="custom-select filters">
+						<select className="filter-game">
+							<option value="">Jeux</option>
+						    <option value="">Apex Legends</option>
+						    <option value="">Leagues of Legend</option>
+						</select>
+					</div>
+				</div>
+				<table className="tab-bloc">
+					<tr>
+						<th>Slot</th>
+						<th>Organisateur</th>
+						<th>Type</th>
+						<th>Prix</th>
+						<th>Jeu</th>
+						<th></th>
+					</tr>
+					<tr>
+						<td>32</td>
+						<td>ESL PRO</td>
+						<td>Ligue</td>
+						<td>1500 $</td>
+						<td></td>
+						<td><Link to="#">Info</Link></td>
+					</tr>
+					<tr>
+						<td>16</td>
+						<td>ESL</td>
+						<td>Ligue</td>
+						<td>1000 $</td>
+						<td></td>
+						<td><Link to="#">Info</Link></td>
+					</tr>
+					<tr>
+						<td>64</td>
+						<td>Major League</td>
+						<td>Ligue</td>
+						<td>Merch</td>
+						<td></td>
+						<td style={{width:"70px"}}><Link to="#">Info</Link></td>
+					</tr>
+				</table>
+			</div>
+		</div>		
 		<Community/>
 		<Join/>
 		<Footer/>

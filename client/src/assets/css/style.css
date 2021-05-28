@@ -173,16 +173,16 @@ li{
 
 }
 @media screen and (max-width: 1302px) {
-  .home .content{
+  .home .content, .league .content{
     display: block;
   }
-  .home .block{
-    width: 16%;
+  .home .block, .league .block{
+    width: 15%;
     display: inline-block;
     margin-bottom: 15px;
     margin-right: 10px;
   }
-  .home .block.last{
+  .home .block.last, .league .block.last{
     width: 15%;
     border-radius: 15px;
   }
@@ -208,8 +208,13 @@ li{
       font-size: 39px;
   }
 }
+@media screen and (max-width: 1075px){
+  .home .block, .home .block.last, .league .block, .league .block.last{
+    width: 20%;
+  } 
+}
 @media screen and (max-width: 1173px){
-  .home .block,.home .block.last{
+  .home .block,.home .block.last, .league .block,.league .block.last, {
     width: 23%;
   }
   .home .jeux{
@@ -234,16 +239,15 @@ li{
   .home .slogan{
       top: 44%;
   }
-  .home .content{
+  .home .content, .league .content{
   display: inherit;
   }
-  .home .block
-  {
+  .home .block, .league .block{
     width: 30%;
     display: inline-block;
     margin-bottom: 15px;
   }
-  .home .block.last{
+  .home .block.last, .league .block.last{
   width: 30%;
   margin-right: 0;
   border-radius: 15px;
@@ -251,30 +255,29 @@ li{
   .home .logo-game{
   width: 20%;
   }
-  .home .actuality{
+  .home .actuality, .league .actuality{
   width: 100%;
   display: block;
   margin-bottom: 15px;
   }
   .home .article{
-  width: 47%;
-
-  }
-  .home .article img{
+    width: 47%;
+  } 
+  .home .article img, .league .article img{
   width: 100%;
   }
-  .home .clip{
+  .home .clip, .league .clip{
   margin-bottom: 15px;
   margin-left: 0px;
   width: 100%;
   }
-  .home .shop, .home .shop img{
+  .home .shop, .home .shop img, .league .shop, .league .shop img{
   width: 100%;
   }
-  .home .gamecash .lot{
+  .home .gamecash .lot, .league .gamecash .lot{
     width: 100%;
   }
-  .home .shop{
+  .home .shop, .league .shop{
     max-width: inherit;
   }
   .home .gamecash .more{
@@ -344,26 +347,25 @@ li{
 
 }
 @media screen and (max-width: 640px){
-  .home .article{
+  .home .article, .league .article{
     width: 100%;
     margin-bottom: 15px;
   }
-  .home .article img{
+  .home .article img, .league .article img{
     width: 95%;
   }
   .home .join{
 
   }
-  .home .join input{
+  .home .join input, .league .join input{
     width: 30%;
   }
-  .home .join a{
+  .home .join a, .league .join a{
     width: 40%;
   }
 }
 @media screen and (max-width: 600px){
-  .home .block,
-  .home .block.last{
+  .home .block, .home .block.last, .league .block, .league .block.last{
     width: 90%;
   }
   .footer .logo, .login footer .rss, .inscription footer .rss{
@@ -395,22 +397,22 @@ li{
     padding-bottom: 0px;
     padding-top: 15px;
   }
-  .home .lastblock{
+  .home .lastblock, .league .lastblock{
     padding-top: 0px;
   }
   .home .bg-game .logo-game{
     margin-left: 20px;
   }
-  .home .community-block{
+  .home .community-block, .league .community-block{
     padding: 0px 15px;
   }
-  .home .shop{
+  .home .shop, .league .shop{
     max-width: inherit;
   }
-  .home .join{
+  .home .join, .league .join{
     margin-top: 15px;
   }
-  .home .community h2, .home .join h2{
+  .home .community h2, .home .join h2, .league .community h2, .league .join h2{
     font-size: 23px;
   }
 }
@@ -421,16 +423,16 @@ li{
   .home .slogan{
     top: 20%;
   }
-  .home .community h2{
+  .home .community h2, .league .community h2{
     font-size: 23px;
   }
 
-  .home .join input{
+  .home .join input, .league .join input{
     display: block;
     width: 70%;
     margin: auto;
   }
-  .home .join a{
+  .home .join a, .league .join a{
     width: 70%;
     margin: auto;
     margin-top: 15px;
@@ -458,7 +460,7 @@ li{
     width: 100%;
     text-align: center;
   }
-  .home .gamecash .lot p{
+  .home .gamecash .lot p, .league .gamecash .lot p{
     display: inine-block;
     width: 50%;
     text-align: left;
