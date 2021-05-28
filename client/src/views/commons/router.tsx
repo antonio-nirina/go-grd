@@ -3,6 +3,7 @@ import { Route, Switch } from "react-router-dom"
 import Home from "../home/home"
 import Ligue from "../ligue/ligue"
 import Tournament from "../tournament/tournament"
+import Tournois from "../annexe/tournois"
 import Info from "../tournament/info"
 import Matches from "../tournament/matches"
 import Teams from "../tournament/teams"
@@ -24,6 +25,7 @@ const Router = function() {
 		<Switch>
 			<Route path="/" exact component={Home} />
 			<ProtectedRoute path="/tournament" exact component={Tournament} />
+			<ProtectedRoute path="/tournois" exact component={Tournois} />
 			<ProtectedRoute path="/info" exact component={Info} />
 			<ProtectedRoute path="/matches" exact component={Matches} />
 			<ProtectedRoute path="/teams" exact component={Teams} />
@@ -38,7 +40,7 @@ const Router = function() {
 			<Route path="/forgot-password" exact component={InitPass} />
 			<Route path="/update-password" exact component={UpdatePassword} />
 			<ProtectedRoute path="/profil" exact component={Profil} />
-			<Route path="/profile" exact component={Profile} />
+			<ProtectedRoute path="/profile" exact component={Profile} />
 		</Switch>
 	)
 }

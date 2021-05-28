@@ -1,4 +1,7 @@
 @charset "UTF-8";
+.league{
+	padding: 3em 0px 0;
+}
 .tabs-content{
 	background: #2c2c2c;
 	padding: 15px;
