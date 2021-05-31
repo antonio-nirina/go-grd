@@ -172,12 +172,13 @@ const Slider: React.FC = function() {
 			<div className="more">
 				<p>
 					<>
-					{
-						Object.keys(userConnectedRedux.user).length > 0 ?
-						Translation(userConnectedRedux.user.language).participHome.see
-						:
-						Translation("fr").participHome.see
-					}
+						<a href="#">{
+							Object.keys(userConnectedRedux.user).length > 0 ?
+							Translation(userConnectedRedux.user.language).participHome.see
+							:
+							Translation("fr").participHome.see
+						}
+						</a>
 					</>
 				</p>
 			</div>

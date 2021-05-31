@@ -11,18 +11,18 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import {Translation} from "../../lang/translation"
 import {RootState} from "../../reducer"
 import "../../assets/css/style.css"
-import "../ligue/ligue.css"
+import "../annexe/tournois.css"
 
-const Ligue: React.FC = function() {
+const Tournois: React.FC = function() {
 
   return(
   	<div className="container">
   		<Header/>
-		<div className="participate league">
+		<div className="participate anex-tournois">
 			<div className="marg">
 				<div className="part">
 					<div className="undertitle">
-						<h2>Ligues</h2>
+						<h2>Tournois</h2>
 						<p>Retrouve les derniers tournois public & inscris-toi !</p>
 					</div>
 					<div className="content">
@@ -88,7 +88,7 @@ const Ligue: React.FC = function() {
 		</div>
 		<div className="tabs-content">
 			<div className="tab-league">
-				<h3>Toutes les ligues</h3>
+				<h3>Tous les tournois</h3>
 				<div className="filter-bar">
 					<div className="custom-select filters">
 						<select className="slot">
@@ -142,7 +142,7 @@ const Ligue: React.FC = function() {
 					</tr>
 				</table>
 			</div>
-		</div>
+		</div>		
 		<Community/>
 		<Join/>
 		<Footer/>
@@ -150,4 +150,4 @@ const Ligue: React.FC = function() {
   )
 }
 
-export default Ligue
+export default Tournois

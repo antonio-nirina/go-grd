@@ -1,0 +1,64 @@
+.content-community{
+	height: 219px;
+	background: #fff;
+	color: #000;
+	font-family: "russo one";
+	display: flex;
+}
+
+.side-right {
+	width: 20%;
+	background: gray;
+}
+.side-left {
+	width: 20%;
+	background: #f2cf1c;
+}
+.actuality-community {
+	width: 60%;
+}
+.side-right .statut-connex{
+    border: 1px solid;
+    border-radius: 90%;
+    background-color: #31a24c;
+    width: 10px;
+    color: #31a24c;
+    height: 12px;
+    padding: 4px 0px;
+
+}
+.side-right .avatar-profile img{
+	width: 27px;
+	height: auto;
+	border-radius: 100%;
+}
+.side-right .username-profile {
+	padding: 10px;
+}
+
+.side-right .friend-inline {
+	display: flex;
+	width: 100%;
+	padding: 10px;
+	border: 1px solid blanchedalmond;
+}
+
+.side-right .instat {
+	padding: 10px 2px 13px 0px;
+	margin-top: 2px;
+}
+
+.friend-inline .chat-button{
+	margin-left: 12px;
+    width: 32px;
+    height: 20px;
+    margin: 10px;
+    margin-top: 8px;
+    border-radius: 5px;
+
+}
+
+.find-friend{
+	width: 100%;
+	margin-top: 86px;
+}
