@@ -35,7 +35,7 @@ const Router = function() {
 			<ProtectedRoute path="/wager" exact component={Wager} />
 			<ProtectedRoute path="/communaute" exact component={Communaute} />
 			<ProtectedRoute path="/assistant" exact component={Assistant} />
-			<Route path="/assistance" exact component={Assistance} />
+			<ProtectedRoute path="/assistance" exact component={Assistance} />
 			<Route path="/login" exact component={Login} />
 			<Route path="/inscription" exact component={Inscription} />
 			<Route path="/register" exact component={Register} />

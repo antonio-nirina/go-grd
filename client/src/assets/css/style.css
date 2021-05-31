@@ -76,7 +76,7 @@ html{
   padding: 5px 0px;
 }
 .login .main,.inscription .main,
-.profil .main-content
+.profil .main-content, .main
 {
   padding-top: 50px;
 }
@@ -298,6 +298,20 @@ li{
   {
     width: 60%;
   }
+  .assistance .aside-menu{
+    display: block;
+    width: 100%;
+    max-width: inherit;
+  }
+  .assistance .support{
+    display: block;
+    width: 100%;
+    max-width: inherit;
+  }
+  .assistance .search-box input{
+    margin-top: 15px;
+    width: 100%;
+  }
 }
 @media screen and (max-width: 827px){
  
@@ -341,7 +355,9 @@ li{
   .logo h1{
    font-size: inherit;
   } 
-
+  .assistance .center-block{
+    width: 90%;
+  }
 }
 @media screen and (max-width: 640px){
   .home .article{
@@ -351,36 +367,14 @@ li{
   .home .article img{
     width: 95%;
   }
-  .home .join{
-
+  .container .join h2{
+    font-size: 23px;
   }
-  .home .join input{
+  .container .join input{
     width: 30%;
   }
-  .home .join a{
+  .container .join a{
     width: 40%;
-  }
-}
-@media screen and (max-width: 600px){
-  .home .block,
-  .home .block.last{
-    width: 90%;
-  }
-  .footer .logo, .login footer .rss, .inscription footer .rss{
-    max-width: inherit;
-    display: block;
-    width: 100%;
-    text-align: center;
-    margin-bottom: 15px;
-  }
-  .footer .rss, .login footer .rss, .inscription footer .rss{
-    width: 90%;
-    max-width: inherit;
-    margin-bottom: 15px;
-  }
-  .footer .mention, .login footer .mention, .inscription footer .mention{
-    width: 90%;
-    text-align: center;
   }
 }
 @media screen and (max-width: 690px){
@@ -410,10 +404,36 @@ li{
   .home .join{
     margin-top: 15px;
   }
-  .home .community h2, .home .join h2{
+  .home .community h2, .home .join h2,{
     font-size: 23px;
   }
 }
+@media screen and (max-width: 600px){
+  .home .block,
+  .home .block.last{
+    width: 90%;
+  }
+  .footer .logo, .login footer .rss, .inscription footer .rss{
+    max-width: inherit;
+    display: block;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 15px;
+  }
+  .footer .rss, .login footer .rss, .inscription footer .rss{
+    width: 90%;
+    max-width: inherit;
+    margin-bottom: 15px;
+  }
+  .footer .mention, .login footer .mention, .inscription footer .mention{
+    width: 90%;
+    text-align: center;
+  }
+  .container .join .email input{
+    margin: 10px auto; 
+  }
+}
+
 @media screen and (max-width: 500px){
   .home .container{
      padding: 3em 0em 0em;
@@ -425,7 +445,7 @@ li{
     font-size: 23px;
   }
 
-  .home .join input{
+  .container .join input{
     display: block;
     width: 70%;
     margin: auto;
@@ -440,6 +460,9 @@ li{
 @media screen and (max-width: 450px){
   .home .container{
      padding: 6em 0em 0em;
+  }
+  .assistance .container{
+    padding-top: 3em;
   }
   .header .logo{
     float: none;
