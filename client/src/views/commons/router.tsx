@@ -10,6 +10,7 @@ import Teams from "../tournament/teams"
 import Rules from "../tournament/rules"
 import Wager from "../wager/wager"
 import Assistant from "../assistant/assistant"
+import Assistance from "../assistance/assistance"
 import Communaute from "../communaute/communaute"
 import Login from "../auth/login"
 import Profil from "../profil/profil"
@@ -34,6 +35,7 @@ const Router = function() {
 			<ProtectedRoute path="/wager" exact component={Wager} />
 			<ProtectedRoute path="/communaute" exact component={Communaute} />
 			<ProtectedRoute path="/assistant" exact component={Assistant} />
+			<Route path="/assistance" exact component={Assistance} />
 			<Route path="/login" exact component={Login} />
 			<Route path="/inscription" exact component={Inscription} />
 			<Route path="/register" exact component={Register} />

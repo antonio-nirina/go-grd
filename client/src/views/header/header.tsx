@@ -130,7 +130,7 @@ const Header: React.FC = function() {
                                 <li><Link to="/tournament">Tournois</Link></li>
                                 <li><Link to="/ligue">Ligues</Link></li>
                                 <li><Link to="/wager">Wager</Link></li>
-                                <li><Link to="/assistant">Assistance</Link></li>
+                                <li><Link to="/assistance">Assistance</Link></li>
 								<li style={{"cursor":"pointer"}} onClick={onDeconnect}>Deconnexion</li>
                             </ul>
                         </div>
