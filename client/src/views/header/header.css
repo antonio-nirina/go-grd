@@ -4,7 +4,7 @@
 	position: relative;
 }
 .wrap{
-	padding: 3px 50px;
+	padding: 6px 50px;
 	text-align: center;
 	/*position: fixed;*/
 	width: 100%;
@@ -112,8 +112,8 @@
 }
 .bg-gametag .avatar{
 	width: 57px;
-	height: auto;
-	border: 1px solid #4c4d4f;
+	height: 57px;
+	border: 2px solid #4c4d4f;
 	border-radius: 50%;
 	float: left;
 	position: absolute;

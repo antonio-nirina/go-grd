@@ -1,9 +1,15 @@
-import React from "react"
+import React, { useState, useCallback } from 'react'
 import { useSelector,useDispatch } from "react-redux"
+import ReactDOM from 'react-dom'
+
+import Popup from "reactjs-popup"
 import {useMutation} from "@apollo/client"
 import {RootState} from "../../reducer"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faPen } from "@fortawesome/free-solid-svg-icons"
+import gamer from "../../assets/image/game-tag.png"
+import Cropper from "react-easy-crop"
+import Slider from "@material-ui/core/Slider"
 
 import AvatarDefault from "../../assets/image/game-tag.png"
 import {UPDATE_AVATAR} from "../../gql/user/mutation"
@@ -16,6 +22,11 @@ interface Input {
 }
 
 const Avatar : React.FC = function() {
+	const [crop, setCrop] = useState({ x: 0, y: 0 })
+  	const [zoom, setZoom] = useState(1)
+  	const onCropComplete = useCallback((croppedArea, croppedAreaPixels) => {
+    	console.log(croppedArea, croppedAreaPixels)
+  	}, [])
 	const dispatch 				= useDispatch()
 	const userConnectedRedux 	= useSelector((state:RootState) => state.userConnected)
 	const [updatedAvatar]  		= useMutation(UPDATE_AVATAR)
@@ -45,8 +56,33 @@ const Avatar : React.FC = function() {
 	return (
 		<div className="avatar">
 			<p className="setavatar">
-				<img src = {userConnectedRedux.user.avatar? userConnectedRedux.user.avatar : AvatarDefault} />
-			<label htmlFor="setavatar"><FontAwesomeIcon icon={faPen} /></label>
+				
+			<Popup
+				trigger={<button className="btn bg-yellow">Valider</button>}
+				modal
+				nested
+  			>
+				<Cropper
+			      image={gamer}
+			      crop={crop}
+			      zoom={zoom}
+			      aspect={4 / 3}
+			      onCropChange={setCrop}
+			      onCropComplete={onCropComplete}
+			      onZoomChange={setZoom}
+	    		/>
+	    		<div className="controls">
+			        <Slider
+			          value={zoom}
+			          min={1}
+			          max={3}
+			          step={0.1}
+			          aria-labelledby="Zoom"			       
+			        />
+     			</div>
+	    	</Popup>
+    		<button className="bg-white">Annuler</button>
+    		<button className="bg-yellow">Appliquer</button>
 			<input type="file" id="setavatar" onChange={handleUpload} className="uploadFile" name="file"/>
 			</p>
 			<p className="pseudo"><strong>{userConnectedRedux.user.username}</strong></p>
