@@ -82,8 +82,8 @@ const Assistance: React.FC = function() {
 		  					<div className="advice">
 		  						<div className="carre"></div>
 		  						<div className="right">
-		  							<p className="medium">Problèmes populaires</p>
-		  							<p className="light">Retrouver les réponses aux questions les plus posées</p>
+		  							<p className="medium">Nos techniciens à votre écoute</p>
+		  							<p className="light">Rejoignez nos réseaux sociaux pour discuter avec nos techniciens en direct</p>
 		  						</div>		  					
 		  					</div>
 		  				</div>
