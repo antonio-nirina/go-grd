@@ -23,7 +23,7 @@ interface Input {
 
 const Avatar : React.FC = function() {
 	const [crop, setCrop] = useState({ x: 0, y: 0 })
-  	const [zoom, setZoom] = useState(1)
+  	const [zoom, setZoom] = useState()
   	const onCropComplete = useCallback((croppedArea, croppedAreaPixels) => {
     	console.log(croppedArea, croppedAreaPixels)
   	}, [])
@@ -69,7 +69,7 @@ const Avatar : React.FC = function() {
 			      aspect={4 / 3}
 			      onCropChange={setCrop}
 			      onCropComplete={onCropComplete}
-			      onZoomChange={setZoom}
+			      // onZoomChange={setZoom}
 	    		/>
 	    		<div className="controls">
 			        <Slider
@@ -77,7 +77,9 @@ const Avatar : React.FC = function() {
 			          min={1}
 			          max={3}
 			          step={0.1}
-			          aria-labelledby="Zoom"			       
+			          aria-labelledby="Zoom"
+			          // onChange={(e, zoom) => setZoom(zoom)}
+      				 classes={{ root: 'slider' }}
 			        />
      			</div>
 	    	</Popup>
