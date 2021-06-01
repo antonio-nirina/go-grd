@@ -18,7 +18,7 @@ const AccountGame : React.FC = function() {
 				<p className="img-account"><img src="https://i.ibb.co/BB3Bjwq/discord.png" alt="discord" width="45" height="45"/></p>
 				<p>Discord</p>
 				<Popup
-						trigger={<button className="btn bg-white">
+						trigger={<button className="btn bg-yellow">
 							<span style={{"fontSize":"11px"}}>{Object.keys(userConnectedRedux.user).length > 0 ?
 							Translation(userConnectedRedux.user.language).profil.accountGame
 							:
@@ -58,7 +58,7 @@ const AccountGame : React.FC = function() {
 				<p className="img-account"><img src="https://i.ibb.co/yXchgZ1/epic-game.png" alt="epic-game" width="45" height="45"/></p>
 				<p>Epic Games</p>
 				<Popup
-						trigger={<button className="btn bg-white">
+						trigger={<button className="btn bg-yellow">
 							<span style={{"fontSize":"11px"}}>{Object.keys(userConnectedRedux.user).length > 0 ?
 							Translation(userConnectedRedux.user.language).profil.accountGame
 							:
