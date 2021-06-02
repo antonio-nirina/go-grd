@@ -8,7 +8,7 @@ import {RootState} from "../../reducer"
 import Footer from "../footer/footer"
 import AvatarDefault from "../../assets/image/game-tag.png"
 import "./communaute.css"
-import { colors } from "react-select/src/theme"
+
 
 const Communaute: React.FC = function() {
 	const userConnectedRedux 	= useSelector((state:RootState) => state.userConnected)
