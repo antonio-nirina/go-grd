@@ -7,47 +7,63 @@ import Header from "../header/header"
 import {RootState} from "../../reducer"
 import Footer from "../footer/footer"
 import AvatarDefault from "../../assets/image/game-tag.png"
+import Streamer1 from "../../assets/image/streamer1.jpg"
 import "./communaute.css"
-import { colors } from "react-select/src/theme"
+
 
 const Communaute: React.FC = function() {
 	const userConnectedRedux 	= useSelector((state:RootState) => state.userConnected)
   return(
-	<div>
-		<div>
-			<Header/>
-		</div>
-		<div className="content-community">
-			<div className="side-left">
-				<div className="games">gg</div>
-				<div className="stream"></div>
-			</div>
-			<div className="actuality-community"></div>
-			<div className="side-right">
-				<div className="find-friend">
-					<input type="text" placeholder="find friend" />
-				</div>
-				<div className="friend-inline">
-				  	<div className="avatar-profile">
-				  		<img src = {userConnectedRedux.user.avatar? userConnectedRedux.user.avatar : AvatarDefault} />
-				  	</div>
-				  	<div className="username-profile">{userConnectedRedux.user.username}</div>
-				  	<div className="instat" >
-				  		<div className="statut-connex"></div>
-			  		</div>
-			  		<div className="chat-button" style={{"cursor":"pointer"}}>
-					  <FontAwesomeIcon icon={faFacebookMessenger} color={"#f2cf1c"} size={"lg"} />
-					  </div>
-				</div>
-				<div className="store">
-					store
-				</div>
-				<div className="tchat">
-					tchat
-				</div>
-			</div>
-		</div>
-		<Footer/>
+	<div className="communaute">
+	    <div className="container">
+	  		<Header/>	  	
+	  		<div className="main">
+	  			<div className="auto">
+	  				<h1>Communauté</h1>
+	  				<div className="aside-left">
+	  					<div className="game-select">
+		  					<div className="game-bg bg-cod">
+		  						<p className="game-title">COD : Warzone</p>
+		  					</div>
+		  					<div className="game-bg bg-rl">
+		  						<p className="game-title">rocket league</p>
+		  					</div>
+		  					<div className="game-bg bg-ft">
+		  						<p className="game-title">fortnite</p>
+		  					</div>
+		  				</div>
+		  				<div className="stream">
+		  					<div className="stream-container">
+			  					<div className="streaming">
+			  						<img src={Streamer1} alt=""/>
+			  					</div>
+			  					<div className="stream-info">
+			  						<p className="streamer">Gotaga</p>
+			  						<p className="streamgame">Apex Legends <span className="stream-type">Arena</span></p>
+			  						<p className="view">12093<i></i></p>
+			  					</div>
+			  				</div>
+			  				<div className="stream-container">
+			  					<div className="streaming">
+			  						<img src={Streamer1} alt=""/>
+			  					</div>
+			  					<div className="stream-info">
+			  						<p className="streamer">Gotaga</p>
+			  						<p className="streamgame">Apex Legends <span className="stream-type">Arena</span></p>
+			  						<p className="view">12093<i></i></p>
+			  					</div>
+			  				</div>
+		  				</div>
+	  				</div>	  				
+	  				<div className="center-block">
+
+	  				</div>
+	  				<div className="aside-right">
+	  				</div>
+	  			</div>
+	  		</div>			
+			<Footer/>
+	  	</div>
 	</div>
   )
 }

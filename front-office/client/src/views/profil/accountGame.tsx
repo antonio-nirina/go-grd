@@ -5,8 +5,6 @@ import { useSelector } from "react-redux"
 
 import {Translation} from "../../lang/translation"
 import {RootState} from "../../reducer"
-import IconXbox from "../../assets/image/icon-xbox.png"
-import IconPs from "../../assets/image/playstation.png"
 
 const AccountGame : React.FC = function() {
 	const userConnectedRedux = useSelector((state:RootState) => state.userConnected)
@@ -17,10 +15,10 @@ const AccountGame : React.FC = function() {
 					:
 					Translation("fr").profil.account}</h2>
 			<div className="itemGame">
-				<p className="img-account"><img src={IconPs} alt="xbox" width="45" height="45"/></p>
-				<p>PSN id</p>
+				<p className="img-account"><img src="https://i.ibb.co/BB3Bjwq/discord.png" alt="discord" width="45" height="45"/></p>
+				<p>Discord</p>
 				<Popup
-						trigger={<button className="btn bg-white">
+						trigger={<button className="btn bg-yellow">
 							<span style={{"fontSize":"11px"}}>{Object.keys(userConnectedRedux.user).length > 0 ?
 							Translation(userConnectedRedux.user.language).profil.accountGame
 							:
@@ -57,10 +55,10 @@ const AccountGame : React.FC = function() {
 
 			</div>
 			<div className="itemGame">
-				<p className="img-account"><img src={IconXbox} alt="xbox" width="45" height="45"/></p>
-				<p>XboxLive</p>
+				<p className="img-account"><img src="https://i.ibb.co/yXchgZ1/epic-game.png" alt="epic-game" width="45" height="45"/></p>
+				<p>Epic Games</p>
 				<Popup
-						trigger={<button className="btn bg-white">
+						trigger={<button className="btn bg-yellow">
 							<span style={{"fontSize":"11px"}}>{Object.keys(userConnectedRedux.user).length > 0 ?
 							Translation(userConnectedRedux.user.language).profil.accountGame
 							:

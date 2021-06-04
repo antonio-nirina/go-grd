@@ -53,44 +53,6 @@ type imageElement struct {
 	Url string `json:"url"`
 }
 
-/*
-	"data": {
-        "id": "6YQnv25",
-        "title": "85eec352c053",
-        "url_viewer": "https://ibb.co/6YQnv25",
-        "url": "https://i.ibb.co/F6pxs9t/85eec352c053.png",
-        "display_url": "https://i.ibb.co/8MkKzJV/85eec352c053.png",
-        "size": 116083,
-        "time": "1622069082",
-        "expiration": "0",
-        "image": {
-            "filename": "85eec352c053.png",
-            "name": "85eec352c053",
-            "mime": "image/png",
-            "extension": "png",
-            "url": "https://i.ibb.co/F6pxs9t/85eec352c053.png"
-        },
-        "thumb": {
-            "filename": "85eec352c053.png",
-            "name": "85eec352c053",
-            "mime": "image/png",
-            "extension": "png",
-            "url": "https://i.ibb.co/6YQnv25/85eec352c053.png"
-        },
-        "medium": {
-            "filename": "85eec352c053.png",
-            "name": "85eec352c053",
-            "mime": "image/png",
-            "extension": "png",
-            "url": "https://i.ibb.co/8MkKzJV/85eec352c053.png"
-        },
-        "delete_url": "https://ibb.co/6YQnv25/bd29674d884a48902b95b098456f49a1"
-    },
-    "success": true,
-    "status": 200
-
-*/
-
 const BASE_URL_IMG_BB = "https://api.imgbb.com/1/upload"
 
 func (f *FileUpload) SenderFile() (string, error) {

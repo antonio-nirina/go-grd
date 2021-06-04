@@ -1,64 +1,84 @@
-.content-community{
-	height: 219px;
-	background: #fff;
-	color: #000;
-	font-family: "russo one";
-	display: flex;
+@charset "UTF-8";
+.communaute{
+	padding-top: 30px;
 }
-
-.side-right {
-	width: 20%;
-	background: gray;
+.auto{
+	max-width: 1000px;
+	width: 100%;
+	margin: auto;		
 }
-.side-left {
-	width: 20%;
-	background: #f2cf1c;
+.aside-left{
+	max-width: 300px;	
+	display: table-cell;
+	
 }
-.actuality-community {
-	width: 60%;
+.aside-left .game-select{	
+	
 }
-.side-right .statut-connex{
-    border: 1px solid;
-    border-radius: 90%;
-    background-color: #31a24c;
-    width: 10px;
-    color: #31a24c;
-    height: 12px;
-    padding: 4px 0px;
-
+.game-select p{
+	text-transform: uppercase;
+	font-size: 12px;
+	font-weight: bold;
+	margin-left: 10px;
+	text-shadow: 5px 5px black;
 }
-.side-right .avatar-profile img{
-	width: 27px;
+.aside-left .game-bg{
+	padding: 21px 5px;
+	border-bottom: 1px solid gray;
+}
+.bg-cod{	
+	background: url("../../assets/image/war-zone.jpg") no-repeat;
+	background-size: 100%;
+	background-position-y: -26px;
+}
+.bg-rl{
+	background: url("../../assets/image/rocketleague.jpg") no-repeat;
+	background-size: 100%;
+	background-position-y: -41px;
+}
+.bg-ft{
+	background: url("../../assets/image/fortnite.jpg") no-repeat;
+	background-size: 100%;
+	background-position-y: -13px;
+}
+.stream-container{
+	margin-bottom: 15px;
+}
+.stream{
+	background: #2c2c2c;
+	margin-top: 15px;
+	padding: 12px;
+}
+.streaming{
+	max-width: 124px;
+	width: 100%;
+	display: inline-block;
+}
+.streaming img{
+	width: 100%;
 	height: auto;
-	border-radius: 100%;
 }
-.side-right .username-profile {
-	padding: 10px;
+.stream-info{	
+	display: inline-block;
+	margin-left: 15px;
+    vertical-align: top;
 }
-
-.side-right .friend-inline {
-	display: flex;
-	width: 100%;
-	padding: 10px;
-	border: 1px solid blanchedalmond;
+.stream-info p{
+	font-size: 12px;    
+    padding: 4px 0px;
 }
-
-.side-right .instat {
-	padding: 10px 2px 13px 0px;
-	margin-top: 2px;
+.streamgame{
+	font-style: italic;
 }
-
-.friend-inline .chat-button{
-	margin-left: 12px;
-    width: 32px;
-    height: 20px;
-    margin: 10px;
-    margin-top: 8px;
-    border-radius: 5px;
-
+.stream .view{
+	font-size: 14px;
 }
 
-.find-friend{
-	width: 100%;
-	margin-top: 86px;
+.center-block{
+	width: 60%;
+	background: #ffffff;
+	display: table-cell;
+}
+.aside-right{
+	
 }
