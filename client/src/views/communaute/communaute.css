@@ -8,12 +8,72 @@
 	margin: auto;		
 }
 .aside-left{
-	max-width: 300px;	
-	display: table-cell;
+	max-width: 200px;
+	width: 100%;
+	display: inline-block;
+	padding-right: 15px;
+	vertical-align: top;
 	
 }
+.center-block{
+	width: 60%;
+	background: #ffffff;
+	display: inline-block;
+
+}
+.center-block h2{
+	color: #000000;
+	text-align: center;
+	font-family: "Russo One";
+	font-weight: lighter;
+	text-transform: uppercase;
+
+}
+.aside-right{
+	width: 20%;
+	display: inline-block;
+	padding-left: 15px;
+	vertical-align: top;
+}
+.aside-right .friend-avatar{
+	width: 25px;
+	height: 25px;
+	border:1px solid #ffff;
+	border-radius: 50%;
+}
+
+.aside-right p, .aside-right span{
+	font-size: 12px;
+}
+.aside-right .friend-list, .aside-right .subjectforum{
+	background: #2c2c2c;
+	padding: 5px 5px;
+}
+.subjectforum{
+	margin-top: 15px;	
+}
+.subjectforum p{
+	padding: 5px 5px;
+}
+.subjectforum i{
+	float: right;
+}
+.aside-right .friend-list img{
+	display: inline-block;
+	vertical-align: middle;	
+}
+.aside-right .friend-list i{
+	float: right;	
+	display: inline-block;
+	margin-right: 5px;
+	margin-top: 5px;
+}
+.friend-list span{
+	display: inline-block;	
+	margin-left: 5px;
+}
 .aside-left .game-select{	
-	
+
 }
 .game-select p{
 	text-transform: uppercase;
@@ -55,8 +115,8 @@
 	display: inline-block;
 }
 .streaming img{
-	width: 100%;
-	height: auto;
+	
+	
 }
 .stream-info{	
 	display: inline-block;
@@ -74,11 +134,3 @@
 	font-size: 14px;
 }
 
-.center-block{
-	width: 60%;
-	background: #ffffff;
-	display: table-cell;
-}
-.aside-right{
-	
-}
