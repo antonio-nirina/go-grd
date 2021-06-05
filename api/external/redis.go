@@ -45,3 +45,7 @@ func SetDataRedis(key string,value interface{})  {
         Logger(fmt.Sprintf("%v", err))
     } 
 }
+
+func GetMessagePublish(){
+	
+}

@@ -8,3 +8,17 @@ func Logger(message string) {
 		"request": message,
 	}).Fatal(message)
 }
+
+/*
+*
+* Retry function after d seconds
+*/
+func ForeverSleep(d time.Duration, f RetryFunc) {
+	for i := 0; ; i++ {
+		err := f(i)
+		if err == nil {
+			return
+		}
+		time.Sleep(d)
+	}
+}
