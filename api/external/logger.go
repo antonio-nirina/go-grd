@@ -1,6 +1,10 @@
 package external
 
-import log "github.com/sirupsen/logrus"
+import (
+	"time"
+
+	log "github.com/sirupsen/logrus"
+)
 
 func Logger(message string) {
 
@@ -11,14 +15,15 @@ func Logger(message string) {
 
 /*
 *
+* RetryFunc parameter 
 * Retry function after d seconds
 */
-func ForeverSleep(d time.Duration, f RetryFunc) {
+func ForeverSleep(d time.Duration) {
 	for i := 0; ; i++ {
-		err := f(i)
-		if err == nil {
-			return
-		}
+		//err := f(i)
+		//if err == nil {
+		//	return
+		//}
 		time.Sleep(d)
 	}
 }

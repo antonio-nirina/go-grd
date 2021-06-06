@@ -21,6 +21,14 @@ func main() {
 			Name:   "Mutation",
 			Fields: mutation.GetRootFields(),
 		}),
+		/*Subscription: graphql.NewObject(graphql.ObjectConfig{
+            Name: "Subscription",
+            Fields: graphql.Fields{
+                "subscribeUser": &graphql.Field{
+                    Type: graphql.String,
+                },
+            },
+        }),*/
 	}
 	schema, err := graphql.NewSchema(schemaConfig)
 
