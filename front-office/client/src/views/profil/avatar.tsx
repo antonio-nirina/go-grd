@@ -1,12 +1,9 @@
 import React, { useState, useCallback } from 'react'
 import { useSelector,useDispatch } from "react-redux"
-import ReactDOM from 'react-dom'
 
 import Popup from "reactjs-popup"
 import {useMutation} from "@apollo/client"
 import {RootState} from "../../reducer"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faPen } from "@fortawesome/free-solid-svg-icons"
 import gamer from "../../assets/image/game-tag.png"
 import Cropper from "react-easy-crop"
 import Slider from "@material-ui/core/Slider"

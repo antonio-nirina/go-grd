@@ -20,7 +20,7 @@ const Assistance: React.FC = function() {
 	    <div className="container">
 	  		<Header/>	  		
 	  		<div className="main">
-	  			<div className="center-block">
+	  			<div className="block-center">
 			  		<div className="search-container">
 			  			<h2>Assistance</h2>
 			  			<div className="search-box">
