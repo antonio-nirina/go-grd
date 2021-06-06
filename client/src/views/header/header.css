@@ -13,23 +13,21 @@
 }
 
 .logo{
-	max-width: 99px;
+	max-width: 174px;
 	width: 100%;
 	display: inline-block;
 	vertical-align: middle;
 }
-.imglogo{
-	max-width: 99px;
-	height: 26px;
+.imglogo{	
 	width: 100%;
 }
 .navmenu{
-	max-width: 875px;
+	max-width: 785px;
     text-align: center;
     display: inline-block;
     vertical-align: middle;
     margin-bottom: 5px;
-    width: 70%;
+    width: 60%;
 }
 .navmenu li{
 	display: inline-block;

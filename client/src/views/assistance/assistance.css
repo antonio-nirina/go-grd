@@ -1,6 +1,6 @@
 @charset "UTF-8";
-.center-block{
-	width: 60%;
+.block-center{
+	width: 94%;
 	padding: 30px 15px;
 	margin: auto;
 	
@@ -29,18 +29,15 @@
 .aside-menu{
 	font-family: "Russo One";
 	font-weight: 500;
-	background: #e3e3e3;
-	max-width: 200px;
-	width: 27%;
+	background: #e3e3e3;	
 	display: table-cell;
 	vertical-align: top;
 	padding: 20px;
 	height: 100%;
 }
 .support{
-	background: #ffffff;
-	max-width: 514px;
-	width: 73%;
+	background: #ffffff;	
+	width: 83.5%;
 	display: table-cell;
 	vertical-align: top;
 	color: #212121;
@@ -113,7 +110,8 @@
 .tuto-video{
 	margin-top: 15px;
 	width: 100%;
+	text-align: center;
 }
 .tuto-video video{
-	width: 100%;
+	width: 49%;
 }
