@@ -1,7 +1,8 @@
 /*
-Description:  Grid
-Version:    1.0
+  - Description:  Grid
+  - Version:    1.0
 */
+
 @charset "UTF-8";
 /* CSS Document */
 
@@ -10,9 +11,9 @@ html{
 }
 
 * {
-    box-sizing: border-box;
-    margin: 0;
-	padding: 0;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 .clear{
     clear: both;
@@ -352,8 +353,9 @@ li{
     position: initial;
     padding-top: 15px;
     margin: auto;
+    width: 40%;
   }
-  .communaute .aside-left .img{
+  .communaute .aside-left .seek .img{
     width: 40%;
   }
   .communaute .streaming{
@@ -419,6 +421,28 @@ li{
   } 
   .assistance .center-block{
     width: 90%;
+  }
+}
+@media screen and (max-width: 800px){
+  .tchat .rcw-widget-container{
+    width: 314px;
+    bottom: 0 !important;
+
+  }  
+  .rcw-conversation-container .rcw-title{
+    padding: 15px 0px !important;
+  }
+  .tchat .rcw-header{
+    padding: 3px !important;
+  }
+  .tchat .rcw-conversation-container .rcw-close-button{
+    background: none;
+    top: 24px;
+    width: 30px;
+  }
+  .tchat .rcw-conversation-container .rcw-close{
+    width: 12px;
+    height: 12px;
   }
 }
 @media screen and (max-width: 640px){

@@ -19,6 +19,7 @@ import thumbnail from "../../assets/image/video.png"
 import Header from "../header/header"
 import {RootState} from "../../reducer"
 
+import Tchat from "../tchat/tchat"
 import Footer from "../footer/footer"
 import AvatarDefault from "../../assets/image/game-tag.png"
 import Streamer1 from "../../assets/image/streamer1.jpg"
@@ -201,7 +202,8 @@ const Communaute: React.FC = function() {
 		  				</div>
 	  				</div>
 	  			</div>
-	  		</div>	  		
+	  		</div>
+	  		<Tchat/> 		
 			<Footer/>
 	  	</div>
 	</div>

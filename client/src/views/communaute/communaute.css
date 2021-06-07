@@ -4,7 +4,8 @@
 }
 .auto{	
 	width: 90%;
-	margin: auto;		
+	margin: auto;	
+	margin-bottom: 30px;
 }
 .aside-left{
 	width: 250px;	
@@ -164,7 +165,7 @@
 }
 .game-select a {
     display: block;
-    padding: 7px;
+    padding: 7px 0;
     background: #2c2c2c;
     margin-bottom: 2px;
     height: 39px;
@@ -183,8 +184,7 @@
 }
 .seek{
 	position: absolute;
-    width: 237px;
-    right: -3px;
+    width: 100%;    
     top: 27px;
 }
 /*.bg-cod{	
