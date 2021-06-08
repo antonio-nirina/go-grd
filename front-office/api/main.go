@@ -16,15 +16,13 @@ import (
 	"github.com/thoussei/antonio/main/front-office/api/graphql/queries"
 )
 
-var counter int
+type Post struct {
+	ID    int `json:"id"`
+	Likes int `json:"count"`
+}
 
-var upgrader = websocket.Upgrader{
-	ReadBufferSize:  1024,
-	WriteBufferSize: 1024,
-	CheckOrigin: func(r *http.Request) bool {
-		return true
-	},
-	Subprotocols: []string{"graphql-ws"},
+type counter struct {
+	Key int
 }
 
 type ConnectionACKMessage struct {
@@ -42,9 +40,28 @@ type Subscriber struct {
 	OperationID   string
 }
 
+var CountType = graphql.NewObject(graphql.ObjectConfig{
+	Name: "Count",
+	Fields: graphql.Fields{
+		"key": &graphql.Field{
+			Type: graphql.Int,
+		},
+	},
+})
+
 var subscribers sync.Map
 
 func main() {
+	var upgrader = websocket.Upgrader{
+		ReadBufferSize:  1024,
+		WriteBufferSize: 1024,
+		CheckOrigin: func(r *http.Request) bool {
+			return true
+		},
+		Subprotocols: []string{"graphql-ws"},
+	}
+
+	var count = &counter{}
 	schemaConfig := graphql.SchemaConfig{
 		Query: graphql.NewObject(graphql.ObjectConfig{
 			Name:   "Query",
@@ -58,9 +75,9 @@ func main() {
             Name: "Subscription",
             Fields: graphql.Fields{
                 "subscribeCounter": &graphql.Field{
-                    Type: graphql.Int,
+                    Type: CountType,
                     Resolve: func(p graphql.ResolveParams) (interface{}, error) {
-						return counter, nil
+						return count, nil
 					},
                 },
             },
@@ -74,9 +91,10 @@ func main() {
 	}
 
 	httpHandler := handler.New(&handler.Config{
-		Schema:   &schema,
-		Pretty:   true,
-		GraphiQL: true,
+		Schema:     &schema,
+		Pretty:     true,
+		GraphiQL:   false,
+		Playground: true,
 		// FormatErrorFn: ,
 	})
 
@@ -90,7 +108,6 @@ func main() {
 		connectionACK, err := json.Marshal(map[string]string{
 			"type": "connection_ack",
 		})
-
 		if err != nil {
 			log.Printf("failed to marshal ws connection ack: %v", err)
 		}
@@ -98,11 +115,42 @@ func main() {
 			log.Printf("failed to write to ws connection: %v", err)
 			return
 		}
+		go func() {
+			for {
+				_, p, err := conn.ReadMessage()
+				if websocket.IsCloseError(err, websocket.CloseGoingAway) {
+					return
+				}
+				if err != nil {
+					log.Println("failed to read websocket message: %v", err)
+					return
+				}
+				var msg ConnectionACKMessage
+				if err := json.Unmarshal(p, &msg); err != nil {
+					log.Printf("failed to unmarshal: %v", err)
+					return
+				}
+				if msg.Type == "start" {
+					length := 0
+					subscribers.Range(func(key, value interface{}) bool {
+						length++
+						return true
+					})
+					var subscriber = Subscriber{
+						ID:            length + 1,
+						Conn:          conn,
+						RequestString: msg.Payload.Query,
+						OperationID:   msg.OperationID,
+					}
+					subscribers.Store(subscriber.ID, &subscriber)
+				}
+			}
+		}()
 	})
 	go func() {
 		for {
 			time.Sleep(1 * time.Second)
-			counter ++
+			count.Key = count.Key + 1
 			subscribers.Range(func(key, value interface{}) bool {
 				subscriber, ok := value.(*Subscriber)
 				if !ok {
