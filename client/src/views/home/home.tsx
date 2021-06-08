@@ -50,7 +50,7 @@ const Home: React.FC = function() {
 		const params = window.location.search
 
 		if (window.opener) {
-			window.opener.postMessage(params)
+			window.opener.postMessage(params,"")
 		   	window.close()
 		}
 	},[])

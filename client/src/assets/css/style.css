@@ -191,7 +191,7 @@ li{
 @media screen and (max-width: 1296px) {
   .navmenu
   {
-        width: 55%;
+        width: 50%;
   }
   .home header.header .wrap,
   .wrap
@@ -222,6 +222,11 @@ li{
   .home .rss {
     width: 60%;
     margin: auto;
+  }
+}
+@media screen and (max-width: 964px){
+  .communaute{
+    padding-top: 5em !important;
   }
 }
 @media screen and (max-width: 991px){
@@ -312,9 +317,65 @@ li{
     margin-top: 15px;
     width: 100%;
   }
+  .communaute .center-block{
+    width: 40%;
+  }
+  .communaute .center-block .article img, .communaute .center-block .article .text{
+    width: 100%;
+  }
+  .communaute .streaming{
+      max-width: inherit;
+  }
+  .communaute .streaming img{
+    max-width: inherit;
+    height: auto;
+  }
+
 }
-@media screen and (max-width: 827px){
- 
+@media screen and (max-width: 786px){
+  .communaute .aside-left, .communaute .aside-right{
+    width: 95%;
+    display: block;
+    margin: auto;
+    margin-bottom: 15px;
+  }
+  .communaute .block-center{
+    display: block;
+    width: 90%;
+  }
+  .communaute .aside-right{
+    margin-top: 15px;
+  }
+  
+  .communaute .aside-left .seek{    
+    text-align: center; 
+    position: initial;
+    padding-top: 15px;
+    margin: auto;
+  }
+  .communaute .aside-left .img{
+    width: 40%;
+  }
+  .communaute .streaming{
+    width: 45%;
+    display: table-cell;
+    padding-right: 20px;
+  }
+  .communaute .stream-info{
+    width: 50%;
+    display: table-cell;
+  } 
+  .communaute .stream-info p{
+    font-size: 15px;
+    padding: 10px 0;
+  }
+  .communaute .stream .view{
+    font-size: 18px;
+  }
+
+}
+
+@media screen and (max-width: 827px){  
   .container footer{
     position: inherit !important;
   }    
@@ -342,12 +403,13 @@ li{
   }
   .header .logo{
     float: left;
-    margin: 10px 30px;
+    margin: 10px 10px;
+    max-width: 150px;
   }
+
   .header .tag{
     width: 60%;
     max-width: inherit;
-
   }
   .header .gametag{
     margin-right: 5px;
@@ -407,6 +469,9 @@ li{
   .home .community h2, .home .join h2,{
     font-size: 23px;
   }
+  .tuto-video video{
+    width: 100%;
+  }
 }
 @media screen and (max-width: 600px){
   .home .block,
@@ -435,9 +500,9 @@ li{
 }
 
 @media screen and (max-width: 500px){
-  .home .container{
+  /*.home .container{
      padding: 3em 0em 0em;
-  }
+  }*/
   .home .slogan{
     top: 20%;
   }
@@ -456,10 +521,16 @@ li{
     margin-top: 15px;
     display: block;
   }
+  .communaute .streaming, .communaute .stream-info{
+    display: block;
+    margin: auto;
+    width: 100%;
+    text-align: center;
+  }
 }
 @media screen and (max-width: 450px){
   .home .container{
-     padding: 6em 0em 0em;
+     padding: 4em 0em 0em;
   }
   .assistance .container{
     padding-top: 3em;
@@ -471,6 +542,9 @@ li{
     max-width: inherit;
     text-align: center;
     margin: 0 0px 8px;
+  }
+  .header .logo .imglogo{
+    width: 45%;
   }
   .bt-container{
     max-width: inherit;

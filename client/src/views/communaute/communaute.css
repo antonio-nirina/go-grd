@@ -2,31 +2,193 @@
 .communaute{
 	padding-top: 30px;
 }
-.auto{
-	max-width: 1000px;
-	width: 100%;
+.auto{	
+	width: 90%;
 	margin: auto;		
 }
 .aside-left{
-	max-width: 300px;	
+	width: 250px;	
 	display: table-cell;
+	padding-right: 15px;
+	vertical-align: top;
 	
 }
-.aside-left .game-select{	
+.center-block{
+	width: 49%;
+	background: #2c2c2c;
+	display: table-cell;
+	margin-bottom: 15px;
+	border-radius: 8px;
+}
+.center-block h2{
+	padding: 15px 0;
+	color: #ffffff;
+	text-align: center;
+	font-family: "Russo One";
+	font-weight: lighter;
+	text-transform: uppercase;
+
+}
+.aside-right{
+	width: 250px;	
+	display: table-cell;
+	padding-left: 15px;
+	vertical-align: top;
+}
+.aside-right .friend-avatar{
+	width: 25px;
+	height: 25px;
+	border:1px solid gray;
+	border-radius: 50%;
+}
+
+.aside-right p, .aside-right span{
+	font-size: 12px;
+}
+.aside-right p{
 	
 }
+.aside-right p i{
+	font-size: 20px;
+}
+.aside-right p i.rect{
+	border: 1px solid #c4c4c4;
+    padding: 1px;
+    margin-right: 7px;
+    display: inline-block;
+    height: 16px;
+    line-height: 10px;
+    vertical-align: top;
+    margin-top: 6px;
+    font-size: 12px;
+}
+.aside-right p svg{
+
+}
+
+.aside-right .friend-list, .aside-right .subjectforum{
+	background: #2c2c2c;
+	padding: 5px 5px;
+}
+.subjectforum{
+	border-bottom: 1px solid gray;
+	position: relative;
+	height: 37px;
+	transition: 500ms ease-in-out;
+	overflow: hidden;	
+}
+.subjectforum .seek{
+	padding: 12px 5px;	
+	width: 100%;
+	top: 38px;
+}
+
+.subjectforum .seek a{
+	display: block;
+	font-size: 12px;
+	font-style: italic;
+	padding: 5px 0;
+}
+.subjectforum:hover{
+	height: 171px;
+	transition: 500ms ease-in-out;
+	background: #4a4949;
+}
+.subjectforum .underlined{
+	border-bottom: 1px solid gray;	
+	padding-bottom:11px;
+	padding-left: -5px;
+}
+
+.subjectforum:last-child{
+	border-bottom: none;
+}
+.subjectforum p{
+	padding: 5px 5px;
+	position: relative;
+}
+.subjectforum i{
+	position: absolute;
+	right: 5px;
+	top: 0;
+}
+.friend-list{
+	border-bottom: 1px solid gray;
+}
+.aside-right i.u-connected, .aside-right i.u-disconnected{
+	display: inline-block;
+	height: 7px;
+	width: 7px;	
+	border-radius: 50%;
+	float: none !important;
+	clear: both !important;
+	margin-left: 15px;
+	margin-top: 5px;
+}
+.aside-right i.u-connected{
+	background: #1abb3d;
+	border: 1px solid #1abb3d;
+}
+.aside-right i.u-disconnected{
+	background: gray;
+	border: 1px solid gray;	
+}
+.friend-list.noborder{
+	border-bottom:none;
+}
+.aside-right .friend-list img{
+	display: inline-block;
+	vertical-align: middle;	
+}
+.aside-right .friend-list i{
+	float: right;	
+	display: inline-block;
+	margin-right: 5px;
+
+}
+.friend-list span{
+	display: inline-block;	
+	margin-left: 5px;
+	padding: 5px;
+}
+
 .game-select p{
 	text-transform: uppercase;
 	font-size: 12px;
 	font-weight: bold;
 	margin-left: 10px;	
 }
-.aside-left .game-bg{
-	padding: 21px 5px;
-	border-bottom: 1px solid gray;
+
+.aside-left .game-bg:last-child{
+	border-bottom: none;
 }
-.bg-cod{	
-	background: url("../../assets/image/war-zone.jpg") no-repeat;
+.game-select a {
+    display: block;
+    padding: 7px;
+    background: #2c2c2c;
+    margin-bottom: 2px;
+    height: 39px;
+    overflow: hidden;
+    transition: 500ms ease-in-out;
+}
+.game-select a:hover{
+	background: #4a4949;
+	transition: 500ms ease-in-out;
+	height: 171px;	
+}
+.game-bg{	
+    margin: auto;
+    position: relative;
+    margin-top: 5px;
+}
+.seek{
+	position: absolute;
+    width: 237px;
+    right: -3px;
+    top: 27px;
+}
+/*.bg-cod{	
+	background: url("../../assets/image/warzone-logo.jpg") no-repeat;
 	background-size: 100%;
 	background-position-y: -26px;
 }
@@ -39,23 +201,23 @@
 	background: url("../../assets/image/fortnite.jpg") no-repeat;
 	background-size: 100%;
 	background-position-y: -13px;
-}
+}*/
 .stream-container{
 	margin-bottom: 15px;
 }
 .stream{
 	background: #2c2c2c;
-	/*margin-top: 15px;*/
+	margin-top: 15px;
 	padding: 12px;
 }
 .streaming{
-	max-width: 124px;
+	max-width: 60px;
 	width: 100%;
 	display: inline-block;
 }
-.streaming img{
-	width: 100%;
-	height: auto;
+.streaming img{	
+	max-width: 65px;
+    height: 48px;
 }
 .stream-info{	
 	display: inline-block;
@@ -64,33 +226,54 @@
 }
 .stream-info p{
 	font-size: 12px;    
-    padding: 4px 0px;
+    padding: 1px 0px;
 }
 .streamgame{
 	font-style: italic;
 }
 .stream .view{
+	font-size: 11px;
+}
+.stream .view i{
+	margin-left: 5px;
+}
+.center-block .actuality{
+	width: 100%;
+}
+.center-block .article{
+	width: 100%;
+	margin-bottom: 15px;	
+	padding-right: 15px;	
+
+}
+.center-block .article img{
+	width: 40%;	
+	float: left;
+	vertical-align: top;
+	background: #2c2c2c;
+	border-radius: 5px;
+	border: 1px solid #2c2c2c;
+}
+.center-block .article .text{
+	float: right;
+	width: 60%;	
+	padding: 20px;
+}
+.center-block .article .text p.title{
+	font-size: 20px;
+}
+.center-block .article p{
 	font-size: 14px;
 }
-.center-block{
-	width: 60%;
-	background: #ffffff;
-	display: table-cell;
-	vertical-align: top;
-}
-.center-block h2{
-	color: #000000;
+
+.center-block .article .readmore{
+	font-weight: 700;
+	font-size: 14px;
+	color: #f5cc22;
+	font-style: normal;
 	text-transform: uppercase;
-	font-family: "Russo One";
-	font-size: 24px;
-	font-weight: lighter;
-	text-align: center;
+	padding: 15px 0;
 }
-.aside-right{
-	max-width: 190px;
-	background: red;
-	display: table-cell;
-	height: 250px;
-	width: 20%;
-	background: #2c2c2c;
+.forum-container{
+	margin-top: 15px;
 }
