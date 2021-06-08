@@ -134,5 +134,22 @@
 		"tournament": "Tournois",
 		"Signup": "Inscrivez-vous",
 		"upcomming" : "Trounoir à venir"
+	},
+	"assistance":{
+		"subject": "Rechercher un sujet",
+		"problem": "Problème social",
+		"friends": "Amis",
+		"tchat": "Chat",
+		"connex": "Problème de connexion",
+		"forgotId": "Identifiant oublié",
+		"link": "Liaison console",
+		"noLobby": "Impossible de rejoindre un lobby",
+		"contact": "Contact",
+		"sup": "Support",
+		"answer": "Retrouver les réponses aux questions les plus posées",
+		"tech": "Nos techniciens à votre écoute",
+		"wireless": "Rejoignez nos réseaux sociaux pour discuter avec nos techniciens en direct",
+		"request": "Comment déposer une requête support ?"
 	}
+
 }
