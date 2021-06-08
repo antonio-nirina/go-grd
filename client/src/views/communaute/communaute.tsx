@@ -1,6 +1,7 @@
-import React from "react"
+import React,{useMemo} from "react"
 import { Link } from 'react-router-dom'
 import { useSelector } from "react-redux"
+import {useSubscription} from "@apollo/client"
 
 import { faPlus, faCommentDots, faEye } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -21,10 +22,15 @@ import Footer from "../footer/footer"
 import AvatarDefault from "../../assets/image/game-tag.png"
 import Streamer1 from "../../assets/image/streamer1.jpg"
 import "./communaute.css"
+import {COUNT_SUBSCRIBE} from "../../gql/user/subscription"
 
 
 const Communaute: React.FC = function() {
 	const userConnectedRedux 	= useSelector((state:RootState) => state.userConnected)
+	const {loading,error,data}  = useSubscription(COUNT_SUBSCRIBE)
+	useMemo(() => {
+		if(!loading && !error && data) console.log("data", data)
+	},[loading,error,data])
   return(
 	<div className="communaute">
 	    <div className="container">
