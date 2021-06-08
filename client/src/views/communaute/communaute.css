@@ -19,8 +19,7 @@
 	text-transform: uppercase;
 	font-size: 12px;
 	font-weight: bold;
-	margin-left: 10px;
-	text-shadow: 5px 5px black;
+	margin-left: 10px;	
 }
 .aside-left .game-bg{
 	padding: 21px 5px;
@@ -46,7 +45,7 @@
 }
 .stream{
 	background: #2c2c2c;
-	margin-top: 15px;
+	/*margin-top: 15px;*/
 	padding: 12px;
 }
 .streaming{
@@ -73,12 +72,25 @@
 .stream .view{
 	font-size: 14px;
 }
-
 .center-block{
 	width: 60%;
 	background: #ffffff;
 	display: table-cell;
+	vertical-align: top;
+}
+.center-block h2{
+	color: #000000;
+	text-transform: uppercase;
+	font-family: "Russo One";
+	font-size: 24px;
+	font-weight: lighter;
+	text-align: center;
 }
 .aside-right{
-	
+	max-width: 190px;
+	background: red;
+	display: table-cell;
+	height: 250px;
+	width: 20%;
+	background: #2c2c2c;
 }

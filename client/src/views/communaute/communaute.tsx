@@ -18,8 +18,7 @@ const Communaute: React.FC = function() {
 	    <div className="container">
 	  		<Header/>	  	
 	  		<div className="main">
-	  			<div className="auto">
-	  				<h1>Communauté</h1>
+	  			<div className="auto">	  				
 	  				<div className="aside-left">
 	  					<div className="game-select">
 		  					<div className="game-bg bg-cod">
@@ -56,9 +55,13 @@ const Communaute: React.FC = function() {
 		  				</div>
 	  				</div>	  				
 	  				<div className="center-block">
-
+	  					<h2>Fil d'actualité</h2>  					
 	  				</div>
 	  				<div className="aside-right">
+	  					<div className="friends">
+	  						<img src="#"/>
+	  						<p>NomAmi <i></i><i></i></p>
+	  					</div>
 	  				</div>
 	  			</div>
 	  		</div>			
