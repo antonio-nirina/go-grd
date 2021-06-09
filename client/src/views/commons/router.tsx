@@ -33,7 +33,7 @@ const Router = function() {
 			<ProtectedRoute path="/rules" exact component={Rules} />
 			<ProtectedRoute path="/ligue" exact component={Ligue} />
 			<ProtectedRoute path="/wager" exact component={Wager} />
-			<ProtectedRoute path="/communaute" exact component={Communaute} />
+			<Route path="/communaute" exact component={Communaute} />
 			<ProtectedRoute path="/assistant" exact component={Assistant} />
 			<ProtectedRoute path="/assistance" exact component={Assistance} />
 			<Route path="/login" exact component={Login} />
