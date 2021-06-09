@@ -1,7 +1,7 @@
 import React from "react"
 import { Route, Switch } from "react-router-dom"
 import Home from "../home/home"
-import Ligue from "../ligue/ligue"
+import Ligue from "../annexe/ligue"
 import Tournament from "../tournament/tournament"
 import Tournois from "../annexe/tournois"
 import Info from "../tournament/info"
