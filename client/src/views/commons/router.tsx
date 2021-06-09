@@ -1,7 +1,7 @@
 import React from "react"
 import { Route, Switch } from "react-router-dom"
 import Home from "../home/home"
-import Ligue from "../ligue/ligue"
+import Ligue from "../annexe/ligue"
 import Tournament from "../tournament/tournament"
 import Tournois from "../annexe/tournois"
 import Info from "../tournament/info"
@@ -33,7 +33,7 @@ const Router = function() {
 			<ProtectedRoute path="/rules" exact component={Rules} />
 			<ProtectedRoute path="/ligue" exact component={Ligue} />
 			<ProtectedRoute path="/wager" exact component={Wager} />
-			<ProtectedRoute path="/communaute" exact component={Communaute} />
+			<Route path="/communaute" exact component={Communaute} />
 			<ProtectedRoute path="/assistant" exact component={Assistant} />
 			<ProtectedRoute path="/assistance" exact component={Assistance} />
 			<Route path="/login" exact component={Login} />

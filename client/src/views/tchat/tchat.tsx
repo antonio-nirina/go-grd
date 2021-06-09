@@ -23,12 +23,12 @@ const Tchat: React.FC = function() {
 	},[loading,error,data])
   return(
 	<div className="tchat">
-	   <Widget
-          handleNewUserMessage={handleNewUserMessage}
-          profileAvatar={AvatarDefault}
-          title="Microtten"
-          subtitle=""
-        />
+    <Widget
+        handleNewUserMessage={handleNewUserMessage}
+        profileAvatar={AvatarDefault}
+        title="Microtten"
+        subtitle=""
+    />
 	</div>
   )
 }
