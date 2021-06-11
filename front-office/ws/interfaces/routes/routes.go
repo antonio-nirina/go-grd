@@ -10,7 +10,7 @@ import (
 	"github.com/gorilla/mux"
 	"github.com/joho/godotenv"
 	"github.com/gorilla/websocket"
-	"github.com/thoussei/antonio/main/front-office/ws/user/controller"
+	"github.com/thoussei/antonio/front-office/ws/user/controller"
 )
 
 var upgrader websocket.Upgrader

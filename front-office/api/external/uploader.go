@@ -14,7 +14,7 @@ import (
 	"path/filepath"
 	"runtime"
 
-	"github.com/antonio-nirina/go-grd/api/external"
+	"github.com/thoussei/antonio/main/front-office/api/external"
 )
 
 type FileUpload struct {
