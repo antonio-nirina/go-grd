@@ -8,12 +8,10 @@ import (
 
 	"github.com/go-redis/redis/v8"
 	"github.com/gorilla/mux"
-	"github.com/joho/godotenv"
 	"github.com/gorilla/websocket"
+	"github.com/joho/godotenv"
 	"github.com/thoussei/antonio/front-office/ws/user/controller"
 )
-
-var upgrader websocket.Upgrader
 
 func Route()  {
 	err := godotenv.Load()
@@ -23,10 +21,10 @@ func Route()  {
 	}
 	
 	host := fmt.Sprintf("%s:%s",os.Getenv("HOST_REDIS"),os.Getenv("PORT_REDIS"))
-	rdb = redis.NewClient(&redis.Options{Addr: host})
+	rdb := redis.NewClient(&redis.Options{Addr: host})
 	
 	r := mux.NewRouter()
-	r.Path("/counter").Methods("GET").HandlerFunc(func(w http.ResponseWriter, r *http.Request,rdb,upgrader)  {
-		controller.NotificationCounter(w,r,rdb,upgrader)
+	r.Path("/counter").Methods("GET").HandlerFunc(func(w http.ResponseWriter, r *http.Request){
+		controller.NotificationCounter(w,r,rdb)
 	})
 }
