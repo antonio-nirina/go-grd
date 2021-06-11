@@ -185,3 +185,19 @@ func (u *userUsecase) UpdateAvatar(user entity.User,avatar string,typeFile strin
 	return nil, err
 }
 
+func (u *userUsecase) FindOneUserById(idQuery string) (entity.User, error) {
+	objectId, err := primitive.ObjectIDFromHex(idQuery)
+
+	if err != nil {
+		return entity.User{}, err
+	}
+
+	user, err := u.userRepository.FindOneUserById(objectId)
+
+	if err != nil {
+		return entity.User{}, err
+	}
+
+	return user, nil
+}
+

@@ -15,4 +15,6 @@ type Usecase interface {
 	UpdatedTokenUser(email string,token string) (interface{}, error)
 	FindUserByToken(token string) (entity.User, error)
 	UpdateAvatar(user entity.User,avatar string,typeFile string) (interface{}, error)
+	FindOneUserById(idQuery string) (entity.User, error)
+	AddFriend(req *entity.Friends) (interface{}, error)
 }

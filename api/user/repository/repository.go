@@ -15,4 +15,6 @@ type Repository interface {
 	// UpdateAccountGame(email string) (entity.User, error)
 	UpdatedTokenUser(email string,token string) (interface{}, error)
 	FindUserByToken(token string) (entity.User, error)
+	FindOneUserById(objectId primitive.ObjectID) (entity.User, error)
+	AddFriend(req *entity.Friends) (interface{}, error)
 }
