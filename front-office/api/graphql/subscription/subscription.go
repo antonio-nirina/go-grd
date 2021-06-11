@@ -1,9 +1,6 @@
 package subscription
 
 import (
-	"fmt"
-	"sync"
-
 	"github.com/graphql-go/graphql"
 	"github.com/thoussei/antonio/main/front-office/api/config"
 	"github.com/thoussei/antonio/main/front-office/api/external"
@@ -14,7 +11,6 @@ import (
 )
 
 var count = &external.Counter{}
-var subscribers sync.Map
 
 var database 	= config.ConfigMongo()
 var repUser 	= repository.NewUserRepository(database)
@@ -33,7 +29,8 @@ func subscribeCounter() *graphql.Field {
 		Type: types.CountType,
 		Description: "subscribeCounter",
 		Resolve: func(p graphql.ResolveParams) (interface{}, error) {
-			fmt.Println("countxxxx",count)
+			external.GetPublish()
+			// fmt.Println("countxxxx")
 			return count, nil
 		},
 	}

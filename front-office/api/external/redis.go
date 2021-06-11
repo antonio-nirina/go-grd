@@ -1,8 +1,11 @@
 package external
 
 import (
+	"bytes"
 	"context"
+	"encoding/json"
 	"fmt"
+	"io/ioutil"
 	"math/rand"
 	"os"
 	"time"
@@ -25,8 +28,8 @@ func init() {
 		Logger(fmt.Sprintf("%v", err))
 	}
 
-	var host = fmt.Sprintf("%s,%s",os.Getenv("HOST_REDIS"),os.Getenv("PORT_REDIS"))
-	
+	var host = fmt.Sprintf("%s:%s",os.Getenv("HOST_REDIS"),os.Getenv("PORT_REDIS"))
+	fmt.Println(host)
 	Rdb = redis.NewClient(&redis.Options{
 		Addr:     host,
 		Password: "", // no password set
@@ -61,9 +64,19 @@ func SetDataRedis(key string,value interface{})  {
 }
 
 func SetMessagePublish(){
-	ctx := context.Background()
 	for {
-		err := Rdb.Publish(ctx, "new_users", GenerateRandomUser()).Err()
+		reqBodyBytes := new(bytes.Buffer)
+		json.NewEncoder(reqBodyBytes).Encode(GenerateRandomUser())
+		data := &UserRed{}
+		body, err := ioutil.ReadAll(reqBodyBytes)
+		err = json.Unmarshal(body, data)
+		
+		if err != nil {
+			fmt.Println(err)
+		}
+
+		fmt.Println("fff", data)
+		err = Rdb.Publish(ctx, "new_users",data.Email).Err()
 		if err != nil {
 			panic(err)
 		}
@@ -94,5 +107,5 @@ func GetPublish() {
 	topic := Rdb.Subscribe(ctx, "new_users")
 	channel := topic.Channel()
 
-	fmt.Println(channel)
+	fmt.Println("channel",channel)
 }

@@ -13,11 +13,6 @@ import (
 	"github.com/thoussei/antonio/main/front-office/api/graphql/queries"
 )
 
-type Post struct {
-	ID    int `json:"id"`
-	Likes int `json:"count"`
-}
-
 type counter struct {
 	Key int
 }
@@ -99,7 +94,7 @@ func main() {
 	http.Handle("/", external.Handle(httpHandler))
 	http.HandleFunc("/subscriptions",func(w http.ResponseWriter, r *http.Request){
 		external.WebsocketHandler(w,r,schema)
-	}) 
+	})
 	/*http.HandleFunc("/subscriptions", func(w http.ResponseWriter, r *http.Request) {
 		conn, err := upgrader.Upgrade(w, r, nil)
 		if err != nil {
@@ -161,6 +156,7 @@ func main() {
 					Schema:        schema,
 					RequestString: subscriber.RequestString,
 				})
+				fmt.Println("payload",payload)
 				message, err := json.Marshal(map[string]interface{}{
 					"type":    "data",
 					"id":      subscriber.OperationID,
