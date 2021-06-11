@@ -2,10 +2,12 @@ package external
 
 import (
 	"encoding/json"
+	"fmt"
 	"log"
 	"net/http"
 	"sync"
-	"time"
+
+	// "time"
 
 	"github.com/gorilla/websocket"
 	"github.com/graphql-go/graphql"
@@ -92,8 +94,10 @@ func WebsocketHandler(w http.ResponseWriter, r *http.Request,schema graphql.Sche
 
 	go func() {
 		for {
-			time.Sleep(1 * time.Second)
-			count.Key = count.Key + 1
+			//time.Sleep(1 * time.Second)
+			// count.Key = count.Key + 1
+			SetMessagePublish()
+			GetPublish()
 			subscribers.Range(func(key, value interface{}) bool {
 				subscriber, ok := value.(*Subscriber)
 				if !ok {
@@ -103,6 +107,7 @@ func WebsocketHandler(w http.ResponseWriter, r *http.Request,schema graphql.Sche
 					Schema:        schema,
 					RequestString: subscriber.RequestString,
 				})
+				fmt.Println("payload",payload)
 				message, err := json.Marshal(map[string]interface{}{
 					"type":    "data",
 					"id":      subscriber.OperationID,
