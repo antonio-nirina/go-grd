@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/thoussei/antonio/front-office/ws/interface/routes"
+	"github.com/thoussei/antonio/front-office/ws/interfaces/routes"
 )
 
 
