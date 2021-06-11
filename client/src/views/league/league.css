@@ -29,3 +29,42 @@
 .bg-white{	
 	color: #ffffff;
 }
+.league .tabs-content{
+	margin: 0;
+}
+.league select{
+	background: #101010;
+	color: #ffffff;
+	border: none;
+}
+.league .tab-bloc{
+	border: none;
+}
+.league .tab-league{
+	padding: 20px 16px;
+	border: 1px solid gray;
+    border-radius: 11px;
+}
+.league .tab-bloc th{
+	border: none;
+	color: inherit;
+	border-radius: 0;
+}
+.league .tab-bloc tr:hover{
+	background: #000000;
+	
+}
+.league .tab-bloc td{
+	border-radius: 0;
+}
+.league .tab-bloc td a{
+	background: #f2cf1c;
+	color: #000000;
+}
+.league .filter-bar{
+	background: #403c3c;
+	border-radius: 18px;
+}
+.league tr:nth-child(odd){
+	background: none;
+}
