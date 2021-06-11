@@ -18,6 +18,8 @@ import thumbnail from "../../assets/image/video.png"
 
 import Header from "../header/header"
 import {RootState} from "../../reducer"
+
+import Tchat from "../tchat/tchat"
 import Footer from "../footer/footer"
 import AvatarDefault from "../../assets/image/game-tag.png"
 import Streamer1 from "../../assets/image/streamer1.jpg"
@@ -183,18 +185,25 @@ const Communaute: React.FC = function() {
 	  					</div>
 	  					<div className="forum-container">
 		  					<div className="subjectforum">
-		  						<p>Sujet Forum <i><FontAwesomeIcon icon={faCommentDots} size="xs"/></i></p>
+		  						<p className="underlined">Go Grind <i><FontAwesomeIcon icon={faCommentDots} size="xs"/></i></p>
+		  						<div className="seek">
+		  							<Link to="#">Comment fonctionne GO Grind ?</Link>
+		  							<Link to="#">Comment déposer une requête support ?</Link>
+		  							<Link to="#">Où nous trouver ?</Link>
+		  							<Link to="#">Comment nous contacter ?</Link>
+		  						</div>
 		  					</div>
 		  					<div className="subjectforum">
-		  						<p>Sujet Forum <i><FontAwesomeIcon icon={faCommentDots} size="xs"/></i></p>
+		  						<p>Problème Social <i><FontAwesomeIcon icon={faCommentDots} size="xs"/></i></p>
 		  					</div>
 		  					<div className="subjectforum">
-		  						<p>Sujet Forum <i><FontAwesomeIcon icon={faCommentDots} size="xs"/></i></p>
+		  						<p>Problème de Connexion <i><FontAwesomeIcon icon={faCommentDots} size="xs"/></i></p>
 		  					</div>
 		  				</div>
 	  				</div>
 	  			</div>
-	  		</div>			
+	  		</div>
+	  		<Tchat/> 		
 			<Footer/>
 	  	</div>
 	</div>

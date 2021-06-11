@@ -5,6 +5,7 @@ import {Translation} from "../../lang/translation"
 import {RootState} from "../../reducer"
 import "../../assets/css/style.css"
 import "../game/game.css"
+
 import apexlegends from "../../assets/image/apex-legends.png"
 import fortnite from "../../assets/image/fortnite.png"
 import rainboxsix from "../../assets/image/rainbowsix.png"

@@ -35,6 +35,6 @@ func GetRootFields() graphql.Fields {
 		"updatedUser": 			updatedUser(),
 		"forgotPassword":		forgotPassword(),
 		"updatedPasswordUser": 	updatedPasswordUser(),
-		"updatedAvatar":		updatedAvatar(),	
+		"updatedAvatar":		updatedAvatar(),
 	}
 }

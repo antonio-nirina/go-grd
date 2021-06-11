@@ -4,7 +4,8 @@
 }
 .auto{	
 	width: 90%;
-	margin: auto;		
+	margin: auto;	
+	margin-bottom: 30px;
 }
 .aside-left{
 	width: 250px;	
@@ -72,7 +73,34 @@
 }
 .subjectforum{
 	border-bottom: 1px solid gray;
+	position: relative;
+	height: 37px;
+	transition: 500ms ease-in-out;
+	overflow: hidden;	
 }
+.subjectforum .seek{
+	padding: 12px 5px;	
+	width: 100%;
+	top: 38px;
+}
+
+.subjectforum .seek a{
+	display: block;
+	font-size: 12px;
+	font-style: italic;
+	padding: 5px 0;
+}
+.subjectforum:hover{
+	height: 171px;
+	transition: 500ms ease-in-out;
+	background: #4a4949;
+}
+.subjectforum .underlined{
+	border-bottom: 1px solid gray;	
+	padding-bottom:11px;
+	padding-left: -5px;
+}
+
 .subjectforum:last-child{
 	border-bottom: none;
 }
@@ -137,7 +165,7 @@
 }
 .game-select a {
     display: block;
-    padding: 7px;
+    padding: 7px 0;
     background: #2c2c2c;
     margin-bottom: 2px;
     height: 39px;
@@ -147,7 +175,7 @@
 .game-select a:hover{
 	background: #4a4949;
 	transition: 500ms ease-in-out;
-	height: 171px;
+	height: 171px;	
 }
 .game-bg{	
     margin: auto;
@@ -156,8 +184,7 @@
 }
 .seek{
 	position: absolute;
-    width: 237px;
-    right: -7px;
+    width: 100%;    
     top: 27px;
 }
 /*.bg-cod{	

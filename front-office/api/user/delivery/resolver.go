@@ -28,6 +28,7 @@ type Resolver interface {
 	ForgotResolver(params graphql.ResolveParams) (interface{}, error)
 	UpdatePasswordResolver(params graphql.ResolveParams) (interface{}, error)
 	UpdateAvatarResolver(params graphql.ResolveParams) (interface{}, error)
+	RequestFriendResolver(params graphql.ResolveParams) (interface{}, error)
 }
 
 type resolver struct {
@@ -82,7 +83,8 @@ func (r *resolver) SavedUserResolver(params graphql.ResolveParams) (interface{},
 		IdGameAccount: []game.GameAccount{},
 		Roles: 	roles,
 		TypeConnexion:"site",
-		Created: time.Now().Format(time.RFC3339),		
+		Created: time.Now().Format(time.RFC3339),
+		Friends: []entity.User{},		
 	}
 
 	res, err := r.userHandler.SavedUser(userSaved)

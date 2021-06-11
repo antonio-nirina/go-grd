@@ -47,6 +47,19 @@ func (c *driverRepository) FindOneUser(objectId primitive.ObjectID) (interface{}
 	return result, nil
 }
 
+func (c *driverRepository) FindOneUserById(objectId primitive.ObjectID) (entity.User, error) {
+	var collection = c.client.Database("grd_database").Collection("users")
+	var result entity.User
+
+	err := collection.FindOne(context.TODO(), bson.M{"_id": objectId}).Decode(&result)
+
+	if err != nil {
+		return result, err
+	}
+
+	return result, nil
+}
+
 func (c *driverRepository) FindAllUser() (interface{}, error) {
 	var collection = c.client.Database("grd_database").Collection("users")
 	var results []primitive.M

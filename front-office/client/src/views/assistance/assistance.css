@@ -12,7 +12,7 @@
 	font-family: "Russo One";
 	font-weight: 500;
 	font-size: 30px;
-	color: #f2cf1c;
+	color: #ffffff;
 	float: left;
 	margin-right: 25px;
 
@@ -29,21 +29,23 @@
 .aside-menu{
 	font-family: "Russo One";
 	font-weight: 500;
-	background: #e3e3e3;	
+	background: #333333;	
 	display: table-cell;
 	vertical-align: top;
 	padding: 20px;
 	height: 100%;
+	border-radius: 5px 0px 0px 5px;
 }
 .support{
-	background: #ffffff;	
+	background: #000000;	
 	width: 83.5%;
 	display: table-cell;
 	vertical-align: top;
-	color: #212121;
+	color: #ffffff;
 	font-family: "Russo One";
 	padding: 30px;
 	font-weight: lighter;
+	border-radius: 0px 5px 5px 0px;
 }
 .support p{
 	margin-left: 5px;
@@ -67,14 +69,14 @@
 	color: #f2cf1c;
 }
 .link h3 a{
-	color: #000000;
+	color: #0d0d0d;
 	font-size: 13px;
 	font-weight: lighter;
 
 }
 
 .link li a{
-	color: #26372f;
+	color: #acacac;
 	font-size: 11px;
 
 }
