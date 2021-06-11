@@ -7,6 +7,10 @@ import {RootState} from "../../reducer"
 import gamer from "../../assets/image/game-tag.png"
 import Cropper from "react-easy-crop"
 import Slider from "@material-ui/core/Slider"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faPen } from "@fortawesome/free-solid-svg-icons"
+
+
 
 import AvatarDefault from "../../assets/image/game-tag.png"
 import {UPDATE_AVATAR} from "../../gql/user/mutation"
@@ -53,35 +57,8 @@ const Avatar : React.FC = function() {
 	return (
 		<div className="avatar">
 			<p className="setavatar">
-				
-			<Popup
-				trigger={<button className="btn bg-yellow">Valider</button>}
-				modal
-				nested
-  			>
-				<Cropper
-			      image={gamer}
-			      crop={crop}
-			      zoom={zoom}
-			      aspect={4 / 3}
-			      onCropChange={setCrop}
-			      onCropComplete={onCropComplete}
-			      // onZoomChange={setZoom}
-	    		/>
-	    		<div className="controls">
-			        <Slider
-			          value={zoom}
-			          min={1}
-			          max={3}
-			          step={0.1}
-			          aria-labelledby="Zoom"
-			          // onChange={(e, zoom) => setZoom(zoom)}
-      				 classes={{ root: 'slider' }}
-			        />
-     			</div>
-	    	</Popup>
-    		<button className="bg-white">Annuler</button>
-    		<button className="bg-yellow">Appliquer</button>
+				<img src = {AvatarDefault} />
+			<label htmlFor="setavatar"><FontAwesomeIcon icon={faPen} /></label>
 			<input type="file" id="setavatar" onChange={handleUpload} className="uploadFile" name="file"/>
 			</p>
 			<p className="pseudo"><strong>{userConnectedRedux.user.username}</strong></p>
