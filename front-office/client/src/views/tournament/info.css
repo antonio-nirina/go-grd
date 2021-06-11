@@ -1,0 +1,251 @@
+@charset "UTF-8";
+.info .tabs li{
+	width: 25%;	
+}
+.info .tabs li a{
+	font-weight: bold;
+	font-size: 17px;
+	padding: 15px;
+}
+.info .tabs li a.active{
+	border-bottom: 2px solid #f2cf1d;
+}
+.details{
+	margin-bottom: 15px;
+}
+.details p{
+	text-transform: uppercase;
+	width: 33.333%;
+	display: inline-block;	
+	text-align: right;
+}
+.details p.name-target{
+	text-align: left;
+}
+.details span{
+	color: #f2cf1c;
+
+}
+.banniere{
+	background: url("https://i.ibb.co/Vw39G5b/championship-rl.jpg") top center no-repeat;
+	background-size: 100%;
+	background-position: 50% 50%;
+	height: 250px;
+	width: 100%;
+	border-radius: 15px 15px 0px 0px;
+}
+.txt{
+	padding: 15px;
+	max-width:  650px;
+	border: 1px solid gray;
+	border-radius: 5px;
+	width: 100%;
+	display: inline-block;
+	margin-right: 15px;
+
+}
+.txt strong{
+	font-weight: 700;
+	color: #f2cf1d;
+}
+.txt p{
+	font-size: 15px;
+	margin: 10px;
+}
+.tableau{	
+	max-width: 458px;
+	width: 100%;
+	display: inline-block;
+	vertical-align: top;
+	padding: 15px;
+
+}
+.tableau .state p{
+	text-transform: uppercase;
+	font-size: 40px;
+	text-align: center;
+	display: inline-block;	
+	max-width: 106px;
+    width: 100%;
+}
+.tableau .state p span{	
+	font-size: 14px;
+	display: block;
+	background: #1b1d26;
+	padding: 10px;
+}
+.info-target{
+	margin-top: 15px;
+	border-bottom: 1px solid;
+}
+.info-target p{
+	text-transform: uppercase;		
+	padding: 15px 5px; ;
+	float: left;
+	width: 40%;
+	text-align: left;
+	margin: 0;
+}
+.info-target span{
+	text-transform: initial;
+	display: inline-block;
+	text-align: right;
+	width: 60%;	
+	padding: 15px 0;
+	font-size: 16px;
+}
+.line{
+	border-bottom: 1px solid #ffffff;
+}
+.line:last-child{
+	border:none;
+}
+.confirm{
+	color: #f2cf1d;
+}
+/****************Matches*******************/
+.matches h2{
+	padding: 15px;
+}
+.matches{	
+	
+	border-radius: 5px;
+	width: 100%;
+	display: inline-block;
+	margin-right: 15px;
+}
+.matches table{
+	border-collapse: collapse;
+	width: 100%;
+}
+.matches p{
+	font-size: 15px;
+	margin: 10px;
+}
+.matches strong{
+	font-weight: 700;
+	color: #f2cf1d;
+}
+.matches td{	
+	
+}
+.matches .schedule{
+	/*width: 43%;*/
+	padding-left: 15px;
+}
+.matches .about-team{
+	text-align: center;
+}
+.matches .vs{
+	color: #f2cf1d;
+	font-weight: bold;
+	/*width: 12%;*/
+	text-align: center;
+}
+.matches span{
+	font-weight: 700;
+}
+.matches span img{
+	border: 2px solid #f2cf1d;	
+	border-radius: 50%;
+}
+.matches .versus span{	
+	display: inline-block;
+	padding: 10px;
+	vertical-align: middle;	
+}
+.matches tr:nth-child(even){
+	background: #101010;
+}
+.matches tr:nth-child(odd){
+	background: #2c2c2c;
+}
+/****************Teams*******************/
+.teams h2{
+	padding: 15px;
+}
+.teams table{
+	border-collapse: collapse;
+}
+.teams table th{
+	padding: 15px 0;
+}
+.teams table td{
+	width: 246px;    
+    text-align: center;
+    padding: 15px;
+    vertical-align: middle;
+}
+.teams td img{
+	border: 2px solid #f2cf1d;
+    border-radius: 50%;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 5px;
+}
+.score{
+	max-width: 300px;
+	background: #2c2c2c;
+	width: 100%;
+	margin: 15px 0px;
+	border-radius: 5px;
+	display: inline-block;
+	vertical-align: middle;
+}
+.score th{
+	font-size: 25px;
+}
+.score i{
+	display: block;	
+}
+.score i svg{
+	width: 30px !important;
+	height: 50px !important;
+}
+.score table th{
+	padding: 15px;
+}
+.score table tr{
+	background: inherit;
+}
+.score .win svg, .score .win{
+	color: #96b900;
+}
+.score .win, .score .lose{
+	background: #373535;	
+}
+.score .lose svg, .score .lose{
+	color: #cf0023;
+}
+
+tr:nth-child(even){
+	background: #101010;
+}
+tr:nth-child(odd){
+	background: #2c2c2c;
+}
+.rating{
+	max-width: 250px;
+	width: 100%;
+	text-align: center;
+	display: inline-block;
+}
+.numb{
+	display: inline-block;
+	margin-right: 15px;
+	font-weight: bold;	
+	padding: 15px;
+}
+
+.numb span{
+	font-size: 25px;
+}
+.onshow{
+	display: block;
+}
+.onhide{
+	display: none;
+}
+.pointer{
+	cursor: pointer;
+}
