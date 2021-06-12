@@ -8,12 +8,13 @@ import (
 
 	"github.com/go-redis/redis/v8"
 	"github.com/gorilla/mux"
-	"github.com/gorilla/websocket"
 	"github.com/joho/godotenv"
+
+	"github.com/rs/cors"
 	"github.com/thoussei/antonio/front-office/ws/user/controller"
 )
 
-func Route()  {
+func Route() {
 	err := godotenv.Load()
 	
 	if err != nil {
@@ -24,7 +25,17 @@ func Route()  {
 	rdb := redis.NewClient(&redis.Options{Addr: host})
 	
 	r := mux.NewRouter()
-	r.Path("/counter").Methods("GET").HandlerFunc(func(w http.ResponseWriter, r *http.Request){
+	r.HandleFunc("/",func(w http.ResponseWriter, r *http.Request){
+		fmt.Println("msg")
 		controller.NotificationCounter(w,r,rdb)
-	})
+	}).Methods("GET")
+
+	c := cors.New(cors.Options{
+        AllowedOrigins: []string{"*"},
+        AllowCredentials: true,
+    })
+
+	handler := c.Handler(r)
+    fmt.Println("ready: listening 8080")
+	http.ListenAndServe(":8080", handler)
 }

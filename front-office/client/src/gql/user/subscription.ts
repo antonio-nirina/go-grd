@@ -7,3 +7,13 @@ export const COUNT_SUBSCRIBE = gql`
 		}
 	}
 `
+
+
+export const HELLO_SUBSCRIBE = gql`
+	subscription helloSaid {
+		helloSaid{
+			id
+    		msg
+		}
+	}
+`

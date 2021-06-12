@@ -2,12 +2,12 @@ package subscription
 
 import (
 	"github.com/graphql-go/graphql"
-	"github.com/thoussei/antonio/main/front-office/api/config"
-	"github.com/thoussei/antonio/main/front-office/api/external"
-	"github.com/thoussei/antonio/main/front-office/api/graphql/types"
-	"github.com/thoussei/antonio/main/front-office/api/user/delivery"
-	"github.com/thoussei/antonio/main/front-office/api/user/handler"
-	"github.com/thoussei/antonio/main/front-office/api/user/repository"
+	"github.com/thoussei/antonio/front-office/api/config"
+	"github.com/thoussei/antonio/front-office/api/external"
+	"github.com/thoussei/antonio/front-office/api/graphql/types"
+	"github.com/thoussei/antonio/front-office/api/user/delivery"
+	"github.com/thoussei/antonio/front-office/api/user/handler"
+	"github.com/thoussei/antonio/front-office/api/user/repository"
 )
 
 var count = &external.Counter{}
@@ -29,8 +29,6 @@ func subscribeCounter() *graphql.Field {
 		Type: types.CountType,
 		Description: "subscribeCounter",
 		Resolve: func(p graphql.ResolveParams) (interface{}, error) {
-			external.GetPublish()
-			// fmt.Println("countxxxx")
 			return count, nil
 		},
 	}

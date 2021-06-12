@@ -5,11 +5,11 @@ import (
 	"fmt"
 
 
-	"github.com/thoussei/antonio/main/front-office/api/games/entity"
+	"github.com/thoussei/antonio/front-office/api/games/entity"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
-	"github.com/thoussei/antonio/main/front-office/api/external"
+	"github.com/thoussei/antonio/front-office/api/external"
 )
 
 // Return Interface User Repository

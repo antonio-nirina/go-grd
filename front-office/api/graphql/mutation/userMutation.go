@@ -2,7 +2,7 @@ package mutation
 
 import (
 	"github.com/graphql-go/graphql"
-	"github.com/thoussei/antonio/main/front-office/api/graphql/types"
+	"github.com/thoussei/antonio/front-office/api/graphql/types"
 )
 
 var inputType = graphql.NewInputObject(

@@ -11,10 +11,10 @@ import (
 	"github.com/graphql-go/graphql"
 	"github.com/joho/godotenv"
 	uuid "github.com/satori/go.uuid"
-	"github.com/thoussei/antonio/main/front-office/api/external"
-	game "github.com/thoussei/antonio/main/front-office/api/games/entity"
-	"github.com/thoussei/antonio/main/front-office/api/user/entity"
-	"github.com/thoussei/antonio/main/front-office/api/user/handler"
+	"github.com/thoussei/antonio/front-office/api/external"
+	game "github.com/thoussei/antonio/front-office/api/games/entity"
+	"github.com/thoussei/antonio/front-office/api/user/entity"
+	"github.com/thoussei/antonio/front-office/api/user/handler"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 

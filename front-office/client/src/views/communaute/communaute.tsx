@@ -24,13 +24,14 @@ import Footer from "../footer/footer"
 import AvatarDefault from "../../assets/image/game-tag.png"
 import Streamer1 from "../../assets/image/streamer1.jpg"
 import "./communaute.css"
-import {COUNT_SUBSCRIBE} from "../../gql/user/subscription"
-
+// import {COUNT_SUBSCRIBE} from "../../gql/user/subscription"
+import {HELLO_SUBSCRIBE} from "../../gql/user/subscription"
 
 const Communaute: React.FC = function() {
 	const userConnectedRedux 	= useSelector((state:RootState) => state.userConnected)
-	const {loading,error,data}  = useSubscription(COUNT_SUBSCRIBE)
+	const {loading,error,data}  = useSubscription(HELLO_SUBSCRIBE)
 	useMemo(() => {
+		console.log("data", data)
 		if(!loading && !error && data) console.log("data", data)
 	},[loading,error,data])
   return(

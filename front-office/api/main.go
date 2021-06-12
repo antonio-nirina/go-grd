@@ -1,16 +1,19 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
+	"log"
 	"net/http"
 	"sync"
+	"time"
 
 	"github.com/gorilla/websocket"
 	"github.com/graphql-go/graphql"
 	"github.com/graphql-go/handler"
-	"github.com/thoussei/antonio/main/front-office/api/external"
-	"github.com/thoussei/antonio/main/front-office/api/graphql/mutation"
-	"github.com/thoussei/antonio/main/front-office/api/graphql/queries"
+	"github.com/thoussei/antonio/front-office/api/external"
+	"github.com/thoussei/antonio/front-office/api/graphql/mutation"
+	"github.com/thoussei/antonio/front-office/api/graphql/queries"
 )
 
 type counter struct {
@@ -44,14 +47,14 @@ var CountType = graphql.NewObject(graphql.ObjectConfig{
 var subscribers sync.Map
 
 func main() {
-	/*var upgrader = websocket.Upgrader{
+	var upgrader = websocket.Upgrader{
 		ReadBufferSize:  1024,
 		WriteBufferSize: 1024,
 		CheckOrigin: func(r *http.Request) bool {
 			return true
 		},
 		Subprotocols: []string{"graphql-ws"},
-	}*/
+	}
 
 	var count = &counter{}
 	schemaConfig := graphql.SchemaConfig{
@@ -92,10 +95,10 @@ func main() {
 	})
 
 	http.Handle("/", external.Handle(httpHandler))
-	http.HandleFunc("/subscriptions",func(w http.ResponseWriter, r *http.Request){
+	/*http.HandleFunc("/subscriptions",func(w http.ResponseWriter, r *http.Request){
 		external.WebsocketHandler(w,r,schema)
-	})
-	/*http.HandleFunc("/subscriptions", func(w http.ResponseWriter, r *http.Request) {
+	})*/
+	http.HandleFunc("/subscriptions", func(w http.ResponseWriter, r *http.Request) {
 		conn, err := upgrader.Upgrade(w, r, nil)
 		if err != nil {
 			log.Printf("failed to do websocket upgrade: %v", err)
@@ -177,7 +180,7 @@ func main() {
 				return true
 			})
 		}
-	}()*/
+	}()
 	fmt.Println("ready: listening 4000")
 	http.ListenAndServe(":4000", nil)
 }

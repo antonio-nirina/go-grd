@@ -1,7 +1,7 @@
 package repository
 
 import (
-	"github.com/thoussei/antonio/main/front-office/api/user/entity"
+	"github.com/thoussei/antonio/front-office/api/user/entity"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 

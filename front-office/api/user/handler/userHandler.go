@@ -11,9 +11,9 @@ import (
 
 	"github.com/joho/godotenv"
 	uuid "github.com/satori/go.uuid"
-	"github.com/thoussei/antonio/main/front-office/api/external"
-	"github.com/thoussei/antonio/main/front-office/api/user/entity"
-	"github.com/thoussei/antonio/main/front-office/api/user/repository"
+	"github.com/thoussei/antonio/front-office/api/external"
+	"github.com/thoussei/antonio/front-office/api/user/entity"
+	"github.com/thoussei/antonio/front-office/api/user/repository"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 

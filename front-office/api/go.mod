@@ -1,4 +1,4 @@
-module github.com/thoussei/antonio/main/front-office/api
+module github.com/thoussei/antonio/front-office/api
 
 go 1.14
 

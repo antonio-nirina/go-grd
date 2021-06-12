@@ -1,7 +1,7 @@
 package handler
 
 import (
-	"github.com/thoussei/antonio/main/front-office/api/games/entity"
+	"github.com/thoussei/antonio/front-office/api/games/entity"
 )
 
 type UsecaseGameInterface  interface {

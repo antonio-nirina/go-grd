@@ -1,7 +1,7 @@
 package handler
 
 import (
-	"github.com/thoussei/antonio/main/front-office/api/user/entity"
+	"github.com/thoussei/antonio/front-office/api/user/entity"
 )
 
 func (u *userUsecase)AddFriend(req *entity.Friends) (interface{}, error) {

@@ -14,7 +14,7 @@ import (
 	"path/filepath"
 	"runtime"
 
-	"github.com/thoussei/antonio/main/front-office/api/external"
+	"github.com/thoussei/antonio/front-office/api/external"
 )
 
 type FileUpload struct {
