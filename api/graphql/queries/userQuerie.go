@@ -36,7 +36,7 @@ func GetAccessTokenXbox() *graphql.Field {
 
 func GetProfilUserXbox() *graphql.Field{
 	return &graphql.Field{
-		Type:        types.XboxProfilSchemaType,
+		Type:        types.UserSchemaType,
 		Description: "Get profil user xbox",
 		Args: graphql.FieldConfigArgument{
 			"accessToken": &graphql.ArgumentConfig{
@@ -60,5 +60,18 @@ func GetAllFriends() *graphql.Field{
 		},
 		
 		Resolve: UserRolve.GetAllFriendsUser,
+	}
+}
+
+func GetUsers() *graphql.Field{
+	return &graphql.Field{
+		Type:        graphql.NewList(types.UserSchemaType),
+		Description: "Get user all",
+		Args: graphql.FieldConfigArgument{
+			"idUserConnected": &graphql.ArgumentConfig{
+				Type: graphql.String,
+			},
+		},
+		Resolve: UserRolve.GetAllUser,
 	}
 }

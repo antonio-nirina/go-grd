@@ -13,12 +13,6 @@ import (
 	"github.com/thoussei/antonio/front-office/api/user/entity"
 )
 
-type query struct {
-	Id string `json:"id"`
-	Email string `json:"email"`
-	Username string `json:"username"`
-}
-
 func (u *userUsecase)AddFriend(req *entity.Friends) (interface{}, error) {
 	result, err := u.userRepository.AddFriend(req)
 
@@ -34,27 +28,35 @@ func (u *userUsecase)NotifUserSender(user *entity.User) (interface{}, error) {
 	if err != nil {
 		return nil,err
 	}
-	
-	// query := &query{user.Uid.String(),user.Email,user.Username}
-	//req, _ := json.Marshal(query)
-	// string(req)
-	req := ":{NotifiUser(user:{"+user.Uid.String()+","+user.Email+","+user.Username+"}){username,email,id"
-	jsonData := make(map[string]string)
-	jsonData["query"] = req
+
+	queryStr := `
+	{ 
+		NotifiUser(user:{id:"",email:"%s",username:"%s"}) {
+			email,
+		}
+	}
+	`
+	queryN := fmt.Sprintf(queryStr,user.Email,user.Username)
+	jsonData := map[string]string{
+		"query":queryN,
+	}
+
 	uri := os.Getenv("URI_SUBSCRIPTION")
-    jsonValue, _ := json.Marshal(jsonData)
+	jsonValue, _ := json.Marshal(jsonData)
     request, err := http.NewRequest("POST",uri, bytes.NewBuffer(jsonValue))
+	request.Header.Set("Content-Type", "application/json")
     client := &http.Client{Timeout: time.Second * 10}
     resp, err := client.Do(request)
 	
 	if err != nil {
-		fmt.Println(err)
+		fmt.Println("errr",err)
         return nil,err
     }
 
     defer resp.Body.Close()
+	fmt.Println("cde", resp.StatusCode)
     data, _ := ioutil.ReadAll(resp.Body)
-    fmt.Println(string(data))
+    fmt.Println("data",string(data))
 
 	return "",nil
 }

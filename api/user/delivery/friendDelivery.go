@@ -2,9 +2,10 @@ package delivery
 
 import (
 	"errors"
-	"fmt"
 
 	"github.com/graphql-go/graphql"
+	"github.com/thoussei/antonio/front-office/api/user/entity"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
 type Friends struct {
@@ -17,7 +18,6 @@ type Friends struct {
 	IsBanned bool 	`json:"isBanned"`
 	Count int 			`json:count`
 }
-
 
 
 func (r *resolver) RequestFriendResolver(params graphql.ResolveParams) (interface{}, error){
@@ -35,7 +35,6 @@ func (r *resolver) RequestFriendResolver(params graphql.ResolveParams) (interfac
 		return nil, err
 	}
 
-	/*
 	friend := &entity.Friends{
 		Uid: primitive.NewObjectID(),
 		Request:resRequest,
@@ -44,8 +43,7 @@ func (r *resolver) RequestFriendResolver(params graphql.ResolveParams) (interfac
 	}
 
 	_, err = r.userHandler.AddFriend(friend)
-	*/
-	fmt.Println(resRequest)
+
 	_, err = r.userHandler.NotifUserSender(&resSender)
 
 	if err != nil {
