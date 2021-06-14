@@ -1,4 +1,7 @@
 @charset "UTF-8";
+.popup-content{
+	background: #1f1f1f !important;
+}
 .communaute{
 	padding-top: 30px;
 }
@@ -44,7 +47,7 @@
 }
 
 .aside-right p, .aside-right span{
-	font-size: 12px;
+	font-size: 13px;
 }
 .aside-right p{
 	
@@ -67,7 +70,7 @@
 
 }
 
-.aside-right .friend-list, .aside-right .subjectforum{
+.aside-right .subjectforum{
 	background: #2c2c2c;
 	padding: 5px 5px;
 }
@@ -277,3 +280,37 @@
 .forum-container{
 	margin-top: 15px;
 }
+.friend-list{
+	background: #2c2c2c;
+}
+.friend-list span.title{
+	display: block;
+}
+.friend-list p{
+	padding: 10px;	
+}
+.friend-list p.title{	
+	border-bottom: 1px solid gray;
+	text-transform: uppercase;
+}
+.friend-list p.search-friends:hover{
+	background: #4a4949;
+}
+.friend-list p.search-friends span{
+	font-size: 15px;
+}
+.friend-list p.search-friends svg{
+	font-size: 14px;
+}
+.avatar-found{
+	width: 57px;
+	height: 57px;
+	border: 1px solid gray;
+	border-radius: 50%;
+}
+.bar-title{
+	font-size: 14px;
+	text-transform: uppercase;
+	text-align: center;
+}
+
