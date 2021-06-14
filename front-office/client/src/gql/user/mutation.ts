@@ -45,3 +45,9 @@ export const UPDATE_AVATAR = gql`
 		}
 	}
 `
+
+export const INCOMING_FRIENDS = gql`
+	mutation requestFriend($idRequest:String,$idSender:String) {
+		requestFriend(idRequest:$idRequest,idSender:$idSender)
+	}
+`

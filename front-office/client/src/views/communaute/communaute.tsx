@@ -1,45 +1,43 @@
 import React,{useMemo} from "react"
 import { Link } from 'react-router-dom'
 import { useSelector } from "react-redux"
-import {useSubscription} from "@apollo/client"
+import {useSubscription,useMutation} from "@apollo/client"
 
-import { faPlus, faCommentDots, faEye } from "@fortawesome/free-solid-svg-icons"
+import { faEye } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {Translation} from "../../lang/translation"
 import warzone from "../../assets/image/warzone-.png"
-import warzoneLogo from "../../assets/image/warzone.png"
 import warz from "../../assets/image/warz.jpg"
 import championship from "../../assets/image/championship.jpeg"
 import fortnite1 from "../../assets/image/fortnite.jpg"
-import rocketleague from "../../assets/image/rocketleague.png"
-import fortnite from "../../assets/image/fortnite.png"
 import rlchampionsip from "../../assets/image/rlchampionsip.png"
-import thumbnail from "../../assets/image/video.png"
+
 
 import Header from "../header/header"
 import {RootState} from "../../reducer"
 
 import Tchat from "../tchat/tchat"
 import Footer from "../footer/footer"
-import AvatarDefault from "../../assets/image/game-tag.png"
+
 import Streamer1 from "../../assets/image/streamer1.jpg"
 import "./communaute.css"
-// import {COUNT_SUBSCRIBE} from "../../gql/user/subscription"
-import {HELLO_SUBSCRIBE} from "../../gql/user/subscription"
+import {COUNT_SUBSCRIBE} from "../../gql/user/subscription"
+import {INCOMING_FRIENDS} from "../../gql/user/mutation"
+import Friend from "./friends"
 
 const Communaute: React.FC = function() {
 	const userConnectedRedux 	= useSelector((state:RootState) => state.userConnected)
-	const {loading,error,data}  = useSubscription(HELLO_SUBSCRIBE)
+	const {loading,error,data}  = useSubscription(COUNT_SUBSCRIBE)
+	const [requestFriend] 		= useMutation(INCOMING_FRIENDS)
 	useMemo(() => {
-		console.log("data", data)
 		if(!loading && !error && data) console.log("data", data)
 	},[loading,error,data])
   return(
 	<div className="communaute">
 	    <div className="container">
-	  		<Header/>	  	
+	  		<Header/>
 	  		<div className="main">
-	  			<div className="auto">	  				
+	  			<div className="auto">
 	  				<div className="aside-left">
 	  					<div className="game-select">
 	  						<Link to="#">
@@ -93,10 +91,10 @@ const Communaute: React.FC = function() {
 				  				</div>
 				  			</Link>
 		  				</div>
-	  				</div>	  				
+	  				</div>
 	  				<div className="center-block">
 	  					<h2>Fil d'actualité</h2>
-	  					<div className="actuality">	  						
+	  					<div className="actuality">
 							<h3>
 							{
 								Object.keys(userConnectedRedux.user).length > 0 ?
@@ -131,7 +129,7 @@ const Communaute: React.FC = function() {
 										</div>
 		             				</div>
 		             			</Link>
-           					</div>           				
+           					</div>
 	           				<Link to="/">
 		            			<div className="article">
 		          					<img src={rlchampionsip} alt="" />
@@ -155,56 +153,14 @@ const Communaute: React.FC = function() {
 											}
 										</div>
 		          					</div>
-		            			</div>         				
+		            			</div>
 	         				</Link>
-         				</div>         				        			
+         				</div>
 	  				</div>
-	  				<div className="aside-right">
-	  					<div className="friend-list">
-	  						<p>
-	  							<img src={AvatarDefault} className="friend-avatar"/>	  						
-	  							<span>NomAmi<i className="u-connected"></i></span>
-	  							<i><FontAwesomeIcon icon={faCommentDots} size="xs"/></i>
-	  							<i className="rect"><FontAwesomeIcon icon={faPlus} size="xs"/></i>
-	  						</p>
-	  					</div>
-	  					<div className="friend-list">
-	  						<p>
-	  							<img src={AvatarDefault} className="friend-avatar"/>	  						
-	  							<span>NomAmi<i className="u-disconnected"></i></span>
-	  							<i><FontAwesomeIcon icon={faCommentDots} size="xs"/></i>
-	  							<i className="rect"><FontAwesomeIcon icon={faPlus} size="xs"/></i>
-	  						</p>
-	  					</div>
-	  					<div className="friend-list noborder">
-	  						<p>
-	  							<img src={AvatarDefault} className="friend-avatar"/>	  						
-	  							<span>NomAmi<i className="u-connected"></i></span>
-	  							<i><FontAwesomeIcon icon={faCommentDots} size="xs"/></i>
-	  							<i className="rect"><FontAwesomeIcon icon={faPlus} size="xs"/></i>
-	  						</p>
-	  					</div>
-	  					<div className="forum-container">
-		  					<div className="subjectforum">
-		  						<p className="underlined">Go Grind <i><FontAwesomeIcon icon={faCommentDots} size="xs"/></i></p>
-		  						<div className="seek">
-		  							<Link to="#">Comment fonctionne GO Grind ?</Link>
-		  							<Link to="#">Comment déposer une requête support ?</Link>
-		  							<Link to="#">Où nous trouver ?</Link>
-		  							<Link to="#">Comment nous contacter ?</Link>
-		  						</div>
-		  					</div>
-		  					<div className="subjectforum">
-		  						<p>Problème Social <i><FontAwesomeIcon icon={faCommentDots} size="xs"/></i></p>
-		  					</div>
-		  					<div className="subjectforum">
-		  						<p>Problème de Connexion <i><FontAwesomeIcon icon={faCommentDots} size="xs"/></i></p>
-		  					</div>
-		  				</div>
-	  				</div>
+	  				<Friend />
 	  			</div>
 	  		</div>
-	  		<Tchat/> 		
+	  		<Tchat/>
 			<Footer/>
 	  	</div>
 	</div>

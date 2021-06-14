@@ -115,7 +115,7 @@ const Header: React.FC = function() {
                     <div className="gametag">
                         <div className="itemsTag">
                             <div className="bg-gametag">
-                                <p><img src={userConnectedRedux.user ? userConnectedRedux.user.avatar : avatar} className="avatar"/></p>
+                                <p><img src={userConnectedRedux.user && userConnectedRedux.user.avatar ? userConnectedRedux.user.avatar : avatar} className="avatar"/></p>
                                 <p className="user">{userConnectedRedux.user.username}</p>
                                 <p className="user-setting">
 									<><img src={ps} className="itemTag" alt="" width="18" height="14"/></>

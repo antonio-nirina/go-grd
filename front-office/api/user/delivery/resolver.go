@@ -29,6 +29,7 @@ type Resolver interface {
 	UpdatePasswordResolver(params graphql.ResolveParams) (interface{}, error)
 	UpdateAvatarResolver(params graphql.ResolveParams) (interface{}, error)
 	RequestFriendResolver(params graphql.ResolveParams) (interface{}, error)
+	GetAllFriendsUser(params graphql.ResolveParams) (interface{}, error)
 }
 
 type resolver struct {

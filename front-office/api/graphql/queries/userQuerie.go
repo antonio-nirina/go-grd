@@ -47,3 +47,18 @@ func GetProfilUserXbox() *graphql.Field{
 		Resolve: UserRolve.GetXboxProfil,
 	}
 }
+
+
+func GetAllFriends() *graphql.Field{
+	return &graphql.Field{
+		Type:        graphql.NewList(types.FriendType),
+		Description: "Get friends user all",
+		Args: graphql.FieldConfigArgument{
+			"email": &graphql.ArgumentConfig{
+				Type: graphql.String,
+			},
+		},
+		
+		Resolve: UserRolve.GetAllFriendsUser,
+	}
+}
