@@ -2,7 +2,7 @@ package mutation
 
 import (
 	"github.com/graphql-go/graphql"
-	"github.com/thoussei/antonio/main/front-office/api/graphql/types"
+	"github.com/thoussei/antonio/front-office/api/graphql/types"
 )
 
 var inputType = graphql.NewInputObject(
@@ -150,5 +150,21 @@ func updatedAvatar() *graphql.Field {
 		Description: "Update avatar",
 		Args: argsAvatar,
 		Resolve: UserRolve.UpdateAvatarResolver,
+	}
+}
+
+func requestFriend() *graphql.Field {
+	return &graphql.Field{
+		Type:        graphql.String,
+		Description: "Request friends",
+		Args: graphql.FieldConfigArgument{
+			"idRequest": &graphql.ArgumentConfig{
+				Type: graphql.String,
+			},
+			"idSender": &graphql.ArgumentConfig{
+				Type: graphql.String,
+			},			
+		},			
+		Resolve: UserRolve.RequestFriendResolver,
 	}
 }

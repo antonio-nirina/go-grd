@@ -4,8 +4,8 @@ import (
 	"errors"
 
 	"github.com/graphql-go/graphql"
-	"github.com/thoussei/antonio/main/front-office/api/games/entity"
-	"github.com/thoussei/antonio/main/front-office/api/games/handler"
+	"github.com/thoussei/antonio/front-office/api/games/entity"
+	"github.com/thoussei/antonio/front-office/api/games/handler"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 

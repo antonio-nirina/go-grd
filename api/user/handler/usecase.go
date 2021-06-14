@@ -1,7 +1,7 @@
 package handler
 
 import (
-	"github.com/thoussei/antonio/main/front-office/api/user/entity"
+	"github.com/thoussei/antonio/front-office/api/user/entity"
 )
 
 type Usecase interface {
@@ -17,4 +17,5 @@ type Usecase interface {
 	UpdateAvatar(user entity.User,avatar string,typeFile string) (interface{}, error)
 	FindOneUserById(idQuery string) (entity.User, error)
 	AddFriend(req *entity.Friends) (interface{}, error)
+	NotifUserSender(user *entity.User) (interface{}, error)
 }

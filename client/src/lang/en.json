@@ -138,5 +138,8 @@
 		"clipMonth":"Clip of the month",
 		"shop":"Shop",
 		"result":"My results"
+	},
+	"communauty":{
+		"friend":"have not friends"
 	}
 }

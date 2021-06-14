@@ -150,6 +150,9 @@
 		"tech": "Nos techniciens à votre écoute",
 		"wireless": "Rejoignez nos réseaux sociaux pour discuter avec nos techniciens en direct",
 		"request": "Comment déposer une requête support ?"
+	},
+	"communauty":{
+		"friend":"n’a encore aucun ami"
 	}
 
 }

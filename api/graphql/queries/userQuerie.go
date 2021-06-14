@@ -2,7 +2,7 @@ package queries
 
 import (
 	"github.com/graphql-go/graphql"
-	"github.com/thoussei/antonio/main/front-office/api/graphql/types"
+	"github.com/thoussei/antonio/front-office/api/graphql/types"
 )
 
 
@@ -45,5 +45,20 @@ func GetProfilUserXbox() *graphql.Field{
 		},
 		
 		Resolve: UserRolve.GetXboxProfil,
+	}
+}
+
+
+func GetAllFriends() *graphql.Field{
+	return &graphql.Field{
+		Type:        graphql.NewList(types.FriendType),
+		Description: "Get friends user all",
+		Args: graphql.FieldConfigArgument{
+			"email": &graphql.ArgumentConfig{
+				Type: graphql.String,
+			},
+		},
+		
+		Resolve: UserRolve.GetAllFriendsUser,
 	}
 }

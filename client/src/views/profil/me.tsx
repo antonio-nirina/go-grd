@@ -75,12 +75,12 @@ const Me : React.FC = function() {
 								defaultValue={userConnectedRedux.user.username}
 							/>
 							<strong><label htmlFor="first">Prénom</label></strong>
-							<input type="text" id="first" 
+							<input type="text" id="first"
 								defaultValue={userConnectedRedux.user.firstname}
 								{...register("firstname")} name="firstname"
 							/>
 							<strong><label htmlFor="last">Nom</label></strong>
-							<input type="text" id="last" 
+							<input type="text" id="last"
 								{...register("lastname")} name="lastname"
 								defaultValue={userConnectedRedux.user.lastname}
 							/>
@@ -104,17 +104,17 @@ const Me : React.FC = function() {
 								</select>
 							</div>
 							<div className="lang-container">
-								<div className="lang-setting">									
+								<div className="lang-setting">
 									<div className="lgdrpdwn">
-										<strong><label htmlFor="lang">Choix de langue</label></strong>										
+										<strong><label htmlFor="lang">Choix de langue</label></strong>
 										<select id="lang" onChange={onChangeLanguage}>
-											<option>FR</option>
-											<option>EN</option>
+											<option value="0">FR</option>
+											<option value="1">EN</option>
 										</select>
 									</div>
-								</div>								
-							</div>				
-										
+								</div>
+							</div>
+
 						</div>
 						<div className="btn-container">
 							<button className="btn bg-yellow mg15">
@@ -124,7 +124,7 @@ const Me : React.FC = function() {
 							Translation("fr").profil.validate}
 							</button>
 						</div>
-					</form>					
+					</form>
 				</div>
 			</div>
 		</div>

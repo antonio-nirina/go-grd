@@ -1,4 +1,4 @@
-import React,{useMemo, useState, useCallback, Component, useEffect} from "react"
+import React,{useMemo, useState, useEffect} from "react"
 import { Widget, addResponseMessage } from 'react-chat-widget'
 
 
@@ -24,7 +24,7 @@ const Tchat: React.FC = function() {
   	}, []);
 
    const handleNewUserMessage = () => {
-    
+
   	};
 	const userConnectedRedux 	= useSelector((state:RootState) => state.userConnected)
 	const {loading,error,data}  = useSubscription(COUNT_SUBSCRIBE)

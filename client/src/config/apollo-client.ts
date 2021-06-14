@@ -3,12 +3,13 @@ import { setContext } from '@apollo/client/link/context'
 import { getMainDefinition } from '@apollo/client/utilities'
 import { WebSocketLink } from "@apollo/client/link/ws"
 
+
+
 const httpLink = new HttpLink({
 	uri: `http://localhost:4000`,
 })
-
 const wsLink = new WebSocketLink({
-	uri: 'ws://localhost:4000/subscriptions',
+	uri: 'ws://localhost:8080/subscriptions',
 	options: {
 	  reconnect: true
 	}

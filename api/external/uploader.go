@@ -13,8 +13,6 @@ import (
 	"os"
 	"path/filepath"
 	"runtime"
-
-	"github.com/antonio-nirina/go-grd/api/external"
 )
 
 type FileUpload struct {
@@ -100,7 +98,7 @@ func (f *FileUpload) SenderFile() (string, error) {
 		fileBbImg := &ImgBB{}
 		err = json.Unmarshal(body, fileBbImg)
 		if err != nil {
-			external.Logger(fmt.Sprintf("%v", err))
+			Logger(fmt.Sprintf("%v", err))
 		}
 
 		return fileBbImg.Data.Url, nil

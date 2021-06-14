@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 
 	"github.com/graphql-go/graphql"
-	"github.com/thoussei/antonio/main/front-office/api/user/entity"
+	"github.com/thoussei/antonio/front-office/api/user/entity"
 )
 
 

@@ -1,14 +1,14 @@
 package queries
 
 import (
-	"github.com/thoussei/antonio/main/front-office/api/config"
-	"github.com/thoussei/antonio/main/front-office/api/user/delivery"
-	"github.com/thoussei/antonio/main/front-office/api/user/handler"
-	"github.com/thoussei/antonio/main/front-office/api/user/repository"
+	"github.com/thoussei/antonio/front-office/api/config"
+	"github.com/thoussei/antonio/front-office/api/user/delivery"
+	"github.com/thoussei/antonio/front-office/api/user/handler"
+	"github.com/thoussei/antonio/front-office/api/user/repository"
 
-	gameDelivery "github.com/thoussei/antonio/main/front-office/api/games/delivery"
-	gameHandler "github.com/thoussei/antonio/main/front-office/api/games/handler"
-	gameRepo "github.com/thoussei/antonio/main/front-office/api/games/repository"
+	gameDelivery "github.com/thoussei/antonio/front-office/api/games/delivery"
+	gameHandler "github.com/thoussei/antonio/front-office/api/games/handler"
+	gameRepo "github.com/thoussei/antonio/front-office/api/games/repository"
 
 	"github.com/graphql-go/graphql"
 )
@@ -37,5 +37,6 @@ func GetRootFields() graphql.Fields {
 		"FindAllPlateform": GetAllPlateformQuery(),
 		"GetAccessTokenXbox": GetAccessTokenXbox(),
 		"GetProfilUserXbox": GetProfilUserXbox(),
+		"GetAllFriends": 	 GetAllFriends(),
 	}
 }

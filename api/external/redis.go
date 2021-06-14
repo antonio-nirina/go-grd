@@ -29,7 +29,6 @@ func init() {
 	}
 
 	var host = fmt.Sprintf("%s:%s",os.Getenv("HOST_REDIS"),os.Getenv("PORT_REDIS"))
-	fmt.Println(host)
 	Rdb = redis.NewClient(&redis.Options{
 		Addr:     host,
 		Password: "", // no password set
