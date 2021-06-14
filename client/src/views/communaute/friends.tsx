@@ -77,23 +77,89 @@ const Friend: React.FC = function() {
 													<div className="found">
 														<p>
 															<img src={AvatarDefault} className="avatar-found"/>
-															<span>ProfilName</span>
-															<button>
+															<span className="profil-name">Name</span>
+															<button className="btn bg-yellow">
 																<i className="rect"><FontAwesomeIcon icon={faUserPlus} size="xs"/></i>
 																<span>Ajouter</span>
 															</button>
 														</p>
 														<p>
 															<img src={AvatarDefault} className="avatar-found"/>
-															<span>ProfilName</span>
-															<button>
+															<span className="profil-name">Name</span>
+															<button className="btn bg-yellow">
 																<i className="rect"><FontAwesomeIcon icon={faUserPlus} size="xs"/></i>
 																<span>Ajouter</span>
 															</button>
-														</p>														
+														</p>
+														<p>
+															<img src={AvatarDefault} className="avatar-found"/>
+															<span className="profil-name">Name</span>
+															<button className="btn bg-yellow">
+																<i className="rect"><FontAwesomeIcon icon={faUserPlus} size="xs"/></i>
+																<span>Ajouter</span>
+															</button>
+														</p>
+														<p>
+															<img src={AvatarDefault} className="avatar-found"/>
+															<span className="profil-name">Name</span>
+															<button className="btn bg-yellow">
+																<i className="rect"><FontAwesomeIcon icon={faUserPlus} size="xs"/></i>
+																<span>Ajouter</span>
+															</button>
+														</p>
+														<p>
+															<img src={AvatarDefault} className="avatar-found"/>
+															<span className="profil-name">Name</span>
+															<button className="btn bg-yellow">
+																<i className="rect"><FontAwesomeIcon icon={faUserPlus} size="xs"/></i>
+																<span>Ajouter</span>
+															</button>
+														</p>
+														<p>
+															<img src={AvatarDefault} className="avatar-found"/>
+															<span className="profil-name">Name</span>
+															<button className="btn bg-yellow">
+																<i className="rect"><FontAwesomeIcon icon={faUserPlus} size="xs"/></i>
+																<span>Ajouter</span>
+															</button>
+														</p>
+														<p>
+															<img src={AvatarDefault} className="avatar-found"/>
+															<span className="profil-name">Name</span>
+															<button className="btn bg-yellow">
+																<i className="rect"><FontAwesomeIcon icon={faUserPlus} size="xs"/></i>
+																<span>Ajouter</span>
+															</button>
+														</p>
+														<p>
+															<img src={AvatarDefault} className="avatar-found"/>
+															<span className="profil-name">Name</span>
+															<button className="btn bg-yellow">
+																<i className="rect"><FontAwesomeIcon icon={faUserPlus} size="xs"/></i>
+																<span>Ajouter</span>
+															</button>
+														</p>
+														<p>
+															<img src={AvatarDefault} className="avatar-found"/>
+															<span className="profil-name">Name</span>
+															<button className="btn bg-yellow">
+																<i className="rect"><FontAwesomeIcon icon={faUserPlus} size="xs"/></i>
+																<span>Ajouter</span>
+															</button>
+														</p>
+														<p>
+															<img src={AvatarDefault} className="avatar-found"/>
+															<span className="profil-name">Name</span>
+															<button className="btn bg-yellow">
+																<i className="rect"><FontAwesomeIcon icon={faUserPlus} size="xs"/></i>
+																<span>Ajouter</span>
+															</button>
+														</p>
+														
+
 													</div>
 													<div className="avatar-search-bar">
-														<input type="text" value="rechercher une personne"/><button>Rechercher</button>
+														<input type="text" value="Rechercher une personne"/><button className="btn bg-white">Rechercher</button>
 													</div>
 												</div>										
 											</div>

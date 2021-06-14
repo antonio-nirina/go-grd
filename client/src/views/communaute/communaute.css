@@ -1,6 +1,7 @@
 @charset "UTF-8";
 .popup-content{
 	background: #1f1f1f !important;
+	font-family: "quicksand regular" !important;
 }
 .communaute{
 	padding-top: 30px;
@@ -313,4 +314,70 @@
 	text-transform: uppercase;
 	text-align: center;
 }
+.found{
+	margin: 15px 0;
+	border-top: 1px solid gray;
+	border-bottom: 1px solid gray;
+	height: 378px;
+	overflow-y: auto;
+}
 
+.found p{
+	display: inline-block;		
+	width: 45%;
+	margin: 9px 15px;
+}
+.found img, .found span.profil-name{
+	display: inline-block;
+	vertical-align: middle;	
+}
+.found span.profil-name{
+	padding: 5px;    
+    text-align: left;  
+   	font-size: 12px; 
+}
+.add-friends .found button{
+	padding: 7px 15px;
+    float: right;
+    margin: 12px 0;
+    border: none;
+    background: #f4cb21;
+    border-radius: 5px;    
+}
+.add-friends .found button span{
+	font-size: 11px;
+}
+.found button svg{
+	font-size: 14px;	
+	margin-right: 15px;
+}
+.avatar-search-bar input, .avatar-search-bar button{
+	padding: 8px;
+	border-radius: 5px;
+	border:none;
+	margin-right: 15px;
+	font-size: 12px;
+	font-family: "quicksand regular";
+	font-weight: bold;
+}
+.avatar-search-bar{
+	width: 90%;
+	margin: auto;
+	text-align: center;
+}
+.avatar-search-bar button{
+	background: red;	
+	font-size: 10px;
+	background: none;
+	color: ;
+	padding: 8px 20px;
+
+}
+
+.avatar-search-bar input{
+	width: 60%;
+}
+.found .btn.bg-yellow{
+	background: #383434;
+    color: #f2cf1c;
+}
