@@ -4,7 +4,7 @@
 	position: relative;
 }
 .wrap{
-	padding: 6px 50px;
+	padding: 6px 35px;
 	text-align: center;
 	/*position: fixed;*/
 	width: 100%;
@@ -56,14 +56,14 @@
 	margin-top: 2px;
 }
 .tag{
-	max-width: 260px;
+	max-width: 291px;
 	width: 100%;
 	display: inline-block;
 	vertical-align: middle;
 }
 
 .box{
-	max-width: 98px;
+	max-width: 131px;
 	width: 100%;
 	display: inline-block;
 	margin-right: 17px;
@@ -93,13 +93,13 @@
 	border: 1px solid #4c4d4f;
 }
 .connex{
-	width: 55px;
+	width: 80px;
 	display: inline-block;
 	vertical-align: middle;
 
 }
 .gametag{
-	max-width: 145px;
+	max-width: 143px;
 	width: 100%;
 	display: inline-block;
 	position: relative;
@@ -150,16 +150,101 @@
 .lang span{
 	display: block;
 }
-.square{
-	border: 1px solid #c4c4c4;
+.square{	
 	padding: 1px;
-	margin-right: 7px;
-	display: inline-block;
-	height: 16px;
-	line-height: 10px;
-	vertical-align: top;
-	margin-top: 9px;
+    margin-right: 16px;
+    display: inline-block;
+    height: 16px;
+    line-height: 10px;
+    vertical-align: top;
+    margin-top: 4px;
+    position: relative;
 }
+.square .number{
+	background: #ffcb15;
+	display: inline-block;
+	position: absolute;
+	width: 19px;
+	height: 19px;
+	border-radius: 50%;
+	font-style: normal;
+	font-size: 12px;
+	padding-top: 5px;
+    text-align: center;
+    top: 12px;
+    left: 13px;
+}
+.header .notification{
+	display: none;
+	position: absolute;
+    background: #101010;    
+    right: 263px;
+    top: 66px;
+    padding: 8px;
+    text-align: center;
+   	border-radius: 0 0 5px 5px;
+   	border: 1px solid gray;
+   	opacity: 0;
+   	transition: 300ms ease-in-out;
+
+}
+.header .notification.show{
+	display: block;
+	opacity: 1;
+	transition: 300ms ease-in-out;
+}
+.header .notification p{
+	font-size: 12px;
+	padding: 5px;
+	border-bottom: 1px solid gray;
+	text-align: left;
+	font-style: italic;
+}
+.header .notification p span.date{
+	color: gray;
+	margin-left: 5px;
+	display: inline-block;
+}
+.header .notification p:last-child{
+	border: none;
+}
+.header .notification .avatar-found{
+	width: 40px;
+	height: 40px;
+}
+.header .notification .profil-name{
+	margin-right: 15px;
+	font-size: 12px;
+	font-style: normal;
+}
+.header .notification button{
+	font-size: 10px;
+	padding: 7px;	
+	color: gray;
+}
+.header .notification .bg-white.gray{
+	border-color: gray !important;
+	color: gray;
+}
+.header .notification button svg{
+	font-size: 13px;
+	color: green;
+}
+.header .notification .bg-white.gray svg{
+	color: red;
+}
+.header .notification button i{
+	margin-right: 5px; 
+}
+.header .notification img, .header .notification button{
+	display: inline-block;
+	vertical-align: middle;
+	margin-right: 15px;
+}
+.square svg{
+	font-size: 24px;
+}
+
 .relative svg{
 	color: #fcfcfc;
 	background: #bcbcbc;

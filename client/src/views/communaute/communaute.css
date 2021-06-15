@@ -2,6 +2,7 @@
 .popup-content{
 	background: #1f1f1f !important;
 	font-family: "quicksand regular" !important;
+	border-color: gray !important;
 }
 .communaute{
 	padding-top: 30px;
