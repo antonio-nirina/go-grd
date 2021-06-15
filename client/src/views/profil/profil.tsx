@@ -1,5 +1,6 @@
 import React from "react"
 import { useSelector } from "react-redux"
+import { Link } from 'react-router-dom'
 
 import Popup from "reactjs-popup"
 // import { faXbox, faPlaystation } from "@fortawesome/free-brands-svg-icons"
@@ -144,46 +145,13 @@ const Profil: React.FC = function() {
 		      					</div>
 		      				</div>
 		      			</div>
-		      			<div className="stat">
-		      				<div className="float">
-		      					<strong>
-		      					{
-		      						Object.keys(userConnectedRedux.user).length > 0 ?
-									Translation(userConnectedRedux.user.language).profil.stats
-									:
-									Translation("fr").profil.stats
-								}
-		      					</strong>
-		      				</div>
-		      				<div className="float">
-			      				<p>{
-		      						Object.keys(userConnectedRedux.user).length > 0 ?
-									Translation(userConnectedRedux.user.language).profil.victory
-									:
-									Translation("fr").profil.victory
-								} : <span>40%</span></p>
-			      				<div className="myProgress">
-		    						<div className="myBar" style={{width:"40%", background:"#6642a9"}}></div>
-		    					</div>
-		    					<p>{
-		      						Object.keys(userConnectedRedux.user).length > 0 ?
-									Translation(userConnectedRedux.user.language).profil.defeat
-									:
-									Translation("fr").profil.defeat
-								} : <span>25%</span></p>
-		    					<div className="myProgress">
-		    						<div className="myBar" style={{width:"25%", background:"#1da1f2"}}></div>
-		    					</div>
-		    					<p>{
-		      						Object.keys(userConnectedRedux.user).length > 0 ?
-									Translation(userConnectedRedux.user.language).profil.retreat
-									:
-									Translation("fr").profil.retreat
-								} : <span>75%</span></p>
-		    					<div className="myProgress">
-		    						<div className="myBar" style={{width:"75%", background:"#f9753d"}}></div>
-		    					</div>
-		    				</div>
+		      			<div className="account-name">
+		      				<p>
+		      					<img src="https://i.ibb.co/VMGk5bF/twitch.png" alt="twitch" width="40px" height="auto"/>
+		      					<span className="account-title">Twitch</span>
+		      					<span>Stream sur Go Grind ! Connectez vous à votre compte Twitch</span>
+		      					<button className="btn bg-yellow">Connectez-vous</button>
+		      				</p>
 		      			</div>
 		      		</div>
 		      	</div>
@@ -334,9 +302,10 @@ const Profil: React.FC = function() {
 	      				</div>
 	      				<div className="btn-container">
 	      					<a href="#" className="btn bg-yellow">4.99 € / {Object.keys(userConnectedRedux.user).length > 0 ?
-									Translation(userConnectedRedux.user.language).profil.month
-									:
-									Translation("fr").profil.month}</a>
+								Translation(userConnectedRedux.user.language).profil.month
+								:
+								Translation("fr").profil.month}
+							</a>
 	      				</div>
 	      			</div>
 				</div>
