@@ -198,7 +198,7 @@
     padding: 15px 40px;
     display: inline-block;
     vertical-align: top;
-    border-right: 1px solid #14151d;
+    /*border-right: 1px solid #14151d;*/
 }
 .group-input:nth-child(2){
 	border-right: none;
@@ -323,7 +323,51 @@ p.lg-desc{
     font-weight: 200;
     
 }
+.uploadLogoteam{	
+	margin-top: 15px;
+	position: relative;
+}
+.logoteam-container{
+    position: absolute;
+    width: 100%;    
+    top: 73%;
+    text-align: center;
+}
+.setlogoTeam{
+	width: 17%;
+	position: relative;
+	display: inline-block;
+    vertical-align: middle;
+}
+.instruction{
+	width: 73%;    
+    padding: 15px;    
+    display: inline-block;
+}
+.setlogoTeam label{
+	position: absolute;
+    background: #4e4e4e;
+    width: 100%;
+    left: 0px;
+    text-align: center;
+    height: 100%;    
+    padding-top: 50%;
+    opacity: 0.5;
+    border-radius: 5px;
+    display: none;
+}
+.setlogoTeam:hover label{
+	display: inline-block;
+}
 
+.uploadLogoteam img{
+	/*width: 100%;*/
+	
+}
+.setlogoTeam
+#setLogoTeam{
+	display: none;
+}
 .game-slide img{
 	min-height: 100%;
 	height: 200px;
@@ -361,7 +405,7 @@ p.lg-desc{
 
 }
 .set-team{	
-	padding: 10px 5px;	
+	padding: 25px 5px 0px;                          	
 }
 .set-team input{
 	display: block;
