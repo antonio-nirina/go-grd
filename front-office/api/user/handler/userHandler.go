@@ -17,17 +17,17 @@ import (
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
-type userUsecase struct {
+type UserUsecase struct {
 	userRepository repository.Repository
 }
 
 func NewUsecaseUser(r repository.Repository) Usecase {
-	return &userUsecase{
+	return &UserUsecase{
 		userRepository: r,
 	}
 }
 
-func (u *userUsecase) SavedUser(user *entity.User) (interface{}, error) {
+func (u *UserUsecase) SavedUser(user *entity.User) (interface{}, error) {
 	result, err := u.userRepository.SavedUser(user)
 
 	if err != nil {
@@ -37,7 +37,7 @@ func (u *userUsecase) SavedUser(user *entity.User) (interface{}, error) {
 	return result, nil
 }
 
-func (u *userUsecase) FindOneUser(idQuery string) (interface{}, error) {
+func (u *UserUsecase) FindOneUser(idQuery string) (interface{}, error) {
 	objectId, err := primitive.ObjectIDFromHex(idQuery)
 
 	if err != nil {
@@ -53,7 +53,7 @@ func (u *userUsecase) FindOneUser(idQuery string) (interface{}, error) {
 	return user, nil
 }
 
-func (u *userUsecase) FindAllUser() (interface{}, error) {
+func (u *UserUsecase) FindAllUser() (interface{}, error) {
 	result, err := u.userRepository.FindAllUser()
 
 	if err != nil {
@@ -63,7 +63,7 @@ func (u *userUsecase) FindAllUser() (interface{}, error) {
 	return result, nil
 }
 
-func (u *userUsecase) FindUserByEmail(email string) (entity.User, error) {
+func (u *UserUsecase) FindUserByEmail(email string) (entity.User, error) {
 	user, err := u.userRepository.FindUserByEmail(email)
 
 	if err != nil {
@@ -73,7 +73,7 @@ func (u *userUsecase) FindUserByEmail(email string) (entity.User, error) {
 	return user, nil
 }
 
-func (u *userUsecase) FindUserByUsername(email string) (entity.User, error) {
+func (u *UserUsecase) FindUserByUsername(email string) (entity.User, error) {
 	user, err := u.userRepository.FindUserByUsername(email)
 
 	if err != nil {
@@ -83,7 +83,7 @@ func (u *userUsecase) FindUserByUsername(email string) (entity.User, error) {
 	return user, nil
 }
 
-func (u *userUsecase) UpdatedUser(user *entity.User) (interface{}, error) {
+func (u *UserUsecase) UpdatedUser(user *entity.User) (interface{}, error) {
 	result, err := u.userRepository.UpdatedUser(user)
 
 	if err != nil {
@@ -93,7 +93,7 @@ func (u *userUsecase) UpdatedUser(user *entity.User) (interface{}, error) {
 	return result, nil
 }
 
-func (u *userUsecase) UpdatedTokenUser(email string,token string) (interface{}, error) {
+func (u *UserUsecase) UpdatedTokenUser(email string,token string) (interface{}, error) {
 	result, err := u.userRepository.UpdatedTokenUser(email,token)
 
 	if err != nil {
@@ -103,7 +103,7 @@ func (u *userUsecase) UpdatedTokenUser(email string,token string) (interface{}, 
 	return result, nil
 }
 
-func (u *userUsecase) FindUserByToken(token string) (entity.User, error) {
+func (u *UserUsecase) FindUserByToken(token string) (entity.User, error) {
 	result, err := u.userRepository.FindUserByToken(token)
 
 	if err != nil {
@@ -113,7 +113,7 @@ func (u *userUsecase) FindUserByToken(token string) (entity.User, error) {
 	return result, nil
 }
 
-func (u *userUsecase) UpdateAvatar(user entity.User,avatar string,typeFile string) (interface{}, error)  {
+func (u *UserUsecase) UpdateAvatar(user entity.User,avatar string,typeFile string) (interface{}, error)  {
 	err := godotenv.Load()
 	
 	if err != nil {
@@ -185,15 +185,15 @@ func (u *userUsecase) UpdateAvatar(user entity.User,avatar string,typeFile strin
 	return nil, err
 }
 
-func (u *userUsecase) FindOneUserById(idQuery string) (entity.User, error) {
+func (u *UserUsecase) FindOneUserById(idQuery string) (entity.User, error) {
 	objectId, err := primitive.ObjectIDFromHex(idQuery)
-
+	
 	if err != nil {
 		return entity.User{}, err
 	}
 
 	user, err := u.userRepository.FindOneUserById(objectId)
-
+	
 	if err != nil {
 		return entity.User{}, err
 	}

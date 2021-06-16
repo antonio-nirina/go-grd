@@ -17,5 +17,5 @@ type Usecase interface {
 	UpdateAvatar(user entity.User,avatar string,typeFile string) (interface{}, error)
 	FindOneUserById(idQuery string) (entity.User, error)
 	AddFriend(req *entity.Friends) (interface{}, error)
-	NotifUserSender(user *entity.User) (interface{}, error)
+	// NotifUserSender(user *entity.User) (interface{}, error)
 }

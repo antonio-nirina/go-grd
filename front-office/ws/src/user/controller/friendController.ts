@@ -2,7 +2,7 @@ import {runTaskTournament} from "../../cron/task-match"
 import {User} from "../entities/user"
 
 export const NotifiUser = async function(user:User) : Promise<User> {
-	console.log(user)
+	console.log("use", user)
 	const sec: number | string = "*/1"
 	const min: number | string = "*" // timesRun.getMinutes()
 	const hours: number | string = "*" // timesRun.getHours()

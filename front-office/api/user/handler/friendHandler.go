@@ -7,19 +7,15 @@ import (
 	"io/ioutil"
 	"net/http"
 	"os"
+	"sync"
 	"time"
 
 	"github.com/joho/godotenv"
+	"github.com/thoussei/antonio/front-office/api/external"
 	"github.com/thoussei/antonio/front-office/api/user/entity"
 )
 
-type query struct {
-	Id string `json:"id"`
-	Email string `json:"email"`
-	Username string `json:"username"`
-}
-
-func (u *userUsecase)AddFriend(req *entity.Friends) (interface{}, error) {
+func (u *UserUsecase)AddFriend(req *entity.Friends) (interface{}, error) {
 	result, err := u.userRepository.AddFriend(req)
 
 	if err != nil {
@@ -29,32 +25,38 @@ func (u *userUsecase)AddFriend(req *entity.Friends) (interface{}, error) {
 	return result, nil
 }
 
-func (u *userUsecase)NotifUserSender(user *entity.User) (interface{}, error) {
+func NotifUserSender(user *entity.User,wg *sync.WaitGroup)  {
 	err := godotenv.Load()
 	if err != nil {
-		return nil,err
+		external.Logger("error load env")
 	}
-	
-	// query := &query{user.Uid.String(),user.Email,user.Username}
-	//req, _ := json.Marshal(query)
-	// string(req)
-	req := ":{NotifiUser(user:{"+user.Uid.String()+","+user.Email+","+user.Username+"}){username,email,id"
-	jsonData := make(map[string]string)
-	jsonData["query"] = req
+
+	queryStr := `
+	{ 
+		NotifiUser(user:{avatar:"%s",email:"%s",username:"%s"}) {
+			email,
+		}
+	}
+	`
+	queryN := fmt.Sprintf(queryStr,user.Avatar,user.Email,user.Username)
+	jsonData := map[string]string{
+		"query":queryN,
+	}
+
 	uri := os.Getenv("URI_SUBSCRIPTION")
-    jsonValue, _ := json.Marshal(jsonData)
+	jsonValue, _ := json.Marshal(jsonData)
     request, err := http.NewRequest("POST",uri, bytes.NewBuffer(jsonValue))
+	request.Header.Set("Content-Type", "application/json")
     client := &http.Client{Timeout: time.Second * 10}
     resp, err := client.Do(request)
 	
 	if err != nil {
-		fmt.Println(err)
-        return nil,err
+        external.Logger(fmt.Sprintf("%v", err))
     }
 
     defer resp.Body.Close()
     data, _ := ioutil.ReadAll(resp.Body)
-    fmt.Println(string(data))
 
-	return "",nil
+	fmt.Println(string(data))
+	wg.Done()
 }
