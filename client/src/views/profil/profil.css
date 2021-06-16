@@ -332,6 +332,7 @@ p.lg-desc{
     width: 100%;    
     top: 73%;
     text-align: center;
+    overflow: hidden;
 }
 .setlogoTeam{
 	width: 17%;
@@ -361,7 +362,8 @@ p.lg-desc{
 }
 
 .uploadLogoteam img{
-	/*width: 100%;*/
+	width: 100%;
+	height: auto;
 	
 }
 .setlogoTeam
