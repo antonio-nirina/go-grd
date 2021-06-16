@@ -10,6 +10,10 @@ import (
 	gameHandler "github.com/thoussei/antonio/front-office/api/games/handler"
 	gameRepo "github.com/thoussei/antonio/front-office/api/games/repository"
 
+	notifDelivery "github.com/thoussei/antonio/front-office/api/notification/delivery"
+	notifHandler "github.com/thoussei/antonio/front-office/api/notification/handler"
+	notifRepo "github.com/thoussei/antonio/front-office/api/notification/repository"
+
 	"github.com/graphql-go/graphql"
 )
 
@@ -26,6 +30,10 @@ var repositoryPlateform = gameRepo.NewPlateformRepository(database)
 var usecasePlateform 	= gameHandler.NewUsecasePlateform(repositoryPlateform)
 var plateformResolver 	= gameDelivery.NewResolverPlateform(usecasePlateform)
 
+var repositoryNotif 	= notifRepo.NewRepository(database)
+var usecaseNotif 	= notifHandler.NewUsecaseNotif(repositoryNotif)
+var NotifResolver = notifDelivery.NewNotifResolver(usecaseNotif)
+
 func GetRootFields() graphql.Fields {
 	return graphql.Fields{
 		"createdUser":      	createdUser(),
@@ -37,5 +45,6 @@ func GetRootFields() graphql.Fields {
 		"updatedPasswordUser": 	updatedPasswordUser(),
 		"updatedAvatar":		updatedAvatar(),
 		"requestFriend":		requestFriend(),
+		"saveNotification":		saveNotification(),
 	}
 }

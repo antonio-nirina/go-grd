@@ -2,9 +2,11 @@ package delivery
 
 import (
 	"errors"
+	"sync"
 
 	"github.com/graphql-go/graphql"
 	"github.com/thoussei/antonio/front-office/api/user/entity"
+	"github.com/thoussei/antonio/front-office/api/user/handler"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
@@ -16,11 +18,12 @@ type Friends struct {
 	Email string 		`json:"email"`
 	Avatar string 		`json:"avatar"`
 	IsBanned bool 	`json:"isBanned"`
-	Count int 			`json:count`
+	Count int 			`json:"count"`
 }
 
 
 func (r *resolver) RequestFriendResolver(params graphql.ResolveParams) (interface{}, error){
+	var wg sync.WaitGroup
 	idRequest, isOKReq := params.Args["idRequest"].(string)
 	idSender, isOKSend := params.Args["idSender"].(string)
 
@@ -43,13 +46,14 @@ func (r *resolver) RequestFriendResolver(params graphql.ResolveParams) (interfac
 	}
 
 	_, err = r.userHandler.AddFriend(friend)
-
-	_, err = r.userHandler.NotifUserSender(&resSender)
-
 	if err != nil {
 		return nil, err
 	}
-
+	
+	wg.Add(1)
+	go handler.NotifUserSender(&resSender,&wg)
+	wg.Wait()
+	
 	return "Ok", nil
 }
 

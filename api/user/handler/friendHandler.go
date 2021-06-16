@@ -7,13 +7,15 @@ import (
 	"io/ioutil"
 	"net/http"
 	"os"
+	"sync"
 	"time"
 
 	"github.com/joho/godotenv"
+	"github.com/thoussei/antonio/front-office/api/external"
 	"github.com/thoussei/antonio/front-office/api/user/entity"
 )
 
-func (u *userUsecase)AddFriend(req *entity.Friends) (interface{}, error) {
+func (u *UserUsecase)AddFriend(req *entity.Friends) (interface{}, error) {
 	result, err := u.userRepository.AddFriend(req)
 
 	if err != nil {
@@ -23,20 +25,20 @@ func (u *userUsecase)AddFriend(req *entity.Friends) (interface{}, error) {
 	return result, nil
 }
 
-func (u *userUsecase)NotifUserSender(user *entity.User) (interface{}, error) {
+func NotifUserSender(user *entity.User,wg *sync.WaitGroup)  {
 	err := godotenv.Load()
 	if err != nil {
-		return nil,err
+		external.Logger("error load env")
 	}
 
 	queryStr := `
 	{ 
-		NotifiUser(user:{id:"",email:"%s",username:"%s"}) {
+		NotifiUser(user:{avatar:"%s",email:"%s",username:"%s"}) {
 			email,
 		}
 	}
 	`
-	queryN := fmt.Sprintf(queryStr,user.Email,user.Username)
+	queryN := fmt.Sprintf(queryStr,user.Avatar,user.Email,user.Username)
 	jsonData := map[string]string{
 		"query":queryN,
 	}
@@ -49,14 +51,12 @@ func (u *userUsecase)NotifUserSender(user *entity.User) (interface{}, error) {
     resp, err := client.Do(request)
 	
 	if err != nil {
-		fmt.Println("errr",err)
-        return nil,err
+        external.Logger(fmt.Sprintf("%v", err))
     }
 
     defer resp.Body.Close()
-	fmt.Println("cde", resp.StatusCode)
     data, _ := ioutil.ReadAll(resp.Body)
-    fmt.Println("data",string(data))
 
-	return "",nil
+	fmt.Println(string(data))
+	wg.Done()
 }
