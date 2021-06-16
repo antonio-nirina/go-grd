@@ -575,3 +575,32 @@ p.lg-desc{
 .ht75{
 	height: 75px !important;
 }
+.account-name{    
+    width: 250px;
+    display: inline-block;
+    vertical-align: top;
+}
+.account-name span{
+	padding: 0px 0px 10px;
+}
+.account-name span{
+	display: block;
+}
+.account-name p .account-title{
+	display: inline-block;
+	vertical-align: top;	
+	padding: 10px;
+	font-weight: 500;
+	text-transform: uppercase;
+	font-family: "russo one";
+	font-weight: lighter;
+}
+.account-name p{
+	font-size: 12px;
+	text-align: left;
+}
+.account-name .btn{
+	font-size: 10px;
+	padding: 8px;
+
+}

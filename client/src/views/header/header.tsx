@@ -9,11 +9,12 @@ import avatar from "../../assets/image/game-tag.png"
 import fr from "../../assets/image/fr.png"
 import gb from "../../assets/image/gb.png"
 import ps from "../../assets/image/playstation.png"
-import { faBars, faPlus, faUsers } from "@fortawesome/free-solid-svg-icons"
+import { faBars, faBell, faUsers, faTimes, faCheck } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {RootState} from "../../reducer"
 import {Translation} from "../../lang/translation"
 import {removeDataUser} from "../auth/action/userAction"
+import AvatarDefault from "../../assets/image/game-tag.png"
 
 
 const Header: React.FC = function() {
@@ -21,9 +22,13 @@ const Header: React.FC = function() {
 	const dispatch = useDispatch()
 	const userConnectedRedux = useSelector((state:RootState) => state.userConnected)
     const [showList, setShowList] = useState<Boolean>(false)
+    const [showNotif, setShowNotif] = useState<Boolean>(false)
 	const [isDeconnect, setIsDeconnect] = useState<Boolean>(false)
     const onShow = function(){
         setShowList(!showList)
+    }
+    const onShowNotif = function(){
+        setShowNotif(!showNotif)
     }
 
 	const onDeconnect = function() {
@@ -102,10 +107,29 @@ const Header: React.FC = function() {
                         </div>
                         <div className="connex" >
                             <>
-                                <i className="square">
-                                    <FontAwesomeIcon icon={faPlus} size="xs"/>
+                                <i className="square" onClick={onShowNotif}>
+                                    <FontAwesomeIcon icon={faBell} size="xs"/>
+                                    <span className="number">2</span>
                                 </i>
                             </>
+                            <div className={!showNotif ? "notification" :"notification show"}>
+                                <p>
+                                    <img src={AvatarDefault} className="avatar-found"/>
+                                    <span className="profil-name">Name</span>
+                                    <button className="btn bg-yellow">
+                                        <i className="rect"><FontAwesomeIcon icon={faCheck} size="xs"/></i>
+                                        <span>Accepter</span>
+                                    </button>
+                                     <button className="btn bg-white gray">
+                                        <i className="rect"><FontAwesomeIcon icon={faTimes} size="xs"/></i>
+                                        <span>Refuser</span>
+                                    </button>
+                                </p>
+                                <p>
+                                    Vous êtes maintenant ami(e) avec <Link to="#">Nirina1718</Link>
+                                    <span className="date">15/06/2021</span>
+                                </p>
+                            </div>
                             <><i className="relative">
 								<FontAwesomeIcon icon={faUsers} size="lg"/>
 								<span className="counter">2</span></i>

@@ -159,7 +159,7 @@ const Friend: React.FC = function() {
 
 													</div>
 													<div className="avatar-search-bar">
-														<input type="text" value="Rechercher une personne"/><button className="btn bg-white">Rechercher</button>
+														<input type="text" placeholder="Rechercher une personne"/><button className="btn bg-white">Rechercher</button>
 													</div>
 												</div>										
 											</div>
