@@ -3,8 +3,8 @@ import { useSelector } from "react-redux"
 import { Link } from 'react-router-dom'
 
 import Popup from "reactjs-popup"
-// import { faXbox, faPlaystation } from "@fortawesome/free-brands-svg-icons"
-// faCogs, faCalendarAlt, faInfoCircle, faGamepad, faTrophy, faMedal, faStepBackward, faStepForward, faChevronRight, faChevronLeft, faMobile,
+import { faPen } from "@fortawesome/free-solid-svg-icons"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import Header from "../header/header"
 import Footer from "../footer/footer"
@@ -13,9 +13,7 @@ import Avatar from "./avatar"
 import "../../assets/css/style.css"
 import "react-responsive-carousel/lib/styles/carousel.min.css"
 import 'reactjs-popup/dist/index.css'
-// import { CircularProgressbar, CircularProgressbarWithChildren, buildStyles} from "react-circular-progressbar"
 
-import "react-circular-progressbar/dist/styles.css"
 import {RootState} from "../../reducer"
 import {Translation} from "../../lang/translation"
 import HistoryTournament from "./historyTournament"
@@ -233,6 +231,18 @@ const Profil: React.FC = function() {
 									Translation(userConnectedRedux.user.language).profil.addTeam
 									:
 									Translation("fr").profil.addTeam}</h3></div>
+									<div className="uploadLogoteam">
+										<div className="bg-team">
+											<img src="https://i.ibb.co/C59KCSd/team-mate.png" className="imgresp"/>
+										</div>
+										<div className="logoteam-container">
+											<p className="setlogoTeam">
+												<img src = "https://i.ibb.co/dQPw2Vd/teamlogo.png" width="100"/>											
+												<label htmlFor="setLogoTeam"><FontAwesomeIcon icon={faPen} /></label>											
+												<input type="file" id="setLogoTeam" className="uploadLogoFile" name="logoFile"/>
+											</p>										
+										</div>
+									</div>
 							        <div className="content set-team">
 							          {' '}
 										<div className="set-team">
