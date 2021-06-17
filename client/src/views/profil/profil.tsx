@@ -3,7 +3,7 @@ import { useSelector } from "react-redux"
 import { Link } from 'react-router-dom'
 
 import Popup from "reactjs-popup"
-import { faPen } from "@fortawesome/free-solid-svg-icons"
+import { faPen, faChartBar } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import Header from "../header/header"
@@ -170,6 +170,31 @@ const Profil: React.FC = function() {
 										Translation("fr").profil.connected}
 		      					</button>
 		      				</p>
+		      			</div>
+		      		</div>
+		      	</div>
+		      	<div className="statistique">
+		      		<div className="start-game">
+		      			<div className="start">
+		      				<img src="https://i.ibb.co/TKD3yZT/apex-legends.webp" alt="apex-legends" />
+		      				<span><FontAwesomeIcon icon={faChartBar} />Statistiques</span>
+		      			</div>
+		      		</div>
+		      		<div className="flexbox">
+		      			<div className="flex-items">
+		      				<p>92 <span>Parties</span></p>
+		      				<p>32 <span>Top 1</span></p>
+		      				<p>35% <span>Taux de victoires</span></p>
+		      			</div>
+		      			<div className="flex-items">
+		      				<p>L L W L<span>Score recents</span></p>
+		      				<p>2.75<span>K/D</span></p>
+		      				<p>923<span>Placement FR</span></p>
+		      			</div>
+		      			<div className="flex-items">
+		      				<p>Ligue<span>-</span></p>
+		      				<p>Placement<span>-</span></p>
+		      				<p>Score<span>-</span></p>
 		      			</div>
 		      		</div>
 		      	</div>
