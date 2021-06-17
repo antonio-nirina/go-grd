@@ -75,3 +75,17 @@ func GetUsers() *graphql.Field{
 		Resolve: UserRolve.GetAllUser,
 	}
 }
+
+func GetAccessTokenTwitch() *graphql.Field {
+	return &graphql.Field{
+		Type:        types.TwitchSchemaType,
+		Description: "Get token access twicth",
+		Args: graphql.FieldConfigArgument{
+			"code": &graphql.ArgumentConfig{
+				Type: graphql.String,
+			},
+		},
+		
+		Resolve: UserRolve.GetAccessTokenTwitchApi,
+	}
+}

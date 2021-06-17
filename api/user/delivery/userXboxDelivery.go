@@ -6,7 +6,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
-	"log"
 	"net/http"
 	"net/url"
 	"os"
@@ -60,10 +59,7 @@ type propertiesXs struct {
 	UserTokens string `json:"UserTokens"`
 	SandboxId string `json:"SandboxId"`
 }
-type DataToken struct {
-	AccessToken string `json:"access_token"`
-	RefreshToken string `json:"refresh_token"`
-}
+
 
 type userToken struct {
 	IssueInstant string `json:"IssueInstant"`
@@ -83,9 +79,6 @@ var xboxClient = &XboxClient{}
 
 func (r *resolver) GetAccessTokenXboxApi(params graphql.ResolveParams) (interface{}, error) {
 	err := godotenv.Load()
-	if err != nil {
-		log.Fatal("Error loading .env file")
-	}
 
 	if err != nil {
 		fmt.Println(err)

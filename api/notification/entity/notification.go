@@ -13,7 +13,7 @@ const (
 type Notification struct {
 	Uid           primitive.ObjectID `bson:"uid"`
 	Title     		string  `json:"title"`
-	Type     		string  `json:"type"`
+	Type     		int  `json:"type"`
 	Content      	string  `json:"content"`
 	Statut 			bool `json:"statut"`
 	User 			user.User `json:"user"`

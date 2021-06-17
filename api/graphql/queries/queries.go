@@ -49,5 +49,6 @@ func GetRootFields() graphql.Fields {
 		"GetUsers": 				GetUsers(),
 		"GetOneNotification": 		GetOneNotification(),
 		"GetAllNotifications": 		GetAllNotifications(),
+		"GetAccessTokenTwitch":		GetAccessTokenTwitch(),
 	}
 }

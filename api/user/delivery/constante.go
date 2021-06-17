@@ -8,5 +8,7 @@ const (
 	KEY_ACCESS_TOKEN = "key_acces_token"
 	ME_URL = "https://graph.microsoft.com/beta/me"
 	PHOT0_URL = "https://graph.microsoft.com/beta/me/photo"
+	TWITCH_TOKEN = "https://id.twitch.tv/oauth2/token"
+	TWITCH_TOKEN_USER = "https://api.twitch.tv/helix/user"
 	// PUT https://graph.microsoft.com/v1.0/me/photo/$value
 )

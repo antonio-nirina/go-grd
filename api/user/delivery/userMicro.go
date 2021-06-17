@@ -16,7 +16,6 @@ import (
 	"github.com/thoussei/antonio/front-office/api/external"
 )
 
-type requestGraph struct {}
 
 type profilXboxUserApi struct {
 	DisplayName string `json:"displayName,omitempty"`

@@ -113,5 +113,25 @@ var XboxProfilSchemaType = graphql.NewObject(graphql.ObjectConfig{
 	},
 })
 
+var TwitchSchemaType = graphql.NewObject(graphql.ObjectConfig{
+	Name: "TwitchType",
+	Fields: graphql.Fields{
+		"access_token": &graphql.Field{
+			Type: graphql.String,
+		},
+		"refresh_token": &graphql.Field{
+			Type: graphql.String,
+		},
+		"expires_in": &graphql.Field{
+			Type: graphql.Int,
+		},
+		"token_type": &graphql.Field{
+			Type: graphql.String,
+		},
+		"scope": &graphql.Field{
+			Type: graphql.String,
+		},
+	},
+})
 
 
