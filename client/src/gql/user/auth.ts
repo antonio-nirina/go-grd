@@ -28,3 +28,17 @@ export const XboxProfil = gql`
 
 	}
 `
+
+export const TwitchProfil = gql`
+	query GetProfilTwitch($accessToken: String!) {
+		GetProfilTwitch(accessToken: $accessToken) {
+				DisplayName
+				Surname
+				userPrincipalName
+				Id
+				Mail
+				PreferredLanguage
+			}
+
+	}
+`

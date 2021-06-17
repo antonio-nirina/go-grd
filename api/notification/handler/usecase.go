@@ -1,16 +1,14 @@
 package handler
 
 import (
-	"fmt"
-
 	"github.com/thoussei/antonio/front-office/api/notification/entity"
 	"github.com/thoussei/antonio/front-office/api/notification/repository"
-	userHandler "github.com/thoussei/antonio/front-office/api/user/handler"
+	userEntity "github.com/thoussei/antonio/front-office/api/user/entity"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
 type UsecaseNotif interface {
-	SavedNotifHandler(idUser string,name string,title string) (interface{}, error)
+	SavedNotifHandler(user userEntity.User,name string,title string) (interface{}, error)
 	FindNotifHandler(idUser string,idQuery string) (interface{}, error)
 	FindAllNotifHandler(idUser string) (interface{}, error)
 }
@@ -25,26 +23,17 @@ func NewUsecaseNotif(r repository.RepositoryNotif) UsecaseNotif {
 	}
 }
 
-// Instance User handler
-var userH = &userHandler.UserUsecase{}
 
-func (r *notifUsecase) SavedNotifHandler(idUser string,title string,content string) (interface{}, error) {
-	fmt.Println("userH", userH)
-	user,err := userH.FindOneUserById(idUser)
-	
-	if err != nil {
-		fmt.Println("errr", err)
-		return nil, err
-	}
-
+func (r *notifUsecase) SavedNotifHandler(user userEntity.User,title string,content string,typeNotification int) (interface{}, error) {
 	notify := &entity.Notification{
+		Uid: primitive.NewObjectID(),
 		Title:title,    		
 		Content:content,     	
 		Statut:false,
+		Type:typeNotification,
 		User:user,			
 	}
 
-	fmt.Println("notify", notify)
 	result, err := r.notifRepository.SavedNotifRepo(notify)
 
 	if err != nil {

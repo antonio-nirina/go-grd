@@ -5,6 +5,7 @@ import (
 
 	"github.com/graphql-go/graphql"
 	"github.com/thoussei/antonio/front-office/api/notification/handler"
+	userHandler "github.com/thoussei/antonio/front-office/api/user/handler"
 	// "go.mongodb.org/mongo-driver/bson/primitive"
 )
 
@@ -16,27 +17,36 @@ type NotifResolver interface {
 
 type resolverNotif struct {
 	notifHandler handler.UsecaseNotif
+	notifUserHandler userHandler.Usecase
 }
 
-func NewNotifResolver(notifUseCase handler.UsecaseNotif) NotifResolver {
+func NewNotifResolver(notifUseCase handler.UsecaseNotif,userNotif userHandler.Usecase) NotifResolver {
 	return &resolverNotif{
 		notifHandler: notifUseCase,
+		notifUserHandler:userNotif,
 	}
 }
+
 
 func (r *resolverNotif) SavedNotifResolver(params graphql.ResolveParams) (interface{}, error) {
 	idUser, _ := params.Args["idUser"].(string)
 	titleNotif, _ := params.Args["title"].(string)
 	content, _ := params.Args["content"].(string)
+	typeNotif, _ := params.Args["type"].(int)
+	user,err := r.notifUserHandler.FindOneUserById(idUser)
 
-	r.notifHandler.SavedNotifHandler(idUser,titleNotif,content)
+	if err != nil {
+		return nil,err
+	}
+
+	r.notifHandler.SavedNotifHandler(user,titleNotif,content,typeNotif)
 
 	return "Ok",nil
 }
 
 func (r *resolverNotif) FindNotifResolver(params graphql.ResolveParams) (interface{}, error) {
 	idUser, _ := params.Args["idUser"].(string)
-	idNotif, _ := params.Args["idQuery"].(string)
+	idNotif, _ := params.Args["idNotification"].(string)
 	notif,err := r.notifHandler.FindNotifHandler(idUser,idNotif)
 
 	if err != nil {
@@ -48,11 +58,11 @@ func (r *resolverNotif) FindNotifResolver(params graphql.ResolveParams) (interfa
 
 func (r *resolverNotif) FindAllNotifResolver(params graphql.ResolveParams) (interface{}, error) {
 	idUser, _ := params.Args["idUser"].(string)
-	notif,err :=  r.notifHandler.FindAllNotifHandler(idUser)
+	notifs,err :=  r.notifHandler.FindAllNotifHandler(idUser)
 
 	if err != nil {
 		return nil,err
 	}
 
-	return notif,nil
+	return notifs,nil
 }

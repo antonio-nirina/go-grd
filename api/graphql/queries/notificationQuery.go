@@ -13,7 +13,7 @@ func GetOneNotification() *graphql.Field {
 			"idUser": &graphql.ArgumentConfig{
 				Type: graphql.String,
 			},
-			"idQuery": &graphql.ArgumentConfig{
+			"idNotification": &graphql.ArgumentConfig{
 				Type: graphql.String,
 			},
 		},

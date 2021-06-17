@@ -31,8 +31,8 @@ var usecasePlateform 	= gameHandler.NewUsecasePlateform(repositoryPlateform)
 var plateformResolver 	= gameDelivery.NewResolverPlateform(usecasePlateform)
 
 var repositoryNotif 	= notifRepo.NewRepository(database)
-var usecaseNotif 	= notifHandler.NewUsecaseNotif(repositoryNotif)
-var NotifResolver = notifDelivery.NewNotifResolver(usecaseNotif)
+var usecaseNotif 		= notifHandler.NewUsecaseNotif(repositoryNotif)
+var NotifResolver 		= notifDelivery.NewNotifResolver(usecaseNotif,usecase)
 
 func GetRootFields() graphql.Fields {
 	return graphql.Fields{

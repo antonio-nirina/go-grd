@@ -1,6 +1,6 @@
 import React from "react"
 import { Link } from 'react-router-dom'
-import {useState} from "react";
+import {useState} from "react"
 
 import "../header/header.css"
 import logo from "../../assets/image/logo.png"

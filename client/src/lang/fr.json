@@ -99,7 +99,9 @@
 		"month":  "mois",
 		"accountGame":"Compte de jeu non renseigné",
 		"firstname":"Prenom",
-		"lastname":"Nom"
+		"lastname":"Nom",
+		"twitchConnected":"Stream sur Go Grind ! Connectez vous à votre compte Twitch",
+		"connected":"Connectez-vous"
 	},
 	"footer":{
 		"note":  "Mentions Légales"

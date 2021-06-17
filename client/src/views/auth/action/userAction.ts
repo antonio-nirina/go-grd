@@ -4,6 +4,7 @@ import {ACCESS_TOKEN} from "../utils"
 export const USER_CONNECTED = "user_connected"
 
 export interface UserType {
+	uid:string|""
 	username:string|""
 	email:string|""
 	avatar:string|""
@@ -25,6 +26,7 @@ export const sendUserConectedAction = function(data:string) {
 
 export const sendUserConnectedXboxAction = function(user:any) {
 	const newUserObject:UserType = {
+		uid:user.uid,
 		username:user.Username,
 		email:user.Email,
 		avatar:"",
@@ -42,6 +44,7 @@ export const sendUserConnectedXboxAction = function(user:any) {
 
 export const changeLanguageUserConnected = function(user:UserType,lang:string) {
 	const newUserObject:UserType = {
+		uid:user.uid,
 		username:user.username,
 		email:user.email,
 		avatar:user.avatar,
@@ -59,6 +62,7 @@ export const changeLanguageUserConnected = function(user:UserType,lang:string) {
 
 export const changeProfilUserConnected = function(user:any) {
 	const newUserObject:UserType = {
+		uid:user.uid,
 		username:user.username,
 		email:user.email,
 		avatar:user.avatar,

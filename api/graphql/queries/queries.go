@@ -32,7 +32,7 @@ var plateformResolver = gameDelivery.NewResolverPlateform(usecasePlateform)
 
 var repositoryNotif 	= notifRepo.NewRepository(database)
 var usecaseNotif 	= notifHandler.NewUsecaseNotif(repositoryNotif)
-var notifResolver = notifDelivery.NewNotifResolver(usecaseNotif)
+var notifResolver = notifDelivery.NewNotifResolver(usecaseNotif,usecase)
 
 
 // GetRootFields returns all the available queries.

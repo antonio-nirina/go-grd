@@ -9,7 +9,10 @@ import (
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
+	"go.mongodb.org/mongo-driver/mongo/options"
 )
+
+const LIMIT = 5
 
 type DriverRepository struct {
 	client *mongo.Client
@@ -46,7 +49,7 @@ func (c *DriverRepository) FindNotifRepo(idUser primitive.ObjectID,objectId prim
 	var collection = c.client.Database("grd_database").Collection("notification")
 	var result entity.Notification
 
-	err := collection.FindOne(context.TODO(), bson.M{"_id": objectId,"user._id":idUser}).Decode(&result)
+	err := collection.FindOne(context.TODO(), bson.M{"_id": objectId,"user.uid":idUser}).Decode(&result)
 
 	if err != nil {
 		return nil, err
@@ -58,7 +61,7 @@ func (c *DriverRepository) FindNotifRepo(idUser primitive.ObjectID,objectId prim
 func (c *DriverRepository) FindAllNotifRepo(idUser primitive.ObjectID) (interface{}, error){
 	var collection = c.client.Database("grd_database").Collection("notification")
 	var results []primitive.M
-	cur, err := collection.Find(context.TODO(), bson.D{{"user.id",idUser}})
+	cur, err := collection.Find(context.TODO(), bson.D{{"statut":false},{"user.uid",idUser}},options.Find().SetLimit(LIMIT).SetSort(bson.D{{"_id", -1}}))
 
 	if err != nil {
 		return nil, err

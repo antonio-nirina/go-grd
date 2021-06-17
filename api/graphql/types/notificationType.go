@@ -4,24 +4,6 @@ import (
 	"github.com/graphql-go/graphql"
 )
 
-var userTYpeNotfi = graphql.NewObject(graphql.ObjectConfig{
-	Name: "userTypeNotif",
-	Fields: graphql.Fields{
-		"uid": &graphql.Field{
-			Type: graphql.String,
-		},
-		"lastname": &graphql.Field{
-			Type: graphql.String,
-		},
-		"firstname": &graphql.Field{
-			Type: graphql.String,
-		},
-		"username": &graphql.Field{
-			Type: graphql.String,
-		},
-	},
-})
-
 var NotificationSchemaType = graphql.NewObject(graphql.ObjectConfig{
 	Name: "NotificationType",
 	Fields: graphql.Fields{
@@ -35,9 +17,12 @@ var NotificationSchemaType = graphql.NewObject(graphql.ObjectConfig{
 			Type: graphql.NewNonNull(graphql.Boolean),
 		},
 		"user": &graphql.Field{
-			Type: graphql.NewNonNull(userTYpeNotfi),
+			Type: graphql.NewNonNull(UserSchemaType),
 		},
-		"Id": &graphql.Field{
+		"type": &graphql.Field{
+			Type: graphql.NewNonNull(graphql.Int),
+		},
+		"_id": &graphql.Field{
 			Type: graphql.NewNonNull(graphql.String),
 		},
 	},

@@ -1,4 +1,4 @@
-import React from "react"
+import React,{useEffect} from "react"
 import { useSelector } from "react-redux"
 import { Link } from 'react-router-dom'
 
@@ -22,9 +22,19 @@ import HistoryTournament from "./historyTournament"
 import HistoryResult from "./historyResult"
 import AccountGame from "./accountGame"
 import Me from "./me"
+import {SigingTwitch} from "../auth/twitch"
 
 const Profil: React.FC = function() {
 	const userConnectedRedux = useSelector((state:RootState) => state.userConnected)
+	useEffect(() => {
+		const params = window.location.search
+
+		if (window.opener) {
+			window.opener.postMessage(params,"")
+		   	window.close()
+		}
+	},[])
+
 
   return(
 	<div className="profil connected">
@@ -149,8 +159,18 @@ const Profil: React.FC = function() {
 		      				<p>
 		      					<img src="https://i.ibb.co/VMGk5bF/twitch.png" alt="twitch" width="40px" height="auto"/>
 		      					<span className="account-title">Twitch</span>
-		      					<span>Stream sur Go Grind ! Connectez vous à votre compte Twitch</span>
-		      					<button className="btn bg-yellow">Connectez-vous</button>
+		      					<span>
+		      						{Object.keys(userConnectedRedux.user).length > 0 ?
+										Translation(userConnectedRedux.user.language).profil.twitchConnected
+										:
+										Translation("fr").profil.twitchConnected}
+		      					</span>
+		      					<button className="btn bg-yellow" onClick={SigingTwitch}>
+		      						{Object.keys(userConnectedRedux.user).length > 0 ?
+										Translation(userConnectedRedux.user.language).profil.connected
+										:
+										Translation("fr").profil.connected}
+		      					</button>
 		      				</p>
 		      			</div>
 		      		</div>
