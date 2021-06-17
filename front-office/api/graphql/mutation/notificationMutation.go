@@ -18,6 +18,9 @@ func saveNotification() *graphql.Field {
 			"content": &graphql.ArgumentConfig{
 				Type: graphql.String,
 			},
+			"type":&graphql.ArgumentConfig{
+				Type: graphql.Int,
+			},
 		},
 		Resolve:     NotifResolver.SavedNotifResolver,
 	}

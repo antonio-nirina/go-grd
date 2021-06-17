@@ -1,7 +1,8 @@
-import React,{useState} from "react"
+import React,{useState,useMemo} from "react"
 import { Link } from 'react-router-dom'
 import { useSelector,useDispatch } from "react-redux"
 import {useHistory } from "react-router-dom"
+import {useQuery} from "@apollo/client"
 
 import "../header/header.css"
 import logo from "../../assets/image/logo.png"
@@ -15,21 +16,30 @@ import {RootState} from "../../reducer"
 import {Translation} from "../../lang/translation"
 import {removeDataUser} from "../auth/action/userAction"
 import AvatarDefault from "../../assets/image/game-tag.png"
+import {GET_ALL_NOTIFICATIONS} from "../../gql/notifications/query"
+import Notifications from "./notificationFriend"
 
 
 const Header: React.FC = function() {
 	const history = useHistory()
 	const dispatch = useDispatch()
 	const userConnectedRedux = useSelector((state:RootState) => state.userConnected)
-    const [showList, setShowList] = useState<Boolean>(false)
-    const [showNotif, setShowNotif] = useState<Boolean>(false)
+	const [showList, setShowList] = useState<Boolean>(false)
+	const [notification, setNotification] = useState<Number>(0)
+	const [showNotif, setShowNotif] = useState<Boolean>(false)
 	const [isDeconnect, setIsDeconnect] = useState<Boolean>(false)
-    const onShow = function(){
-        setShowList(!showList)
-    }
-    const onShowNotif = function(){
-        setShowNotif(!showNotif)
-    }
+	const {loading,error,data} = useQuery(GET_ALL_NOTIFICATIONS, {
+		variables: {
+			idUser: userConnectedRedux.user.uid
+		},
+	})
+
+	const onShow = function(){
+		setShowList(!showList)
+	}
+	const onShowNotif = function(){
+		setShowNotif(!showNotif)
+	}
 
 	const onDeconnect = function() {
 		dispatch(removeDataUser())
@@ -37,20 +47,33 @@ const Header: React.FC = function() {
 		history.push("/")
 	}
 
+	useMemo(() => {
+		if(!loading && !error && data) {
+			let count:number = 0
+			console.log(data.GetAllNotifications)
+			if(data.GetAllNotifications.length > 0) {
+				data.GetAllNotifications.forEach(function(elemnt:any) {
+					if(!elemnt.statut) count++
+				})
+			}
+			setNotification(count)
+		}
+	},[loading,error,data])
+
   return(
-        <header className={isDeconnect || Object.keys(userConnectedRedux.user).length === 0 ? "header" : "header connected"}>
-    	 	<div className="wrap">
-    	 		<div className="logo">
-	    	 		<h1>
+		<header className={isDeconnect || Object.keys(userConnectedRedux.user).length === 0 ? "header" : "header connected"}>
+			<div className="wrap">
+				<div className="logo">
+					<h1>
 						<Link to="/" className="v-align">
 							<img src={logo} alt="Grid" className="imglogo"/>
 						</Link>
-	    	 		</h1>
-	    	 	</div>
-    	 		<nav className="navmenu">
-    	 			<ul>
-    	 				<li>
-    	 					<Link to="/league">
+					</h1>
+				</div>
+				<nav className="navmenu">
+					<ul>
+						<li>
+							<Link to="/league">
 								{
 									Object.keys(userConnectedRedux.user).length > 0 ?
 									Translation(userConnectedRedux.user.language).header.leagues
@@ -58,9 +81,9 @@ const Header: React.FC = function() {
 									Translation("fr").header.leagues
 								}
 							</Link>
-	 					</li>
-    	 				<li>
-    	 					<Link to="/tournament">
+						</li>
+						<li>
+							<Link to="/tournament">
 								{
 									Object.keys(userConnectedRedux.user).length > 0 ?
 									Translation(userConnectedRedux.user.language).header.tournaments
@@ -68,9 +91,9 @@ const Header: React.FC = function() {
 									Translation("fr").header.tournaments
 								}
 							</Link>
-	 					</li>
-    	 				<li>
-    	 					<Link to="/wager">
+						</li>
+						<li>
+							<Link to="/wager">
 								{
 									Object.keys(userConnectedRedux.user).length > 0 ?
 									Translation(userConnectedRedux.user.language).header.wagers
@@ -78,89 +101,74 @@ const Header: React.FC = function() {
 									Translation("fr").header.wagers
 								}
 							</Link>
-	 					</li>
-    	 				<li>
-    	 					<Link to="/communaute">
-							 	{
+						</li>
+						<li>
+							<Link to="/communaute">
+								{
 									Object.keys(userConnectedRedux.user).length > 0 ?
 									Translation(userConnectedRedux.user.language).header.community
 									:
 									Translation("fr").header.community
 								}
 							</Link>
-	 					</li>
-    	 			</ul>
-    	 		</nav>
-                <div className="bt-container">
-                    <Link to="/login" className="btn bg-yellow">Connexion</Link>
-                    <Link to="/register" className="btn bg-white">Inscription</Link>
-                </div>
-    	 		<div className="tag">
-                    <div className="box">
-    	 			   <div className="lang">
-                            <span>
-                                <>
-                                    <img src={fr} alt="" className={userConnectedRedux.user.language && userConnectedRedux.user.language === "fr" ? "lang show" : "hide" }  width="28" height="29"/>
-                                    <img src={gb} alt="" className={userConnectedRedux.user.language && userConnectedRedux.user.language === "fr" ? "hide" : "lang gb" } width="28" height="29"/>
-                                </>
-                            </span>
-                        </div>
-                        <div className="connex" >
-                            <>
-                                <i className="square" onClick={onShowNotif}>
-                                    <FontAwesomeIcon icon={faBell} size="xs"/>
-                                    <span className="number">2</span>
-                                </i>
-                            </>
-                            <div className={!showNotif ? "notification" :"notification show"}>
-                                <p>
-                                    <img src={AvatarDefault} className="avatar-found"/>
-                                    <span className="profil-name">Name</span>
-                                    <button className="btn bg-yellow">
-                                        <i className="rect"><FontAwesomeIcon icon={faCheck} size="xs"/></i>
-                                        <span>Accepter</span>
-                                    </button>
-                                     <button className="btn bg-white gray">
-                                        <i className="rect"><FontAwesomeIcon icon={faTimes} size="xs"/></i>
-                                        <span>Refuser</span>
-                                    </button>
-                                </p>
-                                <p>
-                                    Vous êtes maintenant ami(e) avec <Link to="#">Nirina1718</Link>
-                                    <span className="date">15/06/2021</span>
-                                </p>
-                            </div>
-                            <><i className="relative">
+						</li>
+					</ul>
+				</nav>
+				<div className="bt-container">
+					<Link to="/login" className="btn bg-yellow">Connexion</Link>
+					<Link to="/register" className="btn bg-white">Inscription</Link>
+				</div>
+				<div className="tag">
+					<div className="box">
+					   <div className="lang">
+							<span>
+								<>
+									<img src={fr} alt="" className={userConnectedRedux.user.language && userConnectedRedux.user.language === "fr" ? "lang show" : "hide" }  width="28" height="29"/>
+									<img src={gb} alt="" className={userConnectedRedux.user.language && userConnectedRedux.user.language === "fr" ? "hide" : "lang gb" } width="28" height="29"/>
+								</>
+							</span>
+						</div>
+						<div className="connex" >
+							<>
+								<i className="square" onClick={onShowNotif} style={{"cursor":"pointer"}}>
+									<FontAwesomeIcon icon={faBell} size="xs"/>
+									<span className="number">{notification > 0 ? notification : ""}</span>
+								</i>
+							</>
+							<div className={!showNotif ? "notification" :"notification show"}>
+								<Notifications />
+							</div>
+							<><i className="relative">
 								<FontAwesomeIcon icon={faUsers} size="lg"/>
 								<span className="counter">2</span></i>
 							</>
-                        </div>
-                    </div>
-                    <div className="gametag">
-                        <div className="itemsTag">
-                            <div className="bg-gametag">
-                                <p><img src={userConnectedRedux.user && userConnectedRedux.user.avatar ? userConnectedRedux.user.avatar : avatar} className="avatar"/></p>
-                                <p className="user">{userConnectedRedux.user.username}</p>
-                                <p className="user-setting">
+						</div>
+					</div>
+					<div className="gametag">
+						<div className="itemsTag">
+							<div className="bg-gametag">
+								<p><img src={userConnectedRedux.user && userConnectedRedux.user.avatar ? userConnectedRedux.user.avatar : avatar} className="avatar"/></p>
+								<p className="user">{userConnectedRedux.user.username}</p>
+								<p className="user-setting">
 									<><img src={ps} className="itemTag" alt="" width="18" height="14"/></>
 									<><img src={userConnectedRedux.user.language && userConnectedRedux.user.language === "fr" ? fr : gb} className="itemTag" alt="" width="15" height="14"/></>
-                                <i className="itemTag drop" onClick={onShow}><FontAwesomeIcon icon={faBars} /></i>
-                                </p>
-                            </div>
-                        </div>
-                        <div className={!showList ? "dropdown" :"dropdown show"}>
-                            <ul>
-                                <li><Link to="/profil">Profil</Link></li>
-                                <li><Link to="/tournament">Tournois</Link></li>
-                                <li><Link to="/ligue">Ligues</Link></li>
-                                <li><Link to="/wager">Wager</Link></li>
-                                <li><Link to="/assistance">Assistance</Link></li>
+								<i className="itemTag drop" onClick={onShow}><FontAwesomeIcon icon={faBars} /></i>
+								</p>
+							</div>
+						</div>
+						<div className={!showList ? "dropdown" :"dropdown show"}>
+							<ul>
+								<li><Link to="/profil">Profil</Link></li>
+								<li><Link to="/tournament">Tournois</Link></li>
+								<li><Link to="/ligue">Ligues</Link></li>
+								<li><Link to="/wager">Wager</Link></li>
+								<li><Link to="/assistance">Assistance</Link></li>
 								<li style={{"cursor":"pointer"}} onClick={onDeconnect}>Deconnexion</li>
-                            </ul>
-                        </div>
-                    </div>
-    	 		</div>
-            </div>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
 		</header>
   )
 

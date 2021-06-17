@@ -223,6 +223,7 @@ func GetToken(user entity.User) (interface{}, error) {
 	}
 
 	claims 				:= _jwt.MapClaims{}
+	claims["uid"] 		= user.Uid
 	claims["email"] 	= user.Email
 	claims["avatar"] 	= user.Avatar
 	claims["firstname"] = user.FirstName

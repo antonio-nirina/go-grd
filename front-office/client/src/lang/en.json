@@ -117,7 +117,9 @@
 		"month":  "month",
 		"accountGame":"Unspecified game account",
 		"firstname":"Firstname",
-		"lastname":"Lastname"
+		"lastname":"Lastname",
+		"twitchConnected":"Stream on Go Grind! Log into your Twitch account",
+		"connected":"Signin"
 	},
 	"participHome": {
 		"participateTournament":"Participate in tournaments",
@@ -142,4 +144,5 @@
 	"communauty":{
 		"friend":"have not friends"
 	}
+
 }

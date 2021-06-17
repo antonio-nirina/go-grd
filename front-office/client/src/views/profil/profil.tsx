@@ -1,10 +1,10 @@
-import React from "react"
+import React,{useEffect} from "react"
 import { useSelector } from "react-redux"
 import { Link } from 'react-router-dom'
 
 import Popup from "reactjs-popup"
-// import { faXbox, faPlaystation } from "@fortawesome/free-brands-svg-icons"
-// faCogs, faCalendarAlt, faInfoCircle, faGamepad, faTrophy, faMedal, faStepBackward, faStepForward, faChevronRight, faChevronLeft, faMobile,
+import { faPen } from "@fortawesome/free-solid-svg-icons"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import Header from "../header/header"
 import Footer from "../footer/footer"
@@ -13,18 +13,26 @@ import Avatar from "./avatar"
 import "../../assets/css/style.css"
 import "react-responsive-carousel/lib/styles/carousel.min.css"
 import 'reactjs-popup/dist/index.css'
-// import { CircularProgressbar, CircularProgressbarWithChildren, buildStyles} from "react-circular-progressbar"
 
-import "react-circular-progressbar/dist/styles.css"
 import {RootState} from "../../reducer"
 import {Translation} from "../../lang/translation"
 import HistoryTournament from "./historyTournament"
 import HistoryResult from "./historyResult"
 import AccountGame from "./accountGame"
 import Me from "./me"
+import {SigingTwitch} from "../auth/twitch"
 
 const Profil: React.FC = function() {
 	const userConnectedRedux = useSelector((state:RootState) => state.userConnected)
+	useEffect(() => {
+		const params = window.location.search
+
+		if (window.opener) {
+			window.opener.postMessage(params,"")
+		   	window.close()
+		}
+	},[])
+
 
   return(
 	<div className="profil connected">
@@ -149,8 +157,18 @@ const Profil: React.FC = function() {
 		      				<p>
 		      					<img src="https://i.ibb.co/VMGk5bF/twitch.png" alt="twitch" width="40px" height="auto"/>
 		      					<span className="account-title">Twitch</span>
-		      					<span>Stream sur Go Grind ! Connectez vous à votre compte Twitch</span>
-		      					<button className="btn bg-yellow">Connectez-vous</button>
+		      					<span>
+		      						{Object.keys(userConnectedRedux.user).length > 0 ?
+										Translation(userConnectedRedux.user.language).profil.twitchConnected
+										:
+										Translation("fr").profil.twitchConnected}
+		      					</span>
+		      					<button className="btn bg-yellow" onClick={SigingTwitch}>
+		      						{Object.keys(userConnectedRedux.user).length > 0 ?
+										Translation(userConnectedRedux.user.language).profil.connected
+										:
+										Translation("fr").profil.connected}
+		      					</button>
 		      				</p>
 		      			</div>
 		      		</div>
@@ -213,6 +231,18 @@ const Profil: React.FC = function() {
 									Translation(userConnectedRedux.user.language).profil.addTeam
 									:
 									Translation("fr").profil.addTeam}</h3></div>
+									<div className="uploadLogoteam">
+										<div className="bg-team">
+											<img src="https://i.ibb.co/C59KCSd/team-mate.png" className="imgresp"/>
+										</div>
+										<div className="logoteam-container">
+											<p className="setlogoTeam">
+												<img src = "https://i.ibb.co/dQPw2Vd/teamlogo.png" width="100"/>											
+												<label htmlFor="setLogoTeam"><FontAwesomeIcon icon={faPen} /></label>											
+												<input type="file" id="setLogoTeam" className="uploadLogoFile" name="logoFile"/>
+											</p>										
+										</div>
+									</div>
 							        <div className="content set-team">
 							          {' '}
 										<div className="set-team">

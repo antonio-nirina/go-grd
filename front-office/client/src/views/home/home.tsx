@@ -27,6 +27,7 @@ const GetProfilUser = function ({token}:any) {
 		if(!loading && !error && data) {
 			const name:Array<string> = data.GetProfilUserXbox.DisplayName.split(" ")
 			const user:UserType = {
+				uid:"",
 				username:name[0],
 				email:data.GetProfilUserXbox.userPrincipalName,
 				avatar:"",
