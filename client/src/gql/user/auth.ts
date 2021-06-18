@@ -25,19 +25,15 @@ export const XboxProfil = gql`
 				Mail
 				PreferredLanguage
 			}
-
 	}
 `
 
 export const TwitchProfil = gql`
-	query GetProfilTwitch($accessToken: String!) {
-		GetProfilTwitch(accessToken: $accessToken) {
-				DisplayName
-				Surname
-				userPrincipalName
-				Id
-				Mail
-				PreferredLanguage
+	query GetAccessTokenTwitch($code: String!,$email: String) {
+		GetAccessTokenTwitch(code: $code,email: $email) {
+				access_token
+				refresh_token
+				expires_in
 			}
 
 	}

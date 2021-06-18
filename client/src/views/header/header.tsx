@@ -28,6 +28,7 @@ const Header: React.FC = function() {
 	const [notification, setNotification] = useState<Number>(0)
 	const [showNotif, setShowNotif] = useState<Boolean>(false)
 	const [isDeconnect, setIsDeconnect] = useState<Boolean>(false)
+	const [dataNotifications, setDataNotifications] = useState<Array<any>>([])
 	const {loading,error,data} = useQuery(GET_ALL_NOTIFICATIONS, {
 		variables: {
 			idUser: userConnectedRedux.user.uid
@@ -38,7 +39,10 @@ const Header: React.FC = function() {
 		setShowList(!showList)
 	}
 	const onShowNotif = function(){
-		setShowNotif(!showNotif)
+		if(dataNotifications.length > 0) {
+			setShowNotif(!showNotif)
+		}
+
 	}
 
 	const onDeconnect = function() {
@@ -52,6 +56,7 @@ const Header: React.FC = function() {
 			let count:number = 0
 			console.log(data.GetAllNotifications)
 			if(data.GetAllNotifications.length > 0) {
+				setDataNotifications(data.GetAllNotifications)
 				data.GetAllNotifications.forEach(function(elemnt:any) {
 					if(!elemnt.statut) count++
 				})
@@ -136,7 +141,7 @@ const Header: React.FC = function() {
 								</i>
 							</>
 							<div className={!showNotif ? "notification" :"notification show"}>
-								<Notifications />
+								<Notifications data={dataNotifications} />
 							</div>
 							<><i className="relative">
 								<FontAwesomeIcon icon={faUsers} size="lg"/>

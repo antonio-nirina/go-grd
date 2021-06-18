@@ -84,6 +84,9 @@ func GetAccessTokenTwitch() *graphql.Field {
 			"code": &graphql.ArgumentConfig{
 				Type: graphql.String,
 			},
+			"email": &graphql.ArgumentConfig{
+				Type: graphql.String,
+			},
 		},
 		
 		Resolve: UserRolve.GetAccessTokenTwitchApi,

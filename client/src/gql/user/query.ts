@@ -10,3 +10,12 @@ export const GET_ALL_FRIENDS= gql`
 		id
 	}
 }`
+
+export const GET_ALL_STREAMING = gql`
+	query GetStreaming($uid: String!) {
+		GetStreaming(uid: $uid){
+		count
+		email
+		id
+	}
+}`
