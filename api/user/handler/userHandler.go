@@ -53,7 +53,7 @@ func (u *UserUsecase) FindOneUser(idQuery string) (interface{}, error) {
 	return user, nil
 }
 
-func (u *UserUsecase) FindAllUser() (interface{}, error) {
+func (u *UserUsecase) FindAllUser() ([]entity.User, error) {
 	result, err := u.userRepository.FindAllUser()
 
 	if err != nil {
@@ -201,3 +201,18 @@ func (u *UserUsecase) FindOneUserById(idQuery string) (entity.User, error) {
 	return user, nil
 }
 
+func (u *UserUsecase) FindOneUserByUid(idQuery string) (entity.User, error) {
+	objectId, err := primitive.ObjectIDFromHex(idQuery)
+	
+	if err != nil {
+		return entity.User{}, err
+	}
+
+	user, err := u.userRepository.FindOneUserByUid(objectId)
+	
+	if err != nil {
+		return entity.User{}, err
+	}
+
+	return user, nil
+}

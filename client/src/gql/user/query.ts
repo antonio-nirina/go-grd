@@ -19,3 +19,13 @@ export const GET_ALL_STREAMING = gql`
 		id
 	}
 }`
+
+export const GET_ALL_USER = gql`
+	query GetUsers($idUserConnected: String!) {
+		GetUsers(idUserConnected: $idUserConnected){
+		username
+		avatar
+		uid
+		email
+	}
+}`

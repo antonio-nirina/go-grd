@@ -154,7 +154,11 @@
 		"request": "Comment déposer une requête support ?"
 	},
 	"communauty":{
-		"friend":"Vous n’avez pas encore d'ami"
+		"friend":"Vous n’avez pas encore d'ami",
+		"addFriend":"Ajouter",
+		"addFriendList":"Trouver des amis",
+		"titleFriend":"Amis",
+		"titleAddFriend":"Ajouter des amis"
 	}
 
 }

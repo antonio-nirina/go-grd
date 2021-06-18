@@ -6,6 +6,14 @@ export const typeDefs = gql`
 		time:String
 	}
 
+	type Notifications {
+		uid:String
+		email:String
+		avatar:String
+		username:String
+		count:Int
+	}
+
 	type User {
 	    id: String
 	    email: String
@@ -13,6 +21,8 @@ export const typeDefs = gql`
   	}
 
   	input userInput {
+  		uid:String
+  		count:Int
 	    avatar: String
 	    email: String
 	    username:String
@@ -29,5 +39,6 @@ export const typeDefs = gql`
 
 	type Subscription {
 		subscribeCounter:Times
+		subscribeNotifications:Notifications
 	}
 `

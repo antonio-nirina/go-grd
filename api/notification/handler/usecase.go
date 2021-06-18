@@ -8,7 +8,7 @@ import (
 )
 
 type UsecaseNotif interface {
-	SavedNotifHandler(user userEntity.User,name string,title string,typeNotification int) (interface{}, error)
+	SavedNotifHandler(user userEntity.User,title string,content string,typeNotification int) (int64, error)
 	FindNotifHandler(idUser string,idQuery string) (interface{}, error)
 	FindAllNotifHandler(idUser string) (interface{}, error)
 }
@@ -24,7 +24,7 @@ func NewUsecaseNotif(r repository.RepositoryNotif) UsecaseNotif {
 }
 
 
-func (r *notifUsecase) SavedNotifHandler(user userEntity.User,title string,content string,typeNotification int) (interface{}, error) {
+func (r *notifUsecase) SavedNotifHandler(user userEntity.User,title string,content string,typeNotification int) (int64, error) {
 	notify := &entity.Notification{
 		Uid: primitive.NewObjectID(),
 		Title:title,    		
@@ -34,13 +34,14 @@ func (r *notifUsecase) SavedNotifHandler(user userEntity.User,title string,conte
 		User:user,			
 	}
 
-	result, err := r.notifRepository.SavedNotifRepo(notify)
+	_, err := r.notifRepository.SavedNotifRepo(notify)
+	count,err := r.notifRepository.CountNotifNotActivateRepo(user.Uid)
 
 	if err != nil {
-		return nil, err
+		return 0, err
 	}
 
-	return result,nil
+	return count,nil
 }
 
 func (r *notifUsecase) FindNotifHandler(idUser string,idQuery string) (interface{}, error) {

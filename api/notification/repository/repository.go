@@ -29,6 +29,7 @@ type RepositoryNotif interface {
 	SavedNotifRepo(notif *entity.Notification) (interface{}, error)
 	FindNotifRepo(idUser primitive.ObjectID,idQuery primitive.ObjectID) (interface{}, error)
 	FindAllNotifRepo(idUser primitive.ObjectID) (interface{}, error)
+	CountNotifNotActivateRepo(idUser primitive.ObjectID) (int64, error)
 }
 
 func (c *DriverRepository) SavedNotifRepo(notif *entity.Notification) (interface{}, error){
@@ -61,7 +62,7 @@ func (c *DriverRepository) FindNotifRepo(idUser primitive.ObjectID,objectId prim
 func (c *DriverRepository) FindAllNotifRepo(idUser primitive.ObjectID) (interface{}, error){
 	var collection = c.client.Database("grd_database").Collection("notification")
 	var results []primitive.M
-	cur, err := collection.Find(context.TODO(), bson.M{"user.uid":idUser},options.Find().SetLimit(LIMIT).SetSort(bson.D{{"_id", -1}}))
+	cur, err := collection.Find(context.TODO(), bson.M{"user.uid":idUser},options.Find().SetLimit(LIMIT).SetSort(bson.M{"_id": -1}))
 	// collection.Find(context.TODO(), bson.D{{"user.id",idUser}},options.Find().SetLimit(LIMIT).SetSort(bson.D{{"_id", -1}}))
 	if err != nil {
 		return nil, err
@@ -79,4 +80,15 @@ func (c *DriverRepository) FindAllNotifRepo(idUser primitive.ObjectID) (interfac
 	cur.Close(context.TODO())
 
 	return results, nil
+}
+
+func (c *DriverRepository) CountNotifNotActivateRepo(idUser primitive.ObjectID) (int64, error) {
+	var collection = c.client.Database("grd_database").Collection("notification")
+	count, err := collection.CountDocuments(context.TODO(), bson.M{"user.uid":idUser,"statut":false})
+	
+	if err != nil {
+		return 0, err
+	}
+
+	return count, nil
 }

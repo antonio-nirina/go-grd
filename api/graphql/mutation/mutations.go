@@ -17,12 +17,14 @@ import (
 	"github.com/graphql-go/graphql"
 )
 
-var database 	= config.ConfigMongo()
-var repUser 	= repository.NewUserRepository(database)
-var usecase 	= handler.NewUsecaseUser(repUser)
-var UserRolve 	= delivery.NewResolver(usecase)
+var database 			= config.ConfigMongo()
+var repUser 			= repository.NewUserRepository(database)
+var repositoryNotif 	= notifRepo.NewRepository(database)
+var repositoryGame 		= gameRepo.NewGameRepository(database)
 
-var repositoryGame 	= gameRepo.NewGameRepository(database)
+var usecaseNotif 		= notifHandler.NewUsecaseNotif(repositoryNotif)
+var usecase 			= handler.NewUsecaseUser(repUser)
+var UserRolve 			= delivery.NewResolver(usecase,usecaseNotif)
 var usecaseGame 	= gameHandler.NewUsecaseGame(repositoryGame)
 var gameResolver 	= gameDelivery.NewResolverGame(usecaseGame)
 
@@ -30,8 +32,6 @@ var repositoryPlateform = gameRepo.NewPlateformRepository(database)
 var usecasePlateform 	= gameHandler.NewUsecasePlateform(repositoryPlateform)
 var plateformResolver 	= gameDelivery.NewResolverPlateform(usecasePlateform)
 
-var repositoryNotif 	= notifRepo.NewRepository(database)
-var usecaseNotif 		= notifHandler.NewUsecaseNotif(repositoryNotif)
 var NotifResolver 		= notifDelivery.NewNotifResolver(usecaseNotif,usecase)
 
 func GetRootFields() graphql.Fields {
