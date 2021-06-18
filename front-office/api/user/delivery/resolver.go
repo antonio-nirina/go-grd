@@ -17,6 +17,7 @@ type Resolver interface {
 	RequestFriendResolver(params graphql.ResolveParams) (interface{}, error)
 	GetAllFriendsUser(params graphql.ResolveParams) (interface{}, error)
 	GetAllUser(params graphql.ResolveParams)(interface{}, error)
+	GetAccessTokenTwitchApi(params graphql.ResolveParams) (interface{}, error)
 }
 
 

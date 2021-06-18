@@ -5,7 +5,7 @@ import { faBars, faBell, faUsers, faTimes, faCheck } from "@fortawesome/free-sol
 import AvatarDefault from "../../assets/image/game-tag.png"
 
 
-const Notifications: React.FC = function() {
+const Notifications = function({data}:any) {
 	return(
 		<>
 			<p>

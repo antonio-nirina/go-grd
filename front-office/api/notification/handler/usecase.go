@@ -8,7 +8,7 @@ import (
 )
 
 type UsecaseNotif interface {
-	SavedNotifHandler(user userEntity.User,name string,title string) (interface{}, error)
+	SavedNotifHandler(user userEntity.User,name string,title string,typeNotification int) (interface{}, error)
 	FindNotifHandler(idUser string,idQuery string) (interface{}, error)
 	FindAllNotifHandler(idUser string) (interface{}, error)
 }

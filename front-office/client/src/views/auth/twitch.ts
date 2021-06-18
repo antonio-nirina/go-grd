@@ -27,8 +27,8 @@ export const getTokenUser = async function(code: string) {
 		const data = await client().query({query:TwitchProfil,variables:{code:code}})
 		console.log(data)
 		const token:TokenType = {
-			access_token: data.data.GetAccessTokenXbox.AccessToken,
-			refresh_token:data.data.GetAccessTokenXbox.RefreshToken,
+			access_token: data.data.GetAccessTokenTwitch.AccessToken,
+			refresh_token:data.data.GetAccessTokenTwitch.RefreshToken,
 			type:"twitch"
 		}
 
