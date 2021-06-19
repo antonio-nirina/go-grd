@@ -14,6 +14,16 @@
 .ban a, .ban span{
 	color: #f2cf1c
 }
+.wagers .flag span{
+	display: inline-block;
+}
+.wagers .flag img{
+	width: 25px;	
+	border-radius: 50%;
+	display: inline-block;
+	margin-right: 5px;
+	margin-left: 5px;
+}
 .wagers .container .tabs-content{
 	margin-top: 0;
 	background: #1d1d1d;
@@ -26,4 +36,71 @@
 }
 .view .ban{
 	background: url("../../assets/image/csgo.png") no-repeat;
+}
+
+.wagers .bg-line{
+	background: #000000;
+}
+.tab-bloc td{
+	color: #ffffff;
+	font-weight: normal;
+}
+.tab-bloc td i{
+	margin-left: 5px;
+}
+.tab-bloc span{
+	display: block;
+	padding-top: 5px;
+	text-transform: uppercase;
+}
+.view .versus-container{
+	display: flex;
+	height: 100%;
+}
+.view .team{
+	text-align: center;
+	width: 100%;
+	align-self: center;
+}
+.view .team .info{
+	display: inline-block;
+	vertical-align: top;
+	margin-right: 15px;
+	text-align: right;
+}
+.view .team .info p{
+	padding: 5px;
+}
+.view .team .info p.profilname{
+	text-transform: initial;
+	font-size: 35px;
+}
+.view .team .info{
+	text-transform: uppercase;	
+}
+.view .versus-container img{
+	width: 80px;
+	border: 2px solid #0d94c0;
+	border-radius: 50%;
+	display: inline-block;
+	vertical-align: bottom;
+}
+.view .live{
+	width: 100%;
+	text-align: center;	
+	margin: auto;
+}
+.view .live p{
+	font-size: 45px;
+}
+.view .live span{
+	width: 100px;
+	margin: auto;
+	display: block;	
+	font-size: 16px;
+	color: #0d94c0;
+	border: 1px solid #0d94c0;
+	padding: 5px;
+	border-radius: 15px;
+	text-transform: uppercase;
 }

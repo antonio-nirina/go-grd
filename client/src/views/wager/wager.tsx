@@ -3,6 +3,10 @@ import { Link } from "react-router-dom"
 import Header from "../header/header"
 import Footer from "../footer/footer"
 import "../wager/wager.css"
+import { faEye } from "@fortawesome/free-solid-svg-icons"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import AvatarDefault from "../../assets/image/game-tag.png"
+
 const Wager: React.FC = function() {
 return(
 	<div className="Tournament league wagers">
@@ -16,33 +20,32 @@ return(
 					<div className="tabs-content">
 						<div className="tab-league">							
 							<table className="tab-bloc">
-								<tr>
+								<tr className="bg-line">
 									<th>Creator</th>
 									<th>Tournois Name</th>
 									<th>Status</th>
 									<th>Twitch</th>
-									<th>Join</th>
-									
+									<th>Join</th>									
 								</tr>
 								<tr>
-									<td>Alittoo</td>
+									<td className="flag"><p><img src="https://i.ibb.co/gvSwfSp/gb.png"/><img src={AvatarDefault}/></p><span>Alittoo</span></td>
 									<td>ESL PRO</td>
-									<td>5/10</td>
-									<td>50</td>									
+									<td>5/10 <span>picking 20:01</span></td>
+									<td>50 <i><FontAwesomeIcon icon={faEye} size="xs"/></i></td>									
 									<td><Link to="view">View</Link></td>
 								</tr>
 								<tr>
-									<td>16</td>
+									<td>Bonkay</td>
 									<td>ESL</td>
-									<td>Ligue</td>
-									<td>1000 $</td>									
+									<td>7/10 <span>picking 21:01</span></td>
+									<td>25 <i><FontAwesomeIcon icon={faEye} size="xs"/></i></td>									
 									<td><Link to="/view">View</Link></td>
 								</tr>
 								<tr>
-									<td>64</td>
+									<td>Mondo</td>
 									<td>Major League</td>
-									<td>Ligue</td>
-									<td>Merch</td>									
+									<td>8/10 <span>picking 21:20</span></td>
+									<td>250 <i><FontAwesomeIcon icon={faEye} size="xs"/></i></td>									
 									<td style={{width:"100px"}}><Link to="/view">View</Link></td>
 								</tr>
 							</table>

@@ -19,6 +19,7 @@ import cod_Modernwarfare from "../../assets/image/modernwarfare.png"
 import cod_warzone from "../../assets/image/warzone.png"
 import cod_coldwar from "../../assets/image/cod-coldwar.png"
 import fifa from "../../assets/image/fifa21.png"
+import AvatarDefault from "../../assets/image/game-tag.png"
 
 const League: React.FC = function() {
 	const userConnectedRedux = useSelector((state:RootState) => state.userConnected)
@@ -28,7 +29,27 @@ const League: React.FC = function() {
 			<Header/>
 			<div className="full-container">
 				<div className="ban">
-				
+					<div className="versus-container">
+						<div className="team">
+							<div className="info">
+								<span>team</span>
+								<p className="profilname">HammyZZ</p>
+								<p><span>2113 </span>Average rating</p>
+							</div>
+							<img src={AvatarDefault} />
+						</div>
+						<div className="live">
+							<p><span>Live</span>9:22</p>
+						</div>
+						<div className="team">
+						<div className="info">
+								<span>team</span>
+								<p className="profilname">rainDrop</p>
+								<p><span>2185 </span>Average rating</p>
+							</div>
+							<img src={AvatarDefault} />
+						</div>
+					</div>
 				</div>
 					<div className="tabs-content">
 						<div className="tab-league">							
