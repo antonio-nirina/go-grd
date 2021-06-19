@@ -14,7 +14,7 @@
 .ban a, .ban span{
 	color: #f2cf1c
 }
-.wagers .flag span{
+.wagers .flag span, .wagers .flag p{
 	display: inline-block;
 }
 .wagers .flag img{
