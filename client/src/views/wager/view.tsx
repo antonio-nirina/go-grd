@@ -87,7 +87,8 @@ const League: React.FC = function() {
 						</div>
 					</div>
 				</div>		
-			</div>		
+			</div>
+			<Footer/>	
 		</div>
   );
 }
