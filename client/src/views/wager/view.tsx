@@ -2,6 +2,8 @@ import React from "react"
 import { useSelector } from "react-redux"
 import { Link } from 'react-router-dom'
 
+import { faEye } from "@fortawesome/free-solid-svg-icons"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import {Translation} from "../../lang/translation"
 import {RootState} from "../../reducer"
 
@@ -40,6 +42,7 @@ const League: React.FC = function() {
 						</div>
 						<div className="live">
 							<p><span>Live</span>9:22</p>
+							<div className="mise"><button className="btn bg-yellow">Faite votre mise</button></div>
 						</div>
 						<div className="team">
 						<div className="info">
@@ -49,41 +52,77 @@ const League: React.FC = function() {
 							</div>
 							<img src={AvatarDefault} />
 						</div>
-					</div>
+					</div>					
 				</div>
 					<div className="tabs-content">
 						<div className="tab-league">							
-							<table className="tab-bloc">
-								<tr>
-									<th>Creator</th>
-									<th>Tournois Name</th>
-									<th>Status</th>
-									<th>Twitch</th>
-									<th>Join</th>
+							<div className="team1 team">
+								<table>
+									<tr>
+										<th>Player</th>
+										<th>Rating</th>
+										<th>K/D</th>
+										<th>Twitch</th>
+									</tr>
+									<tr>
+										<th><img src={AvatarDefault} />Klover</th>
+										<th>2099</th>
+										<th>1.29</th>
+										<th>5 <i><FontAwesomeIcon icon={faEye} size="xs"/></i></th>
+									</tr>
+									<tr>
+										<th><img src={AvatarDefault} />Klover</th>
+										<th>2099</th>
+										<th>1.29</th>
+										<th>5 <i><FontAwesomeIcon icon={faEye} size="xs"/></i></th>
+									</tr>
+									<tr>
+										<th><img src={AvatarDefault} />Klover</th>
+										<th>2099</th>
+										<th>1.29</th>
+										<th>5 <i><FontAwesomeIcon icon={faEye} size="xs"/></i></th>
+									</tr>
+									<tr>
+										<th><img src={AvatarDefault} />Klover</th>
+										<th>2099</th>
+										<th>1.29</th>
+										<th>5 <i><FontAwesomeIcon icon={faEye} size="xs"/></i></th>
+									</tr>
 									
-								</tr>
-								<tr>
-									<td>Alittoo</td>
-									<td>ESL PRO</td>
-									<td>5/10</td>
-									<td>50</td>									
-									<td><Link to="view">View</Link></td>
-								</tr>
-								<tr>
-									<td>16</td>
-									<td>ESL</td>
-									<td>Ligue</td>
-									<td>1000 $</td>									
-									<td><Link to="/view">View</Link></td>
-								</tr>
-								<tr>
-									<td>64</td>
-									<td>Major League</td>
-									<td>Ligue</td>
-									<td>Merch</td>									
-									<td style={{width:"100px"}}><Link to="/view">View</Link></td>
-								</tr>
-							</table>
+								</table>
+								<button className="btn bg-yellow">Join Team 1</button>
+
+							</div>
+							<div className="team2 team">								
+								<table>
+									<tr>
+										<th>Player</th>
+										<th>Rating</th>
+										<th>K/D</th>
+										<th>Twitch</th>
+									</tr>
+									<tr>
+										<th><img src={AvatarDefault} />Klover</th>
+										<th>2099</th>
+										<th>1.29</th>
+										<th>5 <i><FontAwesomeIcon icon={faEye} size="xs"/></i></th>
+									</tr>
+									<tr>
+										<th><img src={AvatarDefault} />Klover</th>
+										<th>2099</th>
+										<th>1.29</th>
+										<th>5 <i><FontAwesomeIcon icon={faEye} size="xs"/></i></th>
+									</tr>
+									<tr>
+										<th><img src={AvatarDefault} />Klover</th>
+										<th>2099</th>
+										<th>1.29</th>
+										<th>5 <i><FontAwesomeIcon icon={faEye} size="xs"/></i></th>
+									</tr>
+									
+								</table>
+								<button className="btn bg-yellow">Join Team 2</button>
+							</div>
 						</div>
 					</div>
 				</div>		

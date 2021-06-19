@@ -36,6 +36,7 @@
 }
 .view .ban{
 	background: url("../../assets/image/csgo.png") no-repeat;
+	background-position: center top;
 }
 
 .wagers .bg-line{
@@ -92,6 +93,7 @@
 }
 .view .live p{
 	font-size: 45px;
+	padding: 45px 0;
 }
 .view .live span{
 	width: 100px;
@@ -99,8 +101,42 @@
 	display: block;	
 	font-size: 16px;
 	color: #0d94c0;
-	border: 1px solid #0d94c0;
+	border: 2px solid #0d94c0;
 	padding: 5px;
 	border-radius: 15px;
 	text-transform: uppercase;
+	font-weight: 700;
+}
+.view .live button{
+	margin-top: 15px;
+}
+.view .live button{
+	background: none;
+	color: #f2cf1c;
+}
+.tab-league{
+	display: flex;
+}
+.tab-league table{
+	width: 100%;
+	height: 241px;
+	margin-right: 5px;
+}
+.tab-league img{
+	width: 30px;
+	vertical-align: middle;
+	margin-right: 5px;
+}
+.tab-league .team{
+	width: 100%;
+}
+.tab-league .team1, .tab-league .team2{
+	margin-right: 25px;
+	background: #000000;
+}
+.team th{
+	padding: 5px;
+}
+.team button{
+	margin: 10px 0;
 }
