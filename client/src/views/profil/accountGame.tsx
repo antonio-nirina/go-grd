@@ -27,8 +27,9 @@ const AccountGame : React.FC = function() {
 						modal
 						nested
 					>
+					{(close:any) => (
 					<div className="modal">
-						<button className="close">
+						<button className="close" onClick={close}>
 							&times;
 						</button>
 						<div className="header"> <h3>{Object.keys(userConnectedRedux.user).length > 0 ?
@@ -51,6 +52,7 @@ const AccountGame : React.FC = function() {
 								</Popup>
 							</div>
 						</div>
+					)}
 					</Popup>
 
 			</div>
@@ -68,8 +70,9 @@ const AccountGame : React.FC = function() {
 						modal
 						nested
 					>
+					{(close:any) => (
 					<div className="modal">
-						<button className="close">
+						<button className="close" onClick={close}>
 							&times;
 						</button>
 						<div className="header"> <h3>{Object.keys(userConnectedRedux.user).length > 0 ?
@@ -94,6 +97,7 @@ const AccountGame : React.FC = function() {
 								</Popup>
 							</div>
 						</div>
+					)}
 					</Popup>
 			</div>
 		</div>

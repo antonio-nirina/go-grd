@@ -169,7 +169,7 @@ li{
 }
 /*********  Media query ***************/
 
-@media screen and (min-width: 1330px) {
+/*@media screen and (min-width: 1330px) {
 
 
 }
@@ -193,12 +193,7 @@ li{
   .navmenu
   {
         width: 50%;
-  }
-  .home header.header .wrap,
-  .wrap
-  {
-      /*padding: 3px 0px;*/
-  }
+  }  
   footer .wrap{
     padding: 3px 50px;
   }
@@ -522,10 +517,7 @@ li{
   }
 }
 
-@media screen and (max-width: 500px){
-  /*.home .container{
-     padding: 3em 0em 0em;
-  }*/
+@media screen and (max-width: 500px){  
   .home .slogan{
     top: 20%;
   }
@@ -617,8 +609,5 @@ li{
     font-size: 20px;
   }
 
-}
-@media screen and (max-width: 320px){
-
-}
+}*/
 

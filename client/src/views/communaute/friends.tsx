@@ -99,7 +99,7 @@ const Friend: React.FC = function() {
 							nested
 						>
 							{(close:any) => (<div className="modal">
-									<button className="close">
+									<button className="close" onClick={close}>
 										&times;
 									</button>
 									<div className="bar-title">
