@@ -9,6 +9,7 @@ import Matches from "../tournament/matches"
 import Teams from "../tournament/teams"
 import Rules from "../tournament/rules"
 import Wager from "../wager/wager"
+import View from "../wager/view"
 import Assistant from "../assistant/assistant"
 import Assistance from "../assistance/assistance"
 import Communaute from "../communaute/communaute"
@@ -35,6 +36,7 @@ const Router = function() {
 			<ProtectedRoute path="/ligue" exact component={Ligue} />
 			<ProtectedRoute path="/league" exact component={League} />
 			<ProtectedRoute path="/wager" exact component={Wager} />
+			<ProtectedRoute path="/view" exact component={View} />
 			<ProtectedRoute path="/communaute" exact component={Communaute} />			
 			<ProtectedRoute path="/assistant" exact component={Assistant} />
 			<ProtectedRoute path="/assistance" exact component={Assistance} />

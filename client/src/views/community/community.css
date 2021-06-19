@@ -26,6 +26,9 @@
 	width: 52%;
 	margin-bottom: 15px;
 }
+.artContent{
+	display: flex;
+}
 .actuality h3{
 	font-family: "russo one";
 	font-weight: 200;

@@ -1,17 +1,34 @@
 import React from "react"
-import { Link } from "react-router-dom"
+import { useSelector } from "react-redux"
+import { Link } from 'react-router-dom'
+
+import {Translation} from "../../lang/translation"
+import {RootState} from "../../reducer"
+
 import Header from "../header/header"
+import Join from "../join/join"
 import Footer from "../footer/footer"
-import "../wager/wager.css"
-const Wager: React.FC = function() {
-return(
-	<div className="Tournament league wagers">
+import "../../assets/css/style.css"
+import "../league/league.css"
+
+import apexlegends from "../../assets/image/apex-legends.png"
+import fortnite from "../../assets/image/fortnite.png"
+import rainboxsix from "../../assets/image/rainbowsix.png"
+import rocketleague from "../../assets/image/rocketleague.png"
+import cod_Modernwarfare from "../../assets/image/modernwarfare.png"
+import cod_warzone from "../../assets/image/warzone.png"
+import cod_coldwar from "../../assets/image/cod-coldwar.png"
+import fifa from "../../assets/image/fifa21.png"
+
+const League: React.FC = function() {
+	const userConnectedRedux = useSelector((state:RootState) => state.userConnected)
+  return(
+    <div className="Tournament league wagers view">
 		<div className="container">
 			<Header/>
 			<div className="full-container">
 				<div className="ban">
-					<h2>Welcome to <Link to="#">GO Grind</Link> Wager Platform</h2>
-					<p><span>2688</span> Players Online</p>
+				
 				</div>
 					<div className="tabs-content">
 						<div className="tab-league">							
@@ -51,7 +68,7 @@ return(
 				</div>		
 			</div>		
 		</div>
-	)
+  );
 }
 
-export default Wager
+export default League;

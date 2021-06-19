@@ -169,10 +169,35 @@ li{
 }
 /*********  Media query ***************/
 
-/*@media screen and (min-width: 1330px) {
-
+@media screen and (max-width: 940px) {
+  .home p.title{
+    font-size: 32px;
+  }
+  .navmenu{
+    display: none;
+  }
+  .tag{
+    max-width: inherit;
+    text-align: right;
+  }
+  .header .bt-container{
+    width: 100%;
+    max-width: inherit;
+    text-align: right;
+  }
+  .container .content{
+    display: block;
+  }
+  .container .block, .container .block.last{
+    margin-bottom: 15px;
+    width: 48%
+  }
+  .container .block.last{
+    border-radius: 15px;
+  }
 
 }
+/*
 @media screen and (max-width: 1302px) {
   .home .content{
     display: block;

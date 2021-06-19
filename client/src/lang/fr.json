@@ -20,10 +20,10 @@
 		"connex": "Connectez-vous avec votre compte"
 	},
 	"header":{
-		"leagues": "ligues",
-		"wagers": "wagers",
-		"community": "communauté",
-		"tournaments": "tournois"
+		"leagues": "Ligues",
+		"wagers": "Wagers",
+		"community": "Communauté",
+		"tournaments": "Tournois"
 	},
 	"home":{
 		"leagues": "ligues",
