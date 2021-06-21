@@ -11,7 +11,9 @@
 		"leagues": "leagues",
 		"wagers": "wagers",
 		"community": "community",
-		"tournaments": "tournaments"
+		"tournaments": "tournaments",
+		"refuse":"Refuse",
+		"accepted": "Accepted"
 	},
 	"home":{
 		"gameTag": "Gametag",

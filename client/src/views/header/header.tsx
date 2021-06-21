@@ -20,6 +20,15 @@ import {GET_ALL_NOTIFICATIONS} from "../../gql/notifications/query"
 import Notifications from "./notificationFriend"
 import {NOTIFICATIONS_SUBSCRIBE,COUNT_SUBSCRIBE} from "../../gql/user/subscription"
 
+export interface Notif  {
+	type:number,
+	user:{
+		email: string,
+		username: string,
+		avatar: string,
+	}
+}
+
 
 const Header: React.FC = function() {
 	const history = useHistory()
@@ -54,6 +63,8 @@ const Header: React.FC = function() {
 	}
 
 	useMemo(() => {
+		let array:Array<Notif> = []
+		let notif:Notif
 		if(!loading && !error && data) {
 			let count:number = 0
 
@@ -61,14 +72,37 @@ const Header: React.FC = function() {
 				setDataNotifications(data.GetAllNotifications)
 				data.GetAllNotifications.forEach(function(elemnt:any) {
 					if(!elemnt.statut) count++
+					if(elemnt.type === 0) {
+						notif = {
+							type:0,
+							user:{
+								email: elemnt.emailsender,
+								username: elemnt.usernameSender,
+								avatar: elemnt.avatarSender
+							}
+						}
+						array.push(notif)
+					}
 				})
 			}
 			setNotification(count)
 		}
 
 		if(!subLoading && !errSub && subData) {
-			setNotification(subData.subscribeNotifications.count)
+			if(subData.subscribeNotifications.uid === userConnectedRedux.user.uid) {
+				notif = {
+					type:0,
+					user:{
+						email: subData.subscribeNotifications.emailsender,
+						username: subData.subscribeNotifications.usernameSender,
+						avatar: subData.subscribeNotifications.avatarSender
+					}
+				}
+				array.push(notif)
+				setNotification(subData.subscribeNotifications.count)
+			}
 		}
+		setDataNotifications(array)
 	},[loading,error,data,subLoading,errSub,subData])
 
   return(

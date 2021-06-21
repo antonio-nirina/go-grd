@@ -23,7 +23,9 @@
 		"leagues": "ligues",
 		"wagers": "wagers",
 		"community": "communauté",
-		"tournaments": "tournois"
+		"tournaments": "tournois",
+		"refuse":"Refuser",
+		"accepted": "Accepter"
 	},
 	"home":{
 		"leagues": "ligues",
@@ -158,7 +160,8 @@
 		"addFriend":"Ajouter",
 		"addFriendList":"Trouver des amis",
 		"titleFriend":"Amis",
-		"titleAddFriend":"Ajouter des amis"
+		"titleAddFriend":"Ajouter des amis",
+		"withFriend":"Vous êtes maintenant ami(e) avec"
 	}
 
 }
