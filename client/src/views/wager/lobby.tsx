@@ -23,10 +23,10 @@ import cod_coldwar from "../../assets/image/cod-coldwar.png"
 import fifa from "../../assets/image/fifa21.png"
 import AvatarDefault from "../../assets/image/game-tag.png"
 
-const View: React.FC = function() {
+const Lobby: React.FC = function() {
 	const userConnectedRedux = useSelector((state:RootState) => state.userConnected)
   return(
-    <div className="Tournament league wagers view">
+    <div className="Tournament league wagers view lobby">
 		<div className="container">
 			<Header/>
 			<div className="full-container">
@@ -34,23 +34,20 @@ const View: React.FC = function() {
 					<div className="versus-container">
 						<div className="team">
 							<div className="info">
-								<span>team</span>
-								<p className="profilname">HammyZZ</p>
-								<p><span>2113 </span>Average rating</p>
+								<span>Tournament</span>
+								<p className="profilname">CS:GO</p>
+								<p><span>Type </span>5/5</p>
 							</div>
-							<img src={AvatarDefault} />
+							
 						</div>
-						<div className="live">
-							<p><span>Live</span>9:22</p>
-							<div className="mise"><button className="btn bg-yellow">Faite votre mise</button></div>
-						</div>
+						
 						<div className="team">
 						<div className="info">
-								<span>team</span>
+								<span>Created by</span>
 								<p className="profilname">rainDrop</p>
 								<p><span>2185 </span>Average rating</p>
 							</div>
-							<img src={AvatarDefault} />
+							
 						</div>
 					</div>					
 				</div>
@@ -88,15 +85,9 @@ const View: React.FC = function() {
 										<th>1.29</th>
 										<th>5 <i><FontAwesomeIcon icon={faEye} size="xs"/></i></th>
 									</tr>
-									<tr>
-										<th><img src={AvatarDefault} />Klover</th>
-										<th>2099</th>
-										<th>1.29</th>
-										<th>5 <i><FontAwesomeIcon icon={faEye} size="xs"/></i></th>
-									</tr>
-								</table>
-								
-
+									
+								</table>								
+								<button className="btn bg-yellow">Join Team 1</button>
 							</div>
 							<div className="team2 team">								
 								<table>
@@ -124,20 +115,9 @@ const View: React.FC = function() {
 										<th>1.29</th>
 										<th>5 <i><FontAwesomeIcon icon={faEye} size="xs"/></i></th>
 									</tr>
-									<tr>
-										<th><img src={AvatarDefault} />Klover</th>
-										<th>2099</th>
-										<th>1.29</th>
-										<th>5 <i><FontAwesomeIcon icon={faEye} size="xs"/></i></th>
-									</tr>
-									<tr>
-										<th><img src={AvatarDefault} />Klover</th>
-										<th>2099</th>
-										<th>1.29</th>
-										<th>5 <i><FontAwesomeIcon icon={faEye} size="xs"/></i></th>
-									</tr>
+									
 								</table>
-								
+								<button className="btn bg-yellow">Join Team 2</button>
 							</div>
 						</div>
 					</div>
@@ -148,4 +128,4 @@ const View: React.FC = function() {
   );
 }
 
-export default View;
+export default Lobby;

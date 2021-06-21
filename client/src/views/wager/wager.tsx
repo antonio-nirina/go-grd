@@ -31,28 +31,30 @@ return(
 									<td className="flag"><p><img src="https://i.ibb.co/gvSwfSp/gb.png"/><img src={AvatarDefault}/></p><span>Alittoo</span></td>
 									<td>ESL PRO</td>
 									<td>5/10 <span>picking 20:01</span></td>
-									<td>50 <i><FontAwesomeIcon icon={faEye} size="xs"/></i></td>									
-									<td><Link to="view">View</Link></td>
+									<td className="twitch"><Link to="#">50 <i><FontAwesomeIcon icon={faEye} size="xs"/></i></Link></td>									
+									<td><Link to="/lobby">Lobby</Link></td>
 								</tr>
 								<tr>
 									<td>Bonkay</td>
 									<td>ESL</td>
 									<td>7/10 <span>picking 21:01</span></td>
-									<td>25 <i><FontAwesomeIcon icon={faEye} size="xs"/></i></td>									
+									<td className="twitch"><Link to="#">25 <i><FontAwesomeIcon icon={faEye} size="xs"/></i></Link></td>									
 									<td><Link to="/view">View</Link></td>
 								</tr>
 								<tr>
 									<td>Mondo</td>
 									<td>Major League</td>
 									<td>8/10 <span>picking 21:20</span></td>
-									<td>250 <i><FontAwesomeIcon icon={faEye} size="xs"/></i></td>									
+									<td className="twitch"><Link to="#">250 <i><FontAwesomeIcon icon={faEye} size="xs"/></i></Link></td>									
 									<td style={{width:"100px"}}><Link to="/view">View</Link></td>
 								</tr>
 							</table>
 						</div>
+
 					</div>
 				</div>		
 			</div>
+			
 			<Footer/>	
 		</div>
 	)

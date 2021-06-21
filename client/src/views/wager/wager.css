@@ -34,6 +34,10 @@
 .wagers .tab-bloc td{
 	border-bottom: none;
 }
+.wagers .tab-bloc td.twitch a{
+	background: none;
+	color: #ffffff;
+}
 .view .ban{
 	background: url("../../assets/image/csgo.png") no-repeat;
 	background-position: center top;
@@ -42,6 +46,7 @@
 .wagers .bg-line{
 	background: #000000;
 }
+
 .tab-bloc td{
 	color: #ffffff;
 	font-weight: normal;
@@ -139,4 +144,7 @@
 }
 .team button{
 	margin: 10px 0;
+}
+.lobby .versus-container .team{
+	width: 20%;
 }
