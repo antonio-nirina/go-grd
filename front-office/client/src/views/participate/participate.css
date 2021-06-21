@@ -6,7 +6,7 @@
 	
 }
 .part{
-	padding: 3em 0em 3em 3em;
+	padding: 3em 0em 3em 2em;
 }
 .undertitle{
 	display: inline-block;
@@ -27,8 +27,7 @@
 	margin-right: 10px;
 }
 .content{
-	display: grid;
-	grid-auto-flow: column;
+	display: flex;		
 }
 .clear{
 	display: none;
@@ -36,12 +35,13 @@
 .block{
 	background: #2c2c2c; 
 	display: inline-block;
-	width: 90%;  
+	width: 100%;  
     height: 160px;
     padding: 10px;    
     vertical-align: top;
     border-radius: 15px;    
     position: relative;
+    margin-right: 15px;
 }
 
 .block p{
@@ -61,6 +61,7 @@
 	width: 92%;	
 }
 .block .info p{
+	display: flex;
 	font-size: 11px;
 	font-weight: 200;	
 }
@@ -114,7 +115,7 @@
 }
 .block-tournois{
 	margin-top: 2em;
-	padding: 3em 0em 3em 3em ;	
+	padding: 3em 0em 3em 2em ;	
 	background: #2c2c2c;
 	
 }

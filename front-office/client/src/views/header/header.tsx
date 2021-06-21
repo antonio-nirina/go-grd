@@ -2,7 +2,7 @@ import React,{useState,useMemo} from "react"
 import { Link } from 'react-router-dom'
 import { useSelector,useDispatch } from "react-redux"
 import {useHistory } from "react-router-dom"
-import {useQuery} from "@apollo/client"
+import {useQuery,useSubscription} from "@apollo/client"
 
 import "../header/header.css"
 import logo from "../../assets/image/logo.png"
@@ -18,6 +18,16 @@ import {removeDataUser} from "../auth/action/userAction"
 import AvatarDefault from "../../assets/image/game-tag.png"
 import {GET_ALL_NOTIFICATIONS} from "../../gql/notifications/query"
 import Notifications from "./notificationFriend"
+import {NOTIFICATIONS_SUBSCRIBE,COUNT_SUBSCRIBE} from "../../gql/user/subscription"
+
+export interface Notif  {
+	type:number,
+	user:{
+		email: string,
+		username: string,
+		avatar: string,
+	}
+}
 
 
 const Header: React.FC = function() {
@@ -29,6 +39,7 @@ const Header: React.FC = function() {
 	const [showNotif, setShowNotif] = useState<Boolean>(false)
 	const [isDeconnect, setIsDeconnect] = useState<Boolean>(false)
 	const [dataNotifications, setDataNotifications] = useState<Array<any>>([])
+	const {loading:subLoading,error:errSub,data:subData}  = useSubscription(NOTIFICATIONS_SUBSCRIBE)
 	const {loading,error,data} = useQuery(GET_ALL_NOTIFICATIONS, {
 		variables: {
 			idUser: userConnectedRedux.user.uid
@@ -52,18 +63,47 @@ const Header: React.FC = function() {
 	}
 
 	useMemo(() => {
+		let array:Array<Notif> = []
+		let notif:Notif
 		if(!loading && !error && data) {
 			let count:number = 0
-			console.log(data.GetAllNotifications)
+
 			if(data.GetAllNotifications.length > 0) {
 				setDataNotifications(data.GetAllNotifications)
 				data.GetAllNotifications.forEach(function(elemnt:any) {
 					if(!elemnt.statut) count++
+					if(elemnt.type === 0) {
+						notif = {
+							type:0,
+							user:{
+								email: elemnt.emailsender,
+								username: elemnt.usernameSender,
+								avatar: elemnt.avatarSender
+							}
+						}
+						array.push(notif)
+					}
 				})
 			}
 			setNotification(count)
 		}
-	},[loading,error,data])
+
+		if(!subLoading && !errSub && subData) {
+			if(subData.subscribeNotifications.uid === userConnectedRedux.user.uid) {
+				notif = {
+					type:0,
+					user:{
+						email: subData.subscribeNotifications.emailsender,
+						username: subData.subscribeNotifications.usernameSender,
+						avatar: subData.subscribeNotifications.avatarSender
+					}
+				}
+				array.push(notif)
+				setNotification(subData.subscribeNotifications.count)
+			}
+		}
+		setDataNotifications(array)
+	},[loading,error,data,subLoading,errSub,subData])
 
   return(
 		<header className={isDeconnect || Object.keys(userConnectedRedux.user).length === 0 ? "header" : "header connected"}>
@@ -137,7 +177,7 @@ const Header: React.FC = function() {
 							<>
 								<i className="square" onClick={onShowNotif} style={{"cursor":"pointer"}}>
 									<FontAwesomeIcon icon={faBell} size="xs"/>
-									<span className="number">{notification > 0 ? notification : ""}</span>
+									<span className={notification > 0 ? "number" : ""}>{notification > 0 ? notification : ""}</span>
 								</i>
 							</>
 							<div className={!showNotif ? "notification" :"notification show"}>

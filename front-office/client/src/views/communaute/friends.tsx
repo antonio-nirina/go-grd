@@ -4,21 +4,31 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import Popup from "reactjs-popup"
 import "reactjs-popup/dist/index.css"
 import { Link } from 'react-router-dom'
-import {useQuery} from "@apollo/client"
-import {GET_ALL_FRIENDS} from "../../gql/user/query"
+import {useQuery,useMutation} from "@apollo/client"
+import {GET_ALL_FRIENDS,GET_ALL_USER} from "../../gql/user/query"
 import { useSelector } from "react-redux"
 import {RootState} from "../../reducer"
 import {Translation} from "../../lang/translation"
 import {Friends} from "../../gql/types/friend"
 import AvatarDefault from "../../assets/image/game-tag.png"
+import {INCOMING_FRIENDS} from "../../gql/user/mutation"
 
 const Friend: React.FC = function() {
-	const userConnectedRedux 	= useSelector((state:RootState) => state.userConnected)
+	const userConnectedRedux 		= useSelector((state:RootState) => state.userConnected)
 	const [nbFriends, setNbFriends] = useState<number>(0)
-	const [friends, setFriends] = useState<Array<Friends>>([])
-	const {loading,error,data} = useQuery(GET_ALL_FRIENDS, {
+	// const [isClose, setIsClose] = useState<boolean>(false)
+	const [friends, setFriends] 	= useState<Array<Friends>>([])
+	const [users, setUsers] 		= useState<Array<Friends>>([])
+	const [requestFriend] 			= useMutation(INCOMING_FRIENDS)
+	const {loading,error,data} 		= useQuery(GET_ALL_FRIENDS, {
 		variables: {
 			email: userConnectedRedux.user.email
+		},
+	})
+
+	const {loading:loadingAll,error:errorAll,data:dataAll} = useQuery(GET_ALL_USER, {
+		variables: {
+			idUserConnected: userConnectedRedux.user.uid
 		},
 	})
 	useMemo(()=> {
@@ -28,7 +38,15 @@ const Friend: React.FC = function() {
 				setFriends(data.GetAllFriends)
 			}
 		}
-	},[loading,error,data])
+
+		if(!loadingAll && !errorAll && dataAll) setUsers(dataAll.GetUsers.filter((e:any) => e.uid !== userConnectedRedux.user.uid))
+
+	},[loading,error,data,loadingAll,errorAll,dataAll])
+
+	const onSendIncoming = 	async function(uid:string) {
+		const result = await requestFriend({ variables: { idRequest: userConnectedRedux.user.uid,idSender: uid} })
+		if (result.data.requestFriend) console.log(result.data.requestFriend)
+	}
 	return (
 		<div className="aside-right">
 			{nbFriends
@@ -44,8 +62,15 @@ const Friend: React.FC = function() {
 					)
 				})
 			: (<div className="friend-list noborder">
-					<p className="title">Amis</p>
-					<p style={{"fontWeight":"bold"}}>					
+					<p className="title">
+						{
+							Object.keys(userConnectedRedux.user).length > 0 ?
+							Translation(userConnectedRedux.user.language).communauty.titleFriend
+							:
+							Translation("fr").communauty.titleFriend
+						}
+					</p>
+					<p style={{"fontWeight":"bold"}}>
 						{ `${userConnectedRedux.user.username} `}
 					{
 						Object.keys(userConnectedRedux.user).length > 0 ?
@@ -53,119 +78,83 @@ const Friend: React.FC = function() {
 						:
 						Translation("fr").communauty.friend
 					}
-					</p>					
+					</p>
 					<div className="friends">
 						<Popup
 							trigger={
 								<p className="search-friends"><Link to="#">
 									<FontAwesomeIcon icon={faUserPlus} size="xs"/>
-									<span>Trouver des amis</span></Link>
+									<span>
+										{
+				      						Object.keys(userConnectedRedux.user).length > 0 ?
+											Translation(userConnectedRedux.user.language).communauty.addFriendList
+											:
+											Translation("fr").communauty.addFriendList
+										}
+									</span>
+									</Link>
 								</p>
 							}
 							modal
 							nested
 						>
-							<div className="modal">
-								<button className="close">
-									&times;
-								</button>
-								<div className="bar-title">Ajouter des amis</div>
+							{(close:any) => (<div className="modal">
+									<button className="close" onClick={close}>
+										&times;
+									</button>
+									<div className="bar-title">
+										{
+											Object.keys(userConnectedRedux.user).length > 0 ?
+											Translation(userConnectedRedux.user.language).communauty.addFriend
+											:
+											Translation("fr").communauty.addFriend
+										}
+									</div>
 									<div className="actions">
-										<div className="body">
-											<div className="avatar-container">
-												<div className="add-friends">
-													<div className="found">
-														<p>
-															<img src={AvatarDefault} className="avatar-found"/>
-															<span className="profil-name">Name</span>
-															<button className="btn bg-yellow">
-																<i className="rect"><FontAwesomeIcon icon={faUserPlus} size="xs"/></i>
-																<span>Ajouter</span>
-															</button>
-														</p>
-														<p>
-															<img src={AvatarDefault} className="avatar-found"/>
-															<span className="profil-name">Name</span>
-															<button className="btn bg-yellow">
-																<i className="rect"><FontAwesomeIcon icon={faUserPlus} size="xs"/></i>
-																<span>Ajouter</span>
-															</button>
-														</p>
-														<p>
-															<img src={AvatarDefault} className="avatar-found"/>
-															<span className="profil-name">Name</span>
-															<button className="btn bg-yellow">
-																<i className="rect"><FontAwesomeIcon icon={faUserPlus} size="xs"/></i>
-																<span>Ajouter</span>
-															</button>
-														</p>
-														<p>
-															<img src={AvatarDefault} className="avatar-found"/>
-															<span className="profil-name">Name</span>
-															<button className="btn bg-yellow">
-																<i className="rect"><FontAwesomeIcon icon={faUserPlus} size="xs"/></i>
-																<span>Ajouter</span>
-															</button>
-														</p>
-														<p>
-															<img src={AvatarDefault} className="avatar-found"/>
-															<span className="profil-name">Name</span>
-															<button className="btn bg-yellow">
-																<i className="rect"><FontAwesomeIcon icon={faUserPlus} size="xs"/></i>
-																<span>Ajouter</span>
-															</button>
-														</p>
-														<p>
-															<img src={AvatarDefault} className="avatar-found"/>
-															<span className="profil-name">Name</span>
-															<button className="btn bg-yellow">
-																<i className="rect"><FontAwesomeIcon icon={faUserPlus} size="xs"/></i>
-																<span>Ajouter</span>
-															</button>
-														</p>
-														<p>
-															<img src={AvatarDefault} className="avatar-found"/>
-															<span className="profil-name">Name</span>
-															<button className="btn bg-yellow">
-																<i className="rect"><FontAwesomeIcon icon={faUserPlus} size="xs"/></i>
-																<span>Ajouter</span>
-															</button>
-														</p>
-														<p>
-															<img src={AvatarDefault} className="avatar-found"/>
-															<span className="profil-name">Name</span>
-															<button className="btn bg-yellow">
-																<i className="rect"><FontAwesomeIcon icon={faUserPlus} size="xs"/></i>
-																<span>Ajouter</span>
-															</button>
-														</p>
-														<p>
-															<img src={AvatarDefault} className="avatar-found"/>
-															<span className="profil-name">Name</span>
-															<button className="btn bg-yellow">
-																<i className="rect"><FontAwesomeIcon icon={faUserPlus} size="xs"/></i>
-																<span>Ajouter</span>
-															</button>
-														</p>
-														<p>
-															<img src={AvatarDefault} className="avatar-found"/>
-															<span className="profil-name">Name</span>
-															<button className="btn bg-yellow">
-																<i className="rect"><FontAwesomeIcon icon={faUserPlus} size="xs"/></i>
-																<span>Ajouter</span>
-															</button>
-														</p>
-														
+									<div className="body">
+										<div className="avatar-container">
+											<div className="add-friends">
+												<div className="found">
+													{
 
-													</div>
-													<div className="avatar-search-bar">
-														<input type="text" placeholder="Rechercher une personne"/><button className="btn bg-white">Rechercher</button>
-													</div>
-												</div>										
+														users.length > 0 ?
+														users.map(function(el:any,index:number){
+															let img:string = el.avatar ? (el.avatar) : AvatarDefault
+															return (
+																<p key={index}>
+																	<img src={img} className="avatar-found"/>
+																	<span className="profil-name">{el.username ? el.username : ((el.email).split("@")[0])}</span>
+																	<button className="btn bg-yellow">
+																		<i className="rect"><FontAwesomeIcon icon={faUserPlus} size="xs"/></i>
+																		<span onClick={()=>{
+																			onSendIncoming(el.uid)
+																			close()
+																			}}>
+																			{
+																				Object.keys(userConnectedRedux.user).length > 0 ?
+																				Translation(userConnectedRedux.user.language).communauty.addFriend
+																				:
+																				Translation("fr").communauty.addFriend
+																			}
+																		</span>
+																	</button>
+																</p>
+															)
+														})
+														:
+														<></>
+													}
+
+												</div>
+												<div className="avatar-search-bar">
+													<input type="text" placeholder="Rechercher une personne"/><button className="btn bg-white">Rechercher</button>
+												</div>
 											</div>
 										</div>
 									</div>
 								</div>
+								</div>
+								)}
 						</Popup>
 					</div>
 				</div>)

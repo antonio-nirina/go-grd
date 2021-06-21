@@ -13,22 +13,42 @@ import (
 	uuid "github.com/satori/go.uuid"
 	"github.com/thoussei/antonio/front-office/api/external"
 	game "github.com/thoussei/antonio/front-office/api/games/entity"
+	notifH "github.com/thoussei/antonio/front-office/api/notification/handler"
 	"github.com/thoussei/antonio/front-office/api/user/entity"
 	"github.com/thoussei/antonio/front-office/api/user/handler"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
+type UserResponse struct {
+	Uid           string `json:"uid"`
+	FirstName     string             `json:"firstname,omitempty"`
+	LastName      string             `json:"lastname,omitempty"`
+	Password      string             `json:"password"`
+	Email         string             `json:"email"`
+	Username      string             `json:"username"`
+	IsBanned      bool               `json:"isBanned"`
+	Avatar        string             `json:"avatar,omitempty"`
+	Language      string             `json:"language,omitempty"`
+	IdGameAccount []game.GameAccount `json:"idGameAccount,omitempty"`
+	Point         int                `json:"point"`
+	Roles      	 []string             `json:"roles"`
+	TypeConnexion   string            `json:"type_connexion"`
+	Created 		string 			`json:"created"`
+}
+
 type resolver struct {
 	userHandler handler.Usecase
+	notifHandler notifH.UsecaseNotif
 }
 
 type AuthType struct {
 	token interface{}
 }
 
-func NewResolver(userUseCase handler.Usecase) Resolver {
+func NewResolver(userUseCase handler.Usecase,usecaseNotif notifH.UsecaseNotif) Resolver {
 	return &resolver{
 		userHandler: userUseCase,
+		notifHandler: usecaseNotif,
 	}
 }
 
@@ -200,19 +220,38 @@ func (r *resolver)ForgotResolver(params graphql.ResolveParams) (interface{}, err
 
 func (r *resolver)GetAllUser(params graphql.ResolveParams)(interface{}, error) {
 	idUserConnected, isOKReq := params.Args["idUserConnected"].(string)
-
+	var res []UserResponse
 	if !isOKReq {
 		return nil, errors.New("id not valid")
 	}
 
-	_, err := r.userHandler.FindOneUserById(idUserConnected)
+	_, err := r.userHandler.FindOneUserByUid(idUserConnected)
 	users,err := r.userHandler.FindAllUser()
 
 	if err != nil {
 		return nil, err
 	}
 
-	return users,nil
+	userList := &UserResponse{}
+
+	for _,user := range users {
+		userList.Uid		 	= user.Uid.Hex()
+		userList.FirstName 		= user.FirstName
+		userList.LastName 		= user.LastName      
+		userList.Username 		= user.Username     
+		userList.Email 			= user.Email        
+		userList.IsBanned 		= user.IsBanned    
+		userList.Avatar 		= user.Avatar      
+		userList.Language 		= user.Language    
+		userList.Point 			= user.Point       
+		userList.IdGameAccount 	= user.IdGameAccount
+		userList.Roles 			= user.Roles
+		userList.TypeConnexion 	= user.TypeConnexion
+		userList.Created 		= user.Created 
+		res = append(res, *userList)
+	}
+
+	return res,nil
 }
 
 func GetToken(user entity.User) (interface{}, error) {
@@ -223,7 +262,7 @@ func GetToken(user entity.User) (interface{}, error) {
 	}
 
 	claims 				:= _jwt.MapClaims{}
-	claims["uid"] 		= user.Uid
+	claims["uid"] 		= user.Uid.Hex()
 	claims["email"] 	= user.Email
 	claims["avatar"] 	= user.Avatar
 	claims["firstname"] = user.FirstName
@@ -231,7 +270,6 @@ func GetToken(user entity.User) (interface{}, error) {
 	claims["lastname"] 	= user.LastName
 	claims["username"] 	= user.Username
 	claims["created"] 	= user.Created
-	claims["id"] 		= user.Uid.String()
 	// claims["exp"] = time.Now().Add(time.Hour * 1).Unix() //Token expires after 1 hour
 	token := _jwt.NewWithClaims(_jwt.SigningMethodHS256, claims)
 	result, err := token.SignedString([]byte(os.Getenv("SECRET")))

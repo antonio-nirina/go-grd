@@ -23,7 +23,13 @@
 		"leagues": "ligues",
 		"wagers": "wagers",
 		"community": "communauté",
-		"tournaments": "tournois"
+		"tournaments": "tournois",
+		"refuse":"Refuser",
+		"accepted": "Accepter",
+		"leagues": "Ligues",
+		"wagers": "Wagers",
+		"community": "Communauté",
+		"tournaments": "Tournois"
 	},
 	"home":{
 		"leagues": "ligues",
@@ -154,7 +160,12 @@
 		"request": "Comment déposer une requête support ?"
 	},
 	"communauty":{
-		"friend":"Vous n’avez pas encore d'ami"
+		"friend":"Vous n’avez pas encore d'ami",
+		"addFriend":"Ajouter",
+		"addFriendList":"Trouver des amis",
+		"titleFriend":"Amis",
+		"titleAddFriend":"Ajouter des amis",
+		"withFriend":"Vous êtes maintenant ami(e) avec"
 	}
 
 }

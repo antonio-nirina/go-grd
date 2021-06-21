@@ -8,6 +8,8 @@ import (
 const (
 	TYPE_FRIENDS = 0
 	TYPE_RATING  = 1
+	TITLE_REQ_FRIEND = "ask_friend"
+	CONTENT_REQ_FRIEND = "content_friend"
 )
  
 type Notification struct {

@@ -1,7 +1,7 @@
 import React,{useMemo} from "react"
 import { Link } from 'react-router-dom'
 import { useSelector } from "react-redux"
-import {useSubscription,useMutation,useQuery} from "@apollo/client"
+import {useQuery} from "@apollo/client"
 
 import { faEye } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -12,25 +12,21 @@ import championship from "../../assets/image/championship.jpeg"
 import fortnite1 from "../../assets/image/fortnite.jpg"
 import rlchampionsip from "../../assets/image/rlchampionsip.png"
 
-
 import Header from "../header/header"
 import {RootState} from "../../reducer"
 
 import Tchat from "../tchat/tchat"
 import Footer from "../footer/footer"
-
 import Streamer1 from "../../assets/image/streamer1.jpg"
 import "./communaute.css"
-import {COUNT_SUBSCRIBE} from "../../gql/user/subscription"
-import {INCOMING_FRIENDS} from "../../gql/user/mutation"
+// import {COUNT_SUBSCRIBE} from "../../gql/user/subscription"
 import {GET_ALL_STREAMING} from "../../gql/user/query"
-
 import Friend from "./friends"
 
 const Communaute: React.FC = function() {
 	const userConnectedRedux 	= useSelector((state:RootState) => state.userConnected)
-	const {loading,error,data}  = useSubscription(COUNT_SUBSCRIBE)
-	const [requestFriend] 		= useMutation(INCOMING_FRIENDS)
+	// const {loading,error,data}  = useSubscription(COUNT_SUBSCRIBE)
+
 	const {loading:loadingTwitch,error:errorTwitch,data:dataTwitch} = useQuery(GET_ALL_STREAMING, {
 		variables: {
 			idUser: userConnectedRedux.user.uid
@@ -38,8 +34,9 @@ const Communaute: React.FC = function() {
 	})
 
 	useMemo(() => {
-		if(!loading && !error && data) console.log("data", data)
-	},[loading,error,data,loadingTwitch,errorTwitch,dataTwitch])
+		if(!loadingTwitch && !errorTwitch && dataTwitch) console.log("data", dataTwitch)
+	},[loadingTwitch,errorTwitch,dataTwitch])
+
   return(
 	<div className="communaute">
 	    <div className="container">

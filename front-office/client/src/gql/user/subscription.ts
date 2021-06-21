@@ -7,5 +7,15 @@ export const COUNT_SUBSCRIBE = gql`
 		}
 	}
 `
-
+export const NOTIFICATIONS_SUBSCRIBE = gql`
+	subscription subscribeNotifications {
+		subscribeNotifications {
+			uid
+			email
+			avatar
+			username
+			count
+		}
+	}
+`
 

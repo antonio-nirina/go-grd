@@ -60,9 +60,22 @@ func (c *driverRepository) FindOneUserById(objectId primitive.ObjectID) (entity.
 	return result, nil
 }
 
-func (c *driverRepository) FindAllUser() (interface{}, error) {
+func (c *driverRepository) FindOneUserByUid(objectId primitive.ObjectID) (entity.User, error) {
 	var collection = c.client.Database("grd_database").Collection("users")
-	var results []primitive.M
+	var result entity.User
+
+	err := collection.FindOne(context.TODO(), bson.M{"uid": objectId}).Decode(&result)
+
+	if err != nil {
+		return result, err
+	}
+
+	return result, nil
+}
+
+func (c *driverRepository) FindAllUser() ([]entity.User, error) {
+	var collection = c.client.Database("grd_database").Collection("users")
+	var results []entity.User
 	cur, err := collection.Find(context.TODO(), bson.D{{}})
 
 	if err != nil {
@@ -70,7 +83,7 @@ func (c *driverRepository) FindAllUser() (interface{}, error) {
 	}
 
 	for cur.Next(context.TODO()) {
-		var elem primitive.M
+		var elem entity.User
 		err := cur.Decode(&elem)
 		if err != nil {
 			log.Fatal(err)
@@ -79,7 +92,7 @@ func (c *driverRepository) FindAllUser() (interface{}, error) {
 		results = append(results, elem)
 	}
 	cur.Close(context.TODO())
-
+	
 	return results, nil
 }
 

@@ -19,8 +19,12 @@ import (
 
 var database = config.ConfigMongo()
 var rep = repository.NewUserRepository(database)
+var repositoryNotif 	= notifRepo.NewRepository(database)
+
+// Usecase
+var usecaseNotif 	= notifHandler.NewUsecaseNotif(repositoryNotif)
 var usecase = handler.NewUsecaseUser(rep)
-var UserRolve = delivery.NewResolver(usecase)
+var UserRolve = delivery.NewResolver(usecase,usecaseNotif)
 
 var repositoryGame = gameRepo.NewGameRepository(database)
 var usecaseGame = gameHandler.NewUsecaseGame(repositoryGame)
@@ -30,8 +34,7 @@ var repositoryPlateform = gameRepo.NewPlateformRepository(database)
 var usecasePlateform = gameHandler.NewUsecasePlateform(repositoryPlateform)
 var plateformResolver = gameDelivery.NewResolverPlateform(usecasePlateform)
 
-var repositoryNotif 	= notifRepo.NewRepository(database)
-var usecaseNotif 	= notifHandler.NewUsecaseNotif(repositoryNotif)
+
 var notifResolver = notifDelivery.NewNotifResolver(usecaseNotif,usecase)
 
 

@@ -11,7 +11,9 @@
 		"leagues": "leagues",
 		"wagers": "wagers",
 		"community": "community",
-		"tournaments": "tournaments"
+		"tournaments": "tournaments",
+		"refuse":"Refuse",
+		"accepted": "Accepted"
 	},
 	"home":{
 		"gameTag": "Gametag",
@@ -142,7 +144,11 @@
 		"result":"My results"
 	},
 	"communauty":{
-		"friend":"have not friends"
+		"friend":"have not friends",
+		"addFriend":"Add friend",
+		"addFriendList":"Search friends",
+		"titleFriend":"Friends",
+		"titleAddFriend":"Add friend"
 	}
 
 }

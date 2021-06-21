@@ -5,6 +5,7 @@ import (
 	"sync"
 
 	"github.com/graphql-go/graphql"
+	userNotif "github.com/thoussei/antonio/front-office/api/notification/entity"
 	"github.com/thoussei/antonio/front-office/api/user/entity"
 	"github.com/thoussei/antonio/front-office/api/user/handler"
 	"go.mongodb.org/mongo-driver/bson/primitive"
@@ -31,8 +32,8 @@ func (r *resolver) RequestFriendResolver(params graphql.ResolveParams) (interfac
 		return nil, errors.New("id not valid")
 	}
 
-	resRequest, err := r.userHandler.FindOneUserById(idRequest)
-	resSender, err := r.userHandler.FindOneUserById(idSender)
+	resRequest, err := r.userHandler.FindOneUserByUid(idRequest)
+	resSender, err := r.userHandler.FindOneUserByUid(idSender)
 
 	if err != nil {
 		return nil, err
@@ -46,12 +47,14 @@ func (r *resolver) RequestFriendResolver(params graphql.ResolveParams) (interfac
 	}
 
 	_, err = r.userHandler.AddFriend(friend)
+	count,err := r.notifHandler.SavedNotifHandler(resSender,userNotif.TITLE_REQ_FRIEND,userNotif.CONTENT_REQ_FRIEND,userNotif.TYPE_FRIENDS)
+	
 	if err != nil {
 		return nil, err
 	}
-	
+
 	wg.Add(1)
-	go handler.NotifUserSender(&resSender,&wg)
+	go handler.NotifUserSender(&resSender,count,&wg)
 	wg.Wait()
 	
 	return "Ok", nil

@@ -5,7 +5,8 @@ import (
 	"github.com/thoussei/antonio/front-office/api/config"
 	"github.com/thoussei/antonio/front-office/api/external"
 	"github.com/thoussei/antonio/front-office/api/graphql/types"
-	"github.com/thoussei/antonio/front-office/api/user/delivery"
+
+	// "github.com/thoussei/antonio/front-office/api/user/delivery"
 	"github.com/thoussei/antonio/front-office/api/user/handler"
 	"github.com/thoussei/antonio/front-office/api/user/repository"
 )
@@ -15,7 +16,7 @@ var count = &external.Counter{}
 var database 	= config.ConfigMongo()
 var repUser 	= repository.NewUserRepository(database)
 var usecase 	= handler.NewUsecaseUser(repUser)
-var UserRolve 	= delivery.NewResolver(usecase)
+// var UserRolve 	= delivery.NewResolver(usecase)
 
 func GetRootFields() graphql.Fields {
 	return graphql.Fields{
@@ -46,7 +47,7 @@ func requestFriend() *graphql.Field {
 				Type: graphql.String,
 			},			
 		},			
-		Resolve: UserRolve.RequestFriendResolver,
+		//Resolve: UserRolve.RequestFriendResolver,
 	}
 }
 
