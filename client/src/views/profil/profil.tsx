@@ -248,8 +248,9 @@ const Profil: React.FC = function() {
 							    modal
 							    nested
   							>
+  							{(close:any) => (
 					    	<div className="modal">
-						        <button className="close">
+						        <button className="close" onClick={close}>
 						          &times;
 						        </button>
 						        <div className="header"> <h3>{Object.keys(userConnectedRedux.user).length > 0 ?
@@ -282,18 +283,14 @@ const Profil: React.FC = function() {
 										</div>
 							        </div>
 						        	<div className="actions">
-							          	<Popup
-							            	trigger={<button className="btn bg-yellow">{ Object.keys(userConnectedRedux.user).length > 0 ?
+							          	<button className="btn bg-yellow">{ Object.keys(userConnectedRedux.user).length > 0 ?
 									Translation(userConnectedRedux.user.language).profil.createTeam
 									:
-									Translation("fr").profil.createTeam} </button>}
-							            	position="top center"
-							            	nested
-							          	>
-
-										</Popup>
+									Translation("fr").profil.createTeam} </button>
+							            
 						        	</div>
 						     	</div>
+						    )}
 						    </Popup>
 	    				</div>
 	      			</div>

@@ -3,8 +3,7 @@
 	background: url("../../assets/image/background-img.jpg") no-repeat;
 	background-repeat: no-repeat;	
 	background-size: 100%;
-	padding-top: 0em;
-	padding-bottom: 11em;
+	padding-top: 0em;	
 
 }
 .w100{
@@ -13,32 +12,31 @@
 .bg-game{
 	width: 100%;
 	text-align: left;
+	padding: 0 15px;
 }
 .logo-game{
-	width: 22%;
-	height: auto;
-	display: inline-block;
-	vertical-align: middle;
-	margin-bottom: 29px;
-	filter: none !important;
-	margin-left: 29px;
-	text-align: center;
+	width: 22%;	
+	margin-bottom: 29px;			
+	margin-right: 3em;
+	align-self: center;
 }
 .logo-game img{
-	max-width: 240px;
+	max-width: 280px;
 	width: 100%;
 }
 .jeux h2{
 	font-family: "russo one";
 	font-size: 45px ;
 	width: 100%;
-	text-align: center;
-	padding-bottom: 1em;
+	text-align: center;	
 	padding-top: 35px;
 	font-weight: 200;
 	text-transform: uppercase;
 }
-
+.firstblock, .lastblock{
+	display: flex;
+	padding: 15px;
+}
 .lastblock{
-	padding-top: 2em;
+	
 }

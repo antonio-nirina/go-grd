@@ -25,7 +25,11 @@
 		"community": "communauté",
 		"tournaments": "tournois",
 		"refuse":"Refuser",
-		"accepted": "Accepter"
+		"accepted": "Accepter",
+		"leagues": "Ligues",
+		"wagers": "Wagers",
+		"community": "Communauté",
+		"tournaments": "Tournois"
 	},
 	"home":{
 		"leagues": "ligues",
