@@ -30,6 +30,7 @@ type RepositoryNotif interface {
 	FindNotifRepo(idUser primitive.ObjectID,idQuery primitive.ObjectID) (interface{}, error)
 	FindAllNotifRepo(idUser primitive.ObjectID) ([]entity.Notification, error)
 	CountNotifNotActivateRepo(idUser primitive.ObjectID) (int64, error)
+	FindOneByUidNotifRepo(uid primitive.ObjectID) (entity.Notification, error)
 }
 
 func (c *DriverRepository) SavedNotifRepo(notif *entity.Notification) (interface{}, error){
@@ -91,4 +92,17 @@ func (c *DriverRepository) CountNotifNotActivateRepo(idUser primitive.ObjectID) 
 	}
 
 	return count, nil
+}
+
+func (c *DriverRepository) FindOneByUidNotifRepo(uid primitive.ObjectID) (entity.Notification, error) {
+	var collection = c.client.Database("grd_database").Collection("users")
+	var result entity.Notification
+
+	err := collection.FindOne(context.TODO(), bson.M{"uid": uid}).Decode(&result)
+
+	if err != nil {
+		return result, err
+	}
+
+	return result, nil
 }

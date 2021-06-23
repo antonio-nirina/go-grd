@@ -11,6 +11,7 @@ type UsecaseNotif interface {
 	SavedNotifHandler(user userEntity.User,userReq userEntity.User,title string,content string,typeNotification int) (int64, error)
 	FindNotifHandler(idUser string,idQuery string) (interface{}, error)
 	FindAllNotifHandler(idUser string) ([]entity.Notification, error)
+	FindOneByUidNotifHandler(uid string) (entity.Notification, error)
 }
 
 type notifUsecase struct {
@@ -73,6 +74,22 @@ func (r *notifUsecase) FindAllNotifHandler(idUser string) ([]entity.Notification
 
 	if err != nil {
 		return nil, err
+	}
+
+	return result,nil
+}
+
+func (r *notifUsecase) FindOneByUidNotifHandler(uid string) (entity.Notification, error) {
+	objectId, err := primitive.ObjectIDFromHex(uid)
+
+	if err != nil {
+		return entity.Notification{}, err
+	}
+	
+	result, err := r.notifRepository.FindOneByUidNotifRepo(objectId)
+
+	if err != nil {
+		return entity.Notification{}, err
 	}
 
 	return result,nil
