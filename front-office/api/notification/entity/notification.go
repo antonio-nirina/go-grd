@@ -18,5 +18,6 @@ type Notification struct {
 	Type     		int  `json:"type"`
 	Content      	string  `json:"content"`
 	Statut 			bool `json:"statut"`
+	UserRequest 	user.User `json:"userRequest"`
 	User 			user.User `json:"user"`
 }

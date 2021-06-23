@@ -8,22 +8,25 @@ var NotificationSchemaType = graphql.NewObject(graphql.ObjectConfig{
 	Name: "NotificationType",
 	Fields: graphql.Fields{
 		"title": &graphql.Field{
-			Type: graphql.NewNonNull(graphql.String),
+			Type: graphql.String,
 		},
 		"content": &graphql.Field{
-			Type: graphql.NewNonNull(graphql.String),
+			Type: graphql.String,
 		},
 		"statut": &graphql.Field{
-			Type: graphql.NewNonNull(graphql.Boolean),
+			Type: graphql.Boolean,
 		},
 		"user": &graphql.Field{
-			Type: graphql.NewNonNull(UserSchemaType),
+			Type: UserSchemaType,
 		},
 		"type": &graphql.Field{
-			Type: graphql.NewNonNull(graphql.Int),
+			Type: graphql.Int,
 		},
 		"_id": &graphql.Field{
-			Type: graphql.NewNonNull(graphql.String),
+			Type: graphql.String,
+		},
+		"userRequest": &graphql.Field{
+			Type: UserSchemaType,
 		},
 	},
 })

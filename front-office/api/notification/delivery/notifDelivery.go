@@ -1,8 +1,6 @@
 package delivery
 
 import (
-	//"fmt"
-
 	"github.com/graphql-go/graphql"
 	"github.com/thoussei/antonio/front-office/api/notification/handler"
 	userHandler "github.com/thoussei/antonio/front-office/api/user/handler"
@@ -33,13 +31,15 @@ func (r *resolverNotif) SavedNotifResolver(params graphql.ResolveParams) (interf
 	titleNotif, _ := params.Args["title"].(string)
 	content, _ := params.Args["content"].(string)
 	typeNotif, _ := params.Args["type"].(int)
+	idUserReq,_ := params.Args["idUserReq"].(string)
 	user,err := r.notifUserHandler.FindOneUserById(idUser)
+	userReq,err := r.notifUserHandler.FindOneUserById(idUserReq)
 
 	if err != nil {
 		return nil,err
 	}
 
-	r.notifHandler.SavedNotifHandler(user,titleNotif,content,typeNotif)
+	r.notifHandler.SavedNotifHandler(user,userReq,titleNotif,content,typeNotif)
 
 	return "Ok",nil
 }

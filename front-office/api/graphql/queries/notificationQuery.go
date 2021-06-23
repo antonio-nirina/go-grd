@@ -25,7 +25,7 @@ func GetOneNotification() *graphql.Field {
 func GetAllNotifications() *graphql.Field {
 	return &graphql.Field{
 		Type:        graphql.NewList(types.NotificationSchemaType),
-		Description: "Get all notificatin one user",
+		Description: "Get all notification one user",
 		Args: graphql.FieldConfigArgument{
 			"idUser": &graphql.ArgumentConfig{
 				Type: graphql.String,

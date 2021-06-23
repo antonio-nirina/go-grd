@@ -8,9 +8,14 @@ export const GET_ALL_NOTIFICATIONS= gql`
 		_id
 		title
 		content
-		statut
 		type
+		statut
 		user{
+			email
+			username
+			avatar
+		}
+		userRequest{
 			email
 			username
 			avatar
