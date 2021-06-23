@@ -47,14 +47,14 @@ func (r *resolver) RequestFriendResolver(params graphql.ResolveParams) (interfac
 	}
 
 	_, err = r.userHandler.AddFriend(friend)
-	count,err := r.notifHandler.SavedNotifHandler(resSender,userNotif.TITLE_REQ_FRIEND,userNotif.CONTENT_REQ_FRIEND,userNotif.TYPE_FRIENDS)
+	count,err := r.notifHandler.SavedNotifHandler(resSender,resRequest,userNotif.TITLE_REQ_FRIEND,userNotif.CONTENT_REQ_FRIEND,userNotif.TYPE_FRIENDS)
 	
 	if err != nil {
 		return nil, err
 	}
 
 	wg.Add(1)
-	go handler.NotifUserSender(&resSender,count,&wg)
+	go handler.NotifUserSender(&resSender,&resRequest,count,&wg)
 	wg.Wait()
 	
 	return "Ok", nil
@@ -77,7 +77,7 @@ func (r *resolver) GetAllFriendsUser(params graphql.ResolveParams) (interface{},
 	res := &Friends{}
 
 	if len(user.Friends) == 0 {
-		res.Id = user.Uid.String()
+		res.Id = user.Uid.Hex()
 		res.Count = 0
 		res.Email = ""
 		res.Firstname = ""
@@ -88,7 +88,7 @@ func (r *resolver) GetAllFriendsUser(params graphql.ResolveParams) (interface{},
 		result = append(result, *res)
 	} else {
 		for _,val := range user.Friends {
-			res.Id = user.Uid.String()
+			res.Id = user.Uid.Hex()
 			res.Count = len(user.Friends)
 			res.Email = val.Email
 			res.Firstname = val.FirstName

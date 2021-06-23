@@ -13,7 +13,8 @@
 		"community": "community",
 		"tournaments": "tournaments",
 		"refuse":"Refuse",
-		"accepted": "Accepted"
+		"accepted": "Accepted",
+		"text":"Incoming you to be your friend"
 	},
 	"home":{
 		"gameTag": "Gametag",
