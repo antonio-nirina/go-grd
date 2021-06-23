@@ -11,6 +11,7 @@ type NotifResolver interface {
 	SavedNotifResolver(params graphql.ResolveParams) (interface{}, error)
 	FindNotifResolver(params graphql.ResolveParams) (interface{}, error)
 	FindAllNotifResolver(params graphql.ResolveParams) (interface{}, error)
+	UpdatedStatutNotifResolver(params graphql.ResolveParams) (interface{}, error)
 }
 
 type resolverNotif struct {
@@ -65,4 +66,15 @@ func (r *resolverNotif) FindAllNotifResolver(params graphql.ResolveParams) (inte
 	}
 
 	return notifs,nil
+}
+
+func (r *resolverNotif) UpdatedStatutNotifResolver(params graphql.ResolveParams) (interface{}, error) {
+	uid, _ := params.Args["uid"].(string)
+	notif,err :=  r.notifHandler.FindOneByUidNotifHandler(uid)
+
+	if err != nil {
+		return nil,err
+	}
+
+	return notif,nil
 }
