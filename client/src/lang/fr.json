@@ -29,7 +29,8 @@
 		"leagues": "Ligues",
 		"wagers": "Wagers",
 		"community": "Communauté",
-		"tournaments": "Tournois"
+		"tournaments": "Tournois",
+		"text":"Demande d'être votre amis"
 	},
 	"home":{
 		"leagues": "ligues",

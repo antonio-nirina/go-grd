@@ -25,7 +25,7 @@ func (u *UserUsecase)AddFriend(req *entity.Friends) (interface{}, error) {
 	return result, nil
 }
 
-func NotifUserSender(user *entity.User,count interface{}, wg *sync.WaitGroup)  {
+func NotifUserSender(user *entity.User,userReq *entity.User,count interface{}, wg *sync.WaitGroup)  {
 	err := godotenv.Load()
 	if err != nil {
 		external.Logger("error load env")
@@ -38,7 +38,7 @@ func NotifUserSender(user *entity.User,count interface{}, wg *sync.WaitGroup)  {
 		}
 	}
 	`
-	queryN := fmt.Sprintf(queryStr,user.Uid.Hex(),user.Avatar,user.Email,user.Username,count)
+	queryN := fmt.Sprintf(queryStr,user.Uid.Hex(),userReq.Avatar,userReq.Email,userReq.Username,count)
 
 	jsonData := map[string]string{
 		"query":queryN,

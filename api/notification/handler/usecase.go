@@ -8,9 +8,10 @@ import (
 )
 
 type UsecaseNotif interface {
-	SavedNotifHandler(user userEntity.User,title string,content string,typeNotification int) (int64, error)
+	SavedNotifHandler(user userEntity.User,userReq userEntity.User,title string,content string,typeNotification int) (int64, error)
 	FindNotifHandler(idUser string,idQuery string) (interface{}, error)
-	FindAllNotifHandler(idUser string) (interface{}, error)
+	FindAllNotifHandler(idUser string) ([]entity.Notification, error)
+	FindOneByUidNotifHandler(uid string) (entity.Notification, error)
 }
 
 type notifUsecase struct {
@@ -24,14 +25,15 @@ func NewUsecaseNotif(r repository.RepositoryNotif) UsecaseNotif {
 }
 
 
-func (r *notifUsecase) SavedNotifHandler(user userEntity.User,title string,content string,typeNotification int) (int64, error) {
+func (r *notifUsecase) SavedNotifHandler(user userEntity.User,userReq userEntity.User,title string,content string,typeNotification int) (int64, error) {
 	notify := &entity.Notification{
 		Uid: primitive.NewObjectID(),
 		Title:title,    		
 		Content:content,     	
 		Statut:false,
 		Type:typeNotification,
-		User:user,			
+		User:user,
+		UserRequest: userReq,			
 	}
 
 	_, err := r.notifRepository.SavedNotifRepo(notify)
@@ -61,7 +63,7 @@ func (r *notifUsecase) FindNotifHandler(idUser string,idQuery string) (interface
 	return result,nil
 }
 
-func (r *notifUsecase) FindAllNotifHandler(idUser string) (interface{}, error) {
+func (r *notifUsecase) FindAllNotifHandler(idUser string) ([]entity.Notification, error) {
 	objectId, err := primitive.ObjectIDFromHex(idUser)
 
 	if err != nil {
@@ -72,6 +74,22 @@ func (r *notifUsecase) FindAllNotifHandler(idUser string) (interface{}, error) {
 
 	if err != nil {
 		return nil, err
+	}
+
+	return result,nil
+}
+
+func (r *notifUsecase) FindOneByUidNotifHandler(uid string) (entity.Notification, error) {
+	objectId, err := primitive.ObjectIDFromHex(uid)
+
+	if err != nil {
+		return entity.Notification{}, err
+	}
+	
+	result, err := r.notifRepository.FindOneByUidNotifRepo(objectId)
+
+	if err != nil {
+		return entity.Notification{}, err
 	}
 
 	return result,nil

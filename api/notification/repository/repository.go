@@ -28,8 +28,9 @@ func NewRepository(client *mongo.Client) *DriverRepository {
 type RepositoryNotif interface {
 	SavedNotifRepo(notif *entity.Notification) (interface{}, error)
 	FindNotifRepo(idUser primitive.ObjectID,idQuery primitive.ObjectID) (interface{}, error)
-	FindAllNotifRepo(idUser primitive.ObjectID) (interface{}, error)
+	FindAllNotifRepo(idUser primitive.ObjectID) ([]entity.Notification, error)
 	CountNotifNotActivateRepo(idUser primitive.ObjectID) (int64, error)
+	FindOneByUidNotifRepo(uid primitive.ObjectID) (entity.Notification, error)
 }
 
 func (c *DriverRepository) SavedNotifRepo(notif *entity.Notification) (interface{}, error){
@@ -59,9 +60,9 @@ func (c *DriverRepository) FindNotifRepo(idUser primitive.ObjectID,objectId prim
 	return result, nil
 }
 
-func (c *DriverRepository) FindAllNotifRepo(idUser primitive.ObjectID) (interface{}, error){
+func (c *DriverRepository) FindAllNotifRepo(idUser primitive.ObjectID) ([]entity.Notification, error){
 	var collection = c.client.Database("grd_database").Collection("notification")
-	var results []primitive.M
+	var results []entity.Notification
 	cur, err := collection.Find(context.TODO(), bson.M{"user.uid":idUser},options.Find().SetLimit(LIMIT).SetSort(bson.M{"_id": -1}))
 	// collection.Find(context.TODO(), bson.D{{"user.id",idUser}},options.Find().SetLimit(LIMIT).SetSort(bson.D{{"_id", -1}}))
 	if err != nil {
@@ -69,7 +70,7 @@ func (c *DriverRepository) FindAllNotifRepo(idUser primitive.ObjectID) (interfac
 	}
 
 	for cur.Next(context.TODO()) {
-		var elem primitive.M
+		var elem entity.Notification
 		err := cur.Decode(&elem)
 		if err != nil {
 			external.Logger(fmt.Sprintf("%v", err))
@@ -91,4 +92,17 @@ func (c *DriverRepository) CountNotifNotActivateRepo(idUser primitive.ObjectID) 
 	}
 
 	return count, nil
+}
+
+func (c *DriverRepository) FindOneByUidNotifRepo(uid primitive.ObjectID) (entity.Notification, error) {
+	var collection = c.client.Database("grd_database").Collection("users")
+	var result entity.Notification
+
+	err := collection.FindOne(context.TODO(), bson.M{"uid": uid}).Decode(&result)
+
+	if err != nil {
+		return result, err
+	}
+
+	return result, nil
 }

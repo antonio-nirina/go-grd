@@ -21,7 +21,23 @@ func saveNotification() *graphql.Field {
 			"type":&graphql.ArgumentConfig{
 				Type: graphql.Int,
 			},
+			"idUserReq": &graphql.ArgumentConfig{
+				Type: graphql.String,
+			},
 		},
 		Resolve:     NotifResolver.SavedNotifResolver,
 	}
+}
+
+func updateNotification() *graphql.Field {
+	return &graphql.Field{
+		Type:        graphql.String,
+		Description: "updated notification",
+		Args: graphql.FieldConfigArgument{
+			"uid": &graphql.ArgumentConfig{
+				Type: graphql.String,
+			},
+		},
+		Resolve:     NotifResolver.UpdatedStatutNotifResolver,
+	}	
 }
