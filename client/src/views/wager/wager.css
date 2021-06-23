@@ -27,6 +27,7 @@
 .wagers .container .tabs-content{
 	margin-top: 0;
 	background: #1d1d1d;
+	padding: 0;
 }
 .wagers .container .tab-league{
 	border: none;

@@ -25,6 +25,14 @@
     vertical-align: middle;
     text-align: right;
 }
+.gamer-profil{
+	display: flex;
+	align-items: center;
+	padding: 15px 20px;
+}
+.gamer-tag{
+	padding: 0 25px;
+}
 .tabs{	
 	width: 100%;
 	text-align: center;	
@@ -110,7 +118,7 @@
 	text-align: left;
 }
 .main-pro .avatar{
-	width: 73px;
+	width: 120px;
 	display: inline-block;
 }
 .setavatar{	
@@ -132,7 +140,7 @@
 }
 .setavatar label svg{
 	position: relative;
-	top: 37%;
+	top: 44%;
 	color: #ffffff;
 }
 

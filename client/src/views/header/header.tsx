@@ -52,6 +52,7 @@ const Header: React.FC = function() {
 	const onShowNotif = function(){
 		if(dataNotifications.length > 0) {
 			setShowNotif(!showNotif)
+			setNotification(0) // update notification statut true
 		}
 
 	}
@@ -76,9 +77,9 @@ const Header: React.FC = function() {
 						notif = {
 							type:0,
 							user:{
-								email: elemnt.emailsender,
-								username: elemnt.usernameSender,
-								avatar: elemnt.avatarSender
+								email: elemnt.userRequest.email,
+								username: elemnt.userRequest.username,
+								avatar: elemnt.userRequest.avatar
 							}
 						}
 						array.push(notif)
@@ -93,9 +94,9 @@ const Header: React.FC = function() {
 				notif = {
 					type:0,
 					user:{
-						email: subData.subscribeNotifications.emailsender,
-						username: subData.subscribeNotifications.usernameSender,
-						avatar: subData.subscribeNotifications.avatarSender
+						email: subData.subscribeNotifications.email,
+						username: subData.subscribeNotifications.username,
+						avatar: subData.subscribeNotifications.avatar
 					}
 				}
 				array.push(notif)
@@ -181,7 +182,11 @@ const Header: React.FC = function() {
 								</i>
 							</>
 							<div className={!showNotif ? "notification" :"notification show"}>
-								<Notifications data={dataNotifications} />
+								{dataNotifications.length > 0 && dataNotifications[0].type === 0
+									?
+									(<Notifications data={dataNotifications} />)
+									: <></>
+								}
 							</div>
 							<><i className="relative">
 								<FontAwesomeIcon icon={faUsers} size="lg"/>
