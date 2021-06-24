@@ -1,6 +1,6 @@
 import React from "react"
 import { useSelector } from "react-redux"
-
+import { Link } from 'react-router-dom'
 import {Translation} from "../../lang/translation"
 import {RootState} from "../../reducer"
 import "../../assets/css/style.css"
@@ -35,7 +35,7 @@ const Community: React.FC = function() {
 		  </h3>
           <div className="artContent">
             <div className="article">
-              <img src={warzone} alt="" />
+              <img src={warzone} alt="warzone" />
               <div className="text">
                 <p className="title">Warzone Patch 1.15.x</p>
                 <p>
@@ -46,18 +46,18 @@ const Community: React.FC = function() {
 					Translation("fr").participHome.retrieve
 				}
 				</p>
-                <a href="#">
+                <Link to="#">
 					{
 						Object.keys(userConnectedRedux.user).length > 0 ?
 						Translation(userConnectedRedux.user.language).participHome.see
 						:
 						Translation("fr").participHome.see
 					}
-				</a>
+				</Link>
               </div>
             </div>
             <div className="article">
-              <img src={rlchampionsip} alt="" />
+              <img src={rlchampionsip} alt="rocket league champoinship" />
               <div className="text">
                 <p className="title">Résultats RLCS</p>
                 <p>
@@ -68,14 +68,14 @@ const Community: React.FC = function() {
 					Translation("fr").participHome.follow
 				}
 				</p>
-                <a href="#">
+                <Link to="#">
 					{
 						Object.keys(userConnectedRedux.user).length > 0 ?
 						Translation(userConnectedRedux.user.language).participHome.see
 						:
 						Translation("fr").participHome.see
 					}
-				</a>
+				</Link>
               </div>
             </div>
           </div>
@@ -105,7 +105,7 @@ const Community: React.FC = function() {
 			}
 		  </h3>
           <div className="shop">
-            <a href="#"><img src={promo} alt=""/></a>
+            <Link to="#"><img src={promo} alt="promo"/></Link>
           </div>
         </div>
       </div>

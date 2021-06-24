@@ -55,13 +55,18 @@ const Avatar : React.FC = function() {
         }
 	}
 	return (
-		<div className="avatar">
-			<p className="setavatar">
-				<img src = {AvatarDefault} />
-			<label htmlFor="setavatar"><FontAwesomeIcon icon={faPen} /></label>
-			<input type="file" id="setavatar" onChange={handleUpload} className="uploadFile" name="file"/>
-			</p>
-			<p className="pseudo"><strong>{userConnectedRedux.user.username}</strong></p>
+		<div className="gamer-profil">
+			<div className="avatar">			
+				<p className="setavatar">
+					<img src = {AvatarDefault} />
+				<label htmlFor="setavatar"><FontAwesomeIcon icon={faPen} /></label>
+				<input type="file" id="setavatar" onChange={handleUpload} className="uploadFile" name="file"/>
+				</p>
+				<p className="pseudo"><strong>{userConnectedRedux.user.username}</strong></p>
+			</div>
+			<div className="gamer-tag">
+				<h2>GameTag</h2>
+			</div>
 		</div>
 	)
 }
