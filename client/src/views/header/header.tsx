@@ -2,7 +2,7 @@ import React,{useState,useMemo} from "react"
 import { Link } from 'react-router-dom'
 import { useSelector,useDispatch } from "react-redux"
 import {useHistory } from "react-router-dom"
-import {useQuery,useSubscription} from "@apollo/client"
+import {useQuery,useSubscription,useMutation} from "@apollo/client"
 
 import "../header/header.css"
 import logo from "../../assets/image/logo.png"
@@ -19,6 +19,7 @@ import AvatarDefault from "../../assets/image/game-tag.png"
 import {GET_ALL_NOTIFICATIONS} from "../../gql/notifications/query"
 import Notifications from "./notificationFriend"
 import {NOTIFICATIONS_SUBSCRIBE,COUNT_SUBSCRIBE} from "../../gql/user/subscription"
+import {UPDATED_NOTIFICATION} from "../../gql/notifications/mutation"
 
 export interface Notif  {
 	type:number,
@@ -46,13 +47,20 @@ const Header: React.FC = function() {
 		},
 	})
 
+	const [updatedNotification] = useMutation(UPDATED_NOTIFICATION)
+
 	const onShow = function(){
 		setShowList(!showList)
 	}
-	const onShowNotif = function(){
+	const onShowNotif = async function(){
 		if(dataNotifications.length > 0) {
 			setShowNotif(!showNotif)
 			setNotification(0) // update notification statut true
+			for(let i=0;i < dataNotifications.length;i++) {
+				const result = await updatedNotification({ variables: { uid: dataNotifications[i].uid }})
+				console.log(result)
+			}
+
 		}
 
 	}

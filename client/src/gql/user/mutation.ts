@@ -51,3 +51,9 @@ export const INCOMING_FRIENDS = gql`
 		requestFriend(idRequest:$idRequest,idSender:$idSender)
 	}
 `
+
+export const ACCETEPED_FRIENDS = gql`
+	mutation AcceptedRequestFriend($idRequest:String,$idSender:String) {
+		AcceptedRequestFriend(idRequest:$idRequest,idSender:$idSender)
+	}
+`

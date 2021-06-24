@@ -46,5 +46,7 @@ func GetRootFields() graphql.Fields {
 		"updatedAvatar":		updatedAvatar(),
 		"requestFriend":		requestFriend(),
 		"saveNotification":		saveNotification(),
+		"updateNotification": 	updateNotification(),
+		"AcceptedRequestFriend": AcceptedRequestFriend(),
 	}
 }

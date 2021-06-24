@@ -168,3 +168,19 @@ func requestFriend() *graphql.Field {
 		Resolve: UserRolve.RequestFriendResolver,
 	}
 }
+
+func AcceptedRequestFriend() *graphql.Field {
+	return &graphql.Field{
+		Type:        graphql.String,
+		Description: "Accepted request friends",
+		Args: graphql.FieldConfigArgument{
+			"idRequest": &graphql.ArgumentConfig{
+				Type: graphql.String,
+			},
+			"idSender": &graphql.ArgumentConfig{
+				Type: graphql.String,
+			},				
+		},			
+		Resolve: UserRolve.AcceptedFriendResolver,
+	}
+}

@@ -102,3 +102,24 @@ func (r *resolver) GetAllFriendsUser(params graphql.ResolveParams) (interface{},
 
 	return result, nil
 }
+
+func (r *resolver) AcceptedFriendResolver(params graphql.ResolveParams) (interface{}, error){
+	idRequest, isOKReq := params.Args["idRequest"].(string)
+	idSender, isOKSend := params.Args["idSender"].(string)
+
+	if !isOKReq || !isOKSend {
+		return "", errors.New("id not valid")
+	}
+
+	resRequest, err := r.userHandler.FindOneUserByUid(idRequest)
+	resSender, err := r.userHandler.FindOneUserByUid(idSender)
+
+	if err != nil {
+		return "", err
+	}
+
+	_, err = r.userHandler.UpdatedUserFriend(resSender,resRequest)
+
+	return "Accepted",nil
+
+}

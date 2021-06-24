@@ -25,6 +25,35 @@ func (u *UserUsecase)AddFriend(req *entity.Friends) (interface{}, error) {
 	return result, nil
 }
 
+func (u *UserUsecase) UpdatedUserFriend(user entity.User,userReq entity.User) (interface{}, error) {
+	var friend []entity.User
+	friend = append(friend,userReq)
+	userSender := &entity.User{
+			Uid:           	user.Uid,
+			FirstName:     	user.FirstName,
+			LastName:      	user.LastName,
+			Password:      	user.Password,
+			Username:      	user.Username,
+			Email:         	user.Email,
+			IsBanned:      	user.IsBanned,
+			Avatar:        	user.Avatar,
+			Language:      	user.Language,
+			Point:         	user.Point,
+			IdGameAccount: 	user.IdGameAccount,
+			Roles: 			user.Roles,
+			TypeConnexion:	user.TypeConnexion,
+			Created: 		user.Created,
+			Friends:friend,		
+		}
+	result, err := u.userRepository.UpdatedUser(userSender)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return result, nil
+}
+
 func NotifUserSender(user *entity.User,userReq *entity.User,count interface{}, wg *sync.WaitGroup)  {
 	err := godotenv.Load()
 	if err != nil {
