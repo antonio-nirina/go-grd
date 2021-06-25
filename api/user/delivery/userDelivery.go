@@ -6,6 +6,7 @@ import (
 	"errors"
 	"os"
 	"time"
+	"sync"
 
 	_jwt "github.com/dgrijalva/jwt-go"
 	"github.com/graphql-go/graphql"
@@ -140,6 +141,7 @@ func (r *resolver) ValidateUserResolver(input *inputRegister) (bool, error) {
 }
 
 func (r *resolver) AuthUserResolver(params graphql.ResolveParams) (interface{}, error) {
+	var wg sync.WaitGroup
 	email := params.Args["email"].(string)
 	password := params.Args["password"].(string)
 	res, err := r.userHandler.FindUserByEmail(email)
@@ -163,11 +165,13 @@ func (r *resolver) AuthUserResolver(params graphql.ResolveParams) (interface{}, 
 	if err != nil {
 		return "", errors.New("Error interne try after an moment")
 	}
-
+	wg.Add(1)
+	go r.userHandler.NotifConnected(&res,&wg)
+	wg.Wait()
 	return token, nil
 }
 
-func (r *resolver)ForgotResolver(params graphql.ResolveParams) (interface{}, error) {
+func (r *resolver) ForgotResolver(params graphql.ResolveParams) (interface{}, error) {
 	email := params.Args["email"].(string)
 	res, err := r.userHandler.FindUserByEmail(email)
 	if err != nil {

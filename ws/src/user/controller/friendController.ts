@@ -1,7 +1,7 @@
 import {runTaskTournament} from "../../cron/task-match"
 import {User} from "../entities/user"
 import {Pubsub} from "../../client/redisClient"
-import {CHANNEL_ADD_FRIEND} from "../../common/channels"
+import {CHANNEL_ADD_FRIEND,CHANNEL_CONNECTED,CHANNEL_DISCONNECTED} from "../../common/channels"
 import { Notifications } from "../types/notifications"
 
 export const NotifiUser = async function(user:User) : Promise<User> {
@@ -18,4 +18,15 @@ export const NotifiUser = async function(user:User) : Promise<User> {
 	return user
 }
 
+export const NotifUserConnected = async function(user:User): Promise<User> {
+	Pubsub.publish(CHANNEL_CONNECTED,{subscribeConnected:user})
+
+	return user
+}
+
+export const NotifUserDisconnected = async function(user:User): Promise<User> {
+	Pubsub.publish(CHANNEL_DISCONNECTED,{subscribeDisConnected:user})
+
+	return user
+}
 

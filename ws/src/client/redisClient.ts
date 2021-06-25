@@ -23,9 +23,9 @@ export const GetRedis = async (key:string) => {
 	  return data ? JSON.parse(data) : {}
 	} catch (e) {
 		console.log(e)
-	  return null;
+	  return null
 	}
-  };
+  }
 
 export const SetRedis = async (key:string, data:any) => {
 	try {

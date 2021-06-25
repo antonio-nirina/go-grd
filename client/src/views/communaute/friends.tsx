@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import Popup from "reactjs-popup"
 import "reactjs-popup/dist/index.css"
 import { Link } from 'react-router-dom'
-import {useQuery,useMutation} from "@apollo/client"
+import {useQuery,useMutation,useSubscription} from "@apollo/client"
 import {GET_ALL_FRIENDS,GET_ALL_USER} from "../../gql/user/query"
 import { useSelector } from "react-redux"
 import {RootState} from "../../reducer"
@@ -12,6 +12,7 @@ import {Translation} from "../../lang/translation"
 import {Friends} from "../../gql/types/friend"
 import AvatarDefault from "../../assets/image/game-tag.png"
 import {INCOMING_FRIENDS} from "../../gql/user/mutation"
+import {USER_CONNECTED} from "../../gql/user/subscription"
 
 const Friend: React.FC = function() {
 	const userConnectedRedux 		= useSelector((state:RootState) => state.userConnected)
@@ -31,6 +32,8 @@ const Friend: React.FC = function() {
 			idUserConnected: userConnectedRedux.user.uid
 		},
 	})
+	const {loading:ldSub,error:erSub,data:dataSub}  = useSubscription(USER_CONNECTED)
+
 	useMemo(()=> {
 		if(!loading && !error && data) {
 			if(data.GetAllFriends[0].count > 0) {
@@ -41,6 +44,7 @@ const Friend: React.FC = function() {
 
 		if(!loadingAll && !errorAll && dataAll) setUsers(dataAll.GetUsers.filter((e:any) => e.uid !== userConnectedRedux.user.uid))
 
+		if(!ldSub && !erSub && dataSub) console.log(dataSub)
 	},[loading,error,data,loadingAll,errorAll,dataAll])
 
 	const onSendIncoming = 	async function(uid:string) {

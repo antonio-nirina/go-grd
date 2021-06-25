@@ -18,4 +18,12 @@ export const NOTIFICATIONS_SUBSCRIBE = gql`
 		}
 	}
 `
-
+export const USER_CONNECTED = gql`
+	subscription subscribeConnected {
+		subscribeConnected {
+			uid
+			email
+			avatar
+			username
+		}
+	}

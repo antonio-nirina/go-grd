@@ -15,6 +15,18 @@ import (
 	"github.com/thoussei/antonio/front-office/api/user/entity"
 )
 
+const (
+	CONNECTED 	= "connected"
+	DISCONNECT  = "disconnected"
+)
+
+type userFriends struct {
+	uid string
+	emal string
+	avatar string
+	username string
+}
+
 func (u *UserUsecase)AddFriend(req *entity.Friends) (interface{}, error) {
 	result, err := u.userRepository.AddFriend(req)
 
@@ -73,6 +85,61 @@ func NotifUserSender(user *entity.User,userReq *entity.User,count interface{}, w
 		"query":queryN,
 	}
 
+	clientWsGraphql(jsonData)
+	wg.Done()
+}
+
+func (u *UserUsecase) NotifConnected(user *entity.User, wg *sync.WaitGroup) {
+	err := godotenv.Load()
+	if err != nil {
+		external.Logger("error load env")
+	}
+
+	queryStr := `
+	{ 
+		NotifUserConnected(user:{uid:"%s",avatar:"%s",email:"%s",username:"%s"}) {
+			email,
+		}
+	}
+	`
+	queryN := fmt.Sprintf(queryStr,user.Uid.Hex(),user.Avatar,user.Email,user.Username,0)
+
+	jsonData := map[string]string{
+		"query":queryN,
+	}
+
+
+
+	clientWsGraphql(jsonData)
+	wg.Done()
+}
+
+func (u *UserUsecase) NotifDisConnected(user *entity.User, wg *sync.WaitGroup) {
+	err := godotenv.Load()
+	if err != nil {
+		external.Logger("error load env")
+	}
+
+	queryStr := `
+	{ 
+		NotifUserConnected(user:{uid:"%s",avatar:"%s",email:"%s",username:"%s"}) {
+			email,
+		}
+	}
+	`
+	queryN := fmt.Sprintf(queryStr,user.Uid.Hex(),user.Avatar,user.Email,user.Username,0)
+	jsonData := map[string]string{
+		"query":queryN,
+	}
+	userSend := userFriends{user.Uid.Hex(),user.Email,user.Avatar,user.Username}
+	json, _ := json.Marshal(userSend)
+	external.SetDataRedis(CONNECTED,json)
+	clientWsGraphql(jsonData)
+	wg.Done()
+}
+
+
+func clientWsGraphql(jsonData map[string]string) {
 	uri := os.Getenv("URI_SUBSCRIPTION")
 	jsonValue, _ := json.Marshal(jsonData)
     request, err := http.NewRequest("POST",uri, bytes.NewBuffer(jsonValue))
@@ -88,5 +155,4 @@ func NotifUserSender(user *entity.User,userReq *entity.User,count interface{}, w
     data, _ := ioutil.ReadAll(resp.Body)
 
 	fmt.Println(string(data))
-	wg.Done()
 }

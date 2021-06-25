@@ -31,6 +31,8 @@ export const typeDefs = gql`
 
 	type Query {
   		NotifiUser(user:userInput):User
+  		NotifUserConnected(user:userInput):User
+  		NotifUserDisconnected(user:userInput):User
 	}
 
 	type Mutation {
@@ -40,5 +42,7 @@ export const typeDefs = gql`
 	type Subscription {
 		subscribeCounter:Times
 		subscribeNotifications:Notifications
+		subscribeConnected:User
+		subscribeDisConnected:User
 	}
 `
