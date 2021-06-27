@@ -179,7 +179,7 @@ li{
   .tag{
     max-width: inherit;
     text-align: right;
-  }
+  }  
   .header .bt-container{
     width: 100%;
     max-width: inherit;
@@ -190,12 +190,115 @@ li{
   }
   .container .block, .container .block.last{
     margin-bottom: 15px;
-    width: 48%
+    width: 46%
   }
   .container .block.last{
     border-radius: 15px;
   }
+  .container .actuality{
+    width: 100%;
+  }
+  .container h2{
+    font-size: 25px !important;
+  }
+  .container .clip, .shop{
+    margin-left: 0;
+    width: 100%;
+    margin-bottom: 15px;
+    max-width: inherit;
+  }
+  .shop img{
+    width: 100%;
+  }
+}
 
+@media screen and (max-width: 600px) {
+  .wrap{
+    display: block;
+  }
+  .header h1{
+    text-align: center;
+  }
+  .logo{
+    max-width: inherit;
+    width: 100%;
+  }
+  .imglogo{
+    width: 50%;
+    text-align: center;
+  }
+  .home .slogan{
+    top: 30%;
+  }
+  .tag{
+    text-align: center;
+  }
+  .login .main, .inscription .main, .profil .main-content, .main{
+    padding-top: 8em;
+  }
+  .home p.title{
+    font-size: 25px;
+  }
+  .container .block, .container .block.last{  
+    width: 95%;
+  }
+  .container .gamecash, .container .gamecash .lot{
+    display: block;
+    margin-bottom: 15px;
+  }
+  .container .gamecash .lot{
+    width: 100%;
+  }
+  .container .gamecash .lot p{
+    width: 100%;
+    margin-bottom: 15px;
+  }
+  .container .gamecash .more{
+    width: 100%;
+    text-align: center;
+  }
+  .container .join{
+    padding: 0px 15px;
+  }
+  .container .join .email{
+    padding-bottom: 15px;
+  }
+  .container .join input{
+    margin-bottom: 15px;
+  }
+  .container .block-tournois{
+    padding: 3em 2em 3em 2em;
+  }
+  .container footer .wrap{
+    text-align: center;
+  }
+  .container footer .rss{
+    padding: 15px 0;
+  }
+}
+@media screen and (max-width: 380px) {
+  .wrap{
+    padding: 6px 9px;
+  }    
+  .container .undertitle:before{
+    height: 70px;
+  }
+  .container footer .rss{
+    width: 100%;
+  }
+  .container .jeux{
+    padding-bottom: 2em;
+  }
+  .container .jeux h2{
+    padding-top: 20px;
+  }
+  .container .logo-game{
+    margin-right: 1em;
+    margin-bottom: 0;
+  }
+  .container .firstblock, .container .lastblock{
+    padding: 9px;
+  }
 }
 /*
 @media screen and (max-width: 1302px) {

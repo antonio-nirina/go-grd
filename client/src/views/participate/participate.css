@@ -75,25 +75,26 @@
 	font-size: 13px;
 }
 .gamecash{
-	padding-top: 20px;	
-}
-.gamecash .lot p{
-	display: inline-block;
-	margin-right: 13px;
-	width: 28.5%;
-	text-align: center;
+	padding-top: 20px;
+	display: flex;
 }
 .gamecash .lot{
 	width: 60%;
-	display: inline-block;
+	display: flex;
 	vertical-align: top;
 	
 }
-.gamecash .more{
-	display: inline-block;
+.gamecash .lot p{	
+	margin-right: 13px;
+	width: 28.5%;
+	text-align: center;
+	align-self: center;
+}
+.gamecash .more{	
 	width: 35%;
 	text-align: right;
 	margin-right: 5px;
+	align-self: center;
 }
 .gamecash .more a{
 	font-size: 15px;
