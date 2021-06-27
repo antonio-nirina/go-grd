@@ -59,19 +59,25 @@ func SetDataRedis(key string,value interface{})  {
         Logger(fmt.Sprintf("%v", err))
     } 
 }
-
-func SetHmsetRedis(key string, value interface{}) {
-	err := Rdb.HMSet(ctx,key,value)
+// - HSet("myhash", map[string]interface{}{"key1": "value1", "key2": "value2"})
+func SetHmsetRedis(key string,value interface{}) {
+	fmt.Println(value)
+	err := Rdb.HSet(ctx,key,value)
 	if err != nil {
         Logger(fmt.Sprintf("%v", err))
     } 
 }
 
-func GetHmsetRedis(key string, value interface{}) {
-	err := Rdb.HMGet(ctx,key)
+func GetHmsetRedis(key string, field string) {
+	err := Rdb.HMGet(ctx,key,field)
 	if err != nil {
         Logger(fmt.Sprintf("%v", err))
     } 
 }
 
-
+func RemoveHmsetRedis(key string, field string) {
+	err := Rdb.HDel(ctx,key,field)
+	if err != nil {
+        Logger(fmt.Sprintf("%v", err))
+    } 
+}

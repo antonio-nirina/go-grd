@@ -90,6 +90,7 @@ func NotifUserSender(user *entity.User,userReq *entity.User,count interface{}, w
 }
 
 func (u *UserUsecase) NotifConnected(user *entity.User, wg *sync.WaitGroup) {
+	var args = make(map[string]interface{})
 	err := godotenv.Load()
 	if err != nil {
 		external.Logger("error load env")
@@ -97,7 +98,7 @@ func (u *UserUsecase) NotifConnected(user *entity.User, wg *sync.WaitGroup) {
 
 	queryStr := `
 	{ 
-		NotifUserConnected(user:{uid:"%s",avatar:"%s",email:"%s",username:"%s"}) {
+		NotifUserConnected(user:{uid:"%s",avatar:"%s",email:"%s",username:"%s",count:%d}) {
 			email,
 		}
 	}
@@ -108,8 +109,10 @@ func (u *UserUsecase) NotifConnected(user *entity.User, wg *sync.WaitGroup) {
 		"query":queryN,
 	}
 
-
-
+	userSend := userFriends{user.Uid.Hex(),user.Email,user.Avatar,user.Username}
+	json, _ := json.Marshal(userSend)
+	args[user.Uid.Hex()] = json
+	external.SetHmsetRedis(CONNECTED,args)
 	clientWsGraphql(jsonData)
 	wg.Done()
 }
@@ -122,7 +125,7 @@ func (u *UserUsecase) NotifDisConnected(user *entity.User, wg *sync.WaitGroup) {
 
 	queryStr := `
 	{ 
-		NotifUserConnected(user:{uid:"%s",avatar:"%s",email:"%s",username:"%s"}) {
+		NotifUserConnected(user:{uid:"%s",avatar:"%s",email:"%s",username:"%s",count:%d}) {
 			email,
 		}
 	}
@@ -131,9 +134,8 @@ func (u *UserUsecase) NotifDisConnected(user *entity.User, wg *sync.WaitGroup) {
 	jsonData := map[string]string{
 		"query":queryN,
 	}
-	userSend := userFriends{user.Uid.Hex(),user.Email,user.Avatar,user.Username}
-	json, _ := json.Marshal(userSend)
-	external.SetDataRedis(CONNECTED,json)
+	
+	external.RemoveHmsetRedis(DISCONNECT,user.Uid.Hex())
 	clientWsGraphql(jsonData)
 	wg.Done()
 }

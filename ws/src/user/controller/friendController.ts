@@ -1,8 +1,10 @@
-import {runTaskTournament} from "../../cron/task-match"
 import {User} from "../entities/user"
 import {Pubsub} from "../../client/redisClient"
 import {CHANNEL_ADD_FRIEND,CHANNEL_CONNECTED,CHANNEL_DISCONNECTED} from "../../common/channels"
 import { Notifications } from "../types/notifications"
+import {HgetRedis} from "../../client/redisClient"
+
+const CONNECTED:string = "connected"
 
 export const NotifiUser = async function(user:User) : Promise<User> {
 	const res:Notifications = {
@@ -19,6 +21,8 @@ export const NotifiUser = async function(user:User) : Promise<User> {
 }
 
 export const NotifUserConnected = async function(user:User): Promise<User> {
+	const data = HgetRedis(CONNECTED,user.uid)
+	console.log("xxxx", data)
 	Pubsub.publish(CHANNEL_CONNECTED,{subscribeConnected:user})
 
 	return user

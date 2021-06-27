@@ -27,3 +27,4 @@ export const USER_CONNECTED = gql`
 			username
 		}
 	}
+`
