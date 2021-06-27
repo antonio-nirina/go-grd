@@ -1,6 +1,8 @@
 package handler
 
 import (
+	"sync"
+
 	"github.com/thoussei/antonio/front-office/api/user/entity"
 )
 
@@ -19,4 +21,7 @@ type Usecase interface {
 	AddFriend(req *entity.Friends) (interface{}, error)
 	// NotifUserSender(user *entity.User) (interface{}, error)
 	FindOneUserByUid(idQuery string) (entity.User, error)
+	UpdatedUserFriend(userSender entity.User,userReq entity.User) (interface{}, error)
+	NotifConnected(user *entity.User, wg *sync.WaitGroup)
+	NotifDisConnected(user *entity.User, wg *sync.WaitGroup)
 }

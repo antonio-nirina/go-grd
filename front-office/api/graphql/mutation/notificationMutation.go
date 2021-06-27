@@ -2,6 +2,7 @@ package mutation
 
 import (
 	"github.com/graphql-go/graphql"
+	"github.com/thoussei/antonio/front-office/api/graphql/types"
 )
 
 func saveNotification() *graphql.Field {
@@ -31,7 +32,7 @@ func saveNotification() *graphql.Field {
 
 func updateNotification() *graphql.Field {
 	return &graphql.Field{
-		Type:        graphql.String,
+		Type:        types.NotificationSchemaType,
 		Description: "updated notification",
 		Args: graphql.FieldConfigArgument{
 			"uid": &graphql.ArgumentConfig{

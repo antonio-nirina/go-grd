@@ -7,7 +7,7 @@ const options = {
 	port: 6379,
 	retry_strategy: (options:any) => {
 	  // reconnect after
-	  return Math.max(options.attempt * 100, 3000);
+	  return Math.max(options.attempt * 100, 3000)
 	}
 }
 const redis = new Redis()
@@ -19,20 +19,31 @@ export const Pubsub = new RedisPubSub({
 
 export const GetRedis = async (key:string) => {
 	try {
-	  const data = await redis.get(key);
+	  const data = await redis.get(key)
 	  return data ? JSON.parse(data) : {}
 	} catch (e) {
 		console.log(e)
-	  return null;
+	  return null
 	}
-  };
+  }
 
 export const SetRedis = async (key:string, data:any) => {
 	try {
-	  await redis.set(key, JSON.stringify(data));
+	  await redis.set(key, JSON.stringify(data))
 	  return true
 	} catch (e) {
 		console.log(e)
 	  return false
 	}
-  };
+}
+
+export const HgetRedis = async (key:string, field:string) => {
+	try {
+		const data = await redis.hget(key,field)
+		console.log(data)
+		return data ? JSON.parse(data) : {}
+	} catch (e) {
+		console.log("error", e)
+	  return false
+	}
+}

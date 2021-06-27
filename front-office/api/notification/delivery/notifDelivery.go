@@ -76,5 +76,7 @@ func (r *resolverNotif) UpdatedStatutNotifResolver(params graphql.ResolveParams)
 		return nil,err
 	}
 
+	_,err = r.notifHandler.UpdatedStatutNotifHandler(uid)
+
 	return notif,nil
 }

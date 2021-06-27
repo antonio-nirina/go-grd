@@ -2,17 +2,22 @@ import React,{useState} from "react"
 import { Link } from 'react-router-dom'
 import { useSelector } from "react-redux"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {useQuery} from "@apollo/client"
+import {useQuery,useMutation} from "@apollo/client"
 import { faBars, faBell, faUsers, faTimes, faCheck } from "@fortawesome/free-solid-svg-icons"
 import AvatarDefault from "../../assets/image/game-tag.png"
 import {Translation} from "../../lang/translation"
 import {RootState} from "../../reducer"
+import {ACCETEPED_FRIENDS} from "../../gql/user/mutation"
 
 import {Notif} from "./header"
 
 const Notifications = function(data:any) {
 	const userConnectedRedux = useSelector((state:RootState) => state.userConnected)
-
+	const [acceptedFriend] = useMutation(ACCETEPED_FRIENDS)
+	const handleAccepted = async function(uid:string) {
+		const result = await acceptedFriend({ variables: { idRequest:uid,idSender: userConnectedRedux.user.uid}})
+		console.log(result)
+	}
 	return(
 		<>
 			{
@@ -30,7 +35,7 @@ const Notifications = function(data:any) {
 								Translation("fr").header.text
 							*/}
 					        </span>
-					        <button className="btn bg-yellow">
+					        <button className="btn bg-yellow" onClick={()=>handleAccepted(el.ui)}>
 					            <i className="rect"><FontAwesomeIcon icon={faCheck} size="xs"/></i>
 					            <span>
 					            	{
