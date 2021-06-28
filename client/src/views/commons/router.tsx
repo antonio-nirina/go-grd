@@ -48,7 +48,7 @@ const Router = function() {
 			<Route path="/inscription" exact component={Inscription} />
 			<Route path="/register" exact component={Register} />
 			<Route path="/forgot-password" exact component={InitPass} />
-			<Route path="/update-password" exact component={UpdatePassword} />			
+			<ProtectedRoute path="/update-password" exact component={UpdatePassword} />			
 		</Switch>
 	)
 }
