@@ -3,10 +3,10 @@
 .relative{
 	position: relative;
 }
-.wrap{
+.wrap.red{
 	padding: 6px 35px;	
 	width: 100%;
-	border-bottom : 2px solid #f5cc22;
+	border-bottom : 2px solid #dd0000;
 	background: #000000;
 	display: flex;
 }
@@ -58,10 +58,9 @@
 .tag{
 	max-width: 291px;
 	width: 100%;
-	display: inline-block;
+	display: none;
 	vertical-align: middle;
 }
-
 
 .box{
 	max-width: 131px;
@@ -179,7 +178,7 @@
 .header .notification{
 	display: none;
 	position: absolute;
-    background: #101010;    
+    background: #dd0000;    
     right: 263px;
     top: 66px;
     padding: 8px;
@@ -256,10 +255,10 @@
 	border-radius: 50%;
 }
 
-.counter{
+.red .counter{
 	position: absolute;
 	top: 2px;
-	background: #ffcb15;
+	background: #dd0000;
 	display: inline-block;
 	width: 19px;
 	text-align: center;
@@ -309,12 +308,12 @@
 	padding: 0 5px;
 }
 
-.dropdown li:first-child a:first-child:after{
+.red .dropdown li:first-child a:first-child:after{
 	content:"";
 	display: block;
 	width: 100px;
 	height: 2px;
-	background: #f2cf1d;
+	background: #dd0000;
 	margin: 5px 0px;
 }
 .dropdown li:last-child a:first-child:before{

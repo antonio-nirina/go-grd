@@ -33,6 +33,10 @@ html{
   background: #f2cf1c;
   border: 1px solid #f2cf1c !important;
 }
+.btn.bg-red{
+  background: #dd0000;
+  color: #ffffff;
+}
 .cl-yellow{
   color: yellow;
 }

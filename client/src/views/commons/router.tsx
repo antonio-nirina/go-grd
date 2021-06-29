@@ -1,6 +1,7 @@
 import React from "react"
 import { Route, Switch } from "react-router-dom"
 import Home from "../home/home"
+import Index from "../version/home/index"
 import Ligue from "../annexe/ligue"
 import Tournament from "../tournament/tournament"
 import Tournois from "../annexe/tournois"
@@ -28,6 +29,7 @@ const Router = function() {
 	return (
 		<Switch>
 			<Route path="/" exact component={Home} />
+			<Route path="/index" exact component={Index} />
 			<ProtectedRoute path="/tournament" exact component={Tournament} />
 			<ProtectedRoute path="/tournois" exact component={Tournois} />
 			<ProtectedRoute path="/info" exact component={Info} />
@@ -42,7 +44,7 @@ const Router = function() {
 			<ProtectedRoute path="/communaute" exact component={Communaute} />			
 			<ProtectedRoute path="/assistant" exact component={Assistant} />
 			<ProtectedRoute path="/assistance" exact component={Assistance} />
-			<ProtectedRoute path="/profil" exact component={Profil} />
+			<Route path="/profil" exact component={Profil} />
 			<ProtectedRoute path="/profile" exact component={Profile} />
 			<Route path="/login" exact component={Login} />
 			<Route path="/inscription" exact component={Inscription} />
