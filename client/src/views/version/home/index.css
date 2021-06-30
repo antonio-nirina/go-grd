@@ -1,0 +1,30 @@
+@charset "UTF-8";
+
+*{
+	padding: 0;
+	margin: 0;
+}
+
+a{	
+	text-decoration: none;
+	color: #ffffff;	
+}
+li{
+	list-style: none;
+}
+
+
+body{
+	background: #101010;
+	color: #ffffff;
+	font-family: 'quicksand regular';
+	font-size: 14px;
+}
+.container{
+	width: 100%;
+}
+
+.participate{
+	background: #101010;
+}
+

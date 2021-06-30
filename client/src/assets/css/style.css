@@ -33,6 +33,10 @@ html{
   background: #f2cf1c;
   border: 1px solid #f2cf1c !important;
 }
+.btn.bg-red{
+  background: #dd0000;
+  color: #ffffff;
+}
 .cl-yellow{
   color: yellow;
 }
@@ -210,6 +214,60 @@ li{
   .shop img{
     width: 100%;
   }
+  .container .aside-left, .container .center-block, .container .aside-right{
+    display: block;
+    width: 80%;
+    margin: auto;
+    margin-bottom: 15px;
+    padding: 0;
+  }
+  .container .artContent{
+    display: block;
+  }
+  .container .center-block .article{
+    padding: 0px;
+    margin: 0px;
+  }
+  .container .center-block .article .text{
+    padding: 20px 0;
+  }
+  .container .center-block .article .text, .container .center-block .article img{    
+    clear: both;
+    width: 100%;
+  }  
+  .container .tchat .rcw-widget-container{
+    position: initial;
+  }  
+
+}
+@media screen and (max-width: 800px){
+  .container .tchat{
+    width: 72%;
+    margin: auto;
+  }
+  .rcw-conversation-container .rcw-title{
+    padding: 15px 0px !important;
+  }
+  .tchat .rcw-header{
+    padding: 3px !important;
+  }
+  .tchat .rcw-conversation-container .rcw-close-button{
+    background: none;
+    top: 24px;
+    width: 30px;
+  }
+  .tchat .rcw-conversation-container .rcw-close{
+    width: 12px;
+    height: 12px;
+  }  
+  .container .tchat .rcw-conversation-container{
+    box-shadow: none;
+  }
+  .container .tchat .rcw-widget-container{
+    height: auto;
+    display: block;
+    margin-bottom: 30px;
+  }
 }
 
 @media screen and (max-width: 600px) {
@@ -274,6 +332,12 @@ li{
   }
   .container footer .rss{
     padding: 15px 0;
+  }
+  .popup-content{
+    width: 97% !important;
+  }
+  .rcw-launcher{
+    display: block !important;
   }
 }
 @media screen and (max-width: 380px) {
@@ -551,21 +615,7 @@ li{
     bottom: 0 !important;
 
   }  
-  .rcw-conversation-container .rcw-title{
-    padding: 15px 0px !important;
-  }
-  .tchat .rcw-header{
-    padding: 3px !important;
-  }
-  .tchat .rcw-conversation-container .rcw-close-button{
-    background: none;
-    top: 24px;
-    width: 30px;
-  }
-  .tchat .rcw-conversation-container .rcw-close{
-    width: 12px;
-    height: 12px;
-  }
+  
 }
 @media screen and (max-width: 640px){
   .home .article{

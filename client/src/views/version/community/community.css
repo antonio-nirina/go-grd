@@ -1,0 +1,96 @@
+@charset "UTF-8";
+.community{
+
+}
+
+.community h2{
+	font-family: "russo one";
+	font-size: 45px;
+	width: 100%;
+	text-align: center;
+	padding-bottom: 1em;
+	padding-top: 35px;
+	font-weight: 200;
+	text-transform: uppercase;
+}
+.community-block{
+	margin: auto;
+	padding: 35px;
+	width: 100%;
+}
+.actuality{
+	background: #2c2c2c;	
+	display: inline-block;
+	padding: 20px;
+	border-radius: 10px;
+	width: 52%;
+	margin-bottom: 15px;
+}
+.artContent{
+	display: flex;
+}
+.actuality h3{
+	font-family: "russo one";
+	font-weight: 200;
+	margin-bottom: 15px;
+	margin-left: 15px;
+}
+.actuality h3:before{
+
+}
+.article{
+	display: inline-block;
+	width: 47%;
+	margin-left: 15px;
+	vertical-align: top;	
+}
+.article img{
+	width: 100%;
+}
+.article p{
+	font-size: 12px;
+}
+.article a{
+	font-size: 11px;
+	font-style: italic;
+	display: block;
+	color: #808080;
+	margin-top: 15px;
+}
+.article .text p.title{
+	font-size: 14px;
+	margin-top: 15px;
+	margin-bottom: 5px;
+}
+.community video{
+	width: 100%;
+	height: auto;
+}
+.clip{
+	display: inline-block;
+	vertical-align: top;
+	background: #2c2c2c;
+	padding: 25px;
+	border-radius: 10px;
+	margin-left: 15px;
+	width: 45%;
+}
+.clip h3{
+	font-family: "russo one";
+	margin-bottom: 15px;
+}
+.shop{
+	background: #2c2c2c;	
+	display: inline-block;
+	padding: 20px;
+	border-radius: 10px;	
+	max-width: 543px;
+}
+.shop .img{
+	width: 100%;
+}
+.shop h3{
+	font-family: "russo one";
+	margin-bottom: 15px;
+	margin-left: 15px;
+}
