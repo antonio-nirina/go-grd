@@ -121,5 +121,4 @@ func (r *resolver) AcceptedFriendResolver(params graphql.ResolveParams) (interfa
 	_, err = r.userHandler.UpdatedUserFriend(resSender,resRequest)
 
 	return "Accepted",nil
-
 }

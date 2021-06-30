@@ -16,15 +16,15 @@ import (
 )
 
 const (
-	CONNECTED 	= "connected"
-	DISCONNECT  = "disconnected"
+	CONNECTED 	= "_connect"
+	DISCONNECT  = "_disconnect"
 )
 
 type userFriends struct {
-	uid string
-	emal string
-	avatar string
-	username string
+	Uid string
+	Email string
+	Avatar string
+	Username string
 }
 
 func (u *UserUsecase)AddFriend(req *entity.Friends) (interface{}, error) {
@@ -90,7 +90,7 @@ func NotifUserSender(user *entity.User,userReq *entity.User,count interface{}, w
 }
 
 func (u *UserUsecase) NotifConnected(user *entity.User, wg *sync.WaitGroup) {
-	var args = make(map[string]interface{})
+	//var args = make(map[string]interface{})
 	err := godotenv.Load()
 	if err != nil {
 		external.Logger("error load env")
@@ -110,9 +110,9 @@ func (u *UserUsecase) NotifConnected(user *entity.User, wg *sync.WaitGroup) {
 	}
 
 	userSend := userFriends{user.Uid.Hex(),user.Email,user.Avatar,user.Username}
-	json, _ := json.Marshal(userSend)
-	args[user.Uid.Hex()] = json
-	external.SetHmsetRedis(CONNECTED,args)
+	data,_:= json.Marshal(userSend)
+ 	// args[user.Uid.Hex()] = data
+	external.SetHmsetRedis(CONNECTED,user.Uid.Hex(),data)
 	clientWsGraphql(jsonData)
 	wg.Done()
 }
