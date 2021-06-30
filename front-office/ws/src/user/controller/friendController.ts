@@ -4,7 +4,8 @@ import {CHANNEL_ADD_FRIEND,CHANNEL_CONNECTED,CHANNEL_DISCONNECTED} from "../../c
 import { Notifications } from "../types/notifications"
 import {HgetRedis} from "../../client/redisClient"
 
-const CONNECTED:string = "connected"
+// const CONNECTED:string = "_connect"
+// const DISCONNECT:string  = "_disconnect"
 
 export const NotifiUser = async function(user:User) : Promise<User> {
 	const res:Notifications = {
@@ -21,8 +22,7 @@ export const NotifiUser = async function(user:User) : Promise<User> {
 }
 
 export const NotifUserConnected = async function(user:User): Promise<User> {
-	const data = HgetRedis(CONNECTED,user.uid)
-	console.log("xxxx", data)
+	// const data = HgetRedis(CONNECTED,user.uid)
 	Pubsub.publish(CHANNEL_CONNECTED,{subscribeConnected:user})
 
 	return user
