@@ -52,19 +52,23 @@ const Friend: React.FC = function() {
 		if (result.data.requestFriend) console.log(result.data.requestFriend)
 	}
 	return (
-		<div className="aside-right">
+		<div className="aside-right">			
 			{nbFriends
-				?
+				?				
 				friends.map(function(el:any,index:number) {
 					let img = el.avatar ? el.avatar : AvatarDefault
-					return(<p key={index}>
-							<img src={img} className="friend-avatar"/>
-							<span>{el.username}<i className="u-connected"></i></span>
-							<i><FontAwesomeIcon icon={faCommentDots} size="xs"/></i>
-							<i className="rect"><FontAwesomeIcon icon={faPlus} size="xs"/></i>
-						</p>
+					return(
+						<div className="friend-list">
+							<p key={index}>
+								<img src={img} className="friend-avatar"/>
+								<span>{el.username}<i className="u-connected"></i></span>
+								<i><FontAwesomeIcon icon={faCommentDots} size="xs"/></i>
+								<i className="rect"><FontAwesomeIcon icon={faPlus} size="xs"/></i>
+							</p>
+						</div>
 					)
 				})
+
 			: (<div className="friend-list noborder">
 					<p className="title">
 						{
