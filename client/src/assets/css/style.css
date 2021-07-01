@@ -158,7 +158,9 @@ ul,
 li{
 
 }
-
+.container .service-container.mobile{
+  display: none;
+}
 
 /********** Fonts *********/
 @font-face {
@@ -278,12 +280,29 @@ li{
     display: block;
     margin-bottom: 30px;
   }
+  .container .bloc-items{
+    display: block;
+  }
+  .container .service-img,  .container .service-modal{
+    margin: auto;
+    width: 100%;
+  }
+  .container .service-img img{
+    width: 70%;
+  }
+  .container .service-container{
+    display: none;
+  }
+  .container .service-container.mobile{
+    display: block;
+  }
 }
 
 @media screen and (max-width: 600px) {
-  .wrap{
+  .wrap, .container .wrap.red{
     display: block;
-  }
+    text-align: center;
+  }  
   .header h1{
     text-align: center;
   }
