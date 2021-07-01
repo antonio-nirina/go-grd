@@ -48,8 +48,12 @@ const Friend: React.FC = function() {
 	},[loading,error,data,loadingAll,errorAll,dataAll])
 
 	const onSendIncoming = 	async function(uid:string) {
-		const result = await requestFriend({ variables: { idRequest: userConnectedRedux.user.uid,idSender: uid} })
-		if (result.data.requestFriend) console.log(result.data.requestFriend)
+		try {
+			const result = await requestFriend({ variables: { idRequest: userConnectedRedux.user.uid,idSender: uid} })
+			if (result.data.requestFriend) console.log(result.data.requestFriend)
+		} catch(e) {
+			console.log(e)
+		}
 	}
 	return (
 		<div className="aside-right">

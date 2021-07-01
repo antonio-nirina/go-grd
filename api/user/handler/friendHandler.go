@@ -66,7 +66,7 @@ func (u *UserUsecase) UpdatedUserFriend(user entity.User,userReq entity.User) (i
 	return result, nil
 }
 
-func NotifUserSender(user *entity.User,userReq *entity.User,count interface{}, wg *sync.WaitGroup)  {
+func NotifUserSender(user *entity.User,userReq *entity.User,uid string,count interface{}, wg *sync.WaitGroup)  {
 	err := godotenv.Load()
 	if err != nil {
 		external.Logger("error load env")
@@ -74,12 +74,12 @@ func NotifUserSender(user *entity.User,userReq *entity.User,count interface{}, w
 
 	queryStr := `
 	{ 
-		NotifiUser(user:{uid:"%s",avatar:"%s",email:"%s",username:"%s",count:%d}) {
+		NotifiUser(user:{uid:"%s",avatar:"%s",email:"%s",username:"%s",count:%d,uidNotif:"%s"}) {
 			email,
 		}
 	}
 	`
-	queryN := fmt.Sprintf(queryStr,user.Uid.Hex(),userReq.Avatar,userReq.Email,userReq.Username,count)
+	queryN := fmt.Sprintf(queryStr,user.Uid.Hex(),userReq.Avatar,userReq.Email,userReq.Username,count,uid)
 
 	jsonData := map[string]string{
 		"query":queryN,

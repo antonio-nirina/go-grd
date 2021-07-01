@@ -7,6 +7,8 @@ export const GET_ALL_FRIENDS= gql`
 		GetAllFriends(email: $email){
 		count
 		email
+		username
+		avatar
 		id
 	}
 }`

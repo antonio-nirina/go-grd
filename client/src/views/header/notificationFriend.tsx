@@ -1,5 +1,5 @@
 import React,{useState} from "react"
-import { Link } from 'react-router-dom'
+import { Link,useHistory } from 'react-router-dom'
 import { useSelector } from "react-redux"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {useQuery,useMutation} from "@apollo/client"
@@ -12,11 +12,18 @@ import {ACCETEPED_FRIENDS} from "../../gql/user/mutation"
 import {Notif} from "./header"
 
 const Notifications = function(data:any) {
+	const history = useHistory()
 	const userConnectedRedux = useSelector((state:RootState) => state.userConnected)
 	const [acceptedFriend] = useMutation(ACCETEPED_FRIENDS)
 	const handleAccepted = async function(uid:string) {
-		const result = await acceptedFriend({ variables: { idRequest:uid,idSender: userConnectedRedux.user.uid}})
-		console.log(result)
+		try {
+			const result = await acceptedFriend({ variables: { idRequest:uid,idSender: userConnectedRedux.user.uid}})
+			if(result && history.location.pathname === "communaute") history.push("/communaute")
+
+		} catch(e) {
+			console.log("error",e)
+		}
+
 	}
 	return(
 		<>
@@ -35,7 +42,7 @@ const Notifications = function(data:any) {
 								Translation("fr").header.text
 							*/}
 					        </span>
-					        <button className="btn bg-yellow" onClick={()=>handleAccepted(el.ui)}>
+					        <button className="btn bg-yellow" onClick={()=>handleAccepted(el.user.uid)}>
 					            <i className="rect"><FontAwesomeIcon icon={faCheck} size="xs"/></i>
 					            <span>
 					            	{

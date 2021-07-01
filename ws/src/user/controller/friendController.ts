@@ -9,6 +9,7 @@ import {HgetRedis} from "../../client/redisClient"
 
 export const NotifiUser = async function(user:User) : Promise<User> {
 	const res:Notifications = {
+		uidNotif:user.uidNotif,
 		uid:user.uid,
 		avatar:user.avatar,
 		email:user.email,
