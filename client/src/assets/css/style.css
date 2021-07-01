@@ -370,11 +370,17 @@ li{
   }
 }
 @media screen and (max-width: 380px) {
-  .wrap{
+  .wrap, .container .wrap.red{
     padding: 6px 9px;
   }    
   .container .undertitle:before{
     height: 70px;
+  }
+  .home p.title{
+    font-size: 15px;
+  }
+  .slogan .btn, .slogan .btn.bg-red{
+    font-size: 13px;
   }
   .container footer .rss{
     width: 100%;
