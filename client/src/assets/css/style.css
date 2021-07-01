@@ -37,6 +37,12 @@ html{
   background: #dd0000;
   color: #ffffff;
 }
+.light-gray{
+  background: #131313;
+}
+.dark-gray{
+  background: #101010;
+}
 .cl-yellow{
   color: yellow;
 }
@@ -237,7 +243,11 @@ li{
   }  
   .container .tchat .rcw-widget-container{
     position: initial;
-  }  
+  } 
+ 
+  .container .service-img img{
+    width: 100%;
+  }
 
 }
 @media screen and (max-width: 800px){
