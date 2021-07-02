@@ -3,8 +3,8 @@
 	background: url("../../assets/image/background-img.jpg") no-repeat;
 	background-repeat: no-repeat;	
 	background-size: 100%;
-	padding-top: 0em;	
-
+	padding-top: 0em;
+	padding-bottom: 10em;
 }
 .w100{
 	width: 100%;

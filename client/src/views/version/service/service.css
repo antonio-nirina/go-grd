@@ -1,0 +1,24 @@
+@charset "UTF-8";
+.version .jeux{
+	margin-top: 30px;
+}
+.bloc-items{
+	display: flex;
+}
+.service-img{
+	text-align: center;
+}
+.service-img, .service-modal{	
+	width: 50%;	
+    padding: 41px;
+}
+.service-img img{
+	
+}
+.service-modal p{
+	padding: 10px 25px;
+	font-size: 14px;
+}
+.service-modal .undertitle:before{
+	background: #dd0000;
+}
