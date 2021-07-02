@@ -20,10 +20,13 @@ import {GET_ALL_NOTIFICATIONS} from "../../gql/notifications/query"
 import Notifications from "./notificationFriend"
 import {NOTIFICATIONS_SUBSCRIBE,COUNT_SUBSCRIBE} from "../../gql/user/subscription"
 import {UPDATED_NOTIFICATION} from "../../gql/notifications/mutation"
+import {Deconnect} from "../../gql/user/auth"
 
 export interface Notif  {
 	type:number,
+	uid:string,
 	user:{
+		uid:string,
 		email: string,
 		username: string,
 		avatar: string,
@@ -48,6 +51,7 @@ const Header: React.FC = function() {
 	})
 
 	const [updatedNotification] = useMutation(UPDATED_NOTIFICATION)
+	const [deconnect] = useMutation(Deconnect)
 
 	const onShow = function(){
 		setShowList(!showList)
@@ -57,15 +61,28 @@ const Header: React.FC = function() {
 			setShowNotif(!showNotif)
 			setNotification(0) // update notification statut true
 			for(let i=0;i < dataNotifications.length;i++) {
-				const result = await updatedNotification({ variables: { uid: dataNotifications[i].uid }})
-				console.log(result)
+				if(!dataNotifications[i].statut) {
+					try {
+						const result = await updatedNotification({ variables: { uid: dataNotifications[i].uid }})
+						console.log(result)
+					} catch(e) {
+						console.log("error",e)
+					}
+
+				}
 			}
 
 		}
 
 	}
 
-	const onDeconnect = function() {
+	const onDeconnect = async function() {
+		try {
+			const deco = await deconnect()
+		} catch (e) {
+			console.log(e)
+		}
+
 		dispatch(removeDataUser())
 		setIsDeconnect(true)
 		history.push("/")
@@ -84,7 +101,9 @@ const Header: React.FC = function() {
 					if(elemnt.type === 0) {
 						notif = {
 							type:0,
+							uid:elemnt.uid,
 							user:{
+								uid:elemnt.userRequest.uid,
 								email: elemnt.userRequest.email,
 								username: elemnt.userRequest.username,
 								avatar: elemnt.userRequest.avatar
@@ -101,7 +120,9 @@ const Header: React.FC = function() {
 			if(subData.subscribeNotifications.uid === userConnectedRedux.user.uid) {
 				notif = {
 					type:0,
+					uid:subData.subscribeNotifications.uid,
 					user:{
+						uid:subData.subscribeNotifications.uid,
 						email: subData.subscribeNotifications.email,
 						username: subData.subscribeNotifications.username,
 						avatar: subData.subscribeNotifications.avatar

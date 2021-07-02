@@ -161,6 +161,9 @@ func (c *driverRepository) UpdatedUser(user *entity.User) (interface{}, error) {
 			{
 				"point",user.Point,
 			},
+			{
+				"friends",user.Friends,
+			},
 	}}}
 	updateResult, err := collection.UpdateOne(context.TODO(), filter, update)
 

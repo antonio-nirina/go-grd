@@ -5,6 +5,7 @@ import { useSelector,useDispatch } from "react-redux"
 import Header from "../header/header"
 import Slider from "../slider/slider"
 import Game from "../game/game"
+import Service from "../service/service"
 import Join from "../join/join"
 import {XboxProfil} from "../../../gql/user/auth"
 import Footer from "../footer/footer"
@@ -63,7 +64,8 @@ const Index: React.FC = function() {
 				{getAccessToken() && Object.keys(userConnectedRedux.user).length === 0 ? <GetProfilUser token={getAccessToken()} /> : <></>}
 	        </div>	        
 	      </div>
-	      <Game/>	     
+	      <Game/>
+	      <Service/>   
 	      <Join/>
 	      <Footer/>
 	  </div>

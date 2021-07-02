@@ -5,8 +5,8 @@ import (
 	"encoding/json"
 	"errors"
 	"os"
-	"time"
 	"sync"
+	"time"
 
 	_jwt "github.com/dgrijalva/jwt-go"
 	"github.com/graphql-go/graphql"
@@ -220,6 +220,19 @@ func (r *resolver) ForgotResolver(params graphql.ResolveParams) (interface{}, er
 	}
 	
 	return "Ok",nil
+}
+
+func (r *resolver) DeconnectedResolver(params graphql.ResolveParams) (interface{}, error) {
+	var wg sync.WaitGroup
+	uid := params.Args["uid"].(string)
+	res, err := r.userHandler.FindOneUserByUid(uid)
+	if err != nil {
+		return "error",nil
+	}
+	wg.Add(1)
+	go r.userHandler.NotifDisConnected(&res,&wg)
+	wg.Wait()
+	return "Ok", nil
 }
 
 func (r *resolver)GetAllUser(params graphql.ResolveParams)(interface{}, error) {

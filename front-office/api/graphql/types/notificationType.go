@@ -25,6 +25,9 @@ var NotificationSchemaType = graphql.NewObject(graphql.ObjectConfig{
 		"_id": &graphql.Field{
 			Type: graphql.String,
 		},
+		"uid": &graphql.Field{
+			Type: graphql.String,
+		},
 		"userRequest": &graphql.Field{
 			Type: UserSchemaType,
 		},

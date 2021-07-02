@@ -38,3 +38,8 @@ export const TwitchProfil = gql`
 
 	}
 `
+export const Deconnect = gql`
+	mutation Deconnected{
+		Deconnected
+	}
+`

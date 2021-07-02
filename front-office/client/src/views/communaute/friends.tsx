@@ -48,23 +48,31 @@ const Friend: React.FC = function() {
 	},[loading,error,data,loadingAll,errorAll,dataAll])
 
 	const onSendIncoming = 	async function(uid:string) {
-		const result = await requestFriend({ variables: { idRequest: userConnectedRedux.user.uid,idSender: uid} })
-		if (result.data.requestFriend) console.log(result.data.requestFriend)
+		try {
+			const result = await requestFriend({ variables: { idRequest: userConnectedRedux.user.uid,idSender: uid} })
+			if (result.data.requestFriend) console.log(result.data.requestFriend)
+		} catch(e) {
+			console.log(e)
+		}
 	}
 	return (
-		<div className="aside-right">
+		<div className="aside-right">			
 			{nbFriends
-				?
+				?				
 				friends.map(function(el:any,index:number) {
 					let img = el.avatar ? el.avatar : AvatarDefault
-					return(<p key={index}>
-							<img src={img} className="friend-avatar"/>
-							<span>{el.username}<i className="u-connected"></i></span>
-							<i><FontAwesomeIcon icon={faCommentDots} size="xs"/></i>
-							<i className="rect"><FontAwesomeIcon icon={faPlus} size="xs"/></i>
-						</p>
+					return(
+						<div className="friend-list">
+							<p key={index}>
+								<img src={img} className="friend-avatar"/>
+								<span>{el.username}<i className={el.isConnected ? "u-connected" : ""}></i></span>
+								<i><FontAwesomeIcon icon={faCommentDots} size="xs"/></i>
+								<i className="rect"><FontAwesomeIcon icon={faPlus} size="xs"/></i>
+							</p>
+						</div>
 					)
 				})
+
 			: (<div className="friend-list noborder">
 					<p className="title">
 						{
