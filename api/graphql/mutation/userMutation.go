@@ -184,3 +184,16 @@ func AcceptedRequestFriend() *graphql.Field {
 		Resolve: UserRolve.AcceptedFriendResolver,
 	}
 }
+
+func Deconnected() *graphql.Field {
+	return &graphql.Field{
+		Type:        graphql.String,
+		Description: "Deconnected",
+		Args: graphql.FieldConfigArgument{
+			"id": &graphql.ArgumentConfig{
+				Type: graphql.String,
+			},	
+		},			
+		Resolve: UserRolve.DeconnectedResolver,
+	}
+}

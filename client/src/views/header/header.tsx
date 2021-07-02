@@ -20,6 +20,7 @@ import {GET_ALL_NOTIFICATIONS} from "../../gql/notifications/query"
 import Notifications from "./notificationFriend"
 import {NOTIFICATIONS_SUBSCRIBE,COUNT_SUBSCRIBE} from "../../gql/user/subscription"
 import {UPDATED_NOTIFICATION} from "../../gql/notifications/mutation"
+import {Deconnect} from "../../gql/user/auth"
 
 export interface Notif  {
 	type:number,
@@ -50,6 +51,7 @@ const Header: React.FC = function() {
 	})
 
 	const [updatedNotification] = useMutation(UPDATED_NOTIFICATION)
+	const [deconnect] = useMutation(Deconnect)
 
 	const onShow = function(){
 		setShowList(!showList)
@@ -74,7 +76,13 @@ const Header: React.FC = function() {
 
 	}
 
-	const onDeconnect = function() {
+	const onDeconnect = async function() {
+		try {
+			const deco = await deconnect()
+		} catch (e) {
+			console.log(e)
+		}
+
 		dispatch(removeDataUser())
 		setIsDeconnect(true)
 		history.push("/")

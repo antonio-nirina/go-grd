@@ -65,7 +65,7 @@ const Friend: React.FC = function() {
 						<div className="friend-list">
 							<p key={index}>
 								<img src={img} className="friend-avatar"/>
-								<span>{el.username}<i className="u-connected"></i></span>
+								<span>{el.username}<i className={el.isConnected ? "u-connected" : ""}></i></span>
 								<i><FontAwesomeIcon icon={faCommentDots} size="xs"/></i>
 								<i className="rect"><FontAwesomeIcon icon={faPlus} size="xs"/></i>
 							</p>

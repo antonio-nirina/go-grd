@@ -135,7 +135,7 @@ func (u *UserUsecase) NotifDisConnected(user *entity.User, wg *sync.WaitGroup) {
 		"query":queryN,
 	}
 	
-	external.RemoveHmsetRedis(DISCONNECT,user.Uid.Hex())
+	external.RemoveHmsetRedis(CONNECTED,user.Uid.Hex())
 	clientWsGraphql(jsonData)
 	wg.Done()
 }

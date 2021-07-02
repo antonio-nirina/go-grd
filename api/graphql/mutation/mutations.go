@@ -25,8 +25,8 @@ var repositoryGame 		= gameRepo.NewGameRepository(database)
 var usecaseNotif 		= notifHandler.NewUsecaseNotif(repositoryNotif)
 var usecase 			= handler.NewUsecaseUser(repUser)
 var UserRolve 			= delivery.NewResolver(usecase,usecaseNotif)
-var usecaseGame 	= gameHandler.NewUsecaseGame(repositoryGame)
-var gameResolver 	= gameDelivery.NewResolverGame(usecaseGame)
+var usecaseGame 		= gameHandler.NewUsecaseGame(repositoryGame)
+var gameResolver 		= gameDelivery.NewResolverGame(usecaseGame)
 
 var repositoryPlateform = gameRepo.NewPlateformRepository(database)
 var usecasePlateform 	= gameHandler.NewUsecasePlateform(repositoryPlateform)
@@ -48,5 +48,6 @@ func GetRootFields() graphql.Fields {
 		"saveNotification":		saveNotification(),
 		"updateNotification": 	updateNotification(),
 		"AcceptedRequestFriend": AcceptedRequestFriend(),
+		"deconected":			Deconnected(),
 	}
 }

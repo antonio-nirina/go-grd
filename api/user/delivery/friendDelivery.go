@@ -1,6 +1,7 @@
 package delivery
 
 import (
+	"fmt"
 	"errors"
 
 	"github.com/graphql-go/graphql"
@@ -20,7 +21,7 @@ type Friends struct {
 	Avatar string 		`json:"avatar"`
 	IsBanned bool 	`json:"isBanned"`
 	Count int 			`json:"count"`
-	isConnected bool `json:"connected"`
+	IsConnected bool `json:"isConnected"`
 }
 
 
@@ -81,7 +82,7 @@ func (r *resolver) GetAllFriendsUser(params graphql.ResolveParams) (interface{},
 		res.Username = ""
 		res.Avatar = ""
 		res.IsBanned = false
-		res.Connected = false
+		res.IsConnected = false
 		result = append(result, *res)
 	} else {
 		for _,val := range user.Friends {
@@ -95,10 +96,11 @@ func (r *resolver) GetAllFriendsUser(params graphql.ResolveParams) (interface{},
 			res.IsBanned = val.IsBanned
 			isConnected := false
 			cn,_ := external.GetHmsetRedis(common.CONNECTED,val.Uid.Hex())
+			fmt.Println(cn)
 			if cn != nil {
 				isConnected = true
 			}
-			res.isConnected = isConnected
+			res.IsConnected = isConnected
 			result = append(result, *res)
 		} 
 	}

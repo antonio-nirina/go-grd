@@ -28,7 +28,7 @@ import Register from "../auth/register"
 const Router = function() {
 	return (
 		<Switch>
-			<Route path="/" exact component={Home} />
+			<Route path="/" exact component={Index} />
 			<Route path="/index" exact component={Index} />
 			<ProtectedRoute path="/tournament" exact component={Tournament} />
 			<ProtectedRoute path="/tournois" exact component={Tournois} />

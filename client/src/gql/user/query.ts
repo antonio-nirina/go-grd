@@ -10,6 +10,7 @@ export const GET_ALL_FRIENDS= gql`
 		username
 		avatar
 		id
+		isConnected
 	}
 }`
 
