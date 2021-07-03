@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import {useState} from "react"
 
 import "../header/header.css"
-import logo from "../../assets/image/logo.png"
+import logo from "../../assets/image/go-grind.png"
 import fr from "../../assets/image/fr.png"
 import gb from "../../assets/image/gb.png"
 import ps from "../../assets/image/playstation.png"
@@ -44,7 +44,7 @@ const Header0: React.FC = function() {
     	 			</ul>
     	 		</nav>
                 <div className="bt-container">
-                    <Link to="/login" className="btn bg-yellow">Connexion</Link>
+                    <Link to="/login" className="btn bg-red">Connexion</Link>
                     <Link to="/register" className="btn bg-white">Inscription</Link>
                 </div>
     	 		<div className="tag">

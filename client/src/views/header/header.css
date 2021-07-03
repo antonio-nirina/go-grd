@@ -50,10 +50,11 @@
 .bt-container .btn.bg-white{
 	
 }
-.bt-container .btn.bg-yellow{
+.bt-container .btn.bg-yellow,.bt-container .btn.bg-red{
 	display: inline-block;
 	margin-right: 15px;
 	margin-top: 2px;
+	border: 1px solid #dd0000;
 }
 .tag{
 	max-width: 291px;

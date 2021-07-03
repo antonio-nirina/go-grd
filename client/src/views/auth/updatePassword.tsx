@@ -52,7 +52,7 @@ const UpdatePassword: React.FC = function() {
 						<form onSubmit={handleSubmit(onSubmit)}>
 							<input className="mgt10" type = "password" placeholder = "Nouveau mot de passe" {...register("newPassword", { required: true })} name="newPassword" required/>
 							<input className="mgt10" type = "password" placeholder = "Confirmer le nouveau mot de passe" {...register("cNewPaswd", { required: true })} name="cNewPaswd" required/>
-							<button className="btn bg-yellow mg15">
+							<button className="btn bg-red mg15">
 								Enregistrer le nouveau mot de passe
 							</button>
 						</form>

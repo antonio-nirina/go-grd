@@ -21,9 +21,9 @@ const Inscription: React.FC = function() {
 						{/*<input type ="telephone" placeholder = "Numéro de téléphone"/>*/}
 						<input className="mgt10" type = "email" placeholder = "Email"/>
 						<input className="mgt10" type = "password" placeholder = "Mot de passe"/>
-						<button className="btn bg-yellow mg15"><a href="#" title="Inscription" className="link-btn">Inscription</a></button>
+						<button className="btn bg-red mg15"><a href="#" title="Inscription">Inscription</a></button>
 						<div className="infos">
-							<p className="mb15">Vous avez déjà un compte ? <a href="#" title="Connectez-vous" className="italic cl-yellow">Connectez-vous !</a></p>
+							<p className="mb15">Vous avez déjà un compte ? <a href="#" title="Connectez-vous" className="italic cl-red">Connectez-vous !</a></p>
 							<div className="other-account">
 								<p>Connectez-vous avec votre compte : </p>
 								<span><a href="#" title="Xbox"><img src={IconXbox} alt=""/></a></span>
