@@ -5,7 +5,7 @@ import {useHistory } from "react-router-dom"
 import {useQuery,useSubscription,useMutation} from "@apollo/client"
 
 import "../header/header.css"
-import logo from "../../assets/image/logo.png"
+import logo from "../../assets/image/go-grind.png"
 import avatar from "../../assets/image/game-tag.png"
 import fr from "../../assets/image/fr.png"
 import gb from "../../assets/image/gb.png"

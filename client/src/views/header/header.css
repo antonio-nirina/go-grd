@@ -6,7 +6,7 @@
 .wrap{
 	padding: 6px 35px;	
 	width: 100%;
-	border-bottom : 2px solid #f5cc22;
+	border-bottom : 2px solid #dd0000;
 	background: #000000;
 	display: flex;
 }
@@ -259,7 +259,7 @@
 .counter{
 	position: absolute;
 	top: 2px;
-	background: #ffcb15;
+	background: #dd0000;
 	display: inline-block;
 	width: 19px;
 	text-align: center;
@@ -314,7 +314,7 @@
 	display: block;
 	width: 100px;
 	height: 2px;
-	background: #f2cf1d;
+	background: #dd0000;
 	margin: 5px 0px;
 }
 .dropdown li:last-child a:first-child:before{
@@ -322,7 +322,7 @@
 	display: block;
 	width: 100px;
 	height: 2px;
-	background: #f2cf1d;
+	background: #dd0000;
 	margin: 5px 0px;
 }
 .hide {
