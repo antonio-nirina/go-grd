@@ -2,13 +2,13 @@ import React,{useEffect} from "react"
 import {useQuery} from "@apollo/client"
 import { useSelector,useDispatch } from "react-redux"
 
-import Header from "../header/header"
+import Header from "../../header/header"
 import Slider from "../slider/slider"
 import Game from "../game/game"
 import Service from "../service/service"
-import Join from "../join/join"
+import Join from "../../join/join"
 import {XboxProfil} from "../../../gql/user/auth"
-import Footer from "../footer/footer"
+import Footer from "../../footer/footer"
 import {getAccessToken} from "../../../storage/tokenStorage"
 import {UserType,sendProfilXboxOrPsn} from "../../auth/action/userAction"
 import {RootState} from "../../../reducer"
@@ -38,7 +38,7 @@ const GetProfilUser = function ({token}:any) {
 			}
 			dispatch(sendProfilXboxOrPsn(user))
 		}
-	},[loading,error,data])
+	},[loading,error,data,dispatch])
 	return (
 		<></>
 	)
@@ -62,10 +62,10 @@ const Index: React.FC = function() {
 	        <div className="slider">
 	        	<Slider/>
 				{getAccessToken() && Object.keys(userConnectedRedux.user).length === 0 ? <GetProfilUser token={getAccessToken()} /> : <></>}
-	        </div>	        
+	        </div>
 	      </div>
 	      <Game/>
-	      <Service/>   
+	      <Service/>
 	      <Join/>
 	      <Footer/>
 	  </div>

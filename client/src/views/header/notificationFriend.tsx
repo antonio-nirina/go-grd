@@ -1,15 +1,14 @@
-import React,{useState} from "react"
-import { Link,useHistory } from 'react-router-dom'
+import React from "react"
+import { useHistory } from 'react-router-dom'
 import { useSelector } from "react-redux"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {useQuery,useMutation} from "@apollo/client"
-import { faBars, faBell, faUsers, faTimes, faCheck } from "@fortawesome/free-solid-svg-icons"
+import {useMutation} from "@apollo/client"
+import { faTimes, faCheck } from "@fortawesome/free-solid-svg-icons"
 import AvatarDefault from "../../assets/image/game-tag.png"
 import {Translation} from "../../lang/translation"
 import {RootState} from "../../reducer"
 import {ACCETEPED_FRIENDS} from "../../gql/user/mutation"
 
-import {Notif} from "./header"
 
 const Notifications = function(data:any) {
 	const history = useHistory()
@@ -32,7 +31,7 @@ const Notifications = function(data:any) {
 					let img:string = el.user.avatar ? el.user.avatar : AvatarDefault
 					return (
 						<p key={index}>
-					        <img src={img} className="avatar-found"/>
+					        <img src={img} className="avatar-found" alt=""/>
 					        <span className="profil-name">
 					        {el.user.username}
 					        {/*

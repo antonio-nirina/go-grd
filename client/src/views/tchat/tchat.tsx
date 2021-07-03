@@ -1,7 +1,7 @@
 import React,{useMemo, useEffect} from "react"
 import { Widget, addResponseMessage } from 'react-chat-widget'
 import {useSubscription} from "@apollo/client"
-import {RootState} from "../../reducer"
+
 
 import 'react-chat-widget/lib/styles.css'
 import AvatarDefault from "../../assets/image/game-tag.png"
@@ -14,7 +14,7 @@ const Tchat: React.FC = function() {
   	}, []);
 
    const handleNewUserMessage = () => {
-    
+
   	};
 	// const userConnectedRedux 	= useSelector((state:RootState) => state.userConnected)
 	const {loading,error,data}  = useSubscription(COUNT_SUBSCRIBE)

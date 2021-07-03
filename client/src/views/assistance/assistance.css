@@ -29,7 +29,7 @@
 .aside-menu{
 	font-family: "Russo One";
 	font-weight: 500;
-	background: #333333;	
+	background: #7b7b7b;	
 	display: table-cell;
 	vertical-align: top;
 	padding: 20px;
@@ -37,11 +37,11 @@
 	border-radius: 5px 0px 0px 5px;
 }
 .support{
-	background: #000000;	
+	background: #e3e1d3;	
 	width: 83.5%;
 	display: table-cell;
 	vertical-align: top;
-	color: #ffffff;
+	color: #000000;
 	font-family: "Russo One";
 	padding: 30px;
 	font-weight: lighter;
@@ -65,18 +65,18 @@
 .link{
 	margin-top: 7px;
 }
-.link a.active{
-	color: #f2cf1c;
+.link a.active, .link a:hover{
+	color: #dd0000;
 }
 .link h3 a{
-	color: #0d0d0d;
+	color: #000000;
 	font-size: 13px;
 	font-weight: lighter;
 
 }
 
 .link li a{
-	color: #acacac;
+	color: #2c2c2c;
 	font-size: 11px;
 
 }
