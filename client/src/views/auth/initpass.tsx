@@ -18,7 +18,7 @@ type Inputs = {
 
 const InitPass: React.FC = function() {
 	const history = useHistory()
-	const { register, handleSubmit, formState: { errors } } = useForm<Inputs>()
+	const { register, handleSubmit } = useForm<Inputs>()
 	const [errorForm,setErrorForm] = useState<boolean>(false)
 	const [forgotPassword]  = useMutation(FORGOT_PASSWORD)
 	const onSubmit = async function(data:Inputs){

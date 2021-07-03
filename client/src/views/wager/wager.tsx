@@ -31,7 +31,7 @@ return(
 								</thead>
 								<tbody>
 									<tr>
-										<td className="flag"><p><img src="https://i.ibb.co/gvSwfSp/gb.png"/><img src={AvatarDefault}/></p><span>Alittoo</span></td>
+										<td className="flag"><p><img src="https://i.ibb.co/gvSwfSp/gb.png" alt="#" /><img src={AvatarDefault} alt="#" /></p><span>Alittoo</span></td>
 										<td>ESL PRO</td>
 										<td>5/10 <span>picking 20:01</span></td>
 										<td className="twitch"><Link to="#">50 <i><FontAwesomeIcon icon={faEye} size="xs"/></i></Link></td>									

@@ -1,8 +1,6 @@
 import React,{useState} from "react"
 import {useMutation} from "@apollo/client"
 import { useSelector,useDispatch } from "react-redux"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faCogs  } from "@fortawesome/free-solid-svg-icons"
 import { useForm } from "react-hook-form"
 
 import {changeLanguageUserConnected,changeProfilUserConnected} from "../auth/action/userAction"
