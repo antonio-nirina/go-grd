@@ -3,8 +3,8 @@ package delivery
 import (
 	"errors"
 
-	"github.com/thoussei/antonio/front-office/api/games/entity"
-	"github.com/thoussei/antonio/front-office/api/games/handler"
+	"github.com/thoussei/antonio/api/games/entity"
+	"github.com/thoussei/antonio/api/games/handler"
 	"github.com/graphql-go/graphql"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )

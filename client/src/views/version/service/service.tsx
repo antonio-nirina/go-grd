@@ -1,8 +1,5 @@
 import React from "react"
-import { useSelector } from "react-redux"
 
-import {Translation} from "../../../lang/translation"
-import {RootState} from "../../../reducer"
 import "../../../assets/css/style.css"
 import "../service/service.css"
 import waggers from "../../../assets/image/wagers.png"
@@ -10,7 +7,7 @@ import tournament from "../../../assets/image/tournois-ligues.png"
 import commu from "../../../assets/image/commu.png"
 
 const Service: React.FC = function() {
-	const userConnectedRedux = useSelector((state:RootState) => state.userConnected)
+	// const userConnectedRedux = useSelector((state:RootState) => state.userConnected)
   return(
     <div className="service">
     	<div className="service-container">
@@ -52,7 +49,7 @@ const Service: React.FC = function() {
     			</div>
     			<div className="service-img light-gray">
     				<img src={tournament} alt="" width="325"/>
-    			</div>    			
+    			</div>
     		</div>
     		<div className="bloc-items light-gray">
     			<div className="service-img light-gray">
@@ -72,7 +69,7 @@ const Service: React.FC = function() {
     	<div className="service-container mobile">
     		<div className="bloc-items light-gray">
     			<div className="service-img light-gray">
-    				<img src={waggers} alt="" width="100%"/>
+    				<img src={waggers} alt="" width="100%" />
     			</div>
     			<div className="service-modal dark-gray">
     				<div className="undertitle">
@@ -90,10 +87,10 @@ const Service: React.FC = function() {
     				</div>
     			</div>
     		</div>
-    		<div className="bloc-items light-gray">	
+    		<div className="bloc-items light-gray">
     			<div className="service-img light-gray">
     				<img src={tournament} alt="" width="325"/>
-    			</div>   
+    			</div>
     			<div className="service-modal dark-gray">
     				<div className="undertitle">
     					<h2>Participer à des tournois / ligues</h2>
@@ -109,7 +106,7 @@ const Service: React.FC = function() {
     					</p>
     				</div>
     			</div>
-    			 			
+
     		</div>
     		<div className="bloc-items light-gray">
     			<div className="service-img light-gray">

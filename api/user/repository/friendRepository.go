@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/thoussei/antonio/front-office/api/user/entity"
+	"github.com/thoussei/antonio/api/user/entity"
 )
 
 

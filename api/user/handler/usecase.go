@@ -3,7 +3,7 @@ package handler
 import (
 	"sync"
 
-	"github.com/thoussei/antonio/front-office/api/user/entity"
+	"github.com/thoussei/antonio/api/user/entity"
 )
 
 type Usecase interface {

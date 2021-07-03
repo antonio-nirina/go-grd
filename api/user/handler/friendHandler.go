@@ -11,8 +11,8 @@ import (
 	"time"
 
 	"github.com/joho/godotenv"
-	"github.com/thoussei/antonio/front-office/api/external"
-	"github.com/thoussei/antonio/front-office/api/user/entity"
+	"github.com/thoussei/antonio/api/external"
+	"github.com/thoussei/antonio/api/user/entity"
 )
 
 const (

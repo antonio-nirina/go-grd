@@ -12,11 +12,11 @@ import (
 	"github.com/graphql-go/graphql"
 	"github.com/joho/godotenv"
 	uuid "github.com/satori/go.uuid"
-	"github.com/thoussei/antonio/front-office/api/external"
-	game "github.com/thoussei/antonio/front-office/api/games/entity"
-	notifH "github.com/thoussei/antonio/front-office/api/notification/handler"
-	"github.com/thoussei/antonio/front-office/api/user/entity"
-	"github.com/thoussei/antonio/front-office/api/user/handler"
+	"github.com/thoussei/antonio/api/external"
+	game "github.com/thoussei/antonio/api/games/entity"
+	notifH "github.com/thoussei/antonio/api/notification/handler"
+	"github.com/thoussei/antonio/api/user/entity"
+	"github.com/thoussei/antonio/api/user/handler"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
@@ -232,6 +232,7 @@ func (r *resolver) DeconnectedResolver(params graphql.ResolveParams) (interface{
 	wg.Add(1)
 	go r.userHandler.NotifDisConnected(&res,&wg)
 	wg.Wait()
+	
 	return "Ok", nil
 }
 

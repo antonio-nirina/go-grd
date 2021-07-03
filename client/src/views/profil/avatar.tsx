@@ -1,15 +1,11 @@
-import React, { useState, useCallback } from 'react'
+import React  from 'react'
 import { useSelector,useDispatch } from "react-redux"
 
-import Popup from "reactjs-popup"
 import {useMutation} from "@apollo/client"
 import {RootState} from "../../reducer"
-import gamer from "../../assets/image/game-tag.png"
-import Cropper from "react-easy-crop"
-import Slider from "@material-ui/core/Slider"
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faPen } from "@fortawesome/free-solid-svg-icons"
-
 
 
 import AvatarDefault from "../../assets/image/game-tag.png"
@@ -23,11 +19,11 @@ interface Input {
 }
 
 const Avatar : React.FC = function() {
-	const [crop, setCrop] = useState({ x: 0, y: 0 })
-  	const [zoom, setZoom] = useState()
-  	const onCropComplete = useCallback((croppedArea, croppedAreaPixels) => {
+	// const [crop, setCrop] = useState({ x: 0, y: 0 })
+  	// const [zoom, setZoom] = useState()
+  	/*const onCropComplete = useCallback((croppedArea, croppedAreaPixels) => {
     	console.log(croppedArea, croppedAreaPixels)
-  	}, [])
+  	}, [])*/
 	const dispatch 				= useDispatch()
 	const userConnectedRedux 	= useSelector((state:RootState) => state.userConnected)
 	const [updatedAvatar]  		= useMutation(UPDATE_AVATAR)
@@ -56,9 +52,9 @@ const Avatar : React.FC = function() {
 	}
 	return (
 		<div className="gamer-profil">
-			<div className="avatar">			
+			<div className="avatar">
 				<p className="setavatar">
-					<img src = {AvatarDefault} />
+					<img src = {AvatarDefault} alt="" />
 				<label htmlFor="setavatar"><FontAwesomeIcon icon={faPen} /></label>
 				<input type="file" id="setavatar" onChange={handleUpload} className="uploadFile" name="file"/>
 				</p>

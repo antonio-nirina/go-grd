@@ -13,7 +13,7 @@ import (
 	"net/http"
 
 	"github.com/graphql-go/graphql"
-	"github.com/thoussei/antonio/front-office/api/external"
+	"github.com/thoussei/antonio/api/external"
 )
 
 

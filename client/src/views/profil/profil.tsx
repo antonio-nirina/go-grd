@@ -1,6 +1,6 @@
 import React,{useEffect} from "react"
 import { useSelector } from "react-redux"
-import { Link } from 'react-router-dom'
+
 
 import Popup from "reactjs-popup"
 import { faPen, faChartBar } from "@fortawesome/free-solid-svg-icons"
@@ -259,14 +259,14 @@ const Profil: React.FC = function() {
 									Translation("fr").profil.addTeam}</h3></div>
 									<div className="uploadLogoteam">
 										<div className="bg-team">
-											<img src="https://i.ibb.co/C59KCSd/team-mate.png" className="imgresp"/>
+											<img src="https://i.ibb.co/C59KCSd/team-mate.png" className="imgresp" alt="" />
 										</div>
 										<div className="logoteam-container">
 											<p className="setlogoTeam">
-												<img src = "https://i.ibb.co/dQPw2Vd/teamlogo.png" width="100"/>											
-												<label htmlFor="setLogoTeam"><FontAwesomeIcon icon={faPen} /></label>											
+												<img src = "https://i.ibb.co/dQPw2Vd/teamlogo.png" width="100" alt="" />
+												<label htmlFor="setLogoTeam"><FontAwesomeIcon icon={faPen} /></label>
 												<input type="file" id="setLogoTeam" className="uploadLogoFile" name="logoFile"/>
-											</p>										
+											</p>
 										</div>
 									</div>
 							        <div className="content set-team">
@@ -287,7 +287,7 @@ const Profil: React.FC = function() {
 									Translation(userConnectedRedux.user.language).profil.createTeam
 									:
 									Translation("fr").profil.createTeam} </button>
-							            
+
 						        	</div>
 						     	</div>
 						    )}

@@ -228,7 +228,7 @@ const Header: React.FC = function() {
 								<p><img src={userConnectedRedux.user && userConnectedRedux.user.avatar ? userConnectedRedux.user.avatar : avatar} className="avatar" alt=""/></p>
 								<p className="user">{userConnectedRedux.user.username}</p>
 								<p className="user-setting">
-									<><img src={ps} className="itemTag" alt="" width="18" height="14" alt="#"/></>
+									<><img src={ps} className="itemTag" alt="" width="18" height="14" /></>
 									<><img src={userConnectedRedux.user.language && userConnectedRedux.user.language === "fr" ? fr : gb} className="itemTag" alt="" width="15" height="14"/></>
 								<i className="itemTag drop" onClick={onShow}><FontAwesomeIcon icon={faBars} /></i>
 								</p>

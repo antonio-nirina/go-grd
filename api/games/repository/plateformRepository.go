@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/thoussei/antonio/front-office/api/games/entity"
+	"github.com/thoussei/antonio/api/games/entity"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"

@@ -38,7 +38,7 @@ const GetProfilUser = function ({token}:any) {
 			}
 			dispatch(sendProfilXboxOrPsn(user))
 		}
-	},[loading,error,data])
+	},[loading,error,data,dispatch])
 	return (
 		<></>
 	)
@@ -62,10 +62,10 @@ const Index: React.FC = function() {
 	        <div className="slider">
 	        	<Slider/>
 				{getAccessToken() && Object.keys(userConnectedRedux.user).length === 0 ? <GetProfilUser token={getAccessToken()} /> : <></>}
-	        </div>	        
+	        </div>
 	      </div>
 	      <Game/>
-	      <Service/>   
+	      <Service/>
 	      <Join/>
 	      <Footer/>
 	  </div>
