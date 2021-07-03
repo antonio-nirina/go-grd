@@ -3,10 +3,10 @@ package handler
 import (
 	"sync"
 
-	"github.com/thoussei/antonio/front-office/api/notification/entity"
-	"github.com/thoussei/antonio/front-office/api/notification/repository"
-	userEntity "github.com/thoussei/antonio/front-office/api/user/entity"
-	"github.com/thoussei/antonio/front-office/api/user/handler"
+	"github.com/thoussei/antonio/api/notification/entity"
+	"github.com/thoussei/antonio/api/notification/repository"
+	userEntity "github.com/thoussei/antonio/api/user/entity"
+	"github.com/thoussei/antonio/api/user/handler"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 

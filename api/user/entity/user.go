@@ -5,8 +5,8 @@ import (
 	"crypto/sha512"
 	"fmt"
 
-	"github.com/thoussei/antonio/front-office/api/external"
-	game "github.com/thoussei/antonio/front-office/api/games/entity"
+	"github.com/thoussei/antonio/api/external"
+	game "github.com/thoussei/antonio/api/games/entity"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"golang.org/x/crypto/bcrypt"
 )

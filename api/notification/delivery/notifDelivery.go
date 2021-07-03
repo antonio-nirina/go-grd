@@ -2,8 +2,8 @@ package delivery
 
 import (
 	"github.com/graphql-go/graphql"
-	"github.com/thoussei/antonio/front-office/api/notification/handler"
-	userHandler "github.com/thoussei/antonio/front-office/api/user/handler"
+	"github.com/thoussei/antonio/api/notification/handler"
+	userHandler "github.com/thoussei/antonio/api/user/handler"
 	// "go.mongodb.org/mongo-driver/bson/primitive"
 )
 

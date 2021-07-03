@@ -6,9 +6,9 @@ import (
 
 	"github.com/graphql-go/graphql"
 	"github.com/graphql-go/handler"
-	"github.com/thoussei/antonio/front-office/api/external"
-	"github.com/thoussei/antonio/front-office/api/graphql/mutation"
-	"github.com/thoussei/antonio/front-office/api/graphql/queries"
+	"github.com/thoussei/antonio/api/external"
+	"github.com/thoussei/antonio/api/graphql/mutation"
+	"github.com/thoussei/antonio/api/graphql/queries"
 )
 
 

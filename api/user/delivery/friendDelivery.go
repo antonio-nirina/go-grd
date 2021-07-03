@@ -5,10 +5,10 @@ import (
 	"errors"
 
 	"github.com/graphql-go/graphql"
-	userNotif "github.com/thoussei/antonio/front-office/api/notification/entity"
-	"github.com/thoussei/antonio/front-office/api/user/entity"
-	"github.com/thoussei/antonio/front-office/api/external"
-	"github.com/thoussei/antonio/front-office/api/user/common"
+	userNotif "github.com/thoussei/antonio/api/notification/entity"
+	"github.com/thoussei/antonio/api/user/entity"
+	"github.com/thoussei/antonio/api/external"
+	"github.com/thoussei/antonio/api/user/common"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 

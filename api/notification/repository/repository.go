@@ -4,8 +4,8 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/thoussei/antonio/front-office/api/external"
-	"github.com/thoussei/antonio/front-office/api/notification/entity"
+	"github.com/thoussei/antonio/api/external"
+	"github.com/thoussei/antonio/api/notification/entity"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"

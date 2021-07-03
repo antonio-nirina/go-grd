@@ -2,13 +2,13 @@ package subscription
 
 import (
 	"github.com/graphql-go/graphql"
-	"github.com/thoussei/antonio/front-office/api/config"
-	"github.com/thoussei/antonio/front-office/api/external"
-	"github.com/thoussei/antonio/front-office/api/graphql/types"
+	"github.com/thoussei/antonio/api/config"
+	"github.com/thoussei/antonio/api/external"
+	"github.com/thoussei/antonio/api/graphql/types"
 
 	// "github.com/thoussei/antonio/front-office/api/user/delivery"
-	"github.com/thoussei/antonio/front-office/api/user/handler"
-	"github.com/thoussei/antonio/front-office/api/user/repository"
+	"github.com/thoussei/antonio/api/user/handler"
+	"github.com/thoussei/antonio/api/user/repository"
 )
 
 var count = &external.Counter{}
