@@ -3,9 +3,7 @@ import { Link } from "react-router-dom"
 import Header from "../header/header"
 import Footer from "../footer/footer"
 import Join from "../join/join"
-import { faXbox, faPlaystation } from "@fortawesome/free-brands-svg-icons"
-import { faGamepad } from "@fortawesome/free-solid-svg-icons"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+
 import "../../assets/css/style.css"
 import "../annexe/ligue.css"
 

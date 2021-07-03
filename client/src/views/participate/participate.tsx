@@ -1,4 +1,5 @@
 import React from "react"
+import { Link } from 'react-router-dom'
 import { useSelector } from "react-redux"
 import { faXbox, faPlaystation } from "@fortawesome/free-brands-svg-icons"
 import { faGamepad } from "@fortawesome/free-solid-svg-icons"
@@ -90,7 +91,7 @@ const Slider: React.FC = function() {
 				<p><strong>+2500€</strong><span>Cash prizes/Semaine</span></p>
 			</div>
 			<div className="more">
-				<p><a href="#">plus de tournois</a></p>
+				<p><Link to ="#">plus de tournois</Link></p>
 			</div>
 		</div>
 	</div>
@@ -172,13 +173,13 @@ const Slider: React.FC = function() {
 			<div className="more">
 				<p>
 					<>
-						<a href="#">{
+						<Link to="#">{
 							Object.keys(userConnectedRedux.user).length > 0 ?
 							Translation(userConnectedRedux.user.language).participHome.see
 							:
 							Translation("fr").participHome.see
 						}
-						</a>
+						</Link>
 					</>
 				</p>
 			</div>

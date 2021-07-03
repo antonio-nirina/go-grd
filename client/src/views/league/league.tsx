@@ -1,8 +1,5 @@
 import React from "react"
-import { useSelector } from "react-redux"
 import { Link } from 'react-router-dom'
-
-import {RootState} from "../../reducer"
 
 import Header from "../header/header"
 import Join from "../join/join"

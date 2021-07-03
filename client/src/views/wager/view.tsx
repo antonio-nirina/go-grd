@@ -29,7 +29,7 @@ const View: React.FC = function() {
 						</div>
 						<div className="live">
 							<p><span>Live</span>9:22</p>
-							<div className="mise"><button className="btn bg-yellow">Faite votre mise</button></div>
+							<div className="mise"><button className="btn bg-red">Faite votre mise</button></div>
 						</div>
 						<div className="team">
 						<div className="info">
@@ -45,66 +45,70 @@ const View: React.FC = function() {
 						<div className="tab-league">
 							<div className="team1 team">
 								<table>
-									<tr>
+									<thead>
 										<th>Player</th>
 										<th>Rating</th>
 										<th>K/D</th>
 										<th>Twitch</th>
-									</tr>
-									<tr>
-										<th><img src={AvatarDefault} alt="default" />Klover</th>
-										<th>2099</th>
-										<th>1.29</th>
-										<th>5 <i><FontAwesomeIcon icon={faEye} size="xs"/></i></th>
-									</tr>
-									<tr>
-										<th><img src={AvatarDefault} alt="default" />Klover</th>
-										<th>2099</th>
-										<th>1.29</th>
-										<th>5 <i><FontAwesomeIcon icon={faEye} size="xs"/></i></th>
-									</tr>
-									<tr>
-										<th><img src={AvatarDefault} alt="default" />Klover</th>
-										<th>2099</th>
-										<th>1.29</th>
-										<th>5 <i><FontAwesomeIcon icon={faEye} size="xs"/></i></th>
-									</tr>
-									<tr>
-										<th><img src={AvatarDefault} alt="default" />Klover</th>
-										<th>2099</th>
-										<th>1.29</th>
-										<th>5 <i><FontAwesomeIcon icon={faEye} size="xs"/></i></th>
-									</tr>
-									<tr>
-										<th><img src={AvatarDefault} alt="default" />Klover</th>
-										<th>2099</th>
-										<th>1.29</th>
-										<th>5 <i><FontAwesomeIcon icon={faEye} size="xs"/></i></th>
-									</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td><img src={AvatarDefault} alt="default" />Klover</td>
+											<td>2099</td>
+											<td>1.29</td>
+											<td>5 <i><FontAwesomeIcon icon={faEye} size="xs"/></i></td>
+										</tr>
+										<tr>
+											<td><img src={AvatarDefault} alt="default" />Klover</td>
+											<td>2099</td>
+											<td>1.29</td>
+											<td>5 <i><FontAwesomeIcon icon={faEye} size="xs"/></i></td>
+										</tr>
+										<tr>
+											<td><img src={AvatarDefault} alt="default" />Klover</td>
+											<td>2099</td>
+											<td>1.29</td>
+											<td>5 <i><FontAwesomeIcon icon={faEye} size="xs"/></i></td>
+										</tr>
+										<tr>
+											<td><img src={AvatarDefault} alt="default" />Klover</td>
+											<td>2099</td>
+											<td>1.29</td>
+											<td>5 <i><FontAwesomeIcon icon={faEye} size="xs"/></i></td>
+										</tr>
+										<tr>
+											<td><img src={AvatarDefault} alt="default" />Klover</td>
+											<td>2099</td>
+											<td>1.29</td>
+											<td>5 <i><FontAwesomeIcon icon={faEye} size="xs"/></i></td>
+										</tr>
+									</tbody>
 								</table>
 
 
 							</div>
 							<div className="team2 team">
 								<table>
-									<tr>
+									<thead>
 										<th>Player</th>
 										<th>Rating</th>
 										<th>K/D</th>
 										<th>Twitch</th>
-									</tr>
-									<tr>
-										<th><img src={AvatarDefault} alt="default" />Klover</th>
-										<th>2099</th>
-										<th>1.29</th>
-										<th>5 <i><FontAwesomeIcon icon={faEye} size="xs"/></i></th>
-									</tr>
-									<tr>
-										<th><img src={AvatarDefault} alt="default" />Klover</th>
-										<th>2099</th>
-										<th>1.29</th>
-										<th>5 <i><FontAwesomeIcon icon={faEye} size="xs"/></i></th>
-									</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td><img src={AvatarDefault} alt="default" />Klover</td>
+											<td>2099</td>
+											<td>1.29</td>
+											<td>5 <i><FontAwesomeIcon icon={faEye} size="xs"/></i></td>
+										</tr>
+										<tr>
+											<td><img src={AvatarDefault} alt="default" />Klover</td>
+											<td>2099</td>
+											<td>1.29</td>
+											<td>5 <i><FontAwesomeIcon icon={faEye} size="xs"/></i></td>
+										</tr>
+									</tbody>
 								</table>
 
 							</div>
