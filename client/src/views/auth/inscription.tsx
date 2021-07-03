@@ -1,4 +1,6 @@
 import React from "react"
+import { Link } from 'react-router-dom'
+
 import Header0 from "../header/header0"
 import Footer from "../footer/footer"
 import joystick from "../../assets/image/joystick.png"
@@ -21,13 +23,13 @@ const Inscription: React.FC = function() {
 						{/*<input type ="telephone" placeholder = "Numéro de téléphone"/>*/}
 						<input className="mgt10" type = "email" placeholder = "Email"/>
 						<input className="mgt10" type = "password" placeholder = "Mot de passe"/>
-						<button className="btn bg-red mg15"><a href="#" title="Inscription">Inscription</a></button>
+						<button className="btn bg-red mg15"><Link to="/inscription" title="Inscription">Inscription</Link></button>
 						<div className="infos">
-							<p className="mb15">Vous avez déjà un compte ? <a href="#" title="Connectez-vous" className="italic cl-red">Connectez-vous !</a></p>
+							<p className="mb15">Vous avez déjà un compte ? <Link to="/login" title="Connectez-vous" className="italic cl-red">Connectez-vous !</Link></p>
 							<div className="other-account">
 								<p>Connectez-vous avec votre compte : </p>
-								<span><a href="#" title="Xbox"><img src={IconXbox} alt=""/></a></span>
-								<span><a href="#" title="Playstation"><img src={IconPs} alt=""/></a></span>
+								<span><Link to="/" title="Xbox"><img src={IconXbox} alt=""/></Link></span>
+								<span><Link to="/" title="Playstation"><img src={IconPs} alt=""/></Link></span>
 							</div>
 						</div>
 					</div>
