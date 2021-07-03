@@ -63,7 +63,7 @@ const Slider: React.FC = function() {
 					<div><p className="legend">Warzone Xbox Daily</p><i className="iconGame"><FontAwesomeIcon icon={faXbox}/></i></div>
 					<div className="info">
 					<p className="price inblock"><i className="sprite cup"></i><span>100€ Cash Prize</span></p>
-					<p className="date inblock"><i className="sprite candar"></i><span>02/04/2021 - 5:00 PM</span></p>
+					<p className="date inblock"><i className="sprite calendar"></i><span>02/04/2021 - 5:00 PM</span></p>
 				</div>
 				</div>
 					<div className="apex block">

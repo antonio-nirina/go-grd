@@ -2,7 +2,6 @@ import React from "react"
 import { useSelector } from "react-redux"
 import { Link } from 'react-router-dom'
 
-import {Translation} from "../../lang/translation"
 import {RootState} from "../../reducer"
 
 import Header from "../header/header"
@@ -21,7 +20,7 @@ import cod_coldwar from "../../assets/image/cod-coldwar.png"
 import fifa from "../../assets/image/fifa21.png"
 
 const League: React.FC = function() {
-	const userConnectedRedux = useSelector((state:RootState) => state.userConnected)
+	
   return(
     <div className="Tournament league">
 		<div className="container">

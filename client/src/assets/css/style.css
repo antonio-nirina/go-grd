@@ -50,6 +50,12 @@ html{
 .cl-red{
   color: #dd0000;  
 }
+.dark-red{
+  background: #602020;
+}
+.light-green{
+  background: #216026
+}
 .btn{
   font-size: 14px;
   text-transform: uppercase;
@@ -254,7 +260,34 @@ li{
   .container .service-img img{
     width: 100%;
   }
-
+  .assistance .aside-menu{
+    display: block;
+    width: 100%;
+    max-width: inherit;
+    border-radius: 5px 5px 0px 0px
+  }
+  .assistance .support{
+    display: block;
+    width: 100%;
+    max-width: inherit;
+    border-radius: 0px 0px 5px 5px;
+  }
+  .assistance .search-box input{
+    margin-top: 15px;
+    width: 100%;
+  }
+  .tuto-video video{
+    width: 100%;
+  }
+  .container footer{
+    position: initial !important;
+  }
+  .container .containt{
+    width: 92%;
+  }
+  .container .group h1{
+    font-size: 25px;
+  }
 }
 @media screen and (max-width: 800px){
   .container .tchat{
@@ -306,13 +339,16 @@ li{
   .wrap, .container .wrap.red{
     display: block;
     text-align: center;
-  }  
+  }   
   .header h1{
     text-align: center;
   }
   .logo{
     max-width: inherit;
     width: 100%;
+  }
+  .header .bt-container{
+    text-align: center; 
   }
   .imglogo{
     width: 50%;
@@ -371,6 +407,9 @@ li{
   }
   .rcw-launcher{
     display: block !important;
+  }
+  .container .part{
+    margin-top: 5em;
   }
 }
 @media screen and (max-width: 380px) {
