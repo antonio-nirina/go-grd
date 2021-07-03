@@ -38,6 +38,7 @@ p.title{
 }
 .slogan button.bg-red{
 	font-family: "quicksand regular";
+	font-weight: 700;
 	text-transform: uppercase;
 	padding: 7px 20px;
     opacity: 0.7;

@@ -18,9 +18,10 @@ html{
 .clear{
     clear: both;
 }
-.bg-yellow.btn:hover, .bg-white.btn:hover{
-  background: #383434;
-  color: #f2cf1c;
+.bg-red.btn:hover, .bg-white.btn:hover{
+  background: #000000;
+  border-color: #dd0000;
+  color: #dd0000;
 }
 .bg-white.btn:hover{
     border: 1px solid #ffffff !important;
@@ -45,6 +46,9 @@ html{
 }
 .cl-yellow{
   color: yellow;
+}
+.cl-red{
+  color: #dd0000;  
 }
 .btn{
   font-size: 14px;

@@ -80,13 +80,13 @@ const Login: React.FC = function() {
 						<form onSubmit={handleSubmit(onSubmit)}>
 							<input className="mgt10" type = "email" placeholder = "Ton email" {...register("email", { required: true })} name="email" />
 							<input type ="password" placeholder ={Translation("fr").login.password}  {...register("password", { required: true })} name="password" />
-							<button className="btn bg-yellow mg15">
+							<button className="btn bg-red mg15">
 								Se connecter
 							</button>
 						</form>
 						<div className="infos">
-							<p className="mb15">Vous n'avez pas encore de compte ? <Link to = "/register" title="Inscrivez-vous" className="italic cl-yellow">Inscrivez-vous !</Link></p>
-							<p className="mb15"><Link to ="/forgot-password" title="Mot de passe oublié ?" className="italic cl-yellow">Mot de passe oublié ?</Link></p>
+							<p className="mb15">Vous n'avez pas encore de compte ? <Link to = "/register" title="Inscrivez-vous" className="italic cl-red">Inscrivez-vous !</Link></p>
+							<p className="mb15"><Link to ="/forgot-password" title="Mot de passe oublié ?" className="italic cl-red">Mot de passe oublié ?</Link></p>
 							<div className="other-account">
 								<p>Connectez-vous avec votre compte : </p>
 								<span onClick={Siging}><img src={IconXbox} alt="xbox" /></span>

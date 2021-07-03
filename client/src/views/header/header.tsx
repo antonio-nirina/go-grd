@@ -5,17 +5,16 @@ import {useHistory } from "react-router-dom"
 import {useQuery,useSubscription,useMutation} from "@apollo/client"
 
 import "../header/header.css"
-import logo from "../../assets/image/logo.png"
+import logo from "../../assets/image/go-grind.png"
 import avatar from "../../assets/image/game-tag.png"
 import fr from "../../assets/image/fr.png"
 import gb from "../../assets/image/gb.png"
 import ps from "../../assets/image/playstation.png"
-import { faBars, faBell, faUsers, faTimes, faCheck } from "@fortawesome/free-solid-svg-icons"
+import { faBars, faBell, faUsers } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {RootState} from "../../reducer"
 import {Translation} from "../../lang/translation"
 import {removeDataUser} from "../auth/action/userAction"
-import AvatarDefault from "../../assets/image/game-tag.png"
 import {GET_ALL_NOTIFICATIONS} from "../../gql/notifications/query"
 import Notifications from "./notificationFriend"
 import {NOTIFICATIONS_SUBSCRIBE,COUNT_SUBSCRIBE} from "../../gql/user/subscription"
@@ -226,10 +225,10 @@ const Header: React.FC = function() {
 					<div className="gametag">
 						<div className="itemsTag">
 							<div className="bg-gametag">
-								<p><img src={userConnectedRedux.user && userConnectedRedux.user.avatar ? userConnectedRedux.user.avatar : avatar} className="avatar"/></p>
+								<p><img src={userConnectedRedux.user && userConnectedRedux.user.avatar ? userConnectedRedux.user.avatar : avatar} className="avatar" alt=""/></p>
 								<p className="user">{userConnectedRedux.user.username}</p>
 								<p className="user-setting">
-									<><img src={ps} className="itemTag" alt="" width="18" height="14"/></>
+									<><img src={ps} className="itemTag" alt="" width="18" height="14" alt="#"/></>
 									<><img src={userConnectedRedux.user.language && userConnectedRedux.user.language === "fr" ? fr : gb} className="itemTag" alt="" width="15" height="14"/></>
 								<i className="itemTag drop" onClick={onShow}><FontAwesomeIcon icon={faBars} /></i>
 								</p>

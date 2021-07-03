@@ -61,12 +61,12 @@ const Register: React.FC = function() {
 							<input className="mgt10" type="email" placeholder = "Email" {...register("email", { required: true })} name="email"/>
 							{errors.password && <span style={{"color":"red"}}>Password ne peut être vide</span>}
 							<input className="mgt10" type="password" placeholder = "Mot de passe" {...register("password", { required: true })} name="password"/>
-							<button className="btn bg-yellow mg15" type="submit">
+							<button className="btn bg-red mg15" type="submit">
 								Inscription
 							</button>
 						</form>
 						<div className="infos">
-							<p className="mb15">Vous avez déjà un compte ? <Link className="italic cl-yellow" to="/communaute">Connectez-vous !</Link></p>
+							<p className="mb15">Vous avez déjà un compte ? <Link className="italic cl-red" to="/communaute">Connectez-vous !</Link></p>
 							<div className="other-account">
 								<p>Connectez-vous avec votre compte : </p>
 								<span><img src={IconXbox} alt=""/></span>

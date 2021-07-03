@@ -3,14 +3,12 @@ import { Link } from 'react-router-dom'
 import {useState} from "react"
 
 import "../header/header.css"
-import logo from "../../assets/image/logo.png"
+import logo from "../../assets/image/go-grind.png"
 import fr from "../../assets/image/fr.png"
 import gb from "../../assets/image/gb.png"
 import ps from "../../assets/image/playstation.png"
 import { faBars, faPlus, faUsers } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-
-
 
 const Header0: React.FC = function() {
     const [showList, setShowList] = useState(false)
@@ -44,29 +42,29 @@ const Header0: React.FC = function() {
     	 			</ul>
     	 		</nav>
                 <div className="bt-container">
-                    <Link to="/login" className="btn bg-yellow">Connexion</Link>
+                    <Link to="/login" className="btn bg-red">Connexion</Link>
                     <Link to="/register" className="btn bg-white">Inscription</Link>
                 </div>
     	 		<div className="tag">
                     <div className="box">
     	 			   <div className="lang">
                             <span>
-                                <a href="#" title="">
+                                <Link to="/" title="">
                                     <img src={fr} alt="" className="lang show" width="28" height="29"/>
                                     <img src={gb} alt="" className="lang gb hide" width="28" height="29"/>
-                                </a>
+                                </Link>
                             </span>
                         </div>
                         <div className="connex">
-                            <a href="#">
+                            <Link to="#">
                                 <i className="square">
                                     <FontAwesomeIcon icon={faPlus} size="xs"/>
                                 </i>
-                            </a>
-                            <a href="#"><i className="relative">
+                            </Link>
+                            <Link to="#"><i className="relative">
 								<FontAwesomeIcon icon={faUsers} size="lg"/>
 								<span className="counter">2</span></i>
-							</a>
+							</Link>
                         </div>
                     </div>
                     <div className="gametag">
@@ -74,8 +72,8 @@ const Header0: React.FC = function() {
                             <div className="bg-gametag">
                                 <p>GameTag</p>
                                 <p>
-                                <a href="#"><img src={ps} className="itemTag" alt="" width="18" height="14"/></a>
-                                <a href="#"><img src={fr} className="itemTag" alt="" width="15" height="14"/></a>
+                                <Link to="/"><img src={ps} className="itemTag" alt="" width="18" height="14"/></Link>
+                                <Link to="/"><img src={fr} className="itemTag" alt="" width="15" height="14"/></Link>
                                 <i className="itemTag drop" onClick={onShow}>
 									<FontAwesomeIcon icon={faBars} />
 								</i>
@@ -85,10 +83,10 @@ const Header0: React.FC = function() {
                         <div className={!showList ? "dropdown" :"dropdown show"}>
                             <ul>
                                 <li><Link to="/profil">Profil</Link></li>
-                                <li><a href="#" title="Tournois">Tournois</a></li>
-                                <li><a href="#" title="Ligues">Ligues</a></li>
-                                <li><a href="#" title="Wager">Wager</a></li>
-                                <li><a href="#" title="Assistance">Assistance</a></li>
+                                <li><Link to="/tournament" title="Tournois">Tournois</Link></li>
+                                <li><Link to="/ligue" title="Ligues">Ligues</Link></li>
+                                <li><Link to="/waggers" title="Wager">Wager</Link></li>
+                                <li><Link to ="/assistance" title="Assistance">Assistance</Link></li>
                             </ul>
                         </div>
                     </div>

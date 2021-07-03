@@ -49,7 +49,7 @@ const InitPass: React.FC = function() {
 						<div className="alert alert-success text-center invisible">Un mail de changement de mot de passe vous a été envoyé</div>
 						<form onSubmit={handleSubmit(onSubmit)}>
 							<input className="mgt10" type = "email" placeholder = "Ton email" {...register("email", { required: true })} name="email" required/>
-							<button className="btn bg-yellow mg15">
+							<button className="btn bg-red mg15">
 								Réinitialiser mon mot de passe
 							</button>
 						</form>
