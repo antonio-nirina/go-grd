@@ -78,6 +78,7 @@ const Header: React.FC = function() {
 	const onDeconnect = async function() {
 		try {
 			const deco = await deconnect()
+			console.log("deco", deco)
 		} catch (e) {
 			console.log(e)
 		}
@@ -132,7 +133,7 @@ const Header: React.FC = function() {
 			}
 		}
 		setDataNotifications(array)
-	},[loading,error,data,subLoading,errSub,subData])
+	},[loading,error,data,subLoading,errSub,subData,userConnectedRedux])
 
   return(
 		<header className={isDeconnect || Object.keys(userConnectedRedux.user).length === 0 ? "header" : "header connected"}>

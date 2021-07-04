@@ -353,11 +353,11 @@ const Profil: React.FC = function() {
 	      					</div>
 	      				</div>
 	      				<div className="btn-container">
-	      					<a href="#" className="btn bg-yellow">4.99 € / {Object.keys(userConnectedRedux.user).length > 0 ?
+	      					<span  className="btn bg-yellow">4.99 € / {Object.keys(userConnectedRedux.user).length > 0 ?
 								Translation(userConnectedRedux.user.language).profil.month
 								:
 								Translation("fr").profil.month}
-							</a>
+							</span>
 	      				</div>
 	      			</div>
 				</div>
