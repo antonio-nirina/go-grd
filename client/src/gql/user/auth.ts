@@ -39,7 +39,7 @@ export const TwitchProfil = gql`
 	}
 `
 export const Deconnect = gql`
-	mutation Deconnected{
-		Deconnected
+	mutation Deconnected($id:String){
+		Deconnected(id:$id)
 	}
 `

@@ -224,7 +224,7 @@ func (r *resolver) ForgotResolver(params graphql.ResolveParams) (interface{}, er
 
 func (r *resolver) DeconnectedResolver(params graphql.ResolveParams) (interface{}, error) {
 	var wg sync.WaitGroup
-	uid := params.Args["uid"].(string)
+	uid := params.Args["id"].(string)
 	res, err := r.userHandler.FindOneUserByUid(uid)
 	if err != nil {
 		return "error",nil

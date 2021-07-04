@@ -77,7 +77,7 @@ const Header: React.FC = function() {
 
 	const onDeconnect = async function() {
 		try {
-			const deco = await deconnect()
+			const deco = await deconnect({ variables: { id: userConnectedRedux.user.uid }})
 			console.log("deco", deco)
 		} catch (e) {
 			console.log(e)
