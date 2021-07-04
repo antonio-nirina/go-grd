@@ -49,7 +49,7 @@ const Communaute: React.FC = function() {
 			  					<div className="game-bg wz">
 			  						<p>Warzone</p>
 			  						<div className="seek">
-			  							<img src={warz} className="imgresp" alt="" />
+			  							<img src={warz} className="imgresp" alt=""/>
 			  						</div>
 			  					</div>
 			  				</Link>
@@ -57,7 +57,7 @@ const Communaute: React.FC = function() {
 			  					<div className="game-bg rl">
 			  						<p>Rocket League</p>
 			  						<div className="seek">
-			  							<img src={championship} className="imgresp" alt="" />
+			  							<img src={championship} className="imgresp" alt=""/>
 			  						</div>
 			  					</div>
 		  					</Link>
