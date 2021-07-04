@@ -48,6 +48,6 @@ func GetRootFields() graphql.Fields {
 		"saveNotification":		saveNotification(),
 		"updateNotification": 	updateNotification(),
 		"AcceptedRequestFriend": AcceptedRequestFriend(),
-		"deconected":			Deconnected(),
+		"Deconnected":			Deconnected(),
 	}
 }

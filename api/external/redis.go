@@ -77,7 +77,7 @@ func GetHmsetRedis(key string, field string)(interface{},error) {
 }
 
 func RemoveHmsetRedis(key string, field string) {
-	err := Rdb.HDel(ctx,key,field)
+	err := Rdb.HDel(ctx,key,field).Err()
 	if err != nil {
       Logger(fmt.Sprintf("%v", err))
    } 
