@@ -6,7 +6,7 @@ orginame="${HOME}/Documents/faceit/new-project/go-example/client"
 ws="${HOME}/Documents/faceit/new-project/grind/ws"
 org_server="${HOME}/Documents/faceit/new-project/go-example/api"
 ws_server="${HOME}/Documents/faceit/new-project/go-example/ws"
-gitlab="${HOME}/Documents/faceit/new-project/go-example/gitlab-ci.txt"
+gitlab="${HOME}/Documents/faceit/new-project/go-example/.gitlab-ci.yml"
 
 if [ -d ${dir} ] ; then
     rm -rf $dir 
@@ -29,11 +29,11 @@ else
     cp -r ${ws_server} "${HOME}/Documents/faceit/new-project/grind/"
 fi
 
-if [ -f ${gitlab} ] ; then
-    rm -rf $gitlab
-    cp -r ${gitlab} "${HOME}/Documents/faceit/new-project/grind/"
-else 
-    cp -r ${gitlab} "${HOME}/Documents/faceit/new-project/grind/"
-fi
+# if [ -f ${gitlab} ] ; then
+    # rm -rf $gitlab
+    # cp -r ${gitlab} "${HOME}/Documents/faceit/new-project/grind/"
+#else 
+    # cp -r ${gitlab} "${HOME}/Documents/faceit/new-project/grind/"
+# fi
 
  echo "server and client copy with success"

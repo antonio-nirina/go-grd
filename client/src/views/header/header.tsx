@@ -17,7 +17,7 @@ import {Translation} from "../../lang/translation"
 import {removeDataUser} from "../auth/action/userAction"
 import {GET_ALL_NOTIFICATIONS} from "../../gql/notifications/query"
 import Notifications from "./notificationFriend"
-import {NOTIFICATIONS_SUBSCRIBE,COUNT_SUBSCRIBE} from "../../gql/user/subscription"
+import {NOTIFICATIONS_SUBSCRIBE} from "../../gql/user/subscription"
 import {UPDATED_NOTIFICATION} from "../../gql/notifications/mutation"
 import {Deconnect} from "../../gql/user/auth"
 

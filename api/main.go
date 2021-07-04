@@ -38,7 +38,7 @@ func main() {
 		// FormatErrorFn: ,
 	})
 
-	http.Handle("/", external.Handle(httpHandler))
+	http.Handle("/graphql", external.Handle(httpHandler))
 	fmt.Println("ready: listening 4000")
 	http.ListenAndServe(":4000", nil)
 }

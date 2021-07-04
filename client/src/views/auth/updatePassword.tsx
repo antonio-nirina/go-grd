@@ -19,7 +19,7 @@ const UpdatePassword: React.FC = function() {
 	const history = useHistory()
 	const [passwordValid,setPasswordValid] = useState<boolean>(false)
 	const [updatedPasswordUser]  = useMutation(UPDATE_PASSWORD)
-	const { register, handleSubmit, formState: { errors } } = useForm<Inputs>()
+	const { register, handleSubmit } = useForm<Inputs>()
 
 	const onSubmit = async function(data:Inputs){
 		const password: string 	= data.newPassword

@@ -6,7 +6,7 @@ import { WebSocketLink } from "@apollo/client/link/ws"
 
 
 const httpLink = new HttpLink({
-	uri: `http://localhost:4000`,
+	uri: `http://localhost:4000/graphql`,
 })
 const wsLink = new WebSocketLink({
 	uri: 'ws://localhost:8080/subscriptions',
@@ -19,7 +19,7 @@ const ACCESS_TOKEN: string  = "access_token"
 
 const splitLink = split(
 	({ query }) => {
-	  const definition = getMainDefinition(query);
+	  const definition = getMainDefinition(query)
 	  return (
 		definition.kind === 'OperationDefinition' &&
 		definition.operation === 'subscription'
