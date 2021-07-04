@@ -1,4 +1,4 @@
-import React,{useMemo, useState, useEffect} from "react"
+import React,{useMemo, useState} from "react"
 import { faPlus, faCommentDots, faQuestionCircle, faUserPlus } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import Popup from "reactjs-popup"
@@ -45,7 +45,7 @@ const Friend: React.FC = function() {
 		if(!loadingAll && !errorAll && dataAll) setUsers(dataAll.GetUsers.filter((e:any) => e.uid !== userConnectedRedux.user.uid))
 
 		if(!ldSub && !erSub && dataSub) console.log(dataSub)
-	},[loading,error,data,loadingAll,errorAll,dataAll])
+	},[loading,error,data,loadingAll,errorAll,dataAll,ldSub,erSub,dataSub])
 
 	const onSendIncoming = 	async function(uid:string) {
 		try {
@@ -56,15 +56,15 @@ const Friend: React.FC = function() {
 		}
 	}
 	return (
-		<div className="aside-right">			
+		<div className="aside-right">
 			{nbFriends
-				?				
+				?
 				friends.map(function(el:any,index:number) {
 					let img = el.avatar ? el.avatar : AvatarDefault
 					return(
 						<div className="friend-list">
 							<p key={index}>
-								<img src={img} className="friend-avatar"/>
+								<img src={img} className="friend-avatar" alt=""/>
 								<span>{el.username}<i className={el.isConnected ? "u-connected" : ""}></i></span>
 								<i><FontAwesomeIcon icon={faCommentDots} size="xs"/></i>
 								<i className="rect"><FontAwesomeIcon icon={faPlus} size="xs"/></i>
@@ -128,13 +128,12 @@ const Friend: React.FC = function() {
 											<div className="add-friends">
 												<div className="found">
 													{
-
 														users.length > 0 ?
 														users.map(function(el:any,index:number){
 															let img:string = el.avatar ? (el.avatar) : AvatarDefault
 															return (
 																<p key={index}>
-																	<img src={img} className="avatar-found"/>
+																	<img src={img} className="avatar-found" alt="" />
 																	<span className="profil-name">{el.username ? el.username : ((el.email).split("@")[0])}</span>
 																	<button className="btn bg-yellow">
 																		<i className="rect"><FontAwesomeIcon icon={faUserPlus} size="xs"/></i>

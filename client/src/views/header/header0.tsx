@@ -31,7 +31,7 @@ const Header0: React.FC = function() {
     	 					<Link to="/league"> Ligues</Link>
 	 					</li>
     	 				<li>
-    	 					<Link to="/tournament">Tournois</Link>
+    	 					<Link to="/tournois">Tournois</Link>
 	 					</li>
     	 				<li>
     	 					<Link to="/wager">Wagers</Link>

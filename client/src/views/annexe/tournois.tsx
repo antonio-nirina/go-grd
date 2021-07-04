@@ -24,17 +24,17 @@ const Tournois: React.FC = function() {
 
   return(
   	<div className="container">
-  		<Header/>
-		<div className="participate anex-tournois">
+  		<Header />
+  		<div className="participate league">
 			<div className="marg">
 				<div className="part">
 					<div className="undertitle">
 						<h2>Tournois</h2>
-						<p>Retrouve les derniers tournois public & inscris-toi !</p>
+						<p>Derniers résultats en tournois</p>
 					</div>
 					<div className="content">
 						<div className="clear"></div>
-						<div className="apex block">
+						<div className="apex block dark-red">
 							<div>
 								<p className="legend">Apex Legends Daily Cup</p><i className="iconGame"><FontAwesomeIcon icon={faXbox}/></i>
 							</div>
@@ -43,14 +43,14 @@ const Tournois: React.FC = function() {
 								<p className="date inblock"><i className="sprite calendar"></i><span>02/04/2021 - 5:00 PM</span></p>
 							</div>
 						</div>						
-					<div className="apex block">
+					<div className="apex block dark-red">
 						<div><p className="legend">Fortnite Weekly Cup</p><i className="iconGame"><FontAwesomeIcon icon={faGamepad}/></i></div>
 						<div className="info">
 							<p className="price inblock"><i className="sprite cup"></i><span>50€ Cash Prize</span></p>
 							<p className="date inblock"><i className="sprite calendar"></i><span>03/04/2021 - 5:00 PM</span></p>
 						</div>
 					</div>
-					<div className="apex block">
+					<div className="apex block light-green">
 						<div><p className="legend">Rocket League Champions</p><i className="iconGame"><FontAwesomeIcon icon={faPlaystation}/></i></div>
 						<div className="info">
 							<p className="price inblock"><i className="sprite ticket"></i><span>5€ Cash Prize</span></p>
@@ -58,23 +58,23 @@ const Tournois: React.FC = function() {
 							<p className="date inblock"><i className="sprite calendar"></i><span>04/04/2021 - 7:30 PM</span></p>
 						</div>
 					</div>
-					<div className="apex block">
+					<div className="apex block dark-red">
 						<div>
 							<p className="legend">Warzone Xbox Daily</p><i className="iconGame"><FontAwesomeIcon icon={faXbox}/></i>
 						</div>
 						<div className="info">
 							<p className="price inblock"><i className="sprite cup"></i><span>100€ Cash Prize</span></p>
-							<p className="date inblock"><i className="sprite candar"></i><span>02/04/2021 - 5:00 PM</span></p>
+							<p className="date inblock"><i className="sprite calendar"></i><span>02/04/2021 - 5:00 PM</span></p>
 						</div>
 					</div>
-					<div className="apex block">
+					<div className="apex block dark-red">
 						<div><p className="legend">R6 Squad Tournament</p><i className="iconGame"><FontAwesomeIcon icon={faGamepad}/></i></div>
 						<div className="info">
 							<p className="price inblock"><i className="sprite cup"></i><span>100€ Cash Prize</span></p>
 							<p className="date inblock"><i className="sprite calendar"></i><span>02/04/2021 - 5:00 PM</span></p>
 						</div>
 					</div>
-					<div className="apex block last">
+					<div className="apex block last light-green">
 						<p className="legend">Fifa 21 fut cup</p>
 						<div className="info">
 							<p className="inblock"><i className="sprite ticket"></i><span>10€</span></p>
@@ -129,64 +129,7 @@ const Tournois: React.FC = function() {
 				</div>
 			</div>
  		</div>
-		</div>
-		<div className="tabs-content">
-			<div className="tab-league">
-				<h3>Tous les tournois</h3>
-				<div className="filter-bar">
-					<div className="custom-select filters">
-						<select className="slot">
-							<option value="">Slot</option>
-						    <option value="">32</option>
-						    <option value="">16</option>
-						    <option value="">64</option>								    
-						    <option value="">128</option>
-						</select>
-					</div>
-					<div className="custom-select filters">
-						<select className="filter-game">
-							<option value="">Jeux</option>
-						    <option value="">Apex Legends</option>
-						    <option value="">Leagues of Legend</option>
-						</select>
-					</div>
-				</div>
-				<table className="tab-bloc">
-					<tr>
-						<th>Slot</th>
-						<th>Organisateur</th>
-						<th>Type</th>
-						<th>Prix</th>
-						<th>Jeu</th>
-						<th></th>
-					</tr>
-					<tr>
-						<td>32</td>
-						<td>ESL PRO</td>
-						<td>Ligue</td>
-						<td>1500 $</td>
-						<td></td>
-						<td><Link to="#">Info</Link></td>
-					</tr>
-					<tr>
-						<td>16</td>
-						<td>ESL</td>
-						<td>Ligue</td>
-						<td>1000 $</td>
-						<td></td>
-						<td><Link to="#">Info</Link></td>
-					</tr>
-					<tr>
-						<td>64</td>
-						<td>Major League</td>
-						<td>Ligue</td>
-						<td>Merch</td>
-						<td></td>
-						<td style={{width:"70px"}}><Link to="#">Info</Link></td>
-					</tr>
-				</table>
-			</div>
-		</div>				
+		</div>		
 		<Join/>
 		<Footer/>
   	</div>

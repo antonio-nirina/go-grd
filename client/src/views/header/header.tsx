@@ -17,7 +17,7 @@ import {Translation} from "../../lang/translation"
 import {removeDataUser} from "../auth/action/userAction"
 import {GET_ALL_NOTIFICATIONS} from "../../gql/notifications/query"
 import Notifications from "./notificationFriend"
-import {NOTIFICATIONS_SUBSCRIBE,COUNT_SUBSCRIBE} from "../../gql/user/subscription"
+import {NOTIFICATIONS_SUBSCRIBE} from "../../gql/user/subscription"
 import {UPDATED_NOTIFICATION} from "../../gql/notifications/mutation"
 import {Deconnect} from "../../gql/user/auth"
 
@@ -147,7 +147,7 @@ const Header: React.FC = function() {
 				<nav className="navmenu">
 					<ul>
 						<li>
-							<Link to="/league">
+							<Link to="/ligue">
 								{
 									Object.keys(userConnectedRedux.user).length > 0 ?
 									Translation(userConnectedRedux.user.language).header.leagues
@@ -157,7 +157,7 @@ const Header: React.FC = function() {
 							</Link>
 						</li>
 						<li>
-							<Link to="/tournament">
+							<Link to="/tournois">
 								{
 									Object.keys(userConnectedRedux.user).length > 0 ?
 									Translation(userConnectedRedux.user.language).header.tournaments
@@ -237,7 +237,7 @@ const Header: React.FC = function() {
 						<div className={!showList ? "dropdown" :"dropdown show"}>
 							<ul>
 								<li><Link to="/profil">Profil</Link></li>
-								<li><Link to="/tournament">Tournois</Link></li>
+								<li><Link to="/tournois">Tournois</Link></li>
 								<li><Link to="/ligue">Ligues</Link></li>
 								<li><Link to="/wager">Wager</Link></li>
 								<li><Link to="/assistance">Assistance</Link></li>

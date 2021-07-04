@@ -1,6 +1,5 @@
 import {createApolloClient as client} from "../../config/apollo-client"
 import {XBoxToken} from "../../gql/user/auth"
-import {sendUserConectedAction} from "./action/userAction"
 
 
 const URL_REDIRECT = "http://localhost:3000"

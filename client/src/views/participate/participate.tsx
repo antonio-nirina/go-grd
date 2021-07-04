@@ -1,4 +1,5 @@
 import React from "react"
+import { Link } from 'react-router-dom'
 import { useSelector } from "react-redux"
 import { faXbox, faPlaystation } from "@fortawesome/free-brands-svg-icons"
 import { faGamepad } from "@fortawesome/free-solid-svg-icons"
@@ -63,7 +64,7 @@ const Slider: React.FC = function() {
 					<div><p className="legend">Warzone Xbox Daily</p><i className="iconGame"><FontAwesomeIcon icon={faXbox}/></i></div>
 					<div className="info">
 					<p className="price inblock"><i className="sprite cup"></i><span>100€ Cash Prize</span></p>
-					<p className="date inblock"><i className="sprite candar"></i><span>02/04/2021 - 5:00 PM</span></p>
+					<p className="date inblock"><i className="sprite calendar"></i><span>02/04/2021 - 5:00 PM</span></p>
 				</div>
 				</div>
 					<div className="apex block">
@@ -90,7 +91,7 @@ const Slider: React.FC = function() {
 				<p><strong>+2500€</strong><span>Cash prizes/Semaine</span></p>
 			</div>
 			<div className="more">
-				<p><a href="#">plus de tournois</a></p>
+				<p><Link to ="#">plus de tournois</Link></p>
 			</div>
 		</div>
 	</div>
@@ -172,13 +173,13 @@ const Slider: React.FC = function() {
 			<div className="more">
 				<p>
 					<>
-						<a href="#">{
+						<Link to="#">{
 							Object.keys(userConnectedRedux.user).length > 0 ?
 							Translation(userConnectedRedux.user.language).participHome.see
 							:
 							Translation("fr").participHome.see
 						}
-						</a>
+						</Link>
 					</>
 				</p>
 			</div>

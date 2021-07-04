@@ -43,38 +43,75 @@ const Lobby: React.FC = function() {
 						<div className="tab-league">
 							<div className="team1 team">
 								<table>
-									<tr>
-										<th>Player</th>
-										<th>Rating</th>
-										<th>K/D</th>
-										<th>Twitch</th>
-									</tr>
-									<tr>
-										<th><img src={AvatarDefault} alt="default" />Klover</th>
-										<th>2099</th>
-										<th>1.29</th>
-										<th>5 <i><FontAwesomeIcon icon={faEye} size="xs"/></i></th>
-									</tr>
+									<thead>
+										<tr>
+											<th>Player</th>
+											<th>Rating</th>
+											<th>K/D</th>
+											<th>Twitch</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td><img src={AvatarDefault} alt="default" />Klover</td>
+											<td>2099</td>
+											<td>1.29</td>
+											<td>5 <i><FontAwesomeIcon icon={faEye} size="xs"/></i></td>
+										</tr>
+										<tr>
+											<td><img src={AvatarDefault} alt="default" />Klover</td>
+											<td>2099</td>
+											<td>1.29</td>
+											<td>5 <i><FontAwesomeIcon icon={faEye} size="xs"/></i></td>
+										</tr>
+										<tr>
+											<td><img src={AvatarDefault} alt="default" />Klover</td>
+											<td>2099</td>
+											<td>1.29</td>
+											<td>5 <i><FontAwesomeIcon icon={faEye} size="xs"/></i></td>
+										</tr>
+										<tr>
+											<td><img src={AvatarDefault} alt="default" />Klover</td>
+											<td>2099</td>
+											<td>1.29</td>
+											<td>5 <i><FontAwesomeIcon icon={faEye} size="xs"/></i></td>
+										</tr>
+									</tbody>
 								</table>
-								<button className="btn bg-yellow">Join Team 1</button>
+								<button className="btn bg-red">Join Team 1</button>
 							</div>
 							<div className="team2 team">
 								<table>
-									<tr>
-										<th>Player</th>
-										<th>Rating</th>
-										<th>K/D</th>
-										<th>Twitch</th>
-									</tr>
-									<tr>
-										<th><img src={AvatarDefault} alt="default" />Klover</th>
-										<th>2099</th>
-										<th>1.29</th>
-										<th>5 <i><FontAwesomeIcon icon={faEye} size="xs"/></i></th>
-									</tr>
-
+									<thead>
+										<tr>
+											<th>Player</th>
+											<th>Rating</th>
+											<th>K/D</th>
+											<th>Twitch</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td><img src={AvatarDefault} alt="default" />Klover</td>
+											<td>2099</td>
+											<td>1.29</td>
+											<td>5 <i><FontAwesomeIcon icon={faEye} size="xs"/></i></td>
+										</tr>
+										<tr>
+											<td><img src={AvatarDefault} alt="default" />Klover</td>
+											<td>2099</td>
+											<td>1.29</td>
+											<td>5 <i><FontAwesomeIcon icon={faEye} size="xs"/></i></td>
+										</tr>
+										<tr>
+											<td><img src={AvatarDefault} alt="default" />Klover</td>
+											<td>2099</td>
+											<td>1.29</td>
+											<td>5 <i><FontAwesomeIcon icon={faEye} size="xs"/></i></td>
+										</tr>
+									</tbody>
 								</table>
-								<button className="btn bg-yellow">Join Team 2</button>
+								<button className="btn bg-red">Join Team 2</button>
 							</div>
 						</div>
 					</div>
