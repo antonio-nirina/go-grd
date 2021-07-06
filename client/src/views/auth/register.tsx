@@ -12,8 +12,6 @@ import {checkValidEmail} from "../auth/utils"
 import Header0 from "../header/header0"
 import Footer from "../footer/footer"
 import joystick from "../../assets/image/joystick.png"
-import IconXbox from "../../assets/image/icon-xbox.png"
-import IconPs from "../../assets/image/playstation.png"
 import "../auth/inscription.css"
 import "../../assets/css/style.css"
 
