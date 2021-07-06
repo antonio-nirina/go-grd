@@ -4,6 +4,8 @@ import { useForm } from "react-hook-form"
 import {useMutation} from "@apollo/client"
 import {useHistory } from "react-router-dom"
 import { useDispatch } from "react-redux"
+import { faTwitch } from "@fortawesome/free-brands-svg-icons"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 import {TokenType,SendToken} from "./utils"
 import {sendUserConectedAction} from "./action/userAction"
@@ -14,8 +16,6 @@ import {Translation} from "../../lang/translation"
 import {LOGIN} from "../../gql/user/auth"
 import Footer from "../footer/footer"
 import joystick from "../../assets/image/joystick.png"
-import IconXbox from "../../assets/image/icon-xbox.png"
-import IconPs from "../../assets/image/playstation.png"
 import "../auth/login.css"
 import "../../assets/css/style.css"
 
@@ -89,8 +89,7 @@ const Login: React.FC = function() {
 							<p className="mb15"><Link to ="/forgot-password" title="Mot de passe oublié ?" className="italic cl-red">Mot de passe oublié ?</Link></p>
 							<div className="other-account">
 								<p>Connectez-vous avec votre compte : </p>
-								<span onClick={Siging}><img src={IconXbox} alt="xbox" /></span>
-								<span><img src={IconPs} alt=""/></span>
+								<span onClick={Siging}><i className="platform"><FontAwesomeIcon icon={faTwitch}/></i></span>								
 							</div>
 						</div>
 					</div>

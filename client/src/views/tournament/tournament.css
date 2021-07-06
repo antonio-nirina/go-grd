@@ -21,7 +21,7 @@
 }
 
 .side{
-	max-width: 359px;
+	max-width: 308px;
 	background: #2c2c2c;
 	width: 100%;	
 	border-radius: 5px;
@@ -51,20 +51,20 @@
 .name-section{
 	padding: 15px 15px;
 	border-bottom: 1px solid #666666;
-	color: #f2cf1c;
+	color: #ffffff;
 }
 .prize-section{
 	padding: 15px 15px;
 	position: relative;	
 }	
 .prize-warp{
-	background: #f2cf1c;
+	background: #dd0000;
 	max-width: 75px;
 	padding: 5px;
 	border-radius: 15px;
 	font-size: 12px;
 	text-align: center;
-	color: #010101;
+	color: #ffffff;
 	position: absolute;
 	transform: translate(-50%,-100%);
 	left: 50%;
@@ -73,15 +73,14 @@
 }
 .btn-full{
 	width: 100%;
-	text-align: center;
-	background: #f2cf1c;
+	text-align: center;	
 	border-radius: 0px 0px 5px 5px;	
 }
-.btn-full .bg-yellow{
+.btn-full .bg-red{
 	padding: 15px;
+	background: #dd0000;
 	display: block;
 	border-radius: 0px 0px 5px 5px;
-	text-transform: uppercase;
-	color: #010101;
+	text-transform: uppercase;	
 	text-align: center;
 }

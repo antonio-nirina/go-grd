@@ -39,7 +39,7 @@
 	margin-bottom: 5px;
 }
 .tabs li{
-	background: #2c2c2c;
+	background: #1b1d26;
 	display: inline-block;	
 	border-right: 1px solid #4e4e4e;	
 }
@@ -51,7 +51,7 @@
 }
 
 .tabs li a.active{
-	color: #f2cf1d;
+	color: #dd0000;
 }
 .tabs li:last-child{
 	border-right: none;

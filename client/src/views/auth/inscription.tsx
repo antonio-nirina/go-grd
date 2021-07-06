@@ -1,5 +1,7 @@
 import React from "react"
 import { Link } from 'react-router-dom'
+import { faTwitch } from "@fortawesome/free-brands-svg-icons"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 import Header0 from "../header/header0"
 import Footer from "../footer/footer"
@@ -28,8 +30,7 @@ const Inscription: React.FC = function() {
 							<p className="mb15">Vous avez déjà un compte ? <Link to="/login" title="Connectez-vous" className="italic cl-red">Connectez-vous !</Link></p>
 							<div className="other-account">
 								<p>Connectez-vous avec votre compte : </p>
-								<span><Link to="/" title="Xbox"><img src={IconXbox} alt=""/></Link></span>
-								<span><Link to="/" title="Playstation"><img src={IconPs} alt=""/></Link></span>
+								<span><i className="platform"><FontAwesomeIcon icon={faTwitch}/></i></span>								
 							</div>
 						</div>
 					</div>
