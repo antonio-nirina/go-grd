@@ -168,7 +168,7 @@ const Header: React.FC = function() {
 							</Link>
 						</li>
 						<li>
-							<Link to="/wager">
+							<Link to="/waggers">
 								{
 									Object.keys(userConnectedRedux.user).length > 0 ?
 									Translation(userConnectedRedux.user.language).header.wagers
