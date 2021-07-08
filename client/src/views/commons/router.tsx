@@ -36,9 +36,9 @@ const Router = function() {
 			<ProtectedRoute path="/rules" exact component={Rules} />
 			<ProtectedRoute path="/ligue" exact component={Ligue} />
 			<ProtectedRoute path="/league" exact component={League} />
-			<ProtectedRoute path="/wager" exact component={Wager} />
-			<ProtectedRoute path="/view" exact component={View} />
-			<ProtectedRoute path="/lobby" exact component={Lobby} />
+			<Route path="/wager" exact component={Wager} />
+			<Route path="/view" exact component={View} />
+			<Route path="/lobby" exact component={Lobby} />
 			<ProtectedRoute path="/communaute" exact component={Communaute} />			
 			<ProtectedRoute path="/assistant" exact component={Assistant} />
 			<ProtectedRoute path="/assistance" exact component={Assistance} />
