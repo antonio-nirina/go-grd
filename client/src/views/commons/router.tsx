@@ -10,6 +10,7 @@ import Teams from "../tournament/teams"
 import Rules from "../tournament/rules"
 import Wager from "../wager/wager"
 import Waggers from "../waggers/waggers"
+import WaggersGame from "../waggers/waggersgame"
 import View from "../wager/view"
 import Lobby from "../wager/lobby"
 import Assistant from "../assistant/assistant"
@@ -40,6 +41,7 @@ const Router = function() {
 			<ProtectedRoute path="/league" exact component={League} />
 			<ProtectedRoute path="/wager" exact component={Wager} />
 			<ProtectedRoute path="/waggers" exact component={Waggers} />
+			<ProtectedRoute path="/waggers-game" exact component={WaggersGame} />
 			<ProtectedRoute path="/view" exact component={View} />
 			<ProtectedRoute path="/lobby" exact component={Lobby} />
 			<ProtectedRoute path="/communaute" exact component={Communaute} />			

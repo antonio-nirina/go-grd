@@ -315,6 +315,10 @@ h1{
   .container .service-container.mobile{
     display: block;
   }
+  .container .waggers-title, .container .waggers-data{
+    width: 96%;
+    margin: 5px 0;
+  }
 }
 
 @media screen and (max-width: 600px) {
@@ -406,7 +410,16 @@ h1{
   .wagers .info p{
     font-size: 17px !important;
   }
-
+  .container .waggers-content{    
+    width: 540px;    
+    overflow: scroll;
+  }
+  .container .waggers-list{    
+    overflow: scroll;
+  }
+  .container .waggers-title, .container .waggers-data{
+    width: inherit;
+  }
 }
 @media screen and (max-width: 380px) {
   .wrap, .container .wrap.red{
