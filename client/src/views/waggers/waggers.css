@@ -2,6 +2,14 @@
 .undertitle:before{
 	height: 60px;
 }
+.waggers-link a{
+	display: inline-block;
+	width: 17%;
+	margin-right: 10px;
+}
+.waggers-link a:last-child{
+	margin-right: 0px;
+}
 .waggers-title, .waggers-data{
 	background: #2c2c2c;
 	margin-top: 5px;

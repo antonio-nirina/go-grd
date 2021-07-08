@@ -270,6 +270,12 @@ h1{
   .container .group h1{
     font-size: 25px;
   }
+  .container .waggers-link a{
+    width: 31.5%;
+  }
+  .container .waggers-link .block, .container .waggers-link .block.last{
+    width: 100%;
+  }
 }
 @media screen and (max-width: 800px){
   .container .tchat{
@@ -419,6 +425,9 @@ h1{
   }
   .container .waggers-title, .container .waggers-data{
     width: inherit;
+  }
+  .container .waggers-link a{
+    width: 95%;
   }
 }
 @media screen and (max-width: 380px) {
