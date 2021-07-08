@@ -1,12 +1,12 @@
 import React,{useEffect} from "react"
-import { useSelector } from "react-redux"
+// import { useSelector } from "react-redux"
 import { Link } from 'react-router-dom'
 
 import fr from "../../assets/image/fr.png"
 import ps from "../../assets/image/playstation.png"
-import Popup from "reactjs-popup"
+// import Popup from "reactjs-popup"
 
-import { faPen, faChartBar } from "@fortawesome/free-solid-svg-icons"
+import { faChartBar } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import Header from "../header/header"
@@ -17,13 +17,11 @@ import "../../assets/css/style.css"
 import "react-responsive-carousel/lib/styles/carousel.min.css"
 import 'reactjs-popup/dist/index.css'
 
-import {RootState} from "../../reducer"
-import {Translation} from "../../lang/translation"
+// import {RootState} from "../../reducer"
 
-import {SigingTwitch} from "../auth/twitch"
 
 const Profile: React.FC = function() {
-	const userConnectedRedux = useSelector((state:RootState) => state.userConnected)
+	//const userConnectedRedux = useSelector((state:RootState) => state.userConnected)
 	useEffect(() => {
 		const params = window.location.search
 
@@ -41,9 +39,9 @@ const Profile: React.FC = function() {
 	      <div className="main-content">
 	      	<div className="main-pro">
 	      		<div className="gamer-stats">
-		      		<div className="wall-bloc" id="wall">		      		
+		      		<div className="wall-bloc" id="wall">
 			      		<div className="wall" id="wall">
-			      			<Avatar />		      			
+			      			<Avatar />
 			      		</div>
 			      	</div>
 			      	<div className="statistique">
@@ -73,12 +71,12 @@ const Profile: React.FC = function() {
 			      		<div className="stats-games">
 			      			<div className="gamestat">
 			      				<p>Fifa 21 <span>statistiques</span></p>
-			      				
+
 			      			</div>
 			      			<div className="account-list">
 			      				<img src={ps} alt=""/>
 			      			</div>
-			      		</div>		      		
+			      		</div>
 			      	</div>
 					<div className="team-bloc-setting">
 						<p><img src="#" alt=""/>nomdeteam</p>
@@ -89,7 +87,7 @@ const Profile: React.FC = function() {
 						<p>
 						<i><span>25</span></i>
 						</p>
-					</div>        		      		
+					</div>
 			    </div>
 	      	</div>
 	      </div>
