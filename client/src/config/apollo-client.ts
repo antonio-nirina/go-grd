@@ -4,12 +4,14 @@ import { getMainDefinition } from '@apollo/client/utilities'
 import { WebSocketLink } from "@apollo/client/link/ws"
 
 
+const URI_API = process.env.NODE_ENV === "development" ? "http://localhost:4000" : "https://api.gmrtl4.fr"
+const URI_WS = process.env.NODE_ENV === "development" ? "ws://localhost:8080/subscriptions" : "wss://ws.gmrtl4.fr/subscriptions"
 
 const httpLink = new HttpLink({
-	uri: `http://localhost:4000/graphql`,
+	uri: `${URI_API}/graphql`,
 })
 const wsLink = new WebSocketLink({
-	uri: 'ws://localhost:8080/subscriptions',
+	uri: URI_WS,
 	options: {
 	  reconnect: true
 	}
