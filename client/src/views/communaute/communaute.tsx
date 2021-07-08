@@ -5,12 +5,15 @@ import {useQuery} from "@apollo/client"
 
 import { faEye } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {Translation} from "../../lang/translation"
-import warzone from "../../assets/image/warzone-.png"
 import warz from "../../assets/image/warz.jpg"
 import championship from "../../assets/image/championship.jpeg"
 import fortnite1 from "../../assets/image/fortnite.jpg"
-import rlchampionsip from "../../assets/image/rlchampionsip.png"
+import  gogrind from "../../assets/image/gogrind-joystick.png"
+import  updateInfo from "../../assets/image/info-update.png"
+import  gotaga from "../../assets/image/gotaga.png"
+import  gotagatv from "../../assets/image/video-gotaga.png"
+import  skouinar from "../../assets/image/skouinar.png"
+import  play from "../../assets/image/play-your-game.png"
 
 import Header from "../header/header"
 import {RootState} from "../../reducer"
@@ -97,70 +100,70 @@ const Communaute: React.FC = function() {
 				  			</Link>
 		  				</div>
 	  				</div>
-	  				<div className="center-block">
-	  					<h2>Fil d'actualité</h2>
-	  					<div className="actuality">
-							<h3>
-							{
-								Object.keys(userConnectedRedux.user).length > 0 ?
-								Translation(userConnectedRedux.user.language).participHome.actuality
-								:
-								Translation("fr").participHome.actuality
-							}
-							</h3>
-							<div className="artContent">
-								<Link to="/">
-									<div className="article">
-										<img src={warzone} alt="" />
-										<div className="text">
-											<p className="date-art">4 Juin 2021</p>
-											<p className="title">Warzone Patch 1.15.x</p>
-											<p>
-											{
-												Object.keys(userConnectedRedux.user).length > 0 ?
-												Translation(userConnectedRedux.user.language).participHome.retrieve
-												:
-												Translation("fr").participHome.retrieve
-											}
-											</p>
-							                <div className="readmore">
-												{
-													Object.keys(userConnectedRedux.user).length > 0 ?
-													Translation(userConnectedRedux.user.language).participHome.see
-													:
-													Translation("fr").participHome.see
-												}
-											</div>
-										</div>
-		             				</div>
-		             			</Link>
-           					</div>
-	           				<Link to="/">
-		            			<div className="article">
-		          					<img src={rlchampionsip} alt="" />
-		          					<div className="text">
-		          						<p className="date-art">5 Juin 2021</p>
-		           						<p className="title">Résultats RLCS</p>
-		            					<p>
-										{
-											Object.keys(userConnectedRedux.user).length > 0 ?
-											Translation(userConnectedRedux.user.language).participHome.follow
-											:
-											Translation("fr").participHome.follow
-										}
-										</p>
-						                <div className="readmore">
-											{
-												Object.keys(userConnectedRedux.user).length > 0 ?
-												Translation(userConnectedRedux.user.language).participHome.see
-												:
-												Translation("fr").participHome.see
-											}
-										</div>
-		          					</div>
-		            			</div>
-	         				</Link>
-         				</div>
+	  				<div className="center-block">	  					
+	  					<div className="bloc-actus">
+	  						<div className="actus-name">
+	  							<img src={gogrind} alt=""/>
+	  							<p>GoGrind <span>@GoGrindOff</span></p>
+	  								  						
+	  						</div>
+	  						<div className="actus-content">
+	  							<p>
+		  							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque dapibus odio et lorem
+									pretium ullamcorper. Interdum et malesuada fames ac ante ipsum primis in faucibus.
+									Suspendisse eleifend eros sed sem laoreet, eu aliquet arcu malesuada.
+								</p>
+	  						</div>
+	  						<div className="img-actus">
+	  							<img src={updateInfo} alt="" />
+	  						</div>
+	  					</div>
+	  					<div className="bloc-actus">
+	  						<div className="actus-name">
+	  							<img src={gotaga} alt=""/>
+	  							<p>GotagaTV <span>@GotagaTV</span></p>
+	  								  						
+	  						</div>
+	  						<div className="actus-content">
+	  							<p>
+		  							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque dapibus odio et lorem
+									pretium ullamcorper. Interdum et malesuada fames ac ante ipsum primis in faucibus.
+									Suspendisse eleifend eros sed sem laoreet, eu aliquet arcu malesuada.
+								</p>
+	  						</div>
+	  						<div className="img-actus">
+	  							<img src={gotagatv} alt="" />
+	  						</div>
+	  					</div>
+	  					<div className="bloc-actus">
+	  						<div className="actus-name">
+	  							<img src={skouinar} alt=""/>
+	  							<p>Skouinar <span>@Skouinar</span></p>
+	  								  						
+	  						</div>
+	  						<div className="actus-content">
+	  							<p>Il nous manque un last pour Warzone en Quad !</p>
+	  							<p>Des gens dispo ?</p>
+								<p>DM open</p>
+	  						</div>	  						
+	  					</div>
+	  					<div className="bloc-actus">
+	  						<div className="actus-name">
+	  							<img src={gogrind} alt=""/>
+	  							<p>GoGrind <span>@GoGrindOff</span></p>
+	  								  						
+	  						</div>
+	  						<div className="actus-content">
+	  							<p>
+		  							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque dapibus odio et lorem
+									pretium ullamcorper. Interdum et malesuada fames ac ante ipsum primis in faucibus.
+									Suspendisse eleifend eros sed sem laoreet, eu aliquet arcu malesuada.
+								</p>
+	  						</div>
+	  						<div className="img-actus">
+	  							<img src={play} alt="" />
+	  						</div>
+	  					</div>
 	  				</div>
 	  				<Friend />
 	  			</div>

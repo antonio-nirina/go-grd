@@ -41,7 +41,7 @@ const Notifications = function(data:any) {
 								Translation("fr").header.text
 							*/}
 					        </span>
-					        <button className="btn bg-yellow" onClick={()=>handleAccepted(el.user.uid)}>
+					        <button className="btn bg-red" onClick={()=>handleAccepted(el.user.uid)}>
 					            <i className="rect"><FontAwesomeIcon icon={faCheck} size="xs"/></i>
 					            <span>
 					            	{

@@ -168,7 +168,7 @@ const Header: React.FC = function() {
 							</Link>
 						</li>
 						<li>
-							<Link to="/wager">
+							<Link to="/waggers">
 								{
 									Object.keys(userConnectedRedux.user).length > 0 ?
 									Translation(userConnectedRedux.user.language).header.wagers
@@ -190,7 +190,7 @@ const Header: React.FC = function() {
 					</ul>
 				</nav>
 				<div className="bt-container">
-					<Link to="/login" className="btn bg-yellow">Connexion</Link>
+					<Link to="/login" className="btn bg-red">Connexion</Link>
 					<Link to="/register" className="btn bg-white">Inscription</Link>
 				</div>
 				<div className="tag">
@@ -238,7 +238,7 @@ const Header: React.FC = function() {
 						<div className={!showList ? "dropdown" :"dropdown show"}>
 							<ul>
 								<li><Link to="/profil">Profil</Link></li>
-								<li><Link to="/tournois">Tournois</Link></li>
+								<li><Link to="/tournament">Tournois</Link></li>
 								<li><Link to="/ligue">Ligues</Link></li>
 								<li><Link to="/wager">Wager</Link></li>
 								<li><Link to="/assistance">Assistance</Link></li>

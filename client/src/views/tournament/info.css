@@ -8,7 +8,7 @@
 	padding: 15px;
 }
 .info .tabs li a.active{
-	border-bottom: 2px solid #f2cf1d;
+	border-bottom: 2px solid #dd0000;
 }
 .details{
 	margin-bottom: 15px;
@@ -27,11 +27,12 @@
 
 }
 .banniere{
-	background: url("https://i.ibb.co/Vw39G5b/championship-rl.jpg") top center no-repeat;
-	background-size: 100%;
-	background-position: 50% 50%;
-	height: 250px;
-	width: 100%;
+	background-image: url("../../assets/image/championship.jpeg");	
+	background-attachment: fixed;
+  	background-position: center;
+  	background-repeat: no-repeat;
+  	background-size: cover;		
+  	min-height: 820px;	
 	border-radius: 15px 15px 0px 0px;
 }
 .txt{
@@ -46,7 +47,7 @@
 }
 .txt strong{
 	font-weight: 700;
-	color: #f2cf1d;
+	color: #dd0000;
 }
 .txt p{
 	font-size: 15px;
@@ -101,7 +102,7 @@
 	border:none;
 }
 .confirm{
-	color: #f2cf1d;
+	color: #dd0000;
 }
 /****************Matches*******************/
 .matches h2{
@@ -124,7 +125,7 @@
 }
 .matches strong{
 	font-weight: 700;
-	color: #f2cf1d;
+	color: #dd0000;
 }
 .matches td{	
 	
@@ -146,7 +147,7 @@
 	font-weight: 700;
 }
 .matches span img{
-	border: 2px solid #f2cf1d;	
+	border: 2px solid #dd0000;	
 	border-radius: 50%;
 }
 .matches .versus span{	
@@ -177,7 +178,7 @@
     vertical-align: middle;
 }
 .teams td img{
-	border: 2px solid #f2cf1d;
+	border: 2px solid #dd0000;
     border-radius: 50%;
     display: inline-block;
     vertical-align: middle;

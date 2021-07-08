@@ -68,8 +68,7 @@
 	margin-bottom: 10px;
 	text-align: center;
 }
-.other-account span{
-	background: #383434;
+.other-account span{	
 	padding: 5px 15px;
 	display: inline-block;
 	margin-right: 15px;
@@ -105,4 +104,8 @@
 }
 .visible{
 	display: block;
+}
+.platform svg{
+	color: #8c42f4;
+	font-size: 20px;
 }

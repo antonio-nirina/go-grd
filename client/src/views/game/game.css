@@ -1,7 +1,11 @@
 @charset "UTF-8";
 .jeux{
-	background: url("../../assets/image/background-img.jpg") no-repeat;
-	background-repeat: no-repeat;	
+	background-image: url("../../assets/image/background-img.jpg");
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+    background-position: center;    
+    background-size: cover;
+    min-height: 400px;
 	background-size: 100%;
 	padding-top: 0em;
 	padding-bottom: 10em;

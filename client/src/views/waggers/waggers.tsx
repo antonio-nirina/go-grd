@@ -21,7 +21,7 @@ import cod_warzone from "../../assets/image/warzone.png"
 import cod_coldwar from "../../assets/image/cod-coldwar.png"
 import fifa from "../../assets/image/fifa21.png"
 
-const Tournois: React.FC = function() {
+const Waggers: React.FC = function() {
 
   return(
   	<div className="container">
@@ -30,8 +30,8 @@ const Tournois: React.FC = function() {
 			<div className="marg">
 				<div className="part">
 					<div className="undertitle">
-						<h2>Tournois</h2>
-						<p>Derniers résultats en tournois</p>
+						<h2>Wagers</h2>
+						<p>Derniers résultats en Wagers</p>
 					</div>
 					<div className="content">
 						<div className="clear"></div>
@@ -130,4 +130,4 @@ const Tournois: React.FC = function() {
   )
 }
 
-export default Tournois
+export default Waggers
