@@ -1,18 +1,18 @@
 package queries
 
 import (
-	"github.com/thoussei/antonio/front-office/api/config"
-	"github.com/thoussei/antonio/front-office/api/user/delivery"
-	"github.com/thoussei/antonio/front-office/api/user/handler"
-	"github.com/thoussei/antonio/front-office/api/user/repository"
+	"github.com/thoussei/antonio/api/config"
+	"github.com/thoussei/antonio/api/user/delivery"
+	"github.com/thoussei/antonio/api/user/handler"
+	"github.com/thoussei/antonio/api/user/repository"
 
-	gameDelivery "github.com/thoussei/antonio/front-office/api/games/delivery"
-	gameHandler "github.com/thoussei/antonio/front-office/api/games/handler"
-	gameRepo "github.com/thoussei/antonio/front-office/api/games/repository"
+	gameDelivery "github.com/thoussei/antonio/api/games/delivery"
+	gameHandler "github.com/thoussei/antonio/api/games/handler"
+	gameRepo "github.com/thoussei/antonio/api/games/repository"
 
-	notifDelivery "github.com/thoussei/antonio/front-office/api/notification/delivery"
-	notifHandler "github.com/thoussei/antonio/front-office/api/notification/handler"
-	notifRepo "github.com/thoussei/antonio/front-office/api/notification/repository"
+	notifDelivery "github.com/thoussei/antonio/api/notification/delivery"
+	notifHandler "github.com/thoussei/antonio/api/notification/handler"
+	notifRepo "github.com/thoussei/antonio/api/notification/repository"
 
 	"github.com/graphql-go/graphql"
 )

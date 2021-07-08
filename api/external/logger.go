@@ -7,7 +7,6 @@ import (
 )
 
 func Logger(message string) {
-
 	log.WithFields(log.Fields{
 		"request": message,
 	}).Fatal(message)

@@ -1,7 +1,7 @@
 package entity
 
 import (
-	user "github.com/thoussei/antonio/front-office/api/user/entity"
+	user "github.com/thoussei/antonio/api/user/entity"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 

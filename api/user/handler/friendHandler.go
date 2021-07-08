@@ -11,9 +11,21 @@ import (
 	"time"
 
 	"github.com/joho/godotenv"
-	"github.com/thoussei/antonio/front-office/api/external"
-	"github.com/thoussei/antonio/front-office/api/user/entity"
+	"github.com/thoussei/antonio/api/external"
+	"github.com/thoussei/antonio/api/user/entity"
 )
+
+const (
+	CONNECTED 	= "_connect"
+	DISCONNECT  = "_disconnect"
+)
+
+type userFriends struct {
+	Uid string
+	Email string
+	Avatar string
+	Username string
+}
 
 func (u *UserUsecase)AddFriend(req *entity.Friends) (interface{}, error) {
 	result, err := u.userRepository.AddFriend(req)
@@ -25,7 +37,36 @@ func (u *UserUsecase)AddFriend(req *entity.Friends) (interface{}, error) {
 	return result, nil
 }
 
-func NotifUserSender(user *entity.User,userReq *entity.User,count interface{}, wg *sync.WaitGroup)  {
+func (u *UserUsecase) UpdatedUserFriend(user entity.User,userReq entity.User) (interface{}, error) {
+	var friend []entity.User
+	friend = append(friend,userReq)
+	userSender := &entity.User{
+			Uid:           	user.Uid,
+			FirstName:     	user.FirstName,
+			LastName:      	user.LastName,
+			Password:      	user.Password,
+			Username:      	user.Username,
+			Email:         	user.Email,
+			IsBanned:      	user.IsBanned,
+			Avatar:        	user.Avatar,
+			Language:      	user.Language,
+			Point:         	user.Point,
+			IdGameAccount: 	user.IdGameAccount,
+			Roles: 			user.Roles,
+			TypeConnexion:	user.TypeConnexion,
+			Created: 		user.Created,
+			Friends:friend,		
+		}
+	result, err := u.userRepository.UpdatedUser(userSender)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return result, nil
+}
+
+func NotifUserSender(user *entity.User,userReq *entity.User,uid string,count interface{}, wg *sync.WaitGroup)  {
 	err := godotenv.Load()
 	if err != nil {
 		external.Logger("error load env")
@@ -33,17 +74,74 @@ func NotifUserSender(user *entity.User,userReq *entity.User,count interface{}, w
 
 	queryStr := `
 	{ 
-		NotifiUser(user:{uid:"%s",avatar:"%s",email:"%s",username:"%s",count:%d}) {
+		NotifiUser(user:{uid:"%s",avatar:"%s",email:"%s",username:"%s",count:%d,uidNotif:"%s"}) {
 			email,
 		}
 	}
 	`
-	queryN := fmt.Sprintf(queryStr,user.Uid.Hex(),userReq.Avatar,userReq.Email,userReq.Username,count)
+	queryN := fmt.Sprintf(queryStr,user.Uid.Hex(),userReq.Avatar,userReq.Email,userReq.Username,count,uid)
 
 	jsonData := map[string]string{
 		"query":queryN,
 	}
 
+	clientWsGraphql(jsonData)
+	wg.Done()
+}
+
+func (u *UserUsecase) NotifConnected(user *entity.User, wg *sync.WaitGroup) {
+	//var args = make(map[string]interface{})
+	err := godotenv.Load()
+	if err != nil {
+		external.Logger("error load env")
+	}
+
+	queryStr := `
+	{ 
+		NotifUserConnected(user:{uid:"%s",avatar:"%s",email:"%s",username:"%s",count:%d}) {
+			email,
+		}
+	}
+	`
+	queryN := fmt.Sprintf(queryStr,user.Uid.Hex(),user.Avatar,user.Email,user.Username,0)
+
+	jsonData := map[string]string{
+		"query":queryN,
+	}
+
+	userSend := userFriends{user.Uid.Hex(),user.Email,user.Avatar,user.Username}
+	data,_:= json.Marshal(userSend)
+ 	// args[user.Uid.Hex()] = data
+	external.SetHmsetRedis(CONNECTED,user.Uid.Hex(),data)
+	clientWsGraphql(jsonData)
+	wg.Done()
+}
+
+func (u *UserUsecase) NotifDisConnected(user *entity.User, wg *sync.WaitGroup) {
+	err := godotenv.Load()
+	if err != nil {
+		external.Logger("error load env")
+	}
+
+	queryStr := `
+	{ 
+		NotifUserConnected(user:{uid:"%s",avatar:"%s",email:"%s",username:"%s",count:%d}) {
+			email,
+		}
+	}
+	`
+	queryN := fmt.Sprintf(queryStr,user.Uid.Hex(),user.Avatar,user.Email,user.Username,0)
+	jsonData := map[string]string{
+		"query":queryN,
+	}
+	
+	external.RemoveHmsetRedis(CONNECTED,user.Uid.Hex())
+	clientWsGraphql(jsonData)
+	wg.Done()
+}
+
+
+func clientWsGraphql(jsonData map[string]string) {
 	uri := os.Getenv("URI_SUBSCRIPTION")
 	jsonValue, _ := json.Marshal(jsonData)
     request, err := http.NewRequest("POST",uri, bytes.NewBuffer(jsonValue))
@@ -59,5 +157,4 @@ func NotifUserSender(user *entity.User,userReq *entity.User,count interface{}, w
     data, _ := ioutil.ReadAll(resp.Body)
 
 	fmt.Println(string(data))
-	wg.Done()
 }

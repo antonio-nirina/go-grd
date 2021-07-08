@@ -2,27 +2,30 @@ import React,{useState,useMemo} from "react"
 import { Link } from 'react-router-dom'
 import { useSelector,useDispatch } from "react-redux"
 import {useHistory } from "react-router-dom"
-import {useQuery,useSubscription} from "@apollo/client"
+import {useQuery,useSubscription,useMutation} from "@apollo/client"
 
 import "../header/header.css"
-import logo from "../../assets/image/logo.png"
+import logo from "../../assets/image/go-grind.png"
 import avatar from "../../assets/image/game-tag.png"
 import fr from "../../assets/image/fr.png"
 import gb from "../../assets/image/gb.png"
 import ps from "../../assets/image/playstation.png"
-import { faBars, faBell, faUsers, faTimes, faCheck } from "@fortawesome/free-solid-svg-icons"
+import { faBars, faBell, faUsers } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {RootState} from "../../reducer"
 import {Translation} from "../../lang/translation"
 import {removeDataUser} from "../auth/action/userAction"
-import AvatarDefault from "../../assets/image/game-tag.png"
 import {GET_ALL_NOTIFICATIONS} from "../../gql/notifications/query"
 import Notifications from "./notificationFriend"
-import {NOTIFICATIONS_SUBSCRIBE,COUNT_SUBSCRIBE} from "../../gql/user/subscription"
+import {NOTIFICATIONS_SUBSCRIBE} from "../../gql/user/subscription"
+import {UPDATED_NOTIFICATION} from "../../gql/notifications/mutation"
+import {Deconnect} from "../../gql/user/auth"
 
 export interface Notif  {
 	type:number,
+	uid:string,
 	user:{
+		uid:string,
 		email: string,
 		username: string,
 		avatar: string,
@@ -46,18 +49,40 @@ const Header: React.FC = function() {
 		},
 	})
 
+	const [updatedNotification] = useMutation(UPDATED_NOTIFICATION)
+	const [deconnect] = useMutation(Deconnect)
+
 	const onShow = function(){
 		setShowList(!showList)
 	}
-	const onShowNotif = function(){
+	const onShowNotif = async function(){
 		if(dataNotifications.length > 0) {
 			setShowNotif(!showNotif)
 			setNotification(0) // update notification statut true
+			for(let i=0;i < dataNotifications.length;i++) {
+				if(!dataNotifications[i].statut) {
+					try {
+						const result = await updatedNotification({ variables: { uid: dataNotifications[i].uid }})
+						console.log(result)
+					} catch(e) {
+						console.log("error",e)
+					}
+
+				}
+			}
+
 		}
 
 	}
 
-	const onDeconnect = function() {
+	const onDeconnect = async function() {
+		try {
+			const deco = await deconnect({ variables: { id: userConnectedRedux.user.uid }})
+			console.log("deco", deco)
+		} catch (e) {
+			console.log(e)
+		}
+
 		dispatch(removeDataUser())
 		setIsDeconnect(true)
 		history.push("/")
@@ -76,7 +101,9 @@ const Header: React.FC = function() {
 					if(elemnt.type === 0) {
 						notif = {
 							type:0,
+							uid:elemnt.uid,
 							user:{
+								uid:elemnt.userRequest.uid,
 								email: elemnt.userRequest.email,
 								username: elemnt.userRequest.username,
 								avatar: elemnt.userRequest.avatar
@@ -93,7 +120,9 @@ const Header: React.FC = function() {
 			if(subData.subscribeNotifications.uid === userConnectedRedux.user.uid) {
 				notif = {
 					type:0,
+					uid:subData.subscribeNotifications.uid,
 					user:{
+						uid:subData.subscribeNotifications.uid,
 						email: subData.subscribeNotifications.email,
 						username: subData.subscribeNotifications.username,
 						avatar: subData.subscribeNotifications.avatar
@@ -104,7 +133,7 @@ const Header: React.FC = function() {
 			}
 		}
 		setDataNotifications(array)
-	},[loading,error,data,subLoading,errSub,subData])
+	},[loading,error,data,subLoading,errSub,subData,userConnectedRedux])
 
   return(
 		<header className={isDeconnect || Object.keys(userConnectedRedux.user).length === 0 ? "header" : "header connected"}>
@@ -119,7 +148,7 @@ const Header: React.FC = function() {
 				<nav className="navmenu">
 					<ul>
 						<li>
-							<Link to="/league">
+							<Link to="/ligue">
 								{
 									Object.keys(userConnectedRedux.user).length > 0 ?
 									Translation(userConnectedRedux.user.language).header.leagues
@@ -129,7 +158,7 @@ const Header: React.FC = function() {
 							</Link>
 						</li>
 						<li>
-							<Link to="/tournament">
+							<Link to="/tournois">
 								{
 									Object.keys(userConnectedRedux.user).length > 0 ?
 									Translation(userConnectedRedux.user.language).header.tournaments
@@ -139,7 +168,7 @@ const Header: React.FC = function() {
 							</Link>
 						</li>
 						<li>
-							<Link to="/wager">
+							<Link to="/waggers">
 								{
 									Object.keys(userConnectedRedux.user).length > 0 ?
 									Translation(userConnectedRedux.user.language).header.wagers
@@ -161,7 +190,7 @@ const Header: React.FC = function() {
 					</ul>
 				</nav>
 				<div className="bt-container">
-					<Link to="/login" className="btn bg-yellow">Connexion</Link>
+					<Link to="/login" className="btn bg-red">Connexion</Link>
 					<Link to="/register" className="btn bg-white">Inscription</Link>
 				</div>
 				<div className="tag">
@@ -197,10 +226,10 @@ const Header: React.FC = function() {
 					<div className="gametag">
 						<div className="itemsTag">
 							<div className="bg-gametag">
-								<p><img src={userConnectedRedux.user && userConnectedRedux.user.avatar ? userConnectedRedux.user.avatar : avatar} className="avatar"/></p>
+								<p><img src={userConnectedRedux.user && userConnectedRedux.user.avatar ? userConnectedRedux.user.avatar : avatar} className="avatar" alt=""/></p>
 								<p className="user">{userConnectedRedux.user.username}</p>
 								<p className="user-setting">
-									<><img src={ps} className="itemTag" alt="" width="18" height="14"/></>
+									<><img src={ps} className="itemTag" alt="" width="18" height="14" /></>
 									<><img src={userConnectedRedux.user.language && userConnectedRedux.user.language === "fr" ? fr : gb} className="itemTag" alt="" width="15" height="14"/></>
 								<i className="itemTag drop" onClick={onShow}><FontAwesomeIcon icon={faBars} /></i>
 								</p>

@@ -2,8 +2,8 @@ package handler
 
 import (
 
-	"github.com/thoussei/antonio/front-office/api/games/entity"
-	"github.com/thoussei/antonio/front-office/api/games/repository"
+	"github.com/thoussei/antonio/api/games/entity"
+	"github.com/thoussei/antonio/api/games/repository"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 

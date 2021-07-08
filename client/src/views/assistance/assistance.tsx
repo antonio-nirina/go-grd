@@ -1,5 +1,4 @@
 import React from "react"
-import { useSelector } from "react-redux"
 import { Link } from "react-router-dom"
 
 import Header from "../header/header"
@@ -7,14 +6,11 @@ import Footer from "../footer/footer"
 import Join from "../join/join"
 import thumbnail from "../../assets/image/video.png"
 
-import {Translation} from "../../lang/translation"
-import {RootState} from "../../reducer"
 import "../../assets/css/style.css"
 import "../assistance/assistance.css"
 
 
-const Assistance: React.FC = function() {
-	const userConnectedRedux = useSelector((state:RootState) => state.userConnected)
+const Assistance: React.FC = function() {	
   return(
   	<div className="assistance">
 	    <div className="container">

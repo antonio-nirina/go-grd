@@ -1,18 +1,18 @@
 package mutation
 
 import (
-	"github.com/thoussei/antonio/front-office/api/config"
-	"github.com/thoussei/antonio/front-office/api/user/delivery"
-	"github.com/thoussei/antonio/front-office/api/user/handler"
-	"github.com/thoussei/antonio/front-office/api/user/repository"
+	"github.com/thoussei/antonio/api/config"
+	"github.com/thoussei/antonio/api/user/delivery"
+	"github.com/thoussei/antonio/api/user/handler"
+	"github.com/thoussei/antonio/api/user/repository"
 
-	gameDelivery "github.com/thoussei/antonio/front-office/api/games/delivery"
-	gameHandler "github.com/thoussei/antonio/front-office/api/games/handler"
-	gameRepo "github.com/thoussei/antonio/front-office/api/games/repository"
+	gameDelivery "github.com/thoussei/antonio/api/games/delivery"
+	gameHandler "github.com/thoussei/antonio/api/games/handler"
+	gameRepo "github.com/thoussei/antonio/api/games/repository"
 
-	notifDelivery "github.com/thoussei/antonio/front-office/api/notification/delivery"
-	notifHandler "github.com/thoussei/antonio/front-office/api/notification/handler"
-	notifRepo "github.com/thoussei/antonio/front-office/api/notification/repository"
+	notifDelivery "github.com/thoussei/antonio/api/notification/delivery"
+	notifHandler "github.com/thoussei/antonio/api/notification/handler"
+	notifRepo "github.com/thoussei/antonio/api/notification/repository"
 
 	"github.com/graphql-go/graphql"
 )
@@ -25,8 +25,8 @@ var repositoryGame 		= gameRepo.NewGameRepository(database)
 var usecaseNotif 		= notifHandler.NewUsecaseNotif(repositoryNotif)
 var usecase 			= handler.NewUsecaseUser(repUser)
 var UserRolve 			= delivery.NewResolver(usecase,usecaseNotif)
-var usecaseGame 	= gameHandler.NewUsecaseGame(repositoryGame)
-var gameResolver 	= gameDelivery.NewResolverGame(usecaseGame)
+var usecaseGame 		= gameHandler.NewUsecaseGame(repositoryGame)
+var gameResolver 		= gameDelivery.NewResolverGame(usecaseGame)
 
 var repositoryPlateform = gameRepo.NewPlateformRepository(database)
 var usecasePlateform 	= gameHandler.NewUsecasePlateform(repositoryPlateform)
@@ -46,5 +46,8 @@ func GetRootFields() graphql.Fields {
 		"updatedAvatar":		updatedAvatar(),
 		"requestFriend":		requestFriend(),
 		"saveNotification":		saveNotification(),
+		"updateNotification": 	updateNotification(),
+		"AcceptedRequestFriend": AcceptedRequestFriend(),
+		"Deconnected":			Deconnected(),
 	}
 }

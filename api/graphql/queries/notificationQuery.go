@@ -2,7 +2,7 @@ package queries
 
 import (
 	"github.com/graphql-go/graphql"
-	"github.com/thoussei/antonio/front-office/api/graphql/types"
+	"github.com/thoussei/antonio/api/graphql/types"
 )
 
 func GetOneNotification() *graphql.Field {

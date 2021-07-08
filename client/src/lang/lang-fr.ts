@@ -17,7 +17,7 @@ export const FR = {
 		"communauty": "communauté",
 		"gameTag": "Gametag",
 		"title": "La plateforme compétitive pour consoles",		
-		"go": "lance toi",
+		"go": "créer un compte",
 		"participate": "Participer à des tournois",						
 		"play" : "Joue en ligne contre d'autres joueurs du monde entier et gane des prix",
 		"tournament" : "Tournois/Semaine",

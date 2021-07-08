@@ -1,18 +1,29 @@
-import React,{useState} from "react"
-import { Link } from 'react-router-dom'
+import React from "react"
+import { useHistory } from 'react-router-dom'
 import { useSelector } from "react-redux"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {useQuery} from "@apollo/client"
-import { faBars, faBell, faUsers, faTimes, faCheck } from "@fortawesome/free-solid-svg-icons"
+import {useMutation} from "@apollo/client"
+import { faTimes, faCheck } from "@fortawesome/free-solid-svg-icons"
 import AvatarDefault from "../../assets/image/game-tag.png"
 import {Translation} from "../../lang/translation"
 import {RootState} from "../../reducer"
+import {ACCETEPED_FRIENDS} from "../../gql/user/mutation"
 
-import {Notif} from "./header"
 
 const Notifications = function(data:any) {
+	const history = useHistory()
 	const userConnectedRedux = useSelector((state:RootState) => state.userConnected)
+	const [acceptedFriend] = useMutation(ACCETEPED_FRIENDS)
+	const handleAccepted = async function(uid:string) {
+		try {
+			const result = await acceptedFriend({ variables: { idRequest:uid,idSender: userConnectedRedux.user.uid}})
+			if(result && history.location.pathname === "communaute") history.push("/communaute")
 
+		} catch(e) {
+			console.log("error",e)
+		}
+
+	}
 	return(
 		<>
 			{
@@ -20,7 +31,7 @@ const Notifications = function(data:any) {
 					let img:string = el.user.avatar ? el.user.avatar : AvatarDefault
 					return (
 						<p key={index}>
-					        <img src={img} className="avatar-found"/>
+					        <img src={img} className="avatar-found" alt=""/>
 					        <span className="profil-name">
 					        {el.user.username}
 					        {/*
@@ -30,7 +41,7 @@ const Notifications = function(data:any) {
 								Translation("fr").header.text
 							*/}
 					        </span>
-					        <button className="btn bg-yellow">
+					        <button className="btn bg-red" onClick={()=>handleAccepted(el.user.uid)}>
 					            <i className="rect"><FontAwesomeIcon icon={faCheck} size="xs"/></i>
 					            <span>
 					            	{

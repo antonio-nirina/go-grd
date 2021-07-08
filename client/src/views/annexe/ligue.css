@@ -1,6 +1,10 @@
 @charset "UTF-8";
-.league{
-	padding: 3em 0px 0;
+.container .league{
+	padding: 5em 0px 0;
+}
+.container h2{
+	text-transform: inherit;
+	font-size: 32px;
 }
 .tabs-content{
 	
@@ -67,7 +71,6 @@
 	color: #adadad;
 }
 .choices .jeux{
-	background-image: none;
-	background: #000000;
+	background-image: none;	
 }
 

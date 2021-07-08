@@ -1,9 +1,11 @@
 import React from "react"
+import { Link } from 'react-router-dom'
+import { faTwitch } from "@fortawesome/free-brands-svg-icons"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+
 import Header0 from "../header/header0"
 import Footer from "../footer/footer"
 import joystick from "../../assets/image/joystick.png"
-import IconXbox from "../../assets/image/icon-xbox.png"
-import IconPs from "../../assets/image/playstation.png"
 import "../auth/login.css"
 import "../../assets/css/style.css"
 
@@ -21,13 +23,12 @@ const Inscription: React.FC = function() {
 						{/*<input type ="telephone" placeholder = "Numéro de téléphone"/>*/}
 						<input className="mgt10" type = "email" placeholder = "Email"/>
 						<input className="mgt10" type = "password" placeholder = "Mot de passe"/>
-						<button className="btn bg-yellow mg15"><a href="#" title="Inscription" className="link-btn">Inscription</a></button>
+						<button className="btn bg-red mg15"><Link to="/inscription" title="Inscription">Inscription</Link></button>
 						<div className="infos">
-							<p className="mb15">Vous avez déjà un compte ? <a href="#" title="Connectez-vous" className="italic cl-yellow">Connectez-vous !</a></p>
+							<p className="mb15">Vous avez déjà un compte ? <Link to="/login" title="Connectez-vous" className="italic cl-red">Connectez-vous !</Link></p>
 							<div className="other-account">
 								<p>Connectez-vous avec votre compte : </p>
-								<span><a href="#" title="Xbox"><img src={IconXbox} alt=""/></a></span>
-								<span><a href="#" title="Playstation"><img src={IconPs} alt=""/></a></span>
+								<span><i className="platform"><FontAwesomeIcon icon={faTwitch}/></i></span>								
 							</div>
 						</div>
 					</div>

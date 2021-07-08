@@ -19,7 +19,7 @@ const UpdatePassword: React.FC = function() {
 	const history = useHistory()
 	const [passwordValid,setPasswordValid] = useState<boolean>(false)
 	const [updatedPasswordUser]  = useMutation(UPDATE_PASSWORD)
-	const { register, handleSubmit, formState: { errors } } = useForm<Inputs>()
+	const { register, handleSubmit } = useForm<Inputs>()
 
 	const onSubmit = async function(data:Inputs){
 		const password: string 	= data.newPassword
@@ -52,7 +52,7 @@ const UpdatePassword: React.FC = function() {
 						<form onSubmit={handleSubmit(onSubmit)}>
 							<input className="mgt10" type = "password" placeholder = "Nouveau mot de passe" {...register("newPassword", { required: true })} name="newPassword" required/>
 							<input className="mgt10" type = "password" placeholder = "Confirmer le nouveau mot de passe" {...register("cNewPaswd", { required: true })} name="cNewPaswd" required/>
-							<button className="btn bg-yellow mg15">
+							<button className="btn bg-red mg15">
 								Enregistrer le nouveau mot de passe
 							</button>
 						</form>

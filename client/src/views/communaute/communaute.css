@@ -8,7 +8,7 @@
 	padding-top: 30px;
 }
 .auto{	
-	width: 90%;
+	width: 95%;
 	margin: auto;	
 	margin-bottom: 30px;
 }
@@ -23,8 +23,7 @@
 	width: 49%;
 	background: #2c2c2c;
 	display: table-cell;
-	margin-bottom: 15px;
-	border-radius: 8px;
+	margin-bottom: 15px;	
 }
 .center-block h2{
 	padding: 15px 0;
@@ -260,6 +259,9 @@
 .center-block .actuality{
 	width: 100%;
 }
+.center-block .actuality a{
+	display: block;
+}
 .center-block .article{
 	width: 100%;
 	margin-bottom: 15px;	
@@ -396,4 +398,38 @@
 .found .btn.bg-yellow{
 	background: #383434;
     color: #f2cf1c;
+}
+/***********************/
+.bloc-actus{
+	padding: 20px;
+}
+.actus-name{
+	display: flex;
+}
+.actus-name img{
+	width: 60px;	
+	border-radius: 50%;
+	align-self: center;
+}
+.actus-name p{
+	align-self: center;
+	margin-left: 15px;
+	font-weight: bold;
+}
+.actus-name p span{
+	display: block;
+	font-weight: normal;
+	font-size: 13px;
+	padding: 5px 0;
+}
+.actus-content{
+	margin-bottom: 30px;
+	margin-top: 15px;
+}
+.actus-content p{
+	font-size: 15px;
+
+}
+.bloc-actus .img-actus img{
+	width: 100%;
 }

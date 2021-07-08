@@ -1,10 +1,10 @@
-import React,{useMemo, useState, useEffect} from "react"
+import React,{useMemo, useState} from "react"
 import { faPlus, faCommentDots, faQuestionCircle, faUserPlus } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import Popup from "reactjs-popup"
 import "reactjs-popup/dist/index.css"
 import { Link } from 'react-router-dom'
-import {useQuery,useMutation} from "@apollo/client"
+import {useQuery,useMutation,useSubscription} from "@apollo/client"
 import {GET_ALL_FRIENDS,GET_ALL_USER} from "../../gql/user/query"
 import { useSelector } from "react-redux"
 import {RootState} from "../../reducer"
@@ -12,6 +12,7 @@ import {Translation} from "../../lang/translation"
 import {Friends} from "../../gql/types/friend"
 import AvatarDefault from "../../assets/image/game-tag.png"
 import {INCOMING_FRIENDS} from "../../gql/user/mutation"
+import {USER_CONNECTED} from "../../gql/user/subscription"
 
 const Friend: React.FC = function() {
 	const userConnectedRedux 		= useSelector((state:RootState) => state.userConnected)
@@ -31,6 +32,8 @@ const Friend: React.FC = function() {
 			idUserConnected: userConnectedRedux.user.uid
 		},
 	})
+	const {loading:ldSub,error:erSub,data:dataSub}  = useSubscription(USER_CONNECTED)
+
 	useMemo(()=> {
 		if(!loading && !error && data) {
 			if(data.GetAllFriends[0].count > 0) {
@@ -41,11 +44,16 @@ const Friend: React.FC = function() {
 
 		if(!loadingAll && !errorAll && dataAll) setUsers(dataAll.GetUsers.filter((e:any) => e.uid !== userConnectedRedux.user.uid))
 
-	},[loading,error,data,loadingAll,errorAll,dataAll])
+		if(!ldSub && !erSub && dataSub) console.log(dataSub)
+	},[loading,error,data,loadingAll,errorAll,dataAll,ldSub,erSub,dataSub,userConnectedRedux])
 
 	const onSendIncoming = 	async function(uid:string) {
-		const result = await requestFriend({ variables: { idRequest: userConnectedRedux.user.uid,idSender: uid} })
-		if (result.data.requestFriend) console.log(result.data.requestFriend)
+		try {
+			const result = await requestFriend({ variables: { idRequest: userConnectedRedux.user.uid,idSender: uid} })
+			if (result.data.requestFriend) console.log(result.data.requestFriend)
+		} catch(e) {
+			console.log(e)
+		}
 	}
 	return (
 		<div className="aside-right">
@@ -53,14 +61,18 @@ const Friend: React.FC = function() {
 				?
 				friends.map(function(el:any,index:number) {
 					let img = el.avatar ? el.avatar : AvatarDefault
-					return(<p key={index}>
-							<img src={img} className="friend-avatar"/>
-							<span>{el.username}<i className="u-connected"></i></span>
-							<i><FontAwesomeIcon icon={faCommentDots} size="xs"/></i>
-							<i className="rect"><FontAwesomeIcon icon={faPlus} size="xs"/></i>
-						</p>
+					return(
+						<div className="friend-list">
+							<p key={index}>
+								<img src={img} className="friend-avatar" alt=""/>
+								<span>{el.username}<i className={el.isConnected ? "u-connected" : ""}></i></span>
+								<i><FontAwesomeIcon icon={faCommentDots} size="xs"/></i>
+								<i className="rect"><FontAwesomeIcon icon={faPlus} size="xs"/></i>
+							</p>
+						</div>
 					)
 				})
+
 			: (<div className="friend-list noborder">
 					<p className="title">
 						{
@@ -116,13 +128,12 @@ const Friend: React.FC = function() {
 											<div className="add-friends">
 												<div className="found">
 													{
-
 														users.length > 0 ?
 														users.map(function(el:any,index:number){
 															let img:string = el.avatar ? (el.avatar) : AvatarDefault
 															return (
 																<p key={index}>
-																	<img src={img} className="avatar-found"/>
+																	<img src={img} className="avatar-found" alt="" />
 																	<span className="profil-name">{el.username ? el.username : ((el.email).split("@")[0])}</span>
 																	<button className="btn bg-yellow">
 																		<i className="rect"><FontAwesomeIcon icon={faUserPlus} size="xs"/></i>

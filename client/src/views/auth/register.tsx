@@ -3,6 +3,8 @@ import { useForm } from "react-hook-form"
 import {useMutation} from "@apollo/client"
 import {useHistory } from "react-router-dom"
 import { Link } from 'react-router-dom'
+import { faTwitch } from "@fortawesome/free-brands-svg-icons"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 import {CREATED_USER} from "../../gql/user/mutation"
 import {checkValidEmail} from "../auth/utils"
@@ -10,8 +12,6 @@ import {checkValidEmail} from "../auth/utils"
 import Header0 from "../header/header0"
 import Footer from "../footer/footer"
 import joystick from "../../assets/image/joystick.png"
-import IconXbox from "../../assets/image/icon-xbox.png"
-import IconPs from "../../assets/image/playstation.png"
 import "../auth/inscription.css"
 import "../../assets/css/style.css"
 
@@ -61,16 +61,15 @@ const Register: React.FC = function() {
 							<input className="mgt10" type="email" placeholder = "Email" {...register("email", { required: true })} name="email"/>
 							{errors.password && <span style={{"color":"red"}}>Password ne peut être vide</span>}
 							<input className="mgt10" type="password" placeholder = "Mot de passe" {...register("password", { required: true })} name="password"/>
-							<button className="btn bg-yellow mg15" type="submit">
+							<button className="btn bg-red mg15" type="submit">
 								Inscription
 							</button>
 						</form>
 						<div className="infos">
-							<p className="mb15">Vous avez déjà un compte ? <Link className="italic cl-yellow" to="/communaute">Connectez-vous !</Link></p>
+							<p className="mb15">Vous avez déjà un compte ? <Link className="italic cl-red" to="/communaute">Connectez-vous !</Link></p>
 							<div className="other-account">
 								<p>Connectez-vous avec votre compte : </p>
-								<span><img src={IconXbox} alt=""/></span>
-								<span><img src={IconPs} alt=""/></span>
+								<span><i className="platform"><FontAwesomeIcon icon={faTwitch}/></i></span>
 							</div>
 						</div>
 					</div>

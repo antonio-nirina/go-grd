@@ -24,7 +24,7 @@ const Join: React.FC = function() {
 			type="text"
 			placeholder={Object.keys(userConnectedRedux.user).length > 0 ? Translation(userConnectedRedux.user.language).participHome.yourmail : Translation("fr").participHome.yourmail}/>
 		<>
-		<button className="btn bg-yellow">
+		<button className="btn bg-red">
 		{
 			Object.keys(userConnectedRedux.user).length > 0 ?
 			Translation(userConnectedRedux.user.language).participHome.createaccount

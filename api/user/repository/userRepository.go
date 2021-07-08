@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/thoussei/antonio/front-office/api/user/entity"
+	"github.com/thoussei/antonio/api/user/entity"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
@@ -160,6 +160,9 @@ func (c *driverRepository) UpdatedUser(user *entity.User) (interface{}, error) {
 			},
 			{
 				"point",user.Point,
+			},
+			{
+				"friends",user.Friends,
 			},
 	}}}
 	updateResult, err := collection.UpdateOne(context.TODO(), filter, update)

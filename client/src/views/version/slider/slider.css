@@ -1,0 +1,52 @@
+@charset "UTF-8";
+
+.Imgresp{
+	width: 100%;
+	filter: brightness(0.75);
+}
+.slick-track{
+	width: inherit !Important;
+}
+/*.sliderGrid .slick-slide[aria-hidden="true"]{
+	left: 0px !Important;
+	top: 0px !Important;
+
+}
+.sliderGrid .slick-slide[aria-hidden="false"]{
+	left: 0px !Important;
+	top: -12px !Important;
+	background: red !Important;
+	
+}*/
+.sliderGrid .slick-track .slick-slide.slick-active.slick-current:second-child{
+	
+}
+.slogan{
+	position: absolute;
+	top: 45%;
+	text-align: center;
+	width: 100%;
+}
+p.title{
+	font-family: "Russo One";
+	font-size: 45px;
+}
+.slogan a{
+	font-weight: bold;
+    display: block;
+    font-size: 18px;
+}
+.slogan button.bg-red{
+	font-family: "quicksand regular";
+	font-weight: 700;
+	text-transform: uppercase;
+	padding: 7px 20px;
+    opacity: 0.7;
+    border: none;
+    margin-top: 15px;
+    color: #fff;
+    background: #dd0000;
+}
+.carousel-status{
+	display: none !Important;
+}

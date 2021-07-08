@@ -5,17 +5,18 @@ import (
 	"encoding/json"
 	"errors"
 	"os"
+	"sync"
 	"time"
 
 	_jwt "github.com/dgrijalva/jwt-go"
 	"github.com/graphql-go/graphql"
 	"github.com/joho/godotenv"
 	uuid "github.com/satori/go.uuid"
-	"github.com/thoussei/antonio/front-office/api/external"
-	game "github.com/thoussei/antonio/front-office/api/games/entity"
-	notifH "github.com/thoussei/antonio/front-office/api/notification/handler"
-	"github.com/thoussei/antonio/front-office/api/user/entity"
-	"github.com/thoussei/antonio/front-office/api/user/handler"
+	"github.com/thoussei/antonio/api/external"
+	game "github.com/thoussei/antonio/api/games/entity"
+	notifH "github.com/thoussei/antonio/api/notification/handler"
+	"github.com/thoussei/antonio/api/user/entity"
+	"github.com/thoussei/antonio/api/user/handler"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
@@ -140,6 +141,7 @@ func (r *resolver) ValidateUserResolver(input *inputRegister) (bool, error) {
 }
 
 func (r *resolver) AuthUserResolver(params graphql.ResolveParams) (interface{}, error) {
+	var wg sync.WaitGroup
 	email := params.Args["email"].(string)
 	password := params.Args["password"].(string)
 	res, err := r.userHandler.FindUserByEmail(email)
@@ -163,11 +165,13 @@ func (r *resolver) AuthUserResolver(params graphql.ResolveParams) (interface{}, 
 	if err != nil {
 		return "", errors.New("Error interne try after an moment")
 	}
-
+	wg.Add(1)
+	go r.userHandler.NotifConnected(&res,&wg)
+	wg.Wait()
 	return token, nil
 }
 
-func (r *resolver)ForgotResolver(params graphql.ResolveParams) (interface{}, error) {
+func (r *resolver) ForgotResolver(params graphql.ResolveParams) (interface{}, error) {
 	email := params.Args["email"].(string)
 	res, err := r.userHandler.FindUserByEmail(email)
 	if err != nil {
@@ -218,6 +222,20 @@ func (r *resolver)ForgotResolver(params graphql.ResolveParams) (interface{}, err
 	return "Ok",nil
 }
 
+func (r *resolver) DeconnectedResolver(params graphql.ResolveParams) (interface{}, error) {
+	var wg sync.WaitGroup
+	uid := params.Args["id"].(string)
+	res, err := r.userHandler.FindOneUserByUid(uid)
+	if err != nil {
+		return "error",nil
+	}
+	wg.Add(1)
+	go r.userHandler.NotifDisConnected(&res,&wg)
+	wg.Wait()
+	
+	return "Ok", nil
+}
+
 func (r *resolver)GetAllUser(params graphql.ResolveParams)(interface{}, error) {
 	idUserConnected, isOKReq := params.Args["idUserConnected"].(string)
 	var res []UserResponse
@@ -261,6 +279,7 @@ func GetToken(user entity.User) (interface{}, error) {
 		return "", errors.New("Error interne")
 	}
 
+	var frd = []string{}
 	claims 				:= _jwt.MapClaims{}
 	claims["uid"] 		= user.Uid.Hex()
 	claims["email"] 	= user.Email
@@ -270,6 +289,14 @@ func GetToken(user entity.User) (interface{}, error) {
 	claims["lastname"] 	= user.LastName
 	claims["username"] 	= user.Username
 	claims["created"] 	= user.Created
+	
+	if len(user.Friends) > 0 {
+		for _,v := range user.Friends {
+			frd = append(frd,v.Uid.Hex())
+		}
+	} 
+
+	claims["friends"] 	= frd
 	// claims["exp"] = time.Now().Add(time.Hour * 1).Unix() //Token expires after 1 hour
 	token := _jwt.NewWithClaims(_jwt.SigningMethodHS256, claims)
 	result, err := token.SignedString([]byte(os.Getenv("SECRET")))

@@ -4,8 +4,8 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/thoussei/antonio/front-office/api/external"
-	"github.com/thoussei/antonio/front-office/api/notification/entity"
+	"github.com/thoussei/antonio/api/external"
+	"github.com/thoussei/antonio/api/notification/entity"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
@@ -31,6 +31,7 @@ type RepositoryNotif interface {
 	FindAllNotifRepo(idUser primitive.ObjectID) ([]entity.Notification, error)
 	CountNotifNotActivateRepo(idUser primitive.ObjectID) (int64, error)
 	FindOneByUidNotifRepo(uid primitive.ObjectID) (entity.Notification, error)
+	UpdatedStatutNotification(uid primitive.ObjectID) (interface{}, error)
 }
 
 func (c *DriverRepository) SavedNotifRepo(notif *entity.Notification) (interface{}, error){
@@ -95,7 +96,7 @@ func (c *DriverRepository) CountNotifNotActivateRepo(idUser primitive.ObjectID) 
 }
 
 func (c *DriverRepository) FindOneByUidNotifRepo(uid primitive.ObjectID) (entity.Notification, error) {
-	var collection = c.client.Database("grd_database").Collection("users")
+	var collection = c.client.Database("grd_database").Collection("notification")
 	var result entity.Notification
 
 	err := collection.FindOne(context.TODO(), bson.M{"uid": uid}).Decode(&result)
@@ -105,4 +106,22 @@ func (c *DriverRepository) FindOneByUidNotifRepo(uid primitive.ObjectID) (entity
 	}
 
 	return result, nil
+}
+
+func (c *DriverRepository) UpdatedStatutNotification(uid primitive.ObjectID) (interface{}, error) {
+	var collection = c.client.Database("grd_database").Collection("notification")
+	filter := bson.D{{"uid", uid}}
+	update := bson.D{
+		{"$set", bson.D{
+			{
+				"statut", true,
+			},
+	}}}
+	updateResult, err := collection.UpdateOne(context.TODO(), filter, update)
+
+	if err != nil {
+		return nil,err
+	}
+
+	return updateResult.ModifiedCount,nil
 }

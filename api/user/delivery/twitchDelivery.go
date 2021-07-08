@@ -11,8 +11,8 @@ import (
 
 	"github.com/graphql-go/graphql"
 	"github.com/joho/godotenv"
-	"github.com/thoussei/antonio/front-office/api/external"
-	"github.com/thoussei/antonio/front-office/api/user/entity"
+	"github.com/thoussei/antonio/api/external"
+	"github.com/thoussei/antonio/api/user/entity"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 

@@ -40,5 +40,8 @@ var FriendType = graphql.NewObject(graphql.ObjectConfig{
 		"count": &graphql.Field{
 			Type: graphql.Int,
 		},
+		"isConnected": &graphql.Field{
+			Type: graphql.Boolean,
+		},
 	},
 })

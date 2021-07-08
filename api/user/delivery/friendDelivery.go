@@ -1,13 +1,14 @@
 package delivery
 
 import (
+	"fmt"
 	"errors"
-	"sync"
 
 	"github.com/graphql-go/graphql"
-	userNotif "github.com/thoussei/antonio/front-office/api/notification/entity"
-	"github.com/thoussei/antonio/front-office/api/user/entity"
-	"github.com/thoussei/antonio/front-office/api/user/handler"
+	userNotif "github.com/thoussei/antonio/api/notification/entity"
+	"github.com/thoussei/antonio/api/user/entity"
+	"github.com/thoussei/antonio/api/external"
+	"github.com/thoussei/antonio/api/user/common"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
@@ -20,11 +21,11 @@ type Friends struct {
 	Avatar string 		`json:"avatar"`
 	IsBanned bool 	`json:"isBanned"`
 	Count int 			`json:"count"`
+	IsConnected bool `json:"isConnected"`
 }
 
 
 func (r *resolver) RequestFriendResolver(params graphql.ResolveParams) (interface{}, error){
-	var wg sync.WaitGroup
 	idRequest, isOKReq := params.Args["idRequest"].(string)
 	idSender, isOKSend := params.Args["idSender"].(string)
 
@@ -47,15 +48,11 @@ func (r *resolver) RequestFriendResolver(params graphql.ResolveParams) (interfac
 	}
 
 	_, err = r.userHandler.AddFriend(friend)
-	count,err := r.notifHandler.SavedNotifHandler(resSender,resRequest,userNotif.TITLE_REQ_FRIEND,userNotif.CONTENT_REQ_FRIEND,userNotif.TYPE_FRIENDS)
+	_,err = r.notifHandler.SavedNotifHandler(resSender,resRequest,userNotif.TITLE_REQ_FRIEND,userNotif.CONTENT_REQ_FRIEND,userNotif.TYPE_FRIENDS)
 	
 	if err != nil {
 		return nil, err
 	}
-
-	wg.Add(1)
-	go handler.NotifUserSender(&resSender,&resRequest,count,&wg)
-	wg.Wait()
 	
 	return "Ok", nil
 }
@@ -85,6 +82,7 @@ func (r *resolver) GetAllFriendsUser(params graphql.ResolveParams) (interface{},
 		res.Username = ""
 		res.Avatar = ""
 		res.IsBanned = false
+		res.IsConnected = false
 		result = append(result, *res)
 	} else {
 		for _,val := range user.Friends {
@@ -96,9 +94,36 @@ func (r *resolver) GetAllFriendsUser(params graphql.ResolveParams) (interface{},
 			res.Username = val.Username
 			res.Avatar = val.Avatar
 			res.IsBanned = val.IsBanned
+			isConnected := false
+			cn,_ := external.GetHmsetRedis(common.CONNECTED,val.Uid.Hex())
+			fmt.Println(cn)
+			if cn != nil {
+				isConnected = true
+			}
+			res.IsConnected = isConnected
 			result = append(result, *res)
 		} 
 	}
 
 	return result, nil
+}
+
+func (r *resolver) AcceptedFriendResolver(params graphql.ResolveParams) (interface{}, error){
+	idRequest, isOKReq := params.Args["idRequest"].(string)
+	idSender, isOKSend := params.Args["idSender"].(string)
+
+	if !isOKReq || !isOKSend {
+		return "", errors.New("id request or sender not valid")
+	}
+
+	resRequest, err := r.userHandler.FindOneUserByUid(idRequest)
+	resSender, err := r.userHandler.FindOneUserByUid(idSender)
+
+	if err != nil {
+		return "", err
+	}
+
+	_, err = r.userHandler.UpdatedUserFriend(resSender,resRequest)
+
+	return "Accepted",nil
 }

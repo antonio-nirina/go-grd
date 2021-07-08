@@ -1,5 +1,6 @@
 
 export interface User {
+	uidNotif:string
 	uid:string
 	email: string
     username:string
