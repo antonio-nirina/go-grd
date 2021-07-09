@@ -100,7 +100,7 @@ const Friend: React.FC = function() {
 																				<p key={index}>
 																					<img src={img} className="avatar-found" alt="" />
 																					<span className="profil-name">{el.username ? el.username : ((el.email).split("@")[0])}</span>
-																					<button className="btn bg-yellow">
+																					<button className="btn bg-red">
 																						<i className="rect"><FontAwesomeIcon icon={faUserPlus} size="xs"/></i>
 																						<span onClick={()=>{
 																							onSendIncoming(el.uid)
