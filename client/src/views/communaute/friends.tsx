@@ -1,5 +1,5 @@
 import React,{useMemo, useState} from "react"
-import { faPlus, faCommentDots, faQuestionCircle, faUserPlus } from "@fortawesome/free-solid-svg-icons"
+import { faPlusSquare, faCommentDots, faQuestionCircle, faUserPlus } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import Popup from "reactjs-popup"
 import "reactjs-popup/dist/index.css"
@@ -66,10 +66,10 @@ const Friend: React.FC = function() {
 								<img src={img} className="friend-avatar" alt=""/>
 								<span>{el.username}<i className={el.isConnected ? "u-connected" : ""}></i></span>
 								<i><FontAwesomeIcon icon={faCommentDots} size="xs"/></i>
-								<p>
+								<i>
 									<Popup
 										trigger={
-											<i className="rect"><FontAwesomeIcon icon={faPlus} size="xs"/></i>
+											<FontAwesomeIcon icon={faPlusSquare} size="xs"/>
 										}
 										modal
 										nested
@@ -132,7 +132,7 @@ const Friend: React.FC = function() {
 											</div>
 										)}
 									</Popup>
-								</p>
+								</i>
 							</div>
 						</div>
 					)

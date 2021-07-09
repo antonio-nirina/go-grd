@@ -135,8 +135,11 @@
 	border: 1px solid #1abb3d;
 }
 .aside-right i.u-disconnected{
-	background: gray;
-	border: 1px solid gray;	
+	background: #dd0000;
+	border: 1px solid #dd0000;	
+}
+.friend-list div{
+	padding: 7px;
 }
 .friend-list.noborder{
 	border-bottom:none;
@@ -145,11 +148,12 @@
 	display: inline-block;
 	vertical-align: middle;	
 }
-.aside-right .friend-list i{
-	float: right;	
+.aside-right .friend-list i{	
 	display: inline-block;
 	margin-right: 5px;
-
+	font-size: 18px;
+	float: right;
+    margin-left: 5px;
 }
 .friend-list span{
 	display: inline-block;	
@@ -358,8 +362,7 @@
 	padding: 7px 15px;
     float: right;
     margin: 12px 0;
-    border: none;
-    background: #f4cb21;
+    border: none;    
     border-radius: 5px;    
 }
 .add-friends .found button span{
