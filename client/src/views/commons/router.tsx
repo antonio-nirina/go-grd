@@ -1,6 +1,7 @@
 import React from "react"
 import { Route, Switch } from "react-router-dom"
 import Index from "../version/home/index"
+import Admin from "../admin/admin"
 import Ligue from "../annexe/ligue"
 import Tournament from "../tournament/tournament"
 import Tournois from "../annexe/tournois"
@@ -32,6 +33,7 @@ const Router = function() {
 		<Switch>
 			<Route path="/" exact component={Index} />
 			<Route path="/index" exact component={Index} />
+			<Route path="/admin" exact component={Admin} />
 			<ProtectedRoute path="/tournament" exact component={Tournament} />
 			<ProtectedRoute path="/tournois" exact component={Tournois} />
 			<ProtectedRoute path="/info" exact component={Info} />
@@ -41,9 +43,9 @@ const Router = function() {
 			<ProtectedRoute path="/ligue" exact component={Ligue} />
 			<ProtectedRoute path="/league" exact component={League} />
 			<ProtectedRoute path="/wager" exact component={Wager} />
-			<ProtectedRoute path="/waggers" exact component={Waggers} />
-			<ProtectedRoute path="/waggers-game" exact component={WaggersGame} />
-			<ProtectedRoute path="/joingame" exact component={Joingame} />
+			<Route path="/waggers" exact component={Waggers} />
+			<Route path="/waggers-game" exact component={WaggersGame} />
+			<Route path="/joingame" exact component={Joingame} />
 			<ProtectedRoute path="/view" exact component={View} />
 			<ProtectedRoute path="/lobby" exact component={Lobby} />
 			<ProtectedRoute path="/communaute" exact component={Communaute} />			
