@@ -4,6 +4,7 @@ import (
 	"encoding/base64"
 	"encoding/json"
 	"errors"
+	"fmt"
 	"os"
 	"sync"
 	"time"
@@ -243,7 +244,7 @@ func (r *resolver)GetAllUser(params graphql.ResolveParams)(interface{}, error) {
 		return nil, errors.New("id not valid")
 	}
 
-	_, err := r.userHandler.FindOneUserByUid(idUserConnected)
+	userC, err := r.userHandler.FindOneUserByUid(idUserConnected)
 	users,err := r.userHandler.FindAllUser()
 
 	if err != nil {
@@ -253,20 +254,32 @@ func (r *resolver)GetAllUser(params graphql.ResolveParams)(interface{}, error) {
 	userList := &UserResponse{}
 
 	for _,user := range users {
-		userList.Uid		 	= user.Uid.Hex()
-		userList.FirstName 		= user.FirstName
-		userList.LastName 		= user.LastName      
-		userList.Username 		= user.Username     
-		userList.Email 			= user.Email        
-		userList.IsBanned 		= user.IsBanned    
-		userList.Avatar 		= user.Avatar      
-		userList.Language 		= user.Language    
-		userList.Point 			= user.Point       
-		userList.IdGameAccount 	= user.IdGameAccount
-		userList.Roles 			= user.Roles
-		userList.TypeConnexion 	= user.TypeConnexion
-		userList.Created 		= user.Created 
-		res = append(res, *userList)
+		found := false
+		
+		if len(userC.Friends) > 0 {
+			for _,uc := range userC.Friends {
+				if uc.Uid.Hex() == user.Uid.Hex() {
+					found = true
+				}
+			}
+		}
+		fmt.Println("xxx",found)
+		if !found {
+			userList.Uid		 	= user.Uid.Hex()
+			userList.FirstName 		= user.FirstName
+			userList.LastName 		= user.LastName      
+			userList.Username 		= user.Username     
+			userList.Email 			= user.Email        
+			userList.IsBanned 		= user.IsBanned    
+			userList.Avatar 		= user.Avatar      
+			userList.Language 		= user.Language    
+			userList.Point 			= user.Point       
+			userList.IdGameAccount 	= user.IdGameAccount
+			userList.Roles 			= user.Roles
+			userList.TypeConnexion 	= user.TypeConnexion
+			userList.Created 		= user.Created 
+			res = append(res, *userList)
+		}	
 	}
 
 	return res,nil

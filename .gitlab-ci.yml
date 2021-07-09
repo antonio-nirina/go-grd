@@ -5,7 +5,7 @@
 # https://gitlab.com/gitlab-org/gitlab/-/blob/master/lib/gitlab/ci/templates/Go.gitlab-ci.yml
 
 image: golang:latest
-image: node:latests
+image: node:latest
 variables:
   # Please edit to your GitLab project
   REPO_NAME: gitlab.com/namespace/project

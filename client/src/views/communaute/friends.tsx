@@ -41,7 +41,6 @@ const Friend: React.FC = function() {
 				setFriends(data.GetAllFriends)
 			}
 		}
-
 		if(!loadingAll && !errorAll && dataAll) setUsers(dataAll.GetUsers.filter((e:any) => e.uid !== userConnectedRedux.user.uid))
 
 		if(!ldSub && !erSub && dataSub) console.log(dataSub)
@@ -62,13 +61,79 @@ const Friend: React.FC = function() {
 				friends.map(function(el:any,index:number) {
 					let img = el.avatar ? el.avatar : AvatarDefault
 					return(
-						<div className="friend-list">
-							<p key={index}>
+						<div className="friend-list" key={el.id}>
+							<div key={index}>
 								<img src={img} className="friend-avatar" alt=""/>
 								<span>{el.username}<i className={el.isConnected ? "u-connected" : ""}></i></span>
 								<i><FontAwesomeIcon icon={faCommentDots} size="xs"/></i>
-								<i className="rect"><FontAwesomeIcon icon={faPlus} size="xs"/></i>
-							</p>
+								<p>
+									<Popup
+										trigger={
+											<i className="rect"><FontAwesomeIcon icon={faPlus} size="xs"/></i>
+										}
+										modal
+										nested
+										closeOnDocumentClick>
+										{(close:any) => (
+											<div className="modal">
+												<button className="close" onClick={close}>
+													&times;
+												</button>
+												<div className="bar-title">
+													{
+														Object.keys(userConnectedRedux.user).length > 0 ?
+														Translation(userConnectedRedux.user.language).communauty.addFriend
+														:
+														Translation("fr").communauty.addFriend
+													}
+												</div>
+												<div className="actions">
+													<div className="body">
+														<div className="avatar-container">
+															<div className="add-friends">
+																<div className="found">
+																	{
+																		users.length > 0 ?
+																		users.map(function(el:any,index:number){
+																			let img:string = el.avatar ? (el.avatar) : AvatarDefault
+																			return (
+																				<p key={index}>
+																					<img src={img} className="avatar-found" alt="" />
+																					<span className="profil-name">{el.username ? el.username : ((el.email).split("@")[0])}</span>
+																					<button className="btn bg-yellow">
+																						<i className="rect"><FontAwesomeIcon icon={faUserPlus} size="xs"/></i>
+																						<span onClick={()=>{
+																							onSendIncoming(el.uid)
+																							close()
+																							}}>
+																							{
+																								Object.keys(userConnectedRedux.user).length > 0 ?
+																								Translation(userConnectedRedux.user.language).communauty.addFriend
+																								:
+																								Translation("fr").communauty.addFriend
+																							}
+																						</span>
+																					</button>
+																				</p>
+																			)
+																		})
+																		:
+																		<></>
+																	}
+
+																</div>
+																<div className="avatar-search-bar">
+																	<input type="text" placeholder="Rechercher une personne"/><button className="btn bg-white">Rechercher</button>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										)}
+									</Popup>
+								</p>
+							</div>
 						</div>
 					)
 				})
