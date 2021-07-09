@@ -1,4 +1,5 @@
 import React from "react"
+import { Link } from "react-router-dom"
 import Header from "../header/header"
 import Footer from "../footer/footer"
 import Join from "../join/join"
@@ -35,7 +36,7 @@ const WaggersGame: React.FC = function() {
 								<p>Entréee</p>
 								<p><span>Nombre</span> <span>de</span> joueur</p>
 							</div>
-							<div className="waggers-data">
+							<Link to="/joingame" className="waggers-data">
 								<p>Débute <span>23 JUL - 12h30</span></p>
 								<p>PLATINE</p>
 								<p>B03</p>
@@ -43,8 +44,8 @@ const WaggersGame: React.FC = function() {
 								<p>3v3 Arène</p>
 								<p>Public</p>
 								<p><i><FontAwesomeIcon icon={faUsers}/></i>3/6</p>
-							</div>
-							<div className="waggers-data">
+							</Link>
+							<Link to="#" className="waggers-data">
 								<p>Débute <span>23 JUL - 12h30</span></p>
 								<p>PLATINE</p>
 								<p>B03</p>
@@ -52,8 +53,8 @@ const WaggersGame: React.FC = function() {
 								<p>3v3 Arène</p>
 								<p>Public</p>
 								<p><i><FontAwesomeIcon icon={faUsers}/></i>3/6</p>
-							</div>
-							<div className="waggers-data">
+							</Link>
+							<Link to="#" className="waggers-data">
 								<p>Débute <span>23 JUL - 12h30</span></p>
 								<p>PLATINE</p>
 								<p>B03</p>
@@ -61,8 +62,8 @@ const WaggersGame: React.FC = function() {
 								<p>3v3 Arène</p>
 								<p>Public</p>
 								<p><i><FontAwesomeIcon icon={faUsers}/></i>3/6</p>
-							</div>
-							<div className="waggers-data">
+							</Link>
+							<Link to="#" className="waggers-data">
 								<p>Débute <span>23 JUL - 12h30</span></p>
 								<p>PLATINE</p>
 								<p>B03</p>
@@ -70,8 +71,8 @@ const WaggersGame: React.FC = function() {
 								<p>3v3 Arène</p>
 								<p>Public</p>
 								<p><i><FontAwesomeIcon icon={faUsers}/></i>3/6</p>
-							</div>
-							<div className="waggers-data">
+							</Link>
+							<Link to="#" className="waggers-data">
 								<p>Débute <span>23 JUL - 12h30</span></p>
 								<p>PLATINE</p>
 								<p>B03</p>
@@ -79,8 +80,8 @@ const WaggersGame: React.FC = function() {
 								<p>3v3 Arène</p>
 								<p>Public</p>
 								<p><i><FontAwesomeIcon icon={faUsers}/></i>3/6</p>
-							</div>
-							<div className="waggers-data">
+							</Link>
+							<Link to="#" className="waggers-data">
 								<p>Débute <span>23 JUL - 12h30</span></p>
 								<p>PLATINE</p>
 								<p>B03</p>
@@ -88,7 +89,7 @@ const WaggersGame: React.FC = function() {
 								<p>3v3 Arène</p>
 								<p>Public</p>
 								<p><i><FontAwesomeIcon icon={faUsers}/></i>3/6</p>
-							</div>
+							</Link>
 						</div>
 					</div>
 				</div>
