@@ -100,26 +100,26 @@ const Admin: React.FC = function() {
         				</div>
         				<div className="body-card">
         					<div className="card-title">
-        						<p>Compagnie <i><FontAwesomeIcon icon={faSort} size="lg"/></i></p>
+        						<p>Tournois <i><FontAwesomeIcon icon={faSort} size="lg"/></i></p>
         					</div>
         					<div className="card-title">
         						<div className="card-title">
-        						<p>Compagnie <i><FontAwesomeIcon icon={faSort} size="lg"/></i></p>
-        					</div>
-        					</div>
-        					<div className="card-title">
-        						<div className="card-title">
-        						<p>Compagnie <i><FontAwesomeIcon icon={faSort} size="lg"/></i></p>
+        						<p>Prix <i><FontAwesomeIcon icon={faSort} size="lg"/></i></p>
         					</div>
         					</div>
         					<div className="card-title">
         						<div className="card-title">
-        						<p>Compagnie <i><FontAwesomeIcon icon={faSort} size="lg"/></i></p>
+        						<p>Rank <i><FontAwesomeIcon icon={faSort} size="lg"/></i></p>
         					</div>
         					</div>
         					<div className="card-title">
         						<div className="card-title">
-        						<p>Compagnie <i><FontAwesomeIcon icon={faSort} size="lg"/></i></p>
+        						<p>Statut <i><FontAwesomeIcon icon={faSort} size="lg"/></i></p>
+        					</div>
+        					</div>
+        					<div className="card-title">
+        						<div className="card-title">
+        						<p>Date de création <i><FontAwesomeIcon icon={faSort} size="lg"/></i></p>
         					</div>
         					</div>
         				</div>
@@ -128,16 +128,16 @@ const Admin: React.FC = function() {
         						<p>Apex Legends</p>
         					</div>
         					<div className="card-result">
-        						<p>Rocket League</p>
+        						<p>200</p>
         					</div>
         					<div className="card-result">
-        						<p>Call of Duty</p>
+        						<p>Platinium</p>
         					</div>
         					<div className="card-result">
-        						<p>Fifa 2021</p>
+        						<p>Actif</p>
         					</div>
         					<div className="card-result">
-        						<p>RainbowSix</p>
+        						<p>2020-11-22 10:42:12</p>
         					</div>
         				</div>
         				<div className="filter-game-result">
