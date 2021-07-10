@@ -62,8 +62,7 @@ const Header: React.FC = function() {
 			for(let i=0;i < dataNotifications.length;i++) {
 				if(!dataNotifications[i].statut) {
 					try {
-						const result = await updatedNotification({ variables: { uid: dataNotifications[i].uid }})
-						console.log(result)
+						await updatedNotification({ variables: { uid: dataNotifications[i].uid }})
 					} catch(e) {
 						console.log("error",e)
 					}

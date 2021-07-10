@@ -13,7 +13,8 @@ import "../../assets/css/style.css"
 import "../annexe/tournois.css"
 
 
-const WaggersGame: React.FC = function() {
+const WaggersGame = function(props:any) {
+	const params:string|null = (new URLSearchParams(props.location.search)).get("game")
 
   return(
   	<div className="container">
@@ -22,7 +23,7 @@ const WaggersGame: React.FC = function() {
 			<div className="marg">
 				<div className="part">
 					<div className="undertitle">
-						<h2>Waggers - Apex Legends</h2>
+						<h2>Waggers - {params?.replace("_"," ")}</h2>
 						<p>Retrouve les derniers défis proposés par la communauté</p>
 					</div>
 					<div className="waggers-list">

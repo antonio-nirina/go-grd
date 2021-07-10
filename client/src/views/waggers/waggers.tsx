@@ -20,6 +20,7 @@ import cod_Modernwarfare from "../../assets/image/modernwarfare.png"
 import cod_warzone from "../../assets/image/warzone.png"
 import cod_coldwar from "../../assets/image/cod-coldwar.png"
 import fifa from "../../assets/image/fifa21.png"
+import {APEX_LEGENDE,FORTNITE,RNB,RL,COD_MODERN,COD_WAR_ZONE,COD_COLD_WAR,FIFA} from "../game/constante"
 
 const Waggers: React.FC = function() {
 
@@ -35,7 +36,7 @@ const Waggers: React.FC = function() {
 					</div>
 					<div className="content waggers-link">
 						<div className="clear"></div>
-						<Link to ="waggers-game">
+						<Link to ="/joingame/1">
 							<div className="apex block dark-red">
 								<div>
 									<p className="legend">Apex Legends Daily Cup</p><i className="iconGame"><FontAwesomeIcon icon={faXbox}/></i>
@@ -46,7 +47,7 @@ const Waggers: React.FC = function() {
 								</div>
 							</div>
 						</Link>
-						<Link to ="#">
+						<Link to ="/joingame/2">
 						<div className="apex block dark-red">
 							<div><p className="legend">Fortnite Weekly Cup</p><i className="iconGame"><FontAwesomeIcon icon={faGamepad}/></i></div>
 							<div className="info">
@@ -107,30 +108,30 @@ const Waggers: React.FC = function() {
 				<div className="bg-game">
 				<div className="firstblock w100">
 					<div className="logo-game">
-					    <Link to="#"><img src={apexlegends} alt="Apex Legends" /></Link>
+					    <Link to={`/waggers-game?game=${APEX_LEGENDE.replace(" ","_")}`}><img src={apexlegends} alt="Apex Legends" /></Link>
 					</div>
 					<div className="logo-game">
-					    <Link to="#"><img src={fortnite} alt="Fortnite" /></Link>
+					    <Link to={`/waggers-game?game=${FORTNITE.replace(" ","_")}`} ><img src={fortnite} alt="Fortnite" /></Link>
 					</div>
 					<div className="logo-game">
-					    <Link to="#"><img src={rainboxsix} alt="RainbowSIx Siege" /></Link>
+					    <Link to={`/waggers-game?game=${RNB.replace(" ","_")}`} ><img src={rainboxsix} alt="RainbowSIx Siege" /></Link>
 					</div>
 					<div className="logo-game">
-					    <Link to="#"><img src={rocketleague} alt="Rocket League" /></Link>
+					    <Link to={`/waggers-game?game=${RL.replace(" ","_")}`} ><img src={rocketleague} alt="Rocket League" /></Link>
 					</div>
 				</div>
       			<div className="lastblock w100">
 			        <div className="logo-game">
-			            <Link to="#"><img src={cod_Modernwarfare} alt="Call of Duty Modern Warfare" /></Link>
+			            <Link to={`/waggers-game?game=${COD_MODERN.replace(" ","_")}`} ><img src={cod_Modernwarfare} alt="Call of Duty Modern Warfare" /></Link>
 			        </div>
 			        <div className="logo-game">
-			            <Link to="#"><img src={cod_warzone} alt="Call of Duty Warzone" /></Link>
+			            <Link to={`/waggers-game?game=${COD_WAR_ZONE.replace(" ","_")}`} ><img src={cod_warzone} alt="Call of Duty Warzone" /></Link>
 			        </div>
 			        <div className="logo-game">
-			            <Link to="#"><img src={cod_coldwar} alt="Call of Duty Cold War" /></Link>
+			            <Link to={`/waggers-game?game=${COD_COLD_WAR.replace(" ","_")}`} ><img src={cod_coldwar} alt="Call of Duty Cold War" /></Link>
 			        </div>
 			        <div className="logo-game">
-			            <Link to="#"><img src={fifa} alt="Call of Duty Warzone" /></Link>
+			            <Link to={`/waggers-game?game=${FIFA.replace(" ","_")}`} ><img src={fifa} alt="Call of Duty Warzone" /></Link>
 			        </div>
 				</div>
 			</div>
