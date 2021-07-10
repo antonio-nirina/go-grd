@@ -65,8 +65,8 @@ const Avatar : React.FC = function() {
 			<div className="gamer-tag">
 				<h2>GameTag</h2>
 				<p className="users-setting">
-					<Link to="#"><img src={fr} alt="" /></Link>
-					<Link to="#"><img src={ps} alt="" /></Link>
+					<Link to="#"><img src={fr} alt="" width="30"/></Link>
+					<Link to="#"><img src={ps} alt="" width="30"/></Link>
 				</p>
 			</div>
 		</div>
