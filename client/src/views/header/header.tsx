@@ -88,6 +88,7 @@ const Header: React.FC = function() {
 	}
 
 	useMemo(() => {
+		let isSubscribed:boolean = true
 		let array:Array<Notif> = []
 		let notif:Notif
 		if(!loading && !error && data) {
@@ -132,6 +133,10 @@ const Header: React.FC = function() {
 			}
 		}
 		setDataNotifications(array)
+		return function(){
+			isSubscribed = false
+			console.log(isSubscribed)
+		}
 	},[loading,error,data,subLoading,errSub,subData,userConnectedRedux])
 
   return(
