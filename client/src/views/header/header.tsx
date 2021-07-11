@@ -241,7 +241,7 @@ const Header: React.FC = function() {
 						</div>
 						<div className={!showList ? "dropdown" :"dropdown show"}>
 							<ul>
-								<li><Link to="/profil">Profil</Link></li>
+								<li><Link to="/profile">Profil</Link></li>
 								<li><Link to="/tournament">Tournois</Link></li>
 								<li><Link to="/ligue">Ligues</Link></li>
 								<li><Link to="/wager">Wager</Link></li>

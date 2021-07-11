@@ -109,6 +109,7 @@ func (r *notifUsecase) FindAllNotifHandler(idUser string) ([]notifViewModel, err
 	if err != nil {
 		return nil, err
 	}
+
 	for _,val := range result {
 		objNotif := notifViewModel{
 			Uid: val.Uid.Hex(),

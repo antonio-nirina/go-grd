@@ -82,7 +82,7 @@ const Header0: React.FC = function() {
                         </div>
                         <div className={!showList ? "dropdown" :"dropdown show"}>
                             <ul>
-                                <li><Link to="/profil">Profil</Link></li>
+                                <li><Link to="/profile">Profil</Link></li>
                                 <li><Link to="/tournament" title="Tournois">Tournois</Link></li>
                                 <li><Link to="/ligue" title="Ligues">Ligues</Link></li>
                                 <li><Link to="/waggers" title="Wager">Wager</Link></li>

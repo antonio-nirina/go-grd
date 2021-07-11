@@ -33,7 +33,7 @@ const Router = function() {
 		<Switch>
 			<Route path="/" exact component={Index} />
 			<Route path="/index" exact component={Index} />
-			<Route path="/admin" exact component={Admin} />
+			<ProtectedRoute path="/admin" exact component={Admin} />
 			<ProtectedRoute path="/tournament" exact component={Tournament} />
 			<ProtectedRoute path="/tournois" exact component={Tournois} />
 			<ProtectedRoute path="/info" exact component={Info} />

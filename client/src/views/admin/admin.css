@@ -15,7 +15,7 @@
     height: 100vh;
     top: 0px;
     overflow-y: auto;
-    width: 195px;
+    width: 15%;
     background: #000000
 }
 .main-sidebar{
@@ -26,7 +26,8 @@
 	padding: 15px;	
 }
 .main-sidebar li a{
-	color: #dd0000;	
+	color: #9c9c9e;	
+    display: block;
 }
 .main-sidebar li span{	
 	display: block;
@@ -113,6 +114,7 @@
     z-index: 1;
 }
 .layout-container .content-wrapper {
+    width: 90%;
     margin: 0px;
     flex: auto;
     min-height: 0;
@@ -144,7 +146,7 @@ div#profile-name{
     width: 180px;
 }
 .navbar .profil-name a{
-    color: #4b45b2;
+    color: #9c9c9e;
     font-size: 12px;
     height: 100%;
     display: inline-flex;
@@ -167,3 +169,189 @@ div#profile-name{
 	display: block;
 	padding: 10px;
 }
+.main-content{
+    padding: 42px 70px;
+}
+
+.response-filter {
+    display: flex;
+    background: #000000;
+    box-shadow: 0px 1px 3px rgb(0 0 0 / 12%);
+    border-radius: 10px;
+    flex-grow: 1;
+    padding: 5px;
+}
+.column{
+    display: flex;
+}
+.response-filter-search {
+    width: 100%;
+    border-right: solid 1px #f1f1f1;
+    flex-grow: 1;
+    align-self: center;
+}
+.response-filter-search i{
+    color: #9c9c9e;
+    margin-right: 5px;
+}
+.ant-input-affix-wrapper {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    color: rgba(0,0,0,0.65);
+    font-size: 14px;
+    font-variant: tabular-nums;
+    line-height: 1.5;
+    list-style: none;
+    font-feature-settings: 'tnum', "tnum";
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    text-align: start;
+}
+.ant-input-affix-wrapper .ant-input-prefix {
+    left: 12px;
+}
+.ant-input-affix-wrapper .ant-input:not(:first-child) {
+    padding-left: 40px;
+}
+.ant-input-affix-wrapper .ant-input {
+    position: relative;
+    text-align: inherit;
+}
+.ant-input-affix-wrapper .ant-input-prefix, .ant-input-affix-wrapper .ant-input-suffix{
+    position: absolute;
+    top: 50%;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    color: rgba(0,0,0,0.65);
+    line-height: 0;
+    transform: translateY(-50%);
+}
+.response-filter-flag {
+    flex-grow: 1;
+    border-right: solid 1px #f1f1f1;
+    text-align: right;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 100%;
+    align-self: center;
+}
+.response-filter-flag span{
+    color: #f1f1f1;
+}
+.response-filter-avis {
+    width: 100%;
+    font-size: 13px;
+    line-height: 18px;
+    color: #9c9c9e;
+    align-self: center;    
+    padding: 0px 15px;
+}
+.response-filter-avis p{
+    font-size: 13px;
+    width: 141px;
+}
+.response-status{
+    position: relative;
+}
+.response-status input:focus{
+    caret-color: transparent;
+}
+.hide-status{
+    display: none;    
+}
+.show-status{
+    display: block;
+    position: absolute;
+    background: gray;
+    width: 200px;
+    text-align: -webkit-left;
+    padding: 9px;
+    right: 10px;
+    border-radius: 5px;
+}
+.show-status p{
+    font-size: 14px;
+}
+.response-status span{
+    display: flex;
+}
+.response-status strong{
+    font-weight: normal;
+    color: #9c9c9e;
+    align-self: center;
+    width: 60px;
+}
+.response-status i{
+    align-self: center;
+    margin-right: 15px;
+    color: #9c9c9e;
+}
+.response-filter input{
+    padding: 5px;
+    background: #000000;
+    color: #9c9c9e;
+    border: none;
+}
+.create-game{
+    align-self: center;
+}
+.create-game button{
+    margin-left: 15px;
+    padding: 5px 10px;
+    font-size: 12px;    
+    align-self: center;
+    border: 1px solid #dd0000;
+}
+.create-game button:hover{
+    border: 1px solid #dd0000;
+}
+.body-card{
+    display: flex;        
+    padding: 15px;
+    background: #212121;
+    border-radius: 13px;
+    margin-top: 15px;
+}
+.card-title, .card-result{
+    width: 100%;
+}
+.card-title p, .card-result p{
+    color: #9c9c9e;
+    font-size: 14px;
+}
+.card-title i{
+    font-size: 12px;
+    margin-left: 5px;
+}
+.result-game-page{
+    display: flex;    
+    text-align: right;
+    float: right;
+    margin-top: 16px;
+}
+.result-game-page i{
+    display: block;
+    background: #dd0000;
+    padding: 5px;
+    font-size: 13px;
+    align-self: center;
+    color: #9c9c9e;
+    border-radius: 5px;
+    width: 30px;
+    text-align: center;
+}
+.result-game-page span{
+    display: block;
+    padding: 3px;
+    width: 30px;
+    text-align: center;
+    color: #9c9c9e;
+    border: 1px solid #9c9c9e;
+    border-radius: 5px;  
+    margin: 0 5px;
+}
+
