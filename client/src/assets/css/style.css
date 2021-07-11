@@ -270,6 +270,12 @@ h1{
   .container .group h1{
     font-size: 25px;
   }
+  .container .waggers-link a{
+    width: 31.5%;
+  }
+  .container .waggers-link .block, .container .waggers-link .block.last{
+    width: 100%;
+  }
 }
 @media screen and (max-width: 800px){
   .container .tchat{
@@ -314,6 +320,10 @@ h1{
   }
   .container .service-container.mobile{
     display: block;
+  }
+  .container .waggers-title, .container .waggers-data{
+    width: 96%;
+    margin: 5px 0;
   }
 }
 
@@ -406,7 +416,19 @@ h1{
   .wagers .info p{
     font-size: 17px !important;
   }
-
+  .container .waggers-content{    
+    width: 540px;    
+    overflow: scroll;
+  }
+  .container .waggers-list{    
+    overflow: scroll;
+  }
+  .container .waggers-title, .container .waggers-data{
+    width: inherit;
+  }
+  .container .waggers-link a{
+    width: 95%;
+  }
 }
 @media screen and (max-width: 380px) {
   .wrap, .container .wrap.red{

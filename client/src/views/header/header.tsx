@@ -1,5 +1,5 @@
 import React,{useState,useMemo} from "react"
-import { Link } from 'react-router-dom'
+import { Link } from "react-router-dom"
 import { useSelector,useDispatch } from "react-redux"
 import {useHistory } from "react-router-dom"
 import {useQuery,useSubscription,useMutation} from "@apollo/client"
@@ -62,8 +62,7 @@ const Header: React.FC = function() {
 			for(let i=0;i < dataNotifications.length;i++) {
 				if(!dataNotifications[i].statut) {
 					try {
-						const result = await updatedNotification({ variables: { uid: dataNotifications[i].uid }})
-						console.log(result)
+						await updatedNotification({ variables: { uid: dataNotifications[i].uid }})
 					} catch(e) {
 						console.log("error",e)
 					}
@@ -89,6 +88,7 @@ const Header: React.FC = function() {
 	}
 
 	useMemo(() => {
+		let isSubscribed:boolean = true
 		let array:Array<Notif> = []
 		let notif:Notif
 		if(!loading && !error && data) {
@@ -133,6 +133,10 @@ const Header: React.FC = function() {
 			}
 		}
 		setDataNotifications(array)
+		return function(){
+			isSubscribed = false
+			console.log(isSubscribed)
+		}
 	},[loading,error,data,subLoading,errSub,subData,userConnectedRedux])
 
   return(
@@ -237,7 +241,7 @@ const Header: React.FC = function() {
 						</div>
 						<div className={!showList ? "dropdown" :"dropdown show"}>
 							<ul>
-								<li><Link to="/profil">Profil</Link></li>
+								<li><Link to="/profile">Profil</Link></li>
 								<li><Link to="/tournament">Tournois</Link></li>
 								<li><Link to="/ligue">Ligues</Link></li>
 								<li><Link to="/wager">Wager</Link></li>

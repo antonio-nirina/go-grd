@@ -1,6 +1,7 @@
 import React from "react"
 import { Route, Switch } from "react-router-dom"
 import Index from "../version/home/index"
+import Admin from "../admin/admin"
 import Ligue from "../annexe/ligue"
 import Tournament from "../tournament/tournament"
 import Tournois from "../annexe/tournois"
@@ -10,6 +11,8 @@ import Teams from "../tournament/teams"
 import Rules from "../tournament/rules"
 import Wager from "../wager/wager"
 import Waggers from "../waggers/waggers"
+import WaggersGame from "../waggers/waggersgame"
+import Joingame from "../waggers/joingame"
 import View from "../wager/view"
 import Lobby from "../wager/lobby"
 import Assistant from "../assistant/assistant"
@@ -30,6 +33,7 @@ const Router = function() {
 		<Switch>
 			<Route path="/" exact component={Index} />
 			<Route path="/index" exact component={Index} />
+			<ProtectedRoute path="/admin" exact component={Admin} />
 			<ProtectedRoute path="/tournament" exact component={Tournament} />
 			<ProtectedRoute path="/tournois" exact component={Tournois} />
 			<ProtectedRoute path="/info" exact component={Info} />
@@ -39,7 +43,9 @@ const Router = function() {
 			<ProtectedRoute path="/ligue" exact component={Ligue} />
 			<ProtectedRoute path="/league" exact component={League} />
 			<ProtectedRoute path="/wager" exact component={Wager} />
+			<ProtectedRoute path="/joingame/:id" exact component={Joingame} />
 			<ProtectedRoute path="/waggers" exact component={Waggers} />
+			<ProtectedRoute path="/waggers-game" exact component={WaggersGame} />
 			<ProtectedRoute path="/view" exact component={View} />
 			<ProtectedRoute path="/lobby" exact component={Lobby} />
 			<ProtectedRoute path="/communaute" exact component={Communaute} />			
@@ -47,11 +53,11 @@ const Router = function() {
 			<ProtectedRoute path="/assistance" exact component={Assistance} />
 			<ProtectedRoute path="/profil" exact component={Profil} />
 			<ProtectedRoute path="/profile" exact component={Profile} />
+			<ProtectedRoute path="/update-password" exact component={UpdatePassword} />			
 			<Route path="/login" exact component={Login} />
 			<Route path="/inscription" exact component={Inscription} />
 			<Route path="/register" exact component={Register} />
-			<Route path="/forgot-password" exact component={InitPass} />
-			<ProtectedRoute path="/update-password" exact component={UpdatePassword} />			
+			<Route path="/forgot-password" exact component={InitPass} />			
 		</Switch>
 	)
 }

@@ -11,7 +11,8 @@ import {TokenType,SendToken} from "./utils"
 import {sendUserConectedAction} from "./action/userAction"
 
 import Header0 from "../header/header0"
-import {checkValidEmail,Siging} from "./utils"
+import {checkValidEmail} from "./utils"
+import {SigingTwitch} from "./twitch"
 import {Translation} from "../../lang/translation"
 import {LOGIN} from "../../gql/user/auth"
 import Footer from "../footer/footer"
@@ -89,7 +90,7 @@ const Login: React.FC = function() {
 							<p className="mb15"><Link to ="/forgot-password" title="Mot de passe oublié ?" className="italic cl-red">Mot de passe oublié ?</Link></p>
 							<div className="other-account">
 								<p>Connectez-vous avec votre compte : </p>
-								<span onClick={Siging}><i className="platform"><FontAwesomeIcon icon={faTwitch}/></i></span>								
+								<span onClick={SigingTwitch}><i className="platform"><FontAwesomeIcon icon={faTwitch}/></i></span>
 							</div>
 						</div>
 					</div>

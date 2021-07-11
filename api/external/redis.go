@@ -67,11 +67,12 @@ func SetHmsetRedis(hash string,key string,value interface{}) {
    } 
 }
 
-func GetHmsetRedis(key string, field string)(interface{},error) {
+func GetHmsetRedis(key string, field string)([]interface{},error) {
 	data,err := Rdb.HMGet(ctx,key,field).Result()
+	
 	if err != nil {
       return nil,err
-   } 
+   	} 
 
 	return data,nil
 }
@@ -80,7 +81,7 @@ func RemoveHmsetRedis(key string, field string) {
 	err := Rdb.HDel(ctx,key,field).Err()
 	if err != nil {
       Logger(fmt.Sprintf("%v", err))
-   } 
+    } 
 }
 
 func RPushRedis(key string,value interface{}) {

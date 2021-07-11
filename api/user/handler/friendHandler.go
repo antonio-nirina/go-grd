@@ -39,25 +39,47 @@ func (u *UserUsecase)AddFriend(req *entity.Friends) (interface{}, error) {
 
 func (u *UserUsecase) UpdatedUserFriend(user entity.User,userReq entity.User) (interface{}, error) {
 	var friend []entity.User
+	var friendReq []entity.User
 	friend = append(friend,userReq)
+	friendReq = append(friendReq,user)
 	userSender := &entity.User{
-			Uid:           	user.Uid,
-			FirstName:     	user.FirstName,
-			LastName:      	user.LastName,
-			Password:      	user.Password,
-			Username:      	user.Username,
-			Email:         	user.Email,
-			IsBanned:      	user.IsBanned,
-			Avatar:        	user.Avatar,
-			Language:      	user.Language,
-			Point:         	user.Point,
-			IdGameAccount: 	user.IdGameAccount,
-			Roles: 			user.Roles,
-			TypeConnexion:	user.TypeConnexion,
-			Created: 		user.Created,
-			Friends:friend,		
-		}
+		Uid:           	user.Uid,
+		FirstName:     	user.FirstName,
+		LastName:      	user.LastName,
+		Password:      	user.Password,
+		Username:      	user.Username,
+		Email:         	user.Email,
+		IsBanned:      	user.IsBanned,
+		Avatar:        	user.Avatar,
+		Language:      	user.Language,
+		Point:         	user.Point,
+		IdGameAccount: 	user.IdGameAccount,
+		Roles: 			user.Roles,
+		TypeConnexion:	user.TypeConnexion,
+		Created: 		user.Created,
+		Friends:friend,		
+	}
+
+	userRq := &entity.User{
+		Uid:           	userReq.Uid,
+		FirstName:     	userReq.FirstName,
+		LastName:      	userReq.LastName,
+		Password:      	userReq.Password,
+		Username:      	userReq.Username,
+		Email:         	userReq.Email,
+		IsBanned:      	userReq.IsBanned,
+		Avatar:        	userReq.Avatar,
+		Language:      	userReq.Language,
+		Point:         	userReq.Point,
+		IdGameAccount: 	userReq.IdGameAccount,
+		Roles: 			userReq.Roles,
+		TypeConnexion:	userReq.TypeConnexion,
+		Created: 		userReq.Created,
+		Friends:friendReq,		
+	}
+
 	result, err := u.userRepository.UpdatedUser(userSender)
+	_, err = u.userRepository.UpdatedUser(userRq)
 
 	if err != nil {
 		return nil, err

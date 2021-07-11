@@ -1,1 +1,223 @@
 /*************/
+.undertitle:before{
+	height: 60px;
+}
+.waggers-link a{
+	display: inline-block;
+	width: 17%;
+	margin-right: 10px;
+}
+.waggers-link a:last-child{
+	margin-right: 0px;
+}
+.waggers-title, .waggers-data{
+	background: #2c2c2c;
+	margin-top: 5px;
+}
+.waggers-title p{
+	font-size: 13px;
+	font-style: italic;
+	align-self: center;
+}
+.waggers-title p span{
+	display: block;
+}
+waggers-title p:last-child{
+	text-align: right;
+}
+.waggers-title, .waggers-data{
+	display: flex;
+	width: 80%;
+	margin: 5px auto;
+}
+
+.waggers-title p, .waggers-data p{
+	padding: 3px 15px;	
+	width: 152px;
+	text-align: center;	
+}
+.waggers-title p:last-child{
+	padding-right: 0px;
+	text-align: center;
+
+}
+.waggers-data p{
+	align-self: center;
+	font-size: 13px;
+	padding: 5px 15px;
+}
+.waggers-data p:first-child{
+	text-align: left;
+	font-weight: 700;
+	text-transform: uppercase;
+}
+.waggers-data p:last-child{
+	margin-left: 15px;	
+}
+.waggers-data p:first-child span{
+	text-transform: inherit;
+}
+.waggers-data p span{
+	display: block;
+	font-weight: 500;
+}
+.waggers-data i{
+	display: block;	
+	font-size: 22px; 
+}
+.wagger-data i svg{
+	height: 25px;
+	width: 25px;
+}
+.joingame h2{
+	font-size: 38px;
+}
+.joingame{
+	background-image: url("../../assets/image/apex-legends-arena.jpg");	
+  	background-position: top left;
+  	background-repeat: no-repeat;  	
+	border-radius: 15px 15px 0px 0px;
+}
+.joingame .header-part{
+	width: 80%;
+}
+.joingame .header-part img.item-left{
+	max-width: 185px;
+	width: 100%;
+    border-radius: 50%;    
+    float: left;
+    position: relative;
+    top: -25px;       
+    z-index: 3;
+}
+
+.joingame .join-title{	
+	padding: 25px;
+	background: #2c2c2c;
+	position: relative;
+    z-index: 2;
+    left: 27px;
+    border-radius: 47px;
+}
+.joingame .join-title h2{	
+	font-family: "russo one";
+	font-weight: lighter;
+}
+.joingame .join-title .img-bot-setting p{
+	display: inline-block;
+	margin-right: 15px;
+	margin-top: 15px;
+}
+.joingame .join-title .img-bot-setting img{
+	width: 28px;
+	border-radius: inherit;
+	display: inline-block;
+
+}
+.joingame .bar-menu-top{
+	background: #2c2c2c;
+	clear: both;
+	width: 100%;
+	display: flex;
+	padding-left: 25px;
+	margin-bottom: 25px;
+
+}
+.bar-menu-top li{
+	margin-right: 50px;
+}
+.bar-menu-top li a{
+	text-transform: uppercase;
+	padding: 15px 25px;
+	display: inline-block;		
+}
+.bar-menu-top li a.active{
+	font-weight: 700;
+	border-bottom: 2px solid #dd0000;
+}
+.information-game{
+	padding: 0 25px 15px;
+	display: flex;
+	margin-bottom: 30px;
+}
+.item-info-left{
+	padding: 20px 7px;	
+	background: #2c2c2c;
+	display: flex;
+}
+.item-img-info{
+	float: left;
+}
+.item-info-left img{
+	width: 118px;
+}
+.item-info-right{
+	width: 317px;    
+    margin-left: 20px;
+    position: relative;  
+}
+.item-all-info p{	
+	width: 195px;
+    padding-top: 30px;
+    margin-left: 26px;
+    display: table-cell;
+    padding-left: 47px;
+    font-size: 14px;    
+}
+p.item-text-right{
+	text-align: right;
+	padding: 0;
+}
+p.item-text-left{
+	text-align: left;
+	padding: 0;
+}
+.item-all-info span{
+	color: #949494;
+	font-size: 14px;
+	text-align: left;
+}
+.join-all{
+	background: #2c2c2c;
+}
+.join-all .team-bar-title{
+	font-size: 13px;
+	padding: 15px;
+	background: #2c2c2c;
+	margin-bottom: 0px;
+	text-align: inherit;
+	float: left;	
+}
+.join-all button{
+	text-transform: inherit;
+	font-size: 12px;
+	padding: 7px;
+	display: block;
+	float: right;
+	margin-top: 10px;
+	margin-right: 5px;
+
+}
+.join-all p{
+	font-size: 13px;
+	text-align: center;
+	padding: 15px;
+	margin-bottom: 3px;
+	background: #7b7b7b;
+	text-align: center;
+}
+.profil-join{
+	clear: both;
+}
+.icon-tchat{	
+    background: #2c2c2c;
+    padding: 15px;
+    position: absolute;
+    right:0;
+    bottom: 0;
+
+}
+.icon-tchat i{
+	font-size: 24px;
+	color: #7b7b7b;
+}

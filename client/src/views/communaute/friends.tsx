@@ -1,5 +1,5 @@
 import React,{useMemo, useState} from "react"
-import { faPlus, faCommentDots, faQuestionCircle, faUserPlus } from "@fortawesome/free-solid-svg-icons"
+import { faPlusSquare, faCommentDots, faQuestionCircle, faUserPlus } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import Popup from "reactjs-popup"
 import "reactjs-popup/dist/index.css"
@@ -14,18 +14,98 @@ import AvatarDefault from "../../assets/image/game-tag.png"
 import {INCOMING_FRIENDS} from "../../gql/user/mutation"
 import {USER_CONNECTED} from "../../gql/user/subscription"
 
+const RenderPopup = function({users,isOpen}:any) {
+	const [requestFriend] 			= useMutation(INCOMING_FRIENDS)
+	const userConnectedRedux 		= useSelector((state:RootState) => state.userConnected)
+	const onSendIncoming = 	async function(uid:string) {
+		try {
+			const result = await requestFriend({ variables: { idRequest: userConnectedRedux.user.uid,idSender: uid} })
+			if (result.data.requestFriend) console.log(result.data.requestFriend)
+		} catch(e) {
+			console.log(e)
+		}
+	}
+
+	return(
+		<Popup
+			open={isOpen}
+			modal
+			nested
+			closeOnDocumentClick>
+			{(close:any) => (
+				<div className="modal">
+					<button className="close" onClick={close}>
+						&times;
+					</button>
+					<div className="bar-title">
+						{
+							Object.keys(userConnectedRedux.user).length > 0 ?
+							Translation(userConnectedRedux.user.language).communauty.addFriend
+							:
+							Translation("fr").communauty.addFriend
+						}
+					</div>
+					<div className="actions">
+						<div className="body">
+							<div className="avatar-container">
+								<div className="add-friends">
+									<div className="found">
+										{
+											users.length > 0 ?
+											users.map(function(el:any,index:number){
+												let img:string = el.avatar ? (el.avatar) : AvatarDefault
+												return (
+													<p key={index}>
+														<img src={img} className="avatar-found" alt="" />
+														<span className="profil-name">{el.username ? el.username : ((el.email).split("@")[0])}</span>
+														<button className="btn bg-red">
+															<i className="rect"><FontAwesomeIcon icon={faUserPlus} size="xs"/></i>
+															<span onClick={()=>{
+																onSendIncoming(el.uid)
+																close()
+																}}>
+																{
+																	Object.keys(userConnectedRedux.user).length > 0 ?
+																	Translation(userConnectedRedux.user.language).communauty.addFriend
+																	:
+																	Translation("fr").communauty.addFriend
+																}
+															</span>
+														</button>
+													</p>
+												)
+											})
+											:
+											<></>
+										}
+
+									</div>
+									<div className="avatar-search-bar">
+										<input type="text" placeholder="Rechercher une personne"/><button className="btn bg-white">Rechercher</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			)}
+		</Popup>
+	)
+}
 const Friend: React.FC = function() {
 	const userConnectedRedux 		= useSelector((state:RootState) => state.userConnected)
 	const [nbFriends, setNbFriends] = useState<number>(0)
 	// const [isClose, setIsClose] = useState<boolean>(false)
 	const [friends, setFriends] 	= useState<Array<Friends>>([])
 	const [users, setUsers] 		= useState<Array<Friends>>([])
-	const [requestFriend] 			= useMutation(INCOMING_FRIENDS)
+	const [isOpen, setIsOpen] 		= useState<boolean>(false)
+
 	const {loading,error,data} 		= useQuery(GET_ALL_FRIENDS, {
 		variables: {
 			email: userConnectedRedux.user.email
 		},
 	})
+
 
 	const {loading:loadingAll,error:errorAll,data:dataAll} = useQuery(GET_ALL_USER, {
 		variables: {
@@ -41,20 +121,16 @@ const Friend: React.FC = function() {
 				setFriends(data.GetAllFriends)
 			}
 		}
-
 		if(!loadingAll && !errorAll && dataAll) setUsers(dataAll.GetUsers.filter((e:any) => e.uid !== userConnectedRedux.user.uid))
 
-		if(!ldSub && !erSub && dataSub) console.log(dataSub)
+		if(!ldSub && !erSub && dataSub) console.log("dataSub",dataSub)
 	},[loading,error,data,loadingAll,errorAll,dataAll,ldSub,erSub,dataSub,userConnectedRedux])
 
-	const onSendIncoming = 	async function(uid:string) {
-		try {
-			const result = await requestFriend({ variables: { idRequest: userConnectedRedux.user.uid,idSender: uid} })
-			if (result.data.requestFriend) console.log(result.data.requestFriend)
-		} catch(e) {
-			console.log(e)
-		}
+
+	const openHandle = function(){
+		setIsOpen(true)
 	}
+
 	return (
 		<div className="aside-right">
 			{nbFriends
@@ -62,13 +138,16 @@ const Friend: React.FC = function() {
 				friends.map(function(el:any,index:number) {
 					let img = el.avatar ? el.avatar : AvatarDefault
 					return(
-						<div className="friend-list">
-							<p key={index}>
+						<div className="friend-list" key={el.id}>
+							<div key={index}>
 								<img src={img} className="friend-avatar" alt=""/>
 								<span>{el.username}<i className={el.isConnected ? "u-connected" : ""}></i></span>
 								<i><FontAwesomeIcon icon={faCommentDots} size="xs"/></i>
-								<i className="rect"><FontAwesomeIcon icon={faPlus} size="xs"/></i>
-							</p>
+								<i onClick={openHandle} style={{"cursor":"pointer"}}>
+									<FontAwesomeIcon icon={faPlusSquare} size="xs" />
+								</i>
+								<RenderPopup users={users} isOpen={isOpen} />
+							</div>
 						</div>
 					)
 				})
@@ -92,81 +171,18 @@ const Friend: React.FC = function() {
 					}
 					</p>
 					<div className="friends">
-						<Popup
-							trigger={
-								<p className="search-friends"><Link to="#">
-									<FontAwesomeIcon icon={faUserPlus} size="xs"/>
-									<span>
-										{
-				      						Object.keys(userConnectedRedux.user).length > 0 ?
-											Translation(userConnectedRedux.user.language).communauty.addFriendList
-											:
-											Translation("fr").communauty.addFriendList
-										}
-									</span>
-									</Link>
-								</p>
-							}
-							modal
-							nested
-						>
-							{(close:any) => (<div className="modal">
-									<button className="close" onClick={close}>
-										&times;
-									</button>
-									<div className="bar-title">
-										{
-											Object.keys(userConnectedRedux.user).length > 0 ?
-											Translation(userConnectedRedux.user.language).communauty.addFriend
-											:
-											Translation("fr").communauty.addFriend
-										}
-									</div>
-									<div className="actions">
-									<div className="body">
-										<div className="avatar-container">
-											<div className="add-friends">
-												<div className="found">
-													{
-														users.length > 0 ?
-														users.map(function(el:any,index:number){
-															let img:string = el.avatar ? (el.avatar) : AvatarDefault
-															return (
-																<p key={index}>
-																	<img src={img} className="avatar-found" alt="" />
-																	<span className="profil-name">{el.username ? el.username : ((el.email).split("@")[0])}</span>
-																	<button className="btn bg-yellow">
-																		<i className="rect"><FontAwesomeIcon icon={faUserPlus} size="xs"/></i>
-																		<span onClick={()=>{
-																			onSendIncoming(el.uid)
-																			close()
-																			}}>
-																			{
-																				Object.keys(userConnectedRedux.user).length > 0 ?
-																				Translation(userConnectedRedux.user.language).communauty.addFriend
-																				:
-																				Translation("fr").communauty.addFriend
-																			}
-																		</span>
-																	</button>
-																</p>
-															)
-														})
-														:
-														<></>
-													}
-
-												</div>
-												<div className="avatar-search-bar">
-													<input type="text" placeholder="Rechercher une personne"/><button className="btn bg-white">Rechercher</button>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-								</div>
-								)}
-						</Popup>
+						<p className="search-friends" onClick={openHandle} style={{"cursor":"pointer"}}>
+							<FontAwesomeIcon icon={faUserPlus} size="xs"/>
+							<span>
+								{
+		      						Object.keys(userConnectedRedux.user).length > 0 ?
+									Translation(userConnectedRedux.user.language).communauty.addFriendList
+									:
+									Translation("fr").communauty.addFriendList
+								}
+							</span>
+						</p>
+						<RenderPopup users={users} isOpen={isOpen} />
 					</div>
 				</div>)
 			}
