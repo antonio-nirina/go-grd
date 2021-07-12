@@ -4,7 +4,7 @@ import (
 	"encoding/base64"
 	"encoding/json"
 	"errors"
-	"fmt"
+	// "fmt"
 	"os"
 	"sync"
 	"time"
@@ -263,7 +263,7 @@ func (r *resolver)GetAllUser(params graphql.ResolveParams)(interface{}, error) {
 				}
 			}
 		}
-		fmt.Println("xxx",found)
+
 		if !found {
 			userList.Uid		 	= user.Uid.Hex()
 			userList.FirstName 		= user.FirstName

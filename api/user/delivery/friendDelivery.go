@@ -1,14 +1,13 @@
 package delivery
 
 import (
-	"fmt"
 	"errors"
 
 	"github.com/graphql-go/graphql"
-	userNotif "github.com/thoussei/antonio/api/notification/entity"
-	"github.com/thoussei/antonio/api/user/entity"
 	"github.com/thoussei/antonio/api/external"
+	userNotif "github.com/thoussei/antonio/api/notification/entity"
 	"github.com/thoussei/antonio/api/user/common"
+	"github.com/thoussei/antonio/api/user/entity"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
@@ -96,8 +95,8 @@ func (r *resolver) GetAllFriendsUser(params graphql.ResolveParams) (interface{},
 			res.IsBanned = val.IsBanned
 			isConnected := false
 			cn,_ := external.GetHmsetRedis(common.CONNECTED,val.Uid.Hex())
-			fmt.Println(cn)
-			if cn != nil {
+
+			if cn[0] != nil {
 				isConnected = true
 			}
 			res.IsConnected = isConnected
