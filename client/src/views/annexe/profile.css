@@ -8,7 +8,7 @@
 .profil .container h2{
 	text-transform: uppercase;
 	font-size: 30px;
-	padding: 5px;	
+	/*padding: 5px;	*/
 }
 .profil .main-content{
 
@@ -18,7 +18,7 @@
 	background-position: center top;
 }
 .main-pro{
-	display: flex;
+	/*display: flex;*/
 	min-height: 100vh;		
 	width: 100%;	
 	vertical-align: top;
@@ -39,7 +39,7 @@
 	border-radius: 50px;
 	position: relative;
 	margin: 20px 0;
-    max-width: 500px;
+    /*max-width: 500px;*/
     width: 100%;
 }
 .float{
@@ -52,7 +52,7 @@
 	display: flex;
 	align-items: center;
 	padding: 0;
-	margin-left: 65px;
+	/*margin-left: 65px;*/
 }
 .gamer-profil .users-setting a{
 	display: inline-block;
@@ -142,9 +142,9 @@
 	width: 93px;
     display: inline-block;
     align-self: center;
-    position: absolute;
+    /*position: absolute;
     left: 0;
-    top: 0;
+    top: 0;*/
 }
 .setavatar{	
 	position: relative;
@@ -199,7 +199,7 @@
 }
 .about-me{
 	background: #000000;
-    padding: 5em 3em;
+    padding: 2em 3em;
     position: relative;
     overflow: hidden;
 }
@@ -727,7 +727,7 @@ p.lg-desc{
  display: flex;
 }
 .flexbox{
-	width: 430px;	
+	/*width: 430px;	*/
 	padding: 10px 15px;
 }
 .flex-items{

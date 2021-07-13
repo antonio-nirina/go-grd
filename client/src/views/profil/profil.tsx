@@ -164,7 +164,7 @@ const Profil: React.FC = function() {
 										:
 										Translation("fr").profil.twitchConnected}
 		      					</span>
-		      					<button className="btn bg-yellow" onClick={SigingTwitch}>
+		      					<button className="btn bg-red" onClick={SigingTwitch}>
 		      						{Object.keys(userConnectedRedux.user).length > 0 ?
 										Translation(userConnectedRedux.user.language).profil.connected
 										:
@@ -172,6 +172,7 @@ const Profil: React.FC = function() {
 		      					</button>
 		      				</p>
 		      			</div>
+		      			
 		      		</div>
 		      	</div>
 		      	<div className="statistique">
@@ -242,7 +243,7 @@ const Profil: React.FC = function() {
 	      				</div>
 	      				<div className="bt-game-container">
 	    					<Popup
-							    trigger={<button className="btn bg-yellow"> {Object.keys(userConnectedRedux.user).length > 0 ?
+							    trigger={<button className="btn bg-red"> {Object.keys(userConnectedRedux.user).length > 0 ?
 									Translation(userConnectedRedux.user.language).profil.createTeam
 									:
 									Translation("fr").profil.createTeam} </button>}
@@ -284,7 +285,7 @@ const Profil: React.FC = function() {
 										</div>
 							        </div>
 						        	<div className="actions">
-							          	<button className="btn bg-yellow">{ Object.keys(userConnectedRedux.user).length > 0 ?
+							          	<button className="btn bg-red">{ Object.keys(userConnectedRedux.user).length > 0 ?
 									Translation(userConnectedRedux.user.language).profil.createTeam
 									:
 									Translation("fr").profil.createTeam} </button>
@@ -354,7 +355,7 @@ const Profil: React.FC = function() {
 	      					</div>
 	      				</div>
 	      				<div className="btn-container">
-	      					<span  className="btn bg-yellow">4.99 € / {Object.keys(userConnectedRedux.user).length > 0 ?
+	      					<span  className="btn bg-red">4.99 € / {Object.keys(userConnectedRedux.user).length > 0 ?
 								Translation(userConnectedRedux.user.language).profil.month
 								:
 								Translation("fr").profil.month}
