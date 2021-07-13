@@ -37,6 +37,7 @@ html{
 .btn.bg-red{
   background: #dd0000;
   color: #ffffff;
+  border: 1px solid transparent;
 }
 .light-gray{
   background: #131313;
@@ -90,6 +91,12 @@ html{
 }
 .connected .bt-container{
   display: none;
+}
+.connected .join{
+  display: none;
+}
+.join{
+  display: block;
 }
 .bt-container{
   display: inline-block;
