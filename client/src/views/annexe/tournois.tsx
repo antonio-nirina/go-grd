@@ -295,6 +295,22 @@ const Tournois: React.FC = function() {
 									<p className="inblock"><i className="sprite calendar"></i><span>04/04/2021 - 7:30 PM</span></p>
 								</div>
 							</div>
+							<div className="apex block last light-green">
+								<p className="legend">Fifa 21 fut cup</p>
+								<div className="info">
+									<p className="inblock"><i className="sprite ticket"></i><span>10€</span></p>
+									<p className="inblock"><i className="sprite cup"></i><span>750€ Cash Prize</span></p>
+									<p className="inblock"><i className="sprite calendar"></i><span>04/04/2021 - 7:30 PM</span></p>
+								</div>
+							</div>
+							<div className="apex block last light-green">
+								<p className="legend">Fifa 21 fut cup</p>
+								<div className="info">
+									<p className="inblock"><i className="sprite ticket"></i><span>10€</span></p>
+									<p className="inblock"><i className="sprite cup"></i><span>750€ Cash Prize</span></p>
+									<p className="inblock"><i className="sprite calendar"></i><span>04/04/2021 - 7:30 PM</span></p>
+								</div>
+							</div>
 						</div>								
 					</div>
 				</div>			

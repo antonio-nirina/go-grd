@@ -54,6 +54,13 @@ html{
 .dark-red{
   background: #602020;
 }
+
+.new-red {
+	background: #cf0023
+}
+.new-green {
+	background: #96b900;
+}
 .light-green{
   background: #216026
 }
