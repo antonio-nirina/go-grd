@@ -120,12 +120,14 @@ func (u *UserUsecase) NotifConnected(user *entity.User, wg *sync.WaitGroup) {
 
 	queryStr := `
 	{ 
-		NotifUserConnected(user:{uid:"%s",avatar:"%s",email:"%s",username:"%s",count:%d}) {
+		NotifUserConnected(user:{uid:"%s",avatar:"%s",email:"%s",username:"%s",isConnected:%d,count:%d}) {
 			email,
+			uid
+			avatar
 		}
 	}
 	`
-	queryN := fmt.Sprintf(queryStr,user.Uid.Hex(),user.Avatar,user.Email,user.Username,0)
+	queryN := fmt.Sprintf(queryStr,user.Uid.Hex(),user.Avatar,user.Email,user.Username,1,0)
 
 	jsonData := map[string]string{
 		"query":queryN,
@@ -147,12 +149,12 @@ func (u *UserUsecase) NotifDisConnected(user *entity.User, wg *sync.WaitGroup) {
 
 	queryStr := `
 	{ 
-		NotifUserConnected(user:{uid:"%s",avatar:"%s",email:"%s",username:"%s",count:%d}) {
+		NotifUserConnected(user:{uid:"%s",avatar:"%s",email:"%s",username:"%s",isConnected:%d,count:%d}) {
 			email,
 		}
 	}
 	`
-	queryN := fmt.Sprintf(queryStr,user.Uid.Hex(),user.Avatar,user.Email,user.Username,0)
+	queryN := fmt.Sprintf(queryStr,user.Uid.Hex(),user.Avatar,user.Email,user.Username,0,0)
 	jsonData := map[string]string{
 		"query":queryN,
 	}

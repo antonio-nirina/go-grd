@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form"
 import {useMutation} from "@apollo/client"
 import {useHistory } from "react-router-dom"
 import { useDispatch } from "react-redux"
-import { faTwitch } from "@fortawesome/free-brands-svg-icons"
+import { faTwitch,faDiscord } from "@fortawesome/free-brands-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 import {TokenType,SendToken} from "./utils"
@@ -91,6 +91,7 @@ const Login: React.FC = function() {
 							<div className="other-account">
 								<p>Connectez-vous avec votre compte : </p>
 								<span onClick={SigingTwitch}><i className="platform"><FontAwesomeIcon icon={faTwitch}/></i></span>
+								<span onClick={SigingTwitch}><i className="discord"><FontAwesomeIcon icon={faDiscord}/></i></span>
 							</div>
 						</div>
 					</div>

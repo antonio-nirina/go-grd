@@ -123,8 +123,25 @@ const Friend: React.FC = function() {
 		}
 		if(!loadingAll && !errorAll && dataAll) setUsers(dataAll.GetUsers.filter((e:any) => e.uid !== userConnectedRedux.user.uid))
 
-		if(!ldSub && !erSub && dataSub) console.log("dataSub",dataSub)
-	},[loading,error,data,loadingAll,errorAll,dataAll,ldSub,erSub,dataSub,userConnectedRedux])
+		if(!ldSub && !erSub && dataSub) {
+			let array:Array<Friends> = []
+			friends.forEach(function(e:Friends) {
+				array.push({
+					id:e.id,
+					username:e.username,
+					firstname:"",
+					lastname:"",
+					email:e.email,
+					avatar:e.avatar,
+					isBanned:false,
+					count:0,
+					isConnected:dataSub.subscribeConnected.uid === e.id ? true : e.isConnected
+				})
+			})
+
+			setFriends(array)
+		}
+	},[loading,error,data,loadingAll,errorAll,dataAll,ldSub,erSub,dataSub,userConnectedRedux,friends])
 
 
 	const openHandle = function(){

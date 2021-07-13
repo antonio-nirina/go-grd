@@ -6,4 +6,5 @@ export interface User {
     username:string
     avatar:string
     count:number
+    isConnected:number
 }

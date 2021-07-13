@@ -1,7 +1,6 @@
 import React,{useEffect} from "react"
 import { useSelector } from "react-redux"
 
-
 import Popup from "reactjs-popup"
 import { faPen, faChartBar } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -21,6 +20,8 @@ import HistoryResult from "./historyResult"
 import AccountGame from "./accountGame"
 import Me from "./me"
 import {SigingTwitch} from "../auth/twitch"
+
+
 
 const Profil: React.FC = function() {
 	const userConnectedRedux = useSelector((state:RootState) => state.userConnected)

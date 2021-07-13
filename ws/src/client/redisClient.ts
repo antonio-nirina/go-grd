@@ -40,7 +40,7 @@ export const SetRedis = async (key:string, data:any) => {
 export const HgetRedis = async (key:string, field:string) => {
 	try {
 		const data = await redis.hget(key,field)
-		console.log(data)
+
 		return data ? JSON.parse(data) : {}
 	} catch (e) {
 		console.log("error", e)

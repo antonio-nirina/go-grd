@@ -17,15 +17,14 @@ import "./communaute.css"
 import {COUNT_SUBSCRIBE} from "../../gql/user/subscription"
 
 
-
 const Tchat: React.FC = function() {
 	useEffect(() => {
     addResponseMessage('Salut');
   	}, []);
 
-   const handleNewUserMessage = () => {
+    const handleNewUserMessage = () => {
 
-  	};
+  	}
 	const userConnectedRedux 	= useSelector((state:RootState) => state.userConnected)
 	const {loading,error,data}  = useSubscription(COUNT_SUBSCRIBE)
 	useMemo(() => {
