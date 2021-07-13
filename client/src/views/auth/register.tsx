@@ -26,6 +26,7 @@ const Register: React.FC = function() {
 	const [createdUser]  = useMutation(CREATED_USER)
 	const { register, handleSubmit, formState: { errors } } = useForm<Inputs>()
 	const [errorForm,setErrorForm] = useState<boolean>(false)
+	const [errorMessage,setErrorMessage] = useState<string>("")
 
 	const onSubmit = async function(data:Inputs){
 		const email: string = data.email
@@ -33,14 +34,19 @@ const Register: React.FC = function() {
 		const username: string = data.username
 
 		if(checkValidEmail(email)) {
-			const userInput = {
-				username:username,
-				email:email,
-				password:password,
+			try {
+				const userInput = {
+					username:username,
+					email:email,
+					password:password,
+				}
+
+				const result = await createdUser({ variables: { userInput: userInput } })
+				if (result && result.data) history.push("/login")
+			} catch (e) {
+				setErrorMessage(e.graphQLErrors[0].message)
 			}
 
-			const result = await createdUser({ variables: { userInput: userInput } })
-			if (result && result.data) history.push("/login")
 		} else {
 			setErrorForm(true)
 		}
@@ -53,7 +59,8 @@ const Register: React.FC = function() {
 				<div className="containt">
 					<div className="group">
 					<h1>Inscription <img src={joystick} alt=""/></h1>
-						<div style={{"color":"red"}} >{ errorForm ? "Email not valid" : ""}</div>
+						<div style={{"color":"red","fontSize":"16px"}} >{ errorForm ? "Email not valid" : ""}</div>
+						<div style={{"color":"red","fontSize":"16px"}} >{errorMessage ? errorMessage : ""}</div>
 						<form onSubmit={handleSubmit(onSubmit)}>
 							{errors.username && <span style={{"color":"red"}}>Username ne peut être vide</span>}
 							<input className="mgt10" type="text" placeholder = "Username" {...register("username",{ required: true })} name="username"/>
