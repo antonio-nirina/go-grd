@@ -26,6 +26,7 @@ import "./communaute.css"
 import {GET_ALL_STREAMING} from "../../gql/user/query"
 import Friend from "./friends"
 
+
 const Communaute: React.FC = function() {
 	const userConnectedRedux 	= useSelector((state:RootState) => state.userConnected)
 	// const {loading,error,data}  = useSubscription(COUNT_SUBSCRIBE)

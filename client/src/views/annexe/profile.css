@@ -1,6 +1,7 @@
 @charset "UTF-8";
 .gamer-stats{
-	width: 80%;
+	max-width: 860px;
+	width: 100%;
 	margin-left: 40px;
 
 }
@@ -688,6 +689,7 @@ p.lg-desc{
 .with-stat{
 	width: 275px;
 	padding-left: 15px;
+	padding-right: 8px;
 }
 .with-stat p{
 	padding: 15px;
@@ -828,7 +830,7 @@ p.lg-desc{
 }
 
 .social i{
-	width: 50px;
+	width: 38px;
 	text-align: center;
 	font-size: 25px;
 	margin-left: 2px;

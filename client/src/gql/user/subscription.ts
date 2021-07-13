@@ -21,10 +21,12 @@ export const NOTIFICATIONS_SUBSCRIBE = gql`
 export const USER_CONNECTED = gql`
 	subscription subscribeConnected {
 		subscribeConnected {
+			uidNotif
 			uid
 			email
-			avatar
 			username
+			isConnected
+			avatar
 		}
 	}
 `

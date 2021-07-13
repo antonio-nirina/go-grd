@@ -17,9 +17,11 @@ export const typeDefs = gql`
 
 	type User {
 		uidNotif:String
-	    id: String
+	    uid: String
 	    email: String
 	    username:String
+	    avatar: String
+	    isConnected:Int
   	}
 
   	input userInput {
@@ -29,6 +31,7 @@ export const typeDefs = gql`
 	    avatar: String
 	    email: String
 	    username:String
+	    isConnected:Int
   	}
 
 

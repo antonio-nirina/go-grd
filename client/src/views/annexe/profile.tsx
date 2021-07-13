@@ -18,6 +18,7 @@ import Avatar from "./avatar"
 import "../../assets/css/style.css"
 import "react-responsive-carousel/lib/styles/carousel.min.css"
 import 'reactjs-popup/dist/index.css'
+// import {Translation} from "../../lang/translation"
 
 // import {RootState} from "../../reducer"
 

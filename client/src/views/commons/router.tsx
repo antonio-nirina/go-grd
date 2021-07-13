@@ -27,6 +27,7 @@ import InitPass from "../auth/initpass"
 import UpdatePassword from "../auth/updatePassword"
 import ProtectedRoute from "./protectedRoute"
 import Register from "../auth/register"
+import TournamentGame from "../tournament/tournament-game"
 
 const Router = function() {
 	return (
@@ -36,6 +37,7 @@ const Router = function() {
 			<ProtectedRoute path="/admin" exact component={Admin} />
 			<ProtectedRoute path="/tournament" exact component={Tournament} />
 			<ProtectedRoute path="/tournois" exact component={Tournois} />
+			<ProtectedRoute path="/tournament-game" exact component={TournamentGame} />
 			<ProtectedRoute path="/info" exact component={Info} />
 			<ProtectedRoute path="/matches" exact component={Matches} />
 			<ProtectedRoute path="/teams" exact component={Teams} />

@@ -68,7 +68,7 @@
 	margin-bottom: 10px;
 	text-align: center;
 }
-.other-account span{	
+.other-account span{
 	padding: 5px 15px;
 	display: inline-block;
 	margin-right: 15px;
@@ -107,5 +107,9 @@
 }
 .platform svg{
 	color: #8c42f4;
+	font-size: 20px;
+}
+.discord svg {
+	color: #7289da;
 	font-size: 20px;
 }

@@ -7,4 +7,5 @@ export interface Friends {
 	avatar:string
 	isBanned:boolean
 	count:number
+	isConnected:boolean
 }
