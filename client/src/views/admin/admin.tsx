@@ -3,7 +3,7 @@ import {useState} from "react"
 import { Link } from "react-router-dom"
 
 
-import { faUsers, faPowerOff, faPlus, faSort, faChevronDown, faChevronRight, faChevronLeft, faSearch, faDesktop, faTrophy, faStar} from "@fortawesome/free-solid-svg-icons"
+import { faUsers, faPowerOff, faTools, faSortUp, faSortDown, faPlus, faSort, faChevronUp, faChevronDown, faChevronRight, faChevronLeft, faSearch, faDesktop, faTrophy, faStar} from "@fortawesome/free-solid-svg-icons"
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
@@ -13,9 +13,13 @@ import "../admin/admin.css"
 import logo from "../../assets/image/gogrind-joystick.png"
 const Admin: React.FC = function() {
 	const [showList, setShowList] = useState<Boolean>(false)
+    const [showMenu, setShowMenu] = useState<Boolean>(false)
 	const onShow = function(){
 		setShowList(!showList)
 	}
+    const onShowMenu = function(){
+        setShowMenu(!showMenu)
+    }
 	return(
     <div className="admin">    	
 		<div className="layout-container">
@@ -27,7 +31,7 @@ const Admin: React.FC = function() {
 					<li>
 						<Link to="#">
 							<i><FontAwesomeIcon icon={faDesktop} size="lg"/></i>
-							<span>Dashboard</span>
+							<span>Tableau de bord</span>
 						</Link>
 					</li>
 					<li>
@@ -36,6 +40,12 @@ const Admin: React.FC = function() {
 							<span>Tournois</span>
 						</Link>
 					</li>
+                    <li>
+                        <Link to="#">
+                            <i><FontAwesomeIcon icon={faTools} size="lg"/></i>
+                            <span>Modifier règles</span>
+                        </Link>
+                    </li>
 					<li>
 						<Link to="#">
 							<i><FontAwesomeIcon icon={faUsers} size="lg"/></i>
@@ -53,15 +63,20 @@ const Admin: React.FC = function() {
 			<div className="content-wrapper">
 				<nav className="navbar">
           			<div></div>
-      				<div id="profile-name" className="profil-name">
-      					<Link to = "#">
-      						<img src={avatar} alt="" /> 
-  							<span className="d-md-inline-block">
-  								Administrateur
-  							</span>
-  							<i className="power"><FontAwesomeIcon icon={faPowerOff} size="lg"/></i>
-      					</Link>
-      				</div>
+                    <div id="profile-name" className="profil-name">      					
+                        <img src={avatar} alt="" /> 
+                        <div className="d-md-inline-block" onClick={onShowMenu}>
+                            Administrateur
+                            <div className= {!showMenu ? "hide-drpdwn-menu" :"show-drpdwn-menu"}>
+                                <ul>
+                                    <li><Link to ="/">Retour vers le site</Link></li>
+                                    <li><Link to ="#">Profil</Link></li>                                    
+                                    <li><Link to ="#"><i className="power"><FontAwesomeIcon icon={faPowerOff} size="lg"/></i> Se déconnecter</Link></li>
+                                </ul>
+                            </div>
+                        </div>                            
+                        <i className="poweroff" onClick={onShowMenu}><FontAwesomeIcon icon={!showMenu ? faSortUp : faSortDown} size="lg"/></i>      					
+                    </div>
         		</nav>
         		<div className="main-content">
         			<div className="body-content">
@@ -78,9 +93,9 @@ const Admin: React.FC = function() {
         						<div className="response-filter-flag">
         							<div className="response-status">
         								<span>
-        									<strong>Statut :</strong>
-        									<input placeholder="" type="text" className="ant-input" onClick={onShow}/>
-        									<i onClick={onShow}><FontAwesomeIcon icon={faChevronDown} size="lg"/></i>
+        									<label htmlFor="status">Statut :</label>
+        									<input placeholder="" type="text" className="ant-input" onClick={onShow} id="status"/>
+        									<i onClick={onShow}><FontAwesomeIcon icon={!showList ? faChevronUp : faChevronDown} size="lg"/></i>
         								</span>
         								
         								<div className={!showList ? "hide-status" :"show-status"}>
@@ -95,13 +110,13 @@ const Admin: React.FC = function() {
         						</div>        						
         					</div>
         					<div className="create-game">
-        						<button className="btn bg-red"><FontAwesomeIcon icon={faPlus} /> Créer tournois</button>
-        					</div>
-        				</div>
+        						<Link to="/create-tournament"><button className="btn bg-red"><FontAwesomeIcon icon={faPlus} /> Créer tournois</button></Link>
+        					</div>                            
+        				</div>                        
         				<div className="body-card">
         					<div className="card-title">
         						<p>Tournois <i><FontAwesomeIcon icon={faSort} size="lg"/></i></p>
-        					</div>
+        					</div>                           
         					<div className="card-title">
         						<div className="card-title">
         						<p>Prix <i><FontAwesomeIcon icon={faSort} size="lg"/></i></p>
