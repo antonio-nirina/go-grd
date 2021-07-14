@@ -8,13 +8,21 @@ import AvatarDefault from "../../assets/image/game-tag.png"
 import {Translation} from "../../lang/translation"
 import {RootState} from "../../reducer"
 import {ACCETEPED_FRIENDS} from "../../gql/user/mutation"
-
+import {UPDATED_NOTIFICATION} from "../../gql/notifications/mutation"
 
 const Notifications = function(data:any) {
 	const history = useHistory()
 	const userConnectedRedux = useSelector((state:RootState) => state.userConnected)
 	const [acceptedFriend] = useMutation(ACCETEPED_FRIENDS)
-	const handleAccepted = async function(uid:string) {
+	const [updatedNotification] = useMutation(UPDATED_NOTIFICATION)
+
+
+	const handleAccepted = async function(uid:string,uidNotif:string) {
+		try {
+			await updatedNotification({ variables: { uid: uidNotif }})
+		} catch(e) {
+			console.log("error",e)
+		}
 		try {
 			const result = await acceptedFriend({ variables: { idRequest:uid,idSender: userConnectedRedux.user.uid}})
 			if(result && history.location.pathname === "communaute") history.push("/communaute")
@@ -41,7 +49,7 @@ const Notifications = function(data:any) {
 								Translation("fr").header.text
 							*/}
 					        </span>
-					        <button className="btn bg-red" onClick={()=>handleAccepted(el.user.uid)}>
+					        <button className="btn bg-red" onClick={()=>handleAccepted(el.user.uid,el.uid)}>
 					            <i className="rect"><FontAwesomeIcon icon={faCheck} size="xs"/></i>
 					            <span>
 					            	{

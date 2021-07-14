@@ -1,4 +1,4 @@
-import React,{useMemo, useState} from "react"
+import React,{useState,useEffect} from "react"
 import { faPlusSquare, faCommentDots, faQuestionCircle, faUserPlus } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import Popup from "reactjs-popup"
@@ -114,7 +114,7 @@ const Friend: React.FC = function() {
 	})
 	const {loading:ldSub,error:erSub,data:dataSub}  = useSubscription(USER_CONNECTED)
 
-	useMemo(()=> {
+	useEffect(()=> {
 		if(!loading && !error && data) {
 			if(data.GetAllFriends[0].count > 0) {
 				setNbFriends(data.GetAllFriends[0].count)

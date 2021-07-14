@@ -1,4 +1,3 @@
-
 export const ACCESS_TOKEN = 'access_token'
 
 export const getAccessToken = function() {
@@ -10,4 +9,11 @@ export const getAccessToken = function() {
 		return data.access_token
 	}
 
+}
+
+export const getDataByToken = function() {
+	const user:string|null = localStorage.getItem("userConnected")
+	if(!user) return undefined
+
+	return JSON.parse(user).roles
 }

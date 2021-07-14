@@ -302,6 +302,7 @@ func GetToken(user entity.User) (interface{}, error) {
 	claims["lastname"] 	= user.LastName
 	claims["username"] 	= user.Username
 	claims["created"] 	= user.Created
+	claims["roles"] 	= user.Roles
 	
 	if len(user.Friends) > 0 {
 		for _,v := range user.Friends {

@@ -40,6 +40,18 @@ func (u *UserUsecase)AddFriend(req *entity.Friends) (interface{}, error) {
 func (u *UserUsecase) UpdatedUserFriend(user entity.User,userReq entity.User) (interface{}, error) {
 	var friend []entity.User
 	var friendReq []entity.User
+	if len(user.Friends) > 0 {
+		for _,val := range user.Friends {
+			friend = append(friend,val)
+		}
+	}
+
+	if len(userReq.Friends) > 0 {
+		for _,val := range userReq.Friends {
+			friendReq = append(friendReq,val)
+		}
+	}
+
 	friend = append(friend,userReq)
 	friendReq = append(friendReq,user)
 	userSender := &entity.User{
@@ -96,12 +108,12 @@ func NotifUserSender(user *entity.User,userReq *entity.User,uid string,count int
 
 	queryStr := `
 	{ 
-		NotifiUser(user:{uid:"%s",avatar:"%s",email:"%s",username:"%s",count:%d,uidNotif:"%s"}) {
+		NotifiUser(user:{uid:"%s",uidReq:"%s",avatar:"%s",email:"%s",username:"%s",count:%d,uidNotif:"%s"}) {
 			email,
 		}
 	}
 	`
-	queryN := fmt.Sprintf(queryStr,user.Uid.Hex(),userReq.Avatar,userReq.Email,userReq.Username,count,uid)
+	queryN := fmt.Sprintf(queryStr,user.Uid.Hex(),userReq.Uid.Hex(),userReq.Avatar,userReq.Email,userReq.Username,count,uid)
 
 	jsonData := map[string]string{
 		"query":queryN,

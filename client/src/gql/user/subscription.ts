@@ -10,6 +10,8 @@ export const COUNT_SUBSCRIBE = gql`
 export const NOTIFICATIONS_SUBSCRIBE = gql`
 	subscription subscribeNotifications {
 		subscribeNotifications {
+			uidNotif
+			uidReq
 			uid
 			email
 			avatar
@@ -22,6 +24,7 @@ export const USER_CONNECTED = gql`
 	subscription subscribeConnected {
 		subscribeConnected {
 			uidNotif
+			uidReq
 			uid
 			email
 			username
