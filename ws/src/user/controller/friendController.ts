@@ -11,6 +11,7 @@ export const NotifiUser = async function(user:User) : Promise<User> {
 	const res:Notifications = {
 		uidNotif:user.uidNotif,
 		uid:user.uid,
+		uidReq:user.uidReq,
 		avatar:user.avatar,
 		email:user.email,
 		username:user.username,

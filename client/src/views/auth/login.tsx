@@ -17,6 +17,7 @@ import {Translation} from "../../lang/translation"
 import {LOGIN} from "../../gql/user/auth"
 import Footer from "../footer/footer"
 import joystick from "../../assets/image/joystick.png"
+import {getDataByToken} from "../../storage/tokenStorage"
 import "../auth/login.css"
 import "../../assets/css/style.css"
 
@@ -43,6 +44,7 @@ const Login: React.FC = function() {
 		if(checkValidEmail(email)) {
 			try {
 				const result = await login({ variables: { email: email,password:password } })
+
 				if (result.data.login) {
 					const token:TokenType = {
 						access_token:result.data.login,
@@ -52,8 +54,17 @@ const Login: React.FC = function() {
 					SendToken(token)
 					dispatch(sendUserConectedAction(result.data.login))
 				}
-				history.push("/")
+
+				const data:Array<string|null> = getDataByToken() ? getDataByToken() : []
+
+				if(data.includes("role_admin")) {
+					history.push("/admin")
+				} else {
+					history.push("/")
+				}
+
 			} catch(e) {
+				console.log(e)
 				setPasswd(true)
 			}
 		} else {

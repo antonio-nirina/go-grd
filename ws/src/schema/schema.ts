@@ -9,6 +9,7 @@ export const typeDefs = gql`
 	type Notifications {
 		uidNotif:String
 		uid:String
+		uidReq:String
 		email:String
 		avatar:String
 		username:String
@@ -18,6 +19,7 @@ export const typeDefs = gql`
 	type User {
 		uidNotif:String
 	    uid: String
+	    uidReq:String
 	    email: String
 	    username:String
 	    avatar: String
@@ -27,6 +29,7 @@ export const typeDefs = gql`
   	input userInput {
   		uidNotif:String
   		uid:String
+  		uidReq:String
   		count:Int
 	    avatar: String
 	    email: String

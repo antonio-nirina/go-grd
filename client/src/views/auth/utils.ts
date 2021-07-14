@@ -37,7 +37,6 @@ const receiveMessage = function(event: any) {
 export const getTokenUser = async function(code: string) {
 	try {
 		const data = await client().query({query:XBoxToken,variables:{code:code}})
-		console.log(data.data.GetAccessTokenXbox.AccessToken)
 		const token:TokenType = {
 			access_token: data.data.GetAccessTokenXbox.AccessToken,
 			refresh_token:data.data.GetAccessTokenXbox.RefreshToken,
