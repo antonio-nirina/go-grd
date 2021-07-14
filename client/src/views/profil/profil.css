@@ -4,6 +4,10 @@
 	
 	background-position: center top;
 }
+.profil .main-content {
+	padding-left: 0px;
+	padding-right: 0px;
+}
 .main-pro{
 	/*background: url("../../assets/image/ban1.jpg") no-repeat;	*/
 	min-height: 100vh;	
@@ -18,6 +22,11 @@
 .wall-bloc{
 	background: #101010;
 	padding: 5px 3em 3em;	
+}
+.profil .wall-bloc .wall{
+	width: 94%;
+	margin: 30px auto;
+
 }
 .float{
 	display: inline-block;
@@ -537,9 +546,9 @@ p.lg-desc{
 	color: inherit;
 }
 
-.tab-content tr:hover{
-	background: #f2cf1c;
-	color: #000000;
+.profil .tab-content tr:hover{
+	background: #dd0000;
+	color: #ffffff;
 }
 
 .tab-content{

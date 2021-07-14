@@ -115,7 +115,7 @@ const Me : React.FC = function() {
 
 						</div>
 						<div className="btn-container">
-							<button className="btn bg-yellow mg15">
+							<button className="btn bg-red mg15">
 								{Object.keys(userConnectedRedux.user).length > 0 ?
 							Translation(userConnectedRedux.user.language).profil.validate
 							:
