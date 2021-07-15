@@ -32,6 +32,7 @@ const CreateTournament: React.FC = function() {
 	                                <div className="field">
 	                                    <div className="group-input">
 	                                        <form>
+	                                        	<input type="text" placeholder="Nom"/>
 	                                            <select id="jeux">
 	                                                <option value="">Selectionnez le jeux...</option>
 	                                                <option value="0">Apex Legends</option>
