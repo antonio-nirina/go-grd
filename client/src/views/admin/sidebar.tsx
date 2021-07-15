@@ -25,7 +25,7 @@ const SideBar : React.FC = function() {
 					</Link>
 				</li>
                 <li>
-                    <Link to="#">
+                    <Link to="/set-rules">
                         <i><FontAwesomeIcon icon={faTools} size="lg"/></i>
                         <span>Modifier règles</span>
                     </Link>

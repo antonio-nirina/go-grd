@@ -446,7 +446,7 @@ div#profile-name{
     margin-top: 40px;
     float: right;
 }
-.field .group-input input, .field .group-input textarea,.field .group-input select  {
+.field .group-input input, .field .group-input textarea,.field .group-input select {
     padding: 15px;
     border-radius: 5px;
     border: 1px solid #9c9c9e;
