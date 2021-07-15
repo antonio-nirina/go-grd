@@ -32,7 +32,7 @@ const Avatar : React.FC = function() {
 		reader.readAsDataURL(e.target.files[0])
         reader.onload = function(file) {
         	const promise = new Promise(function executor(resolve, reject){
-        		let file = typeof reader.result == "string" ? reader.result?.replace(/^data:(.*?);base64,/, "") : ""
+        		let file = typeof reader.result === "string" ? reader.result?.replace(/^data:(.*?);base64,/, "") : ""
 				file = file.replace(/ /g, '+')
         		const input:Input = {
 					email:userConnectedRedux.user.email,
@@ -58,10 +58,9 @@ const Avatar : React.FC = function() {
 				<label htmlFor="setavatar"><FontAwesomeIcon icon={faPen} /></label>
 				<input type="file" id="setavatar" onChange={handleUpload} className="uploadFile" name="file"/>
 				</p>
-				<p className="pseudo"><strong>{userConnectedRedux.user.username}</strong></p>
 			</div>
 			<div className="gamer-tag">
-				<h2>GameTag</h2>
+				<h2>{userConnectedRedux.user.username}</h2>
 			</div>
 		</div>
 	)

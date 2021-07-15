@@ -234,6 +234,17 @@ const Header: React.FC = function() {
 								<li><Link to="/ligue">Ligues</Link></li>
 								<li><Link to="/wager">Wager</Link></li>
 								<li><Link to="/assistance">Assistance</Link></li>
+								{userConnectedRedux.user && userConnectedRedux.user.roles && userConnectedRedux.user.roles.includes("role_admin") ? <li>
+									<Link to="/admin">
+										{
+											Object.keys(userConnectedRedux.user).length > 0 ?
+											Translation(userConnectedRedux.user.language).header.switch
+											:
+											Translation("fr").header.switch
+										}
+									</Link>
+									</li> : <></>
+								}
 								<li style={{"cursor":"pointer"}} onClick={onDeconnect}>Deconnexion</li>
 							</ul>
 						</div>

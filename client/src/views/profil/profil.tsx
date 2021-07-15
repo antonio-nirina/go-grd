@@ -154,25 +154,6 @@ const Profil: React.FC = function() {
 		      					</div>
 		      				</div>
 		      			</div>
-		      			<div className="account-name">
-		      				<p>
-		      					<img src="https://i.ibb.co/VMGk5bF/twitch.png" alt="twitch" width="40px" height="auto"/>
-		      					<span className="account-title">Twitch</span>
-		      					<span>
-		      						{Object.keys(userConnectedRedux.user).length > 0 ?
-										Translation(userConnectedRedux.user.language).profil.twitchConnected
-										:
-										Translation("fr").profil.twitchConnected}
-		      					</span>
-		      					<button className="btn bg-red" onClick={SigingTwitch}>
-		      						{Object.keys(userConnectedRedux.user).length > 0 ?
-										Translation(userConnectedRedux.user.language).profil.connected
-										:
-										Translation("fr").profil.connected}
-		      					</button>
-		      				</p>
-		      			</div>
-		      			
 		      		</div>
 		      	</div>
 		      	<div className="statistique">

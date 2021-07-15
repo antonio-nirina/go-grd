@@ -56,9 +56,9 @@ const Home: React.FC = function() {
 		}
 	},[])
   return(
-    <div className="home">
+    <div className="home" >
       <div className="container">
-	      <Header />
+	      <Header/>
 	      <div className="main">
 	        <div className="slider">
 	        	<Slider/>

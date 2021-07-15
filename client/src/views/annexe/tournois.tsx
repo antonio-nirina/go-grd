@@ -287,7 +287,7 @@ const Tournois: React.FC = function() {
 									<p className="date inblock"><i className="sprite calendar"></i><span>02/04/2021 - 5:00 PM</span></p>
 								</div>
 							</div>
-							<div className="apex block last light-green">
+							<div className="apex block light-green">
 								<p className="legend">Fifa 21 fut cup</p>
 								<div className="info">
 									<p className="inblock"><i className="sprite ticket"></i><span>10€</span></p>
@@ -295,7 +295,7 @@ const Tournois: React.FC = function() {
 									<p className="inblock"><i className="sprite calendar"></i><span>04/04/2021 - 7:30 PM</span></p>
 								</div>
 							</div>
-							<div className="apex block last light-green">
+							<div className="apex block light-green">
 								<p className="legend">Fifa 21 fut cup</p>
 								<div className="info">
 									<p className="inblock"><i className="sprite ticket"></i><span>10€</span></p>
@@ -303,7 +303,7 @@ const Tournois: React.FC = function() {
 									<p className="inblock"><i className="sprite calendar"></i><span>04/04/2021 - 7:30 PM</span></p>
 								</div>
 							</div>
-							<div className="apex block last light-green">
+							<div className="apex block light-green">
 								<p className="legend">Fifa 21 fut cup</p>
 								<div className="info">
 									<p className="inblock"><i className="sprite ticket"></i><span>10€</span></p>
