@@ -36,7 +36,7 @@ const Router = function() {
 			<Route path="/" exact component={Index} />
 			<Route path="/index" exact component={Index} />
 			<ProtectedRoute path="/admin" exact component={Admin} />
-			<ProtectedRoute path="/create-tournament" exact component={CreateTournament} />
+			<ProtectedRoute path="/admin/create-tournament" exact component={CreateTournament} />
 			<ProtectedRoute path="/tournament" exact component={Tournament} />
 			<ProtectedRoute path="/tournois" exact component={Tournois} />
 			<ProtectedRoute path="/tournament-game" exact component={TournamentGame} />
