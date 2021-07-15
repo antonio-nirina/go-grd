@@ -31,7 +31,8 @@
 		"community": "Communauté",
 		"tournaments": "Tournois",
 		"text":"Demande d'être votre amis",
-		"switch":"Admin"
+		"switch":"Admin",
+		"logout":"Deconnexion"
 	},
 	"home":{
 		"leagues": "ligues",

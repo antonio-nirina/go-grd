@@ -51,12 +51,12 @@ const Profil: React.FC = function() {
 									}
 							  </a></li>
 		      				<li><a href="#account">
-								  {
-			      						Object.keys(userConnectedRedux.user).length > 0 ?
-										Translation(userConnectedRedux.user.language).profil.account
-										:
-										Translation("fr").profil.account
-									}
+							   {
+		      						Object.keys(userConnectedRedux.user).length > 0 ?
+									Translation(userConnectedRedux.user.language).profil.account
+									:
+									Translation("fr").profil.account
+								}
 							</a></li>
 		      				<li><a href="#game">
 							   {
@@ -74,14 +74,16 @@ const Profil: React.FC = function() {
 									Translation("fr").profil.team
 								}
 							  </a></li>
-		      				<li><a href="#story">
-							  {
-									Object.keys(userConnectedRedux.user).length > 0 ?
-									Translation(userConnectedRedux.user.language).profil.tournaments
-									:
-									Translation("fr").profil.tournaments
-								}
-							  </a></li>
+		      				<li>
+		      					<a href="#story">
+								   {
+										Object.keys(userConnectedRedux.user).length > 0 ?
+										Translation(userConnectedRedux.user.language).profil.tournaments
+										:
+										Translation("fr").profil.tournaments
+									}
+							  	</a>
+							  </li>
 		      				<li><a href="#results">
 							   {
 									Object.keys(userConnectedRedux.user).length > 0 ?
