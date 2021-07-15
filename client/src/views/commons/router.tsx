@@ -3,6 +3,7 @@ import { Route, Switch } from "react-router-dom"
 import Index from "../version/home/index"
 import Admin from "../admin/admin"
 import CreateTournament from "../admin/create-tournament"
+import SetRules from "../admin/set-rules"
 import Ligue from "../annexe/ligue"
 import Tournament from "../tournament/tournament"
 import Tournois from "../annexe/tournois"
@@ -29,8 +30,6 @@ import UpdatePassword from "../auth/updatePassword"
 import ProtectedRoute from "./protectedRoute"
 import Register from "../auth/register"
 import TournamentGame from "../tournament/tournament-game"
-import NotFound from "./notfound"
-import ListTournament from "../admin/list-tournament"
 
 const Router = function() {
 	return (
@@ -38,8 +37,8 @@ const Router = function() {
 			<Route path="/" exact component={Index} />
 			<Route path="/index" exact component={Index} />
 			<ProtectedRoute path="/admin" exact component={Admin} />
-			<ProtectedRoute path="/admin/create-tournament" exact component={CreateTournament} />
-			<ProtectedRoute path="/admin/tournament" exact component={ListTournament} />
+			<ProtectedRoute path="/create-tournament" exact component={CreateTournament} />
+			<ProtectedRoute path="/set-rules" exact component={SetRules} />
 			<ProtectedRoute path="/tournament" exact component={Tournament} />
 			<ProtectedRoute path="/tournois" exact component={Tournois} />
 			<ProtectedRoute path="/tournament-game" exact component={TournamentGame} />
@@ -64,8 +63,7 @@ const Router = function() {
 			<Route path="/login" exact component={Login} />
 			<Route path="/inscription" exact component={Inscription} />
 			<Route path="/register" exact component={Register} />
-			<Route path="/forgot-password" exact component={InitPass} />
-			<Route path="*"  component={NotFound} />
+			<Route path="/forgot-password" exact component={InitPass} />			
 		</Switch>
 	)
 }
