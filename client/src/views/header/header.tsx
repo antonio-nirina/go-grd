@@ -245,7 +245,14 @@ const Header: React.FC = function() {
 									</Link>
 									</li> : <></>
 								}
-								<li style={{"cursor":"pointer"}} onClick={onDeconnect}>Deconnexion</li>
+								<li style={{"cursor":"pointer"}} onClick={onDeconnect}>
+									{
+										Object.keys(userConnectedRedux.user).length > 0 ?
+										Translation(userConnectedRedux.user.language).header.logout
+										:
+										Translation("fr").header.logout
+									}
+								</li>
 							</ul>
 						</div>
 					</div>

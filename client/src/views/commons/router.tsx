@@ -29,6 +29,8 @@ import UpdatePassword from "../auth/updatePassword"
 import ProtectedRoute from "./protectedRoute"
 import Register from "../auth/register"
 import TournamentGame from "../tournament/tournament-game"
+import NotFound from "./notfound"
+import ListTournament from "../admin/list-tournament"
 
 const Router = function() {
 	return (
@@ -37,6 +39,7 @@ const Router = function() {
 			<Route path="/index" exact component={Index} />
 			<ProtectedRoute path="/admin" exact component={Admin} />
 			<ProtectedRoute path="/admin/create-tournament" exact component={CreateTournament} />
+			<ProtectedRoute path="/admin/tournament" exact component={ListTournament} />
 			<ProtectedRoute path="/tournament" exact component={Tournament} />
 			<ProtectedRoute path="/tournois" exact component={Tournois} />
 			<ProtectedRoute path="/tournament-game" exact component={TournamentGame} />
@@ -61,7 +64,8 @@ const Router = function() {
 			<Route path="/login" exact component={Login} />
 			<Route path="/inscription" exact component={Inscription} />
 			<Route path="/register" exact component={Register} />
-			<Route path="/forgot-password" exact component={InitPass} />			
+			<Route path="/forgot-password" exact component={InitPass} />
+			<Route path="*"  component={NotFound} />
 		</Switch>
 	)
 }
