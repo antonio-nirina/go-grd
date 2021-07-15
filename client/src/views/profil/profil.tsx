@@ -19,6 +19,8 @@ import HistoryTournament from "./historyTournament"
 import HistoryResult from "./historyResult"
 import AccountGame from "./accountGame"
 import Me from "./me"
+import {SigingTwitch} from "../auth/twitch"
+
 
 
 const Profil: React.FC = function() {
@@ -51,12 +53,12 @@ const Profil: React.FC = function() {
 									}
 							  </a></li>
 		      				<li><a href="#account">
-							   {
-		      						Object.keys(userConnectedRedux.user).length > 0 ?
-									Translation(userConnectedRedux.user.language).profil.account
-									:
-									Translation("fr").profil.account
-								}
+								  {
+			      						Object.keys(userConnectedRedux.user).length > 0 ?
+										Translation(userConnectedRedux.user.language).profil.account
+										:
+										Translation("fr").profil.account
+									}
 							</a></li>
 		      				<li><a href="#game">
 							   {
@@ -74,16 +76,14 @@ const Profil: React.FC = function() {
 									Translation("fr").profil.team
 								}
 							  </a></li>
-		      				<li>
-		      					<a href="#story">
-								   {
-										Object.keys(userConnectedRedux.user).length > 0 ?
-										Translation(userConnectedRedux.user.language).profil.tournaments
-										:
-										Translation("fr").profil.tournaments
-									}
-							  	</a>
-							  </li>
+		      				<li><a href="#story">
+							  {
+									Object.keys(userConnectedRedux.user).length > 0 ?
+									Translation(userConnectedRedux.user.language).profil.tournaments
+									:
+									Translation("fr").profil.tournaments
+								}
+							  </a></li>
 		      				<li><a href="#results">
 							   {
 									Object.keys(userConnectedRedux.user).length > 0 ?
@@ -154,6 +154,25 @@ const Profil: React.FC = function() {
 		      					</div>
 		      				</div>
 		      			</div>
+		      			<div className="account-name">
+		      				<p>
+		      					<img src="https://i.ibb.co/VMGk5bF/twitch.png" alt="twitch" width="40px" height="auto"/>
+		      					<span className="account-title">Twitch</span>
+		      					<span>
+		      						{Object.keys(userConnectedRedux.user).length > 0 ?
+										Translation(userConnectedRedux.user.language).profil.twitchConnected
+										:
+										Translation("fr").profil.twitchConnected}
+		      					</span>
+		      					<button className="btn bg-red" onClick={SigingTwitch}>
+		      						{Object.keys(userConnectedRedux.user).length > 0 ?
+										Translation(userConnectedRedux.user.language).profil.connected
+										:
+										Translation("fr").profil.connected}
+		      					</button>
+		      				</p>
+		      			</div>
+		      			
 		      		</div>
 		      	</div>
 		      	<div className="statistique">
@@ -285,7 +304,7 @@ const Profil: React.FC = function() {
 	      			<div className="prem-bloc">
 	      				<div className="item-bloc">
 	      					<div className="img-prem">
-	      						<img src="https://i.ibb.co/80vD8kD/stat.png" alt="stat" width="75" height="75"/>
+	      						<img src="https://i.ibb.co/xfFSpWL/stat.png" alt="stat" width="75" height="75"/>
 	      						<strong>{Object.keys(userConnectedRedux.user).length > 0 ?
 									Translation(userConnectedRedux.user.language).profil.formation
 									:
@@ -298,7 +317,7 @@ const Profil: React.FC = function() {
 	      				</div>
 	      				<div className="item-bloc">
 	      					<div className="img-prem">
-	      						<img src="https://i.ibb.co/mXW82Tt/seek.png" alt="seek" width="75" height="75" className="ht75"/>
+	      						<img src="https://i.ibb.co/9brkwNV/seek.png" alt="seek" width="75" height="75" className="ht75"/>
 	      						<strong>{Object.keys(userConnectedRedux.user).length > 0 ?
 									Translation(userConnectedRedux.user.language).profil.pro
 									:
@@ -311,7 +330,7 @@ const Profil: React.FC = function() {
 	      				</div>
 	      				<div className="item-bloc">
 	      					<div className="img-prem">
-	      						<img src="https://i.ibb.co/0KkJNYk/paiment.png" alt="paiment" width="75" height="75"/>
+	      						<img src="https://i.ibb.co/x8xPYTT/paiment.png" alt="paiment" width="75" height="75"/>
 	      						<strong>{Object.keys(userConnectedRedux.user).length > 0 ?
 									Translation(userConnectedRedux.user.language).profil.pro
 									:
@@ -324,7 +343,7 @@ const Profil: React.FC = function() {
 	      				</div>
 	      				<div className="item-bloc">
 	      					<div className="img-prem">
-	      						<img src="https://i.ibb.co/xDfySTm/wallet.png" alt="wallet" width="75" height="75"/>
+	      						<img src="https://i.ibb.co/xfyrM1J/wallet.png" alt="wallet" width="75" height="75"/>
 	      						<strong>{Object.keys(userConnectedRedux.user).length > 0 ?
 									Translation(userConnectedRedux.user.language).profil.wallet
 									:
@@ -334,14 +353,14 @@ const Profil: React.FC = function() {
 									:
 									Translation("fr").profil.training}</p>
 	      					</div>
-	      				</div>
-	      				<div className="btn-container">
-	      					<span  className="btn bg-red">4.99 € / {Object.keys(userConnectedRedux.user).length > 0 ?
-								Translation(userConnectedRedux.user.language).profil.month
-								:
-								Translation("fr").profil.month}
-							</span>
-	      				</div>
+	      				</div>	      				
+	      			</div>
+	      			<div className="btn-container">
+	      				<span  className="btn bg-red">4.99 € / {Object.keys(userConnectedRedux.user).length > 0 ?
+							Translation(userConnectedRedux.user.language).profil.month
+							:
+							Translation("fr").profil.month}
+						</span>
 	      			</div>
 				</div>
 	      	</div>

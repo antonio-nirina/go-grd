@@ -61,6 +61,7 @@ const Avatar : React.FC = function() {
 			</div>
 			<div className="gamer-tag">
 				<h2>{userConnectedRedux.user.username}</h2>
+				<p className="pseudo"><strong>{userConnectedRedux.user.username}</strong></p>
 			</div>
 		</div>
 	)

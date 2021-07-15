@@ -1,7 +1,7 @@
 import React from "react"
 import { Link } from "react-router-dom"
 
-import { faPlus} from "@fortawesome/free-solid-svg-icons"
+import { faPlus, faChevronRight} from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import "../admin/admin.css"
 import SideBar from "./sidebar"
@@ -32,6 +32,7 @@ const CreateTournament: React.FC = function() {
 	                                <div className="field">
 	                                    <div className="group-input">
 	                                        <form>
+	                                        	<input type="text" placeholder="Nom"/>
 	                                            <select id="jeux">
 	                                                <option value="">Selectionnez le jeux...</option>
 	                                                <option value="0">Apex Legends</option>
@@ -54,7 +55,7 @@ const CreateTournament: React.FC = function() {
 	                                                <input type="number" placeholder="Frais de participation" className="no-margin"/>
 	                                            </div>
 	                                            <input type="text" placeholder="Deadline"/>
-	                                            <button className="btn bg-red">Modifier les règles</button>
+	                                            <Link to="/set-rules"><button className="btn bg-red">Modifier les règles <FontAwesomeIcon icon={faChevronRight} /> </button></Link>
 	                                        </form>
 	                                    </div>
 	                                </div>
