@@ -19,8 +19,6 @@ import HistoryTournament from "./historyTournament"
 import HistoryResult from "./historyResult"
 import AccountGame from "./accountGame"
 import Me from "./me"
-import {SigingTwitch} from "../auth/twitch"
-
 
 
 const Profil: React.FC = function() {

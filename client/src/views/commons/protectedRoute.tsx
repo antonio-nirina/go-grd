@@ -1,7 +1,6 @@
 import * as React from 'react'
 import { Redirect, Route, RouteProps } from 'react-router-dom'
 
-
 interface IProtectedRoute{
   authenticationPath?: string
 }
@@ -22,5 +21,6 @@ const ProtectedRoute = (
   } else {
     return <Route {...props} />
   }
-};
+}
+
 export default ProtectedRoute
