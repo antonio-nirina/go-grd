@@ -54,24 +54,28 @@ const ListTournament : React.FC = function() {
 						<p>Tournois <i><FontAwesomeIcon icon={faSort} size="lg"/></i></p>
 					</div>
 					<div className="card-title">
+						<p>Plateforme <i><FontAwesomeIcon icon={faSort} size="lg"/></i></p>
+					</div>
+					<div className="card-title">
 						<div className="card-title">
 						<p>Prix <i><FontAwesomeIcon icon={faSort} size="lg"/></i></p>
 					</div>
 					</div>
+
 					<div className="card-title">
 						<div className="card-title">
-						<p>Rank <i><FontAwesomeIcon icon={faSort} size="lg"/></i></p>
-					</div>
-					</div>
-					<div className="card-title">
-						<div className="card-title">
-						<p>Statut <i><FontAwesomeIcon icon={faSort} size="lg"/></i></p>
-					</div>
+							<p>Statut <i><FontAwesomeIcon icon={faSort} size="lg"/></i></p>
+						</div>
 					</div>
 					<div className="card-title">
 						<div className="card-title">
-						<p>Date de création <i><FontAwesomeIcon icon={faSort} size="lg"/></i></p>
+							<p>Date du tournois <i><FontAwesomeIcon icon={faSort} size="lg"/></i></p>
+						</div>
 					</div>
+					<div className="card-title">
+						<div className="card-title">
+							<p>Date de limit <i><FontAwesomeIcon icon={faSort} size="lg"/></i></p>
+						</div>
 					</div>
 				</div>
 				<div className="body-card">
@@ -79,13 +83,16 @@ const ListTournament : React.FC = function() {
 						<p>Apex Legends</p>
 					</div>
 					<div className="card-result">
+						<p>Playstation</p>
+					</div>
+					<div className="card-result">
 						<p>200</p>
 					</div>
 					<div className="card-result">
-						<p>Platinium</p>
+						<p>Actif</p>
 					</div>
 					<div className="card-result">
-						<p>Actif</p>
+						<p>2020-11-22 10:42:12</p>
 					</div>
 					<div className="card-result">
 						<p>2020-11-22 10:42:12</p>

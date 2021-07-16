@@ -2,6 +2,7 @@ package repository
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/thoussei/antonio/api/external"
 	"github.com/thoussei/antonio/api/tournament/entity"
@@ -25,18 +26,58 @@ func NewTournamentRepository(client *mongo.Client) *DriverRepository {
 
 type RepositoryTournament interface {
 	SavedTournamentRepo(tournament *entity.Tournament) (interface{}, error)
-	FindTournamentRepo(idUser primitive.ObjectID,idQuery primitive.ObjectID) (interface{}, error)
-	FindAllTournamentRepo(idUser primitive.ObjectID) ([]entity.Tournament, error)
+	FindTournamentRepo(idQuery primitive.ObjectID) (entity.Tournament, error)
+	FindAllTournamentRepo(pageNumber int64,limit int64) ([]entity.Tournament, error)
 }
 
-func (d *DriverRepository) SavedTournamentRepo(tournament *entity.Tournament) (interface{}, error){
+func (c *DriverRepository) SavedTournamentRepo(tournament *entity.Tournament) (interface{}, error){
+	var collection = c.client.Database("grd_database").Collection("tournament")
+	insertResult, err := collection.InsertOne(context.TODO(), tournament)
 
+	if err != nil {
+		return nil, err
+	}
+
+	fmt.Println("Inserted a single document: ", insertResult)
+
+	return tournament, nil
 }
 
-func (d *DriverRepository) FindTournamentRepo(idUser primitive.ObjectID,idQuery primitive.ObjectID) (interface{}, error){
+func (c *DriverRepository) FindTournamentRepo(idQuery primitive.ObjectID) (entity.Tournament, error){
+	var collection = c.client.Database("grd_database").Collection("tournament")
+	var result entity.Tournament
 
+	err := collection.FindOne(context.TODO(), bson.M{"uid": idQuery}).Decode(&result)
+
+	if err != nil {
+		return result, err
+	}
+
+	return result, nil
 }
 
-func (d *DriverRepository) FindAllTournamentRepo(idUser primitive.ObjectID) ([]entity.Tournament, error){
+func (c *DriverRepository) FindAllTournamentRepo(pageNumber int64,limit int64) ([]entity.Tournament, error){
+	var skp int64 
+	skp = (pageNumber - 1) * limit
+	var collection = c.client.Database("grd_database").Collection("tournament")
+	var results []entity.Tournament
+	cur, err := collection.Find(context.TODO(), bson.D{{}},options.Find().SetLimit(limit).SetSkip(skp).SetSort(bson.M{"_id": -1}))
 
+	if err != nil {
+		return nil, err
+	}
+
+	for cur.Next(context.TODO()) {
+		var elem entity.Tournament
+		err := cur.Decode(&elem)
+		if err != nil {
+			external.Logger(fmt.Sprintf("%v", err))
+		}
+
+		results = append(results, elem)
+	}
+	
+	cur.Close(context.TODO())
+
+	return results, nil
 }
