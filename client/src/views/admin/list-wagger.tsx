@@ -6,7 +6,7 @@ import { faPlus, faSort, faChevronUp, faChevronDown, faChevronRight, faChevronLe
 // import SideBar from "./sidebar"
 
 
-const ListTournament : React.FC = function() {
+const ListWagger : React.FC = function() {
 	const [showList, setShowList] = useState<Boolean>(false)
 
     const onShow = function(){
@@ -42,60 +42,67 @@ const ListTournament : React.FC = function() {
 							</div>
 						</div>
 						<div className="response-filter-avis">
-							<p><span>13</span> tournois dont <span>7 </span>actifs</p>
+							<p><span>2</span> ligues dont <span>1 </span>actif</p>
 						</div>
 					</div>
 					<div className="create-game">
-						<Link to="/create-tournament"><button className="btn bg-red"><FontAwesomeIcon icon={faPlus} /> Créer tournois</button></Link>
+						<Link to="/create-wagger"><button className="btn bg-red"><FontAwesomeIcon icon={faPlus} /> Créer Wagger</button></Link>
 					</div>
 				</div>
 				<div className="body-card">
 					<div className="card-title">
-						<p>Tournois <i><FontAwesomeIcon icon={faSort} size="lg"/></i></p>
+						<p>Horraire <i><FontAwesomeIcon icon={faSort} size="lg"/></i></p>
 					</div>
 					<div className="card-title">
-						<p>Plateforme <i><FontAwesomeIcon icon={faSort} size="lg"/></i></p>
+						<p>Rank <i><FontAwesomeIcon icon={faSort} size="lg"/></i></p>
 					</div>
-					<div className="card-title">
-						<div className="card-title">
-						<p>Prix <i><FontAwesomeIcon icon={faSort} size="lg"/></i></p>
-					</div>
-					</div>
-
 					<div className="card-title">
 						<div className="card-title">
-							<p>Statut <i><FontAwesomeIcon icon={faSort} size="lg"/></i></p>
+							<p>Inscription <i><FontAwesomeIcon icon={faSort} size="lg"/></i></p>
 						</div>
 					</div>
 					<div className="card-title">
 						<div className="card-title">
-							<p>Date du tournois <i><FontAwesomeIcon icon={faSort} size="lg"/></i></p>
+						<p>Format <i><FontAwesomeIcon icon={faSort} size="lg"/></i></p>
+					</div>
+					</div>					
+					<div className="card-title">
+						<div className="card-title">
+							<p>Mode de jeux <i><FontAwesomeIcon icon={faSort} size="lg"/></i></p>
 						</div>
 					</div>
 					<div className="card-title">
 						<div className="card-title">
-							<p>Date limit <i><FontAwesomeIcon icon={faSort} size="lg"/></i></p>
+							<p>Entrée <i><FontAwesomeIcon icon={faSort} size="lg"/></i></p>
+						</div>
+					</div>
+					<div className="card-title">
+						<div className="card-title">
+							<p>Joueur <i><FontAwesomeIcon icon={faSort} size="lg"/></i></p>
 						</div>
 					</div>
 				</div>
 				<div className="body-card">
 					<div className="card-result">
-						<p>Apex Legends</p>
+						<p>23 Jul - 12h30</p>
 					</div>
 					<div className="card-result">
-						<p>Playstation</p>
+						<p>Platine</p>
 					</div>
 					<div className="card-result">
-						<p>200</p>
+						<p>30</p>
 					</div>
 					<div className="card-result">
-						<p>Actif</p>
+						<p>B03</p>
 					</div>
 					<div className="card-result">
-						<p>2020-11-22 10:42:12</p>
+						<p>3v3 Arène</p>
 					</div>
 					<div className="card-result">
-						<p>2020-11-22 10:42:12</p>
+						<p>Public</p>
+					</div>
+					<div className="card-result">
+						<p>6</p>
 					</div>
 				</div>
 				<div className="filter-game-result">
@@ -110,4 +117,4 @@ const ListTournament : React.FC = function() {
 	)
 }
 
-export default ListTournament
+export default ListWagger

@@ -6,7 +6,7 @@ import { faPlus, faSort, faChevronUp, faChevronDown, faChevronRight, faChevronLe
 // import SideBar from "./sidebar"
 
 
-const ListTournament : React.FC = function() {
+const ListLeague : React.FC = function() {
 	const [showList, setShowList] = useState<Boolean>(false)
 
     const onShow = function(){
@@ -42,19 +42,19 @@ const ListTournament : React.FC = function() {
 							</div>
 						</div>
 						<div className="response-filter-avis">
-							<p><span>13</span> tournois dont <span>7 </span>actifs</p>
+							<p><span>2</span> ligues dont <span>1 </span>actif</p>
 						</div>
 					</div>
 					<div className="create-game">
-						<Link to="/create-tournament"><button className="btn bg-red"><FontAwesomeIcon icon={faPlus} /> Créer tournois</button></Link>
+						<Link to="/create-league"><button className="btn bg-red"><FontAwesomeIcon icon={faPlus} /> Créer ligue</button></Link>
 					</div>
 				</div>
 				<div className="body-card">
 					<div className="card-title">
-						<p>Tournois <i><FontAwesomeIcon icon={faSort} size="lg"/></i></p>
+						<p>Slot <i><FontAwesomeIcon icon={faSort} size="lg"/></i></p>
 					</div>
 					<div className="card-title">
-						<p>Plateforme <i><FontAwesomeIcon icon={faSort} size="lg"/></i></p>
+						<p>Organisateur <i><FontAwesomeIcon icon={faSort} size="lg"/></i></p>
 					</div>
 					<div className="card-title">
 						<div className="card-title">
@@ -80,13 +80,13 @@ const ListTournament : React.FC = function() {
 				</div>
 				<div className="body-card">
 					<div className="card-result">
-						<p>Apex Legends</p>
+						<p>32</p>
 					</div>
 					<div className="card-result">
-						<p>Playstation</p>
+						<p>ESL</p>
 					</div>
 					<div className="card-result">
-						<p>200</p>
+						<p>1500</p>
 					</div>
 					<div className="card-result">
 						<p>Actif</p>
@@ -110,4 +110,4 @@ const ListTournament : React.FC = function() {
 	)
 }
 
-export default ListTournament
+export default ListLeague
