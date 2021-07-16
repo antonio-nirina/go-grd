@@ -38,7 +38,7 @@ var plateformResolver 	= gameDelivery.NewResolverPlateform(usecasePlateform)
 
 var tournamentRepository = tournamentRepo.NewTournamentRepository(database)
 var tournamentUsecase 	= tournamentHandler.NewUsecaseTournament(tournamentRepository)
-var tournamentResolver 	= tournamentDelivery.NewResolverTournament(tournamentUsecase)
+var tournamentResolver 	= tournamentDelivery.NewResolverTournament(tournamentUsecase,usecaseGame,usecasePlateform)
 
 var NotifResolver 		= notifDelivery.NewNotifResolver(usecaseNotif,usecase)
 

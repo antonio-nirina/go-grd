@@ -28,7 +28,7 @@ func saveTournament() *graphql.Field {
 				Type: graphql.Int,
 			},
 			"numberTeam": &graphql.ArgumentConfig{
-				Type: graphql.String,
+				Type: graphql.Int,
 			},
 			"price": &graphql.ArgumentConfig{
 				Type: graphql.Float,

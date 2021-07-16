@@ -35,7 +35,7 @@ func (c *driverRepository) SavedPlateformRepository(plateform *entity.GamePlatfo
 }
 
 func (c *driverRepository) FindOnePlateformRepository(objectId primitive.ObjectID) (interface{}, error) {
-	var collection = c.client.Database("grd_database").Collection("gamePlatform")
+	var collection = c.client.Database("grd_database").Collection("game_platform")
 	var result entity.GamePlatform
 
 	err := collection.FindOne(context.TODO(), bson.M{"_id": objectId}).Decode(&result)
@@ -48,7 +48,7 @@ func (c *driverRepository) FindOnePlateformRepository(objectId primitive.ObjectI
 }
 
 func (c *driverRepository) FindAllPlateformRepository() (interface{}, error) {
-	var collection = c.client.Database("grd_database").Collection("gamePlatform")
+	var collection = c.client.Database("grd_database").Collection("game_platform")
 	var results []primitive.M
 	cur, err := collection.Find(context.TODO(), bson.D{{}})
 
@@ -68,4 +68,17 @@ func (c *driverRepository) FindAllPlateformRepository() (interface{}, error) {
 	cur.Close(context.TODO())
 
 	return results, nil
+}
+
+func (c *driverRepository) FindOnePlateformByUidRepository(objectId primitive.ObjectID) (entity.GamePlatform, error) {
+	var collection = c.client.Database("grd_database").Collection("game_platform")
+	var result entity.GamePlatform
+
+	err := collection.FindOne(context.TODO(), bson.M{"uid": objectId}).Decode(&result)
+
+	if err != nil {
+		return result, err
+	}
+
+	return result, nil
 }

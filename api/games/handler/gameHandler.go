@@ -34,13 +34,13 @@ func (g *gameUsecase) FindOneGameRepository(idQuery string) (interface{}, error)
 		return nil, err
 	}
 
-	user, err := g.gameRepository.FindOneGameRepository(objectId)
+	game, err := g.gameRepository.FindOneGameRepository(objectId)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return user, nil
+	return game, nil
 }
 
 func (g *gameUsecase) FindAllGameRepository() (interface{}, error) {
@@ -52,3 +52,20 @@ func (g *gameUsecase) FindAllGameRepository() (interface{}, error) {
 
 	return result, nil
 }
+
+func (g *gameUsecase) FindOneGameByUidHandler(uidQuery string) (entity.Game, error) {
+	objectId, err := primitive.ObjectIDFromHex(uidQuery)
+
+	if err != nil {
+		return entity.Game{}, err
+	}
+
+	game, err := g.gameRepository.FindOneGameByuidRepository(objectId)
+
+	if err != nil {
+		return entity.Game{}, err
+	}
+
+	return game, nil
+}
+

@@ -1,7 +1,6 @@
 package handler
 
 import (
-
 	"github.com/thoussei/antonio/api/games/entity"
 	"github.com/thoussei/antonio/api/games/repository"
 	"go.mongodb.org/mongo-driver/bson/primitive"
@@ -51,4 +50,20 @@ func (g *plateformUsecase) FindAllPlateformRepository() (interface{}, error) {
 	}
 
 	return result, nil
+}
+
+func (g *plateformUsecase) FindOnePlateformByUidHandler(uidQuery string) (entity.GamePlatform, error) {
+	objectId, err := primitive.ObjectIDFromHex(uidQuery)
+
+	if err != nil {
+		return entity.GamePlatform{}, err
+	}
+
+	plateform, err := g.plateformRepository.FindOnePlateformByUidRepository(objectId)
+
+	if err != nil {
+		return entity.GamePlatform{}, err
+	}
+
+	return plateform, nil
 }

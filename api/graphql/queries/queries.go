@@ -14,6 +14,10 @@ import (
 	notifHandler "github.com/thoussei/antonio/api/notification/handler"
 	notifRepo "github.com/thoussei/antonio/api/notification/repository"
 
+	tournamentDelivery "github.com/thoussei/antonio/api/tournament/delivery"
+	tournamentHandler "github.com/thoussei/antonio/api/tournament/handler"
+	tournamentRepo "github.com/thoussei/antonio/api/tournament/repository"
+
 	"github.com/graphql-go/graphql"
 )
 
@@ -34,6 +38,10 @@ var repositoryPlateform = gameRepo.NewPlateformRepository(database)
 var usecasePlateform = gameHandler.NewUsecasePlateform(repositoryPlateform)
 var plateformResolver = gameDelivery.NewResolverPlateform(usecasePlateform)
 
+var tournamentRepository = tournamentRepo.NewTournamentRepository(database)
+var tournamentUsecase 	= tournamentHandler.NewUsecaseTournament(tournamentRepository)
+var tournamentResolver 	= tournamentDelivery.NewResolverTournament(tournamentUsecase,usecaseGame,usecasePlateform)
+
 
 var notifResolver = notifDelivery.NewNotifResolver(usecaseNotif,usecase)
 
@@ -53,5 +61,7 @@ func GetRootFields() graphql.Fields {
 		"GetOneNotification": 		GetOneNotification(),
 		"GetAllNotifications": 		GetAllNotifications(),
 		"GetAccessTokenTwitch":		GetAccessTokenTwitch(),
+		"FindOneTournament": 		FindOneTournament(),
+		"FindAllTournament":      	FindAllTournament(),
 	}
 }
