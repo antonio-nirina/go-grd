@@ -1,13 +1,31 @@
-import React,{useState} from 'react'
+import React,{useState,useEffect} from 'react'
 import { Link } from "react-router-dom"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPlus, faSort, faChevronUp, faChevronDown, faChevronRight, faChevronLeft, faSearch} from "@fortawesome/free-solid-svg-icons"
+import {useQuery} from "@apollo/client"
+import { faPlus, faSort, faChevronUp, faChevronDown, faSearch} from "@fortawesome/free-solid-svg-icons"
 
-// import SideBar from "./sidebar"
+import {GET_ALL_TOURNAMENT} from "../../gql/tournament/query"
+import Pagination from "./pagination"
 
 
 const ListTournament : React.FC = function() {
 	const [showList, setShowList] = useState<Boolean>(false)
+	const [tournament, setTournament] = useState<any>([])
+	const [limit, setLimit] = useState<Number>(0)
+	const [pageNumber, setPageNumber] = useState<Number>(0)
+	const {loading,error,data} 		= useQuery(GET_ALL_TOURNAMENT, {
+		variables: {
+			limit:limit,
+			pageNumber:pageNumber
+		},
+	})
+
+	useEffect(()=> {
+		if(!loading && !error && data) {
+			setTournament(data.FindAllTournament)
+		}
+
+	},[loading,error,data])
 
     const onShow = function(){
 		setShowList(!showList)
@@ -51,60 +69,68 @@ const ListTournament : React.FC = function() {
 				</div>
 				<div className="body-card">
 					<div className="card-title">
-						<p>Tournois <i><FontAwesomeIcon icon={faSort} size="lg"/></i></p>
+						<div className="card-title">
+							<p>Heure <i><FontAwesomeIcon icon={faSort} size="lg"/></i></p>
+						</div>
+					</div>
+					<div className="card-title">
+						<p>Titre <i><FontAwesomeIcon icon={faSort} size="lg"/></i></p>
+					</div>
+					<div className="card-title">
+						<div className="card-title">
+							<p>Game <i><FontAwesomeIcon icon={faSort} size="lg"/></i></p>
+						</div>
 					</div>
 					<div className="card-title">
 						<p>Plateforme <i><FontAwesomeIcon icon={faSort} size="lg"/></i></p>
 					</div>
 					<div className="card-title">
 						<div className="card-title">
-						<p>Prix <i><FontAwesomeIcon icon={faSort} size="lg"/></i></p>
+							<p>Gains <i><FontAwesomeIcon icon={faSort} size="lg"/></i></p>
+						</div>
 					</div>
+					<div className="card-title">
+						<div className="card-title">
+							<p>Participants <i><FontAwesomeIcon icon={faSort} size="lg"/></i></p>
+						</div>
 					</div>
-
 					<div className="card-title">
 						<div className="card-title">
 							<p>Statut <i><FontAwesomeIcon icon={faSort} size="lg"/></i></p>
 						</div>
 					</div>
-					<div className="card-title">
-						<div className="card-title">
-							<p>Date du tournois <i><FontAwesomeIcon icon={faSort} size="lg"/></i></p>
-						</div>
-					</div>
-					<div className="card-title">
-						<div className="card-title">
-							<p>Date de limit <i><FontAwesomeIcon icon={faSort} size="lg"/></i></p>
-						</div>
-					</div>
 				</div>
-				<div className="body-card">
-					<div className="card-result">
-						<p>Apex Legends</p>
-					</div>
-					<div className="card-result">
-						<p>Playstation</p>
-					</div>
-					<div className="card-result">
-						<p>200</p>
-					</div>
-					<div className="card-result">
-						<p>Actif</p>
-					</div>
-					<div className="card-result">
-						<p>2020-11-22 10:42:12</p>
-					</div>
-					<div className="card-result">
-						<p>2020-11-22 10:42:12</p>
-					</div>
-				</div>
-				<div className="filter-game-result">
-					<div className="result-game-page">
-						<i><FontAwesomeIcon icon={faChevronLeft} size="lg"/></i>
-						<span>1</span>
-						<i><FontAwesomeIcon icon={faChevronRight} size="lg"/></i>
-					</div>
-				</div>
+				{
+					tournament?.map(function(el:any,index:number){
+						return (
+							<div className="body-card" key={index}>
+								<div className="card-result">
+									<p>{el.date}</p>
+								</div>
+								<div className="card-result">
+									<p>{el.title}</p>
+								</div>
+								<div className="card-result">
+									<p>{el.game.name}</p>
+								</div>
+								<div className="card-result">
+									<p>{el.plateform.name}</p>
+								</div>
+								<div className="card-result">
+									<p>{el.numberParticipate}</p>
+								</div>
+								<div className="card-result">
+									<p>{el.price}</p>
+								</div>
+								<div className="card-result">
+									<p>{el.statut?"Actif":"Inactif"}</p>
+								</div>
+							</div>
+						)
+					})
+				}
+
+				<Pagination />
 			</div>
 		</div>
 	)
