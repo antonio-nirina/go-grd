@@ -1,15 +1,14 @@
 import React from "react"
 import { Link } from "react-router-dom"
-//import {useMutation} from "@apollo/client"
+
 import { faPlus, faChevronRight} from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-
 import "../admin/admin.css"
 import SideBar from "./sidebar"
 import Nav from "./nav"
-// import {CREATED_TOURNAMENT} from "../../gql/tournament/mutation"
 
-const CreateTournament: React.FC = function() {
+
+const CreateWaggers: React.FC = function() {
 	return(
 	    <div className="admin create-tournament">
 			<div className="layout-container">
@@ -23,7 +22,7 @@ const CreateTournament: React.FC = function() {
 	        			<div className="body-content">
 	        				<div className="column-tournament">
 	        					<div className="title">
-	                                <h1>Création d'un tournois</h1>
+	                                <h1>Crée wagger</h1>
 	                            </div>
 	        					<div className="create-tournament-game">
 	        						<Link to="/admin"><button className="btn bg-white"> Annuler</button></Link>
@@ -32,20 +31,29 @@ const CreateTournament: React.FC = function() {
 	                            <div className="setting-tournament">
 	                                <div className="field">
 	                                    <div className="group-input">
-	                                        <form>
-	                                        	<input type="text" placeholder="Nom"/>
-	                                            <select id="jeux">
-	                                                <option value="">Selectionnez le jeux...</option>
-	                                                <option value="0">Apex Legends</option>
-	                                                <option value="1">League of Legends</option>
-	                                                <option value="2">Rocket League</option>
+	                                        <form>	                                      		                                        	
+	                                        	<select id="select-mode">
+	                                                <option value="">Selectionnez le mode de jeux...</option>
+	                                                <option value="0">1v1</option>
+	                                                <option value="1">3v3</option>	                                                
 	                                            </select>
-	                                            <input type ="text" placeholder="Date" />
-	                                            <select id="platform">
-	                                                <option value="">Selectionnez les plateformes...</option>
-	                                                <option value="0">Playstation</option>
-	                                                <option value="1">Xbox</option>
+	                                            <select id="rank">
+	                                                <option value="">Rank...</option>
+	                                                <option value="0">Platine</option>
+	                                                <option value="1">Diamond</option>	                                                
+	                                            </select>                                          
+	                                            <select id="format">
+	                                                <option value="">Format...</option>
+	                                                <option value="0">B03</option>
+	                                                <option value="1">B01</option>	                                                
 	                                            </select>
+	                                            <select id="entry">
+	                                                <option value="">Entrée...</option>
+	                                                <option value="0">Public</option>
+	                                                <option value="1">Privée</option>	                                                
+	                                            </select>	                                           
+	                                            <input type="text" placeholder="Heure"/>
+	                                            <input type ="text" placeholder="Date" />	                                            
 	                                            <textarea placeholder="Description..."></textarea>
 	                                            <div className="input-group">
 	                                                <input type="number" placeholder="Nombre de participant"/>
@@ -53,7 +61,7 @@ const CreateTournament: React.FC = function() {
 	                                            </div>
 	                                            <div className="input-group">
 	                                                <input type="number" placeholder="Prix"/>
-	                                                <input type="number" placeholder="Frais de participation" className="no-margin"/>
+	                                                <input type="number" placeholder="Frais d'inscription" className="no-margin"/>
 	                                            </div>
 	                                            <input type="text" placeholder="Deadline"/>
 	                                            <Link to="/set-rules"><button className="btn bg-red">Modifier les règles <FontAwesomeIcon icon={faChevronRight} /> </button></Link>
@@ -70,4 +78,4 @@ const CreateTournament: React.FC = function() {
   )
 }
 
-export default CreateTournament
+export default CreateWaggers

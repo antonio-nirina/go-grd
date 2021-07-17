@@ -1,15 +1,14 @@
 import React from "react"
 import { Link } from "react-router-dom"
-//import {useMutation} from "@apollo/client"
+
 import { faPlus, faChevronRight} from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-
 import "../admin/admin.css"
 import SideBar from "./sidebar"
 import Nav from "./nav"
-// import {CREATED_TOURNAMENT} from "../../gql/tournament/mutation"
 
-const CreateTournament: React.FC = function() {
+
+const CreateLeague: React.FC = function() {
 	return(
 	    <div className="admin create-tournament">
 			<div className="layout-container">
@@ -23,7 +22,7 @@ const CreateTournament: React.FC = function() {
 	        			<div className="body-content">
 	        				<div className="column-tournament">
 	        					<div className="title">
-	                                <h1>Création d'un tournois</h1>
+	                                <h1>Création d'une ligue</h1>
 	                            </div>
 	        					<div className="create-tournament-game">
 	        						<Link to="/admin"><button className="btn bg-white"> Annuler</button></Link>
@@ -34,18 +33,21 @@ const CreateTournament: React.FC = function() {
 	                                    <div className="group-input">
 	                                        <form>
 	                                        	<input type="text" placeholder="Nom"/>
-	                                            <select id="jeux">
+	                                        	<select id="select-game">
 	                                                <option value="">Selectionnez le jeux...</option>
 	                                                <option value="0">Apex Legends</option>
 	                                                <option value="1">League of Legends</option>
 	                                                <option value="2">Rocket League</option>
 	                                            </select>
-	                                            <input type ="text" placeholder="Date" />
-	                                            <select id="platform">
-	                                                <option value="">Selectionnez les plateformes...</option>
-	                                                <option value="0">Playstation</option>
-	                                                <option value="1">Xbox</option>
+	                                            <select id="slot">
+	                                                <option value="">Slot...</option>
+	                                                <option value="0">16</option>
+	                                                <option value="1">32</option>
+	                                                <option value="2">64</option>
+	                                                <option value="3">128</option>
 	                                            </select>
+	                                            <input type="text" placeholder="Nom de l'organisateur"/>
+	                                            <input type ="text" placeholder="Date" />	                                            
 	                                            <textarea placeholder="Description..."></textarea>
 	                                            <div className="input-group">
 	                                                <input type="number" placeholder="Nombre de participant"/>
@@ -70,4 +72,4 @@ const CreateTournament: React.FC = function() {
   )
 }
 
-export default CreateTournament
+export default CreateLeague
