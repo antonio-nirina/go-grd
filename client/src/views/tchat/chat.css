@@ -1,4 +1,4 @@
-.tchat{
+.tchat{	
 	position: fixed;
 	background: #2c2c2c;
 	width: 26%;
@@ -77,3 +77,8 @@
 .tchat-bar-dialog .send{
 	padding-right: 5px;
 }
+.close{
+	display: none;
+}
+
+

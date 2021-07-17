@@ -440,6 +440,18 @@
 /****Chat*******************************************/
 .tchat{
 	position: absolute;
-	bottom: 0px;
+	bottom: 0px;	
+}
+.show-chat{
+	display: block;
+}
+.hide-chat{
+	display: none;		
+}
+.show-chat .close{
+	display: block;
+}
+.show-chat .tchat{
+	display: block;
 }
 /*****************************************************/

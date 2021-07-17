@@ -6,7 +6,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import AvatarDefault from "../../assets/image/game-tag.png"
 import "./chat.css"
 
-const Chat: React.FC = function() {	
+
+const Chat: React.FC = function() {
   return(
   <div className="tchat">
     <div className="tchat-header">
