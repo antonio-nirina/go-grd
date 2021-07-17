@@ -32,7 +32,6 @@ const SetRules: React.FC = function() {
 	    									<div className="wysiwyg">
 	    										<SunEditor setOptions={
 													{
-														defaultTag:undefined,
 														buttonList:[
 															['undo', 'redo',
 																'font', 'fontSize', 'formatBlock',

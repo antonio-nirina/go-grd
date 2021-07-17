@@ -1,6 +1,6 @@
 @charset "UTF-8";
 .container .league{
-	padding: 5em 0px 0;
+	/*padding: 5em 0px 0;*/
 }
 .container h2{
 	text-transform: inherit;
@@ -72,5 +72,8 @@
 }
 .choices .jeux{
 	background-image: none;	
+	padding-bottom: 0px;
 }
-
+.side-infos thead td{
+	color: #8c8cde;
+}

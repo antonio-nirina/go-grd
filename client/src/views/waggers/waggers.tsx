@@ -27,7 +27,7 @@ const Waggers: React.FC = function() {
   return(
   	<div className="container">
   		<Header />
-  		<div className="participate league">
+  		<div className="participate league waggers">
 			<div className="marg">
 				<div className="part">
 					<div className="undertitle">
@@ -137,7 +137,6 @@ const Waggers: React.FC = function() {
 			</div>
  		</div>
 		</div>		
-		<Join/>
 		<Footer/>
   	</div>
   )

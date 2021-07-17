@@ -1,4 +1,7 @@
 /*************/
+.waggers .undertitle{
+	margin-top: 25px;
+}
 .undertitle:before{
 	height: 60px;
 }

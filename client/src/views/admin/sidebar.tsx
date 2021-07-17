@@ -19,7 +19,7 @@ const SideBar : React.FC = function() {
 					</Link>
 				</li>
 				<li>
-					<Link to="/admin">
+					<Link to="/create-tournament">
 						<i><FontAwesomeIcon icon={faTrophy} size="lg"/></i>
 						<span>Tournois</span>
 					</Link>
@@ -31,13 +31,13 @@ const SideBar : React.FC = function() {
                     </Link>
                 </li>
 				<li>
-					<Link to="#">
+					<Link to="/create-league">
 						<i><FontAwesomeIcon icon={faUsers} size="lg"/></i>
 						<span>Ligues</span>
 					</Link>
 				</li>
 				<li>
-					<Link to="#">
+					<Link to="/create-waggers">
 						<i><FontAwesomeIcon icon={faStar} size="lg"/></i>
 						<span>Waggers</span>
 					</Link>

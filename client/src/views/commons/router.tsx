@@ -3,6 +3,8 @@ import { Route, Switch } from "react-router-dom"
 import Index from "../version/home/index"
 import Admin from "../admin/admin"
 import CreateTournament from "../admin/create-tournament"
+import CreateLeague from "../admin/create-league"
+import CreateWaggers from "../admin/create-waggers"
 import SetRules from "../admin/set-rules"
 import Ligue from "../annexe/ligue"
 import Tournament from "../tournament/tournament"
@@ -36,8 +38,10 @@ const Router = function() {
 		<Switch>
 			<Route path="/" exact component={Index} />
 			<Route path="/index" exact component={Index} />
-			<ProtectedRoute path="/admin" exact component={Admin} />
+			<Route path="/admin" exact component={Admin} />
 			<ProtectedRoute path="/create-tournament" exact component={CreateTournament} />
+			<ProtectedRoute path="/create-league" exact component={CreateLeague} />
+			<ProtectedRoute path="/create-waggers" exact component={CreateWaggers} />
 			<ProtectedRoute path="/set-rules" exact component={SetRules} />
 			<ProtectedRoute path="/tournament" exact component={Tournament} />
 			<ProtectedRoute path="/tournois" exact component={Tournois} />
