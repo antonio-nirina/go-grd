@@ -3,6 +3,7 @@ import { Link } from "react-router-dom"
 
 import Header from "../header/header"
 import Footer from "../footer/footer"
+import Chat from "./chat"
 import Join from "../join/join"
 
 import { faCommentDots } from "@fortawesome/free-solid-svg-icons"
@@ -18,6 +19,7 @@ import "../participate/participate.css"
 import apexlegends from "../../assets/image/apex-legends.png"
 import fr from "../../assets/image/fr.png"
 import discord from "../../assets/image/discord.png"
+import AvatarDefault from "../../assets/image/game-tag.png"
 
 const Joingame: React.FC = function() {
 
@@ -92,6 +94,16 @@ const Joingame: React.FC = function() {
             <div className="icon-tchat">
               <i><FontAwesomeIcon icon={faCommentDots} /></i>
             </div>
+            <div className="salon">
+              <div className="salon-titre">Salon de tchat</div>
+              <div className="salon-team">
+                <img src={AvatarDefault} width="30"/>
+                <p>Wager Apex Legends - <span>3v3...<i><FontAwesomeIcon icon={faCommentDots} size="xs"/></i></span></p>
+              </div>
+            </div>
+          </div>
+          <div className="">
+            <Chat />
           </div>
         </div>
         <div className="clear"></div>        

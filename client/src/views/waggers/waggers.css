@@ -1,4 +1,7 @@
 /*************/
+.joingame .part{
+	padding: 6em 0em 3em 2em;
+}
 .waggers .undertitle{
 	margin-top: 25px;
 }
@@ -25,7 +28,7 @@
 .waggers-title p span{
 	display: block;
 }
-waggers-title p:last-child{
+.waggers-title p:last-child{
 	text-align: right;
 }
 .waggers-title, .waggers-data{
@@ -155,7 +158,8 @@ waggers-title p:last-child{
 	width: 118px;
 }
 .item-info-right{
-	width: 317px;    
+	width: 317px;
+	height: 35vh;
     margin-left: 20px;
     position: relative;  
 }
