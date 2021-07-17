@@ -18,7 +18,6 @@ import  play from "../../assets/image/play-your-game.png"
 import Header from "../header/header"
 import {RootState} from "../../reducer"
 
-import Tchat from "../tchat/tchat"
 import Footer from "../footer/footer"
 import Streamer1 from "../../assets/image/streamer1.jpg"
 import "./communaute.css"
@@ -168,8 +167,7 @@ const Communaute: React.FC = function() {
 	  				</div>
 	  				<Friend />
 	  			</div>
-	  		</div>
-	  		<Tchat/>
+	  		</div>	  		
 			<Footer/>
 	  	</div>
 	</div>

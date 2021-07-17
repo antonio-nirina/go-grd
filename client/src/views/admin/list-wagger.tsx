@@ -15,14 +15,13 @@ const ListWagger : React.FC = function() {
 	}
 
 	return (
-		<div className="layout-container">
-			<SideBar />
-			<div className="content-wrapper">
-				<nav className="navbar">
-          			<div></div>
-                    <Nav />
-        		</nav>
-			</div>
+	<div className="layout-container">
+		<SideBar />
+		<div className="content-wrapper">
+			<nav className="navbar">
+      			<div></div>
+                <Nav />
+    		</nav>			
 			<div className="main-content">
 				<div className="body-content">
 					<div className="column">
@@ -124,6 +123,7 @@ const ListWagger : React.FC = function() {
 				</div>
 			</div>
 		</div>
+	</div>
 	)
 }
 

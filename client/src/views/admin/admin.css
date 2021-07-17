@@ -466,3 +466,27 @@ div#profile-name{
 .field .input-group input.no-margin{
     margin-right: 0;
 }
+/***************************admin waggers******************/
+.wysiwyg{
+    margin-top: 15px;    
+}
+.wysiwyg .sun-editor .se-toolbar{
+    background: #000000;
+}
+.wysiwyg .sun-editor .se-tooltip{
+    color: #ffffff;
+}
+.wysiwyg .sun-editor .se-btn-select .txt{
+    padding-left: 5px;
+    margin-right: 5px;
+}
+.wysiwyg .sun-editor .se-btn:enabled:focus, .wysiwyg .sun-editor .se-btn:enabled:hover{
+    background: none !important;
+}
+.wysiwyg .sun-editor .se-btn:enabled.on:focus, .wysiwyg .sun-editor .se-btn:enabled.on:hover{
+    background: #000000;
+    background-color: #000000;
+}
+.wysiwyg .se-btn.se-btn-select.se-btn-tool-font.se-tooltip.on{
+    background-color: #000000
+}

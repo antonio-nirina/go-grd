@@ -39,6 +39,7 @@
 	display: table-cell;
 	padding-left: 15px;
 	vertical-align: top;
+	position: relative;
 }
 .aside-right .friend-avatar{
 	width: 25px;
@@ -436,3 +437,9 @@
 .bloc-actus .img-actus img{
 	width: 100%;
 }
+/****Chat*******************************************/
+.tchat{
+	position: absolute;
+	bottom: 0px;
+}
+/*****************************************************/

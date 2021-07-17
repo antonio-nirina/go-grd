@@ -43,15 +43,14 @@ const Router = function() {
 		<Switch>
 			<Route path="/" exact component={Index} />
 			<Route path="/index" exact component={Index} />
-			<Route path="/admin" exact component={Admin} />
+			<ProtectedRoute path="/admin" exact component={Admin} />
 			<ProtectedRoute path="/admin/create-tournament" exact component={CreateTournament} />
 			<ProtectedRoute path="/admin/create-league" exact component={CreateLeague} />
-			<ProtectedRoute path="/admin/create-waggers" exact component={CreateWaggers} />
+			<ProtectedRoute path="/admin/create-wagger" exact component={CreateWaggers} />
 			<ProtectedRoute path="/admin/set-rules" exact component={SetRules} />
 			<ProtectedRoute path="/admin/tournament" exact component={ListTournament} />
 			<ProtectedRoute path="/admin/league" exact component={ListLeague} />
 			<ProtectedRoute path="/admin/wagger" exact component={ListWagger} />
-
 			<ProtectedRoute path="/tournament" exact component={Tournament} />
 			<ProtectedRoute path="/tournois" exact component={Tournois} />
 			<ProtectedRoute path="/tournament-game" exact component={TournamentGame} />

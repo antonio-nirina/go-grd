@@ -1,6 +1,7 @@
 import React,{useState,useEffect} from "react"
 import { faPlusSquare, faCommentDots, faQuestionCircle, faUserPlus } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import Chat from "../tchat/chat"
 import Popup from "reactjs-popup"
 import "reactjs-popup/dist/index.css"
 import { Link } from 'react-router-dom'
@@ -220,6 +221,7 @@ const Friend: React.FC = function() {
 					<p>Problème de Connexion <i><FontAwesomeIcon icon={faQuestionCircle} size="xs"/></i></p>
 				</div>
 			</div>
+			<Chat />
 		</div>
 	)
 }
