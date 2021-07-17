@@ -43,5 +43,8 @@ var TournamentSchemaType = graphql.NewObject(graphql.ObjectConfig{
 		"plateform":&graphql.Field{
 			Type:PlateformSchemaType,
 		},
+		"rules": &graphql.Field{
+			Type: graphql.String,
+		},
 	},
 })

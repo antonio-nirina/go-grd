@@ -39,6 +39,9 @@ func saveTournament() *graphql.Field {
 			"priceParticipate": &graphql.ArgumentConfig{
 				Type: graphql.Float,
 			},
+			"rules": &graphql.ArgumentConfig{
+				Type: graphql.String,
+			},
 		},
 		Resolve:     tournamentResolver.SavedTournamentResolver,
 	}

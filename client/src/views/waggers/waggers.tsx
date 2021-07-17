@@ -137,7 +137,6 @@ const Waggers: React.FC = function() {
 			</div>
  		</div>
 		</div>		
-		<Join/>
 		<Footer/>
   	</div>
   )
