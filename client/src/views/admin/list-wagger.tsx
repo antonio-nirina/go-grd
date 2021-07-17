@@ -55,7 +55,7 @@ const ListWagger : React.FC = function() {
 							</div>
 						</div>
 						<div className="create-game">
-							<Link to="/create-wagger"><button className="btn bg-red"><FontAwesomeIcon icon={faPlus} /> Créer Wagger</button></Link>
+							<Link to="/admin/create-wagger"><button className="btn bg-red"><FontAwesomeIcon icon={faPlus} /> Créer Wagger</button></Link>
 						</div>
 					</div>
 					<div className="body-card">

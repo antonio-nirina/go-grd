@@ -11,11 +11,12 @@ type Tournament struct {
 	Date 		  			string            	`json:"date"`
 	Game 	 	  			game.Game 	   		`json:"game,omitempty"`
 	Plateform 	  			game.GamePlatform 	 `json:"plateform,omitempty"`
-	Description   			string            	`json:"description"`
 	NumberParticipate 		int            	`json:"numberParticipate"`
 	NumberTeam 		  		int            		`json:"numberTeam"`
 	Price 		  			float64             `json:"price"`
 	DeadlineDate 		  	string            	`json:"deadlineDate"`
 	PriceParticipate 		float64            `json:"priceParticipate"`
 	Statut 		  			bool 				`json:"statut"`
+	Info   					string            	`json:"info"`
+	Rules   				string            	`json:"rules"`
 }

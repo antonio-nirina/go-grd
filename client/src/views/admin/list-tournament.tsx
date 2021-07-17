@@ -73,7 +73,7 @@ const ListTournament : React.FC = function() {
 							</div>
 						</div>
 						<div className="create-game">
-							<Link to="/create-tournament"><button className="btn bg-red"><FontAwesomeIcon icon={faPlus} /> Créer tournois</button></Link>
+							<Link to="/admin/create-tournament"><button className="btn bg-red"><FontAwesomeIcon icon={faPlus} /> Créer tournois</button></Link>
 						</div>
 					</div>
 					<div className="body-card">

@@ -53,13 +53,14 @@ func (t *tournament) SavedTournamentResolver(params graphql.ResolveParams) (inte
 		Date:date,
 		Game: game,
 		Plateform: plateform,
-		Description:description,
 		NumberParticipate:numberParticipate,
 		NumberTeam:numberTeam,
 		Price:price,
 		DeadlineDate:deadlineDate,
 		PriceParticipate:priceParticipate,
 		Statut:true,
+		Info:description,
+		Rules:""
 	}
 
 	res, err := t.tournamentHandler.SavedTournamentHandler(tournament)

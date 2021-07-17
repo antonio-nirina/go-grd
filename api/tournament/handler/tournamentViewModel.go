@@ -14,6 +14,7 @@ type tournamentViewModel struct {
 	PriceParticipate    float64  `json:"priceParticipate"`
 	Game 				GameViewModel `json:"game"`
 	Plateform  			PlateformViewModel `json:"plateform"`
+	Rules   			string            	`json:"rules"`
 }
 
 type GameViewModel struct {

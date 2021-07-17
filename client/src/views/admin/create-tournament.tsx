@@ -1,8 +1,10 @@
 import React from "react"
 import { Link } from "react-router-dom"
 //import {useMutation} from "@apollo/client"
-import { faPlus, faChevronRight} from "@fortawesome/free-solid-svg-icons"
+import { faPlus} from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import SunEditor from 'suneditor-react'
+import 'suneditor/dist/css/suneditor.min.css'
 
 import "../admin/admin.css"
 import SideBar from "./sidebar"
@@ -25,10 +27,6 @@ const CreateTournament: React.FC = function() {
 	        					<div className="title">
 	                                <h1>Création d'un tournois</h1>
 	                            </div>
-	        					<div className="create-tournament-game">
-	        						<Link to="/admin"><button className="btn bg-white"> Annuler</button></Link>
-	                                <button className="btn bg-red"><FontAwesomeIcon icon={faPlus} /> Enregistrer</button>
-	        					</div>
 	                            <div className="setting-tournament">
 	                                <div className="field">
 	                                    <div className="group-input">
@@ -46,17 +44,49 @@ const CreateTournament: React.FC = function() {
 	                                                <option value="0">Playstation</option>
 	                                                <option value="1">Xbox</option>
 	                                            </select>
-	                                            <textarea placeholder="Description..."></textarea>
+	                                            <SunEditor setOptions={
+													{
+														buttonList:[
+															['undo', 'redo',
+																'font', 'fontSize', 'formatBlock',
+																'bold', 'italic',
+																'fontColor', 'hiliteColor', 'textStyle',
+																'removeFormat',
+																'outdent', 'indent',
+																'align', 'horizontalRule', 'list', 'lineHeight',
+																'link', 'image',
+															]
+														]
+													}
+												} />
 	                                            <div className="input-group">
 	                                                <input type="number" placeholder="Nombre de participant"/>
 	                                                <input type="number" placeholder="Nombre d'equipes" className="no-margin"/>
 	                                            </div>
 	                                            <div className="input-group">
-	                                                <input type="number" placeholder="Prix"/>
+	                                                <input type="number" placeholder="Prix à gagner"/>
 	                                                <input type="number" placeholder="Frais de participation" className="no-margin"/>
 	                                            </div>
 	                                            <input type="text" placeholder="Deadline"/>
-	                                            <Link to="/set-rules"><button className="btn bg-red">Modifier les règles <FontAwesomeIcon icon={faChevronRight} /> </button></Link>
+	                                            <SunEditor setOptions={
+													{
+														buttonList:[
+															['undo', 'redo',
+																'font', 'fontSize', 'formatBlock',
+																'bold', 'italic',
+																'fontColor', 'hiliteColor', 'textStyle',
+																'removeFormat',
+																'outdent', 'indent',
+																'align', 'horizontalRule', 'list', 'lineHeight',
+																'link', 'image',
+															]
+														]
+													}
+												} />
+												<div className="create-tournament-game">
+	        										<Link to="/admin"><button className="btn bg-white"> Annuler</button></Link>
+                                					<button className="btn bg-red"><FontAwesomeIcon icon={faPlus} /> Enregistrer</button>
+	        									</div>
 	                                        </form>
 	                                    </div>
 	                                </div>

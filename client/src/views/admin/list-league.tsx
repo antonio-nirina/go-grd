@@ -56,7 +56,7 @@ const ListLeague : React.FC = function() {
 							</div>
 						</div>
 						<div className="create-game">
-							<Link to="/create-league"><button className="btn bg-red"><FontAwesomeIcon icon={faPlus} /> Créer ligue</button></Link>
+							<Link to="/admin/create-league"><button className="btn bg-red"><FontAwesomeIcon icon={faPlus} /> Créer ligue</button></Link>
 						</div>
 					</div>
 					<div className="body-card">

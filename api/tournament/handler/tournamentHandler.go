@@ -48,7 +48,7 @@ func (t *tournamentUsecase) FindTournamentHandler(idQuery string) (tournamentVie
 	tournamentViewModel := tournamentViewModel{
 		Uid: result.Uid.Hex(),
 		Title:result.Title,     			
-		Description:result.Description,      	
+		Description:result.Info,      	
 		Statut:result.Statut,
 		Date:result.Date,  				
 		NumberParticipate:result.NumberParticipate,
@@ -57,7 +57,8 @@ func (t *tournamentUsecase) FindTournamentHandler(idQuery string) (tournamentVie
 		DeadlineDate:result.DeadlineDate,    	
 		PriceParticipate:result.PriceParticipate,  
 		Game:GameViewModel{result.Game.Uid.Hex(),result.Game.Name,result.Game.Logo,result.Game.Slug},				
-		Plateform:PlateformViewModel{result.Plateform.Uid.Hex(),result.Plateform.Name,result.Plateform.Description}, 			
+		Plateform:PlateformViewModel{result.Plateform.Uid.Hex(),result.Plateform.Name,result.Plateform.Description},
+		Rules:result.Rules, 			
 	}
 
 	return tournamentViewModel,nil
@@ -77,7 +78,7 @@ func (t *tournamentUsecase) FindAllTournamentHandler(pageNumber int64, limit int
 			Uid: val.Uid.Hex(),
 			Title:val.Title,
 			Date:val.Date,     			
-			Description:val.Description,      	
+			Description:val.Info,      	
 			Statut:val.Statut, 				
 			NumberParticipate:val.NumberParticipate,
 			NumberTeam:val.NumberTeam, 			
@@ -85,7 +86,8 @@ func (t *tournamentUsecase) FindAllTournamentHandler(pageNumber int64, limit int
 			DeadlineDate:val.DeadlineDate,    	
 			PriceParticipate:val.PriceParticipate,  
 			Game:GameViewModel{val.Game.Uid.Hex(),val.Game.Name,val.Game.Logo,val.Game.Slug},				
-			Plateform:PlateformViewModel{val.Plateform.Uid.Hex(),val.Plateform.Name,val.Plateform.Description}, 			
+			Plateform:PlateformViewModel{val.Plateform.Uid.Hex(),val.Plateform.Name,val.Plateform.Description},
+			Rules:val.Rules,  			
 		}
 
 		res = append(res, tournamentViewModel)
