@@ -97,7 +97,7 @@ const Joingame: React.FC = function() {
             <div className="salon">
               <div className="salon-titre">Salon de tchat</div>
               <div className="salon-team">
-                <img src={AvatarDefault} width="30"/>
+                <img src={AvatarDefault} width="30" alt="joingame" />
                 <p>Wager Apex Legends - <span>3v3...<i><FontAwesomeIcon icon={faCommentDots} size="xs"/></i></span></p>
               </div>
             </div>
