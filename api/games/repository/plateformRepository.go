@@ -47,9 +47,9 @@ func (c *driverRepository) FindOnePlateformRepository(objectId primitive.ObjectI
 	return result, nil
 }
 
-func (c *driverRepository) FindAllPlateformRepository() (interface{}, error) {
+func (c *driverRepository) FindAllPlateformRepository() ([]entity.GamePlatform, error) {
 	var collection = c.client.Database("grd_database").Collection("game_platform")
-	var results []primitive.M
+	var results []entity.GamePlatform
 	cur, err := collection.Find(context.TODO(), bson.D{{}})
 
 	if err != nil {
@@ -57,7 +57,7 @@ func (c *driverRepository) FindAllPlateformRepository() (interface{}, error) {
 	}
 
 	for cur.Next(context.TODO()) {
-		var elem primitive.M
+		var elem entity.GamePlatform
 		err := cur.Decode(&elem)
 		if err != nil {
 			log.Fatal(err)

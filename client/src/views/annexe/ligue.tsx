@@ -2,9 +2,8 @@ import React from "react"
 import { Link } from "react-router-dom"
 import Header from "../header/header"
 import Footer from "../footer/footer"
-import Join from "../join/join"
 import { faGamepad, faTrophy } from "@fortawesome/free-solid-svg-icons"
-import { faXbox, faPlaystation} from "@fortawesome/free-brands-svg-icons"
+import { faXbox } from "@fortawesome/free-brands-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 import "../../assets/css/style.css"
@@ -26,7 +25,7 @@ const Ligue: React.FC = function() {
   	<div className="container">
   		<Header/>
   		<div className="full-container">
-			<h1>Liste des ligues disponibles</h1>				
+			<h1>Liste des ligues disponibles</h1>
 			<div className="card">
 				<h2>Ligues (2)</h2>
 				<div className="bt-container">
@@ -115,7 +114,7 @@ const Ligue: React.FC = function() {
 					</Link>
 				</div>
 			</div>
-		</div>		
+		</div>
 		<div className="choices">
 			<div className="jeux">
 			    <h2>
@@ -169,7 +168,7 @@ const Ligue: React.FC = function() {
 							<p className="price inblock"><i className="sprite cup"></i><span>100€ Cash Prize</span></p>
 							<p className="date inblock"><i className="sprite calendar"></i><span>02/04/2021 - 5:00 PM</span></p>
 						</div>
-					</div>						
+					</div>
 					<div className="apex block dark-red">
 						<div><p className="legend">Fortnite Weekly Cup</p><i className="iconGame"><FontAwesomeIcon icon={faGamepad}/></i></div>
 						<div className="info">
@@ -180,9 +179,9 @@ const Ligue: React.FC = function() {
 				</div>
 
 				</div>
-			</div>			
-		</div>		
-		</div>		
+			</div>
+		</div>
+		</div>
 		<Footer/>
   	</div>
   )

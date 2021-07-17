@@ -10,7 +10,7 @@ type PlateformRepositoryInterface interface {
 	SavedPlateformRepository(plateform *entity.GamePlatform) (interface{}, error)
 	FindOnePlateformRepository(objectId primitive.ObjectID) (interface{}, error)
 	FindOnePlateformByUidRepository(objectId primitive.ObjectID) (entity.GamePlatform, error)
-	FindAllPlateformRepository() (interface{}, error)
+	FindAllPlateformRepository() ([]entity.GamePlatform, error)
 }
 
 type GameRepositoryInterface interface {

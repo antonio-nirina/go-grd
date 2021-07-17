@@ -39,7 +39,7 @@ func (t *tournament) SavedTournamentResolver(params graphql.ResolveParams) (inte
 	price, _ := params.Args["price"].(float64)
 	deadlineDate, _ := params.Args["deadlineDate"].(string)
 	priceParticipate, _ := params.Args["priceParticipate"].(float64)
-
+	rules, _ := params.Args["rules"].(string)
 	game,err := t.gameTournamentHandler.FindOneGameByUidHandler(gameUid)
 	plateform,err := t.plateformTournamentHandler.FindOnePlateformByUidHandler(plateformUid)
 
@@ -60,7 +60,7 @@ func (t *tournament) SavedTournamentResolver(params graphql.ResolveParams) (inte
 		PriceParticipate:priceParticipate,
 		Statut:true,
 		Info:description,
-		Rules:""
+		Rules:rules,
 	}
 
 	res, err := t.tournamentHandler.SavedTournamentHandler(tournament)

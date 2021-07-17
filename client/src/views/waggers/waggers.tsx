@@ -2,7 +2,6 @@ import React from "react"
 import { Link } from "react-router-dom"
 import Header from "../header/header"
 import Footer from "../footer/footer"
-import Join from "../join/join"
 import { faXbox, faPlaystation } from "@fortawesome/free-brands-svg-icons"
 import { faGamepad } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
@@ -96,9 +95,9 @@ const Waggers: React.FC = function() {
 								</div>
 							</div>
 						</Link>
-					</div>								
+					</div>
 				</div>
-			</div>			
+			</div>
 		</div>
 		<div className="choices">
 			<div className="jeux">
@@ -136,7 +135,7 @@ const Waggers: React.FC = function() {
 				</div>
 			</div>
  		</div>
-		</div>		
+		</div>
 		<Footer/>
   	</div>
   )

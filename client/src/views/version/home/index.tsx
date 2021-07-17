@@ -66,7 +66,7 @@ const Index: React.FC = function() {
 	      </div>
 	      <Game/>
 	      <Service/>
-	      <Join/>
+	      {Object.keys(userConnectedRedux.user).length === 0 ? <Join/> : null}
 	      <Footer/>
 	  </div>
     </div>

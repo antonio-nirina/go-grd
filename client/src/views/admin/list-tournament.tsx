@@ -12,12 +12,12 @@ import Nav from "./nav"
 const ListTournament : React.FC = function() {
 	const [showList, setShowList] = useState<Boolean>(false)
 	const [tournament, setTournament] = useState<any>([])
-	const [limit, setLimit] = useState<Number>(0)
-	const [pageNumber, setPageNumber] = useState<Number>(0)
+	//const [limit, setLimit] = useState<Number>(0)
+	//const [pageNumber, setPageNumber] = useState<Number>(0)
 	const {loading,error,data} 		= useQuery(GET_ALL_TOURNAMENT, {
 		variables: {
-			limit:limit,
-			pageNumber:pageNumber
+			limit:0,
+			pageNumber:0
 		},
 	})
 
@@ -39,7 +39,7 @@ const ListTournament : React.FC = function() {
 				<nav className="navbar">
           			<div></div>
                     <Nav />
-        		</nav>			
+        		</nav>
 				<div className="main-content">
 					<div className="body-content">
 						<div className="column">
@@ -113,7 +113,15 @@ const ListTournament : React.FC = function() {
 								return (
 									<div className="body-card" key={index}>
 										<div className="card-result">
-											<p>{el.date}</p>
+											<p>{
+												new Date(el.date).toLocaleTimeString('fr-Fr', {
+													day : 'numeric',
+													month : 'long',
+													year : 'numeric',
+													hour:"numeric",
+													minute:"numeric"
+												})
+											}</p>
 										</div>
 										<div className="card-result">
 											<p>{el.title}</p>
