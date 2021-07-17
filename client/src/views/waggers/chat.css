@@ -1,3 +1,40 @@
+.salon{
+	position: absolute;
+	text-align: center;
+    background: #2c2c2c;
+    right: 0px;    
+    bottom: -94px;
+    width: 316px;
+    height: 255px;
+    display: none;
+}
+.salon-team{
+	display: flex;
+	padding-top: 2px;
+	text-align: center;
+	padding-left: 12px;
+	background: #7b7b7b;
+}
+.salon-team p{
+	font-size: 12px;
+	align-self: center;
+	margin-left: 5px;
+	padding-bottom: 6px;
+}
+.salon-team p i{
+	font-size: 19px;
+	margin-left: 5px;
+}
+.salon-titre{
+	font-weight: bold;
+	background: #2c2c2c;
+	padding: 15px;
+}
+.group-tchat.tchat{
+	right: 0px;
+	padding: 0;
+	display: none;
+}
 .tchat{	
 	position: fixed;
 	background: #2c2c2c;

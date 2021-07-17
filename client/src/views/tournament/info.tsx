@@ -6,6 +6,7 @@ import Footer from "../footer/footer"
 import "../tournament/info.css"
 import "../../assets/css/style.css"
 import { Link } from "react-router-dom"
+import Championship from "../../assets/image/championship.jpeg"
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 // import { faPlaystation } from "@fortawesome/free-brands-svg-icons"
 // import { faCalendarAlt, faInfoCircle, faGamepad, faTrophy, faMedal, faStepBackward, faStepForward, faChevronRight, faChevronLeft, faMobile } from "@fortawesome/free-solid-svg-icons"
@@ -24,8 +25,11 @@ const Info: React.FC = function(props:any) {
 					<p className="status">Status : <span>ouvert</span></p>
 				</div>
 				
-				<div className="banniere"></div>
+				<div className="banniere">
+					<img src={Championship} alt=""/>
+				</div>
 				<div className="tabs">
+					
 					<ul>
 						<li><Link to="/info" className="active">Info</Link></li>
 						<li><Link to="/matches">Match</Link></li>
