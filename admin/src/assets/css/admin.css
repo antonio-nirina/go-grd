@@ -2,8 +2,7 @@ body{
     background: #101010;
     color: #ffffff;
     font-family: 'quicksand regular';
-    font-size: 14px;
-    list-style:none;
+    font-size: 14px;    
 }
 
 .d-md-inline-block{
@@ -519,4 +518,42 @@ form .sun-editor .se-btn:enabled.on:focus, .wysiwyg .sun-editor .se-btn:enabled.
 }
 form .se-btn.se-btn-select.se-btn-tool-font.se-tooltip.on{
     background-color: #000000
+}
+/******************************/
+.dashboard{
+    display: flex;
+}
+.dashboard-title{
+    padding: 25px 15px;
+    text-align: center;
+}
+.grid{
+    width: 224px;
+    margin-right: 15px;
+    border: 1px solid #9c9c9e;
+    padding-bottom: 15px;
+    background: #3a3838;
+    border-radius: 5px;
+    align-self: center;
+}
+.grid img{
+    width: 100%;
+    height: 210px;
+    border-bottom: 1px solid #9c9c9e;
+    border-radius: 0 5px;
+}
+.grid-title{
+    font-family: "russo one";
+    display: block;
+    font-size: 24px;
+    color: #ffffff;
+    padding: 15px 5px;
+    text-align: center;
+
+}
+.grid-desc{
+    font-size: 16px;
+    display: block;
+    color: #9c9c9e;
+    text-align: center;
 }

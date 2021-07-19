@@ -23,7 +23,7 @@ const Router = function() {
 			<Route path="/admin/communaute" exact component={SetRules} />
 			<Route path="/admin/tournament" exact component={ListTournament} />
 			<Route path="/admin/league" exact component={ListLeague} />
-			<ProtectedRoute path="/admin/wagger" exact component={ListWagger} />
+			<Route path="/admin/wagger" exact component={ListWagger} />
 		</Switch>
 	)
 }
