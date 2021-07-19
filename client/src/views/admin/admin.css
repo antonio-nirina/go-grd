@@ -1,3 +1,9 @@
+.body{
+    background: #101010;
+    color: #ffffff;
+    font-family: 'quicksand regular';
+    font-size: 14px;
+}
 .admin a{
 	max-width: inherit;
 }
