@@ -18,13 +18,13 @@ import  play from "../../assets/image/play-your-game.png"
 import Header from "../header/header"
 import {RootState} from "../../reducer"
 
-import Tchat from "../tchat/tchat"
 import Footer from "../footer/footer"
 import Streamer1 from "../../assets/image/streamer1.jpg"
 import "./communaute.css"
 // import {COUNT_SUBSCRIBE} from "../../gql/user/subscription"
 import {GET_ALL_STREAMING} from "../../gql/user/query"
 import Friend from "./friends"
+
 
 const Communaute: React.FC = function() {
 	const userConnectedRedux 	= useSelector((state:RootState) => state.userConnected)
@@ -167,8 +167,7 @@ const Communaute: React.FC = function() {
 	  				</div>
 	  				<Friend />
 	  			</div>
-	  		</div>
-	  		<Tchat/>
+	  		</div>	  		
 			<Footer/>
 	  	</div>
 	</div>

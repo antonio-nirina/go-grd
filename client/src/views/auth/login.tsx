@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form"
 import {useMutation} from "@apollo/client"
 import {useHistory } from "react-router-dom"
 import { useDispatch } from "react-redux"
-import { faTwitch } from "@fortawesome/free-brands-svg-icons"
+import { faTwitch,faDiscord } from "@fortawesome/free-brands-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 import {TokenType,SendToken} from "./utils"
@@ -17,6 +17,7 @@ import {Translation} from "../../lang/translation"
 import {LOGIN} from "../../gql/user/auth"
 import Footer from "../footer/footer"
 import joystick from "../../assets/image/joystick.png"
+import {getDataByToken} from "../../storage/tokenStorage"
 import "../auth/login.css"
 import "../../assets/css/style.css"
 
@@ -43,6 +44,7 @@ const Login: React.FC = function() {
 		if(checkValidEmail(email)) {
 			try {
 				const result = await login({ variables: { email: email,password:password } })
+
 				if (result.data.login) {
 					const token:TokenType = {
 						access_token:result.data.login,
@@ -52,8 +54,17 @@ const Login: React.FC = function() {
 					SendToken(token)
 					dispatch(sendUserConectedAction(result.data.login))
 				}
-				history.push("/")
+
+				const data:Array<string|null> = getDataByToken() ? getDataByToken() : []
+
+				if(data.includes("role_admin")) {
+					history.push("/admin")
+				} else {
+					history.push("/")
+				}
+
 			} catch(e) {
+				console.log(e)
 				setPasswd(true)
 			}
 		} else {
@@ -91,6 +102,7 @@ const Login: React.FC = function() {
 							<div className="other-account">
 								<p>Connectez-vous avec votre compte : </p>
 								<span onClick={SigingTwitch}><i className="platform"><FontAwesomeIcon icon={faTwitch}/></i></span>
+								<span onClick={SigingTwitch}><i className="discord"><FontAwesomeIcon icon={faDiscord}/></i></span>
 							</div>
 						</div>
 					</div>

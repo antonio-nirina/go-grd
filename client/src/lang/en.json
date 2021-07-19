@@ -14,7 +14,9 @@
 		"tournaments": "tournaments",
 		"refuse":"Refuse",
 		"accepted": "Accepted",
-		"text":"Incoming you to be your friend"
+		"text":"Incoming you to be your friend",
+		"switch":"Back to admin",
+		"logout":"Logout"
 	},
 	"home":{
 		"gameTag": "Gametag",

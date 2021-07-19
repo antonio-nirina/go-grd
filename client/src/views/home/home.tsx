@@ -56,9 +56,9 @@ const Home: React.FC = function() {
 		}
 	},[])
   return(
-    <div className="home">
+    <div className="home" >
       <div className="container">
-	      <Header />
+	      <Header/>
 	      <div className="main">
 	        <div className="slider">
 	        	<Slider/>
@@ -70,7 +70,7 @@ const Home: React.FC = function() {
 	      </div>
 	      <Game/>
 	      <Community/>
-	      <Join/>
+		  {Object.keys(userConnectedRedux.user).length === 0 ? <Join/> : null}
 	      <Footer/>
 	  </div>
     </div>

@@ -2,6 +2,7 @@ package delivery
 
 import (
 	"errors"
+	//"fmt"
 
 	"github.com/graphql-go/graphql"
 	"github.com/thoussei/antonio/api/external"
@@ -85,7 +86,7 @@ func (r *resolver) GetAllFriendsUser(params graphql.ResolveParams) (interface{},
 		result = append(result, *res)
 	} else {
 		for _,val := range user.Friends {
-			res.Id = user.Uid.Hex()
+			res.Id = val.Uid.Hex()
 			res.Count = len(user.Friends)
 			res.Email = val.Email
 			res.Firstname = val.FirstName

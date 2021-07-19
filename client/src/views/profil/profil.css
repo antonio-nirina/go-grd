@@ -4,6 +4,10 @@
 	
 	background-position: center top;
 }
+.profil .main-content {
+	padding-left: 0px;
+	padding-right: 0px;
+}
 .main-pro{
 	/*background: url("../../assets/image/ban1.jpg") no-repeat;	*/
 	min-height: 100vh;	
@@ -19,19 +23,27 @@
 	background: #101010;
 	padding: 5px 3em 3em;	
 }
+.profil .wall-bloc .wall{
+	width: 94%;
+	margin: 30px auto;
+
+}
 .float{
 	display: inline-block;
     width: 306px;
     vertical-align: middle;
     text-align: right;
 }
-.gamer-profil{
-	display: flex;
-	align-items: center;
+.profil .gamer-profil{
+	display: flex;	
 	padding: 15px 20px;
+	align-self: center;
 }
-.gamer-tag{
+.profil .gamer-tag{
 	padding: 0 25px;
+}
+.profil .container .gamer-tag h2{
+	font-size: 20px;
 }
 .tabs{	
 	width: 100%;
@@ -67,6 +79,7 @@
 	padding: 15px;
 	background: #2c2c2c;
 	border-radius: 15px;
+	display: flex;
 }
 .stat{
 	
@@ -147,14 +160,17 @@
 .uploadFile{
 	display: none;
 }
-.avatar .pseudo{
-	margin-top: 10px;
+.gamer-tag .pseudo strong{	
+	font-weight: inherit;
+	padding-top: 6px;
+	display: block;	
 }
-.avatar-info{
+.profil .avatar-info{
 	max-width: 750px;    
     display: inline-block;
     vertical-align: top;
     width: 100%;
+    align-self: center;
 }
 .main-pro .avatar img{
 	width: 100%;
@@ -316,6 +332,10 @@ p.lg-desc{
 	min-height:  100vh;
 	display: inline-block;
 	vertical-align: top;*/
+}
+.profil .gamer-tag h2
+{	
+	padding: 0;
 }
 .my-games h2,
 .my-teams h2,
@@ -536,10 +556,15 @@ p.lg-desc{
 	background: none;
 	color: inherit;
 }
-
-.tab-content tr:hover{
-	background: #f2cf1c;
-	color: #000000;
+.profil .tab-content thead tr{
+	background: #000000;
+}
+.profil .tab-content thead tr:hover{
+	background: inherit;
+}
+.profil .tab-content tr:hover{
+	background: #dd0000;
+	color: #ffffff;
 }
 
 .tab-content{
@@ -592,6 +617,9 @@ p.lg-desc{
 	width: 100%;
 	padding: 5px 0em 3em 3em;
 }
+.prem-bloc{
+	display: flex;
+}
 .item-bloc{
 	background: #2c2c2c;
 	width: 23%;	
@@ -629,10 +657,11 @@ p.lg-desc{
 .ht75{
 	height: 75px !important;
 }
-.account-name{    
+.profil .account-name{    
     width: 250px;
     display: inline-block;
     vertical-align: top;
+    align-self: center;
 }
 .account-name span{
 	padding: 0px 0px 10px;
@@ -657,9 +686,10 @@ p.lg-desc{
 	font-size: 10px;
 	padding: 8px;
 }
-.statistique{
+.profil .statistique{
 	padding: 0px 3em 0;
     background: #2c2c2c;
+    justify-content: center;
 }
 .start{
 	width: 210px;

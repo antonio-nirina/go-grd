@@ -1,0 +1,84 @@
+.tchat{	
+	position: fixed;
+	background: #2c2c2c;
+	width: 26%;
+	height: 40%;	
+}
+.tchat i{
+	font-size: 20px;
+	padding: 5px;
+}
+.tchat-header{	
+	background: #000000;
+	padding: 4px 6px 10px;
+}
+.tchat-icon{	
+	display: inline-block;
+}
+.tchat-header span{	     
+    display: inline-block;
+    padding: 4px;
+}
+.close-tchat{		
+    width: 25px;
+    float: right;
+    margin-top: 5px;
+}
+.tchat-content{
+	padding: 15px;
+}
+.msg-received, .msg-send{
+	display: flex;
+}
+.msg-received{
+
+}
+.msg-send{
+
+}
+.tchat-bar-dialog{
+	position: absolute;
+	bottom: 0;
+}
+.tchat-bar-dialog{
+	width: 100%;
+}
+.tchat-bar-dialog form{
+	display: flex;
+}
+.tchat-content .content{
+	background: #4a4949;
+    padding: 15px;
+    width: 278px;
+    margin: auto;
+    border-radius: 15px;
+}
+
+.tchat-content .message{
+	margin-bottom: 15px;
+}
+.tchat-content .message img{
+	height: 35px;
+	margin-right: 5px;
+}
+.tchat-content .content span{
+	display: block;
+	font-size: 10px;
+	padding-top: 5px;	
+	color: gray;
+}
+.tchat-bar-dialog input{
+	width: 100%;
+	padding: 10px;
+}
+.tchat-bar-dialog button{
+	margin-right: 8px;
+}
+.tchat-bar-dialog .send{
+	padding-right: 5px;
+}
+.close{
+	display: none;
+}
+
+

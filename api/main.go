@@ -35,7 +35,6 @@ func main() {
 		Pretty:     true,
 		GraphiQL:   false,
 		Playground: true,
-		// FormatErrorFn: ,
 	})
 
 	http.Handle("/graphql", external.Handle(httpHandler))

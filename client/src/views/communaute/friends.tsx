@@ -1,6 +1,7 @@
-import React,{useMemo, useState} from "react"
+import React,{useState,useEffect} from "react"
 import { faPlusSquare, faCommentDots, faQuestionCircle, faUserPlus } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import Chat from "../tchat/chat"
 import Popup from "reactjs-popup"
 import "reactjs-popup/dist/index.css"
 import { Link } from 'react-router-dom'
@@ -99,6 +100,7 @@ const Friend: React.FC = function() {
 	const [friends, setFriends] 	= useState<Array<Friends>>([])
 	const [users, setUsers] 		= useState<Array<Friends>>([])
 	const [isOpen, setIsOpen] 		= useState<boolean>(false)
+	const [showChat, setShowChat] = useState<Boolean>(false)
 
 	const {loading,error,data} 		= useQuery(GET_ALL_FRIENDS, {
 		variables: {
@@ -114,7 +116,7 @@ const Friend: React.FC = function() {
 	})
 	const {loading:ldSub,error:erSub,data:dataSub}  = useSubscription(USER_CONNECTED)
 
-	useMemo(()=> {
+	useEffect(()=> {
 		if(!loading && !error && data) {
 			if(data.GetAllFriends[0].count > 0) {
 				setNbFriends(data.GetAllFriends[0].count)
@@ -123,16 +125,36 @@ const Friend: React.FC = function() {
 		}
 		if(!loadingAll && !errorAll && dataAll) setUsers(dataAll.GetUsers.filter((e:any) => e.uid !== userConnectedRedux.user.uid))
 
-		if(!ldSub && !erSub && dataSub) console.log("dataSub",dataSub)
-	},[loading,error,data,loadingAll,errorAll,dataAll,ldSub,erSub,dataSub,userConnectedRedux])
+		if(!ldSub && !erSub && dataSub) {
+			let array:Array<Friends> = []
+			friends.forEach(function(e:Friends) {
+				array.push({
+					id:e.id,
+					username:e.username,
+					firstname:"",
+					lastname:"",
+					email:e.email,
+					avatar:e.avatar,
+					isBanned:false,
+					count:0,
+					isConnected:dataSub.subscribeConnected.uid === e.id ? true : e.isConnected
+				})
+			})
+
+			setFriends(array)
+		}
+	},[loading,error,data,loadingAll,errorAll,dataAll,ldSub,erSub,dataSub,userConnectedRedux,friends])
 
 
 	const openHandle = function(){
 		setIsOpen(true)
 	}
+	const onShowChat = function(){
+		setShowChat(!showChat)
+	}
 
 	return (
-		<div className="aside-right">
+		<div className="aside-right">			
 			{nbFriends
 				?
 				friends.map(function(el:any,index:number) {
@@ -142,7 +164,7 @@ const Friend: React.FC = function() {
 							<div key={index}>
 								<img src={img} className="friend-avatar" alt=""/>
 								<span>{el.username}<i className={el.isConnected ? "u-connected" : ""}></i></span>
-								<i><FontAwesomeIcon icon={faCommentDots} size="xs"/></i>
+								<i><FontAwesomeIcon icon={faCommentDots} size="xs" onClick={onShowChat}/></i>
 								<i onClick={openHandle} style={{"cursor":"pointer"}}>
 									<FontAwesomeIcon icon={faPlusSquare} size="xs" />
 								</i>
@@ -202,6 +224,9 @@ const Friend: React.FC = function() {
 				<div className="subjectforum">
 					<p>Problème de Connexion <i><FontAwesomeIcon icon={faQuestionCircle} size="xs"/></i></p>
 				</div>
+			</div>
+			<div className={!showChat ? "hide-chat" :"show-chat"}>
+				<Chat/>
 			</div>
 		</div>
 	)

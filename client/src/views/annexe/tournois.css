@@ -1,6 +1,26 @@
 @charset "UTF-8";
-.anex-tournois{
-	padding: 3em 0px 0;
+.tournament-bloc{	
+	
+}
+.tournament-bloc .jeux{
+	padding-bottom: 0;
+}
+.tournament-bloc .league{
+	padding-top: 0;
+}
+.tournament-bloc .full-container h2{
+	font-weight: lighter;
 	font-family: "russo one";
 }
-
+.content{
+	display: block !important;
+}
+.content .block{
+	max-width: 205px !important;
+	width: 100% !important;
+	border-radius: 15px !important;
+	margin-bottom: 15px;
+}
+.tournament-bloc .side{
+	
+}

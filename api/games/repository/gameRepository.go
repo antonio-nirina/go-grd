@@ -4,12 +4,11 @@ import (
 	"context"
 	"fmt"
 
-
+	"github.com/thoussei/antonio/api/external"
 	"github.com/thoussei/antonio/api/games/entity"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
-	"github.com/thoussei/antonio/api/external"
 )
 
 // Return Interface User Repository
@@ -43,9 +42,9 @@ func (c *driverRepository) FindOneGameRepository(objectId primitive.ObjectID) (i
 	return result, nil
 }
 
-func (c *driverRepository) FindAllGameRepository() (interface{}, error){
+func (c *driverRepository) FindAllGameRepository() ([]entity.Game, error){
 	var collection = c.client.Database("grd_database").Collection("game")
-	var results []primitive.M
+	var results []entity.Game
 	cur, err := collection.Find(context.TODO(), bson.D{{}})
 
 	if err != nil {
@@ -53,7 +52,7 @@ func (c *driverRepository) FindAllGameRepository() (interface{}, error){
 	}
 
 	for cur.Next(context.TODO()) {
-		var elem primitive.M
+		var elem entity.Game
 		err := cur.Decode(&elem)
 		if err != nil {
 			message := fmt.Sprintf("%v", err)
@@ -65,4 +64,17 @@ func (c *driverRepository) FindAllGameRepository() (interface{}, error){
 	cur.Close(context.TODO())
 
 	return results, nil
+}
+
+func (c *driverRepository) FindOneGameByuidRepository(objectId primitive.ObjectID) (entity.Game, error) {
+	var collection = c.client.Database("grd_database").Collection("game")
+	var result entity.Game
+
+	err := collection.FindOne(context.TODO(), bson.M{"uid": objectId}).Decode(&result)
+
+	if err != nil {
+		return result, err
+	}
+
+	return result, nil
 }

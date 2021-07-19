@@ -1,7 +1,6 @@
 package handler
 
 import (
-
 	"github.com/thoussei/antonio/api/games/entity"
 	"github.com/thoussei/antonio/api/games/repository"
 	"go.mongodb.org/mongo-driver/bson/primitive"
@@ -15,6 +14,12 @@ func NewUsecasePlateform(r repository.PlateformRepositoryInterface) UsecasePlate
 	return &plateformUsecase{
 		plateformRepository: r,
 	}
+}
+
+type gamePlatformViewModel struct {
+	Uid         string 				`json:"uid"`
+	Name        string             `json:"name"`
+	Description string             `json:"description"`
 }
 
 func (g *plateformUsecase) SavedPlateformRepository(plateform *entity.GamePlatform) (interface{}, error) {
@@ -45,10 +50,38 @@ func (g *plateformUsecase) FindOnePlateformRepository(idQuery string) (interface
 
 func (g *plateformUsecase) FindAllPlateformRepository() (interface{}, error) {
 	result, err := g.plateformRepository.FindAllPlateformRepository()
-
+	
 	if err != nil {
 		return nil, err
 	}
 
-	return result, nil
+	var res [] gamePlatformViewModel
+
+	for _,val := range result {
+		plateform := gamePlatformViewModel{
+			Uid:val.Uid.Hex(),     
+			Name:val.Name,      
+			Description:val.Description,
+		}
+
+		res = append(res, plateform)
+	}
+
+	return res, nil
+}
+
+func (g *plateformUsecase) FindOnePlateformByUidHandler(uidQuery string) (entity.GamePlatform, error) {
+	objectId, err := primitive.ObjectIDFromHex(uidQuery)
+
+	if err != nil {
+		return entity.GamePlatform{}, err
+	}
+
+	plateform, err := g.plateformRepository.FindOnePlateformByUidRepository(objectId)
+
+	if err != nil {
+		return entity.GamePlatform{}, err
+	}
+
+	return plateform, nil
 }

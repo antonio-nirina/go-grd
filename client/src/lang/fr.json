@@ -30,7 +30,9 @@
 		"wagers": "Wagers",
 		"community": "Communauté",
 		"tournaments": "Tournois",
-		"text":"Demande d'être votre amis"
+		"text":"Demande d'être votre amis",
+		"switch":"Admin",
+		"logout":"Deconnexion"
 	},
 	"home":{
 		"leagues": "ligues",

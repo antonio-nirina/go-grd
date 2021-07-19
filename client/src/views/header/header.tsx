@@ -18,7 +18,7 @@ import {removeDataUser} from "../auth/action/userAction"
 import {GET_ALL_NOTIFICATIONS} from "../../gql/notifications/query"
 import Notifications from "./notificationFriend"
 import {NOTIFICATIONS_SUBSCRIBE} from "../../gql/user/subscription"
-import {UPDATED_NOTIFICATION} from "../../gql/notifications/mutation"
+
 import {Deconnect} from "../../gql/user/auth"
 
 export interface Notif  {
@@ -49,7 +49,6 @@ const Header: React.FC = function() {
 		},
 	})
 
-	const [updatedNotification] = useMutation(UPDATED_NOTIFICATION)
 	const [deconnect] = useMutation(Deconnect)
 
 	const onShow = function(){
@@ -59,17 +58,6 @@ const Header: React.FC = function() {
 		if(dataNotifications.length > 0) {
 			setShowNotif(!showNotif)
 			setNotification(0) // update notification statut true
-			for(let i=0;i < dataNotifications.length;i++) {
-				if(!dataNotifications[i].statut) {
-					try {
-						await updatedNotification({ variables: { uid: dataNotifications[i].uid }})
-					} catch(e) {
-						console.log("error",e)
-					}
-
-				}
-			}
-
 		}
 
 	}
@@ -98,7 +86,7 @@ const Header: React.FC = function() {
 				setDataNotifications(data.GetAllNotifications)
 				data.GetAllNotifications.forEach(function(elemnt:any) {
 					if(!elemnt.statut) count++
-					if(elemnt.type === 0) {
+					if(elemnt.type === 0 && !elemnt.statut) {
 						notif = {
 							type:0,
 							uid:elemnt.uid,
@@ -120,9 +108,9 @@ const Header: React.FC = function() {
 			if(subData.subscribeNotifications.uid === userConnectedRedux.user.uid) {
 				notif = {
 					type:0,
-					uid:subData.subscribeNotifications.uid,
+					uid:subData.subscribeNotifications.uidNotif,
 					user:{
-						uid:subData.subscribeNotifications.uid,
+						uid:subData.subscribeNotifications.uidReq,
 						email: subData.subscribeNotifications.email,
 						username: subData.subscribeNotifications.username,
 						avatar: subData.subscribeNotifications.avatar
@@ -210,7 +198,7 @@ const Header: React.FC = function() {
 						<div className="connex" >
 							<>
 								<i className="square" onClick={onShowNotif} style={{"cursor":"pointer"}}>
-									<FontAwesomeIcon icon={faBell} size="xs"/>
+									<FontAwesomeIcon icon={faBell} size="xs" />
 									<span className={notification > 0 ? "number" : ""}>{notification > 0 ? notification : ""}</span>
 								</i>
 							</>
@@ -241,12 +229,30 @@ const Header: React.FC = function() {
 						</div>
 						<div className={!showList ? "dropdown" :"dropdown show"}>
 							<ul>
-								<li><Link to="/profile">Profil</Link></li>
+								<li><Link to="/profil">Profil</Link></li>
 								<li><Link to="/tournament">Tournois</Link></li>
 								<li><Link to="/ligue">Ligues</Link></li>
 								<li><Link to="/wager">Wager</Link></li>
 								<li><Link to="/assistance">Assistance</Link></li>
-								<li style={{"cursor":"pointer"}} onClick={onDeconnect}>Deconnexion</li>
+								{userConnectedRedux.user && userConnectedRedux.user.roles && userConnectedRedux.user.roles.includes("role_admin") ? <li>
+									<Link to="/admin">
+										{
+											Object.keys(userConnectedRedux.user).length > 0 ?
+											Translation(userConnectedRedux.user.language).header.switch
+											:
+											Translation("fr").header.switch
+										}
+									</Link>
+									</li> : <></>
+								}
+								<li style={{"cursor":"pointer"}} onClick={onDeconnect}>
+									{
+										Object.keys(userConnectedRedux.user).length > 0 ?
+										Translation(userConnectedRedux.user.language).header.logout
+										:
+										Translation("fr").header.logout
+									}
+								</li>
 							</ul>
 						</div>
 					</div>

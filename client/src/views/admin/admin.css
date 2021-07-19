@@ -1,14 +1,65 @@
-.body{
+body{
     background: #101010;
     color: #ffffff;
     font-family: 'quicksand regular';
     font-size: 14px;
 }
+.d-md-inline-block{
+    position: relative;
+    padding-right: 6px;
+    font-size: 14px;
+    font-weight: bold;
+}
+.poweroff{
+    font-size: 16px;    
+    padding-bottom: 5px;
+    position: relative;
+    z-index: 9999;
+}
+.poweroff svg[data-icon="sort-up"]{
+    margin-top: 15px;
+}
+.hide-drpdwn-menu{
+    display: none;
+}
+.show-drpdwn-menu{
+    display: block;
+    position: absolute;
+    background: #000000;
+    padding: 16px;
+    top: 40px;
+    right: -21px;
+    box-shadow: 0px 0px 2px #333332;
+    border-radius: 5px;
+}
+.show-drpdwn-menu:before{
+    content: "";
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 12px solid #101010;
+    position: relative;
+    top: -46px;
+    left: 131.5px;
+}
+.navbar .show-drpdwn-menu li a{    
+    display: block;
+    padding: 5px;
+    width: 140px;
+    text-align: center;
+    font-size: 13px;
+}
+.navbar .show-drpdwn-menu li:last-child a{    
+    border-top: 1px solid #dd0000;
+    padding-top: 10px;
+    margin-top: 5px;
+}
 .admin a{
-	max-width: inherit;
+    max-width: inherit;
 }
 .layout-container{
-	position: relative;
+    position: relative;
     display: flex;
     flex: auto;
     flex-direction: row;
@@ -17,7 +68,7 @@
     margin: 0 auto;
 }
 .layout-container .main-sidebar{
-	position: sticky;
+    position: sticky;
     height: 100vh;
     top: 0px;
     overflow-y: auto;
@@ -25,67 +76,67 @@
     background: #000000
 }
 .main-sidebar{
-	text-align: center;
-	padding-top: 15px;
+    text-align: center;
+    padding-top: 15px;
 }
 .main-sidebar li{
-	padding: 15px;	
+    padding: 15px;  
 }
 .main-sidebar li a{
-	color: #9c9c9e;	
+    color: #9c9c9e; 
     display: block;
 }
-.main-sidebar li span{	
-	display: block;
-	text-transform: uppercase;
-	padding: 10px;
-	font-size: 12px;
+.main-sidebar li span{  
+    display: block;
+    text-transform: uppercase;
+    padding: 10px;
+    font-size: 12px;
 
 }
 .main-sidebar li i{
-	display: block;
-	font-size: 24px;
+    display: block;
+    font-size: 24px;
 }
 .ps{
-	overflow: hidden!important;
+    overflow: hidden!important;
     overflow-anchor: none;
     -ms-overflow-style: none;
     touch-action: auto;
     -ms-touch-action: auto;
 }
 .layout-container .main-sidebar .logo{
-	position: sticky;
+    position: sticky;
     top: 0;    
     z-index: 9999;
 }
 .main-sidebar .logo{
-	display: block;
+    display: block;
     height: 125px;
     line-height: 125px;
     text-align: center;    
 }
 .main-sidebar .logo img{
-	max-height: 75px;
+    max-height: 75px;
     width: auto;
     border-radius: 50%;
     border: 2px solid #dd0000;
 }
 .nav-sidebar{
-	flex-direction: column;
+    flex-direction: column;
 }
 .nav{
-	display: flex;
+    display: flex;
     flex-wrap: wrap;
     padding-left: 0;
     margin-bottom: 0;
     list-style: none;
 }
 .nav-sidebar li{
-	width: 100%;
+    width: 100%;
     margin-bottom: 22px;
 }
 .nav-sidebar li a{
-	display: flex;
+    display: flex;
     position: relative;
     flex-direction: column;
     justify-content: center;
@@ -94,7 +145,7 @@
     color: #8995c7;
 }
 .nav-sidebar li a i{
-	font-size: 23px;
+    font-size: 23px;
     color: #4c49af;
 }
 .nav-sidebar li a i, .nav-sidebar li a span {
@@ -140,11 +191,11 @@
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
-    padding: 5px 10px;
+    padding: 5px 20px;
     
 }
 div#profile-name{
-	justify-content: flex-end;
+    justify-content: flex-end;
     height: 100%;
     display: flex;
     align-items: center;
@@ -167,13 +218,13 @@ div#profile-name{
     box-shadow: 0 0 0px 3px #101010;
     vertical-align: middle;
     margin-left: 20px;
-    margin-right: 5px;
+    margin-right: 10px;
     max-width: 36px;
     max-height: 36px;
 }
-.navbar .profil-name span{	
-	display: block;
-	padding: 10px;
+.navbar .profil-name span{  
+    display: block;
+    padding: 10px;
 }
 .main-content{
     padding: 42px 70px;
@@ -285,7 +336,7 @@ div#profile-name{
 .response-status span{
     display: flex;
 }
-.response-status strong{
+.response-status label{
     font-weight: normal;
     color: #9c9c9e;
     align-self: center;
@@ -360,4 +411,110 @@ div#profile-name{
     border-radius: 5px;  
     margin: 0 5px;
 }
+/*******************************************/
+/**********Create tournament style**********/
+.content-wrapper h1{
+    color: #9c9c9e;
+    font-size: 22px;
+    line-height: 1.36;
+    font-weight: normal;
+    margin-bottom: 0;
+    margin-right: 20px;
+}
+.column-tournament .title{
+    float: left;
+}
+.create-tournament-game{
+    float: right;
+}
+.create-tournament-game button{
+    margin-left: 15px;
+    padding: 5px 10px;
+    font-size: 12px;    
+    align-self: center;
+    border: 1px solid #dd0000;
+}
+.create-tournament-game button:first-child{
+    color: #ffffff;
+    background: #9c9c9e;
+}
+.setting-tournament{
+    clear: both;
+}
+.field{
+    width: 100%;    
+}
+.field .group-input{
+    width: 100%;
+    max-width: inherit;
+}
+.field .group-input .btn{
+    margin-top: 40px;
+    float: right;
+}
+.field .group-input input, .field .group-input textarea,.field .group-input select {
+    padding: 15px;
+    border-radius: 5px;
+    border: 1px solid #9c9c9e;
+    display: block;
+    width: 100%;
+    margin-top: 15px;
+    background: #272727;
+    color: #9c9c9e;
+    font-size: 14px;
+}
+.field .input-group{
+    display: flex;
+}
+.field .input-group input{
+    margin-right: 15px;
+}
+.field .input-group input.no-margin{
+    margin-right: 0;
+}
+/***************************admin waggers******************/
+.wysiwyg{
+    margin-top: 15px;    
+}
+.wysiwyg .sun-editor .se-toolbar{
+    background: #000000;
+}
+.wysiwyg .sun-editor .se-tooltip{
+    color: #ffffff;
+}
+.wysiwyg .sun-editor .se-btn-select .txt{
+    padding-left: 5px;
+    margin-right: 5px;
+}
+.wysiwyg .sun-editor .se-btn:enabled:focus, .wysiwyg .sun-editor .se-btn:enabled:hover{
+    background: none !important;
+}
+.wysiwyg .sun-editor .se-btn:enabled.on:focus, .wysiwyg .sun-editor .se-btn:enabled.on:hover{
+    background: #000000;
+    background-color: #000000;
+}
+.wysiwyg .se-btn.se-btn-select.se-btn-tool-font.se-tooltip.on{
+    background-color: #000000
+}
 
+form .sun-editor .se-toolbar{
+    background: #000000;
+}
+
+form .sun-editor .se-tooltip{
+    color: #ffffff;
+}
+form .sun-editor .se-btn-select .txt{
+    padding-left: 5px;
+    margin-right: 5px;
+}
+form .sun-editor .se-btn:enabled:focus, .wysiwyg .sun-editor .se-btn:enabled:hover{
+    background: none !important;
+}
+form .sun-editor .se-btn:enabled.on:focus, .wysiwyg .sun-editor .se-btn:enabled.on:hover{
+    background: #000000;
+    background-color: #000000;
+}
+form .se-btn.se-btn-select.se-btn-tool-font.se-tooltip.on{
+    background-color: #000000
+}

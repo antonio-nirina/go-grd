@@ -79,3 +79,5 @@ const Router = function() {
 		</Switch>
 	)
 }
+
+export default Router
