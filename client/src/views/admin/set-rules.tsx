@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 import SunEditor from 'suneditor-react'
 import 'suneditor/dist/css/suneditor.min.css'
@@ -28,7 +28,7 @@ const SetRules: React.FC = function() {
 	        					<div className="field">
 		        					<div className="group-input">
 	                                    <form>
-	    									<label htmlFor="title-rules">Ajouter une règle : </label><input type="text" id="title-rules" placeholder="Titre de la règle" />
+	    									<label htmlFor="title-rules">Publication : </label><input type="text" id="title-rules" placeholder="Publication communaute" />
 	    									<div className="wysiwyg">
 	    										<SunEditor setOptions={
 													{

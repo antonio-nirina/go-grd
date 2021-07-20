@@ -12,9 +12,9 @@ export const CREATED_TOURNAMENT = gql`
 		$price:Float,
 		$deadlineDate:String,
 		$priceParticipate:Float,
-		$rules:String
-	){
+		$rules:String){
 		saveTournament(
+			date:$date,
 			title:$title,
 			uidGame:$uidGame,
 			uidPalteforme:$uidPalteforme,
@@ -24,7 +24,7 @@ export const CREATED_TOURNAMENT = gql`
 			price:$price,
 			rules:$rules,
 			deadlineDate:$deadlineDate,
-			priceParticipate:$priceParticipate) {
-		}
+			priceParticipate:$priceParticipate)
 	}
 `
+

@@ -2,7 +2,7 @@ import { ApolloClient, InMemoryCache,HttpLink,split } from '@apollo/client'
 import { setContext } from '@apollo/client/link/context'
 import { getMainDefinition } from '@apollo/client/utilities'
 import { WebSocketLink } from "@apollo/client/link/ws"
-
+import {GetCookie} from "../views/auth/utils"
 
 const URI_API = process.env.NODE_ENV === "development" ? "http://localhost:4000" : "https://api.gmrtl4.fr"
 const URI_WS = process.env.NODE_ENV === "development" ? "ws://localhost:8080/subscriptions" : "wss://ws.gmrtl4.fr/subscriptions"
@@ -16,8 +16,6 @@ const wsLink = new WebSocketLink({
 	  reconnect: true
 	}
 })
-
-const ACCESS_TOKEN: string  = "access_token"
 
 const splitLink = split(
 	({ query }) => {
@@ -33,10 +31,10 @@ const splitLink = split(
 
 export const createApolloClient = () => {
 	let token = ""
-	const storage = localStorage.getItem(ACCESS_TOKEN)
-	if (storage) {
-		const type  = JSON.parse(storage).type
-		token = `${type}=${JSON.parse(storage).access_token}`
+
+	if (GetCookie()) {
+		const type  = GetCookie().type
+		token = `${type}=${GetCookie().access_token}`
 	}
 	const authLink = setContext((_, { headers }) => {
 		return {

@@ -25,9 +25,9 @@ const SideBar : React.FC = function() {
 					</Link>
 				</li>
                 <li>
-                    <Link to="/set-rules">
+                    <Link to="/admin/set-rules">
                         <i><FontAwesomeIcon icon={faTools} size="lg"/></i>
-                        <span>Modifier règles</span>
+                        <span>Contenu communaute</span>
                     </Link>
                 </li>
 				<li>

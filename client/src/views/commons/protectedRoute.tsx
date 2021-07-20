@@ -1,5 +1,6 @@
 import * as React from 'react'
 import { Redirect, Route, RouteProps } from 'react-router-dom'
+import {GetCookie} from "../auth/utils"
 
 interface IProtectedRoute{
   authenticationPath?: string
@@ -11,7 +12,7 @@ const ProtectedRoute = (
 
   const { authenticationPath, path } = props
   //  when user is not logged redirect
-  if (!localStorage.getItem("access_token")) {
+  if (!GetCookie) {
     redirectPath = authenticationPath || '/login'
   }
 

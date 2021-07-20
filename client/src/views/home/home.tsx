@@ -70,7 +70,7 @@ const Home: React.FC = function() {
 	      </div>
 	      <Game/>
 	      <Community/>
-	      <Join/>
+		  {Object.keys(userConnectedRedux.user).length === 0 ? <Join/> : null}
 	      <Footer/>
 	  </div>
     </div>

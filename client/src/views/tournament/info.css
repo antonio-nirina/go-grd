@@ -26,14 +26,12 @@
 	color: #f2cf1c;
 
 }
-.banniere{
-	background-image: url("../../assets/image/championship.jpeg");	
-	background-attachment: fixed;
-  	background-position: center;
-  	background-repeat: no-repeat;
-  	background-size: cover;		
-  	min-height: 820px;	
+.banniere{				  	
 	border-radius: 15px 15px 0px 0px;
+}
+.banniere img{
+	height: 450px;
+	width: 100%;
 }
 .txt{
 	padding: 15px;

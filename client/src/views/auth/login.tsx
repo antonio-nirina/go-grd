@@ -17,7 +17,6 @@ import {Translation} from "../../lang/translation"
 import {LOGIN} from "../../gql/user/auth"
 import Footer from "../footer/footer"
 import joystick from "../../assets/image/joystick.png"
-import {getDataByToken} from "../../storage/tokenStorage"
 import "../auth/login.css"
 import "../../assets/css/style.css"
 
@@ -38,8 +37,8 @@ const Login: React.FC = function() {
 	const [passwd,setPasswd] = useState<boolean>(false)
 	const [login]  = useMutation(LOGIN)
 	const onSubmit = async function(data:Inputs){
-		const email: string = data.email
-		const password: string = data.password
+		const email: string 	= data.email
+		const password: string 	= data.password
 
 		if(checkValidEmail(email)) {
 			try {
@@ -55,13 +54,8 @@ const Login: React.FC = function() {
 					dispatch(sendUserConectedAction(result.data.login))
 				}
 
-				const data:Array<string|null> = getDataByToken() ? getDataByToken() : []
-
-				if(data.includes("role_admin")) {
-					history.push("/admin")
-				} else {
-					history.push("/")
-				}
+				// const data:Array<string|null> = getDataByToken() ? getDataByToken() : []
+				history.push("/")
 
 			} catch(e) {
 				console.log(e)
