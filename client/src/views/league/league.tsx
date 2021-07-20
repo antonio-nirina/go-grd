@@ -2,7 +2,6 @@ import React from "react"
 import { Link } from 'react-router-dom'
 
 import Header from "../header/header"
-import Join from "../join/join"
 import Footer from "../footer/footer"
 import "../../assets/css/style.css"
 import "../league/league.css"
@@ -119,7 +118,6 @@ const League: React.FC = function() {
 				</div>
  			</div>
  			</div>
-			<Join/>
 			<Footer/>
 		</div>
     </div>

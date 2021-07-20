@@ -3,7 +3,6 @@ import React from "react"
 import { Link } from "react-router-dom"
 import Header from "../header/header"
 import Footer from "../footer/footer"
-import Join from "../join/join"
 
 import { faUsers } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
@@ -96,7 +95,6 @@ const TournamentGame = function(props:any) {
 				</div>
 			</div>
  		</div>
-		<Join/>
 		<Footer/>
   	</div>
 	)

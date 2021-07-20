@@ -20,6 +20,7 @@ type tournamentViewModel struct {
 type GameViewModel struct {
 	Uid string  `json:"uid"`
 	Name     		string  `json:"name"`
+	Image     		string  `json:"image"`
 	Logo     		string  `json:"logo"`
 	Slug     		string  `json:"slug"`
 }

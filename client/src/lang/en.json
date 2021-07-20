@@ -152,6 +152,19 @@
 		"addFriendList":"Search friends",
 		"titleFriend":"Friends",
 		"titleAddFriend":"Add friend"
+	},
+	"tournament":{
+		"incoming":"Upcoming Tournaments",
+		"seemore":"See more",
+		"chgame":"Choice your game",
+		"lasttournament":"Last tournaments",
+		"lastresult":"Latest tournament results",
+		"list":"List of tournaments available",
+		"price":"Cache Price",
+		"signup":"Sign up",
+		"prize":"Prize",
+		"team":"Team",
+		"player":"Players"
 	}
 
 }

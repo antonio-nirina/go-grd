@@ -75,6 +75,10 @@ const Header: React.FC = function() {
 		history.push("/")
 	}
 
+	const backAdmin = function() {
+		if(process.env.REACT_APP_URL_ADMIN) window.location.href = process.env.REACT_APP_URL_ADMIN
+	}
+
 	useMemo(() => {
 		let isSubscribed:boolean = true
 		let array:Array<Notif> = []
@@ -150,7 +154,7 @@ const Header: React.FC = function() {
 							</Link>
 						</li>
 						<li>
-							<Link to="/tournois">
+							<Link to="/tournament">
 								{
 									Object.keys(userConnectedRedux.user).length > 0 ?
 									Translation(userConnectedRedux.user.language).header.tournaments
@@ -235,14 +239,14 @@ const Header: React.FC = function() {
 								<li><Link to="/wager">Wager</Link></li>
 								<li><Link to="/assistance">Assistance</Link></li>
 								{userConnectedRedux.user && userConnectedRedux.user.roles && userConnectedRedux.user.roles.includes("role_admin") ? <li>
-									<Link to="/admin">
+									<span onClick={backAdmin} style={{"cursor":"pointer"}}>
 										{
 											Object.keys(userConnectedRedux.user).length > 0 ?
 											Translation(userConnectedRedux.user.language).header.switch
 											:
 											Translation("fr").header.switch
 										}
-									</Link>
+									</span>
 									</li> : <></>
 								}
 								<li style={{"cursor":"pointer"}} onClick={onDeconnect}>

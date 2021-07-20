@@ -9,12 +9,12 @@ import Pagination from "../common/pagination"
 import SideBar from "../header/sidebar"
 import Nav from "../header/nav"
 
-const ListTournament : React.FC = function() {
+const ListTournament : React.FC = function(props:any) {
 	const [showList, setShowList] = useState<Boolean>(false)
 	const [tournament, setTournament] = useState<any>([])
 	//const [limit, setLimit] = useState<Number>(0)
 	//const [pageNumber, setPageNumber] = useState<Number>(0)
-	const {loading,error,data} 		= useQuery(GET_ALL_TOURNAMENT, {
+	const {loading,error,data} 	= useQuery(GET_ALL_TOURNAMENT, {
 		variables: {
 			limit:0,
 			pageNumber:0
@@ -22,11 +22,14 @@ const ListTournament : React.FC = function() {
 	})
 
 	useEffect(() => {
+		//let init = true
 		if(!loading && !error && data) {
 			setTournament(data.FindAllTournament)
 		}
 
-	},[loading,error,data])
+		// return () => init = false
+
+	},[loading,error,data,props])
 
     const onShow = function(){
 		setShowList(!showList)
@@ -133,10 +136,10 @@ const ListTournament : React.FC = function() {
 											<p>{el.plateform.name}</p>
 										</div>
 										<div className="card-result">
-											<p>{el.numberParticipate}</p>
+											<p>{el.price}</p>
 										</div>
 										<div className="card-result">
-											<p>{el.price}</p>
+											<p>{el.numberParticipate}</p>
 										</div>
 										<div className="card-result">
 											<p>{el.statut?"Actif":"Inactif"}</p>

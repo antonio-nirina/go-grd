@@ -16,7 +16,7 @@ import SideBar from "../header/sidebar"
 import Nav from "../header/nav"
 import {CREATED_TOURNAMENT} from "../gql/tournament/mutation"
 import {GET_ALL_GAMES,GET_ALL_PLATEFORM} from "../gql/games/query"
-
+import "./tournament.css"
 
 type Inputs = {
 	participant: number,
@@ -59,16 +59,14 @@ const CreateTournament: React.FC = function() {
 			uidGame:uiGame,
 			uidPalteforme:uidPlateform,
 			description:info,
-			numberParticipate:(Math.trunc(Math.log2(Number(data.participant)))),
+			numberParticipate:Math.pow(2,(Math.ceil(Math.log2(Number(data.participant))))),
 			numberTeam:data.numberTeam,
 			price:data.price,
 			deadlineDate:lastDate,
 			priceParticipate:data.priceParticipate,
 			rules:rules
 		} })
-		if (result.data.createdTournament) {
-			history.push("/admin/tournament")
-		}
+		if (result.data.saveTournament) history.push("/admin/tournament")
 	}
 
 	const handleGame = function(event:any) {

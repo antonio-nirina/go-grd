@@ -56,7 +56,7 @@ func (t *tournamentUsecase) FindTournamentHandler(idQuery string) (tournamentVie
 		Price:result.Price,     			
 		DeadlineDate:result.DeadlineDate,    	
 		PriceParticipate:result.PriceParticipate,  
-		Game:GameViewModel{result.Game.Uid.Hex(),result.Game.Name,result.Game.Logo,result.Game.Slug},				
+		Game:GameViewModel{result.Game.Uid.Hex(),result.Game.Name,result.Game.Image,result.Game.Logo,result.Game.Slug},				
 		Plateform:PlateformViewModel{result.Plateform.Uid.Hex(),result.Plateform.Name,result.Plateform.Description},
 		Rules:result.Rules, 			
 	}
@@ -85,7 +85,7 @@ func (t *tournamentUsecase) FindAllTournamentHandler(pageNumber int64, limit int
 			Price:val.Price,     			
 			DeadlineDate:val.DeadlineDate,    	
 			PriceParticipate:val.PriceParticipate,  
-			Game:GameViewModel{val.Game.Uid.Hex(),val.Game.Name,val.Game.Logo,val.Game.Slug},				
+			Game:GameViewModel{val.Game.Uid.Hex(),val.Game.Name,val.Game.Image,val.Game.Logo,val.Game.Slug},				
 			Plateform:PlateformViewModel{val.Plateform.Uid.Hex(),val.Plateform.Name,val.Plateform.Description},
 			Rules:val.Rules,  			
 		}
