@@ -16,6 +16,12 @@
 	display: inline-block;
 	text-align: right;
 }
+.flex-upcoming{
+	display: flex;
+}
+.flex-upcoming .upcomming.side{
+	width: 100%;
+}
 .card{
 	padding-top: 15px;
 }
@@ -33,7 +39,7 @@
 
 }
 .side-img{
-	height: 210px;
+	/*height: 210px;*/
 }
 .side img{
 	border-radius: 5px 5px 0px 0px;

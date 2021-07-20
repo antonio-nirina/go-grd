@@ -72,6 +72,7 @@ const Tournois: React.FC = function() {
 									}
 								</Link>
 							</div>
+							<div className="flex-upcoming">
 							{
 								tournament?.map(function(el:any,index:number){
 									return (
@@ -136,6 +137,7 @@ const Tournois: React.FC = function() {
 									)
 								})
 							}
+							</div>
 						</div>
 					</div>
 		  			<div className="choices">
