@@ -21,7 +21,7 @@ const ListTournament : React.FC = function() {
 		},
 	})
 
-	useEffect(()=> {
+	useEffect(() => {
 		if(!loading && !error && data) {
 			setTournament(data.FindAllTournament)
 		}

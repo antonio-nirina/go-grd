@@ -1,5 +1,5 @@
 import React from "react"
-import { Route, Switch } from "react-router-dom"
+import { Switch } from "react-router-dom"
 import ProtectedRoute from "./protectedRoute"
 
 import Admin from "../dashboard/admin"
@@ -15,14 +15,14 @@ import Login from "../auth/login"
 const Router = function() {
 	return (
 		<Switch>
-			<Route path="/" exact component={Admin} />
-			<Route path="/admin/login" exact component={Login} />
-			<Route path="/admin/create-tournament" exact component={CreateTournament} />
-			<Route path="/admin/create-league" exact component={CreateLeague} />
-			<Route path="/admin/create-wagger" exact component={CreateWaggers} />
-			<Route path="/admin/communaute" exact component={SetRules} />
-			<Route path="/admin/tournament" exact component={ListTournament} />
-			<Route path="/admin/league" exact component={ListLeague} />
+			<ProtectedRoute path="/" exact component={Admin} />
+			<ProtectedRoute path="/admin/login" exact component={Login} />
+			<ProtectedRoute path="/admin/create-tournament" exact component={CreateTournament} />
+			<ProtectedRoute path="/admin/create-league" exact component={CreateLeague} />
+			<ProtectedRoute path="/admin/create-wagger" exact component={CreateWaggers} />
+			<ProtectedRoute path="/admin/communaute" exact component={SetRules} />
+			<ProtectedRoute path="/admin/tournament" exact component={ListTournament} />
+			<ProtectedRoute path="/admin/league" exact component={ListLeague} />
 			<ProtectedRoute path="/admin/wagger" exact component={ListWagger} />
 		</Switch>
 	)

@@ -27,7 +27,7 @@ const SideBar : React.FC = function() {
                 <li>
                     <Link to="/admin/communaute">
                         <i><FontAwesomeIcon icon={faTools} size="lg"/></i>
-                        <span>Contenu communaute</span>
+                        <span>Communaute</span>
                     </Link>
                 </li>
 				<li>

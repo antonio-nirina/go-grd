@@ -2,7 +2,7 @@ import React,{useState} from "react"
 import { useForm } from "react-hook-form"
 import {useMutation} from "@apollo/client"
 import { useDispatch } from "react-redux"
-
+import {useHistory } from "react-router-dom"
 import {sendUserConectedAction} from "./action/userAction"
 
 import {checkValidEmail,TokenType,SendToken} from "./utils"
@@ -21,10 +21,12 @@ type Inputs = {
 
 const Login: React.FC = function() {
 	const dispatch = useDispatch()
+	const history = useHistory()
 	const { register, handleSubmit } = useForm<Inputs>()
 	const [errorForm,setErrorForm] = useState<boolean>(false)
 	const [passwd,setPasswd] = useState<boolean>(false)
 	const [login]  = useMutation(LOGIN)
+
 	const onSubmit = async function(data:Inputs){
 		const email: string = data.email
 		const password: string = data.password
@@ -42,7 +44,7 @@ const Login: React.FC = function() {
 					SendToken(token)
 					dispatch(sendUserConectedAction(result.data.login))
 				}
-
+				history.push("/")
 			} catch(e) {
 				console.log(e)
 				setPasswd(true)

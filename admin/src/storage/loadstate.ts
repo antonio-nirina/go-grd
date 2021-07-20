@@ -1,5 +1,8 @@
+import Cookies from 'js-cookie'
+import {GetCookie} from "../auth/utils"
+
 export const loadState 	=  function() {
-	const user :string | null = localStorage.getItem("userConnected")
+	const user :string | null = GetCookie("userConnected")
 	let storage = {
 		userConnected:{
 			user:{}
@@ -7,7 +10,7 @@ export const loadState 	=  function() {
 	}
 
 	if(user){
-		storage.userConnected.user = JSON.parse(user)
+		storage.userConnected.user = user
 	}
 
 	return storage
@@ -15,5 +18,5 @@ export const loadState 	=  function() {
 
 export const saveState = function(state:any,name:string) {
 	const serializedState = JSON.stringify(state)
-	localStorage.setItem(name, serializedState)
+	Cookies.set(name, serializedState)
 }

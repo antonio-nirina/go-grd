@@ -1,6 +1,7 @@
+import Cookies from 'js-cookie'
+
 import {createApolloClient as client} from "../config/apollo-client"
 import {XBoxToken} from "../gql/user/auth"
-
 
 const URL_REDIRECT = "http://localhost:3000"
 
@@ -51,7 +52,48 @@ export const getTokenUser = async function(code: string) {
 }
 
 export const SendToken = function(token:TokenType) {
-	localStorage.setItem(ACCESS_TOKEN,JSON.stringify(token))
+	Cookies.set(ACCESS_TOKEN, encodeCookieContent(token))
+}
+
+/**
+ * @function encodeCookieContent
+ * @param { string|object } data - The string or object to encode
+ * @returns { string } The encoded string
+ */
+export const encodeCookieContent = function(data:any) {
+	if (typeof data === 'string') {
+		return btoa(data)
+	} else {
+		return btoa(JSON.stringify(data))
+	}
+}
+
+/**
+ * @function decodeCookieContent
+ * @param { string } data - The string to decode
+ * @returns { object } the JSON parsed data
+ */
+export const decodeCookieContent = function(data:any) {
+	try {
+		return JSON.parse(data)
+	} catch (e) {
+		try {
+			return JSON.parse(atob(data))
+		} catch (e) {
+			return data
+		}
+	}
+}
+
+export const GetCookie = function(key = "") {
+	var k = key ? key : ACCESS_TOKEN
+	let cookieData = Cookies.get(k)
+	if (!cookieData) {
+		return null
+	}
+	const data = decodeCookieContent(cookieData)
+
+	return data
 }
 
 

@@ -1,4 +1,6 @@
 import jwt from "jsonwebtoken"
+import Cookies from 'js-cookie'
+
 import {ACCESS_TOKEN} from "../utils"
 
 export const USER_CONNECTED = "user_connected"
@@ -86,8 +88,10 @@ export const sendProfilXboxOrPsn = function(user:UserType) {
 }
 
 export const removeDataUser = function() {
-	localStorage.removeItem(ACCESS_TOKEN)
-	localStorage.removeItem("userConnected")
+	Cookies.remove(ACCESS_TOKEN)
+	Cookies.remove("userConnected")
+	// localStorage.removeItem(ACCESS_TOKEN)
+	// localStorage.removeItem("userConnected")
 	return {
 		type:USER_CONNECTED,
 		res:{}
