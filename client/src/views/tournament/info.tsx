@@ -6,7 +6,6 @@ import { Link } from "react-router-dom"
 import Header from "../header/header"
 import Footer from "../footer/footer"
 
-import Championship from "../../assets/image/championship.jpeg"
 import {GET_ONE_TOURNAMENT} from "../../gql/tournament/query"
 import {Translation} from "../../lang/translation"
 import {RootState} from "../../reducer"
@@ -18,8 +17,9 @@ import {dateStringToDY} from "../tools/dateConvert"
 
 const Info: React.FC = function(props:any) {
 	const params = new URLSearchParams(props.location.search)
-	const uid = params.get("uid")
+	const uid:string|null = params.get("uid")
 	const [tournament, setTournament] = useState<Tournament>()
+	const [isOpen, setIsOpen] = useState<boolean>(true)
 	const userConnectedRedux = useSelector((state:RootState) => state.userConnected)
 	const {loading,error,data} 	= useQuery(GET_ONE_TOURNAMENT, {
 			variables: {
@@ -32,6 +32,12 @@ const Info: React.FC = function(props:any) {
 			setTournament(data.FindOneTournament)
 		}
 
+		const date1 = new Date()
+		const date2 = new Date(data?.FindOneTournament.deadlineDate)
+		const diff = (date2.getTime() - date1.getTime())/1000/60
+
+		if (diff < 10 || diff <= 0) setIsOpen(false)
+
 	},[loading,error,data])
 
   return(
@@ -41,27 +47,21 @@ const Info: React.FC = function(props:any) {
 			<div className="full-container">
 				<div className="details">
 					<p className="name-target">Tournois : <span>{tournament?.game.name}</span></p>
-					<p className="starting">Date de commencement : <span>{userConnectedRedux.user.language === "fr" ? dateStringToDY(tournament?.date) : dateStringToDY(tournament?.date)}</span></p>
+					<p className="starting">
+						{
+							Translation(userConnectedRedux.user.language).tournament.starttimes
+						}:
+						<span> {userConnectedRedux.user.language === "fr" ? dateStringToDY(tournament?.date) : dateStringToDY(tournament?.date)}</span></p>
 					<p className="status">Status : <span>
-						{tournament?.deadlineDate}
+						{isOpen ? Translation(userConnectedRedux.user.language).tournament.open : Translation(userConnectedRedux.user.language).tournament.close }
 					</span>
 					</p>
 				</div>
-				
-				<div className="banniere">
-					<img src={Championship} alt=""/>
-				</div>
 				<div className="tabs">
-					
 					<ul>
-						<li><Link to="/info" className="active">Info</Link></li>
-						<li><Link to="/matches">Match</Link></li>
-						<li><Link to="/teams">
-							{
-								Translation(userConnectedRedux.user.language).tournament.team
-							}
-						</Link></li>
-						<li><Link to="#">
+						<li><Link to={`/info?uid=${params.get('uid')}`} className="active">Info</Link></li>
+						<li><Link to={`/matches?uid=${params.get('uid')}`}>Match</Link></li>
+						<li><Link to={`/rules?uid=${params.get('uid')}`}>
 						{
 							Translation(userConnectedRedux.user.language).tournament.rules
 						}
@@ -73,13 +73,13 @@ const Info: React.FC = function(props:any) {
 				</div>
 				<div className="tableau">
 					<div className="state">
-						<p>16 <span>slots</span></p>
-						<p>27 <span>
+						<p>{""}<span>slots</span></p>
+						<p>{""}<span>
 							{
 								Translation(userConnectedRedux.user.language).tournament.pending
 							}
 						</span></p>
-						<p>7 <span className="confirm">
+						<p>{""}<span className="confirm">
 							{
 								Translation(userConnectedRedux.user.language).tournament.confirmed
 							}
@@ -92,7 +92,7 @@ const Info: React.FC = function(props:any) {
 									Translation(userConnectedRedux.user.language).tournament.start
 								}
 							</p>
-							<span>{tournament?.date}</span>
+							<span>{dateStringToDY(tournament?.date)}</span>
 						</div>
 						<div className="line">
 							<p>
@@ -100,7 +100,7 @@ const Info: React.FC = function(props:any) {
 									Translation(userConnectedRedux.user.language).tournament.end
 								}
 							</p>
-							<span>{tournament?.deadlineDate}</span>
+							<span>{dateStringToDY(tournament?.deadlineDate)}</span>
 						</div>
 						<div className="line">
 							<p>Participants</p>
@@ -108,7 +108,7 @@ const Info: React.FC = function(props:any) {
 						</div>
 						<div className="line">
 							<p>Mode</p>
-							<span>Elimination</span>
+							<span>{tournament && tournament.numberTeam > 0 ? `${tournament?.numberTeam} ON ${tournament?.numberTeam}` : "1 ON 1" }</span>
 						</div>
 					</div>
 				</div>

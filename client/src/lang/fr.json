@@ -186,7 +186,10 @@
 		"pending":"En attente",
 		"confirmed":"Confirmé",
 		"start":"Début",
-		"end":"Fin"
+		"end":"Fin",
+		"starttimes":"Date de commencement",
+		"open":"Ouvert",
+		"close":"Fermer"
 	}
 
 }

@@ -169,7 +169,10 @@
 		"pending":"Pending",
 		"confirmed":"Confirmed",
 		"start":"Start",
-		"end":"End"
+		"end":"End",
+		"starttimes":"Start time",
+		"open":"Open",
+		"close":"close"
 	}
 
 }

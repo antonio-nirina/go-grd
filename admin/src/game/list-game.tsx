@@ -1,16 +1,18 @@
-import React,{useState} from 'react'
+import React from 'react'
 import { Link } from "react-router-dom"
 
 import SideBar from "../header/sidebar"
 import Nav from "../header/nav"
 import Rocketleague from "../assets/image/rocketleague.png"
 import ApexLegends from "../assets/image/apex-legends.png"
-const ListGame : React.FC = function() {
-	const [showList, setShowList] = useState<Boolean>(false)
 
-    const onShow = function(){
-		setShowList(!showList)
-	}
+
+const ListGame : React.FC = function() {
+	//const [showList, setShowList] = useState<Boolean>(false)
+
+    //const onShow = function(){
+	//	setShowList(!showList)
+	//}
 
 	return (
 	<div className="layout-container">

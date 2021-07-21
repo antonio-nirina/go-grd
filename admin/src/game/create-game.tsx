@@ -1,7 +1,7 @@
 import React from "react"
 import { Link } from "react-router-dom"
 
-import { faPlus, faChevronRight, faCamera} from "@fortawesome/free-solid-svg-icons"
+import { faPlus, faChevronRight} from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import SideBar from "../header/sidebar"
 import Nav from "../header/nav"

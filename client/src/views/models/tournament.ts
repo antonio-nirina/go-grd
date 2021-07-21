@@ -11,7 +11,7 @@ export interface Tournament {
 	priceParticipate:number
 	rules:string
 	game:Game
-	platform:Platform
+	plateform:Platform
 }
 
 export interface Game {
