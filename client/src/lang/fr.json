@@ -181,7 +181,12 @@
 		"signup":"Inscrivez vous",
 		"prize":"Prix",
 		"team":"Equipe",
-		"player":"Joueurs"
+		"player":"Joueurs",
+		"rules":"Règles",
+		"pending":"En attente",
+		"confirmed":"Confirmé",
+		"start":"Début",
+		"end":"Fin"
 	}
 
 }
