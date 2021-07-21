@@ -27,6 +27,8 @@ import {APEX_LEGENDE,FORTNITE,RNB,RL,COD_MODERN,COD_WAR_ZONE,COD_COLD_WAR,FIFA} 
 import {Tournament} from "../models/tournament"
 import {GET_ALL_TOURNAMENT} from "../../gql/tournament/query"
 import {dateStringToDY} from "../tools/dateConvert"
+import {renderPlatformLogo} from "./renderLogo"
+
 
 const Tournois: React.FC = function() {
 	const history = useHistory()
@@ -41,6 +43,7 @@ const Tournois: React.FC = function() {
 
 	useEffect(() => {
 		//let init = true
+		console.log(data)
 		if(!loading && !error && data) {
 			setTournament(data.FindAllTournament)
 		}
@@ -74,7 +77,7 @@ const Tournois: React.FC = function() {
 							</div>
 							<div className="flex-upcoming">
 							{
-								tournament?.map(function(el:any,index:number){
+								tournament?.map(function(el:Tournament,index:number){
 									return (
 										<div className="upcomming side" key={index} onClick={()=>{history.push(`/info?uid=${el.uid}`)}} style={{"cursor":"pointer"}}>
 												<div className="items">
@@ -110,7 +113,8 @@ const Tournois: React.FC = function() {
 														</div>
 														<div className="name-section">
 															<p>
-																{el.game.name}
+																<span>{el.game.name}</span>
+																<span style={{"float":"right"}}>{renderPlatformLogo(el.plateform.name)}</span>
 															</p>
 														</div>
 														<div className="prize-section">
@@ -121,7 +125,7 @@ const Tournois: React.FC = function() {
 																}
 															</div>
 															<div className="prize" style={{"fontWeight":"bold"}}>
-																{`${el.price} € ${Translation(userConnectedRedux.user.language).tournament.price}`}
+																{`${el.price} € `}
 															</div>
 														</div>
 													</div>
