@@ -1,7 +1,8 @@
 import React from 'react'
 import { Link } from "react-router-dom"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faUsers, faTools, faDesktop, faTrophy, faStar} from "@fortawesome/free-solid-svg-icons"
+
+import { faUsers, faTools, faDesktop, faTrophy, faStar, faGamepad } from "@fortawesome/free-solid-svg-icons"
 
 import logo from "../assets/image/gogrind-joystick.png"
 
@@ -40,6 +41,12 @@ const SideBar : React.FC = function() {
 					<Link to="/admin/wagger">
 						<i><FontAwesomeIcon icon={faStar} size="lg"/></i>
 						<span>Waggers</span>
+					</Link>
+				</li>
+				<li>
+					<Link to="/admin/list-game">
+						<i><FontAwesomeIcon icon={faGamepad} size="lg"/></i>
+						<span>Jeux</span>
 					</Link>
 				</li>
 			</ul>

@@ -1,7 +1,7 @@
 import React,{useState} from "react"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useSelector,useDispatch } from "react-redux"
-
+import { Link } from "react-router-dom"
 import { faPowerOff, faSortUp, faSortDown} from "@fortawesome/free-solid-svg-icons"
 import {useHistory } from "react-router-dom"
 import {RootState} from "../reducer"
@@ -34,12 +34,14 @@ const Nav = function() {
                 Administrateur
                 <div className= {!showMenu ? "hide-drpdwn-menu" :"show-drpdwn-menu"}>
                     <ul>
-                        <li><span onClick={backFront} style={{"cursor":"pointer"}}>Retour vers le site</span></li>
+                        <li><Link to="#"><span onClick={backFront} style={{"cursor":"pointer"}}>Retour vers le site</span></Link></li>
                         <li onClick={onDeconnect} style={{"cursor":"pointer"}}>
+                            <Link to="#">
 	                    	<i className="power">
 	                    		<FontAwesomeIcon icon={faPowerOff} size="lg"/>
 	                    	</i>
 	                    	Se déconnecter
+                            </Link>
                     	</li>
                     </ul>
                 </div>

@@ -37,7 +37,7 @@ const Admin: React.FC = function() {
 		        			<Link to="/admin/communaute" className="grid community-board">
 		        				<img src={Community} alt="#" />
 		        				<span className="grid-title">Communauté</span>
-		        				<span className="grid-desc">Publier des articles sur communaute</span>
+		        				<span className="grid-desc">Voir les derniers articles en vogue</span>
 		        			</Link>
 		        		</div>
 	        		</div>

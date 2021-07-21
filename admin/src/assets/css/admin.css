@@ -27,7 +27,7 @@ body{
 	display: block;
 	position: absolute;
 	background: #000000;
-	padding: 16px;
+	padding: 0 16px 16px;
 	top: 40px;
 	right: -21px;
 	box-shadow: 0px 0px 2px #333332;
@@ -41,7 +41,7 @@ body{
 	border-right: 10px solid transparent;
 	border-bottom: 12px solid #101010;
 	position: relative;
-	top: -46px;
+	top: -30px;
 	left: 131.5px;
 }
 .navbar .show-drpdwn-menu li a{
@@ -99,7 +99,7 @@ body{
 	font-size: 24px;
 }
 .ps{
-	overflow: hidden!important;
+	overflow: hidden;
 	overflow-anchor: none;
 	-ms-overflow-style: none;
 	touch-action: auto;
@@ -226,6 +226,12 @@ div#profile-name{
 .navbar .profil-name span{
 	display: block;
 	padding: 10px;
+}
+.navbar .show-drpdwn-menu span{
+    padding: 0px;
+}
+.navbar .show-drpdwn-menu .power{
+    margin-right: 5px;
 }
 .main-content{
 	padding: 42px 70px;
@@ -556,4 +562,43 @@ form .se-btn.se-btn-select.se-btn-tool-font.se-tooltip.on{
 	display: block;
 	color: #9c9c9e;
 	text-align: center;
+}
+/**************Create game***************/
+label[for="logo-game"],
+label[for="img-game"]
+{
+    display: block;
+    width: 100%;
+    padding-top: 15px;
+}
+/**************List game***************/
+.list-game{
+    clear: both;
+}
+.list-game .title{
+    float: left;
+}
+.list-game .grid{
+    position: relative;
+}
+.list-game .grid img{
+    display: block;
+    border-bottom: 0;
+    border-radius: 0;
+}
+.list-game .logo-game{   
+    display: block;   
+    padding: 14px;
+    bottom: 37px;    
+    background: #6f6f6f;
+    width: 100%;
+    text-align: center;
+}
+.list-game .logo-game img{
+    width: 46%;
+    height: 52px;
+    margin: auto;
+}
+.column div.create-game{
+    width: 100%;
 }

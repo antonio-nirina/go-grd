@@ -7,7 +7,9 @@ import CreateTournament from "../tournament/create-tournament"
 import CreateLeague from "../league/create-league"
 import SetRules from "../communaute/set-rules"
 import CreateWaggers from "../wager/create-waggers"
+import CreateGame from "../game/create-game"
 import ListTournament from "../tournament/list-tournament"
+import ListGame from "../game/list-game"
 import ListLeague from "../league/list-league"
 import ListWagger from "../wager/list-wagger"
 import Login from "../auth/login"
@@ -24,6 +26,8 @@ const Router = function() {
 			<ProtectedRoute path="/admin/tournament" exact component={ListTournament} />
 			<ProtectedRoute path="/admin/league" exact component={ListLeague} />
 			<ProtectedRoute path="/admin/wagger" exact component={ListWagger} />
+			<ProtectedRoute path="/admin/create-game" exact component={CreateGame} />
+			<ProtectedRoute path="/admin/list-game" exact component={ListGame} />
 		</Switch>
 	)
 }
