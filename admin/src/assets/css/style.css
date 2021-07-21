@@ -1,0 +1,921 @@
+/*
+  - Description:  Grid
+  - Version:    1.0
+*/
+
+@charset "UTF-8";
+/* CSS Document */
+
+html{
+	font-size:100%;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+.clear{
+    clear: both;
+}
+.bg-red.btn:hover, .bg-white.btn:hover{
+  background: #000000;
+  border-color: #dd0000;
+  color: #dd0000;
+}
+.bg-white.btn:hover{
+    border: 1px solid #ffffff !important;
+    color: #ffffff;
+}
+.bg-white{
+  border: 1px solid #ffffff !important;
+}
+.bg-yellow{
+  background: #f2cf1c;
+  border: 1px solid #f2cf1c !important;
+}
+.btn.bg-red{
+  background: #dd0000;
+  color: #ffffff;
+  border: 1px solid transparent;
+}
+.light-gray{
+  background: #131313;
+}
+.dark-gray{
+  background: #101010;
+}
+.cl-yellow{
+  color: yellow;
+}
+.cl-red{
+  color: #dd0000;  
+}
+.dark-red{
+  background: #602020;
+}
+
+.new-red {
+	background: #cf0023
+}
+.new-green {
+	background: #96b900;
+}
+.light-green{
+  background: #216026
+}
+.btn{
+  font-size: 14px;
+  text-transform: uppercase;
+  padding: 10px 15px;
+  border-radius: 5px;
+  color: #010101;
+  border:none;
+}
+.mg15{
+  margin: 15px 0;
+}
+.italic{
+  font-style: italic;
+}
+.bloc{
+  display: block;
+}
+.center{
+  text-align: center;
+}
+.mb15{
+  margin-bottom: 15px;
+}
+.mgt10{
+  margin-top: 15px;
+}
+.link-btn{
+  color: #010101;
+}
+.connected .tag{
+  display: inline-block;
+}
+.connected .bt-container{
+  display: none;
+}
+.connected .join{
+  display: none;
+}
+.join{
+  display: block;
+}
+.bt-container{
+  display: inline-block;
+  float: none;
+  padding: 5px 0px;
+}
+.login .main,.inscription .main,
+.profil .main-content, .main
+{
+  padding-top: 66px;
+}
+.tag{
+  display: none;
+}
+.imgresp{
+  width: 100%;
+}
+.awesome{
+  margin-right: 5px;
+}
+li{
+  list-style: none;
+}
+a{
+   text-decoration:none;
+}
+a:hover{
+
+}
+label{
+
+}
+textarea{
+
+}
+p{
+    font-size: 16px;
+ }
+span{
+
+}
+h1{
+  font-family: "russo one";
+  font-weight: 200;
+  font-size: 35px;
+  text-transform: uppercase;
+  padding-bottom: 15px;
+}
+.header{
+  top: 0;
+}
+.header h1{
+  padding-bottom: inherit;
+}
+.header{
+  position: fixed;
+  z-index: 99;
+  width: 100%;
+}
+
+.container .service-container.mobile{
+  display: none;
+}
+.container .league .tab-league{
+  overflow: auto; 
+}
+
+/********** Fonts *********/
+@font-face {
+	font-family: 'Russo One';
+    src: url('../../assets/fonts/russoone/RussoOne.eot');
+    src: url('../../assets/fonts/russoone/RussoOne.eot?#iefix') format('embedded-opentype'),
+        url('../../assets/fonts/russoone/RussoOne.woff2') format('woff2'),
+        url('../../assets/fonts/russoone/RussoOne.woff') format('woff'),
+        url('../../assets/fonts/russoone/RussoOne.svg#RussoOne') format('svg');
+}
+@font-face {
+	font-family: 'quicksand regular';
+    src: url('../../assets/fonts/quicksand/static/Quicksand-Regular.eot');
+    src: url('../../assets/fonts/quicksand/static/Quicksand-Regular.eot?#iefix') format('embedded-opentype'),
+        url('../../assets/fonts/quicksand/static/Quicksand-Regular.woff2') format('woff2'),
+        url('../../assets/fonts/quicksand/static/Quicksand-Regular.woff') format('woff'),
+        url('../../assets/fonts/quicksand/static/Quicksand-Regular.svg#RussoOne') format('svg');
+}
+/*********  Media query ***************/
+
+@media screen and (max-width: 940px) {
+  .home p.title{
+    font-size: 32px;
+  }
+  .navmenu{
+    display: none;
+  }
+  .tag{
+    max-width: inherit;
+    text-align: right;
+  }  
+  .header .bt-container{
+    width: 100%;
+    max-width: inherit;
+    text-align: right;
+  }
+  .container .content{
+    display: block;
+  }
+  .container .block, .container .block.last{
+    margin-bottom: 15px;
+    width: 46%
+  }
+  .container .block.last{
+    border-radius: 15px;
+  }
+  .container .actuality{
+    width: 100%;
+  }
+  .container h2{
+    font-size: 25px !important;
+  }
+  .container .clip, .shop{
+    margin-left: 0;
+    width: 100%;
+    margin-bottom: 15px;
+    max-width: inherit;
+  }
+  .shop img{
+    width: 100%;
+  }
+  .container .aside-left, .container .center-block, .container .aside-right{
+    display: block;
+    width: 80%;
+    margin: auto;
+    margin-bottom: 15px;
+    padding: 0;
+  }
+  .container .artContent{
+    display: block;
+  }
+  .container .center-block .article{
+    padding: 0px;
+    margin: 0px;
+  }
+  .container .center-block .article .text{
+    padding: 20px 0;
+  }
+  .container .center-block .article .text, .container .center-block .article img{    
+    clear: both;
+    width: 100%;
+  }  
+  .container .tchat .rcw-widget-container{
+    position: initial;
+  } 
+ 
+  .container .service-img img{
+    width: 100%;
+  }
+  .assistance .aside-menu{
+    display: block;
+    width: 100%;
+    max-width: inherit;
+    border-radius: 5px 5px 0px 0px
+  }
+  .assistance .support{
+    display: block;
+    width: 100%;
+    max-width: inherit;
+    border-radius: 0px 0px 5px 5px;
+  }
+  .assistance .search-box input{
+    margin-top: 15px;
+    width: 100%;
+  }
+  .tuto-video video{
+    width: 100%;
+  }
+  .container footer{
+    position: initial !important;
+  }
+  .container .containt{
+    width: 92%;
+  }
+  .container .group h1{
+    font-size: 25px;
+  }
+  .container .waggers-link a{
+    width: 31.5%;
+  }
+  .container .waggers-link .block, .container .waggers-link .block.last{
+    width: 100%;
+  }
+}
+@media screen and (max-width: 800px){
+  .container .tchat{
+    width: 72%;
+    margin: auto;
+  }
+  .rcw-conversation-container .rcw-title{
+    padding: 15px 0px !important;
+  }
+  .tchat .rcw-header{
+    padding: 3px !important;
+  }
+  .tchat .rcw-conversation-container .rcw-close-button{
+    background: none;
+    top: 24px;
+    width: 30px;
+  }
+  .tchat .rcw-conversation-container .rcw-close{
+    width: 12px;
+    height: 12px;
+  }  
+  .container .tchat .rcw-conversation-container{
+    box-shadow: none;
+  }
+  .container .tchat .rcw-widget-container{
+    height: auto;
+    display: block;
+    margin-bottom: 30px;
+  }
+  .container .bloc-items{
+    display: block;
+  }
+  .container .service-img,  .container .service-modal{
+    margin: auto;
+    width: 100%;
+  }
+  .container .service-img img{
+    width: 70%;
+  }
+  .container .service-container{
+    display: none;
+  }
+  .container .service-container.mobile{
+    display: block;
+  }
+  .container .waggers-title, .container .waggers-data{
+    width: 96%;
+    margin: 5px 0;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .wrap, .container .wrap.red{
+    display: block;
+    text-align: center;
+  }   
+  .header h1{
+    text-align: center;
+  }
+  .logo{
+    max-width: inherit;
+    width: 100%;
+  }
+  .header .bt-container{
+    text-align: center; 
+  }
+  .imglogo{
+    width: 50%;
+    text-align: center;
+  }
+  .home .slogan{
+    top: 30%;
+  }
+  .tag{
+    text-align: center;
+  }
+  .login .main, .inscription .main, .profil .main-content, .main{
+    padding-top: 8em;
+  }
+  .home p.title{
+    font-size: 25px;
+  }
+  .container .block, .container .block.last{  
+    width: 95%;
+  }
+  .container .gamecash, .container .gamecash .lot{
+    display: block;
+    margin-bottom: 15px;
+  }
+  .container .gamecash .lot{
+    width: 100%;
+  }
+  .container .gamecash .lot p{
+    width: 100%;
+    margin-bottom: 15px;
+  }
+  .container .gamecash .more{
+    width: 100%;
+    text-align: center;
+  }
+  .container .join{
+    padding: 0px 15px;
+  }
+  .container .join .email{
+    padding-bottom: 15px;
+  }
+  .container .join input{
+    margin-bottom: 15px;
+  }
+  .container .block-tournois{
+    padding: 3em 2em 3em 2em;
+  }
+  .container footer .wrap{
+    text-align: center;
+  }
+  .container footer .rss{
+    padding: 15px 0;
+  }
+  .popup-content{
+    width: 97% !important;
+  }
+  .rcw-launcher{
+    display: block !important;
+  }
+  .container .part{
+    margin-top: 5em;
+  }
+  .wagers .container .full-container{
+    margin-top: 8em;
+  }
+  .container .tabs-content{
+    overflow: auto;
+  }
+  .container  .tab-league{
+    display: block;
+    width: 510px;
+  } 
+  .wagers .info p{
+    font-size: 17px !important;
+  }
+  .container .waggers-content{    
+    width: 540px;    
+    overflow: scroll;
+  }
+  .container .waggers-list{    
+    overflow: scroll;
+  }
+  .container .waggers-title, .container .waggers-data{
+    width: inherit;
+  }
+  .container .waggers-link a{
+    width: 95%;
+  }
+}
+@media screen and (max-width: 380px) {
+  .wrap, .container .wrap.red{
+    padding: 6px 9px;
+  }    
+  .container .undertitle:before{
+    height: 70px;
+  }
+  .home p.title{
+    font-size: 15px;
+  }
+  .slogan .btn, .slogan .btn.bg-red{
+    font-size: 13px;
+  }
+  .container footer .rss{
+    width: 100%;
+  }
+  .container .jeux{
+    padding-bottom: 2em;
+  }
+  .container .jeux h2{
+    padding-top: 20px;
+  }
+  .container .logo-game{
+    margin-right: 1em;
+    margin-bottom: 0;
+  }
+  .container .firstblock, .container .lastblock{
+    padding: 9px;
+  }
+  .versus-container{
+    display: block !important;
+    padding: 15px 0;
+  }
+  .container .ban{
+    height: auto;
+  }  
+  .mise{
+    margin-bottom: 15px;
+  }
+  .live p{
+    padding: 0px 0 !important;
+  }
+  .lobby .versus-container .team{
+    width: 100% !important;
+    text-align: center !important
+  }
+}
+/*
+@media screen and (max-width: 1302px) {
+  .home .content{
+    display: block;
+  }
+  .home .block{
+    width: 16%;
+    display: inline-block;
+    margin-bottom: 15px;
+    margin-right: 10px;
+  }
+  .home .block.last{
+    width: 15%;
+    border-radius: 15px;
+  }
+
+}
+@media screen and (max-width: 1296px) {
+  .navmenu
+  {
+        width: 50%;
+  }  
+  footer .wrap{
+    padding: 3px 50px;
+  }
+  .home .slogan{
+      top: 38%;
+  }
+  .home p.title{
+      font-size: 39px;
+  }
+}
+@media screen and (max-width: 1173px){
+  .home .block,.home .block.last{
+    width: 23%;
+  }
+  .home .jeux{
+    padding-bottom: 0px;
+  }
+  .home .rss{
+    width: 90%;
+    margin: auto;
+  }
+  .home .rss {
+    width: 60%;
+    margin: auto;
+  }
+}
+@media screen and (max-width: 964px){
+  .communaute{
+    padding-top: 5em !important;
+  }
+}
+@media screen and (max-width: 991px){
+  .part{
+   padding: 0 2em;
+  }
+  .home p.title{
+      font-size: 23px;
+  }
+  .home .slogan{
+      top: 44%;
+  }
+  .home .content{
+  display: inherit;
+  }
+  .home .block
+  {
+    width: 30%;
+    display: inline-block;
+    margin-bottom: 15px;
+  }
+  .home .block.last{
+  width: 30%;
+  margin-right: 0;
+  border-radius: 15px;
+  }
+  .home .logo-game{
+  width: 20%;
+  }
+  .home .actuality{
+  width: 100%;
+  display: block;
+  margin-bottom: 15px;
+  }
+  .home .article{
+  width: 47%;
+
+  }
+  .home .article img{
+  width: 100%;
+  }
+  .home .clip{
+  margin-bottom: 15px;
+  margin-left: 0px;
+  width: 100%;
+  }
+  .home .shop, .home .shop img{
+  width: 100%;
+  }
+  .home .gamecash .lot{
+    width: 100%;
+  }
+  .home .shop{
+    max-width: inherit;
+  }
+  .home .gamecash .more{
+    width: 100%;
+    text-align: center;
+    margin-top: 40px;
+  }
+  .login .containt,
+  .inscription .containt
+  {
+    width: 80%;
+  }
+  .containt h1{
+    font-size: 25px;
+  }
+  .containt .group{
+    padding: 15px 15px;
+  }
+  .login footer .rss,
+  .inscription footer .rss
+  {
+    width: 60%;
+  }
+  .assistance .aside-menu{
+    display: block;
+    width: 100%;
+    max-width: inherit;
+  }
+  .assistance .support{
+    display: block;
+    width: 100%;
+    max-width: inherit;
+  }
+  .assistance .search-box input{
+    margin-top: 15px;
+    width: 100%;
+  }
+  .communaute .center-block{
+    width: 40%;
+  }
+  .communaute .center-block .article img, .communaute .center-block .article .text{
+    width: 100%;
+  }
+  .communaute .streaming{
+      max-width: inherit;
+  }
+  .communaute .streaming img{
+    max-width: inherit;
+    height: 100%;
+  }
+
+}
+@media screen and (max-width: 786px){
+  .communaute .aside-left, .communaute .aside-right{
+    width: 95%;
+    display: block;
+    margin: auto;
+    margin-bottom: 15px;
+  }
+  .communaute .block-center{
+    display: block;
+    width: 90%;
+  }
+  .communaute .aside-right{
+    margin-top: 15px;
+  }
+  
+  .communaute .aside-left .seek{    
+    text-align: center; 
+    position: initial;
+    padding-top: 15px;
+    margin: auto;
+    width: 40%;
+  }
+  .communaute .aside-left .seek .img{
+    width: 40%;
+  }
+  .communaute .streaming{
+    width: 45%;
+    display: table-cell;    
+  }
+  .communaute .stream-info{
+    width: 50%;
+    display: table-cell;
+  } 
+  .communaute .stream-info p{
+    font-size: 15px;
+    padding: 10px 0;
+  }
+  .communaute .stream .view{
+    font-size: 18px;
+  }
+
+}
+
+@media screen and (max-width: 827px){  
+  .container footer{
+    position: inherit !important;
+  }    
+  .header .wrap{
+    text-align: right;
+    padding-right: 5px;
+  }  
+  .bt-container{
+    height: 48px;
+    display: inline-block;
+    padding-top: 3px;
+    margin-right: 25px;
+    float: none;
+    padding: 2px 0px;
+  }
+  .header .dropdown,
+  .header .dropdown
+  {
+    text-align: center;
+    width: 90%;
+  }
+  .navmenu
+  {
+    display: none;
+  }
+  .header .logo{
+    float: left;
+    margin: 10px 10px;
+    max-width: 150px;
+  }
+
+  .header .tag{
+    width: 60%;
+    max-width: inherit;
+  }
+  .header .gametag{
+    margin-right: 5px;
+  }
+  .logo h1{
+   font-size: inherit;
+  } 
+  .assistance .center-block{
+    width: 90%;
+  }
+}
+@media screen and (max-width: 800px){
+  .tchat .rcw-widget-container{
+    width: 314px;
+    bottom: 0 !important;
+
+  }  
+  
+}
+@media screen and (max-width: 640px){
+  .home .article{
+    width: 100%;
+    margin-bottom: 15px;
+  }
+  .home .article img{
+    width: 95%;
+  }
+  .container .join h2{
+    font-size: 23px;
+  }
+  .container .join input{
+    width: 30%;
+  }
+  .container .join a{
+    width: 40%;
+  }
+}
+@media screen and (max-width: 690px){
+  .home .jeux{
+    padding-bottom: 0px;
+  }
+  .home .logo-game{
+    width: 17%;
+  }
+  .home .jeux h2{
+    font-size: 23px;
+    padding-bottom: 0px;
+    padding-top: 15px;
+  }
+  .home .lastblock{
+    padding-top: 0px;
+  }
+  .home .bg-game .logo-game{
+    margin-left: 20px;
+  }
+  .home .community-block{
+    padding: 0px 15px;
+  }
+  .home .shop{
+    max-width: inherit;
+  }
+  .home .join{
+    margin-top: 15px;
+  }
+  .home .community h2, .home .join h2,{
+    font-size: 23px;
+  }
+  .tuto-video video{
+    width: 100%;
+  }
+}
+@media screen and (max-width: 600px){
+  .home .block,
+  .home .block.last{
+    width: 90%;
+  }
+  .footer .logo, .login footer .rss, .inscription footer .rss{
+    max-width: inherit;
+    display: block;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 15px;
+  }
+  .footer .rss, .login footer .rss, .inscription footer .rss{
+    width: 90%;
+    max-width: inherit;
+    margin-bottom: 15px;
+  }
+  .footer .mention, .login footer .mention, .inscription footer .mention{
+    width: 90%;
+    text-align: center;
+  }
+  .container .join .email input{
+    margin: 10px auto; 
+  }
+}
+
+@media screen and (max-width: 500px){  
+  .home .slogan{
+    top: 20%;
+  }
+  .home .community h2{
+    font-size: 23px;
+  }
+
+  .container .join input{
+    display: block;
+    width: 70%;
+    margin: auto;
+  }
+  .home .join a{
+    width: 70%;
+    margin: auto;
+    margin-top: 15px;
+    display: block;
+  }
+  .communaute .streaming, .communaute .stream-info{
+    display: block;
+    margin: auto;
+    width: 100%;
+    text-align: center;
+  }
+  .communaute .stream-container{
+    display: block;
+  }
+}
+@media screen and (max-width: 450px){
+  .home .container{
+     padding: 4em 0em 0em;
+  }
+  .assistance .container{
+    padding-top: 3em;
+  }
+  .header .logo{
+    float: none;
+    clear: both;
+    width: 100%;
+    max-width: inherit;
+    text-align: center;
+    margin: 0 0px 8px;
+  }
+  .header .logo .imglogo{
+    width: 45%;
+  }
+  .bt-container{
+    max-width: inherit;
+    text-align: center;
+    width: 100%;
+  }
+  .header .tag{
+    width: 100%;
+    text-align: center;
+  }
+  .home .gamecash .lot p{
+    display: inine-block;
+    width: 50%;
+    text-align: left;
+    margin-bottom: 15px;
+  }
+  .footer .logo{
+    text-align: center;
+    margin-bottom: 15px;
+    max-width: inherit;
+    width: 90%
+  }
+  .footer .logo a{
+    display: block;
+  }
+  .footer .rss{
+    margin:auto;
+    width: 100%;
+    margin-bottom: 15px;
+  }
+  .footer .rss li{
+    padding-left: 15px;
+  }
+  .footer .mention{
+    width: 100%;
+    text-align: center;
+  }
+}
+@media screen and (max-width: 400px){
+  .home .slogan{
+    top: 9%;
+  }
+  .home p.title{
+    font-size: 20px;
+  }
+
+}*/
+

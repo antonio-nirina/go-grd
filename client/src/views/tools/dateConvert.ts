@@ -10,30 +10,38 @@ export const dateStringToStringEn = function(date: string){
 export const dateStringToDHString = function(date: string){
 	return new Date(date).toLocaleTimeString('fr-Fr', {
 				day : 'numeric',
-				month : 'short',
-				year : 'numeric'
+				month : 'numeric',
+				year : 'numeric',
+				hour:"numeric",
+				minute:"numeric"
 			})
 }
 
 export const dateStringToDHStringEN = function(date: string){
 	return new Date(date).toLocaleTimeString('en', {
 				day : 'numeric',
-				month : 'short',
-				year : 'numeric'
+				month : 'numeric',
+				year : 'numeric',
+				hour:"numeric",
+				minute:"numeric"
 			})
 }
 export const dateStringToDHStringLong = function(date: string){
 	return new Date(date).toLocaleTimeString('fr-Fr', {
 				day : 'numeric',
 				month : 'long',
-				year : 'numeric'
+				year : 'numeric',
+				hour:"2-digit",
+				minute:"numeric"
 			})
 }
-export const dateStringToDY = function(date: string){
+export const dateStringToDY = function(date:any){
 	return new Date(date).toLocaleTimeString('fr-Fr', {
 				day : 'numeric',
 				month : 'long',
-				year : 'numeric'
+				year : 'numeric',
+				hour:"2-digit",
+				minute:"numeric"
 	}).split("à")
 }
 export const dateStringNoYear = function(date: string){

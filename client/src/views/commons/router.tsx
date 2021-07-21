@@ -1,8 +1,7 @@
 import React from "react"
 import { Route, Switch } from "react-router-dom"
 import Index from "../version/home/index"
-import Admin from "../admin/admin"
-import SetRules from "../admin/set-rules"
+
 import Ligue from "../annexe/ligue"
 import Tournament from "../tournament/tournament"
 import Tournois from "../annexe/tournois"
@@ -30,29 +29,14 @@ import ProtectedRoute from "./protectedRoute"
 import Register from "../auth/register"
 import TournamentGame from "../tournament/tournament-game"
 
-import CreateTournament from "../admin/create-tournament"
-import CreateLeague from "../admin/create-league"
-import CreateWaggers from "../admin/create-waggers"
-
-import ListTournament from "../admin/list-tournament"
-import ListLeague from "../admin/list-league"
-import ListWagger from "../admin/list-wagger"
 
 const Router = function() {
 	return (
 		<Switch>
 			<Route path="/" exact component={Index} />
 			<Route path="/index" exact component={Index} />
-			<ProtectedRoute path="/admin" exact component={Admin} />
-			<ProtectedRoute path="/admin/create-tournament" exact component={CreateTournament} />
-			<ProtectedRoute path="/admin/create-league" exact component={CreateLeague} />
-			<ProtectedRoute path="/admin/create-wagger" exact component={CreateWaggers} />
-			<ProtectedRoute path="/admin/set-rules" exact component={SetRules} />
-			<ProtectedRoute path="/admin/tournament" exact component={ListTournament} />
-			<ProtectedRoute path="/admin/league" exact component={ListLeague} />
-			<ProtectedRoute path="/admin/wagger" exact component={ListWagger} />
-			<ProtectedRoute path="/tournament" exact component={Tournament} />
-			<ProtectedRoute path="/tournois" exact component={Tournois} />
+			<ProtectedRoute path="/tournois" exact component={Tournament} />
+			<ProtectedRoute path="/tournament" exact component={Tournois} />
 			<ProtectedRoute path="/tournament-game" exact component={TournamentGame} />
 			<ProtectedRoute path="/info" exact component={Info} />
 			<ProtectedRoute path="/matches" exact component={Matches} />

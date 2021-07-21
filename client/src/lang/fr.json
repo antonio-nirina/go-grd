@@ -169,6 +169,19 @@
 		"titleFriend":"Amis",
 		"titleAddFriend":"Ajouter des amis",
 		"withFriend":"Vous êtes maintenant ami(e) avec"
+	},
+	"tournament":{
+		"incoming":"Tournois à venir",
+		"seemore":"Voir plus",
+		"chgame":"Choisis ton jeu",
+		"lasttournament":"Derniers tournois",
+		"lastresult":"Derniers résultats en tournois",
+		"list":"Liste des tournois disponibles",
+		"price":"Prix Cache",
+		"signup":"Inscrivez vous",
+		"prize":"Prix",
+		"team":"Equipe",
+		"player":"Joueurs"
 	}
 
 }

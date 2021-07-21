@@ -9,14 +9,14 @@ import "./chat.css"
 
 const Chat: React.FC = function() {
   return(
-  <div className="tchat">
-    <div className="tchat-header">
-      <i className="tchat-icon"><FontAwesomeIcon icon={faCommentDots} size="xs"/></i>
-      <span>Nirina1718</span>
-      <div className="close-tchat">
-        <i className="close-icon"><FontAwesomeIcon icon={faTimes} size="xs"/></i>      
-      </div>           
-    </div>    
+  	<div className="tchat">
+	    <div className="tchat-header">
+	      <i className="tchat-icon"><FontAwesomeIcon icon={faCommentDots} size="xs"/></i>
+	      <span>Nirina1718</span>
+	      <div className="close-tchat">
+	        <i className="close-icon"><FontAwesomeIcon icon={faTimes} size="xs"/></i>
+	      </div>
+	    </div>
     <div className="tchat-body">
       <div className="tchat-content">
         <div className="message msg-received">
