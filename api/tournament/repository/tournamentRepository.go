@@ -28,6 +28,7 @@ type RepositoryTournament interface {
 	SavedTournamentRepo(tournament *entity.Tournament) (interface{}, error)
 	FindTournamentRepo(idQuery primitive.ObjectID) (entity.Tournament, error)
 	FindAllTournamentRepo(pageNumber int64,limit int64) ([]entity.Tournament, error)
+	FindTournamentGameRepo(pageNumber int64,limit int64,game string) ([]entity.Tournament, error)
 }
 
 func (c *DriverRepository) SavedTournamentRepo(tournament *entity.Tournament) (interface{}, error){
@@ -62,6 +63,32 @@ func (c *DriverRepository) FindAllTournamentRepo(pageNumber int64,limit int64) (
 	var collection = c.client.Database("grd_database").Collection("tournament")
 	var results []entity.Tournament
 	cur, err := collection.Find(context.TODO(), bson.D{{}},options.Find().SetLimit(limit).SetSkip(skp).SetSort(bson.M{"_id": -1}))
+
+	if err != nil {
+		return nil, err
+	}
+
+	for cur.Next(context.TODO()) {
+		var elem entity.Tournament
+		err := cur.Decode(&elem)
+		if err != nil {
+			external.Logger(fmt.Sprintf("%v", err))
+		}
+
+		results = append(results, elem)
+	}
+	
+	cur.Close(context.TODO())
+
+	return results, nil
+}
+
+func (c *DriverRepository) FindTournamentGameRepo(pageNumber int64,limit int64,game string) ([]entity.Tournament, error) {
+	var skp int64 
+	skp = (pageNumber - 1) * limit
+	var collection = c.client.Database("grd_database").Collection("tournament")
+	var results []entity.Tournament
+	cur, err := collection.Find(context.TODO(), bson.D{{"game.uid", game}},options.Find().SetLimit(limit).SetSkip(skp).SetSort(bson.M{"_id": -1}))
 
 	if err != nil {
 		return nil, err

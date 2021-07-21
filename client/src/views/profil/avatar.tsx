@@ -54,7 +54,7 @@ const Avatar : React.FC = function() {
 		<div className="gamer-profil">
 			<div className="avatar">
 				<p className="setavatar">
-					<img src = {AvatarDefault} alt="" />
+					<img src = {userConnectedRedux.user.avatar ? userConnectedRedux.user.avatar : AvatarDefault} alt="" />
 				<label htmlFor="setavatar"><FontAwesomeIcon icon={faPen} /></label>
 				<input type="file" id="setavatar" onChange={handleUpload} className="uploadFile" name="file"/>
 				</p>

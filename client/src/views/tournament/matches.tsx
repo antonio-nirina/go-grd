@@ -1,17 +1,44 @@
-import React from "react"
+import React,{useEffect,useState} from "react"
 // import { Link } from "react-router-dom"
+import {useQuery} from "@apollo/client"
+import { useSelector } from "react-redux"
+import {RootState} from "../../reducer"
+import {Translation} from "../../lang/translation"
+import {GET_ONE_TOURNAMENT} from "../../gql/tournament/query"
 import Header from "../header/header"
 import Footer from "../footer/footer"
-
+import {Tournament} from "../models/tournament"
 import "../tournament/info.css"
 import "../../assets/css/style.css"
 import { Link } from "react-router-dom"
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-// import { faPlaystation } from "@fortawesome/free-brands-svg-icons"
-// import { faCalendarAlt, faInfoCircle, faGamepad, faTrophy, faMedal, faStepBackward, faStepForward, faChevronRight, faChevronLeft, faMobile } from "@fortawesome/free-solid-svg-icons"
+import {dateStringToDY} from "../tools/dateConvert"
+
 
 
 const Matches: React.FC = function(props:any) {
+	const params = new URLSearchParams(props.location.search)
+	const uid:string|null = params.get("uid")
+	const [tournament, setTournament] = useState<Tournament>()
+	const [isOpen, setIsOpen] = useState<boolean>(true)
+	const userConnectedRedux = useSelector((state:RootState) => state.userConnected)
+	const {loading,error,data} 	= useQuery(GET_ONE_TOURNAMENT, {
+			variables: {
+				uid:uid,
+			},
+	})
+
+	useEffect(() => {
+		if(!loading && !error && data) {
+			setTournament(data.FindOneTournament)
+		}
+
+		const date1 = new Date()
+		const date2 = new Date(data?.FindOneTournament.deadlineDate)
+		const diff = (date2.getTime() - date1.getTime())/1000/60
+
+		if (diff < 10 || diff <= 0) setIsOpen(false)
+
+	},[loading,error,data])
 
   return(
   	<div className="Tournament info">
@@ -20,94 +47,27 @@ const Matches: React.FC = function(props:any) {
 			<div className="full-container">
 				<div className="details">
 					<p className="name-target">Tournois : <span>Rocket League</span></p>
-					<p className="starting">Date de commencement : <span>19 Juin 2022, 17:00</span></p>
-					<p className="status">Status : <span>ouvert</span></p>
+					<p className="starting">Date de commencement : <span>
+						{userConnectedRedux.user.language === "fr" ? dateStringToDY(tournament?.date) : dateStringToDY(tournament?.date)}
+					</span></p>
+					<p className="status">Status : <span>
+						{isOpen ? Translation(userConnectedRedux.user.language).tournament.open : Translation(userConnectedRedux.user.language).tournament.close }
+					</span></p>
 				</div>
 				
 				<div className="banniere"></div>
 				<div className="tabs">
 					<ul>
-						<li><Link to="/info">Info</Link></li>
-						<li><Link to="/matches" className="active">Match</Link></li>
-						<li><Link to="/teams">Equipes</Link></li>
-						<li><Link to="/rules">Règles</Link></li>
+						<li><Link to={`/info?uid=${params.get('uid')}`} className="active">Info</Link></li>
+						<li><Link to={`/matches?uid=${params.get('uid')}`}>Match</Link></li>
+						<li><Link to={`/rules?uid=${params.get('uid')}`}>
+							{Translation(userConnectedRedux.user.language).tournament.rules}
+						</Link></li>
 					</ul>
 				</div>				
 				<div className="matches">
 					<h2>Horaires</h2>
-					<p><strong>Date de commencement</strong></p>
-					<table className="versus">
-						<tr>
-							<td className="schedule">19 Juillet, 2021 17:00</td>
-							<td className="about-team">
-								<span className="team-flag"><img src="https://i.ibb.co/dQPw2Vd/teamlogo.png" alt="teamlogo" width="25" height="25" /></span>
-								<span className="tag-name">TIKIS Esports</span>
-								<span className="flag"><img src="https://i.ibb.co/mC6JsHb/fr.png" alt="fr" width="25" height="25" /></span>
-							</td>
-							<td className="vs">vs</td>
-							<td className="about-team">
-								<span className="team-flag"><img src="https://i.ibb.co/dQPw2Vd/teamlogo.png" alt="teamlogo" width="25" height="25" /></span>
-								<span className="tag-name">TIKIS Esports</span>
-								<span className="flag"><img src="https://i.ibb.co/gvSwfSp/gb.png" alt="gb" width="25" height="25" /></span>
-							</td>
-						</tr>
-						<tr>
-							<td className="schedule">19 Juillet, 2021 17:00</td>
-							<td className="about-team">
-								<span className="team-flag"><img src="https://i.ibb.co/dQPw2Vd/teamlogo.png" alt="teamlogo" width="25" height="25" /></span>
-								<span className="tag-name">TIKIS Esports</span>
-								<span className="flag"><img src="https://i.ibb.co/mC6JsHb/fr.png" alt="fr" width="25" height="25" /></span>
-							</td>
-							<td className="vs">vs</td>
-							<td className="about-team">
-								<span className="team-flag"><img src="https://i.ibb.co/dQPw2Vd/teamlogo.png" alt="teamlogo" width="25" height="25" /></span>
-								<span className="tag-name">TIKIS Esports</span>
-								<span className="flag"><img src="https://i.ibb.co/gvSwfSp/gb.png" alt="gb" width="25" height="25" /></span>
-							</td>
-						</tr>
-						<tr>
-							<td className="schedule">19 Juillet, 2021 17:00</td>
-							<td className="about-team">
-								<span className="team-flag"><img src="https://i.ibb.co/dQPw2Vd/teamlogo.png" alt="teamlogo" width="25" height="25" /></span>
-								<span className="tag-name">TIKIS Esports</span>
-								<span className="flag"><img src="https://i.ibb.co/mC6JsHb/fr.png" alt="fr" width="25" height="25" /></span>
-							</td>
-							<td className="vs">vs</td>
-							<td className="about-team">
-								<span className="team-flag"><img src="https://i.ibb.co/dQPw2Vd/teamlogo.png" alt="teamlogo" width="25" height="25" /></span>
-								<span className="tag-name">Random team</span>
-								<span className="flag"><img src="https://i.ibb.co/gvSwfSp/gb.png" alt="gb" width="25" height="25" /></span>
-							</td>
-						</tr>
-						<tr>
-							<td className="schedule">19 Juillet, 2021 17:00</td>
-							<td className="about-team">
-								<span className="team-flag"><img src="https://i.ibb.co/dQPw2Vd/teamlogo.png" alt="teamlogo" width="25" height="25" /></span>
-								<span className="tag-name">Random team</span>
-								<span className="flag"><img src="https://i.ibb.co/mC6JsHb/fr.png" alt="fr" width="25" height="25" /></span>
-							</td>
-							<td className="vs">vs</td>
-							<td className="about-team">
-								<span className="team-flag"><img src="https://i.ibb.co/dQPw2Vd/teamlogo.png" alt="teamlogo" width="25" height="25" /></span>
-								<span className="tag-name">TIKIS Esports</span>
-								<span className="flag"><img src="https://i.ibb.co/gvSwfSp/gb.png" alt="gb" width="25" height="25" /></span>
-							</td>
-						</tr>
-						<tr>
-							<td className="schedule">19 Juillet, 2021 17:00</td>
-							<td className="about-team">
-								<span className="team-flag"><img src="https://i.ibb.co/dQPw2Vd/teamlogo.png" alt="teamlogo" width="25" height="25" /></span>
-								<span className="tag-name">TIKIS Esports</span>
-								<span className="flag"><img src="https://i.ibb.co/mC6JsHb/fr.png" alt="fr" width="25" height="25" /></span>
-							</td>
-							<td className="vs">vs</td>
-							<td className="about-team">
-								<span className="team-flag"><img src="https://i.ibb.co/dQPw2Vd/teamlogo.png" alt="teamlogo" width="25" height="25" /></span>
-								<span className="tag-name">Random team</span>
-								<span className="flag"><img src="https://i.ibb.co/gvSwfSp/gb.png" alt="gb" width="25" height="25" /></span>
-							</td>
-						</tr>
-					</table>
+					<p><strong>{Translation(userConnectedRedux.user.language).tournament.starttimes}</strong></p>
 				</div>
 			</div>			
 			<Footer/>

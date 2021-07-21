@@ -36,3 +36,23 @@ func FindAllTournament() *graphql.Field {
 		Resolve: tournamentResolver.FindAllTournamentResolver,
 	}
 }
+
+func FindTournamentByGame() *graphql.Field {
+	return &graphql.Field{
+		Type:        graphql.NewList(types.TournamentSchemaType),
+		Description: "Get all tournament by game",
+		Args: graphql.FieldConfigArgument{
+			"uidGame": &graphql.ArgumentConfig{
+				Type: graphql.String,
+			},
+			"limit": &graphql.ArgumentConfig{
+				Type: graphql.Int,
+			},
+			"pageNumber": &graphql.ArgumentConfig{
+				Type: graphql.Int,
+			},
+		},
+		
+		Resolve: tournamentResolver.FindTournamentGameResolver,
+	}
+}

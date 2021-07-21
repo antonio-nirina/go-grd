@@ -1,7 +1,7 @@
 import React from "react"
 import { Link } from "react-router-dom"
 
-import { faPlus, faChevronRight} from "@fortawesome/free-solid-svg-icons"
+import { faPlus} from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import SideBar from "../header/sidebar"
 import Nav from "../header/nav"
@@ -41,7 +41,7 @@ const CreateGame: React.FC = function() {
 	                                                <input type="file" id="img-game" className="no-margin"/>
 	                                            </div>		                                            
 	                                            <textarea placeholder="Description..."></textarea>
-	                                            <Link to="/set-rules"><button className="btn bg-red">Modifier les règles <FontAwesomeIcon icon={faChevronRight} /> </button></Link>
+	                                            <Link to="/set-rules"><button className="btn bg-red">Ajouter un règle</button></Link>
 	                                        </form>
 	                                    </div>
 	                                </div>

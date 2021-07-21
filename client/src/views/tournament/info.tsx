@@ -6,7 +6,6 @@ import { Link } from "react-router-dom"
 import Header from "../header/header"
 import Footer from "../footer/footer"
 
-import Championship from "../../assets/image/championship.jpeg"
 import {GET_ONE_TOURNAMENT} from "../../gql/tournament/query"
 import {Translation} from "../../lang/translation"
 import {RootState} from "../../reducer"
@@ -18,7 +17,7 @@ import {dateStringToDY} from "../tools/dateConvert"
 
 const Info: React.FC = function(props:any) {
 	const params = new URLSearchParams(props.location.search)
-	const uid = params.get("uid")
+	const uid:string|null = params.get("uid")
 	const [tournament, setTournament] = useState<Tournament>()
 	const [isOpen, setIsOpen] = useState<boolean>(true)
 	const userConnectedRedux = useSelector((state:RootState) => state.userConnected)
@@ -34,7 +33,7 @@ const Info: React.FC = function(props:any) {
 		}
 
 		const date1 = new Date()
-		const date2 = new Date(data.FindOneTournament.deadlineDate)
+		const date2 = new Date(data?.FindOneTournament.deadlineDate)
 		const diff = (date2.getTime() - date1.getTime())/1000/60
 
 		if (diff < 10 || diff <= 0) setIsOpen(false)
@@ -58,19 +57,11 @@ const Info: React.FC = function(props:any) {
 					</span>
 					</p>
 				</div>
-				<div className="banniere">
-					<img src={tournament?.game.image} alt=""/>
-				</div>
 				<div className="tabs">
 					<ul>
-						<li><Link to="/info" className="active">Info</Link></li>
-						<li><Link to="/matches">Match</Link></li>
-						<li><Link to="/teams">
-							{
-								Translation(userConnectedRedux.user.language).tournament.team
-							}
-						</Link></li>
-						<li><Link to="#">
+						<li><Link to={`/info?uid=${params.get('uid')}`} className="active">Info</Link></li>
+						<li><Link to={`/matches?uid=${params.get('uid')}`}>Match</Link></li>
+						<li><Link to={`/rules?uid=${params.get('uid')}`}>
 						{
 							Translation(userConnectedRedux.user.language).tournament.rules
 						}
