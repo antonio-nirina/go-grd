@@ -164,7 +164,12 @@
 		"signup":"Sign up",
 		"prize":"Prize",
 		"team":"Team",
-		"player":"Players"
+		"player":"Players",
+		"rules":"Rules",
+		"pending":"Pending",
+		"confirmed":"Confirmed",
+		"start":"Start",
+		"end":"End"
 	}
 
 }

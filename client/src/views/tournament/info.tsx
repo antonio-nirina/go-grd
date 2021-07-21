@@ -56,8 +56,16 @@ const Info: React.FC = function(props:any) {
 					<ul>
 						<li><Link to="/info" className="active">Info</Link></li>
 						<li><Link to="/matches">Match</Link></li>
-						<li><Link to="/teams">Equipes</Link></li>
-						<li><Link to="#">Règles</Link></li>
+						<li><Link to="/teams">
+							{
+								Translation(userConnectedRedux.user.language).tournament.team
+							}
+						</Link></li>
+						<li><Link to="#">
+						{
+							Translation(userConnectedRedux.user.language).tournament.rules
+						}
+						</Link></li>
 					</ul>
 				</div>
 				<div className="txt">
@@ -66,16 +74,32 @@ const Info: React.FC = function(props:any) {
 				<div className="tableau">
 					<div className="state">
 						<p>16 <span>slots</span></p>
-						<p>27 <span>En attente</span></p>
-						<p>7 <span className="confirm">Confirmé</span></p>
+						<p>27 <span>
+							{
+								Translation(userConnectedRedux.user.language).tournament.pending
+							}
+						</span></p>
+						<p>7 <span className="confirm">
+							{
+								Translation(userConnectedRedux.user.language).tournament.confirmed
+							}
+						</span></p>
 					</div>
 					<div className="info-target">
 						<div className="line">
-							<p>Début</p>
+							<p>
+								{
+									Translation(userConnectedRedux.user.language).tournament.start
+								}
+							</p>
 							<span>{tournament?.date}</span>
 						</div>
 						<div className="line">
-							<p>Fin</p>
+							<p>
+								{
+									Translation(userConnectedRedux.user.language).tournament.end
+								}
+							</p>
 							<span>{tournament?.deadlineDate}</span>
 						</div>
 						<div className="line">

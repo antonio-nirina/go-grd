@@ -24,13 +24,14 @@ import cod_warzone from "../../assets/image/warzone.png"
 import cod_coldwar from "../../assets/image/cod-coldwar.png"
 import fifa from "../../assets/image/fifa21.png"
 import {APEX_LEGENDE,FORTNITE,RNB,RL,COD_MODERN,COD_WAR_ZONE,COD_COLD_WAR,FIFA} from "../game/constante"
+import {Tournament} from "../models/tournament"
 import {GET_ALL_TOURNAMENT} from "../../gql/tournament/query"
 import {dateStringToDY} from "../tools/dateConvert"
 
 const Tournois: React.FC = function() {
 	const history = useHistory()
 	const userConnectedRedux = useSelector((state:RootState) => state.userConnected)
-	const [tournament, setTournament] = useState<any>([])
+	const [tournament, setTournament] = useState<Array<Tournament>>([])
 	const {loading,error,data} 	= useQuery(GET_ALL_TOURNAMENT, {
 			variables: {
 				limit:4,
