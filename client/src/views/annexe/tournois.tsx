@@ -2,7 +2,7 @@ import React,{useEffect,useState} from "react"
 import { Link } from "react-router-dom"
 import {useHistory } from "react-router-dom"
 import { useSelector } from "react-redux"
-import { faXbox, faPlaystation} from "@fortawesome/free-brands-svg-icons"
+import { faPlaystation} from "@fortawesome/free-brands-svg-icons"
 import { faGamepad, faTrophy } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import {useQuery} from "@apollo/client"
@@ -41,7 +41,6 @@ const Tournois: React.FC = function() {
 	useEffect(() => {
 		//let init = true
 		if(!loading && !error && data) {
-			console.log(data)
 			setTournament(data.FindAllTournament)
 		}
 
@@ -75,7 +74,7 @@ const Tournois: React.FC = function() {
 							{
 								tournament?.map(function(el:any,index:number){
 									return (
-										<div className="upcomming side" key={index} onClick={()=>{history.push("/info")}} style={{"cursor":"pointer"}}>
+										<div className="upcomming side" key={index} onClick={()=>{history.push(`/info?uid=${el.uid}`)}} style={{"cursor":"pointer"}}>
 												<div className="items">
 													<div className="side-img">
 														<img src={el.game.logo} alt={el.game.name}/>

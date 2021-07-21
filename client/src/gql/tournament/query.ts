@@ -29,3 +29,32 @@ export const GET_ALL_TOURNAMENT= gql`
 		}
 	}
 }`
+
+export const GET_ONE_TOURNAMENT = gql`
+	query FindOneTournament($uid: String!) {
+		FindOneTournament(uid: $uid){
+		uid
+		title
+		statut
+		description
+		numberParticipate
+		numberTeam
+		deadlineDate
+		date
+		price
+		priceParticipate
+		rules
+		game{
+			uid
+			name
+			image
+			logo
+			slug
+		}
+		plateform{
+			uid
+			description
+			name
+		}
+	}
+}`
