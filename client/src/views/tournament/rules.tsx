@@ -54,9 +54,9 @@ const Rules: React.FC = function(props:any) {
 				<div className="banniere"></div>
 				<div className="tabs">
 					<ul>
-						<li><Link to={`/info?uid=${params.get('uid')}`} className="active">Info</Link></li>
+						<li><Link to={`/info?uid=${params.get('uid')}`}>Info</Link></li>
 						<li><Link to={`/matches?uid=${params.get('uid')}`}>Match</Link></li>
-						<li><Link to={`/rules?uid=${params.get('uid')}`}>Règles</Link></li>
+						<li><Link to={`/rules?uid=${params.get('uid')}`} className="active">Règles</Link></li>
 					</ul>
 				</div>
 				<div className="txt">

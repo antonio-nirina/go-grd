@@ -114,7 +114,7 @@ const Tournois: React.FC = function() {
 														<div className="name-section">
 															<p>
 																<span>{el.game.name}</span>
-																<span style={{"float":"right"}}>{renderPlatformLogo(el.plateform.name)}</span>
+																<span className="platform-logo">{renderPlatformLogo(el.plateform.name)}</span>
 															</p>
 														</div>
 														<div className="prize-section">

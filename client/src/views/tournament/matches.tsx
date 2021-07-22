@@ -12,6 +12,8 @@ import "../tournament/info.css"
 import "../../assets/css/style.css"
 import { Link } from "react-router-dom"
 import {dateStringToDY} from "../tools/dateConvert"
+import AvatarDefault from "../../assets/image/game-tag.png"
+
 
 
 
@@ -41,10 +43,11 @@ const Matches: React.FC = function(props:any) {
 	},[loading,error,data])
 
   return(
-  	<div className="Tournament info">
+  	<div className="Tournament info view">
 		<div className="container">
 			<Header/>
 			<div className="full-container">
+
 				<div className="details">
 					<p className="name-target">Tournois : <span>Rocket League</span></p>
 					<p className="starting">Date de commencement : <span>
@@ -54,12 +57,36 @@ const Matches: React.FC = function(props:any) {
 						{isOpen ? Translation(userConnectedRedux.user.language).tournament.open : Translation(userConnectedRedux.user.language).tournament.close }
 					</span></p>
 				</div>
+				<div className="ban">
+					<div className="versus-container">
+						<div className="team">
+							<div className="info">
+								<span>team</span>
+								<p className="profilname">HammyZZ</p>
+								<p><span>2113 </span>Average rating</p>
+							</div>
+							<img src={AvatarDefault} alt="default" />
+						</div>
+						<div className="live">
+							<p><span>Live</span>9:22</p>
+							<div className="mise"><button className="btn bg-red">Voir le match</button></div>
+						</div>
+						<div className="team">
+						<div className="info">
+								<span>team</span>
+								<p className="profilname">rainDrop</p>
+								<p><span>2185 </span>Average rating</p>
+							</div>
+							<img src={AvatarDefault} alt="default" />
+						</div>
+					</div>
+				</div>
 				
 				<div className="banniere"></div>
 				<div className="tabs">
 					<ul>
-						<li><Link to={`/info?uid=${params.get('uid')}`} className="active">Info</Link></li>
-						<li><Link to={`/matches?uid=${params.get('uid')}`}>Match</Link></li>
+						<li><Link to={`/info?uid=${params.get('uid')}`}>Info</Link></li>
+						<li><Link to={`/matches?uid=${params.get('uid')}`} className="active">Match</Link></li>
 						<li><Link to={`/rules?uid=${params.get('uid')}`}>
 							{Translation(userConnectedRedux.user.language).tournament.rules}
 						</Link></li>
