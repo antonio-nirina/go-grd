@@ -181,6 +181,7 @@ body{
 	position: relative;
 }
 .layout-container .content-wrapper .navbar {
+	position: sticky;
 	top: 0px;
 	z-index: 9;
 }
