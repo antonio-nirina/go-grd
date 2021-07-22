@@ -12,6 +12,7 @@ type TournamentResolver interface {
 	SavedTournamentResolver(params graphql.ResolveParams) (interface{}, error)
 	FindTournamentResolver(params graphql.ResolveParams) (interface{}, error)
 	FindAllTournamentResolver(params graphql.ResolveParams) (interface{}, error)
+	FindTournamentGameResolver(params graphql.ResolveParams) (interface{}, error)
 }
 
 type tournament struct {
@@ -99,3 +100,28 @@ func (t *tournament) FindAllTournamentResolver(params graphql.ResolveParams) (in
 
 	return res, nil
 } 
+
+func (t *tournament) FindTournamentGameResolver(params graphql.ResolveParams) (interface{}, error) {
+	limit, _ := params.Args["limit"].(int)
+	pageNumber, _ := params.Args["pageNumber"].(int)
+
+	if pageNumber == 0 && limit > 0{
+		pageNumber = 1
+	}
+
+	gameUid, _ := params.Args["uidGame"].(string)
+	_,err := t.gameTournamentHandler.FindOneGameByUidHandler(gameUid)
+
+	if err != nil {
+		return nil, err
+	}
+
+	res, err := t.tournamentHandler.FindTournamentGameHandler(int64(pageNumber),int64(limit),gameUid)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return res, nil
+
+}

@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from "react-router-dom"
+import {useHistory } from "react-router-dom"
 
 import SideBar from "../header/sidebar"
 import Nav from "../header/nav"
@@ -8,6 +9,7 @@ import ApexLegends from "../assets/image/apex-legends.png"
 
 
 const ListGame : React.FC = function() {
+	const history = useHistory()
 	//const [showList, setShowList] = useState<Boolean>(false)
 
     //const onShow = function(){
@@ -30,7 +32,9 @@ const ListGame : React.FC = function() {
 		    			</div>
 		    			<div className="create-tournament-game">
 		    				<button className="btn bg-white">Supprimer jeux</button>
-		    				<button className="btn bg-red">Créer jeux</button>
+		    				<button className="btn bg-red" onClick={()=> {history.push("/admin/create-game")}}>
+		    					Créer jeux
+	    					</button>
 		    			</div>	    		
 			    		<div className="dashboard list-game">
 			    			<Link to ="#" className="grid league-board">	    				

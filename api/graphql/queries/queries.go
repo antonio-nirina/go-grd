@@ -63,5 +63,6 @@ func GetRootFields() graphql.Fields {
 		"GetAccessTokenTwitch":		GetAccessTokenTwitch(),
 		"FindOneTournament": 		FindOneTournament(),
 		"FindAllTournament":      	FindAllTournament(),
+		"FindTournamentByGame":		FindTournamentByGame(),
 	}
 }

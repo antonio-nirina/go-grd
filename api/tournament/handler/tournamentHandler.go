@@ -10,6 +10,7 @@ type UsecaseTournament interface {
 	SavedTournamentHandler(*entity.Tournament) (interface{}, error)
 	FindTournamentHandler(idQuery string) (tournamentViewModel, error)
 	FindAllTournamentHandler(pageNumber int64,limit int64) ([]tournamentViewModel, error)
+	FindTournamentGameHandler(pageNumber int64,limit int64,gameUid string) ([]tournamentViewModel, error)
 }
 
 type tournamentUsecase struct {
@@ -66,6 +67,38 @@ func (t *tournamentUsecase) FindTournamentHandler(idQuery string) (tournamentVie
 
 func (t *tournamentUsecase) FindAllTournamentHandler(pageNumber int64, limit int64) ([]tournamentViewModel, error){
 	result, err := t.tournamentRepository.FindAllTournamentRepo(pageNumber,limit)
+
+	if err != nil {
+		return []tournamentViewModel{}, err
+	}
+
+	var res []tournamentViewModel
+
+	for _,val := range result {
+		tournamentViewModel := tournamentViewModel{
+			Uid: val.Uid.Hex(),
+			Title:val.Title,
+			Date:val.Date,     			
+			Description:val.Info,      	
+			Statut:val.Statut, 				
+			NumberParticipate:val.NumberParticipate,
+			NumberTeam:val.NumberTeam, 			
+			Price:val.Price,     			
+			DeadlineDate:val.DeadlineDate,    	
+			PriceParticipate:val.PriceParticipate,  
+			Game:GameViewModel{val.Game.Uid.Hex(),val.Game.Name,val.Game.Image,val.Game.Logo,val.Game.Slug},				
+			Plateform:PlateformViewModel{val.Plateform.Uid.Hex(),val.Plateform.Name,val.Plateform.Description},
+			Rules:val.Rules,  			
+		}
+
+		res = append(res, tournamentViewModel)
+	}
+	
+	return res,nil
+}
+
+func (t *tournamentUsecase) FindTournamentGameHandler(pageNumber int64,limit int64,game string) ([]tournamentViewModel, error) {
+	result, err := t.tournamentRepository.FindTournamentGameRepo(pageNumber,limit,game)
 
 	if err != nil {
 		return []tournamentViewModel{}, err
