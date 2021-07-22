@@ -73,12 +73,12 @@ body{
 	height: 100vh;
 	top: 0px;
 	overflow-y: auto;
-	width: 15%;
+	width: 10%;
 	background: #000000
 }
 .main-sidebar{
 	text-align: center;
-	padding-top: 15px;
+	/*padding-top: 15px;*/
 }
 .main-sidebar li{
 	padding: 15px;
@@ -90,7 +90,7 @@ body{
 .main-sidebar li span{
 	display: block;
 	text-transform: uppercase;
-	padding: 10px;
+	padding-top: 10px;
 	font-size: 12px;
 
 }
@@ -109,6 +109,8 @@ body{
 	position: sticky;
 	top: 0;
 	z-index: 9999;
+	padding-top: 22px;
+	background: #000000;
 }
 .main-sidebar .logo{
 	display: block;
@@ -234,7 +236,7 @@ div#profile-name{
     margin-right: 5px;
 }
 .main-content{
-	padding: 42px 70px;
+	padding: 42px 45px;
 }
 
 .response-filter {
@@ -601,4 +603,17 @@ label[for="img-game"]
 }
 .column div.create-game{
     width: 100%;
+}
+/***************set home page *******************/
+.column-home .both{
+	
+}
+.column-home .flex-group{
+	clear: both;
+    margin-right: 15px;
+    display: inline-block;
+    width: 49%;
+}
+.column-home .flex-group:last-child{
+	margin-right: 0;
 }
