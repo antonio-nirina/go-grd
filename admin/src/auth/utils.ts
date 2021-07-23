@@ -85,7 +85,7 @@ export const decodeCookieContent = function(data:any) {
 	}
 }
 
-export const GetCookie = function(key = "") {
+export const GetCookie = (key = "") => {
 	var k = key ? key : ACCESS_TOKEN
 	let cookieData = Cookies.get(k)
 	if (!cookieData) {

@@ -18,6 +18,10 @@ import (
 	tournamentHandler "github.com/thoussei/antonio/api/tournament/handler"
 	tournamentRepo "github.com/thoussei/antonio/api/tournament/repository"
 
+	cmtyDelivery "github.com/thoussei/antonio/api/community/delivery"
+	cmtyHandler "github.com/thoussei/antonio/api/community/handler"
+	cmtyRepo "github.com/thoussei/antonio/api/community/repository"
+
 	"github.com/graphql-go/graphql"
 )
 
@@ -42,8 +46,11 @@ var tournamentRepository = tournamentRepo.NewTournamentRepository(database)
 var tournamentUsecase 	= tournamentHandler.NewUsecaseTournament(tournamentRepository)
 var tournamentResolver 	= tournamentDelivery.NewResolverTournament(tournamentUsecase,usecaseGame,usecasePlateform)
 
+var notifResolver 		= notifDelivery.NewNotifResolver(usecaseNotif,usecase)
 
-var notifResolver = notifDelivery.NewNotifResolver(usecaseNotif,usecase)
+var cmtyRepository 		= cmtyRepo.NewCmtyRepository(database)
+var cmtyUsecase 		= cmtyHandler.NewUsecaseCmty(cmtyRepository)
+var cmtyResolver 		= cmtyDelivery.NewResolverCmty(cmtyUsecase,usecase)
 
 
 // GetRootFields returns all the available queries.
@@ -64,5 +71,7 @@ func GetRootFields() graphql.Fields {
 		"FindOneTournament": 		FindOneTournament(),
 		"FindAllTournament":      	FindAllTournament(),
 		"FindTournamentByGame":		FindTournamentByGame(),
+		"FindAllCmty":      		FindAllCmty(),
+		"FindOneCmty":				FindOneCmty(),
 	}
 }
