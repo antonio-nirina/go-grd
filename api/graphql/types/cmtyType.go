@@ -5,7 +5,7 @@ import (
 )
 
 var CmtySchemaType = graphql.NewObject(graphql.ObjectConfig{
-	Name: "GameType",
+	Name: "CommunutyType",
 	Fields: graphql.Fields{
 		"uid": &graphql.Field{
 			Type: graphql.String,
