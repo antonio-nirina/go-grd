@@ -1,6 +1,11 @@
 @charset "UTF-8";
-.tournament-bloc{	
-	
+.tournament-bloc .platform-logo{
+	float: right;
+	margin-right: 8px;
+}
+.tournament-bloc .prize{
+	text-align: center;
+	margin-top: 15px
 }
 .tournament-bloc .jeux{
 	padding-bottom: 0;
