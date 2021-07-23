@@ -18,6 +18,10 @@ import (
 	tournamentHandler "github.com/thoussei/antonio/api/tournament/handler"
 	tournamentRepo "github.com/thoussei/antonio/api/tournament/repository"
 
+	cmtyDelivery "github.com/thoussei/antonio/api/community/delivery"
+	cmtyHandler "github.com/thoussei/antonio/api/community/handler"
+	cmtyRepo "github.com/thoussei/antonio/api/community/repository"
+
 	"github.com/graphql-go/graphql"
 )
 
@@ -42,6 +46,11 @@ var tournamentResolver 	= tournamentDelivery.NewResolverTournament(tournamentUse
 
 var NotifResolver 		= notifDelivery.NewNotifResolver(usecaseNotif,usecase)
 
+var cmtyRepository 		= cmtyRepo.NewCmtyRepository(database)
+var cmtyUsecase 		= cmtyHandler.NewUsecaseCmty(cmtyRepository)
+var cmtyResolver 		= cmtyDelivery.NewResolverCmty(cmtyUsecase,usecase)
+
+
 func GetRootFields() graphql.Fields {
 	return graphql.Fields{
 		"createdUser":      	createdUser(),
@@ -58,5 +67,6 @@ func GetRootFields() graphql.Fields {
 		"AcceptedRequestFriend": AcceptedRequestFriend(),
 		"Deconnected":			Deconnected(),
 		"saveTournament":		saveTournament(),
+		"createPublication":	createPublication(),
 	}
 }
