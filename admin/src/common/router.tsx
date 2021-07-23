@@ -14,6 +14,7 @@ import ListLeague from "../league/list-league"
 import ListWagger from "../wager/list-wagger"
 import Login from "../auth/login"
 
+
 const Router = function() {
 	return (
 		<Switch>

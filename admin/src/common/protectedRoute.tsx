@@ -8,20 +8,21 @@ interface IProtectedRoute{
 const ProtectedRoute = (
   props: IProtectedRoute & RouteProps
 ) => {
-  let redirectPath: string = '';
+	let redirectPath: string = '';
 
-  const { authenticationPath, path } = props
-  //  when user is not logged redirect
-  if (!GetCookie) {
-    redirectPath = authenticationPath || '/admin/login'
-  }
+	const { authenticationPath, path } = props
+	//  when user is not logged redirect
 
-  if (redirectPath !== '') {
-    const renderComponent = () => <Redirect to={{ pathname: redirectPath, state: { from: path } }}  />
-    return <Route {...props} component={renderComponent} render={undefined} />
-  } else {
-    return <Route {...props} />
-  }
+	if (!GetCookie) {
+		redirectPath = authenticationPath || '/admin/login'
+	}
+
+	if (redirectPath !== '') {
+		const renderComponent = () => <Redirect to={{ pathname: redirectPath, state: { from: path } }}  />
+		return <Route {...props} component={renderComponent} render={undefined} />
+	} else {
+		return <Route {...props} />
+	}
 }
 
 export default ProtectedRoute
