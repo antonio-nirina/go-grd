@@ -2,7 +2,6 @@ import React,{useMemo} from "react"
 import { Link } from 'react-router-dom'
 import { useSelector } from "react-redux"
 import {useQuery} from "@apollo/client"
-
 import { faEye } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import warz from "../../assets/image/warz.jpg"
@@ -23,12 +22,18 @@ import Streamer1 from "../../assets/image/streamer1.jpg"
 import "./communaute.css"
 // import {COUNT_SUBSCRIBE} from "../../gql/user/subscription"
 import {GET_ALL_STREAMING} from "../../gql/user/query"
+import {GET_ALL_CMTY} from "../../gql/cmty/query"
 import Friend from "./friends"
 
 
 const Communaute: React.FC = function() {
 	const userConnectedRedux 	= useSelector((state:RootState) => state.userConnected)
 	// const {loading,error,data}  = useSubscription(COUNT_SUBSCRIBE)
+	const {loading,error,data} 		= useQuery(GET_ALL_CMTY, {
+		variables: {
+			email: userConnectedRedux.user.email
+		},
+	})
 
 	const {loading:loadingTwitch,error:errorTwitch,data:dataTwitch} = useQuery(GET_ALL_STREAMING, {
 		variables: {
@@ -37,8 +42,9 @@ const Communaute: React.FC = function() {
 	})
 
 	useMemo(() => {
-		if(!loadingTwitch && !errorTwitch && dataTwitch) console.log("data", dataTwitch)
-	},[loadingTwitch,errorTwitch,dataTwitch])
+		if(!loadingTwitch && !errorTwitch && dataTwitch) console.log("dataTwitch", dataTwitch)
+		if(!loading && !error && data) console.log("data", data)
+	},[loadingTwitch,errorTwitch,dataTwitch,loading,error,data])
 
   return(
 	<div className="communaute">

@@ -13,7 +13,7 @@ import { faTrophy } from "@fortawesome/free-solid-svg-icons"
 const Tournament: React.FC = function() {
 
   return(
-  	<div className="Tournament">
+  	<div className="Tournament view">
 		<div className="container">
 			<Header/>
 			<div className="full-container">

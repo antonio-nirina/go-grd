@@ -17,5 +17,6 @@ type GameRepositoryInterface interface {
 	SavedGameRepository(game *entity.Game) (interface{}, error)
 	FindOneGameRepository(objectId primitive.ObjectID) (interface{}, error)
 	FindOneGameByuidRepository(objectId primitive.ObjectID) (entity.Game, error)
+	FindOneGameBySlugdRepository(slug string) (entity.Game, error)
 	FindAllGameRepository() ([]entity.Game, error)
 }

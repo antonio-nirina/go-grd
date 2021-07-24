@@ -24,6 +24,16 @@ import cod_warzone from "../../assets/image/warzone.png"
 import cod_coldwar from "../../assets/image/cod-coldwar.png"
 import fifa from "../../assets/image/fifa21.png"
 import {APEX_LEGENDE,FORTNITE,RNB,RL,COD_MODERN,COD_WAR_ZONE,COD_COLD_WAR,FIFA} from "../game/constante"
+import {
+	SLUG_APEX_LEGENDE,
+	SLUG_FORTNITE,
+	SLUG_RNB,
+	SLUG_RL,
+	SLUG_COD_MODERN,
+	SLUG_COD_WAR_ZONE,
+	SLUG_COD_COLD_WAR,
+	SLUG_FIFA
+} from"../game/constante"
 import {Tournament} from "../models/tournament"
 import {GET_ALL_TOURNAMENT} from "../../gql/tournament/query"
 import {dateStringToDY} from "../tools/dateConvert"
@@ -43,7 +53,6 @@ const Tournois: React.FC = function() {
 
 	useEffect(() => {
 		//let init = true
-		console.log(data)
 		if(!loading && !error && data) {
 			setTournament(data.FindAllTournament)
 		}
@@ -114,7 +123,7 @@ const Tournois: React.FC = function() {
 														<div className="name-section">
 															<p>
 																<span>{el.game.name}</span>
-																<span style={{"float":"right"}}>{renderPlatformLogo(el.plateform.name)}</span>
+																<span className="platform-logo">{renderPlatformLogo(el.plateform.name)}</span>
 															</p>
 														</div>
 														<div className="prize-section">
@@ -154,30 +163,30 @@ const Tournois: React.FC = function() {
 						<div className="bg-game">
 						<div className="firstblock w100">
 							<div className="logo-game">
-							    <Link to={`/tournament-game?game=${APEX_LEGENDE.replace(" ","_")}`}><img src={apexlegends} alt="Apex Legends" /></Link>
+							    <Link to={`/tournament-game?game=${APEX_LEGENDE.replace(" ","_")}&slug=${SLUG_APEX_LEGENDE}`}><img src={apexlegends} alt="Apex Legends" /></Link>
 							</div>
 							<div className="logo-game">
-							    <Link to={`/tournament-game?game=${FORTNITE.replace(" ","_")}`}><img src={fortnite} alt="Fortnite" /></Link>
+							    <Link to={`/tournament-game?game=${FORTNITE.replace(" ","_")}&slug=${SLUG_FORTNITE}`}><img src={fortnite} alt="Fortnite" /></Link>
 							</div>
 							<div className="logo-game">
-							    <Link to={`/tournament-game?game=${RNB.replace(" ","_")}`}><img src={rainboxsix} alt="RainbowSIx Siege" /></Link>
+							    <Link to={`/tournament-game?game=${RNB.replace(" ","_")}&slug=${SLUG_RNB}`}><img src={rainboxsix} alt="RainbowSIx Siege" /></Link>
 							</div>
 							<div className="logo-game">
-							    <Link to={`/tournament-game?game=${RL.replace(" ","_")}`}><img src={rocketleague} alt="Rocket League" /></Link>
+							    <Link to={`/tournament-game?game=${RL.replace(" ","_")}&slug=${SLUG_RL}`}><img src={rocketleague} alt="Rocket League" /></Link>
 							</div>
 						</div>
 		      			<div className="lastblock w100">
 					        <div className="logo-game">
-					            <Link to={`/tournament-game?game=${COD_MODERN.replace(" ","_")}`}><img src={cod_Modernwarfare} alt="Call of Duty Modern Warfare" /></Link>
+					            <Link to={`/tournament-game?game=${COD_MODERN.replace(" ","_")}&slug=${SLUG_COD_MODERN}`}><img src={cod_Modernwarfare} alt="Call of Duty Modern Warfare" /></Link>
 					        </div>
 					        <div className="logo-game">
-					            <Link to={`/tournament-game?game=${COD_WAR_ZONE.replace(" ","_")}`}><img src={cod_warzone} alt="Call of Duty Warzone" /></Link>
+					            <Link to={`/tournament-game?game=${COD_WAR_ZONE.replace(" ","_")}&slug=${SLUG_COD_WAR_ZONE}`}><img src={cod_warzone} alt="Call of Duty Warzone" /></Link>
 					        </div>
 					        <div className="logo-game">
-					            <Link to={`/tournament-game?game=${COD_COLD_WAR.replace(" ","_")}`}><img src={cod_coldwar} alt="Call of Duty Cold War" /></Link>
+					            <Link to={`/tournament-game?game=${COD_COLD_WAR.replace(" ","_")}&slug=${SLUG_COD_COLD_WAR}`}><img src={cod_coldwar} alt="Call of Duty Cold War" /></Link>
 					        </div>
 					        <div className="logo-game">
-					            <Link to={`/tournament-game?game=${FIFA.replace(" ","_")}`}><img src={fifa} alt="Call of Duty Warzone" /></Link>
+					            <Link to={`/tournament-game?game=${FIFA.replace(" ","_")}&slug=${SLUG_FIFA}`}><img src={fifa} alt="Call of Duty Warzone" /></Link>
 					        </div>
 						</div>
 					</div>

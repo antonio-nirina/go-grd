@@ -109,14 +109,14 @@ func (t *tournament) FindTournamentGameResolver(params graphql.ResolveParams) (i
 		pageNumber = 1
 	}
 
-	gameUid, _ := params.Args["uidGame"].(string)
-	_,err := t.gameTournamentHandler.FindOneGameByUidHandler(gameUid)
+	gameUid, _ := params.Args["slugGame"].(string)
+	game,err := t.gameTournamentHandler.FindOneGameByUidHandler(gameUid)
 
 	if err != nil {
 		return nil, err
 	}
 
-	res, err := t.tournamentHandler.FindTournamentGameHandler(int64(pageNumber),int64(limit),gameUid)
+	res, err := t.tournamentHandler.FindTournamentGameHandler(int64(pageNumber),int64(limit),game.Uid.Hex())
 
 	if err != nil {
 		return nil, err

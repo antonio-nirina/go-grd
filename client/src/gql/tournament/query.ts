@@ -58,3 +58,32 @@ export const GET_ONE_TOURNAMENT = gql`
 		}
 	}
 }`
+
+export const GET_TOURNAMENT_GAME = gql`
+	query FindTournamentByGame($uidGame: String!,$limit: Int!,$pageNumber:Int!) {
+		FindTournamentByGame(uidGame: $uidGame,limit: $limit,pageNumber:$pageNumber){
+		uid
+		title
+		statut
+		description
+		numberParticipate
+		numberTeam
+		deadlineDate
+		date
+		price
+		priceParticipate
+		rules
+		game{
+			uid
+			name
+			image
+			logo
+			slug
+		}
+		plateform{
+			uid
+			description
+			name
+		}
+	}
+}`
