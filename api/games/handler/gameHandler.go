@@ -78,14 +78,8 @@ func (g *gameUsecase) FindAllGameRepository() (interface{}, error) {
 	return res, nil
 }
 
-func (g *gameUsecase) FindOneGameByUidHandler(uidQuery string) (entity.Game, error) {
-	objectId, err := primitive.ObjectIDFromHex(uidQuery)
-
-	if err != nil {
-		return entity.Game{}, err
-	}
-
-	game, err := g.gameRepository.FindOneGameByuidRepository(objectId)
+func (g *gameUsecase) FindOneGameByUidHandler(slug string) (entity.Game, error) {
+	game, err := g.gameRepository.FindOneGameBySlugdRepository(slug)
 
 	if err != nil {
 		return entity.Game{}, err

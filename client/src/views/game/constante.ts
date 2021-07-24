@@ -32,3 +32,20 @@ export const COD_COLD_WAR_NAME 	= "CALL of DUTTY BLACK OPS COLD WAR"
 export const FIFA_NAME			= "FIFA 21"
 
 
+export const SLUG_APEX_LEGENDE 	= "apex"
+
+export const SLUG_FORTNITE  	= "fortinite"
+
+export const SLUG_RNB 			= "rainbow"
+
+export const SLUG_RL  			= "rl"
+
+export const SLUG_COD_MODERN 	= "cod_modern"
+
+export const SLUG_COD_WAR_ZONE  	= "cod_warzone"
+
+export const SLUG_COD_COLD_WAR 	= "cod_black_ops_coldwar"
+
+export const SLUG_FIFA 			= "fifa21"
+
+

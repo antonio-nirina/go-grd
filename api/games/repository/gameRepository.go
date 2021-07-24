@@ -78,3 +78,16 @@ func (c *driverRepository) FindOneGameByuidRepository(objectId primitive.ObjectI
 
 	return result, nil
 }
+
+func (c *driverRepository) FindOneGameBySlugdRepository(slug string) (entity.Game, error){
+	var collection = c.client.Database("grd_database").Collection("game")
+	var result entity.Game
+
+	err := collection.FindOne(context.TODO(), bson.M{"slug": slug}).Decode(&result)
+
+	if err != nil {
+		return result, err
+	}
+
+	return result, nil
+}

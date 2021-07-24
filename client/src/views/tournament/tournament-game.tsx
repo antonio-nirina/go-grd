@@ -1,4 +1,5 @@
-import React from "react"
+import React,{useEffect} from "react"
+import {useQuery} from "@apollo/client"
 
 import { Link } from "react-router-dom"
 import Header from "../header/header"
@@ -8,12 +9,28 @@ import { faUsers } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 //import {Translation} from "../../lang/translation"
 //import {RootState} from "../../reducer"
+import {GET_TOURNAMENT_GAME} from "../../gql/tournament/query"
 import "../waggers/waggers.css"
 import "../../assets/css/style.css"
 import "../annexe/tournois.css"
 
 const TournamentGame = function(props:any) {
-	const params:string|null = (new URLSearchParams(props.location.search)).get("game")
+	const params:string|null 	= (new URLSearchParams(props.location.search)).get("game")
+	const paramsSlug:string|null 	= (new URLSearchParams(props.location.search)).get("slug")
+	const {loading,error,data} 	= useQuery(GET_TOURNAMENT_GAME, {
+		variables: {
+			uidGame:paramsSlug,
+			limit:4,
+			pageNumber:0
+		},
+	})
+
+	useEffect(() => {
+		if(!loading && !error && data) {
+			console.log("dd",data)
+		}
+
+	},[loading,error,data])
 
 	return (
 		<div className="container">

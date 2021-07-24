@@ -42,7 +42,7 @@ func FindTournamentByGame() *graphql.Field {
 		Type:        graphql.NewList(types.TournamentSchemaType),
 		Description: "Get all tournament by game",
 		Args: graphql.FieldConfigArgument{
-			"uidGame": &graphql.ArgumentConfig{
+			"slugGame": &graphql.ArgumentConfig{
 				Type: graphql.String,
 			},
 			"limit": &graphql.ArgumentConfig{

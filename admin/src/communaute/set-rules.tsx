@@ -27,17 +27,15 @@ const SetRules: React.FC = function() {
 	const userConnectedRedux 			= useSelector((state:RootState) => state.userConnected)
 
 	const onSubmit = async function(data:Inputs){
-		console.log(content)
-		/*const result = await createdTournament({ variables: {
+		const result = await createdTournament({ variables: {
 			uidUser:userConnectedRedux.user.uid,
 			title:data.title,
 			content:content,
 		} })
-		if (result.data.createPublication) history.push("/admin/tournament")*/
+		if (result.data.createPublication) history.push("/admin/communaute")
 	}
 
 	const handleText = function handleText(content: string) {
-		console.log(content)
 		setContent(content)
 	}
 
@@ -56,7 +54,8 @@ const SetRules: React.FC = function() {
 	        					<div className="field">
 		        					<div className="group-input">
 	                                    <form onSubmit={handleSubmit(onSubmit)}>
-	    									<label htmlFor="title-rules">Publication : </label><input type="text" id="title-rules" placeholder="Publication communaute" />
+	    									<label htmlFor="title-rules">Publication : </label>
+	    									<input type="text" id="title-rules"{...register("title", { required: true })} placeholder="Publication communaute" name="title" />
 	    									<div className="wysiwyg">
 	    										<SunEditor
 	    											placeholder="Publication"
