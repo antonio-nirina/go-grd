@@ -1,5 +1,6 @@
-import React,{useEffect} from "react"
+import React,{useEffect,useState} from "react"
 import {useQuery} from "@apollo/client"
+import { useSelector } from "react-redux"
 
 import { Link } from "react-router-dom"
 import Header from "../header/header"
@@ -7,19 +8,23 @@ import Footer from "../footer/footer"
 
 import { faUsers } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-//import {Translation} from "../../lang/translation"
-//import {RootState} from "../../reducer"
+import {Translation} from "../../lang/translation"
 import {GET_TOURNAMENT_GAME} from "../../gql/tournament/query"
+import {RootState} from "../../reducer"
 import "../waggers/waggers.css"
 import "../../assets/css/style.css"
 import "../annexe/tournois.css"
+import {Tournament} from "../models/tournament"
+import {dateStringToDY} from "../tools/dateConvert"
 
 const TournamentGame = function(props:any) {
 	const params:string|null 	= (new URLSearchParams(props.location.search)).get("game")
 	const paramsSlug:string|null 	= (new URLSearchParams(props.location.search)).get("slug")
+	const userConnectedRedux = useSelector((state:RootState) => state.userConnected)
+	const [tournament, setTournament] = useState<Array<Tournament>>([])
 	const {loading,error,data} 	= useQuery(GET_TOURNAMENT_GAME, {
 		variables: {
-			uidGame:paramsSlug,
+			slugGame:paramsSlug,
 			limit:4,
 			pageNumber:0
 		},
@@ -27,7 +32,7 @@ const TournamentGame = function(props:any) {
 
 	useEffect(() => {
 		if(!loading && !error && data) {
-			console.log("dd",data)
+			setTournament(data.FindTournamentByGame)
 		}
 
 	},[loading,error,data])
@@ -53,60 +58,28 @@ const TournamentGame = function(props:any) {
 								<p>Entréee</p>
 								<p><span>Nombre</span> <span>de</span> joueur</p>
 							</div>
-							<Link to="/joingame" className="waggers-data">
-								<p>Débute <span>23 JUL - 12h30</span></p>
-								<p>PLATINE</p>
-								<p>B03</p>
-								<p>30€</p>
-								<p>3v3 Arène</p>
-								<p>Public</p>
-								<p><i><FontAwesomeIcon icon={faUsers}/></i>3/6</p>
-							</Link>
-							<Link to="#" className="waggers-data">
-								<p>Débute <span>23 JUL - 12h30</span></p>
-								<p>PLATINE</p>
-								<p>B03</p>
-								<p>30€</p>
-								<p>3v3 Arène</p>
-								<p>Public</p>
-								<p><i><FontAwesomeIcon icon={faUsers}/></i>3/6</p>
-							</Link>
-							<Link to="#" className="waggers-data">
-								<p>Débute <span>23 JUL - 12h30</span></p>
-								<p>PLATINE</p>
-								<p>B03</p>
-								<p>30€</p>
-								<p>3v3 Arène</p>
-								<p>Public</p>
-								<p><i><FontAwesomeIcon icon={faUsers}/></i>3/6</p>
-							</Link>
-							<Link to="#" className="waggers-data">
-								<p>Débute <span>23 JUL - 12h30</span></p>
-								<p>PLATINE</p>
-								<p>B03</p>
-								<p>30€</p>
-								<p>3v3 Arène</p>
-								<p>Public</p>
-								<p><i><FontAwesomeIcon icon={faUsers}/></i>3/6</p>
-							</Link>
-							<Link to="#" className="waggers-data">
-								<p>Débute <span>23 JUL - 12h30</span></p>
-								<p>PLATINE</p>
-								<p>B03</p>
-								<p>30€</p>
-								<p>3v3 Arène</p>
-								<p>Public</p>
-								<p><i><FontAwesomeIcon icon={faUsers}/></i>3/6</p>
-							</Link>
-							<Link to="#" className="waggers-data">
-								<p>Débute <span>23 JUL - 12h30</span></p>
-								<p>PLATINE</p>
-								<p>B03</p>
-								<p>30€</p>
-								<p>3v3 Arène</p>
-								<p>Public</p>
-								<p><i><FontAwesomeIcon icon={faUsers}/></i>3/6</p>
-							</Link>
+							{
+								tournament && tournament.length > 0 ? tournament.map(function(el:Tournament,index:number){
+									return (
+										<Link to="/joingame" className="waggers-data" key={index}>
+											<p>
+											{
+													Translation(userConnectedRedux.user.language).tournament.start
+											}
+											<span>{userConnectedRedux.user.language === "fr" ? dateStringToDY(el.date) : dateStringToDY(el.date)}</span></p>
+											<p>{el.game.name}</p>
+											<p>{el.numberTeam > 0 ? `B0${el.numberTeam}` : "B01" }</p>
+											<p>{`${el.price} € `}</p>
+											<p>{el.numberTeam > 0 ? `${el.numberTeam}v${el.numberTeam} Arène` : "1v1" }</p>
+											<p>{!el.isPublic ? "Public": "Prenimum"}</p>
+											<p><i><FontAwesomeIcon icon={faUsers}/></i>{`0/${el.priceParticipate}`}</p>
+										</Link>
+									)
+								})
+								:
+								<p>No tournament </p>
+							}
+
 						</div>
 					</div>
 				</div>

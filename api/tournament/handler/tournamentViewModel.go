@@ -15,6 +15,7 @@ type tournamentViewModel struct {
 	Game 				GameViewModel `json:"game"`
 	Plateform  			PlateformViewModel `json:"plateform"`
 	Rules   			string            	`json:"rules"`
+	IsPublic 			bool `json:"isPublic"`
 }
 
 type GameViewModel struct {

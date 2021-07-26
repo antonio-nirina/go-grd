@@ -10,7 +10,7 @@ type UsecaseTournament interface {
 	SavedTournamentHandler(*entity.Tournament) (interface{}, error)
 	FindTournamentHandler(idQuery string) (tournamentViewModel, error)
 	FindAllTournamentHandler(pageNumber int64,limit int64) ([]tournamentViewModel, error)
-	FindTournamentGameHandler(pageNumber int64,limit int64,gameUid string) ([]tournamentViewModel, error)
+	FindTournamentGameHandler(pageNumber int64,limit int64,gameUid primitive.ObjectID) ([]tournamentViewModel, error)
 }
 
 type tournamentUsecase struct {
@@ -59,7 +59,8 @@ func (t *tournamentUsecase) FindTournamentHandler(idQuery string) (tournamentVie
 		PriceParticipate:result.PriceParticipate,  
 		Game:GameViewModel{result.Game.Uid.Hex(),result.Game.Name,result.Game.Image,result.Game.Logo,result.Game.Slug},				
 		Plateform:PlateformViewModel{result.Plateform.Uid.Hex(),result.Plateform.Name,result.Plateform.Description},
-		Rules:result.Rules, 			
+		Rules:result.Rules,
+		IsPublic:result.IsPublic, 			
 	}
 
 	return tournamentViewModel,nil
@@ -88,7 +89,8 @@ func (t *tournamentUsecase) FindAllTournamentHandler(pageNumber int64, limit int
 			PriceParticipate:val.PriceParticipate,  
 			Game:GameViewModel{val.Game.Uid.Hex(),val.Game.Name,val.Game.Image,val.Game.Logo,val.Game.Slug},				
 			Plateform:PlateformViewModel{val.Plateform.Uid.Hex(),val.Plateform.Name,val.Plateform.Description},
-			Rules:val.Rules,  			
+			Rules:val.Rules, 
+			IsPublic:val.IsPublic, 			
 		}
 
 		res = append(res, tournamentViewModel)
@@ -97,7 +99,7 @@ func (t *tournamentUsecase) FindAllTournamentHandler(pageNumber int64, limit int
 	return res,nil
 }
 
-func (t *tournamentUsecase) FindTournamentGameHandler(pageNumber int64,limit int64,game string) ([]tournamentViewModel, error) {
+func (t *tournamentUsecase) FindTournamentGameHandler(pageNumber int64,limit int64,game primitive.ObjectID) ([]tournamentViewModel, error) {
 	result, err := t.tournamentRepository.FindTournamentGameRepo(pageNumber,limit,game)
 
 	if err != nil {
@@ -120,7 +122,8 @@ func (t *tournamentUsecase) FindTournamentGameHandler(pageNumber int64,limit int
 			PriceParticipate:val.PriceParticipate,  
 			Game:GameViewModel{val.Game.Uid.Hex(),val.Game.Name,val.Game.Image,val.Game.Logo,val.Game.Slug},				
 			Plateform:PlateformViewModel{val.Plateform.Uid.Hex(),val.Plateform.Name,val.Plateform.Description},
-			Rules:val.Rules,  			
+			Rules:val.Rules,
+			IsPublic:val.IsPublic,  			
 		}
 
 		res = append(res, tournamentViewModel)

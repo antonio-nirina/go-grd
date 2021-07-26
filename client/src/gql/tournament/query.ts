@@ -15,6 +15,7 @@ export const GET_ALL_TOURNAMENT= gql`
 		date
 		price
 		priceParticipate
+		isPublic
 		game{
 			uid
 			name
@@ -60,8 +61,8 @@ export const GET_ONE_TOURNAMENT = gql`
 }`
 
 export const GET_TOURNAMENT_GAME = gql`
-	query FindTournamentByGame($uidGame: String!,$limit: Int!,$pageNumber:Int!) {
-		FindTournamentByGame(uidGame: $uidGame,limit: $limit,pageNumber:$pageNumber){
+	query FindTournamentByGame($slugGame: String!,$limit: Int!,$pageNumber:Int!) {
+		FindTournamentByGame(slugGame: $slugGame,limit: $limit,pageNumber:$pageNumber){
 		uid
 		title
 		statut
@@ -73,6 +74,7 @@ export const GET_TOURNAMENT_GAME = gql`
 		price
 		priceParticipate
 		rules
+		isPublic
 		game{
 			uid
 			name
