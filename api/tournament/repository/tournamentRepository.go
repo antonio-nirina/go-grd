@@ -28,7 +28,7 @@ type RepositoryTournament interface {
 	SavedTournamentRepo(tournament *entity.Tournament) (interface{}, error)
 	FindTournamentRepo(idQuery primitive.ObjectID) (entity.Tournament, error)
 	FindAllTournamentRepo(pageNumber int64,limit int64) ([]entity.Tournament, error)
-	FindTournamentGameRepo(pageNumber int64,limit int64,game string) ([]entity.Tournament, error)
+	FindTournamentGameRepo(pageNumber int64,limit int64,game primitive.ObjectID) ([]entity.Tournament, error)
 }
 
 func (c *DriverRepository) SavedTournamentRepo(tournament *entity.Tournament) (interface{}, error){
@@ -83,7 +83,7 @@ func (c *DriverRepository) FindAllTournamentRepo(pageNumber int64,limit int64) (
 	return results, nil
 }
 
-func (c *DriverRepository) FindTournamentGameRepo(pageNumber int64,limit int64,game string) ([]entity.Tournament, error) {
+func (c *DriverRepository) FindTournamentGameRepo(pageNumber int64,limit int64,game primitive.ObjectID) ([]entity.Tournament, error) {
 	var skp int64 
 	skp = (pageNumber - 1) * limit
 	var collection = c.client.Database("grd_database").Collection("tournament")

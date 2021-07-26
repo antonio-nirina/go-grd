@@ -9,6 +9,7 @@ type UsecaseGameInterface  interface {
 	FindOneGameRepository(idQuery string) (interface{}, error)
 	FindOneGameByUidHandler(idQuery string) (entity.Game, error)
 	FindAllGameRepository() (interface{}, error)
+	FindOneGameBySlugHandler(slug string) (entity.Game, error)
 }
 
 type UsecasePlateformInterface interface {

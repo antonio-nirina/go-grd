@@ -62,6 +62,7 @@ func (t *tournament) SavedTournamentResolver(params graphql.ResolveParams) (inte
 		Statut:true,
 		Info:description,
 		Rules:rules,
+		IsPublic:true,
 	}
 
 	res, err := t.tournamentHandler.SavedTournamentHandler(tournament)
@@ -110,13 +111,13 @@ func (t *tournament) FindTournamentGameResolver(params graphql.ResolveParams) (i
 	}
 
 	gameUid, _ := params.Args["slugGame"].(string)
-	game,err := t.gameTournamentHandler.FindOneGameByUidHandler(gameUid)
+	game,err := t.gameTournamentHandler.FindOneGameBySlugHandler(gameUid)
 
 	if err != nil {
 		return nil, err
 	}
 
-	res, err := t.tournamentHandler.FindTournamentGameHandler(int64(pageNumber),int64(limit),game.Uid.Hex())
+	res, err := t.tournamentHandler.FindTournamentGameHandler(int64(pageNumber),int64(limit),game.Uid)
 
 	if err != nil {
 		return nil, err

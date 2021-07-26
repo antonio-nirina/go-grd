@@ -10,6 +10,7 @@ export interface Tournament {
 	price:number
 	priceParticipate:number
 	rules:string
+	isPublic:Boolean|undefined
 	game:Game
 	plateform:Platform
 }
