@@ -71,9 +71,8 @@ body{
 .layout-container .main-sidebar{
 	position: sticky;
 	height: 100vh;
-	top: 0px;
-	overflow-y: auto;
-	width: 10%;
+	top: 0px;	
+	width: 20%;
 	background: #000000
 }
 .main-sidebar{
@@ -96,7 +95,7 @@ body{
 }
 .main-sidebar li i{
 	display: block;
-	font-size: 24px;
+	font-size: 15px;
 }
 .ps{
 	overflow: hidden;
@@ -109,7 +108,7 @@ body{
 	position: sticky;
 	top: 0;
 	z-index: 9999;
-	padding-top: 22px;
+	padding-top: 15px;
 	background: #000000;
 }
 .main-sidebar .logo{
