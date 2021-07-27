@@ -18,7 +18,7 @@ type partUsecase struct {
 	partRepository repository.RepositoryPart
 }
 
-func NewUsecaseTournament(r repository.RepositoryPart) UsecasePart {
+func NewUsecasePart(r repository.RepositoryPart) UsecasePart {
 	return &partUsecase{
 		partRepository: r,
 	}

@@ -22,6 +22,14 @@ import (
 	cmtyHandler "github.com/thoussei/antonio/api/community/handler"
 	cmtyRepo "github.com/thoussei/antonio/api/community/repository"
 
+	partDelivery "github.com/thoussei/antonio/api/participate/delivery"
+	partHandler "github.com/thoussei/antonio/api/participate/handler"
+	partRepo "github.com/thoussei/antonio/api/participate/repository"
+
+	var partRepository 		= partRepo.NewPartRepository(database)
+	var partUsecase 		= partHandler.NewUsecasePart(partRepository)
+	var partResolver 		= partDelivery.NewResolverPart(partUsecase,usecase,tournamentUsecase)
+
 	"github.com/graphql-go/graphql"
 )
 
@@ -68,5 +76,6 @@ func GetRootFields() graphql.Fields {
 		"Deconnected":			Deconnected(),
 		"saveTournament":		saveTournament(),
 		"createPublication":	createPublication(),
+		"createPartMatch":		createPartMatch(),
 	}
 }

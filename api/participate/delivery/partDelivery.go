@@ -34,7 +34,7 @@ func NewResolverPart(partUseCase handler.UsecasePart,user userHandler.Usecase,to
 
 func (p *participate) SavedPartResolver(params graphql.ResolveParams) (interface{}, error){
 	date, _ := params.Args["date"].(string)
-	userUid, _ := params.Args["userUid"].(string)
+	userUid, _ := params.Args["uidUser"].(string)
 	tournamentUid, _ := params.Args["tournamentUid"].(string)
 	user,err := p.user.FindOneUserByUid(userUid)
 	tournament,err := p.tournament.FindTournamentHandler(tournamentUid)
@@ -87,14 +87,54 @@ func (p *participate) SavedPartResolver(params graphql.ResolveParams) (interface
 
 func (p *participate) FindPartResolver(params graphql.ResolveParams) (interface{}, error){
 
-	return "",nil
+	uid, _ := params.Args["uid"].(string)
+	res, err := p.partHandler.FindPartHandler(uid)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return res, nil
 }
 func (p *participate) FindAllPartResolver(params graphql.ResolveParams) (interface{}, error){
 
-	return "",nil
+	limit, _ := params.Args["limit"].(int)
+	pageNumber, _ := params.Args["pageNumber"].(int)
+
+	if pageNumber == 0 && limit > 0{
+		pageNumber = 1
+	}
+
+	res, err := p.partHandler.FindAllPartHandler(int64(pageNumber),int64(limit))
+
+	if err != nil {
+		return nil, err
+	}
+
+	return res, nil
 }
 
 func (p *participate) FindPartByUseResolver(params graphql.ResolveParams) (interface{}, error){
-	return "",nil
+	limit, _ := params.Args["limit"].(int)
+	pageNumber, _ := params.Args["pageNumber"].(int)
+
+	if pageNumber == 0 && limit > 0{
+		pageNumber = 1
+	}
+
+	userUid, _ := params.Args["uidUser"].(string)
+	user,err := p.user.FindOneUserByUid(userUid)
+
+	if err != nil {
+		return nil, err
+	}
+
+	res, err := p.partHandler.FindPartUserHandler(int64(pageNumber),int64(limit),user.Uid)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return res, nil
 }
 
