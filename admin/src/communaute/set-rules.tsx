@@ -32,7 +32,10 @@ const SetRules: React.FC = function() {
 			title:data.title,
 			content:content,
 		} })
-		if (result.data.createPublication) history.push("/admin/communaute")
+		if (result.data.createPublication) {
+			setContent("")
+			history.push("/admin/communaute")
+		}
 	}
 
 	const handleText = function handleText(content: string) {
