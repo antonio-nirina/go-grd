@@ -482,6 +482,57 @@ div#profile-name{
 .field .input-group input.no-margin{
 	margin-right: 0;
 }
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+    outline: none;
+}
+.switch input {
+    position: absolute;
+    top: -99999px;
+    left: -99999px;
+}
+input:checked + .slider {
+    background-color: #dd0000;
+    border-color: #dd0000;
+}
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #272727;
+    -webkit-transition: .4s;
+    transition: .4s;
+    border-radius: 34px;
+    text-indent: 67px;
+    padding-top: 5px;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #9c9c9e;
+    border: 1px solid #9c9c9e;
+}
+input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background: #9c9c9e;
+    -webkit-transition: .4s;
+    transition: .4s;
+    border-radius: 50%;
+}
 /***************************admin waggers******************/
 .wysiwyg{
 	margin-top: 15px;
@@ -537,7 +588,7 @@ form .se-btn.se-btn-select.se-btn-tool-font.se-tooltip.on{
 	text-align: center;
 }
 .grid{
-	width: 224px;
+	width: 266px;
 	margin-right: 15px;
 	border: 1px solid #9c9c9e;
 	padding-bottom: 15px;
@@ -561,7 +612,7 @@ form .se-btn.se-btn-select.se-btn-tool-font.se-tooltip.on{
 
 }
 .grid-desc{
-	font-size: 16px;
+	font-size: 14px;
 	display: block;
 	color: #9c9c9e;
 	text-align: center;
