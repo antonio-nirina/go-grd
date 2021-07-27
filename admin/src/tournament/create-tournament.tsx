@@ -114,7 +114,13 @@ const CreateTournament: React.FC = function() {
 	                                <div className="field">
 	                                    <div className="group-input">
 	                                        <form onSubmit={handleSubmit(onSubmit)}>
-	                                        	<input type="text" placeholder="Titre tournois" {...register("title")} name="title"/>
+	                                        	<div className="premium">
+		                                        	<label className="switch">		                                        		
+		                                        		<input type="checkbox" value="false" />
+		                                        		<span className="slider">Premium</span>		                                        		
+		                                        	</label>
+	                                        	</div>
+	                                        	<input type="text" placeholder="Titre tournois" {...register("title")} name="title"/>	                                        	
 	                                            <select id="jeux" onChange={handleGame}>
 	                                                <option value="">Selectionnez le jeux...</option>
 	                                                {
@@ -125,6 +131,12 @@ const CreateTournament: React.FC = function() {
 	                                                	})
 	                                                }
 	                                            </select>
+	                                            <select id="rank">
+	                                            	<option value="0">Selectionnez votre rank...</option>
+	                                            	<option value="1">Platine</option>
+	                                            	<option value="2">Or</option>
+	                                            	<option value="3">Bronze</option>	                                            	
+	                                        	</select>
 												<Datetime
 												 	locale="fr"
 													onChange={handleDate}
@@ -141,25 +153,26 @@ const CreateTournament: React.FC = function() {
 	                                                }
 
 	                                            </select>
-
-	                                            <SunEditor
-													placeholder="Règle du jeux"
-													onChange={handleRulesText}
-													setOptions={
-														{
-															buttonList:[
-																['undo', 'redo',
-																	'font', 'fontSize', 'formatBlock',
-																	'bold', 'italic',
-																	'fontColor', 'hiliteColor', 'textStyle',
-																	'removeFormat',
-																	'outdent', 'indent',
-																	'align', 'horizontalRule', 'list', 'lineHeight',
-																	'link', 'image',
+	                                            <div className="wysiwyg">
+		                                            <SunEditor
+														placeholder="Règle du jeux"
+														onChange={handleRulesText}
+														setOptions={
+															{
+																buttonList:[
+																	['undo', 'redo',
+																		'font', 'fontSize', 'formatBlock',
+																		'bold', 'italic',
+																		'fontColor', 'hiliteColor', 'textStyle',
+																		'removeFormat',
+																		'outdent', 'indent',
+																		'align', 'horizontalRule', 'list', 'lineHeight',
+																		'link', 'image',
+																	]
 																]
-															]
-														}
-												} />
+															}
+													} />
+												</div>
 	                                            <div className="input-group">
 	                                                <input
 	                                                	type="number"
@@ -175,24 +188,26 @@ const CreateTournament: React.FC = function() {
 	                                                <input type="number" placeholder="Frais de participation" {...register("priceParticipate")} name="priceParticipate" className="no-margin"/>
 	                                            </div>
 	                                            <Datetime locale="fr" onChange={handleDateLast} inputProps={{placeholder:"Deadline date tournois"}} />
-	                                            <SunEditor
-													placeholder="Info sur le jeux"
-													onChange={handleInfoText}
-												 	setOptions={
-														{
-															buttonList:[
-																['undo', 'redo',
-																	'font', 'fontSize', 'formatBlock',
-																	'bold', 'italic',
-																	'fontColor', 'hiliteColor', 'textStyle',
-																	'removeFormat',
-																	'outdent', 'indent',
-																	'align', 'horizontalRule', 'list', 'lineHeight',
-																	'link', 'image',
+	                                            <div className="wysiwyg">
+		                                            <SunEditor
+														placeholder="Info sur le jeux"
+														onChange={handleInfoText}
+													 	setOptions={
+															{
+																buttonList:[
+																	['undo', 'redo',
+																		'font', 'fontSize', 'formatBlock',
+																		'bold', 'italic',
+																		'fontColor', 'hiliteColor', 'textStyle',
+																		'removeFormat',
+																		'outdent', 'indent',
+																		'align', 'horizontalRule', 'list', 'lineHeight',
+																		'link', 'image',
+																	]
 																]
-															]
-														}
-												} />
+															}
+													} />
+												</div>
 												<div className="create-tournament-game">
 	        										<Link to="/admin"><button className="btn bg-white"> Annuler</button></Link>
                                 					<button type="submit" className="btn bg-red"><FontAwesomeIcon icon={faPlus} /> Enregistrer</button>

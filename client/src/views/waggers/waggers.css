@@ -8,6 +8,10 @@
 .undertitle:before{
 	height: 60px;
 }
+.waggers-content{
+	height: 64vh;
+    overflow-y: auto;
+}
 .waggers-link a{
 	display: inline-block;
 	width: 16%;
