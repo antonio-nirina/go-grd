@@ -22,6 +22,10 @@ import (
 	cmtyHandler "github.com/thoussei/antonio/api/community/handler"
 	cmtyRepo "github.com/thoussei/antonio/api/community/repository"
 
+	partDelivery "github.com/thoussei/antonio/api/participate/delivery"
+	partHandler "github.com/thoussei/antonio/api/participate/handler"
+	partRepo "github.com/thoussei/antonio/api/participate/repository"
+
 	"github.com/graphql-go/graphql"
 )
 
@@ -53,6 +57,11 @@ var cmtyUsecase 		= cmtyHandler.NewUsecaseCmty(cmtyRepository)
 var cmtyResolver 		= cmtyDelivery.NewResolverCmty(cmtyUsecase,usecase)
 
 
+var partRepository 		= partRepo.NewPartRepository(database)
+var partUsecase 		= partHandler.NewUsecasePart(partRepository)
+var partResolver 		= partDelivery.NewResolverPart(partUsecase,usecase,tournamentUsecase)
+
+
 // GetRootFields returns all the available queries.
 func GetRootFields() graphql.Fields {
 	return graphql.Fields{
@@ -73,5 +82,8 @@ func GetRootFields() graphql.Fields {
 		"FindTournamentByGame":		FindTournamentByGame(),
 		"FindAllCmty":      		FindAllCmty(),
 		"FindOneCmty":				FindOneCmty(),
+		"FindOnePart":				FindOnePart(),
+		"FindAllPart":				FindAllPart(),
+		"FindPartByUser": 			FindPartByUser(),
 	}
 }
