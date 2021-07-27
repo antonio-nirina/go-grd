@@ -24,7 +24,7 @@ const Admin: React.FC = function() {
 		        				<span className="grid-title">Ligue :</span>
 		        				<span className="grid-desc">Voir la liste des ligues disponibles</span>
 		        			</Link>
-		        			<Link to ="/admin/tournament" className="grid tournament-board">
+		        			<Link to ="/admin/tournament" className="grid tournament-board no-mg-right">
 		        				<img src="https://i.ibb.co/TKD3yZT/apex-legends.webp" alt="#" />
 		        				<span className="grid-title">Tournois :</span>
 		        				<span className="grid-desc">Voir la liste des tournois disponibles</span>
@@ -34,7 +34,7 @@ const Admin: React.FC = function() {
 		        				<span className="grid-title" >Wagger :</span>
 		        				<span className="grid-desc">Voir la liste des waggers disponibles</span>
 		        			</Link>
-		        			<Link to="/admin/communaute" className="grid community-board">
+		        			<Link to="/admin/communaute" className="grid community-board no-mg-right">
 		        				<img src={Community} alt="#" />
 		        				<span className="grid-title">Communauté</span>
 		        				<span className="grid-desc">Voir les derniers articles en vogue</span>
