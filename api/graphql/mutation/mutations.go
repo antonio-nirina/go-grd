@@ -26,10 +26,6 @@ import (
 	partHandler "github.com/thoussei/antonio/api/participate/handler"
 	partRepo "github.com/thoussei/antonio/api/participate/repository"
 
-	var partRepository 		= partRepo.NewPartRepository(database)
-	var partUsecase 		= partHandler.NewUsecasePart(partRepository)
-	var partResolver 		= partDelivery.NewResolverPart(partUsecase,usecase,tournamentUsecase)
-
 	"github.com/graphql-go/graphql"
 )
 
@@ -57,6 +53,10 @@ var NotifResolver 		= notifDelivery.NewNotifResolver(usecaseNotif,usecase)
 var cmtyRepository 		= cmtyRepo.NewCmtyRepository(database)
 var cmtyUsecase 		= cmtyHandler.NewUsecaseCmty(cmtyRepository)
 var cmtyResolver 		= cmtyDelivery.NewResolverCmty(cmtyUsecase,usecase)
+
+var partRepository 		= partRepo.NewPartRepository(database)
+var partUsecase 		= partHandler.NewUsecasePart(partRepository)
+var partResolver 		= partDelivery.NewResolverPart(partUsecase,usecase,tournamentUsecase)
 
 
 func GetRootFields() graphql.Fields {

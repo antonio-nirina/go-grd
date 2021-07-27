@@ -8,7 +8,7 @@ import (
 
 func FindOnePart() *graphql.Field  {
 	return &graphql.Field{
-		Type:        types.TournamentSchemaType,
+		Type:        types.PartSchemaType,
 		Description: "Get single participant",
 		Args: graphql.FieldConfigArgument{
 			"uid": &graphql.ArgumentConfig{
@@ -22,7 +22,7 @@ func FindOnePart() *graphql.Field  {
 
 func FindAllPart() *graphql.Field {
 	return &graphql.Field{
-		Type:        graphql.NewList(types.TournamentSchemaType),
+		Type:        graphql.NewList(types.PartSchemaType),
 		Description: "Get all participant",
 		Args: graphql.FieldConfigArgument{
 			"limit": &graphql.ArgumentConfig{
@@ -39,8 +39,8 @@ func FindAllPart() *graphql.Field {
 
 func FindPartByUser() *graphql.Field {
 	return &graphql.Field{
-		Type:        graphql.NewList(types.TournamentSchemaType),
-		Description: "Get all tournament by game",
+		Type:        graphql.NewList(types.PartSchemaType),
+		Description: "Get all part by user",
 		Args: graphql.FieldConfigArgument{
 			"uidUser": &graphql.ArgumentConfig{
 				Type: graphql.String,
@@ -53,6 +53,6 @@ func FindPartByUser() *graphql.Field {
 			},
 		},
 		
-		Resolve: partResolver.FindPartUserResolver,
+		Resolve: partResolver.FindPartByUseResolver,
 	}
 }
