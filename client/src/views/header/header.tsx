@@ -241,20 +241,14 @@ const Header: React.FC = function() {
 								{userConnectedRedux.user && userConnectedRedux.user.roles && userConnectedRedux.user.roles.includes("role_admin") ? <li>
 									<span onClick={backAdmin} style={{"cursor":"pointer"}}>
 										{
-											Object.keys(userConnectedRedux.user).length > 0 ?
 											Translation(userConnectedRedux.user.language).header.switch
-											:
-											Translation("fr").header.switch
 										}
 									</span>
 									</li> : <></>
 								}
 								<li style={{"cursor":"pointer"}} onClick={onDeconnect}>
 									{
-										Object.keys(userConnectedRedux.user).length > 0 ?
 										Translation(userConnectedRedux.user.language).header.logout
-										:
-										Translation("fr").header.logout
 									}
 								</li>
 							</ul>

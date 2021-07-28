@@ -191,42 +191,42 @@ const Tournois: React.FC = function() {
 						</div>
 					</div>
 		 			</div>
-		  			<div className="participate league">
-					<div className="marg">
-						<div className="part">
-							<div className="undertitle">
-								<h2>
-									{
-										Translation(userConnectedRedux.user.language).tournament.lasttournament
-									}
-								</h2>
-								<p>
-									{
-										Translation(userConnectedRedux.user.language).tournament.lastresult
-									}
-								</p>
-							</div>
-							<div className="content">
-								<div className="clear"></div>
-								<div className="apex block dark-red">
-									<div><p className="legend">Fortnite Weekly Cup</p><i className="iconGame"><FontAwesomeIcon icon={faGamepad}/></i></div>
-									<div className="info">
-										<p className="price inblock"><i className="sprite cup"></i><span>50€ Cash Prize</span></p>
-										<p className="date inblock"><i className="sprite calendar"></i><span>03/04/2021 - 5:00 PM</span></p>
+		  				<div className="participate league">
+							<div className="marg">
+								<div className="part">
+									<div className="undertitle">
+										<h2>
+											{
+												Translation(userConnectedRedux.user.language).tournament.lasttournament
+											}
+										</h2>
+										<p>
+											{
+												Translation(userConnectedRedux.user.language).tournament.lastresult
+											}
+										</p>
 									</div>
-								</div>
-								<div className="apex block light-green">
-									<div><p className="legend">Rocket League Champions</p><i className="iconGame"><FontAwesomeIcon icon={faPlaystation}/></i></div>
-									<div className="info">
-										<p className="price inblock"><i className="sprite ticket"></i><span>5€ Cash Prize</span></p>
-										<p className="price inblock"><i className="sprite cup"></i><span>500€ Cash Prize</span></p>
-										<p className="date inblock"><i className="sprite calendar"></i><span>04/04/2021 - 7:30 PM</span></p>
+									<div className="content">
+										<div className="clear"></div>
+										<div className="apex block dark-red">
+											<div><p className="legend">Fortnite Weekly Cup</p><i className="iconGame"><FontAwesomeIcon icon={faGamepad}/></i></div>
+											<div className="info">
+												<p className="price inblock"><i className="sprite cup"></i><span>50€ Cash Prize</span></p>
+												<p className="date inblock"><i className="sprite calendar"></i><span>03/04/2021 - 5:00 PM</span></p>
+											</div>
+										</div>
+										<div className="apex block light-green">
+											<div><p className="legend">Rocket League Champions</p><i className="iconGame"><FontAwesomeIcon icon={faPlaystation}/></i></div>
+											<div className="info">
+												<p className="price inblock"><i className="sprite ticket"></i><span>5€ Cash Prize</span></p>
+												<p className="price inblock"><i className="sprite cup"></i><span>500€ Cash Prize</span></p>
+												<p className="date inblock"><i className="sprite calendar"></i><span>04/04/2021 - 7:30 PM</span></p>
+											</div>
+										</div>
 									</div>
 								</div>
 							</div>
 						</div>
-					</div>
-					</div>
 					</div>
 				</div>
 			<Footer/>

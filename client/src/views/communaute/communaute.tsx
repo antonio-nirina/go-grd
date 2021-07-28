@@ -104,26 +104,28 @@ const Communaute: React.FC = function() {
 				  			</Link>
 		  				</div>
 	  				</div>
-	  				{
-	  					cmty.length > 0 ? cmty.map(function(e:any,index:number) {
-	  						return (
-	  							<div className="center-block" key={index}>
-				  					<div className="bloc-actus">
-				  						<div className="actus-name">
-				  							<img src={e.user.avatar} alt=""/>
-				  							<p>{e.user.username} <span>{`@${e.user.username}`}</span></p>
+	  				<div className="center-block">
+		  				{
+		  					cmty.length > 0 ? cmty.map(function(e:any,index:number) {
+		  						return (
 
-				  						</div>
-				  						<div className="actus-content">
-				  							{parse(e.content)}
-				  						</div>
-				  					</div>
-				  				</div>
-  							)
-	  					})
-	  					:
-	  					<></>
-	  				}
+					  					<div className="bloc-actus" key={index}>
+					  						<div className="actus-name">
+					  							<img src={e.user.avatar} alt=""/>
+					  							<p>{e.user.username} <span>{`@${e.user.username}`}</span></p>
+
+					  						</div>
+					  						<div className="actus-content">
+					  								{console.log("test", (e.content))}
+					  							{parse(e.content)}
+					  						</div>
+					  					</div>
+	  							)
+		  					})
+		  					:
+		  					<></>
+		  				}
+	  				</div>
 
 	  				<Friend />
 	  			</div>

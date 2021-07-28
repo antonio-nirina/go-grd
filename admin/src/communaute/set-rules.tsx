@@ -21,7 +21,7 @@ type Inputs = {
 
 const SetRules: React.FC = function() {
 	const history = useHistory()
-	const [content, setContent] = useState<string>("")
+	const [content, setContent] 		= useState<string>("")
 	const { register, handleSubmit } 	= useForm<Inputs>()
 	const [createdTournament]  			= useMutation(CREATE_PUBLICATION)
 	const userConnectedRedux 			= useSelector((state:RootState) => state.userConnected)
@@ -79,7 +79,7 @@ const SetRules: React.FC = function() {
 													}
 												} />
 	    									</div>
-	    									<button className="btn bg-red"><FontAwesomeIcon icon={faPlus} /> Ajouter</button>
+	    									<button className="btn bg-red" style={{"cursor":"pointer"}}><FontAwesomeIcon icon={faPlus} /> Ajouter</button>
 	    								</form>
 		        					</div>
 	        					</div>
