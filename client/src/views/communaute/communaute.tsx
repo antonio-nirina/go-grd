@@ -5,6 +5,7 @@ import {useQuery} from "@apollo/client"
 import parse from 'html-react-parser'
 import { faEye } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
 import warz from "../../assets/image/warz.jpg"
 import championship from "../../assets/image/championship.jpeg"
 import fortnite1 from "../../assets/image/fortnite.jpg"
