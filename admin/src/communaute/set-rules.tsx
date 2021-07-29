@@ -59,6 +59,14 @@ const SetRules: React.FC = function() {
 	                                    <form onSubmit={handleSubmit(onSubmit)}>
 	    									<label htmlFor="title-rules">Publication : </label>
 	    									<input type="text" id="title-rules"{...register("title", { required: true })} placeholder="Publication communaute" name="title" />
+	    									/*Taille img max :
+											largeur : 1600px
+											hauteur : 900px
+												---------
+											Taille img min :
+											largeur: 790px
+											hauteur: 445px
+											*/
 	    									<div className="wysiwyg">
 	    										<SunEditor
 	    											placeholder="Publication"
