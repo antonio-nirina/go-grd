@@ -36,19 +36,30 @@ import {
 } from"../game/constante"
 import {Tournament} from "../models/tournament"
 import {GET_ALL_TOURNAMENT} from "../../gql/tournament/query"
+import {GET_PART_USER} from "../../gql/participate/query"
 import {dateStringToDY} from "../tools/dateConvert"
 import {renderPlatformLogo} from "./renderLogo"
+import {LIMIT,PAGE_NUMBER} from "../commons/constante"
 
 
 const Tournois: React.FC = function() {
 	const history = useHistory()
 	const userConnectedRedux = useSelector((state:RootState) => state.userConnected)
 	const [tournament, setTournament] = useState<Array<Tournament>>([])
+	const [lastTournament, setLastTournament] = useState<Array<any>>([])
 	const {loading,error,data} 	= useQuery(GET_ALL_TOURNAMENT, {
-			variables: {
-				limit:4,
-				pageNumber:0
-			},
+		variables: {
+			limit:LIMIT,
+			pageNumber:PAGE_NUMBER
+		},
+	})
+
+	const {loading:ldPart,error:errPart,data:dataPart} 	= useQuery(GET_PART_USER, {
+		variables: {
+			uidUser:userConnectedRedux.user.uid,
+			limit:LIMIT,
+			pageNumber:PAGE_NUMBER
+		},
 	})
 
 	useEffect(() => {
@@ -56,10 +67,13 @@ const Tournois: React.FC = function() {
 		if(!loading && !error && data) {
 			setTournament(data.FindAllTournament)
 		}
+		if(!ldPart && !errPart && dataPart) {
+			if(dataPart && dataPart.FindPartByUser.length > 0) setLastTournament(dataPart.FindPartByUser)
+		}
 
 		// return () => init = false
 
-	},[loading,error,data])
+	},[loading,error,data,ldPart,errPart,dataPart])
 
   	return(
 	  	<div className="container">
@@ -194,35 +208,49 @@ const Tournois: React.FC = function() {
 		  				<div className="participate league">
 							<div className="marg">
 								<div className="part">
-									<div className="undertitle">
-										<h2>
-											{
-												Translation(userConnectedRedux.user.language).tournament.lasttournament
-											}
-										</h2>
-										<p>
-											{
-												Translation(userConnectedRedux.user.language).tournament.lastresult
-											}
-										</p>
-									</div>
+									{lastTournament.length > 0 ? (
+											<div className="undertitle">
+												<h2>
+													{
+														Translation(userConnectedRedux.user.language).tournament.lasttournament
+													}
+												</h2>
+											</div>
+										)
+										:
+										(
+											<></>
+										)
+									}
+
 									<div className="content">
-										<div className="clear"></div>
-										<div className="apex block dark-red">
-											<div><p className="legend">Fortnite Weekly Cup</p><i className="iconGame"><FontAwesomeIcon icon={faGamepad}/></i></div>
-											<div className="info">
-												<p className="price inblock"><i className="sprite cup"></i><span>50€ Cash Prize</span></p>
-												<p className="date inblock"><i className="sprite calendar"></i><span>03/04/2021 - 5:00 PM</span></p>
-											</div>
-										</div>
-										<div className="apex block light-green">
-											<div><p className="legend">Rocket League Champions</p><i className="iconGame"><FontAwesomeIcon icon={faPlaystation}/></i></div>
-											<div className="info">
-												<p className="price inblock"><i className="sprite ticket"></i><span>5€ Cash Prize</span></p>
-												<p className="price inblock"><i className="sprite cup"></i><span>500€ Cash Prize</span></p>
-												<p className="date inblock"><i className="sprite calendar"></i><span>04/04/2021 - 7:30 PM</span></p>
-											</div>
-										</div>
+									<div className="clear"></div>
+										{
+											lastTournament.length > 0 ? lastTournament.map(function(el:any,index:number) {
+												return (
+													el.tournament.name ? (
+														<div className="apex block dark-red" key={index}>
+															<div><p className="legend">{el.tournament.title}</p><i className="iconGame"><FontAwesomeIcon icon={faGamepad}/></i></div>
+															<div className="info">
+																<p className="price inblock"><i className="sprite cup"></i><span>{el.tournament.title}</span></p>
+																<p className="date inblock"><i className="sprite calendar"></i>{userConnectedRedux.user.language === "fr" ? dateStringToDY(el.date) : dateStringToDY(el.date)}</p>
+															</div>
+														</div>
+													)
+
+													: (
+														<div className="apex block light-green" key={index}>
+															<div><p className="legend">{el.tournament.title}</p><i className="iconGame"><FontAwesomeIcon icon={faPlaystation}/></i></div>
+															<div className="info">
+																<p className="price inblock"><i className="sprite ticket"></i><span>{el.tournament.participate}</span></p>
+																<p className="price inblock"><i className="sprite cup"></i><span>{el.tournament.price}</span></p>
+																<p className="date inblock"><i className="sprite calendar"></i>{userConnectedRedux.user.language === "fr" ? dateStringToDY(el.date) : dateStringToDY(el.date)}</p>
+															</div>
+														</div>
+													)
+												)
+											}) : <></>
+										}
 									</div>
 								</div>
 							</div>
