@@ -38,7 +38,7 @@ export const dateStringToDHStringLong = function(date: string){
 export const dateStringToDY = function(date:any){
 	return new Date(date).toLocaleTimeString('fr-Fr', {
 				day : 'numeric',
-				month : 'long',
+				month : 'short',
 				year : 'numeric',
 				hour:"2-digit",
 				minute:"numeric"
@@ -56,4 +56,20 @@ export const dateObject = function(date: any){
 		month : 'short',
 		year : 'numeric'
 	})).toString()
+}
+
+export const dateLocaleStr = function(date:string) {
+	const newDate = new Date(date)
+	let y = newDate.getFullYear()
+	let m = newDate.getMonth()
+}
+
+export const dateStringToDYEn = function(date:string){
+	return new Date(date).toLocaleTimeString('en', {
+				day : 'numeric',
+				month : 'short',
+				year : 'numeric',
+				hour:"2-digit",
+				minute:"numeric"
+	}).replace(/PM|AM/,"").trim()
 }

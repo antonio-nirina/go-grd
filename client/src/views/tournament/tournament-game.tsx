@@ -15,7 +15,7 @@ import "../waggers/waggers.css"
 import "../../assets/css/style.css"
 import "../annexe/tournois.css"
 import {Tournament} from "../models/tournament"
-import {dateStringToDY} from "../tools/dateConvert"
+import {dateStringToDY,dateStringToDYEn} from "../tools/dateConvert"
 
 const TournamentGame = function(props:any) {
 	const params:string|null 	= (new URLSearchParams(props.location.search)).get("game")
@@ -63,10 +63,10 @@ const TournamentGame = function(props:any) {
 									return (
 										<Link to="/joingame" className="waggers-data" key={index}>
 											<p>
-											{
-													Translation(userConnectedRedux.user.language).tournament.start
-											}
-											<span>{userConnectedRedux.user.language === "fr" ? dateStringToDY(el.date) : dateStringToDY(el.date)}</span></p>
+												<span>
+													{userConnectedRedux.user.language === "fr" ? dateStringToDY(el.date) : dateStringToDYEn(el.date)}
+												</span>
+											</p>
 											<p>{el.game.name}</p>
 											<p>{el.numberTeam > 0 ? `B0${el.numberTeam}` : "B01" }</p>
 											<p>{`${el.price} € `}</p>
