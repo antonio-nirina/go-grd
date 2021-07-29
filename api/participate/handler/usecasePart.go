@@ -13,6 +13,7 @@ type UsecasePart interface {
 	FindPartHandler(idQuery string) (partViewModel, error)
 	FindAllPartHandler(pageNumber int64,limit int64) ([]partViewModel, error)
 	FindPartUserHandler(pageNumber int64,limit int64,userUid primitive.ObjectID) ([]partViewModel, error)
+	UpdatedPartUserHandler(partUid string, userUid primitive.ObjectID) (interface{}, error)
 }
 type partUsecase struct {
 	partRepository repository.RepositoryPart
@@ -216,4 +217,20 @@ func (p *partUsecase) FindPartUserHandler(pageNumber int64,limit int64,userUid p
 	}
 	
 	return res,nil
+}
+
+func (p *partUsecase) UpdatedPartUserHandler(partUid string, userUid primitive.ObjectID) (interface{}, error) {
+	objectId, err := primitive.ObjectIDFromHex(partUid)
+
+	if err != nil {
+		return nil, err
+	}
+	 
+	_,err = p.partRepository.UpdatedPartUserRepo(objectId)
+	
+	if err != nil {
+		return nil, err
+	}
+
+	return "Ok",nil
 }

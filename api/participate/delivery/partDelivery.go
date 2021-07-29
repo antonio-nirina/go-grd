@@ -16,6 +16,7 @@ type PartResolver interface {
 	FindPartResolver(params graphql.ResolveParams) (interface{}, error)
 	FindAllPartResolver(params graphql.ResolveParams) (interface{}, error)
 	FindPartByUseResolver(params graphql.ResolveParams) (interface{}, error)
+	UpdatedPartByUseResolver(params graphql.ResolveParams) (interface{}, error)
 }
 
 type participate struct {
@@ -57,7 +58,7 @@ func (p *participate) SavedPartResolver(params graphql.ResolveParams) (interface
 			Image: tournament.Game.Image,
 			Slug: tournament.Game.Slug,
 			Logo: tournament.Game.Logo,
-			} ,
+		} ,
 		Plateform:GEntity.GamePlatform{Uid: objectIdPlt,Name: tournament.Plateform.Name,Description: tournament.Plateform.Description},
 		NumberParticipate:tournament.NumberParticipate,
 		NumberTeam:tournament.NumberTeam,
@@ -74,6 +75,7 @@ func (p *participate) SavedPartResolver(params graphql.ResolveParams) (interface
 		Date:date,
 		User:user,
 		Tournament:tournamentObject,
+		IsWin: false,
 	}
 
 	res, err := p.partHandler.SavedPartHandler(part)
@@ -138,3 +140,20 @@ func (p *participate) FindPartByUseResolver(params graphql.ResolveParams) (inter
 	return res, nil
 }
 
+func (p *participate) UpdatedPartByUseResolver(params graphql.ResolveParams) (interface{}, error) {
+	userUid, _ := params.Args["uidUser"].(string)
+	userPartUid, _ := params.Args["uidPart"].(string)
+	user,err := p.user.FindOneUserByUid(userUid)
+
+	if err != nil {
+		return nil, err
+	}
+
+	res, err := p.partHandler.UpdatedPartUserHandler(userPartUid,user.Uid)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return res, nil
+}

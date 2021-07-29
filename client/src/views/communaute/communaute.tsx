@@ -1,18 +1,14 @@
-import React,{useMemo} from "react"
+import React,{useMemo,useState} from "react"
 import { Link } from 'react-router-dom'
 import { useSelector } from "react-redux"
 import {useQuery} from "@apollo/client"
+import parse from 'html-react-parser'
 import { faEye } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
 import warz from "../../assets/image/warz.jpg"
 import championship from "../../assets/image/championship.jpeg"
 import fortnite1 from "../../assets/image/fortnite.jpg"
-import  gogrind from "../../assets/image/gogrind-joystick.png"
-import  updateInfo from "../../assets/image/info-update.png"
-import  gotaga from "../../assets/image/gotaga.png"
-import  gotagatv from "../../assets/image/video-gotaga.png"
-import  skouinar from "../../assets/image/skouinar.png"
-import  play from "../../assets/image/play-your-game.png"
 
 import Header from "../header/header"
 import {RootState} from "../../reducer"
@@ -24,26 +20,29 @@ import "./communaute.css"
 import {GET_ALL_STREAMING} from "../../gql/user/query"
 import {GET_ALL_CMTY} from "../../gql/cmty/query"
 import Friend from "./friends"
+import {LIMIT,PAGE_NUMBER} from "../commons/constante"
 
 
 const Communaute: React.FC = function() {
 	const userConnectedRedux 	= useSelector((state:RootState) => state.userConnected)
 	// const {loading,error,data}  = useSubscription(COUNT_SUBSCRIBE)
+	const [cmty,setCmty] 			= useState<Array<any>>([])
 	const {loading,error,data} 		= useQuery(GET_ALL_CMTY, {
 		variables: {
-			email: userConnectedRedux.user.email
+			limit: LIMIT,
+			pageNumber:PAGE_NUMBER
 		},
 	})
 
 	const {loading:loadingTwitch,error:errorTwitch,data:dataTwitch} = useQuery(GET_ALL_STREAMING, {
 		variables: {
-			idUser: userConnectedRedux.user.uid
+			limit: userConnectedRedux.user.uid
 		},
 	})
 
 	useMemo(() => {
 		if(!loadingTwitch && !errorTwitch && dataTwitch) console.log("dataTwitch", dataTwitch)
-		if(!loading && !error && data) console.log("data", data)
+		if(!loading && !error && data) setCmty(data.FindAllCmty)
 	},[loadingTwitch,errorTwitch,dataTwitch,loading,error,data])
 
   return(
@@ -106,71 +105,29 @@ const Communaute: React.FC = function() {
 				  			</Link>
 		  				</div>
 	  				</div>
-	  				<div className="center-block">	  					
-	  					<div className="bloc-actus">
-	  						<div className="actus-name">
-	  							<img src={gogrind} alt=""/>
-	  							<p>GoGrind <span>@GoGrindOff</span></p>
-	  								  						
-	  						</div>
-	  						<div className="actus-content">
-	  							<p>
-		  							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque dapibus odio et lorem
-									pretium ullamcorper. Interdum et malesuada fames ac ante ipsum primis in faucibus.
-									Suspendisse eleifend eros sed sem laoreet, eu aliquet arcu malesuada.
-								</p>
-	  						</div>
-	  						<div className="img-actus">
-	  							<img src={updateInfo} alt="" />
-	  						</div>
-	  					</div>
-	  					<div className="bloc-actus">
-	  						<div className="actus-name">
-	  							<img src={gotaga} alt=""/>
-	  							<p>GotagaTV <span>@GotagaTV</span></p>
-	  								  						
-	  						</div>
-	  						<div className="actus-content">
-	  							<p>
-		  							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque dapibus odio et lorem
-									pretium ullamcorper. Interdum et malesuada fames ac ante ipsum primis in faucibus.
-									Suspendisse eleifend eros sed sem laoreet, eu aliquet arcu malesuada.
-								</p>
-	  						</div>
-	  						<div className="img-actus">
-	  							<img src={gotagatv} alt="" />
-	  						</div>
-	  					</div>
-	  					<div className="bloc-actus">
-	  						<div className="actus-name">
-	  							<img src={skouinar} alt=""/>
-	  							<p>Skouinar <span>@Skouinar</span></p>
-	  								  						
-	  						</div>
-	  						<div className="actus-content">
-	  							<p>Il nous manque un last pour Warzone en Quad !</p>
-	  							<p>Des gens dispo ?</p>
-								<p>DM open</p>
-	  						</div>	  						
-	  					</div>
-	  					<div className="bloc-actus">
-	  						<div className="actus-name">
-	  							<img src={gogrind} alt=""/>
-	  							<p>GoGrind <span>@GoGrindOff</span></p>
-	  								  						
-	  						</div>
-	  						<div className="actus-content">
-	  							<p>
-		  							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque dapibus odio et lorem
-									pretium ullamcorper. Interdum et malesuada fames ac ante ipsum primis in faucibus.
-									Suspendisse eleifend eros sed sem laoreet, eu aliquet arcu malesuada.
-								</p>
-	  						</div>
-	  						<div className="img-actus">
-	  							<img src={play} alt="" />
-	  						</div>
-	  					</div>
+	  				<div className="center-block">
+		  				{
+		  					cmty.length > 0 ? cmty.map(function(e:any,index:number) {
+		  						return (
+
+					  					<div className="bloc-actus" key={index}>
+					  						<div className="actus-name">
+					  							<img src={e.user.avatar} alt=""/>
+					  							<p>{e.user.username} <span>{`@${e.user.username}`}</span></p>
+
+					  						</div>
+					  						<div className="actus-content">
+					  								{console.log("test", (e.content))}
+					  							{parse(e.content)}
+					  						</div>
+					  					</div>
+	  							)
+		  					})
+		  					:
+		  					<></>
+		  				}
 	  				</div>
+
 	  				<Friend />
 	  			</div>
 	  		</div>	  		

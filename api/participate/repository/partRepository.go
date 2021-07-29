@@ -29,6 +29,7 @@ type RepositoryPart interface {
 	FindPartRepo(idQuery primitive.ObjectID) (entity.Participate, error)
 	FindAllPartRepo(pageNumber int64,limit int64) ([]entity.Participate, error)
 	FindPartUserRepo(pageNumber int64,limit int64,game primitive.ObjectID) ([]entity.Participate, error)
+	UpdatedPartUserRepo(objectId primitive.ObjectID) (interface{}, error)
 }
 
 func (c *DriverRepository) SavedPartRepo(tournament *entity.Participate) (interface{}, error){
@@ -107,4 +108,22 @@ func (c *DriverRepository) FindPartUserRepo(pageNumber int64,limit int64,user pr
 	cur.Close(context.TODO())
 
 	return results, nil
+}
+
+func (c *DriverRepository) UpdatedPartUserRepo(objectId primitive.ObjectID) (interface{}, error) {
+	var collection = c.client.Database("grd_database").Collection("participate")
+	filter := bson.D{{"uid", objectId}}
+	update := bson.D{
+		{"$set", bson.D{
+			{
+				"IsWin", true,
+			},
+	}}}
+	updateResult, err := collection.UpdateOne(context.TODO(), filter, update)
+
+	if err != nil {
+		return nil,err
+	}
+
+	return updateResult.ModifiedCount,nil
 }

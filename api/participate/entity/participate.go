@@ -14,4 +14,5 @@ type Participate struct {
 	Date 		string            		`json:"date"`
 	User 		user.User 				`json:"user"`
 	Tournament  tournament.Tournament 	`json:"tournament"`
+	IsWin 		bool 					`json:"isWin"`
 }
