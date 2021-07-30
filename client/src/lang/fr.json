@@ -135,17 +135,6 @@
 		"shop":"Boutique",
 		"result":"Mes résultats"
 	},
-	"tournament":{
-		"live": "Tournois en direct",
-		"more": "Voir plus",
-		"date": "Date",
-		"team": "Equipe",
-		"type": "Type",
-		"region": "Région",
-		"tournament": "Tournois",
-		"Signup": "Inscrivez-vous",
-		"upcomming" : "Trounoir à venir"
-	},
 	"assistance":{
 		"subject": "Rechercher un sujet",
 		"problem": "Problème social",
@@ -171,6 +160,15 @@
 		"withFriend":"Vous êtes maintenant ami(e) avec"
 	},
 	"tournament":{
+		"live": "Tournois en direct",
+		"more": "Voir plus",
+		"date": "Date",
+		"team": "Equipe",
+		"type": "Type",
+		"region": "Région",
+		"tournament": "Tournois",
+		"Signup": "Inscrivez-vous",
+		"upcomming" : "Trounoir à venir",
 		"incoming":"Tournois à venir",
 		"seemore":"Voir plus",
 		"chgame":"Choisis ton jeu",
@@ -190,6 +188,10 @@
 		"starttimes":"Date de commencement",
 		"open":"Ouvert",
 		"close":"Fermer"
+	},
+	"leagues": {
+		"listLigues":"Liste des ligues disponibles",
+		"retrieve":"Retrouve les derniers ligues public & inscris-toi !"
 	}
 
 }

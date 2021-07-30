@@ -8,7 +8,7 @@ import Footer from "../footer/footer"
 
 import { faUsers } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-// import {Translation} from "../../lang/translation"
+import {Translation} from "../../lang/translation"
 import {GET_TOURNAMENT_GAME} from "../../gql/tournament/query"
 import {RootState} from "../../reducer"
 import "../waggers/waggers.css"
@@ -18,7 +18,7 @@ import {Tournament} from "../models/tournament"
 import {dateStringToDY,dateStringToDYEn} from "../tools/dateConvert"
 import {LIMIT,PAGE_NUMBER} from "../commons/constante"
 
-const TournamentGame = function(props:any) {
+const LeagueGame = function(props:any) {
 	const params:string|null 	= (new URLSearchParams(props.location.search)).get("game")
 	const paramsSlug:string|null 	= (new URLSearchParams(props.location.search)).get("slug")
 	const userConnectedRedux = useSelector((state:RootState) => state.userConnected)
@@ -37,7 +37,6 @@ const TournamentGame = function(props:any) {
 		}
 
 	},[loading,error,data])
-
 	return (
 		<div className="container">
   		<Header />
@@ -93,4 +92,4 @@ const TournamentGame = function(props:any) {
 	)
 }
 
-export default TournamentGame
+export default LeagueGame

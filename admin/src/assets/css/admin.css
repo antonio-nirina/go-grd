@@ -292,7 +292,7 @@ div#profile-name{
 	position: relative;
 	display: inline-block;
 	width: 100%;
-	text-align: start;
+	text-align: left;
 }
 .ant-input-affix-wrapper .ant-input-prefix {
 	left: 12px;

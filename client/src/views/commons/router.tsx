@@ -28,6 +28,7 @@ import UpdatePassword from "../auth/updatePassword"
 import ProtectedRoute from "./protectedRoute"
 import Register from "../auth/register"
 import TournamentGame from "../tournament/tournament-game"
+import LeagueGame from "../league/league-game"
 
 
 const Router = function() {
@@ -38,6 +39,7 @@ const Router = function() {
 			<ProtectedRoute path="/tournois" exact component={Tournament} />
 			<ProtectedRoute path="/tournament" exact component={Tournois} />
 			<ProtectedRoute path="/tournament-game" exact component={TournamentGame} />
+			<ProtectedRoute path="/league-game" exact component={LeagueGame} />
 			<ProtectedRoute path="/info" exact component={Info} />
 			<ProtectedRoute path="/matches" exact component={Matches} />
 			<ProtectedRoute path="/teams" exact component={Teams} />

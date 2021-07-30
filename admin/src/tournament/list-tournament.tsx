@@ -78,77 +78,81 @@ const ListTournament : React.FC = function(props:any) {
 								<Link to="/admin/create-tournament"><button className="btn bg-red"><FontAwesomeIcon icon={faPlus} /> Créer tournois</button></Link>
 							</div>
 						</div>
-						<div className="body-card">
-							<div className="card-title">
-								<div className="card-title">
-									<p>Heure <i><FontAwesomeIcon icon={faSort} size="lg"/></i></p>
-								</div>
-							</div>
-							<div className="card-title">
-								<p>Titre <i><FontAwesomeIcon icon={faSort} size="lg"/></i></p>
-							</div>
-							<div className="card-title">
-								<div className="card-title">
-									<p>Game <i><FontAwesomeIcon icon={faSort} size="lg"/></i></p>
-								</div>
-							</div>
-							<div className="card-title">
-								<p>Plateforme <i><FontAwesomeIcon icon={faSort} size="lg"/></i></p>
-							</div>
-							<div className="card-title">
-								<div className="card-title">
-									<p>Gains <i><FontAwesomeIcon icon={faSort} size="lg"/></i></p>
-								</div>
-							</div>
-							<div className="card-title">
-								<div className="card-title">
-									<p>Participants <i><FontAwesomeIcon icon={faSort} size="lg"/></i></p>
-								</div>
-							</div>
-							<div className="card-title">
-								<div className="card-title">
-									<p>Statut <i><FontAwesomeIcon icon={faSort} size="lg"/></i></p>
-								</div>
-							</div>
-						</div>
-						{
-							tournament?.map(function(el:any,index:number){
-								return (
-									<div className="body-card" key={index}>
-										<div className="card-result">
-											<p>{
-												new Date(el.date).toLocaleTimeString('fr-Fr', {
-													day : 'numeric',
-													month : 'long',
-													year : 'numeric',
-													hour:"numeric",
-													minute:"numeric"
-												})
-											}</p>
-										</div>
-										<div className="card-result">
-											<p>{el.title}</p>
-										</div>
-										<div className="card-result">
-											<p>{el.game.name}</p>
-										</div>
-										<div className="card-result">
-											<p>{el.plateform.name}</p>
-										</div>
-										<div className="card-result">
-											<p>{el.price}</p>
-										</div>
-										<div className="card-result">
-											<p>{el.numberParticipate}</p>
-										</div>
-										<div className="card-result">
-											<p>{el.statut?"Actif":"Inactif"}</p>
+						<div className="auto-scroll">
+							<div className="sm-width">
+								<div className="body-card">
+									<div className="card-title">
+										<div className="card-title">
+											<p>Heure <i><FontAwesomeIcon icon={faSort} size="lg"/></i></p>
 										</div>
 									</div>
-								)
-							})
-						}
+									<div className="card-title">
+										<p>Titre <i><FontAwesomeIcon icon={faSort} size="lg"/></i></p>
+									</div>
+									<div className="card-title">
+										<div className="card-title">
+											<p>Game <i><FontAwesomeIcon icon={faSort} size="lg"/></i></p>
+										</div>
+									</div>
+									<div className="card-title">
+										<p>Plateforme <i><FontAwesomeIcon icon={faSort} size="lg"/></i></p>
+									</div>
+									<div className="card-title">
+										<div className="card-title">
+											<p>Gains <i><FontAwesomeIcon icon={faSort} size="lg"/></i></p>
+										</div>
+									</div>
+									<div className="card-title">
+										<div className="card-title">
+											<p>Participants <i><FontAwesomeIcon icon={faSort} size="lg"/></i></p>
+										</div>
+									</div>
+									<div className="card-title">
+										<div className="card-title">
+											<p>Statut <i><FontAwesomeIcon icon={faSort} size="lg"/></i></p>
+										</div>
+									</div>
+								</div>
+								{
+									tournament?.map(function(el:any,index:number){
+										return (
 
+											<div className="body-card" key={index}>
+												<div className="card-result">
+													<p>{
+														new Date(el.date).toLocaleTimeString('fr-Fr', {
+															day : 'numeric',
+															month : 'long',
+															year : 'numeric',
+															hour:"numeric",
+															minute:"numeric"
+														})
+													}</p>
+												</div>
+												<div className="card-result">
+													<p>{el.title}</p>
+												</div>
+												<div className="card-result">
+													<p>{el.game.name}</p>
+												</div>
+												<div className="card-result">
+													<p>{el.plateform.name}</p>
+												</div>
+												<div className="card-result">
+													<p>{el.price}</p>
+												</div>
+												<div className="card-result">
+													<p>{el.numberParticipate}</p>
+												</div>
+												<div className="card-result">
+													<p>{el.statut?"Actif":"Inactif"}</p>
+												</div>
+											</div>
+										)
+									})
+								}
+							</div>
+						</div>
 						<Pagination />
 					</div>
 				</div>
