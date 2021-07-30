@@ -58,12 +58,6 @@ export const dateObject = function(date: any){
 	})).toString()
 }
 
-export const dateLocaleStr = function(date:string) {
-	const newDate = new Date(date)
-	let y = newDate.getFullYear()
-	let m = newDate.getMonth()
-}
-
 export const dateStringToDYEn = function(date:string){
 	return new Date(date).toLocaleTimeString('en', {
 				day : 'numeric',

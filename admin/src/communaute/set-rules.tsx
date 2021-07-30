@@ -18,7 +18,6 @@ type Inputs = {
 	title:string
 }
 
-
 const SetRules: React.FC = function() {
 	const history = useHistory()
 	const [content, setContent] 		= useState<string>("")
@@ -38,8 +37,14 @@ const SetRules: React.FC = function() {
 		}
 	}
 
-	const handleText = function handleText(content: string) {
+	const handleText = function(content: string) {
+		console.log("ccc", content)
 		setContent(content)
+	}
+
+	const handleFiles = function(files: Array<File>, info: object, uploadHandler: Function) {
+		console.log("fil", files)
+		uploadHandler = () => {return "<img src='https://i.ibb.co/Cmr1hmG/4-zu-3-1.jpg'>"}
 	}
 
 	return(
@@ -63,6 +68,7 @@ const SetRules: React.FC = function() {
 	    										<SunEditor
 	    											placeholder="Publication"
 													onChange={handleText}
+													onImageUploadBefore={handleFiles}
 	    											setOptions={
 													{
 														buttonList:[
@@ -93,3 +99,66 @@ const SetRules: React.FC = function() {
 }
 
 export default SetRules
+
+/*
+
+editor.onImageUploadBefore = function (files, info, core, uploadHandler) {
+                        try {
+                            resizeImage(files, uploadHandler)
+                        } catch (err) {
+                            uploadHandler(err.toString())
+                        }
+                    };
+
+function resizeImage (files, uploadHandler) {
+    const uploadFile = files[0];
+    const img = document.createElement('img');
+    const canvas = document.createElement('canvas');
+    const reader = new FileReader();
+
+    reader.onload = function (e) {
+        img.src = e.target.result
+        img.onload = function () {
+            let ctx = canvas.getContext("2d");
+            ctx.drawImage(img, 0, 0);
+
+            const MAX_WIDTH = 1000;
+            const MAX_HEIGHT = 1000;
+            let width = img.width;
+            let height = img.height;
+
+            if (width > height) {
+                if (width > MAX_WIDTH) {
+                    height *= MAX_WIDTH / width;
+                    width = MAX_WIDTH;
+                }
+            } else {
+                if (height > MAX_HEIGHT) {
+                    width *= MAX_HEIGHT / height;
+                    height = MAX_HEIGHT;
+                }
+            }
+
+            canvas.width = width;
+            canvas.height = height;
+
+            ctx = canvas.getContext("2d");
+            ctx.drawImage(img, 0, 0, width, height);
+
+            canvas.toBlob(async function (blob) {
+                let res = await addPhoto([new File([blob], uploadFile.name)],loggedUser.institute._id,loggedUser._id);
+                if(res.success){
+// Need to implement the image URL logic here
+                    uploadHandler();
+                } else{
+                    uploadHandler(res.message)
+                }
+            }, uploadFile.type, 1);
+        }
+    }
+
+    reader.readAsDataURL(uploadFile);
+}
+
+
+*/

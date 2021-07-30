@@ -173,6 +173,10 @@
 		"starttimes":"Start time",
 		"open":"Open",
 		"close":"close"
+	},
+	"leagues": {
+		"listLigues":"List of available leagues",
+		"retrieve":"Find the latest public leagues & register !"
 	}
 
 }
