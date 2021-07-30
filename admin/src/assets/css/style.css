@@ -170,7 +170,10 @@ h1{
 .container .league .tab-league{
   overflow: auto; 
 }
-
+.auto-scroll{
+  height: 60vh;
+  overflow: auto;
+}
 /********** Fonts *********/
 @font-face {
 	font-family: 'Russo One';
@@ -246,10 +249,82 @@ h1{
   .navbar .mobile-version{
     display: block !important;
   }
+  .communaute .container .main .auto{
+    display: block !important;
+  }
+  .body-content .column{
+    display: block;
+  }
+  .column .response-filter,
+  .response-filter-flag{
+    display: block;
+  }
+  .ant-input-affix-wrapper .ant-input:not(:first-child){
+    background: #2d2d2d;
+    padding: 9px 40px;
+    width: 100%;
+    border-radius: 5px;
+  }
+  .response-status{
+    position: relative;    
+    padding: 15px 0px;
+  }
+  .column .response-filter-search{
+    border-right: none;
+    margin-bottom: 5px;
+  }  
+  .column .response-filter-flag,.column .response-filter-avis{    
+    display: inline-block;    
+    max-width: 320px;
+    width: 100%;
+  }
+  .column .create-game{
+    text-align: center;
+  }
+  .column .create-game button{
+    width: 60%;
+    margin-left: 0;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+  .body-content .body-card{
+    display: block;
+  }
+  .body-content .card-title, .body-content .card-result{
+    width: 119px;
+    display: inline-block;
+    vertical-align: top;
+  }
+  .auto-scroll{
+    width: 866px;
+    overflow: auto;
+  }
+  .sm-width{
+    width: 866px;
+  }
+  
+}
+@media screen and (max-width: 720px) {
+  .column .response-filter-flag,.column .response-filter-avis{
+    max-width: inherit;
+  }
+  .column .show-status{
+    width: 94%;
+  }
+  .column .response-filter input{
+    width: 100%;
+  }
+  .column .response-filter-avis{
+    padding: 0px 5px 5px;
+  }
+  .column .response-filter-flag{
+    border-right: 0;
+  }
 }
 @media screen and (max-width: 600px) {
   .admin .grid{
     width: 100%;
   }
+
 }
 

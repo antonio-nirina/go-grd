@@ -11,16 +11,17 @@
 	width: 95%;
 	margin: auto;	
 	margin-bottom: 30px;
+	display: flex;
 }
 .aside-left{
-	width: 250px;	
+	width: 20%;	
 	display: table-cell;
 	padding-right: 15px;
 	vertical-align: top;
 	
 }
 .center-block{
-	width: 49%;
+	width: 60%;
 	background: #2c2c2c;
 	display: table-cell;
 	margin-bottom: 15px;	
@@ -35,7 +36,7 @@
 
 }
 .aside-right{
-	width: 250px;	
+	width: 20%;	
 	display: table-cell;
 	padding-left: 15px;
 	vertical-align: top;
@@ -406,12 +407,20 @@
 /***********************/
 .bloc-actus{
 	padding: 20px;
+	border-bottom: 1px solid gray;
+}
+.bloc-actus:last-child{
+	border-bottom: 0;
+}
+.se-component.se-image-container.__se__float-none img{
+	width: 100%;
 }
 .actus-name{
 	display: flex;
 }
 .actus-name img{
-	width: 60px;	
+	width: 60px;
+	height: 60px;
 	border-radius: 50%;
 	align-self: center;
 }
