@@ -117,3 +117,39 @@
 .tuto-video video{
 	width: 49%;
 }
+.assistance .accueil .support-link .link:nth-child(1) h3 a,
+.assistance .ingame .support-link .link:nth-child(2) h3 a,
+.assistance .social .support-link .link:nth-child(3) h3 a,
+.assistance .help-connexion .support-link .link:nth-child(4) h3 a,
+.assistance .contact .support-link .link:nth-child(5) h3 a
+{
+	color: #dd0000;
+}
+/***********CONTACT***************/
+
+.input-container label{
+	margin-top: 15px;
+	display: block;
+}
+.input-container.side-by{
+	display: flex;
+}
+.side-by .input-group{
+	width: 100%;
+	margin-right: 15px;
+}
+.side-by .input-group:last-child{
+	margin-right: 0;
+}
+.input-container input,.input-container textarea{
+	padding: 15px;
+	border-radius: 5px;
+	border: 1px solid #9c9c9e;
+	display: block;
+	width: 100%;
+	margin-top: 15px;
+	background: #272727;
+	color: #9c9c9e;
+	font-size: 14px;
+}
+
