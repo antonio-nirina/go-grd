@@ -17,6 +17,10 @@ import View from "../wager/view"
 import Lobby from "../wager/lobby"
 import Assistant from "../assistant/assistant"
 import Assistance from "../assistance/assistance"
+import Ingame from "../assistance/in-game"
+import Social from "../assistance/social"
+import HelpConnexion from "../assistance/aide-connexion"
+import Contact from "../assistance/contact"
 import Communaute from "../communaute/communaute"
 import League from "../league/league"
 import Login from "../auth/login"
@@ -48,13 +52,17 @@ const Router = function() {
 			<ProtectedRoute path="/league" exact component={League} />
 			<ProtectedRoute path="/wager" exact component={Wager} />
 			<ProtectedRoute path="/joingame/:id" exact component={Joingame} />
-			<Route path="/waggers" exact component={Waggers} />
-			<Route path="/waggers-game" exact component={WaggersGame} />
+			<ProtectedRoute path="/waggers" exact component={Waggers} />
+			<ProtectedRoute path="/waggers-game" exact component={WaggersGame} />
 			<ProtectedRoute path="/view" exact component={View} />
 			<ProtectedRoute path="/lobby" exact component={Lobby} />
-			<ProtectedRoute path="/communaute" exact component={Communaute} />			
+			<Route path="/communaute" exact component={Communaute} />			
 			<ProtectedRoute path="/assistant" exact component={Assistant} />
 			<ProtectedRoute path="/assistance" exact component={Assistance} />
+			<ProtectedRoute path="/aide-in-game" exact component={Ingame} />
+			<ProtectedRoute path="/aide-social" exact component={Social} />
+			<ProtectedRoute path="/aide-connexion" exact component={HelpConnexion} />
+			<ProtectedRoute path="/contact" exact component={Contact} />
 			<ProtectedRoute path="/profil" exact component={Profil} />
 			<ProtectedRoute path="/profile" exact component={Profile} />
 			<ProtectedRoute path="/update-password" exact component={UpdatePassword} />			
