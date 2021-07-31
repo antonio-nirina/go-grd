@@ -95,7 +95,7 @@ body{
 	/*padding-top: 15px;*/
 }
 .main-sidebar li{
-	padding: 15px;
+	padding: 10px;
 }
 .main-sidebar li a{
 	color: #9c9c9e;
@@ -675,9 +675,6 @@ label[for="img-game"]
     width: 100%;
 }
 /***************set home page *******************/
-.column-home .both{
-	
-}
 .column-home .flex-group{
 	clear: both;
     margin-right: 15px;

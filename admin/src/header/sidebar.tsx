@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from "react-router-dom"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-import { faUsers, faTools, faDesktop, faTrophy, faStar, faGamepad, faHome } from "@fortawesome/free-solid-svg-icons"
+import { faUsers, faTools, faDesktop, faTrophy, faStar, faGamepad, faHome, faHandsHelping } from "@fortawesome/free-solid-svg-icons"
 
 import logo from "../assets/image/gogrind-joystick.png"
 
@@ -58,6 +58,12 @@ const SideBar : React.FC = function() {
 								<span>Accueil</span>
 							</Link>
 						</li>
+						<li>
+							<Link to="/admin/set-home">
+								<i><FontAwesomeIcon icon={faHome} size="lg"/></i>
+								<span>Accueil</span>
+							</Link>
+						</li>
 					</ul>
 				</div>
 			</div>
@@ -104,6 +110,12 @@ const SideBar : React.FC = function() {
 						<Link to="/admin/set-home">
 							<i><FontAwesomeIcon icon={faHome} size="lg"/></i>
 							<span>Accueil</span>
+						</Link>
+					</li>
+					<li>
+						<Link to="/admin/set-assist">
+							<i><FontAwesomeIcon icon={faHandsHelping} size="lg"/></i>
+							<span>Assistance</span>
 						</Link>
 					</li>
 				</ul>
