@@ -26,6 +26,10 @@ import (
 	partHandler "github.com/thoussei/antonio/api/participate/handler"
 	partRepo "github.com/thoussei/antonio/api/participate/repository"
 
+	homeDelivery "github.com/thoussei/antonio/api/home/delivery"
+	homeHandler "github.com/thoussei/antonio/api/home/handler"
+	homeRepo "github.com/thoussei/antonio/api/home/repository"
+
 	"github.com/graphql-go/graphql"
 )
 
@@ -58,6 +62,10 @@ var partRepository 		= partRepo.NewPartRepository(database)
 var partUsecase 		= partHandler.NewUsecasePart(partRepository)
 var partResolver 		= partDelivery.NewResolverPart(partUsecase,usecase,tournamentUsecase)
 
+var homeRepository 		= homeRepo.NewHomeRepository(database)
+var homeUsecase 		= homeHandler.NewUsecaseHome(homeRepository)
+var homeResolver 		= homeDelivery.NewResolverHome(homeUsecase)
+
 
 func GetRootFields() graphql.Fields {
 	return graphql.Fields{
@@ -77,5 +85,7 @@ func GetRootFields() graphql.Fields {
 		"saveTournament":		saveTournament(),
 		"createPublication":	createPublication(),
 		"createPartMatch":		createPartMatch(),
+		"createHomeContent":	createHomeContent(),
+		"updateHomeContent":	updateHomeContent(),
 	}
 }

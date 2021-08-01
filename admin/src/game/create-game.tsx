@@ -24,7 +24,7 @@ const CreateGame: React.FC = function() {
 	                                <h1>Crée jeux</h1>
 	                            </div>
 	        					<div className="create-tournament-game">
-	        						<Link to="/admin"><button className="btn bg-white"> Annuler</button></Link>
+	        						<Link to="/admin/list-game"><button className="btn bg-white"> Annuler</button></Link>
 	                                <button className="btn bg-red"><FontAwesomeIcon icon={faPlus} /> Enregistrer</button>
 	        					</div>
 	                            <div className="setting-tournament">
@@ -41,7 +41,6 @@ const CreateGame: React.FC = function() {
 	                                                <input type="file" id="img-game" className="no-margin"/>
 	                                            </div>		                                            
 	                                            <textarea placeholder="Description..."></textarea>
-	                                            <Link to="/set-rules"><button className="btn bg-red">Ajouter un règle</button></Link>
 	                                        </form>
 	                                    </div>
 	                                </div>

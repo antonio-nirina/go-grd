@@ -107,7 +107,7 @@ const SideBar : React.FC = function() {
 						
 					</li>
 					<li>
-						<Link to="/admin/set-home">
+						<Link to="/admin/list-home">
 							<i><FontAwesomeIcon icon={faHome} size="lg"/></i>
 							<span>Accueil</span>
 						</Link>

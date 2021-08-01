@@ -4,6 +4,8 @@ import { Link } from "react-router-dom"
 import SideBar from "../header/sidebar"
 import Nav from "../header/nav"
 import Community from "../assets/image/info-update.png"
+
+
 const Admin: React.FC = function() {
 	return(
 	    <div className="admin">

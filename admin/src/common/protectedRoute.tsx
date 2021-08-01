@@ -8,12 +8,12 @@ interface IProtectedRoute{
 const ProtectedRoute = (
   props: IProtectedRoute & RouteProps
 ) => {
-	let redirectPath: string = '';
+	let redirectPath: string = ''
 
 	const { authenticationPath, path } = props
 	//  when user is not logged redirect
 
-	if (!GetCookie) {
+	if (!GetCookie()) {
 		redirectPath = authenticationPath || '/admin/login'
 	}
 
