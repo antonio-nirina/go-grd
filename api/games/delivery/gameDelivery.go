@@ -31,7 +31,9 @@ func (r *resolverGame) SavedGameResolver(params graphql.ResolveParams) (interfac
 	}
 
 	res, err := r.gameHandler.SavedGameRepository(gameSaved)
-
+	err = r.gameHandler.HandleFileGame(params.Args["logo"].(string),params.Args["typeLogo"].(string))
+	err = r.gameHandler.HandleFileGame(params.Args["image"].(string),params.Args["typeImage"].(string))
+	
 	if err != nil {
 		return nil, err
 	}
