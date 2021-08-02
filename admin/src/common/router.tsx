@@ -1,11 +1,13 @@
 import React from "react"
-import { Switch } from "react-router-dom"
+import { Switch,Route } from "react-router-dom"
 import ProtectedRoute from "./protectedRoute"
 
 import Admin from "../dashboard/admin"
 import CreateTournament from "../tournament/create-tournament"
 import CreateLeague from "../league/create-league"
 import SetRules from "../communaute/set-rules"
+
+import HomeList from "../home/home-list"
 import SetHome from "../home/set-home"
 import SetAssist from "../assistance/set-assist"
 import CreateWaggers from "../wager/create-waggers"
@@ -15,13 +17,14 @@ import ListGame from "../game/list-game"
 import ListLeague from "../league/list-league"
 import ListWagger from "../wager/list-wagger"
 import Login from "../auth/login"
+import DetailHome from "../home/home-detail"
 
 
 const Router = function() {
 	return (
 		<Switch>
 			<ProtectedRoute path="/" exact component={Admin} />
-			<ProtectedRoute path="/admin/login" exact component={Login} />
+			<Route path="/admin/login" exact component={Login} />
 			<ProtectedRoute path="/admin/create-tournament" exact component={CreateTournament} />
 			<ProtectedRoute path="/admin/create-league" exact component={CreateLeague} />
 			<ProtectedRoute path="/admin/create-wagger" exact component={CreateWaggers} />
@@ -31,7 +34,9 @@ const Router = function() {
 			<ProtectedRoute path="/admin/wagger" exact component={ListWagger} />
 			<ProtectedRoute path="/admin/create-game" exact component={CreateGame} />
 			<ProtectedRoute path="/admin/list-game" exact component={ListGame} />
+			<ProtectedRoute path="/admin/list-home" exact component={HomeList} />
 			<ProtectedRoute path="/admin/set-home" exact component={SetHome} />
+			<ProtectedRoute path="/admin/detail/:id" exact component={DetailHome} />
 			<ProtectedRoute path="/admin/set-assist" exact component={SetAssist} />
 		</Switch>
 	)
