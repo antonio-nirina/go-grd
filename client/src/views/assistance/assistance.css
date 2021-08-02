@@ -125,8 +125,45 @@
 {
 	color: #dd0000;
 }
+.didacticiel p{
+	font-family: 'quicksand regular';
+	padding-top: 15px;
+	font-size: 14px;
+}
+.support-container{
+	height: 77px;
+	overflow: hidden;
+}
+.support-container.reduce
+{
+	height: auto;	
+}
+.support-container .game-name{
+	color: #dd0000;
+}
+.img-cadre{
+	max-width: 350px;
+	width: 100%;
+	height: auto;
+	margin: auto;
+}
+.img-cadre img{
+	width: 100%;
+}
+.support-container .under-title{
+	position: relative;
+}
+.support-container .under-title i{
+	position: absolute;
+	display: block;
+	right: 10px;
+	top: 15px;
+	font-size: 24px;
+}
 /***********CONTACT***************/
-
+.auto-height .support-container{
+	height: auto !important;
+}
 .input-container label{
 	margin-top: 15px;
 	display: block;
@@ -151,5 +188,9 @@
 	background: #272727;
 	color: #9c9c9e;
 	font-size: 14px;
+}
+.input-container input:focus, .input-container textarea:focus{
+	background: #a2a2a2;
+	color: #000000;
 }
 
