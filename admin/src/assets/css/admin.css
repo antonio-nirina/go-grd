@@ -394,12 +394,27 @@ div#profile-name{
 .create-game button:hover{
 	border: 1px solid #dd0000;
 }
+.sm-width{
+	width: 100%;
+}
+.align-right{
+	text-align: right;
+}
+.align-center{
+	text-align: center;
+}
+
 .body-card{
 	display: flex;
 	padding: 15px;
 	background: #212121;
 	border-radius: 13px;
 	margin-top: 15px;
+}
+.card-result i{
+	color: #9c9c9e;
+	display: inline-block;
+	margin-right: 5px;
 }
 .card-title, .card-result{
 	width: 100%;

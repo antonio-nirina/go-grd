@@ -68,10 +68,10 @@ const CreateGame: React.FC = function() {
 				setImageType((e.target.files[0].type).split("/")[1])
 			}
         }
-	}
+	}	 
 
 	return(
-	    <div className="admin create-tournament">
+	    <div className="admin create-tournament">	    	
 			<div className="layout-container">
 				<SideBar />
 				<div className="content-wrapper">
@@ -96,7 +96,7 @@ const CreateGame: React.FC = function() {
 		                                            <input type="text" {...register("name", { required: true })} placeholder="Nom du jeux" name="name" />
 		                                            <div className="input-group">
 		                                            	<label htmlFor="logo-game">Importer une image du logo</label>
-		                                            	<label htmlFor="img-game">Importer une image du jeux</label>
+		                                            	<label htmlFor="img-game">Importer une image du jeux</label>		                                            	
 		                                            </div>
 		                                            <div className="input-group">
 		                                                <input type="file" onChange={(e)=>{handleUpload(e,true)}} id="logo-game" />
