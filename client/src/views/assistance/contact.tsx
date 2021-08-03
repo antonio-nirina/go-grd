@@ -25,7 +25,7 @@ const Contact: React.FC = function() {
 		  			<div className="aside-menu contact">
 		  				<Aside />
 		  			</div>
-		  			<div className="support">
+		  			<div className="support auto-height">
 		  				<div className="sup">
 		  					<p className="title">Go Grind Support</p>
 		  					<p>Trouver les réponses à vos problèmes et vos questions</p>
