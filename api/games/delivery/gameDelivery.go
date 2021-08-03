@@ -20,19 +20,24 @@ func NewResolverGame(gameUseCase handler.UsecaseGameInterface) ResolverGame {
 }
 
 func (r *resolverGame) SavedGameResolver(params graphql.ResolveParams) (interface{}, error) {
+	urlLogo,err := r.gameHandler.HandleFileGame(params.Args["logo"].(string),params.Args["typeLogo"].(string))
+	urlImage,err := r.gameHandler.HandleFileGame(params.Args["image"].(string),params.Args["typeImage"].(string))
+
+	if err != nil {
+		return nil, err
+	}
+
 	gameSaved := &entity.Game{
 		Uid:        primitive.NewObjectID(),
 		Name:		params.Args["name"].(string),
-		Image:		params.Args["image"].(string),
-		Logo:       params.Args["logo"].(string),
-		Popularity: params.Args["popularity"].(int),
+		Image:		urlImage,
+		Logo:       urlLogo,
 		Notes:      params.Args["notes"].(int),
 		Slug:       params.Args["slug"].(string),
 	}
 
-	res, err := r.gameHandler.SavedGameRepository(gameSaved)
-	err = r.gameHandler.HandleFileGame(params.Args["logo"].(string),params.Args["typeLogo"].(string))
-	err = r.gameHandler.HandleFileGame(params.Args["image"].(string),params.Args["typeImage"].(string))
+	res, err := r.gameHandler.SavedGameHandle(gameSaved)
+	
 	
 	if err != nil {
 		return nil, err
