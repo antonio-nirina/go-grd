@@ -114,6 +114,7 @@ html{
 .profil .main-content, .main
 {
   padding-top: 66px;
+  min-height: 100vh;
 }
 .tag{
   display: none;

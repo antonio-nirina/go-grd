@@ -28,19 +28,18 @@ type gameViewModel struct {
 	Name 	   string             `json:"name"`
 	Image      string             `json:"image,omitempty"`
 	Logo       string             `json:"logo,omitempty"`
-	Popularity int                `json:"popularity"`
 	Notes      int                `json:"notes"`
 	Slug       string             `json:"slug"`
 }
 
-func (g *gameUsecase) SavedGameRepository(game *entity.Game) (interface{}, error) {
-	result, err := g.gameRepository.SavedGameRepository(game)
+func (g *gameUsecase) SavedGameHandle(game *entity.Game) (string, error) {
+	_, err := g.gameRepository.SavedGameRepository(game)
 
 	if err != nil {
-		return nil, err
+		return "", err
 	}
 
-	return result, nil
+	return "Ok", nil
 }
 
 func (g *gameUsecase) FindOneGameRepository(idQuery string) (interface{}, error) {
@@ -74,7 +73,6 @@ func (g *gameUsecase) FindAllGameRepository() (interface{}, error) {
 			Name:val.Name,
 			Image:val.Image,
 			Logo:val.Logo,
-			Popularity:val.Popularity,
 			Notes:val.Notes,
 			Slug:val.Slug,
 		}
@@ -111,11 +109,11 @@ func (g *gameUsecase) FindOneGameBySlugHandler(slug string) (entity.Game, error)
 	return game, nil
 }
 
-func (g *gameUsecase) HandleFileGame(files string,typeFile string) error {
+func (g *gameUsecase) HandleFileGame(files string,typeFile string) (string,error) {
 	err := godotenv.Load()
 	
 	if err != nil {
-		return err
+		return "",err
 	}
 
 	upl := &external.FileUpload{}
@@ -125,7 +123,7 @@ func (g *gameUsecase) HandleFileGame(files string,typeFile string) error {
 	if !upl.DirectoryExists() {
 		err := upl.CreateDirectory()
 		if err != nil {
-			return err
+			return "",err
 		}
 	}
 	
@@ -133,12 +131,12 @@ func (g *gameUsecase) HandleFileGame(files string,typeFile string) error {
 	upl.Data = files
 	
 	upl.ApiKey = os.Getenv("BB_IMAGE_KEY")
-	_,err = upl.SenderFile()
+	url,err := upl.SenderFile()
 
 	if err != nil {
-		return err
+		return "",err
 	}
 
-	return nil
+	return url,nil
 }
 

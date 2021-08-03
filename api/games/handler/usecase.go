@@ -5,12 +5,12 @@ import (
 )
 
 type UsecaseGameInterface  interface {
-	SavedGameRepository(game *entity.Game) (interface{}, error)
+	SavedGameHandle(game *entity.Game) (string, error)
 	FindOneGameRepository(idQuery string) (interface{}, error)
 	FindOneGameByUidHandler(idQuery string) (entity.Game, error)
 	FindAllGameRepository() (interface{}, error)
 	FindOneGameBySlugHandler(slug string) (entity.Game, error)
-	HandleFileGame(files string,typeFile string) error
+	HandleFileGame(files string,typeFile string) (string,error)
 }
 
 type UsecasePlateformInterface interface {

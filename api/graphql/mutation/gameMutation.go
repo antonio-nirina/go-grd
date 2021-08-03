@@ -5,7 +5,7 @@ import (
 	"github.com/thoussei/antonio/api/graphql/types"
 )
 
-var gameInputType = graphql.NewInputObject(
+/*var gameInputType = graphql.NewInputObject(
 	graphql.InputObjectConfig{
 		Name: "gameInputType",
 		Fields: graphql.InputObjectConfigFieldMap{
@@ -18,7 +18,10 @@ var gameInputType = graphql.NewInputObject(
 			"logo": &graphql.InputObjectFieldConfig{
 				Type: graphql.String,
 			},
-			"popularity": &graphql.InputObjectFieldConfig{
+			"typeImage": &graphql.InputObjectFieldConfig{
+				Type: graphql.String,
+			},
+			"typeLogo": &graphql.InputObjectFieldConfig{
 				Type: graphql.String,
 			},
 			"notes": &graphql.InputObjectFieldConfig{
@@ -35,13 +38,35 @@ var argsGame = graphql.FieldConfigArgument{
 	"gameInput": &graphql.ArgumentConfig{
 		Type: gameInputType,
 	},
-}
+}*/
 
 func createdGame() *graphql.Field {
 	return &graphql.Field{
-		Type:        types.GameSchemaType,
+		Type:        graphql.String,
 		Description: "Created game",
-		Args:        argsGame,
+		Args: graphql.FieldConfigArgument{
+			"name": &graphql.ArgumentConfig{
+				Type: graphql.String,
+			},
+			"image": &graphql.ArgumentConfig{
+				Type: graphql.String,
+			},
+			"logo": &graphql.ArgumentConfig{
+				Type: graphql.String,
+			},
+			"typeImage": &graphql.ArgumentConfig{
+				Type: graphql.String,
+			},
+			"typeLogo": &graphql.ArgumentConfig{
+				Type: graphql.String,
+			},
+			"notes": &graphql.ArgumentConfig{
+				Type: graphql.Int,
+			},
+			"slug": &graphql.ArgumentConfig{
+				Type: graphql.String,
+			},
+		},
 		Resolve:     gameResolver.SavedGameResolver,
 	}
 }
