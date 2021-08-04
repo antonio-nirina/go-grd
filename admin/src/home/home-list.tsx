@@ -42,7 +42,7 @@ const HomeList : React.FC = function(props:any) {
 						</div>
 						<div className="auto-scroll">
 							<div className="sm-width">
-								<div className="body-card">
+								<div className="body-card align-center">
 									<div className="card-title">
 										<p>Titre<i><FontAwesomeIcon icon={faSort} size="lg"/></i></p>
 									</div>
@@ -68,22 +68,22 @@ const HomeList : React.FC = function(props:any) {
 									home?.map(function(el:any,index:number){
 										return (
 											<div className="body-card" key={index} style={{"cursor":"pointer"}}>
-												<div className="card-result">
+												<div className="card-result align-center">
 													<p>{el.title}</p>
 												</div>
-												<div className="card-result">
+												<div className="card-result align-center">
 													<p>{el.underTitle}</p>
 												</div>
-												<div className="card-result">
+												<div className="card-result align-center">
 													<p>{el.location}</p>
 												</div>
-												<div className="card-result">
+												<div className="card-result align-center">
 													<p>{el.statut?"Active":"Inactif"}</p>
 												</div>
-												<div className="card-result">
+												<div className="card-result align-right">
 													<>
-														<Link to={`/admin/detail/${el.uid}`}><FontAwesomeIcon icon={faEdit} /></Link>
-														<FontAwesomeIcon icon={faTrash} />
+														<Link to={`/admin/detail/${el.uid}`}><i><FontAwesomeIcon icon={faEdit} /></i></Link>
+														<i><FontAwesomeIcon icon={faTrash} /></i>
 													</>
 												</div>
 											</div>
