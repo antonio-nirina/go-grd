@@ -30,6 +30,10 @@ import (
 	homeHandler "github.com/thoussei/antonio/api/home/handler"
 	homeRepo "github.com/thoussei/antonio/api/home/repository"
 
+	teamDelivery "github.com/thoussei/antonio/api/team/delivery"
+	teamHandler "github.com/thoussei/antonio/api/team/handler"
+	teamRepo "github.com/thoussei/antonio/api/team/repository"
+
 	"github.com/graphql-go/graphql"
 )
 
@@ -69,6 +73,10 @@ var homeRepository 		= homeRepo.NewHomeRepository(database)
 var homeUsecase 		= homeHandler.NewUsecaseHome(homeRepository)
 var homeResolver 		= homeDelivery.NewResolverHome(homeUsecase)
 
+var teamRepository 		= teamRepo.NewHomeRepository(database)
+var teamUsecase 		= teamHandler.NewUsecaseTeam(teamRepository)
+var teamResolver 		= teamDelivery.NewTeamRepository(teamUsecase,usecase)
+
 
 
 // GetRootFields returns all the available queries.
@@ -96,5 +104,7 @@ func GetRootFields() graphql.Fields {
 		"FindPartByUser": 			FindPartByUser(),
 		"FindOneHome":				FindOneHome(),
 		"FindAllHome":				FindAllHome(),
+		"FindOneTeam":				FindOneTeam(),
+		"FindAllTeam":				FindAllTeam(),
 	}
 }

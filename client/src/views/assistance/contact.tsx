@@ -2,7 +2,6 @@ import React from "react"
 
 import Header from "../header/header"
 import Footer from "../footer/footer"
-import Join from "../join/join"
 import Aside from "../assistance/aside"
 
 import "../../assets/css/style.css"
@@ -65,7 +64,6 @@ const Contact: React.FC = function() {
 		  				</div>	  				
 		  			</div>
 	  			</div>
-	  			<Join/>
 	  		</div>			
 			<Footer/>
 	  	</div>

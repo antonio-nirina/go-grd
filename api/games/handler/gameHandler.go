@@ -2,12 +2,12 @@ package handler
 
 import (
 	"fmt"
-	"path/filepath"
 	"os"
+	"path/filepath"
 
-	"github.com/thoussei/antonio/api/external"
 	"github.com/joho/godotenv"
 	uuid "github.com/satori/go.uuid"
+	"github.com/thoussei/antonio/api/external"
 	"github.com/thoussei/antonio/api/games/entity"
 	"github.com/thoussei/antonio/api/games/repository"
 	"go.mongodb.org/mongo-driver/bson/primitive"

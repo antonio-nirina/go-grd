@@ -9,26 +9,27 @@ import {useHistory } from "react-router-dom"
 import SideBar from "../header/sidebar"
 import Nav from "../header/nav"
 import {CREATE_GAME} from "../gql/games/mutation"
-import { FILE } from "dns"
+
 
 type Inputs = {
 	name:string,
 }
 
-const MAX_WIDTH = 1600
+/*const MAX_WIDTH = 1600
 const MAX_HEIGHT = 900
 const MIN_WIDTH = 790
 const MIN_HEIGHT = 445
+*/
 
 const CreateGame: React.FC = function() {
 	const history = useHistory()
 	const [image, setImage] = useState<string>("")
 	const [logo, setLogo] 	= useState<string>("")
 
-	const [logoWidth, setLogoWidth] 	= useState<number>(0)
-	const [logoHeight, setLogoHeight] 	= useState<number>(0)
-	const [imgWidth, setImgWidth] 	= useState<number>(0)
-	const [imgHeigth, setHeigth] 	= useState<number>(0)
+	//const [logoWidth, setLogoWidth] 	= useState<number>(0)
+	//const [logoHeight, setLogoHeight] 	= useState<number>(0)
+	//const [imgWidth, setImgWidth] 	= useState<number>(0)
+	//const [imgHeigth, setHeigth] 	= useState<number>(0)
 
 	const [imageType, setImageType] = useState<string>("")
 	const [logoType, setLogoType] 	= useState<string>("")
@@ -57,13 +58,13 @@ const CreateGame: React.FC = function() {
         	let file = typeof reader.result === "string" ? reader.result?.replace(/^data:(.*?);base64,/, "") : ""
 			file = file.replace(/ /g, '+')
 			if(type) {
-				setLogoWidth(0)
-				setLogoHeight(0)
+				// setLogoWidth(0)
+				// setLogoHeight(0)
 				setLogo(file)
 				setLogoType((e.target.files[0].type).split("/")[1])
 			} else {
-				setImgWidth(0)
-				setHeigth(0)
+				//setImgWidth(0)
+				//setHeigth(0)
 				setImage(file)
 				setImageType((e.target.files[0].type).split("/")[1])
 			}

@@ -2,7 +2,6 @@ import React,{useState} from "react"
 
 import Header from "../header/header"
 import Footer from "../footer/footer"
-import Join from "../join/join"
 import Aside from "../assistance/aside"
 
 import { faSortDown } from "@fortawesome/free-solid-svg-icons"
@@ -73,7 +72,6 @@ const Social: React.FC = function() {
 			  			</div>	  				
 		  			</div>
 	  			</div>
-	  			<Join/>
 	  		</div>			
 			<Footer/>
 	  	</div>
