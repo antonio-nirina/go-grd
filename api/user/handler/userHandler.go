@@ -53,8 +53,8 @@ func (u *UserUsecase) FindOneUser(idQuery string) (interface{}, error) {
 	return user, nil
 }
 
-func (u *UserUsecase) FindAllUser() ([]entity.User, error) {
-	result, err := u.userRepository.FindAllUser()
+func (u *UserUsecase) FindAllUser(pageNumber int64,limit int64) ([]entity.User, error) {
+	result, err := u.userRepository.FindAllUser(pageNumber,limit)
 
 	if err != nil {
 		return nil, err

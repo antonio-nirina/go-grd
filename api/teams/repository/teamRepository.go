@@ -5,7 +5,7 @@ import (
 	"fmt"
 
 	"github.com/thoussei/antonio/api/external"
-	"github.com/thoussei/antonio/api/team/entity"
+	"github.com/thoussei/antonio/api/teams/entity"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
@@ -24,12 +24,12 @@ func NewTeamRepository(client *mongo.Client) *driverRepository {
 
 type RepositoryTeam interface {
 	SavedRepoTeam(team *entity.Team) (interface{}, error)
-	FindTeameRepo(idQuery primitive.ObjectID) (entity.Team, error)
-	FindAllTeamRepo()([]entity.Team, error)
+	FindTeamRepo(idQuery primitive.ObjectID) (entity.Team, error)
+	FindAllTeamRepo(pageNumber int64,limit int64)([]entity.Team, error)
 	UpdatedRepoTeam(team *entity.Team) (interface{}, error)
 }
 
-func (c *driverRepository) SavedRepoTeam(team *entity.Home) (interface{}, error) {
+func (c *driverRepository) SavedRepoTeam(team *entity.Team) (interface{}, error) {
 	var collection = c.client.Database("grd_database").Collection("team")
 	insertResult, err := collection.InsertOne(context.TODO(), team)
 
@@ -42,7 +42,7 @@ func (c *driverRepository) SavedRepoTeam(team *entity.Home) (interface{}, error)
 	return team, nil
 }
 
-func (c *driverRepository) FindTeameRepo(idQuery primitive.ObjectID) (entity.Team, error) {
+func (c *driverRepository) FindTeamRepo(idQuery primitive.ObjectID) (entity.Team, error) {
 	var collection = c.client.Database("grd_database").Collection("team")
 	var result entity.Team
 
@@ -55,10 +55,12 @@ func (c *driverRepository) FindTeameRepo(idQuery primitive.ObjectID) (entity.Tea
 	return result, nil
 }
 
-func (c *driverRepository) FindAllTeamRepo() ([]entity.Team, error) {
+func (c *driverRepository) FindAllTeamRepo(pageNumber int64,limit int64) ([]entity.Team, error) {
+	var skp int64 
+	skp = (pageNumber - 1) * limit
 	var collection = c.client.Database("grd_database").Collection("team")
 	var results []entity.Team
-	cur, err := collection.Find(context.TODO(), bson.D{{}},options.Find())
+	cur, err := collection.Find(context.TODO(), bson.D{{}},options.Find().SetLimit(limit).SetSkip(skp).SetSort(bson.M{"_id": -1}))
 
 	if err != nil {
 		return nil, err
@@ -86,7 +88,7 @@ func (c *driverRepository) UpdatedRepoTeam(team *entity.Team) (interface{}, erro
 		{"$set", bson.D{
 			
 			{
-				"name",team.Title,
+				"name",team.Name,
 			},
 			{
 				"players",team.Players,

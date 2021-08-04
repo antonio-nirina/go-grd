@@ -111,7 +111,9 @@ const Friend: React.FC = function() {
 
 	const {loading:loadingAll,error:errorAll,data:dataAll} = useQuery(GET_ALL_USER, {
 		variables: {
-			idUserConnected: userConnectedRedux.user.uid
+			idUserConnected: userConnectedRedux.user.uid,
+			limit:0,
+			pageNumber:0
 		},
 	})
 	const {loading:ldSub,error:erSub,data:dataSub}  = useSubscription(USER_CONNECTED)

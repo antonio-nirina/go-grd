@@ -9,6 +9,7 @@ import (
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
+	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
 // Driver database
@@ -73,10 +74,12 @@ func (c *driverRepository) FindOneUserByUid(objectId primitive.ObjectID) (entity
 	return result, nil
 }
 
-func (c *driverRepository) FindAllUser() ([]entity.User, error) {
+func (c *driverRepository) FindAllUser(pageNumber int64,limit int64) ([]entity.User, error) {
+	var skp int64 
+	skp = (pageNumber - 1) * limit
 	var collection = c.client.Database("grd_database").Collection("users")
 	var results []entity.User
-	cur, err := collection.Find(context.TODO(), bson.D{{}})
+	cur, err := collection.Find(context.TODO(), bson.D{{}},options.Find().SetLimit(limit).SetSkip(skp).SetSort(bson.M{"_id": -1}))
 
 	if err != nil {
 		return nil, err

@@ -10,7 +10,7 @@ type Repository interface {
 	FindOneUser(objectId primitive.ObjectID) (interface{}, error)
 	FindUserByEmail(email string) (entity.User, error)
 	FindUserByUsername(username string) (entity.User, error)
-	FindAllUser() ([]entity.User, error)
+	FindAllUser(pageNumber int64,limit int64) ([]entity.User, error)
 	UpdatedUser(user *entity.User) (interface{}, error)
 	// UpdateAccountGame(email string) (entity.User, error)
 	UpdatedTokenUser(email string,token string) (interface{}, error)
