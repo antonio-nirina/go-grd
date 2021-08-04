@@ -71,6 +71,12 @@ func GetUsers() *graphql.Field{
 			"idUserConnected": &graphql.ArgumentConfig{
 				Type: graphql.String,
 			},
+			"limit": &graphql.ArgumentConfig{
+				Type: graphql.Int,
+			},
+			"pageNumber": &graphql.ArgumentConfig{
+				Type: graphql.Int,
+			},
 		},
 		Resolve: UserRolve.GetAllUser,
 	}

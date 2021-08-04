@@ -244,8 +244,15 @@ func (r *resolver)GetAllUser(params graphql.ResolveParams)(interface{}, error) {
 		return nil, errors.New("id not valid")
 	}
 
+	limit, _ := params.Args["limit"].(int)
+	pageNumber, _ := params.Args["pageNumber"].(int)
+
+	if pageNumber == 0 && limit > 0{
+		pageNumber = 1
+	}
+
 	userC, err := r.userHandler.FindOneUserByUid(idUserConnected)
-	users,err := r.userHandler.FindAllUser()
+	users,err := r.userHandler.FindAllUser(int64(pageNumber),int64(limit))
 
 	if err != nil {
 		return nil, err

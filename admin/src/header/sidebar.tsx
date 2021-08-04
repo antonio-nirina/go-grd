@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from "react-router-dom"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-import { faUsers, faTools, faDesktop, faTrophy, faStar, faGamepad, faHome, faHandsHelping } from "@fortawesome/free-solid-svg-icons"
+import { faUsers, faTools, faDesktop, faTrophy, faStar, faGamepad, faHome, faHandsHelping,faUser,faCheck} from "@fortawesome/free-solid-svg-icons"
 
 import logo from "../assets/image/gogrind-joystick.png"
 
@@ -22,6 +22,12 @@ const SideBar : React.FC = function() {
 							</Link>
 						</li>
 						<li>
+							<Link to="/admin/set-home">
+								<i><FontAwesomeIcon icon={faHome} size="lg"/></i>
+								<span>Accueil</span>
+							</Link>
+						</li>
+						<li>
 							<Link to="/admin/tournament">
 								<i><FontAwesomeIcon icon={faTrophy} size="lg"/></i>
 								<span>Tournois</span>
@@ -35,7 +41,7 @@ const SideBar : React.FC = function() {
 		                </li>
 						<li>
 							<Link to="/admin/league">
-								<i><FontAwesomeIcon icon={faUsers} size="lg"/></i>
+								<i><FontAwesomeIcon icon={faCheck} size="lg"/></i>
 								<span>Ligues</span>
 							</Link>
 						</li>
@@ -53,15 +59,15 @@ const SideBar : React.FC = function() {
 							
 						</li>
 						<li>
-							<Link to="/admin/set-home">
+							<Link to="/admin/teams">
 								<i><FontAwesomeIcon icon={faHome} size="lg"/></i>
-								<span>Accueil</span>
+								<span>Team</span>
 							</Link>
 						</li>
 						<li>
-							<Link to="/admin/set-home">
+							<Link to="/admin/users">
 								<i><FontAwesomeIcon icon={faHome} size="lg"/></i>
-								<span>Accueil</span>
+								<span>Users</span>
 							</Link>
 						</li>
 					</ul>
@@ -73,6 +79,12 @@ const SideBar : React.FC = function() {
 						<Link to="/">
 							<i><FontAwesomeIcon icon={faDesktop} size="lg"/></i>
 							<span>Tableau de bord</span>
+						</Link>
+					</li>
+					<li>
+						<Link to="/admin/list-home">
+							<i><FontAwesomeIcon icon={faHome} size="lg"/></i>
+							<span>Accueil</span>
 						</Link>
 					</li>
 					<li>
@@ -89,7 +101,7 @@ const SideBar : React.FC = function() {
 		            </li>
 					<li>
 						<Link to="/admin/league">
-							<i><FontAwesomeIcon icon={faUsers} size="lg"/></i>
+							<i><FontAwesomeIcon icon={faCheck} size="lg"/></i>
 							<span>Ligues</span>
 						</Link>
 					</li>
@@ -107,9 +119,15 @@ const SideBar : React.FC = function() {
 						
 					</li>
 					<li>
-						<Link to="/admin/list-home">
-							<i><FontAwesomeIcon icon={faHome} size="lg"/></i>
-							<span>Accueil</span>
+						<Link to="/admin/users">
+							<i><FontAwesomeIcon icon={faUser} size="lg"/></i>
+							<span>User</span>
+						</Link>
+					</li>
+					<li>
+						<Link to="/admin/teams">
+							<i><FontAwesomeIcon icon={faUsers} size="lg"/></i>
+							<span>Team</span>
 						</Link>
 					</li>
 					<li>

@@ -18,7 +18,8 @@ import ListLeague from "../league/list-league"
 import ListWagger from "../wager/list-wagger"
 import Login from "../auth/login"
 import DetailHome from "../home/home-detail"
-
+import Team from "../team/team"
+import User from "../user/user"
 
 const Router = function() {
 	return (
@@ -38,6 +39,8 @@ const Router = function() {
 			<ProtectedRoute path="/admin/set-home" exact component={SetHome} />
 			<ProtectedRoute path="/admin/detail/:id" exact component={DetailHome} />
 			<ProtectedRoute path="/admin/set-assist" exact component={SetAssist} />
+			<ProtectedRoute path="/admin/users" exact component={User} />
+			<ProtectedRoute path="/admin/teams" exact component={Team} />
 		</Switch>
 	)
 }

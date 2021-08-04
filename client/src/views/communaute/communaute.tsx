@@ -21,6 +21,7 @@ import {GET_ALL_STREAMING} from "../../gql/user/query"
 import {GET_ALL_CMTY} from "../../gql/cmty/query"
 import Friend from "./friends"
 import {LIMIT,PAGE_NUMBER} from "../commons/constante"
+import AvatarDefault from "../../assets/image/game-tag.png"
 
 
 const Communaute: React.FC = function() {
@@ -112,7 +113,7 @@ const Communaute: React.FC = function() {
 
 					  					<div className="bloc-actus" key={index}>
 					  						<div className="actus-name">
-					  							<img src={e.user.avatar} alt=""/>
+					  							<img src={e.user.avatar?e.user.avatar:AvatarDefault} alt=""/>
 					  							<p>{e.user.username} <span>{`@${e.user.username}`}</span></p>
 
 					  						</div>

@@ -5,8 +5,8 @@ import (
 
 	"github.com/graphql-go/graphql"
 	"github.com/thoussei/antonio/api/external"
-	"github.com/thoussei/antonio/api/team/entity"
-	"github.com/thoussei/antonio/api/team/handler"
+	"github.com/thoussei/antonio/api/teams/entity"
+	"github.com/thoussei/antonio/api/teams/handler"
 	userEntity "github.com/thoussei/antonio/api/user/entity"
 	userHandler "github.com/thoussei/antonio/api/user/handler"
 	"go.mongodb.org/mongo-driver/bson/primitive"
@@ -84,44 +84,82 @@ func (t *team) SavedTeamResolver(params graphql.ResolveParams) (interface{}, err
 }
 
 func (t *team) FindTeamResolver(params graphql.ResolveParams) (interface{}, error){
-	idHome, _ := params.Args["uid"].(string)
-	home,err := t.teamHandler.FindTeamHandler(idHome)
+	uidTeam, _ := params.Args["uid"].(string)
+	team,err := t.teamHandler.FindTeamHandler(uidTeam)
 
 	if err != nil {
 		return nil,err
 	}
 
-	return home,nil
+	return team,nil
 }
 
 func (t *team) FindAllTeamResolver(params graphql.ResolveParams) (interface{}, error){
-	homes,err :=  t.teamHandler.FindAllTeamHandler()
+	limit, _ := params.Args["limit"].(int)
+	pageNumber, _ := params.Args["pageNumber"].(int)
+
+	if pageNumber == 0 && limit > 0{
+		pageNumber = 1
+	}
+
+	teams,err :=  t.teamHandler.FindAllTeamHandler(int64(pageNumber),int64(limit))
 
 	if err != nil {
 		return nil,err
 	}
 
-	return homes,nil
+	return teams,nil
 }
 
 func (t *team) UpdatedTeamByBannedResolver(params graphql.ResolveParams) (interface{}, error){
+	var users [] userEntity.User 
 	uid, _ := params.Args["uid"].(string)
 	objectId, err := primitive.ObjectIDFromHex(uid)
 	team,err :=  t.teamHandler.FindTeamHandler(uid)
-
+	user,err := t.teamUserHandler.FindOneUserByUid(team.Creator.Uid)
+	
 	if err != nil {
 		return nil,err
+	}
+
+	for _,val := range team.Players {
+		userPl,err := t.teamUserHandler.FindOneUserByUid(val.Uid)
+	
+		if err != nil {
+			return nil,err
+		}
+
+		players := userEntity.User {
+			Uid:userPl.Uid,           
+			FirstName:userPl.FirstName ,
+			LastName:userPl.LastName ,
+			Password:userPl.Password,
+			Email:userPl.Email,
+			Username:userPl.Username ,
+			IsBanned:userPl.IsBanned,
+			Avatar:userPl.Avatar ,
+			Language:userPl.Language     ,
+			IdGameAccount:userPl.IdGameAccount,
+			Point:userPl.Point,
+			Roles:userPl.Roles,
+			TypeConnexion:userPl.TypeConnexion,
+			Created:userPl.Created,
+			ConfirmationToken:userPl.ConfirmationToken ,
+			Friends: userPl.Friends,
+			Accounts: userPl.Accounts,
+		}
+		users = append(users,players)
 	}
 
 	newTeam := &entity.Team{
 		Uid:objectId,
 		Name:team.Name,
 		CreationDate:team.CreationDate,
-		Players: team.Players,
+		Players:users,
 		Description:team.Description,
 		IsBlocked:true,
 		Logo:team.Logo,
-		Creator:team.Creator,   	     			
+		Creator:user,   	     			
 	}
 	 
 

@@ -24,8 +24,8 @@ export const GET_ALL_STREAMING = gql`
 }`
 
 export const GET_ALL_USER = gql`
-	query GetUsers($idUserConnected: String!) {
-		GetUsers(idUserConnected: $idUserConnected){
+	query GetUsers($idUserConnected: String!,$limit: Int!,$pageNumber:Int!) {
+		GetUsers(idUserConnected: $idUserConnected,limit: $limit,pageNumber:$pageNumber){
 		username
 		avatar
 		uid

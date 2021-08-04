@@ -19,14 +19,11 @@ var TeamSchemaType = graphql.NewObject(graphql.ObjectConfig{
 		"creationDate": &graphql.Field{
 			Type: graphql.String,
 		},
-		"Players": &graphql.Field{
+		"players": &graphql.Field{
 			Type: graphql.NewList(UserSchemaType),
 		},
 		"creator": &graphql.Field{
 			Type: UserSchemaType,
-		},
-		"CreationDate": &graphql.Field{
-			Type: graphql.String,
 		},
 	},
 })
