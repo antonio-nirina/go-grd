@@ -702,8 +702,10 @@ label[for="img-game"]
 /******************USER********************/
 .avatar-found{
 	width: 36px;
-	height: 36px;
-	margin-top: 3px;
+    height: 36px;
+    margin-top: 3px;
+    border-radius: 50%;
+    border: 1px solid #000000;	
 }
 .sm-width .card-result{
 	align-self: center;
