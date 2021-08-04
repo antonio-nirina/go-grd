@@ -69,7 +69,39 @@ const User : React.FC = function(props:any) {
 											<p>Statut <i><FontAwesomeIcon icon={faSort} size="lg"/></i></p>
 										</div>
 									</div>
+									<div className="card-title">
+										<div className="card-title">
+											<p>Ban <i><FontAwesomeIcon icon={faSort} size="lg"/></i></p>
+										</div>
+									</div>
+
 								</div>
+								<div className="body-card padt0" >
+												<div className="card-result">
+													<img className="avatar-found" src={AvatarDefault} />
+												</div>
+												<div className="card-result">
+													<p>Fab</p>
+												</div>
+												<div className="card-result">
+													<p>
+														
+														date
+													
+													</p>
+												</div>
+												<div className="card-result">
+													<p>actif</p>
+												</div>
+												<div className="card-result check">
+													<p>
+														<label className="switch">
+															<input type="checkbox" value=""/>
+															<span className="slider">Oui</span>
+														</label>
+													</p>
+												</div>
+											</div>
 								{
 									users?.map(function(el:any,index:number){
 										return (

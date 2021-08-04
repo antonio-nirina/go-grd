@@ -87,7 +87,7 @@ body{
 	background: #000000
 }
 .side-menu{
-	height: 80vh;
+	height: 89vh;
 	overflow: auto;
 }
 .main-sidebar{
@@ -95,7 +95,7 @@ body{
 	/*padding-top: 15px;*/
 }
 .main-sidebar li{
-	padding: 10px;
+	padding: 9px;
 }
 .main-sidebar li a{
 	color: #9c9c9e;
@@ -113,7 +113,7 @@ body{
 }
 .main-sidebar li i{
 	display: block;
-	font-size: 15px;
+	font-size: 11px;
 }
 .ps{
 	overflow: hidden;
@@ -132,12 +132,11 @@ body{
 }
 .main-sidebar .logo{
 	display: block;
-	height: 125px;
-	line-height: 125px;
+	height: 86px;	
 	text-align: center;
 }
 .main-sidebar .logo img{
-	max-height: 75px;
+	max-height: 50px;
 	width: auto;
 	border-radius: 50%;
 	border: 2px solid #dd0000;
@@ -700,6 +699,18 @@ label[for="img-game"]
 	margin-right: 0;
 }
 /******************USER********************/
+.user .response-filter{
+	display: block;
+	background: none;	
+}
+.user .response-filter-search{
+	border-right: none;
+}
+.user .response-filter-search input{
+	padding: 10px;
+	border-radius: 10px;
+	width: 26%;
+}
 .avatar-found{
 	width: 36px;
     height: 36px;
@@ -712,4 +723,7 @@ label[for="img-game"]
 }
 .padt0{
 	padding: 0px 15px;
+}
+.check .switch{
+	position: relative
 }
