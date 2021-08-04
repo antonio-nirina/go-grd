@@ -13,6 +13,9 @@ import (
 	"os"
 	"path/filepath"
 	"runtime"
+
+	"github.com/joho/godotenv"
+	uuid "github.com/satori/go.uuid"
 )
 
 type FileUpload struct {
@@ -146,4 +149,34 @@ func (f *FileUpload) CreateDirectory() error {
 	return nil
 }
 
+
+func (f *FileUpload) HandleFileInBBApi(files string,typeFile string) (string,error) {
+	err := godotenv.Load()
+	
+	if err != nil {
+		return "",err
+	}
+
+	path := fmt.Sprintf("%s%s", filepath.Dir(""), "/tmpFile")
+	f.Path = path
+
+	if !f.DirectoryExists() {
+		err := f.CreateDirectory()
+		if err != nil {
+			return "",err
+		}
+	}
+	
+	f.Filename = (uuid.NewV4()).String()+"."+typeFile
+	f.Data = files
+	
+	f.ApiKey = os.Getenv("BB_IMAGE_KEY")
+	url,err := f.SenderFile()
+
+	if err != nil {
+		return "",err
+	}
+
+	return url,nil
+}
 

@@ -30,6 +30,10 @@ import (
 	homeHandler "github.com/thoussei/antonio/api/home/handler"
 	homeRepo "github.com/thoussei/antonio/api/home/repository"
 
+	teamDelivery "github.com/thoussei/antonio/api/team/delivery"
+	teamHandler "github.com/thoussei/antonio/api/team/handler"
+	teamRepo "github.com/thoussei/antonio/api/team/repository"
+
 	"github.com/graphql-go/graphql"
 )
 
@@ -66,6 +70,10 @@ var homeRepository 		= homeRepo.NewHomeRepository(database)
 var homeUsecase 		= homeHandler.NewUsecaseHome(homeRepository)
 var homeResolver 		= homeDelivery.NewResolverHome(homeUsecase)
 
+var teamRepository 		= teamRepo.NewHomeRepository(database)
+var teamUsecase 		= teamHandler.NewUsecaseTeam(teamRepository)
+var teamResolver 		= teamDelivery.NewTeamRepository(teamUsecase,usecase)
+
 
 func GetRootFields() graphql.Fields {
 	return graphql.Fields{
@@ -87,5 +95,7 @@ func GetRootFields() graphql.Fields {
 		"createPartMatch":		createPartMatch(),
 		"createHomeContent":	createHomeContent(),
 		"updateHomeContent":	updateHomeContent(),
+		"createTeam":			createTeam(),
+		"updatedTeamByBanned":	updatedTeamByBanned(),
 	}
 }

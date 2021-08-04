@@ -31,7 +31,6 @@ const ListGame : React.FC = function() {
 		    				<h1>Liste de jeux</h1>
 		    			</div>
 		    			<div className="create-tournament-game">
-		    				<button className="btn bg-white">Supprimer jeux</button>
 		    				<button className="btn bg-red" onClick={()=> {history.push("/admin/create-game")}}>
 		    					Créer jeux
 	    					</button>
