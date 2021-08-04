@@ -699,3 +699,15 @@ label[for="img-game"]
 .column-home .flex-group:last-child{
 	margin-right: 0;
 }
+/******************USER********************/
+.avatar-found{
+	width: 36px;
+	height: 36px;
+	margin-top: 3px;
+}
+.sm-width .card-result{
+	align-self: center;
+}
+.padt0{
+	padding: 0px 15px;
+}

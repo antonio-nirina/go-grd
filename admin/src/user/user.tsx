@@ -7,7 +7,7 @@ import {GET_ALL_USER} from "../gql/user/query"
 import Pagination from "../common/pagination"
 import SideBar from "../header/sidebar"
 import Nav from "../header/nav"
-//import AvatarDefault from "../assets/image/game-tag.png"
+import AvatarDefault from "../assets/image/game-tag.png"
 
 const User : React.FC = function(props:any) {
 	const [users, setUsers] = useState<any>([])
@@ -38,7 +38,7 @@ const User : React.FC = function(props:any) {
         		</nav>
 				<div className="main-content">
 					<div className="body-content">
-						<div className="column">
+						<div className="column user">
 							<div className="response-filter">
 								<div className="response-filter-search">
 									<span className="ant-input-affix-wrapper">
@@ -73,9 +73,9 @@ const User : React.FC = function(props:any) {
 								{
 									users?.map(function(el:any,index:number){
 										return (
-											<div className="body-card" key={index}>
+											<div className="body-card padt0" key={index}>
 												<div className="card-result">
-													{/*<img className="avatar-found" src={el.avatar ? (el.avatar) : AvatarDefault} />*/}
+													<img className="avatar-found" src={el.avatar ? (el.avatar) : AvatarDefault} />
 												</div>
 												<div className="card-result">
 													<p>{el.username}</p>

@@ -2,7 +2,7 @@ import React,{useState} from "react"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useSelector,useDispatch } from "react-redux"
 import { Link } from "react-router-dom"
-import { faUsers, faTools, faDesktop, faTrophy, faStar, faGamepad, faHome, faPowerOff, faSortUp, faSortDown} from "@fortawesome/free-solid-svg-icons"
+import { faUsers, faTools, faDesktop, faTrophy, faUser, faStar, faGamepad, faHome, faPowerOff, faSortUp, faSortDown} from "@fortawesome/free-solid-svg-icons"
 import {useHistory } from "react-router-dom"
 import {RootState} from "../reducer"
 import avatar from "../assets/image/game-tag.png"
@@ -42,6 +42,7 @@ const Nav = function() {
                             <li><Link to="/admin/league"><i><FontAwesomeIcon icon={faUsers} size="lg"/></i>Ligues</Link></li>
                             <li><Link to="/admin/wagger"><i><FontAwesomeIcon icon={faStar} size="lg"/></i>Waggers</Link></li>
                             <li><Link to="/admin/list-game"><i><FontAwesomeIcon icon={faGamepad} size="lg"/></i>Jeux</Link></li>
+                            <li><Link to="/admin/users"><i><FontAwesomeIcon icon={faUser} size="lg"/></i>User</Link></li>
                             <li><Link to="/admin/set-home"><i><FontAwesomeIcon icon={faHome} size="lg"/></i>Accueil</Link></li>
                         </div>
                         <li onClick={onDeconnect} style={{"cursor":"pointer"}}>
