@@ -114,7 +114,7 @@ const User : React.FC = function(props:any) {
 								}
 							</div>
 						</div>
-						<Pagination />
+						<Pagination records={users.length} />
 					</div>
 				</div>
 			</div>
