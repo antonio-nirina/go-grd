@@ -1,12 +1,16 @@
 .salon{
+	display: none;
 	position: absolute;
 	text-align: center;
     background: #2c2c2c;
-    right: 0px;    
+    right: 56px;    
     bottom: -94px;
     width: 316px;
-    height: 255px;
-    display: none;
+    height: 255px;    
+    box-shadow: 1px -3px 10px #000000;
+}
+.salon.show{
+	display: block;
 }
 .salon-team{
 	display: flex;
@@ -30,17 +34,19 @@
 	background: #2c2c2c;
 	padding: 15px;
 }
-.group-tchat.tchat{
-	right: 0px;
-	padding: 0;
-	display: none;
-}
 .tchat{	
 	position: fixed;
 	background: #2c2c2c;
+	right: 53px;
 	width: 26%;
 	height: 40%;	
+	display: block;
+	border: 1px solid #4a4949;
 }
+.salon-chat.show .group-tchat.tchat{
+	display: block;
+}
+
 .tchat i{
 	font-size: 20px;
 	padding: 5px;
@@ -117,5 +123,6 @@
 .close{
 	display: none;
 }
+
 
 

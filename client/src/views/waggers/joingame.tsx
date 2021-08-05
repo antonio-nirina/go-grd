@@ -1,4 +1,4 @@
-import React from "react"
+import React,{useState} from "react"
 import { Link } from "react-router-dom"
 
 import Header from "../header/header"
@@ -14,6 +14,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 import "../../assets/css/style.css"
 import "../annexe/tournois.css"
+import "../waggers/waggers.css"
 import "../participate/participate.css"
 
 import apexlegends from "../../assets/image/apex-legends.png"
@@ -22,7 +23,14 @@ import discord from "../../assets/image/discord.png"
 import AvatarDefault from "../../assets/image/game-tag.png"
 
 const Joingame: React.FC = function() {
-
+  const [showSalon, setShowSalon] = useState(false)
+  const [showTchat, setShowTchat] = useState(false)
+  const onShowSalon = function(){
+    setShowSalon(!showSalon)
+  }
+  const onShowTchat = function(){
+    setShowTchat(!showTchat)
+  }
   return(
   	<div className="container">
   		<Header />
@@ -91,18 +99,18 @@ const Joingame: React.FC = function() {
                 <p className="free-emplacement"><span>Emplacement Libre</span></p>
               </div>
             </div>
-            <div className="icon-tchat">
+            <div className="icon-tchat" onClick={onShowSalon}>
               <i><FontAwesomeIcon icon={faCommentDots} /></i>
             </div>
-            <div className="salon">
+            <div className={!showSalon ? "salon" :"salon show"}>
               <div className="salon-titre">Salon de tchat</div>
-              <div className="salon-team">
+              <div className="salon-team" onClick={onShowTchat}>
                 <img src={AvatarDefault} width="30" alt="joingame" />
                 <p>Wager Apex Legends - <span>3v3...<i><FontAwesomeIcon icon={faCommentDots} size="xs"/></i></span></p>
               </div>
             </div>
           </div>
-          <div className="">
+          <div className={!showTchat ? "salon-chat" :"salon-chat show"} >
             <Chat />
           </div>
         </div>
