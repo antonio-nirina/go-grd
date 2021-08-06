@@ -1,4 +1,7 @@
 @charset "UTF-8";
+.profil.connected{
+	position: relative;
+}
 .content{	
 	width: 100%;
 	
@@ -742,5 +745,49 @@ p.lg-desc{
 	font-size: 15px;
 	font-family: "quicksand regular";
 
+}
+/*********crop***********/
+.crop-container {
+    z-index: 999;
+    position: fixed;        
+    text-align: center;    
+    text-align: center;
+    width: 100%;
+    left: 0;
+    top: 133px;
+    display: none;
+
+}
+.crop-container.close{
+	display: none;
+}
+.is-cropped{
+	width: 50%;
+	margin: auto;
+	background: #000000;
+	padding-bottom: 30px;
+	border-radius: 15px;
+	border: 1px solid #1b1d26;	
+	overflow: hidden;
+
+}
+.crop-container .btn{
+	margin-right: 15px;
+}
+.crop-container .btn.bg-white{
+	background: none;
+}
+.crop-container .btn:last-child{
+	margin-right: 0;
+}
+.crop-container .reactEasyCrop_CropArea{
+	border-radius: 50%;
+	top: 52%;
+}
+.crop-container .reactEasyCrop_Contain{
+	position: initial !important;
+}
+.crop-container .reactEasyCrop_Container{
+	position: initial !important;
 }
 
