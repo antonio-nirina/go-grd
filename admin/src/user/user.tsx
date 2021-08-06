@@ -2,21 +2,24 @@ import React,{useState,useEffect} from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {useQuery} from "@apollo/client"
 import {faSort, faSearch} from "@fortawesome/free-solid-svg-icons"
+import { useSelector } from "react-redux"
 
 import {GET_ALL_USER} from "../gql/user/query"
 import Pagination from "../common/pagination"
 import SideBar from "../header/sidebar"
 import Nav from "../header/nav"
 import AvatarDefault from "../assets/image/game-tag.png"
+import {RootState} from "../reducer"
 
 const User : React.FC = function(props:any) {
+	const userConnectedRedux 		= useSelector((state:RootState) => state.userConnected)
 	const [users, setUsers] = useState<any>([])
 
 	const {loading,error,data} 	= useQuery(GET_ALL_USER, {
 		variables: {
-			idUserConnected:"",
-			limit:0,
-			pageNumber:0
+			idUserConnected:userConnectedRedux.user.uid,
+			limit:5,
+			pageNumber:2
 		},
 	})
 
@@ -81,7 +84,7 @@ const User : React.FC = function(props:any) {
 										return (
 											<div className="body-card padt0" key={index}>
 												<div className="card-result">
-													<img className="avatar-found" src={el.avatar ? (el.avatar) : AvatarDefault} />
+													<img className="avatar-found" src={el.avatar ? (el.avatar) : AvatarDefault} alt="" />
 												</div>
 												<div className="card-result">
 													<p>{el.username}</p>
@@ -114,7 +117,7 @@ const User : React.FC = function(props:any) {
 								}
 							</div>
 						</div>
-						<Pagination records={users.length} />
+						<Pagination records={11} />
 					</div>
 				</div>
 			</div>

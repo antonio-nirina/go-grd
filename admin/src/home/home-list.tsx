@@ -5,7 +5,6 @@ import {useQuery} from "@apollo/client"
 import { faPlus, faSort,faEdit,faTrash } from "@fortawesome/free-solid-svg-icons"
 
 import {GET_ALL_HOME} from "../gql/home/query"
-import Pagination from "../common/pagination"
 import SideBar from "../header/sidebar"
 import Nav from "../header/nav"
 
@@ -92,7 +91,6 @@ const HomeList : React.FC = function(props:any) {
 								}
 							</div>
 						</div>
-						<Pagination />
 					</div>
 				</div>
 			</div>

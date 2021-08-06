@@ -18,4 +18,5 @@ type Repository interface {
 	FindOneUserById(objectId primitive.ObjectID) (entity.User, error)
 	AddFriend(req *entity.Friends) (interface{}, error)
 	FindOneUserByUid(objectId primitive.ObjectID) (entity.User, error)
+	CountUserRepository()(int,error)
 }

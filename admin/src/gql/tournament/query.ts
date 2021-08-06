@@ -15,6 +15,7 @@ export const GET_ALL_TOURNAMENT= gql`
 		date
 		price
 		priceParticipate
+		records
 		game{
 			uid
 			name

@@ -23,6 +23,7 @@ type TeamViewModel struct {
 	IsBlocked 		  		bool 						`json:"isBlocked"`
 	Logo   					string            			`json:"logo"`
 	Creator   				userHandler.UserViewModel    `json:"creator"`
+	Records   					int            			`json:"records"`
 }
 
 type teamUsecase struct {
@@ -115,6 +116,12 @@ func (t *teamUsecase) FindAllTeamHandler(pageNumber int64,limit int64) ([]TeamVi
 		return []TeamViewModel{}, err
 	}
 
+	records,err := t.teamRepository.CountTeamRepository()
+
+	if err != nil {
+		return []TeamViewModel{}, err
+	}
+
 	var res []TeamViewModel
 	var players []userHandler.UserViewModel
 
@@ -161,7 +168,8 @@ func (t *teamUsecase) FindAllTeamHandler(pageNumber int64,limit int64) ([]TeamVi
 			Description:val.Description,
 			IsBlocked:val.IsBlocked,
 			Logo:val.Logo,
-			Creator:user,   		
+			Creator:user,
+			Records:records,   		
 		}
 
 		res = append(res, teamViewModel)
@@ -179,4 +187,14 @@ func (t *teamUsecase) UpdatedTeamHandler(team *entity.Team) (interface{}, error)
 	}
 
 	return "Ok",nil
+}
+
+func (t *teamUsecase) CountTeamHandler()(int) {
+	records,err := t.teamRepository.CountTeamRepository()
+
+	if err != nil {
+		return 0
+	}
+	
+	return records
 }

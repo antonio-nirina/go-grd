@@ -216,3 +216,13 @@ func (u *UserUsecase) FindOneUserByUid(idQuery string) (entity.User, error) {
 
 	return user, nil
 }
+
+func (u *UserUsecase) CountUserHandler()(int) {
+	records,err := u.userRepository.CountUserRepository()
+
+	if err != nil {
+		return 0
+	}
+	
+	return records
+}

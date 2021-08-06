@@ -24,4 +24,5 @@ type Usecase interface {
 	UpdatedUserFriend(userSender entity.User,userReq entity.User) (interface{}, error)
 	NotifConnected(user *entity.User, wg *sync.WaitGroup)
 	NotifDisConnected(user *entity.User, wg *sync.WaitGroup)
+	CountUserHandler()(int)
 }

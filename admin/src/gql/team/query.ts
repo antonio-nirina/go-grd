@@ -7,6 +7,7 @@ export const GET_ALL_TEAMS = gql`
 		name
 		logo
 		creationDate
+		records
 		creator{
 			uid
 			email

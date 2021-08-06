@@ -31,5 +31,6 @@ export const GET_ALL_USER = gql`
 		uid
 		email
 		created
+		records
 	}
 }`

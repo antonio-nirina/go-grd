@@ -102,7 +102,7 @@ const Team : React.FC = function(props:any) {
 								}
 							</div>
 						</div>
-						<Pagination />
+						<Pagination records={team[0].records} />
 					</div>
 				</div>
 			</div>
