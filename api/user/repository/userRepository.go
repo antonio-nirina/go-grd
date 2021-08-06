@@ -208,6 +208,18 @@ func (c *driverRepository) FindUserByToken(token string) (entity.User, error) {
 	return result, nil
 }
 
+func (c *driverRepository) CountUserRepository()(int,error) {
+	var collection = c.client.Database("grd_database").Collection("users")
+
+	records,err := collection.CountDocuments(context.TODO(), bson.D{{}})
+	
+	if err != nil {
+		return 0, err
+	}
+
+	return int(records),nil
+}
+
 /*func (c *driverRepository) UpdateAccountGame(email string) (entity.User, error) {
 	var collection = c.client.Database("grd_database").Collection("users")
 	var result entity.User

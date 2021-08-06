@@ -73,6 +73,12 @@ func (t *tournamentUsecase) FindAllTournamentHandler(pageNumber int64, limit int
 		return []tournamentViewModel{}, err
 	}
 
+	records,err := t.tournamentRepository.CountTournamentRepository()
+
+	if err != nil {
+		return []tournamentViewModel{}, err
+	}
+
 	var res []tournamentViewModel
 
 	for _,val := range result {
@@ -90,7 +96,8 @@ func (t *tournamentUsecase) FindAllTournamentHandler(pageNumber int64, limit int
 			Game:GameViewModel{val.Game.Uid.Hex(),val.Game.Name,val.Game.Image,val.Game.Logo,val.Game.Slug},				
 			Plateform:PlateformViewModel{val.Plateform.Uid.Hex(),val.Plateform.Name,val.Plateform.Description},
 			Rules:val.Rules, 
-			IsPublic:val.IsPublic, 			
+			IsPublic:val.IsPublic,
+			Records:records, 			
 		}
 
 		res = append(res, tournamentViewModel)
@@ -130,4 +137,14 @@ func (t *tournamentUsecase) FindTournamentGameHandler(pageNumber int64,limit int
 	}
 	
 	return res,nil
+}
+
+func (t *tournamentUsecase) CountTournamentHandler()(int) {
+	records,err := t.tournamentRepository.CountTournamentRepository()
+
+	if err != nil {
+		return 0
+	}
+	
+	return records
 }

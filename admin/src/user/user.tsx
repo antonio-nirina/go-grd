@@ -2,21 +2,24 @@ import React,{useState,useEffect} from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {useQuery} from "@apollo/client"
 import {faSort, faSearch} from "@fortawesome/free-solid-svg-icons"
+import { useSelector } from "react-redux"
 
 import {GET_ALL_USER} from "../gql/user/query"
 import Pagination from "../common/pagination"
 import SideBar from "../header/sidebar"
 import Nav from "../header/nav"
-//import AvatarDefault from "../assets/image/game-tag.png"
+import AvatarDefault from "../assets/image/game-tag.png"
+import {RootState} from "../reducer"
 
 const User : React.FC = function(props:any) {
+	const userConnectedRedux 		= useSelector((state:RootState) => state.userConnected)
 	const [users, setUsers] = useState<any>([])
 
 	const {loading,error,data} 	= useQuery(GET_ALL_USER, {
 		variables: {
-			idUserConnected:"",
-			limit:0,
-			pageNumber:0
+			idUserConnected:userConnectedRedux.user.uid,
+			limit:5,
+			pageNumber:2
 		},
 	})
 
@@ -38,7 +41,7 @@ const User : React.FC = function(props:any) {
         		</nav>
 				<div className="main-content">
 					<div className="body-content">
-						<div className="column">
+						<div className="column user">
 							<div className="response-filter">
 								<div className="response-filter-search">
 									<span className="ant-input-affix-wrapper">
@@ -69,13 +72,19 @@ const User : React.FC = function(props:any) {
 											<p>Statut <i><FontAwesomeIcon icon={faSort} size="lg"/></i></p>
 										</div>
 									</div>
-								</div>
+									<div className="card-title">
+										<div className="card-title">
+											<p>Ban <i><FontAwesomeIcon icon={faSort} size="lg"/></i></p>
+										</div>
+									</div>
+
+								</div>								
 								{
 									users?.map(function(el:any,index:number){
 										return (
-											<div className="body-card" key={index}>
+											<div className="body-card padt0" key={index}>
 												<div className="card-result">
-													{/*<img className="avatar-found" src={el.avatar ? (el.avatar) : AvatarDefault} />*/}
+													<img className="avatar-found" src={el.avatar ? (el.avatar) : AvatarDefault} alt="" />
 												</div>
 												<div className="card-result">
 													<p>{el.username}</p>
@@ -94,13 +103,21 @@ const User : React.FC = function(props:any) {
 												<div className="card-result">
 													<p>{!el.isBanned?"Actif":"Bloquer"}</p>
 												</div>
+												<div className="card-result check">
+													<p>
+														<label className="switch">
+															<input type="checkbox" value=""/>
+															<span className="slider">Oui</span>
+														</label>
+													</p>
+												</div>
 											</div>
 										)
 									})
 								}
 							</div>
 						</div>
-						<Pagination />
+						<Pagination records={11} />
 					</div>
 				</div>
 			</div>

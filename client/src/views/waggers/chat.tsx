@@ -1,4 +1,4 @@
-import React from "react"
+import React,{useState} from "react"
 
 import { faCommentDots, faTimes, faPaperPlane } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
@@ -8,12 +8,17 @@ import "./chat.css"
 
 
 const Chat: React.FC = function() {
+  const [showClose, setShowClose] = useState(false)
+  
+  const onShowClose = function(){
+    setShowClose(!showClose)
+  }
   return(
-  <div className="group-tchat tchat">
+  <div className={!showClose ? "group-tchat tchat show" :"group-tchat tchat hide"}>
     <div className="tchat-header">
       <i className="tchat-icon"><FontAwesomeIcon icon={faCommentDots} size="xs"/></i>
       <span>Tchat groupe</span>
-      <div className="close-tchat">
+      <div className="close-tchat" onClick={onShowClose}>
         <i className="close-icon"><FontAwesomeIcon icon={faTimes} size="xs"/></i>      
       </div>           
     </div>    

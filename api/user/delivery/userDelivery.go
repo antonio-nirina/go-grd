@@ -36,6 +36,7 @@ type UserResponse struct {
 	Roles      	 []string             `json:"roles"`
 	TypeConnexion   string            `json:"type_connexion"`
 	Created 		string 			`json:"created"`
+	Records 		int 			`json:"records"`
 }
 
 type resolver struct {
@@ -284,7 +285,8 @@ func (r *resolver)GetAllUser(params graphql.ResolveParams)(interface{}, error) {
 			userList.IdGameAccount 	= user.IdGameAccount
 			userList.Roles 			= user.Roles
 			userList.TypeConnexion 	= user.TypeConnexion
-			userList.Created 		= user.Created 
+			userList.Created 		= user.Created
+			userList.Records 		= r.userHandler.CountUserHandler() 
 			res = append(res, *userList)
 		}	
 	}

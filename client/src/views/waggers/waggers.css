@@ -226,9 +226,18 @@ p.item-text-left{
     position: absolute;
     right:0;
     bottom: 0;
-
+    cursor: pointer;
 }
 .icon-tchat i{
 	font-size: 24px;
 	color: #7b7b7b;
+}
+.salon-team{
+	cursor: pointer;
+}
+.salon-chat{
+	display: none;
+}
+.salon-chat.show{
+	display: block;
 }
