@@ -45,15 +45,17 @@ const Ligue: React.FC = function() {
 					}
 				</h1>
 				<div className="card">
-					<h2>
-						Ligues (2)
-					</h2>
-					<div className="bt-container">
-						<Link to="#" className="btn bg-red">
-							{
-								Translation(userConnectedRedux.user.language).tournament.seemore
-							}
-						</Link>
+					<div className="flex-container">
+						<h2>
+							Ligues (2)
+						</h2>
+						<div className="bt-container">
+							<Link to="#" className="btn bg-red">
+								{
+									Translation(userConnectedRedux.user.language).tournament.seemore
+								}
+							</Link>
+						</div>
 					</div>
 					<div className="upcomming side">
 						<Link to="/info" title="">

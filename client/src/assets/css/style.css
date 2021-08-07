@@ -187,6 +187,11 @@ h1{
         url('../../assets/fonts/quicksand/static/Quicksand-Regular.svg#RussoOne') format('svg');
 }
 /*********  Media query ***************/
+@media screen and (max-width: 1000px) {
+  .container .center-block {
+    width: 46%;
+  }
+}
 
 @media screen and (max-width: 940px) {
   .home p.title{
@@ -217,8 +222,11 @@ h1{
   .container .actuality{
     width: 100%;
   }
-  .container h2{
-    font-size: 25px !important;
+  .container .full-container h2{
+    font-size: 25px;
+  }
+  .container .full-container .txt, .container .full-container .tableau{
+    max-width: inherit;
   }
   .container .clip, .shop{
     margin-left: 0;
@@ -291,11 +299,23 @@ h1{
   .container .waggers-link .block, .container .waggers-link .block.last{
     width: 100%;
   }
+  .container .flex-upcoming{
+    display: block;
+    text-align: center;
+  }
+  .container .card .upcomming.side{
+    max-width: inherit;
+    width: 46%;
+  }
+  .aside-menu.social{
+    margin-left: 0;
+  }  
 }
 @media screen and (max-width: 800px){
   .container .tchat{
     width: 72%;
     margin: auto;
+    z-index: 9999;
   }
   .rcw-conversation-container .rcw-title{
     padding: 15px 0px !important;
@@ -339,10 +359,40 @@ h1{
   .container .waggers-title, .container .waggers-data{
     width: 96%;
     margin: 5px 0;
+  }  
+}
+@media screen and (max-width: 700px) {
+  .container .card .upcomming.side{    
+    width: 100%;
+  }
+
+  .container .information-game{
+    display: block;
+  }
+  .container .item-info-right{
+    margin-top: 15px;
+    margin-left: 0px;
+    width: 100%;    
+  }
+  .container .icon-tchat{
+    position: initial;
+    margin-top: 15px;
+
   }
 }
-
 @media screen and (max-width: 600px) {
+  .container{
+    margin-top: 5em;
+  }
+  .view .container{
+    margin-top: 10em;
+  }
+  .assistance .container, .container .waggers .part{
+    margin-top: 0;
+  }
+  .full-container h1{
+    font-size: 23px;
+  }
   .wrap, .container .wrap.red{
     display: block;
     text-align: center;
@@ -419,7 +469,7 @@ h1{
     margin-top: 5em;
   }
   .wagers .container .full-container{
-    margin-top: 8em;
+    margin-top: 10em;
   }
   .container .tabs-content{
     overflow: auto;
@@ -444,7 +494,20 @@ h1{
   .container .waggers-link a{
     width: 95%;
   }
+  .container .item-info-left{
+    display: block;
+  }
 }
+@media screen and (max-width: 520px) {
+  .view .ban{
+    height: 100% !important;
+  }
+  .view .container .versus-container{
+    display: block;
+    padding: 15px 0;
+  }
+}
+
 @media screen and (max-width: 380px) {
   .wrap, .container .wrap.red{
     padding: 6px 9px;
@@ -491,429 +554,45 @@ h1{
     width: 100% !important;
     text-align: center !important
   }
-}
-/*
-@media screen and (max-width: 1302px) {
-  .home .content{
+  .container .flex-container{
     display: block;
   }
-  .home .block{
-    width: 16%;
-    display: inline-block;
-    margin-bottom: 15px;
-    margin-right: 10px;
+  .container h2{
+    font-size: 20px !important;
   }
-  .home .block.last{
-    width: 15%;
-    border-radius: 15px;
-  }
-
-}
-@media screen and (max-width: 1296px) {
-  .navmenu
-  {
-        width: 50%;
-  }  
-  footer .wrap{
-    padding: 3px 50px;
-  }
-  .home .slogan{
-      top: 38%;
-  }
-  .home p.title{
-      font-size: 39px;
-  }
-}
-@media screen and (max-width: 1173px){
-  .home .block,.home .block.last{
-    width: 23%;
-  }
-  .home .jeux{
-    padding-bottom: 0px;
-  }
-  .home .rss{
-    width: 90%;
-    margin: auto;
-  }
-  .home .rss {
-    width: 60%;
-    margin: auto;
-  }
-}
-@media screen and (max-width: 964px){
-  .communaute{
-    padding-top: 5em !important;
-  }
-}
-@media screen and (max-width: 991px){
-  .part{
-   padding: 0 2em;
-  }
-  .home p.title{
-      font-size: 23px;
-  }
-  .home .slogan{
-      top: 44%;
-  }
-  .home .content{
-  display: inherit;
-  }
-  .home .block
-  {
-    width: 30%;
-    display: inline-block;
-    margin-bottom: 15px;
-  }
-  .home .block.last{
-  width: 30%;
-  margin-right: 0;
-  border-radius: 15px;
-  }
-  .home .logo-game{
-  width: 20%;
-  }
-  .home .actuality{
-  width: 100%;
-  display: block;
-  margin-bottom: 15px;
-  }
-  .home .article{
-  width: 47%;
-
-  }
-  .home .article img{
-  width: 100%;
-  }
-  .home .clip{
-  margin-bottom: 15px;
-  margin-left: 0px;
-  width: 100%;
-  }
-  .home .shop, .home .shop img{
-  width: 100%;
-  }
-  .home .gamecash .lot{
+  .container .full-container h2{
     width: 100%;
-  }
-  .home .shop{
-    max-width: inherit;
-  }
-  .home .gamecash .more{
-    width: 100%;
-    text-align: center;
-    margin-top: 40px;
-  }
-  .login .containt,
-  .inscription .containt
-  {
-    width: 80%;
-  }
-  .containt h1{
-    font-size: 25px;
-  }
-  .containt .group{
-    padding: 15px 15px;
-  }
-  .login footer .rss,
-  .inscription footer .rss
-  {
-    width: 60%;
-  }
-  .assistance .aside-menu{
-    display: block;
-    width: 100%;
-    max-width: inherit;
-  }
-  .assistance .support{
-    display: block;
-    width: 100%;
-    max-width: inherit;
-  }
-  .assistance .search-box input{
-    margin-top: 15px;
-    width: 100%;
-  }
-  .communaute .center-block{
-    width: 40%;
-  }
-  .communaute .center-block .article img, .communaute .center-block .article .text{
-    width: 100%;
-  }
-  .communaute .streaming{
-      max-width: inherit;
-  }
-  .communaute .streaming img{
-    max-width: inherit;
-    height: 100%;
-  }
-
-}
-@media screen and (max-width: 786px){
-  .communaute .aside-left, .communaute .aside-right{
-    width: 95%;
-    display: block;
-    margin: auto;
-    margin-bottom: 15px;
-  }
-  .communaute .block-center{
-    display: block;
-    width: 90%;
-  }
-  .communaute .aside-right{
-    margin-top: 15px;
-  }
-  
-  .communaute .aside-left .seek{    
-    text-align: center; 
-    position: initial;
-    padding-top: 15px;
-    margin: auto;
-    width: 40%;
-  }
-  .communaute .aside-left .seek .img{
-    width: 40%;
-  }
-  .communaute .streaming{
-    width: 45%;
-    display: table-cell;    
-  }
-  .communaute .stream-info{
-    width: 50%;
-    display: table-cell;
-  } 
-  .communaute .stream-info p{
-    font-size: 15px;
-    padding: 10px 0;
-  }
-  .communaute .stream .view{
-    font-size: 18px;
-  }
-
-}
-
-@media screen and (max-width: 827px){  
-  .container footer{
-    position: inherit !important;
-  }    
-  .header .wrap{
-    text-align: right;
-    padding-right: 5px;
-  }  
-  .bt-container{
-    height: 48px;
-    display: inline-block;
-    padding-top: 3px;
-    margin-right: 25px;
-    float: none;
-    padding: 2px 0px;
-  }
-  .header .dropdown,
-  .header .dropdown
-  {
-    text-align: center;
-    width: 90%;
-  }
-  .navmenu
-  {
-    display: none;
-  }
-  .header .logo{
-    float: left;
-    margin: 10px 10px;
-    max-width: 150px;
-  }
-
-  .header .tag{
-    width: 60%;
-    max-width: inherit;
-  }
-  .header .gametag{
-    margin-right: 5px;
-  }
-  .logo h1{
-   font-size: inherit;
-  } 
-  .assistance .center-block{
-    width: 90%;
-  }
-}
-@media screen and (max-width: 800px){
-  .tchat .rcw-widget-container{
-    width: 314px;
-    bottom: 0 !important;
-
-  }  
-  
-}
-@media screen and (max-width: 640px){
-  .home .article{
-    width: 100%;
-    margin-bottom: 15px;
-  }
-  .home .article img{
-    width: 95%;
-  }
-  .container .join h2{
-    font-size: 23px;
-  }
-  .container .join input{
-    width: 30%;
-  }
-  .container .join a{
-    width: 40%;
-  }
-}
-@media screen and (max-width: 690px){
-  .home .jeux{
-    padding-bottom: 0px;
-  }
-  .home .logo-game{
-    width: 17%;
-  }
-  .home .jeux h2{
-    font-size: 23px;
-    padding-bottom: 0px;
-    padding-top: 15px;
-  }
-  .home .lastblock{
-    padding-top: 0px;
-  }
-  .home .bg-game .logo-game{
-    margin-left: 20px;
-  }
-  .home .community-block{
-    padding: 0px 15px;
-  }
-  .home .shop{
-    max-width: inherit;
-  }
-  .home .join{
-    margin-top: 15px;
-  }
-  .home .community h2, .home .join h2,{
-    font-size: 23px;
-  }
-  .tuto-video video{
-    width: 100%;
-  }
-}
-@media screen and (max-width: 600px){
-  .home .block,
-  .home .block.last{
-    width: 90%;
-  }
-  .footer .logo, .login footer .rss, .inscription footer .rss{
-    max-width: inherit;
-    display: block;
-    width: 100%;
-    text-align: center;
-    margin-bottom: 15px;
-  }
-  .footer .rss, .login footer .rss, .inscription footer .rss{
-    width: 90%;
-    max-width: inherit;
-    margin-bottom: 15px;
-  }
-  .footer .mention, .login footer .mention, .inscription footer .mention{
-    width: 90%;
-    text-align: center;
-  }
-  .container .join .email input{
-    margin: 10px auto; 
-  }
-}
-
-@media screen and (max-width: 500px){  
-  .home .slogan{
-    top: 20%;
-  }
-  .home .community h2{
-    font-size: 23px;
-  }
-
-  .container .join input{
-    display: block;
-    width: 70%;
-    margin: auto;
-  }
-  .home .join a{
-    width: 70%;
-    margin: auto;
-    margin-top: 15px;
-    display: block;
-  }
-  .communaute .streaming, .communaute .stream-info{
-    display: block;
-    margin: auto;
-    width: 100%;
-    text-align: center;
-  }
-  .communaute .stream-container{
-    display: block;
-  }
-}
-@media screen and (max-width: 450px){
-  .home .container{
-     padding: 4em 0em 0em;
-  }
-  .assistance .container{
-    padding-top: 3em;
-  }
-  .header .logo{
-    float: none;
-    clear: both;
-    width: 100%;
-    max-width: inherit;
-    text-align: center;
-    margin: 0 0px 8px;
-  }
-  .header .logo .imglogo{
-    width: 45%;
-  }
-  .bt-container{
-    max-width: inherit;
-    text-align: center;
-    width: 100%;
-  }
-  .header .tag{
-    width: 100%;
-    text-align: center;
-  }
-  .home .gamecash .lot p{
-    display: inine-block;
-    width: 50%;
-    text-align: left;
-    margin-bottom: 15px;
-  }
-  .footer .logo{
-    text-align: center;
-    margin-bottom: 15px;
-    max-width: inherit;
-    width: 90%
-  }
-  .footer .logo a{
-    display: block;
-  }
-  .footer .rss{
-    margin:auto;
-    width: 100%;
-    margin-bottom: 15px;
-  }
-  .footer .rss li{
-    padding-left: 15px;
-  }
-  .footer .mention{
-    width: 100%;
-    text-align: center;
-  }
-}
-@media screen and (max-width: 400px){
-  .home .slogan{
-    top: 9%;
-  }
-  .home p.title{
     font-size: 20px;
   }
-
-}*/
-
+  .container .tableau .state p{
+    max-width: inherit;
+    width: inherit;
+  }
+  .container .flex-container .bt-container{
+    width: 100%;
+    max-width: inherit;
+    text-align: center;
+  }
+  .container .details p{
+    font-size: 12px;
+  }
+  .container .full-container .tabs li{
+    width: 33%;
+  }
+  .container .item-img-info{
+    clear: both;
+    float: none;
+    text-align: center;
+  }
+  .container .item-all-info p{
+    padding-left: 13px;
+    display: block;
+  }
+  .container .salon{
+    right: 5px;
+  }
+  .container .tchat{
+    width: 93%;
+    left: 13px;
+  }
+}

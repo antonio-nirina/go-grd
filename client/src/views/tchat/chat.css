@@ -1,8 +1,9 @@
 .tchat{	
 	position: fixed;
 	background: #2c2c2c;
-	width: 26%;
-	height: 40%;	
+	max-width: 390px;
+	width: 100%;
+	height: 50%;	
 }
 .tchat i{
 	font-size: 20px;
