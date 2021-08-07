@@ -13,7 +13,7 @@ import AvatarDefault from "../assets/image/game-tag.png"
 import {RootState} from "../reducer"
 
 const User : React.FC = function(props:any) {
-	const userConnectedRedux 		= useSelector((state:RootState) => state.userConnected)
+	const userConnectedRedux = useSelector((state:RootState) => state.userConnected)
 	const [users, setUsers] = useState<any>([])
 
 	const {loading,error,data} 	= useQuery(GET_ALL_USER, {
