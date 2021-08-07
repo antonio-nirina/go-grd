@@ -153,7 +153,7 @@ const ListTournament : React.FC = function(props:any) {
 								}
 							</div>
 						</div>
-						<Pagination records={tournament[0].records} />
+						<Pagination records={tournament.length > 0 ? tournament[0].records : 0} />
 					</div>
 				</div>
 			</div>

@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {useQuery} from "@apollo/client"
 import {faSort, faSearch} from "@fortawesome/free-solid-svg-icons"
 import { useSelector } from "react-redux"
+// import Popup from "reactjs-popup"
 
 import {GET_ALL_USER} from "../gql/user/query"
 import Pagination from "../common/pagination"
@@ -19,7 +20,7 @@ const User : React.FC = function(props:any) {
 		variables: {
 			idUserConnected:userConnectedRedux.user.uid,
 			limit:5,
-			pageNumber:2
+			pageNumber:1
 		},
 	})
 
@@ -117,7 +118,7 @@ const User : React.FC = function(props:any) {
 								}
 							</div>
 						</div>
-						<Pagination records={11} />
+						<Pagination records={users.length > 0 ? users[0].records : 0} />
 					</div>
 				</div>
 			</div>
