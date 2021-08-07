@@ -19,9 +19,11 @@ const Tournament: React.FC = function() {
 			<div className="full-container">
 				<h1>Liste des tournois disponibles</h1>
 				<div className="card">
-					<h2>Tournois en direct (15)</h2>
-					<div className="bt-container">
-						<Link to="#" className="btn bg-red">Voir plus</Link>
+					<div className="flex-container">
+						<h2>Tournois en direct (15)</h2>
+						<div className="bt-container">
+							<Link to="#" className="btn bg-red">Voir plus</Link>
+						</div>
 					</div>
 					<div className="live side">
 						<Link to="/info" title="info">

@@ -34,12 +34,16 @@
 	background: #2c2c2c;
 	padding: 15px;
 }
+.container .tchat{
+	z-index: 99999;
+}
 .tchat{	
 	position: fixed;
 	background: #2c2c2c;
 	right: 53px;
 	bottom: 26px;
-	width: 26%;
+	max-width: 390px;
+	width: 100%;
 	height: 40%;	
 	display: block;
 	border: 1px solid #4a4949;
