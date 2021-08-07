@@ -3,7 +3,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {useQuery} from "@apollo/client"
 import {faSort, faSearch} from "@fortawesome/free-solid-svg-icons"
 import { useSelector } from "react-redux"
-// import Popup from "reactjs-popup"
 
 import {GET_ALL_USER} from "../gql/user/query"
 import Pagination from "../common/pagination"
@@ -31,7 +30,14 @@ const User : React.FC = function(props:any) {
 		}
 
 	},[loading,error,data,props])
-
+	const [showModal, setShowModal] = useState(false)
+	const [showConfirm, setShowConfirm] = useState(false)	
+    const onShowModal = function(){
+        setShowModal(!showModal)
+    }  
+    const onShowConfirm = function(){
+        setShowConfirm(!showConfirm)
+    }  
 	return (
 		<div className="layout-container">
 			<SideBar />
@@ -78,8 +84,7 @@ const User : React.FC = function(props:any) {
 											<p>Ban <i><FontAwesomeIcon icon={faSort} size="lg"/></i></p>
 										</div>
 									</div>
-
-								</div>								
+								</div>																						
 								{
 									users?.map(function(el:any,index:number){
 										return (
@@ -106,8 +111,8 @@ const User : React.FC = function(props:any) {
 												</div>
 												<div className="card-result check">
 													<p>
-														<label className="switch">
-															<input type="checkbox" value=""/>
+														<label htmlFor="ban" className="switch">
+															<input type="checkbox" onChange={onShowModal} id="ban"/>
 															<span className="slider">Oui</span>
 														</label>
 													</p>
@@ -116,6 +121,15 @@ const User : React.FC = function(props:any) {
 										)
 									})
 								}
+							</div>
+							<div className={!showModal ? "popup-modal" :"popup-modal show"} >
+								<div className="popup-container">
+									<div className="popup-title">{!showConfirm ? "Voulez vous bannir " :"Voulez vous annuler le bannissement de "}<span>Antonio</span>?</div>
+									<div className="btn-container confirm">
+										<button className="btn bg-red">Oui</button>
+										<button className="btn bg-white" onClick={onShowModal}>Non</button>
+									</div>
+								</div>
 							</div>
 						</div>
 						<Pagination records={users.length > 0 ? users[0].records : 0} />
