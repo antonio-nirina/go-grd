@@ -113,8 +113,16 @@ const SetRules: React.FC = function() {
 	        					<div className="field">
 		        					<div className="group-input">
 	                                    <form onSubmit={handleSubmit(onSubmit)}>
-	    									<label htmlFor="title-rules">Publication : </label>
-	    									<input type="text" id="title-rules"{...register("title", { required: true })} placeholder="Publication communaute" name="title" />
+	    									<label htmlFor="title-rules">Publication : </label>	    									
+	    									<div className="input-group">
+                                                <input type="text" id="title-rules"{...register("title", { required: true })} placeholder="Publication communaute" name="title" />
+                                                <select id="select-game">
+	                                                <option value="">Selectionner jeux ...</option>
+	                                                <option value="0">COD : Warzone</option>
+	                                                <option value="1">Rocket League</option>
+	                                                <option value="1">Fortnite</option>
+	                                            </select>
+                                            </div>
 	    									<div className="wysiwyg">
 	    										<SunEditor
 	    											placeholder="Publication"
