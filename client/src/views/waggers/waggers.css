@@ -220,17 +220,19 @@ p.item-text-left{
 .profil-join{
 	clear: both;
 }
-.icon-tchat{	
-    background: #2c2c2c;
-    padding: 15px;
-    position: absolute;
-    right:0;
-    bottom: 0;
+.icon-tchat{              
     cursor: pointer;
+    margin-top: 15px;
+    text-align: right;
+    width: 100%;
 }
 .icon-tchat i{
+	background: #2c2c2c;
 	font-size: 24px;
 	color: #7b7b7b;
+	padding: 15px;
+	display: inline-block;
+	width: 52px;	
 }
 .salon-team{
 	cursor: pointer;

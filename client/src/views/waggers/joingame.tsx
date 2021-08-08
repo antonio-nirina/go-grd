@@ -102,6 +102,9 @@ const Joingame: React.FC = function() {
             <div className="icon-tchat" onClick={onShowSalon}>
               <i><FontAwesomeIcon icon={faCommentDots} /></i>
             </div>
+            <div className={!showTchat ? "salon-chat" :"salon-chat show"} >
+              <Chat />
+            </div>
             <div className={!showSalon ? "salon" :"salon show"}>
               <div className="salon-titre">Salon de tchat</div>
               <div className="salon-team" onClick={onShowTchat}>
@@ -109,10 +112,7 @@ const Joingame: React.FC = function() {
                 <p>Wager Apex Legends - <span>3v3...<i><FontAwesomeIcon icon={faCommentDots} size="xs"/></i></span></p>
               </div>
             </div>
-          </div>
-          <div className={!showTchat ? "salon-chat" :"salon-chat show"} >
-            <Chat />
-          </div>
+          </div>          
         </div>
         <div className="clear"></div>        
 				<Join/>

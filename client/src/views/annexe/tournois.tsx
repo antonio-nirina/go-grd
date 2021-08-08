@@ -86,17 +86,19 @@ const Tournois: React.FC = function() {
 						}
 						</h1>
 						<div className="card">
-							<h2>
-								{
-									Translation(userConnectedRedux.user.language).tournament.incoming
-								}
-							</h2>
-							<div className="bt-container">
-								<Link to="#" className="btn bg-red">
+							<div className="flex-container">
+								<h2>
 									{
-										Translation(userConnectedRedux.user.language).tournament.seemore
+										Translation(userConnectedRedux.user.language).tournament.incoming
 									}
-								</Link>
+								</h2>
+								<div className="bt-container">
+									<Link to="#" className="btn bg-red">
+										{
+											Translation(userConnectedRedux.user.language).tournament.seemore
+										}
+									</Link>
+								</div>
 							</div>
 							<div className="flex-upcoming">
 							{

@@ -4,7 +4,9 @@ body{
 	font-family: 'quicksand regular';
 	font-size: 14px;
 }
-
+.main-content{
+	position: relative;
+}
 .d-md-inline-block{
 	position: relative;
 	padding-right: 6px;
@@ -726,4 +728,43 @@ label[for="img-game"]
 }
 .check .switch{
 	position: relative
+}
+.popup-modal{
+	position: fixed;
+	top: 0;
+    text-align: center;
+    border-radius: 5px;    
+    width: 84%;
+    text-align: center;
+    height: 100%;    
+    z-index: 2;
+    display: none;
+}
+.popup-modal.show{
+	display: block;
+}
+.popup-container{
+	max-width: 390px;
+	margin: auto;
+	width: 100%;
+	padding: 15px;
+	background: #000000;
+    border: 1px solid #9c9c9e;
+    position: relative;
+    top: 50%;
+    border-radius: 15px;
+}
+.popup-container span{
+	color: #00ffff;
+}
+.btn-container{
+	margin-top: 15px;
+}
+.btn-container .btn{
+	margin-right: 15px;
+	font-size: 12px;
+}
+
+.d-none{
+	display: none !important;
 }

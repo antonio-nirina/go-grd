@@ -75,11 +75,11 @@ func (c *driverRepository) FindOneUserByUid(objectId primitive.ObjectID) (entity
 }
 
 func (c *driverRepository) FindAllUser(pageNumber int64,limit int64) ([]entity.User, error) {
-	var skp int64 
-	skp = (pageNumber - 1) * limit
+	//var skp int64 
+	//skp = (pageNumber - 1) * limit
 	var collection = c.client.Database("grd_database").Collection("users")
 	var results []entity.User
-	cur, err := collection.Find(context.TODO(), bson.D{{}},options.Find().SetLimit(limit).SetSkip(skp).SetSort(bson.M{"_id": -1}))
+	cur, err := collection.Find(context.TODO(), bson.D{{}},options.Find().SetLimit(limit).SetSkip(pageNumber).SetSort(bson.M{"_id": -1}))
 
 	if err != nil {
 		return nil, err

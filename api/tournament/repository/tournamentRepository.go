@@ -85,11 +85,9 @@ func (c *DriverRepository) FindAllTournamentRepo(pageNumber int64,limit int64) (
 }
 
 func (c *DriverRepository) FindTournamentGameRepo(pageNumber int64,limit int64,game primitive.ObjectID) ([]entity.Tournament, error) {
-	var skp int64 
-	skp = (pageNumber - 1) * limit
 	var collection = c.client.Database("grd_database").Collection("tournament")
 	var results []entity.Tournament
-	cur, err := collection.Find(context.TODO(), bson.D{{"game.uid", game}},options.Find().SetLimit(limit).SetSkip(skp).SetSort(bson.M{"_id": -1}))
+	cur, err := collection.Find(context.TODO(), bson.D{{"game.uid", game}},options.Find().SetLimit(limit).SetSkip(pageNumber).SetSort(bson.M{"_id": -1}))
 
 	if err != nil {
 		return nil, err

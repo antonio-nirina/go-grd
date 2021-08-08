@@ -106,10 +106,7 @@ const Profil: React.FC = function() {
 		      					<div className="cell">
 		      						<strong>
 		      						{
-			      						Object.keys(userConnectedRedux.user).length > 0 ?
-										Translation(userConnectedRedux.user.language).profil.platform
-										:
-										Translation("fr").profil.platform
+			      						Translation(userConnectedRedux.user.language).profil.platform
 									}
 		      						</strong>
 		      						<p><span>Playstation</span></p>
@@ -117,19 +114,13 @@ const Profil: React.FC = function() {
 		      					<div className="cell">
 		      						<strong>
 		      						{
-		      							Object.keys(userConnectedRedux.user).length > 0 ?
-										Translation(userConnectedRedux.user.language).profil.server
-										:
-										Translation("fr").profil.server
+		      							Translation(userConnectedRedux.user.language).profil.server
 									}
 									</strong>
 		      						<p>
 		      							<span>
 		      							{
-		      								Object.keys(userConnectedRedux.user).length > 0 ?
-											Translation(userConnectedRedux.user.language).profil.asia
-											:
-											Translation("fr").profil.asia
+		      								Translation(userConnectedRedux.user.language).profil.asia
 										}
 										</span>
 									</p>
@@ -140,15 +131,9 @@ const Profil: React.FC = function() {
 		      					</div>
 		      					<div className="cell">
 		      						<strong>{
-		      								Object.keys(userConnectedRedux.user).length > 0 ?
-											Translation(userConnectedRedux.user.language).profil.exp
-											:
-											Translation("fr").profil.exp
+		      								Translation(userConnectedRedux.user.language).profil.exp
 										}</strong>
-		      						<p><span>6 {Object.keys(userConnectedRedux.user).length > 0 ?
-											Translation(userConnectedRedux.user.language).profil.hours
-											:
-											Translation("fr").profil.hours}</span></p>
+		      						<p><span>6 {Translation(userConnectedRedux.user.language).profil.hours}</span></p>
 		      					</div>
 		      				</div>
 		      			</div>
@@ -183,10 +168,7 @@ const Profil: React.FC = function() {
 		      	<AccountGame />
 
 	      		<div className="my-teams" id="myteams">
-	      			<h2>{Object.keys(userConnectedRedux.user).length > 0 ?
-						Translation(userConnectedRedux.user.language).profil.team
-						:
-						Translation("fr").profil.team}</h2>
+	      			<h2>{Translation(userConnectedRedux.user.language).profil.team}</h2>
 	      			<div className="team-mate">
 	      				<div className="team-bloc">
 	      					<div className="team-banniere">
@@ -197,35 +179,19 @@ const Profil: React.FC = function() {
 	      							<img src="https://i.ibb.co/dQPw2Vd/teamlogo.png" alt="teamlogo" width="75"/>
 	      						</div>
       							<div className="team-name">
-      								<p>{Object.keys(userConnectedRedux.user).length > 0 ?
-									Translation(userConnectedRedux.user.language).profil.teamName
-									:
-									Translation("fr").profil.teamName} : </p>
+      								<p>{Translation(userConnectedRedux.user.language).profil.teamName} : </p>
       								<p>#Tag</p>
-      								<p>
-      								{Object.keys(userConnectedRedux.user).length > 0 ?
-									Translation(userConnectedRedux.user.language).profil.create
-									:
-									Translation("fr").profil.create} : 05/03/2020</p>
+      								<p>{Translation(userConnectedRedux.user.language).profil.create}</p>
 
-      								<p>{Object.keys(userConnectedRedux.user).length > 0 ?
-									Translation(userConnectedRedux.user.language).profil.owner
-									:
-									Translation("fr").profil.owner} : </p>
+      								<p>{Translation(userConnectedRedux.user.language).profil.owner} : </p>
 
-      								<p>1 {Object.keys(userConnectedRedux.user).length > 0 ?
-									Translation(userConnectedRedux.user.language).profil.gamer
-									:
-									Translation("fr").profil.gamer}</p>
+      								<p>1 {Translation(userConnectedRedux.user.language).profil.gamer}</p>
       							</div>
 	      					</div>
 	      				</div>
 	      				<div className="bt-game-container">
 	    					<Popup
-							    trigger={<button className="btn bg-red"> {Object.keys(userConnectedRedux.user).length > 0 ?
-									Translation(userConnectedRedux.user.language).profil.createTeam
-									:
-									Translation("fr").profil.createTeam} </button>}
+							    trigger={<button className="btn bg-red">{Translation(userConnectedRedux.user.language).profil.createTeam} </button>}
 							    modal
 							    nested
   							>
@@ -234,10 +200,7 @@ const Profil: React.FC = function() {
 						        <button className="close" onClick={close}>
 						          &times;
 						        </button>
-						        <div className="header"> <h3>{Object.keys(userConnectedRedux.user).length > 0 ?
-									Translation(userConnectedRedux.user.language).profil.addTeam
-									:
-									Translation("fr").profil.addTeam}</h3></div>
+						        <div className="header"> <h3>{Translation(userConnectedRedux.user.language).profil.addTeam}</h3></div>
 									<div className="uploadLogoteam">
 										<div className="bg-team">
 											<img src="https://i.ibb.co/C59KCSd/team-mate.png" className="imgresp" alt="" />
@@ -253,22 +216,12 @@ const Profil: React.FC = function() {
 							        <div className="content set-team">
 							          {' '}
 										<div className="set-team">
-											<input type="text" placeholder={Object.keys(userConnectedRedux.user).length > 0 ?
-									Translation(userConnectedRedux.user.language).profil.teamName
-									:
-									Translation("fr").profil.teamName} />
-											<input type="text" placeholder={Object.keys(userConnectedRedux.user).length > 0 ?
-									Translation(userConnectedRedux.user.language).profil.tagTeam
-									:
-									Translation("fr").profil.tagTeam} />
+											<input type="text" placeholder={Translation(userConnectedRedux.user.language).profil.teamName} />
+											<input type="text" placeholder={Translation(userConnectedRedux.user.language).profil.tagTeam} />
 										</div>
 							        </div>
 						        	<div className="actions">
-							          	<button className="btn bg-red">{ Object.keys(userConnectedRedux.user).length > 0 ?
-									Translation(userConnectedRedux.user.language).profil.createTeam
-									:
-									Translation("fr").profil.createTeam} </button>
-
+							          	<button className="btn bg-red">{Translation(userConnectedRedux.user.language).profil.createTeam}</button>
 						        	</div>
 						     	</div>
 						    )}
@@ -284,61 +237,34 @@ const Profil: React.FC = function() {
 	      				<div className="item-bloc">
 	      					<div className="img-prem">
 	      						<img src="https://i.ibb.co/xfFSpWL/stat.png" alt="stat" width="75" height="75"/>
-	      						<strong>{Object.keys(userConnectedRedux.user).length > 0 ?
-									Translation(userConnectedRedux.user.language).profil.formation
-									:
-									Translation("fr").profil.formation}</strong>
-	      						<p>{Object.keys(userConnectedRedux.user).length > 0 ?
-									Translation(userConnectedRedux.user.language).profil.training
-									:
-									Translation("fr").profil.training}</p>
+	      						<strong>{Translation(userConnectedRedux.user.language).profil.formation}</strong>
+	      						<p>{Translation(userConnectedRedux.user.language).profil.training}</p>
 	      					</div>
 	      				</div>
 	      				<div className="item-bloc">
 	      					<div className="img-prem">
 	      						<img src="https://i.ibb.co/9brkwNV/seek.png" alt="seek" width="75" height="75" className="ht75"/>
-	      						<strong>{Object.keys(userConnectedRedux.user).length > 0 ?
-									Translation(userConnectedRedux.user.language).profil.pro
-									:
-									Translation("fr").profil.pro}</strong>
-	      						<p>{Object.keys(userConnectedRedux.user).length > 0 ?
-									Translation(userConnectedRedux.user.language).profil.training
-									:
-									Translation("fr").profil.training}</p>
+	      						<strong>{Translation(userConnectedRedux.user.language).profil.pro}</strong>
+	      						<p>{Translation(userConnectedRedux.user.language).profil.training}</p>
 	      					</div>
 	      				</div>
 	      				<div className="item-bloc">
 	      					<div className="img-prem">
 	      						<img src="https://i.ibb.co/x8xPYTT/paiment.png" alt="paiment" width="75" height="75"/>
-	      						<strong>{Object.keys(userConnectedRedux.user).length > 0 ?
-									Translation(userConnectedRedux.user.language).profil.pro
-									:
-									Translation("fr").profil.paiement}</strong>
-	      						<p>{Object.keys(userConnectedRedux.user).length > 0 ?
-									Translation(userConnectedRedux.user.language).profil.training
-									:
-									Translation("fr").profil.training}</p>
+	      						<strong>{Translation(userConnectedRedux.user.language).profil.paiement}</strong>
+	      						<p>{Translation(userConnectedRedux.user.language).profil.training}</p>
 	      					</div>
 	      				</div>
 	      				<div className="item-bloc">
 	      					<div className="img-prem">
 	      						<img src="https://i.ibb.co/xfyrM1J/wallet.png" alt="wallet" width="75" height="75"/>
-	      						<strong>{Object.keys(userConnectedRedux.user).length > 0 ?
-									Translation(userConnectedRedux.user.language).profil.wallet
-									:
-									Translation("fr").profil.wallet}</strong>
-	      						<p>{Object.keys(userConnectedRedux.user).length > 0 ?
-									Translation(userConnectedRedux.user.language).profil.training
-									:
-									Translation("fr").profil.training}</p>
+	      						<strong>{Translation(userConnectedRedux.user.language).profil.wallet}</strong>
+	      						<p>{Translation(userConnectedRedux.user.language).profil.training}</p>
 	      					</div>
 	      				</div>	      				
 	      			</div>
 	      			<div className="btn-container">
-	      				<span  className="btn bg-red">4.99 € / {Object.keys(userConnectedRedux.user).length > 0 ?
-							Translation(userConnectedRedux.user.language).profil.month
-							:
-							Translation("fr").profil.month}
+	      				<span  className="btn bg-red">4.99 € / {Translation(userConnectedRedux.user.language).profil.month}
 						</span>
 	      			</div>
 				</div>

@@ -60,7 +60,7 @@ var NotifResolver 		= notifDelivery.NewNotifResolver(usecaseNotif,usecase)
 
 var cmtyRepository 		= cmtyRepo.NewCmtyRepository(database)
 var cmtyUsecase 		= cmtyHandler.NewUsecaseCmty(cmtyRepository)
-var cmtyResolver 		= cmtyDelivery.NewResolverCmty(cmtyUsecase,usecase)
+var cmtyResolver 		= cmtyDelivery.NewResolverCmty(cmtyUsecase,usecase,usecaseGame)
 
 var partRepository 		= partRepo.NewPartRepository(database)
 var partUsecase 		= partHandler.NewUsecasePart(partRepository)

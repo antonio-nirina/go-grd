@@ -10,27 +10,51 @@ import SideBar from "../header/sidebar"
 import Nav from "../header/nav"
 import AvatarDefault from "../assets/image/game-tag.png"
 import {RootState} from "../reducer"
+import {NUMBER_PER_PAGE} from "../common/constante"
+
+interface Item {
+	item:number
+}
 
 const User : React.FC = function(props:any) {
-	const userConnectedRedux 		= useSelector((state:RootState) => state.userConnected)
+	const userConnectedRedux = useSelector((state:RootState) => state.userConnected)
 	const [users, setUsers] = useState<any>([])
+	const [showModal, setShowModal] = useState(false)
+	const [showConfirm, setShowConfirm] = useState(false)
+	const [showName, setShowName] = useState<string>("")
+	const [isClosed, setIsClosed] = useState<Boolean>(false)
+	const [item, setItem] = useState<Item>({item:1})
 
 	const {loading,error,data} 	= useQuery(GET_ALL_USER, {
 		variables: {
 			idUserConnected:userConnectedRedux.user.uid,
-			limit:5,
-			pageNumber:2
+			limit:NUMBER_PER_PAGE,
+			pageNumber:(item.item)*NUMBER_PER_PAGE - NUMBER_PER_PAGE
 		},
 	})
 
 	useEffect(() => {
 		if(!loading && !error && data) {
-			console.log(data)
 			setUsers(data.GetUsers)
 		}
 
-	},[loading,error,data,props])
+	},[loading,error,data,props,item])
 
+    const onShowModal = function(event:any,isBan=false,username = ""){
+    	console.log("username",username)
+		setShowModal(!isClosed)
+    	setShowName(username)
+    }  
+    const onShowConfirm = function(){
+        setShowConfirm(!showConfirm)
+    }
+    const handleNotAccepted = function() {
+    	setShowName("")
+    	setShowModal(false)
+    }
+    const handleItemsPage = function(item:number) {
+    	setItem({item:item})
+    }
 	return (
 		<div className="layout-container">
 			<SideBar />
@@ -77,8 +101,7 @@ const User : React.FC = function(props:any) {
 											<p>Ban <i><FontAwesomeIcon icon={faSort} size="lg"/></i></p>
 										</div>
 									</div>
-
-								</div>								
+								</div>																						
 								{
 									users?.map(function(el:any,index:number){
 										return (
@@ -105,8 +128,13 @@ const User : React.FC = function(props:any) {
 												</div>
 												<div className="card-result check">
 													<p>
-														<label className="switch">
-															<input type="checkbox" value=""/>
+														<label htmlFor="ban" className="switch">
+															<input
+																type="checkbox"
+																u-tag={el.username}
+																checked={!el.isBanned? false : true}
+																onChange={(e) => onShowModal(e,el.isBanned,el.username)}
+																id="ban"/>
 															<span className="slider">Oui</span>
 														</label>
 													</p>
@@ -116,8 +144,20 @@ const User : React.FC = function(props:any) {
 									})
 								}
 							</div>
+							<div className={!showModal ? "popup-modal" :"popup-modal show"} >
+								<div className="popup-container">
+									<div className="popup-title">{!showConfirm ? "Voulez vous bannir " :"Voulez vous annuler le bannissement de "}<span>{showName}</span>?</div>
+									<div className="btn-container confirm">
+										<button className="btn bg-red">Oui</button>
+										<button className="btn bg-white" onClick={() => handleNotAccepted()}>Non</button>
+									</div>
+								</div>
+							</div>
 						</div>
-						<Pagination records={11} />
+						<Pagination
+							handlePage={handleItemsPage}
+							records={users.length > 0 ? users[0].records : 0}
+						/>
 					</div>
 				</div>
 			</div>

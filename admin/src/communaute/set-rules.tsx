@@ -1,5 +1,5 @@
-import React,{useState} from "react"
-import {useMutation} from "@apollo/client"
+import React,{useState,useEffect} from "react"
+import {useMutation,useQuery} from "@apollo/client"
 import { useForm } from "react-hook-form"
 import SunEditor from 'suneditor-react'
 import {useHistory } from "react-router-dom"
@@ -13,6 +13,7 @@ import SideBar from "../header/sidebar"
 import {RootState} from "../reducer"
 import Nav from "../header/nav"
 import {CREATE_PUBLICATION} from "../gql/cmty/mutation"
+import {GET_ALL_GAMES} from "../gql/games/query"
 
 type Inputs = {
 	title:string
@@ -23,9 +24,12 @@ const MESS_ERR:string = "Taille de l'image est trop petite, vueillez chosir imag
 const SetRules: React.FC = function() {
 	const history = useHistory()
 	const [content, setContent] 		= useState<string>("")
+	const [games, setGames] = useState<any>([])
 	const { register, handleSubmit } 	= useForm<Inputs>()
 	const [createdTournament]  			= useMutation(CREATE_PUBLICATION)
 	const userConnectedRedux 			= useSelector((state:RootState) => state.userConnected)
+
+	const {loading,error,data} 	= useQuery(GET_ALL_GAMES)
 
 	const onSubmit = async function(data:Inputs){
 		const result = await createdTournament({ variables: {
@@ -38,6 +42,13 @@ const SetRules: React.FC = function() {
 			history.push("/admin/communaute")
 		}
 	}
+
+	useEffect(() => {
+		if(!loading && !error && data) {
+			setGames(data.FindAllGame)
+		}
+
+	},[loading,error,data])
 
 	const handleText = function(content: string) {
 		console.log("ccc", content)
@@ -113,8 +124,18 @@ const SetRules: React.FC = function() {
 	        					<div className="field">
 		        					<div className="group-input">
 	                                    <form onSubmit={handleSubmit(onSubmit)}>
-	    									<label htmlFor="title-rules">Publication : </label>
-	    									<input type="text" id="title-rules"{...register("title", { required: true })} placeholder="Publication communaute" name="title" />
+	    									<label htmlFor="title-rules">Publication : </label>	    									
+	    									<div className="input-group">
+                                                <input type="text" id="title-rules"{...register("title", { required: true })} placeholder="Publication communaute" name="title" />
+                                                <select id="select-game">
+	                                                <option value="">Selectionner jeux ...</option>
+	                                                {games?.map(function(el:any,index:number){
+	                                                	return (
+	                                                		<option key={index} value={el.uid}>{el.name}</option>
+                                                		)
+	                                                })}
+	                                            </select>
+                                            </div>
 	    									<div className="wysiwyg">
 	    										<SunEditor
 	    											placeholder="Publication"
