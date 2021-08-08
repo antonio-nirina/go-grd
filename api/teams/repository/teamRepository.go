@@ -57,11 +57,9 @@ func (c *driverRepository) FindTeamRepo(idQuery primitive.ObjectID) (entity.Team
 }
 
 func (c *driverRepository) FindAllTeamRepo(pageNumber int64,limit int64) ([]entity.Team, error) {
-	var skp int64 
-	skp = (pageNumber - 1) * limit
 	var collection = c.client.Database("grd_database").Collection("team")
 	var results []entity.Team
-	cur, err := collection.Find(context.TODO(), bson.D{{}},options.Find().SetLimit(limit).SetSkip(skp).SetSort(bson.M{"_id": -1}))
+	cur, err := collection.Find(context.TODO(), bson.D{{}},options.Find().SetLimit(limit).SetSkip(pageNumber).SetSort(bson.M{"_id": -1}))
 
 	if err != nil {
 		return nil, err

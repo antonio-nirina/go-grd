@@ -764,3 +764,7 @@ label[for="img-game"]
 	margin-right: 15px;
 	font-size: 12px;
 }
+
+.d-none{
+	display: none !important;
+}

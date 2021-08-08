@@ -8,16 +8,22 @@ import {GET_ALL_TOURNAMENT} from "../gql/tournament/query"
 import Pagination from "../common/pagination"
 import SideBar from "../header/sidebar"
 import Nav from "../header/nav"
+import {NUMBER_PER_PAGE} from "../common/constante"
+
+interface Item {
+	item:number
+}
 
 const ListTournament : React.FC = function(props:any) {
 	const [showList, setShowList] = useState<Boolean>(false)
 	const [tournament, setTournament] = useState<any>([])
+	const [item, setItem] = useState<Item>({item:1})
 	//const [limit, setLimit] = useState<Number>(0)
 	//const [pageNumber, setPageNumber] = useState<Number>(0)
 	const {loading,error,data} 	= useQuery(GET_ALL_TOURNAMENT, {
 		variables: {
-			limit:0,
-			pageNumber:0
+			limit:NUMBER_PER_PAGE,
+			pageNumber:(item.item)*NUMBER_PER_PAGE - NUMBER_PER_PAGE
 		},
 	})
 
@@ -34,6 +40,10 @@ const ListTournament : React.FC = function(props:any) {
     const onShow = function(){
 		setShowList(!showList)
 	}
+
+	const handleItemsPage = function(item:number) {
+    	setItem({item:item})
+    }
 
 	return (
 		<div className="layout-container">
@@ -153,7 +163,10 @@ const ListTournament : React.FC = function(props:any) {
 								}
 							</div>
 						</div>
-						<Pagination records={tournament.length > 0 ? tournament[0].records : 0} />
+						<Pagination
+							handlePage={handleItemsPage}
+							records={tournament.length > 0 ? tournament[0].records : 0}
+						/>
 					</div>
 				</div>
 			</div>
@@ -162,3 +175,4 @@ const ListTournament : React.FC = function(props:any) {
 }
 
 export default ListTournament
+

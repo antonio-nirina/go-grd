@@ -7,14 +7,20 @@ import {GET_ALL_TEAMS} from "../gql/team/query"
 import Pagination from "../common/pagination"
 import SideBar from "../header/sidebar"
 import Nav from "../header/nav"
+import {NUMBER_PER_PAGE} from "../common/constante"
+
+interface Item {
+	item:number
+}
 
 const Team : React.FC = function(props:any) {
 	const [team, setTeam] = useState<any>([])
+	const [item, setItem] = useState<Item>({item:1})
 
 	const {loading,error,data} 	= useQuery(GET_ALL_TEAMS, {
 		variables: {
-			limit:0,
-			pageNumber:0
+			limit:NUMBER_PER_PAGE,
+			pageNumber:(item.item)*NUMBER_PER_PAGE - NUMBER_PER_PAGE
 		},
 	})
 
@@ -24,6 +30,10 @@ const Team : React.FC = function(props:any) {
 		}
 
 	},[loading,error,data,props])
+
+	const handleItemsPage = function(item:number) {
+    	setItem({item:item})
+    }
 
 	return (
 		<div className="layout-container">
@@ -102,7 +112,9 @@ const Team : React.FC = function(props:any) {
 								}
 							</div>
 						</div>
-						<Pagination records={team.length > 0 ? team[0].records : 0} />
+						<Pagination
+						handlePage={handleItemsPage}
+						records={team.length > 0 ? team[0].records : 0} />
 					</div>
 				</div>
 			</div>
