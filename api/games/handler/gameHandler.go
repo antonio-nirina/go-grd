@@ -23,7 +23,7 @@ func NewUsecaseGame(r repository.GameRepositoryInterface) UsecaseGameInterface {
 	}
 }
 
-type gameViewModel struct {
+type GameViewModel struct {
 	Uid        string 			 `json:"uid"`
 	Name 	   string             `json:"name"`
 	Image      string             `json:"image,omitempty"`
@@ -65,10 +65,10 @@ func (g *gameUsecase) FindAllGameRepository() (interface{}, error) {
 		return nil, err
 	}
 
-	var res [] gameViewModel
+	var res [] GameViewModel
 
 	for _,val := range result {
-		game := gameViewModel{
+		game := GameViewModel{
 			Uid:val.Uid.Hex(),     
 			Name:val.Name,
 			Image:val.Image,

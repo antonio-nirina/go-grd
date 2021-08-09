@@ -19,7 +19,7 @@ store.subscribe(function() {
 
 function App() {
 	let client = createApolloClient()
-
+	
   	return (
 		<div className="App">
 			<Provider store={store}>
