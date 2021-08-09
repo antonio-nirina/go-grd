@@ -1,5 +1,7 @@
-import React,{useState,useEffect} from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import React,{useState,useEffect} from "react"
+import Loader from "react-loader-spinner"
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import {useQuery} from "@apollo/client"
 import {faSort, faSearch} from "@fortawesome/free-solid-svg-icons"
 import { useSelector } from "react-redux"
@@ -79,6 +81,12 @@ const User : React.FC = function(props:any) {
 						</div>
 						<div className="auto-scroll">
 							<div className="sm-width">
+								<div className="loader-spinner" style={{"display": "none"}}>
+									<Loader
+								        type="Oval"							       
+								        color="#dd0000"							        
+								    />
+								</div>
 								<div className="body-card">
 									<div className="card-title">
 										<p></p>
@@ -101,7 +109,7 @@ const User : React.FC = function(props:any) {
 											<p>Ban <i><FontAwesomeIcon icon={faSort} size="lg"/></i></p>
 										</div>
 									</div>
-								</div>																						
+								</div>																									
 								{
 									users?.map(function(el:any,index:number){
 										return (
@@ -143,7 +151,7 @@ const User : React.FC = function(props:any) {
 										)
 									})
 								}
-							</div>
+							</div>							
 							<div className={!showModal ? "popup-modal" :"popup-modal show"} >
 								<div className="popup-container">
 									<div className="popup-title">{!showConfirm ? "Voulez vous bannir " :"Voulez vous annuler le bannissement de "}<span>{showName}</span>?</div>
