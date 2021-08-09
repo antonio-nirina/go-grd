@@ -7,7 +7,6 @@ export const GET_ALL_GAMES = gql`
 		image
 		logo
 		notes
-		popularity
 		slug
 		name
 	}

@@ -18,6 +18,9 @@ func createPublication() *graphql.Field {
 			},	
 			"content": &graphql.ArgumentConfig{
 				Type: graphql.String,
+			},
+			"uidGame": &graphql.ArgumentConfig{
+				Type: graphql.String,
 			},			
 		},			
 		Resolve: cmtyResolver.CreatePublicationResolve,

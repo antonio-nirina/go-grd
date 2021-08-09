@@ -132,7 +132,9 @@ const User : React.FC = function(props:any) {
 															<input
 																type="checkbox"
 																u-tag={el.username}
-																checked={!el.isBanned? false : true} onChange={(e) => onShowModal(e,el.isBanned,el.username)} id="ban"/>
+																checked={!el.isBanned? false : true}
+																onChange={(e) => onShowModal(e,el.isBanned,el.username)}
+																id="ban"/>
 															<span className="slider">Oui</span>
 														</label>
 													</p>

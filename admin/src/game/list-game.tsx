@@ -1,20 +1,29 @@
-import React from 'react'
+import React,{useState,useEffect} from 'react'
 import { Link } from "react-router-dom"
 import {useHistory } from "react-router-dom"
+import {useQuery} from "@apollo/client"
 
 import SideBar from "../header/sidebar"
 import Nav from "../header/nav"
-import Rocketleague from "../assets/image/rocketleague.png"
-import ApexLegends from "../assets/image/apex-legends.png"
-
+import {GET_ALL_GAMES} from "../gql/games/query"
 
 const ListGame : React.FC = function() {
 	const history = useHistory()
+	const [games, setGames] = useState<any>([])
 	//const [showList, setShowList] = useState<Boolean>(false)
 
     //const onShow = function(){
 	//	setShowList(!showList)
 	//}
+
+	const {loading,error,data} 	= useQuery(GET_ALL_GAMES)
+
+	useEffect(() => {
+		if(!loading && !error && data) {
+			setGames(data.FindAllGame)
+		}
+
+	},[loading,error,data])
 
 	return (
 	<div className="layout-container">
@@ -36,30 +45,17 @@ const ListGame : React.FC = function() {
 	    					</button>
 		    			</div>	    		
 			    		<div className="dashboard list-game">
-			    			<Link to ="#" className="grid league-board">	    				
-			    				<img src="https://i.ibb.co/Vw39G5b/championship-rl.jpg" alt="#" />
-			    				<span className="logo-game"><img src={Rocketleague} alt="" /></span>
-			    				<span className="grid-title">Rocket League :</span>
-			    				<span className="grid-desc">Genre : course</span>
-			    			</Link>
-			    			<Link to ="#" className="grid tournament-board">
-			    				<img src="https://i.ibb.co/TKD3yZT/apex-legends.webp" alt="#" />
-			    				<span className="logo-game"><img src={ApexLegends} alt="" /></span>
-			    				<span className="grid-title">Apex legends</span>
-			    				<span className="grid-desc">Genre : FPS</span>
-			    			</Link>
-			    			<Link to="#" className="grid wagger-board">
-			    				<img src="https://i.ibb.co/YQgvJpM/championship.jpg" alt="#" />
-			    				<span className="logo-game"><img src={Rocketleague} alt="" /></span>
-			    				<span className="grid-title" >Call of Duty</span>
-			    				<span className="grid-desc">Genre : FPS</span>
-			    			</Link>
-			    			<Link to="#" className="grid community-board">
-			    				<img src="https://i.ibb.co/YQgvJpM/championship.jpg" alt="#" />
-			    				<span className="logo-game"><img src={Rocketleague} alt="" /></span>
-			    				<span className="grid-title">Fifa 2021</span>
-			    				<span className="grid-desc">Genre : Sport</span>
-			    			</Link>
+			    			{games?.map(function(el:any,index:number){
+                            	return (
+                            		<Link key={index} to ="#" className="grid league-board">
+					    				<img src={el.image} alt="#" />
+					    				<span className="logo-game"><img src={el.logo} alt="" /></span>
+					    				<span className="grid-title">{el.name} :</span>
+					    			</Link>
+                        		)
+                            })}
+
+
 			    		</div>
 			    	</div>
 		    	</div>
