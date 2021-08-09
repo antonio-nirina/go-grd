@@ -478,10 +478,6 @@ div#profile-name{
 	align-self: center;
 	border: 1px solid #dd0000;
 }
-.create-tournament-game button:first-child{
-	color: #ffffff;
-	background: #9c9c9e;
-}
 .setting-tournament{
 	clear: both;
 }
@@ -623,6 +619,7 @@ form .se-btn.se-btn-select.se-btn-tool-font.se-tooltip.on{
 }
 .grid{
 	width: 24%;
+	margin-bottom: 15px;
 	display: inline-block;
 	margin-right: 10px;
 	border: 1px solid #9c9c9e;
