@@ -24,6 +24,7 @@ const MESS_ERR:string = "Taille de l'image est trop petite, vueillez chosir imag
 const SetRules: React.FC = function() {
 	const history = useHistory()
 	const [content, setContent] 		= useState<string>("")
+	const [uidGame, setUidGame] 		= useState<string>("")
 	const [games, setGames] = useState<any>([])
 	const { register, handleSubmit } 	= useForm<Inputs>()
 	const [createdTournament]  			= useMutation(CREATE_PUBLICATION)
@@ -36,6 +37,7 @@ const SetRules: React.FC = function() {
 			uidUser:userConnectedRedux.user.uid,
 			title:data.title,
 			content:content,
+			uidGame:uidGame
 		} })
 		if (result.data.createPublication) {
 			setContent("")
@@ -61,6 +63,10 @@ const SetRules: React.FC = function() {
 	    } catch (err) {
 	        uploadHandler(err.toString())
 	    }
+	}
+
+	const handleGame = function(event:any){
+		setUidGame(event.target.value)
 	}
 
 	const resizeImage = function(files:Array<File>, uploadHandler:Function) {
@@ -127,7 +133,7 @@ const SetRules: React.FC = function() {
 	    									<label htmlFor="title-rules">Publication : </label>	    									
 	    									<div className="input-group">
                                                 <input type="text" id="title-rules"{...register("title", { required: true })} placeholder="Publication communaute" name="title" />
-                                                <select id="select-game">
+                                                <select id="select-game" onChange={handleGame}>
 	                                                <option value="">Selectionner jeux ...</option>
 	                                                {games?.map(function(el:any,index:number){
 	                                                	return (

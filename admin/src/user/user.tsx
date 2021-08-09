@@ -25,6 +25,7 @@ const User : React.FC = function(props:any) {
 	const [showConfirm, setShowConfirm] = useState(false)
 	const [showName, setShowName] = useState<string>("")
 	const [isClosed, setIsClosed] = useState<Boolean>(false)
+	const [isLoader, setIsLoader] = useState<Boolean>(true)
 	const [item, setItem] = useState<Item>({item:1})
 
 	const {loading,error,data} 	= useQuery(GET_ALL_USER, {
@@ -37,10 +38,11 @@ const User : React.FC = function(props:any) {
 
 	useEffect(() => {
 		if(!loading && !error && data) {
+			setIsLoader(false)
 			setUsers(data.GetUsers)
 		}
 
-	},[loading,error,data,props,item])
+	},[loading,error,data,props,item,isLoader])
 
     const onShowModal = function(event:any,isBan=false,username = ""){
     	console.log("username",username)
@@ -55,6 +57,7 @@ const User : React.FC = function(props:any) {
     	setShowModal(false)
     }
     const handleItemsPage = function(item:number) {
+    	setIsLoader(true)
     	setItem({item:item})
     }
 	return (
@@ -81,7 +84,7 @@ const User : React.FC = function(props:any) {
 						</div>
 						<div className="auto-scroll">
 							<div className="sm-width">
-								<div className="loader-spinner" style={{"display": "none"}}>
+								<div className={isLoader ? "loader-spinner":"d-none"}>
 									<Loader
 								        type="Oval"							       
 								        color="#dd0000"							        

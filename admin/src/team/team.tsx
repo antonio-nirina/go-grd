@@ -1,5 +1,6 @@
 import React,{useState,useEffect} from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import Loader from "react-loader-spinner"
 import {useQuery} from "@apollo/client"
 import { faSort, faSearch} from "@fortawesome/free-solid-svg-icons"
 
@@ -16,6 +17,7 @@ interface Item {
 const Team : React.FC = function(props:any) {
 	const [team, setTeam] = useState<any>([])
 	const [item, setItem] = useState<Item>({item:1})
+	const [isLoader, setIsLoader] = useState<Boolean>(true)
 
 	const {loading,error,data} 	= useQuery(GET_ALL_TEAMS, {
 		variables: {
@@ -26,12 +28,14 @@ const Team : React.FC = function(props:any) {
 
 	useEffect(() => {
 		if(!loading && !error && data) {
+			setIsLoader(false)
 			setTeam(data.FindAllTeam)
 		}
 
-	},[loading,error,data,props])
+	},[loading,error,data,props,isLoader])
 
 	const handleItemsPage = function(item:number) {
+		setIsLoader(true)
     	setItem({item:item})
     }
 
@@ -59,6 +63,12 @@ const Team : React.FC = function(props:any) {
 						</div>
 						<div className="auto-scroll">
 							<div className="sm-width">
+							<div className={isLoader ? "loader-spinner":"d-none"}>
+									<Loader
+								        type="Oval"
+								        color="#dd0000"
+								    />
+								</div>
 								<div className="body-card">
 									<div className="card-title">
 										<div className="card-title">

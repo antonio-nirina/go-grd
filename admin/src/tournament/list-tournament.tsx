@@ -1,5 +1,6 @@
 import React,{useState,useEffect} from 'react'
 import { Link } from "react-router-dom"
+import Loader from "react-loader-spinner"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {useQuery} from "@apollo/client"
 import { faPlus, faSort, faChevronUp, faChevronDown, faSearch} from "@fortawesome/free-solid-svg-icons"
@@ -18,6 +19,8 @@ const ListTournament : React.FC = function(props:any) {
 	const [showList, setShowList] = useState<Boolean>(false)
 	const [tournament, setTournament] = useState<any>([])
 	const [item, setItem] = useState<Item>({item:1})
+	const [isLoader, setIsLoader] = useState<Boolean>(true)
+
 	//const [limit, setLimit] = useState<Number>(0)
 	//const [pageNumber, setPageNumber] = useState<Number>(0)
 	const {loading,error,data} 	= useQuery(GET_ALL_TOURNAMENT, {
@@ -30,18 +33,20 @@ const ListTournament : React.FC = function(props:any) {
 	useEffect(() => {
 		//let init = true
 		if(!loading && !error && data) {
+			setIsLoader(false)
 			setTournament(data.FindAllTournament)
 		}
 
 		// return () => init = false
 
-	},[loading,error,data,props])
+	},[loading,error,data,props,isLoader])
 
     const onShow = function(){
 		setShowList(!showList)
 	}
 
 	const handleItemsPage = function(item:number) {
+		setIsLoader(true)
     	setItem({item:item})
     }
 
@@ -90,6 +95,12 @@ const ListTournament : React.FC = function(props:any) {
 						</div>
 						<div className="auto-scroll">
 							<div className="sm-width">
+								<div className={isLoader ? "loader-spinner":"d-none"}>
+									<Loader
+								        type="Oval"
+								        color="#dd0000"
+								    />
+								</div>
 								<div className="body-card">
 									<div className="card-title">
 										<div className="card-title">
