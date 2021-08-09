@@ -173,6 +173,7 @@ h1{
 .auto-scroll{
   height: 60vh;
   overflow: auto;
+  position: relative;
 }
 /********** Fonts *********/
 @font-face {
