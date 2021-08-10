@@ -49,7 +49,7 @@ const Team : React.FC = function(props:any) {
         		</nav>
 				<div className="main-content">
 					<div className="body-content">
-						<div className="column">
+						<div className="column team">
 							<div className="response-filter">
 								<div className="response-filter-search">
 									<span className="ant-input-affix-wrapper">

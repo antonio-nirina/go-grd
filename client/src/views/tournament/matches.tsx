@@ -57,6 +57,15 @@ const Matches: React.FC = function(props:any) {
 						{isOpen ? Translation(userConnectedRedux.user.language).tournament.open : Translation(userConnectedRedux.user.language).tournament.close }
 					</span></p>
 				</div>
+				<div className="tabs">
+					<ul>
+						<li><Link to={`/info?uid=${params.get('uid')}`}>Info</Link></li>
+						<li><Link to={`/matches?uid=${params.get('uid')}`} className="active">Match</Link></li>
+						<li><Link to={`/rules?uid=${params.get('uid')}`}>
+							{Translation(userConnectedRedux.user.language).tournament.rules}
+						</Link></li>
+					</ul>
+				</div>
 				<div className="ban">
 					<div className="versus-container">
 						<div className="team">
@@ -82,16 +91,7 @@ const Matches: React.FC = function(props:any) {
 					</div>
 				</div>
 				
-				<div className="banniere"></div>
-				<div className="tabs">
-					<ul>
-						<li><Link to={`/info?uid=${params.get('uid')}`}>Info</Link></li>
-						<li><Link to={`/matches?uid=${params.get('uid')}`} className="active">Match</Link></li>
-						<li><Link to={`/rules?uid=${params.get('uid')}`}>
-							{Translation(userConnectedRedux.user.language).tournament.rules}
-						</Link></li>
-					</ul>
-				</div>				
+				<div className="banniere"></div>							
 				<div className="matches">
 					<h2>Horaires</h2>
 					<p><strong>{Translation(userConnectedRedux.user.language).tournament.starttimes}</strong></p>
