@@ -358,6 +358,7 @@ div#profile-name{
 	padding: 9px;
 	right: 10px;
 	border-radius: 5px;
+	z-index: 9999
 }
 .show-status p{
 	font-size: 14px;
@@ -698,14 +699,14 @@ label[for="img-game"]
 	margin-right: 0;
 }
 /******************USER********************/
-.user .response-filter{
+.user .response-filter, .team .response-filter{
 	display: block;
 	background: none;	
 }
-.user .response-filter-search{
+.user .response-filter-search, .team .response-filter-search{
 	border-right: none;
 }
-.user .response-filter-search input{
+.user .response-filter-search input, .team .response-filter-search input{
 	padding: 10px;
 	border-radius: 10px;
 	width: 26%;
