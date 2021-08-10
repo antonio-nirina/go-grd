@@ -48,10 +48,14 @@ const User : React.FC = function(props:any) {
     	console.log("username",username)
 		setShowModal(!isClosed)
     	setShowName(username)
-    }  
+    }
+
     const onShowConfirm = function(){
+    	// verif
+    	setIsClosed(true)
         setShowConfirm(!showConfirm)
     }
+
     const handleNotAccepted = function() {
     	setShowName("")
     	setShowModal(false)
@@ -159,8 +163,8 @@ const User : React.FC = function(props:any) {
 								<div className="popup-container">
 									<div className="popup-title">{!showConfirm ? "Voulez vous bannir " :"Voulez vous annuler le bannissement de "}<span>{showName}</span>?</div>
 									<div className="btn-container confirm">
-										<button className="btn bg-red">Oui</button>
-										<button className="btn bg-white" onClick={() => handleNotAccepted()}>Non</button>
+										<button className="btn bg-red" onClick={() => handleNotAccepted()}>Oui</button>
+										<button className="btn bg-white" onClick={onShowConfirm}>Non</button>
 									</div>
 								</div>
 							</div>
