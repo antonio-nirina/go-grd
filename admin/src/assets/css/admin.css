@@ -686,7 +686,10 @@ label[for="img-game"]
     margin: auto;
 }
 .column div.create-game{
-    width: 100%;
+    width: 100%;    
+}
+.create-game button svg{
+	margin-right: 5px;
 }
 /***************set home page *******************/
 .column-home .flex-group{
@@ -773,7 +776,7 @@ label[for="img-game"]
 	background: #3d3d40;
 	height: 75%;
 	z-index: 999;
-	border-radius: 15px;	
+	border-radius: 15px;		
 }
 .loader-spinner div{
 	position: relative;
@@ -782,4 +785,29 @@ label[for="img-game"]
 .loader-spinner svg{
 	width: 30px;
 	height: 30px;
+}
+/************assistance**************/
+.assistance i{
+	font-size: 9px;
+	display: inline-block;
+	vertical-align: top;
+}
+.assistance .under-link, .assistance .link-master {
+	margin-top: 15px;
+}
+.assistance .btn-container{
+	text-align: right;
+}
+.assistance .clear button{	
+	float: none !important;
+}
+.assistance h1{
+	float: left;
+}
+.assistance .create-game{
+	float: right;
+}
+.assistance .group-input{
+	clear: both;
+	float: none;
 }
