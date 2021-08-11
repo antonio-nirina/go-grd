@@ -19,6 +19,8 @@ const Pagination = function({records,handlePage}:TypeRecords) {
 	const [currentPage, setCurrentPage] = useState<number>(1)
 	const [isActivedNext, setIsActivedNext] = useState<Boolean>(false)
 
+	const [isActiv, setIsActive] = useState<number>(1)
+
 	useEffect(()=>{
 		if(records) {
 			let array:Array<number> = []
@@ -39,9 +41,11 @@ const Pagination = function({records,handlePage}:TypeRecords) {
 		}
 
 		handlePage(item)
+		setIsActive(item)
 	}
 
 	const handlePrevious = function() {
+		setIsActive(currentPage)
 		if(currentPage > 1) {
 			setCurrentPage(currentPage - 1)
 			handlePage(currentPage - 1)
@@ -50,7 +54,8 @@ const Pagination = function({records,handlePage}:TypeRecords) {
 	}
 
 	const handleNext = function() {
-		if(currentPage  < Math.ceil(records/NUMBER_PER_PAGE) && currentPage !== 1) {
+		setIsActive(currentPage)
+		if(currentPage  < Math.ceil(records/NUMBER_PER_PAGE)) {
 			setCurrentPage(currentPage + 1)
 			handlePage(currentPage + 1)
 			if(currentPage === Math.ceil(records/NUMBER_PER_PAGE) - 1) setIsActivedNext(true)
@@ -66,7 +71,7 @@ const Pagination = function({records,handlePage}:TypeRecords) {
 					{
 						pages.map(function(el:number,index:number) {
 							return (
-								<span key={index} style={style} onClick={()=> handleClick(el)}>{el}</span>
+								<span key={index} className={isActiv === el ? "active" : ""} style={style} onClick={()=> handleClick(el)}>{el}</span>
 							)
 						})
 					}
