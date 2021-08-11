@@ -1,5 +1,7 @@
-import React,{useState,useEffect} from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import React,{useState,useEffect} from "react"
+import Loader from "react-loader-spinner"
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import {useQuery} from "@apollo/client"
 import {faSort, faSearch} from "@fortawesome/free-solid-svg-icons"
 import { useSelector } from "react-redux"
@@ -23,6 +25,7 @@ const User : React.FC = function(props:any) {
 	const [showConfirm, setShowConfirm] = useState(false)
 	const [showName, setShowName] = useState<string>("")
 	const [isClosed, setIsClosed] = useState<Boolean>(false)
+	const [isLoader, setIsLoader] = useState<Boolean>(true)
 	const [item, setItem] = useState<Item>({item:1})
 
 	const {loading,error,data} 	= useQuery(GET_ALL_USER, {
@@ -35,24 +38,30 @@ const User : React.FC = function(props:any) {
 
 	useEffect(() => {
 		if(!loading && !error && data) {
+			setIsLoader(false)
 			setUsers(data.GetUsers)
 		}
 
-	},[loading,error,data,props,item])
+	},[loading,error,data,props,item,isLoader])
 
     const onShowModal = function(event:any,isBan=false,username = ""){
     	console.log("username",username)
 		setShowModal(!isClosed)
     	setShowName(username)
-    }  
+    }
+
     const onShowConfirm = function(){
+    	// verif
+    	setIsClosed(true)
         setShowConfirm(!showConfirm)
     }
+
     const handleNotAccepted = function() {
     	setShowName("")
     	setShowModal(false)
     }
     const handleItemsPage = function(item:number) {
+    	setIsLoader(true)
     	setItem({item:item})
     }
 	return (
@@ -79,6 +88,12 @@ const User : React.FC = function(props:any) {
 						</div>
 						<div className="auto-scroll">
 							<div className="sm-width">
+								<div className={isLoader ? "loader-spinner":"d-none"}>
+									<Loader
+								        type="Oval"							       
+								        color="#dd0000"							        
+								    />
+								</div>
 								<div className="body-card">
 									<div className="card-title">
 										<p></p>
@@ -101,7 +116,7 @@ const User : React.FC = function(props:any) {
 											<p>Ban <i><FontAwesomeIcon icon={faSort} size="lg"/></i></p>
 										</div>
 									</div>
-								</div>																						
+								</div>																									
 								{
 									users?.map(function(el:any,index:number){
 										return (
@@ -143,13 +158,13 @@ const User : React.FC = function(props:any) {
 										)
 									})
 								}
-							</div>
+							</div>							
 							<div className={!showModal ? "popup-modal" :"popup-modal show"} >
 								<div className="popup-container">
 									<div className="popup-title">{!showConfirm ? "Voulez vous bannir " :"Voulez vous annuler le bannissement de "}<span>{showName}</span>?</div>
 									<div className="btn-container confirm">
-										<button className="btn bg-red">Oui</button>
-										<button className="btn bg-white" onClick={() => handleNotAccepted()}>Non</button>
+										<button className="btn bg-red" onClick={() => handleNotAccepted()}>Oui</button>
+										<button className="btn bg-white" onClick={onShowConfirm}>Non</button>
 									</div>
 								</div>
 							</div>

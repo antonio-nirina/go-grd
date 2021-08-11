@@ -53,6 +53,7 @@ const Communaute: React.FC = function() {
 	  		<div className="main">
 	  			<div className="auto">
 	  				<div className="aside-left">
+	  					{/*
 	  					<div className="game-select">
 	  						<Link to="#">
 			  					<div className="game-bg wz">
@@ -79,6 +80,7 @@ const Communaute: React.FC = function() {
 			  					</div>
 			  				</Link>
 		  				</div>
+		  				*/}
 		  				<div className="stream">
 		  					<Link to="#">
 			  					<div className="stream-container">

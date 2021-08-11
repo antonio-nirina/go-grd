@@ -1,6 +1,5 @@
 import React,{useState, useCallback}  from 'react'
 import Cropper from 'react-easy-crop'
-import Popup from "reactjs-popup"
 import { useSelector,useDispatch } from "react-redux"
 
 import {useMutation} from "@apollo/client"
@@ -57,10 +56,10 @@ const Avatar : React.FC = function() {
   	const onCropComplete = useCallback((croppedArea, croppedAreaPixels) => {
     	console.log(croppedArea, croppedAreaPixels)
   	}, [])
-  	const area = {		
+  	/*const area = {
 		width: 276, // width of the cropped area
 		height: 276 // height of the cropped area
-	}
+	}*/
 	const [closeModal, setCloseModal] = useState(false)
     const onClose = function(){
         setCloseModal(!closeModal)

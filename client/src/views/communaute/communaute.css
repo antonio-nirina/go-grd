@@ -221,8 +221,10 @@
 
 .stream{
 	background: #2c2c2c;
-	margin-top: 15px;
+	/*margin-top: 15px;*/
 	padding: 12px;
+	height: 230px;
+	overflow: auto;	
 }
 .stream a{
 	display: block;

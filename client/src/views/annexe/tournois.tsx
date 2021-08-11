@@ -106,8 +106,7 @@ const Tournois: React.FC = function() {
 									return (
 										<div className="upcomming side" key={index} onClick={()=>{history.push(`/info?uid=${el.uid}`)}} style={{"cursor":"pointer"}}>
 												<div className="items">
-													<div className="side-img">
-														<img src={el.game.logo} alt={el.game.name}/>
+													<div className="side-img" style={{ background: `url(${el.game.logo})`}}>
 													</div>
 													<div className="side-infos">
 														<div className="meta">
