@@ -37,18 +37,16 @@ const SetAssist: React.FC = function() {
 		                                    	<div className="bloc">
 		                                    		<div className="field">
 		                                    			<div className="group-input">
-			                                        		<form>
-			                                        			<div className="add-bloc">
-				                                        			<div className="link-master">
-					    												<label htmlFor="title-assist">Ajouter le titre : </label>
-					    												<input type="text" placeholder="titre" id="title-assist"/>
-					    											</div>
-					    											<div className="under-link">
-					    												<label htmlFor="underTitle">Ajouter le sous-titre : </label>
-					    												<input type="text" placeholder="Sous-titre" id="underTitle" />
-					    											</div>
-					    										</div>					    										
-				    										</form>
+		                                    				<div className="add-bloc">
+			                                        			<div className="link-master">
+				    												<label htmlFor="title-assist">Ajouter le titre : </label>
+				    												<input type="text" placeholder="titre" id="title-assist"/>
+				    											</div>
+				    											<div className="under-link">
+				    												<label htmlFor="underTitle">Ajouter le sous-titre : </label>
+				    												<input type="text" placeholder="Sous-titre" id="underTitle" />
+				    											</div>
+				    										</div>
 				    									</div>
 				    								</div>
 	    											<div className="wysiwyg">
