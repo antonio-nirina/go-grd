@@ -55,6 +55,7 @@ const User : React.FC = function(props:any) {
     	// verif
     	setIsClosed(true)
         setShowConfirm(!showConfirm)
+        setIsBanned(true)
     }
 
     const handleNotAccepted = function() {
