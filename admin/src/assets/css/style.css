@@ -175,6 +175,10 @@ h1{
   overflow: auto;
   position: relative;
 }
+.wysiwyg .sun-editor .se-btn:enabled.on{
+  background: none !important;
+  border: none !important;
+}
 /********** Fonts *********/
 @font-face {
 	font-family: 'Russo One';
