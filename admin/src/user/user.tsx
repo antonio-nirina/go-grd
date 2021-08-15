@@ -26,6 +26,7 @@ const User : React.FC = function(props:any) {
 	const [showName, setShowName] = useState<string>("")
 	const [isClosed, setIsClosed] = useState<Boolean>(false)
 	const [isLoader, setIsLoader] = useState<Boolean>(true)
+	const [isBanned, setIsBanned] = useState<Boolean>(true)
 	const [item, setItem] = useState<Item>({item:1})
 
 	const {loading,error,data} 	= useQuery(GET_ALL_USER, {
@@ -54,11 +55,13 @@ const User : React.FC = function(props:any) {
     	// verif
     	setIsClosed(true)
         setShowConfirm(!showConfirm)
+        setIsBanned(true)
     }
 
     const handleNotAccepted = function() {
     	setShowName("")
     	setShowModal(false)
+    	setIsBanned(false)
     }
     const handleItemsPage = function(item:number) {
     	setIsLoader(true)
@@ -147,7 +150,7 @@ const User : React.FC = function(props:any) {
 															<input
 																type="checkbox"
 																u-tag={el.username}
-																checked={!el.isBanned? false : true}
+																checked={isBanned ? false : true}
 																onChange={(e) => onShowModal(e,el.isBanned,el.username)}
 																id="ban"/>
 															<span className="slider">Oui</span>
