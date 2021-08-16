@@ -39,7 +39,9 @@
 
 }
 .side-img{
-	/*height: 210px;*/
+	height: 210px;	
+    background-repeat: no-repeat !important;
+    background-size: 100% !important;
 }
 .side img{
 	border-radius: 5px 5px 0px 0px;

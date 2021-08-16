@@ -28,7 +28,7 @@ const Tournament: React.FC = function() {
 					<div className="live side">
 						<Link to="/info" title="info">
 							<div className="items">
-								<div className="side-img">
+								<div className="side-img" >
 									<img src={championship} alt="championship-rl"/>
 								</div>
 								<div className="side-infos">

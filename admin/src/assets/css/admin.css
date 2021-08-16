@@ -446,6 +446,10 @@ div#profile-name{
 	width: 30px;
 	text-align: center;
 }
+.result-game-page .active{
+	background: #9c9c9e;
+	color: #000000;
+}
 .result-game-page span{
 	display: block;
 	padding: 3px;
@@ -776,7 +780,7 @@ label[for="img-game"]
 	background: #3d3d40;
 	height: 75%;
 	z-index: 999;
-	border-radius: 15px;		
+	border-radius: 15px;	
 }
 .loader-spinner div{
 	position: relative;
