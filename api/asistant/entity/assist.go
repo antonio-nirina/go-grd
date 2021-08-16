@@ -4,12 +4,13 @@ import (
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
-type Assistant struct {
+type Asistant struct {
 	Uid        primitive.ObjectID `bson:"uid"`
-	Content    []assistContent     `json:"content"`
+	Name      string             `json:"name"`
+	Content    []AssistContent     `json:"content"`
 }
 
-type assistContent struct {
+type AssistContent struct {
 	Title      string             `json:"title"`
 	TitleUnder string             `json:"titleUnder"`
 	Incontent string              `json:"incontent"`
