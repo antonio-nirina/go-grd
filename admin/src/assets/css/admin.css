@@ -815,3 +815,42 @@ label[for="img-game"]
 	clear: both;
 	float: none;
 }
+/***********Détail User*****************/
+.avatar{
+	width: 250px;
+	height: 250px;
+	border-radius: 50%;
+	border: 2px solid #000000;
+}
+.avatarDefault{
+	display: flex;
+}
+.infos-user{
+	width: 50%;	
+	align-self: center;
+	padding-left: 30px;
+}
+.infos-user h2{
+	font-family: "russo one";
+	font-weight: lighter;
+	font-size: 50px;
+}
+.infos-user p{
+	font-size: 24px;
+}
+.avatarDefault .btn-container{
+	align-self: center;	
+}
+.avatarDefault .btn-container .btn{
+	font-size: 25px;
+}
+.detailUser h1{
+	text-align: center;
+	color: #ffffff;
+}
+.detailUser .body-content{
+	margin-top: 30px;
+}
+.detailUser .popup-container{
+	top: 60%;
+}

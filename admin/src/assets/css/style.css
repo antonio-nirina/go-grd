@@ -179,6 +179,14 @@ h1{
   background: none !important;
   border: none !important;
 }
+.btn-container.nomarg{
+  margin-top: 0;
+}
+.nomarg .btn{
+  padding: 5px 10px;
+  font-size: 12px;
+  text-transform: inherit;
+}
 /********** Fonts *********/
 @font-face {
 	font-family: 'Russo One';
