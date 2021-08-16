@@ -1,4 +1,5 @@
 import React,{useState,useEffect} from "react"
+import { Link } from "react-router-dom"
 import Loader from "react-loader-spinner"
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
@@ -116,7 +117,7 @@ const User : React.FC = function(props:any) {
 									</div>
 									<div className="card-title">
 										<div className="card-title">
-											<p>Ban <i><FontAwesomeIcon icon={faSort} size="lg"/></i></p>
+											<p>Détail <i><FontAwesomeIcon icon={faSort} size="lg"/></i></p>
 										</div>
 									</div>
 								</div>																									
@@ -145,7 +146,7 @@ const User : React.FC = function(props:any) {
 													<p>{!el.isBanned?"Actif":"Bloquer"}</p>
 												</div>
 												<div className="card-result check">
-													<p>
+													{/*<p>
 														<label htmlFor="ban" className="switch">
 															<input
 																type="checkbox"
@@ -155,7 +156,10 @@ const User : React.FC = function(props:any) {
 																id="ban"/>
 															<span className="slider">Oui</span>
 														</label>
-													</p>
+													</p>*/}
+													<div className="btn-container nomarg">
+														<Link to="/admin/detail-user" className="btn bg-red">Détail user</Link>
+													</div>
 												</div>
 											</div>
 										)

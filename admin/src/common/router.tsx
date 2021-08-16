@@ -20,6 +20,7 @@ import Login from "../auth/login"
 import DetailHome from "../home/home-detail"
 import Team from "../team/team"
 import User from "../user/user"
+import DetailUser from "../user/detail-user"
 
 const Router = function() {
 	return (
@@ -40,6 +41,7 @@ const Router = function() {
 			<ProtectedRoute path="/admin/detail/:id" exact component={DetailHome} />
 			<ProtectedRoute path="/admin/set-assist" exact component={SetAssist} />
 			<ProtectedRoute path="/admin/users" exact component={User} />
+			<ProtectedRoute path="/admin/detail-user" exact component={DetailUser} />
 			<ProtectedRoute path="/admin/teams" exact component={Team} />
 		</Switch>
 	)
