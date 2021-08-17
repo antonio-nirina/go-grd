@@ -33,7 +33,10 @@ const SetAssist: React.FC = function() {
 	        						</div>
 		        					<div className="group-input">		        						
 	                                    <form className="wysiwyg-container">
-		                                    <div className="both">
+	                                    	{/*Classe line pour ajouter une ligne, class both pour la colonne
+	                                    	Nb : 1 ligne = 2 colonne*/}
+	                                    	<div className="line">
+		                                    	<div className="both">
 		                                    	<div className="bloc">
 		                                    		<div className="field">
 		                                    			<div className="group-input">
@@ -71,7 +74,127 @@ const SetAssist: React.FC = function() {
 		    											<button className="btn bg-red"><FontAwesomeIcon icon={faPen} /> Ajouter</button>
 		    										</div>
 		    									</div>		    									
-		    								</div>		    								
+		    									</div>
+		    									<div className="both">
+			                                    	<div className="bloc">
+			                                    		<div className="field">
+			                                    			<div className="group-input">
+			                                    				<div className="add-bloc">
+				                                        			<div className="link-master">
+					    												<label htmlFor="title-assist">Ajouter le titre : </label>
+					    												<input type="text" placeholder="titre" id="title-assist"/>
+					    											</div>
+					    											<div className="under-link">
+					    												<label htmlFor="underTitle">Ajouter le sous-titre : </label>
+					    												<input type="text" placeholder="Sous-titre" id="underTitle" />
+					    											</div>
+					    										</div>
+					    									</div>
+					    								</div>
+		    											<div className="wysiwyg">
+				    										<SunEditor setOptions={
+																{
+																	buttonList:[
+																		['undo', 'redo',
+																			'font', 'fontSize', 'formatBlock',
+																			'bold', 'italic',
+																			'fontColor', 'hiliteColor', 'textStyle',
+																			'removeFormat',
+																			'outdent', 'indent',
+																			'align', 'horizontalRule', 'list', 'lineHeight',
+																			'link', 'image',
+																			'fullScreen']
+																	]
+																}
+															} />
+		    											</div>
+		    											<div className="btn-container clear">
+		    												<button className="btn bg-white"><FontAwesomeIcon icon={faTimes} /> Supprimer</button>
+			    											<button className="btn bg-red"><FontAwesomeIcon icon={faPen} /> Ajouter</button>
+			    										</div>
+			    									</div>		    									
+		    									</div>
+		    								</div>
+		    								<div className="line">
+		                                    	<div className="both">
+		                                    	<div className="bloc">
+		                                    		<div className="field">
+		                                    			<div className="group-input">
+		                                    				<div className="add-bloc">
+			                                        			<div className="link-master">
+				    												<label htmlFor="title-assist">Ajouter le titre : </label>
+				    												<input type="text" placeholder="titre" id="title-assist"/>
+				    											</div>
+				    											<div className="under-link">
+				    												<label htmlFor="underTitle">Ajouter le sous-titre : </label>
+				    												<input type="text" placeholder="Sous-titre" id="underTitle" />
+				    											</div>
+				    										</div>
+				    									</div>
+				    								</div>
+	    											<div className="wysiwyg">
+			    										<SunEditor setOptions={
+															{
+																buttonList:[
+																	['undo', 'redo',
+																		'font', 'fontSize', 'formatBlock',
+																		'bold', 'italic',
+																		'fontColor', 'hiliteColor', 'textStyle',
+																		'removeFormat',
+																		'outdent', 'indent',
+																		'align', 'horizontalRule', 'list', 'lineHeight',
+																		'link', 'image',
+																		'fullScreen']
+																]
+															}
+														} />
+	    											</div>
+	    											<div className="btn-container clear">
+	    												<button className="btn bg-white"><FontAwesomeIcon icon={faTimes} /> Supprimer</button>
+		    											<button className="btn bg-red"><FontAwesomeIcon icon={faPen} /> Ajouter</button>
+		    										</div>
+		    									</div>		    									
+		    									</div>
+		    									<div className="both">
+			                                    	<div className="bloc">
+			                                    		<div className="field">
+			                                    			<div className="group-input">
+			                                    				<div className="add-bloc">
+				                                        			<div className="link-master">
+					    												<label htmlFor="title-assist">Ajouter le titre : </label>
+					    												<input type="text" placeholder="titre" id="title-assist"/>
+					    											</div>
+					    											<div className="under-link">
+					    												<label htmlFor="underTitle">Ajouter le sous-titre : </label>
+					    												<input type="text" placeholder="Sous-titre" id="underTitle" />
+					    											</div>
+					    										</div>
+					    									</div>
+					    								</div>
+		    											<div className="wysiwyg">
+				    										<SunEditor setOptions={
+																{
+																	buttonList:[
+																		['undo', 'redo',
+																			'font', 'fontSize', 'formatBlock',
+																			'bold', 'italic',
+																			'fontColor', 'hiliteColor', 'textStyle',
+																			'removeFormat',
+																			'outdent', 'indent',
+																			'align', 'horizontalRule', 'list', 'lineHeight',
+																			'link', 'image',
+																			'fullScreen']
+																	]
+																}
+															} />
+		    											</div>
+		    											<div className="btn-container clear">
+		    												<button className="btn bg-white"><FontAwesomeIcon icon={faTimes} /> Supprimer</button>
+			    											<button className="btn bg-red"><FontAwesomeIcon icon={faPen} /> Ajouter</button>
+			    										</div>
+			    									</div>		    									
+		    									</div>
+		    								</div>
 	    								</form>
 		        					</div>
 	        					</div>
