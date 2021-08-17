@@ -6,15 +6,22 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import AvatarDefault from "../../assets/image/game-tag.png"
 import "./chat.css"
 
+type TypeTchat = {
+	handleTchat:Function
+}
 
-const Chat: React.FC = function() {
+const Chat = function({handleTchat}:TypeTchat) {
+	const handleClosed = function() {
+		handleTchat(false)
+	}
+
   return(
   	<div className="tchat">
 	    <div className="tchat-header">
 	      <i className="tchat-icon"><FontAwesomeIcon icon={faCommentDots} size="xs"/></i>
 	      <span>Nirina1718</span>
 	      <div className="close-tchat">
-	        <i className="close-icon"><FontAwesomeIcon icon={faTimes} size="xs"/></i>
+	        <i className="close-icon" style={{"cursor":"pointer"}} onClick={handleClosed}><FontAwesomeIcon icon={faTimes} size="xs"/></i>
 	      </div>
 	    </div>
     <div className="tchat-body">
