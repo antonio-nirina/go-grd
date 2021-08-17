@@ -14,3 +14,4 @@
 - go run main.go
 
 [Redis graphql](https://github.com/ccamel/go-graphql-subscription-example)
+[Optimized reader](https://github.com/icza/shutdown/blob/master/shutdown.go)
