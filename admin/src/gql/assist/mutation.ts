@@ -1,8 +1,8 @@
 import gql from "graphql-tag"
 
-export const CREATE_PAGE_ASSIST = gql`
-mutation{createAsist(assistInput:{
-  name:"Blog",
-  content:{Title:"Title-game",TitleUnder:"Next-title",Incontent:"xxxxx"}
-})}
+
+export const CREATE_ASSIST = gql`
+	mutation createAssistContent($underTitle:String,$location:String,$title:String,$content:String){
+		createHomeContent(underTitle:$underTitle,location:$location,title:$title,content:$content)
+	}
 `

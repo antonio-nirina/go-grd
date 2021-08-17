@@ -101,11 +101,11 @@ func GetRootFields() graphql.Fields {
 		"saveTournament":		saveTournament(),
 		"createPublication":	createPublication(),
 		"createPartMatch":		createPartMatch(),
-		"createHomeContent":	createHomeContent(),
-		"updateHomeContent":	updateHomeContent(),
+		"createAssistContent":	createAssistContent(),
+		// "updateHomeContent":	updateHomeContent(),
 		"createTeam":			createTeam(),
 		"updatedTeamByBanned":	updatedTeamByBanned(),
-		"createAsist":			createAsist(),
-		"removedAsist":			removedAsist(),
+		"createHome":			createHome(),
+		"removedHome":			removedHome(),
 	}
 }

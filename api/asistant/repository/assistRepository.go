@@ -4,14 +4,13 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/thoussei/antonio/api/asistant/entity"
 	"github.com/thoussei/antonio/api/external"
+	"github.com/thoussei/antonio/api/asistant/entity"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
-
 
 type driverRepository struct {
 	client *mongo.Client
@@ -24,16 +23,15 @@ func NewAsistRepository(client *mongo.Client) *driverRepository {
 
 
 type RepositoryAsist interface {
-	SavedRepoAsist(asist *entity.Asistant) (interface{}, error)
+	SavedRepoAsistRepo(home *entity.Asistant) (interface{}, error)
 	FindAsistRepo(idQuery primitive.ObjectID) (entity.Asistant, error)
-	FindAllAsistRepo(pageNumber int64,limit int64)([]entity.Asistant, error)
-	RemovedRepoAsist(idQuery primitive.ObjectID) (interface{}, error)
-	CountAsistRepository()(int,error)
+	FindAllAsistRepo()([]entity.Asistant, error)
+	// RemovedRepoAsist(home *entity.Asistant) (interface{}, error)
 }
 
-func (c *driverRepository) SavedRepoAsist(asistant *entity.Asistant) (interface{}, error) {
+func (c *driverRepository) SavedRepoAsistRepo(home *entity.Asistant) (interface{}, error) {
 	var collection = c.client.Database("grd_database").Collection("asistant")
-	insertResult, err := collection.InsertOne(context.TODO(), asistant)
+	insertResult, err := collection.InsertOne(context.TODO(), home)
 
 	if err != nil {
 		return nil, err
@@ -41,7 +39,7 @@ func (c *driverRepository) SavedRepoAsist(asistant *entity.Asistant) (interface{
 
 	fmt.Println("Inserted a single document: ", insertResult)
 
-	return asistant, nil
+	return home, nil
 }
 
 func (c *driverRepository) FindAsistRepo(idQuery primitive.ObjectID) (entity.Asistant, error) {
@@ -57,10 +55,10 @@ func (c *driverRepository) FindAsistRepo(idQuery primitive.ObjectID) (entity.Asi
 	return result, nil
 }
 
-func (c *driverRepository) FindAllAsistRepo(pageNumber int64,limit int64) ([]entity.Asistant, error) {
+func (c *driverRepository) FindAllAsistRepo() ([]entity.Asistant, error) {
 	var collection = c.client.Database("grd_database").Collection("asistant")
 	var results []entity.Asistant
-	cur, err := collection.Find(context.TODO(), bson.D{{}},options.Find().SetLimit(limit).SetSkip(pageNumber).SetSort(bson.M{"_id": -1}))
+	cur, err := collection.Find(context.TODO(), bson.D{{}},options.Find())
 
 	if err != nil {
 		return nil, err
@@ -81,8 +79,8 @@ func (c *driverRepository) FindAllAsistRepo(pageNumber int64,limit int64) ([]ent
 	return results, nil
 }
 
-func (c *driverRepository) RemovedRepoAsist(idQuery primitive.ObjectID) (interface{}, error) {
-	var collection = c.client.Database("grd_database").Collection("asistant")
+/*func (c *driverRepository) RemovedRepoAsist(idQuery primitive.ObjectID) (interface{}, error) {
+	var collection = c.client.Database("grd_database").Collection("home")
 	filter := bson.D{{"uid", idQuery}}
 
 	updateResult, err := collection.DeleteOne(context.TODO(), filter)
@@ -92,16 +90,5 @@ func (c *driverRepository) RemovedRepoAsist(idQuery primitive.ObjectID) (interfa
 	}
 
 	return updateResult.DeletedCount,nil
-}
-
-func (c *driverRepository) CountAsistRepository()(int,error) {
-	var collection = c.client.Database("grd_database").Collection("asistant")
-
-	records,err := collection.CountDocuments(context.TODO(), bson.D{{}})
+}*/
 	
-	if err != nil {
-		return 0, err
-	}
-
-	return int(records),nil
-}

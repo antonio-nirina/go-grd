@@ -5,10 +5,13 @@ import (
 )
 
 type Home struct {
-	Uid       primitive.ObjectID `bson:"uid"`
-	Title     string             `json:"title"`
-	Location  string             `json:"location"`
-	Content   string             `json:"content"`
-	UnderTitle   string           `json:"underTitle"`
-	Statut   bool           	 `json:"statut"`
+	Uid        primitive.ObjectID `bson:"uid"`
+	Name      string             `json:"name"`
+	Content    []HomeContent     `json:"content"`
+}
+
+type HomeContent struct {
+	Title      string             `json:"title"`
+	TitleUnder string             `json:"titleUnder"`
+	Incontent string              `json:"incontent"`
 }

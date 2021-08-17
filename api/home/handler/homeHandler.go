@@ -7,34 +7,31 @@ import (
 )
 
 type UsecaseHome interface {
-	SavedHomeHandler(home *entity.Home) (interface{}, error)
+	SavedHomeandler(asist *entity.Home) (interface{}, error)
 	FindHomeHandler(idQuery string) (HomeViewModel, error)
-	FindAllHomeHandler() ([]HomeViewModel, error)
-	UpdatedHomeHandler(uid string) (interface{}, error)
+	FindAllHomeHandler(pageNumber int64,limit int64) ([]HomeViewModel, error)
+	RemovedHomeHandler(idQuery string) (interface{}, error)
 }
 
 type HomeViewModel struct {
-	Uid       	string 			 	`json:"uid"`
-	Title     	string             `json:"title"`
-	Location  	string             `json:"location"`
-	Content   	string             `json:"content"`
-	UnderTitle  string           	`json:"underTitle"`
-	Statut  	bool           		`json:"statut"`
+	Uid        string 						`json:"uid"`
+	Name      string             			`json:"name"`
+	Content    []entity.HomeContent       `json:"content"`
+	Records    int            				`json:"records"`
 }
 
 type homeUsecase struct {
 	homeRepository repository.RepositoryHome
 }
 
-func NewUsecaseHome(h repository.RepositoryHome) UsecaseHome {
+func NewUsecaseHome(a repository.RepositoryHome) UsecaseHome {
 	return &homeUsecase{
-		homeRepository: h,
+		homeRepository: a,
 	}
 }
 
-func (h *homeUsecase) SavedHomeHandler(cmty *entity.Home) (interface{}, error) {
-
-	_,err := h.homeRepository.SavedRepoHomeHandler(cmty)
+func (a *homeUsecase) SavedHomeandler(asist *entity.Home) (interface{}, error){
+	_,err := a.homeRepository.SavedRepoHome(asist)
 
 	if err != nil {
 		return 0, err
@@ -43,33 +40,36 @@ func (h *homeUsecase) SavedHomeHandler(cmty *entity.Home) (interface{}, error) {
 	return "Ok",nil
 }
 
-func (h *homeUsecase) FindHomeHandler(idQuery string) (HomeViewModel, error) {
+func (a *homeUsecase) FindHomeHandler(idQuery string) (HomeViewModel, error){
 	objectId, err := primitive.ObjectIDFromHex(idQuery)
 	
 	if err != nil {
 		return HomeViewModel{}, err
 	}
 
-	result, err := h.homeRepository.FindHomeRepo(objectId)
+	result, err := a.homeRepository.FindHomeRepo(objectId)
 
 	if err != nil {
 		return HomeViewModel{}, err
 	}
 
 	homeViewModel := HomeViewModel{
-		Uid: result.Uid.Hex(),
-		Title:result.Title,
-		Location:result.Location,
-		Content:result.Content,
-		UnderTitle:result.UnderTitle,
-		Statut:result.Statut,      			
+		Uid:result.Uid.Hex(),
+		Name:result.Name,
+		Content:result.Content,    			
 	}
 
 	return homeViewModel,nil
 }
 
-func (h *homeUsecase) FindAllHomeHandler() ([]HomeViewModel, error) {
-	result, err := h.homeRepository.FindAllHomeRepo()
+func (a *homeUsecase) FindAllHomeHandler(pageNumber int64,limit int64) ([]HomeViewModel, error){
+	result, err := a.homeRepository.FindAllHomeRepo(pageNumber,limit)
+
+	if err != nil {
+		return []HomeViewModel{}, err
+	}
+
+	records,err := a.homeRepository.CountHomeRepository()
 
 	if err != nil {
 		return []HomeViewModel{}, err
@@ -79,47 +79,26 @@ func (h *homeUsecase) FindAllHomeHandler() ([]HomeViewModel, error) {
 
 	for _,val := range result {
 		homeViewModel := HomeViewModel{
-			Uid: val.Uid.Hex(),
-			Title:val.Title,
-			Location:val.Location,
+			Uid:val.Uid.Hex(),
+			Name:val.Name,
 			Content:val.Content,
-			UnderTitle:val.UnderTitle,
-			Statut:val.Statut,   		
+			Records:records,     			
 		}
 
 		res = append(res, homeViewModel)
 	}
-	
+
 	return res,nil
 }
 
-func (h *homeUsecase) UpdatedHomeHandler(uid string) (interface{}, error) {
-	objectId, err := primitive.ObjectIDFromHex(uid)
+func (a *homeUsecase) RemovedHomeHandler(idQuery string) (interface{}, error){
+	objectId, err := primitive.ObjectIDFromHex(idQuery)
+	_,err = a.homeRepository.RemovedRepoHome(objectId)
 
 	if err != nil {
-		return nil, err
-	}
-
-	result, err := h.homeRepository.FindHomeRepo(objectId)
-
-	if err != nil {
-		return HomeViewModel{}, err
-	}
-
-	home := &entity.Home{
-		Uid: result.Uid,
-		Title:result.Title,
-		Location:result.Location,
-		Content:result.Content,
-		UnderTitle:result.UnderTitle,
-		Statut:result.Statut,   	     			
-	}
-	 
-	_,err = h.homeRepository.UpdatedRepoHome(home)
-	
-	if err != nil {
-		return nil, err
+		return 0, err
 	}
 
 	return "Ok",nil
 }
+

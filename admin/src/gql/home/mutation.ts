@@ -11,3 +11,10 @@ export const UPDATED_HOME_PAGE_CONTENT = gql`
 		updateHomeContent(uid:$uid)
 	}
 `
+export const CREATE_PAGE_ASSIST = gql`
+	mutation
+		createHome($homeInput:HomeInputType){
+			createHome(homeInput:$homeInput)
+		}
+
+`

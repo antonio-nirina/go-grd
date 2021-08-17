@@ -4,13 +4,14 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/thoussei/antonio/api/external"
 	"github.com/thoussei/antonio/api/home/entity"
+	"github.com/thoussei/antonio/api/external"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
+
 
 type driverRepository struct {
 	client *mongo.Client
@@ -23,15 +24,16 @@ func NewHomeRepository(client *mongo.Client) *driverRepository {
 
 
 type RepositoryHome interface {
-	SavedRepoHomeHandler(home *entity.Home) (interface{}, error)
+	SavedRepoHome(asist *entity.Home) (interface{}, error)
 	FindHomeRepo(idQuery primitive.ObjectID) (entity.Home, error)
-	FindAllHomeRepo()([]entity.Home, error)
-	UpdatedRepoHome(home *entity.Home) (interface{}, error)
+	FindAllHomeRepo(pageNumber int64,limit int64)([]entity.Home, error)
+	RemovedRepoHome(idQuery primitive.ObjectID) (interface{}, error)
+	CountHomeRepository()(int,error)
 }
 
-func (c *driverRepository) SavedRepoHomeHandler(home *entity.Home) (interface{}, error) {
+func (c *driverRepository) SavedRepoHome(asistant *entity.Home) (interface{}, error) {
 	var collection = c.client.Database("grd_database").Collection("home")
-	insertResult, err := collection.InsertOne(context.TODO(), home)
+	insertResult, err := collection.InsertOne(context.TODO(), asistant)
 
 	if err != nil {
 		return nil, err
@@ -39,7 +41,7 @@ func (c *driverRepository) SavedRepoHomeHandler(home *entity.Home) (interface{},
 
 	fmt.Println("Inserted a single document: ", insertResult)
 
-	return home, nil
+	return asistant, nil
 }
 
 func (c *driverRepository) FindHomeRepo(idQuery primitive.ObjectID) (entity.Home, error) {
@@ -55,10 +57,10 @@ func (c *driverRepository) FindHomeRepo(idQuery primitive.ObjectID) (entity.Home
 	return result, nil
 }
 
-func (c *driverRepository) FindAllHomeRepo() ([]entity.Home, error) {
+func (c *driverRepository) FindAllHomeRepo(pageNumber int64,limit int64) ([]entity.Home, error) {
 	var collection = c.client.Database("grd_database").Collection("home")
 	var results []entity.Home
-	cur, err := collection.Find(context.TODO(), bson.D{{}},options.Find())
+	cur, err := collection.Find(context.TODO(), bson.D{{}},options.Find().SetLimit(limit).SetSkip(pageNumber).SetSort(bson.M{"_id": -1}))
 
 	if err != nil {
 		return nil, err
@@ -79,8 +81,33 @@ func (c *driverRepository) FindAllHomeRepo() ([]entity.Home, error) {
 	return results, nil
 }
 
-func (c *driverRepository) UpdatedRepoHome(home *entity.Home) (interface{}, error) {
+func (c *driverRepository) RemovedRepoHome(idQuery primitive.ObjectID) (interface{}, error) {
 	var collection = c.client.Database("grd_database").Collection("home")
+	filter := bson.D{{"uid", idQuery}}
+
+	updateResult, err := collection.DeleteOne(context.TODO(), filter)
+
+	if err != nil {
+		return nil,err
+	}
+
+	return updateResult.DeletedCount,nil
+}
+
+func (c *driverRepository) CountHomeRepository()(int,error) {
+	var collection = c.client.Database("grd_database").Collection("home")
+
+	records,err := collection.CountDocuments(context.TODO(), bson.D{{}})
+	
+	if err != nil {
+		return 0, err
+	}
+
+	return int(records),nil
+}
+
+/*func (c *driverRepository) UpdatedRepoHome(home *entity.Home) (interface{}, error) {
+	var collection = c.client.Database("grd_database").Collection("asistant")
 	filter := bson.D{{"uid", home.Uid}}
 	update := bson.D{
 		{"$set", bson.D{
@@ -109,4 +136,4 @@ func (c *driverRepository) UpdatedRepoHome(home *entity.Home) (interface{}, erro
 	}
 
 	return updateResult.ModifiedCount,nil
-}	
+}*/

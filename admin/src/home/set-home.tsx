@@ -26,72 +26,11 @@ const SetHome: React.FC = function() {
 	const [content, setContent] 		= useState<string>("")
 	const [title, setTitle] 			= useState<string>("")
 	const [titleUnder, setTitleUnder] 	= useState<string>("")
-	const [location, setLocation] 		= useState<string>("")
 	const [createdHomePage]  			= useMutation(CREATE_HOME_PAGE_CONTENT)
 
 	const onSubmit1 = async function(data:Inputs){
 		const result = await createdHomePage({ variables: {
-			location:location,
-			title:data.title,
-			underTitle:data.titleSous,
-			content:content,
-		} })
-		if (result.data.createHomeContent) {
-			setContent("")
-			history.push("/admin/list-home")
-		}
-	}
-	const onSubmit2 = async function(){
-		const result = await createdHomePage({ variables: {
-			location:location,
-			title:title,
-			underTitle:titleUnder,
-			content:content,
-		} })
-		if (result.data.createHomeContent) {
-			setContent("")
-			history.push("/admin/list-home")
-		}
-	}
-	const onSubmit3 = async function(){
-		const result = await createdHomePage({ variables: {
-			location:location,
-			title:title,
-			underTitle:titleUnder,
-			content:content,
-		} })
-		if (result.data.createHomeContent) {
-			setContent("")
-			history.push("/admin/list-home")
-		}
-	}
-	const onSubmit4 = async function(){
-		const result = await createdHomePage({ variables: {
-			location:location,
-			title:title,
-			underTitle:titleUnder,
-			content:content,
-		} })
-		if (result.data.createHomeContent) {
-			setContent("")
-			history.push("/admin/list-home")
-		}
-	}
-	const onSubmit5 = async function(){
-		const result = await createdHomePage({ variables: {
-			location:location,
-			title:title,
-			underTitle:titleUnder,
-			content:content,
-		} })
-		if (result.data.createHomeContent) {
-			setContent("")
-			history.push("/admin/set-home")
-		}
-	}
-	const onSubmit6 = async function(){
-		const result = await createdHomePage({ variables: {
-			location:location,
+			location:"",
 			title:title,
 			underTitle:titleUnder,
 			content:content,
@@ -103,26 +42,6 @@ const SetHome: React.FC = function() {
 	}
 
 	const handleText1 = function(content: string) {
-		setContent(content)
-	}
-
-	const handleText2 = function(content: string) {
-		setContent(content)
-	}
-
-	const handleText3 = function(content: string) {
-		setContent(content)
-	}
-
-	const handleText4 = function(content: string) {
-		setContent(content)
-	}
-
-	const handleText5 = function(content: string) {
-		setContent(content)
-	}
-
-	const handleText6 = function(content: string) {
 		setContent(content)
 	}
 
@@ -153,7 +72,7 @@ const SetHome: React.FC = function() {
         							</div>
         						</div>
 	        					<div className="group-input">		        						
-                                    <form className="wysiwyg-container"> 
+                                    <form className="wysiwyg-container" onSubmit={handleSubmit(onSubmit1)}>
                                     	{/*Classe line pour la ligne, class both pour la colonne
 	                                    	Nb : 1 ligne = 2 colonne*/}                                   	
                                     	<div className="line">
@@ -164,35 +83,37 @@ const SetHome: React.FC = function() {
 		                                    				<div className="add-bloc">
 			                                        			<div className="link-master">
 				    												<label htmlFor="title-assist">Ajouter le titre : </label>
-				    												<input type="text" placeholder="titre" id="title-assist"/>
+				    												<input onChange={handleTitle} type="text" placeholder="titre" id="title-assist"/>
 				    											</div>
 				    											<div className="under-link">
 				    												<label htmlFor="underTitle">Ajouter le sous-titre : </label>
-				    												<input type="text" placeholder="Sous-titre" id="underTitle" />
+				    												<input type="text" onChange={handleUnderTitle} placeholder="Sous-titre" id="underTitle" />
 				    											</div>
 				    										</div>
 				    									</div>
 				    								</div>
 	    											<div className="wysiwyg">
-			    										<SunEditor setOptions={
-															{
-																buttonList:[
-																	['undo', 'redo',
-																		'font', 'fontSize', 'formatBlock',
-																		'bold', 'italic',
-																		'fontColor', 'hiliteColor', 'textStyle',
-																		'removeFormat',
-																		'outdent', 'indent',
-																		'align', 'horizontalRule', 'list', 'lineHeight',
-																		'link', 'image',
-																		'fullScreen']
-																]
-															}
+			    										<SunEditor
+			    											onChange={handleText1}
+			    											setOptions={
+																{
+																	buttonList:[
+																		['undo', 'redo',
+																			'font', 'fontSize', 'formatBlock',
+																			'bold', 'italic',
+																			'fontColor', 'hiliteColor', 'textStyle',
+																			'removeFormat',
+																			'outdent', 'indent',
+																			'align', 'horizontalRule', 'list', 'lineHeight',
+																			'link', 'image',
+																			'fullScreen']
+																	]
+																}
 														} />
 	    											</div>
 	    											<div className="btn-container clear">
 	    												<button className="btn bg-white"><FontAwesomeIcon icon={faTimes} /> Supprimer</button>
-		    											<button className="btn bg-red"><FontAwesomeIcon icon={faPen} /> Ajouter</button>
+		    											<button className="btn bg-red"><FontAwesomeIcon icon={faPen} style={style} /> Ajouter</button>
 		    										</div>
 		    									</div>		    									
 		    								</div>

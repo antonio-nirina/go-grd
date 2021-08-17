@@ -1,18 +1,35 @@
 package delivery
 
 import (
+	"encoding/json"
+
 	"github.com/graphql-go/graphql"
 	"github.com/thoussei/antonio/api/home/entity"
 	"github.com/thoussei/antonio/api/home/handler"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
+type inputAddHome struct {
+	HomeInput homeInputEl `json:"homeInput"`
+}
+
+type homeInputEl struct {
+	Name string `json:"name"`
+	Content [] homeElements `json:"content"`
+}
+
+type homeElements struct {
+	Title string `json:"title"`
+	TitleUnder string `json:"titleUnder"`
+	Incontent string `json:"incontent"`
+}
+
 
 type HomeResolver interface {
 	SavedHomeResolver(params graphql.ResolveParams) (interface{}, error)
 	FindHomeResolver(params graphql.ResolveParams) (interface{}, error)
 	FindAllHomeResolver(params graphql.ResolveParams) (interface{}, error)
-	UpdatedHomeByUseResolver(params graphql.ResolveParams) (interface{}, error)
+	RemovedHomeByResolver(params graphql.ResolveParams) (interface{}, error)
 }
 
 type home struct {
@@ -25,22 +42,22 @@ func NewResolverHome(homeUseCase handler.UsecaseHome) HomeResolver {
 	}
 }
 
-func (h *home) SavedHomeResolver(params graphql.ResolveParams) (interface{}, error){
-	titleHome, _ := params.Args["title"].(string)
-	content, _ := params.Args["content"].(string)
-	underTitle, _ := params.Args["underTitle"].(string)
-	locationHome, _ := params.Args["location"].(string)
+func (a *home) SavedHomeResolver(params graphql.ResolveParams) (interface{}, error){
+	var cnts [] entity.HomeContent
+	jsonString, _ := json.Marshal(params.Args)
+	inputs := inputAddHome{}
+	json.Unmarshal([]byte(jsonString), &inputs)
 
+	for _,val := range inputs.HomeInput.Content{
+		cnts = append(cnts,entity.HomeContent{Title:val.Title,TitleUnder:val.TitleUnder,Incontent:val.Incontent})
+	}
 	home := &entity.Home{
 		Uid: primitive.NewObjectID(),
-		Title:titleHome,
-		Location:locationHome,
-		Content:content, 
-		UnderTitle:underTitle,
-		Statut:true,    			
+		Name:inputs.HomeInput.Name,
+		Content:cnts,  			
 	}
 
-	res,err := h.homeHandler.SavedHomeHandler(home)
+	res,err := a.homeHandler.SavedHomeandler(home)
 
 	if err != nil {
 		return nil, err
@@ -49,9 +66,9 @@ func (h *home) SavedHomeResolver(params graphql.ResolveParams) (interface{}, err
 	return res,nil
 }
 
-func (h *home) FindHomeResolver(params graphql.ResolveParams) (interface{}, error){
-	idHome, _ := params.Args["uid"].(string)
-	home,err := h.homeHandler.FindHomeHandler(idHome)
+func (t *home) FindHomeResolver(params graphql.ResolveParams) (interface{}, error){
+	uidHome, _ := params.Args["uid"].(string)
+	home,err := t.homeHandler.FindHomeHandler(uidHome)
 
 	if err != nil {
 		return nil,err
@@ -60,8 +77,15 @@ func (h *home) FindHomeResolver(params graphql.ResolveParams) (interface{}, erro
 	return home,nil
 }
 
-func (h *home) FindAllHomeResolver(params graphql.ResolveParams) (interface{}, error){
-	homes,err :=  h.homeHandler.FindAllHomeHandler()
+func (t *home) FindAllHomeResolver(params graphql.ResolveParams) (interface{}, error){
+	limit, _ := params.Args["limit"].(int)
+	pageNumber, _ := params.Args["pageNumber"].(int)
+
+	if pageNumber == 0 && limit > 0{
+		pageNumber = 1
+	}
+
+	homes,err :=  t.homeHandler.FindAllHomeHandler(int64(pageNumber),int64(limit))
 
 	if err != nil {
 		return nil,err
@@ -70,15 +94,16 @@ func (h *home) FindAllHomeResolver(params graphql.ResolveParams) (interface{}, e
 	return homes,nil
 }
 
-func (h *home) UpdatedHomeByUseResolver(params graphql.ResolveParams) (interface{}, error){
+func (t *home) RemovedHomeByResolver(params graphql.ResolveParams) (interface{}, error){
 	uid, _ := params.Args["uid"].(string)
-	home,err :=  h.homeHandler.FindHomeHandler(uid)
-
+	_,err :=  t.homeHandler.FindHomeHandler(uid)
+	
 	if err != nil {
 		return nil,err
 	}
+	 
 
-	_,err = h.homeHandler.UpdatedHomeHandler(uid)
+	asist,err := t.homeHandler.RemovedHomeHandler(uid)
 
-	return home,nil
+	return asist,nil
 }
