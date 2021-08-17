@@ -4,59 +4,38 @@ import (
 	"github.com/graphql-go/graphql"
 )
 
-var contentInputType  = graphql.NewInputObject(graphql.InputObjectConfig{
-	Name:"ContentAssistInput",
-	Fields: graphql.InputObjectConfigFieldMap{
-		"Title": &graphql.InputObjectFieldConfig{
-			Type: graphql.String,
-		},
-		"TitleUnder": &graphql.InputObjectFieldConfig{
-			Type: graphql.String,
-		},
-		"Incontent": &graphql.InputObjectFieldConfig{
-			Type: graphql.String,
-		},
-	},
-})
 
-var inputAssistType = graphql.NewInputObject(
-	graphql.InputObjectConfig{
-		Name: "AssistInputType",
-		Fields: graphql.InputObjectConfigFieldMap{
-			"name": &graphql.InputObjectFieldConfig{
-				Type: graphql.String,
-			},
-			"content": &graphql.InputObjectFieldConfig{
-				Type: graphql.NewList(contentInputType),
-			},
-		},
-	},
-)
-
-var argsAssist = graphql.FieldConfigArgument{
-	"assistInput": &graphql.ArgumentConfig{
-		Type: inputAssistType,
-	},
-}
-
-func createAsist() *graphql.Field {
+func createAssistContent() *graphql.Field {
 	return &graphql.Field{
 		Type:        graphql.String,
-		Description: "Assist create",
-		Args:argsAssist,		
-		Resolve: asistResolver.SavedAsistResolver,
+		Description: "Assist content create",
+		Args: graphql.FieldConfigArgument{
+			"title": &graphql.ArgumentConfig{
+				Type: graphql.String,
+			},
+			"underTitle": &graphql.ArgumentConfig{
+				Type: graphql.String,
+			},	
+			"location": &graphql.ArgumentConfig{
+				Type: graphql.String,
+			},	
+			"content": &graphql.ArgumentConfig{
+				Type: graphql.String,
+			},			
+		},			
+		Resolve: homeResolver.SavedHomeResolver,
 	}
 }
 
-func removedAsist() *graphql.Field {
+/*func updateHomeContent() *graphql.Field {
 	return &graphql.Field{
 		Type:        graphql.String,
-		Description: "removed asist",
+		Description: "updated assist",
 		Args: graphql.FieldConfigArgument{
 			"uid": &graphql.ArgumentConfig{
 				Type: graphql.String,
 			},
 		},
-		Resolve:     asistResolver.RemovedAsistByResolver,
+		Resolve:     homeResolver.UpdatedHomeByUseResolver,
 	}	
-}
+}*/

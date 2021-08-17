@@ -4,7 +4,7 @@ import SunEditor from 'suneditor-react'
 import 'suneditor/dist/css/suneditor.min.css'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPen, faPlus, faTimes } from "@fortawesome/free-solid-svg-icons"
+import { faPen, faTimes } from "@fortawesome/free-solid-svg-icons"
 
 import SideBar from "../header/sidebar"
 import Nav from "../header/nav"
@@ -27,13 +27,13 @@ const SetAssist: React.FC = function() {
 	        					<div className="field">
 	        						<div className="title">
 	        							<h1>Dynamisation de la page assistance</h1>
-	        							<div className="create-game">
-	        								<button className="btn bg-red"><i><FontAwesomeIcon icon={faPlus} size="lg"/></i>Ajouter Nouveau bloc</button>
-	        							</div>
 	        						</div>
 		        					<div className="group-input">		        						
 	                                    <form className="wysiwyg-container">
-		                                    <div className="both">
+	                                    	{/*Classe line pour ajouter une ligne, class both pour la colonne
+	                                    	Nb : 1 ligne = 2 colonne*/}
+		    								<div className="line">
+		                                    	<div className="both">
 		                                    	<div className="bloc">
 		                                    		<div className="field">
 		                                    			<div className="group-input">
@@ -71,7 +71,8 @@ const SetAssist: React.FC = function() {
 		    											<button className="btn bg-red"><FontAwesomeIcon icon={faPen} /> Ajouter</button>
 		    										</div>
 		    									</div>		    									
-		    								</div>		    								
+		    									</div>
+		    								</div>
 	    								</form>
 		        					</div>
 	        					</div>

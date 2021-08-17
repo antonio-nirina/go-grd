@@ -5,13 +5,10 @@ import (
 )
 
 type Asistant struct {
-	Uid        primitive.ObjectID `bson:"uid"`
-	Name      string             `json:"name"`
-	Content    []AssistContent     `json:"content"`
-}
-
-type AssistContent struct {
-	Title      string             `json:"title"`
-	TitleUnder string             `json:"titleUnder"`
-	Incontent string              `json:"incontent"`
+	Uid       primitive.ObjectID `bson:"uid"`
+	Title     string             `json:"title"`
+	Location  string             `json:"location"`
+	Content   string             `json:"content"`
+	UnderTitle   string           `json:"underTitle"`
+	Statut   bool           	 `json:"statut"`
 }

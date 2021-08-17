@@ -47,7 +47,6 @@ const User : React.FC = function(props:any) {
 	},[loading,error,data,props,item,isLoader])
 
     const onShowModal = function(event:any,isBan=false,username = ""){
-    	console.log("username",event.target.value)
 		setShowModal(true)
     	setShowName(username)
     }

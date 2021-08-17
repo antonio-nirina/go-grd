@@ -66,10 +66,7 @@ const RenderPopup = function({users,isOpen}:any) {
 																close()
 																}}>
 																{
-																	Object.keys(userConnectedRedux.user).length > 0 ?
 																	Translation(userConnectedRedux.user.language).communauty.addFriend
-																	:
-																	Translation("fr").communauty.addFriend
 																}
 															</span>
 														</button>
@@ -155,6 +152,10 @@ const Friend: React.FC = function() {
 		setShowChat(!showChat)
 	}
 
+	const openTchat = function() {
+		setShowChat(!showChat)
+	}
+
 	return (
 		<div className="aside-right">			
 			{nbFriends
@@ -179,19 +180,13 @@ const Friend: React.FC = function() {
 			: (<div className="friend-list noborder">
 					<p className="title">
 						{
-							Object.keys(userConnectedRedux.user).length > 0 ?
 							Translation(userConnectedRedux.user.language).communauty.titleFriend
-							:
-							Translation("fr").communauty.titleFriend
 						}
 					</p>
 					<p style={{"fontWeight":"bold"}}>
 						{ `${userConnectedRedux.user.username} `}
 					{
-						Object.keys(userConnectedRedux.user).length > 0 ?
 						Translation(userConnectedRedux.user.language).communauty.friend
-						:
-						Translation("fr").communauty.friend
 					}
 					</p>
 					<div className="friends">
@@ -199,10 +194,7 @@ const Friend: React.FC = function() {
 							<FontAwesomeIcon icon={faUserPlus} size="xs"/>
 							<span>
 								{
-		      						Object.keys(userConnectedRedux.user).length > 0 ?
 									Translation(userConnectedRedux.user.language).communauty.addFriendList
-									:
-									Translation("fr").communauty.addFriendList
 								}
 							</span>
 						</p>
@@ -228,7 +220,9 @@ const Friend: React.FC = function() {
 				</div>
 			</div>
 			<div className={!showChat ? "hide-chat" :"show-chat"}>
-				<Chat/>
+				<Chat
+					handleTchat={openTchat}
+				/>
 			</div>
 		</div>
 	)

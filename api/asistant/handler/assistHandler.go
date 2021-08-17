@@ -7,31 +7,34 @@ import (
 )
 
 type UsecaseAsist interface {
-	SavedAsistandler(asist *entity.Asistant) (interface{}, error)
+	SavedAsistHandler(home *entity.Asistant) (interface{}, error)
 	FindAsistHandler(idQuery string) (AsistViewModel, error)
-	FindAllAsistHandler(pageNumber int64,limit int64) ([]AsistViewModel, error)
-	RemovedAsistHandler(idQuery string) (interface{}, error)
+	FindAllAsistHandler() ([]AsistViewModel, error)
+	// UpdatedAsistHandler(uid string) (interface{}, error)
 }
 
 type AsistViewModel struct {
-	Uid        string 						`json:"uid"`
-	Name      string             			`json:"name"`
-	Content    []entity.AssistContent       `json:"content"`
-	Records    int            				`json:"records"`
+	Uid       	string 			 	`json:"uid"`
+	Title     	string             `json:"title"`
+	Location  	string             `json:"location"`
+	Content   	string             `json:"content"`
+	UnderTitle  string           	`json:"underTitle"`
+	Statut  	bool           		`json:"statut"`
 }
 
 type asistUsecase struct {
 	asistRepository repository.RepositoryAsist
 }
 
-func NewUsecaseAsist(a repository.RepositoryAsist) UsecaseAsist {
+func NewUsecaseAsist(h repository.RepositoryAsist) UsecaseAsist {
 	return &asistUsecase{
-		asistRepository: a,
+		asistRepository: h,
 	}
 }
 
-func (a *asistUsecase) SavedAsistandler(asist *entity.Asistant) (interface{}, error){
-	_,err := a.asistRepository.SavedRepoAsist(asist)
+func (h *asistUsecase) SavedAsistHandler(cmty *entity.Asistant) (interface{}, error) {
+
+	_,err := h.asistRepository.SavedRepoAsistRepo(cmty)
 
 	if err != nil {
 		return 0, err
@@ -40,36 +43,33 @@ func (a *asistUsecase) SavedAsistandler(asist *entity.Asistant) (interface{}, er
 	return "Ok",nil
 }
 
-func (a *asistUsecase) FindAsistHandler(idQuery string) (AsistViewModel, error){
+func (h *asistUsecase) FindAsistHandler(idQuery string) (AsistViewModel, error) {
 	objectId, err := primitive.ObjectIDFromHex(idQuery)
 	
 	if err != nil {
 		return AsistViewModel{}, err
 	}
 
-	result, err := a.asistRepository.FindAsistRepo(objectId)
+	result, err := h.asistRepository.FindAsistRepo(objectId)
 
 	if err != nil {
 		return AsistViewModel{}, err
 	}
 
 	asistViewModel := AsistViewModel{
-		Uid:result.Uid.Hex(),
-		Name:result.Name,
-		Content:result.Content,    			
+		Uid: result.Uid.Hex(),
+		Title:result.Title,
+		Location:result.Location,
+		Content:result.Content,
+		UnderTitle:result.UnderTitle,
+		Statut:result.Statut,      			
 	}
 
 	return asistViewModel,nil
 }
 
-func (a *asistUsecase) FindAllAsistHandler(pageNumber int64,limit int64) ([]AsistViewModel, error){
-	result, err := a.asistRepository.FindAllAsistRepo(pageNumber,limit)
-
-	if err != nil {
-		return []AsistViewModel{}, err
-	}
-
-	records,err := a.asistRepository.CountAsistRepository()
+func (h *asistUsecase) FindAllAsistHandler() ([]AsistViewModel, error) {
+	result, err := h.asistRepository.FindAllAsistRepo()
 
 	if err != nil {
 		return []AsistViewModel{}, err
@@ -79,26 +79,47 @@ func (a *asistUsecase) FindAllAsistHandler(pageNumber int64,limit int64) ([]Asis
 
 	for _,val := range result {
 		asistViewModel := AsistViewModel{
-			Uid:val.Uid.Hex(),
-			Name:val.Name,
+			Uid: val.Uid.Hex(),
+			Title:val.Title,
+			Location:val.Location,
 			Content:val.Content,
-			Records:records,     			
+			UnderTitle:val.UnderTitle,
+			Statut:val.Statut,   		
 		}
 
 		res = append(res, asistViewModel)
 	}
-
+	
 	return res,nil
 }
 
-func (a *asistUsecase) RemovedAsistHandler(idQuery string) (interface{}, error){
-	objectId, err := primitive.ObjectIDFromHex(idQuery)
-	_,err = a.asistRepository.RemovedRepoAsist(objectId)
+/*func (h *asistUsecase) UpdatedAsistHandler(uid string) (interface{}, error) {
+	objectId, err := primitive.ObjectIDFromHex(uid)
 
 	if err != nil {
-		return 0, err
+		return nil, err
+	}
+
+	result, err := h.asistRepository.FindAsistRepo(objectId)
+
+	if err != nil {
+		return AsistViewModel{}, err
+	}
+
+	home := &entity.Asistant{
+		Uid: result.Uid,
+		Title:result.Title,
+		Location:result.Location,
+		Content:result.Content,
+		UnderTitle:result.UnderTitle,
+		Statut:result.Statut,   	     			
+	}
+	 
+	_,err = h.asistRepository.UpdatedRepoAsist(home)
+	
+	if err != nil {
+		return nil, err
 	}
 
 	return "Ok",nil
-}
-
+}*/
