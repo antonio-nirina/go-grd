@@ -7,6 +7,9 @@ import (
 var contentSchemaType  = graphql.NewObject(graphql.ObjectConfig{
 	Name: "ContentAssistType",
 	Fields: graphql.Fields{
+		"uid": &graphql.Field{
+			Type: graphql.String,
+		},
 		"Title": &graphql.Field{
 			Type: graphql.String,
 		},

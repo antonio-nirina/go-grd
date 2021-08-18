@@ -132,7 +132,7 @@ const SideBar : React.FC = function() {
 							</Link>
 						</li>
 						<li>
-							<Link to="/admin/set-assist">
+							<Link to="/admin/list-assist">
 								<i><FontAwesomeIcon icon={faHandsHelping} size="lg"/></i>
 								<span>Assistance</span>
 							</Link>
