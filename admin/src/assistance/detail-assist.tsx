@@ -11,21 +11,21 @@ import { faPlus } from "@fortawesome/free-solid-svg-icons"
 import SideBar from "../header/sidebar"
 import Nav from "../header/nav"
 import {UPDATED_HOME_PAGE_CONTENT} from "../gql/home/mutation"
-import {GET_ONE_HOME} from "../gql/home/query"
+import {GET_ONE_ASSIST} from "../gql/assist/query"
 
 type Inputs = {
 	title:string,
 	underTitle:string
 }
 
-const DetailHome: React.FC = function() {
+const DetailAssist: React.FC = function() {
 	const { id } 						= useParams<any>()
 	const history 						= useHistory()
 	const [content, setContent] 		= useState<string>("")
 	const { register, handleSubmit } 	= useForm<Inputs>()
-	const [updatedHome]  			= useMutation(UPDATED_HOME_PAGE_CONTENT)
-	const [home, setListHome] 			= useState<any>()
-	const {loading,error,data} 			= useQuery(GET_ONE_HOME, {
+	const [updatedHome]  				= useMutation(UPDATED_HOME_PAGE_CONTENT)
+	const [listAssist, setListAssist] 			= useState<any>()
+	const {loading,error,data} 			= useQuery(GET_ONE_ASSIST, {
 		variables: {
 			uid:id,
 		},
@@ -33,7 +33,7 @@ const DetailHome: React.FC = function() {
 
 	useEffect(() => {
 		if(!loading && !error && data) {
-			setListHome(data.FindOneHome)
+			setListAssist(data.FindOneAsist)
 		}
 
 	},[loading,error,data])
@@ -44,7 +44,7 @@ const DetailHome: React.FC = function() {
 		} })
 		if (result.data.createPublication) {
 			setContent("")
-			history.push("/admin/list-home")
+			history.push("/admin/list-assist")
 		}
 	}
 
@@ -63,12 +63,11 @@ const DetailHome: React.FC = function() {
 	        					<div className="field">
 		        					<div className="group-input">
 	                                    <form onSubmit={handleSubmit(onSubmit)}>
-	    									<label htmlFor="title-rules">{home?.location} : </label>
 	    									<input type="text" id="title-rules"{...register("title")} placeholder="Titre" name="title" />
 	    									<input type="text" id="title-under"{...register("title")} placeholder="Sous-titre" name="underTitle" />
 	    									<div className="wysiwyg">
 	    										<SunEditor
-	    											defaultValue={home?.content}
+	    											defaultValue={listAssist?.content}
 	    											setOptions={
 													{
 														buttonList:[
@@ -98,4 +97,4 @@ const DetailHome: React.FC = function() {
   	)
 }
 
-export default DetailHome
+export default DetailAssist

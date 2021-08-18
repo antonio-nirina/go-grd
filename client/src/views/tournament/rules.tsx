@@ -59,47 +59,49 @@ const Rules: React.FC = function(props:any) {
 						<li><Link to={`/rules?uid=${params.get('uid')}`} className="active">Règles</Link></li>
 					</ul>
 				</div>
-				<div className="txt">
-					{tournament? parse(tournament.description) : <></>}
-				</div>
-				<div className="tableau">
-					<div className="state">
-						<p>{""}<span>slots</span></p>
-						<p>{""}<span>
-							{
-								Translation(userConnectedRedux.user.language).tournament.pending
-							}
-						</span></p>
-						<p>{""}<span className="confirm">
-							{
-								Translation(userConnectedRedux.user.language).tournament.confirmed
-							}
-						</span></p>
+				<div className="container-rules">
+					<div className="txt">
+						{tournament? parse(tournament.description) : <></>}
 					</div>
-					<div className="info-target">
-						<div className="line">
-							<p>
+					<div className="tableau">
+						<div className="state">
+							<p>{""}<span>slots</span></p>
+							<p>{""}<span>
 								{
-									Translation(userConnectedRedux.user.language).tournament.start
+									Translation(userConnectedRedux.user.language).tournament.pending
 								}
-							</p>
-							<span>{dateStringToDY(tournament?.date)}</span>
-						</div>
-						<div className="line">
-							<p>
+							</span></p>
+							<p>{""}<span className="confirm">
 								{
-									Translation(userConnectedRedux.user.language).tournament.end
+									Translation(userConnectedRedux.user.language).tournament.confirmed
 								}
-							</p>
-							<span>{dateStringToDY(tournament?.deadlineDate)}</span>
+							</span></p>
 						</div>
-						<div className="line">
-							<p>Participants</p>
-							<span>{tournament?.numberParticipate}</span>
-						</div>
-						<div className="line">
-							<p>Mode</p>
-							<span>{tournament && tournament.numberTeam > 0 ? `${tournament?.numberTeam} ON ${tournament?.numberTeam}` : "1 ON 1" }</span>
+						<div className="info-target">
+							<div className="line">
+								<p>
+									{
+										Translation(userConnectedRedux.user.language).tournament.start
+									}
+								</p>
+								<span>{dateStringToDY(tournament?.date)}</span>
+							</div>
+							<div className="line">
+								<p>
+									{
+										Translation(userConnectedRedux.user.language).tournament.end
+									}
+								</p>
+								<span>{dateStringToDY(tournament?.deadlineDate)}</span>
+							</div>
+							<div className="line">
+								<p>Participants</p>
+								<span>{tournament?.numberParticipate}</span>
+							</div>
+							<div className="line">
+								<p>Mode</p>
+								<span>{tournament && tournament.numberTeam > 0 ? `${tournament?.numberTeam} ON ${tournament?.numberTeam}` : "1 ON 1" }</span>
+							</div>
 						</div>
 					</div>
 				</div>

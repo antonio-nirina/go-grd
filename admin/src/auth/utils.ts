@@ -63,7 +63,7 @@ export const decodeCookieContent = function(data:any) {
 		}
 	}
 }
-
+// check role admin
 export const GetCookie = (key = "") => {
 	var k = key ? key : ACCESS_TOKEN
 	let cookieData = Cookies.get(k)

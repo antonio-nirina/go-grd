@@ -46,11 +46,6 @@ const User : React.FC = function(props:any) {
 
 	},[loading,error,data,props,item,isLoader])
 
-    const onShowModal = function(event:any,isBan=false,username = ""){
-		setShowModal(true)
-    	setShowName(username)
-    }
-
     const onShowConfirm = function(){
     	// verif
     	setIsClosed(true)

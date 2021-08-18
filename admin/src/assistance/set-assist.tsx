@@ -1,16 +1,42 @@
-import React from 'react'
-
+import React,{useState} from 'react'
+import {useMutation} from "@apollo/client"
 import SunEditor from 'suneditor-react'
 import 'suneditor/dist/css/suneditor.min.css'
-
+import { useForm } from "react-hook-form"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPen, faTimes } from "@fortawesome/free-solid-svg-icons"
+import {useHistory } from "react-router-dom"
 
 import SideBar from "../header/sidebar"
 import Nav from "../header/nav"
+import {CREATE_ASSIST} from "../gql/assist/mutation"
 
+type Inputs = {
+	title:string
+	titleUnder:string
+}
 
 const SetAssist: React.FC = function() {
+	const history = useHistory()
+	const { register, handleSubmit } 	= useForm<Inputs>()
+	const [content, setContent] 		= useState<string>("")
+	const [createdAssist]  				= useMutation(CREATE_ASSIST)
+
+	const onSubmit = async function(data:Inputs){
+		const result = await createdAssist({ variables: {
+			location:"",
+			title:data.title,
+			underTitle:data.titleUnder,
+			content:content,
+		} })
+		if (result.data.createHomeContent) {
+			history.push("/admin/list-assist")
+		}
+	}
+
+	const handleText = function(content: string) {
+		setContent(content)
+	}
 
 	return(
 	    <div className="admin">
@@ -50,20 +76,22 @@ const SetAssist: React.FC = function() {
 				    									</div>
 				    								</div>
 	    											<div className="wysiwyg">
-			    										<SunEditor setOptions={
-															{
-																buttonList:[
-																	['undo', 'redo',
-																		'font', 'fontSize', 'formatBlock',
-																		'bold', 'italic',
-																		'fontColor', 'hiliteColor', 'textStyle',
-																		'removeFormat',
-																		'outdent', 'indent',
-																		'align', 'horizontalRule', 'list', 'lineHeight',
-																		'link', 'image',
-																		'fullScreen']
-																]
-															}
+			    										<SunEditor
+			    											onChange={handleText}
+			    											setOptions={
+																{
+																	buttonList:[
+																		['undo', 'redo',
+																			'font', 'fontSize', 'formatBlock',
+																			'bold', 'italic',
+																			'fontColor', 'hiliteColor', 'textStyle',
+																			'removeFormat',
+																			'outdent', 'indent',
+																			'align', 'horizontalRule', 'list', 'lineHeight',
+																			'link', 'image',
+																			'fullScreen']
+																	]
+																}
 														} />
 	    											</div>
 	    											<div className="btn-container clear">
