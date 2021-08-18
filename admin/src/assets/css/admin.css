@@ -676,6 +676,12 @@ label[for="img-game"]
     border-bottom: 0;
     border-radius: 0;
 }
+.list-game .img-games{
+	display: block;
+	background-size: 100% 100% !important; 
+	height: 250px;
+	background-repeat: no-repeat !important;
+}
 .list-game .logo-game{   
     display: block;   
     padding: 14px;

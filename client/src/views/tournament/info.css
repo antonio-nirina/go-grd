@@ -33,6 +33,9 @@
 	height: 450px;
 	width: 100%;
 }
+.container-rules{
+	margin: 4em 0;
+}
 .txt{
 	padding: 15px;
 	max-width:  650px;

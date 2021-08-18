@@ -47,8 +47,8 @@ const ListGame : React.FC = function() {
 			    		<div className="dashboard list-game">
 			    			{games?.map(function(el:any,index:number){
                             	return (
-                            		<Link key={index} to ="#" className="grid league-board">
-					    				<img src={el.image} alt="#" />
+                            		<Link key={index} to ="#" className="grid league-board" >
+					    				<span className="img-games" style={{ background: `url(${el.image})`}}></span>
 					    				<span className="logo-game"><img src={el.logo} alt="" /></span>
 					    				<span className="grid-title">{el.name} :</span>
 					    			</Link>
