@@ -309,7 +309,32 @@ h1{
   }
   .aside-menu.social{
     margin-left: 0;
+  }
+  .profil .tournois{
+    width: 430px;
+    overflow: scroll;
+  }
+  .profil .tab-content{
+    width: 510px;
+    margin-bottom: 15px;
+    overflow: scroll;
+  }
+  .profil .mes-resultats{
+    overflow: scroll;
+  }
+  .profil .premium{
+    width: 87%;
+  }
+  .profil .prem-bloc{
+    display: block;
+  }
+  .profil .prem-bloc .item-bloc{
+    width: 100%;
+    display: block;
   }  
+  .premium .btn-container .btn{
+    display: block;
+  }
 }
 @media screen and (max-width: 800px){
   .container .tchat{
@@ -460,7 +485,7 @@ h1{
     padding: 15px 0;
   }
   .popup-content{
-    width: 97% !important;
+    width: 90% !important;
   }
   .rcw-launcher{
     display: block !important;
@@ -496,6 +521,35 @@ h1{
   }
   .container .item-info-left{
     display: block;
+  }
+  .wall#wall{
+    display: block;
+    margin-top: 15px;
+  }
+  .profil .avatar-info{
+    margin-top: 15px;
+  }
+  .profil .tabs li{
+    display: block;
+  }
+  .profil .statistique{
+    display: block;
+  }
+  .profil .start{
+    margin: auto;
+  }
+  .profil .flexbox{
+    width: 100%
+  }
+  .profil .is-cropped{
+    width: 100%;
+  }
+  .profil .itemGame{
+    max-width: inherit;
+    margin-bottom: 15px;
+  } 
+  .profil .team-bloc{
+    max-width: inherit;
   }
 }
 @media screen and (max-width: 520px) {
@@ -594,5 +648,20 @@ h1{
   .container .tchat{
     width: 93%;
     left: 13px;
+  }
+  .mes-tournois .tab-content{
+    width: 290px;
+  }
+  .profil .tournois{
+    width: 290px;
+  }
+  .profil .team-img{
+    top: 15%;
+  }
+  .profil .mes-tournois{
+    padding: 5px 0px 3em 1em;
+  }
+  .profil .about-me{
+    padding: 2em 0;
   }
 }
