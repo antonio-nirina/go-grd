@@ -39,7 +39,6 @@
 }
 .profil .gamer-profil{
 	display: flex;	
-	padding: 15px 20px;
 	align-self: center;
 }
 .profil .gamer-tag{
@@ -169,11 +168,16 @@
 	display: block;	
 }
 .profil .avatar-info{
-	max-width: 750px;    
-    display: inline-block;
-    vertical-align: top;
-    width: 100%;
-    align-self: center;
+	width: 100%;
+	align-self: center;
+	padding-left: 15px;
+}
+.profil .avatar-info .table{
+	display: flex;	
+}
+.profil .avatar-info .table .cell{
+	width: 100%;
+	align-self: center;
 }
 .main-pro .avatar img{
 	width: 100%;
@@ -182,11 +186,6 @@
 }
 .main-pro .premium{
 	
-}
-.cell{
-	display: table-cell;
-    padding: 15px 30px;    
-    width: 23%;
 }
 .about-bloc{
 	

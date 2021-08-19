@@ -23,7 +23,7 @@ func createAssistContent() *graphql.Field {
 				Type: graphql.String,
 			},			
 		},			
-		Resolve: homeResolver.SavedHomeResolver,
+		Resolve: asistResolver.SavedAsistResolver,
 	}
 }
 

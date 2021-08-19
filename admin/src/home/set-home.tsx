@@ -26,6 +26,8 @@ const SetHome: React.FC = function() {
 	const [content, setContent] 		= useState<string>("")
 	const [title, setTitle] 			= useState<string>("")
 	const [titleUnder, setTitleUnder] 	= useState<string>("")
+	const [number, setNumber] 		= useState<number>(1)
+	const [arrayForm, setArrayForm] 		= useState<Array<number>>([])
 	const [createdHomePage]  			= useMutation(CREATE_HOME_PAGE_CONTENT)
 
 	const onSubmit1 = async function(data:Inputs){
@@ -53,6 +55,11 @@ const SetHome: React.FC = function() {
 		setTitleUnder(event.target.value)
 	}
 
+	const addForm = function() {
+		setNumber(number+1)
+		setArrayForm([...arrayForm,number+1])
+	}
+
 	return(
 	    <div className="admin">
 			<div className="layout-container">
@@ -68,7 +75,7 @@ const SetHome: React.FC = function() {
         						<div className="title">
         							<h1>Dynamisation de la page d'accueil</h1>
         							<div className="create-game">
-        								<button className="btn bg-red"><i><FontAwesomeIcon icon={faPlus} size="lg"/></i>Ajouter Nouveau bloc</button>
+        								<button onClick={addForm} className="btn bg-red"><i><FontAwesomeIcon icon={faPlus} size="lg"/></i>Ajouter Nouveau bloc</button>
         							</div>
         						</div>
 	        					<div className="group-input">		        						
@@ -117,7 +124,101 @@ const SetHome: React.FC = function() {
 		    										</div>
 		    									</div>		    									
 		    								</div>
-		    							</div>	    								
+		    							</div>
+		    							{
+		    								number > 1
+		    								?
+		    								arrayForm.map(function(el:number,index:number) {
+		    									return (
+		    										<div className="line">
+					                                    <div className="both">
+					                                    	<div className="bloc">
+					                                    		<div className="field">
+					                                    			<div className="group-input">
+					                                    				<div className="add-bloc">
+						                                        			<div className="link-master">
+							    												<label htmlFor="title-assist">Ajouter le titre : </label>
+							    												<input onChange={handleTitle} type="text" placeholder="titre" id="title-assist"/>
+							    											</div>
+							    											<div className="under-link">
+							    												<label htmlFor="underTitle">Ajouter le sous-titre : </label>
+							    												<input type="text" onChange={handleUnderTitle} placeholder="Sous-titre" id="underTitle" />
+							    											</div>
+							    										</div>
+							    									</div>
+							    								</div>
+				    											<div className="wysiwyg">
+						    										<SunEditor
+						    											onChange={handleText1}
+						    											setOptions={
+																			{
+																				buttonList:[
+																					['undo', 'redo',
+																						'font', 'fontSize', 'formatBlock',
+																						'bold', 'italic',
+																						'fontColor', 'hiliteColor', 'textStyle',
+																						'removeFormat',
+																						'outdent', 'indent',
+																						'align', 'horizontalRule', 'list', 'lineHeight',
+																						'link', 'image',
+																						'fullScreen']
+																				]
+																			}
+																	} />
+				    											</div>
+				    											<div className="btn-container clear">
+				    												<button className="btn bg-white"><FontAwesomeIcon icon={faTimes} /> Supprimer</button>
+					    											<button className="btn bg-red"><FontAwesomeIcon icon={faPen} style={style} /> Ajouter</button>
+					    										</div>
+					    									</div>
+					    								</div>
+					    								<div className={number > 1 && number % 2 !== 0 ? "both" : "d-none"} >
+					                                    	<div className="bloc">
+					                                    		<div className="field">
+					                                    			<div className="group-input">
+					                                    				<div className="add-bloc">
+						                                        			<div className="link-master">
+							    												<label htmlFor="title-assist">Ajouter le titre : </label>
+							    												<input onChange={handleTitle} type="text" placeholder="titre" id="title-assist"/>
+							    											</div>
+							    											<div className="under-link">
+							    												<label htmlFor="underTitle">Ajouter le sous-titre : </label>
+							    												<input type="text" onChange={handleUnderTitle} placeholder="Sous-titre" id="underTitle" />
+							    											</div>
+							    										</div>
+							    									</div>
+							    								</div>
+				    											<div className="wysiwyg">
+						    										<SunEditor
+						    											onChange={handleText1}
+						    											setOptions={
+																			{
+																				buttonList:[
+																					['undo', 'redo',
+																						'font', 'fontSize', 'formatBlock',
+																						'bold', 'italic',
+																						'fontColor', 'hiliteColor', 'textStyle',
+																						'removeFormat',
+																						'outdent', 'indent',
+																						'align', 'horizontalRule', 'list', 'lineHeight',
+																						'link', 'image',
+																						'fullScreen']
+																				]
+																			}
+																	} />
+				    											</div>
+				    											<div className="btn-container clear">
+				    												<button className="btn bg-white"><FontAwesomeIcon icon={faTimes} /> Supprimer</button>
+					    											<button className="btn bg-red"><FontAwesomeIcon icon={faPen} style={style} /> Ajouter</button>
+					    										</div>
+					    									</div>
+				    									</div>
+				    								</div>
+	    										)
+		    								})
+		    								:
+		    								null
+		    							}
     								</form>
 	        					</div>
         					</div>
