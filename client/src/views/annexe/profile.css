@@ -175,12 +175,6 @@
 .avatar .pseudo{
 	margin-top: 10px;
 }
-.avatar-info{
-	max-width: 750px;    
-    display: inline-block;
-    vertical-align: top;
-    width: 100%;
-}
 .main-pro .avatar img{
 	width: 100%;
 	border-radius: 50%;
@@ -188,11 +182,6 @@
 }
 .main-pro .premium{
 	
-}
-.cell{
-	display: table-cell;
-    padding: 15px 30px;    
-    width: 23%;
 }
 .about-bloc{
 	
