@@ -4,26 +4,36 @@ import (
 	"github.com/graphql-go/graphql"
 )
 
-var HomeSchemaType = graphql.NewObject(graphql.ObjectConfig{
+
+var contentSchemaType  = graphql.NewObject(graphql.ObjectConfig{
+	Name: "ContentAssistType",
+	Fields: graphql.Fields{
+		"uid": &graphql.Field{
+			Type: graphql.String,
+		},
+		"Title": &graphql.Field{
+			Type: graphql.String,
+		},
+		"TitleUnder": &graphql.Field{
+			Type: graphql.String,
+		},
+		"Incontent": &graphql.Field{
+			Type: graphql.String,
+		},
+	},
+})
+
+var HomeSchemaType  = graphql.NewObject(graphql.ObjectConfig{
 	Name: "HomeType",
 	Fields: graphql.Fields{
 		"uid": &graphql.Field{
 			Type: graphql.String,
 		},
-		"title": &graphql.Field{
+		"name": &graphql.Field{
 			Type: graphql.String,
 		},
-		"location": &graphql.Field{
-			Type: graphql.String,
-		},
-		"content": &graphql.Field{
-			Type: graphql.String,
-		},
-		"underTitle":&graphql.Field{
-			Type: graphql.String,
-		},
-		"statut":&graphql.Field{
-			Type: graphql.Boolean,
+		"Content": &graphql.Field{
+			Type: graphql.NewList(contentSchemaType),
 		},
 	},
 })

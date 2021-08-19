@@ -58,7 +58,7 @@ const ListAssist : React.FC = function() {
 													<p>{el.title}</p>
 												</div>
 												<div className="card-result align-center">
-													<p>{el.TitleUnder}</p>
+													<p>{el.underTitle}</p>
 												</div>
 												<div className="card-result align-right">
 													<>

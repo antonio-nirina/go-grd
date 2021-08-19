@@ -132,7 +132,7 @@ const SetRules: React.FC = function() {
 	                                    <form onSubmit={handleSubmit(onSubmit)}>
 	    									<label htmlFor="title-rules">Publication : </label>	    									
 	    									<div className="input-group">
-                                                <input type="text" id="title-rules"{...register("title", { required: true })} placeholder="Publication communaute" name="title" />
+                                                <input type="text" id="title-rules" {...register("title", { required: true })} placeholder="Publication communaute" name="title" />
                                                 <select id="select-game" onChange={handleGame}>
 	                                                <option value="">Selectionner jeux ...</option>
 	                                                {games?.map(function(el:any,index:number){
