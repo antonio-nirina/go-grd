@@ -1,7 +1,7 @@
 FROM golang:1.16.2 AS build-env
 
-WORKDIR /backend
-ADD . /backend
+WORKDIR /server
+ADD . /server
 
 RUN go build -o /api cmd/api/main.go
 

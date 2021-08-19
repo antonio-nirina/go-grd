@@ -2,10 +2,10 @@ version: "3.8"
 
 services:
   server:
-    container_name: backend
-    build: ./backend
+    container_name: server_grd
+    build: ./api
     volumes:
-      - ./api/:/backend
+      - ./api/:/server
     ports:
       - 4000:4000
     depends_on:
@@ -14,7 +14,7 @@ services:
     networks:
       - app-network
   redis:
-    container_name: redis_server
+    container_name: redis_grd
     image: redis:alpine3.14
     volumes:
       - ./redis/redis.conf:/etc/redis/redis.conf
@@ -24,7 +24,7 @@ services:
       - app-network
   mongo:
     image: mongo
-    container_name: mongo
+    container_name: mongo_grd
     ports:
       - 27019:27017
     environment:
@@ -48,33 +48,33 @@ services:
       - "3000:3000"
     networks:
       - app-network
-admin:
-  build:
-    context: ./admin/
-  command: npm start
-  volumes:
-    - ./admin/:/usr/admin/
-    - /usr/admin/node_modules
-  depends_on:
-    - server
-  ports:
-    - "3002:3002"
-  networks:
-    - app-network
-ws:
-  build:
-    context: ./ws/
-  command: npm start
-  volumes:
-    - ./ws/:/usr/ws/
-    - /usr/ws/node_modules
-  depends_on:
-    - server
-    - redis
-    - mongo
-  ports:
-    - "8080:8080"
-  networks:
+  admin:
+    build:
+      context: ./admin/
+    command: npm start
+    volumes:
+      - ./admin/:/usr/admin/
+      - /usr/admin/node_modules
+    depends_on:
+      - server
+    ports:
+      - "3002:3002"
+    networks:
+      - app-network
+  ws:
+    build:
+      context: ./ws/
+    command: npm start
+    volumes:
+      - ./ws/:/usr/ws/
+      - /usr/ws/node_modules
+    depends_on:
+      - server
+      - redis
+      - mongo
+    ports:
+      - "8080:8080"
+    networks:
     - app-network
 networks:
   app-network:
