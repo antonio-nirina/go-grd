@@ -313,6 +313,7 @@ h1{
   .profil .tournois{
     width: 430px;
     overflow: scroll;
+    margin: auto;
   }
   .profil .tab-content{
     width: 510px;
@@ -334,6 +335,12 @@ h1{
   }  
   .premium .btn-container .btn{
     display: block;
+  }
+  .profil .mes-resultats .tab-content{
+    width: 510px;
+  }
+  .profil .mes-resultats{
+    padding: 5px 1em 0em;
   }
 }
 @media screen and (max-width: 800px){
@@ -649,19 +656,22 @@ h1{
     width: 93%;
     left: 13px;
   }
-  .mes-tournois .tab-content{
+  /*.mes-tournois .tab-content{
     width: 290px;
-  }
+  }*/
   .profil .tournois{
-    width: 290px;
+    width: 350px;
   }
   .profil .team-img{
     top: 15%;
   }
   .profil .mes-tournois{
-    padding: 5px 0px 3em 1em;
+    padding: 0px;
   }
   .profil .about-me{
     padding: 2em 0;
+  }
+  .profil #wall .avatar-info .table{
+    display: block;
   }
 }
