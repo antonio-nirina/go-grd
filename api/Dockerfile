@@ -1,13 +1,15 @@
-FROM golang:1.16.2 AS build-env
+FROM golang:1.16-alpine
 
-WORKDIR /server
-ADD . /server
+WORKDIR /app
 
-RUN go build -o /api cmd/api/main.go
+COPY go.mod ./
+COPY go.sum ./
+RUN go mod download
 
-FROM debian:buster
+COPY *.go ./
 
-WORKDIR /
-COPY --from=build-env /api /
+RUN go build -o /api
 
-ENTRYPOINT ["/api"]
+EXPOSE 4000
+
+CMD [ "/api" ]
