@@ -21,7 +21,6 @@ type Inputs = {
 const DetailAssist: React.FC = function() {
 	const { id } 						= useParams<any>()
 	const history 						= useHistory()
-	const [content, setContent] 		= useState<string>("")
 	const { register, handleSubmit } 	= useForm<Inputs>()
 	const [updatedHome]  				= useMutation(UPDATED_HOME_PAGE_CONTENT)
 	const [listAssist, setListAssist] 			= useState<any>()
@@ -43,7 +42,6 @@ const DetailAssist: React.FC = function() {
 			uid:id,
 		} })
 		if (result.data.createPublication) {
-			setContent("")
 			history.push("/admin/list-assist")
 		}
 	}

@@ -32,9 +32,9 @@ func NewUsecaseAsist(h repository.RepositoryAsist) UsecaseAsist {
 	}
 }
 
-func (h *asistUsecase) SavedAsistHandler(cmty *entity.Asistant) (interface{}, error) {
+func (h *asistUsecase) SavedAsistHandler(asist *entity.Asistant) (interface{}, error) {
 
-	_,err := h.asistRepository.SavedRepoAsistRepo(cmty)
+	_,err := h.asistRepository.SavedRepoAsistRepo(asist)
 
 	if err != nil {
 		return 0, err

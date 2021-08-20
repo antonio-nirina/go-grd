@@ -22,12 +22,7 @@ interface Item {
 const User : React.FC = function(props:any) {
 	const userConnectedRedux = useSelector((state:RootState) => state.userConnected)
 	const [users, setUsers] = useState<any>([])
-	const [showModal, setShowModal] = useState(false)
-	const [showConfirm, setShowConfirm] = useState(false)
-	const [showName, setShowName] = useState<string>("")
-	const [isClosed, setIsClosed] = useState<Boolean>(false)
 	const [isLoader, setIsLoader] = useState<Boolean>(true)
-	const [isBanned, setIsBanned] = useState<Boolean>(true)
 	const [item, setItem] = useState<Item>({item:1})
 
 	const {loading,error,data} 	= useQuery(GET_ALL_USER, {
@@ -46,18 +41,6 @@ const User : React.FC = function(props:any) {
 
 	},[loading,error,data,props,item,isLoader])
 
-    const onShowConfirm = function(){
-    	// verif
-    	setIsClosed(true)
-        setShowConfirm(!showConfirm)
-        setIsBanned(true)
-    }
-
-    const handleNotAccepted = function() {
-    	setShowName("")
-    	setShowModal(false)
-    	setIsBanned(false)
-    }
     const handleItemsPage = function(item:number) {
     	setIsLoader(true)
     	setItem({item:item})
@@ -140,17 +123,6 @@ const User : React.FC = function(props:any) {
 													<p>{!el.isBanned?"Actif":"Bloquer"}</p>
 												</div>
 												<div className="card-result check">
-													{/*<p>
-														<label htmlFor="ban" className="switch">
-															<input
-																type="checkbox"
-																u-tag={el.username}
-																checked={isBanned ? false : true}
-																onChange={(e) => onShowModal(e,el.isBanned,el.username)}
-																id="ban"/>
-															<span className="slider">Oui</span>
-														</label>
-													</p>*/}
 													<div className="btn-container nomarg">
 														<Link to="/admin/detail-user" className="btn bg-red">Détail user</Link>
 													</div>
@@ -160,15 +132,7 @@ const User : React.FC = function(props:any) {
 									})
 								}
 							</div>							
-							<div className={!showModal ? "popup-modal" :"popup-modal show"} >
-								<div className="popup-container">
-									<div className="popup-title">{!showConfirm ? "Voulez vous bannir " :"Voulez vous annuler le bannissement de "}<span>{showName}</span>?</div>
-									<div className="btn-container confirm">
-										<button className="btn bg-red" onClick={() => handleNotAccepted()}>Oui</button>
-										<button className="btn bg-white" onClick={onShowConfirm}>Non</button>
-									</div>
-								</div>
-							</div>
+
 						</div>
 						<Pagination
 							handlePage={handleItemsPage}
