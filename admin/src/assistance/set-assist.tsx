@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPen, faTimes } from "@fortawesome/free-solid-svg-icons"
 import {useHistory } from "react-router-dom"
+import { Link } from "react-router-dom"
 
 import SideBar from "../header/sidebar"
 import Nav from "../header/nav"
@@ -18,7 +19,7 @@ type Inputs = {
 
 const SetAssist: React.FC = function() {
 	const history = useHistory()
-	const { register, handleSubmit } 	= useForm<Inputs>()
+	const { register, formState: { errors },handleSubmit } 	= useForm<Inputs>()
 	const [content, setContent] 		= useState<string>("")
 	const [createdAssist]  				= useMutation(CREATE_ASSIST)
 
@@ -29,7 +30,7 @@ const SetAssist: React.FC = function() {
 			underTitle:data.titleUnder,
 			content:content,
 		} })
-		if (result.data.createHomeContent) {
+		if (result.data.createAssistContent) {
 			history.push("/admin/list-assist")
 		}
 	}
@@ -55,7 +56,7 @@ const SetAssist: React.FC = function() {
 	        							<h1>Dynamisation de la page assistance</h1>
 	        						</div>
 		        					<div className="group-input">		        						
-	                                    <form className="wysiwyg-container">
+	                                    <form onSubmit={handleSubmit(onSubmit)} className="wysiwyg-container">
 	                                    	{/*Classe line pour ajouter une ligne, class both pour la colonne
 	                                    	Nb : 1 ligne = 2 colonne*/}
 		    								<div className="line">
@@ -66,11 +67,13 @@ const SetAssist: React.FC = function() {
 		                                    				<div className="add-bloc">
 			                                        			<div className="link-master">
 				    												<label htmlFor="title-assist">Ajouter le titre : </label>
-				    												<input type="text" placeholder="titre" id="title-assist"/>
+				    												{errors.title && <p style={{"color":"red"}}>{errors.title.message}</p>}
+				    												<input type="text" placeholder="titre" {...register("title", { required: "Title est obligatoire." })} id="title-assist" name="title"/>
 				    											</div>
 				    											<div className="under-link">
 				    												<label htmlFor="underTitle">Ajouter le sous-titre : </label>
-				    												<input type="text" placeholder="Sous-titre" id="underTitle" />
+				    												{errors.titleUnder && <p style={{"color":"red"}}>{errors.titleUnder.message}</p>}
+				    												<input type="text" placeholder="Sous-titre" {...register("titleUnder", { required: "Sous-titre est obligatoire" })} id="underTitle" name="titleUnder" />
 				    											</div>
 				    										</div>
 				    									</div>
@@ -95,7 +98,7 @@ const SetAssist: React.FC = function() {
 														} />
 	    											</div>
 	    											<div className="btn-container clear">
-	    												<button className="btn bg-white"><FontAwesomeIcon icon={faTimes} /> Supprimer</button>
+	    												<Link to="/admin/list-assist" className="btn bg-white"><FontAwesomeIcon icon={faTimes} /> Supprimer</Link>
 		    											<button className="btn bg-red"><FontAwesomeIcon icon={faPen} /> Ajouter</button>
 		    										</div>
 		    									</div>		    									

@@ -26,21 +26,21 @@ func NewResolverAsist(asistUseCase handler.UsecaseAsist) AsistResolver {
 }
 
 func (h *asist) SavedAsistResolver(params graphql.ResolveParams) (interface{}, error){
-	titleHome, _ := params.Args["title"].(string)
+	title, _ := params.Args["title"].(string)
 	content, _ := params.Args["content"].(string)
 	underTitle, _ := params.Args["underTitle"].(string)
 	locationHome, _ := params.Args["location"].(string)
 
-	home := &entity.Asistant{
+	asist := &entity.Asistant{
 		Uid: primitive.NewObjectID(),
-		Title:titleHome,
+		Title:title,
 		Location:locationHome,
 		Content:content, 
 		UnderTitle:underTitle,
 		Statut:true,    			
 	}
 
-	res,err := h.asistHandler.SavedAsistHandler(home)
+	res,err := h.asistHandler.SavedAsistHandler(asist)
 
 	if err != nil {
 		return nil, err

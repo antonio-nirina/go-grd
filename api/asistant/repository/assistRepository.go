@@ -23,15 +23,15 @@ func NewAsistRepository(client *mongo.Client) *driverRepository {
 
 
 type RepositoryAsist interface {
-	SavedRepoAsistRepo(home *entity.Asistant) (interface{}, error)
+	SavedRepoAsistRepo(asist *entity.Asistant) (interface{}, error)
 	FindAsistRepo(idQuery primitive.ObjectID) (entity.Asistant, error)
 	FindAllAsistRepo()([]entity.Asistant, error)
 	// RemovedRepoAsist(home *entity.Asistant) (interface{}, error)
 }
 
-func (c *driverRepository) SavedRepoAsistRepo(home *entity.Asistant) (interface{}, error) {
+func (c *driverRepository) SavedRepoAsistRepo(asist *entity.Asistant) (interface{}, error) {
 	var collection = c.client.Database("grd_database").Collection("asistant")
-	insertResult, err := collection.InsertOne(context.TODO(), home)
+	insertResult, err := collection.InsertOne(context.TODO(), asist)
 
 	if err != nil {
 		return nil, err
@@ -39,7 +39,7 @@ func (c *driverRepository) SavedRepoAsistRepo(home *entity.Asistant) (interface{
 
 	fmt.Println("Inserted a single document: ", insertResult)
 
-	return home, nil
+	return asist, nil
 }
 
 func (c *driverRepository) FindAsistRepo(idQuery primitive.ObjectID) (entity.Asistant, error) {

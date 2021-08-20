@@ -21,7 +21,6 @@ type Inputs = {
 const DetailHome: React.FC = function() {
 	const { id } 						= useParams<any>()
 	const history 						= useHistory()
-	const [content, setContent] 		= useState<string>("")
 	const { register, handleSubmit } 	= useForm<Inputs>()
 	const [updatedHome]  			= useMutation(UPDATED_HOME_PAGE_CONTENT)
 	const [home, setListHome] 			= useState<any>()
@@ -43,7 +42,6 @@ const DetailHome: React.FC = function() {
 			uid:id,
 		} })
 		if (result.data.createPublication) {
-			setContent("")
 			history.push("/admin/list-home")
 		}
 	}
