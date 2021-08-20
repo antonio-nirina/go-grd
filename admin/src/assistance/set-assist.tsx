@@ -98,7 +98,7 @@ const SetAssist: React.FC = function() {
 														} />
 	    											</div>
 	    											<div className="btn-container clear">
-	    												<Link to="/admin/list-assist" className="btn bg-white"><FontAwesomeIcon icon={faTimes} /> Supprimer</Link>
+	    												<Link to="/admin/list-assist" className="btn bg-white white"><FontAwesomeIcon icon={faTimes} /> Supprimer</Link>
 		    											<button className="btn bg-red"><FontAwesomeIcon icon={faPen} /> Ajouter</button>
 		    										</div>
 		    									</div>		    									

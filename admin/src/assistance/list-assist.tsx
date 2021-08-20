@@ -28,7 +28,7 @@ const ListAssist : React.FC = function() {
                     <Nav />
         		</nav>
 				<div className="main-content">
-					<div className="body-content">
+					<div className="body-content list-assist">
 						<div className="column">
 							<div className="create-game">
 								<Link to="/admin/set-assist">
@@ -41,7 +41,7 @@ const ListAssist : React.FC = function() {
 						</div>
 						<div className="auto-scroll">
 							<div className="sm-width">
-								<div className="body-card align-center">
+								<div className="body-card">
 									<div className="card-title">
 										<p>Titre<i><FontAwesomeIcon icon={faSort} size="lg"/></i></p>
 									</div>
@@ -54,13 +54,13 @@ const ListAssist : React.FC = function() {
 									assists?.map(function(el:any,index:number){
 										return (
 											<div className="body-card" key={index} style={{"cursor":"pointer"}}>
-												<div className="card-result align-center">
+												<div className="card-result">
 													<p>{el.title}</p>
 												</div>
-												<div className="card-result align-center">
+												<div className="card-result">
 													<p>{el.underTitle}</p>
 												</div>
-												<div className="card-result align-right">
+												<div className="card-result">
 													<>
 														<Link to={`/admin/detail/assist/${el.uid}`}><i><FontAwesomeIcon icon={faEdit} /></i></Link>
 														<i><FontAwesomeIcon icon={faTrash} /></i>

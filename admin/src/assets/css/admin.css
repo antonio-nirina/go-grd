@@ -831,6 +831,16 @@ label[for="img-game"]
 .wysiwyg-container .both:last-child{
 	margin-left: 8px;
 }
+.list-assist .sm-width{
+	width: 40%;
+}
+.list-assist .body-card{
+	display: block;
+}
+.list-assist .card-title, .list-assist .card-result{
+	width: 33%;
+	display: inline-block;
+}
 /***********Détail User*****************/
 .avatar{
 	width: 250px;
