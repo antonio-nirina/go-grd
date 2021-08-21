@@ -17,9 +17,6 @@ import View from "../wager/view"
 import Lobby from "../wager/lobby"
 import Assistant from "../assistant/assistant"
 import Assistance from "../assistance/assistance"
-import Ingame from "../assistance/in-game"
-import Social from "../assistance/social"
-import HelpConnexion from "../assistance/aide-connexion"
 import Contact from "../assistance/contact"
 import Communaute from "../communaute/communaute"
 import League from "../league/league"
@@ -58,10 +55,7 @@ const Router = function() {
 			<ProtectedRoute path="/lobby" exact component={Lobby} />
 			<ProtectedRoute path="/communaute" exact component={Communaute} />			
 			<ProtectedRoute path="/assistant" exact component={Assistant} />
-			<ProtectedRoute path="/assistance" exact component={Assistance} />
-			<ProtectedRoute path="/aide-in-game" exact component={Ingame} />
-			<ProtectedRoute path="/aide-social" exact component={Social} />
-			<ProtectedRoute path="/aide-connexion" exact component={HelpConnexion} />
+			<ProtectedRoute path="/assistance" exact component={Assistance} />			
 			<ProtectedRoute path="/contact" exact component={Contact} />
 			<ProtectedRoute path="/profil" exact component={Profil} />
 			<ProtectedRoute path="/profile" exact component={Profile} />

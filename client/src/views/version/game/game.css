@@ -2,13 +2,7 @@
 .version .jeux{
 	margin-top: 24px;
 }
-.jeux{
-	background: url("../../../assets/image/background-img.jpg") no-repeat;
-	background-repeat: no-repeat;	
-	background-size: 100%;
-	padding-top: 0em;	
 
-}
 .w100{
 	width: 100%;
 }

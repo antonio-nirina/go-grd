@@ -78,7 +78,15 @@ const SetHome: React.FC = function() {
         								<button onClick={addForm} className="btn bg-red"><i><FontAwesomeIcon icon={faPlus} size="lg"/></i>Ajouter Nouveau bloc</button>
         							</div>
         						</div>
-	        					<div className="group-input">		        						
+	        					<div className="group-input">	        						
+                                    <div className="input-group">
+                                    	<label htmlFor="sliderImg" className="entete">Importer une image header</label>
+                                    	<label htmlFor="bg-game" className="entete">Importer une image de fond du jeux</label>		                                            	
+                                    </div>
+                                    <div className="input-group">
+                                        <input type="file" id="sliderImg" />
+                                        <input type="file" id="bg-game" className="no-margin" />
+                                    </div>	        						
                                     <form className="wysiwyg-container" onSubmit={handleSubmit(onSubmit1)}>
                                     	{/*Classe line pour la ligne, class both pour la colonne
 	                                    	Nb : 1 ligne = 2 colonne*/}                                   	
