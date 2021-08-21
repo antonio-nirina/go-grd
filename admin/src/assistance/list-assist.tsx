@@ -48,6 +48,9 @@ const ListAssist : React.FC = function() {
 									<div className="card-title">
 										<p>Sous-titre<i><FontAwesomeIcon icon={faSort} size="lg"/></i></p>
 									</div>
+									<div className="card-title">
+										<p>Statut <i><FontAwesomeIcon icon={faSort} size="lg"/></i></p>
+									</div>
 									<div className="card-title"></div>
 								</div>
 								{
@@ -59,6 +62,9 @@ const ListAssist : React.FC = function() {
 												</div>
 												<div className="card-result">
 													<p>{el.underTitle}</p>
+												</div>
+												<div className="card-result">
+													<p>{el.statut?"Actif":"Inactif"}</p>
 												</div>
 												<div className="card-result">
 													<>
