@@ -60,6 +60,11 @@ const SetHome: React.FC = function() {
 		setArrayForm([...arrayForm,number+1])
 	}
 
+	const removeLine = function(index:number) {
+		const arr = arrayForm.splice(0,index)
+		setArrayForm(arr)
+	}
+
 	return(
 	    <div className="admin">
 			<div className="layout-container">
@@ -130,7 +135,7 @@ const SetHome: React.FC = function() {
 		    								?
 		    								arrayForm.map(function(el:number,index:number) {
 		    									return (
-		    										<div className="line">
+		    										<div className="line" key={index}>
 					                                    <div className="both">
 					                                    	<div className="bloc">
 					                                    		<div className="field">
@@ -167,52 +172,11 @@ const SetHome: React.FC = function() {
 																	} />
 				    											</div>
 				    											<div className="btn-container clear">
-				    												<button className="btn bg-white"><FontAwesomeIcon icon={faTimes} /> Supprimer</button>
+				    												<div className="btn bg-white" onClick={() => removeLine(index)}><FontAwesomeIcon icon={faTimes} /> Supprimer</div>
 					    											<button className="btn bg-red"><FontAwesomeIcon icon={faPen} style={style} /> Ajouter</button>
 					    										</div>
 					    									</div>
 					    								</div>
-					    								<div className={number > 1 && number % 2 !== 0 ? "both" : "d-none"} >
-					                                    	<div className="bloc">
-					                                    		<div className="field">
-					                                    			<div className="group-input">
-					                                    				<div className="add-bloc">
-						                                        			<div className="link-master">
-							    												<label htmlFor="title-assist">Ajouter le titre : </label>
-							    												<input onChange={handleTitle} type="text" placeholder="titre" id="title-assist"/>
-							    											</div>
-							    											<div className="under-link">
-							    												<label htmlFor="underTitle">Ajouter le sous-titre : </label>
-							    												<input type="text" onChange={handleUnderTitle} placeholder="Sous-titre" id="underTitle" />
-							    											</div>
-							    										</div>
-							    									</div>
-							    								</div>
-				    											<div className="wysiwyg">
-						    										<SunEditor
-						    											onChange={handleText1}
-						    											setOptions={
-																			{
-																				buttonList:[
-																					['undo', 'redo',
-																						'font', 'fontSize', 'formatBlock',
-																						'bold', 'italic',
-																						'fontColor', 'hiliteColor', 'textStyle',
-																						'removeFormat',
-																						'outdent', 'indent',
-																						'align', 'horizontalRule', 'list', 'lineHeight',
-																						'link', 'image',
-																						'fullScreen']
-																				]
-																			}
-																	} />
-				    											</div>
-				    											<div className="btn-container clear">
-				    												<button className="btn bg-white"><FontAwesomeIcon icon={faTimes} /> Supprimer</button>
-					    											<button className="btn bg-red"><FontAwesomeIcon icon={faPen} style={style} /> Ajouter</button>
-					    										</div>
-					    									</div>
-				    									</div>
 				    								</div>
 	    										)
 		    								})
