@@ -4,7 +4,6 @@ import { Link } from "react-router-dom"
 import Header from "../header/header"
 import Footer from "../footer/footer"
 import Chat from "./chat"
-import Join from "../join/join"
 
 import { faCommentDots } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
@@ -115,7 +114,6 @@ const Joingame: React.FC = function() {
           </div>          
         </div>
         <div className="clear"></div>        
-				<Join/>
 				<Footer/>
   			</div>
   		</div>

@@ -7,13 +7,13 @@ import (
 var contentInputType  = graphql.NewInputObject(graphql.InputObjectConfig{
 	Name:"ContentHomeInput",
 	Fields: graphql.InputObjectConfigFieldMap{
-		"Title": &graphql.InputObjectFieldConfig{
+		"title": &graphql.InputObjectFieldConfig{
 			Type: graphql.String,
 		},
-		"TitleUnder": &graphql.InputObjectFieldConfig{
+		"titleUnder": &graphql.InputObjectFieldConfig{
 			Type: graphql.String,
 		},
-		"Incontent": &graphql.InputObjectFieldConfig{
+		"incontent": &graphql.InputObjectFieldConfig{
 			Type: graphql.String,
 		},
 	},
@@ -28,6 +28,18 @@ var inputAssistType = graphql.NewInputObject(
 			},
 			"content": &graphql.InputObjectFieldConfig{
 				Type: graphql.NewList(contentInputType),
+			},
+			"image": &graphql.ArgumentConfig{
+				Type: graphql.String,
+			},
+			"imageGame": &graphql.ArgumentConfig{
+				Type: graphql.String,
+			},
+			"imageType": &graphql.ArgumentConfig{
+				Type: graphql.String,
+			},
+			"imageGameType": &graphql.ArgumentConfig{
+				Type: graphql.String,
 			},
 		},
 	},
