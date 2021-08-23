@@ -56,7 +56,7 @@ func (c *driverRepository) SavedRepoSubjectRepo(subject *entity.Subject) (interf
 
 	fmt.Println("Inserted a single document: ", insertResult)
 
-	return asist, nil
+	return subject, nil
 }
 
 func (c *driverRepository) FindAsistRepo(idQuery primitive.ObjectID) (entity.Asistant, error) {

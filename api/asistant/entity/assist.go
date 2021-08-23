@@ -6,7 +6,7 @@ import (
 
 type Asistant struct {
 	Uid       primitive.ObjectID `bson:"uid"`
-	Title     string             `json:"title"`
+	Title     Subject             `json:"title"`
 	Location  string             `json:"location"`
 	Content   string             `json:"content"`
 	UnderTitle   string           `json:"underTitle"`

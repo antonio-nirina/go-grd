@@ -77,3 +77,44 @@
 .side-infos thead td{
 	color: #8c8cde;
 }
+/*/////////////////////////////////////////////////*/
+.avatar{
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	border: 1px solid #000000;
+}
+.flex-group{	
+}
+.team-group{
+	border: 1px solid #1b1d26;
+	border-radius: 5px;
+    width: 32.5%;
+    display: inline-block;
+    margin-right: 5px;
+    margin-bottom: 15px;
+}
+.groups{
+	background: #1b1d26
+}
+.calendar .groups p{
+	font-weight: bold;
+	font-size: 18px;
+	text-align: center;
+	padding: 15px 0px;
+	color: #ffffff;
+	margin: 0px;
+
+}
+.group-name{
+	display: flex;
+	padding: 3px 5px;
+	margin-right: 5px;
+}
+.group-name img, .group-name span{
+	align-self: center;
+	margin-right: 10px;	
+}
+.group-name span{
+	font-size: 13px;
+}

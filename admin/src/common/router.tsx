@@ -23,6 +23,7 @@ import User from "../user/user"
 import DetailUser from "../user/detail-user"
 import ListAssist from "../assistance/list-assist"
 import DetailAssist from "../assistance/detail-assist"
+import CreateTitle from "../assistance/create-titre"
 
 const Router = function() {
 	return (
@@ -47,6 +48,7 @@ const Router = function() {
 			<ProtectedRoute path="/admin/teams" exact component={Team} />
 			<ProtectedRoute path="/admin/list-assist" exact component={ListAssist} />
 			<ProtectedRoute path="/admin/detail/assist/:id" exact component={DetailAssist} />
+			<ProtectedRoute path="/admin/create/assistant" exact component={CreateTitle} />
 		</Switch>
 	)
 }

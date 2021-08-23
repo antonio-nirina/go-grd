@@ -75,7 +75,7 @@ var partResolver 		= partDelivery.NewResolverPart(partUsecase,usecase,tournament
 
 var homeRepository 		= homeRepo.NewHomeRepository(database)
 var homeUsecase 		= homeHandler.NewUsecaseHome(homeRepository)
-var homeResolver 		= homeDelivery.NewResolverHome(homeUsecase)
+var homeResolver 		= homeDelivery.NewResolverHome(homeUsecase,usecaseGame)
 
 var teamRepository 		= teamRepo.NewTeamRepository(database)
 var teamUsecase 		= teamHandler.NewUsecaseTeam(teamRepository)

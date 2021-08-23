@@ -11,7 +11,7 @@ var AssistSchemaType = graphql.NewObject(graphql.ObjectConfig{
 			Type: graphql.String,
 		},
 		"title": &graphql.Field{
-			Type: graphql.String,
+			Type: SubjectSchemaType,
 		},
 		"location": &graphql.Field{
 			Type: graphql.String,

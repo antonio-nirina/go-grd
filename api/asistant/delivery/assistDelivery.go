@@ -29,14 +29,26 @@ func NewResolverAsist(asistUseCase handler.UsecaseAsist) AsistResolver {
 }
 
 func (h *asist) SavedAsistResolver(params graphql.ResolveParams) (interface{}, error){
-	title, _ := params.Args["title"].(string)
+	titleUid, _ := params.Args["title"].(string)
 	content, _ := params.Args["content"].(string)
 	underTitle, _ := params.Args["underTitle"].(string)
 	locationHome, _ := params.Args["location"].(string)
+	title,err := h.asistHandler.FindSubjectHandler(titleUid)
+
+	if err != nil {
+		return nil,err
+	}
+
+	uid,_:= primitive.ObjectIDFromHex(title.Uid)
+	newTitle := entity.Subject{
+		Uid:uid,       
+		Title:title.Title,
+		Description:title.Description,
+	}
 
 	asist := &entity.Asistant{
 		Uid: primitive.NewObjectID(),
-		Title:title,
+		Title:newTitle,
 		Location:locationHome,
 		Content:content, 
 		UnderTitle:underTitle,
@@ -56,13 +68,13 @@ func (h *asist) SavedSubjectResolver(params graphql.ResolveParams) (interface{},
 	title, _ := params.Args["title"].(string)
 	description, _ := params.Args["description"].(string)
 
-	asist := &entity.Asistant{
+	subject := &entity.Subject{
 		Uid: primitive.NewObjectID(),
 		Title:title,
 		Description:description,  			
 	}
 
-	res,err := h.asistHandler.SavedSubjectHandler(asist)
+	res,err := h.asistHandler.SavedSubjectHandler(subject)
 
 	if err != nil {
 		return nil, err

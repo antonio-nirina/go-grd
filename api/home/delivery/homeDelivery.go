@@ -16,7 +16,7 @@ type inputAddHome struct {
 
 type homeInputEl struct {
 	Name string `json:"name"`
-	ImageGame string `json:"imageGame"`
+	Image string `json:"image"`
 	ImageType string `json:"imageType"`
 	ImageGameType string `json:"imageGameType"`
 	ImageGame string `json:"imageGame"`
@@ -45,7 +45,7 @@ type home struct {
 func NewResolverHome(homeUseCase handler.UsecaseHome,usecase gameUseCase.UsecaseGameInterface) HomeResolver {
 	return &home{
 		homeHandler: homeUseCase,
-		gameUseCase:usecase
+		gameUseCase:usecase,
 	}
 }
 
@@ -70,8 +70,8 @@ func (a *home) SavedHomeResolver(params graphql.ResolveParams) (interface{}, err
 		Uid: primitive.NewObjectID(),
 		Name:inputs.HomeInput.Name,
 		Content:cnts,
-		image:urlImage,
-		imageGame:urlGame,  			
+		Image:urlImage,
+		ImageGame:urlGame,  			
 	}
 
 	res,err := a.homeHandler.SavedHomeandler(home)

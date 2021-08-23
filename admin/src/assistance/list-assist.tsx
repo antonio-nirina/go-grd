@@ -37,6 +37,12 @@ const ListAssist : React.FC = function() {
 											Créer contenu
 									</button>
 								</Link>
+								<Link to="/admin/create/assistant">
+									<button className="btn bg-red" style={{"cursor":"pointer"}}>
+										<FontAwesomeIcon icon={faPlus} />
+											Créer titre publication
+									</button>
+								</Link>
 							</div>
 						</div>
 						<div className="auto-scroll">
@@ -58,7 +64,7 @@ const ListAssist : React.FC = function() {
 										return (
 											<div className="body-card" key={index} style={{"cursor":"pointer"}}>
 												<div className="card-result">
-													<p>{el.title}</p>
+													<p>{el.title.title}</p>
 												</div>
 												<div className="card-result">
 													<p>{el.underTitle}</p>

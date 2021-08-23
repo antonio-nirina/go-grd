@@ -4,41 +4,42 @@ import (
 	"github.com/graphql-go/graphql"
 )
 
-var contentInputType  = graphql.NewInputObject(graphql.InputObjectConfig{
-	Name:"ContentHomeInput",
-	Fields: graphql.InputObjectConfigFieldMap{
-		"title": &graphql.InputObjectFieldConfig{
-			Type: graphql.String,
-		},
-		"titleUnder": &graphql.InputObjectFieldConfig{
-			Type: graphql.String,
-		},
-		"incontent": &graphql.InputObjectFieldConfig{
-			Type: graphql.String,
+var contentInputType  = graphql.NewInputObject(
+	graphql.InputObjectConfig{
+		Name:"ContentHomeInput",
+		Fields: graphql.InputObjectConfigFieldMap{
+			"title": &graphql.InputObjectFieldConfig{
+				Type: graphql.String,
+			},
+			"titleUnder": &graphql.InputObjectFieldConfig{
+				Type: graphql.String,
+			},
+			"incontent": &graphql.InputObjectFieldConfig{
+				Type: graphql.String,
+			},
 		},
 	},
-})
+)
 
 var inputAssistType = graphql.NewInputObject(
 	graphql.InputObjectConfig{
 		Name: "HomeInputType",
 		Fields: graphql.InputObjectConfigFieldMap{
 			"name": &graphql.InputObjectFieldConfig{
-				Type: graphql.String,
 			},
 			"content": &graphql.InputObjectFieldConfig{
 				Type: graphql.NewList(contentInputType),
 			},
-			"image": &graphql.ArgumentConfig{
+			"image": &graphql.InputObjectFieldConfig{
 				Type: graphql.String,
 			},
-			"imageGame": &graphql.ArgumentConfig{
+			"imageGame": &graphql.InputObjectFieldConfig{
 				Type: graphql.String,
 			},
-			"imageType": &graphql.ArgumentConfig{
+			"imageType": &graphql.InputObjectFieldConfig{
 				Type: graphql.String,
 			},
-			"imageGameType": &graphql.ArgumentConfig{
+			"imageGameType": &graphql.InputObjectFieldConfig{
 				Type: graphql.String,
 			},
 		},
@@ -51,7 +52,7 @@ var argsAssist = graphql.FieldConfigArgument{
 	},
 }
 
-func createHome() *graphql.Field {
+func createdHome() *graphql.Field {
 	return &graphql.Field{
 		Type:        graphql.String,
 		Description: "Home create",
@@ -69,6 +70,6 @@ func removedHome() *graphql.Field {
 				Type: graphql.String,
 			},
 		},
-		Resolve:     homeResolver.RemovedHomeByResolver,
+		Resolve:homeResolver.RemovedHomeByResolver,
 	}	
 }

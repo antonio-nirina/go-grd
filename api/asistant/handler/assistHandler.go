@@ -1,6 +1,7 @@
 package handler
 
 import (
+
 	"github.com/thoussei/antonio/api/asistant/entity"
 	"github.com/thoussei/antonio/api/asistant/repository"
 	"go.mongodb.org/mongo-driver/bson/primitive"
@@ -11,7 +12,7 @@ type UsecaseAsist interface {
 	FindAsistHandler(idQuery string) (AsistViewModel, error)
 	FindAllAsistHandler() ([]AsistViewModel, error)
 
-	SavedSubjectHandler(home *entity.Asistant) (interface{}, error)
+	SavedSubjectHandler(subject *entity.Subject) (interface{}, error)
 	FindSubjectHandler(idQuery string) (SubjectViewModel, error)
 	FindAllSubjectHandler() ([]SubjectViewModel, error)
 	// UpdatedAsistHandler(uid string) (interface{}, error)
@@ -19,7 +20,7 @@ type UsecaseAsist interface {
 
 type AsistViewModel struct {
 	Uid       	string 			 	`json:"uid"`
-	Title     	string             `json:"title"`
+	Title     	SubjectViewModel     `json:"title"`
 	Location  	string             `json:"location"`
 	Content   	string             `json:"content"`
 	UnderTitle  string           	`json:"underTitle"`
@@ -53,9 +54,9 @@ func (h *asistUsecase) SavedAsistHandler(asist *entity.Asistant) (interface{}, e
 	return "Ok",nil
 }
 
-func (h *asistUsecase) SavedSubjectHandler(asist *entity.Asistant) (interface{}, error) {
+func (h *asistUsecase) SavedSubjectHandler(subject *entity.Subject) (interface{}, error) {
 
-	_,err := h.asistRepository.SavedRepoSubjectRepo(asist)
+	_,err := h.asistRepository.SavedRepoSubjectRepo(subject)
 
 	if err != nil {
 		return 0, err
@@ -77,9 +78,15 @@ func (h *asistUsecase) FindAsistHandler(idQuery string) (AsistViewModel, error) 
 		return AsistViewModel{}, err
 	}
 
+	subject := SubjectViewModel{
+		result.Title.Uid.Hex(),
+		result.Title.Title,
+		result.Title.Description,
+	}
+
 	asistViewModel := AsistViewModel{
 		Uid: result.Uid.Hex(),
-		Title:result.Title,
+		Title:subject,
 		Location:result.Location,
 		Content:result.Content,
 		UnderTitle:result.UnderTitle,
@@ -93,13 +100,13 @@ func (h *asistUsecase) FindSubjectHandler(idQuery string) (SubjectViewModel, err
 	objectId, err := primitive.ObjectIDFromHex(idQuery)
 	
 	if err != nil {
-		return AsistViewModel{}, err
+		return SubjectViewModel{}, err
 	}
 
 	result, err := h.asistRepository.FindSubjectRepo(objectId)
 
 	if err != nil {
-		return AsistViewModel{}, err
+		return SubjectViewModel{}, err
 	}
 
 	subjViewModel := SubjectViewModel{
@@ -121,9 +128,14 @@ func (h *asistUsecase) FindAllAsistHandler() ([]AsistViewModel, error) {
 	var res []AsistViewModel
 
 	for _,val := range result {
+		subject := SubjectViewModel{
+			val.Title.Uid.Hex(),
+			val.Title.Title,
+			val.Title.Description,
+		}
 		asistViewModel := AsistViewModel{
 			Uid: val.Uid.Hex(),
-			Title:val.Title,
+			Title:subject,
 			Location:val.Location,
 			Content:val.Content,
 			UnderTitle:val.UnderTitle,
@@ -137,8 +149,7 @@ func (h *asistUsecase) FindAllAsistHandler() ([]AsistViewModel, error) {
 }
 
 func (h *asistUsecase) FindAllSubjectHandler() ([]SubjectViewModel, error) {
-
-
+	result, err := h.asistRepository.FindAllSubjectRepo()
 	if err != nil {
 		return []SubjectViewModel{}, err
 	}
