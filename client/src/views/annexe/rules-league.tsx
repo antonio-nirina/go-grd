@@ -1,21 +1,19 @@
-import React ,{useEffect,useState} from "react"
+import React,{useEffect,useState} from "react"
+import parse from 'html-react-parser'
 import {useQuery} from "@apollo/client"
 import { useSelector } from "react-redux"
-import parse from 'html-react-parser'
-import { Link } from "react-router-dom"
+import {RootState} from "../../reducer"
+import {Translation} from "../../lang/translation"
+import {GET_ONE_TOURNAMENT} from "../../gql/tournament/query"
 import Header from "../header/header"
 import Footer from "../footer/footer"
-
-import {GET_ONE_TOURNAMENT} from "../../gql/tournament/query"
-import {Translation} from "../../lang/translation"
-import {RootState} from "../../reducer"
+import {Tournament} from "../models/tournament"
 import "../tournament/info.css"
 import "../../assets/css/style.css"
-import {Tournament} from "../models/tournament"
+import { Link } from "react-router-dom"
 import {dateStringToDY} from "../tools/dateConvert"
 
-
-const Info: React.FC = function(props:any) {
+const RulesLeague: React.FC = function(props:any) {
 	const params = new URLSearchParams(props.location.search)
 	const uid:string|null = params.get("uid")
 	const [tournament, setTournament] = useState<Tournament>()
@@ -44,28 +42,21 @@ const Info: React.FC = function(props:any) {
   	<div className="Tournament info">
 		<div className="container">
 			<Header/>
-			<div className="full-container test">
+			<div className="full-container">
 				<div className="details">
-					<p className="name-target">Tournois : <span>{tournament?.game.name}</span></p>
-					<p className="starting">
-						{
-							Translation(userConnectedRedux.user.language).tournament.starttimes
-						}:
-						<span> {userConnectedRedux.user.language === "fr" ? dateStringToDY(tournament?.date) : dateStringToDY(tournament?.date)}</span></p>
+					<p className="name-target">Tournament : <span>{tournament?.game.name}</span></p>
+					<p className="starting"><span>{userConnectedRedux.user.language === "fr" ? dateStringToDY(tournament?.date) : dateStringToDY(tournament?.date)}</span></p>
 					<p className="status">Status : <span>
 						{isOpen ? Translation(userConnectedRedux.user.language).tournament.open : Translation(userConnectedRedux.user.language).tournament.close }
-					</span>
-					</p>
+					</span></p>
 				</div>
+				
+				<div className="banniere"></div>
 				<div className="tabs">
 					<ul>
-						<li><Link to={`/info?uid=${params.get('uid')}`} className="active">Info</Link></li>
-						<li><Link to={`/matches?uid=${params.get('uid')}`}>Match</Link></li>
-						<li><Link to={`/rules?uid=${params.get('uid')}`}>
-						{
-							Translation(userConnectedRedux.user.language).tournament.rules
-						}
-						</Link></li>
+						<li><Link to={`/info-league?uid=${params.get('uid')}`}>Info</Link></li>
+						<li><Link to={`/matches-league?uid=${params.get('uid')}`}>Match</Link></li>
+						<li><Link to={`/rules-league?uid=${params.get('uid')}`} className="active">Règles</Link></li>
 					</ul>
 				</div>
 				<div className="container-rules">
@@ -121,4 +112,4 @@ const Info: React.FC = function(props:any) {
   )
 }
 
-export default Info
+export default RulesLeague

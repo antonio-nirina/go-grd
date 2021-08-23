@@ -6,9 +6,12 @@ import Ligue from "../annexe/ligue"
 import Tournament from "../tournament/tournament"
 import Tournois from "../annexe/tournois"
 import Info from "../tournament/info"
+import InfoLeague from "../annexe/info-league"
 import Matches from "../tournament/matches"
+import MatchesLeague from "../annexe/matches-league"
 import Teams from "../tournament/teams"
 import Rules from "../tournament/rules"
+import RulesLeague from "../annexe/rules-league"
 import Wager from "../wager/wager"
 import Waggers from "../waggers/waggers"
 import WaggersGame from "../waggers/waggersgame"
@@ -41,10 +44,13 @@ const Router = function() {
 			<ProtectedRoute path="/tournament" exact component={Tournois} />
 			<ProtectedRoute path="/tournament-game" exact component={TournamentGame} />
 			<ProtectedRoute path="/league-game" exact component={LeagueGame} />
-			<ProtectedRoute path="/info" exact component={Info} />
+			<ProtectedRoute path="/info" exact component={Info} />			
 			<ProtectedRoute path="/matches" exact component={Matches} />
+			<ProtectedRoute path="/info-league" exact component={InfoLeague} />
+			<ProtectedRoute path="/matches-league" exact component={MatchesLeague} />
+			<ProtectedRoute path="/rules-league" exact component={RulesLeague} />
 			<ProtectedRoute path="/teams" exact component={Teams} />
-			<ProtectedRoute path="/rules" exact component={Rules} />
+			<ProtectedRoute path="/rules" exact component={Rules} />			
 			<ProtectedRoute path="/ligue" exact component={Ligue} />
 			<ProtectedRoute path="/league" exact component={League} />
 			<ProtectedRoute path="/wager" exact component={Wager} />

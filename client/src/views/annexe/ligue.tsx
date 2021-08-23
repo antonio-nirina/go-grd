@@ -58,7 +58,7 @@ const Ligue: React.FC = function() {
 						</div>
 					</div>
 					<div className="upcomming side">
-						<Link to="/info" title="">
+						<Link to="/info-league" title="">
 							<div className="items">
 								<div className="side-img">
 									<img src={championship} alt="championship-rl"/>
@@ -103,7 +103,7 @@ const Ligue: React.FC = function() {
 						</Link>
 					</div>
 					<div className="upcomming side">
-						<Link to="/info" title="">
+						<Link to="/info-league" title="">
 							<div className="items">
 								<div className="side-img">
 									<img src={championship} alt="championship-rl"/>
