@@ -13,9 +13,9 @@ import "../tournament/info.css"
 import "../../assets/css/style.css"
 import {Tournament} from "../models/tournament"
 import {dateStringToDY} from "../tools/dateConvert"
+import AvatarDefault from "../../assets/image/game-tag.png"
 
-
-const Info: React.FC = function(props:any) {
+const InfoLeague: React.FC = function(props:any) {
 	const params = new URLSearchParams(props.location.search)
 	const uid:string|null = params.get("uid")
 	const [tournament, setTournament] = useState<Tournament>()
@@ -59,9 +59,9 @@ const Info: React.FC = function(props:any) {
 				</div>
 				<div className="tabs">
 					<ul>
-						<li><Link to={`/info?uid=${params.get('uid')}`} className="active">Info</Link></li>
-						<li><Link to={`/matches?uid=${params.get('uid')}`}>Match</Link></li>
-						<li><Link to={`/rules?uid=${params.get('uid')}`}>
+						<li><Link to={`/info-league?uid=${params.get('uid')}`} className="active">Info</Link></li>
+						<li><Link to={`/matches-league?uid=${params.get('uid')}`}>Match</Link></li>
+						<li><Link to={`/rules-league?uid=${params.get('uid')}`}>
 						{
 							Translation(userConnectedRedux.user.language).tournament.rules
 						}
@@ -70,7 +70,62 @@ const Info: React.FC = function(props:any) {
 				</div>
 				<div className="container-rules">
 					<div className="txt">
-						{tournament? parse(tournament.description) : <></>}
+						<div className="calendar">
+							<h2>Champions League <span>2022</span></h2>
+							<div className="flex-group">
+								<div className="team-group">
+									<div className="groups">									
+										<p>Group A</p>
+									</div>
+									<p className="group-name">
+										<img src={AvatarDefault} className="avatar" alt="" />
+										<span>Teamname 1</span>
+									</p>
+									<p className="group-name">
+										<img src={AvatarDefault} className="avatar" alt="" />
+										<span>Teamname 2</span>
+									</p>
+									<p className="group-name">
+										<img src={AvatarDefault} className="avatar" alt="" />
+										<span>Teamname 3</span>
+									</p>
+								</div>
+								<div className="team-group">
+									<div className="groups">									
+										<p>Group B</p>
+									</div>
+									<p className="group-name">
+										<img src={AvatarDefault} className="avatar" alt="" />
+										<span>Teamname 4</span>
+									</p>
+									<p className="group-name">
+										<img src={AvatarDefault} className="avatar" alt="" />
+										<span>Teamname 5</span>
+									</p>
+									<p className="group-name">
+										<img src={AvatarDefault} className="avatar" alt="" />
+										<span>Teamname 6</span>
+									</p>
+								</div>
+								<div className="team-group">
+									<div className="groups">									
+										<p>Group B</p>
+									</div>
+									<p className="group-name">
+										<img src={AvatarDefault} className="avatar" alt="" />
+										<span>Teamname 4</span>
+									</p>
+									<p className="group-name">
+										<img src={AvatarDefault} className="avatar" alt="" />
+										<span>Teamname 5</span>
+									</p>
+									<p className="group-name">
+										<img src={AvatarDefault} className="avatar" alt="" />
+										<span>Teamname 6</span>
+									</p>
+								</div>
+							</div>
+						</div>
 					</div>
 					<div className="tableau">
 						<div className="state">
@@ -121,4 +176,4 @@ const Info: React.FC = function(props:any) {
   )
 }
 
-export default Info
+export default InfoLeague
