@@ -27,6 +27,22 @@ func createAssistContent() *graphql.Field {
 	}
 }
 
+func createSubjectContent() *graphql.Field {
+	return &graphql.Field{
+		Type:        graphql.String,
+		Description: "Assist content create",
+		Args: graphql.FieldConfigArgument{
+			"title": &graphql.ArgumentConfig{
+				Type: graphql.String,
+			},
+			"description": &graphql.ArgumentConfig{
+				Type: graphql.String,
+			},			
+		},			
+		Resolve: asistResolver.SavedSubjectResolver,
+	}
+}
+
 /*func updateHomeContent() *graphql.Field {
 	return &graphql.Field{
 		Type:        graphql.String,

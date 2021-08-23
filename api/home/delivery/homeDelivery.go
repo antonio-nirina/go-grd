@@ -6,6 +6,7 @@ import (
 	"github.com/graphql-go/graphql"
 	"github.com/thoussei/antonio/api/home/entity"
 	"github.com/thoussei/antonio/api/home/handler"
+	gameUseCase "github.com/thoussei/antonio/api/games/handler"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
@@ -15,6 +16,10 @@ type inputAddHome struct {
 
 type homeInputEl struct {
 	Name string `json:"name"`
+	ImageGame string `json:"imageGame"`
+	ImageType string `json:"imageType"`
+	ImageGameType string `json:"imageGameType"`
+	ImageGame string `json:"imageGame"`
 	Content [] homeElements `json:"content"`
 }
 
@@ -34,11 +39,13 @@ type HomeResolver interface {
 
 type home struct {
 	homeHandler handler.UsecaseHome
+	gameUseCase gameUseCase.UsecaseGameInterface
 }
 
-func NewResolverHome(homeUseCase handler.UsecaseHome) HomeResolver {
+func NewResolverHome(homeUseCase handler.UsecaseHome,usecase gameUseCase.UsecaseGameInterface) HomeResolver {
 	return &home{
 		homeHandler: homeUseCase,
+		gameUseCase:usecase
 	}
 }
 
@@ -51,10 +58,20 @@ func (a *home) SavedHomeResolver(params graphql.ResolveParams) (interface{}, err
 	for _,val := range inputs.HomeInput.Content{
 		cnts = append(cnts,entity.HomeContent{Title:val.Title,TitleUnder:val.TitleUnder,Incontent:val.Incontent})
 	}
+
+	urlGame,err := a.gameUseCase.HandleFileGame(params.Args["imageGame"].(string),params.Args["imageGameType"].(string))
+	urlImage,err := a.gameUseCase.HandleFileGame(params.Args["image"].(string),params.Args["imageType"].(string))
+
+	if err != nil {
+		return nil, err
+	}
+
 	home := &entity.Home{
 		Uid: primitive.NewObjectID(),
 		Name:inputs.HomeInput.Name,
-		Content:cnts,  			
+		Content:cnts,
+		image:urlImage,
+		imageGame:urlGame,  			
 	}
 
 	res,err := a.homeHandler.SavedHomeandler(home)

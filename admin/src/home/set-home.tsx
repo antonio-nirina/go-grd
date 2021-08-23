@@ -23,36 +23,55 @@ type Inputs = {
 const SetHome: React.FC = function() {
 	const history = useHistory()
 	const { handleSubmit } 	= useForm<Inputs>()
-	const [content, setContent] 		= useState<string>("")
-	const [title, setTitle] 			= useState<string>("")
-	const [titleUnder, setTitleUnder] 	= useState<string>("")
+	const [title, setTitle] 			= useState<Array<string>>([])
+	const [titleUnder, setTitleUnder] 	= useState<Array<string>>([])
 	const [number, setNumber] 		= useState<number>(1)
 	const [arrayForm, setArrayForm] 		= useState<Array<number>>([])
 	const [createdHomePage]  			= useMutation(CREATE_HOME_PAGE_CONTENT)
+	const [image, setImage] = useState<string>("")
+	const [imageGame, setImageGame] 	= useState<string>("")
+	const [imageType, setImageType] = useState<string>("")
+	const [imageGameType, setImageGameType] 	= useState<string>("")
+	const [arrayContent, setArrayContent] 		= useState<Array<string>>([])
 
-	const onSubmit1 = async function(data:Inputs){
-		const result = await createdHomePage({ variables: {
-			location:"",
+	const onSubmit1 = async function(){
+		let array:Array<any> = []
+		let nIncontent:Array<any> = []
+		
+		for(let i=0;i<titleUnder.length;i++) {
+			nIncontent.push({
+				title:title[i],
+				titleUnder:titleUnder[i],
+				incontent:arrayContent[i]
+			})
+		}
+		console.log(nIncontent)
+		/*const result = await createdHomePage({ variables: {
+			name:"",
 			title:title,
 			underTitle:titleUnder,
-			content:content,
+			content:array,
+			image:image,
+			imageGame:imageGame,
+			imageType:imageType,
+			imageGameType:imageGameType
 		} })
 		if (result.data.createHomeContent) {
 			setContent("")
 			history.push("/admin/list-home")
-		}
+		}*/
 	}
 
 	const handleText1 = function(content: string) {
-		setContent(content)
+		setArrayContent(arrayContent => [...arrayContent, content])
 	}
 
 	const handleTitle = function(event:any) {
-		setTitle(event.target.value)
+		setTitle([...title,event.target.value])
 	}
 
 	const handleUnderTitle = function(event:any) {
-		setTitleUnder(event.target.value)
+		setTitleUnder(titleUnder => [...titleUnder, event.target.value])
 	}
 
 	const addForm = function() {
@@ -63,6 +82,22 @@ const SetHome: React.FC = function() {
 	const removeLine = function(index:number) {
 		const arr = arrayForm.splice(0,index)
 		setArrayForm(arr)
+	}
+
+	const handleUpload = function(e:any,type=false) {
+		const reader = new FileReader()
+		reader.readAsDataURL(e.target.files[0])
+        reader.onload = function(params) {
+        	let file = typeof reader.result === "string" ? reader.result?.replace(/^data:(.*?);base64,/, "") : ""
+			file = file.replace(/ /g, '+')
+			if(type) {
+				setImageGame(file)
+				setImageType((e.target.files[0].type).split("/")[1])
+			} else {
+				setImage(file)
+				setImageGameType((e.target.files[0].type).split("/")[1])
+			}
+        }
 	}
 
 	return(
@@ -89,8 +124,8 @@ const SetHome: React.FC = function() {
                                     	<label htmlFor="bg-game" className="entete">Importer une image de fond du jeux</label>		                                            	
                                     </div>
                                     <div className="input-group">
-                                        <input type="file" id="sliderImg" />
-                                        <input type="file" id="bg-game" className="no-margin" />
+                                        <input type="file" id="sliderImg" onChange={(e)=>{handleUpload(e,true)}} />
+                                        <input type="file" id="bg-game" onChange={(e)=>{handleUpload(e)}} className="no-margin" />
                                     </div>	        						
                                     <form className="wysiwyg-container" onSubmit={handleSubmit(onSubmit1)}>
                                     	{/*Classe line pour la ligne, class both pour la colonne
@@ -131,10 +166,6 @@ const SetHome: React.FC = function() {
 																}
 														} />
 	    											</div>
-	    											<div className="btn-container clear">
-	    												<button className="btn bg-white"><FontAwesomeIcon icon={faTimes} /> Supprimer</button>
-		    											<button className="btn bg-red"><FontAwesomeIcon icon={faPen} style={style} /> Ajouter</button>
-		    										</div>
 		    									</div>		    									
 		    								</div>
 		    							</div>
@@ -151,11 +182,11 @@ const SetHome: React.FC = function() {
 					                                    				<div className="add-bloc">
 						                                        			<div className="link-master">
 							    												<label htmlFor="title-assist">Ajouter le titre : </label>
-							    												<input onChange={handleTitle} type="text" placeholder="titre" id="title-assist"/>
+							    												<input onChange={handleTitle} type="text" placeholder="titre" id={`title-assist-${el}`}/>
 							    											</div>
 							    											<div className="under-link">
 							    												<label htmlFor="underTitle">Ajouter le sous-titre : </label>
-							    												<input type="text" onChange={handleUnderTitle} placeholder="Sous-titre" id="underTitle" />
+							    												<input type="text" onChange={handleUnderTitle} placeholder="Sous-titre" id={`underTitle-${el}`} />
 							    											</div>
 							    										</div>
 							    									</div>
@@ -181,7 +212,6 @@ const SetHome: React.FC = function() {
 				    											</div>
 				    											<div className="btn-container clear">
 				    												<div className="btn bg-white" onClick={() => removeLine(index)}><FontAwesomeIcon icon={faTimes} /> Supprimer</div>
-					    											<button className="btn bg-red"><FontAwesomeIcon icon={faPen} style={style} /> Ajouter</button>
 					    										</div>
 					    									</div>
 					    								</div>
@@ -191,6 +221,10 @@ const SetHome: React.FC = function() {
 		    								:
 		    								null
 		    							}
+		    							<div className="btn-container clear">
+											<button className="btn bg-white"><FontAwesomeIcon icon={faTimes} /> Supprimer</button>
+											<button className="btn bg-red"><FontAwesomeIcon icon={faPen} style={style} /> Ajouter</button>
+										</div>
     								</form>
 	        					</div>
         					</div>

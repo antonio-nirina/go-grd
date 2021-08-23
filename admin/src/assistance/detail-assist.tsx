@@ -20,8 +20,8 @@ type Inputs = {
 
 const DetailAssist: React.FC = function() {
 	const { id } 						= useParams<any>()
-	const history 						= useHistory()
-	const { register, handleSubmit } 	= useForm<Inputs>()
+	const history 								= useHistory()
+	const { register, handleSubmit,setValue } 	= useForm<Inputs>()
 	const [updatedHome]  				= useMutation(UPDATED_HOME_PAGE_CONTENT)
 	const [listAssist, setListAssist] 			= useState<any>()
 	const {loading,error,data} 			= useQuery(GET_ONE_ASSIST, {
@@ -33,9 +33,11 @@ const DetailAssist: React.FC = function() {
 	useEffect(() => {
 		if(!loading && !error && data) {
 			setListAssist(data.FindOneAsist)
+			setValue("title", data.FindOneAsist.title)
+			setValue("underTitle", data.FindOneAsist.underTitle)
 		}
 
-	},[loading,error,data])
+	},[loading,error,data,setValue])
 
 	const onSubmit = async function(data:Inputs){
 		const result = await updatedHome({ variables: {
@@ -61,8 +63,8 @@ const DetailAssist: React.FC = function() {
 	        					<div className="field">
 		        					<div className="group-input">
 	                                    <form onSubmit={handleSubmit(onSubmit)}>
-	    									<input type="text" id="title-rules"{...register("title")} placeholder="Titre" name="title" />
-	    									<input type="text" id="title-under"{...register("title")} placeholder="Sous-titre" name="underTitle" />
+	    									<input type="text" id="title-rules" {...register("title")} placeholder="Titre" name="title" />
+	    									<input type="text" id="title-under" {...register("underTitle")} placeholder="Sous-titre" name="underTitle" />
 	    									<div className="wysiwyg">
 	    										<SunEditor
 	    											defaultValue={listAssist?.content}
