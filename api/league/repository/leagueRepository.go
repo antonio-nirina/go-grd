@@ -24,7 +24,7 @@ func NewLeagueRepository(client *mongo.Client) *DriverRepository {
 }
 
 
-type RepositoryTournament interface {
+type RepositoryLeague interface {
 	SavedLeagueRepo(league *entity.League) (interface{}, error)
 	FindLeagueRepo(idQuery primitive.ObjectID) (entity.League, error)
 	FindAllLeagueRepo(pageNumber int64,limit int64) ([]entity.League, error)

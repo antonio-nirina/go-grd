@@ -12,3 +12,4 @@ export const CREATE_SUBJECT = gql`
 		createSubjectContent(title:$title,description:$description)
 	}
 `
+

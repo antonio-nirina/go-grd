@@ -2,8 +2,8 @@ package handler
 
 import (
 	"github.com/thoussei/antonio/api/league/entity"
-	tournament "github.com/thoussei/antonio/api/tournament/handler"
 	"github.com/thoussei/antonio/api/league/repository"
+	tournament "github.com/thoussei/antonio/api/tournament/handler"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
@@ -96,8 +96,8 @@ func (l *leagueUsecase) FindAllLeagueHandler(pageNumber int64, limit int64) ([]l
 			Price:val.Price,     			
 			DeadlineDate:val.DeadlineDate,    	
 			PriceParticipate:val.PriceParticipate,  
-			Game:GameViewModel{val.Game.Uid.Hex(),val.Game.Name,val.Game.Image,val.Game.Logo,val.Game.Slug},				
-			Plateform:PlateformViewModel{val.Plateform.Uid.Hex(),val.Plateform.Name,val.Plateform.Description},
+			Game:tournament.GameViewModel{val.Game.Uid.Hex(),val.Game.Name,val.Game.Image,val.Game.Logo,val.Game.Slug},				
+			Plateform:tournament.PlateformViewModel{val.Plateform.Uid.Hex(),val.Plateform.Name,val.Plateform.Description},
 			Rules:val.Rules, 
 			IsPublic:val.IsPublic,
 			Records:records, 			
@@ -130,8 +130,8 @@ func (l *leagueUsecase) FindLeagueGameHandler(pageNumber int64,limit int64,game 
 			Price:val.Price,     			
 			DeadlineDate:val.DeadlineDate,    	
 			PriceParticipate:val.PriceParticipate,  
-			Game:GameViewModel{val.Game.Uid.Hex(),val.Game.Name,val.Game.Image,val.Game.Logo,val.Game.Slug},				
-			Plateform:PlateformViewModel{val.Plateform.Uid.Hex(),val.Plateform.Name,val.Plateform.Description},
+			Game:tournament.GameViewModel{val.Game.Uid.Hex(),val.Game.Name,val.Game.Image,val.Game.Logo,val.Game.Slug},				
+			Plateform:tournament.PlateformViewModel{val.Plateform.Uid.Hex(),val.Plateform.Name,val.Plateform.Description},
 			Rules:val.Rules,
 			IsPublic:val.IsPublic,  			
 		}

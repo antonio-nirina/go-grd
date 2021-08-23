@@ -22,4 +22,6 @@ type leagueViewModel struct {
 	Rules   			string            	`json:"rules"`
 	IsPublic 			bool `json:"isPublic"`
 	Records   			int   `json:"records"`
+	IsTeam 				bool `json:"IsTeam"`
+	NumberGroup 		int `json:"numberGroup"`
 }

@@ -1,5 +1,5 @@
-import React,{useState} from 'react'
-import {useMutation} from "@apollo/client"
+import React,{useState,useEffect} from 'react'
+import {useMutation,useQuery} from "@apollo/client"
 import SunEditor from 'suneditor-react'
 import 'suneditor/dist/css/suneditor.min.css'
 import { useForm } from "react-hook-form"
@@ -11,6 +11,7 @@ import { Link } from "react-router-dom"
 import SideBar from "../header/sidebar"
 import Nav from "../header/nav"
 import {CREATE_ASSIST} from "../gql/assist/mutation"
+import {GET_ALL_SUBJECT} from "../gql/assist/query"
 
 type Inputs = {
 	title:string
@@ -21,12 +22,15 @@ const SetAssist: React.FC = function() {
 	const history = useHistory()
 	const { register, formState: { errors },handleSubmit } 	= useForm<Inputs>()
 	const [content, setContent] 		= useState<string>("")
+	const [title, setTitle] 			= useState<string>("")
+	const [titles, setTitles] 			= useState<any>([])
 	const [createdAssist]  				= useMutation(CREATE_ASSIST)
+	const {loading,error,data} 			= useQuery(GET_ALL_SUBJECT)
 
 	const onSubmit = async function(data:Inputs){
 		const result = await createdAssist({ variables: {
 			location:"",
-			title:data.title,
+			title:title,
 			underTitle:data.titleUnder,
 			content:content,
 		} })
@@ -35,8 +39,18 @@ const SetAssist: React.FC = function() {
 		}
 	}
 
+	useEffect(() => {
+		if(!loading && !error && data) {
+			setTitles(data.FindAllSubject)
+		}
+	},[loading,error,data])
+
 	const handleText = function(content: string) {
 		setContent(content)
+	}
+
+	const handleTitle = function(event:any) {
+		setTitle(event.target.value)
 	}
 
 	return(
@@ -65,12 +79,17 @@ const SetAssist: React.FC = function() {
 		                                    		<div className="field">
 		                                    			<div className="group-input">
 		                                    				<div className="add-bloc">
-			                                        			<div className="link-master">
-				    												<label htmlFor="title-assist">Ajouter le titre : </label>
-				    												{errors.title && <p style={{"color":"red"}}>{errors.title.message}</p>}
-				    												<input type="text" placeholder="titre" {...register("title", { required: "Title est obligatoire." })} id="title-assist" name="title"/>
-				    											</div>
-				    											<div className="under-link">
+		                                    					<select id="jeux" onChange={handleTitle}>
+					                                                <option value="">Selectionnez le titre...</option>
+					                                                {
+					                                                	titles?.map(function(el:any,index:number) {
+					                                                		return(
+					                                                			<option key={index} value={el.uid}>{el.title}</option>
+				                                                			)
+					                                                	})
+					                                                }
+					                                            </select>
+					                                            <div className="under-link">
 				    												<label htmlFor="underTitle">Ajouter le sous-titre : </label>
 				    												{errors.titleUnder && <p style={{"color":"red"}}>{errors.titleUnder.message}</p>}
 				    												<input type="text" placeholder="Sous-titre" {...register("titleUnder", { required: "Sous-titre est obligatoire" })} id="underTitle" name="titleUnder" />
