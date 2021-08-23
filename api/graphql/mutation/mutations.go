@@ -107,5 +107,6 @@ func GetRootFields() graphql.Fields {
 		"updatedTeamByBanned":	updatedTeamByBanned(),
 		"createHome":			createHome(),
 		"removedHome":			removedHome(),
+		"createSubjectContent":createSubjectContent(),
 	}
 }

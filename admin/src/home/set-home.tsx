@@ -37,7 +37,7 @@ const SetHome: React.FC = function() {
 	const onSubmit1 = async function(){
 		let array:Array<any> = []
 		let nIncontent:Array<any> = []
-		console.log(document.getElementById("title-assist-2"))
+		
 		for(let i=0;i<titleUnder.length;i++) {
 			nIncontent.push({
 				title:title[i],

@@ -5,7 +5,7 @@ import (
 	"fmt"
 
 	"github.com/thoussei/antonio/api/external"
-	"github.com/thoussei/antonio/api/tournament/entity"
+	"github.com/thoussei/antonio/api/league/entity"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
@@ -19,22 +19,22 @@ type DriverRepository struct {
 
 
 // Return Interface User Repository
-func NewTournamentRepository(client *mongo.Client) *DriverRepository {
+func NewLeagueRepository(client *mongo.Client) *DriverRepository {
 	return &DriverRepository{client}
 }
 
 
 type RepositoryTournament interface {
-	SavedTournamentRepo(tournament *entity.Tournament) (interface{}, error)
-	FindTournamentRepo(idQuery primitive.ObjectID) (entity.Tournament, error)
-	FindAllTournamentRepo(pageNumber int64,limit int64) ([]entity.Tournament, error)
-	FindTournamentGameRepo(pageNumber int64,limit int64,game primitive.ObjectID) ([]entity.Tournament, error)
-	CountTournamentRepository()(int,error)
+	SavedLeagueRepo(league *entity.League) (interface{}, error)
+	FindLeagueRepo(idQuery primitive.ObjectID) (entity.League, error)
+	FindAllLeagueRepo(pageNumber int64,limit int64) ([]entity.League, error)
+	FindLeagueGameRepo(pageNumber int64,limit int64,game primitive.ObjectID) ([]entity.League, error)
+	CountLeagueRepository()(int,error)
 }
 
-func (c *DriverRepository) SavedTournamentRepo(tournament *entity.Tournament) (interface{}, error){
-	var collection = c.client.Database("grd_database").Collection("tournament")
-	insertResult, err := collection.InsertOne(context.TODO(), tournament)
+func (c *DriverRepository) SavedLeagueRepo(league *entity.League) (interface{}, error){
+	var collection = c.client.Database("grd_database").Collection("league")
+	insertResult, err := collection.InsertOne(context.TODO(), league)
 
 	if err != nil {
 		return nil, err
@@ -42,12 +42,12 @@ func (c *DriverRepository) SavedTournamentRepo(tournament *entity.Tournament) (i
 
 	fmt.Println("Inserted a single document: ", insertResult)
 
-	return tournament, nil
+	return league, nil
 }
 
-func (c *DriverRepository) FindTournamentRepo(idQuery primitive.ObjectID) (entity.Tournament, error){
-	var collection = c.client.Database("grd_database").Collection("tournament")
-	var result entity.Tournament
+func (c *DriverRepository) FindLeagueRepo(idQuery primitive.ObjectID) (entity.League, error){
+	var collection = c.client.Database("grd_database").Collection("league")
+	var result entity.League
 
 	err := collection.FindOne(context.TODO(), bson.M{"uid": idQuery}).Decode(&result)
 
@@ -58,11 +58,11 @@ func (c *DriverRepository) FindTournamentRepo(idQuery primitive.ObjectID) (entit
 	return result, nil
 }
 
-func (c *DriverRepository) FindAllTournamentRepo(pageNumber int64,limit int64) ([]entity.Tournament, error){
+func (c *DriverRepository) FindAllLeagueRepo(pageNumber int64,limit int64) ([]entity.League, error){
 	// var skp int64 
 	// skp = (pageNumber - 1) * limit
-	var collection = c.client.Database("grd_database").Collection("tournament")
-	var results []entity.Tournament
+	var collection = c.client.Database("grd_database").Collection("league")
+	var results []entity.League
 	cur, err := collection.Find(context.TODO(), bson.D{{}},options.Find().SetLimit(limit).SetSkip(pageNumber).SetSort(bson.M{"_id": -1}))
 
 	if err != nil {
@@ -70,7 +70,7 @@ func (c *DriverRepository) FindAllTournamentRepo(pageNumber int64,limit int64) (
 	}
 
 	for cur.Next(context.TODO()) {
-		var elem entity.Tournament
+		var elem entity.League
 		err := cur.Decode(&elem)
 		if err != nil {
 			external.Logger(fmt.Sprintf("%v", err))
@@ -84,9 +84,9 @@ func (c *DriverRepository) FindAllTournamentRepo(pageNumber int64,limit int64) (
 	return results, nil
 }
 
-func (c *DriverRepository) FindTournamentGameRepo(pageNumber int64,limit int64,game primitive.ObjectID) ([]entity.Tournament, error) {
-	var collection = c.client.Database("grd_database").Collection("tournament")
-	var results []entity.Tournament
+func (c *DriverRepository) FindLeagueGameRepo(pageNumber int64,limit int64,game primitive.ObjectID) ([]entity.League, error) {
+	var collection = c.client.Database("grd_database").Collection("league")
+	var results []entity.League
 	cur, err := collection.Find(context.TODO(), bson.D{{"game.uid", game}},options.Find().SetLimit(limit).SetSkip(pageNumber).SetSort(bson.M{"_id": -1}))
 
 	if err != nil {
@@ -94,7 +94,7 @@ func (c *DriverRepository) FindTournamentGameRepo(pageNumber int64,limit int64,g
 	}
 
 	for cur.Next(context.TODO()) {
-		var elem entity.Tournament
+		var elem entity.League
 		err := cur.Decode(&elem)
 		if err != nil {
 			external.Logger(fmt.Sprintf("%v", err))
@@ -108,8 +108,8 @@ func (c *DriverRepository) FindTournamentGameRepo(pageNumber int64,limit int64,g
 	return results, nil
 }
 
-func (c *DriverRepository) CountTournamentRepository()(int,error) {
-	var collection = c.client.Database("grd_database").Collection("tournament")
+func (c *DriverRepository) CountLeagueRepository()(int,error) {
+	var collection = c.client.Database("grd_database").Collection("league")
 
 	records,err := collection.CountDocuments(context.TODO(), bson.D{{}})
 	
