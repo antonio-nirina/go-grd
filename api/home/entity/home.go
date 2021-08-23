@@ -7,6 +7,8 @@ import (
 type Home struct {
 	Uid        primitive.ObjectID `bson:"uid"`
 	Name      string             `json:"name"`
+	ImageGame string             `json:"imageGame"`
+	Image      string             `json:"image"`
 	Content    []HomeContent     `json:"content"`
 }
 

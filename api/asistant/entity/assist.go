@@ -12,3 +12,9 @@ type Asistant struct {
 	UnderTitle   string           `json:"underTitle"`
 	Statut   bool           	 `json:"statut"`
 }
+
+type Subject struct {
+	Uid       primitive.ObjectID 	`bson:"uid"`
+	Title     string             	`json:"title"`
+	Description  string             `json:"location"`
+}

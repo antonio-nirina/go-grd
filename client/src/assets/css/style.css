@@ -125,6 +125,9 @@ html{
 .awesome{
   margin-right: 5px;
 }
+.white{
+  color: #ffffff !important;
+}
 a{
    text-decoration:none;
 }

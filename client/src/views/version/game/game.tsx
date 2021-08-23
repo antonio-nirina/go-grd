@@ -14,11 +14,12 @@ import cod_Modernwarfare from "../../../assets/image/modernwarfare.png"
 import cod_warzone from "../../../assets/image/warzone.png"
 import cod_coldwar from "../../../assets/image/cod-coldwar.png"
 import fifa from "../../../assets/image/fifa21.png"
+import Background from "../../../assets/image/background-img.jpg"
 
 const Game: React.FC = function() {
 	const userConnectedRedux = useSelector((state:RootState) => state.userConnected)
   return(
-  <div className="jeux">
+  <div className="jeux" style={{ background: `url(${Background})`}}>
     <h2>
 	{
 		Object.keys(userConnectedRedux.user).length > 0 ?

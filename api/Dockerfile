@@ -7,8 +7,8 @@ COPY go.sum ./
 RUN go mod download
 
 COPY *.go ./
-RUN go build -o /api 
+RUN go build -o /api
 
 EXPOSE 4000
 
-ENTRYPOINT ["/api"]
+CMD [ "/api" ]

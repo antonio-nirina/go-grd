@@ -21,3 +21,21 @@ export const GET_ONE_ASSIST= gql`
 		statut
 	}
 }`
+
+export const GET_ALL_SUBJECT= gql`
+	query FindAllSubject {
+		FindAllSubjectt{
+		uid
+		title
+		description
+	}
+}`
+
+export const GET_ONE_SUBJECT= gql`
+	query FindOneSubject($uid: String!) {
+		FindOneSubject(uid: $uid){
+		uid
+		title
+		description
+	}
+}`

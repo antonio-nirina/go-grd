@@ -8,7 +8,7 @@ import Footer from "../footer/footer"
 
 import { faUsers } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import {Translation} from "../../lang/translation"
+// import {Translation} from "../../lang/translation"
 import {GET_TOURNAMENT_GAME} from "../../gql/tournament/query"
 import {RootState} from "../../reducer"
 import "../waggers/waggers.css"

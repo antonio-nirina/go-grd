@@ -124,6 +124,9 @@ html{
 .awesome{
   margin-right: 5px;
 }
+.white{
+  color: #ffffff !important;
+}
 li{
   list-style: none;
 }

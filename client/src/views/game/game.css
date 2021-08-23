@@ -1,14 +1,13 @@
 @charset "UTF-8";
-.jeux{
-	background-image: url("../../assets/image/background-img.jpg");
-	background-repeat: no-repeat;
-	background-attachment: fixed;
-    background-position: center;    
-    background-size: cover;
-    min-height: 400px;
-	background-size: 100%;
-	padding-top: 0em;
-	padding-bottom: 10em;
+.jeux{		
+	background-repeat: no-repeat !important;
+	background-attachment: fixed !important;
+    background-position: center !important;    
+    background-size: cover !important;
+    min-height: 400px !important;
+	background-size: 100% !important;
+	padding-top: 0em !important;
+	padding-bottom: 10em !important;
 }
 .w100{
 	width: 100%;

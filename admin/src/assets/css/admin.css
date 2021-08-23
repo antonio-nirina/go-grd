@@ -655,11 +655,18 @@ form .se-btn.se-btn-select.se-btn-tool-font.se-tooltip.on{
 }
 /**************Create game***************/
 label[for="logo-game"],
-label[for="img-game"]
+label[for="img-game"],
+label.entete
 {
     display: block;
     width: 100%;
     padding-top: 15px;
+}
+label.entete{
+	margin-top: 0 !important;
+}
+label.entete:last-child{
+	margin-left: 15px;
 }
 /**************List game***************/
 .list-game{
@@ -830,6 +837,16 @@ label[for="img-game"]
 }
 .wysiwyg-container .both:last-child{
 	margin-left: 8px;
+}
+.list-assist .sm-width{
+	width: 100%;
+}
+.list-assist .body-card{
+	display: flex;
+}
+.list-assist .card-title, .list-assist .card-result{
+	width: 33%;
+	display: inline-block;
 }
 /***********Détail User*****************/
 .avatar{

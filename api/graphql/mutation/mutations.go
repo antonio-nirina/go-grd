@@ -71,7 +71,7 @@ var partUsecase 		= partHandler.NewUsecasePart(partRepository)
 var partResolver 		= partDelivery.NewResolverPart(partUsecase,usecase,tournamentUsecase)
 
 var homeRepository 		= homeRepo.NewHomeRepository(database)
-var homeUsecase 		= homeHandler.NewUsecaseHome(homeRepository)
+var homeUsecase 		= homeHandler.NewUsecaseHome(homeRepository,usecaseGame)
 var homeResolver 		= homeDelivery.NewResolverHome(homeUsecase)
 
 var teamRepository 		= teamRepo.NewTeamRepository(database)
@@ -107,5 +107,6 @@ func GetRootFields() graphql.Fields {
 		"updatedTeamByBanned":	updatedTeamByBanned(),
 		"createHome":			createHome(),
 		"removedHome":			removedHome(),
+		"createSubjectContent":createSubjectContent(),
 	}
 }

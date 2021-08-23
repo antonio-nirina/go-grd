@@ -27,3 +27,18 @@ var AssistSchemaType = graphql.NewObject(graphql.ObjectConfig{
 		},
 	},
 })
+
+var SubjectSchemaType = graphql.NewObject(graphql.ObjectConfig{
+	Name: "SubjectType",
+	Fields: graphql.Fields{
+		"uid": &graphql.Field{
+			Type: graphql.String,
+		},
+		"title": &graphql.Field{
+			Type: graphql.String,
+		},
+		"description": &graphql.Field{
+			Type: graphql.String,
+		},
+	},
+})
