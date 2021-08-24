@@ -84,6 +84,12 @@
 	border-radius: 50%;
 	border: 1px solid #000000;
 }
+.container-rules .txt .calendar h2{
+	font-size: 20px;
+	font-weight: lighter;
+	width: 100%;
+	text-align: center;
+}
 .flex-group{	
 }
 .team-group{
@@ -98,13 +104,11 @@
 	background: #1b1d26
 }
 .calendar .groups p{
-	font-weight: bold;
 	font-size: 18px;
 	text-align: center;
 	padding: 15px 0px;
 	color: #ffffff;
 	margin: 0px;
-
 }
 .group-name{
 	display: flex;
@@ -117,4 +121,14 @@
 }
 .group-name span{
 	font-size: 13px;
+}
+.tree-container{
+	display: none;
+}
+.tree-container.show{
+	display: block;
+}
+.container-rules .txt{
+	/*height: 87vh;
+	overflow: auto;*/
 }
