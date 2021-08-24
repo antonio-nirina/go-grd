@@ -118,5 +118,6 @@ func GetRootFields() graphql.Fields {
 		"FindAllAsist":				FindAllAsist(),
 		"FindOneSubject":			FindOneSubject(),
 		"FindAllSubject":			FindAllSubject(),
+		"FindAssistBySubject": 		FindAssistBySubject(),
 	}
 }

@@ -4,17 +4,19 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {useQuery} from "@apollo/client"
 import { faPlus, faSort,faEdit,faTrash } from "@fortawesome/free-solid-svg-icons"
 
-import {GET_ALL_ASSIST} from "../gql/assist/query"
 import SideBar from "../header/sidebar"
+import {GET_ALL_SUBJECT} from "../gql/assist/query"
 import Nav from "../header/nav"
 
-const ListAssist : React.FC = function() {
-	const [assists, setAssists] = useState<any>([])
-	const {loading,error,data} 	= useQuery(GET_ALL_ASSIST)
+
+const ListSubject = function() {
+	const [subjects, setSubjects] = useState<any>([])
+
+	const {loading,error,data} 	= useQuery(GET_ALL_SUBJECT)
 
 	useEffect(() => {
 		if(!loading && !error && data) {
-			setAssists(data.FindAllAsist)
+			setSubjects(data.FindAllSubject)
 		}
 
 	},[loading,error,data])
@@ -31,16 +33,10 @@ const ListAssist : React.FC = function() {
 					<div className="body-content list-assist">
 						<div className="column">
 							<div className="create-game">
-								<Link to="/admin/set-assist">
+								<Link to="/admin/create/subject">
 									<button className="btn bg-red" style={{"cursor":"pointer"}}>
 										<FontAwesomeIcon icon={faPlus} />
-											Créer contenu
-									</button>
-								</Link>
-								<Link to="/admin/list/subject">
-									<button className="btn bg-red" style={{"cursor":"pointer"}}>
-										<FontAwesomeIcon icon={faPlus} />
-											Liste titre publication
+											Créer titre publication
 									</button>
 								</Link>
 							</div>
@@ -52,22 +48,16 @@ const ListAssist : React.FC = function() {
 										<p>Titre<i><FontAwesomeIcon icon={faSort} size="lg"/></i></p>
 									</div>
 									<div className="card-title">
-										<p>Sous-titre<i><FontAwesomeIcon icon={faSort} size="lg"/></i></p>
-									</div>
-									<div className="card-title">
 										<p>Statut <i><FontAwesomeIcon icon={faSort} size="lg"/></i></p>
 									</div>
 									<div className="card-title"></div>
 								</div>
 								{
-									assists?.map(function(el:any,index:number){
+									subjects?.map(function(el:any,index:number){
 										return (
 											<div className="body-card" key={index} style={{"cursor":"pointer"}}>
 												<div className="card-result">
-													<p>{el.title.title}</p>
-												</div>
-												<div className="card-result">
-													<p>{el.underTitle}</p>
+													<p>{el.title}</p>
 												</div>
 												<div className="card-result">
 													<p>{el.statut?"Actif":"Inactif"}</p>
@@ -91,4 +81,4 @@ const ListAssist : React.FC = function() {
 	)
 }
 
-export default ListAssist
+export default ListSubject

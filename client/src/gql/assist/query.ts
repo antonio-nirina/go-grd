@@ -29,3 +29,22 @@ export const GET_ONE_ASSIST= gql`
 		statut
 	}
 }`
+
+export const GET_ASSIST_BY_SUBJECT= gql`
+	query FindAssistBySubject{
+		FindAssistBySubject{
+		title{
+			uid
+			title{
+				uid
+				title
+				description
+			}
+			content
+			underTitle
+			statut
+		}
+	}
+}`
+
+

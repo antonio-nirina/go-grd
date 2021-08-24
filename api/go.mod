@@ -3,7 +3,6 @@ module github.com/thoussei/antonio/api
 go 1.14
 
 require (
-	github.com/antonio-nirina/go-grd/api v0.0.0-20210424142750-ff1bb81bd033
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/go-redis/redis/v8 v8.8.2
 	github.com/gorilla/websocket v1.4.2

@@ -36,6 +36,7 @@ export const GET_ALL_SUBJECT= gql`
 		uid
 		title
 		description
+		statut
 	}
 }`
 
@@ -45,5 +46,6 @@ export const GET_ONE_SUBJECT= gql`
 		uid
 		title
 		description
+		statut
 	}
 }`
