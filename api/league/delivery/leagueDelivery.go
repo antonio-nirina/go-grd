@@ -1,3 +1,5 @@
+package delivery
+
 import (
 	"github.com/graphql-go/graphql"
 	gameHandler "github.com/thoussei/antonio/api/games/handler"
@@ -14,20 +16,20 @@ type LeagueResolver interface {
 }
 
 type league struct {
-	leagueHandler handler.UsecaseLeague
-	gameLeagueHandler gameHandler.UsecaseGameInterface
+	leagueHandler          handler.UsecaseLeague
+	gameLeagueHandler      gameHandler.UsecaseGameInterface
 	plateformLeagueHandler gameHandler.UsecasePlateformInterface
 }
 
 func NewResolverLeague(
 	leagueUseCase handler.UsecaseLeague,
 	leagueGame gameHandler.UsecaseGameInterface,
-	leaguePlateform gameHandler.UsecasePlateformInterface
+	leaguePlateform gameHandler.UsecasePlateformInterface,
 ) LeagueResolver {
 	return &league{
-		leagueHandler: leagueUseCase,
-		gameLeagueHandler:leagueGame,
-		plateformLeagueHandler:leaguePlateform,
+		leagueHandler:          leagueUseCase,
+		gameLeagueHandler:      leagueGame,
+		plateformLeagueHandler: leaguePlateform,
 	}
 }
 
@@ -44,11 +46,11 @@ func (l *league) SavedLeagueResolver(params graphql.ResolveParams) (interface{},
 	deadlineDate, _ := params.Args["deadlineDate"].(string)
 	priceParticipate, _ := params.Args["priceParticipate"].(float64)
 	rules, _ := params.Args["rules"].(string)
-	game,err := l.gameLeagueHandler.FindOneGameByUidHandler(gameUid)
-	plateform,err := l.plateformLeagueHandler.FindOnePlateformByUidHandler(plateformUid)
+	game, err := l.gameLeagueHandler.FindOneGameByUidHandler(gameUid)
+	plateform, err := l.plateformLeagueHandler.FindOnePlateformByUidHandler(plateformUid)
 
 	if err != nil {
-		return nil,err
+		return nil, err
 	}
 
 	IsTeam := false
@@ -58,22 +60,22 @@ func (l *league) SavedLeagueResolver(params graphql.ResolveParams) (interface{},
 	}
 
 	league := &entity.League{
-		Uid:primitive.NewObjectID(),
-		Title:title,
-		Date:date,
-		Game: game,
-		Plateform: plateform,
-		NumberParticipate:numberParticipate,
-		NumberTeam:numberTeam,
-		Price:price,
-		DeadlineDate:deadlineDate,
-		PriceParticipate:priceParticipate,
-		Statut:true,
-		Info:description,
-		Rules:rules,
-		IsPublic:true,
-		IsTeam:IsTeam,
-		NumberGroup:numberGroup,
+		Uid:               primitive.NewObjectID(),
+		Title:             title,
+		Date:              date,
+		Game:              game,
+		Plateform:         plateform,
+		NumberParticipate: numberParticipate,
+		NumberTeam:        numberTeam,
+		Price:             price,
+		DeadlineDate:      deadlineDate,
+		PriceParticipate:  priceParticipate,
+		Statut:            true,
+		Info:              description,
+		Rules:             rules,
+		IsPublic:          true,
+		IsTeam:            IsTeam,
+		NumberGroup:       numberGroup,
 	}
 
 	res, err := l.leagueHandler.SavedLeagueHandler(league)
@@ -94,41 +96,41 @@ func (l *league) FindLeagueResolver(params graphql.ResolveParams) (interface{}, 
 	}
 
 	return res, nil
-} 
+}
 
 func (l *league) FindAllLeagueResolver(params graphql.ResolveParams) (interface{}, error) {
 	limit, _ := params.Args["limit"].(int)
 	pageNumber, _ := params.Args["pageNumber"].(int)
 
-	if pageNumber == 0 && limit > 0{
+	if pageNumber == 0 && limit > 0 {
 		pageNumber = 1
 	}
 
-	res, err := l.leagueHandler.FindAllLeagueHandler(int64(pageNumber),int64(limit))
+	res, err := l.leagueHandler.FindAllLeagueHandler(int64(pageNumber), int64(limit))
 
 	if err != nil {
 		return nil, err
 	}
 
 	return res, nil
-} 
+}
 
 func (l *league) FindLeagueGameResolver(params graphql.ResolveParams) (interface{}, error) {
 	limit, _ := params.Args["limit"].(int)
 	pageNumber, _ := params.Args["pageNumber"].(int)
 
-	if pageNumber == 0 && limit > 0{
+	if pageNumber == 0 && limit > 0 {
 		pageNumber = 1
 	}
 
 	gameUid, _ := params.Args["slugGame"].(string)
-	game,err := l.gameLeagueHandler.FindOneGameBySlugHandler(gameUid)
+	game, err := l.gameLeagueHandler.FindOneGameBySlugHandler(gameUid)
 
 	if err != nil {
 		return nil, err
 	}
 
-	res, err := l.leagueHandler.FindLeagueGameHandler(int64(pageNumber),int64(limit),game.Uid)
+	res, err := l.leagueHandler.FindLeagueGameHandler(int64(pageNumber), int64(limit), game.Uid)
 
 	if err != nil {
 		return nil, err
@@ -136,4 +138,4 @@ func (l *league) FindLeagueGameResolver(params graphql.ResolveParams) (interface
 
 	return res, nil
 
-} 
+}
