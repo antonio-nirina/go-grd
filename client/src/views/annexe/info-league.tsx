@@ -3,6 +3,7 @@ import {useQuery} from "@apollo/client"
 import { useSelector } from "react-redux"
 import parse from 'html-react-parser'
 import { Link } from "react-router-dom"
+import Tree from "./tree"
 import Header from "../header/header"
 import Footer from "../footer/footer"
 
@@ -20,13 +21,16 @@ const InfoLeague: React.FC = function(props:any) {
 	const uid:string|null = params.get("uid")
 	const [tournament, setTournament] = useState<Tournament>()
 	const [isOpen, setIsOpen] = useState<boolean>(true)
+	const [showMore, setShowMore] = useState<boolean>(false)
 	const userConnectedRedux = useSelector((state:RootState) => state.userConnected)
 	const {loading,error,data} 	= useQuery(GET_ONE_TOURNAMENT, {
 			variables: {
 				uid:uid,
 			},
 	})
-
+	const onShowMore = function(){
+		setShowMore(!showMore)
+	}
 	useEffect(() => {
 		if(!loading && !error && data) {
 			setTournament(data.FindOneTournament)
@@ -125,6 +129,12 @@ const InfoLeague: React.FC = function(props:any) {
 									</p>
 								</div>
 							</div>
+							<div className="btn-container">
+								<button className="btn bg-red" onClick={onShowMore}>{!showMore ? "Voir plus" :"Reduire"}</button>
+							</div>
+						</div>
+						<div className={!showMore ? "tree-container" :"tree-container show"}>
+							<Tree />
 						</div>
 					</div>
 					<div className="tableau">
