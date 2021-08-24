@@ -26,6 +26,7 @@ type RepositoryAsist interface {
 	SavedRepoAsistRepo(asist *entity.Asistant) (interface{}, error)
 	FindAsistRepo(idQuery primitive.ObjectID) (entity.Asistant, error)
 	FindAllAsistRepo()([]entity.Asistant, error)
+	FindAllAsistBySubjectRepo(uid primitive.ObjectID)([]entity.Asistant, error)
 
 	SavedRepoSubjectRepo(asist *entity.Subject) (interface{}, error)
 	FindSubjectRepo(idQuery primitive.ObjectID) (entity.Subject, error)
@@ -120,6 +121,30 @@ func (c *driverRepository) FindAllSubjectRepo() ([]entity.Subject, error) {
 
 	for cur.Next(context.TODO()) {
 		var elem entity.Subject
+		err := cur.Decode(&elem)
+		if err != nil {
+			external.Logger(fmt.Sprintf("%v", err))
+		}
+
+		results = append(results, elem)
+	}
+	
+	cur.Close(context.TODO())
+
+	return results, nil
+}
+
+func (c *driverRepository) FindAllAsistBySubjectRepo(uid primitive.ObjectID)([]entity.Asistant, error) {
+	var collection = c.client.Database("grd_database").Collection("asistant")
+	var results []entity.Asistant
+	cur, err := collection.Find(context.TODO(), bson.D{{"title.uid",uid}},options.Find())
+
+	if err != nil {
+		return nil, err
+	}
+
+	for cur.Next(context.TODO()) {
+		var elem entity.Asistant
 		err := cur.Decode(&elem)
 		if err != nil {
 			external.Logger(fmt.Sprintf("%v", err))

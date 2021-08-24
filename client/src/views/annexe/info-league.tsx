@@ -1,7 +1,6 @@
 import React ,{useEffect,useState} from "react"
 import {useQuery} from "@apollo/client"
 import { useSelector } from "react-redux"
-import parse from 'html-react-parser'
 import { Link } from "react-router-dom"
 import Header from "../header/header"
 import Footer from "../footer/footer"

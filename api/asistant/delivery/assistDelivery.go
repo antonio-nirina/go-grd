@@ -15,6 +15,7 @@ type AsistResolver interface {
 	FindSubjectResolver(params graphql.ResolveParams) (interface{}, error)
 	FindAllAsistResolver(params graphql.ResolveParams) (interface{}, error)
 	FindAllSubjectResolver(params graphql.ResolveParams) (interface{}, error)
+	FindAssistBySubjectResolver(params graphql.ResolveParams) (interface{}, error)
 	// UpdatedAsistByUseResolver(params graphql.ResolveParams) (interface{}, error)
 }
 
@@ -71,7 +72,8 @@ func (h *asist) SavedSubjectResolver(params graphql.ResolveParams) (interface{},
 	subject := &entity.Subject{
 		Uid: primitive.NewObjectID(),
 		Title:title,
-		Description:description,  			
+		Description:description,
+		Statut:true,  			
 	}
 
 	res,err := h.asistHandler.SavedSubjectHandler(subject)
@@ -106,13 +108,13 @@ func (h *asist) FindSubjectResolver(params graphql.ResolveParams) (interface{}, 
 }
 
 func (h *asist) FindAllAsistResolver(params graphql.ResolveParams) (interface{}, error){
-	homes,err :=  h.asistHandler.FindAllAsistHandler()
+	assists,err :=  h.asistHandler.FindAllAsistHandler()
 
 	if err != nil {
 		return nil,err
 	}
 
-	return homes,nil
+	return assists,nil
 }
 
 func (h *asist) FindAllSubjectResolver(params graphql.ResolveParams) (interface{}, error){
@@ -123,6 +125,16 @@ func (h *asist) FindAllSubjectResolver(params graphql.ResolveParams) (interface{
 	}
 
 	return subjects,nil
+}
+
+func (h *asist) FindAssistBySubjectResolver(params graphql.ResolveParams) (interface{}, error) {
+	assists,err :=  h.asistHandler.FindAllAsistBySubjectHandler()
+
+	if err != nil {
+		return nil,err
+	}
+
+	return assists,nil
 }
 
 /*func (h *home) UpdatedHomeByUseResolver(params graphql.ResolveParams) (interface{}, error){

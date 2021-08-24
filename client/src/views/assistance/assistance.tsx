@@ -1,4 +1,5 @@
-import React,{useState} from "react"
+import React,{useState,useEffect} from "react"
+import {useQuery} from "@apollo/client"
 
 import Header from "../header/header"
 import Footer from "../footer/footer"
@@ -9,10 +10,22 @@ import "../../assets/css/style.css"
 import "../assistance/assistance.css"
 import { faSortDown } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import {GET_ASSIST_BY_SUBJECT} from "../../gql/assist/query"
 
 const Assistance: React.FC = function() {	
 	const [showDrop, setShowDrop] = useState<Boolean>(false)
 	const [showContent, setShowContent] = useState<Boolean>(false)
+	const [assists, setAssists] = useState<any>([])
+	const {loading,error,data} 	= useQuery(GET_ASSIST_BY_SUBJECT)
+
+	useEffect(() => {
+		if(!loading && !error && data) {
+			console.log(data.FindAssistBySubject)
+			setAssists(data.FindAssistBySubject)
+		}
+
+	},[loading,error,data])
+
 	const onShowDrop = function(){
 	    setShowDrop(!showDrop)
 	}
@@ -32,7 +45,7 @@ const Assistance: React.FC = function() {
 			  			</div>
 			  		</div>
 		  			<div className="aside-menu accueil">
-		  				<Aside />
+		  				<Aside assists={assists} />
 		  			</div>
 		  			<div className="support">
 		  				<div className="sup">

@@ -29,7 +29,7 @@ const CreateTitle = function() {
 		} })
 		if (result.data.createSubjectContent) {
 			setContent("")
-			history.push("/admin/list-assist")
+			history.push("/admin/list/subject")
 		}
 	}
 
