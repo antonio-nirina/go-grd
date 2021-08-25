@@ -1,5 +1,4 @@
 import React from "react"
-import { Link } from "react-router-dom"
 import "../annexe/tree.css"
 import AvatarDefault from "../../assets/image/game-tag.png"
 
@@ -10,49 +9,49 @@ return(
         <li>
         	<ul className="part-one">
 	            <li>
-	              <Link to="#">Team ?</Link>
+	              <span>Team ?</span>
 	              <ul>
 	                <li>
-	                  <Link to="#">Team 1</Link>          
+	                  <span><img src={AvatarDefault} alt="" className="avatar-team"/>Team 1</span>          
 	                </li>
 	                <li>
-	                  <Link to="#">Team 2</Link>          
+	                  <span><img src={AvatarDefault} alt="" className="avatar-team"/>Team 2</span>          
 	                </li>
 	              </ul>
 	            </li>
 	            <li>
-	              <Link to="#">Team ?</Link>
+	              <span>Team ?</span>
 	              <ul>
 	                <li>
-	                  <Link to="#">Team 3</Link>          
+	                  <span><img src={AvatarDefault} alt="" className="avatar-team"/>Team 3</span>          
 	                </li>
 	                <li>
-	                  <Link to="#">Team 4</Link>          
+	                  <span><img src={AvatarDefault} alt="" className="avatar-team"/>Team 4</span>          
 	                </li>
 	              </ul>
 	            </li>          
           	</ul>
-          	<Link to="#">WINNER</Link>
+          	<span>WINNER</span>
           	<ul className="part-two">
 	            <li>
-	              <Link to ="#">Team ?</Link>
+	              <span>Team ?</span>
 	              <ul>
 	                <li>
-	                  <Link to="#">Team 5</Link>          
+	                  <span><img src={AvatarDefault} alt="" className="avatar-team"/>Team 5</span>          
 	                </li>
 	                <li>
-	                  <Link to="#">Team 6</Link>          
+	                  <span><img src={AvatarDefault} alt="" className="avatar-team"/>Team 6</span>          
 	                </li>
 	              </ul>
 	            </li>
 	            <li>
-	              <Link to="#">Team ?</Link>
+	              <span>Team ?</span>
 	              <ul>
 	                <li>
-	                  <Link to="#">Team 7</Link>          
+	                  <span><img src={AvatarDefault} alt="" className="avatar-team"/>Team 7</span>          
 	                </li>
 	                <li>
-	                  <Link to="#">Team 8</Link>          
+	                  <span><img src={AvatarDefault} alt="" className="avatar-team"/>Team 8</span>          
 	                </li>
 	              </ul>
 	            </li>          

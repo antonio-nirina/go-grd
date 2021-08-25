@@ -72,8 +72,9 @@ const InfoLeague: React.FC = function(props:any) {
 					</ul>
 				</div>
 				<div className="container-rules">
-					<div className="txt">
-						<div className="calendar">
+					<div className="txt txt-infos">
+						<div className="container-infos">
+							<div className="calendar">
 							<h2>Champions League <span>2022</span></h2>
 							<div className="flex-group">
 								<div className="team-group">
@@ -131,9 +132,10 @@ const InfoLeague: React.FC = function(props:any) {
 							<div className="btn-container">
 								<button className="btn bg-red" onClick={onShowMore}>{!showMore ? "Voir plus" :"Reduire"}</button>
 							</div>
-						</div>
-						<div className={!showMore ? "tree-container" :"tree-container show"}>
-							<Tree />
+							</div>
+							<div className={!showMore ? "tree-container" :"tree-container show"}>
+								<Tree />
+							</div>
 						</div>
 					</div>
 					<div className="tableau">
