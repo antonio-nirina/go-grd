@@ -400,7 +400,13 @@ h1{
   .container .card .upcomming.side{    
     width: 100%;
   }
-
+  .container .container-rules .txt-infos{
+    width: 550px;
+    overflow: scroll;
+  }
+  .container .container-rules .container-infos{
+    width: 1024px;
+  }
   .container .information-game{
     display: block;
   }

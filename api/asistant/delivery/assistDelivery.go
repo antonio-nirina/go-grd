@@ -1,10 +1,18 @@
 package delivery
 
 import (
+	"fmt"
+	"strings"
+	"unicode"
+
 	"github.com/graphql-go/graphql"
 	"github.com/thoussei/antonio/api/asistant/entity"
 	"github.com/thoussei/antonio/api/asistant/handler"
 	"go.mongodb.org/mongo-driver/bson/primitive"
+
+	"golang.org/x/text/runes"
+	"golang.org/x/text/transform"
+	"golang.org/x/text/unicode/norm"
 )
 
 
@@ -45,6 +53,7 @@ func (h *asist) SavedAsistResolver(params graphql.ResolveParams) (interface{}, e
 		Uid:uid,       
 		Title:title.Title,
 		Description:title.Description,
+		Tag:title.Tag,
 	}
 
 	asist := &entity.Asistant{
@@ -68,12 +77,15 @@ func (h *asist) SavedAsistResolver(params graphql.ResolveParams) (interface{}, e
 func (h *asist) SavedSubjectResolver(params graphql.ResolveParams) (interface{}, error) {
 	title, _ := params.Args["title"].(string)
 	description, _ := params.Args["description"].(string)
+	t := transform.Chain(norm.NFD, runes.Remove(runes.In(unicode.Mn)), norm.NFC)
+	result, _, _ := transform.String(t, title)
 
 	subject := &entity.Subject{
 		Uid: primitive.NewObjectID(),
 		Title:title,
 		Description:description,
-		Statut:true,  			
+		Statut:true, 
+		Tag:strings.Replace(result," ","_",-1),			
 	}
 
 	res,err := h.asistHandler.SavedSubjectHandler(subject)
@@ -133,7 +145,7 @@ func (h *asist) FindAssistBySubjectResolver(params graphql.ResolveParams) (inter
 	if err != nil {
 		return nil,err
 	}
-
+fmt.Println(assists)
 	return assists,nil
 }
 

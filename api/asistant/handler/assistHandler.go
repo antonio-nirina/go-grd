@@ -11,7 +11,7 @@ type UsecaseAsist interface {
 	SavedAsistHandler(home *entity.Asistant) (interface{}, error)
 	FindAsistHandler(idQuery string) (AsistViewModel, error)
 	FindAllAsistHandler() ([]AsistViewModel, error)
-	FindAllAsistBySubjectHandler() (SubjectAssistModel, error)
+	FindAllAsistBySubjectHandler() (map[string][]AsistViewModel, error)
 
 	SavedSubjectHandler(subject *entity.Subject) (interface{}, error)
 	FindSubjectHandler(idQuery string) (SubjectViewModel, error)
@@ -37,6 +37,7 @@ type SubjectViewModel struct {
 	Title     	string             `json:"title"`
 	Description  	string             `json:"description"`
 	Statut  	bool           		`json:"statut"`
+	Tag 		string 				`json:"tag"`
 }
 
 type asistUsecase struct {
@@ -89,6 +90,7 @@ func (h *asistUsecase) FindAsistHandler(idQuery string) (AsistViewModel, error) 
 		result.Title.Title,
 		result.Title.Description,
 		result.Title.Statut,
+		result.Title.Tag,
 	}
 
 	asistViewModel := AsistViewModel{
@@ -120,7 +122,8 @@ func (h *asistUsecase) FindSubjectHandler(idQuery string) (SubjectViewModel, err
 		Uid: result.Uid.Hex(),
 		Title:result.Title,
 		Description:result.Description,
-		Statut:result.Statut,     			
+		Statut:result.Statut,
+		Tag:result.Tag,     			
 	}
 
 	return subjViewModel,nil
@@ -141,6 +144,7 @@ func (h *asistUsecase) FindAllAsistHandler() ([]AsistViewModel, error) {
 			val.Title.Title,
 			val.Title.Description,
 			val.Title.Statut,
+			val.Title.Tag,
 		}
 		asistViewModel := AsistViewModel{
 			Uid: val.Uid.Hex(),
@@ -170,7 +174,8 @@ func (h *asistUsecase) FindAllSubjectHandler() ([]SubjectViewModel, error) {
 			Uid: val.Uid.Hex(),
 			Title:val.Title,
 			Description:val.Description,
-			Statut:val.Statut,  		
+			Statut:val.Statut,
+			Tag:val.Tag,  		
 		}
 
 		res = append(res, subViewModel)
@@ -179,22 +184,22 @@ func (h *asistUsecase) FindAllSubjectHandler() ([]SubjectViewModel, error) {
 	return res,nil
 }
 
-func (h *asistUsecase) FindAllAsistBySubjectHandler() (SubjectAssistModel, error) {
+func (h *asistUsecase) FindAllAsistBySubjectHandler() (map[string][]AsistViewModel, error) {
 	subjects, err := h.asistRepository.FindAllSubjectRepo()
 	
 	if err != nil {
-		return SubjectAssistModel{}, err
+		return map[string][]AsistViewModel{}, err
 	}
 
-	var aRes []AsistViewModel
-	var subAss []SubjectAssistModel
+	subAss := make(map[string][]AsistViewModel)
 
 	for _,val := range subjects {
 		result, err := h.asistRepository.FindAllAsistBySubjectRepo(val.Uid)
 		
 		if err != nil {
-			return SubjectAssistModel{}, err
+			return map[string][]AsistViewModel{}, err
 		}
+		var aRes []AsistViewModel
 
 		for _,valAssist := range result {
 			subject := SubjectViewModel{
@@ -202,6 +207,7 @@ func (h *asistUsecase) FindAllAsistBySubjectHandler() (SubjectAssistModel, error
 				valAssist.Title.Title,
 				valAssist.Title.Description,
 				valAssist.Title.Statut,
+				valAssist.Title.Tag,
 			}
 			asistViewModel := AsistViewModel{
 				Uid: valAssist.Uid.Hex(),
@@ -211,16 +217,14 @@ func (h *asistUsecase) FindAllAsistBySubjectHandler() (SubjectAssistModel, error
 				UnderTitle:valAssist.UnderTitle,
 				Statut:valAssist.Statut,   		
 			}
-			nSub := SubjectAssistModel{Title:val.Title}
+
 			aRes = append(aRes, asistViewModel)
 		}
-
-		subAss = append(subAss,)
+		
+		subAss[val.Tag] = aRes
 	}
 
-	res := SubjectAssistModel{Title:aRes}
-
-	return res,nil
+	return subAss,nil
 }
 
 /*func (h *asistUsecase) UpdatedAsistHandler(uid string) (interface{}, error) {
