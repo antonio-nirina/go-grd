@@ -1,6 +1,8 @@
 package delivery
 
 import (
+	"string"
+
 	"github.com/graphql-go/graphql"
 	"github.com/thoussei/antonio/api/asistant/entity"
 	"github.com/thoussei/antonio/api/asistant/handler"
@@ -73,7 +75,8 @@ func (h *asist) SavedSubjectResolver(params graphql.ResolveParams) (interface{},
 		Uid: primitive.NewObjectID(),
 		Title:title,
 		Description:description,
-		Statut:true,  			
+		Statut:true, 
+		Tag:strings.Replace(title," ","_",-1)			
 	}
 
 	res,err := h.asistHandler.SavedSubjectHandler(subject)

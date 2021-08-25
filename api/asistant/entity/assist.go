@@ -18,4 +18,5 @@ type Subject struct {
 	Title     string             	`json:"title"`
 	Description  string             `json:"description"`
 	Statut     bool           	 	`json:"statut"`
+	Tag 		string 				`json:"tag"`
 }
