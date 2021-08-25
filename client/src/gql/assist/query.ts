@@ -39,6 +39,7 @@ export const GET_ASSIST_BY_SUBJECT= gql`
 				uid
 				title
 				description
+				tag
 			}
 			content
 			underTitle

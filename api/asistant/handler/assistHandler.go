@@ -11,7 +11,7 @@ type UsecaseAsist interface {
 	SavedAsistHandler(home *entity.Asistant) (interface{}, error)
 	FindAsistHandler(idQuery string) (AsistViewModel, error)
 	FindAllAsistHandler() ([]AsistViewModel, error)
-	FindAllAsistBySubjectHandler() (SubjectAssistModel, error)
+	FindAllAsistBySubjectHandler() (map[string][]AsistViewModel, error)
 
 	SavedSubjectHandler(subject *entity.Subject) (interface{}, error)
 	FindSubjectHandler(idQuery string) (SubjectViewModel, error)
@@ -184,22 +184,22 @@ func (h *asistUsecase) FindAllSubjectHandler() ([]SubjectViewModel, error) {
 	return res,nil
 }
 
-func (h *asistUsecase) FindAllAsistBySubjectHandler() (SubjectAssistModel, error) {
+func (h *asistUsecase) FindAllAsistBySubjectHandler() (map[string][]AsistViewModel, error) {
 	subjects, err := h.asistRepository.FindAllSubjectRepo()
 	
 	if err != nil {
-		return SubjectAssistModel{}, err
+		return map[string][]AsistViewModel{}, err
 	}
 
-	var aRes []AsistViewModel
-	subAss := make(map[string]SubjectAssistModel)
+	subAss := make(map[string][]AsistViewModel)
 
 	for _,val := range subjects {
 		result, err := h.asistRepository.FindAllAsistBySubjectRepo(val.Uid)
 		
 		if err != nil {
-			return SubjectAssistModel{}, err
+			return map[string][]AsistViewModel{}, err
 		}
+		var aRes []AsistViewModel
 
 		for _,valAssist := range result {
 			subject := SubjectViewModel{
@@ -217,16 +217,14 @@ func (h *asistUsecase) FindAllAsistBySubjectHandler() (SubjectAssistModel, error
 				UnderTitle:valAssist.UnderTitle,
 				Statut:valAssist.Statut,   		
 			}
-			nSub := SubjectAssistModel{Title:val.Title}
+
 			aRes = append(aRes, asistViewModel)
 		}
-
-		subAss = append(subAss,)
+		
+		subAss[val.Tag] = aRes
 	}
 
-	res := SubjectAssistModel{Title:aRes}
-
-	return res,nil
+	return subAss,nil
 }
 
 /*func (h *asistUsecase) UpdatedAsistHandler(uid string) (interface{}, error) {
