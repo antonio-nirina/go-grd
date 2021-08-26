@@ -33,13 +33,13 @@ export const GET_ONE_ASSIST= gql`
 export const GET_ASSIST_BY_SUBJECT= gql`
 	query FindAssistBySubject{
 		FindAssistBySubject{
-		title{
+		title
+		assist {
 			uid
 			title{
 				uid
 				title
 				description
-				tag
 			}
 			content
 			underTitle

@@ -11,7 +11,7 @@ type UsecaseAsist interface {
 	SavedAsistHandler(home *entity.Asistant) (interface{}, error)
 	FindAsistHandler(idQuery string) (AsistViewModel, error)
 	FindAllAsistHandler() ([]AsistViewModel, error)
-	FindAllAsistBySubjectHandler() (map[string][]AsistViewModel, error)
+	FindAllAsistBySubjectHandler() ([]SubjectAssistModel, error)
 
 	SavedSubjectHandler(subject *entity.Subject) (interface{}, error)
 	FindSubjectHandler(idQuery string) (SubjectViewModel, error)
@@ -20,7 +20,8 @@ type UsecaseAsist interface {
 }
 
 type SubjectAssistModel struct {
-	Title []AsistViewModel `json:"title"`
+	Title  string `json:"title"`
+	Assist []AsistViewModel `json:"assist"`
 }
 
 type AsistViewModel struct {
@@ -184,11 +185,11 @@ func (h *asistUsecase) FindAllSubjectHandler() ([]SubjectViewModel, error) {
 	return res,nil
 }
 
-func (h *asistUsecase) FindAllAsistBySubjectHandler() (map[string][]AsistViewModel, error) {
+func (h *asistUsecase) FindAllAsistBySubjectHandler() ([]SubjectAssistModel, error) {
 	subjects, err := h.asistRepository.FindAllSubjectRepo()
 	
 	if err != nil {
-		return map[string][]AsistViewModel{}, err
+		return []SubjectAssistModel{}, err
 	}
 
 	subAss := make(map[string][]AsistViewModel)
@@ -197,7 +198,7 @@ func (h *asistUsecase) FindAllAsistBySubjectHandler() (map[string][]AsistViewMod
 		result, err := h.asistRepository.FindAllAsistBySubjectRepo(val.Uid)
 		
 		if err != nil {
-			return map[string][]AsistViewModel{}, err
+			return []SubjectAssistModel{}, err
 		}
 		var aRes []AsistViewModel
 
@@ -224,7 +225,17 @@ func (h *asistUsecase) FindAllAsistBySubjectHandler() (map[string][]AsistViewMod
 		subAss[val.Tag] = aRes
 	}
 
-	return subAss,nil
+	var arraySub []SubjectAssistModel
+
+	for key,val := range subAss {
+		resSub := SubjectAssistModel{
+			Title:key,
+			Assist:val,
+		}
+		arraySub = append(arraySub, resSub)
+	}
+	
+	return arraySub,nil
 }
 
 /*func (h *asistUsecase) UpdatedAsistHandler(uid string) (interface{}, error) {
