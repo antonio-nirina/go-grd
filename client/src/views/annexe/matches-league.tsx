@@ -16,7 +16,6 @@ import AvatarDefault from "../../assets/image/game-tag.png"
 
 
 
-
 const MatchesLeague: React.FC = function(props:any) {
 	const params = new URLSearchParams(props.location.search)
 	const uid:string|null = params.get("uid")

@@ -345,6 +345,19 @@ h1{
   .profil .mes-resultats{
     padding: 5px 1em 0em;
   }
+  .container .jeux{
+    background-repeat: no-repeat !important;
+    background-attachment: scroll !important;
+    background-size: inherit !important;
+    background-size: cover !important;
+    min-height: inherit !important;    
+    padding-top: 0em !important;
+    padding-bottom: 0em !important;
+  }
+  .home .main{
+    min-height: inherit;
+    padding-top: 50px;
+  }
 }
 @media screen and (max-width: 800px){
   .container .tchat{

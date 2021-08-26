@@ -1,7 +1,6 @@
 package delivery
 
 import (
-	"fmt"
 	"strings"
 	"unicode"
 
@@ -145,7 +144,7 @@ func (h *asist) FindAssistBySubjectResolver(params graphql.ResolveParams) (inter
 	if err != nil {
 		return nil,err
 	}
-fmt.Println(assists)
+
 	return assists,nil
 }
 

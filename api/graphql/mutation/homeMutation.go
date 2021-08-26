@@ -26,6 +26,7 @@ var inputAssistType = graphql.NewInputObject(
 		Name: "HomeInputType",
 		Fields: graphql.InputObjectConfigFieldMap{
 			"name": &graphql.InputObjectFieldConfig{
+				Type: graphql.String,
 			},
 			"content": &graphql.InputObjectFieldConfig{
 				Type: graphql.NewList(contentInputType),

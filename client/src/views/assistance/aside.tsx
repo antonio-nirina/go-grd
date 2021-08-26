@@ -4,6 +4,20 @@ import { Link } from "react-router-dom"
 import "../../assets/css/style.css"
 import "../assistance/assistance.css"
 
+const ChildList = function({el}:any) {
+	return (
+		<>
+			{el.assist.map(function(e:any,aIndex:number){
+				return (
+					<div className="link" key={aIndex}>
+						<li><Link to ={`#${e.underTitle.toLowerCase()}`}>{e.underTitle}</Link></li>
+					</div>
+				)
+			})}
+		</>
+	)
+}
+
 
 const Aside = function({assists}:any) {
 
@@ -16,14 +30,8 @@ const Aside = function({assists}:any) {
 				assists.map(function(el:any,index:number){
 					return (
 						<div className="link" key={index}>
-							<h3>{el.title.title}</h3>
-							<div className="link">
-								<li><Link to ="#apex-legends">Apex Legends</Link></li>
-								<li><Link to ="#call-of-duty">Call of Duty : Warzone</Link></li>
-								<li><Link to ="#cold-war">Call of Duty : Cold War</Link></li>
-								<li><Link to ="#rocket-league">Rocket League</Link></li>
-								<li><Link to ="#fifa">Fifa</Link></li>
-							</div>
+							<h3>{el.assist.length > 0 ? el.title : <></>}</h3>
+							{el.assist.length > 0 ? <ChildList el={el} /> : <></>}
 						</div>
 					)
 				})
@@ -32,7 +40,7 @@ const Aside = function({assists}:any) {
 				<h3><Link to ="/contact">Contact</Link></h3>
 			</div>
 		</div>
-	);
+	)
 }
 
 export default Aside;
