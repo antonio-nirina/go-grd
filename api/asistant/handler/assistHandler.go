@@ -222,7 +222,7 @@ func (h *asistUsecase) FindAllAsistBySubjectHandler() ([]SubjectAssistModel, err
 			aRes = append(aRes, asistViewModel)
 		}
 		
-		subAss[val.Tag] = aRes
+		subAss[val.Title] = aRes
 	}
 
 	var arraySub []SubjectAssistModel

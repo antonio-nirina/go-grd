@@ -68,7 +68,7 @@ func FindAllSubject() *graphql.Field {
 
 func FindAssistBySubject() *graphql.Field {
 	return &graphql.Field{
-		Type:        types.SubjectAssistSchemaType,
+		Type:        graphql.NewList(types.SubjectAssistSchemaType),
 		Args: graphql.FieldConfigArgument{
 			"limit": &graphql.ArgumentConfig{
 				Type: graphql.Int,
