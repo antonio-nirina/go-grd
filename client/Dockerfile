@@ -1,8 +1,8 @@
 FROM node:14-slim
-
+RUN apt-get update && apt-get install -y git
 WORKDIR /usr/src
 COPY package*.json ./
-RUN npm ci -qy
+RUN npm install --silent
 COPY . .
 EXPOSE 3000
 
