@@ -27,7 +27,7 @@ const Aside = function({assists}:any) {
 				<h3><Link to ="/assistance">Accueil</Link></h3>
 			</div>
 			{
-				assists.map(function(el:any,index:number){
+				assists?.map(function(el:any,index:number){
 					return (
 						<div className="link" key={index}>
 							<h3>{el.assist.length > 0 ? el.title : <></>}</h3>
