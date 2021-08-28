@@ -1,25 +1,19 @@
 import React,{useState} from "react"
 import {useQuery} from "@apollo/client"
 import thumbnail from "../../assets/image/video.png"
+import { faSortDown } from "@fortawesome/free-solid-svg-icons"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 const Support: React.FC = function() {	
-	const [showDrop, setShowDrop] = useState<Boolean>(false)
-	const [showContent, setShowContent] = useState<Boolean>(false)
-	
-	
-
-
-
+	const [showDrop, setShowDrop] = useState<Boolean>(true)
 	const onShowDrop = function(){
 	    setShowDrop(!showDrop)
-	}
-	const onShowContent = function(){
-	    setShowContent(!showContent)
-	}
+	}	
   return(
-  	<div className="support-content">
-		<div className="sup">
+  	<div onClick={onShowDrop} className= {!showDrop ? "sup-content" :"support-content reduce"}>
+		<div className= "sup">
 			<p className="title">Go Grind Support</p>
 			<p>Trouver les réponses à vos problèmes et vos questions</p>
+			<i><FontAwesomeIcon icon={faSortDown} /></i>
 		</div>
 		<div className="under-title">
 			<div className="advice">
