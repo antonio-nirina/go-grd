@@ -55,6 +55,9 @@ var LeagueSchemaType = graphql.NewObject(graphql.ObjectConfig{
 		"numberGroup": &graphql.Field{
 			Type: graphql.String,
 		},
+		"organizer": &graphql.Field{
+			Type: graphql.String,
+		},
 		"records": &graphql.Field{
 			Type: graphql.Int,
 		},

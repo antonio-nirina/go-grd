@@ -1,5 +1,7 @@
 import gql from "graphql-tag"
 
+// GetAllNotification
+
 export const GET_ALL_LEAGUE = gql`
 	query FindAllLeague($limit: Int!,$pageNumber:Int!) {
 		FindAllLeague(limit: $limit,pageNumber:$pageNumber){
@@ -13,8 +15,9 @@ export const GET_ALL_LEAGUE = gql`
 		date
 		price
 		priceParticipate
+		isPublic
+		numberGroup
 		organizer
-		records
 		game{
 			uid
 			name
@@ -30,7 +33,6 @@ export const GET_ALL_LEAGUE = gql`
 	}
 }`
 
-
 export const GET_ONE_LEAGUE = gql`
 	query FindOneLeague($uid: String!) {
 		FindOneLeague(uid: $uid){
@@ -44,8 +46,40 @@ export const GET_ONE_LEAGUE = gql`
 		date
 		price
 		priceParticipate
+		rules
+		numberGroup
 		organizer
-		records
+		game{
+			uid
+			name
+			image
+			logo
+			slug
+		}
+		plateform{
+			uid
+			description
+			name
+		}
+	}
+}`
+
+export const GET_LEAGUE_GAME = gql`
+	query FindLeagueByGame($slugGame: String!,$limit: Int!,$pageNumber:Int!) {
+		FindLeagueByGame(slugGame: $slugGame,limit: $limit,pageNumber:$pageNumber){
+		uid
+		title
+		statut
+		description
+		numberParticipate
+		numberTeam
+		deadlineDate
+		date
+		price
+		priceParticipate
+		rules
+		isPublic
+		numberGroup
 		game{
 			uid
 			name

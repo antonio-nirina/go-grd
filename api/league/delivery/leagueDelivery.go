@@ -46,6 +46,7 @@ func (l *league) SavedLeagueResolver(params graphql.ResolveParams) (interface{},
 	deadlineDate, _ := params.Args["deadlineDate"].(string)
 	priceParticipate, _ := params.Args["priceParticipate"].(float64)
 	rules, _ := params.Args["rules"].(string)
+	organizer, _ := params.Args["organizer"].(string)
 	game, err := l.gameLeagueHandler.FindOneGameByUidHandler(gameUid)
 	plateform, err := l.plateformLeagueHandler.FindOnePlateformByUidHandler(plateformUid)
 
@@ -76,6 +77,7 @@ func (l *league) SavedLeagueResolver(params graphql.ResolveParams) (interface{},
 		IsPublic:          true,
 		IsTeam:            IsTeam,
 		NumberGroup:       numberGroup,
+		Organizer:			organizer,
 	}
 
 	res, err := l.leagueHandler.SavedLeagueHandler(league)
