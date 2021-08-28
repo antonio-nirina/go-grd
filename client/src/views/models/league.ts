@@ -10,7 +10,7 @@ export interface League {
 	date:string
 	price:number
 	priceParticipate:number
-	slot:number
+	numberParticipate:number
 	rules:string
 	isPublic:Boolean|undefined
 	game:Game

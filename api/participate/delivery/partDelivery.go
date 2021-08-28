@@ -8,6 +8,13 @@ import (
 	tEntity "github.com/thoussei/antonio/api/tournament/entity"
 	tournamentHandler "github.com/thoussei/antonio/api/tournament/handler"
 	userHandler "github.com/thoussei/antonio/api/user/handler"
+
+	leagueEntity "github.com/thoussei/antonio/api/league/entity"
+	leagueHandler "github.com/thoussei/antonio/api/league/handler"
+
+	teamEntity "github.com/thoussei/antonio/api/teams/entity"
+	teamHandler "github.com/thoussei/antonio/api/teams/handler"
+
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
@@ -23,13 +30,23 @@ type participate struct {
 	partHandler handler.UsecasePart
 	user userHandler.Usecase
 	tournament tournamentHandler.UsecaseTournament
+	league leagueHandler.UsecaseLeague
+	team teamHandler.UsecaseTeam
 }
 
-func NewResolverPart(partUseCase handler.UsecasePart,user userHandler.Usecase,tournament tournamentHandler.UsecaseTournament) PartResolver {
+func NewResolverPart(
+	partUseCase handler.UsecasePart,
+	user userHandler.Usecase,
+	tournament tournamentHandler.UsecaseTournament
+	team teamHandler.UsecaseTeam,
+	league leagueHandler.UsecaseLeague
+) PartResolver {
 	return &participate{
 		partHandler: partUseCase,
 		user:user,
 		tournament:tournament,
+		league:league,
+		team:team,
 	}
 }
 
@@ -37,7 +54,17 @@ func (p *participate) SavedPartResolver(params graphql.ResolveParams) (interface
 	date, _ := params.Args["date"].(string)
 	userUid, _ := params.Args["uidUser"].(string)
 	tournamentUid, _ := params.Args["tournamentUid"].(string)
+	leagueUid, _ := params.Args["leagueUid"].(string)
+	leagueUid, _ := params.Args["leagueUid"].(string)
+	// jerena raims
 	user,err := p.user.FindOneUserByUid(userUid)
+	tournament,err := p.tournament.FindTournamentHandler(tournamentUid)
+
+	if leagueUid != "" {
+		league,err := p.tournament.FindLeagueHandler(leagueUid)
+	}
+	
+
 	tournament,err := p.tournament.FindTournamentHandler(tournamentUid)
 
 	if err != nil {
