@@ -1,15 +1,40 @@
-import React,{useState} from 'react'
+import React,{useState,useEffect} from 'react'
 import { Link } from "react-router-dom"
+import Loader from "react-loader-spinner"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPlus, faSort, faChevronUp, faChevronDown, faChevronRight, faChevronLeft, faSearch} from "@fortawesome/free-solid-svg-icons"
+import {useQuery} from "@apollo/client"
+import { faPlus, faSort, faChevronUp, faChevronDown, faSearch,faChevronLeft,faChevronRight} from "@fortawesome/free-solid-svg-icons"
 
+import {GET_ALL_LEAGUE} from "../gql/league/query"
+import Pagination from "../common/pagination"
 import SideBar from "../header/sidebar"
 import Nav from "../header/nav"
+import {NUMBER_PER_PAGE} from "../common/constante"
 
-
+interface Item {
+	item:number
+}
 
 const ListLeague : React.FC = function() {
 	const [showList, setShowList] = useState<Boolean>(false)
+	const [league, setLeague] = useState<any>([])
+	const [item, setItem] = useState<Item>({item:1})
+	const [isLoader, setIsLoader] = useState<Boolean>(true)
+
+	const {loading,error,data} 	= useQuery(GET_ALL_LEAGUE, {
+		variables: {
+			limit:NUMBER_PER_PAGE,
+			pageNumber:(item.item)*NUMBER_PER_PAGE - NUMBER_PER_PAGE
+		},
+	})
+
+	useEffect(() => {
+		if(!loading && !error && data) {
+			setIsLoader(false)
+			setLeague(data.FindAllLeague)
+		}
+
+	},[loading,error,data,isLoader])
 
     const onShow = function(){
 		setShowList(!showList)

@@ -38,6 +38,10 @@ import (
 	asistHandler "github.com/thoussei/antonio/api/asistant/handler"
 	asistRepo "github.com/thoussei/antonio/api/asistant/repository"
 
+	leagueDelivery "github.com/thoussei/antonio/api/league/delivery"
+	leagueHandler "github.com/thoussei/antonio/api/league/handler"
+	leagueRepo "github.com/thoussei/antonio/api/league/repository"
+
 	"github.com/graphql-go/graphql"
 )
 
@@ -85,6 +89,10 @@ var asistRepository 	= asistRepo.NewAsistRepository(database)
 var asistUsecase 		= asistHandler.NewUsecaseAsist(asistRepository)
 var asistResolver 		= asistDelivery.NewResolverAsist(asistUsecase)
 
+var leagueRepository 	= leagueRepo.NewLeagueRepository(database)
+var leagueUsecase 		= leagueHandler.NewUsecaseLeague(leagueRepository)
+var leagueResolver 		= leagueDelivery.NewResolverLeague(leagueUsecase,usecaseGame,usecasePlateform)
+
 
 
 // GetRootFields returns all the available queries.
@@ -119,5 +127,8 @@ func GetRootFields() graphql.Fields {
 		"FindOneSubject":			FindOneSubject(),
 		"FindAllSubject":			FindAllSubject(),
 		"FindAssistBySubject": 		FindAssistBySubject(),
+		"FindOneLeague": 			FindOneLeague(),
+		"FindAllLeague":      		FindAllLeague(),
+		"FindLeagueByGame":			FindLeagueByGame(),
 	}
 }
