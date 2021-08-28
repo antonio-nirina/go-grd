@@ -55,7 +55,7 @@ func (l *league) SavedLeagueResolver(params graphql.ResolveParams) (interface{},
 	}
 
 	IsTeam := false
-	isPublic = true
+	isPublic := true
 
 	if numberTeam > 0 {
 		IsTeam = true
