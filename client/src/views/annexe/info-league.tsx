@@ -178,6 +178,9 @@ const InfoLeague: React.FC = function(props:any) {
 								<span>{league && league.numberTeam > 0 ? `${league?.numberTeam} ON ${league?.numberTeam}` : "1 ON 1" }</span>
 							</div>
 						</div>
+						<div className="btn-container">
+							<button className="btn bg-red">Se connecter</button>
+						</div>
 					</div>
 				</div>
 			</div>			
