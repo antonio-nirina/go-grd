@@ -53,7 +53,7 @@ func Handle(next http.Handler) http.Handler {
 			}
 		}
 
-		/*var checkRef bool = false 
+		var checkRef bool = false 
 		arrayRf := strings.SplitAfter(os.Getenv("REFERS"),"-")
 		
 		if r.Referer() != "" {
@@ -69,8 +69,8 @@ func Handle(next http.Handler) http.Handler {
 			w.Write([]byte(`{ "error": "not authorized" }`))
 		} else {
 			next.ServeHTTP(w, r)
-		}*/
-		next.ServeHTTP(w, r)
+		}
+		// next.ServeHTTP(w, r)
 	})
 }
 
