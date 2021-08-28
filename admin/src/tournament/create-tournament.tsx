@@ -131,12 +131,6 @@ const CreateTournament: React.FC = function() {
 	                                                	})
 	                                                }
 	                                            </select>
-	                                            <select id="rank">
-	                                            	<option value="0">Selectionnez votre rank...</option>
-	                                            	<option value="1">Platine</option>
-	                                            	<option value="2">Or</option>
-	                                            	<option value="3">Bronze</option>	                                            	
-	                                        	</select>
 												<Datetime
 												 	locale="fr"
 													onChange={handleDate}

@@ -1,19 +1,49 @@
-import React,{useState} from 'react'
+import React,{useState,useEffect} from 'react'
 import { Link } from "react-router-dom"
+import Loader from "react-loader-spinner"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPlus, faSort, faChevronUp, faChevronDown, faChevronRight, faChevronLeft, faSearch} from "@fortawesome/free-solid-svg-icons"
+import {useQuery} from "@apollo/client"
+import { faPlus, faSort, faChevronUp, faChevronDown, faSearch,faChevronLeft,faChevronRight} from "@fortawesome/free-solid-svg-icons"
 
+import {GET_ALL_LEAGUE} from "../gql/league/query"
+import Pagination from "../common/pagination"
 import SideBar from "../header/sidebar"
 import Nav from "../header/nav"
+import {NUMBER_PER_PAGE} from "../common/constante"
 
-
+interface Item {
+	item:number
+}
 
 const ListLeague : React.FC = function() {
 	const [showList, setShowList] = useState<Boolean>(false)
+	const [league, setLeague] = useState<any>([])
+	const [item, setItem] = useState<Item>({item:1})
+	const [isLoader, setIsLoader] = useState<Boolean>(true)
+
+	const {loading,error,data} 	= useQuery(GET_ALL_LEAGUE, {
+		variables: {
+			limit:NUMBER_PER_PAGE,
+			pageNumber:(item.item)*NUMBER_PER_PAGE - NUMBER_PER_PAGE
+		},
+	})
+
+	useEffect(() => {
+		if(!loading && !error && data) {
+			setIsLoader(false)
+			setLeague(data.FindAllLeague)
+		}
+
+	},[loading,error,data,isLoader])
 
     const onShow = function(){
 		setShowList(!showList)
 	}
+
+	const handleItemsPage = function(item:number) {
+		setIsLoader(true)
+    	setItem({item:item})
+    }
 
 	return (
 		<div className="layout-container">
@@ -58,55 +88,102 @@ const ListLeague : React.FC = function() {
 								<Link to="/admin/create-league"><button className="btn bg-red"><FontAwesomeIcon icon={faPlus} /> Créer ligue</button></Link>
 							</div>
 						</div>
+						<div className={isLoader ? "loader-spinner":"d-none"}>
+							<Loader
+						        type="Oval"
+						        color="#dd0000"
+						    />
+						</div>
 						<div className="body-card">
 							<div className="card-title">
 								<p>Slot <i><FontAwesomeIcon icon={faSort} size="lg"/></i></p>
-							</div>
-							<div className="card-title">
-								<p>Organisateur <i><FontAwesomeIcon icon={faSort} size="lg"/></i></p>
-							</div>
-							<div className="card-title">
-								<div className="card-title">
-								<p>Prix <i><FontAwesomeIcon icon={faSort} size="lg"/></i></p>
-							</div>
-							</div>
-
-							<div className="card-title">
-								<div className="card-title">
-									<p>Statut <i><FontAwesomeIcon icon={faSort} size="lg"/></i></p>
-								</div>
-							</div>
-							<div className="card-title">
-								<div className="card-title">
-									<p>Date du tournois <i><FontAwesomeIcon icon={faSort} size="lg"/></i></p>
-								</div>
 							</div>
 							<div className="card-title">
 								<div className="card-title">
 									<p>Date limit <i><FontAwesomeIcon icon={faSort} size="lg"/></i></p>
 								</div>
 							</div>
+							<div className="card-title">
+								<p>Organisateur <i><FontAwesomeIcon icon={faSort} size="lg"/></i></p>
+							</div>
+							<div className="card-title">
+								<p>Titre <i><FontAwesomeIcon icon={faSort} size="lg"/></i></p>
+							</div>
+							<div className="card-title">
+								<div className="card-title">
+									<p>Game <i><FontAwesomeIcon icon={faSort} size="lg"/></i></p>
+								</div>
+							</div>
+							<div className="card-title">
+								<p>Plateforme <i><FontAwesomeIcon icon={faSort} size="lg"/></i></p>
+							</div>
+							<div className="card-title">
+								<div className="card-title">
+								<p>Gains <i><FontAwesomeIcon icon={faSort} size="lg"/></i></p>
+							</div>
+							</div>
+							<div className="card-title">
+								<div className="card-title">
+									<p>Date du match <i><FontAwesomeIcon icon={faSort} size="lg"/></i></p>
+								</div>
+							</div>
+							<div className="card-title">
+								<div className="card-title">
+									<p>Statut <i><FontAwesomeIcon icon={faSort} size="lg"/></i></p>
+								</div>
+							</div>
 						</div>
-						<div className="body-card">
-							<div className="card-result">
-								<p>32</p>
-							</div>
-							<div className="card-result">
-								<p>ESL</p>
-							</div>
-							<div className="card-result">
-								<p>1500</p>
-							</div>
-							<div className="card-result">
-								<p>Actif</p>
-							</div>
-							<div className="card-result">
-								<p>2020-11-22 10:42:12</p>
-							</div>
-							<div className="card-result">
-								<p>2020-11-22 10:42:12</p>
-							</div>
-						</div>
+						{
+							league?.map(function(el:any,index:number){
+								return (
+									<div className="body-card" key={index}>
+										<div className="card-result">
+											<p>{el.numberParticipate}</p>
+										</div>
+										<div className="card-result">
+											<p>{
+												new Date(el.deadlineDate).toLocaleTimeString('fr-Fr', {
+													day : 'numeric',
+													month : 'long',
+													year : 'numeric',
+													hour:"numeric",
+													minute:"numeric"
+												})
+											}</p>
+										</div>
+										<div className="card-result">
+											<p>{el.organizer}</p>
+										</div>
+										<div className="card-result">
+											<p>{el.title}</p>
+										</div>
+										<div className="card-result">
+											<p>{el.game.name}</p>
+										</div>
+										<div className="card-result">
+											<p>{el.plateform.name}</p>
+										</div>
+										<div className="card-result">
+											<p>{el.price}</p>
+										</div>
+										<div className="card-result">
+											<p>{
+												new Date(el.date).toLocaleTimeString('fr-Fr', {
+													day : 'numeric',
+													month : 'long',
+													year : 'numeric',
+													hour:"numeric",
+													minute:"numeric"
+												})
+											}</p>
+										</div>
+										<div className="card-result">
+											<p>{el.statut?"Actif":"Inactif"}</p>
+										</div>
+									</div>
+								)
+							})
+						}
 						<div className="filter-game-result">
 							<div className="result-game-page">
 								<i><FontAwesomeIcon icon={faChevronLeft} size="lg"/></i>
@@ -114,6 +191,10 @@ const ListLeague : React.FC = function() {
 								<i><FontAwesomeIcon icon={faChevronRight} size="lg"/></i>
 							</div>
 						</div>
+						<Pagination
+							handlePage={handleItemsPage}
+							records={league.length > 0 ? league[0].records : 0}
+						/>
 					</div>
 				</div>
 			</div>

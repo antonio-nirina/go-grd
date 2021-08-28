@@ -22,4 +22,5 @@ type League struct {
 	IsPublic   				bool            	`json:"isPublic"`
 	IsTeam   				bool            	`json:"isTeam"`
 	NumberGroup   			int            		`json:"numberGroup"`
+	Organizer 				string            	`json:"organizer"`
 }

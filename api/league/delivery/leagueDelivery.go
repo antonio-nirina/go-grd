@@ -46,6 +46,7 @@ func (l *league) SavedLeagueResolver(params graphql.ResolveParams) (interface{},
 	deadlineDate, _ := params.Args["deadlineDate"].(string)
 	priceParticipate, _ := params.Args["priceParticipate"].(float64)
 	rules, _ := params.Args["rules"].(string)
+	organizer, _ := params.Args["organizer"].(string)
 	game, err := l.gameLeagueHandler.FindOneGameByUidHandler(gameUid)
 	plateform, err := l.plateformLeagueHandler.FindOnePlateformByUidHandler(plateformUid)
 
@@ -54,9 +55,14 @@ func (l *league) SavedLeagueResolver(params graphql.ResolveParams) (interface{},
 	}
 
 	IsTeam := false
+	isPublic := true
 
 	if numberTeam > 0 {
 		IsTeam = true
+	}
+
+	if priceParticipate > 0 {
+		isPublic = false
 	}
 
 	league := &entity.League{
@@ -73,9 +79,10 @@ func (l *league) SavedLeagueResolver(params graphql.ResolveParams) (interface{},
 		Statut:            true,
 		Info:              description,
 		Rules:             rules,
-		IsPublic:          true,
+		IsPublic:          isPublic,
 		IsTeam:            IsTeam,
 		NumberGroup:       numberGroup,
+		Organizer:			organizer,
 	}
 
 	res, err := l.leagueHandler.SavedLeagueHandler(league)

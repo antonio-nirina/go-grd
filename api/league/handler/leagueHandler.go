@@ -63,6 +63,7 @@ func (l *leagueUsecase) FindLeagueHandler(idQuery string) (leagueViewModel, erro
 		Rules:result.Rules,
 		IsPublic:result.IsPublic,
 		IsTeam:result.IsTeam,
+		Organizer:result.Organizer,
 		NumberGroup:result.NumberGroup, 			
 	}
 
@@ -100,6 +101,7 @@ func (l *leagueUsecase) FindAllLeagueHandler(pageNumber int64, limit int64) ([]l
 			Plateform:tournament.PlateformViewModel{val.Plateform.Uid.Hex(),val.Plateform.Name,val.Plateform.Description},
 			Rules:val.Rules, 
 			IsPublic:val.IsPublic,
+			Organizer:val.Organizer,
 			Records:records, 			
 		}
 
@@ -133,6 +135,7 @@ func (l *leagueUsecase) FindLeagueGameHandler(pageNumber int64,limit int64,game 
 			Game:tournament.GameViewModel{val.Game.Uid.Hex(),val.Game.Name,val.Game.Image,val.Game.Logo,val.Game.Slug},				
 			Plateform:tournament.PlateformViewModel{val.Plateform.Uid.Hex(),val.Plateform.Name,val.Plateform.Description},
 			Rules:val.Rules,
+			Organizer:val.Organizer,
 			IsPublic:val.IsPublic,  			
 		}
 

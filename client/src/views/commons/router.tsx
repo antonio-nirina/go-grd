@@ -22,7 +22,6 @@ import Assistant from "../assistant/assistant"
 import Assistance from "../assistance/assistance"
 import Contact from "../assistance/contact"
 import Communaute from "../communaute/communaute"
-import League from "../league/league"
 import Login from "../auth/login"
 import Profil from "../profil/profil"
 import Profile from "../annexe/profile"
@@ -51,8 +50,7 @@ const Router = function() {
 			<ProtectedRoute path="/rules-league" exact component={RulesLeague} />
 			<ProtectedRoute path="/teams" exact component={Teams} />
 			<ProtectedRoute path="/rules" exact component={Rules} />			
-			<ProtectedRoute path="/ligue" exact component={Ligue} />
-			<ProtectedRoute path="/league" exact component={League} />
+			<ProtectedRoute path="/league" exact component={Ligue} />
 			<ProtectedRoute path="/wager" exact component={Wager} />
 			<ProtectedRoute path="/joingame/:id" exact component={Joingame} />
 			<ProtectedRoute path="/waggers" exact component={Waggers} />

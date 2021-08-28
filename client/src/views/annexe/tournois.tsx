@@ -2,7 +2,6 @@ import React,{useEffect,useState} from "react"
 import { Link } from "react-router-dom"
 import {useHistory } from "react-router-dom"
 import { useSelector } from "react-redux"
-import { faPlaystation} from "@fortawesome/free-brands-svg-icons"
 import { faGamepad, faTrophy } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import {useQuery} from "@apollo/client"
@@ -129,7 +128,7 @@ const Tournois: React.FC = function() {
 																<tbody>
 																	<tr>
 																		<td>{userConnectedRedux.user.language === "fr" ? dateStringToDY(el.date) : dateStringToDY(el.date)}</td>
-																		<td>{`0/${el.priceParticipate}`}</td>
+																		<td>{`0/${el.numberParticipate}`}</td>
 																		<td>{el.numberTeam > 0 ? `${el.numberTeam} ON ${el.numberTeam}` : "1 ON 1" }</td>
 																	</tr>
 																</tbody>
@@ -241,7 +240,7 @@ const Tournois: React.FC = function() {
 
 													: (
 														<div className="apex block light-green" key={index}>
-															<div><p className="legend">{el.tournament.title}</p><i className="iconGame"><FontAwesomeIcon icon={faPlaystation}/></i></div>
+															<div><p className="legend">{el.tournament.title}</p>{renderPlatformLogo(el.tournament.plateform.name)}</div>
 															<div className="info">
 																<p className="price inblock"><i className="sprite ticket"></i><span>{el.tournament.participate}</span></p>
 																<p className="price inblock"><i className="sprite cup"></i><span>{el.tournament.price}</span></p>
