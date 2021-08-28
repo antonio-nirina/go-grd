@@ -126,6 +126,10 @@
 {
 	color: #dd0000;
 }
+.didacticiel {
+	padding-top: 15px;
+	font-family: "quicksand regular";	
+}
 .didacticiel p{
 	font-family: 'quicksand regular';
 	padding-top: 15px;
