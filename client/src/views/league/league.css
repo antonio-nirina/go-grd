@@ -68,3 +68,6 @@
 .league tr:nth-child(odd){
 	background: none;
 }
+.platform-logo svg{
+	float: right;
+}

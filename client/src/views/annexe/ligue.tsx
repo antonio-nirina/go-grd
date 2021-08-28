@@ -82,6 +82,7 @@ const Ligue: React.FC = function() {
 				</h1>
 				<div className="card">
 					<div className="flex-container">
+						<h2>Ligue disponibles</h2>
 						<div className="bt-container">
 							<Link to="#" className="btn bg-red">
 								{
