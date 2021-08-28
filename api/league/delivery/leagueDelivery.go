@@ -55,9 +55,14 @@ func (l *league) SavedLeagueResolver(params graphql.ResolveParams) (interface{},
 	}
 
 	IsTeam := false
+	isPublic := true
 
 	if numberTeam > 0 {
 		IsTeam = true
+	}
+
+	if priceParticipate > 0 {
+		isPublic = false
 	}
 
 	league := &entity.League{
@@ -74,7 +79,7 @@ func (l *league) SavedLeagueResolver(params graphql.ResolveParams) (interface{},
 		Statut:            true,
 		Info:              description,
 		Rules:             rules,
-		IsPublic:          true,
+		IsPublic:          isPublic,
 		IsTeam:            IsTeam,
 		NumberGroup:       numberGroup,
 		Organizer:			organizer,
