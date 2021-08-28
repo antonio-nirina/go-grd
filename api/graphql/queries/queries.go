@@ -47,12 +47,12 @@ import (
 
 var database = config.ConfigMongo()
 var rep = repository.NewUserRepository(database)
-var repositoryNotif 	= notifRepo.NewRepository(database)
+var repositoryNotif = notifRepo.NewRepository(database)
 
 // Usecase
-var usecaseNotif 	= notifHandler.NewUsecaseNotif(repositoryNotif)
+var usecaseNotif = notifHandler.NewUsecaseNotif(repositoryNotif)
 var usecase = handler.NewUsecaseUser(rep)
-var UserRolve = delivery.NewResolver(usecase,usecaseNotif)
+var UserRolve = delivery.NewResolver(usecase, usecaseNotif)
 
 var repositoryGame = gameRepo.NewGameRepository(database)
 var usecaseGame = gameHandler.NewUsecaseGame(repositoryGame)
@@ -63,72 +63,69 @@ var usecasePlateform = gameHandler.NewUsecasePlateform(repositoryPlateform)
 var plateformResolver = gameDelivery.NewResolverPlateform(usecasePlateform)
 
 var tournamentRepository = tournamentRepo.NewTournamentRepository(database)
-var tournamentUsecase 	= tournamentHandler.NewUsecaseTournament(tournamentRepository)
-var tournamentResolver 	= tournamentDelivery.NewResolverTournament(tournamentUsecase,usecaseGame,usecasePlateform)
+var tournamentUsecase = tournamentHandler.NewUsecaseTournament(tournamentRepository)
+var tournamentResolver = tournamentDelivery.NewResolverTournament(tournamentUsecase, usecaseGame, usecasePlateform)
 
-var notifResolver 		= notifDelivery.NewNotifResolver(usecaseNotif,usecase)
+var notifResolver = notifDelivery.NewNotifResolver(usecaseNotif, usecase)
 
-var cmtyRepository 		= cmtyRepo.NewCmtyRepository(database)
-var cmtyUsecase 		= cmtyHandler.NewUsecaseCmty(cmtyRepository)
-var cmtyResolver 		= cmtyDelivery.NewResolverCmty(cmtyUsecase,usecase,usecaseGame)
+var cmtyRepository = cmtyRepo.NewCmtyRepository(database)
+var cmtyUsecase = cmtyHandler.NewUsecaseCmty(cmtyRepository)
+var cmtyResolver = cmtyDelivery.NewResolverCmty(cmtyUsecase, usecase, usecaseGame)
 
+var homeRepository = homeRepo.NewHomeRepository(database)
+var homeUsecase = homeHandler.NewUsecaseHome(homeRepository)
+var homeResolver = homeDelivery.NewResolverHome(homeUsecase, usecaseGame)
 
-var partRepository 		= partRepo.NewPartRepository(database)
-var partUsecase 		= partHandler.NewUsecasePart(partRepository)
-var partResolver 		= partDelivery.NewResolverPart(partUsecase,usecase,tournamentUsecase)
+var teamRepository = teamRepo.NewTeamRepository(database)
+var teamUsecase = teamHandler.NewUsecaseTeam(teamRepository)
+var teamResolver = teamDelivery.NewResolverTeam(teamUsecase, usecase)
 
-var homeRepository 		= homeRepo.NewHomeRepository(database)
-var homeUsecase 		= homeHandler.NewUsecaseHome(homeRepository)
-var homeResolver 		= homeDelivery.NewResolverHome(homeUsecase,usecaseGame)
+var asistRepository = asistRepo.NewAsistRepository(database)
+var asistUsecase = asistHandler.NewUsecaseAsist(asistRepository)
+var asistResolver = asistDelivery.NewResolverAsist(asistUsecase)
 
-var teamRepository 		= teamRepo.NewTeamRepository(database)
-var teamUsecase 		= teamHandler.NewUsecaseTeam(teamRepository)
-var teamResolver 		= teamDelivery.NewResolverTeam(teamUsecase,usecase)
+var leagueRepository = leagueRepo.NewLeagueRepository(database)
+var leagueUsecase = leagueHandler.NewUsecaseLeague(leagueRepository)
+var leagueResolver = leagueDelivery.NewResolverLeague(leagueUsecase, usecaseGame, usecasePlateform)
 
-var asistRepository 	= asistRepo.NewAsistRepository(database)
-var asistUsecase 		= asistHandler.NewUsecaseAsist(asistRepository)
-var asistResolver 		= asistDelivery.NewResolverAsist(asistUsecase)
-
-var leagueRepository 	= leagueRepo.NewLeagueRepository(database)
-var leagueUsecase 		= leagueHandler.NewUsecaseLeague(leagueRepository)
-var leagueResolver 		= leagueDelivery.NewResolverLeague(leagueUsecase,usecaseGame,usecasePlateform)
-
-
+var partRepository = partRepo.NewPartRepository(database)
+var partUsecase = partHandler.NewUsecasePart(partRepository)
+var partResolver = partDelivery.NewResolverPart(partUsecase, usecase, tournamentUsecase, teamUsecase, leagueUsecase)
 
 // GetRootFields returns all the available queries.
 func GetRootFields() graphql.Fields {
 	return graphql.Fields{
-		"FindOneUser":      		GetOneUserQuery(),
-		"FindOneGame":      		GetOneGameQuery(),
-		"FindOnePlateform": 		GetOnePlateformQuery(),
-		"FindAllGame":      		GetAllGameQuery(),
-		"FindAllPlateform": 		GetAllPlateformQuery(),
-		"GetAccessTokenXbox": 		GetAccessTokenXbox(),
-		"GetProfilUserXbox": 		GetProfilUserXbox(),
-		"GetAllFriends": 	 		GetAllFriends(),
-		"GetUsers": 				GetUsers(),
-		"GetOneNotification": 		GetOneNotification(),
-		"GetAllNotifications": 		GetAllNotifications(),
-		"GetAccessTokenTwitch":		GetAccessTokenTwitch(),
-		"FindOneTournament": 		FindOneTournament(),
-		"FindAllTournament":      	FindAllTournament(),
-		"FindTournamentByGame":		FindTournamentByGame(),
-		"FindAllCmty":      		FindAllCmty(),
-		"FindOneCmty":				FindOneCmty(),
-		"FindOnePart":				FindOnePart(),
-		"FindAllPart":				FindAllPart(),
-		"FindPartByUser": 			FindPartByUser(),
-		"FindOneHome":				FindOneHome(),
-		"FindAllHome":				FindAllHome(),
-		"FindOneTeam":				FindOneTeam(),
-		"FindAllTeam":				FindAllTeam(),
-		"FindOneAsist":				FindOneAsist(),
-		"FindAllAsist":				FindAllAsist(),
-		"FindOneSubject":			FindOneSubject(),
-		"FindAllSubject":			FindAllSubject(),
-		"FindAssistBySubject": 		FindAssistBySubject(),
-		"FindOneLeague": 			FindOneLeague(),
-		"FindAllLeague":      		FindAllLeague(),
-		"FindLeagueByGame":			FindLeagueByGame(),
+		"FindOneUser":          GetOneUserQuery(),
+		"FindOneGame":          GetOneGameQuery(),
+		"FindOnePlateform":     GetOnePlateformQuery(),
+		"FindAllGame":          GetAllGameQuery(),
+		"FindAllPlateform":     GetAllPlateformQuery(),
+		"GetAccessTokenXbox":   GetAccessTokenXbox(),
+		"GetProfilUserXbox":    GetProfilUserXbox(),
+		"GetAllFriends":        GetAllFriends(),
+		"GetUsers":             GetUsers(),
+		"GetOneNotification":   GetOneNotification(),
+		"GetAllNotifications":  GetAllNotifications(),
+		"GetAccessTokenTwitch": GetAccessTokenTwitch(),
+		"FindOneTournament":    FindOneTournament(),
+		"FindAllTournament":    FindAllTournament(),
+		"FindTournamentByGame": FindTournamentByGame(),
+		"FindAllCmty":          FindAllCmty(),
+		"FindOneCmty":          FindOneCmty(),
+		"FindOnePart":          FindOnePart(),
+		"FindAllPart":          FindAllPart(),
+		"FindPartByUser":       FindPartByUser(),
+		"FindOneHome":          FindOneHome(),
+		"FindAllHome":          FindAllHome(),
+		"FindOneTeam":          FindOneTeam(),
+		"FindAllTeam":          FindAllTeam(),
+		"FindOneAsist":         FindOneAsist(),
+		"FindAllAsist":         FindAllAsist(),
+		"FindOneSubject":       FindOneSubject(),
+		"FindAllSubject":       FindAllSubject(),
+		"FindAssistBySubject":  FindAssistBySubject(),
+		"FindOneLeague":        FindOneLeague(),
+		"FindAllLeague":        FindAllLeague(),
+		"FindLeagueByGame":     FindLeagueByGame(),
 	}
 }

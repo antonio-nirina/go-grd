@@ -10,6 +10,7 @@ import (
 type UsecaseLeague interface {
 	SavedLeagueHandler(*entity.League) (interface{}, error)
 	FindLeagueHandler(idQuery string) (leagueViewModel, error)
+	FindOneLeagueHandler(idQuery string) (entity.League, error)
 	FindAllLeagueHandler(pageNumber int64,limit int64) ([]leagueViewModel, error)
 	FindLeagueGameHandler(pageNumber int64,limit int64,gameUid primitive.ObjectID) ([]leagueViewModel, error)
 }
@@ -68,6 +69,22 @@ func (l *leagueUsecase) FindLeagueHandler(idQuery string) (leagueViewModel, erro
 	}
 
 	return leagueViewModel,nil
+}
+
+func (l *leagueUsecase) FindOneLeagueHandler(idQuery string) (entity.League, error) {
+	objectId, err := primitive.ObjectIDFromHex(idQuery)
+	
+	if err != nil {
+		return entity.League{}, err
+	}
+
+	result, err := l.leagueRepository.FindLeagueRepo(objectId)
+
+	if err != nil {
+		return entity.League{}, err
+	}
+
+	return result,nil
 }
 
 func (l *leagueUsecase) FindAllLeagueHandler(pageNumber int64, limit int64) ([]leagueViewModel, error){

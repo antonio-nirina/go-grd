@@ -10,6 +10,7 @@ import (
 type UsecaseTeam interface {
 	SavedTeamHandler(team *entity.Team) (interface{}, error)
 	FindTeamHandler(idQuery string) (TeamViewModel, error)
+	FindOneTeamHandler(idQuery string) (entity.Team, error)
 	FindAllTeamHandler(pageNumber int64,limit int64) ([]TeamViewModel, error)
 	UpdatedTeamHandler(team *entity.Team) (interface{}, error)
 }
@@ -107,6 +108,23 @@ func (t *teamUsecase) FindTeamHandler(idQuery string) (TeamViewModel, error) {
 	}
 
 	return teamViewModel,nil
+}
+
+func (t *teamUsecase) FindOneTeamHandler(idQuery string) (entity.Team, error){
+	objectId, err := primitive.ObjectIDFromHex(idQuery)
+	
+	if err != nil {
+		return entity.Team{}, err
+	}
+
+	result, err := t.teamRepository.FindTeamRepo(objectId)
+
+	if err != nil {
+		return entity.Team{}, err
+	}
+
+	return result,nil
+
 }
 
 func (t *teamUsecase) FindAllTeamHandler(pageNumber int64,limit int64) ([]TeamViewModel, error) {
