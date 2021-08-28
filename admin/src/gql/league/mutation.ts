@@ -13,6 +13,7 @@ export const CREATED_LEAGUE = gql`
 		$deadlineDate:String,
 		$priceParticipate:Float,
 		$numberGroup:Int,
+		$organizer:String,
 		$rules:String){
 		saveLeague(
 			date:$date,
@@ -26,6 +27,7 @@ export const CREATED_LEAGUE = gql`
 			rules:$rules,
 			deadlineDate:$deadlineDate,
 			numberGroup:$numberGroup,
+			organizer:$organizer,
 			priceParticipate:$priceParticipate)
 	}
 `

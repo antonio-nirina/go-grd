@@ -42,6 +42,9 @@ func saveLeague() *graphql.Field {
 			"rules": &graphql.ArgumentConfig{
 				Type: graphql.String,
 			},
+			"organizer": &graphql.ArgumentConfig{
+				Type: graphql.String,
+			},
 			"numberGroup":&graphql.ArgumentConfig{
 				Type: graphql.Int,
 			},
