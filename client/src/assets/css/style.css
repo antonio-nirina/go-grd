@@ -64,6 +64,9 @@ html{
 .light-green{
   background: #216026
 }
+.light-blue{
+  background: #0d94c0;
+}
 .btn{
   font-size: 14px;
   text-transform: uppercase;

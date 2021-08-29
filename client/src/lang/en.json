@@ -172,7 +172,10 @@
 		"end":"End",
 		"starttimes":"Start time",
 		"open":"Open",
-		"close":"close"
+		"close":"close",
+		"participate":"Register",
+		"cancelParticipate":"CANCEL MY SUBSCRIPTION",
+		"notify":"You are signup this league"
 	},
 	"leagues": {
 		"listLigues":"List of available leagues",

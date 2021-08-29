@@ -6,7 +6,6 @@ import Footer from "../footer/footer"
 import Aside from "../assistance/aside"
 import Support from "../assistance/support"
 
-import thumbnail from "../../assets/image/video.png"
 import "../../assets/css/style.css"
 import "../assistance/assistance.css"
 import { faSortDown } from "@fortawesome/free-solid-svg-icons"
@@ -15,7 +14,7 @@ import {GET_ASSIST_BY_SUBJECT} from "../../gql/assist/query"
 
 const Assistance: React.FC = function() {	
 	const [showDrop, setShowDrop] = useState<Boolean>(false)
-	const [showContent, setShowContent] = useState<Boolean>(false)
+	// const [showContent, setShowContent] = useState<Boolean>(false)
 	const [assists, setAssists] = useState<any>([])
 	const {loading,error,data} 	= useQuery(GET_ASSIST_BY_SUBJECT)
 
@@ -30,9 +29,7 @@ const Assistance: React.FC = function() {
 	const onShowDrop = function(){
 	    setShowDrop(!showDrop)
 	}
-	const onShowContent = function(){
-	    setShowContent(!showContent)
-	}
+
   return(
   	<div className="assistance">
 	    <div className="container">

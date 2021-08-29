@@ -2,6 +2,9 @@ import React ,{useEffect,useState} from "react"
 import {useQuery} from "@apollo/client"
 import { useSelector } from "react-redux"
 import { Link } from "react-router-dom"
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+
 import Tree from "./tree"
 import Header from "../header/header"
 import Footer from "../footer/footer"
@@ -20,19 +23,28 @@ const InfoLeague: React.FC = function(props:any) {
 	const uid:string|null = params.get("uid")
 	const [league, setLeague] = useState<League>()
 	const [isOpen, setIsOpen] = useState<boolean>(true)
+	const [group, setGroup] = useState<Array<number>>([])
 	const [showMore, setShowMore] = useState<boolean>(false)
+	const [isSingup, setIsSingup] = useState<boolean>(false)
 	const userConnectedRedux = useSelector((state:RootState) => state.userConnected)
 	const {loading,error,data} 	= useQuery(GET_ONE_LEAGUE, {
-			variables: {
-				uid:uid,
-			},
+		variables: {
+			uid:uid,
+		},
 	})
 	const onShowMore = function(){
 		setShowMore(!showMore)
 	}
 	useEffect(() => {
+		let array:Array<number> = []
+
 		if(!loading && !error && data) {
 			setLeague(data.FindOneLeague)
+			for(let i = 0 ; i < data.FindOneLeague.numberParticipate/4; i++){
+				array.push(i)
+			}
+
+			setGroup(array)
 		}
 
 		const date1 = new Date()
@@ -40,8 +52,21 @@ const InfoLeague: React.FC = function(props:any) {
 		const diff = (date2.getTime() - date1.getTime())/1000/60
 
 		if (diff < 10 || diff <= 0) setIsOpen(false)
-
 	},[loading,error,data])
+	const message:string = Translation(userConnectedRedux.user.language).tournament.notify ?? ""
+
+	const notify = function(){
+		toast(message,{
+			className: 'light-blue',
+			position: "top-left",
+			autoClose: 5000,
+			hideProgressBar: false,
+			closeOnClick: true,
+			pauseOnHover: true,
+			draggable: true,
+			progress: undefined,
+		})
+	}
 
   return(
   	<div className="Tournament info">
@@ -50,6 +75,17 @@ const InfoLeague: React.FC = function(props:any) {
 			<div className="full-container test">
 				<div className="details">
 					<p className="name-target">League : <span>{league?.game.name}</span></p>
+					<ToastContainer
+						position="top-left"
+						autoClose={5000}
+						hideProgressBar={false}
+						newestOnTop={false}
+						closeOnClick
+						rtl={false}
+						pauseOnFocusLoss
+						draggable
+						pauseOnHover
+						/>
 					<p className="starting">
 						{
 							Translation(userConnectedRedux.user.language).tournament.starttimes
@@ -75,58 +111,30 @@ const InfoLeague: React.FC = function(props:any) {
 					<div className="txt txt-infos">
 						<div className="container-infos">
 							<div className="calendar">
-							<h2>Champions League <span>2022</span></h2>
+							<h2>{league?.title}</h2>
 							<div className="flex-group">
-								<div className="team-group">
-									<div className="groups">									
-										<p>Group A</p>
-									</div>
-									<p className="group-name">
-										<img src={AvatarDefault} className="avatar" alt="" />
-										<span>Teamname 1</span>
-									</p>
-									<p className="group-name">
-										<img src={AvatarDefault} className="avatar" alt="" />
-										<span>Teamname 2</span>
-									</p>
-									<p className="group-name">
-										<img src={AvatarDefault} className="avatar" alt="" />
-										<span>Teamname 3</span>
-									</p>
-								</div>
-								<div className="team-group">
-									<div className="groups">									
-										<p>Group B</p>
-									</div>
-									<p className="group-name">
-										<img src={AvatarDefault} className="avatar" alt="" />
-										<span>Teamname 4</span>
-									</p>
-									<p className="group-name">
-										<img src={AvatarDefault} className="avatar" alt="" />
-										<span>Teamname 5</span>
-									</p>
-									<p className="group-name">
-										<img src={AvatarDefault} className="avatar" alt="" />
-										<span>Teamname 6</span>
-									</p>
-								</div>
-								<div className="team-group">
-									<div className="groups">									
-										<p>Group B</p>
-									</div>
-									<p className="group-name">
-										<img src={AvatarDefault} className="avatar" alt="" />
-										<span>Teamname 4</span>
-									</p>
-									<p className="group-name">
-										<img src={AvatarDefault} className="avatar" alt="" />
-										<span>Teamname 5</span>
-									</p>
-									<p className="group-name">
-										<img src={AvatarDefault} className="avatar" alt="" />
-										<span>Teamname 6</span>
-									</p>
+								<div className="team-group flex">
+									{
+										group.map(function(el:number,index:number){
+											return (<div key={index}>
+												<div className="groups">									
+													<p>Group {el+1}</p>
+												</div>
+												<p className="group-name">
+													<img src={AvatarDefault} className="avatar" alt="" />
+													<span>Teamname 1</span>
+												</p>
+												<p className="group-name">
+													<img src={AvatarDefault} className="avatar" alt="" />
+													<span>Teamname 2</span>
+												</p>
+												<p className="group-name">
+													<img src={AvatarDefault} className="avatar" alt="" />
+													<span>Teamname 3</span>
+												</p>		
+											</div>)
+										})
+									}	
 								</div>
 							</div>
 							<div className="btn-container">
@@ -179,7 +187,20 @@ const InfoLeague: React.FC = function(props:any) {
 							</div>
 						</div>
 						<div className="btn-container">
-							<button className="btn bg-red">Se connecter</button>
+							{isSingup ? 
+								<button className="btn light-blue">
+									{
+										Translation(userConnectedRedux.user.language).tournament.cancelParticipate
+									}
+								</button>
+								:
+								<button className="btn bg-red" onClick={notify}>
+									{
+										Translation(userConnectedRedux.user.language).tournament.participate
+									}
+								</button>
+							}
+							
 						</div>
 					</div>
 				</div>

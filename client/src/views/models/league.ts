@@ -6,6 +6,7 @@ export interface League {
 	statut:Boolean
 	organizer:string
 	numberTeam:number
+	description:string
 	deadlineDate:string
 	date:string
 	price:number

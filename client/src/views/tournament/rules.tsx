@@ -104,7 +104,11 @@ const Rules: React.FC = function(props:any) {
 							</div>
 						</div>
 						<div className="btn-container">
-							<button className="btn bg-red">Se connecter</button>
+							<button className="btn bg-red">
+								{
+									Translation(userConnectedRedux.user.language).tournament.participate
+								}
+							</button>
 						</div>
 					</div>
 				</div>
