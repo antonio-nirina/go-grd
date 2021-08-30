@@ -14,6 +14,8 @@ type UsecasePart interface {
 	FindAllPartHandler(pageNumber int64,limit int64) ([]partViewModel, error)
 	FindPartUserHandler(pageNumber int64,limit int64,userUid primitive.ObjectID) ([]partViewModel, error)
 	UpdatedPartUserHandler(partUid string, userUid primitive.ObjectID) (interface{}, error)
+	FindPartUserLeagueHandler(uidUser primitive.ObjectID,leagueUid string) (partViewModel, error)
+	FindPartUserTournamentHandler(uidUser primitive.ObjectID,tournamentUid string) (partViewModel, error)
 }
 type partUsecase struct {
 	partRepository repository.RepositoryPart
@@ -233,4 +235,128 @@ func (p *partUsecase) UpdatedPartUserHandler(partUid string, userUid primitive.O
 	}
 
 	return "Ok",nil
+}
+
+func (p *partUsecase) FindPartUserLeagueHandler(userUid primitive.ObjectID,leagueUid string) (partViewModel, error){
+	objectId, err := primitive.ObjectIDFromHex(leagueUid)
+	
+	if err != nil {
+		return partViewModel{}, err
+	}
+
+	result, err := p.partRepository.FindPartByLeagueRepo(userUid,objectId)
+
+	if err != nil {
+		return partViewModel{}, err
+	}
+
+	
+	partViewModel := partViewModel{
+		Uid: result.Uid.Hex(),
+		Date:result.Date,
+		User:userH.UserViewModel{
+			Uid:result.User.Uid.Hex(),
+			FirstName:result.User.FirstName,
+			LastName:result.User.LastName,
+			Email:result.User.Email,
+			Username:result.User.Username,
+			IsBanned:result.User.IsBanned,
+			Avatar:result.User.Avatar,
+			Language:result.User.Language     ,
+			Point:result.User.Point,         
+			Roles:result.User.Roles      	 ,
+			TypeConnexion:result.User.TypeConnexion   ,
+			Created:result.User.Created, 		
+		},
+		Tournament:tHandler.TournamentViewModel{
+			result.Tournament.Uid.Hex(),
+			result.Tournament.Title,
+			result.Tournament.Date,
+			result.Tournament.Info,
+			result.Tournament.Statut,
+			result.Tournament.NumberParticipate,
+			result.Tournament.NumberTeam,
+			result.Tournament.Price,
+			result.Tournament.DeadlineDate,
+			result.Tournament.PriceParticipate,
+			tHandler.GameViewModel{
+				result.Tournament.Game.Uid.Hex(),
+				result.Tournament.Game.Name,
+				result.Tournament.Game.Image,
+				result.Tournament.Game.Logo,
+				result.Tournament.Game.Slug,
+			}, 
+			tHandler.PlateformViewModel{
+				result.Tournament.Plateform.Uid.Hex(),
+				result.Tournament.Plateform.Description,
+				result.Tournament.Plateform.Name,
+			},
+			result.Tournament.Rules,
+			result.Tournament.IsPublic,
+		},
+	}
+
+	return partViewModel,nil
+}
+
+func (p *partUsecase) FindPartUserTournamentHandler(uidUser primitive.ObjectID,tournamentUid string) (partViewModel, error){
+	objectId, err := primitive.ObjectIDFromHex(tournamentUid)
+	
+	if err != nil {
+		return partViewModel{}, err
+	}
+
+	result, err := p.partRepository.FindPartByTournamentRepo(userUid,objectId)
+
+	if err != nil {
+		return partViewModel{}, err
+	}
+
+	
+	partViewModel := partViewModel{
+		Uid: result.Uid.Hex(),
+		Date:result.Date,
+		User:userH.UserViewModel{
+			Uid:result.User.Uid.Hex(),
+			FirstName:result.User.FirstName,
+			LastName:result.User.LastName,
+			Email:result.User.Email,
+			Username:result.User.Username,
+			IsBanned:result.User.IsBanned,
+			Avatar:result.User.Avatar,
+			Language:result.User.Language     ,
+			Point:result.User.Point,         
+			Roles:result.User.Roles      	 ,
+			TypeConnexion:result.User.TypeConnexion   ,
+			Created:result.User.Created, 		
+		},
+		Tournament:tHandler.TournamentViewModel{
+			result.Tournament.Uid.Hex(),
+			result.Tournament.Title,
+			result.Tournament.Date,
+			result.Tournament.Info,
+			result.Tournament.Statut,
+			result.Tournament.NumberParticipate,
+			result.Tournament.NumberTeam,
+			result.Tournament.Price,
+			result.Tournament.DeadlineDate,
+			result.Tournament.PriceParticipate,
+			tHandler.GameViewModel{
+				result.Tournament.Game.Uid.Hex(),
+				result.Tournament.Game.Name,
+				result.Tournament.Game.Image,
+				result.Tournament.Game.Logo,
+				result.Tournament.Game.Slug,
+			}, 
+			tHandler.PlateformViewModel{
+				result.Tournament.Plateform.Uid.Hex(),
+				result.Tournament.Plateform.Description,
+				result.Tournament.Plateform.Name,
+			},
+			result.Tournament.Rules,
+			result.Tournament.IsPublic,
+		},
+	}
+
+	return partViewModel,nil
 }

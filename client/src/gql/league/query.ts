@@ -18,6 +18,7 @@ export const GET_ALL_LEAGUE = gql`
 		isPublic
 		numberGroup
 		organizer
+		isTeam
 		game{
 			uid
 			name
@@ -49,6 +50,7 @@ export const GET_ONE_LEAGUE = gql`
 		rules
 		numberGroup
 		organizer
+		isTeam
 		game{
 			uid
 			name
@@ -79,6 +81,7 @@ export const GET_LEAGUE_GAME = gql`
 		priceParticipate
 		rules
 		isPublic
+		isTeam
 		numberGroup
 		game{
 			uid

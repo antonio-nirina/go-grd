@@ -1,5 +1,5 @@
 import React ,{useEffect,useState} from "react"
-import {useQuery} from "@apollo/client"
+import {useQuery,useMutation} from "@apollo/client"
 import { useSelector } from "react-redux"
 import { Link } from "react-router-dom"
 import { ToastContainer, toast } from 'react-toastify'
@@ -11,6 +11,7 @@ import Header from "../header/header"
 import Footer from "../footer/footer"
 
 import {GET_ONE_LEAGUE} from "../../gql/league/query"
+import {SAVED_PART} from "../../gql/participate/mutation"
 import {Translation} from "../../lang/translation"
 import {RootState} from "../../reducer"
 import "../tournament/info.css"
@@ -19,6 +20,7 @@ import {League} from "../models/league"
 import {dateStringToDY} from "../tools/dateConvert"
 import AvatarDefault from "../../assets/image/game-tag.png"
 import {RegisterLeagueAction,Input} from "../league/action/leagueAction"
+import {checkInTeam} from "../league/utils"
 
 const InfoLeague: React.FC = function(props:any) {
 	const dispatch = useDispatch()
@@ -28,13 +30,15 @@ const InfoLeague: React.FC = function(props:any) {
 	const [isOpen, setIsOpen] = useState<boolean>(true)
 	const [group, setGroup] = useState<Array<number>>([])
 	const [showMore, setShowMore] = useState<boolean>(false)
-	const [isSingup, setIsSingup] = useState<boolean>(false)
 	const userConnectedRedux = useSelector((state:RootState) => state.userConnected)
+	const userSingupLeague = useSelector((state:RootState) => state.leagueSingin)
 	const {loading,error,data} 	= useQuery(GET_ONE_LEAGUE, {
 		variables: {
 			uid:uid,
 		},
 	})
+	const [savedPartLeague]  = useMutation(SAVED_PART)
+
 	const onShowMore = function(){
 		setShowMore(!showMore)
 	}
@@ -56,15 +60,26 @@ const InfoLeague: React.FC = function(props:any) {
 
 		if (diff < 10 || diff <= 0) setIsOpen(false)
 	},[loading,error,data])
-	const message:string = Translation(userConnectedRedux.user.language).tournament.notify ?? ""
+	let message:string = Translation(userConnectedRedux.user.language).tournament.notify ?? ""
 
-	const notify = function(){
+	const notify = async function(){
+		let isError:boolean = false
 		const param:Input = {
 			uidLeague:uid,
 			userUid:userConnectedRedux.user.uid,
+			part:true
 		}
-		//  Check if user belong to Team if League is Team
-		dispatch(RegisterLeagueAction(param))
+
+		if(league?.isTeam) {
+			const check = await checkInTeam(userConnectedRedux.user.uid)
+			if(!check) message = Translation(userConnectedRedux.user.language).tournament.notifyError
+		}
+
+		if(!isError) {
+			await savedPartLeague({ variables: { uidUser: userConnectedRedux.user.uid,date:(new Date().toLocaleString()),tournamentUid:"",leagueUid:uid,teamsUid:{uid:[]} } })
+			dispatch(RegisterLeagueAction(param))
+		}
+
 		toast(message,{
 			className: 'light-blue',
 			position: "top-left",
@@ -94,7 +109,7 @@ const InfoLeague: React.FC = function(props:any) {
 						pauseOnFocusLoss
 						draggable
 						pauseOnHover
-						/>
+					/>
 					<p className="starting">
 						{
 							Translation(userConnectedRedux.user.language).tournament.starttimes
@@ -196,7 +211,7 @@ const InfoLeague: React.FC = function(props:any) {
 							</div>
 						</div>
 						<div className="btn-container">
-							{isSingup ? 
+							{userSingupLeague.league.part ?
 								<button className="btn light-blue">
 									{
 										Translation(userConnectedRedux.user.language).tournament.cancelParticipate

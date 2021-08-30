@@ -36,8 +36,8 @@ export const GET_ONE_TEAM = gql`
 
 
 export const GET_ONE_TEAM_BY_USER = gql`
-	query FindTeamByUser($idUser: String!) {
-		FindTeamByUser(idUser: $idUser) {
+	query FindTeamByUser($uid: String!) {
+		FindTeamByUser(uid: $uid) {
 		uid
 		name
 		logo
