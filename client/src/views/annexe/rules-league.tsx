@@ -2,6 +2,8 @@ import React,{useEffect,useState} from "react"
 import parse from 'html-react-parser'
 import {useQuery} from "@apollo/client"
 import { useSelector } from "react-redux"
+import { useDispatch } from "react-redux"
+
 import {RootState} from "../../reducer"
 import {Translation} from "../../lang/translation"
 import {GET_ONE_LEAGUE} from "../../gql/league/query"
@@ -14,6 +16,7 @@ import { Link } from "react-router-dom"
 import {dateStringToDY} from "../tools/dateConvert"
 
 const RulesLeague: React.FC = function(props:any) {
+	const dispatch = useDispatch()
 	const params = new URLSearchParams(props.location.search)
 	const uid:string|null = params.get("uid")
 	const [league, setLeague] = useState<League>()

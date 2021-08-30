@@ -1,8 +1,8 @@
 export const LEAGUE_REGISTER = "league_register"
 
-interface Input{
-	uidLeague:string
-	userUid:string
+export interface Input{
+	uidLeague:string|null
+	userUid:string|null
 }
 
 export const RegisterLeagueAction = function(data:Input) {

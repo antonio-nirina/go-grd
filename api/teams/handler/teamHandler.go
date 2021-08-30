@@ -13,6 +13,7 @@ type UsecaseTeam interface {
 	FindOneTeamHandler(idQuery string) (entity.Team, error)
 	FindAllTeamHandler(pageNumber int64,limit int64) ([]TeamViewModel, error)
 	UpdatedTeamHandler(team *entity.Team) (interface{}, error)
+	FindTeamByUserHandler(idQuery string) ([]TeamViewModel, error)
 }
 
 type TeamViewModel struct {
@@ -215,4 +216,73 @@ func (t *teamUsecase) CountTeamHandler()(int) {
 	}
 	
 	return records
+}
+
+func (t *teamUsecase) FindTeamByUserHandler(idQuery string) ([]TeamViewModel, error) {
+	objectId, err := primitive.ObjectIDFromHex(idQuery)
+	
+	if err != nil {
+		return []TeamViewModel{}, err
+	}
+
+	result, err := t.teamRepository.FindTeamByUserRepo(objectId)
+
+	if err != nil {
+		return []TeamViewModel{}, err
+	}
+
+	var res []TeamViewModel
+	var players []userHandler.UserViewModel
+
+	for _,val := range result {
+		for _,value := range val.Players{
+			pls := userHandler.UserViewModel{
+				Uid:value.Uid.Hex(),
+				FirstName:value.FirstName,
+				LastName:value.LastName,
+				Email:value.Email,
+				Username:value.Username,
+				IsBanned:value.IsBanned,
+				Avatar:value.Avatar,
+				Language:value.Language,
+				Point:value.Point,
+				Roles:value.Roles,
+				TypeConnexion:value.TypeConnexion,
+				Created:value.Created,
+			}
+
+			players = append(players,pls)
+		}
+
+		user := userHandler.UserViewModel{
+			Uid:val.Uid.Hex(),
+			FirstName:val.Creator.FirstName,
+			LastName:val.Creator.LastName,
+			Email:val.Creator.Email,
+			Username:val.Creator.Username,
+			IsBanned:val.Creator.IsBanned,
+			Avatar:val.Creator.Avatar,
+			Language:val.Creator.Language,
+			Point:val.Creator.Point,
+			Roles:val.Creator.Roles,
+			TypeConnexion:val.Creator.TypeConnexion,
+			Created:val.Creator.Created,
+		}
+
+		teamViewModel := TeamViewModel{
+			Uid:val.Uid.Hex(),
+			Name:val.Name,
+			CreationDate:val.CreationDate,
+			Players: players,
+			Description:val.Description,
+			IsBlocked:val.IsBlocked,
+			Logo:val.Logo,
+			Creator:user,
+			Records:0,   		
+		}
+
+		res = append(res, teamViewModel)
+	}
+	
+	return res,nil
 }

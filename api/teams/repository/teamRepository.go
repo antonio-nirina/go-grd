@@ -28,6 +28,7 @@ type RepositoryTeam interface {
 	FindAllTeamRepo(pageNumber int64,limit int64)([]entity.Team, error)
 	UpdatedRepoTeam(team *entity.Team) (interface{}, error)
 	CountTeamRepository()(int,error)
+	FindTeamByUserRepo(idQuery primitive.ObjectID) ([]entity.Team, error)
 }
 
 func (c *driverRepository) SavedRepoTeam(team *entity.Team) (interface{}, error) {
@@ -122,4 +123,28 @@ func (c *driverRepository) CountTeamRepository()(int,error) {
 	}
 
 	return int(records),nil
+}
+
+func (c *driverRepository) FindTeamByUserRepo(idQuery primitive.ObjectID) ([]entity.Team, error) {
+	var collection = c.client.Database("grd_database").Collection("team")
+	var results []entity.Team
+	cur, err := collection.Find(context.TODO(), bson.M{"players": idQuery},options.Find().SetSort(bson.M{"_id": -1}))
+
+	if err != nil {
+		return nil, err
+	}
+
+	for cur.Next(context.TODO()) {
+		var elem entity.Team
+		err := cur.Decode(&elem)
+		if err != nil {
+			external.Logger(fmt.Sprintf("%v", err))
+		}
+
+		results = append(results, elem)
+	}
+	
+	cur.Close(context.TODO())
+
+	return results, nil
 }

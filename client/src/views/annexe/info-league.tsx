@@ -4,6 +4,7 @@ import { useSelector } from "react-redux"
 import { Link } from "react-router-dom"
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import { useDispatch } from "react-redux"
 
 import Tree from "./tree"
 import Header from "../header/header"
@@ -17,8 +18,10 @@ import "../../assets/css/style.css"
 import {League} from "../models/league"
 import {dateStringToDY} from "../tools/dateConvert"
 import AvatarDefault from "../../assets/image/game-tag.png"
+import {RegisterLeagueAction,Input} from "../league/action/leagueAction"
 
 const InfoLeague: React.FC = function(props:any) {
+	const dispatch = useDispatch()
 	const params = new URLSearchParams(props.location.search)
 	const uid:string|null = params.get("uid")
 	const [league, setLeague] = useState<League>()
@@ -56,6 +59,12 @@ const InfoLeague: React.FC = function(props:any) {
 	const message:string = Translation(userConnectedRedux.user.language).tournament.notify ?? ""
 
 	const notify = function(){
+		const param:Input = {
+			uidLeague:uid,
+			userUid:userConnectedRedux.user.uid,
+		}
+		//  Check if user belong to Team if League is Team
+		dispatch(RegisterLeagueAction(param))
 		toast(message,{
 			className: 'light-blue',
 			position: "top-left",
