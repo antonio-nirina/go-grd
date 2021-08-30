@@ -94,7 +94,7 @@ const ListLeague : React.FC = function() {
 						        color="#dd0000"
 						    />
 						</div>
-						<div className="body-card">
+						<div className="body-card center">
 							<div className="card-title">
 								<p>Slot <i><FontAwesomeIcon icon={faSort} size="lg"/></i></p>
 							</div>
@@ -136,7 +136,7 @@ const ListLeague : React.FC = function() {
 						{
 							league?.map(function(el:any,index:number){
 								return (
-									<div className="body-card" key={index}>
+									<div className="body-card center" key={index}>
 										<div className="card-result">
 											<p>{el.numberParticipate}</p>
 										</div>
@@ -183,14 +183,7 @@ const ListLeague : React.FC = function() {
 									</div>
 								)
 							})
-						}
-						<div className="filter-game-result">
-							<div className="result-game-page">
-								<i><FontAwesomeIcon icon={faChevronLeft} size="lg"/></i>
-								<span>1</span>
-								<i><FontAwesomeIcon icon={faChevronRight} size="lg"/></i>
-							</div>
-						</div>
+						}						
 						<Pagination
 							handlePage={handleItemsPage}
 							records={league.length > 0 ? league[0].records : 0}

@@ -35,3 +35,17 @@ func FindAllTeam() *graphql.Field {
 		Resolve: teamResolver.FindAllTeamResolver,
 	}
 }
+
+func FindTeamByUser() *graphql.Field {
+	return &graphql.Field{
+		Type:        graphql.NewList(types.TeamSchemaType),
+		Description: "Get single Team by user",
+		Args: graphql.FieldConfigArgument{
+			"uid": &graphql.ArgumentConfig{
+				Type: graphql.String,
+			},
+		},
+		
+		Resolve: teamResolver.TeamByUserResolver,
+	}
+}

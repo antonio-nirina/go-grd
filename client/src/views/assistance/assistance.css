@@ -47,6 +47,12 @@
 	padding: 30px;
 	font-weight: lighter;
 	border-radius: 0px 5px 5px 0px;
+	height: 100vh;
+	overflow: auto;
+}
+.support-content{
+	height: 54px;
+    overflow: hidden;
 }
 .support p{
 	margin-left: 5px;
@@ -126,6 +132,10 @@
 {
 	color: #dd0000;
 }
+.didacticiel {
+	padding-top: 15px;
+	font-family: "quicksand regular";	
+}
 .didacticiel p{
 	font-family: 'quicksand regular';
 	padding-top: 15px;
@@ -134,6 +144,19 @@
 .support-container{
 	height: 77px;
 	overflow: hidden;
+}
+.sup{
+	position: relative;
+}
+.sup.reduce{
+	
+}
+.sup i{
+	float: right;
+    position: absolute;
+    top: 0;
+    right: 9px;
+    font-size: 24px;
 }
 .support-container.reduce
 {

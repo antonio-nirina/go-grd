@@ -82,6 +82,7 @@ const Ligue: React.FC = function() {
 				</h1>
 				<div className="card">
 					<div className="flex-container">
+						<h2>Ligue disponibles</h2>
 						<div className="bt-container">
 							<Link to="#" className="btn bg-red">
 								{
@@ -166,13 +167,13 @@ const Ligue: React.FC = function() {
 								    <Link to={`/league-game?game=${APEX_LEGENDE.replace(" ","_")}&slug=${SLUG_APEX_LEGENDE}`}><img src={apexlegends} alt="Apex Legends" /></Link>
 								</div>
 								<div className="logo-game">
-								    <Link to={`/tournament-game?game=${FORTNITE.replace(" ","_")}&slug=${SLUG_FORTNITE}`}><img src={fortnite} alt="Fortnite" /></Link>
+								    <Link to={`/league-game?game=${FORTNITE.replace(" ","_")}&slug=${SLUG_FORTNITE}`}><img src={fortnite} alt="Fortnite" /></Link>
 								</div>
 								<div className="logo-game">
 								    <Link to={`/league-game?game=${RNB.replace(" ","_")}&slug=${SLUG_RNB}`}><img src={rainboxsix} alt="RainbowSIx Siege" /></Link>
 								</div>
 								<div className="logo-game">
-								    <Link to={`/tournament-game?game=${RL.replace(" ","_")}&slug=${SLUG_RL}`}><img src={rocketleague} alt="Rocket League" /></Link>
+								    <Link to={`/league-game?game=${RL.replace(" ","_")}&slug=${SLUG_RL}`}><img src={rocketleague} alt="Rocket League" /></Link>
 								</div>
 							</div>
 		      			<div className="lastblock w100">
@@ -192,55 +193,55 @@ const Ligue: React.FC = function() {
 					</div>
 	 			</div>
 		 		<div className="participate league">
-							<div className="marg">
-								<div className="part">
-									{lastLeague.length > 0 ? (
-											<div className="undertitle">
-												<h2>
-													{
-														Translation(userConnectedRedux.user.language).tournament.lasttournament
-													}
-												</h2>
-											</div>
-										)
-										:
-										(
-											<></>
-										)
-									}
-
-									<div className="content">
-									<div className="clear"></div>
-										{
-											lastLeague.length > 0 ? lastLeague.map(function(el:any,index:number) {
-												return (
-													el.league.name ? (
-														<div className="apex block dark-red" key={index}>
-															<div><p className="legend">{el.league.title}</p><i className="iconGame"><FontAwesomeIcon icon={faGamepad}/></i></div>
-															<div className="info">
-																<p className="price inblock"><i className="sprite cup"></i><span>{el.tournament.title}</span></p>
-																<p className="date inblock"><i className="sprite calendar"></i>{userConnectedRedux.user.language === "fr" ? dateStringToDY(el.date) : dateStringToDY(el.date)}</p>
-															</div>
-														</div>
-													)
-
-													: (
-														<div className="apex block light-green" key={index}>
-															<div><p className="legend">{el.league.title}</p>{renderPlatformLogo(el.league.plateform.name)}</div>
-															<div className="info">
-																<p className="price inblock"><i className="sprite ticket"></i><span>{el.league.participate}</span></p>
-																<p className="price inblock"><i className="sprite cup"></i><span>{el.league.price}</span></p>
-																<p className="date inblock"><i className="sprite calendar"></i>{userConnectedRedux.user.language === "fr" ? dateStringToDY(el.date) : dateStringToDY(el.date)}</p>
-															</div>
-														</div>
-													)
-												)
-											}) : <></>
-										}
+					<div className="marg">
+						<div className="part">
+							{lastLeague.length > 0 ? (
+									<div className="undertitle">
+										<h2>
+											{
+												Translation(userConnectedRedux.user.language).tournament.lasttournament
+											}
+										</h2>
 									</div>
-								</div>
+								)
+								:
+								(
+									<></>
+								)
+							}
+
+							<div className="content">
+							<div className="clear"></div>
+								{
+									lastLeague.length > 0 ? lastLeague.map(function(el:any,index:number) {
+										return (
+											el.league.name ? (
+												<div className="apex block dark-red" key={index}>
+													<div><p className="legend">{el.league.title}</p><i className="iconGame"><FontAwesomeIcon icon={faGamepad}/></i></div>
+													<div className="info">
+														<p className="price inblock"><i className="sprite cup"></i><span>{el.tournament.title}</span></p>
+														<p className="date inblock"><i className="sprite calendar"></i>{userConnectedRedux.user.language === "fr" ? dateStringToDY(el.date) : dateStringToDY(el.date)}</p>
+													</div>
+												</div>
+											)
+
+											: (
+												<div className="apex block light-green" key={index}>
+													<div><p className="legend">{el.league.title}</p>{renderPlatformLogo(el.league.plateform.name)}</div>
+													<div className="info">
+														<p className="price inblock"><i className="sprite ticket"></i><span>{el.league.participate}</span></p>
+														<p className="price inblock"><i className="sprite cup"></i><span>{el.league.price}</span></p>
+														<p className="date inblock"><i className="sprite calendar"></i>{userConnectedRedux.user.language === "fr" ? dateStringToDY(el.date) : dateStringToDY(el.date)}</p>
+													</div>
+												</div>
+											)
+										)
+									}) : <></>
+								}
 							</div>
 						</div>
+					</div>
+				</div>
 			</div>
 		<Footer/>
   		</div>

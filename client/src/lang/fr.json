@@ -187,7 +187,10 @@
 		"end":"Fin",
 		"starttimes":"Date de commencement",
 		"open":"Ouvert",
-		"close":"Fermer"
+		"close":"Fermer",
+		"participate":"S'incrire",
+		"cancelParticipate":"ANNULER MON INSCRIPTION",
+		"notify":"Vous êtes inscrit"
 	},
 	"leagues": {
 		"listLigues":"Liste des ligues disponibles",

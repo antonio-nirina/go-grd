@@ -2,46 +2,80 @@ import React ,{useEffect,useState} from "react"
 import {useQuery} from "@apollo/client"
 import { useSelector } from "react-redux"
 import { Link } from "react-router-dom"
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+import { useDispatch } from "react-redux"
+
 import Tree from "./tree"
 import Header from "../header/header"
 import Footer from "../footer/footer"
 
-import {GET_ONE_TOURNAMENT} from "../../gql/tournament/query"
+import {GET_ONE_LEAGUE} from "../../gql/league/query"
 import {Translation} from "../../lang/translation"
 import {RootState} from "../../reducer"
 import "../tournament/info.css"
 import "../../assets/css/style.css"
-import {Tournament} from "../models/tournament"
+import {League} from "../models/league"
 import {dateStringToDY} from "../tools/dateConvert"
 import AvatarDefault from "../../assets/image/game-tag.png"
+import {RegisterLeagueAction,Input} from "../league/action/leagueAction"
 
 const InfoLeague: React.FC = function(props:any) {
+	const dispatch = useDispatch()
 	const params = new URLSearchParams(props.location.search)
 	const uid:string|null = params.get("uid")
-	const [tournament, setTournament] = useState<Tournament>()
+	const [league, setLeague] = useState<League>()
 	const [isOpen, setIsOpen] = useState<boolean>(true)
+	const [group, setGroup] = useState<Array<number>>([])
 	const [showMore, setShowMore] = useState<boolean>(false)
+	const [isSingup, setIsSingup] = useState<boolean>(false)
 	const userConnectedRedux = useSelector((state:RootState) => state.userConnected)
-	const {loading,error,data} 	= useQuery(GET_ONE_TOURNAMENT, {
-			variables: {
-				uid:uid,
-			},
+	const {loading,error,data} 	= useQuery(GET_ONE_LEAGUE, {
+		variables: {
+			uid:uid,
+		},
 	})
 	const onShowMore = function(){
 		setShowMore(!showMore)
 	}
 	useEffect(() => {
+		let array:Array<number> = []
+
 		if(!loading && !error && data) {
-			setTournament(data.FindOneTournament)
+			setLeague(data.FindOneLeague)
+			for(let i = 0 ; i < data.FindOneLeague.numberParticipate/4; i++){
+				array.push(i)
+			}
+
+			setGroup(array)
 		}
 
 		const date1 = new Date()
-		const date2 = new Date(data?.FindOneTournament.deadlineDate)
+		const date2 = new Date(data?.FindOneLeague.deadlineDate)
 		const diff = (date2.getTime() - date1.getTime())/1000/60
 
 		if (diff < 10 || diff <= 0) setIsOpen(false)
-
 	},[loading,error,data])
+	const message:string = Translation(userConnectedRedux.user.language).tournament.notify ?? ""
+
+	const notify = function(){
+		const param:Input = {
+			uidLeague:uid,
+			userUid:userConnectedRedux.user.uid,
+		}
+		//  Check if user belong to Team if League is Team
+		dispatch(RegisterLeagueAction(param))
+		toast(message,{
+			className: 'light-blue',
+			position: "top-left",
+			autoClose: 5000,
+			hideProgressBar: false,
+			closeOnClick: true,
+			pauseOnHover: true,
+			draggable: true,
+			progress: undefined,
+		})
+	}
 
   return(
   	<div className="Tournament info">
@@ -49,12 +83,23 @@ const InfoLeague: React.FC = function(props:any) {
 			<Header/>
 			<div className="full-container test">
 				<div className="details">
-					<p className="name-target">Tournois : <span>{tournament?.game.name}</span></p>
+					<p className="name-target">League : <span>{league?.game.name}</span></p>
+					<ToastContainer
+						position="top-left"
+						autoClose={5000}
+						hideProgressBar={false}
+						newestOnTop={false}
+						closeOnClick
+						rtl={false}
+						pauseOnFocusLoss
+						draggable
+						pauseOnHover
+						/>
 					<p className="starting">
 						{
 							Translation(userConnectedRedux.user.language).tournament.starttimes
 						}:
-						<span> {userConnectedRedux.user.language === "fr" ? dateStringToDY(tournament?.date) : dateStringToDY(tournament?.date)}</span></p>
+						<span> {userConnectedRedux.user.language === "fr" ? dateStringToDY(league?.date) : dateStringToDY(league?.date)}</span></p>
 					<p className="status">Status : <span>
 						{isOpen ? Translation(userConnectedRedux.user.language).tournament.open : Translation(userConnectedRedux.user.language).tournament.close }
 					</span>
@@ -75,58 +120,30 @@ const InfoLeague: React.FC = function(props:any) {
 					<div className="txt txt-infos">
 						<div className="container-infos">
 							<div className="calendar">
-							<h2>Champions League <span>2022</span></h2>
+							<h2>{league?.title}</h2>
 							<div className="flex-group">
-								<div className="team-group">
-									<div className="groups">									
-										<p>Group A</p>
-									</div>
-									<p className="group-name">
-										<img src={AvatarDefault} className="avatar" alt="" />
-										<span>Teamname 1</span>
-									</p>
-									<p className="group-name">
-										<img src={AvatarDefault} className="avatar" alt="" />
-										<span>Teamname 2</span>
-									</p>
-									<p className="group-name">
-										<img src={AvatarDefault} className="avatar" alt="" />
-										<span>Teamname 3</span>
-									</p>
-								</div>
-								<div className="team-group">
-									<div className="groups">									
-										<p>Group B</p>
-									</div>
-									<p className="group-name">
-										<img src={AvatarDefault} className="avatar" alt="" />
-										<span>Teamname 4</span>
-									</p>
-									<p className="group-name">
-										<img src={AvatarDefault} className="avatar" alt="" />
-										<span>Teamname 5</span>
-									</p>
-									<p className="group-name">
-										<img src={AvatarDefault} className="avatar" alt="" />
-										<span>Teamname 6</span>
-									</p>
-								</div>
-								<div className="team-group">
-									<div className="groups">									
-										<p>Group B</p>
-									</div>
-									<p className="group-name">
-										<img src={AvatarDefault} className="avatar" alt="" />
-										<span>Teamname 4</span>
-									</p>
-									<p className="group-name">
-										<img src={AvatarDefault} className="avatar" alt="" />
-										<span>Teamname 5</span>
-									</p>
-									<p className="group-name">
-										<img src={AvatarDefault} className="avatar" alt="" />
-										<span>Teamname 6</span>
-									</p>
+								<div className="team-group flex">
+									{
+										group.map(function(el:number,index:number){
+											return (<div key={index}>
+												<div className="groups">									
+													<p>Group {el+1}</p>
+												</div>
+												<p className="group-name">
+													<img src={AvatarDefault} className="avatar" alt="" />
+													<span>Teamname 1</span>
+												</p>
+												<p className="group-name">
+													<img src={AvatarDefault} className="avatar" alt="" />
+													<span>Teamname 2</span>
+												</p>
+												<p className="group-name">
+													<img src={AvatarDefault} className="avatar" alt="" />
+													<span>Teamname 3</span>
+												</p>		
+											</div>)
+										})
+									}	
 								</div>
 							</div>
 							<div className="btn-container">
@@ -159,7 +176,7 @@ const InfoLeague: React.FC = function(props:any) {
 										Translation(userConnectedRedux.user.language).tournament.start
 									}
 								</p>
-								<span>{dateStringToDY(tournament?.date)}</span>
+								<span>{dateStringToDY(league?.date)}</span>
 							</div>
 							<div className="line">
 								<p>
@@ -167,16 +184,32 @@ const InfoLeague: React.FC = function(props:any) {
 										Translation(userConnectedRedux.user.language).tournament.end
 									}
 								</p>
-								<span>{dateStringToDY(tournament?.deadlineDate)}</span>
+								<span>{dateStringToDY(league?.deadlineDate)}</span>
 							</div>
 							<div className="line">
 								<p>Participants</p>
-								<span>{tournament?.numberParticipate}</span>
+								<span>{league?.numberParticipate}</span>
 							</div>
 							<div className="line">
 								<p>Mode</p>
-								<span>{tournament && tournament.numberTeam > 0 ? `${tournament?.numberTeam} ON ${tournament?.numberTeam}` : "1 ON 1" }</span>
+								<span>{league && league.numberTeam > 0 ? `${league?.numberTeam} ON ${league?.numberTeam}` : "1 ON 1" }</span>
 							</div>
+						</div>
+						<div className="btn-container">
+							{isSingup ? 
+								<button className="btn light-blue">
+									{
+										Translation(userConnectedRedux.user.language).tournament.cancelParticipate
+									}
+								</button>
+								:
+								<button className="btn bg-red" onClick={notify}>
+									{
+										Translation(userConnectedRedux.user.language).tournament.participate
+									}
+								</button>
+							}
+							
 						</div>
 					</div>
 				</div>

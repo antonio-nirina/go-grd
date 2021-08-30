@@ -20,7 +20,7 @@ const WaggersGame = function(props:any) {
   		<Header />
   		<div className="participate league waggersgame">
 			<div className="marg">
-				<div className="part">
+				<div className="part test">
 					<div className="undertitle">
 						<h2>Waggers - {params?.replace("_"," ")}</h2>
 						<p>Retrouve les derniers défis proposés par la communauté</p>

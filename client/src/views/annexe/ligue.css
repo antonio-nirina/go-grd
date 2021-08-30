@@ -99,6 +99,7 @@
     display: inline-block;
     margin-right: 5px;
     margin-bottom: 15px;
+    display: flex;
 }
 .groups{
 	background: #1b1d26

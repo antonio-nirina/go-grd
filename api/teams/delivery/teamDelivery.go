@@ -18,6 +18,7 @@ type TeamResolver interface {
 	FindTeamResolver(params graphql.ResolveParams) (interface{}, error)
 	FindAllTeamResolver(params graphql.ResolveParams) (interface{}, error)
 	UpdatedTeamByBannedResolver(params graphql.ResolveParams) (interface{}, error)
+	TeamByUserResolver(params graphql.ResolveParams) (interface{}, error)
 }
 
 type team struct {
@@ -164,6 +165,23 @@ func (t *team) UpdatedTeamByBannedResolver(params graphql.ResolveParams) (interf
 	 
 
 	_,err = t.teamHandler.UpdatedTeamHandler(newTeam)
+
+	return team,nil
+}
+
+func (t *team) TeamByUserResolver(params graphql.ResolveParams) (interface{}, error){
+	uid, _ := params.Args["uid"].(string)
+	_,err := t.teamUserHandler.FindOneUserByUid(uid)
+	
+	if err != nil {
+		return nil, err
+	}
+
+	team,err :=  t.teamHandler.FindTeamByUserHandler(uid)
+
+	if err != nil {
+		return nil,err
+	}
 
 	return team,nil
 }

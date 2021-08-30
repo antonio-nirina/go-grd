@@ -6,11 +6,12 @@ export interface League {
 	statut:Boolean
 	organizer:string
 	numberTeam:number
+	description:string
 	deadlineDate:string
 	date:string
 	price:number
 	priceParticipate:number
-	slot:number
+	numberParticipate:number
 	rules:string
 	isPublic:Boolean|undefined
 	game:Game
