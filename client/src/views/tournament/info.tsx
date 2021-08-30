@@ -107,7 +107,7 @@ const Info: React.FC = function(props:any) {
 								<p>Participants</p>
 								<span>{tournament?.numberParticipate}</span>
 							</div>
-							<div className="line">
+							<div>
 								<p>Mode</p>
 								<span>{tournament && tournament.numberTeam > 0 ? `${tournament?.numberTeam} ON ${tournament?.numberTeam}` : "1 ON 1" }</span>
 							</div>

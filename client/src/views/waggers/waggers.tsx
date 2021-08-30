@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 import Header from "../header/header"
 import Footer from "../footer/footer"
 import { faXbox, faPlaystation } from "@fortawesome/free-brands-svg-icons"
-import { faGamepad } from "@fortawesome/free-solid-svg-icons"
+import { faGamepad, faTrophy } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 //import {Translation} from "../../lang/translation"
 //import {RootState} from "../../reducer"
@@ -29,112 +29,160 @@ const Waggers: React.FC = function() {
   		<div className="participate league waggers">
 			<div className="marg">
 				<div className="part">
-					<div className="undertitle">
-						<h2>Wagers</h2>
-						<p>Derniers résultats en Wagers</p>
-					</div>
-					<div className="content waggers-link">
-						<div className="clear"></div>
-						<Link to ="/joingame/1">
-							<div className="apex block dark-red">
-								<div>
-									<p className="legend">Apex Legends Daily Cup</p><i className="iconGame"><FontAwesomeIcon icon={faXbox}/></i>
+					<div className="upcomming side">
+						<div className="items">
+							<div className="side-img" style={{ background: `url(${apexlegends})`}}></div>
+							<div className="side-infos">
+								<div className="meta">
+									<table>
+										<thead>
+											<tr>
+												<td>Format</td>
+												<td>Console</td>
+												<td>Participation</td>
+												<td>Prix</td>												
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>BO3</td>
+												<td>Ps4</td>
+												<td>30 €</td>
+												<td>500 €</td>
+											</tr>
+										</tbody>
+									</table>
 								</div>
-								<div className="info">
-									<p className="price inblock"><i className="sprite cup"></i><span>100€ Cash Prize</span></p>
-									<p className="date inblock"><i className="sprite calendar"></i><span>02/04/2021 - 5:00 PM</span></p>
+								<div className="name-section">
+									<p>Waggers</p>
 								</div>
-							</div>
-						</Link>
-						<Link to ="/joingame/2">
-						<div className="apex block dark-red">
-							<div><p className="legend">Fortnite Weekly Cup</p><i className="iconGame"><FontAwesomeIcon icon={faGamepad}/></i></div>
-							<div className="info">
-								<p className="price inblock"><i className="sprite cup"></i><span>50€ Cash Prize</span></p>
-								<p className="date inblock"><i className="sprite calendar"></i><span>03/04/2021 - 5:00 PM</span></p>
+								<div className="name-section">
+									<p>
+										<span>Apex Legends </span>
+										<span className="platform-logo">ps4</span>
+									</p>
+								</div>
+									<div className="prize-section">
+										<div className="prize-warp">
+											<i className="awesome"><FontAwesomeIcon icon={faTrophy}/></i>												
+											prix
+										</div>
+										<div className="prize" style={{"fontWeight":"bold"}}>
+											500 € 
+										</div>
+									</div>
+								</div>
+								<div className="btn-full">
+									<Link to="/" className="signup-btn bg-red">Inscrivez-vous</Link>
+								</div>
 							</div>
 						</div>
-						</Link>
-						<Link to ="#">
-							<div className="apex block light-green">
-								<div><p className="legend">Rocket League Champions</p><i className="iconGame"><FontAwesomeIcon icon={faPlaystation}/></i></div>
+						<div className="undertitle">
+							<h2>Wagers</h2>
+							<p>Derniers résultats en Wagers</p>
+						</div>
+						<div className="content waggers-link">
+							<div className="clear"></div>
+							<Link to ="/joingame/1">
+								<div className="apex block dark-red">
+									<div>
+										<p className="legend">Apex Legends Daily Cup</p><i className="iconGame"><FontAwesomeIcon icon={faXbox}/></i>
+									</div>
+									<div className="info">
+										<p className="price inblock"><i className="sprite cup"></i><span>100€ Cash Prize</span></p>
+										<p className="date inblock"><i className="sprite calendar"></i><span>02/04/2021 - 5:00 PM</span></p>
+									</div>
+								</div>
+							</Link>
+							<Link to ="/joingame/2">
+							<div className="apex block dark-red">
+								<div><p className="legend">Fortnite Weekly Cup</p><i className="iconGame"><FontAwesomeIcon icon={faGamepad}/></i></div>
 								<div className="info">
-									<p className="price inblock"><i className="sprite ticket"></i><span>5€ Cash Prize</span></p>
-									<p className="price inblock"><i className="sprite cup"></i><span>500€ Cash Prize</span></p>
-									<p className="date inblock"><i className="sprite calendar"></i><span>04/04/2021 - 7:30 PM</span></p>
+									<p className="price inblock"><i className="sprite cup"></i><span>50€ Cash Prize</span></p>
+									<p className="date inblock"><i className="sprite calendar"></i><span>03/04/2021 - 5:00 PM</span></p>
 								</div>
 							</div>
-						</Link>
-						<Link to ="#">
-							<div className="apex block dark-red">
-								<div>
-									<p className="legend">Warzone Xbox Daily</p><i className="iconGame"><FontAwesomeIcon icon={faXbox}/></i>
+							</Link>
+							<Link to ="#">
+								<div className="apex block light-green">
+									<div><p className="legend">Rocket League Champions</p><i className="iconGame"><FontAwesomeIcon icon={faPlaystation}/></i></div>
+									<div className="info">
+										<p className="price inblock"><i className="sprite ticket"></i><span>5€ Cash Prize</span></p>
+										<p className="price inblock"><i className="sprite cup"></i><span>500€ Cash Prize</span></p>
+										<p className="date inblock"><i className="sprite calendar"></i><span>04/04/2021 - 7:30 PM</span></p>
+									</div>
 								</div>
+							</Link>
+							<Link to ="#">
+								<div className="apex block dark-red">
+									<div>
+										<p className="legend">Warzone Xbox Daily</p><i className="iconGame"><FontAwesomeIcon icon={faXbox}/></i>
+									</div>
+									<div className="info">
+										<p className="price inblock"><i className="sprite cup"></i><span>100€ Cash Prize</span></p>
+										<p className="date inblock"><i className="sprite calendar"></i><span>02/04/2021 - 5:00 PM</span></p>
+									</div>
+								</div>
+							</Link>
+							<Link to ="#">
+								<div className="apex block dark-red">
+								<div><p className="legend">R6 Squad Tournament</p><i className="iconGame"><FontAwesomeIcon icon={faGamepad}/></i></div>
 								<div className="info">
 									<p className="price inblock"><i className="sprite cup"></i><span>100€ Cash Prize</span></p>
 									<p className="date inblock"><i className="sprite calendar"></i><span>02/04/2021 - 5:00 PM</span></p>
 								</div>
-							</div>
-						</Link>
-						<Link to ="#">
-							<div className="apex block dark-red">
-							<div><p className="legend">R6 Squad Tournament</p><i className="iconGame"><FontAwesomeIcon icon={faGamepad}/></i></div>
-							<div className="info">
-								<p className="price inblock"><i className="sprite cup"></i><span>100€ Cash Prize</span></p>
-								<p className="date inblock"><i className="sprite calendar"></i><span>02/04/2021 - 5:00 PM</span></p>
-							</div>
-							</div>
-						</Link>
-						<Link to ="#">
-							<div className="apex block last light-green">
-								<p className="legend">Fifa 21 fut cup</p>
-								<div className="info">
-									<p className="inblock"><i className="sprite ticket"></i><span>10€</span></p>
-									<p className="inblock"><i className="sprite cup"></i><span>750€ Cash Prize</span></p>
-									<p className="inblock"><i className="sprite calendar"></i><span>04/04/2021 - 7:30 PM</span></p>
 								</div>
-							</div>
-						</Link>
+							</Link>
+							<Link to ="#">
+								<div className="apex block last light-green">
+									<p className="legend">Fifa 21 fut cup</p>
+									<div className="info">
+										<p className="inblock"><i className="sprite ticket"></i><span>10€</span></p>
+										<p className="inblock"><i className="sprite cup"></i><span>750€ Cash Prize</span></p>
+										<p className="inblock"><i className="sprite calendar"></i><span>04/04/2021 - 7:30 PM</span></p>
+									</div>
+								</div>
+							</Link>
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
-		<div className="choices">
-			<div className="jeux">
-			    <h2>
-					Choisis ton jeu
-				</h2>
-				<div className="bg-game">
-				<div className="firstblock w100">
-					<div className="logo-game">
-					    <Link to={`/waggers-game?game=${APEX_LEGENDE.replace(" ","_")}`}><img src={apexlegends} alt="Apex Legends" /></Link>
+			<div className="choices">
+				<div className="jeux">
+				    <h2>
+						Choisis ton jeu
+					</h2>
+					<div className="bg-game">
+					<div className="firstblock w100">
+						<div className="logo-game">
+						    <Link to={`/waggers-game?game=${APEX_LEGENDE.replace(" ","_")}`}><img src={apexlegends} alt="Apex Legends" /></Link>
+						</div>
+						<div className="logo-game">
+						    <Link to={`/waggers-game?game=${FORTNITE.replace(" ","_")}`} ><img src={fortnite} alt="Fortnite" /></Link>
+						</div>
+						<div className="logo-game">
+						    <Link to={`/waggers-game?game=${RNB.replace(" ","_")}`} ><img src={rainboxsix} alt="RainbowSIx Siege" /></Link>
+						</div>
+						<div className="logo-game">
+						    <Link to={`/waggers-game?game=${RL.replace(" ","_")}`} ><img src={rocketleague} alt="Rocket League" /></Link>
+						</div>
 					</div>
-					<div className="logo-game">
-					    <Link to={`/waggers-game?game=${FORTNITE.replace(" ","_")}`} ><img src={fortnite} alt="Fortnite" /></Link>
-					</div>
-					<div className="logo-game">
-					    <Link to={`/waggers-game?game=${RNB.replace(" ","_")}`} ><img src={rainboxsix} alt="RainbowSIx Siege" /></Link>
-					</div>
-					<div className="logo-game">
-					    <Link to={`/waggers-game?game=${RL.replace(" ","_")}`} ><img src={rocketleague} alt="Rocket League" /></Link>
+	      			<div className="lastblock w100">
+				        <div className="logo-game">
+				            <Link to={`/waggers-game?game=${COD_MODERN.replace(" ","_")}`} ><img src={cod_Modernwarfare} alt="Call of Duty Modern Warfare" /></Link>
+				        </div>
+				        <div className="logo-game">
+				            <Link to={`/waggers-game?game=${COD_WAR_ZONE.replace(" ","_")}`} ><img src={cod_warzone} alt="Call of Duty Warzone" /></Link>
+				        </div>
+				        <div className="logo-game">
+				            <Link to={`/waggers-game?game=${COD_COLD_WAR.replace(" ","_")}`} ><img src={cod_coldwar} alt="Call of Duty Cold War" /></Link>
+				        </div>
+				        <div className="logo-game">
+				            <Link to={`/waggers-game?game=${FIFA.replace(" ","_")}`} ><img src={fifa} alt="Call of Duty Warzone" /></Link>
+				        </div>
 					</div>
 				</div>
-      			<div className="lastblock w100">
-			        <div className="logo-game">
-			            <Link to={`/waggers-game?game=${COD_MODERN.replace(" ","_")}`} ><img src={cod_Modernwarfare} alt="Call of Duty Modern Warfare" /></Link>
-			        </div>
-			        <div className="logo-game">
-			            <Link to={`/waggers-game?game=${COD_WAR_ZONE.replace(" ","_")}`} ><img src={cod_warzone} alt="Call of Duty Warzone" /></Link>
-			        </div>
-			        <div className="logo-game">
-			            <Link to={`/waggers-game?game=${COD_COLD_WAR.replace(" ","_")}`} ><img src={cod_coldwar} alt="Call of Duty Cold War" /></Link>
-			        </div>
-			        <div className="logo-game">
-			            <Link to={`/waggers-game?game=${FIFA.replace(" ","_")}`} ><img src={fifa} alt="Call of Duty Warzone" /></Link>
-			        </div>
-				</div>
-			</div>
- 		</div>
+	 		</div>
 		</div>
 		<Footer/>
   	</div>
