@@ -175,7 +175,8 @@
 		"close":"close",
 		"participate":"Register now",
 		"cancelParticipate":"CANCEL MY SUBSCRIPTION",
-		"notify":"You are signup this league"
+		"notify":"You are signup this league",
+		"notifyError":"Error you are not belong to an Team"
 	},
 	"leagues": {
 		"listLigues":"List of available leagues",

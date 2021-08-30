@@ -56,3 +56,38 @@ func FindPartByUser() *graphql.Field {
 		Resolve: partResolver.FindPartByUseResolver,
 	}
 }
+
+
+func FindPartByUserLeague() *graphql.Field {
+	return &graphql.Field{
+		Type:        graphql.NewList(types.PartSchemaType),
+		Description: "Get all part by user",
+		Args: graphql.FieldConfigArgument{
+			"uidUser": &graphql.ArgumentConfig{
+				Type: graphql.String,
+			},
+			"uidLeague": &graphql.ArgumentConfig{
+				Type: graphql.String,
+			},
+		},
+		
+		Resolve: partResolver.FindPartByUseResolver,
+	}
+}
+
+func FindPartByUserTournament() *graphql.Field {
+	return &graphql.Field{
+		Type:        graphql.NewList(types.PartSchemaType),
+		Description: "Get all part by user",
+		Args: graphql.FieldConfigArgument{
+			"uidUser": &graphql.ArgumentConfig{
+				Type: graphql.String,
+			},
+			"uidTournament": &graphql.ArgumentConfig{
+				Type: graphql.String,
+			},
+		},
+		
+		Resolve: partResolver.FindPartByUseResolver,
+	}
+}

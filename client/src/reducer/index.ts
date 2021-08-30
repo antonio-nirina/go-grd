@@ -6,8 +6,8 @@ import {TournamentReducer} from "../views/tournament/reducer/tournamentReducer"
 
 export const rootReducer = combineReducers({
 	userConnected: userConnectedReducer,
-	LeagueReducer:LeagueReducer,
-	TournamentReducer:TournamentReducer,
+	leagueSingin:LeagueReducer,
+	tournamentSingin:TournamentReducer,
 })
 
 export type RootState = ReturnType<typeof rootReducer>

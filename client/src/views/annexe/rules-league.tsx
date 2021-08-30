@@ -1,8 +1,8 @@
 import React,{useEffect,useState} from "react"
 import parse from 'html-react-parser'
 import {useQuery} from "@apollo/client"
-import { useSelector } from "react-redux"
-import { useDispatch } from "react-redux"
+import { useSelector,useDispatch } from "react-redux"
+import { ToastContainer, toast } from 'react-toastify'
 
 import {RootState} from "../../reducer"
 import {Translation} from "../../lang/translation"
@@ -14,6 +14,10 @@ import "../tournament/info.css"
 import "../../assets/css/style.css"
 import { Link } from "react-router-dom"
 import {dateStringToDY} from "../tools/dateConvert"
+import {RegisterLeagueAction,Input} from "../league/action/leagueAction"
+import {checkInTeam} from "../league/utils"
+
+
 
 const RulesLeague: React.FC = function(props:any) {
 	const dispatch = useDispatch()
@@ -22,6 +26,7 @@ const RulesLeague: React.FC = function(props:any) {
 	const [league, setLeague] = useState<League>()
 	const [isOpen, setIsOpen] = useState<boolean>(true)
 	const userConnectedRedux = useSelector((state:RootState) => state.userConnected)
+	const userSingupLeague = useSelector((state:RootState) => state.leagueSingin)
 	const {loading,error,data} 	= useQuery(GET_ONE_LEAGUE, {
 			variables: {
 				uid:uid,
@@ -40,6 +45,35 @@ const RulesLeague: React.FC = function(props:any) {
 		if (diff < 10 || diff <= 0) setIsOpen(false)
 
 	},[loading,error,data])
+	let message:string = Translation(userConnectedRedux.user.language).tournament.notify ?? ""
+
+	const notify = async function(){
+		const param:Input = {
+			uidLeague:uid,
+			userUid:userConnectedRedux.user.uid,
+			part:true
+		}
+
+		if(league?.isTeam) {
+			const check = await checkInTeam(userConnectedRedux.user.uid)
+			if(check) {
+				dispatch(RegisterLeagueAction(param))
+			}
+			if(!check) message = Translation(userConnectedRedux.user.language).tournament.notifyError
+		}
+
+		toast(message,{
+			className: 'light-blue',
+			position: "top-left",
+			autoClose: 5000,
+			hideProgressBar: false,
+			closeOnClick: true,
+			pauseOnHover: true,
+			draggable: true,
+			progress: undefined,
+		})
+
+	}
 
   return(
   	<div className="Tournament info">
@@ -48,6 +82,17 @@ const RulesLeague: React.FC = function(props:any) {
 			<div className="full-container">
 				<div className="details">
 					<p className="name-target">League : <span>{league?.game.name}</span></p>
+					<ToastContainer
+						position="top-left"
+						autoClose={5000}
+						hideProgressBar={false}
+						newestOnTop={false}
+						closeOnClick
+						rtl={false}
+						pauseOnFocusLoss
+						draggable
+						pauseOnHover
+					/>
 					<p className="starting"><span>{userConnectedRedux.user.language === "fr" ? dateStringToDY(league?.date) : dateStringToDY(league?.date)}</span></p>
 					<p className="status">Status : <span>
 						{isOpen ? Translation(userConnectedRedux.user.language).tournament.open : Translation(userConnectedRedux.user.language).tournament.close }
@@ -107,11 +152,19 @@ const RulesLeague: React.FC = function(props:any) {
 							</div>
 						</div>
 						<div className="btn-container">
-							<button className="btn bg-red">
-								{
-									Translation(userConnectedRedux.user.language).tournament.participate
-								}
-							</button>
+							{userSingupLeague.league.part ?
+								<button className="btn light-blue">
+									{
+										Translation(userConnectedRedux.user.language).tournament.cancelParticipate
+									}
+								</button>
+								:
+								<button className="btn bg-red" onClick={notify}>
+									{
+										Translation(userConnectedRedux.user.language).tournament.participate
+									}
+								</button>
+							}
 						</div>
 					</div>
 				</div>
