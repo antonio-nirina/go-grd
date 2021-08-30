@@ -95,11 +95,12 @@
 .team-group{
 	border: 1px solid #1b1d26;
 	border-radius: 5px;
-    width: 32.5%;
-    display: inline-block;
-    margin-right: 5px;
-    margin-bottom: 15px;
-    display: flex;
+}
+.team-group.flex div{
+	display: inline-block;
+	width: 24%;
+	margin-right: 5px;
+    margin-bottom: 15px;    
 }
 .groups{
 	background: #1b1d26
@@ -118,7 +119,7 @@
 }
 .group-name img, .group-name span{
 	align-self: center;
-	margin-right: 10px;	
+	margin-right: 5px;	
 }
 .group-name span{
 	font-size: 13px;

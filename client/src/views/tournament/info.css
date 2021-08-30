@@ -12,6 +12,7 @@
 }
 .details{
 	margin-bottom: 15px;
+	display: flex;
 }
 .details p{
 	text-transform: uppercase;
@@ -38,13 +39,19 @@
 }
 .txt{
 	padding: 15px;
-	max-width:  650px;
-	border: 1px solid gray;
+	max-width:  730px;
+	border: 1px solid #1d1c1c;
 	border-radius: 5px;
 	width: 100%;
 	display: inline-block;
 	margin-right: 15px;
 
+}
+p.group-title{
+	text-align: center;
+    background: #1b1b1b;
+    padding: 5px;
+    border-radius: 25px;
 }
 .txt strong{
 	font-weight: 700;
@@ -78,7 +85,7 @@
 }
 .info-target{
 	margin-top: 15px;
-	border-bottom: 1px solid;
+	border-bottom: 1px solid #2d2d2d;
 }
 .info-target p{
 	text-transform: uppercase;		
@@ -97,9 +104,9 @@
 	font-size: 16px;
 }
 .line{
-	border-bottom: 1px solid #ffffff;
+	border-bottom: 1px solid #2d2d2d;
 }
-.line:last-child{
+.info-target .line:last-child{
 	border:none;
 }
 .confirm{
