@@ -1,29 +1,45 @@
 import React ,{useEffect,useState} from "react"
-import {useQuery} from "@apollo/client"
-import { useSelector } from "react-redux"
+import {useQuery,useMutation} from "@apollo/client"
+import { useSelector,useDispatch } from "react-redux"
+import { ToastContainer, toast } from 'react-toastify'
+
 import parse from 'html-react-parser'
 import { Link } from "react-router-dom"
 import Header from "../header/header"
 import Footer from "../footer/footer"
-
 import {GET_ONE_TOURNAMENT} from "../../gql/tournament/query"
+import {SAVED_PART} from "../../gql/participate/mutation"
+import {GET_PART_TOURNAMENT} from "../../gql/participate/query"
 import {Translation} from "../../lang/translation"
 import {RootState} from "../../reducer"
 import "../tournament/info.css"
 import "../../assets/css/style.css"
 import {Tournament} from "../models/tournament"
 import {dateStringToDY} from "../tools/dateConvert"
+import {checkInTeam} from "../league/utils"
+import {RegisterTournamentAction,Input} from "../tournament/action/tournamentAction"
 
 
 const Info: React.FC = function(props:any) {
+	const dispatch = useDispatch()
 	const params = new URLSearchParams(props.location.search)
 	const uid:string|null = params.get("uid")
 	const [tournament, setTournament] = useState<Tournament>()
 	const [isOpen, setIsOpen] = useState<boolean>(true)
+	const [isPart, setPart] = useState<boolean>(true)
+	const [isUserSingup,setIsUserSingup] = useState<boolean>(false)
 	const userConnectedRedux = useSelector((state:RootState) => state.userConnected)
+	const userSingupTournament = useSelector((state:RootState) => state.tournamentSingin)
 	const {loading,error,data} 	= useQuery(GET_ONE_TOURNAMENT, {
 			variables: {
 				uid:uid,
+			},
+	})
+
+	const {loading:loadTrnmt,error:errTrnmt,data:dataTrnmt} = useQuery(GET_PART_TOURNAMENT, {
+			variables: {
+				uidUser:userConnectedRedux.user.uid,
+				uidTournament:"6129d5349e638a5176f6d383"
 			},
 	})
 
@@ -37,8 +53,47 @@ const Info: React.FC = function(props:any) {
 		const diff = (date2.getTime() - date1.getTime())/1000/60
 
 		if (diff < 10 || diff <= 0) setIsOpen(false)
+console.log(dataTrnmt)
+		if(!loadTrnmt && !errTrnmt && dataTrnmt) {
+			if(dataTrnmt.FindPartByUserTournament.length > 0 && tournament?.isTeam) {
+				// dataTrnmt.FindPartByUserTournament.team
+			}
+		}
 
-	},[loading,error,data])
+	},[loading,error,data,loadTrnmt,errTrnmt,dataTrnmt])
+
+	const [savedPartTournament]  = useMutation(SAVED_PART)
+	let message:string = Translation(userConnectedRedux.user.language).tournament.notify ?? ""
+
+	const notify = async function(){
+		let isError:boolean = false
+		const param:Input = {
+			uidTournament:uid,
+			userUid:userConnectedRedux.user.uid,
+			part:true
+		}
+
+		if(tournament?.isTeam) {
+			const check = await checkInTeam(userConnectedRedux.user.uid)
+			if(!check) message = Translation(userConnectedRedux.user.language).tournament.notifyError
+		}
+
+		if(!isError) {
+			await savedPartTournament({ variables: { uidUser: userConnectedRedux.user.uid,date:(new Date().toLocaleString()),tournamentUid:uid,leagueUid:"",teamsUid:{uid:[]} } })
+			dispatch(RegisterTournamentAction(param))
+		}
+
+		toast(message,{
+			className: 'light-blue',
+			position: "top-left",
+			autoClose: 5000,
+			hideProgressBar: false,
+			closeOnClick: true,
+			pauseOnHover: true,
+			draggable: true,
+			progress: undefined,
+		})
+	}
 
   return(
   	<div className="Tournament info">
@@ -47,6 +102,17 @@ const Info: React.FC = function(props:any) {
 			<div className="full-container test">
 				<div className="details">
 					<p className="name-target">Tournois : <span>{tournament?.game.name}</span></p>
+					<ToastContainer
+						position="top-left"
+						autoClose={5000}
+						hideProgressBar={false}
+						newestOnTop={false}
+						closeOnClick
+						rtl={false}
+						pauseOnFocusLoss
+						draggable
+						pauseOnHover
+					/>
 					<p className="starting">
 						{
 							Translation(userConnectedRedux.user.language).tournament.starttimes
@@ -113,7 +179,19 @@ const Info: React.FC = function(props:any) {
 							</div>
 						</div>
 						<div className="btn-container">
-							<button className="btn bg-red">Se connecter</button>
+							{userSingupTournament.tournament.part || isUserSingup ?
+								<button className="btn light-blue">
+									{
+										Translation(userConnectedRedux.user.language).tournament.cancelParticipate
+									}
+								</button>
+								:
+								<button className="btn bg-red" onClick={notify}>
+									{
+										Translation(userConnectedRedux.user.language).tournament.participate
+									}
+								</button>
+							}
 						</div>
 					</div>
 				</div>

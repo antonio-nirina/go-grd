@@ -60,6 +60,7 @@ func (t *tournamentUsecase) FindTournamentHandler(idQuery string) (tournamentVie
 		Game:GameViewModel{result.Game.Uid.Hex(),result.Game.Name,result.Game.Image,result.Game.Logo,result.Game.Slug},				
 		Plateform:PlateformViewModel{result.Plateform.Uid.Hex(),result.Plateform.Name,result.Plateform.Description},
 		Rules:result.Rules,
+		IsTeam:result.IsTeam,
 		IsPublic:result.IsPublic, 			
 	}
 
@@ -97,6 +98,7 @@ func (t *tournamentUsecase) FindAllTournamentHandler(pageNumber int64, limit int
 			Plateform:PlateformViewModel{val.Plateform.Uid.Hex(),val.Plateform.Name,val.Plateform.Description},
 			Rules:val.Rules, 
 			IsPublic:val.IsPublic,
+			IsTeam:val.IsTeam,
 			Records:records, 			
 		}
 
@@ -130,6 +132,7 @@ func (t *tournamentUsecase) FindTournamentGameHandler(pageNumber int64,limit int
 			Game:GameViewModel{val.Game.Uid.Hex(),val.Game.Name,val.Game.Image,val.Game.Logo,val.Game.Slug},				
 			Plateform:PlateformViewModel{val.Plateform.Uid.Hex(),val.Plateform.Name,val.Plateform.Description},
 			Rules:val.Rules,
+			IsTeam:val.IsTeam,
 			IsPublic:val.IsPublic,  			
 		}
 

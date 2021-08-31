@@ -140,9 +140,10 @@ const InfoLeague: React.FC = function(props:any) {
 								<div className="team-group flex">
 									{
 										group.map(function(el:number,index:number){
-											return (
-											<div key={index}>																				
-												<p className="group-title">Group {el+1}</p>
+											return (<div key={index}>
+												<div className="groups">
+													<p>Group {el+1}</p>
+												</div>
 												<p className="group-name">
 													<img src={AvatarDefault} className="avatar" alt="" />
 													<span>Teamname 1</span>
@@ -154,10 +155,10 @@ const InfoLeague: React.FC = function(props:any) {
 												<p className="group-name">
 													<img src={AvatarDefault} className="avatar" alt="" />
 													<span>Teamname 3</span>
-												</p>		
+												</p>
 											</div>)
 										})
-									}	
+									}
 								</div>
 							</div>
 							<div className="btn-container">
@@ -204,7 +205,7 @@ const InfoLeague: React.FC = function(props:any) {
 								<p>Participants</p>
 								<span>{league?.numberParticipate}</span>
 							</div>
-							<div>
+							<div className="line">
 								<p>Mode</p>
 								<span>{league && league.numberTeam > 0 ? `${league?.numberTeam} ON ${league?.numberTeam}` : "1 ON 1" }</span>
 							</div>

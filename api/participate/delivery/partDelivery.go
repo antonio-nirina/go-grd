@@ -276,7 +276,7 @@ func (p *participate) FindPartByUseLeagueResolver(params graphql.ResolveParams) 
 		return nil, err
 	}
 
-	league, err := p.league.FindOneLeagueHandler(leagueUid)
+	_, err = p.league.FindOneLeagueHandler(leagueUid)
 	
 	if err != nil {
 		return nil, err
@@ -300,13 +300,13 @@ func (p *participate) FindPartByUseTournamentResolver(params graphql.ResolvePara
 		return nil, err
 	}
 
-	tournament, err := p.tournament.FindTournamentHandler(tournamentUid)
+	/*_, err = p.tournament.FindTournamentHandler(tournamentUid)
 
 	if err != nil {
 		return nil, err
-	}
-
-	res, err := p.partHandler.FindPartUserTournamentHandler(user.Uid,tournamentUid)
+	}*/
+//FindPartUserTournamentHandler
+	res, err := p.partHandler.FindPartUserLeagueHandler(user.Uid,tournamentUid)
 
 	if err != nil {
 		return nil, err

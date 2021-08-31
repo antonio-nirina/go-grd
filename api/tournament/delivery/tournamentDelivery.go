@@ -48,6 +48,12 @@ func (t *tournament) SavedTournamentResolver(params graphql.ResolveParams) (inte
 		return nil,err
 	}
 
+	IsTeam := false
+
+	if numberTeam > 0 {
+		IsTeam = true
+	}
+
 	tournament := &entity.Tournament{
 		Uid:primitive.NewObjectID(),
 		Title:title,
@@ -57,6 +63,7 @@ func (t *tournament) SavedTournamentResolver(params graphql.ResolveParams) (inte
 		NumberParticipate:numberParticipate,
 		NumberTeam:numberTeam,
 		Price:price,
+		IsTeam:IsTeam,
 		DeadlineDate:deadlineDate,
 		PriceParticipate:priceParticipate,
 		Statut:true,

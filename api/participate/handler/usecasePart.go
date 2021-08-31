@@ -1,10 +1,13 @@
 package handler
 
 import (
+	"fmt"
+
 	"github.com/thoussei/antonio/api/participate/entity"
 	"github.com/thoussei/antonio/api/participate/repository"
 	tHandler "github.com/thoussei/antonio/api/tournament/handler"
 	userH "github.com/thoussei/antonio/api/user/handler"
+	teamH "github.com/thoussei/antonio/api/teams/handler"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
@@ -50,10 +53,60 @@ func (p *partUsecase) FindPartHandler(idQuery string) (partViewModel, error){
 		return partViewModel{}, err
 	}
 
+	var teamView []teamH.TeamViewModel
+	var userView []userH.UserViewModel
+
+	for _,val := range result.Team {
+		for _,item := range val.Players {
+			resUser := userH.UserViewModel{
+				Uid:item.Uid.Hex(),
+				FirstName:item.FirstName,
+				LastName:item.LastName,
+				Email:item.Email,
+				Username:item.Username,
+				IsBanned:item.IsBanned,
+				Avatar:item.Avatar,
+				Language:item.Language,
+				Point:item.Point,
+				Roles:item.Roles,
+				TypeConnexion:item.TypeConnexion,
+				Created:item.Created,
+			}
+			userView = append(userView,resUser)
+		}
+		resTeam := teamH.TeamViewModel{
+			Uid:val.Uid.Hex(),
+			Name:val.Name,
+			CreationDate:val.CreationDate,
+			Players:userView,
+			Description:val.Description,
+			IsBlocked:val.IsBlocked,
+			Logo:val.Logo,
+			Creator:userH.UserViewModel{
+				Uid:val.Creator.Uid.Hex(),
+				FirstName:val.Creator.FirstName,
+				LastName:val.Creator.LastName,
+				Email:val.Creator.Email,
+				Username:val.Creator.Username,
+				IsBanned:val.Creator.IsBanned,
+				Avatar:val.Creator.Avatar,
+				Language:val.Creator.Language,
+				Point:val.Creator.Point,
+				Roles:val.Creator.Roles,
+				TypeConnexion:val.Creator.TypeConnexion,
+				Created:val.Creator.Created,
+			},
+			Records:0,
+		}
+
+		teamView = append(teamView,resTeam)
+	}
+	
 	
 	partViewModel := partViewModel{
 		Uid: result.Uid.Hex(),
 		Date:result.Date,
+		Team:teamView,
 		User:userH.UserViewModel{
 			Uid:result.User.Uid.Hex(),
 			FirstName:result.User.FirstName,
@@ -107,11 +160,59 @@ func (p *partUsecase) FindAllPartHandler(pageNumber int64,limit int64) ([]partVi
 	}
 
 	var res []partViewModel
+	var teamView []teamH.TeamViewModel
+	var userView []userH.UserViewModel
 
 	for _,result := range results {
+		for _,val := range result.Team {
+			for _,item := range val.Players {
+				resUser := userH.UserViewModel{
+					Uid:item.Uid.Hex(),
+					FirstName:item.FirstName,
+					LastName:item.LastName,
+					Email:item.Email,
+					Username:item.Username,
+					IsBanned:item.IsBanned,
+					Avatar:item.Avatar,
+					Language:item.Language,
+					Point:item.Point,
+					Roles:item.Roles,
+					TypeConnexion:item.TypeConnexion,
+					Created:item.Created,
+				}
+				userView = append(userView,resUser)
+			}
+			resTeam := teamH.TeamViewModel{
+				Uid:val.Uid.Hex(),
+				Name:val.Name,
+				CreationDate:val.CreationDate,
+				Players:userView,
+				Description:val.Description,
+				IsBlocked:val.IsBlocked,
+				Logo:val.Logo,
+				Creator:userH.UserViewModel{
+					Uid:val.Creator.Uid.Hex(),
+					FirstName:val.Creator.FirstName,
+					LastName:val.Creator.LastName,
+					Email:val.Creator.Email,
+					Username:val.Creator.Username,
+					IsBanned:val.Creator.IsBanned,
+					Avatar:val.Creator.Avatar,
+					Language:val.Creator.Language,
+					Point:val.Creator.Point,
+					Roles:val.Creator.Roles,
+					TypeConnexion:val.Creator.TypeConnexion,
+					Created:val.Creator.Created,
+				},
+				Records:0,
+			}
+			teamView = append(teamView,resTeam)
+		}
+		
 		partView := partViewModel{
 			Uid: result.Uid.Hex(),
 			Date:result.Date,
+			Team:teamView,
 			User:userH.UserViewModel{
 				Uid:result.User.Uid.Hex(),
 				FirstName:result.User.FirstName,
@@ -168,11 +269,59 @@ func (p *partUsecase) FindPartUserHandler(pageNumber int64,limit int64,userUid p
 	}
 
 	var res []partViewModel
+	var teamView []teamH.TeamViewModel
+	var userView []userH.UserViewModel
 
 	for _,result := range results {
+		for _,val := range result.Team {
+			for _,item := range val.Players {
+				resUser := userH.UserViewModel{
+					Uid:item.Uid.Hex(),
+					FirstName:item.FirstName,
+					LastName:item.LastName,
+					Email:item.Email,
+					Username:item.Username,
+					IsBanned:item.IsBanned,
+					Avatar:item.Avatar,
+					Language:item.Language,
+					Point:item.Point,
+					Roles:item.Roles,
+					TypeConnexion:item.TypeConnexion,
+					Created:item.Created,
+				}
+				userView = append(userView,resUser)
+			}
+			resTeam := teamH.TeamViewModel{
+				Uid:val.Uid.Hex(),
+				Name:val.Name,
+				CreationDate:val.CreationDate,
+				Players:userView,
+				Description:val.Description,
+				IsBlocked:val.IsBlocked,
+				Logo:val.Logo,
+				Creator:userH.UserViewModel{
+					Uid:val.Creator.Uid.Hex(),
+					FirstName:val.Creator.FirstName,
+					LastName:val.Creator.LastName,
+					Email:val.Creator.Email,
+					Username:val.Creator.Username,
+					IsBanned:val.Creator.IsBanned,
+					Avatar:val.Creator.Avatar,
+					Language:val.Creator.Language,
+					Point:val.Creator.Point,
+					Roles:val.Creator.Roles,
+					TypeConnexion:val.Creator.TypeConnexion,
+					Created:val.Creator.Created,
+				},
+				Records:0,
+			}
+			teamView = append(teamView,resTeam)
+		}
+		
 		partView := partViewModel{
 			Uid: result.Uid.Hex(),
 			Date:result.Date,
+			Team:teamView,
 			User:userH.UserViewModel{
 				Uid:result.User.Uid.Hex(),
 				FirstName:result.User.FirstName,
@@ -245,15 +394,66 @@ func (p *partUsecase) FindPartUserLeagueHandler(userUid primitive.ObjectID,leagu
 	}
 
 	result, err := p.partRepository.FindPartByLeagueRepo(userUid,objectId)
-
+fmt.Println("handler",result)
+fmt.Println("errH",err)
 	if err != nil {
 		return partViewModel{}, err
 	}
 
+	var teamView []teamH.TeamViewModel
+	var userView []userH.UserViewModel
+
+	for _,val := range result.Team {
+		for _,item := range val.Players {
+			resUser := userH.UserViewModel{
+				Uid:item.Uid.Hex(),
+				FirstName:item.FirstName,
+				LastName:item.LastName,
+				Email:item.Email,
+				Username:item.Username,
+				IsBanned:item.IsBanned,
+				Avatar:item.Avatar,
+				Language:item.Language,
+				Point:item.Point,
+				Roles:item.Roles,
+				TypeConnexion:item.TypeConnexion,
+				Created:item.Created,
+			}
+			userView = append(userView,resUser)
+		}
+		resTeam := teamH.TeamViewModel{
+			Uid:val.Uid.Hex(),
+			Name:val.Name,
+			CreationDate:val.CreationDate,
+			Players:userView,
+			Description:val.Description,
+			IsBlocked:val.IsBlocked,
+			Logo:val.Logo,
+			Creator:userH.UserViewModel{
+				Uid:val.Creator.Uid.Hex(),
+				FirstName:val.Creator.FirstName,
+				LastName:val.Creator.LastName,
+				Email:val.Creator.Email,
+				Username:val.Creator.Username,
+				IsBanned:val.Creator.IsBanned,
+				Avatar:val.Creator.Avatar,
+				Language:val.Creator.Language,
+				Point:val.Creator.Point,
+				Roles:val.Creator.Roles,
+				TypeConnexion:val.Creator.TypeConnexion,
+				Created:val.Creator.Created,
+			},
+			Records:0,
+		}
+
+		teamView = append(teamView,resTeam)
+	}
+	
 	
 	partViewModel := partViewModel{
 		Uid: result.Uid.Hex(),
 		Date:result.Date,
+		Team:teamView,
 		User:userH.UserViewModel{
 			Uid:result.User.Uid.Hex(),
 			FirstName:result.User.FirstName,
@@ -306,16 +506,66 @@ func (p *partUsecase) FindPartUserTournamentHandler(uidUser primitive.ObjectID,t
 		return partViewModel{}, err
 	}
 
-	result, err := p.partRepository.FindPartByTournamentRepo(userUid,objectId)
+	result, err := p.partRepository.FindPartByTournamentRepo(uidUser,objectId)
 
 	if err != nil {
 		return partViewModel{}, err
 	}
 
+	var teamView []teamH.TeamViewModel
+	var userView []userH.UserViewModel
+
+	for _,val := range result.Team {
+		for _,item := range val.Players {
+			resUser := userH.UserViewModel{
+				Uid:item.Uid.Hex(),
+				FirstName:item.FirstName,
+				LastName:item.LastName,
+				Email:item.Email,
+				Username:item.Username,
+				IsBanned:item.IsBanned,
+				Avatar:item.Avatar,
+				Language:item.Language,
+				Point:item.Point,
+				Roles:item.Roles,
+				TypeConnexion:item.TypeConnexion,
+				Created:item.Created,
+			}
+			userView = append(userView,resUser)
+		}
+		resTeam := teamH.TeamViewModel{
+			Uid:val.Uid.Hex(),
+			Name:val.Name,
+			CreationDate:val.CreationDate,
+			Players:userView,
+			Description:val.Description,
+			IsBlocked:val.IsBlocked,
+			Logo:val.Logo,
+			Creator:userH.UserViewModel{
+				Uid:val.Creator.Uid.Hex(),
+				FirstName:val.Creator.FirstName,
+				LastName:val.Creator.LastName,
+				Email:val.Creator.Email,
+				Username:val.Creator.Username,
+				IsBanned:val.Creator.IsBanned,
+				Avatar:val.Creator.Avatar,
+				Language:val.Creator.Language,
+				Point:val.Creator.Point,
+				Roles:val.Creator.Roles,
+				TypeConnexion:val.Creator.TypeConnexion,
+				Created:val.Creator.Created,
+			},
+			Records:0,
+		}
+
+		teamView = append(teamView,resTeam)
+	}
+	
 	
 	partViewModel := partViewModel{
 		Uid: result.Uid.Hex(),
 		Date:result.Date,
+		Team:teamView,
 		User:userH.UserViewModel{
 			Uid:result.User.Uid.Hex(),
 			FirstName:result.User.FirstName,

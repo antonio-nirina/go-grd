@@ -1,8 +1,9 @@
 export const TOURNAMENT_REGISTER = "tournament_register"
 
-interface Input{
-	uidTournament:string
-	userUid:string
+export interface Input{
+	uidTournament:string|null
+	userUid:string|null
+	part:boolean
 }
 
 export const RegisterTournamentAction = function(data:Input) {
