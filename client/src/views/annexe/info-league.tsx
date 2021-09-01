@@ -31,7 +31,7 @@ const InfoLeague: React.FC = function(props:any) {
 	const [group, setGroup] = useState<Array<number>>([])
 	const [showMore, setShowMore] = useState<boolean>(false)
 	const userConnectedRedux = useSelector((state:RootState) => state.userConnected)
-	const userSingupLeague = useSelector((state:RootState) => state.leagueSingin)
+	// const userSingupLeague = useSelector((state:RootState) => state.leagueSingin)
 	const {loading,error,data} 	= useQuery(GET_ONE_LEAGUE, {
 		variables: {
 			uid:uid,
@@ -211,7 +211,7 @@ const InfoLeague: React.FC = function(props:any) {
 							</div>
 						</div>
 						<div className="btn-container">
-							{userSingupLeague.league.part ?
+							{/*userSingupLeague.league.part ?
 								<button className="btn light-blue">
 									{
 										Translation(userConnectedRedux.user.language).tournament.cancelParticipate
@@ -223,8 +223,12 @@ const InfoLeague: React.FC = function(props:any) {
 										Translation(userConnectedRedux.user.language).tournament.participate
 									}
 								</button>
-							}
-							
+							*/}
+							<button className="btn bg-red" onClick={notify}>
+								{
+									Translation(userConnectedRedux.user.language).tournament.participate
+								}
+							</button>
 						</div>
 					</div>
 				</div>
