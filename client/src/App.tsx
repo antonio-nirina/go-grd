@@ -23,7 +23,7 @@ store.subscribe(function() {
 
 store.subscribe(function() {
 	const nameState = 'tournamentSingin'
-	saveState(store.getState().tournamentSingin.part,nameState)
+	saveState(store.getState().tournamentSingin.tournament,nameState)
 })
 function App() {
 	let client = createApolloClient()

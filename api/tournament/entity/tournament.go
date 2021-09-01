@@ -19,5 +19,6 @@ type Tournament struct {
 	Statut 		  			bool 				`json:"statut"`
 	Info   					string            	`json:"info"`
 	Rules   				string            	`json:"rules"`
+	IsTeam   				bool            	`json:"isTeam"`
 	IsPublic   				bool            	`json:"isPublic"`
 }

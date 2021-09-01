@@ -16,6 +16,7 @@ export const GET_ALL_TOURNAMENT= gql`
 		price
 		priceParticipate
 		isPublic
+		isTeam
 		game{
 			uid
 			name
@@ -43,6 +44,7 @@ export const GET_ONE_TOURNAMENT = gql`
 		deadlineDate
 		date
 		price
+		isTeam
 		priceParticipate
 		rules
 		game{
@@ -74,6 +76,7 @@ export const GET_TOURNAMENT_GAME = gql`
 		price
 		priceParticipate
 		rules
+		isTeam
 		isPublic
 		game{
 			uid

@@ -249,3 +249,6 @@ p.item-text-left{
 .salon-chat.show{
 	display: block;
 }
+.waggers thead{
+	background: none;
+}

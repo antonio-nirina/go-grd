@@ -17,7 +17,11 @@ export const loadState 	=  function() {
 			}
 		},
 		tournamentSingin:{
-			part:false
+			tournament:{
+				uidTournament:"",
+				userUid:"",
+				part:false
+			}
 		}
 	}
 
@@ -26,7 +30,7 @@ export const loadState 	=  function() {
 	}
 
 	if(singUpLeague) storage.leagueSingin.league.part = Boolean(singUpLeague)
-	if(singUpTournament) storage.tournamentSingin.part = Boolean(singUpTournament)
+	if(singUpTournament) storage.tournamentSingin.tournament.part = Boolean(singUpTournament)
 
 	return storage
 }

@@ -88,6 +88,6 @@ func FindPartByUserTournament() *graphql.Field {
 			},
 		},
 		
-		Resolve: partResolver.FindPartByUseResolver,
+		Resolve: partResolver.FindPartByUseTournamentResolver,
 	}
 }

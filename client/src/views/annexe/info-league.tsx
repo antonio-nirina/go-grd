@@ -141,7 +141,7 @@ const InfoLeague: React.FC = function(props:any) {
 									{
 										group.map(function(el:number,index:number){
 											return (<div key={index}>
-												<div className="groups">									
+												<div className="groups">
 													<p>Group {el+1}</p>
 												</div>
 												<p className="group-name">
@@ -155,10 +155,10 @@ const InfoLeague: React.FC = function(props:any) {
 												<p className="group-name">
 													<img src={AvatarDefault} className="avatar" alt="" />
 													<span>Teamname 3</span>
-												</p>		
+												</p>
 											</div>)
 										})
-									}	
+									}
 								</div>
 							</div>
 							<div className="btn-container">
