@@ -17,7 +17,7 @@ var PartSchemaType = graphql.NewObject(graphql.ObjectConfig{
 			Type: UserSchemaType,
 		},
 		"team":  &graphql.Field{
-			Type: TeamSchemaType,
+			Type: graphql.NewList(TeamSchemaType),
 		},
 		"tournament": &graphql.Field{
 			Type: TournamentSchemaType,

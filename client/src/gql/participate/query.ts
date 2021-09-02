@@ -44,6 +44,9 @@ export const GET_PART_TOURNAMENT = gql`
 				uid
 				title
 				date
+				game{
+					uid
+				}
 				plateform{
 					uid
 					name

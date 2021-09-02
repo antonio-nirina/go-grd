@@ -176,7 +176,8 @@
 		"participate":"Register now",
 		"cancelParticipate":"CANCEL MY SUBSCRIPTION",
 		"notify":"You are signup this league",
-		"notifyError":"Error you are not belong to an Team"
+		"notifyError":"Error you are not belong to an Team",
+		"leave":"You are leave tournament"
 	},
 	"leagues": {
 		"listLigues":"List of available leagues",

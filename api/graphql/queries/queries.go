@@ -90,7 +90,7 @@ var leagueResolver = leagueDelivery.NewResolverLeague(leagueUsecase, usecaseGame
 
 var partRepository = partRepo.NewPartRepository(database)
 var partUsecase = partHandler.NewUsecasePart(partRepository)
-var partResolver = partDelivery.NewResolverPart(partUsecase, usecase, tournamentUsecase, teamUsecase, leagueUsecase)
+var partResolver = partDelivery.NewResolverPart(partUsecase, usecase, tournamentUsecase, teamUsecase)
 
 // GetRootFields returns all the available queries.
 func GetRootFields() graphql.Fields {

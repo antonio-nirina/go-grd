@@ -88,7 +88,7 @@ var leagueResolver = leagueDelivery.NewResolverLeague(leagueUsecase, usecaseGame
 
 var partRepository = partRepo.NewPartRepository(database)
 var partUsecase = partHandler.NewUsecasePart(partRepository)
-var partResolver = partDelivery.NewResolverPart(partUsecase, usecase, tournamentUsecase, teamUsecase, leagueUsecase)
+var partResolver = partDelivery.NewResolverPart(partUsecase, usecase, tournamentUsecase, teamUsecase)
 
 func GetRootFields() graphql.Fields {
 	return graphql.Fields{
@@ -116,5 +116,6 @@ func GetRootFields() graphql.Fields {
 		"removedHome":          removedHome(),
 		"createSubjectContent": createSubjectContent(),
 		"saveLeague":           saveLeague(),
+		"removePartTournament" : removePartTournament(),
 	}
 }
