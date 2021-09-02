@@ -29,13 +29,26 @@ func createPartMatch() *graphql.Field {
 			"tournamentUid": &graphql.ArgumentConfig{
 				Type: graphql.String,
 			},
-			"leagueUid": &graphql.ArgumentConfig{
+			/*"leagueUid": &graphql.ArgumentConfig{
 				Type: graphql.String,
-			},
+			},*/
 			"teamsUid": &graphql.ArgumentConfig{
 				Type: teamsInputType,
 			},
 		},
 		Resolve: partResolver.SavedPartResolver,
+	}
+}
+
+func removePartTournament() *graphql.Field {
+	return &graphql.Field{
+		Type:        graphql.String,
+		Description: "remove participation",
+		Args: graphql.FieldConfigArgument{
+			"uid": &graphql.ArgumentConfig{
+				Type: graphql.String,
+			},
+		},
+		Resolve: partResolver.RemovedPartByResolver,
 	}
 }

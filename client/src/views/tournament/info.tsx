@@ -8,7 +8,7 @@ import { Link } from "react-router-dom"
 import Header from "../header/header"
 import Footer from "../footer/footer"
 import {GET_ONE_TOURNAMENT} from "../../gql/tournament/query"
-import {SAVED_PART} from "../../gql/participate/mutation"
+import {SAVED_PART,LEAVE_PART_TOURNAMENT} from "../../gql/participate/mutation"
 import {GET_PART_TOURNAMENT} from "../../gql/participate/query"
 import {Translation} from "../../lang/translation"
 import {RootState} from "../../reducer"
@@ -26,21 +26,21 @@ const Info: React.FC = function(props:any) {
 	const uid:string|null = params.get("uid")
 	const [tournament, setTournament] = useState<Tournament>()
 	const [isOpen, setIsOpen] = useState<boolean>(true)
-	const [isPart, setPart] = useState<boolean>(true)
+	const [part, setPart] = useState<string>("")
 	const [isUserSingup,setIsUserSingup] = useState<boolean>(false)
 	const userConnectedRedux = useSelector((state:RootState) => state.userConnected)
 	const userSingupTournament = useSelector((state:RootState) => state.tournamentSingin)
 	const {loading,error,data} 	= useQuery(GET_ONE_TOURNAMENT, {
-			variables: {
-				uid:uid,
-			},
+		variables: {
+			uid:uid,
+		},
 	})
 
 	const {loading:loadTrnmt,error:errTrnmt,data:dataTrnmt} = useQuery(GET_PART_TOURNAMENT, {
-			variables: {
-				uidUser:userConnectedRedux.user.uid,
-				uidTournament:"6129d5349e638a5176f6d383"
-			},
+		variables: {
+			uidUser:userConnectedRedux.user.uid,
+			uidTournament:uid,
+		},
 	})
 
 	useEffect(() => {
@@ -53,17 +53,39 @@ const Info: React.FC = function(props:any) {
 		const diff = (date2.getTime() - date1.getTime())/1000/60
 
 		if (diff < 10 || diff <= 0) setIsOpen(false)
-console.log(dataTrnmt)
+
 		if(!loadTrnmt && !errTrnmt && dataTrnmt) {
-			if(dataTrnmt.FindPartByUserTournament.length > 0 && tournament?.isTeam) {
-				// dataTrnmt.FindPartByUserTournament.team
-			}
+			setIsUserSingup(true)
+			setPart(dataTrnmt.Uid)
 		}
 
 	},[loading,error,data,loadTrnmt,errTrnmt,dataTrnmt])
 
 	const [savedPartTournament]  = useMutation(SAVED_PART)
+	const [leavePartTournament] = useMutation(LEAVE_PART_TOURNAMENT)
 	let message:string = Translation(userConnectedRedux.user.language).tournament.notify ?? ""
+
+	const leaveTournament = async function(){
+		const param:Input = {
+			uidTournament:uid,
+			userUid:userConnectedRedux.user.uid,
+			part:false
+		}
+		const messageLeave:string = Translation(userConnectedRedux.user.language).tournament.leave ?? ""
+		// await leavePartTournament({ variables: { uid: part} })
+		dispatch(RegisterTournamentAction(param))
+
+		toast(messageLeave,{
+			className: 'light-blue',
+			position: "top-left",
+			autoClose: 5000,
+			hideProgressBar: false,
+			closeOnClick: true,
+			pauseOnHover: true,
+			draggable: true,
+			progress: undefined,
+		})
+	}
 
 	const notify = async function(){
 		let isError:boolean = false
@@ -75,11 +97,14 @@ console.log(dataTrnmt)
 
 		if(tournament?.isTeam) {
 			const check = await checkInTeam(userConnectedRedux.user.uid)
-			if(!check) message = Translation(userConnectedRedux.user.language).tournament.notifyError
+			if(!check) {
+				isError = true
+				message = Translation(userConnectedRedux.user.language).tournament.notifyError
+			}
 		}
 
 		if(!isError) {
-			await savedPartTournament({ variables: { uidUser: userConnectedRedux.user.uid,date:(new Date().toLocaleString()),tournamentUid:uid,leagueUid:"",teamsUid:{uid:[]} } })
+			await savedPartTournament({ variables: { uidUser: userConnectedRedux.user.uid,date:(new Date().toLocaleString()),tournamentUid:uid,teamsUid:{uid:[]} } })
 			dispatch(RegisterTournamentAction(param))
 		}
 
@@ -179,8 +204,8 @@ console.log(dataTrnmt)
 							</div>
 						</div>
 						<div className="btn-container">
-							{userSingupTournament.tournament.part || isUserSingup ?
-								<button className="btn light-blue">
+							{!userSingupTournament.tournament.part && isUserSingup ?
+								<button className="btn light-blue" onClick={leaveTournament}>
 									{
 										Translation(userConnectedRedux.user.language).tournament.cancelParticipate
 									}
