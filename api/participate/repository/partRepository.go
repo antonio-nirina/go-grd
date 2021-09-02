@@ -35,7 +35,7 @@ type RepositoryPart interface {
 }
 
 func (c *DriverRepository) SavedPartRepo(tournament *entity.Participate) (interface{}, error){
-	var collection = c.client.Database("grd_database").Collection("Participate")
+	var collection = c.client.Database("grd_database").Collection("participate")
 	insertResult, err := collection.InsertOne(context.TODO(), tournament)
 
 	if err != nil {
@@ -144,7 +144,7 @@ func (c *DriverRepository) FindPartByTournamentRepo(userUid primitive.ObjectID,o
 }
 
 func (c *DriverRepository) FindPartByLeagueRepo(userUid  primitive.ObjectID,objectId primitive.ObjectID) (entity.Participate, error){
-	var collection = c.client.Database("grd_database").Collection("participate")
+	var collection = c.client.Database("grd_database").Collection("Participate")
 	var result entity.Participate
 
 	err := collection.FindOne(context.TODO(), bson.M{"user.uid": userUid,"league.uid":objectId}).Decode(&result)

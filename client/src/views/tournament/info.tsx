@@ -175,7 +175,7 @@ console.log(dataTrnmt)
 							</div>
 							<div>
 								<p>Mode</p>
-								<span>{tournament && tournament.numberTeam > 0 ? `${tournament?.numberTeam} ON ${tournament?.numberTeam}` : "1 ON 1" }</span>
+								<span>{tournament && tournament.numberTeam > 0 ? `${tournament?.numberTeam} V ${tournament?.numberTeam}` : "1 V 1" }</span>
 							</div>
 						</div>
 						<div className="btn-container">

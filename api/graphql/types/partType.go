@@ -22,5 +22,8 @@ var PartSchemaType = graphql.NewObject(graphql.ObjectConfig{
 		"tournament": &graphql.Field{
 			Type: TournamentSchemaType,
 		},
+		"league": &graphql.Field{
+			Type: LeagueSchemaType,
+		},
 	},
 })

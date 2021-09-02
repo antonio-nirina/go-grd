@@ -2,7 +2,6 @@ package handler
 
 import (
 	"fmt"
-
 	"github.com/thoussei/antonio/api/participate/entity"
 	"github.com/thoussei/antonio/api/participate/repository"
 	tHandler "github.com/thoussei/antonio/api/tournament/handler"
@@ -394,8 +393,7 @@ func (p *partUsecase) FindPartUserLeagueHandler(userUid primitive.ObjectID,leagu
 	}
 
 	result, err := p.partRepository.FindPartByLeagueRepo(userUid,objectId)
-fmt.Println("handler",result)
-fmt.Println("errH",err)
+
 	if err != nil {
 		return partViewModel{}, err
 	}
@@ -495,7 +493,7 @@ fmt.Println("errH",err)
 			result.Tournament.IsPublic,
 		},
 	}
-
+	fmt.Println(partViewModel)
 	return partViewModel,nil
 }
 
