@@ -15,12 +15,6 @@ store.subscribe(function() {
 	const nameState = 'userConnected'
 	saveState(store.getState().userConnected.user,nameState)
 })
-
-store.subscribe(function() {
-	const nameState = 'leagueSingin'
-	saveState(store.getState().leagueSingin.league,nameState)
-})
-
 store.subscribe(function() {
 	const nameState = 'tournamentSingin'
 	saveState(store.getState().tournamentSingin.tournament,nameState)

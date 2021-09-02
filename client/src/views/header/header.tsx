@@ -144,16 +144,6 @@ const Header: React.FC = function() {
 				<nav className="navmenu">
 					<ul>
 						<li>
-							<Link to="/league">
-								{
-									Object.keys(userConnectedRedux.user).length > 0 ?
-									Translation(userConnectedRedux.user.language).header.leagues
-									:
-									Translation("fr").header.leagues
-								}
-							</Link>
-						</li>
-						<li>
 							<Link to="/tournament">
 								{
 									Object.keys(userConnectedRedux.user).length > 0 ?

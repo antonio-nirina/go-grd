@@ -6,12 +6,12 @@ import Ligue from "../annexe/ligue"
 import Tournament from "../tournament/tournament"
 import Tournois from "../annexe/tournois"
 import Info from "../tournament/info"
-import InfoLeague from "../annexe/info-league"
+// import InfoLeague from "../annexe/info-league"
 import Matches from "../tournament/matches"
-import MatchesLeague from "../annexe/matches-league"
+// import MatchesLeague from "../annexe/matches-league"
 import Teams from "../tournament/teams"
 import Rules from "../tournament/rules"
-import RulesLeague from "../annexe/rules-league"
+// import RulesLeague from "../annexe/rules-league"
 import Wager from "../wager/wager"
 import Waggers from "../waggers/waggers"
 import WaggersGame from "../waggers/waggersgame"
@@ -31,7 +31,7 @@ import UpdatePassword from "../auth/updatePassword"
 import ProtectedRoute from "./protectedRoute"
 import Register from "../auth/register"
 import TournamentGame from "../tournament/tournament-game"
-import LeagueGame from "../league/league-game"
+// import LeagueGame from "../league/league-game"
 
 
 const Router = function() {
@@ -42,15 +42,10 @@ const Router = function() {
 			<ProtectedRoute path="/tournois" exact component={Tournament} />
 			<ProtectedRoute path="/tournament" exact component={Tournois} />
 			<ProtectedRoute path="/tournament-game" exact component={TournamentGame} />
-			<ProtectedRoute path="/league-game" exact component={LeagueGame} />
 			<ProtectedRoute path="/info" exact component={Info} />			
 			<ProtectedRoute path="/matches" exact component={Matches} />
-			<ProtectedRoute path="/info-league" exact component={InfoLeague} />
-			<ProtectedRoute path="/matches-league" exact component={MatchesLeague} />
-			<ProtectedRoute path="/rules-league" exact component={RulesLeague} />
 			<ProtectedRoute path="/teams" exact component={Teams} />
 			<ProtectedRoute path="/rules" exact component={Rules} />			
-			<ProtectedRoute path="/league" exact component={Ligue} />
 			<ProtectedRoute path="/wager" exact component={Wager} />
 			<ProtectedRoute path="/joingame/:id" exact component={Joingame} />
 			<ProtectedRoute path="/waggers" exact component={Waggers} />
