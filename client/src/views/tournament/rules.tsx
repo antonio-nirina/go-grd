@@ -56,6 +56,7 @@ const Rules: React.FC = function(props:any) {
 					<ul>
 						<li><Link to={`/info?uid=${params.get('uid')}`}>Info</Link></li>
 						<li><Link to={`/matches?uid=${params.get('uid')}`}>Match</Link></li>
+						<li><Link to={`/bracket?uid=${params.get('uid')}`}>Bracket</Link></li>
 						<li><Link to={`/rules?uid=${params.get('uid')}`} className="active">Règles</Link></li>
 					</ul>
 				</div>
