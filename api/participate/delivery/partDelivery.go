@@ -324,9 +324,8 @@ func (p *participate) RemovedPartByResolver(params graphql.ResolveParams) (inter
 		return nil,err
 	}
 	 
+	part,err := p.partHandler.RemovedPartHandler(uid)
 
-	asist,err := p.partHandler.RemovedPartHandler(uid)
-
-	return asist,nil
+	return part,nil
 }
 

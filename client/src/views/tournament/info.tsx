@@ -8,7 +8,7 @@ import { Link } from "react-router-dom"
 import Header from "../header/header"
 import Footer from "../footer/footer"
 import {GET_ONE_TOURNAMENT} from "../../gql/tournament/query"
-import {SAVED_PART,LEAVE_PART_TOURNAMENT} from "../../gql/participate/mutation"
+
 import {GET_PART_TOURNAMENT} from "../../gql/participate/query"
 import {Translation} from "../../lang/translation"
 import {RootState} from "../../reducer"
@@ -17,7 +17,8 @@ import "../../assets/css/style.css"
 import {Tournament} from "../models/tournament"
 import {dateStringToDY} from "../tools/dateConvert"
 import {checkInTeam} from "../league/utils"
-import {RegisterTournamentAction,Input} from "../tournament/action/tournamentAction"
+import RegisterTournament,{RegisterType} from "./tournament-register"
+
 
 
 const Info: React.FC = function(props:any) {
@@ -61,63 +62,9 @@ const Info: React.FC = function(props:any) {
 
 	},[loading,error,data,loadTrnmt,errTrnmt,dataTrnmt])
 
-	const [savedPartTournament]  = useMutation(SAVED_PART)
-	const [leavePartTournament] = useMutation(LEAVE_PART_TOURNAMENT)
-	let message:string = Translation(userConnectedRedux.user.language).tournament.notify ?? ""
-
-	const leaveTournament = async function(){
-		const param:Input = {
-			uidTournament:uid,
-			userUid:userConnectedRedux.user.uid,
-			part:false
-		}
-		const messageLeave:string = Translation(userConnectedRedux.user.language).tournament.leave ?? ""
-		// await leavePartTournament({ variables: { uid: part} })
-		dispatch(RegisterTournamentAction(param))
-
-		toast(messageLeave,{
-			className: 'light-blue',
-			position: "top-left",
-			autoClose: 5000,
-			hideProgressBar: false,
-			closeOnClick: true,
-			pauseOnHover: true,
-			draggable: true,
-			progress: undefined,
-		})
-	}
-
-	const notify = async function(){
-		let isError:boolean = false
-		const param:Input = {
-			uidTournament:uid,
-			userUid:userConnectedRedux.user.uid,
-			part:true
-		}
-
-		if(tournament?.isTeam) {
-			const check = await checkInTeam(userConnectedRedux.user.uid)
-			if(!check) {
-				isError = true
-				message = Translation(userConnectedRedux.user.language).tournament.notifyError
-			}
-		}
-
-		if(!isError) {
-			await savedPartTournament({ variables: { uidUser: userConnectedRedux.user.uid,date:(new Date().toLocaleString()),tournamentUid:uid,teamsUid:{uid:[]} } })
-			dispatch(RegisterTournamentAction(param))
-		}
-
-		toast(message,{
-			className: 'light-blue',
-			position: "top-left",
-			autoClose: 5000,
-			hideProgressBar: false,
-			closeOnClick: true,
-			pauseOnHover: true,
-			draggable: true,
-			progress: undefined,
-		})
+	const RegisterData:RegisterType = {
+		uid:uid,
+		tournament:tournament
 	}
 
   return(
@@ -204,19 +151,7 @@ const Info: React.FC = function(props:any) {
 							</div>
 						</div>
 						<div className="btn-container">
-							{!userSingupTournament.tournament.part && isUserSingup ?
-								<button className="btn light-blue" onClick={leaveTournament}>
-									{
-										Translation(userConnectedRedux.user.language).tournament.cancelParticipate
-									}
-								</button>
-								:
-								<button className="btn bg-red" onClick={notify}>
-									{
-										Translation(userConnectedRedux.user.language).tournament.participate
-									}
-								</button>
-							}
+							<RegisterTournament {...RegisterData}  />
 						</div>
 					</div>
 				</div>
