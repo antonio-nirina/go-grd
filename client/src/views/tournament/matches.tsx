@@ -61,6 +61,7 @@ const Matches: React.FC = function(props:any) {
 					<ul>
 						<li><Link to={`/info?uid=${params.get('uid')}`}>Info</Link></li>
 						<li><Link to={`/matches?uid=${params.get('uid')}`} className="active">Match</Link></li>
+						<li><Link to={`/bracket?uid=${params.get('uid')}`}>Bracket</Link></li>
 						<li><Link to={`/rules?uid=${params.get('uid')}`}>
 							{Translation(userConnectedRedux.user.language).tournament.rules}
 						</Link></li>

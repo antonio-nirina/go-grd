@@ -21,9 +21,9 @@
 	},
 	"header":{
 		"leagues": "ligues",
-		"wagers": "wagers",
-		"community": "communauté",
-		"tournaments": "tournois",
+		"wagers": "Wagers",
+		"community": "Communauté",
+		"tournaments": "Tournois",
 		"refuse":"Refuser",
 		"accepted": "Accepter",
 		"leagues": "Ligues",
