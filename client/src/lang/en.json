@@ -9,9 +9,9 @@
 	},
 	"header":{
 		"leagues": "leagues",
-		"wagers": "wagers",
-		"community": "community",
-		"tournaments": "tournaments",
+		"wagers": "Wagers",
+		"community": "Community",
+		"tournaments": "Tournaments",
 		"refuse":"Refuse",
 		"accepted": "Accepted",
 		"text":"Incoming you to be your friend",

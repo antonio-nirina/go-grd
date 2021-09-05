@@ -1,7 +1,6 @@
 import React ,{useEffect,useState} from "react"
-import {useQuery,useMutation} from "@apollo/client"
-import { useSelector,useDispatch } from "react-redux"
-import { ToastContainer, toast } from 'react-toastify'
+import {useQuery} from "@apollo/client"
+import { useSelector } from "react-redux"
 
 import parse from 'html-react-parser'
 import { Link } from "react-router-dom"
@@ -16,13 +15,12 @@ import "../tournament/info.css"
 import "../../assets/css/style.css"
 import {Tournament} from "../models/tournament"
 import {dateStringToDY} from "../tools/dateConvert"
-import {checkInTeam} from "../league/utils"
 import RegisterTournament,{RegisterType} from "./tournament-register"
 
 
 
 const Info: React.FC = function(props:any) {
-	const dispatch = useDispatch()
+	// const dispatch = useDispatch()
 	const params = new URLSearchParams(props.location.search)
 	const uid:string|null = params.get("uid")
 	const [tournament, setTournament] = useState<Tournament>()
@@ -30,7 +28,7 @@ const Info: React.FC = function(props:any) {
 	const [part, setPart] = useState<string>("")
 	const [isUserSingup,setIsUserSingup] = useState<boolean>(false)
 	const userConnectedRedux = useSelector((state:RootState) => state.userConnected)
-	const userSingupTournament = useSelector((state:RootState) => state.tournamentSingin)
+	// const userSingupTournament = useSelector((state:RootState) => state.tournamentSingin)
 	const {loading,error,data} 	= useQuery(GET_ONE_TOURNAMENT, {
 		variables: {
 			uid:uid,
@@ -57,15 +55,18 @@ const Info: React.FC = function(props:any) {
 
 		if(!loadTrnmt && !errTrnmt && dataTrnmt) {
 			setIsUserSingup(true)
-			setPart(dataTrnmt.Uid)
+			setPart(dataTrnmt.FindPartByUserTournament.uid)
 		}
 
 	},[loading,error,data,loadTrnmt,errTrnmt,dataTrnmt])
 
 	const RegisterData:RegisterType = {
 		uid:uid,
-		tournament:tournament
+		tournament:tournament,
+		isUserSingup:isUserSingup,
+		part:part
 	}
+	// const messageLeave:string = Translation(userConnectedRedux.user.language).tournament.leave ?? ""
 
   return(
   	<div className="Tournament info">
@@ -74,17 +75,6 @@ const Info: React.FC = function(props:any) {
 			<div className="full-container test">
 				<div className="details">
 					<p className="name-target">Tournois : <span>{tournament?.game.name}</span></p>
-					<ToastContainer
-						position="top-left"
-						autoClose={5000}
-						hideProgressBar={false}
-						newestOnTop={false}
-						closeOnClick
-						rtl={false}
-						pauseOnFocusLoss
-						draggable
-						pauseOnHover
-					/>
 					<p className="starting">
 						{
 							Translation(userConnectedRedux.user.language).tournament.starttimes
@@ -148,7 +138,7 @@ const Info: React.FC = function(props:any) {
 							</div>
 							<div>
 								<p>Mode</p>
-								<span>{tournament && tournament.numberTeam > 0 ? `${tournament?.numberTeam} ON ${tournament?.numberTeam}` : "1 ON 1" }</span>
+								<span>{tournament && tournament.numberTeam > 0 ? `${tournament?.numberTeam} V ${tournament?.numberTeam}` : "1 V 1" }</span>
 							</div>
 						</div>
 						<div className="btn-container">
