@@ -5,7 +5,7 @@ import (
 )
 
 
-type leagueViewModel struct {
+type LeagueViewModel struct {
 	Uid           		string  `json:"uid"`
 	Title     			string  `json:"title"`
 	Date     			string  `json:"date"`

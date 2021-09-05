@@ -20,7 +20,6 @@ const Assistance: React.FC = function() {
 
 	useEffect(() => {
 		if(!loading && !error && data) {
-			console.log(data.FindAssistBySubject)
 			setAssists(data.FindAssistBySubject)
 		}
 

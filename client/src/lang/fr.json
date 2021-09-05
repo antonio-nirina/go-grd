@@ -21,9 +21,9 @@
 	},
 	"header":{
 		"leagues": "ligues",
-		"wagers": "wagers",
-		"community": "communauté",
-		"tournaments": "tournois",
+		"wagers": "Wagers",
+		"community": "Communauté",
+		"tournaments": "Tournois",
 		"refuse":"Refuser",
 		"accepted": "Accepter",
 		"leagues": "Ligues",
@@ -191,7 +191,8 @@
 		"participate":"S'incrire",
 		"cancelParticipate":"ANNULER MON INSCRIPTION",
 		"notify":"Vous êtes inscrit",
-		"notifyError":"Error vous n'appartient pas à une équipe"
+		"notifyError":"Error vous n'appartient pas à une équipe",
+		"leave":"Vous allez quitte le tournois"
 	},
 	"leagues": {
 		"listLigues":"Liste des ligues disponibles",

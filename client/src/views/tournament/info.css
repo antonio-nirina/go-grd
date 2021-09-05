@@ -1,11 +1,10 @@
 @charset "UTF-8";
 .info .tabs li{
-	width: 25%;	
+	width: 20%;	
 }
-.info .tabs li a{
-	font-weight: bold;
-	font-size: 17px;
-	padding: 15px;
+.info .tabs li a{	
+	font-size: 15px;
+	padding: 5px;
 }
 .info .tabs li a.active{
 	border-bottom: 2px solid #dd0000;

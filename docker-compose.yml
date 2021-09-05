@@ -35,19 +35,19 @@ services:
       - ./db:/data/mongodb
     networks:
       - app-network
-  client:
-    build:
-      context: ./client/
-    command: npm start
-    volumes:
-      - ./client/:/usr/src/
-      - /usr/src/node_modules
-    depends_on:
-      - server
-    ports:
-      - "3000:3000"
-    networks:
-      - app-network
+  #client:
+  #  build:
+  #    context: ./client/
+  #  command: npm start
+  #  volumes:
+  #    - ./client/:/usr/src/
+  #    - /usr/src/node_modules
+  #  depends_on:
+  #    - server
+  #  ports:
+  #    - "3000:3000"
+  #  networks:
+  #    - app-network
   admin:
     build:
       context: ./admin/

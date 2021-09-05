@@ -26,10 +26,7 @@ const Header0: React.FC = function() {
 	    	 		</div>
 	    	 	</div>
     	 		<nav className="navmenu">
-    	 			<ul>
-    	 				<li>
-    	 					<Link to="/league"> Ligues</Link>
-	 					</li>
+    	 			<ul>    	 				
     	 				<li>
     	 					<Link to="/tournament">Tournois</Link>
 	 					</li>
@@ -84,7 +81,6 @@ const Header0: React.FC = function() {
                             <ul>
                                 <li><Link to="/profil">Profil</Link></li>
                                 <li><Link to="/tournament" title="Tournois">Tournois</Link></li>
-                                <li><Link to="/ligue" title="Ligues">Ligues</Link></li>
                                 <li><Link to="/waggers" title="Wager">Wager</Link></li>
                                 <li><Link to ="/assistance" title="Assistance">Assistance</Link></li>
                             </ul>

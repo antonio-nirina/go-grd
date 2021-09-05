@@ -77,7 +77,7 @@ func FindPartByUserLeague() *graphql.Field {
 
 func FindPartByUserTournament() *graphql.Field {
 	return &graphql.Field{
-		Type:        graphql.NewList(types.PartSchemaType),
+		Type:        types.PartSchemaType,
 		Description: "Get all part by user",
 		Args: graphql.FieldConfigArgument{
 			"uidUser": &graphql.ArgumentConfig{
