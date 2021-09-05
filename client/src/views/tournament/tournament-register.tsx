@@ -15,9 +15,10 @@ export interface RegisterType {
 	tournament:Tournament|undefined
 	isUserSingup:Boolean
 	part:string
+	isOpen:Boolean
 }
-
-const RegisterTournament: React.FC<RegisterType> = function({tournament,uid,isUserSingup,part}) {
+// Isopen close Register
+const RegisterTournament: React.FC<RegisterType> = function({tournament,uid,isUserSingup,part,isOpen}) {
 	const dispatch = useDispatch()
 	const history = useHistory()
 	const userConnectedRedux = useSelector((state:RootState) => state.userConnected)
@@ -32,7 +33,7 @@ const RegisterTournament: React.FC<RegisterType> = function({tournament,uid,isUs
 			userUid:userConnectedRedux.user.uid,
 			part:isUserSingup?true:false
 		}))
-	},[isUserSingup])
+	},[isUserSingup,uid,userConnectedRedux,dispatch])
 
 	const leaveTournament = async function(){
 		const param:Input = {
@@ -43,7 +44,7 @@ const RegisterTournament: React.FC<RegisterType> = function({tournament,uid,isUs
 
 		if(part) {
 			dispatch(RegisterTournamentAction(param))
-			// await leavePartTournament({ variables: { uid: part} })
+			await leavePartTournament({ variables: { uid: part} })
 		}
 	}
 

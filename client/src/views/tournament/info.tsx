@@ -64,7 +64,8 @@ const Info: React.FC = function(props:any) {
 		uid:uid,
 		tournament:tournament,
 		isUserSingup:isUserSingup,
-		part:part
+		part:part,
+		isOpen:isOpen
 	}
 	// const messageLeave:string = Translation(userConnectedRedux.user.language).tournament.leave ?? ""
 

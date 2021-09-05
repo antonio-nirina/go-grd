@@ -58,7 +58,8 @@ const Rules: React.FC = function(props:any) {
 		uid:uid,
 		tournament:tournament,
 		isUserSingup:isUserSingup,
-		part:part
+		part:part,
+		isOpen:isOpen
 	}
 
   return(
