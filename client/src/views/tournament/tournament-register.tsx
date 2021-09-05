@@ -1,4 +1,4 @@
-import React from "react"
+import React,{useEffect} from "react"
 import {useMutation} from "@apollo/client"
 import {useHistory } from "react-router-dom"
 import { useSelector,useDispatch } from "react-redux"
@@ -26,6 +26,14 @@ const RegisterTournament: React.FC<RegisterType> = function({tournament,uid,isUs
 	const [savedPartTournament]  = useMutation(SAVED_PART)
 	const [leavePartTournament] = useMutation(LEAVE_PART_TOURNAMENT)
 
+	useEffect(()=>{
+		dispatch(RegisterTournamentAction({
+			uidTournament:uid,
+			userUid:userConnectedRedux.user.uid,
+			part:isUserSingup?true:false
+		}))
+	},[isUserSingup])
+
 	const leaveTournament = async function(){
 		const param:Input = {
 			uidTournament:uid,
@@ -35,8 +43,7 @@ const RegisterTournament: React.FC<RegisterType> = function({tournament,uid,isUs
 
 		if(part) {
 			dispatch(RegisterTournamentAction(param))
-			await leavePartTournament({ variables: { uid: part} })
-
+			// await leavePartTournament({ variables: { uid: part} })
 		}
 	}
 
@@ -65,7 +72,7 @@ const RegisterTournament: React.FC<RegisterType> = function({tournament,uid,isUs
 
 	return (
 		<>
-			{userSingupTournament.tournament.part || isUserSingup ?
+			{userSingupTournament.tournament.part  ?
 				<button className="btn light-blue" onClick={leaveTournament}>
 					{
 						Translation(userConnectedRedux.user.language).tournament.cancelParticipate

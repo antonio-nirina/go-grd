@@ -7,7 +7,6 @@ export interface Input{
 }
 
 export const RegisterTournamentAction = function(data:Input) {
-	console.log(data)
 	return {
    		type:TOURNAMENT_REGISTER,
    		res:data??{}
