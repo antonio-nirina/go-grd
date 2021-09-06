@@ -30,3 +30,15 @@ var PartSchemaType = graphql.NewObject(graphql.ObjectConfig{
 		},*/
 	},
 })
+
+var PartRecords = graphql.NewObject(graphql.ObjectConfig{
+	Name: "PartRecType",
+	Fields: graphql.Fields{
+		"recordsPart": &graphql.Field{
+			Type: graphql.Int,
+		},
+		"recordsConfirmed": &graphql.Field{
+			Type: graphql.Int,
+		},
+	},
+})

@@ -19,14 +19,14 @@ const Stat = function({tournament}:any) {
 					}
 				</span>
 			</p>
-				<p>
-					{userSingupTournament.tournament.confirmed}
-					<span className="confirm">
-						{
-							Translation(userConnectedRedux.user.language).tournament.confirmed
-						}
-					</span>
-				</p>
+			<p>
+				{userSingupTournament.tournament.confirmed}
+				<span className="confirm">
+					{
+						Translation(userConnectedRedux.user.language).tournament.confirmed
+					}
+				</span>
+			</p>
 		</div>
 	)
 }

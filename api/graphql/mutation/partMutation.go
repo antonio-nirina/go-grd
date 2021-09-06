@@ -17,7 +17,7 @@ var teamsInputType = graphql.NewInputObject(
 
 func createPartMatch() *graphql.Field {
 	return &graphql.Field{
-		Type:        graphql.String,
+		Type:        graphql.Int,
 		Description: "Publication create",
 		Args: graphql.FieldConfigArgument{
 			"uidUser": &graphql.ArgumentConfig{
@@ -42,7 +42,7 @@ func createPartMatch() *graphql.Field {
 
 func removePartTournament() *graphql.Field {
 	return &graphql.Field{
-		Type:        graphql.String,
+		Type:        graphql.Int,
 		Description: "remove participation",
 		Args: graphql.FieldConfigArgument{
 			"uid": &graphql.ArgumentConfig{

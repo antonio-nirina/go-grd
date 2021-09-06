@@ -14,3 +14,8 @@ type partViewModel struct {
 	Tournament  thandler.TournamentViewModel 	`json:"tournament"`
 	NumberPartConfirmed bool 					`json:"numberPartConfirmed"`
 }
+
+type ReacordsPartModel struct {
+	RecordsPart int `json:"recordsPart"`
+	ReacordsnumberPartConfirmed  int `json:"reacordsnumberPartConfirmed"`
+}

@@ -19,6 +19,7 @@ type UsecasePart interface {
 	FindPartUserTournamentHandler(uidUser primitive.ObjectID,tournamentUid string,isTeam bool) (partViewModel, error)
 	RemovedPartHandler(idQuery string) (interface{}, error)
 	UpdatedPartNumberConfirmedHandler(userPartUid string,numberConf bool)(interface{}, error)
+	GetNumberPartHandler(userPartUid string) (interface{}, error)
 }
 type partUsecase struct {
 	partRepository repository.RepositoryPart
@@ -31,13 +32,13 @@ func NewUsecasePart(r repository.RepositoryPart) UsecasePart {
 }
 
 func (p *partUsecase) SavedPartHandler(part *entity.Participate) (interface{}, error){
-	_,err := p.partRepository.SavedPartRepo(part)
+	rec,err := p.partRepository.SavedPartRepo(part)
 
 	if err != nil {
 		return 0, err
 	}
 
-	return "Ok",nil
+	return rec,nil
 }
 
 func (p *partUsecase) FindPartHandler(idQuery string) (partViewModel, error){
@@ -512,7 +513,7 @@ func (p *partUsecase) FindPartUserTournamentHandler(uidUser primitive.ObjectID,t
 	}
 
 	var teamView []teamH.TeamViewModel
-	
+
 	if len(result.Team) > 0 {
 		var userView []userH.UserViewModel
 
@@ -564,63 +565,63 @@ func (p *partUsecase) FindPartUserTournamentHandler(uidUser primitive.ObjectID,t
 	}
 
 	partViewModel := partViewModel{
-		Uid: result.Uid.Hex(),
-		Date:result.Date,
-		Team:teamView,
-		User:userH.UserViewModel{
-			Uid:result.User.Uid.Hex(),
-			FirstName:result.User.FirstName,
-			LastName:result.User.LastName,
-			Email:result.User.Email,
-			Username:result.User.Username,
-			IsBanned:result.User.IsBanned,
-			Avatar:result.User.Avatar,
-			Language:result.User.Language,
-			Point:result.User.Point,         
-			Roles:result.User.Roles,
-			TypeConnexion:result.User.TypeConnexion,
-			Created:result.User.Created, 		
-		},
-		Tournament:tHandler.TournamentViewModel{
-			result.Tournament.Uid.Hex(),
-			result.Tournament.Title,
-			result.Tournament.Date,
-			result.Tournament.Info,
-			result.Tournament.Statut,
-			result.Tournament.NumberParticipate,
-			result.Tournament.NumberTeam,
-			result.Tournament.Price,
-			result.Tournament.DeadlineDate,
-			result.Tournament.PriceParticipate,
-			tHandler.GameViewModel{
-				result.Tournament.Game.Uid.Hex(),
-				result.Tournament.Game.Name,
-				result.Tournament.Game.Image,
-				result.Tournament.Game.Logo,
-				result.Tournament.Game.Slug,
-			}, 
-			tHandler.PlateformViewModel{
-				result.Tournament.Plateform.Uid.Hex(),
-				result.Tournament.Plateform.Description,
-				result.Tournament.Plateform.Name,
+			Uid: result.Uid.Hex(),
+			Date:result.Date,
+			Team:teamView,
+			User:userH.UserViewModel{
+				Uid:result.User.Uid.Hex(),
+				FirstName:result.User.FirstName,
+				LastName:result.User.LastName,
+				Email:result.User.Email,
+				Username:result.User.Username,
+				IsBanned:result.User.IsBanned,
+				Avatar:result.User.Avatar,
+				Language:result.User.Language,
+				Point:result.User.Point,         
+				Roles:result.User.Roles,
+				TypeConnexion:result.User.TypeConnexion,
+				Created:result.User.Created, 		
 			},
-			result.Tournament.Rules,
-			result.Tournament.IsPublic,
-		},
-	}
+			Tournament:tHandler.TournamentViewModel{
+				result.Tournament.Uid.Hex(),
+				result.Tournament.Title,
+				result.Tournament.Date,
+				result.Tournament.Info,
+				result.Tournament.Statut,
+				result.Tournament.NumberParticipate,
+				result.Tournament.NumberTeam,
+				result.Tournament.Price,
+				result.Tournament.DeadlineDate,
+				result.Tournament.PriceParticipate,
+				tHandler.GameViewModel{
+					result.Tournament.Game.Uid.Hex(),
+					result.Tournament.Game.Name,
+					result.Tournament.Game.Image,
+					result.Tournament.Game.Logo,
+					result.Tournament.Game.Slug,
+				}, 
+				tHandler.PlateformViewModel{
+					result.Tournament.Plateform.Uid.Hex(),
+					result.Tournament.Plateform.Description,
+					result.Tournament.Plateform.Name,
+				},
+				result.Tournament.Rules,
+				result.Tournament.IsPublic,
+			},
+		}
 
 	return partViewModel,nil
 }
 
 func (p *partUsecase) RemovedPartHandler(idQuery string) (interface{}, error){
 	objectId, err := primitive.ObjectIDFromHex(idQuery)
-	_,err = p.partRepository.RemovedPartRepo(objectId)
+	rec,err := p.partRepository.RemovedPartRepo(objectId)
 
 	if err != nil {
 		return 0, err
 	}
 
-	return "Ok",nil
+	return rec,nil
 }
 
 func (p *partUsecase) UpdatedPartNumberConfirmedHandler(userPartUid string,numberConf bool)(interface{}, error) {
@@ -632,4 +633,15 @@ func (p *partUsecase) UpdatedPartNumberConfirmedHandler(userPartUid string,numbe
 	}
 
 	return "Ok",nil
+}
+
+func (p *partUsecase) GetNumberPartHandler(userPartUid string) (interface{}, error) {
+	objectId, err := primitive.ObjectIDFromHex(userPartUid)
+	rec,err := p.partRepository.GetNumberPartRepo(objectId)
+
+	if err != nil {
+		return 0, err
+	}
+
+	return rec,nil
 }

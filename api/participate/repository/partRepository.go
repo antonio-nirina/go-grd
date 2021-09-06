@@ -25,7 +25,7 @@ func NewPartRepository(client *mongo.Client) *DriverRepository {
 
 
 type RepositoryPart interface {
-	SavedPartRepo(tournament *entity.Participate) (interface{}, error)
+	SavedPartRepo(part *entity.Participate) (interface{}, error)
 	FindPartRepo(idQuery primitive.ObjectID) (entity.Participate, error)
 	FindAllPartRepo(pageNumber int64,limit int64) ([]entity.Participate, error)
 	FindPartUserRepo(pageNumber int64,limit int64,game primitive.ObjectID) ([]entity.Participate, error)
@@ -34,19 +34,26 @@ type RepositoryPart interface {
 	FindPartByLeagueRepo(userUid  primitive.ObjectID,objectId primitive.ObjectID) (entity.Participate, error)
 	RemovedPartRepo(idQuery primitive.ObjectID) (interface{}, error)
 	UpdateNumberConfirmedRepo(objectId primitive.ObjectID,numberConf bool) (interface{}, error)
+	GetNumberPartRepo(objectId primitive.ObjectID) (interface{}, error)
 }
 
-func (c *DriverRepository) SavedPartRepo(tournament *entity.Participate) (interface{}, error){
-	var collection = c.client.Database("grd_database").Collection("participate")
-	insertResult, err := collection.InsertOne(context.TODO(), tournament)
+type recordsPartModel struct {
+	RecordsPart int `json:"recordsPart"`
+	ReacordsnumberPartConfirmed  int `json:"reacordsnumberPartConfirmed"`
+}
 
+func (c *DriverRepository) SavedPartRepo(part *entity.Participate) (interface{}, error){
+	var collection = c.client.Database("grd_database").Collection("participate")
+	insertResult, err := collection.InsertOne(context.TODO(), part)
+	records,err := collection.CountDocuments(context.TODO(), bson.D{{}})
+	
 	if err != nil {
-		return nil, err
+		return 0, err
 	}
 
 	fmt.Println("Inserted a single document: ", insertResult)
 
-	return tournament, nil
+	return int(records), nil
 }
 
 func (c *DriverRepository) FindPartRepo(idQuery primitive.ObjectID) (entity.Participate, error){
@@ -164,14 +171,14 @@ func (c *DriverRepository) FindPartByLeagueRepo(userUid  primitive.ObjectID,obje
 func (c *DriverRepository) RemovedPartRepo(idQuery primitive.ObjectID) (interface{}, error) {
 	var collection = c.client.Database("grd_database").Collection("participate")
 	filter := bson.D{{"uid", idQuery}}
-
-	updateResult, err := collection.DeleteOne(context.TODO(), filter)
-
+	_, err := collection.DeleteOne(context.TODO(), filter)
+	records,err := collection.CountDocuments(context.TODO(), bson.D{{}})
+	
 	if err != nil {
-		return nil,err
+		return nil, err
 	}
 
-	return updateResult.DeletedCount,nil
+	return records,nil
 }
 
 func (c *DriverRepository) UpdateNumberConfirmedRepo(objectId primitive.ObjectID,numberConf bool) (interface{}, error) {
@@ -180,7 +187,7 @@ func (c *DriverRepository) UpdateNumberConfirmedRepo(objectId primitive.ObjectID
 	update := bson.D{
 		{"$set", bson.D{
 			{
-				"NumberPartConfirmed", numberConf,
+				"numberpartconfirmed", numberConf,
 			},
 	}}}
 	updateResult, err := collection.UpdateOne(context.TODO(), filter, update)
@@ -190,4 +197,22 @@ func (c *DriverRepository) UpdateNumberConfirmedRepo(objectId primitive.ObjectID
 	}
 
 	return updateResult.ModifiedCount,nil
+}
+
+func (c *DriverRepository) GetNumberPartRepo(objectId primitive.ObjectID) (interface{}, error) {
+	var collection = c.client.Database("grd_database").Collection("participate")
+	records,err := collection.CountDocuments(context.TODO(), bson.D{{}})
+	filter := bson.D{{"tournament.uid", objectId},{"numberpartconfirmed",true}}
+	recordConfirmed,err := collection.CountDocuments(context.TODO(), filter)
+	
+	if err != nil {
+		return nil, err
+	}
+
+	recs := recordsPartModel{
+		RecordsPart:int(records) ,
+		ReacordsnumberPartConfirmed:int(recordConfirmed), 
+	}
+
+	return recs,nil
 }

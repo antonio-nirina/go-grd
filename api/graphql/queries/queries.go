@@ -128,5 +128,6 @@ func GetRootFields() graphql.Fields {
 		"FindAllLeague":        FindAllLeague(),
 		"FindLeagueByGame":     FindLeagueByGame(),
 		"FindPartByUserTournament": FindPartByUserTournament(),
+		"FindPartCount": 		FindPartCount(),
 	}
 }
