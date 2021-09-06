@@ -33,6 +33,7 @@ type RepositoryPart interface {
 	FindPartByTournamentRepo(userUid primitive.ObjectID,objectId primitive.ObjectID,isTeam bool) (entity.Participate, error)
 	FindPartByLeagueRepo(userUid  primitive.ObjectID,objectId primitive.ObjectID) (entity.Participate, error)
 	RemovedPartRepo(idQuery primitive.ObjectID) (interface{}, error)
+	UpdateNumberConfirmedRepo(objectId primitive.ObjectID,numberConf bool) (interface{}, error)
 }
 
 func (c *DriverRepository) SavedPartRepo(tournament *entity.Participate) (interface{}, error){
@@ -171,4 +172,22 @@ func (c *DriverRepository) RemovedPartRepo(idQuery primitive.ObjectID) (interfac
 	}
 
 	return updateResult.DeletedCount,nil
+}
+
+func (c *DriverRepository) UpdateNumberConfirmedRepo(objectId primitive.ObjectID,numberConf bool) (interface{}, error) {
+	var collection = c.client.Database("grd_database").Collection("participate")
+	filter := bson.D{{"uid", objectId}}
+	update := bson.D{
+		{"$set", bson.D{
+			{
+				"NumberPartConfirmed", numberConf,
+			},
+	}}}
+	updateResult, err := collection.UpdateOne(context.TODO(), filter, update)
+
+	if err != nil {
+		return nil,err
+	}
+
+	return updateResult.ModifiedCount,nil
 }

@@ -16,6 +16,7 @@ import "../../assets/css/style.css"
 import {Tournament} from "../models/tournament"
 import {dateStringToDY} from "../tools/dateConvert"
 import RegisterTournament,{RegisterType} from "./tournament-register"
+import Stat from "./stat"
 
 
 
@@ -65,7 +66,9 @@ const Info: React.FC = function(props:any) {
 		tournament:tournament,
 		isUserSingup:isUserSingup,
 		part:part,
-		isOpen:isOpen
+		isOpen:isOpen,
+		numberPart:0,
+		confirmed:0
 	}
 	// const messageLeave:string = Translation(userConnectedRedux.user.language).tournament.leave ?? ""
 
@@ -103,19 +106,7 @@ const Info: React.FC = function(props:any) {
 						{tournament? parse(tournament.description) : <></>}
 					</div>
 					<div className="tableau">
-						<div className="state">
-							<p>{""}<span>slots</span></p>
-							<p>{""}<span>
-								{
-									Translation(userConnectedRedux.user.language).tournament.pending
-								}
-							</span></p>
-							<p>{""}<span className="confirm">
-								{
-									Translation(userConnectedRedux.user.language).tournament.confirmed
-								}
-							</span></p>
-						</div>
+						<Stat tournament={tournament} />
 						<div className="info-target">
 							<div className="line">
 								<p>

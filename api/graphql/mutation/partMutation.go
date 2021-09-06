@@ -52,3 +52,19 @@ func removePartTournament() *graphql.Field {
 		Resolve: partResolver.RemovedPartByResolver,
 	}
 }
+
+func updateConfirmedPartTournament() *graphql.Field {
+	return &graphql.Field{
+		Type:        graphql.String,
+		Description: "increment participation confirmed participation",
+		Args: graphql.FieldConfigArgument{
+			"uid": &graphql.ArgumentConfig{
+				Type: graphql.String,
+			},
+			"partConfirmed":&graphql.ArgumentConfig{
+				Type: graphql.Boolean,
+			},
+		},
+		Resolve: partResolver.UpdatedNumberPartConfResolver,
+	}
+}

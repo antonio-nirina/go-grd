@@ -16,22 +16,26 @@ export interface RegisterType {
 	isUserSingup:Boolean
 	part:string
 	isOpen:Boolean
+	numberPart:number
+	confirmed:number
 }
 // Isopen close Register
-const RegisterTournament: React.FC<RegisterType> = function({tournament,uid,isUserSingup,part,isOpen}) {
+const RegisterTournament: React.FC<RegisterType> = function({tournament,uid,isUserSingup,part,isOpen,numberPart,confirmed}) {
 	const dispatch = useDispatch()
 	const history = useHistory()
 	const userConnectedRedux = useSelector((state:RootState) => state.userConnected)
 	const userSingupTournament = useSelector((state:RootState) => state.tournamentSingin)
 	// let message:string = Translation(userConnectedRedux.user.language).tournament.notify ?? ""
 	const [savedPartTournament]  = useMutation(SAVED_PART)
-	const [leavePartTournament] = useMutation(LEAVE_PART_TOURNAMENT)
+	const [leavePartTournament]  = useMutation(LEAVE_PART_TOURNAMENT)
 
 	useEffect(()=>{
 		dispatch(RegisterTournamentAction({
 			uidTournament:uid,
 			userUid:userConnectedRedux.user.uid,
-			part:isUserSingup?true:false
+			part:isUserSingup?true:false,
+			numberPart:0,
+			confirmed:0
 		}))
 	},[isUserSingup,uid,userConnectedRedux,dispatch])
 
@@ -39,7 +43,9 @@ const RegisterTournament: React.FC<RegisterType> = function({tournament,uid,isUs
 		const param:Input = {
 			uidTournament:uid,
 			userUid:userConnectedRedux.user.uid,
-			part:false
+			part:false,
+			numberPart:numberPart-1,
+			confirmed:confirmed-1
 		}
 
 		if(part) {
@@ -53,7 +59,9 @@ const RegisterTournament: React.FC<RegisterType> = function({tournament,uid,isUs
 		const param:Input = {
 			uidTournament:uid,
 			userUid:userConnectedRedux.user.uid,
-			part:true
+			part:true,
+			numberPart:numberPart+1,
+			confirmed:0
 		}
 
 		if(tournament?.isTeam) {
