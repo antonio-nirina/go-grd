@@ -58,6 +58,9 @@ export const GET_PART_TOURNAMENT = gql`
 					uid
 				}
 			}
+			league{
+				uid
+			}
 		}
 	}`
 

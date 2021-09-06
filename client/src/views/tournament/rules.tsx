@@ -15,6 +15,7 @@ import "../../assets/css/style.css"
 import { Link } from "react-router-dom"
 import {dateStringToDY} from "../tools/dateConvert"
 import RegisterTournament,{RegisterType} from "./tournament-register"
+import Stat from "./stat"
 
 const Rules: React.FC = function(props:any) {
 	const params = new URLSearchParams(props.location.search)
@@ -58,7 +59,10 @@ const Rules: React.FC = function(props:any) {
 		uid:uid,
 		tournament:tournament,
 		isUserSingup:isUserSingup,
-		part:part
+		part:part,
+		isOpen:isOpen,
+		numberPart:0,
+		confirmed:0
 	}
 
   return(
@@ -88,19 +92,7 @@ const Rules: React.FC = function(props:any) {
 						{tournament? parse(tournament.description) : <></>}
 					</div>
 					<div className="tableau">
-						<div className="state">
-							<p>{""}<span>slots</span></p>
-							<p>{""}<span>
-								{
-									Translation(userConnectedRedux.user.language).tournament.pending
-								}
-							</span></p>
-							<p>{""}<span className="confirm">
-								{
-									Translation(userConnectedRedux.user.language).tournament.confirmed
-								}
-							</span></p>
-						</div>
+						<Stat tournament={tournament} />
 						<div className="info-target">
 							<div className="line">
 								<p>

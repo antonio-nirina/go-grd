@@ -13,7 +13,9 @@ export const loadState 	=  function() {
 			tournament:{
 				uidTournament:"",
 				userUid:"",
-				part:false
+				part:false,
+				numberPart:0,
+				confirmed:0
 			}
 		}
 	}

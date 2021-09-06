@@ -1,7 +1,6 @@
 package handler
 
 import (
-
 	"github.com/thoussei/antonio/api/participate/entity"
 	"github.com/thoussei/antonio/api/participate/repository"
 	tHandler "github.com/thoussei/antonio/api/tournament/handler"
@@ -19,6 +18,7 @@ type UsecasePart interface {
 	FindPartUserLeagueHandler(uidUser primitive.ObjectID,leagueUid string) (partViewModel, error)
 	FindPartUserTournamentHandler(uidUser primitive.ObjectID,tournamentUid string,isTeam bool) (partViewModel, error)
 	RemovedPartHandler(idQuery string) (interface{}, error)
+	UpdatedPartNumberConfirmedHandler(userPartUid string,numberConf bool)(interface{}, error)
 }
 type partUsecase struct {
 	partRepository repository.RepositoryPart
@@ -394,6 +394,7 @@ func (p *partUsecase) FindPartUserLeagueHandler(userUid primitive.ObjectID,leagu
 	}
 
 	result, err := p.partRepository.FindPartByLeagueRepo(userUid,objectId)
+
 	if err != nil {
 		return partViewModel{}, err
 	}
@@ -614,6 +615,17 @@ func (p *partUsecase) FindPartUserTournamentHandler(uidUser primitive.ObjectID,t
 func (p *partUsecase) RemovedPartHandler(idQuery string) (interface{}, error){
 	objectId, err := primitive.ObjectIDFromHex(idQuery)
 	_,err = p.partRepository.RemovedPartRepo(objectId)
+
+	if err != nil {
+		return 0, err
+	}
+
+	return "Ok",nil
+}
+
+func (p *partUsecase) UpdatedPartNumberConfirmedHandler(userPartUid string,numberConf bool)(interface{}, error) {
+	objectId, err := primitive.ObjectIDFromHex(userPartUid)
+	_,err = p.partRepository.UpdateNumberConfirmedRepo(objectId,numberConf)
 
 	if err != nil {
 		return 0, err

@@ -4,6 +4,8 @@ export interface Input{
 	uidTournament:string|null
 	userUid:string|null
 	part:boolean
+	numberPart:number
+	confirmed:number
 }
 
 export const RegisterTournamentAction = function(data:Input) {

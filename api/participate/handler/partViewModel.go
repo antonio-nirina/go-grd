@@ -12,4 +12,5 @@ type partViewModel struct {
 	User 		user.UserViewModel 				`json:"user"`
 	Team 		[]team.TeamViewModel 			`json:"team"`
 	Tournament  thandler.TournamentViewModel 	`json:"tournament"`
+	NumberPartConfirmed bool 					`json:"numberPartConfirmed"`
 }
