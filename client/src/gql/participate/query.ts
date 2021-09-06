@@ -58,9 +58,15 @@ export const GET_PART_TOURNAMENT = gql`
 					uid
 				}
 			}
-			league{
-				uid
-			}
 		}
 	}`
 
+export const GET_RECORDS_PART = gql`
+	query FindPartCount($uid: String) {
+		FindPartCount(uid: $uid) {
+			recordsPart
+			recordsConfirmed
+		}
+	}
+
+`

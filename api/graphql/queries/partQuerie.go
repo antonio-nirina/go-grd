@@ -91,3 +91,17 @@ func FindPartByUserTournament() *graphql.Field {
 		Resolve: partResolver.FindPartByUseTournamentResolver,
 	}
 }
+
+func FindPartCount() *graphql.Field {
+	return &graphql.Field{
+		Type:        types.PartRecords,
+		Description: "Get all count",
+		Args: graphql.FieldConfigArgument{
+			"uid": &graphql.ArgumentConfig{
+				Type: graphql.String,
+			},
+		},
+		
+		Resolve: partResolver.GetNumberPartByResolver,
+	}
+}

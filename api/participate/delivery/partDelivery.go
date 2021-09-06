@@ -14,7 +14,6 @@ import (
 
 	// leagueEntity "github.com/thoussei/antonio/api/league/entity"
 	// leagueHandler "github.com/thoussei/antonio/api/league/handler"
-
 	teamEntity "github.com/thoussei/antonio/api/teams/entity"
 	teamHandler "github.com/thoussei/antonio/api/teams/handler"
 
@@ -31,6 +30,7 @@ type PartResolver interface {
 	UpdatedPartByUseResolver(params graphql.ResolveParams) (interface{}, error)
 	RemovedPartByResolver(params graphql.ResolveParams) (interface{}, error)
 	UpdatedNumberPartConfResolver(params graphql.ResolveParams) (interface{}, error)
+	GetNumberPartByResolver(params graphql.ResolveParams) (interface{}, error)
 }
 
 type participate struct {
@@ -189,9 +189,8 @@ func (p *participate) SavedPartResolver(params graphql.ResolveParams) (interface
 		//League:     leagueObject,
 		IsWin:      false,
 		IsTournament: IsTournament,
-		NumberPartPending:true, 
 		NumberPartConfirmed: false,
-		IsWager:false
+		IsWager:false,
 	}
 
 	res, err := p.partHandler.SavedPartHandler(part)
@@ -338,7 +337,7 @@ func (p *participate) RemovedPartByResolver(params graphql.ResolveParams) (inter
 func (p *participate) UpdatedNumberPartConfResolver(params graphql.ResolveParams) (interface{}, error) {
 	userPartUid, _ := params.Args["uidPart"].(string)
 	partConfirmed, _ := params.Args["partConfirmed"].(bool)
-	_, err := p.partHandler.FindPartResolver(userPartUid)
+	_, err := p.partHandler.FindPartHandler(userPartUid)
 
 	if err != nil {
 		return nil, err
@@ -352,3 +351,19 @@ func (p *participate) UpdatedNumberPartConfResolver(params graphql.ResolveParams
 
 	return res, nil
 }
+
+func (p *participate) GetNumberPartByResolver(params graphql.ResolveParams) (interface{}, error) {
+	uid, _ := params.Args["uid"].(string)
+	_, err := p.tournament.FindTournamentHandler(uid)
+	
+	if err != nil {
+		return nil,err
+	}
+	 
+	part,err := p.partHandler.GetNumberPartHandler(uid)
+
+	return part,nil
+}
+
+
+
