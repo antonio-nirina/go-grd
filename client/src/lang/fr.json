@@ -192,7 +192,8 @@
 		"cancelParticipate":"ANNULER MON INSCRIPTION",
 		"notify":"Vous êtes inscrit",
 		"notifyError":"Error vous n'appartient pas à une équipe",
-		"leave":"Vous allez quitte le tournois"
+		"leave":"Vous allez quitte le tournois",
+		"notAUthorizePart":"Vous avez déjà inscrit sur d'autre tournois"
 	},
 	"leagues": {
 		"listLigues":"Liste des ligues disponibles",

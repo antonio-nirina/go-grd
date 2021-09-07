@@ -1,4 +1,4 @@
-import React,{useEffect} from "react"
+import React,{useEffect,useState} from "react"
 import {useMutation,useQuery} from "@apollo/client"
 // import {useHistory } from "react-router-dom"
 import { useSelector,useDispatch } from "react-redux"
@@ -10,6 +10,7 @@ import {checkInTeam} from "../league/utils"
 import {RegisterTournamentAction,Input} from "../tournament/action/tournamentAction"
 import {Tournament} from "../models/tournament"
 import {GET_RECORDS_PART} from "../../gql/participate/query"
+import {GET_PART_USER_ALL} from "../../gql/participate/query"
 
 export interface RegisterType {
 	uid:string|null
@@ -24,6 +25,7 @@ export interface RegisterType {
 const RegisterTournament: React.FC<RegisterType> = function({tournament,uid,isUserSingup,part,isOpen,numberPart,confirmed}) {
 	const dispatch = useDispatch()
 	// const history = useHistory()
+	const [isAuthorize,setIsAuthorize] = useState<boolean>(true)
 	const userConnectedRedux = useSelector((state:RootState) => state.userConnected)
 	const userSingupTournament = useSelector((state:RootState) => state.tournamentSingin)
 	// let message:string = Translation(userConnectedRedux.user.language).tournament.notify ?? ""
@@ -33,6 +35,14 @@ const RegisterTournament: React.FC<RegisterType> = function({tournament,uid,isUs
 	const {loading,error,data} 	= useQuery(GET_RECORDS_PART, {
 		variables: {
 			uid:uid,
+		},
+	})
+
+	const {loading:loadingUserPart,error:errorUserPart,data:dataUserPart} = useQuery(GET_PART_USER_ALL, {
+		variables: {
+			uidUser:userConnectedRedux.user.uid,
+			limit:0,
+			pageNumber:0,
 		},
 	})
 
@@ -47,13 +57,29 @@ const RegisterTournament: React.FC<RegisterType> = function({tournament,uid,isUs
 			}))
 		}
 
-	},[isUserSingup,uid,userConnectedRedux,dispatch,loading,error,data])
+		if(!loadingUserPart && !errorUserPart && dataUserPart) {
+			let dateInit = new Date(dataUserPart.FindPartByUser[0].date)
+			dataUserPart.FindPartByUser.forEach(function(el:any,index:number) {
+				let dateNext
+				if(index > 0) {
+					if(dateInit > new Date(el.date)) {
+						dateNext = dateInit.getTime() - new Date(el.date).getTime()
+					} else {
+						dateNext =  new Date(el.date).getTime() - dateInit.getTime()
+					}
+
+					const diffDate = new Date(dateNext)
+					if(diffDate.getUTCDate() - 1 > 0) setIsAuthorize(false)
+					if(diffDate.getHours() < 3) setIsAuthorize(false)
+					dateInit = new Date(el.date)
+				}
+			})
+		}
+
+	},[isUserSingup,uid,userConnectedRedux,dispatch,loading,error,data,loadingUserPart,errorUserPart,dataUserPart])
 
 	const leaveTournament = async function(){
-
-
 		if(part) {
-
 			const leav = await leavePartTournament({ variables: { uid: part} })
 			if(leav.data.removePartTournament) {
 				const param:Input = {
@@ -70,7 +96,6 @@ const RegisterTournament: React.FC<RegisterType> = function({tournament,uid,isUs
 
 	const notify = async function(){
 		let isError:boolean = false
-
 
 		if(tournament?.isTeam) {
 			const check = await checkInTeam(userConnectedRedux.user.uid)
@@ -99,11 +124,13 @@ const RegisterTournament: React.FC<RegisterType> = function({tournament,uid,isUs
 	return (
 		<>
 			{userSingupTournament.tournament.part  ?
-				<button className="btn light-blue" onClick={leaveTournament}>
+				<><button className="btn light-blue" onClick={leaveTournament} disabled={isAuthorize ? false : true}>
 					{
 						Translation(userConnectedRedux.user.language).tournament.cancelParticipate
 					}
 				</button>
+				isAuthorize ? <div>{Translation(userConnectedRedux.user.language).tournament.notAUthorizePart}</div> : <></>
+				</>
 				:
 				<button className="btn bg-red" onClick={notify}>
 					{
