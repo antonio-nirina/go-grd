@@ -1,4 +1,4 @@
-import React,{useEffect,useState} from "react"
+import React,{useEffect,useState, useMemo} from "react"
 import {useMutation,useQuery} from "@apollo/client"
 // import {useHistory } from "react-router-dom"
 import { useSelector,useDispatch } from "react-redux"
@@ -27,6 +27,7 @@ const RegisterTournament: React.FC<RegisterType> = function({tournament,uid,isUs
 	const dispatch = useDispatch()
 	// const history = useHistory()
 	const [isAuthorize,setIsAuthorize] = useState<boolean>(true)
+	const [isPartTournament,setIsPartTournament] = useState<boolean>(false)
 	const userConnectedRedux = useSelector((state:RootState) => state.userConnected)
 	const userSingupTournament = useSelector((state:RootState) => state.tournamentSingin)
 	// let message:string = Translation(userConnectedRedux.user.language).tournament.notify ?? ""
@@ -49,13 +50,16 @@ const RegisterTournament: React.FC<RegisterType> = function({tournament,uid,isUs
 
 	useEffect(()=>{
 		if(!loading && !error && data) {
-			dispatch(RegisterTournamentAction({
-				uidTournament:uid,
-				userUid:userConnectedRedux.user.uid,
-				part:isUserSingup?true:false,
-				numberPart:data.FindPartCount.recordsPart,
-				confirmed:data.FindPartCount.recordsConfirmed?data.FindPartCount.recordsConfirmed:0
-			}))
+			dispatch(RegisterTournamentAction(
+				{
+					uidTournament:uid,
+					userUid:userConnectedRedux.user.uid,
+					part:isUserSingup?true:false,
+					numberPart:data.FindPartCount.recordsPart,
+					confirmed:data.FindPartCount.recordsConfirmed?data.FindPartCount.recordsConfirmed:0
+				}
+			)
+			)
 		}
 
 		if(!loadingUserPart && !errorUserPart && dataUserPart && dataUserPart.FindPartByUser.length > 1) {
@@ -78,9 +82,15 @@ const RegisterTournament: React.FC<RegisterType> = function({tournament,uid,isUs
 				}
 			})
 		}
-
 	},[isUserSingup,uid,userConnectedRedux,dispatch,loading,error,data,loadingUserPart,errorUserPart,dataUserPart])
 
+	useMemo(()=> {
+		if(userSingupTournament.tournament.length > 0) {
+			userSingupTournament.tournament.forEach(function(e:Input) {
+				if(e.uidTournament === uid && e.userUid === userConnectedRedux.user.uid && e.part) setIsPartTournament(true)
+			})
+		}
+	},[userSingupTournament,userConnectedRedux,uid,setIsPartTournament])
 	const leaveTournament = async function(){
 		if(part) {
 			const leav = await leavePartTournament({ variables: { uid: part} })
@@ -126,7 +136,7 @@ const RegisterTournament: React.FC<RegisterType> = function({tournament,uid,isUs
 
 	return (
 		<>
-			{userSingupTournament.tournament  ?
+			{isPartTournament  ?
 				<button className="btn light-blue" onClick={leaveTournament}>
 					{
 						Translation(userConnectedRedux.user.language).tournament.cancelParticipate
