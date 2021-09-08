@@ -5,14 +5,14 @@ import {Translation} from "../../lang/translation"
 
 const Stat = function({tournament}:any) {
 	const userConnectedRedux = useSelector((state:RootState) => state.userConnected)
-	const userSingupTournament = useSelector((state:RootState) => state.tournamentSingin)
+	// const userSingupTournament = useSelector((state:RootState) => state.tournamentSingin)
 	return (
 		<div className="state">
 			<p>{tournament?.numberParticipate}
 				<span>slots</span>
 			</p>
 			<p>
-				{userSingupTournament.tournament.numberPart}
+				0
 				<span>
 					{
 						Translation(userConnectedRedux.user.language).tournament.pending
@@ -20,7 +20,7 @@ const Stat = function({tournament}:any) {
 				</span>
 			</p>
 			<p>
-				{userSingupTournament.tournament.confirmed}
+				0
 				<span className="confirm">
 					{
 						Translation(userConnectedRedux.user.language).tournament.confirmed
@@ -32,3 +32,5 @@ const Stat = function({tournament}:any) {
 }
 
 export default Stat
+// {userSingupTournament.tournament.numberPart}
+// {userSingupTournament.tournament.confirmed}

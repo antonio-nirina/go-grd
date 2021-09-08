@@ -71,8 +71,8 @@ export const GET_RECORDS_PART = gql`
 
 `
 export const GET_PART_USER_ALL = gql`
-	query FindPartByUser($uidUser:String,$limit:Int,$pageNumber) {
-		FindPartByUser(uidUser:$uidUser,limit:$limit,$pageNumber) {
+	query FindPartByUser($uidUser:String,$limit:Int,$pageNumber:Int) {
+		FindPartByUser(uidUser:$uidUser,limit:$limit,pageNumber:$pageNumber) {
 			uid
 			date
 			user{

@@ -21,6 +21,7 @@ export interface RegisterType {
 	numberPart:number
 	confirmed:number
 }
+
 // Isopen close Register
 const RegisterTournament: React.FC<RegisterType> = function({tournament,uid,isUserSingup,part,isOpen,numberPart,confirmed}) {
 	const dispatch = useDispatch()
@@ -57,8 +58,9 @@ const RegisterTournament: React.FC<RegisterType> = function({tournament,uid,isUs
 			}))
 		}
 
-		if(!loadingUserPart && !errorUserPart && dataUserPart) {
+		if(!loadingUserPart && !errorUserPart && dataUserPart && dataUserPart.FindPartByUser.length > 1) {
 			let dateInit = new Date(dataUserPart.FindPartByUser[0].date)
+			let uidInit:string = dataUserPart.FindPartByUser[0].uid
 			dataUserPart.FindPartByUser.forEach(function(el:any,index:number) {
 				let dateNext
 				if(index > 0) {
@@ -69,9 +71,10 @@ const RegisterTournament: React.FC<RegisterType> = function({tournament,uid,isUs
 					}
 
 					const diffDate = new Date(dateNext)
-					if(diffDate.getUTCDate() - 1 > 0) setIsAuthorize(false)
-					if(diffDate.getHours() < 3) setIsAuthorize(false)
+					if(diffDate.getUTCDate() - 1 > 0 && el.uid === uidInit) setIsAuthorize(false)
+					if(diffDate.getHours() < 3 && el.uid === uidInit) setIsAuthorize(false)
 					dateInit = new Date(el.date)
+					uidInit = el.uid
 				}
 			})
 		}
@@ -123,21 +126,20 @@ const RegisterTournament: React.FC<RegisterType> = function({tournament,uid,isUs
 
 	return (
 		<>
-			{userSingupTournament.tournament.part  ?
-				<><button className="btn light-blue" onClick={leaveTournament} disabled={isAuthorize ? false : true}>
+			{userSingupTournament.tournament  ?
+				<button className="btn light-blue" onClick={leaveTournament}>
 					{
 						Translation(userConnectedRedux.user.language).tournament.cancelParticipate
 					}
 				</button>
-				isAuthorize ? <div>{Translation(userConnectedRedux.user.language).tournament.notAUthorizePart}</div> : <></>
-				</>
 				:
-				<button className="btn bg-red" onClick={notify}>
+				<button className="btn bg-red" onClick={notify} disabled={isAuthorize ? false : true}>
 					{
 						Translation(userConnectedRedux.user.language).tournament.participate
 					}
 				</button>
 			}
+			{!isAuthorize ? <div>{Translation(userConnectedRedux.user.language).tournament.notAUthorizePart}</div> : <></>}
 		</>
 	)
 }

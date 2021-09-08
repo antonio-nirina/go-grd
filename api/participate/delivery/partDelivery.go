@@ -214,7 +214,6 @@ func (p *participate) FindPartResolver(params graphql.ResolveParams) (interface{
 	return res, nil
 }
 func (p *participate) FindAllPartResolver(params graphql.ResolveParams) (interface{}, error) {
-
 	limit, _ := params.Args["limit"].(int)
 	pageNumber, _ := params.Args["pageNumber"].(int)
 
