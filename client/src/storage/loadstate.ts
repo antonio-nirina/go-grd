@@ -4,19 +4,20 @@ import {GetCookie} from "../views/auth/utils"
 export const loadState 	=  function() {
 	const user :string | null = GetCookie("userConnected")
 	// const singUpLeague :string | null  = localStorage.getItem("leagueSingin")
-	const singUpTournament :string | null  = localStorage.getItem("tournamentSingin")
+	//const singUpTournament :string | null  = GetCookie("tournamentSingin")
+
 	let storage = {
 		userConnected:{
 			user:{}
 		},
 		tournamentSingin:{
-			tournament:{
+			tournament:[{
 				uidTournament:"",
 				userUid:"",
 				part:false,
 				numberPart:0,
 				confirmed:0
-			}
+		}]
 		}
 	}
 
@@ -24,7 +25,7 @@ export const loadState 	=  function() {
 		storage.userConnected.user = user
 	}
 
-	if(singUpTournament) storage.tournamentSingin.tournament.part = Boolean(singUpTournament)
+	// if(singUpTournament) storage.tournamentSingin.tournament = singUpTournament
 
 	return storage
 }
