@@ -45,15 +45,20 @@ type recordsPartModel struct {
 func (c *DriverRepository) SavedPartRepo(part *entity.Participate) (interface{}, error){
 	var collection = c.client.Database("grd_database").Collection("participate")
 	insertResult, err := collection.InsertOne(context.TODO(), part)
-	records,err := collection.CountDocuments(context.TODO(), bson.D{{}})
+	filter := bson.D{{"uid", insertResult}}
+	records,err := collection.CountDocuments(context.TODO(), filter)
 	
 	if err != nil {
 		return 0, err
 	}
 
-	fmt.Println("Inserted a single document: ", insertResult)
+	res := int(records)
 
-	return int(records), nil
+	if res == 0 {
+		res++
+	}
+	
+	return res, nil
 }
 
 func (c *DriverRepository) FindPartRepo(idQuery primitive.ObjectID) (entity.Participate, error){
@@ -201,7 +206,7 @@ func (c *DriverRepository) UpdateNumberConfirmedRepo(objectId primitive.ObjectID
 
 func (c *DriverRepository) GetNumberPartRepo(objectId primitive.ObjectID) (interface{}, error) {
 	var collection = c.client.Database("grd_database").Collection("participate")
-	records,err := collection.CountDocuments(context.TODO(), bson.D{{}})
+	records,err := collection.CountDocuments(context.TODO(), bson.D{{"tournament.uid", objectId}})
 	filter := bson.D{{"tournament.uid", objectId},{"numberpartconfirmed",true}}
 	recordConfirmed,err := collection.CountDocuments(context.TODO(), filter)
 	

@@ -62,23 +62,14 @@ const RegisterTournament: React.FC<RegisterType> = function({tournament,uid,isUs
 			)
 		}
 
-		if(!loadingUserPart && !errorUserPart && dataUserPart && dataUserPart.FindPartByUser.length > 1) {
-			let dateInit = new Date(dataUserPart.FindPartByUser[0].date)
-			let uidInit:string = dataUserPart.FindPartByUser[0].uid
+		if(!loadingUserPart && !errorUserPart && dataUserPart) {
+			let dateInit = new Date()
 			dataUserPart.FindPartByUser.forEach(function(el:any,index:number) {
 				let dateNext
-				if(index > 0) {
-					if(dateInit > new Date(el.date)) {
-						dateNext = dateInit.getTime() - new Date(el.date).getTime()
-					} else {
-						dateNext =  new Date(el.date).getTime() - dateInit.getTime()
-					}
-
-					const diffDate = new Date(dateNext)
-					if(diffDate.getUTCDate() - 1 > 0 && el.uid === uidInit) setIsAuthorize(false)
-					if(diffDate.getHours() < 3 && el.uid === uidInit) setIsAuthorize(false)
-					dateInit = new Date(el.date)
-					uidInit = el.uid
+				dateNext = new Date(el.date).getTime() - dateInit.getTime()
+				const diffDate = new Date(dateNext)
+				if((diffDate.getUTCDate() - 1 > 0) || (diffDate.getHours() < 3)) {
+					setIsAuthorize(false)
 				}
 			})
 		}
@@ -122,11 +113,15 @@ const RegisterTournament: React.FC<RegisterType> = function({tournament,uid,isUs
 			const saved = await savedPartTournament({ variables: { uidUser: userConnectedRedux.user.uid,date:(new Date().toLocaleString()),tournamentUid:uid,teamsUid:{uid:[]} } })
 
 			if(saved.data.createPartMatch) {
+				let sumPart = 0
+				userSingupTournament.tournament.forEach(function(e:Input){
+					sumPart = sumPart + e.numberPart
+				})
 				const param:Input = {
 					uidTournament:uid,
 					userUid:userConnectedRedux.user.uid,
 					part:true,
-					numberPart:saved.data.createPartMatch,
+					numberPart:sumPart+parseInt(saved.data.createPartMatch),
 					confirmed:0
 				}
 				dispatch(RegisterTournamentAction(param))
@@ -149,9 +144,10 @@ const RegisterTournament: React.FC<RegisterType> = function({tournament,uid,isUs
 					}
 				</button>
 			}
-			{!isAuthorize ? <div>{Translation(userConnectedRedux.user.language).tournament.notAUthorizePart}</div> : <></>}
+			{!isAuthorize ? <div style={{"color":"#dd0000","fontWeight":"bold"}}>{Translation(userConnectedRedux.user.language).tournament.notAUthorizePart}</div> : <></>}
 		</>
 	)
 }
 
 export default RegisterTournament
+
