@@ -1,10 +1,12 @@
 import React from "react"
 import { Link } from "react-router-dom"
-import Header from "../header/header"
-import Footer from "../footer/footer"
-import { faXbox, faPlaystation } from "@fortawesome/free-brands-svg-icons"
+import {useHistory } from "react-router-dom"
+import { faXbox } from "@fortawesome/free-brands-svg-icons"
 import { faGamepad, faTrophy } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+
+import Header from "../header/header"
+import Footer from "../footer/footer"
 //import {Translation} from "../../lang/translation"
 //import {RootState} from "../../reducer"
 import "../../assets/css/style.css"
@@ -22,11 +24,11 @@ import fifa from "../../assets/image/fifa21.png"
 import {APEX_LEGENDE,FORTNITE,RNB,RL,COD_MODERN,COD_WAR_ZONE,COD_COLD_WAR,FIFA} from "../game/constante"
 
 const Waggers: React.FC = function() {
-
+	const history = useHistory()
   return(
   	<div className="container">
   		<Header />
-  		<div className="participate league waggers">
+  		<div className="participate league waggers" onClick={()=>{history.push(`/joingame?uid=${11111}`)}} style={{"cursor":"pointer"}}>
 			<div className="marg">
 				<div className="part">
 					<div className="upcomming side">
@@ -95,51 +97,11 @@ const Waggers: React.FC = function() {
 								</div>
 							</Link>
 							<Link to ="/joingame/2">
-							<div className="apex block dark-red">
-								<div><p className="legend">Fortnite Weekly Cup</p><i className="iconGame"><FontAwesomeIcon icon={faGamepad}/></i></div>
-								<div className="info">
-									<p className="price inblock"><i className="sprite cup"></i><span>50€ Cash Prize</span></p>
-									<p className="date inblock"><i className="sprite calendar"></i><span>03/04/2021 - 5:00 PM</span></p>
-								</div>
-							</div>
-							</Link>
-							<Link to ="#">
-								<div className="apex block light-green">
-									<div><p className="legend">Rocket League Champions</p><i className="iconGame"><FontAwesomeIcon icon={faPlaystation}/></i></div>
-									<div className="info">
-										<p className="price inblock"><i className="sprite ticket"></i><span>5€ Cash Prize</span></p>
-										<p className="price inblock"><i className="sprite cup"></i><span>500€ Cash Prize</span></p>
-										<p className="date inblock"><i className="sprite calendar"></i><span>04/04/2021 - 7:30 PM</span></p>
-									</div>
-								</div>
-							</Link>
-							<Link to ="#">
 								<div className="apex block dark-red">
-									<div>
-										<p className="legend">Warzone Xbox Daily</p><i className="iconGame"><FontAwesomeIcon icon={faXbox}/></i>
-									</div>
+									<div><p className="legend">Fortnite Weekly Cup</p><i className="iconGame"><FontAwesomeIcon icon={faGamepad}/></i></div>
 									<div className="info">
-										<p className="price inblock"><i className="sprite cup"></i><span>100€ Cash Prize</span></p>
-										<p className="date inblock"><i className="sprite calendar"></i><span>02/04/2021 - 5:00 PM</span></p>
-									</div>
-								</div>
-							</Link>
-							<Link to ="#">
-								<div className="apex block dark-red">
-								<div><p className="legend">R6 Squad Tournament</p><i className="iconGame"><FontAwesomeIcon icon={faGamepad}/></i></div>
-								<div className="info">
-									<p className="price inblock"><i className="sprite cup"></i><span>100€ Cash Prize</span></p>
-									<p className="date inblock"><i className="sprite calendar"></i><span>02/04/2021 - 5:00 PM</span></p>
-								</div>
-								</div>
-							</Link>
-							<Link to ="#">
-								<div className="apex block last light-green">
-									<p className="legend">Fifa 21 fut cup</p>
-									<div className="info">
-										<p className="inblock"><i className="sprite ticket"></i><span>10€</span></p>
-										<p className="inblock"><i className="sprite cup"></i><span>750€ Cash Prize</span></p>
-										<p className="inblock"><i className="sprite calendar"></i><span>04/04/2021 - 7:30 PM</span></p>
+										<p className="price inblock"><i className="sprite cup"></i><span>50€ Cash Prize</span></p>
+										<p className="date inblock"><i className="sprite calendar"></i><span>03/04/2021 - 5:00 PM</span></p>
 									</div>
 								</div>
 							</Link>
