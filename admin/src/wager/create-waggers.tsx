@@ -1,13 +1,70 @@
-import React from "react"
+import React,{useState,useMemo} from "react"
 import { Link } from "react-router-dom"
-
+import {useHistory } from "react-router-dom"
+import {useMutation} from "@apollo/client"
 import { faPlus, faChevronRight} from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { useForm } from "react-hook-form"
+import "react-datetime/css/react-datetime.css"
+import Datetime from "react-datetime"
+import moment from 'moment'
+import 'moment/locale/fr'
+
 import SideBar from "../header/sidebar"
+import {CREATED_WAGGER} from "../gql/wagger/mutation"
 import Nav from "../header/nav"
+
+type Inputs = {
+	title:string,
+	price:number,
+	format:string,
+	priceParticipate:number,
+	description:string,
+	isPublic:boolean
+}
 
 
 const CreateWaggers: React.FC = function() {
+	const history = useHistory()
+	const [startDate, setStartDate] 	= useState<String>("")
+	const [lastDate, setLastDate] 		= useState<String>("")
+	const [gameWay,setGameWay] 			= useState<String>("")
+	const [entry,setEntry] 				= useState<String>("")
+	const { register, handleSubmit } 	= useForm<Inputs>()
+	const [createWagger]  			= useMutation(CREATED_WAGGER)
+
+	const onSubmit = async function(data:Inputs){
+		const result = await createWagger({ variables: {
+			date:startDate,
+			title:data.title,
+			description:data.description,
+			price:data.price,
+			format:data.format ? data.format : "",
+			type:entry,
+			gameWay:gameWay, 
+			deadlineDate:lastDate,
+			priceParticipate:data.priceParticipate,
+			isPublic:data.isPublic
+		} })
+		if (result.data.saveWagger) history.push("/admin/wagger")
+	}
+
+	const handleDate = function(date:any) {
+		setStartDate(moment(date._d).toString())
+	}
+
+	const handleDateDeadline = function(date:any) {
+		setLastDate(moment(date._d).toString())
+	}
+
+	const handleGameWay = function(event:any){
+		setGameWay(event.target.value)
+	}
+
+	const handleEntry = function(event:any){
+		setEntry(event.target.value)
+	}
+
 	return(
 	    <div className="admin create-tournament">
 			<div className="layout-container">
@@ -23,47 +80,44 @@ const CreateWaggers: React.FC = function() {
 	        					<div className="title">
 	                                <h1>Crée wagger</h1>
 	                            </div>
-	        					<div className="create-tournament-game">
-	        						<Link to="/admin"><button className="btn bg-white"> Annuler</button></Link>
-	                                <button className="btn bg-red"><FontAwesomeIcon icon={faPlus} /> Enregistrer</button>
-	        					</div>
+	        					
 	                            <div className="setting-tournament">
 	                                <div className="field">
 	                                    <div className="group-input">
-	                                        <form>	                                      		                                        	
-	                                        	<select id="select-mode">
+	                                        <form onSubmit={handleSubmit(onSubmit)}>
+	                                        	<div className="premium">
+		                                        	<label className="switch">		                                        		
+		                                        		<input type="checkbox" {...register("isPublic")} name="isPublic" value="false" />
+		                                        		<span className="slider">Public</span>		                                        		
+		                                        	</label>
+	                                        	</div>
+	                                        	<input type="text" placeholder="Titre wagger" {...register("title")} name="title" />	                                      		                                        	
+	                                        	<select id="select-mode" onChange={handleGameWay}>
 	                                                <option value="">Selectionnez le mode de jeux...</option>
-	                                                <option value="0">1v1</option>
-	                                                <option value="1">3v3</option>	                                                
-	                                            </select>
-	                                            <select id="rank">
-	                                                <option value="">Rank...</option>
-	                                                <option value="0">Platine</option>
-	                                                <option value="1">Diamond</option>	                                                
-	                                            </select>                                          
-	                                            <select id="format">
-	                                                <option value="">Format...</option>
-	                                                <option value="0">B03</option>
-	                                                <option value="1">B01</option>	                                                
-	                                            </select>
-	                                            <select id="entry">
-	                                                <option value="">Entrée...</option>
-	                                                <option value="0">Public</option>
-	                                                <option value="1">Privée</option>	                                                
-	                                            </select>	                                           
-	                                            <input type="text" placeholder="Heure"/>
-	                                            <input type ="text" placeholder="Date" />	                                            
-	                                            <textarea placeholder="Description..."></textarea>
+	                                                <option value="1v1">1v1</option>
+	                                                <option value="2v2">2v2</option>
+	                                                <option value="4v4">4v4</option>	                                                
+	                                            </select>                                         
+	                                            <input type="text" placeholder="Format game" {...register("format")} name="format" />	                                           
+	                                            <Datetime
+												 	locale="fr"
+													onChange={handleDate}
+													inputProps={{placeholder:"Date"}}
+												/>
+												<Datetime
+												 	locale="fr"
+													onChange={handleDateDeadline}
+													inputProps={{placeholder:"Deadline"}}
+												/>
+	                                            <textarea placeholder="Description..." {...register("description")}></textarea>
 	                                            <div className="input-group">
-	                                                <input type="number" placeholder="Nombre de participant"/>
-	                                                <input type="number" placeholder="Nombre d'equipes" className="no-margin"/>
+	                                                <input type="number" placeholder="Prix à gagner" {...register("price")} name="price" />
+	                                                <input type="number" placeholder="Frais d'inscription" {...register("priceParticipate")} name="priceParticipate" className="no-margin"/>
 	                                            </div>
-	                                            <div className="input-group">
-	                                                <input type="number" placeholder="Prix"/>
-	                                                <input type="number" placeholder="Frais d'inscription" className="no-margin"/>
-	                                            </div>
-	                                            <input type="text" placeholder="Deadline"/>
-	                                            <Link to="/set-rules"><button className="btn bg-red">Modifier les règles <FontAwesomeIcon icon={faChevronRight} /> </button></Link>
+	                                            <div className="create-tournament-game">
+						    						<Link to="/admin"><button className="btn bg-white"> Annuler</button></Link>
+						                            <button className="btn bg-red"><FontAwesomeIcon icon={faPlus} /> Enregistrer</button>
+						    					</div>
 	                                        </form>
 	                                    </div>
 	                                </div>
