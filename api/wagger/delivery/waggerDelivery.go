@@ -34,7 +34,6 @@ type updatedWagger struct {
 	Price 					string `json:"price"`
 	DeadlineDate 			string `json:"deadlineDate"`
 	GameWay 				string `json:"gameWay"`
-	Entry 					string `json:"entry"`
 	PriceParticipate 		string  `json:"priceParticipate"`
 	Format 					string `json:"format"`
 	IsPublic 				string `json:"IsPublic"`
@@ -56,7 +55,6 @@ func (w *wagger) SavedWaggerResolver(params graphql.ResolveParams) (interface{},
 	deadlineDate, _ := params.Args["deadlineDate"].(string)
 	priceParticipate, _ := params.Args["priceParticipate"].(float64)
 	gameWay,_ := params.Args["gameWay"].(string)
-	entry,_ := params.Args["entry"].(string)
 	format,_ := params.Args["format"].(string)
 	isPublic,_ := params.Args["isPublic"].(bool)
 	wagger := &entity.Wagger{
@@ -69,7 +67,6 @@ func (w *wagger) SavedWaggerResolver(params graphql.ResolveParams) (interface{},
 		Statut:true,
 		Description:description,
 		GameWay:gameWay,
-		Entry:entry,
 		Format:format,
 		IsPublic:isPublic,
 	}
@@ -131,7 +128,6 @@ func (w *wagger) UpdatedWaggerResolver(params graphql.ResolveParams) (interface{
 	format := wagger.Format
 	isPublic := wagger.IsPublic
 	statut := wagger.Statut
-	entry := wagger.Entry
 	
 	if input.WaggerUpated.Date != "" {
 		date = input.WaggerUpated.Date
@@ -155,10 +151,6 @@ func (w *wagger) UpdatedWaggerResolver(params graphql.ResolveParams) (interface{
 
 	if input.WaggerUpated.GameWay != "" {
 		gameWay = input.WaggerUpated.GameWay
-	}
-
-	if input.WaggerUpated.Entry != "" {
-		entry = input.WaggerUpated.Entry
 	}
 
 	if input.WaggerUpated.PriceParticipate != "" {
@@ -185,7 +177,6 @@ func (w *wagger) UpdatedWaggerResolver(params graphql.ResolveParams) (interface{
 		Price:price, 				
 		DeadlineDate:deadlineDate, 			
 		GameWay:gameWay,			
-		Entry:entry,			
 		PriceParticipate:priceParticipate,	
 		Format:format,			
 		IsPublic:isPublic,		

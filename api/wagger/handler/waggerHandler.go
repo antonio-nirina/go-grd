@@ -22,7 +22,6 @@ type WaggerViewModel struct {
 	Price 					float64 `json:"price"`
 	DeadlineDate 			string `json:"deadlineDate"`
 	GameWay 				string `json:"gameWay"`
-	Entry 					string `json:"entry"`
 	PriceParticipate 		float64  `json:"priceParticipate"`
 	Format 					string `json:"format"`
 	IsPublic 				bool `json:"IsPublic"`
@@ -71,7 +70,6 @@ func (w *waggerUsecase) FindWaggerHandler(idQuery string) (WaggerViewModel, erro
 		Price:result.Price,	
 		DeadlineDate:result.DeadlineDate,	
 		GameWay:result.GameWay,		
-		Entry:result.Entry,			
 		PriceParticipate:result.PriceParticipate,
 		Format:result.Format,
 		IsPublic:result.IsPublic,		
@@ -105,7 +103,6 @@ func (w *waggerUsecase) FindAllWaggerHandler(pageNumber int64,limit int64) ([]Wa
 			Price:result.Price,	
 			DeadlineDate:result.DeadlineDate,	
 			GameWay:result.GameWay,		
-			Entry:result.Entry,			
 			PriceParticipate:result.PriceParticipate,
 			Format:result.Format,
 			IsPublic:result.IsPublic,		

@@ -118,9 +118,6 @@ func (c *DriverRepository) UpdatedWagger(wagger *entity.Wagger) (interface{}, er
 				"gameWay",wagger.GameWay,
 			},
 			{
-				"entry",wagger.Entry,
-			},
-			{
 				"priceParticipate",wagger.PriceParticipate,
 			},
 			{

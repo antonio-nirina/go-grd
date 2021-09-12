@@ -8,7 +8,6 @@ export const CREATED_WAGGER = gql`
 		$price:Float,
 		$deadlineDate:String,
 		$gameWay:String,
-		$entry:String,
 		$priceParticipate:Float,
 		$format:String,
 		$isPublic:Boolean
@@ -20,7 +19,7 @@ export const CREATED_WAGGER = gql`
 			price:$price,
 			deadlineDate:$deadlineDate,
 			gameWay:$gameWay,
-			entry:$entry,
+			type:$entry,
 			priceParticipate:$priceParticipate,
 			isPublic:$isPublic,
 			format:$format)

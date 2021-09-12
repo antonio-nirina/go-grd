@@ -11,7 +11,6 @@ export const GET_ALL_WAGER = gql`
 			price,
 			deadlineDate,
 			gameWay,
-			entry,
 			priceParticipate,
 			format
 			statut

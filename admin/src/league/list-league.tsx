@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 import Loader from "react-loader-spinner"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {useQuery} from "@apollo/client"
-import { faPlus, faSort, faChevronUp, faChevronDown, faSearch,faChevronLeft,faChevronRight} from "@fortawesome/free-solid-svg-icons"
+import { faPlus, faSort, faChevronUp, faChevronDown, faSearch} from "@fortawesome/free-solid-svg-icons"
 
 import {GET_ALL_LEAGUE} from "../gql/league/query"
 import Pagination from "../common/pagination"

@@ -12,7 +12,6 @@ type Wagger struct {
 	Price 					float64 `json:"price"`
 	DeadlineDate 			string `json:"deadlineDate"`
 	GameWay 				string `json:"gameWay"`
-	Entry 					string `json:"entry"`
 	PriceParticipate 		float64  `json:"priceParticipate"`
 	Format 					string `json:"format"`
 	IsPublic 				bool `json:"isPublic"`

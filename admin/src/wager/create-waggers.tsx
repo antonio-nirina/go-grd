@@ -1,8 +1,8 @@
-import React,{useState,useMemo} from "react"
+import React,{useState} from "react"
 import { Link } from "react-router-dom"
 import {useHistory } from "react-router-dom"
 import {useMutation} from "@apollo/client"
-import { faPlus, faChevronRight} from "@fortawesome/free-solid-svg-icons"
+import { faPlus} from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useForm } from "react-hook-form"
 import "react-datetime/css/react-datetime.css"
@@ -29,7 +29,6 @@ const CreateWaggers: React.FC = function() {
 	const [startDate, setStartDate] 	= useState<String>("")
 	const [lastDate, setLastDate] 		= useState<String>("")
 	const [gameWay,setGameWay] 			= useState<String>("")
-	const [entry,setEntry] 				= useState<String>("")
 	const { register, handleSubmit } 	= useForm<Inputs>()
 	const [createWagger]  			= useMutation(CREATED_WAGGER)
 
@@ -40,7 +39,6 @@ const CreateWaggers: React.FC = function() {
 			description:data.description,
 			price:data.price,
 			format:data.format ? data.format : "",
-			type:entry,
 			gameWay:gameWay, 
 			deadlineDate:lastDate,
 			priceParticipate:data.priceParticipate,
@@ -61,9 +59,6 @@ const CreateWaggers: React.FC = function() {
 		setGameWay(event.target.value)
 	}
 
-	const handleEntry = function(event:any){
-		setEntry(event.target.value)
-	}
 
 	return(
 	    <div className="admin create-tournament">
