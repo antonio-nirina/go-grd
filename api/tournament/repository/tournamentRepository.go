@@ -30,6 +30,7 @@ type RepositoryTournament interface {
 	FindAllTournamentRepo(pageNumber int64,limit int64) ([]entity.Tournament, error)
 	FindTournamentGameRepo(pageNumber int64,limit int64,game primitive.ObjectID) ([]entity.Tournament, error)
 	CountTournamentRepository()(int,error)
+	UpdatedTournament(tournament *entity.Tournament) (interface{}, error)
 }
 
 func (c *DriverRepository) SavedTournamentRepo(tournament *entity.Tournament) (interface{}, error){
@@ -118,4 +119,62 @@ func (c *DriverRepository) CountTournamentRepository()(int,error) {
 	}
 
 	return int(records),nil
+}
+
+
+func (c *DriverRepository) UpdatedTournament(tournament *entity.Tournament) (interface{}, error) {
+	var collection = c.client.Database("grd_database").Collection("tournament")
+	filter := bson.D{{"uid", tournament.Uid}}
+	update := bson.D{
+		{"$set", bson.D{
+			{
+				"title", tournament.Title,
+			},
+			{
+				"date", tournament.Date,
+			},
+			{
+				"game", tournament.Game,
+			},
+			{
+				"plateform",tournament.Plateform,
+			},
+			{
+				"numberParticipate",tournament.NumberParticipate,
+			},
+			{
+				"numberTeam",tournament.NumberTeam,
+			},
+			{
+				"price",tournament.Price,
+			},
+			{
+				"deadlineDate",tournament.DeadlineDate,
+			},
+			{
+				"priceParticipate",tournament.PriceParticipate,
+			},
+			{
+				"statut",tournament.Statut,
+			},
+			{
+				"info",tournament.Info,
+			},
+			{
+				"rules",tournament.Rules,
+			},
+			{
+				"isTeam",tournament.IsTeam,
+			},
+			{
+				"isPublic",tournament.IsPublic,
+			},
+	}}}
+	updateResult, err := collection.UpdateOne(context.TODO(), filter, update)
+
+	if err != nil {
+		return nil,err
+	}
+
+	return updateResult.ModifiedCount,nil
 }

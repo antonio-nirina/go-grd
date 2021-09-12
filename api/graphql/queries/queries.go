@@ -42,6 +42,10 @@ import (
 	leagueHandler "github.com/thoussei/antonio/api/league/handler"
 	leagueRepo "github.com/thoussei/antonio/api/league/repository"
 
+	waggerDelivery "github.com/thoussei/antonio/api/wagger/delivery"
+	waggerHandler "github.com/thoussei/antonio/api/wagger/handler"
+	waggerRepo "github.com/thoussei/antonio/api/wagger/repository"
+
 	"github.com/graphql-go/graphql"
 )
 
@@ -92,6 +96,11 @@ var partRepository = partRepo.NewPartRepository(database)
 var partUsecase = partHandler.NewUsecasePart(partRepository)
 var partResolver = partDelivery.NewResolverPart(partUsecase, usecase, tournamentUsecase, teamUsecase)
 
+var waggerRepository = waggerRepo.NewWaggerRepository(database)
+var waggerUsecase = waggerHandler.NewUsecaseWagger(waggerRepository)
+var waggerResolver = waggerDelivery.NewResolverWagger(waggerUsecase)
+
+
 // GetRootFields returns all the available queries.
 func GetRootFields() graphql.Fields {
 	return graphql.Fields{
@@ -129,5 +138,8 @@ func GetRootFields() graphql.Fields {
 		"FindLeagueByGame":     FindLeagueByGame(),
 		"FindPartByUserTournament": FindPartByUserTournament(),
 		"FindPartCount": 		FindPartCount(),
+
+		"FindOneWagger":        FindOneWagger(),
+		"FindAllWagger":        FindAllWagger(),
 	}
 }
