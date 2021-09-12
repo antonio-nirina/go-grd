@@ -15,7 +15,7 @@ type Wagger struct {
 	Entry 					string `json:"entry"`
 	PriceParticipate 		float64  `json:"priceParticipate"`
 	Format 					string `json:"format"`
-	IsPublic 				bool `json:"IsPublic"`
+	IsPublic 				bool `json:"isPublic"`
 	Statut 		  			bool `json:"statut"`
 }
 

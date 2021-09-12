@@ -35,10 +35,13 @@ func (r *resolver) UpdatedUserResolver(params graphql.ResolveParams) (interface{
 	json.Unmarshal([]byte(jsonString), &input)
 	res, _ := r.userHandler.FindUserByEmail(input.UserUpated.Email)
 	usernameUp := res.Username
+
 	if input.UserUpated.Username != "" {
 		usernameUp = input.UserUpated.Username
 	}
+
 	langUp := res.Language
+	
 	if input.UserUpated.Language != "" {
 		langUp = input.UserUpated.Language
 	}

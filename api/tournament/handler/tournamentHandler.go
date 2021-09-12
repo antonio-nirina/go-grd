@@ -9,8 +9,10 @@ import (
 type UsecaseTournament interface {
 	SavedTournamentHandler(*entity.Tournament) (interface{}, error)
 	FindTournamentHandler(idQuery string) (tournamentViewModel, error)
+	FindOneTournamentHandler(idQuery string) (entity.Tournament, error)
 	FindAllTournamentHandler(pageNumber int64,limit int64) ([]tournamentViewModel, error)
 	FindTournamentGameHandler(pageNumber int64,limit int64,gameUid primitive.ObjectID) ([]tournamentViewModel, error)
+	UpdatedTournamentHandler(tournament *entity.Tournament) (interface{}, error)
 }
 
 type tournamentUsecase struct {
@@ -150,4 +152,30 @@ func (t *tournamentUsecase) CountTournamentHandler()(int) {
 	}
 	
 	return records
+}
+
+func (t *tournamentUsecase) FindOneTournamentHandler(idQuery string) (entity.Tournament, error) {
+	objectId, err := primitive.ObjectIDFromHex(idQuery)
+	
+	if err != nil {
+		return entity.Tournament{}, err
+	}
+
+	result, err := t.tournamentRepository.FindTournamentRepo(objectId)
+
+	if err != nil {
+		return entity.Tournament{}, err
+	}
+
+	return result,nil
+}
+
+func (t *tournamentUsecase) UpdatedTournamentHandler(tournament *entity.Tournament) (interface{}, error) {
+	result, err := t.tournamentRepository.UpdatedTournament(tournament)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return result, nil
 }
