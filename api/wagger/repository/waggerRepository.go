@@ -12,7 +12,6 @@ import (
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
-
 type DriverRepository struct {
 	client *mongo.Client
 }
@@ -22,16 +21,15 @@ func NewWaggerRepository(client *mongo.Client) *DriverRepository {
 	return &DriverRepository{client}
 }
 
-
 type RepositoryWagger interface {
 	SavedWaggerRepo(wagger *entity.Wagger) (interface{}, error)
 	FindWaggerRepo(idQuery primitive.ObjectID) (entity.Wagger, error)
-	FindAllWaggerRepo(pageNumber int64,limit int64) ([]entity.Wagger, error)
-	CountWaggerRepository()(int,error)
+	FindAllWaggerRepo(pageNumber int64, limit int64) ([]entity.Wagger, error)
+	CountWaggerRepository() (int, error)
 	UpdatedWagger(wagger *entity.Wagger) (interface{}, error)
 }
 
-func (c *DriverRepository) SavedWaggerRepo(wagger *entity.Wagger) (interface{}, error){
+func (c *DriverRepository) SavedWaggerRepo(wagger *entity.Wagger) (interface{}, error) {
 	var collection = c.client.Database("grd_database").Collection("wagger")
 	insertResult, err := collection.InsertOne(context.TODO(), wagger)
 
@@ -44,7 +42,7 @@ func (c *DriverRepository) SavedWaggerRepo(wagger *entity.Wagger) (interface{}, 
 	return wagger, nil
 }
 
-func (c *DriverRepository) FindWaggerRepo(idQuery primitive.ObjectID) (entity.Wagger, error){
+func (c *DriverRepository) FindWaggerRepo(idQuery primitive.ObjectID) (entity.Wagger, error) {
 	var collection = c.client.Database("grd_database").Collection("wagger")
 	var result entity.Wagger
 
@@ -57,10 +55,10 @@ func (c *DriverRepository) FindWaggerRepo(idQuery primitive.ObjectID) (entity.Wa
 	return result, nil
 }
 
-func (c *DriverRepository) FindAllWaggerRepo(pageNumber int64,limit int64) ([]entity.Wagger, error){
+func (c *DriverRepository) FindAllWaggerRepo(pageNumber int64, limit int64) ([]entity.Wagger, error) {
 	var collection = c.client.Database("grd_database").Collection("wagger")
 	var results []entity.Wagger
-	cur, err := collection.Find(context.TODO(), bson.D{{}},options.Find().SetLimit(limit).SetSkip(pageNumber).SetSort(bson.M{"_id": -1}))
+	cur, err := collection.Find(context.TODO(), bson.D{{}}, options.Find().SetLimit(limit).SetSkip(pageNumber).SetSort(bson.M{"_id": -1}))
 
 	if err != nil {
 		return nil, err
@@ -75,24 +73,23 @@ func (c *DriverRepository) FindAllWaggerRepo(pageNumber int64,limit int64) ([]en
 
 		results = append(results, elem)
 	}
-	
+
 	cur.Close(context.TODO())
 
 	return results, nil
 }
 
-func (c *DriverRepository) CountWaggerRepository()(int,error) {
+func (c *DriverRepository) CountWaggerRepository() (int, error) {
 	var collection = c.client.Database("grd_database").Collection("wagger")
 
-	records,err := collection.CountDocuments(context.TODO(), bson.D{{}})
-	
+	records, err := collection.CountDocuments(context.TODO(), bson.D{{}})
+
 	if err != nil {
 		return 0, err
 	}
 
-	return int(records),nil
+	return int(records), nil
 }
-
 
 func (c *DriverRepository) UpdatedWagger(wagger *entity.Wagger) (interface{}, error) {
 	var collection = c.client.Database("grd_database").Collection("wagger")
@@ -109,32 +106,35 @@ func (c *DriverRepository) UpdatedWagger(wagger *entity.Wagger) (interface{}, er
 				"description", wagger.Description,
 			},
 			{
-				"price",wagger.Price,
+				"price", wagger.Price,
 			},
 			{
-				"deadlineDate",wagger.DeadlineDate,
+				"deadlineDate", wagger.DeadlineDate,
 			},
 			{
-				"gameWay",wagger.GameWay,
+				"gameWay", wagger.GameWay,
 			},
 			{
-				"priceParticipate",wagger.PriceParticipate,
+				"priceParticipate", wagger.PriceParticipate,
 			},
 			{
-				"format",wagger.Format,
+				"format", wagger.Format,
 			},
 			{
-				"isPublic",wagger.IsPublic,
+				"isPublic", wagger.IsPublic,
 			},
 			{
-				"statut",wagger.Statut,
+				"statut", wagger.Statut,
 			},
-	}}}
+			{
+				"participant", wagger.Participant,
+			},
+		}}}
 	updateResult, err := collection.UpdateOne(context.TODO(), filter, update)
 
 	if err != nil {
-		return nil,err
+		return nil, err
 	}
 
-	return updateResult.ModifiedCount,nil
+	return updateResult.ModifiedCount, nil
 }

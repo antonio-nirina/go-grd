@@ -3,8 +3,8 @@ import gql from "graphql-tag"
 // GetAllNotification
 
 export const GET_ALL_WAGER = gql`
-	query FindAllWager($limit: Int!,$pageNumber:Int!) {
-		FindAllWager(limit: $limit,pageNumber:$pageNumber){
+	query FindAllWagger($limit: Int!,$pageNumber:Int!) {
+		FindAllWagger(limit: $limit,pageNumber:$pageNumber){
 			date,
 			title,
 			description,
@@ -14,5 +14,6 @@ export const GET_ALL_WAGER = gql`
 			priceParticipate,
 			format
 			statut
+			participant
 	}
 }`

@@ -1,18 +1,50 @@
-import React,{useState} from 'react'
+import React,{useState,useEffect} from 'react'
 import { Link } from "react-router-dom"
+import {useQuery} from "@apollo/client"
+import Loader from "react-loader-spinner"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus, faSort, faChevronUp, faChevronDown, faChevronRight, faChevronLeft, faSearch} from "@fortawesome/free-solid-svg-icons"
 
 import SideBar from "../header/sidebar"
 import Nav from "../header/nav"
+import Pagination from "../common/pagination"
+import {NUMBER_PER_PAGE} from "../common/constante"
+import {GET_ALL_WAGER} from "../gql/wagger/query"
 
+interface Item {
+	item:number
+}
 
 const ListWagger : React.FC = function() {
 	const [showList, setShowList] = useState<Boolean>(false)
+	const [waggers, setWaggers] = useState<any>([])
+	const [item, setItem] = useState<Item>({item:1})
+	const [isLoader, setIsLoader] = useState<Boolean>(true)
+
+	const {loading,error,data} 	= useQuery(GET_ALL_WAGER, {
+		variables: {
+			limit:NUMBER_PER_PAGE,
+			pageNumber:(item.item)*NUMBER_PER_PAGE - NUMBER_PER_PAGE
+		},
+	})
+
+	useEffect(() => {
+		console.log(data)
+		if(!loading && !error && data) {
+			setIsLoader(false)
+			setWaggers(data.FindAllWagger)
+		}
+
+	},[loading,error,data,isLoader])
 
     const onShow = function(){
 		setShowList(!showList)
 	}
+
+	const handleItemsPage = function(item:number) {
+		setIsLoader(true)
+    	setItem({item:item})
+    }
 
 	return (
 	<div className="layout-container">
@@ -56,6 +88,12 @@ const ListWagger : React.FC = function() {
 						<div className="create-game">
 							<Link to="/admin/create-wagger"><button className="btn bg-red"><FontAwesomeIcon icon={faPlus} /> Créer Wagger</button></Link>
 						</div>
+					</div>
+					<div className={isLoader ? "loader-spinner":"d-none"}>
+						<Loader
+							type="Oval"
+							color="#dd0000"
+						/>
 					</div>
 					<div className="body-card">
 						<div className="card-title">
@@ -114,11 +152,10 @@ const ListWagger : React.FC = function() {
 						</div>
 					</div>
 					<div className="filter-game-result">
-						<div className="result-game-page">
-							<i><FontAwesomeIcon icon={faChevronLeft} size="lg"/></i>
-							<span>1</span>
-							<i><FontAwesomeIcon icon={faChevronRight} size="lg"/></i>
-						</div>
+					<Pagination
+							handlePage={handleItemsPage}
+							records={waggers.length > 0 ? waggers[0].records : 0}
+						/>
 					</div>
 				</div>
 			</div>

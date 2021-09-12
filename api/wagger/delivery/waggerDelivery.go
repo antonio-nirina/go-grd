@@ -10,7 +10,6 @@ import (
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
-
 type WaggerResolver interface {
 	SavedWaggerResolver(params graphql.ResolveParams) (interface{}, error)
 	FindWaggerResolver(params graphql.ResolveParams) (interface{}, error)
@@ -27,19 +26,19 @@ type inputUpdatedWagger struct {
 }
 
 type updatedWagger struct {
-	Uid           			string 	`json:"uid"`
-	Date 					string `json:"date"`
-	Title 					string `json:"title"`
-	Description 			string `json:"description"`
-	Price 					string `json:"price"`
-	DeadlineDate 			string `json:"deadlineDate"`
-	GameWay 				string `json:"gameWay"`
-	PriceParticipate 		string  `json:"priceParticipate"`
-	Format 					string `json:"format"`
-	IsPublic 				string `json:"IsPublic"`
-	Statut 		  			string `json:"statut"`
+	Uid              string `json:"uid"`
+	Date             string `json:"date"`
+	Title            string `json:"title"`
+	Description      string `json:"description"`
+	Price            string `json:"price"`
+	DeadlineDate     string `json:"deadlineDate"`
+	GameWay          string `json:"gameWay"`
+	PriceParticipate string `json:"priceParticipate"`
+	Format           string `json:"format"`
+	Participant      string `json:"participant"`
+	IsPublic         string `json:"IsPublic"`
+	Statut           string `json:"statut"`
 }
-
 
 func NewResolverWagger(waggerUseCase handler.UsecaseWagger) WaggerResolver {
 	return &wagger{
@@ -54,25 +53,27 @@ func (w *wagger) SavedWaggerResolver(params graphql.ResolveParams) (interface{},
 	price, _ := params.Args["price"].(float64)
 	deadlineDate, _ := params.Args["deadlineDate"].(string)
 	priceParticipate, _ := params.Args["priceParticipate"].(float64)
-	gameWay,_ := params.Args["gameWay"].(string)
-	format,_ := params.Args["format"].(string)
-	isPublic,_ := params.Args["isPublic"].(bool)
+	gameWay, _ := params.Args["gameWay"].(string)
+	format, _ := params.Args["format"].(string)
+	isPublic, _ := params.Args["isPublic"].(bool)
+	participant, _ := params.Args["participant"].(int)
 	wagger := &entity.Wagger{
-		Uid: primitive.NewObjectID(),
-		Title:title,
-		Date:date,
-		Price:price,
-		DeadlineDate:deadlineDate,
-		PriceParticipate:priceParticipate,
-		Statut:true,
-		Description:description,
-		GameWay:gameWay,
-		Format:format,
-		IsPublic:isPublic,
+		Uid:              primitive.NewObjectID(),
+		Title:            title,
+		Date:             date,
+		Participant:      participant,
+		Price:            price,
+		DeadlineDate:     deadlineDate,
+		PriceParticipate: priceParticipate,
+		Statut:           true,
+		Description:      description,
+		GameWay:          gameWay,
+		Format:           format,
+		IsPublic:         isPublic,
 	}
 
 	res, err := w.waggerHandler.SavedWaggerHandle(wagger)
-	
+
 	if err != nil {
 		return nil, err
 	}
@@ -99,7 +100,7 @@ func (w *wagger) FindAllWaggerResolver(params graphql.ResolveParams) (interface{
 		pageNumber = 1
 	}
 
-	res, err := w.waggerHandler.FindAllWaggerHandler(int64(pageNumber),int64(limit))
+	res, err := w.waggerHandler.FindAllWaggerHandler(int64(pageNumber), int64(limit))
 
 	if err != nil {
 		return nil, err
@@ -128,7 +129,8 @@ func (w *wagger) UpdatedWaggerResolver(params graphql.ResolveParams) (interface{
 	format := wagger.Format
 	isPublic := wagger.IsPublic
 	statut := wagger.Statut
-	
+	participant := wagger.Participant
+
 	if input.WaggerUpated.Date != "" {
 		date = input.WaggerUpated.Date
 	}
@@ -142,7 +144,7 @@ func (w *wagger) UpdatedWaggerResolver(params graphql.ResolveParams) (interface{
 	}
 
 	if input.WaggerUpated.Price != "" {
-		price , _ = strconv.ParseFloat(input.WaggerUpated.Price,64)
+		price, _ = strconv.ParseFloat(input.WaggerUpated.Price, 64)
 	}
 
 	if input.WaggerUpated.DeadlineDate != "" {
@@ -154,7 +156,7 @@ func (w *wagger) UpdatedWaggerResolver(params graphql.ResolveParams) (interface{
 	}
 
 	if input.WaggerUpated.PriceParticipate != "" {
-		priceParticipate , _ = strconv.ParseFloat(input.WaggerUpated.PriceParticipate,64)
+		priceParticipate, _ = strconv.ParseFloat(input.WaggerUpated.PriceParticipate, 64)
 	}
 
 	if input.WaggerUpated.Format != "" {
@@ -162,25 +164,30 @@ func (w *wagger) UpdatedWaggerResolver(params graphql.ResolveParams) (interface{
 	}
 
 	if input.WaggerUpated.IsPublic != "" {
-		isPublic , _ = strconv.ParseBool(input.WaggerUpated.IsPublic)
+		isPublic, _ = strconv.ParseBool(input.WaggerUpated.IsPublic)
 	}
 
 	if input.WaggerUpated.Statut != "" {
-		statut  , _ = strconv.ParseBool(input.WaggerUpated.Statut)
+		statut, _ = strconv.ParseBool(input.WaggerUpated.Statut)
 	}
 
-	waggerToupdated := &entity.Wagger {
-		Uid:wagger.Uid,
-		Date:date, 					
-		Title:title, 				
-		Description:description,			
-		Price:price, 				
-		DeadlineDate:deadlineDate, 			
-		GameWay:gameWay,			
-		PriceParticipate:priceParticipate,	
-		Format:format,			
-		IsPublic:isPublic,		
-		Statut:statut,
+	if input.WaggerUpated.Participant != "" {
+		participant, _ = strconv.Atoi(input.WaggerUpated.Participant)
+	}
+
+	waggerToupdated := &entity.Wagger{
+		Uid:              wagger.Uid,
+		Date:             date,
+		Title:            title,
+		Description:      description,
+		Price:            price,
+		DeadlineDate:     deadlineDate,
+		GameWay:          gameWay,
+		PriceParticipate: priceParticipate,
+		Format:           format,
+		IsPublic:         isPublic,
+		Participant:      participant,
+		Statut:           statut,
 	}
 
 	res, err := w.waggerHandler.UpdatedWaggerHandler(waggerToupdated)

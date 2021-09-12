@@ -28,9 +28,6 @@ var WaggerSchemaType = graphql.NewObject(graphql.ObjectConfig{
 		"gameWay": &graphql.Field{
 			Type: graphql.String,
 		},
-		"entry": &graphql.Field{
-			Type: graphql.String,
-		},
 		"priceParticipate": &graphql.Field{
 			Type: graphql.Float,
 		},
@@ -41,6 +38,9 @@ var WaggerSchemaType = graphql.NewObject(graphql.ObjectConfig{
 			Type: graphql.Boolean,
 		},
 		"statut": &graphql.Field{
+			Type: graphql.Boolean,
+		},
+		"participant" :&graphql.Field{
 			Type: graphql.Boolean,
 		},
 		"records": &graphql.Field{

@@ -1,6 +1,7 @@
 package handler
 
 import (
+	"fmt"
 	"github.com/thoussei/antonio/api/wagger/entity"
 	"github.com/thoussei/antonio/api/wagger/repository"
 	"go.mongodb.org/mongo-driver/bson/primitive"
@@ -85,9 +86,9 @@ func (w *waggerUsecase) FindAllWaggerHandler(pageNumber int64,limit int64) ([]Wa
 	if err != nil {
 		return []WaggerViewModel{}, err
 	}
-
+fmt.Println(results)
 	records,err := w.waggerRepository.CountWaggerRepository()
-
+fmt.Println(records)
 	if err != nil {
 		return []WaggerViewModel{}, err
 	}
