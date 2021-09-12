@@ -1,6 +1,7 @@
 package handler
 
 import (
+	"fmt"
 	"github.com/thoussei/antonio/api/wagger/entity"
 	"github.com/thoussei/antonio/api/wagger/repository"
 	"go.mongodb.org/mongo-driver/bson/primitive"
@@ -22,7 +23,6 @@ type WaggerViewModel struct {
 	Price 					float64 `json:"price"`
 	DeadlineDate 			string `json:"deadlineDate"`
 	GameWay 				string `json:"gameWay"`
-	Entry 					string `json:"entry"`
 	PriceParticipate 		float64  `json:"priceParticipate"`
 	Format 					string `json:"format"`
 	IsPublic 				bool `json:"IsPublic"`
@@ -71,7 +71,6 @@ func (w *waggerUsecase) FindWaggerHandler(idQuery string) (WaggerViewModel, erro
 		Price:result.Price,	
 		DeadlineDate:result.DeadlineDate,	
 		GameWay:result.GameWay,		
-		Entry:result.Entry,			
 		PriceParticipate:result.PriceParticipate,
 		Format:result.Format,
 		IsPublic:result.IsPublic,		
@@ -87,9 +86,9 @@ func (w *waggerUsecase) FindAllWaggerHandler(pageNumber int64,limit int64) ([]Wa
 	if err != nil {
 		return []WaggerViewModel{}, err
 	}
-
+fmt.Println(results)
 	records,err := w.waggerRepository.CountWaggerRepository()
-
+fmt.Println(records)
 	if err != nil {
 		return []WaggerViewModel{}, err
 	}
@@ -105,7 +104,6 @@ func (w *waggerUsecase) FindAllWaggerHandler(pageNumber int64,limit int64) ([]Wa
 			Price:result.Price,	
 			DeadlineDate:result.DeadlineDate,	
 			GameWay:result.GameWay,		
-			Entry:result.Entry,			
 			PriceParticipate:result.PriceParticipate,
 			Format:result.Format,
 			IsPublic:result.IsPublic,		

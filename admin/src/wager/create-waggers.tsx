@@ -1,8 +1,8 @@
-import React,{useState,useMemo} from "react"
+import React,{useState} from "react"
 import { Link } from "react-router-dom"
 import {useHistory } from "react-router-dom"
 import {useMutation} from "@apollo/client"
-import { faPlus, faChevronRight} from "@fortawesome/free-solid-svg-icons"
+import { faPlus} from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useForm } from "react-hook-form"
 import "react-datetime/css/react-datetime.css"
@@ -20,16 +20,17 @@ type Inputs = {
 	format:string,
 	priceParticipate:number,
 	description:string,
-	isPublic:boolean
+	isPublic:boolean,
+	participant:number
 }
 
 
 const CreateWaggers: React.FC = function() {
 	const history = useHistory()
-	const [startDate, setStartDate] 	= useState<String>("")
-	const [lastDate, setLastDate] 		= useState<String>("")
-	const [gameWay,setGameWay] 			= useState<String>("")
-	const [entry,setEntry] 				= useState<String>("")
+	const [startDate, setStartDate] 	= useState<string>("")
+	const [lastDate, setLastDate] 		= useState<string>("")
+	const [gameWay,setGameWay] 			= useState<string>("")
+	const [isPub,setIsPub] 				= useState<boolean>(false)
 	const { register, handleSubmit } 	= useForm<Inputs>()
 	const [createWagger]  			= useMutation(CREATED_WAGGER)
 
@@ -40,13 +41,13 @@ const CreateWaggers: React.FC = function() {
 			description:data.description,
 			price:data.price,
 			format:data.format ? data.format : "",
-			type:entry,
 			gameWay:gameWay, 
 			deadlineDate:lastDate,
 			priceParticipate:data.priceParticipate,
-			isPublic:data.isPublic
+			isPublic:data.isPublic,
+			participant:Math.pow(2,(Math.ceil(Math.log2(Number(data.participant))))),
 		} })
-		if (result.data.saveWagger) history.push("/admin/wagger")
+		if (result.data.createWagger) history.push("/admin/wagger")
 	}
 
 	const handleDate = function(date:any) {
@@ -61,8 +62,8 @@ const CreateWaggers: React.FC = function() {
 		setGameWay(event.target.value)
 	}
 
-	const handleEntry = function(event:any){
-		setEntry(event.target.value)
+	const handleTextPub = function(event:any) {
+		setIsPub(event.target.checked)
 	}
 
 	return(
@@ -87,8 +88,8 @@ const CreateWaggers: React.FC = function() {
 	                                        <form onSubmit={handleSubmit(onSubmit)}>
 	                                        	<div className="premium">
 		                                        	<label className="switch">		                                        		
-		                                        		<input type="checkbox" {...register("isPublic")} name="isPublic" value="false" />
-		                                        		<span className="slider">Public</span>		                                        		
+		                                        		<input type="checkbox" {...register("isPublic")} name="isPublic" onChange={handleTextPub} />
+		                                        		<span className="slider">{isPub ? "Public" : "Privé"}</span>		                                        		
 		                                        	</label>
 	                                        	</div>
 	                                        	<input type="text" placeholder="Titre wagger" {...register("title")} name="title" />	                                      		                                        	
@@ -97,7 +98,8 @@ const CreateWaggers: React.FC = function() {
 	                                                <option value="1v1">1v1</option>
 	                                                <option value="2v2">2v2</option>
 	                                                <option value="4v4">4v4</option>	                                                
-	                                            </select>                                         
+	                                            </select>
+												<input type="text" placeholder="Participant" {...register("participant")} name="participant" />                                         
 	                                            <input type="text" placeholder="Format game" {...register("format")} name="format" />	                                           
 	                                            <Datetime
 												 	locale="fr"

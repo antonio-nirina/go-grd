@@ -1,28 +1,28 @@
 import gql from "graphql-tag"
 
 export const CREATED_WAGGER = gql`
-	mutation saveWagger(
+	mutation createWagger(
 		$date:String,
 		$title:String,
 		$description:String,
 		$price:Float,
 		$deadlineDate:String,
 		$gameWay:String,
-		$entry:String,
 		$priceParticipate:Float,
 		$format:String,
 		$isPublic:Boolean
+		$participant:Int
 		){
-		saveWagger(
+		createWagger(
 			date:$date,
 			title:$title,
 			description:$description,
 			price:$price,
 			deadlineDate:$deadlineDate,
 			gameWay:$gameWay,
-			entry:$entry,
 			priceParticipate:$priceParticipate,
 			isPublic:$isPublic,
+			participant:$participant,
 			format:$format)
 	}
 `
