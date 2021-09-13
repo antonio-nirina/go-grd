@@ -31,10 +31,10 @@ func Handle(next http.Handler) http.Handler {
 		}
 
 		tokenString := r.Header.Get("Authorization")
-		arrayToken := strings.SplitAfter(tokenString," ")
+		arrayToken := strings.SplitAfter(tokenString, " ")
 
 		if len(arrayToken) > 1 {
-			array := strings.Split(arrayToken[1],"=")
+			array := strings.Split(arrayToken[1], "=")
 
 			if array[0] == "" {
 				token, _ := jwt.Parse(tokenString, func(token *jwt.Token) (interface{}, error) {
@@ -53,18 +53,18 @@ func Handle(next http.Handler) http.Handler {
 			}
 		}
 
-		var checkRef bool = false 
-		arrayRf := strings.SplitAfter(os.Getenv("REFERS"),"-")
-		
+		var checkRef bool = false
+		arrayRf := strings.SplitAfter(os.Getenv("REFERS"), "-")
+
 		if r.Referer() != "" {
-			for _,val := range arrayRf {
-				if r.Referer() == strings.Split(val,"-")[0] {
+			for _, val := range arrayRf {
+				if r.Referer() == strings.Split(val, "-")[0] {
 					checkRef = true
 				}
 			}
 		}
 
-		if tokenString == "" &&  !checkRef {
+		if tokenString == "" && !checkRef {
 			w.WriteHeader(401)
 			w.Write([]byte(`{ "error": "not authorized" }`))
 		} else {
@@ -73,4 +73,3 @@ func Handle(next http.Handler) http.Handler {
 		// next.ServeHTTP(w, r)
 	})
 }
-

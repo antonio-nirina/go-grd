@@ -117,7 +117,7 @@ const CreateWaggers: React.FC = function() {
 	                                                <input type="number" placeholder="Frais d'inscription" {...register("priceParticipate")} name="priceParticipate" className="no-margin"/>
 	                                            </div>
 	                                            <div className="create-tournament-game">
-						    						<Link to="/admin"><button className="btn bg-white"> Annuler</button></Link>
+						    						<Link to="/admin/wagger"><button className="btn bg-white"> Annuler</button></Link>
 						                            <button className="btn bg-red"><FontAwesomeIcon icon={faPlus} /> Enregistrer</button>
 						    					</div>
 	                                        </form>

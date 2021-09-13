@@ -34,7 +34,6 @@ const ListWagger : React.FC = function() {
 			setIsLoader(false)
 			setWaggers(data.FindAllWagger)
 		}
-
 	},[loading,error,data,isLoader])
 
     const onShow = function(){
@@ -100,12 +99,19 @@ const ListWagger : React.FC = function() {
 							<p>Horraire <i><FontAwesomeIcon icon={faSort} size="lg"/></i></p>
 						</div>
 						<div className="card-title">
-							<p>Rank <i><FontAwesomeIcon icon={faSort} size="lg"/></i></p>
+							<p>Titre</p>
+						</div>
+						<div className="card-title">
+							<p>Deadline</p>
 						</div>
 						<div className="card-title">
 							<div className="card-title">
-								<p>Inscription <i><FontAwesomeIcon icon={faSort} size="lg"/></i></p>
+								<p>Prix à gagner <i><FontAwesomeIcon icon={faSort} size="lg"/></i></p>
 							</div>
+						</div>
+						<div className="card-title">
+							<div className="card-title">
+							<p>Prix participations <i><FontAwesomeIcon icon={faSort} size="lg"/></i></p>
 						</div>
 						<div className="card-title">
 							<div className="card-title">
@@ -124,34 +130,57 @@ const ListWagger : React.FC = function() {
 						</div>
 						<div className="card-title">
 							<div className="card-title">
-								<p>Joueur <i><FontAwesomeIcon icon={faSort} size="lg"/></i></p>
+								<p>Participant <i><FontAwesomeIcon icon={faSort} size="lg"/></i></p>
 							</div>
 						</div>
 					</div>
-					<div className="body-card">
-						<div className="card-result">
-							<p>23 Jul - 12h30</p>
-						</div>
-						<div className="card-result">
-							<p>Platine</p>
-						</div>
-						<div className="card-result">
-							<p>30</p>
-						</div>
-						<div className="card-result">
-							<p>B03</p>
-						</div>
-						<div className="card-result">
-							<p>3v3 Arène</p>
-						</div>
-						<div className="card-result">
-							<p>Public</p>
-						</div>
-						<div className="card-result">
-							<p>6</p>
-						</div>
-					</div>
-					<div className="filter-game-result">
+					{waggers.map(function(el:any,index:number){
+						return (
+							<div className="body-card" key={index}>
+								<div className="card-result">
+									<p>{
+										new Date(el.date).toLocaleTimeString('fr-Fr', {
+											day : 'numeric',
+											month : 'short',
+											year : 'numeric',
+											hour:"numeric",
+											minute:"numeric"
+										})
+									}</p>
+								</div>
+								<div className="card-result">
+									<p>{
+											new Date(el.deadlineDate).toLocaleTimeString('fr-Fr', {
+												day : 'numeric',
+												month : 'short',
+												year : 'numeric',
+												hour:"numeric",
+												minute:"numeric"
+											})
+										}</p>
+								</div>
+								<div className="card-result">
+									<p>{el.price}</p>
+								</div>
+								<div className="card-result">
+									<p>{el.priceParticipate >0 ? el.priceParticipate : "Free" }</p>
+								</div>
+								<div className="card-result">
+									<p>{el.format}</p>
+								</div>
+								<div className="card-result">
+									<p>{el.gameWay}</p>
+								</div>
+								<div className="card-result">
+									<p>{el.isPublic ? "Public" : "Privé"}</p>
+								</div>
+								<div className="card-result">
+									<p>{el.participant}</p>
+								</div>
+							</div>
+							
+						)
+					})}
 					<Pagination
 							handlePage={handleItemsPage}
 							records={waggers.length > 0 ? waggers[0].records : 0}

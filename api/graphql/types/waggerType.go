@@ -40,8 +40,8 @@ var WaggerSchemaType = graphql.NewObject(graphql.ObjectConfig{
 		"statut": &graphql.Field{
 			Type: graphql.Boolean,
 		},
-		"participant" :&graphql.Field{
-			Type: graphql.Boolean,
+		"participant": &graphql.Field{
+			Type: graphql.Int,
 		},
 		"records": &graphql.Field{
 			Type: graphql.Int,

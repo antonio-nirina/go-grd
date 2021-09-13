@@ -38,7 +38,7 @@ type participate struct {
 	user        userHandler.Usecase
 	tournament  tournamentHandler.UsecaseTournament
 	// league      leagueHandler.UsecaseLeague
-	team        teamHandler.UsecaseTeam
+	team teamHandler.UsecaseTeam
 }
 
 type teamsElements struct {
@@ -57,7 +57,7 @@ func NewResolverPart(
 		user:        user,
 		tournament:  tournament,
 		// league:      league,
-		team:        team,
+		team: team,
 	}
 }
 
@@ -187,10 +187,10 @@ func (p *participate) SavedPartResolver(params graphql.ResolveParams) (interface
 		Tournament: tournamentObject,
 		Team:       teamObject,
 		//League:     leagueObject,
-		IsWin:      false,
-		IsTournament: IsTournament,
+		IsWin:               false,
+		IsTournament:        IsTournament,
 		NumberPartConfirmed: false,
-		IsWager:false,
+		IsWager:             false,
 	}
 
 	res, err := p.partHandler.SavedPartHandler(part)
@@ -216,11 +216,6 @@ func (p *participate) FindPartResolver(params graphql.ResolveParams) (interface{
 func (p *participate) FindAllPartResolver(params graphql.ResolveParams) (interface{}, error) {
 	limit, _ := params.Args["limit"].(int)
 	pageNumber, _ := params.Args["pageNumber"].(int)
-
-	if pageNumber == 0 && limit > 0 {
-		pageNumber = 1
-	}
-
 	res, err := p.partHandler.FindAllPartHandler(int64(pageNumber), int64(limit))
 
 	if err != nil {
@@ -272,7 +267,7 @@ func (p *participate) UpdatedPartByUseResolver(params graphql.ResolveParams) (in
 	return res, nil
 }
 
-func (p *participate) FindPartByUseLeagueResolver(params graphql.ResolveParams) (interface{}, error){
+func (p *participate) FindPartByUseLeagueResolver(params graphql.ResolveParams) (interface{}, error) {
 	userUid, _ := params.Args["uidUser"].(string)
 	leagueUid, _ := params.Args["uidLeague"].(string)
 	user, err := p.user.FindOneUserByUid(userUid)
@@ -282,12 +277,12 @@ func (p *participate) FindPartByUseLeagueResolver(params graphql.ResolveParams) 
 	}
 
 	/*_, err = p.league.FindOneLeagueHandler(leagueUid)
-	
+
 	if err != nil {
 		return nil, err
 	}*/
 
-	res, err := p.partHandler.FindPartUserLeagueHandler(user.Uid,leagueUid)
+	res, err := p.partHandler.FindPartUserLeagueHandler(user.Uid, leagueUid)
 
 	if err != nil {
 		return nil, err
@@ -296,7 +291,7 @@ func (p *participate) FindPartByUseLeagueResolver(params graphql.ResolveParams) 
 	return res, nil
 }
 
-func (p *participate) FindPartByUseTournamentResolver(params graphql.ResolveParams) (interface{}, error){
+func (p *participate) FindPartByUseTournamentResolver(params graphql.ResolveParams) (interface{}, error) {
 	userUid, _ := params.Args["uidUser"].(string)
 	tournamentUid, _ := params.Args["uidTournament"].(string)
 	user, err := p.user.FindOneUserByUid(userUid)
@@ -311,7 +306,7 @@ func (p *participate) FindPartByUseTournamentResolver(params graphql.ResolvePara
 		return nil, err
 	}
 
-	res, err := p.partHandler.FindPartUserTournamentHandler(user.Uid,tournamentUid,tournament.IsTeam)
+	res, err := p.partHandler.FindPartUserTournamentHandler(user.Uid, tournamentUid, tournament.IsTeam)
 
 	if err != nil {
 		return nil, err
@@ -323,14 +318,14 @@ func (p *participate) FindPartByUseTournamentResolver(params graphql.ResolvePara
 func (p *participate) RemovedPartByResolver(params graphql.ResolveParams) (interface{}, error) {
 	uid, _ := params.Args["uid"].(string)
 	_, err := p.partHandler.FindPartHandler(uid)
-	
-	if err != nil {
-		return nil,err
-	}
-	 
-	part,err := p.partHandler.RemovedPartHandler(uid)
 
-	return part,nil
+	if err != nil {
+		return nil, err
+	}
+
+	part, err := p.partHandler.RemovedPartHandler(uid)
+
+	return part, nil
 }
 
 func (p *participate) UpdatedNumberPartConfResolver(params graphql.ResolveParams) (interface{}, error) {
@@ -342,7 +337,7 @@ func (p *participate) UpdatedNumberPartConfResolver(params graphql.ResolveParams
 		return nil, err
 	}
 
-	res, err := p.partHandler.UpdatedPartNumberConfirmedHandler(userPartUid,partConfirmed)
+	res, err := p.partHandler.UpdatedPartNumberConfirmedHandler(userPartUid, partConfirmed)
 
 	if err != nil {
 		return nil, err
@@ -354,15 +349,12 @@ func (p *participate) UpdatedNumberPartConfResolver(params graphql.ResolveParams
 func (p *participate) GetNumberPartByResolver(params graphql.ResolveParams) (interface{}, error) {
 	uid, _ := params.Args["uid"].(string)
 	_, err := p.tournament.FindTournamentHandler(uid)
-	
+
 	if err != nil {
-		return nil,err
+		return nil, err
 	}
-	 
-	part,err := p.partHandler.GetNumberPartHandler(uid)
 
-	return part,nil
+	part, err := p.partHandler.GetNumberPartHandler(uid)
+
+	return part, nil
 }
-
-
-

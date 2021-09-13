@@ -95,11 +95,6 @@ func (w *wagger) FindWaggerResolver(params graphql.ResolveParams) (interface{}, 
 func (w *wagger) FindAllWaggerResolver(params graphql.ResolveParams) (interface{}, error) {
 	limit, _ := params.Args["limit"].(int)
 	pageNumber, _ := params.Args["pageNumber"].(int)
-
-	if pageNumber == 0 && limit > 0 {
-		pageNumber = 1
-	}
-
 	res, err := w.waggerHandler.FindAllWaggerHandler(int64(pageNumber), int64(limit))
 
 	if err != nil {

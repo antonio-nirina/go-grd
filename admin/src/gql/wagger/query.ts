@@ -15,5 +15,6 @@ export const GET_ALL_WAGER = gql`
 			format
 			statut
 			participant
+			isPublic
 	}
 }`
