@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 import {useQuery} from "@apollo/client"
 import Loader from "react-loader-spinner"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPlus, faSort, faChevronUp, faChevronDown, faChevronRight, faChevronLeft, faSearch} from "@fortawesome/free-solid-svg-icons"
+import { faPlus, faChevronUp, faChevronDown, faSearch} from "@fortawesome/free-solid-svg-icons"
 
 import SideBar from "../header/sidebar"
 import Nav from "../header/nav"
@@ -29,7 +29,6 @@ const ListWagger : React.FC = function() {
 	})
 
 	useEffect(() => {
-		console.log(data)
 		if(!loading && !error && data) {
 			setIsLoader(false)
 			setWaggers(data.FindAllWagger)
@@ -96,60 +95,60 @@ const ListWagger : React.FC = function() {
 					</div>
 					<div className="body-card">
 						<div className="card-title">
-							<p>Horraire <i><FontAwesomeIcon icon={faSort} size="lg"/></i></p>
-						</div>
-						<div className="card-title">
-							<p>Titre</p>
+							<p>Horraire</p>
 						</div>
 						<div className="card-title">
 							<p>Deadline</p>
 						</div>
 						<div className="card-title">
+							<p>Titre</p>
+						</div>
+						<div className="card-title">
+							<p>Prix à gagner</p>
+						</div>
+						<div className="card-title">
+							<p>Prix participations</p>
+						</div>
+						<div className="card-title">
 							<div className="card-title">
-								<p>Prix à gagner <i><FontAwesomeIcon icon={faSort} size="lg"/></i></p>
+								<p>Game</p>
 							</div>
 						</div>
 						<div className="card-title">
-							<div className="card-title">
-							<p>Prix participations <i><FontAwesomeIcon icon={faSort} size="lg"/></i></p>
+							<p>Plateforme</p>
 						</div>
 						<div className="card-title">
-							<div className="card-title">
-							<p>Format <i><FontAwesomeIcon icon={faSort} size="lg"/></i></p>
-						</div>
+							<p>Format</p>
 						</div>
 						<div className="card-title">
-							<div className="card-title">
-								<p>Mode de jeux <i><FontAwesomeIcon icon={faSort} size="lg"/></i></p>
-							</div>
+							<p>Mode de jeux</p>
 						</div>
 						<div className="card-title">
-							<div className="card-title">
-								<p>Entrée <i><FontAwesomeIcon icon={faSort} size="lg"/></i></p>
-							</div>
+							<p>Entrée</p>
 						</div>
 						<div className="card-title">
-							<div className="card-title">
-								<p>Participant <i><FontAwesomeIcon icon={faSort} size="lg"/></i></p>
-							</div>
+							<p>Participant</p>
 						</div>
 					</div>
 					{waggers.map(function(el:any,index:number){
 						return (
 							<div className="body-card" key={index}>
 								<div className="card-result">
-									<p>{
-										new Date(el.date).toLocaleTimeString('fr-Fr', {
-											day : 'numeric',
-											month : 'short',
-											year : 'numeric',
-											hour:"numeric",
-											minute:"numeric"
-										})
-									}</p>
+									<p>
+										{
+											new Date(el.date).toLocaleTimeString('fr-Fr', {
+												day : 'numeric',
+												month : 'short',
+												year : 'numeric',
+												hour:"numeric",
+												minute:"numeric"
+											})
+										}
+									</p>
 								</div>
 								<div className="card-result">
-									<p>{
+									<p>
+										{
 											new Date(el.deadlineDate).toLocaleTimeString('fr-Fr', {
 												day : 'numeric',
 												month : 'short',
@@ -157,13 +156,23 @@ const ListWagger : React.FC = function() {
 												hour:"numeric",
 												minute:"numeric"
 											})
-										}</p>
+										}
+									</p>
 								</div>
 								<div className="card-result">
-									<p>{el.price}</p>
+									<p>{el.title}</p>
 								</div>
 								<div className="card-result">
-									<p>{el.priceParticipate >0 ? el.priceParticipate : "Free" }</p>
+									<p>{`${el.price} €`}</p>
+								</div>
+								<div className="card-result">
+									<p>{el.priceParticipate >0 ? `${el.priceParticipate} €`  : "Free" }</p>
+								</div>
+								<div className="card-result">
+									<p>{el.game.name}</p>
+								</div>
+								<div className="card-result">
+									<p>{el.plateform.name}</p>
 								</div>
 								<div className="card-result">
 									<p>{el.format}</p>
@@ -178,9 +187,9 @@ const ListWagger : React.FC = function() {
 									<p>{el.participant}</p>
 								</div>
 							</div>
-							
 						)
 					})}
+					<div className="filter-game-result">
 					<Pagination
 							handlePage={handleItemsPage}
 							records={waggers.length > 0 ? waggers[0].records : 0}

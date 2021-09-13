@@ -1,9 +1,10 @@
-import React from "react"
+import React,{useEffect,useState} from "react"
 import { Link } from "react-router-dom"
 import {useHistory } from "react-router-dom"
 import { faXbox } from "@fortawesome/free-brands-svg-icons"
 import { faGamepad, faTrophy } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import {useQuery} from "@apollo/client"
 
 import Header from "../header/header"
 import Footer from "../footer/footer"
@@ -23,8 +24,30 @@ import cod_coldwar from "../../assets/image/cod-coldwar.png"
 import fifa from "../../assets/image/fifa21.png"
 import {APEX_LEGENDE,FORTNITE,RNB,RL,COD_MODERN,COD_WAR_ZONE,COD_COLD_WAR,FIFA} from "../game/constante"
 
+import {GET_ALL_WAGER} from "../../gql/wagger/query"
+import {Wagger} from "../models/wagger"
+import {dateStringToDY} from "../tools/dateConvert"
+import {renderPlatformLogo} from "../annexe/renderLogo"
+import {LIMIT,PAGE_NUMBER} from "../commons/constante"
+
+
 const Waggers: React.FC = function() {
 	const history = useHistory()
+	const [waggers, setWaggers] = useState<Array<Wagger>>([])
+	const {loading,error,data} 	= useQuery(GET_ALL_WAGER, {
+		variables: {
+			limit:LIMIT,
+			pageNumber:PAGE_NUMBER
+		},
+	})
+
+	useEffect(() => {
+		if(!loading && !error && data) {
+			setWaggers(data.FindAllWagger)
+		}
+
+	},[loading,error,data])
+
   return(
   	<div className="container">
   		<Header />
@@ -79,6 +102,7 @@ const Waggers: React.FC = function() {
 								</div>
 							</div>
 						</div>
+
 						<div className="undertitle">
 							<h2>Wagers</h2>
 							<p>Derniers résultats en Wagers</p>

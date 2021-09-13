@@ -1,7 +1,7 @@
-import React,{useState} from "react"
+import React,{useState,useMemo} from "react"
 import { Link } from "react-router-dom"
 import {useHistory } from "react-router-dom"
-import {useMutation} from "@apollo/client"
+import {useMutation,useQuery} from "@apollo/client"
 import { faPlus} from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useForm } from "react-hook-form"
@@ -13,6 +13,7 @@ import 'moment/locale/fr'
 import SideBar from "../header/sidebar"
 import {CREATED_WAGGER} from "../gql/wagger/mutation"
 import Nav from "../header/nav"
+import {GET_ALL_GAMES,GET_ALL_PLATEFORM} from "../gql/games/query"
 
 type Inputs = {
 	title:string,
@@ -30,14 +31,28 @@ const CreateWaggers: React.FC = function() {
 	const [startDate, setStartDate] 	= useState<string>("")
 	const [lastDate, setLastDate] 		= useState<string>("")
 	const [gameWay,setGameWay] 			= useState<string>("")
+	const [uiGame,setUiGame] 			= useState<string>("")
+	const [uidPlateform,setUidPlateform] = useState<string>("")
+	const [games,setGames] 				= useState<Array<any>>([])
+	const [plateforms,setPlateforms] 	= useState<Array<any>>([])
 	const [isPub,setIsPub] 				= useState<boolean>(false)
 	const { register, handleSubmit } 	= useForm<Inputs>()
+
 	const [createWagger]  			= useMutation(CREATED_WAGGER)
+	const {loading,error,data} = useQuery(GET_ALL_GAMES)
+	const {loading:loadingP,error:errorP,data:dataP} = useQuery(GET_ALL_PLATEFORM)
+
+	useMemo(() => {
+		if(!loading && !error && data) setGames(data.FindAllGame)
+		if(!loadingP && !errorP && dataP) setPlateforms(dataP.FindAllPlateform)
+	},[loading,error,data,loadingP,errorP,dataP])
 
 	const onSubmit = async function(data:Inputs){
 		const result = await createWagger({ variables: {
 			date:startDate,
 			title:data.title,
+			uidGame:uiGame,
+			uidPalteforme:uidPlateform,
 			description:data.description,
 			price:data.price,
 			format:data.format ? data.format : "",
@@ -48,6 +63,14 @@ const CreateWaggers: React.FC = function() {
 			participant:Math.pow(2,(Math.ceil(Math.log2(Number(data.participant))))),
 		} })
 		if (result.data.createWagger) history.push("/admin/wagger")
+	}
+
+	const handleGame = function(event:any) {
+		setUiGame(event.target.value)
+	}
+
+	const handlePlateform = function(event:any) {
+		setUidPlateform(event.target.value)
 	}
 
 	const handleDate = function(date:any) {
@@ -99,8 +122,30 @@ const CreateWaggers: React.FC = function() {
 	                                                <option value="2v2">2v2</option>
 	                                                <option value="4v4">4v4</option>	                                                
 	                                            </select>
+	                                            <select id="jeux" onChange={handleGame}>
+	                                                <option value="">Selectionnez le jeux...</option>
+	                                                {
+	                                                	games?.map(function(el:any,index:number) {
+	                                                		return(
+	                                                			<option key={index} value={el.uid}>{el.name}</option>
+                                                			)
+	                                                	})
+	                                                }
+	                                            </select>
+	                                            <select id="platform" onChange={handlePlateform}>
+	                                                <option value="">Selectionnez les plateformes...</option>
+	                                                {
+	                                                	plateforms?.map(function(el:any,index:number) {
+	                                                		return(
+	                                                			<option key={index} value={el.uid}>{el.name}</option>
+                                                			)
+	                                                	})
+	                                                }
+
+	                                            </select>
 												<input type="text" placeholder="Participant" {...register("participant")} name="participant" />                                         
-	                                            <input type="text" placeholder="Format game" {...register("format")} name="format" />	                                           
+	                                            <input type="text" placeholder="Format game" {...register("format")} name="format" />
+
 	                                            <Datetime
 												 	locale="fr"
 													onChange={handleDate}

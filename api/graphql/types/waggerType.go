@@ -31,6 +31,12 @@ var WaggerSchemaType = graphql.NewObject(graphql.ObjectConfig{
 		"priceParticipate": &graphql.Field{
 			Type: graphql.Float,
 		},
+		"game": &graphql.Field{
+			Type: GameSchemaType,
+		},
+		"plateform":&graphql.Field{
+			Type:PlateformSchemaType,
+		},
 		"format": &graphql.Field{
 			Type: graphql.String,
 		},

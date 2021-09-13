@@ -3,6 +3,7 @@ package handler
 import (
 	"github.com/thoussei/antonio/api/wagger/entity"
 	"github.com/thoussei/antonio/api/wagger/repository"
+	tournament "github.com/thoussei/antonio/api/tournament/handler"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
@@ -23,6 +24,8 @@ type WaggerViewModel struct {
 	DeadlineDate     string  `json:"deadlineDate"`
 	GameWay          string  `json:"gameWay"`
 	PriceParticipate float64 `json:"priceParticipate"`
+	Game 			 tournament.GameViewModel `json:"game"`
+	Plateform  		 tournament.PlateformViewModel `json:"plateform"`
 	Format           string  `json:"format"`
 	IsPublic         bool    `json:"IsPublic"`
 	Statut           bool    `json:"statut"`
@@ -72,6 +75,8 @@ func (w *waggerUsecase) FindWaggerHandler(idQuery string) (WaggerViewModel, erro
 		DeadlineDate:     result.DeadlineDate,
 		GameWay:          result.GameWay,
 		PriceParticipate: result.PriceParticipate,
+		Game:tournament.GameViewModel{result.Game.Uid.Hex(),result.Game.Name,result.Game.Image,result.Game.Logo,result.Game.Slug},				
+		Plateform:tournament.PlateformViewModel{result.Plateform.Uid.Hex(),result.Plateform.Name,result.Plateform.Description},
 		Format:           result.Format,
 		IsPublic:         result.IsPublic,
 		Statut:           result.Statut,
@@ -106,6 +111,8 @@ func (w *waggerUsecase) FindAllWaggerHandler(pageNumber int64, limit int64) ([]W
 			DeadlineDate:     result.DeadlineDate,
 			GameWay:          result.GameWay,
 			PriceParticipate: result.PriceParticipate,
+			Game:tournament.GameViewModel{result.Game.Uid.Hex(),result.Game.Name,result.Game.Image,result.Game.Logo,result.Game.Slug},				
+			Plateform:tournament.PlateformViewModel{result.Plateform.Uid.Hex(),result.Plateform.Name,result.Plateform.Description},
 			Format:           result.Format,
 			IsPublic:         result.IsPublic,
 			Statut:           result.Statut,

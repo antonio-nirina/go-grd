@@ -98,7 +98,7 @@ var partResolver = partDelivery.NewResolverPart(partUsecase, usecase, tournament
 
 var waggerRepository = waggerRepo.NewWaggerRepository(database)
 var waggerUsecase = waggerHandler.NewUsecaseWagger(waggerRepository)
-var waggerResolver = waggerDelivery.NewResolverWagger(waggerUsecase)
+var waggerResolver = waggerDelivery.NewResolverWagger(waggerUsecase, usecaseGame, usecasePlateform)
 
 
 // GetRootFields returns all the available queries.
