@@ -74,6 +74,12 @@ func createWagger() *graphql.Field {
 			"deadlineDate": &graphql.ArgumentConfig{
 				Type: graphql.String,
 			},
+			"uidGame": &graphql.ArgumentConfig{
+				Type: graphql.String,
+			},
+			"uidPalteforme": &graphql.ArgumentConfig{
+				Type: graphql.String,
+			},
 			"gameWay": &graphql.ArgumentConfig{
 				Type: graphql.String,
 			},

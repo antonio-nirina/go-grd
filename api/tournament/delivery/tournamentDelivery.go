@@ -20,37 +20,36 @@ type TournamentResolver interface {
 }
 
 type tournament struct {
-	tournamentHandler handler.UsecaseTournament
-	gameTournamentHandler gameHandler.UsecaseGameInterface
+	tournamentHandler          handler.UsecaseTournament
+	gameTournamentHandler      gameHandler.UsecaseGameInterface
 	plateformTournamentHandler gameHandler.UsecasePlateformInterface
 }
-
 
 type inputUpdatedTournament struct {
 	trUpated updatedTournament `json:"trUpated"`
 }
 
 type updatedTournament struct {
-	Uid           			string 	`json:"uid"`
-	Title 		  			string 				`json:"title"`
-	Date 		  			string            	`json:"date"`
-	NumberParticipate 		string            	`json:"numberParticipate"`
-	NumberTeam 		  		string            		`json:"numberTeam"`
-	Price 		  			string             `json:"price"`
-	DeadlineDate 		  	string            	`json:"deadlineDate"`
-	PriceParticipate 		string            `json:"priceParticipate"`
-	Statut 		  			string 				`json:"statut"`
-	Info   					string            	`json:"info"`
-	Rules   				string            	`json:"rules"`
-	IsTeam   				string            	`json:"isTeam"`
-	IsPublic   				string            	`json:"isPublic"`
+	Uid               string `json:"uid"`
+	Title             string `json:"title"`
+	Date              string `json:"date"`
+	NumberParticipate string `json:"numberParticipate"`
+	NumberTeam        string `json:"numberTeam"`
+	Price             string `json:"price"`
+	DeadlineDate      string `json:"deadlineDate"`
+	PriceParticipate  string `json:"priceParticipate"`
+	Statut            string `json:"statut"`
+	Info              string `json:"info"`
+	Rules             string `json:"rules"`
+	IsTeam            string `json:"isTeam"`
+	IsPublic          string `json:"isPublic"`
 }
 
-func NewResolverTournament(tournamentUseCase handler.UsecaseTournament,tournamentGame gameHandler.UsecaseGameInterface,tournamentPlateform gameHandler.UsecasePlateformInterface) TournamentResolver {
+func NewResolverTournament(tournamentUseCase handler.UsecaseTournament, tournamentGame gameHandler.UsecaseGameInterface, tournamentPlateform gameHandler.UsecasePlateformInterface) TournamentResolver {
 	return &tournament{
-		tournamentHandler: tournamentUseCase,
-		gameTournamentHandler:tournamentGame,
-		plateformTournamentHandler:tournamentPlateform,
+		tournamentHandler:          tournamentUseCase,
+		gameTournamentHandler:      tournamentGame,
+		plateformTournamentHandler: tournamentPlateform,
 	}
 }
 
@@ -66,11 +65,11 @@ func (t *tournament) SavedTournamentResolver(params graphql.ResolveParams) (inte
 	deadlineDate, _ := params.Args["deadlineDate"].(string)
 	priceParticipate, _ := params.Args["priceParticipate"].(float64)
 	rules, _ := params.Args["rules"].(string)
-	game,err := t.gameTournamentHandler.FindOneGameByUidHandler(gameUid)
-	plateform,err := t.plateformTournamentHandler.FindOnePlateformByUidHandler(plateformUid)
+	game, err := t.gameTournamentHandler.FindOneGameByUidHandler(gameUid)
+	plateform, err := t.plateformTournamentHandler.FindOnePlateformByUidHandler(plateformUid)
 
 	if err != nil {
-		return nil,err
+		return nil, err
 	}
 
 	IsTeam := false
@@ -80,21 +79,21 @@ func (t *tournament) SavedTournamentResolver(params graphql.ResolveParams) (inte
 	}
 
 	tournament := &entity.Tournament{
-		Uid:primitive.NewObjectID(),
-		Title:title,
-		Date:date,
-		Game: game,
-		Plateform: plateform,
-		NumberParticipate:numberParticipate,
-		NumberTeam:numberTeam,
-		Price:price,
-		IsTeam:IsTeam,
-		DeadlineDate:deadlineDate,
-		PriceParticipate:priceParticipate,
-		Statut:true,
-		Info:description,
-		Rules:rules,
-		IsPublic:true,
+		Uid:               primitive.NewObjectID(),
+		Title:             title,
+		Date:              date,
+		Game:              game,
+		Plateform:         plateform,
+		NumberParticipate: numberParticipate,
+		NumberTeam:        numberTeam,
+		Price:             price,
+		IsTeam:            IsTeam,
+		DeadlineDate:      deadlineDate,
+		PriceParticipate:  priceParticipate,
+		Statut:            true,
+		Info:              description,
+		Rules:             rules,
+		IsPublic:          true,
 	}
 
 	res, err := t.tournamentHandler.SavedTournamentHandler(tournament)
@@ -104,7 +103,7 @@ func (t *tournament) SavedTournamentResolver(params graphql.ResolveParams) (inte
 	}
 
 	return res, nil
-} 
+}
 
 func (t *tournament) FindTournamentResolver(params graphql.ResolveParams) (interface{}, error) {
 	uid, _ := params.Args["uid"].(string)
@@ -115,41 +114,36 @@ func (t *tournament) FindTournamentResolver(params graphql.ResolveParams) (inter
 	}
 
 	return res, nil
-} 
+}
 
 func (t *tournament) FindAllTournamentResolver(params graphql.ResolveParams) (interface{}, error) {
 	limit, _ := params.Args["limit"].(int)
 	pageNumber, _ := params.Args["pageNumber"].(int)
-
-	if pageNumber == 0 && limit > 0{
-		pageNumber = 1
-	}
-
-	res, err := t.tournamentHandler.FindAllTournamentHandler(int64(pageNumber),int64(limit))
+	res, err := t.tournamentHandler.FindAllTournamentHandler(int64(pageNumber), int64(limit))
 
 	if err != nil {
 		return nil, err
 	}
 
 	return res, nil
-} 
+}
 
 func (t *tournament) FindTournamentGameResolver(params graphql.ResolveParams) (interface{}, error) {
 	limit, _ := params.Args["limit"].(int)
 	pageNumber, _ := params.Args["pageNumber"].(int)
 
-	if pageNumber == 0 && limit > 0{
+	if pageNumber == 0 && limit > 0 {
 		pageNumber = 1
 	}
 
 	gameUid, _ := params.Args["slugGame"].(string)
-	game,err := t.gameTournamentHandler.FindOneGameBySlugHandler(gameUid)
+	game, err := t.gameTournamentHandler.FindOneGameBySlugHandler(gameUid)
 
 	if err != nil {
 		return nil, err
 	}
 
-	res, err := t.tournamentHandler.FindTournamentGameHandler(int64(pageNumber),int64(limit),game.Uid)
+	res, err := t.tournamentHandler.FindTournamentGameHandler(int64(pageNumber), int64(limit), game.Uid)
 
 	if err != nil {
 		return nil, err
@@ -169,18 +163,18 @@ func (t *tournament) UpdatedTournamentResolver(params graphql.ResolveParams) (in
 		return nil, err
 	}
 
-	title := tournament.Title		  		
-	date := tournament.Date		  		  		
+	title := tournament.Title
+	date := tournament.Date
 	numberParticipate := tournament.NumberParticipate
-	numberTeam := tournament.NumberTeam	  	
-	price := tournament.Price		
-	deadlineDate :=	tournament.DeadlineDate
+	numberTeam := tournament.NumberTeam
+	price := tournament.Price
+	deadlineDate := tournament.DeadlineDate
 	priceParticipate := tournament.PriceParticipate
-	statut := tournament.Statut	
-	info :=	tournament.Info	
-	rules := tournament.Rules		
-	isTeam := tournament.IsTeam	
-	isPublic :=tournament.IsPublic
+	statut := tournament.Statut
+	info := tournament.Info
+	rules := tournament.Rules
+	isTeam := tournament.IsTeam
+	isPublic := tournament.IsPublic
 
 	if input.trUpated.Date != "" {
 		date = input.trUpated.Date
@@ -189,17 +183,17 @@ func (t *tournament) UpdatedTournamentResolver(params graphql.ResolveParams) (in
 	if input.trUpated.Title != "" {
 		title = input.trUpated.Title
 	}
-	
+
 	if input.trUpated.NumberParticipate != "" {
 		numberParticipate, _ = strconv.Atoi(input.trUpated.NumberParticipate)
 	}
 
 	if input.trUpated.NumberTeam != "" {
-		numberTeam, _ = strconv.Atoi(input.trUpated.NumberTeam) 
+		numberTeam, _ = strconv.Atoi(input.trUpated.NumberTeam)
 	}
 
 	if input.trUpated.Price != "" {
-		price , _ = strconv.ParseFloat(input.trUpated.Price, 64)
+		price, _ = strconv.ParseFloat(input.trUpated.Price, 64)
 	}
 
 	if input.trUpated.DeadlineDate != "" {
@@ -207,7 +201,7 @@ func (t *tournament) UpdatedTournamentResolver(params graphql.ResolveParams) (in
 	}
 
 	if input.trUpated.PriceParticipate != "" {
-		priceParticipate , _ = strconv.ParseFloat(input.trUpated.PriceParticipate, 64) 
+		priceParticipate, _ = strconv.ParseFloat(input.trUpated.PriceParticipate, 64)
 	}
 
 	if input.trUpated.Statut != "" {
@@ -223,30 +217,29 @@ func (t *tournament) UpdatedTournamentResolver(params graphql.ResolveParams) (in
 	}
 
 	if input.trUpated.IsTeam != "" {
-		isTeam , _ = strconv.ParseBool(input.trUpated.IsTeam)
+		isTeam, _ = strconv.ParseBool(input.trUpated.IsTeam)
 	}
 
 	if input.trUpated.IsPublic != "" {
-		isPublic , _ = strconv.ParseBool(input.trUpated.IsPublic)
+		isPublic, _ = strconv.ParseBool(input.trUpated.IsPublic)
 	}
 
-
-	tournamentUpdated := &entity.Tournament {
-		Uid:tournament.Uid,           			
-		Title:title,		  		
-		Date:date,		  		
-		Game:tournament.Game,	 	  		
-		Plateform:tournament.Plateform, 		
-		NumberParticipate:numberParticipate,	
-		NumberTeam:numberTeam,	  	
-		Price:price,	  		
-		DeadlineDate:deadlineDate,	
-		PriceParticipate:priceParticipate, 	
-		Statut:statut,		  		
-		Info:info,			
-		Rules:rules, 			
-		IsTeam:isTeam, 			
-		IsPublic:isPublic,
+	tournamentUpdated := &entity.Tournament{
+		Uid:               tournament.Uid,
+		Title:             title,
+		Date:              date,
+		Game:              tournament.Game,
+		Plateform:         tournament.Plateform,
+		NumberParticipate: numberParticipate,
+		NumberTeam:        numberTeam,
+		Price:             price,
+		DeadlineDate:      deadlineDate,
+		PriceParticipate:  priceParticipate,
+		Statut:            statut,
+		Info:              info,
+		Rules:             rules,
+		IsTeam:            isTeam,
+		IsPublic:          isPublic,
 	}
 
 	res, err := t.tournamentHandler.UpdatedTournamentHandler(tournamentUpdated)
@@ -255,6 +248,5 @@ func (t *tournament) UpdatedTournamentResolver(params graphql.ResolveParams) (in
 		return nil, err
 	}
 
-	   			
 	return res, nil
 }

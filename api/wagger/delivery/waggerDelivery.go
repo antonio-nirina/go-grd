@@ -7,6 +7,7 @@ import (
 	"github.com/graphql-go/graphql"
 	"github.com/thoussei/antonio/api/wagger/entity"
 	"github.com/thoussei/antonio/api/wagger/handler"
+	gameHandler "github.com/thoussei/antonio/api/games/handler"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
@@ -19,6 +20,8 @@ type WaggerResolver interface {
 
 type wagger struct {
 	waggerHandler handler.UsecaseWagger
+	gameWaggerHandler      gameHandler.UsecaseGameInterface
+	plateformWaggerHandler gameHandler.UsecasePlateformInterface
 }
 
 type inputUpdatedWagger struct {
@@ -40,9 +43,11 @@ type updatedWagger struct {
 	Statut           string `json:"statut"`
 }
 
-func NewResolverWagger(waggerUseCase handler.UsecaseWagger) WaggerResolver {
+func NewResolverWagger(waggerUseCase handler.UsecaseWagger,waggerGame gameHandler.UsecaseGameInterface, waggerPlateform gameHandler.UsecasePlateformInterface) WaggerResolver {
 	return &wagger{
 		waggerHandler: waggerUseCase,
+		gameWaggerHandler:waggerGame,
+		plateformWaggerHandler:waggerPlateform,
 	}
 }
 
@@ -52,16 +57,27 @@ func (w *wagger) SavedWaggerResolver(params graphql.ResolveParams) (interface{},
 	description, _ := params.Args["description"].(string)
 	price, _ := params.Args["price"].(float64)
 	deadlineDate, _ := params.Args["deadlineDate"].(string)
+	gameUid, _ := params.Args["uidGame"].(string)
+	plateformUid, _ := params.Args["uidPalteforme"].(string)
 	priceParticipate, _ := params.Args["priceParticipate"].(float64)
 	gameWay, _ := params.Args["gameWay"].(string)
 	format, _ := params.Args["format"].(string)
 	isPublic, _ := params.Args["isPublic"].(bool)
 	participant, _ := params.Args["participant"].(int)
+	game, err := w.gameWaggerHandler.FindOneGameByUidHandler(gameUid)
+	plateform, err := w.plateformWaggerHandler.FindOnePlateformByUidHandler(plateformUid)
+
+	if err != nil {
+		return nil, err
+	}
+
 	wagger := &entity.Wagger{
 		Uid:              primitive.NewObjectID(),
 		Title:            title,
 		Date:             date,
 		Participant:      participant,
+		Game:             game,
+		Plateform:        plateform,
 		Price:            price,
 		DeadlineDate:     deadlineDate,
 		PriceParticipate: priceParticipate,
@@ -95,11 +111,6 @@ func (w *wagger) FindWaggerResolver(params graphql.ResolveParams) (interface{}, 
 func (w *wagger) FindAllWaggerResolver(params graphql.ResolveParams) (interface{}, error) {
 	limit, _ := params.Args["limit"].(int)
 	pageNumber, _ := params.Args["pageNumber"].(int)
-
-	if pageNumber == 0 && limit > 0 {
-		pageNumber = 1
-	}
-
 	res, err := w.waggerHandler.FindAllWaggerHandler(int64(pageNumber), int64(limit))
 
 	if err != nil {
@@ -180,6 +191,8 @@ func (w *wagger) UpdatedWaggerResolver(params graphql.ResolveParams) (interface{
 		Date:             date,
 		Title:            title,
 		Description:      description,
+		Game:             wagger.Game,
+		Plateform:        wagger.Plateform,
 		Price:            price,
 		DeadlineDate:     deadlineDate,
 		GameWay:          gameWay,
