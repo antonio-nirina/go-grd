@@ -183,6 +183,9 @@
 	"leagues": {
 		"listLigues":"List of available leagues",
 		"retrieve":"Find the latest public leagues & register !"
+	},
+	"wagger":{
+		"lastwagger":"Last result in Wagers"
 	}
 
 }

@@ -1,5 +1,7 @@
-import React,{useState} from "react"
+import React,{useState,useEffect} from "react"
 import { Link } from "react-router-dom"
+import {useQuery} from "@apollo/client"
+import { useSelector } from "react-redux"
 
 import Header from "../header/header"
 import Footer from "../footer/footer"
@@ -20,16 +22,37 @@ import apexlegends from "../../assets/image/apex-legends.png"
 import fr from "../../assets/image/fr.png"
 import discord from "../../assets/image/discord.png"
 import AvatarDefault from "../../assets/image/game-tag.png"
+import {Wagger} from "../models/wagger"
 
-const Joingame: React.FC = function() {
-  const [showSalon, setShowSalon] = useState(false)
-  const [showTchat, setShowTchat] = useState(false)
-  const onShowSalon = function(){
-    setShowSalon(!showSalon)
-  }
-  const onShowTchat = function(){
-    setShowTchat(!showTchat)
-  }
+import {GET_ONE_WAGGER} from "../../gql/wagger/query"
+
+
+const Joingame: React.FC = function(props:any) {
+  	const [showSalon, setShowSalon] = useState(false)
+  	const [showTchat, setShowTchat] = useState(false)
+  	const [wagger, setWagger] = useState<Wagger>()
+	const params = new URLSearchParams(props.location.search)
+	const uid:string|null = params.get("uid")
+
+	const {loading,error,data} 	= useQuery(GET_ONE_WAGGER, {
+		variables: {
+			uid:uid,
+		},
+	})
+
+	useEffect(() => {
+		if(!loading && !error && data) {
+			setWagger(data.FindOneWagger)
+		}
+
+	},[loading,error,data])
+
+  	const onShowSalon = function(){
+    	setShowSalon(!showSalon)
+  	}
+  	const onShowTchat = function(){
+    	setShowTchat(!showTchat)
+  	}
   return(
   	<div className="container">
   		<Header />

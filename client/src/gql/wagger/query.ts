@@ -32,3 +32,34 @@ export const GET_ALL_WAGER = gql`
 			}
 	}
 }`
+
+export const GET_ONE_WAGGER = gql`
+	query FindOneWagger($uid: String!) {
+		FindOneWagger(uid: $uid){
+		uid
+			date,
+			title,
+			description,
+			price,
+			deadlineDate,
+			gameWay,
+			priceParticipate,
+			format
+			statut
+			participant
+			isPublic
+			records
+			game{
+				uid
+				name
+				image
+				logo
+				slug
+			}
+			plateform{
+				uid
+				description
+				name
+			}
+	}
+}`

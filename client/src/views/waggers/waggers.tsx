@@ -60,7 +60,7 @@ const Waggers: React.FC = function() {
 			if(dataPart && dataPart.FindPartByUser.length > 0) setLastWagger(dataPart.FindPartByUser)
 		}
 
-	},[loading,error,data])
+	},[loading,error,data,ldPart,errPart,dataPart])
 
   return(
   	<div className="container">
@@ -123,9 +123,10 @@ const Waggers: React.FC = function() {
 
 					{lastWagger.length > 0 ? (
 							<div className="undertitle">
+							<h2>Wagers</h2>
 								<h2>
 									{
-										Translation(userConnectedRedux.user.language).tournament.lasttournament
+										Translation(userConnectedRedux.user.language).wagger.lastwagger
 									}
 								</h2>
 							</div>
@@ -135,10 +136,6 @@ const Waggers: React.FC = function() {
 							<></>
 						)
 					}
-					<div className="undertitle">
-						<h2>Wagers</h2>
-						<p>Derniers résultats en Wagers</p>
-					</div>
 					<div className="content waggers-link d-none">
 							<div className="clear"></div>
 							{
