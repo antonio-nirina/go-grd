@@ -92,54 +92,53 @@ var leagueRepository = leagueRepo.NewLeagueRepository(database)
 var leagueUsecase = leagueHandler.NewUsecaseLeague(leagueRepository)
 var leagueResolver = leagueDelivery.NewResolverLeague(leagueUsecase, usecaseGame, usecasePlateform)
 
-var partRepository = partRepo.NewPartRepository(database)
-var partUsecase = partHandler.NewUsecasePart(partRepository)
-var partResolver = partDelivery.NewResolverPart(partUsecase, usecase, tournamentUsecase, teamUsecase)
-
 var waggerRepository = waggerRepo.NewWaggerRepository(database)
 var waggerUsecase = waggerHandler.NewUsecaseWagger(waggerRepository)
 var waggerResolver = waggerDelivery.NewResolverWagger(waggerUsecase, usecaseGame, usecasePlateform)
 
+var partRepository = partRepo.NewPartRepository(database)
+var partUsecase = partHandler.NewUsecasePart(partRepository)
+var partResolver = partDelivery.NewResolverPart(partUsecase, usecase, tournamentUsecase, teamUsecase, waggerUsecase)
 
 // GetRootFields returns all the available queries.
 func GetRootFields() graphql.Fields {
 	return graphql.Fields{
-		"FindOneUser":          GetOneUserQuery(),
-		"FindOneGame":          GetOneGameQuery(),
-		"FindOnePlateform":     GetOnePlateformQuery(),
-		"FindAllGame":          GetAllGameQuery(),
-		"FindAllPlateform":     GetAllPlateformQuery(),
-		"GetAccessTokenXbox":   GetAccessTokenXbox(),
-		"GetProfilUserXbox":    GetProfilUserXbox(),
-		"GetAllFriends":        GetAllFriends(),
-		"GetUsers":             GetUsers(),
-		"GetOneNotification":   GetOneNotification(),
-		"GetAllNotifications":  GetAllNotifications(),
-		"GetAccessTokenTwitch": GetAccessTokenTwitch(),
-		"FindOneTournament":    FindOneTournament(),
-		"FindAllTournament":    FindAllTournament(),
-		"FindTournamentByGame": FindTournamentByGame(),
-		"FindAllCmty":          FindAllCmty(),
-		"FindOneCmty":          FindOneCmty(),
-		"FindOnePart":          FindOnePart(),
-		"FindAllPart":          FindAllPart(),
-		"FindPartByUser":       FindPartByUser(),
-		"FindOneHome":          FindOneHome(),
-		"FindAllHome":          FindAllHome(),
-		"FindOneTeam":          FindOneTeam(),
-		"FindAllTeam":          FindAllTeam(),
-		"FindOneAsist":         FindOneAsist(),
-		"FindAllAsist":         FindAllAsist(),
-		"FindOneSubject":       FindOneSubject(),
-		"FindAllSubject":       FindAllSubject(),
-		"FindAssistBySubject":  FindAssistBySubject(),
-		"FindOneLeague":        FindOneLeague(),
-		"FindAllLeague":        FindAllLeague(),
-		"FindLeagueByGame":     FindLeagueByGame(),
+		"FindOneUser":              GetOneUserQuery(),
+		"FindOneGame":              GetOneGameQuery(),
+		"FindOnePlateform":         GetOnePlateformQuery(),
+		"FindAllGame":              GetAllGameQuery(),
+		"FindAllPlateform":         GetAllPlateformQuery(),
+		"GetAccessTokenXbox":       GetAccessTokenXbox(),
+		"GetProfilUserXbox":        GetProfilUserXbox(),
+		"GetAllFriends":            GetAllFriends(),
+		"GetUsers":                 GetUsers(),
+		"GetOneNotification":       GetOneNotification(),
+		"GetAllNotifications":      GetAllNotifications(),
+		"GetAccessTokenTwitch":     GetAccessTokenTwitch(),
+		"FindOneTournament":        FindOneTournament(),
+		"FindAllTournament":        FindAllTournament(),
+		"FindTournamentByGame":     FindTournamentByGame(),
+		"FindAllCmty":              FindAllCmty(),
+		"FindOneCmty":              FindOneCmty(),
+		"FindOnePart":              FindOnePart(),
+		"FindAllPart":              FindAllPart(),
+		"FindPartByUser":           FindPartByUser(),
+		"FindOneHome":              FindOneHome(),
+		"FindAllHome":              FindAllHome(),
+		"FindOneTeam":              FindOneTeam(),
+		"FindAllTeam":              FindAllTeam(),
+		"FindOneAsist":             FindOneAsist(),
+		"FindAllAsist":             FindAllAsist(),
+		"FindOneSubject":           FindOneSubject(),
+		"FindAllSubject":           FindAllSubject(),
+		"FindAssistBySubject":      FindAssistBySubject(),
+		"FindOneLeague":            FindOneLeague(),
+		"FindAllLeague":            FindAllLeague(),
+		"FindLeagueByGame":         FindLeagueByGame(),
 		"FindPartByUserTournament": FindPartByUserTournament(),
-		"FindPartCount": 		FindPartCount(),
-
-		"FindOneWagger":        FindOneWagger(),
-		"FindAllWagger":        FindAllWagger(),
+		"FindPartByUserWagger":     FindPartByUserWagger(),
+		"FindPartCount":            FindPartCount(),
+		"FindOneWagger":            FindOneWagger(),
+		"FindAllWagger":            FindAllWagger(),
 	}
 }

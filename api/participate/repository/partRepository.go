@@ -12,42 +12,40 @@ import (
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
-
 type DriverRepository struct {
 	client *mongo.Client
 }
-
 
 // Return Interface User Repository
 func NewPartRepository(client *mongo.Client) *DriverRepository {
 	return &DriverRepository{client}
 }
 
-
 type RepositoryPart interface {
 	SavedPartRepo(part *entity.Participate) (interface{}, error)
 	FindPartRepo(idQuery primitive.ObjectID) (entity.Participate, error)
-	FindAllPartRepo(pageNumber int64,limit int64) ([]entity.Participate, error)
-	FindPartUserRepo(pageNumber int64,limit int64,game primitive.ObjectID) ([]entity.Participate, error)
+	FindAllPartRepo(pageNumber int64, limit int64) ([]entity.Participate, error)
+	FindPartUserRepo(pageNumber int64, limit int64, game primitive.ObjectID) ([]entity.Participate, error)
 	UpdatedPartUserRepo(objectId primitive.ObjectID) (interface{}, error)
-	FindPartByTournamentRepo(userUid primitive.ObjectID,objectId primitive.ObjectID,isTeam bool) (entity.Participate, error)
-	FindPartByLeagueRepo(userUid  primitive.ObjectID,objectId primitive.ObjectID) (entity.Participate, error)
+	FindPartByTournamentRepo(userUid primitive.ObjectID, objectId primitive.ObjectID, isTeam bool) (entity.Participate, error)
+	FindPartByLeagueRepo(userUid primitive.ObjectID, objectId primitive.ObjectID) (entity.Participate, error)
 	RemovedPartRepo(idQuery primitive.ObjectID) (interface{}, error)
-	UpdateNumberConfirmedRepo(objectId primitive.ObjectID,numberConf bool) (interface{}, error)
+	UpdateNumberConfirmedRepo(objectId primitive.ObjectID, numberConf bool) (interface{}, error)
 	GetNumberPartRepo(objectId primitive.ObjectID) (interface{}, error)
+	FindPartByWaggerRepo(userUid primitive.ObjectID, uidWagger primitive.ObjectID) (entity.Participate, error)
 }
 
 type recordsPartModel struct {
-	RecordsPart int `json:"recordsPart"`
-	ReacordsnumberPartConfirmed  int `json:"reacordsnumberPartConfirmed"`
+	RecordsPart                 int `json:"recordsPart"`
+	ReacordsnumberPartConfirmed int `json:"reacordsnumberPartConfirmed"`
 }
 
-func (c *DriverRepository) SavedPartRepo(part *entity.Participate) (interface{}, error){
+func (c *DriverRepository) SavedPartRepo(part *entity.Participate) (interface{}, error) {
 	var collection = c.client.Database("grd_database").Collection("participate")
 	insertResult, err := collection.InsertOne(context.TODO(), part)
 	filter := bson.D{{"uid", insertResult}}
-	records,err := collection.CountDocuments(context.TODO(), filter)
-	
+	records, err := collection.CountDocuments(context.TODO(), filter)
+
 	if err != nil {
 		return 0, err
 	}
@@ -57,11 +55,11 @@ func (c *DriverRepository) SavedPartRepo(part *entity.Participate) (interface{},
 	if res == 0 {
 		res++
 	}
-	
+
 	return res, nil
 }
 
-func (c *DriverRepository) FindPartRepo(idQuery primitive.ObjectID) (entity.Participate, error){
+func (c *DriverRepository) FindPartRepo(idQuery primitive.ObjectID) (entity.Participate, error) {
 	var collection = c.client.Database("grd_database").Collection("participate")
 	var result entity.Participate
 
@@ -74,12 +72,12 @@ func (c *DriverRepository) FindPartRepo(idQuery primitive.ObjectID) (entity.Part
 	return result, nil
 }
 
-func (c *DriverRepository) FindAllPartRepo(pageNumber int64,limit int64) ([]entity.Participate, error){
-	var skp int64 
+func (c *DriverRepository) FindAllPartRepo(pageNumber int64, limit int64) ([]entity.Participate, error) {
+	var skp int64
 	skp = (pageNumber - 1) * limit
 	var collection = c.client.Database("grd_database").Collection("participate")
 	var results []entity.Participate
-	cur, err := collection.Find(context.TODO(), bson.D{{}},options.Find().SetLimit(limit).SetSkip(skp).SetSort(bson.M{"_id": -1}))
+	cur, err := collection.Find(context.TODO(), bson.D{{}}, options.Find().SetLimit(limit).SetSkip(skp).SetSort(bson.M{"_id": -1}))
 
 	if err != nil {
 		return nil, err
@@ -94,18 +92,18 @@ func (c *DriverRepository) FindAllPartRepo(pageNumber int64,limit int64) ([]enti
 
 		results = append(results, elem)
 	}
-	
+
 	cur.Close(context.TODO())
 
 	return results, nil
 }
 
-func (c *DriverRepository) FindPartUserRepo(pageNumber int64,limit int64,user primitive.ObjectID) ([]entity.Participate, error) {
-	var skp int64 
+func (c *DriverRepository) FindPartUserRepo(pageNumber int64, limit int64, user primitive.ObjectID) ([]entity.Participate, error) {
+	var skp int64
 	skp = (pageNumber - 1) * limit
 	var collection = c.client.Database("grd_database").Collection("participate")
 	var results []entity.Participate
-	cur, err := collection.Find(context.TODO(), bson.D{{"user.uid", user}},options.Find().SetLimit(limit).SetSkip(skp).SetSort(bson.M{"_id": -1}))
+	cur, err := collection.Find(context.TODO(), bson.D{{"user.uid", user}}, options.Find().SetLimit(limit).SetSkip(skp).SetSort(bson.M{"_id": -1}))
 
 	if err != nil {
 		return nil, err
@@ -120,7 +118,7 @@ func (c *DriverRepository) FindPartUserRepo(pageNumber int64,limit int64,user pr
 
 		results = append(results, elem)
 	}
-	
+
 	cur.Close(context.TODO())
 
 	return results, nil
@@ -134,25 +132,25 @@ func (c *DriverRepository) UpdatedPartUserRepo(objectId primitive.ObjectID) (int
 			{
 				"IsWin", true,
 			},
-	}}}
+		}}}
 	updateResult, err := collection.UpdateOne(context.TODO(), filter, update)
 
 	if err != nil {
-		return nil,err
+		return nil, err
 	}
 
-	return updateResult.ModifiedCount,nil
+	return updateResult.ModifiedCount, nil
 }
 
-func (c *DriverRepository) FindPartByTournamentRepo(userUid primitive.ObjectID,objectId primitive.ObjectID,isTeam bool) (entity.Participate, error){
+func (c *DriverRepository) FindPartByTournamentRepo(userUid primitive.ObjectID, objectId primitive.ObjectID, isTeam bool) (entity.Participate, error) {
 	var collection = c.client.Database("grd_database").Collection("participate")
 	var result entity.Participate
-	err := collection.FindOne(context.TODO(), bson.M{"user.uid": userUid,"tournament.uid":objectId}).Decode(&result)
+	err := collection.FindOne(context.TODO(), bson.M{"user.uid": userUid, "tournament.uid": objectId}).Decode(&result)
 
 	if isTeam {
-		err = collection.FindOne(context.TODO(), bson.M{"team.players.uid": userUid,"tournament.uid":objectId}).Decode(&result)
+		err = collection.FindOne(context.TODO(), bson.M{"team.players.uid": userUid, "tournament.uid": objectId}).Decode(&result)
 	}
-	
+
 	if err != nil {
 		return result, err
 	}
@@ -160,11 +158,11 @@ func (c *DriverRepository) FindPartByTournamentRepo(userUid primitive.ObjectID,o
 	return result, nil
 }
 
-func (c *DriverRepository) FindPartByLeagueRepo(userUid  primitive.ObjectID,objectId primitive.ObjectID) (entity.Participate, error){
+func (c *DriverRepository) FindPartByLeagueRepo(userUid primitive.ObjectID, objectId primitive.ObjectID) (entity.Participate, error) {
 	var collection = c.client.Database("grd_database").Collection("Participate")
 	var result entity.Participate
 
-	err := collection.FindOne(context.TODO(), bson.M{"user.uid": userUid,"league.uid":objectId}).Decode(&result)
+	err := collection.FindOne(context.TODO(), bson.M{"user.uid": userUid, "league.uid": objectId}).Decode(&result)
 
 	if err != nil {
 		return result, err
@@ -177,16 +175,16 @@ func (c *DriverRepository) RemovedPartRepo(idQuery primitive.ObjectID) (interfac
 	var collection = c.client.Database("grd_database").Collection("participate")
 	filter := bson.D{{"uid", idQuery}}
 	_, err := collection.DeleteOne(context.TODO(), filter)
-	records,err := collection.CountDocuments(context.TODO(), bson.D{{}})
-	
+	records, err := collection.CountDocuments(context.TODO(), bson.D{{}})
+
 	if err != nil {
 		return nil, err
 	}
 
-	return records,nil
+	return records, nil
 }
 
-func (c *DriverRepository) UpdateNumberConfirmedRepo(objectId primitive.ObjectID,numberConf bool) (interface{}, error) {
+func (c *DriverRepository) UpdateNumberConfirmedRepo(objectId primitive.ObjectID, numberConf bool) (interface{}, error) {
 	var collection = c.client.Database("grd_database").Collection("participate")
 	filter := bson.D{{"uid", objectId}}
 	update := bson.D{
@@ -194,30 +192,43 @@ func (c *DriverRepository) UpdateNumberConfirmedRepo(objectId primitive.ObjectID
 			{
 				"numberpartconfirmed", numberConf,
 			},
-	}}}
+		}}}
 	updateResult, err := collection.UpdateOne(context.TODO(), filter, update)
 
 	if err != nil {
-		return nil,err
+		return nil, err
 	}
 
-	return updateResult.ModifiedCount,nil
+	return updateResult.ModifiedCount, nil
 }
 
 func (c *DriverRepository) GetNumberPartRepo(objectId primitive.ObjectID) (interface{}, error) {
 	var collection = c.client.Database("grd_database").Collection("participate")
-	records,err := collection.CountDocuments(context.TODO(), bson.D{{"tournament.uid", objectId}})
-	filter := bson.D{{"tournament.uid", objectId},{"numberpartconfirmed",true}}
-	recordConfirmed,err := collection.CountDocuments(context.TODO(), filter)
-	
+	records, err := collection.CountDocuments(context.TODO(), bson.D{{"tournament.uid", objectId}})
+	filter := bson.D{{"tournament.uid", objectId}, {"numberpartconfirmed", true}}
+	recordConfirmed, err := collection.CountDocuments(context.TODO(), filter)
+
 	if err != nil {
 		return nil, err
 	}
 
 	recs := recordsPartModel{
-		RecordsPart:int(records) ,
-		ReacordsnumberPartConfirmed:int(recordConfirmed), 
+		RecordsPart:                 int(records),
+		ReacordsnumberPartConfirmed: int(recordConfirmed),
 	}
 
-	return recs,nil
+	return recs, nil
+}
+
+func (c *DriverRepository) FindPartByWaggerRepo(userUid primitive.ObjectID, uidWagger primitive.ObjectID) (entity.Participate, error) {
+	var collection = c.client.Database("grd_database").Collection("Participate")
+	var result entity.Participate
+
+	err := collection.FindOne(context.TODO(), bson.M{"user.uid": userUid, "wagger.uid": uidWagger}).Decode(&result)
+
+	if err != nil {
+		return result, err
+	}
+
+	return result, nil
 }

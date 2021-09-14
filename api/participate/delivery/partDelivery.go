@@ -4,13 +4,14 @@ import (
 	"encoding/json"
 
 	"github.com/graphql-go/graphql"
-	GEntity "github.com/thoussei/antonio/api/games/entity"
 	"github.com/thoussei/antonio/api/participate/entity"
 	"github.com/thoussei/antonio/api/participate/handler"
 	tEntity "github.com/thoussei/antonio/api/tournament/entity"
 	tournamentHandler "github.com/thoussei/antonio/api/tournament/handler"
 	userEntity "github.com/thoussei/antonio/api/user/entity"
 	userHandler "github.com/thoussei/antonio/api/user/handler"
+	waggerEntity "github.com/thoussei/antonio/api/wagger/entity"
+	waggerHandler "github.com/thoussei/antonio/api/wagger/handler"
 
 	// leagueEntity "github.com/thoussei/antonio/api/league/entity"
 	// leagueHandler "github.com/thoussei/antonio/api/league/handler"
@@ -31,6 +32,7 @@ type PartResolver interface {
 	RemovedPartByResolver(params graphql.ResolveParams) (interface{}, error)
 	UpdatedNumberPartConfResolver(params graphql.ResolveParams) (interface{}, error)
 	GetNumberPartByResolver(params graphql.ResolveParams) (interface{}, error)
+	FindPartByUserWaggerResolver(params graphql.ResolveParams) (interface{}, error)
 }
 
 type participate struct {
@@ -38,7 +40,8 @@ type participate struct {
 	user        userHandler.Usecase
 	tournament  tournamentHandler.UsecaseTournament
 	// league      leagueHandler.UsecaseLeague
-	team teamHandler.UsecaseTeam
+	team   teamHandler.UsecaseTeam
+	wagger waggerHandler.UsecaseWagger
 }
 
 type teamsElements struct {
@@ -50,6 +53,7 @@ func NewResolverPart(
 	user userHandler.Usecase,
 	tournament tournamentHandler.UsecaseTournament,
 	team teamHandler.UsecaseTeam,
+	wagger waggerHandler.UsecaseWagger,
 	// league leagueHandler.UsecaseLeague,
 ) PartResolver {
 	return &participate{
@@ -57,7 +61,8 @@ func NewResolverPart(
 		user:        user,
 		tournament:  tournament,
 		// league:      league,
-		team: team,
+		team:   team,
+		wagger: wagger,
 	}
 }
 
@@ -65,6 +70,7 @@ func (p *participate) SavedPartResolver(params graphql.ResolveParams) (interface
 	date, _ := params.Args["date"].(string)
 	userUid, _ := params.Args["uidUser"].(string)
 	tournamentUid, _ := params.Args["tournamentUid"].(string)
+	waggerUid, _ := params.Args["waggerUid"].(string)
 	// leagueUid, _ := params.Args["leagueUid"].(string)
 	jsonString, _ := json.Marshal(params.Args["teamsUid"])
 	teams := teamsElements{}
@@ -74,7 +80,9 @@ func (p *participate) SavedPartResolver(params graphql.ResolveParams) (interface
 	// leagueObject := leagueEntity.League{}
 	teamObject := []teamEntity.Team{}
 	userObject := userEntity.User{}
+	waggerObject := waggerEntity.Wagger{}
 	IsTournament := false
+	isWagger := false
 	if userUid != "" {
 		user, err := p.user.FindOneUserByUid(userUid)
 		if err != nil {
@@ -102,35 +110,23 @@ func (p *participate) SavedPartResolver(params graphql.ResolveParams) (interface
 
 	if tournamentUid != "" {
 		IsTournament = true
-		tournament, err := p.tournament.FindTournamentHandler(tournamentUid)
+		tournament, err := p.tournament.FindOneTournamentHandler(tournamentUid)
 
 		if err != nil {
 			return nil, err
 		}
 
-		objectId, _ := primitive.ObjectIDFromHex(tournament.Uid)
-		objectIdGame, _ := primitive.ObjectIDFromHex(tournament.Game.Uid)
-		objectIdPlt, _ := primitive.ObjectIDFromHex(tournament.Plateform.Uid)
-		tournamentObject.Uid = objectId
-		tournamentObject.Title = tournament.Title
-		tournamentObject.Date = tournament.Date
-		tournamentObject.Game = GEntity.Game{
-			Uid:   objectIdGame,
-			Name:  tournament.Game.Name,
-			Image: tournament.Game.Image,
-			Slug:  tournament.Game.Slug,
-			Logo:  tournament.Game.Logo,
+		tournamentObject = tournament
+	}
+
+	if waggerUid != "" {
+		isWagger = true
+		wagger, err := p.wagger.FindOneWaggerHandler(waggerUid)
+
+		if err != nil {
+			return nil, err
 		}
-		tournamentObject.Plateform = GEntity.GamePlatform{Uid: objectIdPlt, Name: tournament.Plateform.Name, Description: tournament.Plateform.Description}
-		tournamentObject.NumberParticipate = tournament.NumberParticipate
-		tournamentObject.NumberTeam = tournament.NumberTeam
-		tournamentObject.Price = tournament.Price
-		tournamentObject.DeadlineDate = tournament.DeadlineDate
-		tournamentObject.PriceParticipate = tournament.PriceParticipate
-		tournamentObject.Statut = tournament.Statut
-		tournamentObject.Info = tournament.Info
-		tournamentObject.Rules = tournament.Rules
-		tournamentObject.IsPublic = tournament.IsPublic
+		waggerObject = wagger
 	}
 
 	/*if leagueUid != "" {
@@ -189,8 +185,9 @@ func (p *participate) SavedPartResolver(params graphql.ResolveParams) (interface
 		//League:     leagueObject,
 		IsWin:               false,
 		IsTournament:        IsTournament,
+		Wagger:              waggerObject,
 		NumberPartConfirmed: false,
-		IsWager:             false,
+		IsWager:             isWagger,
 	}
 
 	res, err := p.partHandler.SavedPartHandler(part)
@@ -357,4 +354,28 @@ func (p *participate) GetNumberPartByResolver(params graphql.ResolveParams) (int
 	part, err := p.partHandler.GetNumberPartHandler(uid)
 
 	return part, nil
+}
+
+func (p *participate) FindPartByUserWaggerResolver(params graphql.ResolveParams) (interface{}, error) {
+	userUid, _ := params.Args["uidUser"].(string)
+	uidWagger, _ := params.Args["uidWagger"].(string)
+	user, err := p.user.FindOneUserByUid(userUid)
+
+	if err != nil {
+		return nil, err
+	}
+
+	wagger, err := p.wagger.FindOneWaggerHandler(uidWagger)
+
+	if err != nil {
+		return nil, err
+	}
+
+	res, err := p.partHandler.FindPartUserWaggerHandler(user.Uid, wagger.Uid)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return res, nil
 }

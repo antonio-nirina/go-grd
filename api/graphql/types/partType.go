@@ -16,13 +16,19 @@ var PartSchemaType = graphql.NewObject(graphql.ObjectConfig{
 		"user": &graphql.Field{
 			Type: UserSchemaType,
 		},
-		"team":  &graphql.Field{
+		"team": &graphql.Field{
 			Type: graphql.NewList(TeamSchemaType),
 		},
 		"tournament": &graphql.Field{
 			Type: TournamentSchemaType,
 		},
+		"wagger": &graphql.Field{
+			Type: WaggerSchemaType,
+		},
 		"numberPartConfirmed": &graphql.Field{
+			Type: graphql.Boolean,
+		},
+		"isWin": &graphql.Field{
 			Type: graphql.Boolean,
 		},
 		/*"league": &graphql.Field{

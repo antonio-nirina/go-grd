@@ -5,7 +5,6 @@ import (
 	"github.com/thoussei/antonio/api/graphql/types"
 )
 
-
 func FindOneWagger() *graphql.Field {
 	return &graphql.Field{
 		Type:        types.WaggerSchemaType,
@@ -15,14 +14,14 @@ func FindOneWagger() *graphql.Field {
 				Type: graphql.String,
 			},
 		},
-		
+
 		Resolve: waggerResolver.FindWaggerResolver,
 	}
 }
 
 func FindAllWagger() *graphql.Field {
 	return &graphql.Field{
-		Type:        graphql.NewList(types.WaggerSchemaType),
+		Type: graphql.NewList(types.WaggerSchemaType),
 		Args: graphql.FieldConfigArgument{
 			"limit": &graphql.ArgumentConfig{
 				Type: graphql.Int,
@@ -32,6 +31,6 @@ func FindAllWagger() *graphql.Field {
 			},
 		},
 		Description: "Get all page wagger",
-		Resolve: waggerResolver.FindAllWaggerResolver,
+		Resolve:     waggerResolver.FindAllWaggerResolver,
 	}
 }

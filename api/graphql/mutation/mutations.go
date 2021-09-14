@@ -90,14 +90,13 @@ var leagueRepository = leagueRepo.NewLeagueRepository(database)
 var leagueUsecase = leagueHandler.NewUsecaseLeague(leagueRepository)
 var leagueResolver = leagueDelivery.NewResolverLeague(leagueUsecase, usecaseGame, usecasePlateform)
 
-var partRepository = partRepo.NewPartRepository(database)
-var partUsecase = partHandler.NewUsecasePart(partRepository)
-var partResolver = partDelivery.NewResolverPart(partUsecase, usecase, tournamentUsecase, teamUsecase)
-
 var waggerRepository = waggerRepo.NewWaggerRepository(database)
 var waggerUsecase = waggerHandler.NewUsecaseWagger(waggerRepository)
 var waggerResolver = waggerDelivery.NewResolverWagger(waggerUsecase, usecaseGame, usecasePlateform)
 
+var partRepository = partRepo.NewPartRepository(database)
+var partUsecase = partHandler.NewUsecasePart(partRepository)
+var partResolver = partDelivery.NewResolverPart(partUsecase, usecase, tournamentUsecase, teamUsecase, waggerUsecase)
 
 func GetRootFields() graphql.Fields {
 	return graphql.Fields{
@@ -125,8 +124,8 @@ func GetRootFields() graphql.Fields {
 		"removedHome":          removedHome(),
 		"createSubjectContent": createSubjectContent(),
 		"saveLeague":           saveLeague(),
-		"removePartTournament" : removePartTournament(),
-		"createWagger": 		createWagger(),
-		"updatedWagger":		updatedWagger(),
+		"removePartTournament": removePartTournament(),
+		"createWagger":         createWagger(),
+		"updatedWagger":        updatedWagger(),
 	}
 }

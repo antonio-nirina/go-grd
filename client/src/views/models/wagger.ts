@@ -6,6 +6,7 @@ export interface Wagger {
 	statut:boolean
 	description:string
 	deadlineDate:string
+	format:string
 	date:string
 	price:number
 	priceParticipate:number
