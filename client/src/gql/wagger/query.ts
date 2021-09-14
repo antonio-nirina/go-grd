@@ -5,6 +5,7 @@ import gql from "graphql-tag"
 export const GET_ALL_WAGER = gql`
 	query FindAllWagger($limit: Int!,$pageNumber:Int!) {
 		FindAllWagger(limit: $limit,pageNumber:$pageNumber){
+			uid
 			date,
 			title,
 			description,

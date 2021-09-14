@@ -7,6 +7,7 @@ export const GET_PART_USER = gql`
 		FindPartByUser(uidUser:$uidUser,limit: $limit,pageNumber:$pageNumber){
 			uid
 			date
+			iswin
 			user{
 				uid
 				username
@@ -35,6 +36,7 @@ export const GET_PART_TOURNAMENT = gql`
 		FindPartByUserTournament(uidUser: $uidUser,uidTournament:$uidTournament) {
 			uid
 			date
+			iswin
 			user{
 				uid
 				username
@@ -75,10 +77,44 @@ export const GET_PART_USER_ALL = gql`
 		FindPartByUser(uidUser:$uidUser,limit:$limit,pageNumber:$pageNumber) {
 			uid
 			date
+			iswin
 			user{
 				uid
 				username
 				avatar
+			}
+		}
+	}
+`
+
+export const GET_PART_USER_WAGGER = gql`
+	query FindPartByUserWagger($uidUser: String,$uidWagger:String) {
+		FindPartByUserWagger(uidUser: uidUser,uidWagger:$uidWagger) {
+			uid
+			date
+			isWin
+			user{
+				uid
+				username
+				avatar
+			}
+			wagger{
+				uid
+				title
+				date
+				game{
+					uid
+				}
+				plateform{
+					uid
+					name
+				}
+			}
+			team{
+				uid
+				players{
+					uid
+				}
 			}
 		}
 	}

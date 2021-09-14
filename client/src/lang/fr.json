@@ -198,6 +198,9 @@
 	"leagues": {
 		"listLigues":"Liste des ligues disponibles",
 		"retrieve":"Retrouve les derniers ligues public & inscris-toi !"
+	},
+	"wagger":{
+		"lastwagger":"Derniers résultats en Wagers"
 	}
 
 }

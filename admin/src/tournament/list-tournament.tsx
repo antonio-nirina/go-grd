@@ -160,7 +160,7 @@ const ListTournament : React.FC = function(props:any) {
 													<p>{el.plateform.name}</p>
 												</div>
 												<div className="card-result">
-													<p>{el.price}</p>
+													<p>{`${el.price} €`}</p>
 												</div>
 												<div className="card-result">
 													<p>{el.numberParticipate}</p>

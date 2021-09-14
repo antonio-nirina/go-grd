@@ -110,6 +110,14 @@ const ListWagger : React.FC = function() {
 							<p>Prix participations</p>
 						</div>
 						<div className="card-title">
+							<div className="card-title">
+								<p>Game</p>
+							</div>
+						</div>
+						<div className="card-title">
+							<p>Plateforme</p>
+						</div>
+						<div className="card-title">
 							<p>Format</p>
 						</div>
 						<div className="card-title">
@@ -155,10 +163,16 @@ const ListWagger : React.FC = function() {
 									<p>{el.title}</p>
 								</div>
 								<div className="card-result">
-									<p>{el.price}</p>
+									<p>{`${el.price} €`}</p>
 								</div>
 								<div className="card-result">
-									<p>{el.priceParticipate >0 ? el.priceParticipate : "Free" }</p>
+									<p>{el.priceParticipate >0 ? `${el.priceParticipate} €`  : "Free" }</p>
+								</div>
+								<div className="card-result">
+									<p>{el.game.name}</p>
+								</div>
+								<div className="card-result">
+									<p>{el.plateform.name}</p>
 								</div>
 								<div className="card-result">
 									<p>{el.format}</p>

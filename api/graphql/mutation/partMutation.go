@@ -35,6 +35,9 @@ func createPartMatch() *graphql.Field {
 			"teamsUid": &graphql.ArgumentConfig{
 				Type: teamsInputType,
 			},
+			"waggerUid": &graphql.ArgumentConfig{
+				Type: graphql.String,
+			},
 		},
 		Resolve: partResolver.SavedPartResolver,
 	}
@@ -61,7 +64,7 @@ func updateConfirmedPartTournament() *graphql.Field {
 			"uid": &graphql.ArgumentConfig{
 				Type: graphql.String,
 			},
-			"partConfirmed":&graphql.ArgumentConfig{
+			"partConfirmed": &graphql.ArgumentConfig{
 				Type: graphql.Boolean,
 			},
 		},
