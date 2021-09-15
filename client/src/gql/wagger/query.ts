@@ -18,6 +18,8 @@ export const GET_ALL_WAGER = gql`
 			participant
 			isPublic
 			records
+			gameWay
+			rules
 			game{
 				uid
 				name
@@ -36,7 +38,7 @@ export const GET_ALL_WAGER = gql`
 export const GET_ONE_WAGGER = gql`
 	query FindOneWagger($uid: String!) {
 		FindOneWagger(uid: $uid){
-		uid
+			uid
 			date,
 			title,
 			description,
@@ -49,6 +51,8 @@ export const GET_ONE_WAGGER = gql`
 			participant
 			isPublic
 			records
+			rules
+			gameWay
 			game{
 				uid
 				name

@@ -44,6 +44,9 @@ var waggerUpatedType = graphql.NewInputObject(
 			"statut": &graphql.InputObjectFieldConfig{
 				Type: graphql.String,
 			},
+			"rules": &graphql.InputObjectFieldConfig{
+				Type: graphql.String,
+			},
 		},
 	},
 )
@@ -95,8 +98,11 @@ func createWagger() *graphql.Field {
 			"participant": &graphql.ArgumentConfig{
 				Type: graphql.Int,
 			},
+			"rules": &graphql.ArgumentConfig{
+				Type: graphql.String,
+			},
 		},
-		Resolve:waggerResolver.SavedWaggerResolver,
+		Resolve: waggerResolver.SavedWaggerResolver,
 	}
 }
 

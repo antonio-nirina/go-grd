@@ -9,6 +9,8 @@ import "react-datetime/css/react-datetime.css"
 import Datetime from "react-datetime"
 import moment from 'moment'
 import 'moment/locale/fr'
+import SunEditor from 'suneditor-react'
+import 'suneditor/dist/css/suneditor.min.css'
 
 import SideBar from "../header/sidebar"
 import {CREATED_WAGGER} from "../gql/wagger/mutation"
@@ -36,6 +38,7 @@ const CreateWaggers: React.FC = function() {
 	const [games,setGames] 				= useState<Array<any>>([])
 	const [plateforms,setPlateforms] 	= useState<Array<any>>([])
 	const [isPub,setIsPub] 				= useState<boolean>(false)
+	const [rules, setRules] 	= useState<String>("")
 	const { register, handleSubmit } 	= useForm<Inputs>()
 
 	const [createWagger]  			= useMutation(CREATED_WAGGER)
@@ -53,13 +56,14 @@ const CreateWaggers: React.FC = function() {
 			title:data.title,
 			uidGame:uiGame,
 			uidPalteforme:uidPlateform,
-			description:data.description,
+			description:data.description ? data.description : "",
 			price:data.price,
 			format:data.format ? data.format : "",
 			gameWay:gameWay, 
 			deadlineDate:lastDate,
 			priceParticipate:data.priceParticipate,
 			isPublic:data.isPublic,
+			rules:rules,
 			participant:Math.pow(2,(Math.ceil(Math.log2(Number(data.participant))))),
 		} })
 		if (result.data.createWagger) history.push("/admin/wagger")
@@ -87,6 +91,10 @@ const CreateWaggers: React.FC = function() {
 
 	const handleTextPub = function(event:any) {
 		setIsPub(event.target.checked)
+	}
+
+	const handleRulesText = function(content: string) {
+		setRules(content)
 	}
 
 	return(
@@ -156,6 +164,26 @@ const CreateWaggers: React.FC = function() {
 													onChange={handleDateDeadline}
 													inputProps={{placeholder:"Deadline"}}
 												/>
+												<div className="wysiwyg">
+		                                            <SunEditor
+														placeholder="Règle du jeux"
+														onChange={handleRulesText}
+														setOptions={
+															{
+																buttonList:[
+																	['undo', 'redo',
+																		'font', 'fontSize', 'formatBlock',
+																		'bold', 'italic',
+																		'fontColor', 'hiliteColor', 'textStyle',
+																		'removeFormat',
+																		'outdent', 'indent',
+																		'align', 'horizontalRule', 'list', 'lineHeight',
+																		'link', 'image',
+																	]
+																]
+															}
+													} />
+												</div>
 	                                            <textarea placeholder="Description..." {...register("description")}></textarea>
 	                                            <div className="input-group">
 	                                                <input type="number" placeholder="Prix à gagner" {...register("price")} name="price" />
