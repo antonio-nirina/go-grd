@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { useSelector } from "react-redux"
 import {useQuery} from "@apollo/client"
 import parse from 'html-react-parser'
-import { faEye } from "@fortawesome/free-solid-svg-icons"
+import { faEye,faImage,faLaugh,faPaperclip } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import Header from "../header/header"
@@ -105,6 +105,24 @@ const Communaute: React.FC = function() {
 		  				</div>
 	  				</div>
 	  				<div className="center-block">
+	  					<div className="new-post">
+	  						<div className="new-post-title">
+	  							Nouveau Post
+	  						</div>
+	  						<div className="content-new-post"></div>
+	  						<div className="post-icon" >
+	  							<div className="">
+								  <i><FontAwesomeIcon icon={faImage} size="1x"/></i>
+								</div>
+	  							<div className="">
+								  <i><FontAwesomeIcon icon={faPaperclip} rotation={90} size="1x"/></i>
+								  </div>
+	  							<div className="">
+								  <i><FontAwesomeIcon icon={faLaugh} size="1x"/></i>
+								  </div>
+	  							<button className="btn bg-red poster">Poster</button>
+	  						</div>
+	  					</div>
 		  				{
 		  					cmty.length > 0 ? cmty.map(function(e:any,index:number) {
 		  						return (
@@ -129,7 +147,7 @@ const Communaute: React.FC = function() {
 
 	  				<Friend />
 	  			</div>
-	  		</div>	  		
+	  		</div>
 			<Footer/>
 	  	</div>
 	</div>

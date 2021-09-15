@@ -465,3 +465,19 @@
 	display: block;
 }
 /*****************************************************/
+
+.center-block .new-post{
+	background-color: #efefef;
+	border-radius: 7px;
+}
+.new-post .post-icon{
+	color: #777778;
+	display: flex;
+	margin-bottom: 11px;
+	padding-bottom: 11px;
+}
+
+.post-icon .poster{
+	padding: 4px;
+	font-size: 11px;
+}

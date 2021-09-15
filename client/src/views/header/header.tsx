@@ -145,30 +145,28 @@ const Header: React.FC = function() {
 						<li>
 							<Link to="/tournament">
 								{
-									Object.keys(userConnectedRedux.user).length > 0 ?
 									Translation(userConnectedRedux.user.language).header.tournaments
-									:
-									Translation("fr").header.tournaments
 								}
 							</Link>
 						</li>
 						<li>
 							<Link to="/waggers">
 								{
-									Object.keys(userConnectedRedux.user).length > 0 ?
 									Translation(userConnectedRedux.user.language).header.wagers
-									:
-									Translation("fr").header.wagers
 								}
 							</Link>
 						</li>
 						<li>
 							<Link to="/communaute">
 								{
-									Object.keys(userConnectedRedux.user).length > 0 ?
 									Translation(userConnectedRedux.user.language).header.community
-									:
-									Translation("fr").header.community
+								}
+							</Link>
+						</li>
+						<li>
+							<Link to="/assistance">
+								{
+									Translation(userConnectedRedux.user.language).header.assistance
 								}
 							</Link>
 						</li>

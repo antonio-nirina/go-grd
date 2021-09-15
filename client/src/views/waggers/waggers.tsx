@@ -144,7 +144,7 @@ const Waggers: React.FC = function() {
 							<></>
 						)
 					}
-					<div className="content waggers-link d-none">
+					<div className="content waggers-link">
 							<div className="clear"></div>
 							{
 								lastWagger.length > 0 && countWagger > 0 ? lastWagger.map(function(el:any,index:number) {
@@ -182,7 +182,7 @@ const Waggers: React.FC = function() {
 					</div>
 				</div>
 			</div>
-			<div className="choices d-none">
+			<div className="choices">
 				<div className="jeux">
 				    <h2>
 						Choisis ton jeu
