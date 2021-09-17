@@ -167,7 +167,7 @@ const Tournois: React.FC = function() {
 							</div>
 						</div>
 					</div>
-		  			<div className="choices d-none">
+		  			<div className="choices">
 					<div className="jeux">
 					    <h2>
 							{

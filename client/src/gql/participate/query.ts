@@ -7,7 +7,7 @@ export const GET_PART_USER = gql`
 		FindPartByUser(uidUser:$uidUser,limit: $limit,pageNumber:$pageNumber){
 			uid
 			date
-			iswin
+			isWin
 			user{
 				uid
 				username
@@ -36,7 +36,7 @@ export const GET_PART_TOURNAMENT = gql`
 		FindPartByUserTournament(uidUser: $uidUser,uidTournament:$uidTournament) {
 			uid
 			date
-			iswin
+			isWin
 			user{
 				uid
 				username
@@ -77,7 +77,7 @@ export const GET_PART_USER_ALL = gql`
 		FindPartByUser(uidUser:$uidUser,limit:$limit,pageNumber:$pageNumber) {
 			uid
 			date
-			iswin
+			isWin
 			user{
 				uid
 				username

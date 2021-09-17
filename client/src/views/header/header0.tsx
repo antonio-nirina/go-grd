@@ -36,6 +36,9 @@ const Header0: React.FC = function() {
     	 				<li>
     	 					<Link to="/communaute">Communauté</Link>
 	 					</li>
+	 					<li>
+    	 					<Link to="/assistance">Assistance</Link>
+	 					</li>
     	 			</ul>
     	 		</nav>
                 <div className="bt-container">

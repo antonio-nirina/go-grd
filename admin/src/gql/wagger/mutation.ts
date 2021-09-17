@@ -14,6 +14,7 @@ export const CREATED_WAGGER = gql`
 		$format:String,
 		$isPublic:Boolean
 		$participant:Int
+		$rules:String
 		){
 		createWagger(
 			date:$date,
@@ -27,6 +28,7 @@ export const CREATED_WAGGER = gql`
 			priceParticipate:$priceParticipate,
 			isPublic:$isPublic,
 			participant:$participant,
+			rules:$rules,
 			format:$format)
 	}
 `

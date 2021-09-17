@@ -5,9 +5,9 @@ import (
 	"strconv"
 
 	"github.com/graphql-go/graphql"
+	gameHandler "github.com/thoussei/antonio/api/games/handler"
 	"github.com/thoussei/antonio/api/wagger/entity"
 	"github.com/thoussei/antonio/api/wagger/handler"
-	gameHandler "github.com/thoussei/antonio/api/games/handler"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
@@ -19,7 +19,7 @@ type WaggerResolver interface {
 }
 
 type wagger struct {
-	waggerHandler handler.UsecaseWagger
+	waggerHandler          handler.UsecaseWagger
 	gameWaggerHandler      gameHandler.UsecaseGameInterface
 	plateformWaggerHandler gameHandler.UsecasePlateformInterface
 }
@@ -41,13 +41,14 @@ type updatedWagger struct {
 	Participant      string `json:"participant"`
 	IsPublic         string `json:"IsPublic"`
 	Statut           string `json:"statut"`
+	Rules            string `json:"rules"`
 }
 
-func NewResolverWagger(waggerUseCase handler.UsecaseWagger,waggerGame gameHandler.UsecaseGameInterface, waggerPlateform gameHandler.UsecasePlateformInterface) WaggerResolver {
+func NewResolverWagger(waggerUseCase handler.UsecaseWagger, waggerGame gameHandler.UsecaseGameInterface, waggerPlateform gameHandler.UsecasePlateformInterface) WaggerResolver {
 	return &wagger{
-		waggerHandler: waggerUseCase,
-		gameWaggerHandler:waggerGame,
-		plateformWaggerHandler:waggerPlateform,
+		waggerHandler:          waggerUseCase,
+		gameWaggerHandler:      waggerGame,
+		plateformWaggerHandler: waggerPlateform,
 	}
 }
 
@@ -64,6 +65,7 @@ func (w *wagger) SavedWaggerResolver(params graphql.ResolveParams) (interface{},
 	format, _ := params.Args["format"].(string)
 	isPublic, _ := params.Args["isPublic"].(bool)
 	participant, _ := params.Args["participant"].(int)
+	rules, _ := params.Args["rules"].(string)
 	game, err := w.gameWaggerHandler.FindOneGameByUidHandler(gameUid)
 	plateform, err := w.plateformWaggerHandler.FindOnePlateformByUidHandler(plateformUid)
 
@@ -86,6 +88,7 @@ func (w *wagger) SavedWaggerResolver(params graphql.ResolveParams) (interface{},
 		GameWay:          gameWay,
 		Format:           format,
 		IsPublic:         isPublic,
+		Rules:            rules,
 	}
 
 	res, err := w.waggerHandler.SavedWaggerHandle(wagger)
@@ -141,6 +144,7 @@ func (w *wagger) UpdatedWaggerResolver(params graphql.ResolveParams) (interface{
 	isPublic := wagger.IsPublic
 	statut := wagger.Statut
 	participant := wagger.Participant
+	rules := wagger.Rules
 
 	if input.WaggerUpated.Date != "" {
 		date = input.WaggerUpated.Date
@@ -186,6 +190,10 @@ func (w *wagger) UpdatedWaggerResolver(params graphql.ResolveParams) (interface{
 		participant, _ = strconv.Atoi(input.WaggerUpated.Participant)
 	}
 
+	if input.WaggerUpated.Rules != "" {
+		rules = input.WaggerUpated.Rules
+	}
+
 	waggerToupdated := &entity.Wagger{
 		Uid:              wagger.Uid,
 		Date:             date,
@@ -201,6 +209,7 @@ func (w *wagger) UpdatedWaggerResolver(params graphql.ResolveParams) (interface{
 		IsPublic:         isPublic,
 		Participant:      participant,
 		Statut:           statut,
+		Rules:            rules,
 	}
 
 	res, err := w.waggerHandler.UpdatedWaggerHandler(waggerToupdated)

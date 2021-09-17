@@ -78,7 +78,7 @@ const Avatar : React.FC = function() {
 				<h2>{userConnectedRedux.user.username}</h2>
 				<p className="pseudo"><strong>{userConnectedRedux.user.username}</strong></p>
 			</div>
-			<div className={!closeModal ? "crop-container" :"crop-container close"}>
+			{/*<div className={!closeModal ? "crop-container" :"crop-container close"}>
 				<div className="is-cropped">
 					<h2>Changer de photo de profil</h2>
 					<Cropper
@@ -95,7 +95,7 @@ const Avatar : React.FC = function() {
 						<button className="btn bg-red">Valider</button>
 					</div>
 				</div>
-			</div>
+			</div>*/}
 		</div>
 	)
 }

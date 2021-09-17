@@ -14,4 +14,5 @@ export interface Wagger {
 	isPublic:boolean|undefined
 	game:Game
 	plateform:Platform
+	gameWay:string
 }

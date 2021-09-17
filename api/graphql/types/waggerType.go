@@ -34,8 +34,8 @@ var WaggerSchemaType = graphql.NewObject(graphql.ObjectConfig{
 		"game": &graphql.Field{
 			Type: GameSchemaType,
 		},
-		"plateform":&graphql.Field{
-			Type:PlateformSchemaType,
+		"plateform": &graphql.Field{
+			Type: PlateformSchemaType,
 		},
 		"format": &graphql.Field{
 			Type: graphql.String,
@@ -51,6 +51,9 @@ var WaggerSchemaType = graphql.NewObject(graphql.ObjectConfig{
 		},
 		"records": &graphql.Field{
 			Type: graphql.Int,
+		},
+		"rules": &graphql.Field{
+			Type: graphql.String,
 		},
 	},
 })

@@ -1,7 +1,7 @@
 import React,{useEffect,useState} from "react"
 import { Link } from "react-router-dom"
 import { faXbox } from "@fortawesome/free-brands-svg-icons"
-import { faGamepad, faTrophy } from "@fortawesome/free-solid-svg-icons"
+import {  faTrophy } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import {useQuery} from "@apollo/client"
 import { useSelector } from "react-redux"
@@ -35,6 +35,7 @@ const Waggers: React.FC = function() {
 	const userConnectedRedux = useSelector((state:RootState) => state.userConnected)
 	const [waggers, setWaggers] = useState<Array<Wagger>>([])
 	const [lastWagger, setLastWagger] = useState<Array<any>>([])
+	const [countWagger,setCountWagger] = useState<number>(0)
 	const {loading,error,data} 	= useQuery(GET_ALL_WAGER, {
 		variables: {
 			limit:LIMIT,
@@ -52,15 +53,22 @@ const Waggers: React.FC = function() {
 
 
 	useEffect(() => {
+		let countWagger:number = 0
 		if(!loading && !error && data) {
 			setWaggers(data.FindAllWagger)
 		}
 
 		if(!ldPart && !errPart && dataPart) {
-			if(dataPart && dataPart.FindPartByUser.length > 0) setLastWagger(dataPart.FindPartByUser)
+			if(dataPart && dataPart.FindPartByUser.length > 0) {
+				dataPart.FindPartByUser.forEach(function(e:any) {
+					countWagger++
+					if(e.wagger) setCountWagger(countWagger)
+				})
+				setLastWagger(dataPart.FindPartByUser)
+			}
 		}
 
-	},[loading,error,data])
+	},[loading,error,data,ldPart,errPart,dataPart])
 
   return(
   	<div className="container">
@@ -121,7 +129,7 @@ const Waggers: React.FC = function() {
 						)
 					})}
 
-					{lastWagger.length > 0 ? (
+					{lastWagger.length > 0 && countWagger > 0 ? (
 							<div className="undertitle">
 							<h2>Wagers</h2>
 								<h2>
@@ -136,13 +144,13 @@ const Waggers: React.FC = function() {
 							<></>
 						)
 					}
-					<div className="content waggers-link d-none">
+					<div className="content waggers-link">
 							<div className="clear"></div>
 							{
-								lastWagger.length > 0 ? lastWagger.map(function(el:any,index:number) {
+								lastWagger.length > 0 && countWagger > 0 ? lastWagger.map(function(el:any,index:number) {
 									return (
-										el.iswin ? (
-											<Link to ={el.wagger.uid} key={index}>
+										el.isWin  ? (
+											<Link to ={el?.wagger.uid} key={index}>
 												<div className="apex block dark-green">
 													<div>
 														<p className="legend">{el.wagger.title}</p><i className="iconGame"><FontAwesomeIcon icon={faXbox}/></i>
@@ -154,7 +162,7 @@ const Waggers: React.FC = function() {
 												</div>
 											</Link>
 										) : (
-											<Link to ={el.wagger.uid} key={index}>
+											<Link to ={el?.wagger.uid} key={index}>
 												<div className="apex block dark-red">
 													<div>
 														<p className="legend">{el.wagger.title}</p><i className="iconGame"><FontAwesomeIcon icon={faXbox}/></i>
@@ -174,7 +182,7 @@ const Waggers: React.FC = function() {
 					</div>
 				</div>
 			</div>
-			<div className="choices d-none">
+			<div className="choices">
 				<div className="jeux">
 				    <h2>
 						Choisis ton jeu
