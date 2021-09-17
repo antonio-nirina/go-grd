@@ -1,4 +1,4 @@
-import React,{useMemo,useState} from "react"
+import React,{useMemo,useState,useRef} from "react"
 import { Link } from 'react-router-dom'
 import { useSelector } from "react-redux"
 import {useQuery} from "@apollo/client"
@@ -23,6 +23,7 @@ import AvatarDefault from "../../assets/image/game-tag.png"
 const Communaute: React.FC = function() {
 	const userConnectedRedux 	= useSelector((state:RootState) => state.userConnected)
 	// const {loading,error,data}  = useSubscription(COUNT_SUBSCRIBE)
+	const contentPost = useRef<HTMLInputElement>(null)
 	const [cmty,setCmty] 			= useState<Array<any>>([])
 	const {loading,error,data} 		= useQuery(GET_ALL_CMTY, {
 		variables: {
@@ -40,6 +41,7 @@ const Communaute: React.FC = function() {
 	useMemo(() => {
 		if(!loadingTwitch && !errorTwitch && dataTwitch) console.log("dataTwitch", dataTwitch)
 		if(!loading && !error && data) setCmty(data.FindAllCmty)
+		if(contentPost.current) contentPost.current.contentEditable = "true"
 	},[loadingTwitch,errorTwitch,dataTwitch,loading,error,data])
 
   return(
@@ -109,17 +111,23 @@ const Communaute: React.FC = function() {
 	  						<div className="new-post-title">
 	  							Nouveau Post
 	  						</div>
-	  						<div className="content-new-post"></div>
-	  						<div className="post-icon" >
-	  							<div className="">
-								  <i><FontAwesomeIcon icon={faImage} size="1x"/></i>
-								</div>
-	  							<div className="">
-								  <i><FontAwesomeIcon icon={faPaperclip} rotation={90} size="1x"/></i>
+	  						<div className="content-profil">
+	  							<div><img className="img-post" src={userConnectedRedux.user.avatar} /></div>
+	  							<div className="title-expr">Exprime toi ...</div>
+	  						</div>
+	  						<div className="content-new-post" id="content-post" ref={contentPost}></div>
+	  						<div className="post-icon">
+	  							<div className="icon-lists">
+		  							<div className="f-icons">
+									  <i><FontAwesomeIcon icon={faImage} /></i>
+									</div>
+		  							<div className="f-icons">
+									  <i><FontAwesomeIcon icon={faPaperclip} rotation={90} /></i>
+									  </div>
+		  							<div className="f-icons">
+									  <i><FontAwesomeIcon icon={faLaugh} /></i>
 								  </div>
-	  							<div className="">
-								  <i><FontAwesomeIcon icon={faLaugh} size="1x"/></i>
-								  </div>
+								 </div>
 	  							<button className="btn bg-red poster">Poster</button>
 	  						</div>
 	  					</div>

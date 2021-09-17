@@ -10,15 +10,9 @@ func createPublication() *graphql.Field {
 		Type:        graphql.String,
 		Description: "Publication create",
 		Args: graphql.FieldConfigArgument{
-			"uidUser": &graphql.ArgumentConfig{
-				Type: graphql.String,
-			},
-			"title": &graphql.ArgumentConfig{
+			"streaming": &graphql.ArgumentConfig{
 				Type: graphql.String,
 			},	
-			"content": &graphql.ArgumentConfig{
-				Type: graphql.String,
-			},
 			"uidGame": &graphql.ArgumentConfig{
 				Type: graphql.String,
 			},			
