@@ -29,8 +29,8 @@ export const XboxProfil = gql`
 `
 
 export const TwitchProfil = gql`
-	query GetAccessTokenTwitch($code: String!,$email: String) {
-		GetAccessTokenTwitch(code: $code,email: $email) {
+	query GetAccessTokenTwitch($code: String!) {
+		GetAccessTokenTwitch(code: $code) {
 				access_token
 				refresh_token
 				expires_in

@@ -12,6 +12,7 @@ import (
 	"github.com/graphql-go/graphql"
 	"github.com/joho/godotenv"
 	"github.com/thoussei/antonio/api/external"
+	game "github.com/thoussei/antonio/api/games/entity"
 	"github.com/thoussei/antonio/api/user/entity"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
@@ -114,7 +115,12 @@ func (r *resolver) GetAccessTokenTwitchApi(params graphql.ResolveParams) (interf
 			external.Logger(fmt.Sprintf("%v", err))
 		}
 		
-		user, _ := r.userHandler.FindUserByEmail(params.Args["email"].(string))
+		user, err := r.userHandler.FindUserByEmail(userTwitch.Email)
+
+		if err != nil {
+			external.Logger(fmt.Sprintf("%v", err))
+		}
+
 		accounts := entity.Accounts{
 			Uid:primitive.NewObjectID(),
 			Id:userTwitch.Id,
@@ -122,8 +128,29 @@ func (r *resolver) GetAccessTokenTwitchApi(params graphql.ResolveParams) (interf
 			Profil:userTwitch.DisplayName,
 			Logo:userTwitch.Logo,
 		}
-		user.Accounts = append(user.Accounts, accounts)
-		_, err = r.userHandler.UpdatedUser(&user)
+		
+		if  user.Uid.Hex() != "" {
+			user.Accounts = append(user.Accounts, accounts)
+		} else {
+			userTwitch := &entity.User{
+				Uid:           primitive.NewObjectID(),
+				FirstName:     userTwitch.DisplayName,
+				LastName:      userTwitch.Name,
+				Password:      "",
+				Username:      userTwitch.DisplayName,
+				Email:         userTwitch.Email,
+				IsBanned:      false,
+				Avatar:        "",
+				Language:      "fr",
+				Point:         entity.POINT,
+				IdGameAccount: []game.GameAccount{},
+				Roles: 	roles,
+				TypeConnexion:"twitch",		
+			}
+
+			r.userHandler.SavedUser(userTwitch)
+		}
+	
 	}
 
 	return resSuccess,nil

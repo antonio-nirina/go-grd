@@ -19,7 +19,7 @@ type post struct {
 	postUserHandler userHandler.Usecase
 }
 
-func NewResolverPost(postUseCase handler.UsecaseCmty, userUsecase userHandler.Usecase) PostResolve {
+func NewResolverPost(postUseCase handler.UsecasePost, userUsecase userHandler.Usecase) PostResolve {
 	return &post{
 		postHandler:     postUseCase,
 		postUserHandler: userUsecase,

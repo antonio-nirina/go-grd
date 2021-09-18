@@ -1,12 +1,18 @@
 package delivery
 
 import (
+	"encoding/json"
+
 	"github.com/graphql-go/graphql"
 	"github.com/thoussei/antonio/api/community/entity"
 	"github.com/thoussei/antonio/api/community/handler"
 	gameHandler "github.com/thoussei/antonio/api/games/handler"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
+
+type inputAdCmty struct {
+	Streaming  []string `json:"streaming"`
+}
 
 type CmtyResolve interface {
 	CreatePublicationResolve(params graphql.ResolveParams) (interface{}, error)
@@ -22,13 +28,18 @@ type cmty struct {
 func NewResolverCmty(cmtyUseCase handler.UsecaseCmty, cmtyGame gameHandler.UsecaseGameInterface) CmtyResolve {
 	return &cmty{
 		cmtyHandler:     cmtyUseCase,
-		cmtyUserHandler: userUsecase,
 		cmtyGameHandler: cmtyGame,
 	}
 }
 
 func (c *cmty) CreatePublicationResolve(params graphql.ResolveParams) (interface{}, error) {
-	streaming, _ := params.Args["streaming"].(string)
+	var streams [] string
+	jsonString, _ := json.Marshal(params.Args)
+	inputs := inputAdCmty{}
+	json.Unmarshal([]byte(jsonString), &inputs)
+	for _, val := range inputs.Streaming {
+		streams = append(streams, val)
+	}
 	uidGame, _ := params.Args["uidGame"].(string)
 	game, err := c.cmtyGameHandler.FindOneGameByUidHandler(uidGame)
 
@@ -38,7 +49,7 @@ func (c *cmty) CreatePublicationResolve(params graphql.ResolveParams) (interface
 
 	cmty := &entity.Communauty{
 		Uid:     primitive.NewObjectID(),
-		Streaming:   streaming,
+		Streaming:   streams,
 		Game:    game,
 	}
 

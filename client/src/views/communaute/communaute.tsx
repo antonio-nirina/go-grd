@@ -112,7 +112,7 @@ const Communaute: React.FC = function() {
 	  							Nouveau Post
 	  						</div>
 	  						<div className="content-profil">
-	  							<div><img className="img-post" src={userConnectedRedux.user.avatar} /></div>
+	  							<div><img className="img-post" src={userConnectedRedux.user.avatar} alt="avatar-user-post" /></div>
 	  							<div className="title-expr">Exprime toi ...</div>
 	  						</div>
 	  						<div className="content-new-post" id="content-post" ref={contentPost}></div>
