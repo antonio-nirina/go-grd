@@ -393,7 +393,6 @@
 	background: red;	
 	font-size: 10px;
 	background: none;
-	color: ;
 	padding: 8px 20px;
 
 }
@@ -466,68 +465,4 @@
 }
 /*****************************************************/
 
-.center-block .new-post{
-	background-color: #efefef;
-	border-radius: 7px;
-	overflow: hidden;
-	padding-right: 6px;
-	padding-left: 6px;
-}
-.new-post .post-icon{
-	color: #777778;
-	margin-bottom: 11px;
-	padding-bottom: 11px;
-	position: relative;
-}
-.new-post .new-post-title {
-	font-size: 18px;
-	color: #000;
-	font-weight: bolder;
-	padding-bottom: 7px;
-	border-bottom: 1px solid;
-}
-.post-icon .poster{
-	padding: 4px;
-	font-size: 11px;
-	position: absolute;
-	bottom: 0;
-	right: 0;
-	text-transform: none !important;
-}
 
-.post-icon .icon-lists {
-	display: flex;
-	width: 50%;
-	position: absolute;
-	bottom: 0;
-}
-
-.icon-lists .f-icons{
-	font-size: 19px;
-}
-
-.content-new-post{
-	height: 118px;
-	color: #000;
-	margin-top: 11px;
-	margin-bottom: 15px;
-	outline: none;
-}
-.content-profil{
-	display: flex;
-	color: #000;
-	margin-top: 11px;
-	position: relative;
-}
-.content-profil .img-post{
-	width: 57px;
-	height: 57px;
-	border-radius: 50%;
-}
-
-.title-expr{
-	position: absolute;
-	top: 50%;
-	transform: translateY(-50%);
-	left: 71px;
-}

@@ -152,7 +152,10 @@
 		"addFriend":"Add friend",
 		"addFriendList":"Search friends",
 		"titleFriend":"Friends",
-		"titleAddFriend":"Add friend"
+		"titleAddFriend":"Add friend",
+		"express":"Express yourself ...",
+		"newpost": "New post",
+		"addImage":"Add pictures/videos or drag & drop..."
 	},
 	"tournament":{
 		"incoming":"Upcoming Tournaments",
