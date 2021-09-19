@@ -12,6 +12,8 @@ type PostViewModel struct {
 	Title     string             			`json:"title"`
 	User      userHanlder.UserViewModel   `json:"user"`
 	Content   string             			`json:"content"`
+	ImageType   string             `json:"imageType"`
+	Files   string             `json:"files"`
 }
 
 type UsecasePost interface {
@@ -66,14 +68,16 @@ func (c *postUsecase) FindPostHandler(idQuery string) (PostViewModel, error) {
 		Point:result.User.Point,         
 		Roles:result.User.Roles,      	
 		TypeConnexion:result.User.TypeConnexion,   
-		Created:result.User.Created, 		
+		Created:result.User.Created,	
 	}
 
 	cmtyViewModel := PostViewModel{
 		Uid: result.Uid.Hex(),
 		Title:result.Title,
 		User:userViews,
-		Content:result.Content,  			
+		Content:result.Content,
+		ImageType:result.ImageType,
+		Files:result.Files,  			
 	}
 
 	return cmtyViewModel,nil
@@ -109,6 +113,8 @@ func (c *postUsecase) FindAllPostHandler(pageNumber int64,limit int64) ([]PostVi
 			Title:val.Title,
 			User:userViews,
 			Content:val.Content,
+			ImageType:val.ImageType,
+			Files:val.Files,
 		}
 
 		res = append(res, cmtyViewModel)

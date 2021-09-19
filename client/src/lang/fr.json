@@ -161,7 +161,8 @@
 		"withFriend":"Vous êtes maintenant ami(e) avec",
 		"newpost": "Nouveau Post",
 		"express":"Exprime toi ...",
-		"addImage":"Ajouter photos/videos ou glisser-deposer ..."
+		"addImage":"Ajouter photos/videos ou glisser-deposer ...",
+		"fileNotvalid":"Type du fichier n'est pas valider"
 	},
 	"tournament":{
 		"live": "Tournois en direct",

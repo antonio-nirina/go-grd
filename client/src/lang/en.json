@@ -155,7 +155,8 @@
 		"titleAddFriend":"Add friend",
 		"express":"Express yourself ...",
 		"newpost": "New post",
-		"addImage":"Add pictures/videos or drag & drop..."
+		"addImage":"Add pictures/videos or drag & drop...",
+		"fileNotvalid":"File type not valid"
 	},
 	"tournament":{
 		"incoming":"Upcoming Tournaments",

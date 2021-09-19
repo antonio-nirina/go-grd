@@ -11,4 +11,6 @@ type Post struct {
 	Title     string             `json:"title"`
 	User      entity.User             `json:"user"`
 	Content   string             `json:"Content"`
+	ImageType   string             `json:"imageType"`
+	Files   string             `json:"files"`
 }
