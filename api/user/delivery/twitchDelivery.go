@@ -12,39 +12,39 @@ import (
 	"github.com/graphql-go/graphql"
 	"github.com/joho/godotenv"
 	"github.com/thoussei/antonio/api/external"
+	game "github.com/thoussei/antonio/api/games/entity"
 	"github.com/thoussei/antonio/api/user/entity"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
 type oauthTokenTwitch struct {
-	TokenType string `json:"token_type"`
-	ExpiresIn int `json:"expires_in"`
-	Scope string `json:"scope"`
-	AccessToken string `json:"access_token"`
+	TokenType    string `json:"token_type"`
+	ExpiresIn    int    `json:"expires_in"`
+	Scope        string `json:"scope"`
+	AccessToken  string `json:"access_token"`
 	RefreshToken string `json:"refresh_token"`
 }
 
 type userTwitchApi struct {
-	Id string `json:"_id"`
-	Bio string `json:"bio"`
-	CreatedAt string `json:"created_at"`
-	DisplayName string `json:"display_name"`
-	Email string `json:"email"`
-	EmailVerified bool `json:"email_verified"`
-	Logo string `json:"logo"`
-	Name string `json:"name"`
-	Notifications notificationTwitchApi
-	Partnered string `json:"partnered"`
+	Id               string `json:"_id"`
+	Bio              string `json:"bio"`
+	CreatedAt        string `json:"created_at"`
+	DisplayName      string `json:"display_name"`
+	Email            string `json:"email"`
+	EmailVerified    bool   `json:"email_verified"`
+	Logo             string `json:"logo"`
+	Name             string `json:"name"`
+	Notifications    notificationTwitchApi
+	Partnered        string `json:"partnered"`
 	TwitterConnected string `json:"twitter_connected"`
-	Type string `json:"type"`
-	UpdatedAt string `json:"updated_at"`
+	Type             string `json:"type"`
+	UpdatedAt        string `json:"updated_at"`
 }
 
 type notificationTwitchApi struct {
 	Email bool `json:"email"`
-	Push bool `json:"push"`
+	Push  bool `json:"push"`
 }
-
 
 func (r *resolver) GetAccessTokenTwitchApi(params graphql.ResolveParams) (interface{}, error) {
 	err := godotenv.Load()
@@ -79,25 +79,25 @@ func (r *resolver) GetAccessTokenTwitchApi(params graphql.ResolveParams) (interf
 	token := &DataToken{}
 	defer resp.Body.Close()
 	body, err := ioutil.ReadAll(resp.Body)
-	
-	if resp.StatusCode == 200 { 
+
+	if resp.StatusCode == 200 {
 		userTwitch := &userTwitchApi{}
 		err = json.Unmarshal(body, resSuccess)
 		if err != nil {
 			external.Logger(fmt.Sprintf("%v", err))
 		}
-		
-		token.AccessToken 	= resSuccess.AccessToken
-		token.RefreshToken 	= resSuccess.RefreshToken
+
+		token.AccessToken = resSuccess.AccessToken
+		token.RefreshToken = resSuccess.RefreshToken
 		payload := &requestGraph{}
 		reqBodyBytes := new(bytes.Buffer)
 		json.NewEncoder(reqBodyBytes).Encode(payload)
 		reqUser, err := http.NewRequest("GET", TWITCH_TOKEN_USER, reqBodyBytes)
-		reqUser.Header.Set("Authorization","Bearer "+resSuccess.AccessToken)
+		reqUser.Header.Set("Authorization", "Bearer "+resSuccess.AccessToken)
 		reqUser.Header.Set("Content-Type", "application/json")
 
 		if err != nil {
-			return nil,err
+			return nil, err
 		}
 
 		respUser, err := htppClient.client.Do(reqUser)
@@ -113,18 +113,49 @@ func (r *resolver) GetAccessTokenTwitchApi(params graphql.ResolveParams) (interf
 		if err != nil {
 			external.Logger(fmt.Sprintf("%v", err))
 		}
-		
-		user, _ := r.userHandler.FindUserByEmail(params.Args["email"].(string))
-		accounts := entity.Accounts{
-			Uid:primitive.NewObjectID(),
-			Id:userTwitch.Id,
-			Name:"Twitch",
-			Profil:userTwitch.DisplayName,
-			Logo:userTwitch.Logo,
-		}
-		user.Accounts = append(user.Accounts, accounts)
-		_, err = r.userHandler.UpdatedUser(&user)
-	}
 
-	return resSuccess,nil
+		user, err := r.userHandler.FindUserByEmail(userTwitch.Email)
+
+		if err != nil {
+			external.Logger(fmt.Sprintf("%v", err))
+		}
+
+		var twitchAccount []entity.Accounts
+		accounts := entity.Accounts{
+			Uid:    primitive.NewObjectID(),
+			Id:     userTwitch.Id,
+			Name:   "Twitch",
+			Profil: userTwitch.DisplayName,
+			Logo:   userTwitch.Logo,
+		}
+
+		twitchAccount = append(twitchAccount, accounts)
+		if user.Uid.Hex() != "" {
+			user.Accounts = append(user.Accounts, accounts)
+			user.TypeConnexion = "twitch"
+			_, err = r.userHandler.UpdatedUser(&user)
+		} else {
+			userTwitch := &entity.User{
+				Uid:           primitive.NewObjectID(),
+				FirstName:     userTwitch.DisplayName,
+				LastName:      userTwitch.Name,
+				Password:      "",
+				Username:      userTwitch.DisplayName,
+				Email:         userTwitch.Email,
+				IsBanned:      false,
+				Avatar:        "",
+				Language:      "fr",
+				Point:         entity.POINT,
+				IdGameAccount: []game.GameAccount{},
+				Roles:         roles,
+				TypeConnexion: "twitch",
+				Accounts:      twitchAccount,
+			}
+
+			r.userHandler.SavedUser(userTwitch)
+		}
+
+	}
+	fmt.Println(resSuccess)
+	return resSuccess, nil
 }

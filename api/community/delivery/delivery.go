@@ -1,13 +1,18 @@
 package delivery
 
 import (
+	"encoding/json"
+
 	"github.com/graphql-go/graphql"
 	"github.com/thoussei/antonio/api/community/entity"
 	"github.com/thoussei/antonio/api/community/handler"
 	gameHandler "github.com/thoussei/antonio/api/games/handler"
-	userHandler "github.com/thoussei/antonio/api/user/handler"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
+
+type inputAdCmty struct {
+	Streaming  []string `json:"streaming"`
+}
 
 type CmtyResolve interface {
 	CreatePublicationResolve(params graphql.ResolveParams) (interface{}, error)
@@ -17,24 +22,25 @@ type CmtyResolve interface {
 
 type cmty struct {
 	cmtyHandler     handler.UsecaseCmty
-	cmtyUserHandler userHandler.Usecase
 	cmtyGameHandler gameHandler.UsecaseGameInterface
 }
 
-func NewResolverCmty(cmtyUseCase handler.UsecaseCmty, userUsecase userHandler.Usecase, cmtyGame gameHandler.UsecaseGameInterface) CmtyResolve {
+func NewResolverCmty(cmtyUseCase handler.UsecaseCmty, cmtyGame gameHandler.UsecaseGameInterface) CmtyResolve {
 	return &cmty{
 		cmtyHandler:     cmtyUseCase,
-		cmtyUserHandler: userUsecase,
 		cmtyGameHandler: cmtyGame,
 	}
 }
 
 func (c *cmty) CreatePublicationResolve(params graphql.ResolveParams) (interface{}, error) {
-	uid, _ := params.Args["uidUser"].(string)
-	title, _ := params.Args["title"].(string)
-	content, _ := params.Args["content"].(string)
+	var streams [] string
+	jsonString, _ := json.Marshal(params.Args)
+	inputs := inputAdCmty{}
+	json.Unmarshal([]byte(jsonString), &inputs)
+	for _, val := range inputs.Streaming {
+		streams = append(streams, val)
+	}
 	uidGame, _ := params.Args["uidGame"].(string)
-	user, err := c.cmtyUserHandler.FindOneUserByUid(uid)
 	game, err := c.cmtyGameHandler.FindOneGameByUidHandler(uidGame)
 
 	if err != nil {
@@ -43,9 +49,7 @@ func (c *cmty) CreatePublicationResolve(params graphql.ResolveParams) (interface
 
 	cmty := &entity.Communauty{
 		Uid:     primitive.NewObjectID(),
-		Title:   title,
-		User:    user,
-		Content: content,
+		Streaming:   streams,
 		Game:    game,
 	}
 

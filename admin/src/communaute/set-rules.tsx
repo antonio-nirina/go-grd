@@ -47,13 +47,13 @@ const SetRules: React.FC = function() {
 
 	},[loading,error,data])
 
-	const handleFiles = function(files: Array<File>, info: object, uploadHandler: Function) {
+	/*const handleFiles = function(files: Array<File>, info: object, uploadHandler: Function) {
 		try {
         	resizeImage(files, uploadHandler)
 	    } catch (err:any) {
 	        uploadHandler(err.toString())
 	    }
-	}
+	}*/
 
 	const handleGame = function(event:any){
 		setUidGame(event.target.value)
@@ -120,7 +120,7 @@ const SetRules: React.FC = function() {
 	        					<div className="field">
 		        					<div className="group-input">
 	                                    <form onSubmit={handleSubmit(onSubmit)}>
-	    									<label htmlFor="title-rules">Publication : </label>	    									
+	    									<label htmlFor="title-rules">Contenu page communaute : </label>
 	    									<div className="input-group">
                                                 <select id="select-game" onChange={handleGame}>
 	                                                <option value="">Selectionner jeux ...</option>
@@ -130,6 +130,9 @@ const SetRules: React.FC = function() {
                                                 		)
 	                                                })}
 	                                            </select>
+                                            </div>
+                                            <div className="input-group">
+                                            	Les streaming à afficher
                                             </div>
 	    									<button className="btn bg-red" style={{"cursor":"pointer"}}><FontAwesomeIcon icon={faPlus} /> Ajouter</button>
 	    								</form>

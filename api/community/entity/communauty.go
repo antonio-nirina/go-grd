@@ -7,6 +7,6 @@ import (
 
 type Communauty struct {
 	Uid       primitive.ObjectID `bson:"uid"`
-	Streaming     []string             `json:"Streaming"`
+	Streaming     []string             `json:"streaming"`
 	Game      gameEntity.Game             `json:"game"`
 }

@@ -4,21 +4,26 @@ import (
 	"github.com/graphql-go/graphql"
 )
 
+var streamingInputType  = graphql.NewInputObject(
+	graphql.InputObjectConfig{
+		Name:"StreamingInput",
+		Fields: graphql.InputObjectConfigFieldMap{
+			"stream": &graphql.InputObjectFieldConfig{
+				Type: graphql.String,
+			},
+		},
+	},
+)
+
 
 func createPublication() *graphql.Field {
 	return &graphql.Field{
 		Type:        graphql.String,
 		Description: "Publication create",
 		Args: graphql.FieldConfigArgument{
-			"uidUser": &graphql.ArgumentConfig{
-				Type: graphql.String,
-			},
-			"title": &graphql.ArgumentConfig{
-				Type: graphql.String,
+			"streaming": &graphql.ArgumentConfig{
+				Type: graphql.NewList(streamingInputType),
 			},	
-			"content": &graphql.ArgumentConfig{
-				Type: graphql.String,
-			},
 			"uidGame": &graphql.ArgumentConfig{
 				Type: graphql.String,
 			},			

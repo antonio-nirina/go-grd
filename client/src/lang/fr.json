@@ -158,7 +158,11 @@
 		"addFriendList":"Trouver des amis",
 		"titleFriend":"Amis",
 		"titleAddFriend":"Ajouter des amis",
-		"withFriend":"Vous êtes maintenant ami(e) avec"
+		"withFriend":"Vous êtes maintenant ami(e) avec",
+		"newpost": "Nouveau Post",
+		"express":"Exprime toi ...",
+		"addImage":"Ajouter photos/videos ou glisser-deposer ...",
+		"fileNotvalid":"Type du fichier n'est pas valider"
 	},
 	"tournament":{
 		"live": "Tournois en direct",
@@ -179,7 +183,6 @@
 		"price":"Prix Cache",
 		"signup":"Inscrivez vous",
 		"prize":"Prix",
-		"team":"Equipe",
 		"player":"Joueurs",
 		"rules":"Règles",
 		"pending":"En attente",

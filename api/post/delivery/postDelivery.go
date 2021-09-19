@@ -19,7 +19,7 @@ type post struct {
 	postUserHandler userHandler.Usecase
 }
 
-func NewResolverPost(postUseCase handler.UsecaseCmty, userUsecase userHandler.Usecase) PostResolve {
+func NewResolverPost(postUseCase handler.UsecasePost, userUsecase userHandler.Usecase) PostResolve {
 	return &post{
 		postHandler:     postUseCase,
 		postUserHandler: userUsecase,
@@ -30,6 +30,8 @@ func (c *post) CreatePostResolve(params graphql.ResolveParams) (interface{}, err
 	uid, _ := params.Args["uidUser"].(string)
 	title, _ := params.Args["title"].(string)
 	content, _ := params.Args["content"].(string)
+	imageType, _ := params.Args["imageType"].(string)
+	files, _ := params.Args["files"].(string)
 	user, err := c.postUserHandler.FindOneUserByUid(uid)
 
 	if err != nil {
@@ -41,6 +43,8 @@ func (c *post) CreatePostResolve(params graphql.ResolveParams) (interface{}, err
 		Title:   title,
 		User:    user,
 		Content: content,
+		ImageType:imageType,
+		Files:files,
 	}
 
 	res, err := c.postHandler.CreatePostHandler(cmty)

@@ -3,13 +3,13 @@ import React,{useState} from "react"
 import SunEditor from 'suneditor-react'
 import 'suneditor/dist/css/suneditor.min.css'
 import { useForm } from "react-hook-form"
-import {useMutation} from "@apollo/client"
+// import {useMutation} from "@apollo/client"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPen, faPlus, faTimes } from "@fortawesome/free-solid-svg-icons"
-import {useHistory } from "react-router-dom"
+//import {useHistory } from "react-router-dom"
 import SideBar from "../header/sidebar"
 import Nav from "../header/nav"
-import {CREATE_HOME_PAGE_CONTENT} from "../gql/home/mutation"
+// import {CREATE_HOME_PAGE_CONTENT} from "../gql/home/mutation"
 
 const style = {
 	"cursor":"pointer"
@@ -21,13 +21,13 @@ type Inputs = {
 }
 
 const SetHome: React.FC = function() {
-	const history = useHistory()
+	//const history = useHistory()
 	const { handleSubmit } 	= useForm<Inputs>()
 	const [title, setTitle] 			= useState<Array<string>>([])
 	const [titleUnder, setTitleUnder] 	= useState<Array<string>>([])
 	const [number, setNumber] 		= useState<number>(1)
 	const [arrayForm, setArrayForm] 		= useState<Array<number>>([])
-	const [createdHomePage]  			= useMutation(CREATE_HOME_PAGE_CONTENT)
+	// const [createdHomePage]  			= useMutation(CREATE_HOME_PAGE_CONTENT)
 	const [image, setImage] = useState<string>("")
 	const [imageGame, setImageGame] 	= useState<string>("")
 	const [imageType, setImageType] = useState<string>("")
@@ -35,7 +35,7 @@ const SetHome: React.FC = function() {
 	const [arrayContent, setArrayContent] 		= useState<Array<string>>([])
 
 	const onSubmit1 = async function(){
-		let array:Array<any> = []
+		// let array:Array<any> = []
 		let nIncontent:Array<any> = []
 		
 		for(let i=0;i<titleUnder.length;i++) {
