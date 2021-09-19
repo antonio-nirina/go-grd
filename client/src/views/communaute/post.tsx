@@ -89,12 +89,9 @@ const Post = function() {
     const handleUpload = function() {
         setIsUpload(true)
     }
-    const handleClose = function() {
+    const handleClose = function(event:any) {
         setIsUpload(false)
-    }
-
-    const handleRemove = function(event:any) {
-        event.stopPropagation()
+     	event.stopPropagation()
     	if (files[0].preview) URL.revokeObjectURL(files[0].preview)
         setFiles([])
     }
