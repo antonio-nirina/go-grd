@@ -9,8 +9,8 @@ import logo from "../../assets/image/go-grind.png"
 import avatar from "../../assets/image/game-tag.png"
 import fr from "../../assets/image/fr.png"
 import gb from "../../assets/image/gb.png"
-import ps from "../../assets/image/playstation.png"
-import { faBars, faBell, faUsers } from "@fortawesome/free-solid-svg-icons"
+import WhiteJoystick from "../../assets/image/white-joystick.png"
+import { faBars, faBell, faUsers, faPlus} from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {RootState} from "../../reducer"
 import {Translation} from "../../lang/translation"
@@ -178,6 +178,7 @@ const Header: React.FC = function() {
 				</div>
 				<div className="tag">
 					<div className="box">
+					   {/*
 					   <div className="lang">
 							<span>
 								<>
@@ -186,10 +187,12 @@ const Header: React.FC = function() {
 								</>
 							</span>
 						</div>
+					   */}
 						<div className="connex" >
 							<>
 								<i className="square" onClick={onShowNotif} style={{"cursor":"pointer"}}>
-									<FontAwesomeIcon icon={faBell} size="xs" />
+									<FontAwesomeIcon icon={faPlus} />
+									<span className="counter">2</span>
 									<span className={notification > 0 ? "number" : ""}>{notification > 0 ? notification : ""}</span>
 								</i>
 							</>
@@ -200,9 +203,11 @@ const Header: React.FC = function() {
 									: <></>
 								}
 							</div>
-							<><i className="relative">
-								<FontAwesomeIcon icon={faUsers} size="lg"/>
-								<span className="counter">2</span></i>
+							<>
+								<i className="relative">
+									<FontAwesomeIcon icon={faUsers} size="lg"/>
+									{/*<span className="counter">2</span>*/}
+								</i>
 							</>
 						</div>
 					</div>
@@ -212,7 +217,7 @@ const Header: React.FC = function() {
 								<p><img src={userConnectedRedux.user && userConnectedRedux.user.avatar ? userConnectedRedux.user.avatar : avatar} className="avatar" alt=""/></p>
 								<p className="user">{userConnectedRedux.user.username}</p>
 								<p className="user-setting">
-									<><img src={ps} className="itemTag" alt="" width="18" height="14" /></>
+									<><img src={WhiteJoystick} className="itemTag joystick" alt="" width="18" height="14" /></>
 									<><img src={userConnectedRedux.user.language && userConnectedRedux.user.language === "fr" ? fr : gb} className="itemTag" alt="" width="15" height="14"/></>
 								<i className="itemTag drop" onClick={onShow}><FontAwesomeIcon icon={faBars} /></i>
 								</p>

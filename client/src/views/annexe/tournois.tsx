@@ -18,7 +18,7 @@ import apexlegends from "../../assets/image/apex-legends.png"
 import fortnite from "../../assets/image/fortnite.png"
 import rainboxsix from "../../assets/image/rainbowsix.png"
 import rocketleague from "../../assets/image/rocketleague.png"
-import cod_Modernwarfare from "../../assets/image/modernwarfare.png"
+import cod_vanguard from "../../assets/image/cod-vanguard.png"
 import cod_warzone from "../../assets/image/warzone.png"
 import cod_coldwar from "../../assets/image/cod-coldwar.png"
 import fifa from "../../assets/image/fifa21.png"
@@ -191,7 +191,7 @@ const Tournois: React.FC = function() {
 							</div>
 			      			<div className="lastblock w100">
 						        <div className="logo-game">
-						            <Link to={`/tournament-game?game=${COD_MODERN.replace(" ","_")}&slug=${SLUG_COD_MODERN}`}><img src={cod_Modernwarfare} alt="Call of Duty Modern Warfare" /></Link>
+						            <Link to={`/tournament-game?game=${COD_MODERN.replace(" ","_")}&slug=${SLUG_COD_MODERN}`}><img src={cod_vanguard} alt="Call of Duty Vanguard" /></Link>
 						        </div>
 						        <div className="logo-game">
 						            <Link to={`/tournament-game?game=${COD_WAR_ZONE.replace(" ","_")}&slug=${SLUG_COD_WAR_ZONE}`}><img src={cod_warzone} alt="Call of Duty Warzone" /></Link>
