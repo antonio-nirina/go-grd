@@ -22,10 +22,15 @@
 	
 }
 .slogan{
-	position: absolute;
+	/*position: absolute;
 	top: 45%;
 	text-align: center;
-	width: 100%;
+	width: 100%;*/
+	position: absolute;
+    top: 37%;
+    text-align: center;
+    width: 100%;
+    left: 33px;
 }
 p.title{
 	font-family: "Russo One";
@@ -38,14 +43,14 @@ p.title{
 }
 .slogan button.bg-red{
 	font-family: "quicksand regular";
-	font-weight: 700;
-	text-transform: uppercase;
-	padding: 7px 20px;
-    opacity: 0.7;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 7px 54px;
     border: none;
     margin-top: 15px;
     color: #fff;
     background: #dd0000;
+    font-size: 21px;
 }
 .carousel-status{
 	display: none !Important;
