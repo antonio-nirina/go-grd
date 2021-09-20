@@ -7,6 +7,11 @@ import (
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
+const (
+	PAGE_NUMBER = 0
+	LIMIT 		= 10
+)
+
 type PostViewModel struct {
 	Uid       string 						`json:"uid"`
 	Title     string             			`json:"title"`
@@ -14,10 +19,11 @@ type PostViewModel struct {
 	Content   string             			`json:"content"`
 	ImageType   string             `json:"imageType"`
 	Files   string             `json:"files"`
+	Date       string                `json:"date"`
 }
 
 type UsecasePost interface {
-	CreatePostHandler(cmty *entity.Post) (interface{}, error)
+	CreatePostHandler(cmty *entity.Post) ([]PostViewModel, error)
 	FindPostHandler(idQuery string) (PostViewModel, error)
 	FindAllPostHandler(pageNumber int64,limit int64) ([]PostViewModel, error)
 }
@@ -32,15 +38,21 @@ func NewUsecasePost(r repository.RepositoryPost) UsecasePost {
 	}
 }
 
-func (c *postUsecase) CreatePostHandler(cmty *entity.Post) (interface{}, error) {
+func (c *postUsecase) CreatePostHandler(cmty *entity.Post) ([]PostViewModel, error) {
 
 	_,err := c.postRepository.SavedPostRepo(cmty)
 
 	if err != nil {
-		return 0, err
+		return []PostViewModel{}, err
 	}
 
-	return "Ok",nil
+	result, err := c.postRepository.FindAllPostRepo(PAGE_NUMBER,LIMIT)
+
+	if err != nil {
+		return []PostViewModel{}, err
+	}
+
+	return handlerAllPost(result),nil
 }
 
 func (c *postUsecase) FindPostHandler(idQuery string) (PostViewModel, error) {
@@ -77,7 +89,8 @@ func (c *postUsecase) FindPostHandler(idQuery string) (PostViewModel, error) {
 		User:userViews,
 		Content:result.Content,
 		ImageType:result.ImageType,
-		Files:result.Files,  			
+		Files:result.Files,
+		Date:result.Date,  			
 	}
 
 	return cmtyViewModel,nil
@@ -89,7 +102,11 @@ func (c *postUsecase) FindAllPostHandler(pageNumber int64,limit int64) ([]PostVi
 	if err != nil {
 		return []PostViewModel{}, err
 	}
+	
+	return handlerAllPost(result),nil
+}
 
+func handlerAllPost(result []entity.Post) ([]PostViewModel) {
 	var res []PostViewModel
 
 	for _,val := range result {
@@ -115,10 +132,11 @@ func (c *postUsecase) FindAllPostHandler(pageNumber int64,limit int64) ([]PostVi
 			Content:val.Content,
 			ImageType:val.ImageType,
 			Files:val.Files,
+			Date:val.Date,
 		}
 
 		res = append(res, cmtyViewModel)
 	}
 	
-	return res,nil
+	return res
 }

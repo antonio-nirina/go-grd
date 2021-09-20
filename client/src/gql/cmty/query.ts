@@ -14,3 +14,19 @@ query FindAllCmty($limit: Int!,$pageNumber:Int!) {
 		content
 	}
 }`
+
+export const GET_ALL_POST = gql`
+query FindAllPost($limit: Int!,$pageNumber:Int!) {
+	FindAllPost(limit: $limit,pageNumber:$pageNumber){
+		uid
+		user{
+			uid
+			email
+			username
+			avatar
+		}
+		content
+		files
+		files
+	}
+}`

@@ -67,3 +67,13 @@ export const dateStringToDYEn = function(date:string){
 				minute:"numeric"
 	}).replace(/PM|AM/,"").trim()
 }
+
+export const dateDefault = function(){
+	return new Date().toLocaleTimeString('fr-Fr', {
+				day : 'numeric',
+				month : 'numeric',
+				year : 'numeric',
+				hour:"numeric",
+				minute:"numeric"
+			})
+}

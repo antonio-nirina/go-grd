@@ -1,8 +1,7 @@
-import React,{useMemo,useState} from "react"
+import React,{useMemo} from "react"
 import { Link } from 'react-router-dom'
 import { useSelector } from "react-redux"
 import {useQuery} from "@apollo/client"
-import parse from 'html-react-parser'
 import { faEye } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
@@ -15,23 +14,14 @@ import "./communaute.css"
 import "./post.css"
 // import {COUNT_SUBSCRIBE} from "../../gql/user/subscription"
 import {GET_ALL_STREAMING} from "../../gql/user/query"
-import {GET_ALL_CMTY} from "../../gql/cmty/query"
 import Friend from "./friends"
-import {LIMIT,PAGE_NUMBER} from "../commons/constante"
-import AvatarDefault from "../../assets/image/game-tag.png"
+
+
 import Post from "./post"
 
 const Communaute: React.FC = function() {
 	const userConnectedRedux 	= useSelector((state:RootState) => state.userConnected)
 	// const {loading,error,data}  = useSubscription(COUNT_SUBSCRIBE)
-	
-	const [cmty,setCmty] 			= useState<Array<any>>([])
-	const {loading,error,data} 		= useQuery(GET_ALL_CMTY, {
-		variables: {
-			limit: LIMIT,
-			pageNumber:PAGE_NUMBER
-		},
-	})
 
 	const {loading:loadingTwitch,error:errorTwitch,data:dataTwitch} = useQuery(GET_ALL_STREAMING, {
 		variables: {
@@ -41,8 +31,7 @@ const Communaute: React.FC = function() {
 
 	useMemo(() => {
 		if(!loadingTwitch && !errorTwitch && dataTwitch) console.log("dataTwitch", dataTwitch)
-		if(!loading && !error && data) setCmty(data.FindAllCmty)
-	},[loadingTwitch,errorTwitch,dataTwitch,loading,error,data])
+	},[loadingTwitch,errorTwitch,dataTwitch])
 
   return(
 	<div className="communaute">
@@ -108,25 +97,6 @@ const Communaute: React.FC = function() {
 	  				</div>
 	  				<div className="center-block">
 	  					<Post />
-		  				{
-		  					cmty.length > 0 ? cmty.map(function(e:any,index:number) {
-		  						return (
-
-					  					<div className="bloc-actus" key={index}>
-					  						<div className="actus-name">
-					  							<img src={e.user.avatar?e.user.avatar:AvatarDefault} alt=""/>
-					  							<p>{e.user.username} <span>{`@${e.user.username}`}</span></p>
-
-					  						</div>
-					  						<div className="actus-content">
-					  							{parse(e.content)}
-					  						</div>
-					  					</div>
-	  							)
-		  					})
-		  					:
-		  					<></>
-		  				}
 	  				</div>
 
 	  				<Friend />

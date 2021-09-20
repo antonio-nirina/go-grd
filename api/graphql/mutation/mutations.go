@@ -46,6 +46,10 @@ import (
 	waggerHandler "github.com/thoussei/antonio/api/wagger/handler"
 	waggerRepo "github.com/thoussei/antonio/api/wagger/repository"
 
+	postDelivery "github.com/thoussei/antonio/api/post/delivery"
+	postHandler "github.com/thoussei/antonio/api/post/handler"
+	postRepo "github.com/thoussei/antonio/api/post/repository"
+
 	"github.com/graphql-go/graphql"
 )
 
@@ -98,6 +102,10 @@ var partRepository = partRepo.NewPartRepository(database)
 var partUsecase = partHandler.NewUsecasePart(partRepository)
 var partResolver = partDelivery.NewResolverPart(partUsecase, usecase, tournamentUsecase, teamUsecase, waggerUsecase)
 
+var postRepository = postRepo.NewPostRepository(database)
+var postUsecase = postHandler.NewUsecasePost(postRepository)
+var postResolver = postDelivery.NewResolverPost(postUsecase, usecase)
+
 func GetRootFields() graphql.Fields {
 	return graphql.Fields{
 		"createdUser":           createdUser(),
@@ -127,5 +135,6 @@ func GetRootFields() graphql.Fields {
 		"removePartTournament": removePartTournament(),
 		"createWagger":         createWagger(),
 		"updatedWagger":        updatedWagger(),
+		"createPost":			createPost(),
 	}
 }
