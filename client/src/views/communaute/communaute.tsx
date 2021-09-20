@@ -12,17 +12,19 @@ import {RootState} from "../../reducer"
 import Footer from "../footer/footer"
 import Streamer1 from "../../assets/image/streamer1.jpg"
 import "./communaute.css"
+import "./post.css"
 // import {COUNT_SUBSCRIBE} from "../../gql/user/subscription"
 import {GET_ALL_STREAMING} from "../../gql/user/query"
 import {GET_ALL_CMTY} from "../../gql/cmty/query"
 import Friend from "./friends"
 import {LIMIT,PAGE_NUMBER} from "../commons/constante"
 import AvatarDefault from "../../assets/image/game-tag.png"
-
+import Post from "./post"
 
 const Communaute: React.FC = function() {
 	const userConnectedRedux 	= useSelector((state:RootState) => state.userConnected)
 	// const {loading,error,data}  = useSubscription(COUNT_SUBSCRIBE)
+	
 	const [cmty,setCmty] 			= useState<Array<any>>([])
 	const {loading,error,data} 		= useQuery(GET_ALL_CMTY, {
 		variables: {
@@ -105,6 +107,7 @@ const Communaute: React.FC = function() {
 		  				</div>
 	  				</div>
 	  				<div className="center-block">
+	  					<Post />
 		  				{
 		  					cmty.length > 0 ? cmty.map(function(e:any,index:number) {
 		  						return (
@@ -116,7 +119,6 @@ const Communaute: React.FC = function() {
 
 					  						</div>
 					  						<div className="actus-content">
-					  								{console.log("test", (e.content))}
 					  							{parse(e.content)}
 					  						</div>
 					  					</div>
@@ -129,7 +131,7 @@ const Communaute: React.FC = function() {
 
 	  				<Friend />
 	  			</div>
-	  		</div>	  		
+	  		</div>
 			<Footer/>
 	  	</div>
 	</div>

@@ -5,6 +5,8 @@ import { useSelector } from "react-redux"
 import {RootState} from "../../reducer"
 import {Translation} from "../../lang/translation"
 import {GET_ONE_TOURNAMENT} from "../../gql/tournament/query"
+import {GET_PART_TOURNAMENT} from "../../gql/participate/query"
+
 import Header from "../header/header"
 import Footer from "../footer/footer"
 import {Tournament} from "../models/tournament"
@@ -12,17 +14,28 @@ import "../tournament/info.css"
 import "../../assets/css/style.css"
 import { Link } from "react-router-dom"
 import {dateStringToDY} from "../tools/dateConvert"
+import RegisterTournament,{RegisterType} from "./tournament-register"
+import Stat from "./stat"
 
 const Rules: React.FC = function(props:any) {
 	const params = new URLSearchParams(props.location.search)
 	const uid:string|null = params.get("uid")
 	const [tournament, setTournament] = useState<Tournament>()
 	const [isOpen, setIsOpen] = useState<boolean>(true)
+	const [part, setPart] = useState<string>("")
+	const [isUserSingup,setIsUserSingup] = useState<boolean>(false)
 	const userConnectedRedux = useSelector((state:RootState) => state.userConnected)
 	const {loading,error,data} 	= useQuery(GET_ONE_TOURNAMENT, {
 			variables: {
 				uid:uid,
 			},
+	})
+
+	const {loading:loadTrnmt,error:errTrnmt,data:dataTrnmt} = useQuery(GET_PART_TOURNAMENT, {
+		variables: {
+			uidUser:userConnectedRedux.user.uid,
+			uidTournament:uid,
+		},
 	})
 
 	useEffect(() => {
@@ -33,10 +46,24 @@ const Rules: React.FC = function(props:any) {
 		const date1 = new Date()
 		const date2 = new Date(data?.FindOneTournament.deadlineDate)
 		const diff = (date2.getTime() - date1.getTime())/1000/60
-
 		if (diff < 10 || diff <= 0) setIsOpen(false)
 
-	},[loading,error,data])
+		if(!loadTrnmt && !errTrnmt && dataTrnmt) {
+			setIsUserSingup(true)
+			setPart(dataTrnmt.FindPartByUserTournament.Uid)
+		}
+
+	},[loading,error,data,loadTrnmt,errTrnmt,dataTrnmt])
+
+	const RegisterData:RegisterType = {
+		uid:uid,
+		tournament:tournament,
+		isUserSingup:isUserSingup,
+		part:part,
+		isOpen:isOpen,
+		numberPart:0,
+		confirmed:0
+	}
 
   return(
   	<div className="Tournament info">
@@ -65,19 +92,7 @@ const Rules: React.FC = function(props:any) {
 						{tournament? parse(tournament.description) : <></>}
 					</div>
 					<div className="tableau">
-						<div className="state">
-							<p>{""}<span>slots</span></p>
-							<p>{""}<span>
-								{
-									Translation(userConnectedRedux.user.language).tournament.pending
-								}
-							</span></p>
-							<p>{""}<span className="confirm">
-								{
-									Translation(userConnectedRedux.user.language).tournament.confirmed
-								}
-							</span></p>
-						</div>
+						<Stat tournament={tournament} />
 						<div className="info-target">
 							<div className="line">
 								<p>
@@ -101,15 +116,11 @@ const Rules: React.FC = function(props:any) {
 							</div>
 							<div className="line">
 								<p>Mode</p>
-								<span>{tournament && tournament.numberTeam > 0 ? `${tournament?.numberTeam} ON ${tournament?.numberTeam}` : "1 ON 1" }</span>
+								<span>{tournament && tournament.numberTeam > 0 ? `${tournament?.numberTeam} V ${tournament?.numberTeam}` : "1 V 1" }</span>
 							</div>
 						</div>
 						<div className="btn-container">
-							<button className="btn bg-red">
-								{
-									Translation(userConnectedRedux.user.language).tournament.participate
-								}
-							</button>
+							<RegisterTournament {...RegisterData}  />
 						</div>
 					</div>
 				</div>

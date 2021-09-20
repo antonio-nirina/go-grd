@@ -1,13 +1,102 @@
-import React from "react"
+import React,{useState,useMemo} from "react"
 import { Link } from "react-router-dom"
-
-import { faPlus, faChevronRight} from "@fortawesome/free-solid-svg-icons"
+import {useHistory } from "react-router-dom"
+import {useMutation,useQuery} from "@apollo/client"
+import { faPlus} from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { useForm } from "react-hook-form"
+import "react-datetime/css/react-datetime.css"
+import Datetime from "react-datetime"
+import moment from 'moment'
+import 'moment/locale/fr'
+import SunEditor from 'suneditor-react'
+import 'suneditor/dist/css/suneditor.min.css'
+
 import SideBar from "../header/sidebar"
+import {CREATED_WAGGER} from "../gql/wagger/mutation"
 import Nav from "../header/nav"
+import {GET_ALL_GAMES,GET_ALL_PLATEFORM} from "../gql/games/query"
+
+type Inputs = {
+	title:string,
+	price:number,
+	format:string,
+	priceParticipate:number,
+	description:string,
+	isPublic:boolean,
+	participant:number
+}
 
 
 const CreateWaggers: React.FC = function() {
+	const history = useHistory()
+	const [startDate, setStartDate] 	= useState<string>("")
+	const [lastDate, setLastDate] 		= useState<string>("")
+	const [gameWay,setGameWay] 			= useState<string>("")
+	const [uiGame,setUiGame] 			= useState<string>("")
+	const [uidPlateform,setUidPlateform] = useState<string>("")
+	const [games,setGames] 				= useState<Array<any>>([])
+	const [plateforms,setPlateforms] 	= useState<Array<any>>([])
+	const [isPub,setIsPub] 				= useState<boolean>(false)
+	const [rules, setRules] 	= useState<String>("")
+	const { register, handleSubmit } 	= useForm<Inputs>()
+
+	const [createWagger]  			= useMutation(CREATED_WAGGER)
+	const {loading,error,data} = useQuery(GET_ALL_GAMES)
+	const {loading:loadingP,error:errorP,data:dataP} = useQuery(GET_ALL_PLATEFORM)
+
+	useMemo(() => {
+		if(!loading && !error && data) setGames(data.FindAllGame)
+		if(!loadingP && !errorP && dataP) setPlateforms(dataP.FindAllPlateform)
+	},[loading,error,data,loadingP,errorP,dataP])
+
+	const onSubmit = async function(data:Inputs){
+		const result = await createWagger({ variables: {
+			date:startDate,
+			title:data.title,
+			uidGame:uiGame,
+			uidPalteforme:uidPlateform,
+			description:data.description ? data.description : "",
+			price:data.price,
+			format:data.format ? data.format : "",
+			gameWay:gameWay, 
+			deadlineDate:lastDate,
+			priceParticipate:data.priceParticipate,
+			isPublic:data.isPublic,
+			rules:rules,
+			participant:Math.pow(2,(Math.ceil(Math.log2(Number(data.participant))))),
+		} })
+		if (result.data.createWagger) history.push("/admin/wagger")
+	}
+
+	const handleGame = function(event:any) {
+		setUiGame(event.target.value)
+	}
+
+	const handlePlateform = function(event:any) {
+		setUidPlateform(event.target.value)
+	}
+
+	const handleDate = function(date:any) {
+		setStartDate(moment(date._d).toString())
+	}
+
+	const handleDateDeadline = function(date:any) {
+		setLastDate(moment(date._d).toString())
+	}
+
+	const handleGameWay = function(event:any){
+		setGameWay(event.target.value)
+	}
+
+	const handleTextPub = function(event:any) {
+		setIsPub(event.target.checked)
+	}
+
+	const handleRulesText = function(content: string) {
+		setRules(content)
+	}
+
 	return(
 	    <div className="admin create-tournament">
 			<div className="layout-container">
@@ -23,47 +112,87 @@ const CreateWaggers: React.FC = function() {
 	        					<div className="title">
 	                                <h1>Crée wagger</h1>
 	                            </div>
-	        					<div className="create-tournament-game">
-	        						<Link to="/admin"><button className="btn bg-white"> Annuler</button></Link>
-	                                <button className="btn bg-red"><FontAwesomeIcon icon={faPlus} /> Enregistrer</button>
-	        					</div>
+	        					
 	                            <div className="setting-tournament">
 	                                <div className="field">
 	                                    <div className="group-input">
-	                                        <form>	                                      		                                        	
-	                                        	<select id="select-mode">
+	                                        <form onSubmit={handleSubmit(onSubmit)}>
+	                                        	<div className="premium">
+		                                        	<label className="switch">		                                        		
+		                                        		<input type="checkbox" {...register("isPublic")} name="isPublic" onChange={handleTextPub} />
+		                                        		<span className="slider">{isPub ? "Public" : "Privé"}</span>		                                        		
+		                                        	</label>
+	                                        	</div>
+	                                        	<input type="text" placeholder="Titre wagger" {...register("title")} name="title" />	                                      		                                        	
+	                                        	<select id="select-mode" onChange={handleGameWay}>
 	                                                <option value="">Selectionnez le mode de jeux...</option>
-	                                                <option value="0">1v1</option>
-	                                                <option value="1">3v3</option>	                                                
+	                                                <option value="1v1">1v1</option>
+	                                                <option value="2v2">2v2</option>
+	                                                <option value="4v4">4v4</option>	                                                
 	                                            </select>
-	                                            <select id="rank">
-	                                                <option value="">Rank...</option>
-	                                                <option value="0">Platine</option>
-	                                                <option value="1">Diamond</option>	                                                
-	                                            </select>                                          
-	                                            <select id="format">
-	                                                <option value="">Format...</option>
-	                                                <option value="0">B03</option>
-	                                                <option value="1">B01</option>	                                                
+	                                            <select id="jeux" onChange={handleGame}>
+	                                                <option value="">Selectionnez le jeux...</option>
+	                                                {
+	                                                	games?.map(function(el:any,index:number) {
+	                                                		return(
+	                                                			<option key={index} value={el.uid}>{el.name}</option>
+                                                			)
+	                                                	})
+	                                                }
 	                                            </select>
-	                                            <select id="entry">
-	                                                <option value="">Entrée...</option>
-	                                                <option value="0">Public</option>
-	                                                <option value="1">Privée</option>	                                                
-	                                            </select>	                                           
-	                                            <input type="text" placeholder="Heure"/>
-	                                            <input type ="text" placeholder="Date" />	                                            
-	                                            <textarea placeholder="Description..."></textarea>
+	                                            <select id="platform" onChange={handlePlateform}>
+	                                                <option value="">Selectionnez les plateformes...</option>
+	                                                {
+	                                                	plateforms?.map(function(el:any,index:number) {
+	                                                		return(
+	                                                			<option key={index} value={el.uid}>{el.name}</option>
+                                                			)
+	                                                	})
+	                                                }
+
+	                                            </select>
+												<input type="text" placeholder="Participant" {...register("participant")} name="participant" />                                         
+	                                            <input type="text" placeholder="Format game" {...register("format")} name="format" />
+
+	                                            <Datetime
+												 	locale="fr"
+													onChange={handleDate}
+													inputProps={{placeholder:"Date"}}
+												/>
+												<Datetime
+												 	locale="fr"
+													onChange={handleDateDeadline}
+													inputProps={{placeholder:"Deadline"}}
+												/>
+												<div className="wysiwyg">
+		                                            <SunEditor
+														placeholder="Règle du jeux"
+														onChange={handleRulesText}
+														setOptions={
+															{
+																buttonList:[
+																	['undo', 'redo',
+																		'font', 'fontSize', 'formatBlock',
+																		'bold', 'italic',
+																		'fontColor', 'hiliteColor', 'textStyle',
+																		'removeFormat',
+																		'outdent', 'indent',
+																		'align', 'horizontalRule', 'list', 'lineHeight',
+																		'link', 'image',
+																	]
+																]
+															}
+													} />
+												</div>
+	                                            <textarea placeholder="Description..." {...register("description")}></textarea>
 	                                            <div className="input-group">
-	                                                <input type="number" placeholder="Nombre de participant"/>
-	                                                <input type="number" placeholder="Nombre d'equipes" className="no-margin"/>
+	                                                <input type="number" placeholder="Prix à gagner" {...register("price")} name="price" />
+	                                                <input type="number" placeholder="Frais d'inscription" {...register("priceParticipate")} name="priceParticipate" className="no-margin"/>
 	                                            </div>
-	                                            <div className="input-group">
-	                                                <input type="number" placeholder="Prix"/>
-	                                                <input type="number" placeholder="Frais d'inscription" className="no-margin"/>
-	                                            </div>
-	                                            <input type="text" placeholder="Deadline"/>
-	                                            <Link to="/set-rules"><button className="btn bg-red">Modifier les règles <FontAwesomeIcon icon={faChevronRight} /> </button></Link>
+	                                            <div className="create-tournament-game">
+						    						<Link to="/admin/wagger"><button className="btn bg-white"> Annuler</button></Link>
+						                            <button className="btn bg-red"><FontAwesomeIcon icon={faPlus} /> Enregistrer</button>
+						    					</div>
 	                                        </form>
 	                                    </div>
 	                                </div>

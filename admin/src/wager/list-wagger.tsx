@@ -1,18 +1,48 @@
-import React,{useState} from 'react'
+import React,{useState,useEffect} from 'react'
 import { Link } from "react-router-dom"
+import {useQuery} from "@apollo/client"
+import Loader from "react-loader-spinner"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPlus, faSort, faChevronUp, faChevronDown, faChevronRight, faChevronLeft, faSearch} from "@fortawesome/free-solid-svg-icons"
+import { faPlus, faChevronUp, faChevronDown, faSearch} from "@fortawesome/free-solid-svg-icons"
 
 import SideBar from "../header/sidebar"
 import Nav from "../header/nav"
+import Pagination from "../common/pagination"
+import {NUMBER_PER_PAGE} from "../common/constante"
+import {GET_ALL_WAGER} from "../gql/wagger/query"
 
+interface Item {
+	item:number
+}
 
 const ListWagger : React.FC = function() {
 	const [showList, setShowList] = useState<Boolean>(false)
+	const [waggers, setWaggers] = useState<any>([])
+	const [item, setItem] = useState<Item>({item:1})
+	const [isLoader, setIsLoader] = useState<Boolean>(true)
+
+	const {loading,error,data} 	= useQuery(GET_ALL_WAGER, {
+		variables: {
+			limit:NUMBER_PER_PAGE,
+			pageNumber:(item.item)*NUMBER_PER_PAGE - NUMBER_PER_PAGE
+		},
+	})
+
+	useEffect(() => {
+		if(!loading && !error && data) {
+			setIsLoader(false)
+			setWaggers(data.FindAllWagger)
+		}
+	},[loading,error,data,isLoader])
 
     const onShow = function(){
 		setShowList(!showList)
 	}
+
+	const handleItemsPage = function(item:number) {
+		setIsLoader(true)
+    	setItem({item:item})
+    }
 
 	return (
 	<div className="layout-container">
@@ -57,68 +87,113 @@ const ListWagger : React.FC = function() {
 							<Link to="/admin/create-wagger"><button className="btn bg-red"><FontAwesomeIcon icon={faPlus} /> Créer Wagger</button></Link>
 						</div>
 					</div>
-					<div className="body-card">
-						<div className="card-title">
-							<p>Horraire <i><FontAwesomeIcon icon={faSort} size="lg"/></i></p>
-						</div>
-						<div className="card-title">
-							<p>Rank <i><FontAwesomeIcon icon={faSort} size="lg"/></i></p>
-						</div>
-						<div className="card-title">
-							<div className="card-title">
-								<p>Inscription <i><FontAwesomeIcon icon={faSort} size="lg"/></i></p>
-							</div>
-						</div>
-						<div className="card-title">
-							<div className="card-title">
-							<p>Format <i><FontAwesomeIcon icon={faSort} size="lg"/></i></p>
-						</div>
-						</div>
-						<div className="card-title">
-							<div className="card-title">
-								<p>Mode de jeux <i><FontAwesomeIcon icon={faSort} size="lg"/></i></p>
-							</div>
-						</div>
-						<div className="card-title">
-							<div className="card-title">
-								<p>Entrée <i><FontAwesomeIcon icon={faSort} size="lg"/></i></p>
-							</div>
-						</div>
-						<div className="card-title">
-							<div className="card-title">
-								<p>Joueur <i><FontAwesomeIcon icon={faSort} size="lg"/></i></p>
-							</div>
-						</div>
+					<div className={isLoader ? "loader-spinner":"d-none"}>
+						<Loader
+							type="Oval"
+							color="#dd0000"
+						/>
 					</div>
 					<div className="body-card">
-						<div className="card-result">
-							<p>23 Jul - 12h30</p>
+						<div className="card-title">
+							<p>Horraire</p>
 						</div>
-						<div className="card-result">
-							<p>Platine</p>
+						<div className="card-title">
+							<p>Deadline</p>
 						</div>
-						<div className="card-result">
-							<p>30</p>
+						<div className="card-title">
+							<p>Titre</p>
 						</div>
-						<div className="card-result">
-							<p>B03</p>
+						<div className="card-title">
+							<p>Prix à gagner</p>
 						</div>
-						<div className="card-result">
-							<p>3v3 Arène</p>
+						<div className="card-title">
+							<p>Prix participations</p>
 						</div>
-						<div className="card-result">
-							<p>Public</p>
+						<div className="card-title">
+							<div className="card-title">
+								<p>Game</p>
+							</div>
 						</div>
-						<div className="card-result">
-							<p>6</p>
+						<div className="card-title">
+							<p>Plateforme</p>
+						</div>
+						<div className="card-title">
+							<p>Format</p>
+						</div>
+						<div className="card-title">
+							<p>Mode de jeux</p>
+						</div>
+						<div className="card-title">
+							<p>Entrée</p>
+						</div>
+						<div className="card-title">
+							<p>Participant</p>
 						</div>
 					</div>
+					{waggers.map(function(el:any,index:number){
+						return (
+							<div className="body-card" key={index}>
+								<div className="card-result">
+									<p>
+										{
+											new Date(el.date).toLocaleTimeString('fr-Fr', {
+												day : 'numeric',
+												month : 'short',
+												year : 'numeric',
+												hour:"numeric",
+												minute:"numeric"
+											})
+										}
+									</p>
+								</div>
+								<div className="card-result">
+									<p>
+										{
+											new Date(el.deadlineDate).toLocaleTimeString('fr-Fr', {
+												day : 'numeric',
+												month : 'short',
+												year : 'numeric',
+												hour:"numeric",
+												minute:"numeric"
+											})
+										}
+									</p>
+								</div>
+								<div className="card-result">
+									<p>{el.title}</p>
+								</div>
+								<div className="card-result">
+									<p>{`${el.price} €`}</p>
+								</div>
+								<div className="card-result">
+									<p>{el.priceParticipate >0 ? `${el.priceParticipate} €`  : "Free" }</p>
+								</div>
+								<div className="card-result">
+									<p>{el.game.name}</p>
+								</div>
+								<div className="card-result">
+									<p>{el.plateform.name}</p>
+								</div>
+								<div className="card-result">
+									<p>{el.format}</p>
+								</div>
+								<div className="card-result">
+									<p>{el.gameWay}</p>
+								</div>
+								<div className="card-result">
+									<p>{el.isPublic ? "Public" : "Privé"}</p>
+								</div>
+								<div className="card-result">
+									<p>{el.participant}</p>
+								</div>
+							</div>
+						)
+					})}
 					<div className="filter-game-result">
-						<div className="result-game-page">
-							<i><FontAwesomeIcon icon={faChevronLeft} size="lg"/></i>
-							<span>1</span>
-							<i><FontAwesomeIcon icon={faChevronRight} size="lg"/></i>
-						</div>
+					<Pagination
+							handlePage={handleItemsPage}
+							records={waggers.length > 0 ? waggers[0].records : 0}
+						/>
 					</div>
 				</div>
 			</div>

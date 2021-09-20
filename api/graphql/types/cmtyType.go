@@ -10,13 +10,7 @@ var CmtySchemaType = graphql.NewObject(graphql.ObjectConfig{
 		"uid": &graphql.Field{
 			Type: graphql.String,
 		},
-		"title": &graphql.Field{
-			Type: graphql.String,
-		},
-		"user": &graphql.Field{
-			Type: UserSchemaType,
-		},
-		"content": &graphql.Field{
+		"streaming": &graphql.Field{
 			Type: graphql.String,
 		},
 	},

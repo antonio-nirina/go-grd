@@ -1,13 +1,18 @@
 package delivery
 
 import (
+	"encoding/json"
+
 	"github.com/graphql-go/graphql"
 	"github.com/thoussei/antonio/api/community/entity"
 	"github.com/thoussei/antonio/api/community/handler"
-	userHandler "github.com/thoussei/antonio/api/user/handler"
 	gameHandler "github.com/thoussei/antonio/api/games/handler"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
+
+type inputAdCmty struct {
+	Streaming  []string `json:"streaming"`
+}
 
 type CmtyResolve interface {
 	CreatePublicationResolve(params graphql.ResolveParams) (interface{}, error)
@@ -16,37 +21,36 @@ type CmtyResolve interface {
 }
 
 type cmty struct {
-	cmtyHandler handler.UsecaseCmty
-	cmtyUserHandler userHandler.Usecase
+	cmtyHandler     handler.UsecaseCmty
 	cmtyGameHandler gameHandler.UsecaseGameInterface
 }
 
-func NewResolverCmty(cmtyUseCase handler.UsecaseCmty,userUsecase userHandler.Usecase,cmtyGame gameHandler.UsecaseGameInterface) CmtyResolve {
+func NewResolverCmty(cmtyUseCase handler.UsecaseCmty, cmtyGame gameHandler.UsecaseGameInterface) CmtyResolve {
 	return &cmty{
-		cmtyHandler: cmtyUseCase,
-		cmtyUserHandler:userUsecase,
-		cmtyGameHandler:cmtyGame,
+		cmtyHandler:     cmtyUseCase,
+		cmtyGameHandler: cmtyGame,
 	}
 }
 
 func (c *cmty) CreatePublicationResolve(params graphql.ResolveParams) (interface{}, error) {
-	uid, _ := params.Args["uidUser"].(string)
-	title, _ := params.Args["title"].(string)
-	content, _ := params.Args["content"].(string)
+	var streams [] string
+	jsonString, _ := json.Marshal(params.Args)
+	inputs := inputAdCmty{}
+	json.Unmarshal([]byte(jsonString), &inputs)
+	for _, val := range inputs.Streaming {
+		streams = append(streams, val)
+	}
 	uidGame, _ := params.Args["uidGame"].(string)
-	user,err := c.cmtyUserHandler.FindOneUserByUid(uid)
-	game,err := c.cmtyGameHandler.FindOneGameByUidHandler(uidGame)
-	
+	game, err := c.cmtyGameHandler.FindOneGameByUidHandler(uidGame)
+
 	if err != nil {
-		return nil,err
+		return nil, err
 	}
 
 	cmty := &entity.Communauty{
-		Uid:primitive.NewObjectID(),
-		Title:title,
-		User:user,
-		Content:content,
-		Game:game,
+		Uid:     primitive.NewObjectID(),
+		Streaming:   streams,
+		Game:    game,
 	}
 
 	res, err := c.cmtyHandler.CreatePublicationHandler(cmty)
@@ -66,23 +70,17 @@ func (c *cmty) FindCmtyResolver(params graphql.ResolveParams) (interface{}, erro
 		return nil, err
 	}
 
-
 	return res, nil
-} 
+}
 
 func (c *cmty) FindAllCmtytResolver(params graphql.ResolveParams) (interface{}, error) {
 	limit, _ := params.Args["limit"].(int)
 	pageNumber, _ := params.Args["pageNumber"].(int)
-
-	if pageNumber == 0 && limit > 0{
-		pageNumber = 1
-	}
-
-	res, err := c.cmtyHandler.FindAllCmtyHandler(int64(pageNumber),int64(limit))
+	res, err := c.cmtyHandler.FindAllCmtyHandler(int64(pageNumber), int64(limit))
 
 	if err != nil {
 		return nil, err
 	}
 
 	return res, nil
-} 
+}

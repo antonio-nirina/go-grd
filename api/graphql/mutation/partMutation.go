@@ -17,7 +17,7 @@ var teamsInputType = graphql.NewInputObject(
 
 func createPartMatch() *graphql.Field {
 	return &graphql.Field{
-		Type:        graphql.String,
+		Type:        graphql.Int,
 		Description: "Publication create",
 		Args: graphql.FieldConfigArgument{
 			"uidUser": &graphql.ArgumentConfig{
@@ -29,13 +29,45 @@ func createPartMatch() *graphql.Field {
 			"tournamentUid": &graphql.ArgumentConfig{
 				Type: graphql.String,
 			},
-			"leagueUid": &graphql.ArgumentConfig{
+			/*"leagueUid": &graphql.ArgumentConfig{
 				Type: graphql.String,
-			},
+			},*/
 			"teamsUid": &graphql.ArgumentConfig{
 				Type: teamsInputType,
 			},
+			"waggerUid": &graphql.ArgumentConfig{
+				Type: graphql.String,
+			},
 		},
 		Resolve: partResolver.SavedPartResolver,
+	}
+}
+
+func removePartTournament() *graphql.Field {
+	return &graphql.Field{
+		Type:        graphql.Int,
+		Description: "remove participation",
+		Args: graphql.FieldConfigArgument{
+			"uid": &graphql.ArgumentConfig{
+				Type: graphql.String,
+			},
+		},
+		Resolve: partResolver.RemovedPartByResolver,
+	}
+}
+
+func updateConfirmedPartTournament() *graphql.Field {
+	return &graphql.Field{
+		Type:        graphql.String,
+		Description: "increment participation confirmed participation",
+		Args: graphql.FieldConfigArgument{
+			"uid": &graphql.ArgumentConfig{
+				Type: graphql.String,
+			},
+			"partConfirmed": &graphql.ArgumentConfig{
+				Type: graphql.Boolean,
+			},
+		},
+		Resolve: partResolver.UpdatedNumberPartConfResolver,
 	}
 }

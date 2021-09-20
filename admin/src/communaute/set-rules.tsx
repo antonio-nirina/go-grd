@@ -1,10 +1,9 @@
 import React,{useState,useEffect} from "react"
 import {useMutation,useQuery} from "@apollo/client"
 import { useForm } from "react-hook-form"
-import SunEditor from 'suneditor-react'
 import {useHistory } from "react-router-dom"
 import { useSelector } from "react-redux"
-import 'suneditor/dist/css/suneditor.min.css'
+
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from "@fortawesome/free-solid-svg-icons"
@@ -23,7 +22,6 @@ const MESS_ERR:string = "Taille de l'image est trop petite, vueillez chosir imag
 
 const SetRules: React.FC = function() {
 	const history = useHistory()
-	const [content, setContent] 		= useState<string>("")
 	const [uidGame, setUidGame] 		= useState<string>("")
 	const [games, setGames] = useState<any>([])
 	const { register, handleSubmit } 	= useForm<Inputs>()
@@ -35,12 +33,9 @@ const SetRules: React.FC = function() {
 	const onSubmit = async function(data:Inputs){
 		const result = await createdTournament({ variables: {
 			uidUser:userConnectedRedux.user.uid,
-			title:data.title,
-			content:content,
 			uidGame:uidGame
 		} })
 		if (result.data.createPublication) {
-			setContent("")
 			history.push("/admin/communaute")
 		}
 	}
@@ -52,18 +47,13 @@ const SetRules: React.FC = function() {
 
 	},[loading,error,data])
 
-	const handleText = function(content: string) {
-		console.log("ccc", content)
-		setContent(content)
-	}
-
-	const handleFiles = function(files: Array<File>, info: object, uploadHandler: Function) {
+	/*const handleFiles = function(files: Array<File>, info: object, uploadHandler: Function) {
 		try {
         	resizeImage(files, uploadHandler)
-	    } catch (err) {
+	    } catch (err:any) {
 	        uploadHandler(err.toString())
 	    }
-	}
+	}*/
 
 	const handleGame = function(event:any){
 		setUidGame(event.target.value)
@@ -130,9 +120,8 @@ const SetRules: React.FC = function() {
 	        					<div className="field">
 		        					<div className="group-input">
 	                                    <form onSubmit={handleSubmit(onSubmit)}>
-	    									<label htmlFor="title-rules">Publication : </label>	    									
+	    									<label htmlFor="title-rules">Contenu page communaute : </label>
 	    									<div className="input-group">
-                                                <input type="text" id="title-rules" {...register("title", { required: true })} placeholder="Publication communaute" name="title" />
                                                 <select id="select-game" onChange={handleGame}>
 	                                                <option value="">Selectionner jeux ...</option>
 	                                                {games?.map(function(el:any,index:number){
@@ -142,27 +131,9 @@ const SetRules: React.FC = function() {
 	                                                })}
 	                                            </select>
                                             </div>
-	    									<div className="wysiwyg">
-	    										<SunEditor
-	    											placeholder="Publication"
-													onChange={handleText}
-													onImageUploadBefore={handleFiles}
-	    											setOptions={
-													{
-														buttonList:[
-															['undo', 'redo',
-																'font', 'fontSize', 'formatBlock',
-																'bold', 'italic',
-																'fontColor', 'hiliteColor', 'textStyle',
-																'removeFormat',
-																'outdent', 'indent',
-																'align', 'horizontalRule', 'list', 'lineHeight',
-																'link', 'image',
-																'fullScreen']
-														]
-													}
-												} />
-	    									</div>
+                                            <div className="input-group">
+                                            	Les streaming à afficher
+                                            </div>
 	    									<button className="btn bg-red" style={{"cursor":"pointer"}}><FontAwesomeIcon icon={faPlus} /> Ajouter</button>
 	    								</form>
 		        					</div>

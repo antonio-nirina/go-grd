@@ -5,8 +5,7 @@ import (
 	"github.com/thoussei/antonio/api/graphql/types"
 )
 
-
-func FindOnePart() *graphql.Field  {
+func FindOnePart() *graphql.Field {
 	return &graphql.Field{
 		Type:        types.PartSchemaType,
 		Description: "Get single participant",
@@ -15,7 +14,7 @@ func FindOnePart() *graphql.Field  {
 				Type: graphql.String,
 			},
 		},
-		
+
 		Resolve: partResolver.FindPartResolver,
 	}
 }
@@ -32,7 +31,7 @@ func FindAllPart() *graphql.Field {
 				Type: graphql.Int,
 			},
 		},
-		
+
 		Resolve: partResolver.FindAllPartResolver,
 	}
 }
@@ -52,16 +51,15 @@ func FindPartByUser() *graphql.Field {
 				Type: graphql.Int,
 			},
 		},
-		
+
 		Resolve: partResolver.FindPartByUseResolver,
 	}
 }
 
-
 func FindPartByUserLeague() *graphql.Field {
 	return &graphql.Field{
 		Type:        graphql.NewList(types.PartSchemaType),
-		Description: "Get all part by user",
+		Description: "Get all part by  in league",
 		Args: graphql.FieldConfigArgument{
 			"uidUser": &graphql.ArgumentConfig{
 				Type: graphql.String,
@@ -70,15 +68,15 @@ func FindPartByUserLeague() *graphql.Field {
 				Type: graphql.String,
 			},
 		},
-		
+
 		Resolve: partResolver.FindPartByUseResolver,
 	}
 }
 
 func FindPartByUserTournament() *graphql.Field {
 	return &graphql.Field{
-		Type:        graphql.NewList(types.PartSchemaType),
-		Description: "Get all part by user",
+		Type:        types.PartSchemaType,
+		Description: "Get all part by user tournament",
 		Args: graphql.FieldConfigArgument{
 			"uidUser": &graphql.ArgumentConfig{
 				Type: graphql.String,
@@ -87,7 +85,38 @@ func FindPartByUserTournament() *graphql.Field {
 				Type: graphql.String,
 			},
 		},
-		
+
 		Resolve: partResolver.FindPartByUseTournamentResolver,
+	}
+}
+
+func FindPartCount() *graphql.Field {
+	return &graphql.Field{
+		Type:        types.PartRecords,
+		Description: "Get all count",
+		Args: graphql.FieldConfigArgument{
+			"uid": &graphql.ArgumentConfig{
+				Type: graphql.String,
+			},
+		},
+
+		Resolve: partResolver.GetNumberPartByResolver,
+	}
+}
+
+func FindPartByUserWagger() *graphql.Field {
+	return &graphql.Field{
+		Type:        types.PartSchemaType,
+		Description: "Get all part by wagger user",
+		Args: graphql.FieldConfigArgument{
+			"uidUser": &graphql.ArgumentConfig{
+				Type: graphql.String,
+			},
+			"uidWagger": &graphql.ArgumentConfig{
+				Type: graphql.String,
+			},
+		},
+
+		Resolve: partResolver.FindPartByUserWaggerResolver,
 	}
 }

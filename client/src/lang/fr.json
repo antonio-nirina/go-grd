@@ -21,9 +21,9 @@
 	},
 	"header":{
 		"leagues": "ligues",
-		"wagers": "wagers",
-		"community": "communauté",
-		"tournaments": "tournois",
+		"wagers": "Wagers",
+		"community": "Communauté",
+		"tournaments": "Tournois",
 		"refuse":"Refuser",
 		"accepted": "Accepter",
 		"leagues": "Ligues",
@@ -32,6 +32,7 @@
 		"tournaments": "Tournois",
 		"text":"Demande d'être votre amis",
 		"switch":"Admin",
+		"assistance":"Assistance",
 		"logout":"Deconnexion"
 	},
 	"home":{
@@ -157,7 +158,11 @@
 		"addFriendList":"Trouver des amis",
 		"titleFriend":"Amis",
 		"titleAddFriend":"Ajouter des amis",
-		"withFriend":"Vous êtes maintenant ami(e) avec"
+		"withFriend":"Vous êtes maintenant ami(e) avec",
+		"newpost": "Nouveau Post",
+		"express":"Exprime toi ...",
+		"addImage":"Ajouter photos/videos ou glisser-deposer ...",
+		"fileNotvalid":"Type du fichier n'est pas valider"
 	},
 	"tournament":{
 		"live": "Tournois en direct",
@@ -178,7 +183,6 @@
 		"price":"Prix Cache",
 		"signup":"Inscrivez vous",
 		"prize":"Prix",
-		"team":"Equipe",
 		"player":"Joueurs",
 		"rules":"Règles",
 		"pending":"En attente",
@@ -191,11 +195,16 @@
 		"participate":"S'incrire",
 		"cancelParticipate":"ANNULER MON INSCRIPTION",
 		"notify":"Vous êtes inscrit",
-		"notifyError":"Error vous n'appartient pas à une équipe"
+		"notifyError":"Error vous n'appartient pas à une équipe",
+		"leave":"Vous allez quitte le tournois",
+		"notAUthorizePart":"Vous avez déjà inscrit sur d'autre tournois"
 	},
 	"leagues": {
 		"listLigues":"Liste des ligues disponibles",
 		"retrieve":"Retrouve les derniers ligues public & inscris-toi !"
+	},
+	"wagger":{
+		"lastwagger":"Derniers résultats en Wagers"
 	}
 
 }

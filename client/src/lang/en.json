@@ -9,14 +9,15 @@
 	},
 	"header":{
 		"leagues": "leagues",
-		"wagers": "wagers",
-		"community": "community",
-		"tournaments": "tournaments",
+		"wagers": "Wagers",
+		"community": "Community",
+		"tournaments": "Tournaments",
 		"refuse":"Refuse",
 		"accepted": "Accepted",
 		"text":"Incoming you to be your friend",
 		"switch":"Back to admin",
-		"logout":"Logout"
+		"logout":"Logout",
+		"assistance":"Assistance"
 	},
 	"home":{
 		"gameTag": "Gametag",
@@ -151,7 +152,11 @@
 		"addFriend":"Add friend",
 		"addFriendList":"Search friends",
 		"titleFriend":"Friends",
-		"titleAddFriend":"Add friend"
+		"titleAddFriend":"Add friend",
+		"express":"Express yourself ...",
+		"newpost": "New post",
+		"addImage":"Add pictures/videos or drag & drop...",
+		"fileNotvalid":"File type not valid"
 	},
 	"tournament":{
 		"incoming":"Upcoming Tournaments",
@@ -176,11 +181,16 @@
 		"participate":"Register now",
 		"cancelParticipate":"CANCEL MY SUBSCRIPTION",
 		"notify":"You are signup this league",
-		"notifyError":"Error you are not belong to an Team"
+		"notifyError":"Error you are not belong to an Team",
+		"leave":"You are leave tournament",
+		"notAUthorizePart":"You have already registered for other tournaments"
 	},
 	"leagues": {
 		"listLigues":"List of available leagues",
 		"retrieve":"Find the latest public leagues & register !"
+	},
+	"wagger":{
+		"lastwagger":"Last result in Wagers"
 	}
 
 }

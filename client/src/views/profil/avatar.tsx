@@ -1,5 +1,6 @@
-import React,{useState, useCallback}  from 'react'
-import Cropper from 'react-easy-crop'
+import React from 'react'
+// import React,{useState, useCallback}  from 'react'
+// import Cropper from 'react-easy-crop'
 import { useSelector,useDispatch } from "react-redux"
 
 import {useMutation} from "@apollo/client"
@@ -51,19 +52,20 @@ const Avatar : React.FC = function() {
 			})
         }
 	}
-	const [crop, setCrop] = useState({ x: 0, y: 0 })
-  	const [zoom, setZoom] = useState(1)
-  	const onCropComplete = useCallback((croppedArea, croppedAreaPixels) => {
-    	console.log(croppedArea, croppedAreaPixels)
-  	}, [])
+	//const [crop, setCrop] = useState({ x: 0, y: 0 })
+  	//const [zoom, setZoom] = useState(1)
+  	//const onCropComplete = useCallback((croppedArea, croppedAreaPixels) => {
+    //	console.log(croppedArea, croppedAreaPixels)
+  	//}, [])
   	/*const area = {
 		width: 276, // width of the cropped area
 		height: 276 // height of the cropped area
 	}*/
-	const [closeModal, setCloseModal] = useState(false)
-    const onClose = function(){
+	// const [closeModal, setCloseModal] = useState(false)
+    /*const onClose = function(){
         setCloseModal(!closeModal)
-    }
+    }*/
+
 	return (
 		<div className="gamer-profil">
 			<div className="avatar">
@@ -78,7 +80,7 @@ const Avatar : React.FC = function() {
 				<h2>{userConnectedRedux.user.username}</h2>
 				<p className="pseudo"><strong>{userConnectedRedux.user.username}</strong></p>
 			</div>
-			<div className={!closeModal ? "crop-container" :"crop-container close"}>
+			{/*<div className={!closeModal ? "crop-container" :"crop-container close"}>
 				<div className="is-cropped">
 					<h2>Changer de photo de profil</h2>
 					<Cropper
@@ -95,7 +97,7 @@ const Avatar : React.FC = function() {
 						<button className="btn bg-red">Valider</button>
 					</div>
 				</div>
-			</div>
+			</div>*/}
 		</div>
 	)
 }

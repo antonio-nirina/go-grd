@@ -9,10 +9,10 @@ import (
 
 type UsecaseLeague interface {
 	SavedLeagueHandler(*entity.League) (interface{}, error)
-	FindLeagueHandler(idQuery string) (leagueViewModel, error)
+	FindLeagueHandler(idQuery string) (LeagueViewModel, error)
 	FindOneLeagueHandler(idQuery string) (entity.League, error)
-	FindAllLeagueHandler(pageNumber int64,limit int64) ([]leagueViewModel, error)
-	FindLeagueGameHandler(pageNumber int64,limit int64,gameUid primitive.ObjectID) ([]leagueViewModel, error)
+	FindAllLeagueHandler(pageNumber int64,limit int64) ([]LeagueViewModel, error)
+	FindLeagueGameHandler(pageNumber int64,limit int64,gameUid primitive.ObjectID) ([]LeagueViewModel, error)
 }
 
 type leagueUsecase struct {
@@ -35,20 +35,20 @@ func (l *leagueUsecase) SavedLeagueHandler(league *entity.League) (interface{}, 
 	return "Ok",nil
 }
 
-func (l *leagueUsecase) FindLeagueHandler(idQuery string) (leagueViewModel, error){
+func (l *leagueUsecase) FindLeagueHandler(idQuery string) (LeagueViewModel, error){
 	objectId, err := primitive.ObjectIDFromHex(idQuery)
 	
 	if err != nil {
-		return leagueViewModel{}, err
+		return LeagueViewModel{}, err
 	}
 
 	result, err := l.leagueRepository.FindLeagueRepo(objectId)
 
 	if err != nil {
-		return leagueViewModel{}, err
+		return LeagueViewModel{}, err
 	}
 
-	leagueViewModel := leagueViewModel{
+	leagueViewModel := LeagueViewModel{
 		Uid: result.Uid.Hex(),
 		Title:result.Title,     			
 		Description:result.Info,      	
@@ -87,23 +87,23 @@ func (l *leagueUsecase) FindOneLeagueHandler(idQuery string) (entity.League, err
 	return result,nil
 }
 
-func (l *leagueUsecase) FindAllLeagueHandler(pageNumber int64, limit int64) ([]leagueViewModel, error){
+func (l *leagueUsecase) FindAllLeagueHandler(pageNumber int64, limit int64) ([]LeagueViewModel, error){
 	result, err := l.leagueRepository.FindAllLeagueRepo(pageNumber,limit)
 
 	if err != nil {
-		return []leagueViewModel{}, err
+		return []LeagueViewModel{}, err
 	}
 
 	records,err := l.leagueRepository.CountLeagueRepository()
 
 	if err != nil {
-		return []leagueViewModel{}, err
+		return []LeagueViewModel{}, err
 	}
 
-	var res []leagueViewModel
+	var res []LeagueViewModel
 
 	for _,val := range result {
-		leagueView := leagueViewModel{
+		leagueView := LeagueViewModel{
 			Uid: val.Uid.Hex(),
 			Title:val.Title,
 			Date:val.Date,     			
@@ -128,17 +128,17 @@ func (l *leagueUsecase) FindAllLeagueHandler(pageNumber int64, limit int64) ([]l
 	return res,nil
 }
 
-func (l *leagueUsecase) FindLeagueGameHandler(pageNumber int64,limit int64,game primitive.ObjectID) ([]leagueViewModel, error) {
+func (l *leagueUsecase) FindLeagueGameHandler(pageNumber int64,limit int64,game primitive.ObjectID) ([]LeagueViewModel, error) {
 	result, err := l.leagueRepository.FindLeagueGameRepo(pageNumber,limit,game)
 
 	if err != nil {
-		return []leagueViewModel{}, err
+		return []LeagueViewModel{}, err
 	}
 
-	var res []leagueViewModel
+	var res []LeagueViewModel
 
 	for _,val := range result {
-		leagueView := leagueViewModel{
+		leagueView := LeagueViewModel{
 			Uid: val.Uid.Hex(),
 			Title:val.Title,
 			Date:val.Date,     			

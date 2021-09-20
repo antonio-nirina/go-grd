@@ -1,7 +1,7 @@
 import {TWITCH_OUATH,TWITCH_REDIRECT,TWITCH_REDIRECT_PR} from "../commons/url"
 import {createApolloClient as client} from "../../config/apollo-client"
 import {TwitchProfil} from "../../gql/user/auth"
-import {TokenType} from "./utils"
+import {TokenType,SendToken} from "./utils"
 
 export const TWITCH_TOKEN = "twitch_token"
 
@@ -32,15 +32,11 @@ export const getTokenUser = async function(code: string) {
 			type:"twitch"
 		}
 
-		SendTokenTwitch(token)
+		SendToken(token)
 		window.location.pathname = "/profile"
 	} catch(errors) {
 		console.log("errors_get_one_match", errors)
 	}
-}
-
-export const SendTokenTwitch = function(token:TokenType) {
-	localStorage.setItem(TWITCH_TOKEN,JSON.stringify(token))
 }
 
 /*

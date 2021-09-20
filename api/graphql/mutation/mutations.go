@@ -42,6 +42,10 @@ import (
 	leagueHandler "github.com/thoussei/antonio/api/league/handler"
 	leagueRepo "github.com/thoussei/antonio/api/league/repository"
 
+	waggerDelivery "github.com/thoussei/antonio/api/wagger/delivery"
+	waggerHandler "github.com/thoussei/antonio/api/wagger/handler"
+	waggerRepo "github.com/thoussei/antonio/api/wagger/repository"
+
 	"github.com/graphql-go/graphql"
 )
 
@@ -68,7 +72,7 @@ var NotifResolver = notifDelivery.NewNotifResolver(usecaseNotif, usecase)
 
 var cmtyRepository = cmtyRepo.NewCmtyRepository(database)
 var cmtyUsecase = cmtyHandler.NewUsecaseCmty(cmtyRepository)
-var cmtyResolver = cmtyDelivery.NewResolverCmty(cmtyUsecase, usecase, usecaseGame)
+var cmtyResolver = cmtyDelivery.NewResolverCmty(cmtyUsecase, usecaseGame)
 
 var homeRepository = homeRepo.NewHomeRepository(database)
 var homeUsecase = homeHandler.NewUsecaseHome(homeRepository)
@@ -86,9 +90,13 @@ var leagueRepository = leagueRepo.NewLeagueRepository(database)
 var leagueUsecase = leagueHandler.NewUsecaseLeague(leagueRepository)
 var leagueResolver = leagueDelivery.NewResolverLeague(leagueUsecase, usecaseGame, usecasePlateform)
 
+var waggerRepository = waggerRepo.NewWaggerRepository(database)
+var waggerUsecase = waggerHandler.NewUsecaseWagger(waggerRepository)
+var waggerResolver = waggerDelivery.NewResolverWagger(waggerUsecase, usecaseGame, usecasePlateform)
+
 var partRepository = partRepo.NewPartRepository(database)
 var partUsecase = partHandler.NewUsecasePart(partRepository)
-var partResolver = partDelivery.NewResolverPart(partUsecase, usecase, tournamentUsecase, teamUsecase, leagueUsecase)
+var partResolver = partDelivery.NewResolverPart(partUsecase, usecase, tournamentUsecase, teamUsecase, waggerUsecase)
 
 func GetRootFields() graphql.Fields {
 	return graphql.Fields{
@@ -116,5 +124,8 @@ func GetRootFields() graphql.Fields {
 		"removedHome":          removedHome(),
 		"createSubjectContent": createSubjectContent(),
 		"saveLeague":           saveLeague(),
+		"removePartTournament": removePartTournament(),
+		"createWagger":         createWagger(),
+		"updatedWagger":        updatedWagger(),
 	}
 }
