@@ -68,8 +68,8 @@ const Joingame: React.FC = function(props:any) {
             </div>            
         </div>
         <div className="bar-menu-top">
-          <li><Link to="#" className="active">Général</Link></li>
-          <li><Link to="#">Règles</Link></li>
+          <li><Link to="/joingame" className="active">Général</Link></li>
+          <li><Link to="/waggers-rules">Règles</Link></li>
         </div>
         <div className="information-game">
           <div className="item-info-left">
@@ -99,13 +99,13 @@ const Joingame: React.FC = function(props:any) {
                 <p><span>Serveur</span></p>
                 <p className="item-text-left">Paris, France</p>
                 <p><span>Cash prize</span></p>
-                <p>`${wagger?.price} €`</p>
+                <p>{`${wagger?.price} €`}</p>
               </div>
               <div className="item-all-info">
                 <p><span>Console(s)</span></p>
                 <p className="item-text-left">Xbox / PS4</p>
                 <p><span>Vainqueur</span></p>
-                <p>`${wagger?.price} €`</p>
+                <p>{`${wagger?.price} €`}</p>
               </div>
             </div>
           </div>          

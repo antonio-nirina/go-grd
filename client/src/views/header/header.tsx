@@ -130,6 +130,10 @@ const Header: React.FC = function() {
 		}
 	},[loading,error,data,subLoading,errSub,subData,userConnectedRedux])
 
+	const friendOnlineHandler = function() {
+		alert("okok")
+	}
+
   return(
 		<header className={isDeconnect || Object.keys(userConnectedRedux.user).length === 0 ? "header" : "header connected"}>
 			<div className="wrap">
@@ -188,14 +192,12 @@ const Header: React.FC = function() {
 							</span>
 						</div>
 					   */}
-						<div className="connex" >
-							<>
-								<i className="square" onClick={onShowNotif} style={{"cursor":"pointer"}}>
-									<FontAwesomeIcon icon={faPlus} />
-									<span className="counter">2</span>
-									<span className={notification > 0 ? "number" : ""}>{notification > 0 ? notification : ""}</span>
-								</i>
-							</>
+						<div className="connex" style={{"cursor":"pointer"}} onClick={friendOnlineHandler}>
+							<i className="square" onClick={onShowNotif} >
+								<FontAwesomeIcon icon={faPlus} />
+								<span className="count">21</span>
+								<span className={notification > 0 ? "number" : ""}>{notification > 0 ? notification : ""}</span>
+							</i>
 							<div className={!showNotif ? "notification" :"notification show"}>
 								{dataNotifications.length > 0 && dataNotifications[0].type === 0
 									?
@@ -205,8 +207,12 @@ const Header: React.FC = function() {
 							</div>
 							<>
 								<i className="relative">
+									<FontAwesomeIcon icon={faBell} size="lg"/>
+									
+								</i>
+								<i className="relative">
 									<FontAwesomeIcon icon={faUsers} size="lg"/>
-									{/*<span className="counter">2</span>*/}
+									
 								</i>
 							</>
 						</div>

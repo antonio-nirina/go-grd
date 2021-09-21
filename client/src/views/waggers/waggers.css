@@ -252,3 +252,12 @@ p.item-text-left{
 .waggers thead{
 	background: none;
 }
+.rules-waggers{
+	width: 100%;
+}
+.rules-waggers .txt{
+	max-width: 930px;
+}
+.rules-waggers .tableau{
+	width: 27% !important;
+}

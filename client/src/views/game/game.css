@@ -13,9 +13,10 @@
 	width: 100%;
 }
 .bg-game{
-	width: 100%;
-	text-align: left;
+	width: 80%;
+	margin: auto;
 	padding: 0 15px;
+	text-align: left;	
 }
 .logo-game{
 	width: 22%;	

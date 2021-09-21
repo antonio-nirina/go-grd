@@ -13,8 +13,8 @@ import promo from "../../../assets/image/promo.png"
 
 const Community: React.FC = function() {
 	const userConnectedRedux = useSelector((state:RootState) => state.userConnected)
-  return(
-    <div className="community">
+  	return(
+    	<div className="community">
       <h2>
 	  {
 		Object.keys(userConnectedRedux.user).length > 0 ?
@@ -110,7 +110,7 @@ const Community: React.FC = function() {
         </div>
       </div>
     </div>
-  );
+  	)
 }
 
 export default Community

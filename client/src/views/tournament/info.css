@@ -88,7 +88,7 @@ p.group-title{
 }
 .info-target p{
 	text-transform: uppercase;		
-	padding: 15px 5px; ;
+	align-self: center;
 	float: left;
 	width: 40%;
 	text-align: left;
@@ -104,6 +104,7 @@ p.group-title{
 }
 .line{
 	border-bottom: 1px solid #2d2d2d;
+	display: flex;
 }
 .info-target .line:last-child{
 	border:none;
