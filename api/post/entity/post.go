@@ -13,4 +13,5 @@ type Post struct {
 	Content   string             `json:"Content"`
 	ImageType   string             `json:"imageType"`
 	Files   string             `json:"files"`
+	Date       string                `json:"date"`
 }

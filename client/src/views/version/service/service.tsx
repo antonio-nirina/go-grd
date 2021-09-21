@@ -3,8 +3,8 @@ import React from "react"
 import "../../../assets/css/style.css"
 import "../service/service.css"
 import waggers from "../../../assets/image/wagers.png"
-import tournament from "../../../assets/image/tournois-ligues.png"
-import commu from "../../../assets/image/commu.png"
+import tournament from "../../../assets/image/classement.png"
+import commu from "../../../assets/image/tchat.png"
 
 const Service: React.FC = function() {
 	// const userConnectedRedux = useSelector((state:RootState) => state.userConnected)

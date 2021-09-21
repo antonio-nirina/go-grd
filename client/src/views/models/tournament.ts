@@ -29,3 +29,14 @@ export interface Platform {
 	description:string
 	name:string
 }
+
+export interface User {
+	uid:string
+	firstname:string
+	lastname:string
+	email:string
+	username:string
+	avatar:string
+	language:string
+	point:number
+}

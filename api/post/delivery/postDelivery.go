@@ -11,7 +11,7 @@ import (
 type PostResolve interface {
 	CreatePostResolve(params graphql.ResolveParams) (interface{}, error)
 	FindPostResolver(params graphql.ResolveParams) (interface{}, error)
-	FindAllPosttResolver(params graphql.ResolveParams) (interface{}, error)
+	FindAllPostResolver(params graphql.ResolveParams) (interface{}, error)
 }
 
 type post struct {
@@ -29,6 +29,7 @@ func NewResolverPost(postUseCase handler.UsecasePost, userUsecase userHandler.Us
 func (c *post) CreatePostResolve(params graphql.ResolveParams) (interface{}, error) {
 	uid, _ := params.Args["uidUser"].(string)
 	title, _ := params.Args["title"].(string)
+	date, _ := params.Args["date"].(string)
 	content, _ := params.Args["content"].(string)
 	imageType, _ := params.Args["imageType"].(string)
 	files, _ := params.Args["files"].(string)
@@ -42,6 +43,7 @@ func (c *post) CreatePostResolve(params graphql.ResolveParams) (interface{}, err
 		Uid:     primitive.NewObjectID(),
 		Title:   title,
 		User:    user,
+		Date:date,
 		Content: content,
 		ImageType:imageType,
 		Files:files,
@@ -67,7 +69,7 @@ func (c *post) FindPostResolver(params graphql.ResolveParams) (interface{}, erro
 	return res, nil
 }
 
-func (c *post) FindAllPosttResolver(params graphql.ResolveParams) (interface{}, error) {
+func (c *post) FindAllPostResolver(params graphql.ResolveParams) (interface{}, error) {
 	limit, _ := params.Args["limit"].(int)
 	pageNumber, _ := params.Args["pageNumber"].(int)
 	res, err := c.postHandler.FindAllPostHandler(int64(pageNumber), int64(limit))

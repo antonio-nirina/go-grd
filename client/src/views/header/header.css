@@ -2,6 +2,7 @@
 
 .relative{
 	position: relative;
+	display: block;
 }
 .wrap{
 	padding: 6px 35px;
@@ -63,9 +64,8 @@
 	vertical-align: middle;
 }
 
-
 .box{
-	max-width: 131px;
+	max-width: 73px;
 	width: 100%;
 	display: inline-block;
 	margin-right: 17px;
@@ -96,7 +96,7 @@
 	border: 1px solid #4c4d4f;
 }
 .connex{
-	width: 80px;
+	width: 70px;
 	display: inline-block;
 	vertical-align: middle;
 
@@ -147,6 +147,9 @@
 	z-index: 3;
 	height: auto;
 }
+.itemTag.joystick{
+	margin-top: 9px;
+}
 .itemTag.drop{
 	height: 15px;
 }
@@ -155,13 +158,19 @@
 }
 .square{
 	padding: 1px;
+	cursor: pointer;
     margin-right: 16px;
-    display: inline-block;
-    height: 16px;
+    display: inline-block;    
     line-height: 10px;
     vertical-align: top;
-    margin-top: 4px;
+    margin-top: 7px;
     position: relative;
+    float: left;
+    border: 1px solid #4c4d4f;
+    padding: 3px;
+}
+.square svg{
+	font-size: 10px;
 }
 .square .number{
 	background: #dd0000;
@@ -244,9 +253,6 @@
 	vertical-align: middle;
 	margin-right: 15px;
 }
-.square svg{
-	font-size: 24px;
-}
 
 .relative svg{
 	color: #fcfcfc;
@@ -259,16 +265,16 @@
 
 .counter{
 	position: absolute;
-	top: 2px;
-	background: #dd0000;
-	display: inline-block;
-	width: 19px;
-	text-align: center;
-	font-style: normal;
-	border-radius: 50%;
-	left: 23px;
-	font-size: 12px;
-	padding: 2px;
+    top: -9px;
+    background: #dd0000;
+    display: inline-block;
+    width: 19px;
+    text-align: center;
+    font-style: normal;
+    border-radius: 50%;
+    left: 10px;
+    font-size: 12px;
+    padding: 4px;
 }
 .bg-gametag{
 	text-align: right;
