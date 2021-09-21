@@ -1,12 +1,12 @@
-import React,{ useRef,useState,useCallback,useEffect} from "react"
+import React,{ useRef,useState,useCallback, useMemo} from "react"
 import { faImage,faLaugh,faPaperclip,faTimes } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useSelector } from "react-redux"
 import {useMutation,useQuery} from "@apollo/client"
 import {useDropzone} from "react-dropzone"
 import parse from 'html-react-parser'
-// import 'emoji-mart/css/emoji-mart.css'
-// import { Picker } from 'emoji-mart'
+import 'emoji-mart/css/emoji-mart.css'
+import { Picker,Emoji, EmojiData } from 'emoji-mart'
 
 import {RootState} from "../../reducer"
 import {Translation} from "../../lang/translation"
@@ -35,6 +35,7 @@ const Post = function() {
 	const [mimeType, setMimeType] = useState<string>("")
 	const [errorInscr,setErreorIns] = useState<boolean>(false)
 	const [errorMesg, setErreorMsg] = useState<string>("")
+	const [listEmoij,setListEmoij] = useState<Array<EmojiData>>([])
 
 	const [posts, setPosts] = useState<Array<PostModel>>([])
 
@@ -49,7 +50,7 @@ const Post = function() {
 		},
 	})
 
-	useEffect(() => {
+	useMemo(() => {
 		if(!loading && !error && data) {
 			setPosts(data.FindAllPost)
 		}
@@ -80,7 +81,6 @@ const Post = function() {
 		}
 	}
 
-
 	const handleContent = async function(){
 		let contnt = ""
 		if(contentPost.current) {
@@ -93,19 +93,22 @@ const Post = function() {
 			reader.readAsDataURL(files[0])
 			reader.onload = async function(file) {
 				try {
+					let newFile = typeof reader.result === "string" ? reader.result?.replace(/^data:(.*?);base64,/, "") : ""
+					newFile = newFile.replace(/ /g, '+')
 					const result = await sendPost({ variables: {
 						uidUser: userConnectedRedux.user.uid,
 						title: "",
 						date:dateDefault(),
 						content:contnt,
 						imageType: files && files.length > 0 ? files[0].type : "",
-						files: files && files.length > 0 ?reader.result : ""
+						files: newFile
 					}})
 					if (result.data.createPost && contentPost.current) {
 						URL.revokeObjectURL(files[0].preview)
 						setFiles([])
 						setIsUpload(false)
 						contentPost.current.textContent = ""
+						setPosts(result.data.createPost)
 					}
 				} catch(e) {
 					console.log(e)
@@ -144,6 +147,14 @@ const Post = function() {
 		}
 	}
 
+	const handleEmoji = function() {
+		setIsEmoij(true)
+	}
+
+	const handleSetEmoji = function(e:EmojiData) {
+    	setListEmoij([...listEmoij,e])
+  	}
+
 	return (
 		<div className="post-cnt" >
 			<div className="new-post">
@@ -161,6 +172,9 @@ const Post = function() {
 					</div>
 				</div>
 					<div className="content-new-post" id="content-post" ref={contentPost}></div>
+					{listEmoij.length > 0 ? listEmoij.map(function(e,i){
+						return (<Emoji emoji={e} size={16} key={i} />)
+					}) : <></> }
 						<div className={isUpload ? "image-videos" : "d-none"}>
 							{
 								Translation(userConnectedRedux.user.language).communauty.addImage
@@ -184,9 +198,28 @@ const Post = function() {
 
 									</div>
 							</div>
-						<div className={isEmoij ? "emoij" : "d-non"}></div>
-						{/*<Picker set='facebook' />*/}
-					</div>
+						</div>
+						<div className={isEmoij ? "emoij" : "d-none"}>
+							<Picker
+								set="facebook"
+								title=''
+								emoji=''
+								theme="dark"
+								showPreview={false}
+								showSkinTones={false}
+								skin={1}
+								color="#dd0000"
+								exclude={
+								[
+									"recent",
+									"foods",
+									"nature",
+									"activity",
+									"places",
+									"objects"
+								]}
+							/>
+						</div>
 					<div className="post-icon">
 						<div className="icon-lists">
 							<div className="f-icons" onClick={handleUpload}>
@@ -195,7 +228,7 @@ const Post = function() {
 							<div className="f-icons">
 								<i><FontAwesomeIcon icon={faPaperclip} rotation={90} /></i>
 								</div>
-							<div className="f-icons">
+							<div className="f-icons" onClick={handleEmoji}>
 								<i><FontAwesomeIcon icon={faLaugh} /></i>
 							</div>
 							</div>

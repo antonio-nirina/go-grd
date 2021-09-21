@@ -2,6 +2,16 @@ import gql from "graphql-tag"
 
 export const CREATE_PUBLICATION = gql`
 	mutation createPost($uidUser:String,$title:String,$content:String,$imageType:String,$files:String,$date:String){
-		createPost(uidUser:$uidUser,title:$title,content:$content,imageType:$imageType,files:$files,date:$date)
+		createPost(uidUser:$uidUser,title:$title,content:$content,imageType:$imageType,files:$files,date:$date){
+			uid
+			user{
+				uid
+				email
+				username
+				avatar
+			}
+			content
+			files
+		}
 	}
 `

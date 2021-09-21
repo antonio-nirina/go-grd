@@ -27,6 +27,5 @@ query FindAllPost($limit: Int!,$pageNumber:Int!) {
 		}
 		content
 		files
-		files
 	}
 }`

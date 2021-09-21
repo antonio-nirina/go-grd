@@ -1,6 +1,9 @@
 package handler
 
 import (
+	"fmt"
+
+	"github.com/thoussei/antonio/api/external"
 	"github.com/thoussei/antonio/api/post/entity"
 	"github.com/thoussei/antonio/api/post/repository"
 	userHanlder "github.com/thoussei/antonio/api/user/handler"
@@ -15,11 +18,11 @@ const (
 type PostViewModel struct {
 	Uid       string 						`json:"uid"`
 	Title     string             			`json:"title"`
-	User      userHanlder.UserViewModel   `json:"user"`
+	User      userHanlder.UserViewModel   	`json:"user"`
 	Content   string             			`json:"content"`
-	ImageType   string             `json:"imageType"`
-	Files   string             `json:"files"`
-	Date       string                `json:"date"`
+	ImageType   string             			`json:"imageType"`
+	Files   string             				`json:"files"`
+	Date       string               		 `json:"date"`
 }
 
 type UsecasePost interface {
@@ -39,7 +42,17 @@ func NewUsecasePost(r repository.RepositoryPost) UsecasePost {
 }
 
 func (c *postUsecase) CreatePostHandler(cmty *entity.Post) ([]PostViewModel, error) {
+	urlFile := cmty.Files
 
+	if cmty.Files != "" {
+		upl := &external.FileUpload{}
+		url,_ := upl.HandleFileInBBApi(cmty.Files,cmty.ImageType)
+		urlFile = url
+	}
+
+	cmty.Files = urlFile
+	
+	fmt.Println(cmty)
 	_,err := c.postRepository.SavedPostRepo(cmty)
 
 	if err != nil {
