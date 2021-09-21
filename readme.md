@@ -16,3 +16,5 @@
 [Redis graphql](https://github.com/ccamel/go-graphql-subscription-example)
 [Optimized reader](https://github.com/icza/shutdown/blob/master/shutdown.go)
 [concurrent](https://eleni.blog/2020/01/12/go-routines-and-thread-safe-data-structures/)
+
+https://flowcv.me/rajeshbiswas
