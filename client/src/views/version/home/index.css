@@ -27,4 +27,6 @@ body{
 .participate{
 	background: #101010;
 }
-
+.home .bg-game{
+	width: 100%;
+}

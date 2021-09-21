@@ -81,7 +81,7 @@ const Login: React.FC = function() {
 							<span style={style}>{errorForm ? Translation("fr").login.errorForm : ""}</span>
 						</div>
 						<div>
-							{passwd ? <span style={style}>Passord or username invalid </span> : ""}
+							{passwd ? <span style={style}>Password or username invalid </span> : ""}
 						</div>
 						<form onSubmit={handleSubmit(onSubmit)}>
 							<input className="mgt10" type = "email" placeholder = "Ton email" {...register("email", { required: true })} name="email" />

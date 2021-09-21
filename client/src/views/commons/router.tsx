@@ -15,6 +15,7 @@ import Rules from "../tournament/rules"
 // import RulesLeague from "../annexe/rules-league"
 import Wager from "../wager/wager"
 import Waggers from "../waggers/waggers"
+import WaggersRules from "../waggers/waggersrules"
 import WaggersGame from "../waggers/waggersgame"
 import Joingame from "../waggers/joingame"
 import View from "../wager/view"
@@ -51,6 +52,7 @@ const Router = function() {
 			<ProtectedRoute path="/wager" exact component={Wager} />
 			<ProtectedRoute path="/joingame" exact component={Joingame} />
 			<ProtectedRoute path="/waggers" exact component={Waggers} />
+			<ProtectedRoute path="/waggers-rules" exact component={WaggersRules} />
 			<ProtectedRoute path="/waggers-game" exact component={WaggersGame} />
 			<ProtectedRoute path="/view" exact component={View} />
 			<ProtectedRoute path="/lobby" exact component={Lobby} />
@@ -60,7 +62,7 @@ const Router = function() {
 			<ProtectedRoute path="/contact" exact component={Contact} />
 			<ProtectedRoute path="/profil" exact component={Profil} />
 			<ProtectedRoute path="/profile" exact component={Profile} />
-			<ProtectedRoute path="/update-password" exact component={UpdatePassword} />			
+			<ProtectedRoute path="/update-password" exact component={UpdatePassword} />						
 			<Route path="/login" exact component={Login} />
 			<Route path="/inscription" exact component={Inscription} />
 			<Route path="/register" exact component={Register} />
