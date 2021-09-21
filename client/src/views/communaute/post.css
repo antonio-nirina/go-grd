@@ -13,11 +13,12 @@
     padding-top: 31px;
 }
 .new-post .new-post-title {
-	font-size: 18px;
-	color: #000;
-	font-weight: bolder;
-	padding-bottom: 7px;
-	border-bottom: 1px solid;
+	font-size: 14px;
+    color: #000;
+    font-weight: bold;
+    padding-bottom: 7px;
+    border-bottom: 1px solid;
+    padding-top: 6px;
 }
 .post-icon .poster{
 	padding: 4px;

@@ -15,13 +15,12 @@
 	color: #ffffff;
 	float: left;
 	margin-right: 25px;
-
 }
 .search-box{
 
 }
 .search-box input{
-	width: 70%;
+	width: 78%;
 	padding: 10px;
 	border: 1px solid #e3e3e3;
 	border-radius: 5px;
@@ -29,7 +28,7 @@
 .aside-menu{
 	font-family: "Russo One";
 	font-weight: 500;
-	background: #7b7b7b;	
+	background: #101010;	
 	display: table-cell;
 	vertical-align: top;
 	padding: 20px;
@@ -38,11 +37,11 @@
 	border-radius: 5px 0px 0px 5px;
 }
 .support{
-	background: #e3e1d3;	
+	background: #101010;	
 	width: 940px;
 	display: table-cell;
 	vertical-align: top;
-	color: #000000;
+	color: #ffffff;
 	font-family: "Russo One";
 	padding: 30px;
 	font-weight: lighter;
@@ -63,33 +62,34 @@
 
 .sup{
 	padding-bottom: 15px;
-	border-bottom: 2px solid #909090;
+	border-bottom: 2px solid #dd0000;
 }
 .sup p{
 	font-size: 14px;
 }
-
 .link{
 	margin-top: 7px;
 }
+.parent-link{
+	margin: 15px 0;	
+}
 .link a.active, .link a:hover, .link h3.active, .link h3:hover{
-	color: #dd0000;
+	color: #ffffff;
 }
 .link h3, .link h3 a{
-	color: #000000;
-	font-size: 13px;
-	font-weight: lighter;
-
+	color: #ffffff;
+    font-size: 15px;
+    font-weight: lighter;
+    position: relative;
 }
-
 .link li a{
-	color: #2c2c2c;
+	color: #ffffff;
 	font-size: 11px;
 
 }
 .under-title{
 	padding: 20px 0;
-	border-bottom: 2px solid #909090;
+	border-bottom: 2px solid #dd0000;
 }
 .under-title .clear{
 	display: block;	
@@ -106,7 +106,7 @@
 .carre{
 	width: 30px;
 	height: 30px;
-	background: #2c2c2c;
+	background: #a7a7a7;
 	display: inline-block;
 	float: left;
 	margin-left: 5px;
@@ -124,13 +124,22 @@
 .tuto-video video{
 	width: 49%;
 }
-.assistance .accueil .support-link .link:nth-child(1) h3 a,
-.assistance .ingame .support-link .link:nth-child(2) h3 a,
-.assistance .social .support-link .link:nth-child(3) h3 a,
-.assistance .help-connexion .support-link .link:nth-child(4) h3 a,
-.assistance .contact .support-link .link:nth-child(5) h3 a
+.assistance .accueil .support-link .link:nth-child(1) h3 a:before,
+.assistance .ingame .support-link .link:nth-child(2) h3 a:before,
+.assistance .social .support-link .link:nth-child(3) h3 a:before,
+.assistance .help-connexion .support-link .link:nth-child(4) h3 a:before,
+.assistance .contact .support-link .link:nth-child(5) h3 a:before
 {
-	color: #dd0000;
+	content: "";
+    display: inline-block;
+    vertical-align: middle;
+    width: 6px;
+    height: 25px;
+    background: #dd0000;
+    margin-right: 5px;  
+    position: absolute;
+    left: -13px;
+    top: -3px;
 }
 .didacticiel {
 	padding-top: 15px;
@@ -162,9 +171,7 @@
 {
 	height: auto;	
 }
-.support-container .game-name{
-	color: #dd0000;
-}
+
 .img-cadre{
 	max-width: 350px;
 	width: 100%;

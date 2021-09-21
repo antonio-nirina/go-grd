@@ -30,8 +30,10 @@ const Aside = function({assists}:any) {
 				assists?.map(function(el:any,index:number){
 					return (
 						<div className="link" key={index}>
-							<h3>{el.assist.length > 0 ? el.title : <></>}</h3>
-							{el.assist.length > 0 ? <ChildList el={el} /> : <></>}
+							<div className="parent-link">
+								<h3>{el.assist.length > 0 ? el.title : <></>}</h3>
+								{el.assist.length > 0 ? <ChildList el={el} /> : <></>}
+							</div>
 						</div>
 					)
 				})

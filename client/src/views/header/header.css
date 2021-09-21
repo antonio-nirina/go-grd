@@ -2,7 +2,8 @@
 
 .relative{
 	position: relative;
-	display: block;
+    display: inline-block;
+    padding-right: 10px;
 }
 .wrap{
 	padding: 6px 35px;
@@ -65,7 +66,7 @@
 }
 
 .box{
-	max-width: 73px;
+	max-width: 117px;
 	width: 100%;
 	display: inline-block;
 	margin-right: 17px;
@@ -96,7 +97,7 @@
 	border: 1px solid #4c4d4f;
 }
 .connex{
-	width: 70px;
+	width: 128px;
 	display: inline-block;
 	vertical-align: middle;
 
@@ -168,6 +169,19 @@
     float: left;
     border: 1px solid #4c4d4f;
     padding: 3px;
+}
+.count{
+	position: absolute;
+    top: -9px;
+    background: #dd0000;
+    display: inline-block;
+    width: 19px;
+    text-align: center;
+    font-style: normal;
+    border-radius: 50%;
+    left: 10px;
+    font-size: 12px;
+    padding: 4px;
 }
 .square svg{
 	font-size: 10px;
