@@ -1,3 +1,6 @@
+.post-cnt{
+	position: relative;
+}
 .center-block .new-post{
 	background-color: #efefef;
 	border-radius: 7px;
@@ -93,4 +96,26 @@
 
 .content-new-post .emoji-mart-bar{
 	display: none;
+}
+.new-post .emoij{
+	border: 1px solid;
+	color: #fff;
+	width: 46%;
+	position: absolute;
+	background-color: #181818;
+	left: 78px;
+	z-index: 1;
+}
+.emoij .fbEmoij-cnt{
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.fbEmoij-cnt .list-emoij{
+	flex-basis: 40px;
+}
+.fbEmoij img{
+	max-width: 100%;
+	vertical-align: middle;
+	cursor: pointer;
 }
