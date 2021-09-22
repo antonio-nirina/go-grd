@@ -132,6 +132,9 @@ html{
 .white{
   color: #ffffff !important;
 }
+.bold{
+  font-weight: 600;
+}
 a{
    text-decoration:none;
 }

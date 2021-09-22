@@ -170,6 +170,15 @@
     border: 1px solid #4c4d4f;
     padding: 3px;
 }
+.add-icon{
+    padding: 1px;
+    cursor: pointer;
+    margin-right: 7px;
+    display: inline-block;        
+    padding: 2px;
+    position: relative;    
+    border: 1px solid #4c4d4f;    
+}
 .count{
 	position: absolute;
     top: -9px;
@@ -186,19 +195,25 @@
 .square svg{
 	font-size: 10px;
 }
-.square .number{
+.square .number, .relative .number{
 	background: #dd0000;
-	display: inline-block;
-	position: absolute;
-	width: 19px;
-	height: 19px;
-	border-radius: 50%;
-	font-style: normal;
-	font-size: 12px;
-	padding-top: 5px;
+    display: inline-block;
+    position: absolute;
+    width: 19px;
+    height: 19px;
+    border-radius: 50%;
+    font-style: normal;
+    font-size: 12px;
+    padding-top: 5px;
     text-align: center;
-    top: 12px;
-    left: 13px;
+    top: -13px;
+    left: 63px;
+    z-index: 2;
+}
+.relative .number{
+	line-height: 9px;
+	top: -7px;
+    left: 60px;
 }
 .header .notification{
 	display: none;
@@ -245,8 +260,8 @@
 }
 .header .notification button{
 	font-size: 10px;
-	padding: 7px;
-	color: gray;
+    padding: 7px;
+    color: #d8d8d8;
 }
 .header .notification .bg-white.gray{
 	border-color: gray !important;
@@ -267,7 +282,74 @@
 	vertical-align: middle;
 	margin-right: 15px;
 }
-
+.header .invitation.show{
+	display: block;
+}
+.header .invitation{
+	max-width: 270px;
+    width: 100%;
+	display: none;
+    background: #2c2c2c;    
+    position: absolute;
+    height: 100vh;
+    overflow: auto;
+    top: 66px;
+    z-index: 2;    
+    cursor: auto;
+    right: 0px;    
+    box-shadow: -6px 0px 62px #000000;    
+}
+.header .invitation p{
+	font-size: 13px;
+    padding: 10px 15px;
+    text-align: left;
+}
+.header .invitation p i{
+	font-size: 16px;
+	cursor: pointer;
+}
+.header .invitation .right-icon{
+	float: right;
+	font-size: 13px;
+}
+.header .invitation .i-right{
+	position: absolute;
+    top: 2px;
+    right: 10px;
+    margin-top: 14px;
+}
+.header .friends-online p.bold{
+	cursor: pointer;
+}
+.header .friends-online strong{
+	font-weight: inherit;
+	display: flex;
+}
+.header .list-online{
+	height: 0;
+	overflow: hidden;
+}
+.header .list-online.show{
+	height: auto;
+	overflow: auto;
+}
+.header .list-online p{
+	position: relative;
+	margin: 0 10px;
+	border-bottom: 2px solid #4c4d4f;
+}
+.header .list-online p:last-child{
+	border: none;
+}
+.header .list-online strong img{
+	width: 30px;
+	height: 30px;
+	align-self: center;
+	margin-right: 7px;
+}
+.header .list-online strong span{
+	align-self: center;
+}
 .relative svg{
 	color: #fcfcfc;
 	background: #bcbcbc;
