@@ -10,13 +10,14 @@ import avatar from "../../assets/image/game-tag.png"
 import fr from "../../assets/image/fr.png"
 import gb from "../../assets/image/gb.png"
 import WhiteJoystick from "../../assets/image/white-joystick.png"
-import { faBars, faBell, faUsers, faPlus} from "@fortawesome/free-solid-svg-icons"
+import { faBars, faBell, faUsers, faPlus, faMinus, faCommentDots} from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {RootState} from "../../reducer"
 import {Translation} from "../../lang/translation"
 import {removeDataUser} from "../auth/action/userAction"
 import {GET_ALL_NOTIFICATIONS} from "../../gql/notifications/query"
 import Notifications from "./notificationFriend"
+import Invitation from "./invitation"
 import {NOTIFICATIONS_SUBSCRIBE} from "../../gql/user/subscription"
 
 import {Deconnect} from "../../gql/user/auth"
@@ -40,6 +41,7 @@ const Header: React.FC = function() {
 	const [showList, setShowList] = useState<Boolean>(false)
 	const [notification, setNotification] = useState<Number>(0)
 	const [showNotif, setShowNotif] = useState<Boolean>(false)
+	const [showInvitation, setShowInvitation] = useState<Boolean>(false)
 	const [isDeconnect, setIsDeconnect] = useState<Boolean>(false)
 	const [dataNotifications, setDataNotifications] = useState<Array<any>>([])
 	const {loading:subLoading,error:errSub,data:subData}  = useSubscription(NOTIFICATIONS_SUBSCRIBE)
@@ -53,6 +55,9 @@ const Header: React.FC = function() {
 
 	const onShow = function(){
 		setShowList(!showList)
+	}
+	const onShowInvitation = function(){
+		setShowInvitation(!showInvitation)
 	}
 	const onShowNotif = async function(){
 		if(dataNotifications.length > 0) {
@@ -128,11 +133,7 @@ const Header: React.FC = function() {
 			isSubscribed = false
 			console.log(isSubscribed)
 		}
-	},[loading,error,data,subLoading,errSub,subData,userConnectedRedux])
-
-	const friendOnlineHandler = function() {
-		alert("okok")
-	}
+	},[loading,error,data,subLoading,errSub,subData,userConnectedRedux])	
 
   return(
 		<header className={isDeconnect || Object.keys(userConnectedRedux.user).length === 0 ? "header" : "header connected"}>
@@ -193,11 +194,13 @@ const Header: React.FC = function() {
 						</div>
 					   */}
 						<div className="connex" style={{"cursor":"pointer"}}>
-							<i className="square" onClick={onShowNotif} >
-								<FontAwesomeIcon icon={faPlus} onClick={friendOnlineHandler} />
-								<span className="count">2</span>
-								<span className={notification > 0 ? "number" : ""}>{notification > 0 ? notification : ""}</span>
+							<i className="square" onClick={onShowInvitation} >
+								<FontAwesomeIcon icon={faPlus} />
+								<span className="count">2</span>								
 							</i>
+							<div className={!showInvitation ? "invitation" :"invitation show"}>
+								<Invitation />
+							</div>
 							<div className={!showNotif ? "notification" :"notification show"}>
 								{dataNotifications.length > 0 && dataNotifications[0].type === 0
 									?
@@ -206,8 +209,9 @@ const Header: React.FC = function() {
 								}
 							</div>
 							<>
-								<i className="relative">
-									<FontAwesomeIcon icon={faBell} size="lg" />									
+								<i className="relative" onClick={onShowNotif}>
+									<FontAwesomeIcon icon={faBell} size="lg" />
+									<span className={notification > 0 ? "number" : ""}>{notification > 0 ? notification : ""}</span>								
 								</i>
 								<i className="relative">
 									<FontAwesomeIcon icon={faUsers} size="lg" />
