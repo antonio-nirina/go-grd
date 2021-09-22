@@ -192,10 +192,10 @@ const Header: React.FC = function() {
 							</span>
 						</div>
 					   */}
-						<div className="connex" style={{"cursor":"pointer"}} onClick={friendOnlineHandler}>
+						<div className="connex" style={{"cursor":"pointer"}}>
 							<i className="square" onClick={onShowNotif} >
-								<FontAwesomeIcon icon={faPlus} />
-								<span className="count">21</span>
+								<FontAwesomeIcon icon={faPlus} onClick={friendOnlineHandler} />
+								<span className="count">2</span>
 								<span className={notification > 0 ? "number" : ""}>{notification > 0 ? notification : ""}</span>
 							</i>
 							<div className={!showNotif ? "notification" :"notification show"}>
@@ -207,12 +207,10 @@ const Header: React.FC = function() {
 							</div>
 							<>
 								<i className="relative">
-									<FontAwesomeIcon icon={faBell} size="lg"/>
-									
+									<FontAwesomeIcon icon={faBell} size="lg" />									
 								</i>
 								<i className="relative">
-									<FontAwesomeIcon icon={faUsers} size="lg"/>
-									
+									<FontAwesomeIcon icon={faUsers} size="lg" />
 								</i>
 							</>
 						</div>
