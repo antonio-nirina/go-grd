@@ -21,6 +21,7 @@ import Invitation from "./invitation"
 import {NOTIFICATIONS_SUBSCRIBE} from "../../gql/user/subscription"
 
 import {Deconnect} from "../../gql/user/auth"
+import Chat from "../tchat/chat"
 
 export interface Notif  {
 	type:number,
@@ -33,16 +34,26 @@ export interface Notif  {
 	}
 }
 
+interface Show {
+	isShow:boolean
+}
+
 
 const Header: React.FC = function() {
 	const history = useHistory()
 	const dispatch = useDispatch()
+
+	const [showChat, setShowChat] = useState<Show>({
+		isShow:false
+	})
+
 	const userConnectedRedux = useSelector((state:RootState) => state.userConnected)
 	const [showList, setShowList] = useState<Boolean>(false)
 	const [notification, setNotification] = useState<Number>(0)
 	const [showNotif, setShowNotif] = useState<Boolean>(false)
 	const [showInvitation, setShowInvitation] = useState<Boolean>(false)
 	const [isDeconnect, setIsDeconnect] = useState<Boolean>(false)
+	const [isShowChat, setIsShowChat] = useState<Boolean>(false)
 	const [dataNotifications, setDataNotifications] = useState<Array<any>>([])
 	const {loading:subLoading,error:errSub,data:subData}  = useSubscription(NOTIFICATIONS_SUBSCRIBE)
 	const {loading,error,data} = useQuery(GET_ALL_NOTIFICATIONS, {
@@ -83,7 +94,6 @@ const Header: React.FC = function() {
 	}
 
 	useEffect(() => {
-		
 		let array:Array<Notif> = []
 		let notif:Notif
 		if(!loading && !error && data) {
@@ -130,7 +140,15 @@ const Header: React.FC = function() {
 		setDataNotifications(array)
 		let isSubscribed:boolean = true
 		return () => {isSubscribed = false}
-	},[loading,error,data,subLoading,errSub,subData,userConnectedRedux])	
+	},[loading,error,data,subLoading,errSub,subData,userConnectedRedux])
+
+	const openTchat = function() {
+		setIsShowChat(showChat.isShow)
+	}
+
+	const onDmTchat = function(statTchat:boolean) {
+		setShowChat({isShow:statTchat})
+	}
 
   return(
 		<header className={isDeconnect || Object.keys(userConnectedRedux.user).length === 0 ? "header" : "header connected"}>
@@ -196,7 +214,14 @@ const Header: React.FC = function() {
 								<span className="count">2</span>								
 							</i>
 							<div className={!showInvitation ? "invitation" :"invitation show"}>
-								<Invitation />
+								<Invitation
+									handleDm={onDmTchat}
+								/>
+							</div>
+							<div className={!showChat.isShow ? "hide-chat" :"show-chat"}>
+								<Chat
+									handleTchat={openTchat}
+								/>
 							</div>
 							<div className={!showNotif ? "notification" :"notification show"}>
 								{dataNotifications.length > 0 && dataNotifications[0].type === 0

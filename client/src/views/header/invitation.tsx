@@ -5,16 +5,21 @@ import { faPlus, faMinus, faCommentDots } from "@fortawesome/free-solid-svg-icon
 import {useQuery} from "@apollo/client"
 import AvatarDefault from "../../assets/image/game-tag.png"
 import {RootState} from "../../reducer"
-import {USerModel} from "../models/user"
 import {GET_ALL_FRIENDS} from "../../gql/user/query"
 import {Friends} from "../../gql/types/friend"
+import {Translation} from "../../lang/translation"
+
+type TypeStateTchat = {
+	handleDm:Function
+}
 
 
-const Invitation = function() {
+const Invitation = function({handleDm}:TypeStateTchat) {
 	const userConnectedRedux = useSelector((state:RootState) => state.userConnected)
 	const [friends, setFriends] 	= useState<Array<Friends>>([])
 	const [nbFriends, setNbFriends] = useState<number>(0)
 	const [showReduce, setShowReduce] = useState<Boolean>(true)
+	const [showChat, setShowChat] = useState<Boolean>(false)
 	const onShowReduce = function(){
 		setShowReduce(!showReduce)
 	}
@@ -38,13 +43,24 @@ const Invitation = function() {
 		}
 	},[loading,error,data])
 
+	const handleShowTchat = function() {
+		setShowChat(!showChat)
+		handleDm(!showChat)
+	}
 
 	return(
 		<div className="gamer-invite">
-			<p>Invitez à rejoindre votre groupe</p>
+			<p>
+				{
+					Translation(userConnectedRedux.user.language).header.invtation
+				}
+
+			</p>
 			<div className="friends-online">
 				<p className="bold" onClick={onShowReduce}>
-					Mes amis en ligne 
+					{
+						Translation(userConnectedRedux.user.language).header.friendOnline
+					}
 					<span>
 						{`(${nbFriends})`}
 					</span>
@@ -62,7 +78,7 @@ const Invitation = function() {
 								</strong>
 								<span className="i-right">
 									<i><FontAwesomeIcon className="add-icon" icon={faPlus} /></i>
-									<i><FontAwesomeIcon icon={faCommentDots} /></i>
+									<i><FontAwesomeIcon icon={faCommentDots} onClick={handleShowTchat} /></i>
 								</span>
 							</p>
 						)
