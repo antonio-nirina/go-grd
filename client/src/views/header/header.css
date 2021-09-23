@@ -432,3 +432,16 @@
 .hide {
 	display: none;
 }
+
+i.u-connected{
+	display: inline-block;
+	height: 7px;
+	width: 7px;	
+	border-radius: 50%;
+	float: none !important;
+	clear: both !important;
+	margin-left: 15px;
+	margin-top: 5px;
+	background: #1abb3d;
+	border: 1px solid #1abb3d;
+}

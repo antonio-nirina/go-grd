@@ -1,4 +1,4 @@
-import React,{useState,useMemo} from "react"
+import React,{useState, useEffect} from "react"
 import { Link } from "react-router-dom"
 import { useSelector,useDispatch } from "react-redux"
 import {useHistory } from "react-router-dom"
@@ -10,7 +10,7 @@ import avatar from "../../assets/image/game-tag.png"
 import fr from "../../assets/image/fr.png"
 import gb from "../../assets/image/gb.png"
 import WhiteJoystick from "../../assets/image/white-joystick.png"
-import { faBars, faBell, faUsers, faPlus, faMinus, faCommentDots} from "@fortawesome/free-solid-svg-icons"
+import { faBars, faBell, faUsers, faPlus} from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {RootState} from "../../reducer"
 import {Translation} from "../../lang/translation"
@@ -64,7 +64,6 @@ const Header: React.FC = function() {
 			setShowNotif(!showNotif)
 			setNotification(0) // update notification statut true
 		}
-
 	}
 
 	const onDeconnect = async function() {
@@ -83,8 +82,8 @@ const Header: React.FC = function() {
 		if(process.env.REACT_APP_URL_ADMIN) window.location.href = process.env.REACT_APP_URL_ADMIN
 	}
 
-	useMemo(() => {
-		let isSubscribed:boolean = true
+	useEffect(() => {
+		
 		let array:Array<Notif> = []
 		let notif:Notif
 		if(!loading && !error && data) {
@@ -129,10 +128,8 @@ const Header: React.FC = function() {
 			}
 		}
 		setDataNotifications(array)
-		return function(){
-			isSubscribed = false
-			console.log(isSubscribed)
-		}
+		let isSubscribed:boolean = true
+		return () => {isSubscribed = false}
 	},[loading,error,data,subLoading,errSub,subData,userConnectedRedux])	
 
   return(

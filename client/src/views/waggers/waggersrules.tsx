@@ -1,8 +1,7 @@
 import React,{useEffect,useState} from "react"
-import parse from 'html-react-parser'
 import {useQuery} from "@apollo/client"
 import { useSelector,useDispatch } from "react-redux"
-import { ToastContainer, toast } from 'react-toastify'
+import {  toast } from 'react-toastify'
 
 import {RootState} from "../../reducer"
 import {Translation} from "../../lang/translation"

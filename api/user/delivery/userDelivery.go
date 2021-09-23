@@ -4,6 +4,7 @@ import (
 	"encoding/base64"
 	"encoding/json"
 	"errors"
+
 	// "fmt"
 	"os"
 	"sync"
@@ -22,7 +23,7 @@ import (
 )
 
 type UserResponse struct {
-	Uid           string `json:"uid"`
+	Uid           string             `json:"uid"`
 	FirstName     string             `json:"firstname,omitempty"`
 	LastName      string             `json:"lastname,omitempty"`
 	Password      string             `json:"password"`
@@ -33,14 +34,14 @@ type UserResponse struct {
 	Language      string             `json:"language,omitempty"`
 	IdGameAccount []game.GameAccount `json:"idGameAccount,omitempty"`
 	Point         int                `json:"point"`
-	Roles      	 []string             `json:"roles"`
-	TypeConnexion   string            `json:"type_connexion"`
-	Created 		string 			`json:"created"`
-	Records 		int 			`json:"records"`
+	Roles         []string           `json:"roles"`
+	TypeConnexion string             `json:"type_connexion"`
+	Created       string             `json:"created"`
+	Records       int                `json:"records"`
 }
 
 type resolver struct {
-	userHandler handler.Usecase
+	userHandler  handler.Usecase
 	notifHandler notifH.UsecaseNotif
 }
 
@@ -48,9 +49,9 @@ type AuthType struct {
 	token interface{}
 }
 
-func NewResolver(userUseCase handler.Usecase,usecaseNotif notifH.UsecaseNotif) Resolver {
+func NewResolver(userUseCase handler.Usecase, usecaseNotif notifH.UsecaseNotif) Resolver {
 	return &resolver{
-		userHandler: userUseCase,
+		userHandler:  userUseCase,
 		notifHandler: usecaseNotif,
 	}
 }
@@ -60,7 +61,7 @@ type inputRegister struct {
 }
 
 type inputElements struct {
-	Email string `json:"email"`
+	Email    string `json:"email"`
 	Username string `json:"username"`
 	Password string `json:"password"`
 }
@@ -75,7 +76,7 @@ func (r *resolver) SavedUserResolver(params graphql.ResolveParams) (interface{},
 
 	hashed := userEntity.CreatedHash(input.UserInput.Password)
 	check, _ := r.ValidateUserResolver(&input)
-	
+
 	if check {
 		return nil, errors.New("email or username already existe")
 	}
@@ -91,10 +92,10 @@ func (r *resolver) SavedUserResolver(params graphql.ResolveParams) (interface{},
 		Language:      "fr",
 		Point:         entity.POINT,
 		IdGameAccount: []game.GameAccount{},
-		Roles: 	roles,
-		TypeConnexion:"site",
-		Created: time.Now().Format(time.RFC3339),
-		Friends: []entity.User{},		
+		Roles:         roles,
+		TypeConnexion: "site",
+		Created:       time.Now().Format(time.RFC3339),
+		Friends:       []entity.User{},
 	}
 
 	res, err := r.userHandler.SavedUser(userSaved)
@@ -130,7 +131,6 @@ func (r *resolver) ValidateUserResolver(input *inputRegister) (bool, error) {
 	if res.Email != "" {
 		return true, nil
 	}
-
 
 	if username != "" {
 		resUsername, _ := r.userHandler.FindUserByUsername(username)
@@ -168,7 +168,7 @@ func (r *resolver) AuthUserResolver(params graphql.ResolveParams) (interface{}, 
 		return "", errors.New("Error interne try after an moment")
 	}
 	wg.Add(1)
-	go r.userHandler.NotifConnected(&res,&wg)
+	go r.userHandler.NotifConnected(&res, &wg)
 	wg.Wait()
 	return token, nil
 }
@@ -177,51 +177,51 @@ func (r *resolver) ForgotResolver(params graphql.ResolveParams) (interface{}, er
 	email := params.Args["email"].(string)
 	res, err := r.userHandler.FindUserByEmail(email)
 	if err != nil {
-		return "error",nil
+		return "error", nil
 	}
 	data := make(map[string]string)
 	u := uuid.NewV4()
 	encoded := base64.StdEncoding.EncodeToString([]byte(u.String()))
-	data["token"] =  encoded
-	_,err = r.userHandler.UpdatedTokenUser(email,encoded)
-	
+	data["token"] = encoded
+	_, err = r.userHandler.UpdatedTokenUser(email, encoded)
+
 	if err != nil {
-		return "error",nil
+		return "error", nil
 	}
 
 	name := ""
 	if res.FirstName != "" {
-		name = res.FirstName	
+		name = res.FirstName
 	} else {
 		name = res.Username
 	}
 
 	subject := "Mot de pass oublie"
 	text := "Tu as oublié ton mot de passe ?"
-	data["msg"] =  "Clique ici pour re-initialiser votre password"
+	data["msg"] = "Clique ici pour re-initialiser votre password"
 
 	if res.Language == "en" {
 		subject = "Forgot password"
 		text = "Are you forgot your password ?"
-		data["msg"] =  "Click here for init your password"
+		data["msg"] = "Click here for init your password"
 	}
 
-	message := "Hello "+name+"\n"+text
+	message := "Hello " + name + "\n" + text
 	to := external.ToMailer{
 		Firstname: res.FirstName,
-		Lastname: res.LastName,
-		Email: res.Email,
-		Subject: subject,
-		Message: message,
+		Lastname:  res.LastName,
+		Email:     res.Email,
+		Subject:   subject,
+		Message:   message,
 	}
-	
-	_,err = to.Sender(data)
+
+	_, err = to.Sender(data)
 
 	if err != nil {
 		external.Logger("[MAILER] Email send failure via Mailjet")
 	}
-	
-	return "Ok",nil
+
+	return "Ok", nil
 }
 
 func (r *resolver) DeconnectedResolver(params graphql.ResolveParams) (interface{}, error) {
@@ -229,16 +229,16 @@ func (r *resolver) DeconnectedResolver(params graphql.ResolveParams) (interface{
 	uid := params.Args["id"].(string)
 	res, err := r.userHandler.FindOneUserByUid(uid)
 	if err != nil {
-		return "error",nil
+		return "error", nil
 	}
 	wg.Add(1)
-	go r.userHandler.NotifDisConnected(&res,&wg)
+	go r.userHandler.NotifDisConnected(&res, &wg)
 	wg.Wait()
-	
+
 	return "Ok", nil
 }
 
-func (r *resolver)GetAllUser(params graphql.ResolveParams)(interface{}, error) {
+func (r *resolver) GetAllUser(params graphql.ResolveParams) (interface{}, error) {
 	idUserConnected, isOKReq := params.Args["idUserConnected"].(string)
 	var res []UserResponse
 	if !isOKReq {
@@ -248,12 +248,12 @@ func (r *resolver)GetAllUser(params graphql.ResolveParams)(interface{}, error) {
 	limit, _ := params.Args["limit"].(int)
 	pageNumber, _ := params.Args["pageNumber"].(int)
 
-	if pageNumber == 0 && limit > 0{
+	if pageNumber == 0 && limit > 0 {
 		pageNumber = 1
 	}
 
 	userC, err := r.userHandler.FindOneUserByUid(idUserConnected)
-	users,err := r.userHandler.FindAllUser(int64(pageNumber),int64(limit))
+	users, err := r.userHandler.FindAllUser(int64(pageNumber), int64(limit))
 
 	if err != nil {
 		return nil, err
@@ -261,11 +261,11 @@ func (r *resolver)GetAllUser(params graphql.ResolveParams)(interface{}, error) {
 
 	userList := &UserResponse{}
 
-	for _,user := range users {
+	for _, user := range users {
 		found := false
-		
+
 		if len(userC.Friends) > 0 {
-			for _,uc := range userC.Friends {
+			for _, uc := range userC.Friends {
 				if uc.Uid.Hex() == user.Uid.Hex() {
 					found = true
 				}
@@ -273,25 +273,25 @@ func (r *resolver)GetAllUser(params graphql.ResolveParams)(interface{}, error) {
 		}
 
 		if !found {
-			userList.Uid		 	= user.Uid.Hex()
-			userList.FirstName 		= user.FirstName
-			userList.LastName 		= user.LastName      
-			userList.Username 		= user.Username     
-			userList.Email 			= user.Email        
-			userList.IsBanned 		= user.IsBanned    
-			userList.Avatar 		= user.Avatar      
-			userList.Language 		= user.Language    
-			userList.Point 			= user.Point       
-			userList.IdGameAccount 	= user.IdGameAccount
-			userList.Roles 			= user.Roles
-			userList.TypeConnexion 	= user.TypeConnexion
-			userList.Created 		= user.Created
-			userList.Records 		= r.userHandler.CountUserHandler() 
+			userList.Uid = user.Uid.Hex()
+			userList.FirstName = user.FirstName
+			userList.LastName = user.LastName
+			userList.Username = user.Username
+			userList.Email = user.Email
+			userList.IsBanned = user.IsBanned
+			userList.Avatar = user.Avatar
+			userList.Language = user.Language
+			userList.Point = user.Point
+			userList.IdGameAccount = user.IdGameAccount
+			userList.Roles = user.Roles
+			userList.TypeConnexion = user.TypeConnexion
+			userList.Created = user.Created
+			userList.Records = r.userHandler.CountUserHandler()
 			res = append(res, *userList)
-		}	
+		}
 	}
 
-	return res,nil
+	return res, nil
 }
 
 func GetToken(user entity.User) (interface{}, error) {
@@ -302,24 +302,24 @@ func GetToken(user entity.User) (interface{}, error) {
 	}
 
 	var frd = []string{}
-	claims 				:= _jwt.MapClaims{}
-	claims["uid"] 		= user.Uid.Hex()
-	claims["email"] 	= user.Email
-	claims["avatar"] 	= user.Avatar
+	claims := _jwt.MapClaims{}
+	claims["uid"] = user.Uid.Hex()
+	claims["email"] = user.Email
+	claims["avatar"] = user.Avatar
 	claims["firstname"] = user.FirstName
-	claims["language"] 	= user.Language
-	claims["lastname"] 	= user.LastName
-	claims["username"] 	= user.Username
-	claims["created"] 	= user.Created
-	claims["roles"] 	= user.Roles
-	
-	if len(user.Friends) > 0 {
-		for _,v := range user.Friends {
-			frd = append(frd,v.Uid.Hex())
-		}
-	} 
+	claims["language"] = user.Language
+	claims["lastname"] = user.LastName
+	claims["username"] = user.Username
+	claims["created"] = user.Created
+	claims["roles"] = user.Roles
 
-	claims["friends"] 	= frd
+	if len(user.Friends) > 0 {
+		for _, v := range user.Friends {
+			frd = append(frd, v.Uid.Hex())
+		}
+	}
+
+	claims["friends"] = frd
 	// claims["exp"] = time.Now().Add(time.Hour * 1).Unix() //Token expires after 1 hour
 	token := _jwt.NewWithClaims(_jwt.SigningMethodHS256, claims)
 	result, err := token.SignedString([]byte(os.Getenv("SECRET")))
