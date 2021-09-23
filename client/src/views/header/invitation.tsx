@@ -82,7 +82,11 @@ const Invitation = function({handleDm}:TypeStateTchat) {
 								</span>
 							</p>
 						)
-					}):<></>}
+					}):<>
+						{
+							Translation(userConnectedRedux.user.language).communauty.friend
+						}
+					</>}
 				</div>
 			</div>
 			<div className="friends-online">
