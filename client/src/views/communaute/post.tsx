@@ -15,22 +15,22 @@ import {LIMIT,PAGE_NUMBER} from "../commons/constante"
 import {PostModel} from "../models/post"
 import AvatarDefault from "../../assets/image/game-tag.png"
 
-import crying_face from "../../assets/image/crying_face.png"
-import face_with_tongue from "../../assets/image/face_with_tongue.png"
-import frowning_face from "../../assets/image/frowning_face.png"
-import grinning_face from "../../assets/image/grinning_face.png"
-import heart_eyes from "../../assets/image/heart_eyes.png"
-import heart from "../../assets/image/heart.png"
-import ok_hand from "../../assets/image/ok_hand.png"
-import angry_face from "../../assets/image/angry_face.png"
-import slightly_smiling_face from "../../assets/image/slightly_smiling_face.png"
-import sunglasses from "../../assets/image/sunglasses.png"
-import tilted from "../../assets/image/tilted.png"
-import thumbs_down from "../../assets/image/thumbs_down.png"
-import thumbs_up from "../../assets/image/thumbs_up.png"
-import winking_face from "../../assets/image/winking_face.png"
-import pray from "../../assets/image/pray.png"
-import joy from "../../assets/image/joy.png"
+import crying_face from "../../assets/image/emoji/crying_face.png"
+import face_with_tongue from "../../assets/image/emoji/face_with_tongue.png"
+import frowning_face from "../../assets/image/emoji/frowning_face.png"
+import grinning_face from "../../assets/image/emoji/grinning_face.png"
+import heart_eyes from "../../assets/image/emoji/heart_eyes.png"
+import heart from "../../assets/image/emoji/heart.png"
+import ok_hand from "../../assets/image/emoji/ok_hand.png"
+import angry_face from "../../assets/image/emoji/angry_face.png"
+import slightly_smiling_face from "../../assets/image/emoji/slightly_smiling_face.png"
+import sunglasses from "../../assets/image/emoji/sunglasses.png"
+import tilted from "../../assets/image/emoji/tilted.png"
+import thumbs_down from "../../assets/image/emoji/thumbs_down.png"
+import thumbs_up from "../../assets/image/emoji/thumbs_up.png"
+import winking_face from "../../assets/image/emoji/winking_face.png"
+import pray from "../../assets/image/emoji/pray.png"
+import joy from "../../assets/image/emoji/joy.png"
 
 
 import {dateDefault} from "../tools/dateConvert"
@@ -212,7 +212,9 @@ const Post = function() {
 									</div>
 							</div>
 						</div>
-					<div className="post-icon">
+					<div className="post-user">
+						<div className="flex-inline">
+						<div className="post-icon">
 						<div className="icon-lists">
 							<div className="f-icons" onClick={handleUpload}>
 								<i><FontAwesomeIcon icon={faImage} color={isUpload?"#000":""} /></i>
@@ -223,91 +225,95 @@ const Post = function() {
 							<div className="f-icons" onClick={handleEmoji}>
 								<i><FontAwesomeIcon icon={faLaugh} /></i>
 							</div>
-							</div>
-						<button className="btn bg-red poster" onClick={handleContent}>Poster</button>
-					</div>
-					<div className={isEmoij ? "emoij" : "d-none"}>
-						<div className="fbEmoij-cnt">
-							<div className="list-emoij">
-								<div className="fbEmoij">
-									<img src={(crying_face)} alt="crying_face" onClick={() => handleSetEmoji("crying_face")} />
+							</div>						
+						</div>
+						<div className={isEmoij ? "emoij" : "d-none"}>
+							<div className="fbEmoij-cnt">
+								<div className="list-emoij">
+									<div className="fbEmoij">
+										<img src={(crying_face)} alt="crying_face" onClick={() => handleSetEmoji("crying_face")} />
+									</div>
+								</div>
+								<div className="list-emoij">
+									<div className="fbEmoij">
+										<img src={(face_with_tongue)} alt="face_with_tongue" onClick={() => handleSetEmoji("face_with_tongue")} />
+									</div>
+								</div>
+								<div className="list-emoij">
+									<div className="fbEmoij">
+										<img src={(frowning_face)} alt="frowning_face" onClick={() => handleSetEmoji("frowning_face")} />
+									</div>
+								</div>
+								<div className="list-emoij">
+									<div className="fbEmoij">
+										<img src={(grinning_face)} alt="grinning_face" onClick={() => handleSetEmoji("grinning_face")} />
+									</div>
+								</div>
+								<div className="list-emoij">
+									<div className="fbEmoij">
+										<img src={(heart_eyes)} alt="heart_eyes" onClick={() => handleSetEmoji("heart_eyes")} />
+									</div>
+								</div>
+								<div className="list-emoij">
+									<div className="fbEmoij">
+										<img src={(heart)} alt="heart" onClick={() => handleSetEmoji("heart")} />
+									</div>
+								</div>
+								<div className="list-emoij">
+									<div className="fbEmoij">
+										<img src={(ok_hand)} alt="ok_hand" onClick={() => handleSetEmoji("ok_hand")} />
+									</div>
+								</div>
+								<div className="list-emoij">
+									<div className="fbEmoij">
+										<img src={(angry_face)} alt="angry_face" onClick={() => handleSetEmoji("angry_face")} />
+									</div>
+								</div>
+								<div className="list-emoij">
+									<div className="fbEmoij">
+										<img src={(slightly_smiling_face)} alt="slightly_smiling_face" onClick={() => handleSetEmoji("slightly_smiling_face")} />
+									</div>
+								</div>
+								<div className="list-emoij">
+									<div className="fbEmoij">
+										<img src={(sunglasses)} alt="sunglasses" onClick={() => handleSetEmoji("sunglasses")} />
+									</div>
+								</div>
+								<div className="list-emoij">
+									<div className="fbEmoij">
+										<img src={(tilted)} alt="tilted" onClick={() => handleSetEmoji("tilted")} />
+									</div>
+								</div>
+								<div className="list-emoij">
+									<div className="fbEmoij">
+										<img src={(thumbs_down)} alt="thumbs_down" onClick={() => handleSetEmoji("thumbs_down")} />
+									</div>
+								</div>
+								<div className="list-emoij">
+									<div className="fbEmoij">
+										<img src={(thumbs_up)} alt="thumbs_up" onClick={() => handleSetEmoji("thumbs_up")} />
+									</div>
+								</div>
+								<div className="list-emoij">
+									<div className="fbEmoij">
+										<img src={(winking_face)} alt="winking_face" onClick={() => handleSetEmoji("winking_face")} />
+									</div>
+								</div>
+								<div className="list-emoij">
+									<div className="fbEmoij">
+										<img src={(pray)} alt="pray" onClick={() => handleSetEmoji("pray")} />
+									</div>
+								</div>
+								<div className="list-emoij">
+									<div className="fbEmoij">
+										<img src={(joy)} alt="joy" onClick={() => handleSetEmoji("joy")} />
+									</div>
 								</div>
 							</div>
-							<div className="list-emoij">
-								<div className="fbEmoij">
-									<img src={(face_with_tongue)} alt="face_with_tongue" onClick={() => handleSetEmoji("face_with_tongue")} />
-								</div>
-							</div>
-							<div className="list-emoij">
-								<div className="fbEmoij">
-									<img src={(frowning_face)} alt="frowning_face" onClick={() => handleSetEmoji("frowning_face")} />
-								</div>
-							</div>
-							<div className="list-emoij">
-								<div className="fbEmoij">
-									<img src={(grinning_face)} alt="grinning_face" onClick={() => handleSetEmoji("grinning_face")} />
-								</div>
-							</div>
-							<div className="list-emoij">
-								<div className="fbEmoij">
-									<img src={(heart_eyes)} alt="heart_eyes" onClick={() => handleSetEmoji("heart_eyes")} />
-								</div>
-							</div>
-							<div className="list-emoij">
-								<div className="fbEmoij">
-									<img src={(heart)} alt="heart" onClick={() => handleSetEmoji("heart")} />
-								</div>
-							</div>
-							<div className="list-emoij">
-								<div className="fbEmoij">
-									<img src={(ok_hand)} alt="ok_hand" onClick={() => handleSetEmoji("ok_hand")} />
-								</div>
-							</div>
-							<div className="list-emoij">
-								<div className="fbEmoij">
-									<img src={(angry_face)} alt="angry_face" onClick={() => handleSetEmoji("angry_face")} />
-								</div>
-							</div>
-							<div className="list-emoij">
-								<div className="fbEmoij">
-									<img src={(slightly_smiling_face)} alt="slightly_smiling_face" onClick={() => handleSetEmoji("slightly_smiling_face")} />
-								</div>
-							</div>
-							<div className="list-emoij">
-								<div className="fbEmoij">
-									<img src={(sunglasses)} alt="sunglasses" onClick={() => handleSetEmoji("sunglasses")} />
-								</div>
-							</div>
-							<div className="list-emoij">
-								<div className="fbEmoij">
-									<img src={(tilted)} alt="tilted" onClick={() => handleSetEmoji("tilted")} />
-								</div>
-							</div>
-							<div className="list-emoij">
-								<div className="fbEmoij">
-									<img src={(thumbs_down)} alt="thumbs_down" onClick={() => handleSetEmoji("thumbs_down")} />
-								</div>
-							</div>
-							<div className="list-emoij">
-								<div className="fbEmoij">
-									<img src={(thumbs_up)} alt="thumbs_up" onClick={() => handleSetEmoji("thumbs_up")} />
-								</div>
-							</div>
-							<div className="list-emoij">
-								<div className="fbEmoij">
-									<img src={(winking_face)} alt="winking_face" onClick={() => handleSetEmoji("winking_face")} />
-								</div>
-							</div>
-							<div className="list-emoij">
-								<div className="fbEmoij">
-									<img src={(pray)} alt="pray" onClick={() => handleSetEmoji("pray")} />
-								</div>
-							</div>
-							<div className="list-emoij">
-								<div className="fbEmoij">
-									<img src={(joy)} alt="joy" onClick={() => handleSetEmoji("joy")} />
-								</div>
-							</div>
+						</div>						
+						</div>
+						<div className="post-btn">
+							<button className="btn bg-red poster" onClick={handleContent}>Poster</button>
 						</div>
 					</div>
 			</div>
