@@ -1,4 +1,4 @@
-import React,{useState,useMemo} from "react"
+import React,{useState, useEffect} from "react"
 import { Link } from "react-router-dom"
 import { useSelector,useDispatch } from "react-redux"
 import {useHistory } from "react-router-dom"
@@ -10,7 +10,7 @@ import avatar from "../../assets/image/game-tag.png"
 import fr from "../../assets/image/fr.png"
 import gb from "../../assets/image/gb.png"
 import WhiteJoystick from "../../assets/image/white-joystick.png"
-import { faBars, faBell, faUsers, faPlus, faMinus, faCommentDots} from "@fortawesome/free-solid-svg-icons"
+import { faBars, faBell, faUsers, faPlus} from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {RootState} from "../../reducer"
 import {Translation} from "../../lang/translation"
@@ -21,6 +21,7 @@ import Invitation from "./invitation"
 import {NOTIFICATIONS_SUBSCRIBE} from "../../gql/user/subscription"
 
 import {Deconnect} from "../../gql/user/auth"
+import Chat from "../tchat/chat"
 
 export interface Notif  {
 	type:number,
@@ -33,16 +34,26 @@ export interface Notif  {
 	}
 }
 
+interface Show {
+	isShow:boolean
+}
+
 
 const Header: React.FC = function() {
 	const history = useHistory()
 	const dispatch = useDispatch()
+
+	const [showChat, setShowChat] = useState<Show>({
+		isShow:false
+	})
+
 	const userConnectedRedux = useSelector((state:RootState) => state.userConnected)
 	const [showList, setShowList] = useState<Boolean>(false)
 	const [notification, setNotification] = useState<Number>(0)
 	const [showNotif, setShowNotif] = useState<Boolean>(false)
 	const [showInvitation, setShowInvitation] = useState<Boolean>(false)
 	const [isDeconnect, setIsDeconnect] = useState<Boolean>(false)
+	const [isShowChat, setIsShowChat] = useState<Boolean>(false)
 	const [dataNotifications, setDataNotifications] = useState<Array<any>>([])
 	const {loading:subLoading,error:errSub,data:subData}  = useSubscription(NOTIFICATIONS_SUBSCRIBE)
 	const {loading,error,data} = useQuery(GET_ALL_NOTIFICATIONS, {
@@ -64,7 +75,6 @@ const Header: React.FC = function() {
 			setShowNotif(!showNotif)
 			setNotification(0) // update notification statut true
 		}
-
 	}
 
 	const onDeconnect = async function() {
@@ -83,8 +93,7 @@ const Header: React.FC = function() {
 		if(process.env.REACT_APP_URL_ADMIN) window.location.href = process.env.REACT_APP_URL_ADMIN
 	}
 
-	useMemo(() => {
-		let isSubscribed:boolean = true
+	useEffect(() => {
 		let array:Array<Notif> = []
 		let notif:Notif
 		if(!loading && !error && data) {
@@ -129,11 +138,17 @@ const Header: React.FC = function() {
 			}
 		}
 		setDataNotifications(array)
-		return function(){
-			isSubscribed = false
-			console.log(isSubscribed)
-		}
-	},[loading,error,data,subLoading,errSub,subData,userConnectedRedux])	
+		let isSubscribed:boolean = true
+		return () => {isSubscribed = false}
+	},[loading,error,data,subLoading,errSub,subData,userConnectedRedux])
+
+	const openTchat = function() {
+		setIsShowChat(showChat.isShow)
+	}
+
+	const onDmTchat = function(statTchat:boolean) {
+		setShowChat({isShow:statTchat})
+	}
 
   return(
 		<header className={isDeconnect || Object.keys(userConnectedRedux.user).length === 0 ? "header" : "header connected"}>
@@ -199,7 +214,14 @@ const Header: React.FC = function() {
 								<span className="count">2</span>								
 							</i>
 							<div className={!showInvitation ? "invitation" :"invitation show"}>
-								<Invitation />
+								<Invitation
+									handleDm={onDmTchat}
+								/>
+							</div>
+							<div className={!showChat.isShow ? "hide-chat" :"show-chat"}>
+								<Chat
+									handleTchat={openTchat}
+								/>
 							</div>
 							<div className={!showNotif ? "notification" :"notification show"}>
 								{dataNotifications.length > 0 && dataNotifications[0].type === 0

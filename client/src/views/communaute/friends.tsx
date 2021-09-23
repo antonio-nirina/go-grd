@@ -105,7 +105,6 @@ const Friend: React.FC = function() {
 		},
 	})
 
-
 	const {loading:loadingAll,error:errorAll,data:dataAll} = useQuery(GET_ALL_USER, {
 		variables: {
 			idUserConnected: userConnectedRedux.user.uid,

@@ -33,7 +33,9 @@
 		"text":"Demande d'être votre amis",
 		"switch":"Admin",
 		"assistance":"Assistance",
-		"logout":"Deconnexion"
+		"logout":"Deconnexion",
+		"invtation":"Invitez à rejoindre votre groupe",
+		"friendOnline":"Mes amis en ligne"
 	},
 	"home":{
 		"leagues": "ligues",

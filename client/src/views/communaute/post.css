@@ -1,42 +1,44 @@
 .post-cnt{
 	position: relative;
 }
-.center-block .new-post{
+.center-block .new-post{	
 	background-color: #efefef;
 	border-radius: 7px;
 	overflow: hidden;
-	padding-right: 6px;
-	padding-left: 6px;
+    padding: 10px 0;
+}
+.new-post .post-user{
+	padding: 0 20px;
+}
+.new-post .flex-inline{
+	display: flex;
+	margin-top: 7px;
+	float: left;
 }
 .new-post .post-icon{
-	color: #777778;
-	margin-bottom: 11px;
-	padding-bottom: 11px;
-	position: relative;
-    padding-top: 31px;
+	width: 110px;
+    color: #777778;
+    align-self: center;
 }
 .new-post .new-post-title {
+	font-weight: 700;
 	font-size: 14px;
-    color: #000;
-    font-weight: bold;
-    padding-bottom: 7px;
-    border-bottom: 1px solid;
-    padding-top: 6px;
+    color: #000000;
+    padding: 6px 0px 7px 10px;    
+    border-bottom: 1px solid #bfbfbf;
 }
-.post-icon .poster{
-	padding: 4px;
-	font-size: 11px;
-	position: absolute;
-	bottom: 0;
-	right: 0;
-	text-transform: none !important;
+.post-btn{
+	float: right;        
+}
+.post-btn .btn.poster{
+	padding: 7px 15px;
+	font-size: 14px;
+	font-weight: 600;	
+	text-transform: capitalize;	
 }
 
 .post-icon .icon-lists {
 	display: flex;
-	width: 50%;
-	position: absolute;
-	bottom: 0;
 }
 
 .icon-lists .f-icons{
@@ -44,41 +46,43 @@
 }
 
 .content-new-post{
-	height: auto;
-	color: #000;
-	margin-top: 11px;
-	margin-bottom: 18px;
+	height: 74px;
+    overflow: auto;
+	color: #000000;
+	padding: 10px;
 	outline: none;
 }
 .content-profil{
 	display: flex;
-	color: #000;
-	margin-top: 11px;
-	position: relative;
+    color: #000;
+    margin-top: 11px;
+    padding-left: 15px;
 }
 .content-profil .img-post{
-	width: 57px;
-	height: 57px;
+	width: 40px;
+	height: 40px;
 	border-radius: 50%;
 }
 
 .title-expr{
-	position: absolute;
-	top: 50%;
-	transform: translateY(-50%);
-	left: 71px;
+    align-self: center;
+    margin-left: 10px;
 }
 
 .f-icons{
     cursor: pointer;
-    margin-right: 9px;
+    margin-right: 20px;
 }
 .image-videos{
+	width: 53%;
+	margin: auto;
     color: #000;
-	border: 1px solid;
-	border-radius: 5px;
-	height: auto;
-	text-align: center;
+    border: 1px solid #bfbfbf;
+    border-radius: 5px;
+    height: auto;
+    text-align: center;
+    padding: 9px;        
+    
 }
 .close-upload{
 	float: right;
@@ -97,14 +101,12 @@
 .content-new-post .emoji-mart-bar{
 	display: none;
 }
-.new-post .emoij{
-	border: 1px solid;
-	color: #fff;
-	width: 46%;
-	position: absolute;
-	background-color: #181818;
-	left: 78px;
-	z-index: 1;
+.new-post .emoij{	    
+    width: 85%;    
+    background: #efefef;    
+}
+.fbEmoij{
+	cursor: pointer;
 }
 .emoij .fbEmoij-cnt{
 	display: flex;
@@ -112,10 +114,11 @@
 }
 
 .fbEmoij-cnt .list-emoij{
-	flex-basis: 40px;
+	flex-basis: 30px;
 }
 .fbEmoij img{
-	max-width: 100%;
-	vertical-align: middle;
-	cursor: pointer;
+	width: 20px;
+	flex-basis: 19px;
+    margin-right: 10px;
+    margin-left: 0px;
 }
