@@ -5,6 +5,47 @@
 	width: 100%;
 	height: 50%;	
 }
+.header .show-chat .tchat{
+	position: fixed;
+	bottom: 0;
+	overflow: auto;
+	height: 50%;	
+}
+.header .tchat-content .message img{
+	height: 35px;
+    margin-right: 5px;
+    width: 35px;
+}
+.header .tchat-content .msg-received .content,
+.header .tchat-content .msg-send .content
+{
+	position: relative;
+}
+.header .tchat-content .msg-received .content:before{
+    content: "";
+    display: block;
+    position: absolute;
+    left: -9px;
+    border-top: 9px solid transparent;
+    border-right: 10px solid #4a4949;
+    border-bottom: 10px solid transparent;
+    top: 8px;
+}
+.header .tchat-content .msg-send .content:before{
+	content: "";
+    display: block;
+    position: absolute;
+    right: -9px;
+    border-top: 9px solid transparent;
+    border-left: 10px solid #4a4949;
+    border-bottom: 10px solid transparent;
+    top: 8px;
+}
+.header .tchat-bar-dialog button{
+	padding: 5px;
+	margin-right: 0;
+	border-radius: 0px;
+}
 .tchat i{
 	font-size: 20px;
 	padding: 5px;

@@ -42,7 +42,7 @@ const Chat = function({handleTchat}:TypeTchat) {
       <div className="tchat-bar-dialog">
         <form>
           <input type="text" placeholder="Ecrire votre message ..." />
-          <button><i className="send"><FontAwesomeIcon icon={faPaperPlane} size="xs"/></i></button>
+          <button className="btn bg-red"><i className="send"><FontAwesomeIcon icon={faPaperPlane} size="xs"/></i></button>
         </form>
       </div>
     </div>
