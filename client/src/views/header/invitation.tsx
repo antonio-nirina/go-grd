@@ -10,11 +10,12 @@ import {Friends} from "../../gql/types/friend"
 import {Translation} from "../../lang/translation"
 
 type TypeStateTchat = {
-	handleDm:Function
+	handleDm:Function,
+	handleTotalConnected:Function
 }
 
 
-const Invitation = function({handleDm}:TypeStateTchat) {
+const Invitation = function({handleDm,handleTotalConnected}:TypeStateTchat) {
 	const userConnectedRedux = useSelector((state:RootState) => state.userConnected)
 	const [friends, setFriends] 	= useState<Array<Friends>>([])
 	const [nbFriends, setNbFriends] = useState<number>(0)
@@ -40,8 +41,10 @@ const Invitation = function({handleDm}:TypeStateTchat) {
 				if(el.isConnected) count++
 			})
 			setNbFriends(count)
+			handleTotalConnected(count)
 		}
 	},[loading,error,data])
+
 
 	const handleShowTchat = function() {
 		setShowChat(!showChat)

@@ -100,6 +100,7 @@ const Post = function() {
 	const handleContent = async function(){
 		let contnt = ""
 		if(contentPost.current) {
+			console.log("initial", contentPost.current.children)
 			for (var i = 0; i < contentPost.current.children.length; i++) {
 				contnt += "<p>"+contentPost.current.children[i].innerHTML+"</p>"
 			}
@@ -131,7 +132,8 @@ const Post = function() {
 				}
 			}
 		} else {
-			try {
+			console.log("contnt", contnt)
+			/*try {
 				const result = await sendPost({ variables: {
 					uidUser: userConnectedRedux.user.uid,
 					title: "",
@@ -145,7 +147,7 @@ const Post = function() {
 				}
 			} catch(e) {
 				console.log(e)
-			}
+			}*/
 		}
 
 	}
@@ -168,7 +170,14 @@ const Post = function() {
 	}
 
 	const handleSetEmoji = function(e:string) {
-		console.log(e)
+		if(contentPost.current) {
+			/*let contnt = ""
+			for (var i = 0; i < contentPost.current.children.length; i++) {
+				contnt += "<p>"+contentPost.current.children[i].innerHTML+"</p>"
+			}*/
+			contentPost.current.innerHTML = contentPost.current.innerHTML + e
+		}
+		
 	}
 
 	return (
@@ -231,82 +240,82 @@ const Post = function() {
 							<div className="fbEmoij-cnt">
 								<div className="list-emoij">
 									<div className="fbEmoij">
-										<img src={crying_face} alt="crying_face" onClick={() => handleSetEmoji("crying_face")} />
+										<img src={crying_face} alt="crying_face" onClick={() => handleSetEmoji(":crying_face")} />
 									</div>
 								</div>
 								<div className="list-emoij">
 									<div className="fbEmoij">
-										<img src={face_with_tongue} alt="face_with_tongue" onClick={() => handleSetEmoji("face_with_tongue")} />
+										<img src={face_with_tongue} alt="face_with_tongue" onClick={() => handleSetEmoji(":face_with_tongue")} />
 									</div>
 								</div>
 								<div className="list-emoij">
 									<div className="fbEmoij">
-										<img src={frowning_face} alt="frowning_face" onClick={() => handleSetEmoji("frowning_face")} />
+										<img src={frowning_face} alt="frowning_face" onClick={() => handleSetEmoji(":frowning_face")} />
 									</div>
 								</div>
 								<div className="list-emoij">
 									<div className="fbEmoij">
-										<img src={grinning_face} alt="grinning_face" onClick={() => handleSetEmoji("grinning_face")} />
+										<img src={grinning_face} alt="grinning_face" onClick={() => handleSetEmoji(":grinning_face")} />
 									</div>
 								</div>
 								<div className="list-emoij">
 									<div className="fbEmoij">
-										<img src={heart_eyes} alt="heart_eyes" onClick={() => handleSetEmoji("heart_eyes")} />
+										<img src={heart_eyes} alt="heart_eyes" onClick={() => handleSetEmoji(":heart_eyes")} />
 									</div>
 								</div>
 								<div className="list-emoij">
 									<div className="fbEmoij">
-										<img src={heart} alt="heart" onClick={() => handleSetEmoji("heart")} />
+										<img src={heart} alt="heart" onClick={() => handleSetEmoji(":heart")} />
 									</div>
 								</div>
 								<div className="list-emoij">
 									<div className="fbEmoij">
-										<img src={ok_hand} alt="ok_hand" onClick={() => handleSetEmoji("ok_hand")} />
+										<img src={ok_hand} alt="ok_hand" onClick={() => handleSetEmoji(":ok_hand")} />
 									</div>
 								</div>
 								<div className="list-emoij">
 									<div className="fbEmoij">
-										<img src={angry_face} alt="angry_face" onClick={() => handleSetEmoji("angry_face")} />
+										<img src={angry_face} alt="angry_face" onClick={() => handleSetEmoji(":angry_face")} />
 									</div>
 								</div>
 								<div className="list-emoij">
 									<div className="fbEmoij">
-										<img src={slightly_smiling_face} alt="slightly_smiling_face" onClick={() => handleSetEmoji("slightly_smiling_face")} />
+										<img src={slightly_smiling_face} alt="slightly_smiling_face" onClick={() => handleSetEmoji(":slightly_smiling_face")} />
 									</div>
 								</div>
 								<div className="list-emoij">
 									<div className="fbEmoij">
-										<img src={sunglasses} alt="sunglasses" onClick={() => handleSetEmoji("sunglasses")} />
+										<img src={sunglasses} alt="sunglasses" onClick={() => handleSetEmoji(":sunglasses")} />
 									</div>
 								</div>
 								<div className="list-emoij">
 									<div className="fbEmoij">
-										<img src={tilted} alt="tilted" onClick={() => handleSetEmoji("tilted")} />
+										<img src={tilted} alt="tilted" onClick={() => handleSetEmoji(":tilted")} />
 									</div>
 								</div>
 								<div className="list-emoij">
 									<div className="fbEmoij">
-										<img src={thumbs_down} alt="thumbs_down" onClick={() => handleSetEmoji("thumbs_down")} />
+										<img src={thumbs_down} alt="thumbs_down" onClick={() => handleSetEmoji(":thumbs_down")} />
 									</div>
 								</div>
 								<div className="list-emoij">
 									<div className="fbEmoij">
-										<img src={thumbs_up} alt="thumbs_up" onClick={() => handleSetEmoji("thumbs_up")} />
+										<img src={thumbs_up} alt="thumbs_up" onClick={() => handleSetEmoji(":thumbs_up")} />
 									</div>
 								</div>
 								<div className="list-emoij">
 									<div className="fbEmoij">
-										<img src={winking_face} alt="winking_face" onClick={() => handleSetEmoji("winking_face")} />
+										<img src={winking_face} alt="winking_face" onClick={() => handleSetEmoji(":winking_face")} />
 									</div>
 								</div>
 								<div className="list-emoij">
 									<div className="fbEmoij">
-										<img src={pray} alt="pray" onClick={() => handleSetEmoji("pray")} />
+										<img src={pray} alt="pray" onClick={() => handleSetEmoji(":pray")} />
 									</div>
 								</div>
 								<div className="list-emoij">
 									<div className="fbEmoij">
-										<img src={joy} alt="joy" onClick={() => handleSetEmoji("joy")} />
+										<img src={joy} alt="joy" onClick={() => handleSetEmoji(":joy")} />
 									</div>
 								</div>
 							</div>
