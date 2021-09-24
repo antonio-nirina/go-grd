@@ -446,8 +446,7 @@
 	width: 100%;
 }
 /****Chat*******************************************/
-.tchat{
-	position: absolute;
+.tchat{	
 	bottom: 0px;	
 }
 .show-chat{
