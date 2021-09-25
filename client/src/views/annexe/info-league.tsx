@@ -6,7 +6,6 @@ import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { useDispatch } from "react-redux"
 
-import Tree from "./tree"
 import Header from "../header/header"
 import Footer from "../footer/footer"
 
@@ -164,10 +163,7 @@ const InfoLeague: React.FC = function(props:any) {
 							<div className="btn-container">
 								<button className="btn bg-red" onClick={onShowMore}>{!showMore ? "Voir plus" :"Reduire"}</button>
 							</div>
-							</div>
-							<div className={!showMore ? "tree-container" :"tree-container show"}>
-								<Tree />
-							</div>
+							</div>							
 						</div>
 					</div>
 					<div className="tableau">

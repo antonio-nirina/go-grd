@@ -1,3 +1,4 @@
+// eslint-disable-next-line
 import React,{useState,useEffect} from "react"
 import { useSelector } from "react-redux"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -10,11 +11,12 @@ import {Friends} from "../../gql/types/friend"
 import {Translation} from "../../lang/translation"
 
 type TypeStateTchat = {
-	handleDm:Function
+	handleDm:Function,
+	handleTotalConnected:Function
 }
 
 
-const Invitation = function({handleDm}:TypeStateTchat) {
+const Invitation = function({handleDm,handleTotalConnected}:TypeStateTchat) {
 	const userConnectedRedux = useSelector((state:RootState) => state.userConnected)
 	const [friends, setFriends] 	= useState<Array<Friends>>([])
 	const [nbFriends, setNbFriends] = useState<number>(0)
@@ -40,8 +42,10 @@ const Invitation = function({handleDm}:TypeStateTchat) {
 				if(el.isConnected) count++
 			})
 			setNbFriends(count)
+			handleTotalConnected(count)
 		}
 	},[loading,error,data])
+
 
 	const handleShowTchat = function() {
 		setShowChat(!showChat)
@@ -54,10 +58,9 @@ const Invitation = function({handleDm}:TypeStateTchat) {
 				{
 					Translation(userConnectedRedux.user.language).header.invtation
 				}
-
 			</p>
 			<div className="friends-online">
-				<p className="bold" onClick={onShowReduce}>
+				<p onClick={onShowReduce}>
 					{
 						Translation(userConnectedRedux.user.language).header.friendOnline
 					}
@@ -82,11 +85,15 @@ const Invitation = function({handleDm}:TypeStateTchat) {
 								</span>
 							</p>
 						)
-					}):<></>}
+					}):<>
+						{
+							Translation(userConnectedRedux.user.language).communauty.friend
+						}
+					</>}
 				</div>
 			</div>
 			<div className="friends-online">
-				<p className="bold">Skouinar & Co. <span>(15)</span><i className="right-icon"><FontAwesomeIcon icon={faPlus} /></i></p>
+				<p>Skouinar & Co. <span>(15)</span><i className="right-icon"><FontAwesomeIcon icon={faPlus} /></i></p>
 			</div>
 		</div>	
 	)

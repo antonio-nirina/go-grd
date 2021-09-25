@@ -38,6 +38,10 @@ interface Show {
 	isShow:boolean
 }
 
+type numberConnected = {
+	total:number
+}
+
 
 const Header: React.FC = function() {
 	const history = useHistory()
@@ -53,7 +57,8 @@ const Header: React.FC = function() {
 	const [showNotif, setShowNotif] = useState<Boolean>(false)
 	const [showInvitation, setShowInvitation] = useState<Boolean>(false)
 	const [isDeconnect, setIsDeconnect] = useState<Boolean>(false)
-	const [isShowChat, setIsShowChat] = useState<Boolean>(false)
+	// const [isShowChat, setIsShowChat] = useState<Boolean>(false)
+	const [friendsConnect, setFriendsConnect] = useState<numberConnected>({total:0})
 	const [dataNotifications, setDataNotifications] = useState<Array<any>>([])
 	const {loading:subLoading,error:errSub,data:subData}  = useSubscription(NOTIFICATIONS_SUBSCRIBE)
 	const {loading,error,data} = useQuery(GET_ALL_NOTIFICATIONS, {
@@ -96,6 +101,8 @@ const Header: React.FC = function() {
 	useEffect(() => {
 		let array:Array<Notif> = []
 		let notif:Notif
+		let isSubscribed:boolean = true
+
 		if(!loading && !error && data) {
 			let count:number = 0
 
@@ -138,25 +145,31 @@ const Header: React.FC = function() {
 			}
 		}
 		setDataNotifications(array)
-		let isSubscribed:boolean = true
+
 		return () => {isSubscribed = false}
 	},[loading,error,data,subLoading,errSub,subData,userConnectedRedux])
 
-	const openTchat = function() {
-		setIsShowChat(showChat.isShow)
+	const openTchat = function(e:boolean) {
+		setShowChat({isShow:e})
 	}
 
 	const onDmTchat = function(statTchat:boolean) {
 		setShowChat({isShow:statTchat})
 	}
 
-  return(
+	const handleConnected = function(numberConnected:number) {
+		setFriendsConnect({total:numberConnected})
+	}
+
+
+
+  	return(
 		<header className={isDeconnect || Object.keys(userConnectedRedux.user).length === 0 ? "header" : "header connected"}>
 			<div className="wrap">
 				<div className="logo">
 					<h1>
 						<Link to="/" className="v-align">
-							<img src={logo} alt="Grid" className="imglogo"/>
+							<img src={logo} alt="grind" className="imglogo"/>
 						</Link>
 					</h1>
 				</div>
@@ -211,11 +224,12 @@ const Header: React.FC = function() {
 						<div className="connex" style={{"cursor":"pointer"}}>
 							<i className="square" onClick={onShowInvitation} >
 								<FontAwesomeIcon icon={faPlus} />
-								<span className="count">2</span>								
+								<span className= {friendsConnect.total > 0 ? "count" : ""}>{friendsConnect.total === 0 ? "" : friendsConnect.total}</span>
 							</i>
 							<div className={!showInvitation ? "invitation" :"invitation show"}>
 								<Invitation
 									handleDm={onDmTchat}
+									handleTotalConnected={handleConnected}
 								/>
 							</div>
 							<div className={!showChat.isShow ? "hide-chat" :"show-chat"}>

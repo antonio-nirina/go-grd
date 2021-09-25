@@ -69,6 +69,7 @@ const Joingame: React.FC = function(props:any) {
         </div>
         <div className="bar-menu-top">
           <li><Link to="/joingame" className="active">Général</Link></li>
+          <li><Link to="/tableau">Tableau</Link></li>
           <li><Link to="/waggers-rules">Règles</Link></li>
         </div>
         <div className="information-game">

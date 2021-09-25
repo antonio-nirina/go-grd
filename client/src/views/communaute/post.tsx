@@ -14,25 +14,6 @@ import imgDefault from "../../assets/image/image.png"
 import {LIMIT,PAGE_NUMBER} from "../commons/constante"
 import {PostModel} from "../models/post"
 import AvatarDefault from "../../assets/image/game-tag.png"
-
-import crying_face from "../../assets/image/emoji/crying_face.png"
-import face_with_tongue from "../../assets/image/emoji/face_with_tongue.png"
-import frowning_face from "../../assets/image/emoji/frowning_face.png"
-import grinning_face from "../../assets/image/emoji/grinning_face.png"
-import heart_eyes from "../../assets/image/emoji/heart_eyes.png"
-import heart from "../../assets/image/emoji/heart.png"
-import ok_hand from "../../assets/image/emoji/ok_hand.png"
-import angry_face from "../../assets/image/emoji/angry_face.png"
-import slightly_smiling_face from "../../assets/image/emoji/slightly_smiling_face.png"
-import sunglasses from "../../assets/image/emoji/sunglasses.png"
-import tilted from "../../assets/image/emoji/tilted.png"
-import thumbs_down from "../../assets/image/emoji/thumbs_down.png"
-import thumbs_up from "../../assets/image/emoji/thumbs_up.png"
-import winking_face from "../../assets/image/emoji/winking_face.png"
-import pray from "../../assets/image/emoji/pray.png"
-import joy from "../../assets/image/emoji/joy.png"
-
-
 import {dateDefault} from "../tools/dateConvert"
 
 const mimeTypeValid = [
@@ -52,7 +33,6 @@ const Post = function() {
 	const [mimeType, setMimeType] = useState<string>("")
 	const [errorInscr,setErreorIns] = useState<boolean>(false)
 	const [errorMesg, setErreorMsg] = useState<string>("")
-
 	const [posts, setPosts] = useState<Array<PostModel>>([])
 
 	const userConnectedRedux 	= useSelector((state:RootState) => state.userConnected)
@@ -98,11 +78,9 @@ const Post = function() {
 	}
 
 	const handleContent = async function(){
-		let contnt = ""
+		let contnt:string|null = ""
 		if(contentPost.current) {
-			for (var i = 0; i < contentPost.current.children.length; i++) {
-				contnt += "<p>"+contentPost.current.children[i].innerHTML+"</p>"
-			}
+			contnt = contentPost.current.innerHTML
 		}
 		if(files.length > 0) {
 			const reader = new FileReader()
@@ -167,12 +145,19 @@ const Post = function() {
 		setIsEmoij(!isEmoij)
 	}
 
-	const handleSetEmoji = function(e:string) {
-		console.log(e)
+	const handleSetEmoji = function(e:string,url:string) {
+		if(contentPost.current) {
+			if(/<br>/.test(contentPost.current.innerHTML)){
+				contentPost.current.innerHTML = contentPost.current.innerHTML.replace("<br>",`<img src=${url} style="width:12px" alt=${e} />`)
+			} else {
+				if(!contentPost.current.textContent) contentPost.current.innerHTML = contentPost.current.innerHTML+`<img src=${url} style="width:12px" alt=${e} />`
+			}
+			
+		}
 	}
 
 	return (
-		<div className="post-cnt" >
+		<div className="post-cnt rel" >
 			<div className="new-post">
 				<div className="new-post-title">
 					{
@@ -187,31 +172,31 @@ const Post = function() {
 						}
 					</div>
 				</div>
-					<div className="content-new-post" id="content-post" ref={contentPost}></div>
-						<div className={isUpload ? "image-videos" : "d-none"}>
-							{
-								Translation(userConnectedRedux.user.language).communauty.addImage
-							}
-							{errorInscr ? errorMesg : ""}
-							<span className="close-upload" onClick={handleClose}><i><FontAwesomeIcon icon={faTimes} /></i></span>
-							<div className="init" {...getRootProps()}>
-								<input {...getInputProps()} />
-									<div className="card-icon-file list">
-										{
-											files && files.length > 0 ? (mimeType === "application/pdf"
-												?
-											<i className="fa fa-file-pdf-o font-pdf"></i>
-											:
-											mimeType === "video/mp4" ? <video src={files[0].preview} width="320" height="240" controls></video> :  <img src={files[0].preview} style={{"width":"38%"}} alt="" />
+					<div className="content-new-post" id="content-post" ref={contentPost} contentEditable></div>
+					<div className={isUpload ? "image-videos" : "d-none"}>
+						{
+							Translation(userConnectedRedux.user.language).communauty.addImage
+						}
+						{errorInscr ? errorMesg : ""}
+						<span className="close-upload" onClick={handleClose}><i><FontAwesomeIcon icon={faTimes} /></i></span>
+						<div className="init" {...getRootProps()}>
+							<input {...getInputProps()} />
+								<div className="card-icon-file list">
+									{
+										files && files.length > 0 ? (mimeType === "application/pdf"
+											?
+										<i className="fa fa-file-pdf-o font-pdf"></i>
+										:
+										mimeType === "video/mp4" ? <video src={files[0].preview} width="320" height="240" controls></video> :  <img src={files[0].preview} style={{"width":"38%"}} alt="" />
 
-											)
-											:
-											<img style={{"cursor":"pointer","width":"21%"}} src={imgDefault} alt="default" />
-										}
+										)
+										:
+										<img style={{"cursor":"pointer","width":"21%"}} src={imgDefault} alt="default" />
+									}
 
-									</div>
-							</div>
+								</div>
 						</div>
+					</div>
 					<div className="post-user">
 						<div className="flex-inline">
 						<div className="post-icon">
@@ -222,7 +207,7 @@ const Post = function() {
 							<div className="f-icons">
 								<i><FontAwesomeIcon icon={faPaperclip} rotation={90} /></i>
 								</div>
-							<div className="f-icons" onClick={handleEmoji}>
+							<div className={!isEmoij ? "f-icons" :"f-icons active"} onClick={handleEmoji}>
 								<i><FontAwesomeIcon icon={faLaugh} /></i>
 							</div>
 							</div>
@@ -231,82 +216,82 @@ const Post = function() {
 							<div className="fbEmoij-cnt">
 								<div className="list-emoij">
 									<div className="fbEmoij">
-										<img src={crying_face} alt="crying_face" onClick={() => handleSetEmoji("crying_face")} />
+										<img src="https://i.ibb.co/rZzDqHj/crying-face.png" alt="crying_face" onClick={() => handleSetEmoji("crying_face","https://i.ibb.co/rZzDqHj/crying-face.png")} />
 									</div>
 								</div>
 								<div className="list-emoij">
 									<div className="fbEmoij">
-										<img src={face_with_tongue} alt="face_with_tongue" onClick={() => handleSetEmoji("face_with_tongue")} />
+										<img src="https://i.ibb.co/jVhS2t8/face-with-tongue.png" alt="face_with_tongue" onClick={() => handleSetEmoji("face_with_tongue","https://i.ibb.co/jVhS2t8/face-with-tongue.png")} />
 									</div>
 								</div>
 								<div className="list-emoij">
 									<div className="fbEmoij">
-										<img src={frowning_face} alt="frowning_face" onClick={() => handleSetEmoji("frowning_face")} />
+										<img src="https://i.ibb.co/THGpNYw/frowning-face.png" alt="frowning_face" onClick={() => handleSetEmoji("frowning_face","https://i.ibb.co/THGpNYw/frowning-face.png")} />
 									</div>
 								</div>
 								<div className="list-emoij">
 									<div className="fbEmoij">
-										<img src={grinning_face} alt="grinning_face" onClick={() => handleSetEmoji("grinning_face")} />
+										<img src="https://i.ibb.co/wQHLZRt/grinning-face.png" alt="grinning_face" onClick={() => handleSetEmoji("grinning_face","https://i.ibb.co/wQHLZRt/grinning-face.png")} />
 									</div>
 								</div>
 								<div className="list-emoij">
 									<div className="fbEmoij">
-										<img src={heart_eyes} alt="heart_eyes" onClick={() => handleSetEmoji("heart_eyes")} />
+										<img src="https://i.ibb.co/ZGvdKr4/heart-eyes.png" alt="heart_eyes" onClick={() => handleSetEmoji("heart_eyes","https://i.ibb.co/ZGvdKr4/heart-eyes.png")} />
 									</div>
 								</div>
 								<div className="list-emoij">
 									<div className="fbEmoij">
-										<img src={heart} alt="heart" onClick={() => handleSetEmoji("heart")} />
+										<img src="https://i.ibb.co/s9Z9NxM/heart.png" alt="heart" onClick={() => handleSetEmoji("heart","https://i.ibb.co/s9Z9NxM/heart.png")} />
 									</div>
 								</div>
 								<div className="list-emoij">
 									<div className="fbEmoij">
-										<img src={ok_hand} alt="ok_hand" onClick={() => handleSetEmoji("ok_hand")} />
+										<img src="https://i.ibb.co/GP7KVWs/ok-hand.png" alt="ok_hand" onClick={() => handleSetEmoji("ok_hand","https://i.ibb.co/GP7KVWs/ok-hand.png")} />
 									</div>
 								</div>
 								<div className="list-emoij">
 									<div className="fbEmoij">
-										<img src={angry_face} alt="angry_face" onClick={() => handleSetEmoji("angry_face")} />
+										<img src="https://i.ibb.co/TYNpKv1/angry-face.png" alt="angry_face" onClick={() => handleSetEmoji("angry_face","")} />
 									</div>
 								</div>
 								<div className="list-emoij">
 									<div className="fbEmoij">
-										<img src={slightly_smiling_face} alt="slightly_smiling_face" onClick={() => handleSetEmoji("slightly_smiling_face")} />
+										<img src="https://i.ibb.co/hM4pfXW/slightly-smiling-face.png" alt="slightly_smiling_face" onClick={() => handleSetEmoji("slightly_smiling_face","https://i.ibb.co/hM4pfXW/slightly-smiling-face.png")} />
 									</div>
 								</div>
 								<div className="list-emoij">
 									<div className="fbEmoij">
-										<img src={sunglasses} alt="sunglasses" onClick={() => handleSetEmoji("sunglasses")} />
+										<img src="https://i.ibb.co/RyjymyL/sunglasses.png" alt="sunglasses" onClick={() => handleSetEmoji("sunglasses","https://i.ibb.co/RyjymyL/sunglasses.png")} />
 									</div>
 								</div>
 								<div className="list-emoij">
 									<div className="fbEmoij">
-										<img src={tilted} alt="tilted" onClick={() => handleSetEmoji("tilted")} />
+										<img src="https://i.ibb.co/HX36Ynp/tilted.png" alt="tilted" onClick={() => handleSetEmoji("tilted","https://i.ibb.co/HX36Ynp/tilted.png")} />
 									</div>
 								</div>
 								<div className="list-emoij">
 									<div className="fbEmoij">
-										<img src={thumbs_down} alt="thumbs_down" onClick={() => handleSetEmoji("thumbs_down")} />
+										<img src="https://i.ibb.co/DtCP1h1/thumbs-down.png" alt="thumbs_down" onClick={() => handleSetEmoji("thumbs_down","https://i.ibb.co/DtCP1h1/thumbs-down.png")} />
 									</div>
 								</div>
 								<div className="list-emoij">
 									<div className="fbEmoij">
-										<img src={thumbs_up} alt="thumbs_up" onClick={() => handleSetEmoji("thumbs_up")} />
+										<img src="https://i.ibb.co/k520Y9g/thumbs-up.png" alt="thumbs_up" onClick={() => handleSetEmoji("thumbs_up","https://i.ibb.co/k520Y9g/thumbs-up.png")} />
 									</div>
 								</div>
 								<div className="list-emoij">
 									<div className="fbEmoij">
-										<img src={winking_face} alt="winking_face" onClick={() => handleSetEmoji("winking_face")} />
+										<img src="https://i.ibb.co/Bgv0sx8/winking-face.png" alt="winking_face" onClick={() => handleSetEmoji("winking_face","https://i.ibb.co/Bgv0sx8/winking-face.png")} />
 									</div>
 								</div>
 								<div className="list-emoij">
 									<div className="fbEmoij">
-										<img src={pray} alt="pray" onClick={() => handleSetEmoji("pray")} />
+										<img src="https://i.ibb.co/GQWwGL2/pray.png" alt="pray" onClick={() => handleSetEmoji("pray","https://i.ibb.co/GQWwGL2/pray.png")} />
 									</div>
 								</div>
 								<div className="list-emoij">
 									<div className="fbEmoij">
-										<img src={joy} alt="joy" onClick={() => handleSetEmoji("joy")} />
+										<img src="https://i.ibb.co/7SYMjR1/joy.png" alt="joy" onClick={() => handleSetEmoji("joy","https://i.ibb.co/7SYMjR1/joy.png")} />
 									</div>
 								</div>
 							</div>
@@ -329,9 +314,13 @@ const Post = function() {
 	  						<div className="actus-content">
 	  							{parse(e.content)}
 	  						</div>
-	  						<div className="actus-content">
-								{e.imageType !== "video/mp4" ? <img src={e.files} style={{"width":"100%"}} alt={e.uid} /> :  <video src={e.files} width="100%" height="240" controls></video>}
-	  						</div>
+							  {e.files ? 
+							  	<div className="actus-content">
+								  {e.imageType !== "video/mp4" ? <img src={e.files} style={{"width":"100%"}} alt={e.uid} /> :  <video src={e.files} width="100%" height="240" controls></video>}
+								</div>
+							  : <></>
+							  }
+	  						
 	  					</div>
 					)
 				})

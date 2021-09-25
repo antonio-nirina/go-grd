@@ -3,7 +3,6 @@ import {useQuery} from "@apollo/client"
 import { useSelector } from "react-redux"
 
 import { Link } from "react-router-dom"
-import Tree from "./tree"
 import Header from "../header/header"
 import Footer from "../footer/footer"
 import {GET_ONE_TOURNAMENT} from "../../gql/tournament/query"
@@ -66,7 +65,7 @@ const Bracket: React.FC = function(props:any) {
 				</div>
 				<div className="container-rules">
 					<div className={!showMore ? "tree-container" :"tree-container show"}>
-						<Tree />
+						
 					</div>
 				</div>
 			</div>			
