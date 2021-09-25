@@ -284,6 +284,11 @@
 }
 .header .invitation.show{
 	display: block;
+	padding: 15px;
+	border-radius: 0px 0px 7px 7px;	
+}
+.header .invitation.show:hover{
+	overflow: auto;
 }
 .header .invitation{
 	max-width: 270px;
@@ -291,17 +296,17 @@
 	display: none;
     background: #2c2c2c;    
     position: absolute;
-    height: 100vh;
-    overflow: auto;
+    height: 85vh;    
     top: 66px;
     z-index: 2;    
     cursor: auto;
-    right: 0px;    
-    box-shadow: -6px 0px 62px #000000;    
+    right: 5px;    
+    box-shadow: -6px 0px 62px #000000;
+    overflow: hidden;
 }
 .header .invitation p{
 	font-size: 13px;
-    padding: 10px 15px;
+    padding: 4px 0px;
     text-align: left;
 }
 .header .invitation p i{
@@ -318,8 +323,15 @@
     right: 10px;
     margin-top: 14px;
 }
-.header .friends-online p.bold{
+.header .friends-online{
+	padding-bottom: 15px;
+}
+.header .friends-online p{
 	cursor: pointer;
+	font-style: italic;
+}
+.header .friends-online .list-online p{
+	font-style: inherit;
 }
 .header .friends-online strong{
 	font-weight: inherit;
@@ -335,15 +347,15 @@
 }
 .header .list-online p{
 	position: relative;
-	margin: 0 10px;
-	border-bottom: 2px solid #4c4d4f;
+	margin: 0 17px;
+	border-bottom: 1px solid #4c4d4f;
 }
 .header .list-online p:last-child{
 	border: none;
 }
 .header .list-online strong img{
-	width: 30px;
-	height: 30px;
+	width: 40px;
+	height: 40px;
 	align-self: center;
 	margin-right: 7px;
 }

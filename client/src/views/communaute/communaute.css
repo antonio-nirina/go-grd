@@ -31,7 +31,6 @@
 	font-family: "Russo One";
 	font-weight: lighter;
 	text-transform: uppercase;
-
 }
 .aside-right{
 	width: 20%;	
@@ -40,18 +39,17 @@
 	vertical-align: top;
 	position: relative;
 }
+.aside-right p{
+	margin-bottom: 5px;
+}
 .aside-right .friend-avatar{
-	width: 25px;
-	height: 25px;
+	width: 30px;
+	height: 30px;
 	border:1px solid gray;
 	border-radius: 50%;
 }
-
 .aside-right p, .aside-right span{
 	font-size: 13px;
-}
-.aside-right p{
-	
 }
 .aside-right p i{
 	font-size: 20px;
@@ -67,15 +65,10 @@
     margin-top: 6px;
     font-size: 12px;
 }
-.aside-right p svg{
-
-}
 
 .aside-right .subjectforum{
-	background: #2c2c2c;
+	margin: 0 15px;
 	padding: 5px 5px;
-}
-.subjectforum{
 	border-bottom: 1px solid gray;
 	position: relative;
 	height: 37px;
@@ -96,8 +89,7 @@
 }
 .subjectforum:hover{
 	height: 171px;
-	transition: 500ms ease-in-out;
-	background: #4a4949;
+	transition: 500ms ease-in-out;	
 }
 .subjectforum .underlined{
 	border-bottom: 1px solid gray;	
@@ -117,8 +109,15 @@
 	right: 5px;
 	top: 0;
 }
+.friend-list-container{
+	background: #2c2c2c;
+}
 .friend-list{
 	border-bottom: 1px solid gray;
+	margin: 0 15px;
+}
+.friend-list-container .friend-list:last-child{
+	border: none;
 }
 .aside-right i.u-connected, .aside-right i.u-disconnected{
 	display: inline-block;
@@ -151,9 +150,12 @@
 .aside-right .friend-list i{	
 	display: inline-block;
 	margin-right: 5px;
-	font-size: 18px;
+	font-size: 10px;
 	float: right;
     margin-left: 5px;
+}
+.aside-right .friend-list .comments{
+	font-size: 24px;
 }
 .friend-list span{
 	display: inline-block;	
@@ -302,12 +304,10 @@
 	text-transform: uppercase;
 	padding: 15px 0;
 }
-.forum-container{
-	margin-top: 15px;
-}
-.friend-list{
+.forum-container{	
 	background: #2c2c2c;
 }
+
 .friend-list span.title{
 	display: block;
 }
