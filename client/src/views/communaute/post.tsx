@@ -50,8 +50,9 @@ const Post = function() {
 	const [isEmoij,setIsEmoij] = useState<boolean>(false)
 	const [files, setFiles] = useState<Array<any>>([])
 	const [mimeType, setMimeType] = useState<string>("")
-	const [errorInscr,setErreorIns] = useState<boolean>(false)	
+	const [errorInscr,setErreorIns] = useState<boolean>(false)
 	const [errorMesg, setErreorMsg] = useState<string>("")
+	const [textEmoij, setTextEmoij] = useState<string>("")
 
 	const [posts, setPosts] = useState<Array<PostModel>>([])
 
@@ -100,10 +101,7 @@ const Post = function() {
 	const handleContent = async function(){
 		let contnt = ""
 		if(contentPost.current) {
-			console.log("initial", contentPost.current.children)
-			for (var i = 0; i < contentPost.current.children.length; i++) {
-				contnt += "<p>"+contentPost.current.children[i].innerHTML+"</p>"
-			}
+			contnt = contentPost.current.innerHTML
 		}
 		if(files.length > 0) {
 			const reader = new FileReader()
@@ -171,13 +169,9 @@ const Post = function() {
 
 	const handleSetEmoji = function(e:string) {
 		if(contentPost.current) {
-			/*let contnt = ""
-			for (var i = 0; i < contentPost.current.children.length; i++) {
-				contnt += "<p>"+contentPost.current.children[i].innerHTML+"</p>"
-			}*/
-			contentPost.current.innerHTML = contentPost.current.innerHTML + e
+			console.log("fff", contentPost.current.innerHTML)
+			contentPost.current.innerHTML = contentPost.current.innerHTML.replace("<br>","") + e
 		}
-		
 	}
 
 	return (
@@ -196,31 +190,31 @@ const Post = function() {
 						}
 					</div>
 				</div>
-					<div className="content-new-post" id="content-post" ref={contentPost}></div>
-						<div className={isUpload ? "image-videos" : "d-none"}>
-							{
-								Translation(userConnectedRedux.user.language).communauty.addImage
-							}
-							{errorInscr ? errorMesg : ""}
-							<span className="close-upload" onClick={handleClose}><i><FontAwesomeIcon icon={faTimes} /></i></span>
-							<div className="init" {...getRootProps()}>
-								<input {...getInputProps()} />
-									<div className="card-icon-file list">
-										{
-											files && files.length > 0 ? (mimeType === "application/pdf"
-												?
-											<i className="fa fa-file-pdf-o font-pdf"></i>
-											:
-											mimeType === "video/mp4" ? <video src={files[0].preview} width="320" height="240" controls></video> :  <img src={files[0].preview} style={{"width":"38%"}} alt="" />
+					<div className="content-new-post" id="content-post" ref={contentPost} contentEditable></div>
+					<div className={isUpload ? "image-videos" : "d-none"}>
+						{
+							Translation(userConnectedRedux.user.language).communauty.addImage
+						}
+						{errorInscr ? errorMesg : ""}
+						<span className="close-upload" onClick={handleClose}><i><FontAwesomeIcon icon={faTimes} /></i></span>
+						<div className="init" {...getRootProps()}>
+							<input {...getInputProps()} />
+								<div className="card-icon-file list">
+									{
+										files && files.length > 0 ? (mimeType === "application/pdf"
+											?
+										<i className="fa fa-file-pdf-o font-pdf"></i>
+										:
+										mimeType === "video/mp4" ? <video src={files[0].preview} width="320" height="240" controls></video> :  <img src={files[0].preview} style={{"width":"38%"}} alt="" />
 
-											)
-											:
-											<img style={{"cursor":"pointer","width":"21%"}} src={imgDefault} alt="default" />
-										}
+										)
+										:
+										<img style={{"cursor":"pointer","width":"21%"}} src={imgDefault} alt="default" />
+									}
 
-									</div>
-							</div>
+								</div>
 						</div>
+					</div>
 					<div className="post-user">
 						<div className="flex-inline">
 						<div className="post-icon">
