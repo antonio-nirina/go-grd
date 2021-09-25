@@ -6,37 +6,75 @@ const Tree: React.FC = function(props:any) {
 return(
   	<div className="tree">
       <ul>      
-        <li>
+        <li className="border">
         	<ul className="part-one">
 	            <li>
-	              <span>Team ?</span>
+	              <span>Gotaga - CapelarJr - Mickalow</span>
 	              <ul>
-	                <li>
-	                  <span>Team 1</span>          
+	                <li className="lose">
+	                  <span>Team 4</span>          
 	                </li>
 	                <li>
-	                  <span>Team 2</span>          
+	                  <span>Gotaga - CapelarJr - Mickalow</span>          
 	                </li>
 	              </ul>
 	            </li>
 	            <li>
-	              <span>Team ?</span>
+	              <span className="lose">Skouinar - TonioPlancha - Shad_BD</span>
 	              <ul>
-	                <li>
+	                <li className="lose">
 	                  <span>Team 2</span>          
 	                </li>
 	                <li>
 	                  <span>Skouinar - TonioPlancha - Shad_BD</span>          
 	                </li>
 	              </ul>
+	            </li>	                     	            
+          	</ul>
+          	<ul className="no-border">
+          		<li>          			
+          			<span>Gotaga - CapelarJr - Mickalow</span>
+          		</li>
+          	</ul>
+        </li>
+        <li className="part-two">
+        	<ul className="part-one">
+	            <li>
+	              <span>Team 6</span>
+	              <ul>
+	                <li className="lose">
+	                  <span>Team 8</span>          
+	                </li>
+	                <li>
+	                  <span>Team 6</span>        
+	                </li>
+	              </ul>
+	            </li>
+	            <li>
+	              <span className="lose">Team 5</span>
+	              <ul>
+	                <li>
+	                  <span>Team 5</span>          
+	                </li>
+	                <li className="lose">
+	                  <span>Team 7</span>          
+	                </li>
+	              </ul>
 	            </li>          
           	</ul>
           	<ul className="no-border">
-          		<strong>Vainqueur</strong>
-          		<span>Gotaga - CapelarJr - Mickalow</span>
-          	</ul>
-          	
+          		<li className="lose">
+          			<span>Team 6</span>
+          		</li>
+          	</ul>          	
         </li>
+
+      </ul>
+      <ul className="winner">
+      	<strong>Vainqueur</strong>
+  		<li className="win">  			
+    		<span>Gotaga - CapelarJr - Mickalow</span>
+    	</li>
       </ul>
     </div>
   )
