@@ -74,7 +74,7 @@ const WaggersRules: React.FC = function(props:any) {
     })
 
   }
-  
+  	console.log(isOpen)
     return(
   	<div className="container">
   		<Header />
