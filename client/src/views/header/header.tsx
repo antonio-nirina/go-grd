@@ -148,8 +148,8 @@ const Header: React.FC = function() {
 		return () => {isSubscribed = false}
 	},[loading,error,data,subLoading,errSub,subData,userConnectedRedux])
 
-	const openTchat = function() {
-		setIsShowChat(showChat.isShow)
+	const openTchat = function(e:boolean) {
+		setShowChat({isShow:e})
 	}
 
 	const onDmTchat = function(statTchat:boolean) {
@@ -221,7 +221,7 @@ const Header: React.FC = function() {
 						<div className="connex" style={{"cursor":"pointer"}}>
 							<i className="square" onClick={onShowInvitation} >
 								<FontAwesomeIcon icon={faPlus} />
-								<span className="count">{friendsConnect.total}</span>								
+								<span className= {friendsConnect.total > 0 ? "count" : ""}>{friendsConnect.total === 0 ? "" : friendsConnect.total}</span>
 							</i>
 							<div className={!showInvitation ? "invitation" :"invitation show"}>
 								<Invitation

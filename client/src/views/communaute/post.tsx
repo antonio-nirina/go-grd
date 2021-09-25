@@ -52,6 +52,7 @@ const Post = function() {
 	const [mimeType, setMimeType] = useState<string>("")
 	const [errorInscr,setErreorIns] = useState<boolean>(false)
 	const [errorMesg, setErreorMsg] = useState<string>("")
+	const [textEmoij, setTextEmoij] = useState<string>("")
 
 	const [posts, setPosts] = useState<Array<PostModel>>([])
 
@@ -100,6 +101,7 @@ const Post = function() {
 	const handleContent = async function(){
 		let contnt = ""
 		if(contentPost.current) {
+			console.log("tex", textEmoij)
 			console.log("initial", contentPost.current.children)
 			for (var i = 0; i < contentPost.current.children.length; i++) {
 				contnt += "<p>"+contentPost.current.children[i].innerHTML+"</p>"
@@ -175,6 +177,7 @@ const Post = function() {
 			for (var i = 0; i < contentPost.current.children.length; i++) {
 				contnt += "<p>"+contentPost.current.children[i].innerHTML+"</p>"
 			}*/
+			setTextEmoij(contentPost.current.innerHTML + e)
 			contentPost.current.innerHTML = contentPost.current.innerHTML + e
 		}
 		
