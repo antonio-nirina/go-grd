@@ -178,7 +178,7 @@ const Post = function() {
 	}
 
 	return (
-		<div className="post-cnt" >
+		<div className="post-cnt rel" >
 			<div className="new-post">
 				<div className="new-post-title">
 					{

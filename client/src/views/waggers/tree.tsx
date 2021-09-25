@@ -1,6 +1,5 @@
 import React from "react"
 import "./tree.css"
-import AvatarDefault from "../../assets/image/game-tag.png"
 
 const Tree: React.FC = function(props:any) {
 return(

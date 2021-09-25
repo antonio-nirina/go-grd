@@ -58,10 +58,9 @@ const Invitation = function({handleDm,handleTotalConnected}:TypeStateTchat) {
 				{
 					Translation(userConnectedRedux.user.language).header.invtation
 				}
-
 			</p>
 			<div className="friends-online">
-				<p className="bold" onClick={onShowReduce}>
+				<p onClick={onShowReduce}>
 					{
 						Translation(userConnectedRedux.user.language).header.friendOnline
 					}
@@ -94,7 +93,7 @@ const Invitation = function({handleDm,handleTotalConnected}:TypeStateTchat) {
 				</div>
 			</div>
 			<div className="friends-online">
-				<p className="bold">Skouinar & Co. <span>(15)</span><i className="right-icon"><FontAwesomeIcon icon={faPlus} /></i></p>
+				<p>Skouinar & Co. <span>(15)</span><i className="right-icon"><FontAwesomeIcon icon={faPlus} /></i></p>
 			</div>
 		</div>	
 	)

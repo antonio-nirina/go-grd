@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from "react"
-import { faPlusSquare, faCommentDots, faQuestionCircle, faUserPlus } from "@fortawesome/free-solid-svg-icons"
+import { faPlus, faCommentDots, faQuestionCircle, faUserPlus } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import Chat from "../tchat/chat"
 import Popup from "reactjs-popup"
@@ -156,54 +156,58 @@ const Friend: React.FC = function() {
 	}
 
 	return (
-		<div className="aside-right">			
-			{nbFriends
-				?
-				friends.map(function(el:any,index:number) {
-					let img = el.avatar ? el.avatar : AvatarDefault
-					return(
-						<div className="friend-list" key={el.id}>
-							<div key={index}>
-								<img src={img} className="friend-avatar" alt=""/>
-								<span>{el.username}<i className={el.isConnected ? "u-connected" : ""}></i></span>
-								<i><FontAwesomeIcon icon={faCommentDots} size="xs" onClick={onShowChat}/></i>
-								<i onClick={openHandle} style={{"cursor":"pointer"}}>
-									<FontAwesomeIcon icon={faPlusSquare} size="xs" />
-								</i>
-								<RenderPopup users={users} isOpen={isOpen} />
-							</div>
-						</div>
-					)
-				})
-
-			: (<div className="friend-list noborder">
-					<p className="title">
-						{
-							Translation(userConnectedRedux.user.language).communauty.titleFriend
-						}
-					</p>
-					<p style={{"fontWeight":"bold"}}>
-						{ `${userConnectedRedux.user.username} `}
-					{
-						Translation(userConnectedRedux.user.language).communauty.friend
-					}
-					</p>
-					<div className="friends">
-						<p className="search-friends" onClick={openHandle} style={{"cursor":"pointer"}}>
-							<FontAwesomeIcon icon={faUserPlus} size="xs"/>
-							<span>
-								{
-									Translation(userConnectedRedux.user.language).communauty.addFriendList
-								}
-							</span>
+		<div className="aside-right">
+			<p className="bold">Mes amis</p>	
+			<div className="friend-list-container">
+				{nbFriends
+					?
+					friends.map(function(el:any,index:number) {
+						let img = el.avatar ? el.avatar : AvatarDefault
+						return(							
+							<div className="friend-list"key={el.id}>
+								<div key={index}>
+									<img src={img} className="friend-avatar" alt=""/>
+									<span>{el.username}<i className={el.isConnected ? "u-connected" : ""}></i></span>
+									<i className="comments"><FontAwesomeIcon icon={faCommentDots} size="xs" onClick={onShowChat}/></i>
+									<i className="square" onClick={openHandle} style={{"cursor":"pointer"}}>
+										<FontAwesomeIcon icon={faPlus} size="xs" />
+									</i>
+									<RenderPopup users={users} isOpen={isOpen} />
+								</div>
+							</div>							
+						)
+					})
+				
+				: (<div className="friend-list noborder">
+						<p className="title">
+							{
+								Translation(userConnectedRedux.user.language).communauty.titleFriend
+							}
 						</p>
-						<RenderPopup users={users} isOpen={isOpen} />
-					</div>
-				</div>)
-			}
+						<p style={{"fontWeight":"bold"}}>
+							{ `${userConnectedRedux.user.username} `}
+						{
+							Translation(userConnectedRedux.user.language).communauty.friend
+						}
+						</p>
+						<div className="friends">
+							<p className="search-friends" onClick={openHandle} style={{"cursor":"pointer"}}>
+								<FontAwesomeIcon icon={faUserPlus} size="xs"/>
+								<span>
+									{
+										Translation(userConnectedRedux.user.language).communauty.addFriendList
+									}
+								</span>
+							</p>
+							<RenderPopup users={users} isOpen={isOpen} />
+						</div>
+					</div>)
+				}
+			</div>
+			<p className="bold mg-10">Hubs</p>
 			<div className="forum-container">
 				<div className="subjectforum">
-					<p className="underlined">Go Grind <i><FontAwesomeIcon icon={faQuestionCircle} size="xs"/></i></p>
+					<p className="underlined">Discord (Non-ofﬁciel) PS4.. <i><FontAwesomeIcon icon={faQuestionCircle} size="xs"/></i></p>
 					<div className="seek">
 						<Link to="#">Comment fonctionne GO Grind ?</Link>
 						<Link to="#">Comment déposer une requête support ?</Link>
@@ -212,10 +216,13 @@ const Friend: React.FC = function() {
 					</div>
 				</div>
 				<div className="subjectforum">
-					<p>Problème Social <i><FontAwesomeIcon icon={faQuestionCircle} size="xs"/></i></p>
+					<p>Recherche TEAM Xbox COD <i><FontAwesomeIcon icon={faQuestionCircle} size="xs"/></i></p>
 				</div>
 				<div className="subjectforum">
-					<p>Problème de Connexion <i><FontAwesomeIcon icon={faQuestionCircle} size="xs"/></i></p>
+					<p>Comment connecter sa play.. <i><FontAwesomeIcon icon={faQuestionCircle} size="xs"/></i></p>
+				</div>
+				<div className="subjectforum">
+					<p>Impossible de rejoindre sur.. <i><FontAwesomeIcon icon={faQuestionCircle} size="xs"/></i></p>
 				</div>
 			</div>
 			<div className={!showChat ? "hide-chat" :"show-chat"}>
