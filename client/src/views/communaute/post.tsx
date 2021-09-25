@@ -50,7 +50,7 @@ const Post = function() {
 	const [isEmoij,setIsEmoij] = useState<boolean>(false)
 	const [files, setFiles] = useState<Array<any>>([])
 	const [mimeType, setMimeType] = useState<string>("")
-	const [errorInscr,setErreorIns] = useState<boolean>(false)
+	const [errorInscr,setErreorIns] = useState<boolean>(false)	
 	const [errorMesg, setErreorMsg] = useState<string>("")
 	const [textEmoij, setTextEmoij] = useState<string>("")
 
@@ -234,7 +234,7 @@ const Post = function() {
 							<div className="f-icons">
 								<i><FontAwesomeIcon icon={faPaperclip} rotation={90} /></i>
 								</div>
-							<div className="f-icons" onClick={handleEmoji}>
+							<div className={!isEmoij ? "f-icons" :"f-icons active"} onClick={handleEmoji}>
 								<i><FontAwesomeIcon icon={faLaugh} /></i>
 							</div>
 							</div>

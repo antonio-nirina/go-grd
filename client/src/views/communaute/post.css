@@ -44,6 +44,9 @@
 .icon-lists .f-icons{
 	font-size: 19px;
 }
+.icon-lists .f-icons.active i{
+	color: #dd0000;
+}
 
 .content-new-post{
 	height: 74px;
@@ -102,11 +105,20 @@
 	display: none;
 }
 .new-post .emoij{	    
-    width: 85%;    
-    background: #efefef;    
+    width: 36%;
+    background: #2c2c2c;
+    padding: 15px;
+    position: absolute;
+    bottom: -154px;
+    border-radius: 0 0 5px 5px;
+    left: 97px;
+    z-index: 99999;    
 }
 .fbEmoij{
 	cursor: pointer;
+	text-align: center;
+	margin-left: 9px;
+    margin-bottom: 6px;
 }
 .emoij .fbEmoij-cnt{
 	display: flex;
@@ -117,8 +129,6 @@
 	flex-basis: 30px;
 }
 .fbEmoij img{
-	width: 20px;
+	width: 31px;
 	flex-basis: 19px;
-    margin-right: 10px;
-    margin-left: 0px;
 }
