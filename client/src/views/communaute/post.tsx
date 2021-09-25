@@ -14,25 +14,6 @@ import imgDefault from "../../assets/image/image.png"
 import {LIMIT,PAGE_NUMBER} from "../commons/constante"
 import {PostModel} from "../models/post"
 import AvatarDefault from "../../assets/image/game-tag.png"
-
-import crying_face from "../../assets/image/emoji/crying_face.png"
-import face_with_tongue from "../../assets/image/emoji/face_with_tongue.png"
-import frowning_face from "../../assets/image/emoji/frowning_face.png"
-import grinning_face from "../../assets/image/emoji/grinning_face.png"
-import heart_eyes from "../../assets/image/emoji/heart_eyes.png"
-import heart from "../../assets/image/emoji/heart.png"
-import ok_hand from "../../assets/image/emoji/ok_hand.png"
-import angry_face from "../../assets/image/emoji/angry_face.png"
-import slightly_smiling_face from "../../assets/image/emoji/slightly_smiling_face.png"
-import sunglasses from "../../assets/image/emoji/sunglasses.png"
-import tilted from "../../assets/image/emoji/tilted.png"
-import thumbs_down from "../../assets/image/emoji/thumbs_down.png"
-import thumbs_up from "../../assets/image/emoji/thumbs_up.png"
-import winking_face from "../../assets/image/emoji/winking_face.png"
-import pray from "../../assets/image/emoji/pray.png"
-import joy from "../../assets/image/emoji/joy.png"
-
-
 import {dateDefault} from "../tools/dateConvert"
 
 const mimeTypeValid = [
@@ -52,8 +33,6 @@ const Post = function() {
 	const [mimeType, setMimeType] = useState<string>("")
 	const [errorInscr,setErreorIns] = useState<boolean>(false)
 	const [errorMesg, setErreorMsg] = useState<string>("")
-	const [textEmoij, setTextEmoij] = useState<string>("")
-
 	const [posts, setPosts] = useState<Array<PostModel>>([])
 
 	const userConnectedRedux 	= useSelector((state:RootState) => state.userConnected)

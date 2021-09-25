@@ -1,10 +1,10 @@
 import React,{useEffect,useState} from "react"
 import {useQuery} from "@apollo/client"
-import { useSelector,useDispatch } from "react-redux"
-import {  toast } from 'react-toastify'
+// import { useSelector } from "react-redux"
+// import {  toast } from 'react-toastify'
 
-import {RootState} from "../../reducer"
-import {Translation} from "../../lang/translation"
+//import {RootState} from "../../reducer"
+// import {Translation} from "../../lang/translation"
 import {GET_ONE_LEAGUE} from "../../gql/league/query"
 import Tree from "./tree"
 import Header from "../header/header"
@@ -13,26 +13,26 @@ import {League} from "../models/league"
 import "../tournament/info.css"
 import "../../assets/css/style.css"
 import { Link } from "react-router-dom"
-import {RegisterLeagueAction,Input} from "../league/action/leagueAction"
-import {checkInTeam} from "../league/utils"
+// import {RegisterLeagueAction,Input} from "../league/action/leagueAction"
+// import {checkInTeam} from "../league/utils"
 import fr from "../../assets/image/fr.png"
 import discord from "../../assets/image/discord.png"
 
 
 const Tableau: React.FC = function(props:any) {
-  const dispatch = useDispatch()
+  // const dispatch = useDispatch()
   const params = new URLSearchParams(props.location.search)
   const uid:string|null = params.get("uid")
   const [league, setLeague] = useState<League>()
   const [isOpen, setIsOpen] = useState<boolean>(true)
-  const userConnectedRedux = useSelector((state:RootState) => state.userConnected)
+  // const userConnectedRedux = useSelector((state:RootState) => state.userConnected)
   // const userSingupLeague = useSelector((state:RootState) => state.leagueSingin)
   const {loading,error,data}  = useQuery(GET_ONE_LEAGUE, {
       variables: {
         uid:uid,
       },
   })
-
+  console.log(isOpen,league)
   useEffect(() => {
     if(!loading && !error && data) {
       setLeague(data.FindOneLeague)
@@ -45,9 +45,9 @@ const Tableau: React.FC = function(props:any) {
     if (diff < 10 || diff <= 0) setIsOpen(false)
 
   },[loading,error,data])
-  let message:string = Translation(userConnectedRedux.user.language).tournament.notify ?? ""
+ // let message:string = Translation(userConnectedRedux.user.language).tournament.notify ?? ""
 
-  const notify = async function(){
+  /*const notify = async function(){
     const param:Input = {
       uidLeague:uid,
       userUid:userConnectedRedux.user.uid,
@@ -73,7 +73,7 @@ const Tableau: React.FC = function(props:any) {
       progress: undefined,
     })
 
-  }
+  }*/
   
     return(
   	<div className="container">
