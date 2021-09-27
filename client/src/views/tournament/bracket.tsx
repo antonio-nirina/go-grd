@@ -3,6 +3,7 @@ import {useQuery} from "@apollo/client"
 import { useSelector } from "react-redux"
 
 import { Link } from "react-router-dom"
+import Tree from "../waggers/tree";
 import Header from "../header/header"
 import Footer from "../footer/footer"
 import {GET_ONE_TOURNAMENT} from "../../gql/tournament/query"
@@ -10,6 +11,8 @@ import {Translation} from "../../lang/translation"
 import {RootState} from "../../reducer"
 import "../tournament/bracket.css"
 import "../../assets/css/style.css"
+
+
 import {Tournament} from "../models/tournament"
 import {dateStringToDY} from "../tools/dateConvert"
 
@@ -65,7 +68,7 @@ const Bracket: React.FC = function(props:any) {
 				</div>
 				<div className="container-rules">
 					<div className={!showMore ? "tree-container" :"tree-container show"}>
-						
+						<Tree />
 					</div>
 				</div>
 			</div>			

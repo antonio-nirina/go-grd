@@ -291,9 +291,6 @@
 	padding: 15px;
 	border-radius: 0px 0px 7px 7px;	
 }
-.header .invitation.show:hover{
-	overflow: auto;
-}
 .header .invitation{
 	max-width: 270px;
     width: 100%;
@@ -306,7 +303,7 @@
     cursor: auto;
     right: 5px;    
     box-shadow: -6px 0px 62px #000000;
-    overflow: hidden;
+    overflow: scroll;   
 }
 .header .invitation p{
 	font-size: 13px;
