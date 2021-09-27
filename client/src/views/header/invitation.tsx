@@ -12,11 +12,12 @@ import {Translation} from "../../lang/translation"
 
 type TypeStateTchat = {
 	handleDm:Function,
-	handleTotalConnected:Function
+	handleTotalConnected:Function,
+	SetGroupFriends:Function
 }
 
 
-const Invitation = function({handleDm,handleTotalConnected}:TypeStateTchat) {
+const Invitation = function({handleDm,handleTotalConnected,SetGroupFriends}:TypeStateTchat) {
 	const userConnectedRedux = useSelector((state:RootState) => state.userConnected)
 	const [friends, setFriends] 	= useState<Array<Friends>>([])
 	const [nbFriends, setNbFriends] = useState<number>(0)
@@ -52,6 +53,10 @@ const Invitation = function({handleDm,handleTotalConnected}:TypeStateTchat) {
 		handleDm(!showChat)
 	}
 
+	const handleGroup = function(user:Friends) {
+		SetGroupFriends(user)
+	}
+
 	return(
 		<div className="gamer-invite">
 			<p>
@@ -73,14 +78,14 @@ const Invitation = function({handleDm,handleTotalConnected}:TypeStateTchat) {
 						return (
 							<p key={index}>
 								<strong>
-									<img src={el.avatar ? el.avatar : AvatarDefault} alt="profil-avatar"/>
+									<img src={el.avatar ? el.avatar : AvatarDefault} alt="profil-avatar" onClick={handleShowTchat}/>
 									<span>
 										{el.username ? el.username : ((el.email).split("@")[0])}
 										<i className={el.isConnected ? "u-connected" : ""}></i>
 									</span>
 								</strong>
 								<span className="i-right">
-									<i><FontAwesomeIcon className="add-icon" icon={faPlus} /></i>
+									<i><FontAwesomeIcon className="add-icon" icon={faPlus} onClick={() => handleGroup(el)} /></i>
 									<i><FontAwesomeIcon icon={faCommentDots} onClick={handleShowTchat} /></i>
 								</span>
 							</p>

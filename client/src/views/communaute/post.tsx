@@ -48,6 +48,7 @@ const Post = function() {
 
 	useMemo(() => {
 		if(!loading && !error && data) {
+			console.log("data", data)
 			setPosts(data.FindAllPost)
 		}
 	},[loading,error,data])
@@ -82,6 +83,7 @@ const Post = function() {
 		if(contentPost.current) {
 			contnt = contentPost.current.innerHTML
 		}
+		if(!contnt) return null
 		if(files.length > 0) {
 			const reader = new FileReader()
 			reader.readAsDataURL(files[0])
@@ -212,6 +214,9 @@ const Post = function() {
 							</div>
 							</div>
 						</div>
+						<div className="post-btn">
+							<button className="btn bg-red poster" onClick={handleContent}>Poster</button>
+						</div>
 						<div className={isEmoij ? "emoij" : "d-none"}>
 							<div className="fbEmoij-cnt">
 								<div className="list-emoij">
@@ -296,10 +301,7 @@ const Post = function() {
 								</div>
 							</div>
 						</div>
-						</div>
-						<div className="post-btn">
-							<button className="btn bg-red poster" onClick={handleContent}>Poster</button>
-						</div>
+						</div>						
 					</div>
 			</div>
 			{

@@ -135,6 +135,7 @@ func GetRootFields() graphql.Fields {
 		"removePartTournament": removePartTournament(),
 		"createWagger":         createWagger(),
 		"updatedWagger":        updatedWagger(),
-		"createPost":			createPost(),
+		"createPost":           createPost(),
+		"removedPost":          removedPost(),
 	}
 }

@@ -97,8 +97,7 @@ html{
   color: #010101;
 }
 .connected .tag{
-  display: inline-block;
-  text-align: right;
+  display: flex;  
 }
 .connected .bt-container{
   display: none;
