@@ -7,7 +7,7 @@
     padding-right: 10px;
 }
 .wrap{
-	padding: 6px 35px;
+	padding: 6px 45px;
 	width: 100%;
 	border-bottom : 2px solid #dd0000;
 	background: #000000;
@@ -17,6 +17,7 @@
 .logo{
 	max-width: 174px;
 	width: 100%;
+	margin-right: 5em;
 	display: inline-block;
 	vertical-align: middle;
 	align-self: center;
@@ -60,7 +61,7 @@
 	border: 1px solid #dd0000;
 }
 .tag{
-	max-width: 291px;
+	max-width: 386px;
 	width: 100%;
 	display: inline-block;
 	vertical-align: middle;
