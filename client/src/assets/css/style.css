@@ -426,7 +426,16 @@ h1{
   .container .waggers-title, .container .waggers-data{
     width: 96%;
     margin: 5px 0;
-  }  
+  }
+  .container .jeux h2{
+    font-size: 30px;
+  }
+  .container .logo-game{
+    margin-right: 15px;
+  }
+  .container .bg-game{
+    width: 100%;    
+  }
 }
 @media screen and (max-width: 700px) {
   .container .card .upcomming.side{    
@@ -450,8 +459,7 @@ h1{
   .container .icon-tchat{
     position: initial;
     margin-top: 15px;
-
-  }
+  }  
 }
 @media screen and (max-width: 600px) {
   .container{
