@@ -608,6 +608,9 @@ h1{
   .container .header .invitation{
     top: 122px;
   }
+  .container .full-container{
+    margin-top: 11em !important;
+  }
 }
 @media screen and (max-width: 520px) {
   .view .ban{

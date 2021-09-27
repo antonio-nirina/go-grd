@@ -34,11 +34,11 @@
 	width: 100%;
 }
 .container-rules{
+	display: flex;
 	margin: 4em 0;
 }
 .txt{
-	padding: 15px;
-	max-width:  730px;
+	padding: 15px;	
 	border: 1px solid #1d1c1c;
 	border-radius: 5px;
 	width: 100%;
@@ -61,8 +61,7 @@ p.group-title{
 	margin: 10px;
 }
 .tableau{	
-	max-width: 458px;
-	width: 100%;
+	width: 41%;
 	display: inline-block;
 	vertical-align: top;
 	padding: 15px;

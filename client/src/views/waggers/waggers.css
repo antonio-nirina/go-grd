@@ -253,11 +253,12 @@ p.item-text-left{
 	background: none;
 }
 .rules-waggers{
+	display: flex;
 	width: 100%;
 }
 .rules-waggers .txt{
-	max-width: 930px;
+	
 }
 .rules-waggers .tableau{
-	width: 27% !important;
+	width: 41% !important;
 }
