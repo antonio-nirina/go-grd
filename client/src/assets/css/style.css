@@ -39,6 +39,9 @@ html{
   color: #ffffff;
   border: 1px solid transparent;
 }
+.btn-container div{
+  margin-top: 15px;
+}
 .light-gray{
   background: #131313;
 }
@@ -212,9 +215,9 @@ h1{
   .navmenu{
     display: none;
   }
-  .tag{
-    max-width: inherit;
+  .container .tag{    
     text-align: right;
+    max-width: inherit;
   }  
   .header .bt-container{
     width: 100%;
@@ -366,6 +369,13 @@ h1{
   .home .main{
     min-height: inherit;
     padding-top: 50px;
+  }
+  .home .container .jeux{
+    background-attachment: initial !important;
+    background-position: top !important;
+    padding-bottom: 0 !important;
+    min-height: inherit !important;
+
   }
 }
 @media screen and (max-width: 800px){
@@ -588,6 +598,15 @@ h1{
   } 
   .profil .team-bloc{
     max-width: inherit;
+  }
+  .container .logo{
+    margin-right: 0;
+  }
+  .container .box{
+    width: 50%;
+  }
+  .container .header .invitation{
+    top: 122px;
   }
 }
 @media screen and (max-width: 520px) {

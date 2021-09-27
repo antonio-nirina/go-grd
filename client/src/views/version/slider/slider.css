@@ -7,17 +7,7 @@
 .slick-track{
 	width: inherit !Important;
 }
-/*.sliderGrid .slick-slide[aria-hidden="true"]{
-	left: 0px !Important;
-	top: 0px !Important;
 
-}
-.sliderGrid .slick-slide[aria-hidden="false"]{
-	left: 0px !Important;
-	top: -12px !Important;
-	background: red !Important;
-	
-}*/
 .sliderGrid .slick-track .slick-slide.slick-active.slick-current:second-child{
 	
 }
@@ -29,8 +19,7 @@
 	position: absolute;
     top: 37%;
     text-align: center;
-    width: 100%;
-    left: 33px;
+    width: 100%;    
 }
 p.title{
 	font-family: "Russo One";
