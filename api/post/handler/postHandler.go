@@ -27,6 +27,7 @@ type UsecasePost interface {
 	CreatePostHandler(cmty *entity.Post) ([]PostViewModel, error)
 	FindPostHandler(idQuery string) (PostViewModel, error)
 	FindAllPostHandler(pageNumber int64, limit int64) ([]PostViewModel, error)
+	RemoveHandler(idQuery string) ([]PostViewModel, error)
 }
 
 type postUsecase struct {
@@ -148,4 +149,21 @@ func handlerAllPost(result []entity.Post) []PostViewModel {
 	}
 
 	return res
+}
+
+func (c *postUsecase) RemoveHandler(idQuery string) ([]PostViewModel, error) {
+	objectId, _ := primitive.ObjectIDFromHex(idQuery)
+	_, err := c.postRepository.RemovedPostRepo(objectId)
+
+	if err != nil {
+		return []PostViewModel{}, err
+	}
+
+	result, err := c.postRepository.FindAllPostRepo(PAGE_NUMBER, LIMIT)
+
+	if err != nil {
+		return []PostViewModel{}, err
+	}
+
+	return handlerAllPost(result), nil
 }

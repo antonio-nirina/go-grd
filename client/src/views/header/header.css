@@ -3,10 +3,11 @@
 .relative{
 	position: relative;
     display: inline-block;
+    margin-top: 4px;
     padding-right: 10px;
 }
 .wrap{
-	padding: 6px 35px;
+	padding: 6px 45px;
 	width: 100%;
 	border-bottom : 2px solid #dd0000;
 	background: #000000;
@@ -16,6 +17,7 @@
 .logo{
 	max-width: 174px;
 	width: 100%;
+	margin-right: 5em;
 	display: inline-block;
 	vertical-align: middle;
 	align-self: center;
@@ -59,20 +61,23 @@
 	border: 1px solid #dd0000;
 }
 .tag{
-	max-width: 291px;
+	max-width: 386px;
 	width: 100%;
 	display: inline-block;
 	vertical-align: middle;
 }
 
-.box{
-	max-width: 117px;
+.box{	
 	width: 100%;
-	display: inline-block;
-	margin-right: 17px;
+	display: inline-block;	
 	align-self: center;
+	text-align: right;
 }
-
+.add-team{
+    left: -8px;
+    top: 3px;
+    position: relative;
+}
 .lang{
  width: 28px;
  display: inline-block;
@@ -96,8 +101,7 @@
 	left: 0px;
 	border: 1px solid #4c4d4f;
 }
-.connex{
-	width: 128px;
+.connex{	
 	display: inline-block;
 	vertical-align: middle;
 
@@ -164,7 +168,7 @@
     display: inline-block;    
     line-height: 10px;
     vertical-align: top;
-    margin-top: 7px;
+    margin-top: 10px;
     position: relative;
     float: left;
     border: 1px solid #4c4d4f;

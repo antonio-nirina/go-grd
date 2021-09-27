@@ -22,6 +22,7 @@ import {NOTIFICATIONS_SUBSCRIBE} from "../../gql/user/subscription"
 
 import {Deconnect} from "../../gql/user/auth"
 import Chat from "../tchat/chat"
+import { Friends } from "../../gql/types/friend"
 
 export interface Notif  {
 	type:number,
@@ -34,12 +35,16 @@ export interface Notif  {
 	}
 }
 
-interface Show {
+type Show = {
 	isShow:boolean
 }
 
 type numberConnected = {
 	total:number
+}
+
+type FriendsGroup = {
+	friendGroup:Array<Friends>
 }
 
 
@@ -60,6 +65,8 @@ const Header: React.FC = function() {
 	// const [isShowChat, setIsShowChat] = useState<Boolean>(false)
 	const [friendsConnect, setFriendsConnect] = useState<numberConnected>({total:0})
 	const [dataNotifications, setDataNotifications] = useState<Array<any>>([])
+	const [groupFriends,setGroupFriends] = useState<FriendsGroup>({friendGroup:[]})
+
 	const {loading:subLoading,error:errSub,data:subData}  = useSubscription(NOTIFICATIONS_SUBSCRIBE)
 	const {loading,error,data} = useQuery(GET_ALL_NOTIFICATIONS, {
 		variables: {
@@ -161,7 +168,13 @@ const Header: React.FC = function() {
 		setFriendsConnect({total:numberConnected})
 	}
 
-
+	const handleGroupFriend = function(friend:Friends) {
+		const checkFriend = groupFriends.friendGroup.find(e => e.id === friend.id)
+		if(!checkFriend) {
+			setGroupFriends({friendGroup:[...groupFriends.friendGroup,friend]})
+			setShowInvitation(false)
+		}
+	}
 
   	return(
 		<header className={isDeconnect || Object.keys(userConnectedRedux.user).length === 0 ? "header" : "header connected"}>
@@ -226,10 +239,18 @@ const Header: React.FC = function() {
 								<FontAwesomeIcon icon={faPlus} />
 								<span className= {friendsConnect.total > 0 ? "count" : ""}>{friendsConnect.total === 0 ? "" : friendsConnect.total}</span>
 							</i>
+							{groupFriends.friendGroup.map(function(el:Friends,index:number) {
+								return (
+									<span className="add-team" key={index}>
+										<img src={el.avatar ? el.avatar : avatar} style={{"width":"31px", "height":"32px"}} alt={el.id} />
+									</span>
+								)
+							})}
 							<div className={!showInvitation ? "invitation" :"invitation show"}>
 								<Invitation
 									handleDm={onDmTchat}
 									handleTotalConnected={handleConnected}
+									SetGroupFriends={handleGroupFriend}
 								/>
 							</div>
 							<div className={!showChat.isShow ? "hide-chat" :"show-chat"}>
@@ -237,6 +258,7 @@ const Header: React.FC = function() {
 									handleTchat={openTchat}
 								/>
 							</div>
+
 							<div className={!showNotif ? "notification" :"notification show"}>
 								{dataNotifications.length > 0 && dataNotifications[0].type === 0
 									?

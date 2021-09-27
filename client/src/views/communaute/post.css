@@ -2,12 +2,12 @@
 	
 }
 .rel{
-	position: relative;
+	
 }
-.center-block .new-post{	
+.center-block .new-post{
+	position: relative;
 	background-color: #efefef;
-	border-radius: 7px;
-	overflow: hidden;
+	border-radius: 7px;	
     padding: 10px 0;
 }
 .new-post .post-user{
@@ -15,11 +15,9 @@
 }
 .new-post .flex-inline{
 	display: flex;
-	margin-top: 7px;
-	float: left;
+	margin-top: 7px;	
 }
-.new-post .post-icon{
-	width: 110px;
+.new-post .post-icon{	
     color: #777778;
     align-self: center;
 }
@@ -31,7 +29,8 @@
     border-bottom: 1px solid #bfbfbf;
 }
 .post-btn{
-	float: right;        
+	width: 100%;
+	text-align: right;       
 }
 .post-btn .btn.poster{
 	padding: 7px 15px;
@@ -99,7 +98,8 @@
 	cursor: pointer;
 }
 .post-cnt .bloc-actus{
-	border: 1px solid #000;
+	border: none;
+	border-radius: 5px;
 	margin-top: 10px;
 	background-color: #2c2c2c;
 }
@@ -108,15 +108,16 @@
 	display: none;
 }
 .new-post .emoij{	    
-    width: 36%;
+    width: 33%;
     background: #2c2c2c;
     padding: 15px;
     position: absolute;
-    bottom: -154px;
-    border-radius: 0 0 5px 5px;
-    left: 97px;
-    z-index: 99999;    
+    top: 100%;
+    left: 95px;
+    box-shadow: 0px 0px 12px #000000;
+    border-radius: 0 0 5px 5px;    
 }
+   
 .fbEmoij{
 	cursor: pointer;
 	text-align: center;

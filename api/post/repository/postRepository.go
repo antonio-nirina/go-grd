@@ -4,8 +4,8 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/thoussei/antonio/api/post/entity"
 	"github.com/thoussei/antonio/api/external"
+	"github.com/thoussei/antonio/api/post/entity"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
@@ -16,17 +16,16 @@ type driverRepository struct {
 	client *mongo.Client
 }
 
-
 // Return Interface User Repository
 func NewPostRepository(client *mongo.Client) *driverRepository {
 	return &driverRepository{client}
 }
 
-
 type RepositoryPost interface {
 	SavedPostRepo(post *entity.Post) (interface{}, error)
 	FindPostRepo(idQuery primitive.ObjectID) (entity.Post, error)
-	FindAllPostRepo(pageNumber int64,limit int64) ([]entity.Post, error)
+	FindAllPostRepo(pageNumber int64, limit int64) ([]entity.Post, error)
+	RemovedPostRepo(idQuery primitive.ObjectID) (interface{}, error)
 }
 
 func (c *driverRepository) SavedPostRepo(post *entity.Post) (interface{}, error) {
@@ -55,10 +54,10 @@ func (c *driverRepository) FindPostRepo(idQuery primitive.ObjectID) (entity.Post
 	return result, nil
 }
 
-func (c *driverRepository) FindAllPostRepo(pageNumber int64,limit int64) ([]entity.Post, error) {
+func (c *driverRepository) FindAllPostRepo(pageNumber int64, limit int64) ([]entity.Post, error) {
 	var collection = c.client.Database("grd_database").Collection("post")
 	var results []entity.Post
-	cur, err := collection.Find(context.TODO(), bson.D{{}},options.Find().SetLimit(limit).SetSkip(pageNumber).SetSort(bson.M{"_id": -1}))
+	cur, err := collection.Find(context.TODO(), bson.D{{}}, options.Find().SetLimit(limit).SetSkip(pageNumber).SetSort(bson.M{"_id": -1}))
 
 	if err != nil {
 		return nil, err
@@ -73,10 +72,21 @@ func (c *driverRepository) FindAllPostRepo(pageNumber int64,limit int64) ([]enti
 
 		results = append(results, elem)
 	}
-	
+
 	cur.Close(context.TODO())
 
 	return results, nil
 }
 
+func (c *driverRepository) RemovedPostRepo(idQuery primitive.ObjectID) (interface{}, error) {
+	var collection = c.client.Database("grd_database").Collection("post")
+	filter := bson.D{{"uid", idQuery}}
 
+	updateResult, err := collection.DeleteOne(context.TODO(), filter)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return updateResult.DeletedCount, nil
+}

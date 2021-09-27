@@ -5,7 +5,6 @@ import (
 	"github.com/thoussei/antonio/api/graphql/types"
 )
 
-
 func createPost() *graphql.Field {
 	return &graphql.Field{
 		Type:        graphql.NewList(types.PostSchemaType),
@@ -16,20 +15,33 @@ func createPost() *graphql.Field {
 			},
 			"title": &graphql.ArgumentConfig{
 				Type: graphql.String,
-			},	
+			},
 			"content": &graphql.ArgumentConfig{
 				Type: graphql.String,
 			},
-			"imageType":&graphql.ArgumentConfig{
+			"imageType": &graphql.ArgumentConfig{
 				Type: graphql.String,
 			},
-			"files":&graphql.ArgumentConfig{
+			"files": &graphql.ArgumentConfig{
 				Type: graphql.String,
 			},
-			"date":&graphql.ArgumentConfig{
+			"date": &graphql.ArgumentConfig{
 				Type: graphql.String,
-			},					
-		},			
+			},
+		},
 		Resolve: postResolver.CreatePostResolve,
+	}
+}
+
+func removedPost() *graphql.Field {
+	return &graphql.Field{
+		Type:        graphql.NewList(types.PostSchemaType),
+		Description: "removed Post",
+		Args: graphql.FieldConfigArgument{
+			"uid": &graphql.ArgumentConfig{
+				Type: graphql.String,
+			},
+		},
+		Resolve: postResolver.RemovedPostResolver,
 	}
 }

@@ -10,6 +10,7 @@ import (
 
 type PostResolve interface {
 	CreatePostResolve(params graphql.ResolveParams) (interface{}, error)
+	RemovedPostResolver(params graphql.ResolveParams) (interface{}, error)
 	FindPostResolver(params graphql.ResolveParams) (interface{}, error)
 	FindAllPostResolver(params graphql.ResolveParams) (interface{}, error)
 }
@@ -40,13 +41,13 @@ func (c *post) CreatePostResolve(params graphql.ResolveParams) (interface{}, err
 	}
 
 	cmty := &entity.Post{
-		Uid:     primitive.NewObjectID(),
-		Title:   title,
-		User:    user,
-		Date:date,
-		Content: content,
-		ImageType:imageType,
-		Files:files,
+		Uid:       primitive.NewObjectID(),
+		Title:     title,
+		User:      user,
+		Date:      date,
+		Content:   content,
+		ImageType: imageType,
+		Files:     files,
 	}
 
 	res, err := c.postHandler.CreatePostHandler(cmty)
@@ -73,6 +74,23 @@ func (c *post) FindAllPostResolver(params graphql.ResolveParams) (interface{}, e
 	limit, _ := params.Args["limit"].(int)
 	pageNumber, _ := params.Args["pageNumber"].(int)
 	res, err := c.postHandler.FindAllPostHandler(int64(pageNumber), int64(limit))
+
+	if err != nil {
+		return nil, err
+	}
+
+	return res, nil
+}
+
+func (c *post) RemovedPostResolver(params graphql.ResolveParams) (interface{}, error) {
+	uid, _ := params.Args["uid"].(string)
+	_, err := c.postHandler.FindPostHandler(uid)
+
+	if err != nil {
+		return nil, err
+	}
+
+	res, err := c.postHandler.RemoveHandler(uid)
 
 	if err != nil {
 		return nil, err
