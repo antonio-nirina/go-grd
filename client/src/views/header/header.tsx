@@ -57,7 +57,7 @@ const Header: React.FC = function() {
 	const [showNotif, setShowNotif] = useState<Boolean>(false)
 	const [showInvitation, setShowInvitation] = useState<Boolean>(false)
 	const [isDeconnect, setIsDeconnect] = useState<Boolean>(false)
-	const [isShowChat, setIsShowChat] = useState<Boolean>(false)
+	// const [isShowChat, setIsShowChat] = useState<Boolean>(false)
 	const [friendsConnect, setFriendsConnect] = useState<numberConnected>({total:0})
 	const [dataNotifications, setDataNotifications] = useState<Array<any>>([])
 	const {loading:subLoading,error:errSub,data:subData}  = useSubscription(NOTIFICATIONS_SUBSCRIBE)
@@ -101,7 +101,8 @@ const Header: React.FC = function() {
 	useEffect(() => {
 		let array:Array<Notif> = []
 		let notif:Notif
-		
+		let isSubscribed:boolean = true
+
 		if(!loading && !error && data) {
 			let count:number = 0
 
@@ -144,7 +145,7 @@ const Header: React.FC = function() {
 			}
 		}
 		setDataNotifications(array)
-		let isSubscribed:boolean = true
+
 		return () => {isSubscribed = false}
 	},[loading,error,data,subLoading,errSub,subData,userConnectedRedux])
 
@@ -160,7 +161,9 @@ const Header: React.FC = function() {
 		setFriendsConnect({total:numberConnected})
 	}
 
-  return(
+
+
+  	return(
 		<header className={isDeconnect || Object.keys(userConnectedRedux.user).length === 0 ? "header" : "header connected"}>
 			<div className="wrap">
 				<div className="logo">
