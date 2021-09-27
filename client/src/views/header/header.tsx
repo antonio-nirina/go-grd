@@ -237,8 +237,8 @@ const Header: React.FC = function() {
 							</i>
 							{groupFriends.friendGroup.map(function(el:Friends,index:number) {
 								return (
-									<span key={index}>
-										<span><img src={el.avatar ? el.avatar : avatar} style={{"width":"33px"}} alt={el.id} /></span>
+									<span className="add-team" key={index}>
+										<img src={el.avatar ? el.avatar : avatar} style={{"width":"31px", "height":"32px"}} alt={el.id} />
 									</span>
 								)
 							})}

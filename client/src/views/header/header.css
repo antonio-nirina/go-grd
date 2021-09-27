@@ -3,6 +3,7 @@
 .relative{
 	position: relative;
     display: inline-block;
+    margin-top: 4px;
     padding-right: 10px;
 }
 .wrap{
@@ -65,14 +66,17 @@
 	vertical-align: middle;
 }
 
-.box{
-	max-width: 117px;
+.box{	
 	width: 100%;
-	display: inline-block;
-	margin-right: 17px;
+	display: inline-block;	
 	align-self: center;
+	text-align: right;
 }
-
+.add-team{
+    left: -8px;
+    top: 3px;
+    position: relative;
+}
 .lang{
  width: 28px;
  display: inline-block;
@@ -96,8 +100,7 @@
 	left: 0px;
 	border: 1px solid #4c4d4f;
 }
-.connex{
-	width: 128px;
+.connex{	
 	display: inline-block;
 	vertical-align: middle;
 
@@ -164,7 +167,7 @@
     display: inline-block;    
     line-height: 10px;
     vertical-align: top;
-    margin-top: 7px;
+    margin-top: 10px;
     position: relative;
     float: left;
     border: 1px solid #4c4d4f;

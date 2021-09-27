@@ -214,6 +214,9 @@ const Post = function() {
 							</div>
 							</div>
 						</div>
+						<div className="post-btn">
+							<button className="btn bg-red poster" onClick={handleContent}>Poster</button>
+						</div>
 						<div className={isEmoij ? "emoij" : "d-none"}>
 							<div className="fbEmoij-cnt">
 								<div className="list-emoij">
@@ -298,10 +301,7 @@ const Post = function() {
 								</div>
 							</div>
 						</div>
-						</div>
-						<div className="post-btn">
-							<button className="btn bg-red poster" onClick={handleContent}>Poster</button>
-						</div>
+						</div>						
 					</div>
 			</div>
 			{
