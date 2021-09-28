@@ -164,7 +164,7 @@
 }
 .square{	
     cursor: pointer;
-    margin-right: 16px;
+    margin-right: 26px;
     display: inline-block;
     line-height: 15px;
     vertical-align: top;
@@ -174,7 +174,7 @@
     border: 1px solid #4c4d4f;
     padding: 0px 2px;
     height: 18px;
-    align-self: center;
+    align-self: center;    
 }
 .add-icon{
     padding: 1px;
