@@ -20,6 +20,8 @@ import Notifications from "./notificationFriend"
 import Invitation from "./invitation"
 import {NOTIFICATIONS_SUBSCRIBE} from "../../gql/user/subscription"
 
+import {CREATE_GROUP} from "../../gql/group/mutation"
+
 import {Deconnect} from "../../gql/user/auth"
 import Chat from "../tchat/chat"
 import { Friends } from "../../gql/types/friend"
@@ -75,6 +77,7 @@ const Header: React.FC = function() {
 	})
 
 	const [deconnect] = useMutation(Deconnect)
+	const [grp] = useMutation(CREATE_GROUP)
 
 	const onShow = function(){
 		setShowList(!showList)
@@ -168,10 +171,17 @@ const Header: React.FC = function() {
 		setFriendsConnect({total:numberConnected})
 	}
 
-	const handleGroupFriend = function(friend:Friends) {
+	const handleGroupFriend = async function(friend:Friends) {
 		const checkFriend = groupFriends.friendGroup.find(e => e.id === friend.id)
 		if(!checkFriend) {
+			let array:Array<string> = []
 			setGroupFriends({friendGroup:[...groupFriends.friendGroup,friend]})
+			array.push(friend.id)
+			try {
+				await grp({ variables: { idUsers: array,lead:userConnectedRedux.user.uid,subject:"" }})
+			} catch (e) {
+				console.log("error", e)
+			}
 			setShowInvitation(false)
 		}
 	}

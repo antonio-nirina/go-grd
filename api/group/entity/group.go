@@ -8,7 +8,7 @@ import (
 
 type Group struct {
 	Uid       primitive.ObjectID `bson:"uid"`
-	Lead      entity.User             `json:"lead"`
-	Users      []entity.User             `json:"users"`
-	Content   string             `json:"Content"`
+	Lead      entity.User         `json:"lead"`
+	Users     []entity.User      `json:"users"`
+	Subject   string             `json:"subject"`
 }
