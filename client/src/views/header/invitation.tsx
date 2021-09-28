@@ -97,9 +97,9 @@ const Invitation = function({handleDm,handleTotalConnected,SetGroupFriends}:Type
 					</>}
 				</div>
 			</div>
-			<div className="friends-online">
+			{/*<div className="friends-online">
 				<p>Skouinar & Co. <span>(15)</span><i className="right-icon"><FontAwesomeIcon icon={faPlus} /></i></p>
-			</div>
+			</div>*/}
 		</div>	
 	)
 }

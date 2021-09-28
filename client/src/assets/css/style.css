@@ -39,6 +39,9 @@ html{
   color: #ffffff;
   border: 1px solid transparent;
 }
+.btn-container div{
+  margin-top: 15px;
+}
 .light-gray{
   background: #131313;
 }
@@ -212,9 +215,9 @@ h1{
   .navmenu{
     display: none;
   }
-  .tag{
-    max-width: inherit;
+  .container .tag{    
     text-align: right;
+    max-width: inherit;
   }  
   .header .bt-container{
     width: 100%;
@@ -367,6 +370,13 @@ h1{
     min-height: inherit;
     padding-top: 50px;
   }
+  .home .container .jeux{
+    background-attachment: initial !important;
+    background-position: top !important;
+    padding-bottom: 0 !important;
+    min-height: inherit !important;
+
+  }
 }
 @media screen and (max-width: 800px){
   .container .tchat{
@@ -416,7 +426,16 @@ h1{
   .container .waggers-title, .container .waggers-data{
     width: 96%;
     margin: 5px 0;
-  }  
+  }
+  .container .jeux h2{
+    font-size: 30px;
+  }
+  .container .logo-game{
+    margin-right: 15px;
+  }
+  .container .bg-game{
+    width: 100%;    
+  }
 }
 @media screen and (max-width: 700px) {
   .container .card .upcomming.side{    
@@ -440,8 +459,7 @@ h1{
   .container .icon-tchat{
     position: initial;
     margin-top: 15px;
-
-  }
+  }  
 }
 @media screen and (max-width: 600px) {
   .container{
@@ -588,6 +606,18 @@ h1{
   } 
   .profil .team-bloc{
     max-width: inherit;
+  }
+  .container .logo{
+    margin-right: 0;
+  }
+  .container .box{
+    width: 50%;
+  }
+  .container .header .invitation{
+    top: 122px;
+  }
+  .container .full-container{
+    margin-top: 11em !important;
   }
 }
 @media screen and (max-width: 520px) {

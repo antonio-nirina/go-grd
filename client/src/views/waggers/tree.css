@@ -8,6 +8,7 @@
 	-webkit-box-pack: start;
 	-ms-flex-pack: start;
 	justify-content: flex-start;
+	overflow: auto;
 }
 .tree ul.part-one{
 	transform: rotate(180deg);
@@ -31,8 +32,7 @@
 	flex-direction: column;
 	-webkit-box-pack: center;
 	-ms-flex-pack: center;
-	justify-content: center;
-	margin: auto;
+	justify-content: center;	
 }
 
 .tree li {
