@@ -627,11 +627,11 @@ form .se-btn.se-btn-select.se-btn-tool-font.se-tooltip.on{
 	margin-bottom: 15px;
 	display: inline-block;
 	margin-right: 10px;
-	border: 1px solid #9c9c9e;
-	padding-bottom: 15px;
+	border: 1px solid #232328;	
 	background: #3a3838;
 	border-radius: 5px;
 	align-self: center;
+	overflow: hidden;	
 }
 .grid img{
 	width: 100%;
@@ -685,28 +685,53 @@ label.entete:last-child{
 }
 .list-game .img-games{
 	display: block;
+	border-radius: 5px;
 	background-size: 100% 100% !important; 
 	height: 250px;
 	background-repeat: no-repeat !important;
 }
 .list-game .logo-game{   
     display: block;   
-    padding: 14px;
+    padding: 0;
     bottom: 37px;    
-    background: #6f6f6f;
     width: 100%;
-    text-align: center;
+    max-width: 75px;
+    text-align: center;    
+}
+.list-game span{
+	align-self: center;
 }
 .list-game .logo-game img{
-    width: 46%;
-    height: 52px;
-    margin: auto;
+    width: 100%;
+    height: 82px;
+    border-radius: 50%;  
 }
 .column div.create-game{
     width: 100%;    
 }
 .create-game button svg{
 	margin-right: 5px;
+}
+
+.game-name{		
+	display: flex;
+	width: 100%;
+	height: 50%;
+    justify-content: center;
+    position: absolute;
+    bottom: 0px;
+    background: rgba(0,0,0,0.8);    
+    border-radius: 0 0 5px 5px;
+    transition: ease-in-out 500ms;  
+}
+.game-name span{
+	align-self: center;
+}
+.grid:hover .game-name{
+	height: 100%;
+	bottom: 0;
+	border-radius: 5px;
+	transition: ease-in-out 500ms;
 }
 /***************set home page *******************/
 .column-home .flex-group{
@@ -887,3 +912,4 @@ label.entete:last-child{
 .detailUser .popup-container{
 	top: 60%;
 }
+/**************/
