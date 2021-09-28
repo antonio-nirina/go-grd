@@ -50,6 +50,10 @@ import (
 	postHandler "github.com/thoussei/antonio/api/post/handler"
 	postRepo "github.com/thoussei/antonio/api/post/repository"
 
+	groupDelivery "github.com/thoussei/antonio/api/group/delivery"
+	groupHandler "github.com/thoussei/antonio/api/group/handler"
+	groupRepo "github.com/thoussei/antonio/api/group/repository"
+
 	"github.com/graphql-go/graphql"
 )
 
@@ -106,6 +110,10 @@ var postRepository = postRepo.NewPostRepository(database)
 var postUsecase = postHandler.NewUsecasePost(postRepository)
 var postResolver = postDelivery.NewResolverPost(postUsecase, usecase)
 
+var groupRepository = groupRepo.NewGroupRepository(database)
+var groupUsecase = groupHandler.NewUsecaseGroup(groupRepository)
+var groupResolver = groupDelivery.NewResolverGroup(groupUsecase, usecase)
+
 func GetRootFields() graphql.Fields {
 	return graphql.Fields{
 		"createdUser":           createdUser(),
@@ -137,5 +145,6 @@ func GetRootFields() graphql.Fields {
 		"updatedWagger":        updatedWagger(),
 		"createPost":           createPost(),
 		"removedPost":          removedPost(),
+		"saveGroup":			saveGroup(),
 	}
 }
