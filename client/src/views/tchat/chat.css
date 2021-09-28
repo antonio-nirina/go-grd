@@ -5,11 +5,19 @@
 	width: 100%;
 	height: 50%;	
 }
+.header .title-container{
+	display: flex;
+}
+.header .title-container span{
+	align-self: center;
+}
 .header .show-chat .tchat{
+	width: 25%;
+	height: 42%;
 	position: fixed;
 	bottom: 0;
-	overflow: auto;
-	height: 50%;	
+	overflow: auto;	
+	border-radius: 5px 5px 0px 0px;
 }
 .header .tchat-content .message img{
 	height: 35px;
@@ -27,7 +35,7 @@
     position: absolute;
     left: -9px;
     border-top: 9px solid transparent;
-    border-right: 10px solid #4a4949;
+    border-right: 10px solid #3e3d3d;
     border-bottom: 10px solid transparent;
     top: 8px;
 }
@@ -37,11 +45,13 @@
     position: absolute;
     right: -9px;
     border-top: 9px solid transparent;
-    border-left: 10px solid #4a4949;
+    border-left: 10px solid #363636;
     border-bottom: 10px solid transparent;
     top: 8px;
 }
 .header .tchat-bar-dialog button{
+	background: #7c7b7b;
+	color: #ffffff;
 	padding: 5px;
 	margin-right: 0;
 	border-radius: 0px;
@@ -50,9 +60,18 @@
 	font-size: 20px;
 	padding: 5px;
 }
-.tchat-header{	
-	background: #000000;
-	padding: 4px 6px 10px;
+.header .tchat-header{	
+	display: flex;
+	width: 24.8%;
+	position: fixed;
+    z-index: 2;
+    background: #000000;
+    padding: 4px 6px 10px;   
+    border-radius: 5px 5px 0 0; 
+}
+.header .tchat-body{
+	height: auto;
+    padding-top: 50px
 }
 .tchat-icon{	
 	display: inline-block;
@@ -61,37 +80,39 @@
     display: inline-block;
     padding: 4px;
 }
-.close-tchat{		
-    width: 25px;
-    float: right;
-    margin-top: 5px;
+.header .close-tchat{		
+    width: 100%; 
+    margin-top: 5px;    
 }
 .tchat-content{
-	padding: 15px;
+	padding: 15px 5px 40px 5px;
 }
 .msg-received, .msg-send{
 	display: flex;
 }
-.msg-received{
-
+.header .msg-received{
+	text-align: left;
 }
-.msg-send{
-
-}
-.tchat-bar-dialog{
-	position: absolute;
+.header .tchat-bar-dialog{
+	width: 24.8%;
+	position: fixed;
 	bottom: 0;
 }
-.tchat-bar-dialog{
-	width: 100%;
-}
+
 .tchat-bar-dialog form{
 	display: flex;
 }
-.tchat-content .content{
-	background: #4a4949;
+.header .tchat-content .content{
+    background: #363636;
     padding: 15px;
-    width: 278px;
+    width: 240px;
+    margin: auto;
+    border-radius: 15px;
+}
+.header .tchat-content .msg-received .content{
+    background: #3e3d3d;
+    padding: 15px;
+    width: 240px;
     margin: auto;
     border-radius: 15px;
 }
@@ -112,6 +133,9 @@
 .tchat-bar-dialog input{
 	width: 100%;
 	padding: 10px;
+	background: #4a4949;
+	border: none;
+	color: #ffffff;
 }
 .tchat-bar-dialog button{
 	margin-right: 8px;

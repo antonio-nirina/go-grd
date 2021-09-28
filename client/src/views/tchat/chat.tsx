@@ -19,11 +19,13 @@ const Chat = function({handleTchat}:TypeTchat) {
   return(
 	<div className="tchat">
 		<div className="tchat-header">
+		<div className="title-container">
 		  <i className="tchat-icon"><FontAwesomeIcon icon={faCommentDots} size="xs"/></i>
 		  <span>Nirina1718</span>
-		  <div className="close-tchat">
+		</div>
+		<div className="close-tchat">
 			<i className="close-icon" style={{"cursor":"pointer"}} onClick={handleClosed}><FontAwesomeIcon icon={faTimes} size="xs"/></i>
-		  </div>
+		</div>
 		</div>
 	<div className="tchat-body">
 	  <div className="tchat-content">
@@ -43,7 +45,7 @@ const Chat = function({handleTchat}:TypeTchat) {
 	  <div className="tchat-bar-dialog">
 		<form>
 		  <input type="text" placeholder="Ecrire votre message ..." />
-		  <button className="btn bg-red"><i className="send"><FontAwesomeIcon icon={faPaperPlane} size="xs"/></i></button>
+		  <button className="btn"><i className="send"><FontAwesomeIcon icon={faPaperPlane} size="xs"/></i></button>
 		</form>
 	  </div>
 	</div>
