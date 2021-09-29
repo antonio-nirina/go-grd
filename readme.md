@@ -24,3 +24,6 @@ https://flowcv.me/rajeshbiswas
 [Awesome](https://github.com/danistefanovic/build-your-own-x?fbclid=IwAR0U-ex0amE42l46vP1zJJ8DRxaf6pIjsUzINt2QKyOLmiHtgFhmOqr5qPc)
 
 https://www.infoq.com/articles/build-a-container-golang/
+
+
+https://gist.github.com/jpchateau/f822e00f1c6318046125
