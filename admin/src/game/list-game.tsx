@@ -49,8 +49,10 @@ const ListGame : React.FC = function() {
                             	return (
                             		<Link key={index} to ="#" className="grid league-board" >
 					    				<span className="img-games" style={{ background: `url(${el.image})`}}></span>
-					    				<span className="logo-game"><img src={el.logo} alt="" /></span>
-					    				<span className="grid-title">{el.name} :</span>
+					    				<strong className="game-name">
+					    					<span className="logo-game"><img src={el.logo} alt="" /></span>					    					
+					    					<span className="grid-title">{el.name}</span>					    					
+					    				</strong>
 					    			</Link>
                         		)
                             })}

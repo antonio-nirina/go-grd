@@ -61,21 +61,21 @@
 	border: 1px solid #dd0000;
 }
 .tag{
-	max-width: 386px;
-	width: 100%;
-	display: inline-block;
-	vertical-align: middle;
+    max-width: 386px;
+    width: 100%;    
+    vertical-align: middle;
 }
-
 .box{	
 	width: 100%;
-	display: inline-block;	
-	align-self: center;
-	text-align: right;
+    display: flex;
+    align-self: center;
+    justify-content: right;
+    text-align: right;
 }
 .add-team{
     left: -8px;
-    top: 3px;
+    top: 5px;
+    margin-right: 3px;
     position: relative;
 }
 .lang{
@@ -103,8 +103,9 @@
 }
 .connex{	
 	display: inline-block;
-	vertical-align: middle;
-
+    vertical-align: middle;
+    display: flex;
+    justify-content: right;
 }
 .gametag{
 	max-width: 143px;
@@ -161,18 +162,19 @@
 .lang span{
 	display: block;
 }
-.square{
-	padding: 1px;
-	cursor: pointer;
-    margin-right: 16px;
-    display: inline-block;    
-    line-height: 10px;
+.square{	
+    cursor: pointer;
+    margin-right: 26px;
+    display: inline-block;
+    line-height: 15px;
     vertical-align: top;
-    margin-top: 10px;
+    margin-top: 6px;
     position: relative;
     float: left;
     border: 1px solid #4c4d4f;
-    padding: 3px;
+    padding: 0px 2px;
+    height: 18px;
+    align-self: center;    
 }
 .add-icon{
     padding: 1px;
@@ -303,7 +305,7 @@
     cursor: auto;
     right: 5px;    
     box-shadow: -6px 0px 62px #000000;
-    overflow: scroll;   
+    overflow-x: auto;   
 }
 .header .invitation p{
 	font-size: 13px;
