@@ -128,7 +128,7 @@ const Joingame: React.FC = function(props:any) {
             <div className={!showSalon ? "salon" :"salon show"}>
               <div className="salon-titre">Salon de tchat</div>
               <div className="salon-team" onClick={onShowTchat}>
-                <img src={AvatarDefault} width="30" alt="joingame" />
+                <img src={AvatarDefault} width="30" height="30" alt="joingame" />
                 <p>{wagger?.game.logo} - <span>{wagger?.gameWay}<i><FontAwesomeIcon icon={faCommentDots} size="xs"/></i></span></p>
               </div>
             </div>
