@@ -25,6 +25,9 @@
 	margin-left: 5px;
 	padding-bottom: 6px;
 }
+.salon-team img{
+	align-self: center;
+}
 .salon-team p i{
 	font-size: 19px;
 	margin-left: 5px;
