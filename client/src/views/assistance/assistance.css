@@ -14,13 +14,13 @@
 	font-size: 30px;
 	color: #ffffff;
 	float: left;
-	margin-right: 25px;
+	margin-right: 60px;
 }
 .search-box{
 
 }
 .search-box input{
-	width: 78%;
+	width: 72%;
 	padding: 10px;
 	border: 1px solid #e3e3e3;
 	border-radius: 5px;
