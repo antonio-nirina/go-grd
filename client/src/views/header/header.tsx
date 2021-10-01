@@ -155,7 +155,7 @@ const Header: React.FC = function() {
 			}
 		}
 		setDataNotifications(array)
-
+		console.log(isSubscribed)
 		return () => {isSubscribed = false}
 	},[loading,error,data,subLoading,errSub,subData,userConnectedRedux])
 

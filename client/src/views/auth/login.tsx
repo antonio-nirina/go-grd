@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { useForm } from "react-hook-form"
 import {useMutation} from "@apollo/client"
 import {useHistory } from "react-router-dom"
+import Loader from "react-loader-spinner"
 import { useDispatch } from "react-redux"
 import { faTwitch,faDiscord } from "@fortawesome/free-brands-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
@@ -35,16 +36,20 @@ const Login: React.FC = function() {
 	const { register, handleSubmit } = useForm<Inputs>()
 	const [errorForm,setErrorForm] = useState<boolean>(false)
 	const [passwd,setPasswd] = useState<boolean>(false)
+	const [isLoader, setIsLoader] = useState<Boolean>(false)
 	const [login]  = useMutation(LOGIN)
+
 	const onSubmit = async function(data:Inputs){
 		const email: string 	= data.email
 		const password: string 	= data.password
 
 		if(checkValidEmail(email)) {
+			setIsLoader(true)
 			try {
 				const result = await login({ variables: { email: email,password:password } })
 
 				if (result.data.login) {
+					setIsLoader(false)
 					const token:TokenType = {
 						access_token:result.data.login,
 						refresh_token:"",
@@ -84,6 +89,12 @@ const Login: React.FC = function() {
 							{passwd ? <span style={style}>Password or username invalid </span> : ""}
 						</div>
 						<form onSubmit={handleSubmit(onSubmit)}>
+							<div className={isLoader ? "loader-spinner":"d-none"} style={{"textAlign":"center"}}>
+								<Loader
+									type="Oval"
+									color="#dd0000"
+								/>
+							</div>
 							<input className="mgt10" type = "email" placeholder = "Ton email" {...register("email", { required: true })} name="email" />
 							<input type ="password" placeholder ={Translation("fr").login.password}  {...register("password", { required: true })} name="password" />
 							<button className="btn bg-red mg15">
