@@ -248,6 +248,7 @@ const Header: React.FC = function() {
 							<i className="square" onClick={onShowInvitation} >
 								<FontAwesomeIcon icon={faPlus} />
 								<span className= {friendsConnect.total > 0 ? "count" : ""}>{friendsConnect.total === 0 ? "" : friendsConnect.total}</span>
+								<span className="tooltip">Inviter des amis</span>
 							</i>
 							{groupFriends.friendGroup.map(function(el:Friends,index:number) {
 								return (
@@ -276,13 +277,15 @@ const Header: React.FC = function() {
 									: <></>
 								}
 							</div>
-							<>
-								<i className="relative" onClick={onShowNotif}>
+							<>								
+								<i className="relative bell" onClick={onShowNotif}>
 									<FontAwesomeIcon icon={faBell} size="lg" />
 									<span className={notification > 0 ? "number" : ""}>{notification > 0 ? notification : ""}</span>								
+									<span className="tooltip">Notification</span>
 								</i>
-								<i className="relative">
+								<i className="relative member">
 									<FontAwesomeIcon icon={faUsers} size="lg" />
+									<span className="tooltip">Groupe</span>
 								</i>
 							</>
 						</div>
