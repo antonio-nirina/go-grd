@@ -7,6 +7,8 @@ import { useSelector } from "react-redux"
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from "@fortawesome/free-solid-svg-icons"
+import thumbnail from "../assets/image/thumbnail.png"
+import { faTrash } from "@fortawesome/free-solid-svg-icons"
 
 import SideBar from "../header/sidebar"
 import {RootState} from "../reducer"
@@ -27,6 +29,7 @@ const SetRules: React.FC = function() {
 	const { register, handleSubmit } 	= useForm<Inputs>()
 	const [createdTournament]  			= useMutation(CREATE_PUBLICATION)
 	const userConnectedRedux 			= useSelector((state:RootState) => state.userConnected)
+	const [Selected, setSelected] = useState<Boolean>(false)
 
 	const {loading,error,data} 	= useQuery(GET_ALL_GAMES)
 
@@ -38,6 +41,9 @@ const SetRules: React.FC = function() {
 		if (result.data.createPublication) {
 			history.push("/admin/communaute")
 		}
+	}
+	const onSelected = function(){
+		setSelected(!Selected)
 	}
 
 	useEffect(() => {
@@ -131,10 +137,44 @@ const SetRules: React.FC = function() {
 	                                                })}
 	                                            </select>
                                             </div>
-                                            <div className="input-group">
-                                            	Les streaming à afficher
+                                            <div className="guide">
+                                            	<p>Les streaming à afficher :</p>
+                                            	<p>
+                                            		<span>- Selectionner la ou les vidéos que vous voulez afficher</span>
+                                            		<span>- Ajouter</span>
+                                            	</p>
                                             </div>
-	    									<button className="btn bg-red" style={{"cursor":"pointer"}}><FontAwesomeIcon icon={faPlus} /> Ajouter</button>
+                                            <div className="list-video">
+                                            	<div className="video-check">
+                                            		<input type="checkbox" className="v-check" onClick={onSelected}/>
+                                            		<video controls poster={thumbnail} width="477" height="268" className={!Selected ? "notSelected" :"selected"}>
+														<source src="https://media.w3.org/2010/05/sintel/trailer_hd.mp4" type="video/mp4"/>
+													</video>
+												</div>																						
+                                            </div>
+                                            <div className="btn-container full-w">
+                                            	<button className="btn bg-red center clear" style={{"cursor":"pointer"}}><FontAwesomeIcon icon={faPlus} /> Ajouter</button>                                        
+                                            </div>
+                                            <div className="video-checked">
+                                            	<div className="guide">
+	                                            	<p>Liste de vidéo à afficher dans communauté  :</p>
+	                                            	<p>
+	                                            		<span>- Appuyer sur l'icone supprimer pour effacer la vidéo</span>
+	                                            		<span>- Valider</span>
+	                                            	</p>
+                                            	</div>
+                                            	<div className="list-video">
+                                            		<div className="video-check">
+                                            			<i><FontAwesomeIcon icon={faTrash} /></i>
+                                        				<video controls poster={thumbnail} width="477" height="268">
+															<source src="https://media.w3.org/2010/05/sintel/trailer_hd.mp4" type="video/mp4"/>												
+														</video>
+													</div>
+												</div>
+												<div className="btn-container full-w">
+                                            		<button className="btn bg-red center clear" style={{"cursor":"pointer"}}><FontAwesomeIcon icon={faPlus} /> Valider</button>                                        
+                                            	</div>
+                                            </div>	    									
 	    								</form>
 		        					</div>
 	        					</div>
