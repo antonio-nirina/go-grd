@@ -48,8 +48,8 @@ func (r *resolver) GetAccessTokenTwitchApi(params graphql.ResolveParams) (interf
 		external.Logger("Error loading .env file")
 	}
 
-	// commonDelevery
-	accesTokens, err := external.GetAccessTokenTwitch(params.Args["code"].(string))
+	code, _ := params.Args["code"].(string)
+	accesTokens, err := external.GetAccessTokenTwitch(code)
 
 	if err != nil {
 		return nil, err
@@ -107,4 +107,15 @@ func (r *resolver) GetAccessTokenTwitchApi(params graphql.ResolveParams) (interf
 	}
 
 	return accesTokens, nil
+}
+
+func (r *resolver) GetAccessUserTwitchApi(params graphql.ResolveParams) (interface{}, error) {
+	accesToken, _ := params.Args["accessToken"].(string)
+	user, err := external.GetUserTwitchApi(accesToken)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return user, nil
 }

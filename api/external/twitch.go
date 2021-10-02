@@ -54,6 +54,7 @@ type userResultTwitch struct {
 	DisplayName     string `json:"display_name"`
 	Email           string `json:"email"`
 	ProfileImageUrl string `json:"profile_image_url"`
+	CreatedAt       string `json:"created_at"`
 }
 
 type GameTwitch struct {
@@ -173,6 +174,7 @@ func GetUserTwitchApi(accessToken string) (userResultTwitch, error) {
 		DisplayName:     userTwitch.Data[0].DisplayName,
 		Email:           userTwitch.Data[0].Email,
 		ProfileImageUrl: userTwitch.Data[0].ProfileImageUrl,
+		CreatedAt:       userTwitch.Data[0].CreatedAt,
 	}
 
 	return res, nil

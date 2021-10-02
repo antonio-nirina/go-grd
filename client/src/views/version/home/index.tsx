@@ -7,15 +7,17 @@ import Slider from "../slider/slider"
 import Game from "../game/game"
 import Service from "../service/service"
 import Join from "../../join/join"
-import {XboxProfil} from "../../../gql/user/auth"
+import {XboxProfil,TwitchUserConnected} from "../../../gql/user/auth"
 import Footer from "../../footer/footer"
-import {getAccessToken} from "../../../storage/tokenStorage"
-import {UserType,sendProfilXboxOrPsn} from "../../auth/action/userAction"
+import {getAccessToken,getAccessTokenTwitch} from "../../../storage/tokenStorage"
+import {UserType,sendProfilXboxOrPsn,sendUserConnectedTwitchAction} from "../../auth/action/userAction"
 import {RootState} from "../../../reducer"
 import "../home/index.css"
 import "../../../assets/css/style.css"
-
-const GetProfilUser = function ({token}:any) {
+type paramToken = {
+	token:string
+}
+const GetProfilUser = function ({token}:paramToken) {
 	const dispatch = useDispatch()
 	const {loading,error,data} = useQuery(XboxProfil, {
 		variables: {
@@ -44,14 +46,42 @@ const GetProfilUser = function ({token}:any) {
 	)
 }
 
+const GetProfilTwitchuser = function({token}:paramToken) {
+	const dispatch = useDispatch()
+	const {loading,error,data} = useQuery(TwitchUserConnected, {
+		variables: {
+			accessToken:token
+		},
+	})
+	useEffect(() => {
+		if(!loading && !error && data) {
+			const user:UserType = {
+				uid:"",
+				username:data.GetAccessUserTwitchApi.login,
+				email:data.GetAccessUserTwitchApi.email,
+				avatar:data.GetAccessUserTwitchApi.profile_image_url,
+				firstname:"",
+				language: "fr",
+				lastname:"",
+				id:data.GetAccessUserTwitchApi.Id,
+				created:data.GetAccessUserTwitchApi.created_at
+			}
+			dispatch(sendUserConnectedTwitchAction(user))
+		}
+	},[loading,error,data,dispatch])
+	return (
+		<></>
+	)
+}
+
 const Index: React.FC = function() {
 	const userConnectedRedux = useSelector((state:RootState) => state.userConnected)
 	useEffect(() => {
 		const params = window.location.search
 
 		if (window.opener) {
-			window.opener.postMessage(params,"")
-		   	window.close()
+			window.opener.postMessage(params,process.env.REACT_URI)
+			window.close()
 		}
 	},[])
   return(
@@ -61,7 +91,14 @@ const Index: React.FC = function() {
 	      <div className="main">
 	        <div className="slider">
 	        	<Slider/>
-				{getAccessToken() && Object.keys(userConnectedRedux.user).length === 0 ? <GetProfilUser token={getAccessToken()} /> : <></>}
+				{getAccessToken() && Object.keys(userConnectedRedux.user).length === 0 ?
+				 <GetProfilUser token={getAccessToken()} /> 
+				 : 
+				 getAccessTokenTwitch() && Object.keys(userConnectedRedux.user).length === 0 ? 
+				 <GetProfilTwitchuser token={getAccessTokenTwitch()}  /> : 
+				 
+				 <></>
+				}
 	        </div>
 	      </div>
 	      <Game/>

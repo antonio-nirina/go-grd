@@ -152,5 +152,6 @@ func GetRootFields() graphql.Fields {
 		"FindAllPost":              FindAllPost(),
 		"FindAllGAmeTwitch":        FindAllGAmeTwitch(),
 		"FindAllStreaming":         FindAllStreaming(),
+		"GetAccessUserTwitchApi":   GetAccessUserTwitchApi(),
 	}
 }

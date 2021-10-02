@@ -12,6 +12,7 @@ const ProtectedRoute = (
 
   const { authenticationPath, path } = props
   //  when user is not logged redirect
+ 
   if (!GetCookie()) {
     redirectPath = authenticationPath || '/login'
   }
