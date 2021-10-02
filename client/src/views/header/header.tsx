@@ -3,6 +3,7 @@ import { Link } from "react-router-dom"
 import { useSelector,useDispatch } from "react-redux"
 import {useHistory } from "react-router-dom"
 import {useQuery,useSubscription,useMutation} from "@apollo/client"
+import Loader from "react-loader-spinner"
 
 import "../header/header.css"
 import logo from "../../assets/image/go-grind.png"
@@ -107,6 +108,7 @@ const Header: React.FC = function() {
 	const backAdmin = function() {
 		if(process.env.REACT_APP_URL_ADMIN) window.location.href = process.env.REACT_APP_URL_ADMIN
 	}
+	const [isLoader, setIsLoader] = useState<Boolean>(false)
 
 	useEffect(() => {
 		let array:Array<Notif> = []
@@ -316,10 +318,18 @@ const Header: React.FC = function() {
 									</span>
 									</li> : <></>
 								}
-								<li style={{"cursor":"pointer"}} onClick={onDeconnect}>
+								<li style={{"cursor":"pointer"}} onClick={onDeconnect} className="loader">
+									<div className={isLoader ? "loader-spinner":"d-none"}>
+										<Loader
+											type="Oval"
+											color="#dd0000"
+										/>
+									</div>
+									<span>
 									{
 										Translation(userConnectedRedux.user.language).header.logout
 									}
+									</span>
 								</li>
 							</ul>
 						</div>
