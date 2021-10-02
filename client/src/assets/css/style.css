@@ -201,7 +201,7 @@ h1{
   background: #dd0000; 
 }
 :root,.stream, .friend-list-container{
-  scrollbar-color: #dd0000 transparent !important;
+  scrollbar-color: #dd0000 #000000 !important;
   scrollbar-width: thin !important;  
 }
 /**********************************************************/
