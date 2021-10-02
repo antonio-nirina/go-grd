@@ -31,26 +31,26 @@ const Router = function() {
 		<Switch>
 			<ProtectedRoute path="/" exact component={Admin} />
 			<Route path="/admin/login" exact component={Login} />
-			<ProtectedRoute path="/admin/create-tournament" exact component={CreateTournament} />
-			<ProtectedRoute path="/admin/create-league" exact component={CreateLeague} />
-			<ProtectedRoute path="/admin/create-wagger" exact component={CreateWaggers} />
-			<ProtectedRoute path="/admin/communaute" exact component={SetRules} />
-			<ProtectedRoute path="/admin/tournament" exact component={ListTournament} />
-			<ProtectedRoute path="/admin/league" exact component={ListLeague} />
-			<ProtectedRoute path="/admin/wagger" exact component={ListWagger} />
-			<ProtectedRoute path="/admin/create-game" exact component={CreateGame} />
-			<ProtectedRoute path="/admin/list-game" exact component={ListGame} />
-			<ProtectedRoute path="/admin/list-home" exact component={HomeList} />
-			<ProtectedRoute path="/admin/set-home" exact component={SetHome} />
-			<ProtectedRoute path="/admin/detail/:id" exact component={DetailHome} />
-			<ProtectedRoute path="/admin/set-assist" exact component={SetAssist} />
-			<ProtectedRoute path="/admin/users" exact component={User} />
-			<ProtectedRoute path="/admin/detail-user" exact component={DetailUser} />
-			<ProtectedRoute path="/admin/teams" exact component={Team} />
-			<ProtectedRoute path="/admin/list-assist" exact component={ListAssist} />
-			<ProtectedRoute path="/admin/detail/assist/:id" exact component={DetailAssist} />
-			<ProtectedRoute path="/admin/create/subject" exact component={CreateTitle} />
-			<ProtectedRoute path="/admin/list/subject" exact component={ListSubject} />
+			<Route path="/admin/create-tournament" exact component={CreateTournament} />
+			<Route path="/admin/create-league" exact component={CreateLeague} />
+			<Route path="/admin/create-wagger" exact component={CreateWaggers} />
+			<Route path="/admin/communaute" exact component={SetRules} />
+			<Route path="/admin/tournament" exact component={ListTournament} />
+			<Route path="/admin/league" exact component={ListLeague} />
+			<Route path="/admin/wagger" exact component={ListWagger} />
+			<Route path="/admin/create-game" exact component={CreateGame} />
+			<Route path="/admin/list-game" exact component={ListGame} />
+			<Route path="/admin/list-home" exact component={HomeList} />
+			<Route path="/admin/set-home" exact component={SetHome} />
+			<Route path="/admin/detail/:id" exact component={DetailHome} />
+			<Route path="/admin/set-assist" exact component={SetAssist} />
+			<Route path="/admin/users" exact component={User} />
+			<Route path="/admin/detail-user" exact component={DetailUser} />
+			<Route path="/admin/teams" exact component={Team} />
+			<Route path="/admin/list-assist" exact component={ListAssist} />
+			<Route path="/admin/detail/assist/:id" exact component={DetailAssist} />
+			<Route path="/admin/create/subject" exact component={CreateTitle} />
+			<Route path="/admin/list/subject" exact component={ListSubject} />
 		</Switch>
 	)
 }
