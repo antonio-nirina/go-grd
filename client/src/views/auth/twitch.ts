@@ -8,11 +8,14 @@ export const TWITCH_TOKEN = "twitch_token"
 export const SigingTwitch = function() {
 	const REDIRECT_URI_TWITCH = process.env.NODE_ENV === "development" ? encodeURI(TWITCH_REDIRECT) : encodeURI(TWITCH_REDIRECT_PR)
 	let uri = `${TWITCH_OUATH}&redirect_uri=${REDIRECT_URI_TWITCH}`
-	window.open(uri,"","width=600,height=400")
-	window.addEventListener('message', event => receiveMessageCode(event), false)
+	// window.open(uri,"","width=600,height=400")
+	window.open(uri,"")
+	
+	window.addEventListener('message', event => receiveMessageCodeTwitch(event), false)
 }
 
-const receiveMessageCode = function(event: any) {
+const receiveMessageCodeTwitch = function(event: any) {
+	console.log("event", event)
 	if (TWITCH_REDIRECT !== event.origin) {
 		return ""
 	}
@@ -23,9 +26,10 @@ const receiveMessageCode = function(event: any) {
 }
 
 export const getTokenUser = async function(code: string) {
+	console.log("code",code)
 	try {
 		const data = await client().query({query:TwitchProfil,variables:{code:code}})
-		console.log(data)
+		console.log("data",data)
 		const token:TokenType = {
 			access_token: data.data.GetAccessTokenTwitch.AccessToken,
 			refresh_token:data.data.GetAccessTokenTwitch.RefreshToken,

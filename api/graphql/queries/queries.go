@@ -148,7 +148,9 @@ func GetRootFields() graphql.Fields {
 		"FindPartCount":            FindPartCount(),
 		"FindOneWagger":            FindOneWagger(),
 		"FindAllWagger":            FindAllWagger(),
-		"FindOnePost":				FindOnePost(),
-		"FindAllPost": 				FindAllPost(),
+		"FindOnePost":              FindOnePost(),
+		"FindAllPost":              FindAllPost(),
+		"FindAllGAmeTwitch":        FindAllGAmeTwitch(),
+		"FindAllStreaming":         FindAllStreaming(),
 	}
 }

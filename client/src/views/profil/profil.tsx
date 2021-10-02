@@ -1,4 +1,4 @@
-import React,{useEffect} from "react"
+import React from "react"
 import { useSelector } from "react-redux"
 
 import Popup from "reactjs-popup"
@@ -23,15 +23,6 @@ import Me from "./me"
 
 const Profil: React.FC = function() {
 	const userConnectedRedux = useSelector((state:RootState) => state.userConnected)
-	useEffect(() => {
-		const params = window.location.search
-
-		if (window.opener) {
-			window.opener.postMessage(params,"")
-		   	window.close()
-		}
-	},[])
-
 
   return(
 	<div className="profil connected">

@@ -74,12 +74,12 @@ func (c *driverRepository) FindOneUserByUid(objectId primitive.ObjectID) (entity
 	return result, nil
 }
 
-func (c *driverRepository) FindAllUser(pageNumber int64,limit int64) ([]entity.User, error) {
-	//var skp int64 
+func (c *driverRepository) FindAllUser(pageNumber int64, limit int64) ([]entity.User, error) {
+	//var skp int64
 	//skp = (pageNumber - 1) * limit
 	var collection = c.client.Database("grd_database").Collection("users")
 	var results []entity.User
-	cur, err := collection.Find(context.TODO(), bson.D{{}},options.Find().SetLimit(limit).SetSkip(pageNumber).SetSort(bson.M{"_id": -1}))
+	cur, err := collection.Find(context.TODO(), bson.D{{}}, options.Find().SetLimit(limit).SetSkip(pageNumber).SetSort(bson.M{"_id": -1}))
 
 	if err != nil {
 		return nil, err
@@ -95,11 +95,11 @@ func (c *driverRepository) FindAllUser(pageNumber int64,limit int64) ([]entity.U
 		results = append(results, elem)
 	}
 	cur.Close(context.TODO())
-	
+
 	return results, nil
 }
 
-func (c *driverRepository) FindUserByEmail(email string) (entity.User, error)  {
+func (c *driverRepository) FindUserByEmail(email string) (entity.User, error) {
 	var collection = c.client.Database("grd_database").Collection("users")
 	var result entity.User
 
@@ -153,31 +153,34 @@ func (c *driverRepository) UpdatedUser(user *entity.User) (interface{}, error) {
 				"language", user.Language,
 			},
 			{
-				"password",user.Password,
+				"password", user.Password,
 			},
 			{
-				"email",user.Email,
+				"email", user.Email,
 			},
 			{
-				"avatar",user.Avatar,
+				"avatar", user.Avatar,
 			},
 			{
-				"point",user.Point,
+				"point", user.Point,
 			},
 			{
-				"friends",user.Friends,
+				"friends", user.Friends,
 			},
-	}}}
+			{
+				"accounts", user.Accounts,
+			},
+		}}}
 	updateResult, err := collection.UpdateOne(context.TODO(), filter, update)
 
 	if err != nil {
-		return nil,err
+		return nil, err
 	}
 
-	return updateResult.ModifiedCount,nil
+	return updateResult.ModifiedCount, nil
 }
 
-func (c *driverRepository) UpdatedTokenUser(email string,token string) (interface{}, error) {
+func (c *driverRepository) UpdatedTokenUser(email string, token string) (interface{}, error) {
 	var collection = c.client.Database("grd_database").Collection("users")
 	filter := bson.D{{"email", email}}
 	update := bson.D{
@@ -185,14 +188,14 @@ func (c *driverRepository) UpdatedTokenUser(email string,token string) (interfac
 			{
 				"confirmation_token", token,
 			},
-	}}}
+		}}}
 	updateResult, err := collection.UpdateOne(context.TODO(), filter, update)
 
 	if err != nil {
-		return nil,err
+		return nil, err
 	}
 
-	return updateResult.ModifiedCount,nil
+	return updateResult.ModifiedCount, nil
 }
 
 func (c *driverRepository) FindUserByToken(token string) (entity.User, error) {
@@ -208,16 +211,16 @@ func (c *driverRepository) FindUserByToken(token string) (entity.User, error) {
 	return result, nil
 }
 
-func (c *driverRepository) CountUserRepository()(int,error) {
+func (c *driverRepository) CountUserRepository() (int, error) {
 	var collection = c.client.Database("grd_database").Collection("users")
 
-	records,err := collection.CountDocuments(context.TODO(), bson.D{{}})
-	
+	records, err := collection.CountDocuments(context.TODO(), bson.D{{}})
+
 	if err != nil {
 		return 0, err
 	}
 
-	return int(records),nil
+	return int(records), nil
 }
 
 /*func (c *driverRepository) UpdateAccountGame(email string) (entity.User, error) {
