@@ -66,6 +66,14 @@
 	text-align: center;	
 	margin-bottom: 5px;
 }
+.profil .tabs{
+	position: fixed;
+	top: 64px;
+	z-index: 9;
+}
+.profil .main-content{
+	padding-top: 110px;
+}
 .tabs li{
 	background: #1b1d26;
 	display: inline-block;	
