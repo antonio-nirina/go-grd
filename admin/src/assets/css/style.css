@@ -212,6 +212,10 @@ h1{
 ::-webkit-scrollbar-thumb:hover {
   background: #dd0000; 
 }
+*{
+  scrollbar-color: #dd0000 #000000 !important;
+  scrollbar-width: thin !important;  
+}
 /********** Fonts *********/
 @font-face {
 	font-family: 'Russo One';

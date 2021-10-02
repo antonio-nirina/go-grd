@@ -2,6 +2,7 @@ import React,{useState} from "react"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useSelector,useDispatch } from "react-redux"
 import { Link } from "react-router-dom"
+import Loader from "react-loader-spinner"
 import { faHandsHelping, faUsers, faTools, faDesktop, faTrophy, faUser, faStar, faGamepad, faHome, faPowerOff, faSortUp, faSortDown} from "@fortawesome/free-solid-svg-icons"
 import {useHistory } from "react-router-dom"
 import {RootState} from "../reducer"
@@ -13,6 +14,7 @@ const Nav = function() {
 	const dispatch = useDispatch()
 	const userConnectedRedux = useSelector((state:RootState) => state.userConnected)
     const [showMenu, setShowMenu] = useState<Boolean>(false)
+    const [isLoader, setIsLoader] = useState<Boolean>(false)
 
     const onShowMenu = function(){
         setShowMenu(!showMenu)
@@ -46,13 +48,19 @@ const Nav = function() {
                             <li><Link to="/admin/set-assist"><i><FontAwesomeIcon icon={faHandsHelping} size="lg"/></i>Assistance</Link></li>
                             <li><Link to="/admin/set-home"><i><FontAwesomeIcon icon={faHome} size="lg"/></i>Accueil</Link></li>
                         </div>
-                        <li onClick={onDeconnect} style={{"cursor":"pointer"}}>
-                            <Link to="#">
-	                    	<i className="power">
-	                    		<FontAwesomeIcon icon={faPowerOff} size="lg"/>
-	                    	</i>
-	                    	Se déconnecter
+                        <li onClick={onDeconnect} style={{"cursor":"pointer"}} className="loader">
+                            <Link to="#" className={isLoader ? "setWidth":""}>
+    	                    	<i className={isLoader ? "d-none":"power"}>
+    	                    		<FontAwesomeIcon icon={faPowerOff} size="lg"/>
+    	                    	</i>
+    	                    	Se déconnecter
                             </Link>
+                            <div className={isLoader ? "loader-spinner":"d-none"}>
+                                <Loader
+                                    type="Oval"
+                                    color="#dd0000"
+                                />
+                             </div>
                     	</li>
                     </ul>
                 </div>

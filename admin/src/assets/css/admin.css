@@ -89,7 +89,7 @@ body{
 	background: #000000
 }
 .side-menu{
-	height: 89vh;
+	height: 85vh;
 	overflow: auto;
 }
 .main-sidebar{
@@ -545,8 +545,7 @@ input:checked + .slider {
     transition: .4s;
     border-radius: 34px;
     text-indent: 67px;
-    padding-top: 5px;
-    font-weight: bold;
+    padding-top: 5px;    
     text-transform: uppercase;
     color: #9c9c9e;
     border: 1px solid #9c9c9e;
@@ -652,6 +651,7 @@ form .se-btn.se-btn-select.se-btn-tool-font.se-tooltip.on{
 	display: block;
 	color: #9c9c9e;
 	text-align: center;
+	padding-bottom: 20px;
 }
 /**************Create game***************/
 label[for="logo-game"],
@@ -962,4 +962,23 @@ label.entete:last-child{
 	clear: both;
 	float: none;
 	margin-top: 0;	
+}
+.navbar .d-none{
+	display: none;
+}
+.navbar .loader-spinner{
+	background: none;
+	position: initial;
+	text-align: initial;
+	display: inline-block;
+	width: 20px;
+}
+.navbar .loader-spinner svg{
+	width: 20px;
+}
+.navbar .loader{
+	display: flex;
+}
+.navbar .show-drpdwn-menu li a.setWidth{
+	width: 120px;
 }
