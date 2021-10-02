@@ -362,6 +362,12 @@
     right: 10px;
     margin-top: 14px;
 }
+.header .invitation .list-online{
+	text-align: initial;
+	margin-top: 5px;
+	margin-left: 15px;
+	font-size: 13px;
+}
 .header .friends-online{
 	padding-bottom: 15px;
 }
@@ -397,6 +403,7 @@
 	height: 40px;
 	align-self: center;
 	margin-right: 7px;
+	border-radius: 50%;
 }
 .header .list-online strong span{
 	align-self: center;
@@ -495,4 +502,21 @@ i.u-connected{
 	margin-top: 5px;
 	background: #1abb3d;
 	border: 1px solid #1abb3d;
+}
+.loader div.d-none{	
+	display: none;	
+}
+.loader div.loader-spinner{
+	display: inline-block;
+	width: 25px;
+	height: 25px;
+	vertical-align: middle;
+	padding-right: 5px;
+}
+.loader div svg{
+	width: 18px;
+	height: 25px;
+}
+.loader span{
+	display: inline-block;
 }
