@@ -200,8 +200,8 @@ h1{
 ::-webkit-scrollbar-thumb:hover {
   background: #dd0000; 
 }
-:root{
-  scrollbar-color: #dd0000 #000000 !important;
+:root,.stream, .friend-list-container{
+  scrollbar-color: #dd0000 transparent !important;
   scrollbar-width: thin !important;  
 }
 /**********************************************************/
