@@ -184,7 +184,7 @@ h1{
 .container .league .tab-league{
   overflow: auto; 
 }
-/**************scroll style***********************/
+/**************scrollbar style***********************/
 
 ::-webkit-scrollbar {
   width: 7px;
@@ -200,6 +200,12 @@ h1{
 ::-webkit-scrollbar-thumb:hover {
   background: #dd0000; 
 }
+:root{
+  scrollbar-color: #dd0000 #000000 !important;
+  scrollbar-width: thin !important;
+  border-radius: 10px !important;
+}
+/**********************************************************/
 .login .loader-spinner,
 .inscription .loader-spinner{
   text-align: center;
@@ -223,7 +229,7 @@ h1{
   width: 40px;
 }
 
-/********** Fonts *********/
+/********** Fonts ********
 @font-face {
 	font-family: 'Russo One';
     src: url('../../assets/fonts/russoone/RussoOne.eot');
