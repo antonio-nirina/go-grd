@@ -47,14 +47,6 @@ const GetProfilUser = function ({token}:any) {
 
 const Home: React.FC = function() {
 	const userConnectedRedux = useSelector((state:RootState) => state.userConnected)
-	useEffect(() => {
-		const params = window.location.search
-
-		if (window.opener) {
-			window.opener.postMessage(params,"")
-		   	window.close()
-		}
-	},[])
   return(
     <div className="home" >
       <div className="container">

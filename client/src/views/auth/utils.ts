@@ -91,8 +91,9 @@ export const GetCookie = function(key = "") {
 	if (!cookieData) {
 		return null
 	}
+	
 	const data = decodeCookieContent(cookieData)
-
+	console.log("data", data)
 	return data
 }
 

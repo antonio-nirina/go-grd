@@ -119,6 +119,7 @@ html{
 .login .main,.inscription .main,
 .profil .main-content, .main
 {
+  position: relative;
   padding-top: 66px;
   min-height: 100vh;
 }
@@ -183,8 +184,51 @@ h1{
 .container .league .tab-league{
   overflow: auto; 
 }
+/**************scrollbar style***********************/
 
-/********** Fonts *********/
+::-webkit-scrollbar {
+  width: 7px;
+}
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px gray; 
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background: #dd0000; 
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #dd0000; 
+}
+*{
+  scrollbar-color: #dd0000 #000000 !important;
+  scrollbar-width: thin !important;  
+}
+/**********************************************************/
+.login .loader-spinner,
+.inscription .loader-spinner{
+  text-align: center;
+  background: #000;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  height: 100%;
+  top: 67px;
+  opacity: 0.5;
+}
+.login .loader-spinner div,
+.inscription .loader-spinner div
+{
+  position: relative;
+  top: 33%;
+}
+.login .loader-spinner svg,
+.inscription .loader-spinner svg
+{
+  width: 40px;
+}
+
+/********** Fonts ********/
 @font-face {
 	font-family: 'Russo One';
     src: url('../../assets/fonts/russoone/RussoOne.eot');

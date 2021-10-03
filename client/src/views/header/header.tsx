@@ -3,6 +3,7 @@ import { Link } from "react-router-dom"
 import { useSelector,useDispatch } from "react-redux"
 import {useHistory } from "react-router-dom"
 import {useQuery,useSubscription,useMutation} from "@apollo/client"
+import Loader from "react-loader-spinner"
 
 import "../header/header.css"
 import logo from "../../assets/image/go-grind.png"
@@ -107,6 +108,7 @@ const Header: React.FC = function() {
 	const backAdmin = function() {
 		if(process.env.REACT_APP_URL_ADMIN) window.location.href = process.env.REACT_APP_URL_ADMIN
 	}
+	const [isLoader, setIsLoader] = useState<Boolean>(false)
 
 	useEffect(() => {
 		let array:Array<Notif> = []
@@ -155,7 +157,7 @@ const Header: React.FC = function() {
 			}
 		}
 		setDataNotifications(array)
-
+		console.log(isSubscribed)
 		return () => {isSubscribed = false}
 	},[loading,error,data,subLoading,errSub,subData,userConnectedRedux])
 
@@ -248,6 +250,7 @@ const Header: React.FC = function() {
 							<i className="square" onClick={onShowInvitation} >
 								<FontAwesomeIcon icon={faPlus} />
 								<span className= {friendsConnect.total > 0 ? "count" : ""}>{friendsConnect.total === 0 ? "" : friendsConnect.total}</span>
+								<span className="tooltip">Inviter des amis</span>
 							</i>
 							{groupFriends.friendGroup.map(function(el:Friends,index:number) {
 								return (
@@ -276,13 +279,15 @@ const Header: React.FC = function() {
 									: <></>
 								}
 							</div>
-							<>
-								<i className="relative" onClick={onShowNotif}>
+							<>								
+								<i className="relative bell" onClick={onShowNotif}>
 									<FontAwesomeIcon icon={faBell} size="lg" />
 									<span className={notification > 0 ? "number" : ""}>{notification > 0 ? notification : ""}</span>								
+									<span className="tooltip">Notification</span>
 								</i>
-								<i className="relative">
+								<i className="relative member">
 									<FontAwesomeIcon icon={faUsers} size="lg" />
+									<span className="tooltip">Groupe</span>
 								</i>
 							</>
 						</div>
@@ -304,6 +309,7 @@ const Header: React.FC = function() {
 								<li><Link to="/profil">Profil</Link></li>
 								<li><Link to="/tournament">Tournois</Link></li>								
 								<li><Link to="/waggers">Wager</Link></li>
+								<li><Link to="/communaute">Communauté</Link></li>
 								<li><Link to="/assistance">Assistance</Link></li>
 								{userConnectedRedux.user && userConnectedRedux.user.roles && userConnectedRedux.user.roles.includes("role_admin") ? <li>
 									<span onClick={backAdmin} style={{"cursor":"pointer"}}>
@@ -313,10 +319,18 @@ const Header: React.FC = function() {
 									</span>
 									</li> : <></>
 								}
-								<li style={{"cursor":"pointer"}} onClick={onDeconnect}>
+								<li style={{"cursor":"pointer"}} onClick={onDeconnect} className="loader">
+									<div className={isLoader ? "loader-spinner":"d-none"}>
+										<Loader
+											type="Oval"
+											color="#dd0000"
+										/>
+									</div>
+									<span>
 									{
 										Translation(userConnectedRedux.user.language).header.logout
 									}
+									</span>
 								</li>
 							</ul>
 						</div>

@@ -16,10 +16,9 @@ type Resolver interface {
 	UpdateAvatarResolver(params graphql.ResolveParams) (interface{}, error)
 	RequestFriendResolver(params graphql.ResolveParams) (interface{}, error)
 	GetAllFriendsUser(params graphql.ResolveParams) (interface{}, error)
-	GetAllUser(params graphql.ResolveParams)(interface{}, error)
+	GetAllUser(params graphql.ResolveParams) (interface{}, error)
 	GetAccessTokenTwitchApi(params graphql.ResolveParams) (interface{}, error)
 	AcceptedFriendResolver(params graphql.ResolveParams) (interface{}, error)
 	DeconnectedResolver(params graphql.ResolveParams) (interface{}, error)
+	GetAccessUserTwitchApi(params graphql.ResolveParams) (interface{}, error)
 }
-
-

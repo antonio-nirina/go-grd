@@ -9,8 +9,8 @@ footer .wrap{
     margin-top: 5px;
 }
 footer .rss{
-	display: inline-block;
-	width: 75%;
+	width: 100%;
+	display: inline-block;	
 	text-align: center;
 	vertical-align: middle;
 }
@@ -23,6 +23,8 @@ footer .rss .size svg{
 	width: 30px;
 }
 footer .mention{
+	width: 30%;
+	text-align: right; 
 	display: inline-block;
 	vertical-align: middle;
 	font-style: italic;

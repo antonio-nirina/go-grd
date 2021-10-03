@@ -125,16 +125,29 @@ var TwitchSchemaType = graphql.NewObject(graphql.ObjectConfig{
 		"refresh_token": &graphql.Field{
 			Type: graphql.String,
 		},
-		"expires_in": &graphql.Field{
-			Type: graphql.Int,
-		},
-		"token_type": &graphql.Field{
+	},
+})
+
+var TwitchUserSchemaType = graphql.NewObject(graphql.ObjectConfig{
+	Name: "TwitchUserType",
+	Fields: graphql.Fields{
+		"id": &graphql.Field{
 			Type: graphql.String,
 		},
-		"scope": &graphql.Field{
+		"login": &graphql.Field{
+			Type: graphql.String,
+		},
+		"display_name": &graphql.Field{
+			Type: graphql.String,
+		},
+		"email": &graphql.Field{
+			Type: graphql.String,
+		},
+		"profile_image_url": &graphql.Field{
+			Type: graphql.String,
+		},
+		"created_at": &graphql.Field{
 			Type: graphql.String,
 		},
 	},
 })
-
-

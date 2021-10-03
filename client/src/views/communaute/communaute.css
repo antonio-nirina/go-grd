@@ -43,8 +43,8 @@
 	margin-bottom: 5px;
 }
 .aside-right .friend-avatar{
-	width: 30px;
-	height: 30px;
+	width: 35px;
+	height: 35px;
 	border:1px solid gray;
 	border-radius: 50%;
 }
@@ -111,6 +111,8 @@
 }
 .friend-list-container{
 	background: #2c2c2c;
+	height: 204px;
+	overflow: auto;
 }
 .friend-list{
 	border-bottom: 1px solid gray;
@@ -138,7 +140,7 @@
 	border: 1px solid #dd0000;	
 }
 .friend-list div{
-	padding: 7px;
+	padding: 2.8px;
 }
 .friend-list.noborder{
 	border-bottom:none;
@@ -224,7 +226,7 @@
 	background: #2c2c2c;
 	/*margin-top: 15px;*/
 	padding: 12px;
-	height: 230px;
+	height: 260px;
 	overflow: auto;	
 }
 .stream a{

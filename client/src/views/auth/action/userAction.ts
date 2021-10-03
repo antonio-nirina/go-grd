@@ -97,3 +97,21 @@ export const removeDataUser = function() {
 		res:{}
   	}
 }
+
+export const sendUserConnectedTwitchAction = function(user:any) {
+	const newUserObject:UserType = {
+		uid:user.uid,
+		username:user.Username,
+		email:user.Email,
+		avatar:user.avatar,
+		firstname:user.Surname,
+		language:user.PreferredLanguage,
+		lastname:user.DisplayName,
+		id:user.Id,
+		created:user.created
+	}
+	return {
+		type:USER_CONNECTED,
+		res:newUserObject??""
+  	}
+}

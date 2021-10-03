@@ -61,21 +61,21 @@
 	border: 1px solid #dd0000;
 }
 .tag{
-	max-width: 386px;
-	width: 100%;
-	display: inline-block;
-	vertical-align: middle;
+    max-width: 386px;
+    width: 100%;    
+    vertical-align: middle;
 }
-
 .box{	
 	width: 100%;
-	display: inline-block;	
-	align-self: center;
-	text-align: right;
+    display: flex;
+    align-self: center;
+    justify-content: right;
+    text-align: right;
 }
 .add-team{
     left: -8px;
-    top: 3px;
+    top: 5px;
+    margin-right: 3px;
     position: relative;
 }
 .lang{
@@ -103,8 +103,9 @@
 }
 .connex{	
 	display: inline-block;
-	vertical-align: middle;
-
+    vertical-align: middle;
+    display: flex;
+    justify-content: right;
 }
 .gametag{
 	max-width: 143px;
@@ -161,18 +162,55 @@
 .lang span{
 	display: block;
 }
-.square{
-	padding: 1px;
-	cursor: pointer;
-    margin-right: 16px;
-    display: inline-block;    
-    line-height: 10px;
+.square{	
+    cursor: pointer;
+    margin-right: 26px;
+    display: inline-block;
+    line-height: 15px;
     vertical-align: top;
-    margin-top: 10px;
+    margin-top: 6px;
     position: relative;
     float: left;
     border: 1px solid #4c4d4f;
-    padding: 3px;
+    padding: 0px 2px;
+    height: 18px;
+    align-self: center;    
+}
+.connex .square:hover .tooltip,
+.relative.bell:hover .tooltip,
+.relative.member:hover .tooltip
+{
+	display: block;
+}
+.relative.bell .tooltip, .relative.member .tooltip{
+    top: 44px;
+    left: -36px;
+}
+.tooltip{
+	display: none;
+	position: absolute;
+	top: 30px;
+	left: -45px;
+    background: #101010;
+    width: 115px;    
+    z-index: 2;
+    font-size: 12px;    
+    padding: 7px;
+    border-radius: 4px;    
+    text-align: center;
+    box-shadow: 0px 0px 7px #333332;
+    z-index: 9;
+}
+.tooltip:before{	
+	content: "";
+	width: 0;
+	height: 0;
+	border-left: 10px solid transparent;
+	border-right: 10px solid transparent;
+	border-bottom: 10px solid #101010;
+	position: absolute;
+	top: -10px;
+	left: 42px;
 }
 .add-icon{
     padding: 1px;
@@ -303,7 +341,7 @@
     cursor: auto;
     right: 5px;    
     box-shadow: -6px 0px 62px #000000;
-    overflow: scroll;   
+    overflow-x: auto;   
 }
 .header .invitation p{
 	font-size: 13px;
@@ -323,6 +361,12 @@
     top: 2px;
     right: 10px;
     margin-top: 14px;
+}
+.header .invitation .list-online{
+	text-align: initial;
+	margin-top: 5px;
+	margin-left: 15px;
+	font-size: 13px;
 }
 .header .friends-online{
 	padding-bottom: 15px;
@@ -359,6 +403,7 @@
 	height: 40px;
 	align-self: center;
 	margin-right: 7px;
+	border-radius: 50%;
 }
 .header .list-online strong span{
 	align-self: center;
@@ -457,4 +502,21 @@ i.u-connected{
 	margin-top: 5px;
 	background: #1abb3d;
 	border: 1px solid #1abb3d;
+}
+.loader div.d-none{	
+	display: none;	
+}
+.loader div.loader-spinner{
+	display: inline-block;
+	width: 25px;
+	height: 25px;
+	vertical-align: middle;
+	padding-right: 5px;
+}
+.loader div svg{
+	width: 18px;
+	height: 25px;
+}
+.loader span{
+	display: inline-block;
 }

@@ -33,9 +33,19 @@ export const TwitchProfil = gql`
 		GetAccessTokenTwitch(code: $code) {
 				access_token
 				refresh_token
-				expires_in
 			}
 
+	}
+`
+export const TwitchUserConnected = gql`
+	query GetAccessUserTwitchApi($accessToken:String) {
+		GetAccessUserTwitchApi(accessToken:$accessToken) {
+			id
+			login
+			email
+			profile_image_url
+			created_at
+		}
 	}
 `
 export const Deconnect = gql`

@@ -5,7 +5,6 @@ import (
 	"github.com/thoussei/antonio/api/graphql/types"
 )
 
-
 func GetOneUserQuery() *graphql.Field {
 	return &graphql.Field{
 		Type:        types.UserSchemaType,
@@ -15,7 +14,7 @@ func GetOneUserQuery() *graphql.Field {
 				Type: graphql.String,
 			},
 		},
-		
+
 		Resolve: UserRolve.FindOneUserResolver,
 	}
 }
@@ -29,12 +28,12 @@ func GetAccessTokenXbox() *graphql.Field {
 				Type: graphql.String,
 			},
 		},
-		
+
 		Resolve: UserRolve.GetAccessTokenXboxApi,
 	}
 }
 
-func GetProfilUserXbox() *graphql.Field{
+func GetProfilUserXbox() *graphql.Field {
 	return &graphql.Field{
 		Type:        types.UserSchemaType,
 		Description: "Get profil user xbox",
@@ -43,13 +42,12 @@ func GetProfilUserXbox() *graphql.Field{
 				Type: graphql.String,
 			},
 		},
-		
+
 		Resolve: UserRolve.GetXboxProfil,
 	}
 }
 
-
-func GetAllFriends() *graphql.Field{
+func GetAllFriends() *graphql.Field {
 	return &graphql.Field{
 		Type:        graphql.NewList(types.FriendType),
 		Description: "Get friends user all",
@@ -58,12 +56,12 @@ func GetAllFriends() *graphql.Field{
 				Type: graphql.String,
 			},
 		},
-		
+
 		Resolve: UserRolve.GetAllFriendsUser,
 	}
 }
 
-func GetUsers() *graphql.Field{
+func GetUsers() *graphql.Field {
 	return &graphql.Field{
 		Type:        graphql.NewList(types.UserSchemaType),
 		Description: "Get user all",
@@ -90,11 +88,22 @@ func GetAccessTokenTwitch() *graphql.Field {
 			"code": &graphql.ArgumentConfig{
 				Type: graphql.String,
 			},
-			"email": &graphql.ArgumentConfig{
+		},
+
+		Resolve: UserRolve.GetAccessTokenTwitchApi,
+	}
+}
+
+func GetAccessUserTwitchApi() *graphql.Field {
+	return &graphql.Field{
+		Type:        types.TwitchUserSchemaType,
+		Description: "Get User twicth",
+		Args: graphql.FieldConfigArgument{
+			"accessToken": &graphql.ArgumentConfig{
 				Type: graphql.String,
 			},
 		},
-		
-		Resolve: UserRolve.GetAccessTokenTwitchApi,
+
+		Resolve: UserRolve.GetAccessUserTwitchApi,
 	}
 }
