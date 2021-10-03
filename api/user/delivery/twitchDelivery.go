@@ -1,6 +1,7 @@
 package delivery
 
 import (
+	"encoding/json"
 	"fmt"
 
 	"github.com/graphql-go/graphql"
@@ -54,7 +55,8 @@ func (r *resolver) GetAccessTokenTwitchApi(params graphql.ResolveParams) (interf
 	if err != nil {
 		return nil, err
 	}
-
+	data, _ := json.Marshal(accesTokens)
+	external.SetHmsetRedis("access_token_twitch", "key", data)
 	userTwitch, err := external.GetUserTwitchApi(accesTokens.AccessToken)
 	user, err := r.userHandler.FindUserByEmail(userTwitch.Email)
 
@@ -118,4 +120,29 @@ func (r *resolver) GetAccessUserTwitchApi(params graphql.ResolveParams) (interfa
 	}
 
 	return user, nil
+}
+func (r *resolver) GetAccessTokenTwitchAdmin(params graphql.ResolveParams) (interface{}, error) {
+	err := godotenv.Load()
+	if err != nil {
+		external.Logger("Error loading .env file")
+	}
+	useToken := ""
+	accessToken, _ := external.GetHmsetRedis("access_token_twitch", "key")
+
+	if len(accessToken) > 0 {
+		nAccessToken := fmt.Sprintf("%v", accessToken[0])
+		check, _ := external.ValidateToken(nAccessToken)
+		if check {
+			useToken = nAccessToken
+		} else {
+			refresh, _ := external.RefressToken()
+			useToken = refresh.AccessToken
+		}
+	} else {
+		code, _ := params.Args["code"].(string)
+		newToken, _ := external.GetAccessTokenTwitch(code)
+		useToken = newToken.AccessToken
+	}
+
+	return useToken, nil
 }

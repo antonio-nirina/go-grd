@@ -14,6 +14,7 @@ import {sendUserConectedAction} from "./action/userAction"
 import Header0 from "../header/header0"
 import {checkValidEmail} from "./utils"
 import {SigingTwitch} from "./twitch"
+import {AuthDiscord} from "./discord"
 import {Translation} from "../../lang/translation"
 import {LOGIN} from "../../gql/user/auth"
 import Footer from "../footer/footer"
@@ -107,7 +108,7 @@ const Login: React.FC = function() {
 							<div className="other-account">
 								<p>Connectez-vous avec votre compte : </p>
 								<span onClick={SigingTwitch}><i className="platform"><FontAwesomeIcon icon={faTwitch}/></i></span>
-								<span onClick={SigingTwitch}><i className="discord"><FontAwesomeIcon icon={faDiscord}/></i></span>
+								<span onClick={AuthDiscord}><i className="discord"><FontAwesomeIcon icon={faDiscord}/></i></span>
 							</div>
 						</div>
 					</div>

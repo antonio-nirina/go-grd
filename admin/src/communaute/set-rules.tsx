@@ -3,9 +3,8 @@ import {useMutation,useQuery} from "@apollo/client"
 import { useForm } from "react-hook-form"
 import {useHistory } from "react-router-dom"
 import { useSelector } from "react-redux"
-
-
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTwitch } from "@fortawesome/free-brands-svg-icons"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faPlus } from "@fortawesome/free-solid-svg-icons"
 import thumbnail from "../assets/image/thumbnail.png"
 import { faTrash } from "@fortawesome/free-solid-svg-icons"
@@ -14,10 +13,18 @@ import SideBar from "../header/sidebar"
 import {RootState} from "../reducer"
 import Nav from "../header/nav"
 import {CREATE_PUBLICATION} from "../gql/cmty/mutation"
-import {GET_ALL_GAMES} from "../gql/games/query"
+import {Twitch_GAMES} from "../gql/cmty/query"
+import {SigingAdminTwitch} from "./communaute"
+import {getAccessToken} from "../common/utils"
 
 type Inputs = {
 	title:string
+}
+
+type TwitchToken = {
+	type:string,
+	access_token:string,
+	refresh_token:string
 }
 
 const MESS_ERR:string = "Taille de l'image est trop petite, vueillez chosir image approprié"
@@ -25,13 +32,18 @@ const MESS_ERR:string = "Taille de l'image est trop petite, vueillez chosir imag
 const SetRules: React.FC = function() {
 	const history = useHistory()
 	const [uidGame, setUidGame] 		= useState<string>("")
+	const [twitchToken,setTwitchToken] = useState<TwitchToken>({type:"",access_token:"",refresh_token:""})
 	const [games, setGames] = useState<any>([])
 	const { register, handleSubmit } 	= useForm<Inputs>()
 	const [createdTournament]  			= useMutation(CREATE_PUBLICATION)
 	const userConnectedRedux 			= useSelector((state:RootState) => state.userConnected)
 	const [Selected, setSelected] = useState<Boolean>(false)
 
-	const {loading,error,data} 	= useQuery(GET_ALL_GAMES)
+	const {loading,error,data} 	= useQuery(Twitch_GAMES,{
+		variables:{
+			access_token:getAccessToken()
+		}
+	})
 
 	const onSubmit = async function(data:Inputs){
 		const result = await createdTournament({ variables: {
@@ -47,8 +59,17 @@ const SetRules: React.FC = function() {
 	}
 
 	useEffect(() => {
+		const strg = localStorage.getItem("access_token_twitch")
+		if(strg) {
+			setTwitchToken({
+				type:JSON.parse(strg).type,
+				access_token:JSON.parse(strg).access_token,
+				refresh_token:JSON.parse(strg).refresh_token
+			})
+		}
+
 		if(!loading && !error && data) {
-			setGames(data.FindAllGame)
+			setGames(data.FindAllGAmeTwitch)
 		}
 
 	},[loading,error,data])
@@ -115,73 +136,80 @@ const SetRules: React.FC = function() {
 	    <div className="admin">
 			<div className="layout-container">
 				<SideBar />
-				<div className="content-wrapper">
-					<nav className="navbar">
-	          			<div></div>
-	                    <Nav />
-	        		</nav>
-	        		<div className="main-content">
-	        			<div className="body-content">
-	        				<div className="column-rules">
-	        					<div className="field">
-		        					<div className="group-input">
-	                                    <form onSubmit={handleSubmit(onSubmit)}>
-	    									<label htmlFor="title-rules">Contenu page communaute : </label>
-	    									<div className="input-group">
-                                                <select id="select-game" onChange={handleGame}>
-	                                                <option value="">Selectionner jeux ...</option>
-	                                                {games?.map(function(el:any,index:number){
-	                                                	return (
-	                                                		<option key={index} value={el.uid}>{el.name}</option>
-                                                		)
-	                                                })}
-	                                            </select>
-                                            </div>
-                                            <div className="guide">
-                                            	<p>Les streaming à afficher :</p>
-                                            	<p>
-                                            		<span>- Selectionner la ou les vidéos que vous voulez afficher</span>
-                                            		<span>- Ajouter</span>
-                                            	</p>
-                                            </div>
-                                            <div className="list-video">
-                                            	<div className="video-check">
-                                            		<input type="checkbox" className="v-check" onClick={onSelected}/>
-                                            		<video controls poster={thumbnail} width="477" height="268" className={!Selected ? "notSelected" :"selected"}>
-														<source src="https://media.w3.org/2010/05/sintel/trailer_hd.mp4" type="video/mp4"/>
-													</video>
-												</div>																						
-                                            </div>
-                                            <div className="btn-container full-w">
-                                            	<button className="btn bg-red center clear" style={{"cursor":"pointer"}}><FontAwesomeIcon icon={faPlus} /> Ajouter</button>                                        
-                                            </div>
-                                            <div className="video-checked">
-                                            	<div className="guide">
-	                                            	<p>Liste de vidéo à afficher dans communauté  :</p>
-	                                            	<p>
-	                                            		<span>- Appuyer sur l'icone supprimer pour effacer la vidéo</span>
-	                                            		<span>- Valider</span>
-	                                            	</p>
-                                            	</div>
-                                            	<div className="list-video">
-                                            		<div className="video-check">
-                                            			<i><FontAwesomeIcon icon={faTrash} /></i>
-                                        				<video controls poster={thumbnail} width="477" height="268">
-															<source src="https://media.w3.org/2010/05/sintel/trailer_hd.mp4" type="video/mp4"/>												
+				{twitchToken.access_token ? 
+					(<div className="content-wrapper">
+						<nav className="navbar">
+							<div></div>
+							<Nav />
+						</nav>
+						<div className="main-content">
+							<div className="body-content">
+								<div className="column-rules">
+									<div className="field">
+										<div className="group-input">
+											<form onSubmit={handleSubmit(onSubmit)}>
+												<label htmlFor="title-rules">Contenu page communaute : </label>
+												<div className="input-group">
+													<select id="select-game" onChange={handleGame}>
+														<option value="">Selectionner jeux ...</option>
+														{games?.map(function(el:any,index:number){
+															return (
+																<option key={index} value={el.id}>{el.name}</option>
+															)
+														})}
+													</select>
+												</div>
+												<div className="guide">
+													<p>Les streaming à afficher :</p>
+													<p>
+														<span>- Selectionner la ou les vidéos que vous voulez afficher</span>
+														<span>- Ajouter</span>
+													</p>
+												</div>
+												<div className="list-video">
+													<div className="video-check">
+														<input type="checkbox" className="v-check" onClick={onSelected}/>
+														<video controls poster={thumbnail} width="477" height="268" className={!Selected ? "notSelected" :"selected"}>
+															<source src="https://media.w3.org/2010/05/sintel/trailer_hd.mp4" type="video/mp4"/>
 														</video>
-													</div>
+													</div>																						
 												</div>
 												<div className="btn-container full-w">
-                                            		<button className="btn bg-red center clear" style={{"cursor":"pointer"}}><FontAwesomeIcon icon={faPlus} /> Valider</button>                                        
-                                            	</div>
-                                            </div>	    									
-	    								</form>
-		        					</div>
-	        					</div>
-	        				</div>
-	        			</div>
-	        		</div>
-				</div>
+													<button className="btn bg-red center clear" style={{"cursor":"pointer"}}><FontAwesomeIcon icon={faPlus} /> Ajouter</button>                                        
+												</div>
+												<div className="video-checked">
+													<div className="guide">
+														<p>Liste de vidéo à afficher dans communauté  :</p>
+														<p>
+															<span>- Appuyer sur l'icone supprimer pour effacer la vidéo</span>
+															<span>- Valider</span>
+														</p>
+													</div>
+													<div className="list-video">
+														<div className="video-check">
+															<i><FontAwesomeIcon icon={faTrash} /></i>
+															<video controls poster={thumbnail} width="477" height="268">
+																<source src="https://media.w3.org/2010/05/sintel/trailer_hd.mp4" type="video/mp4"/>												
+															</video>
+														</div>
+													</div>
+													<div className="btn-container full-w">
+														<button className="btn bg-red center clear" style={{"cursor":"pointer"}}><FontAwesomeIcon icon={faPlus} /> Valider</button>                                        
+													</div>
+												</div>	    									
+											</form>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>)
+					:
+					(<div className="content-wrapper">
+						Il faut se connecter sur twitch 
+						<div onClick={SigingAdminTwitch}><i style={{"fontSize":"41px","textAlign":"center","cursor":"pointer"}} className="platform"><FontAwesomeIcon icon={faTwitch}/></i></div>
+					</div>)
+				}
 			</div>
 	  	</div>
   	)
