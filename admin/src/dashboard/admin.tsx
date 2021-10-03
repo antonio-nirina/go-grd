@@ -1,4 +1,4 @@
-import React from "react"
+import React,{useEffect} from "react"
 import { Link } from "react-router-dom"
 
 import SideBar from "../header/sidebar"
@@ -7,6 +7,14 @@ import Community from "../assets/image/info-update.png"
 
 
 const Admin: React.FC = function() {
+	useEffect(() => {
+		const params = window.location.search
+
+		if (window.opener && process.env.REACT_UR) {
+			window.opener.postMessage(params,`${process.env.REACT_URI}/admin`)
+			window.close()
+		}
+	},[])
 	return(
 	    <div className="admin">
 			<div className="layout-container">

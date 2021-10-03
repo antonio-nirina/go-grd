@@ -16,6 +16,8 @@ const TWITCH_STREAMING_USER = "https://api.twitch.tv/helix/streams" // GET
 const TWITCH_GET_USER = "https://api.twitch.tv/helix/users"
 const TWITCH_GAME_ALL = "https://api.twitch.tv/helix/games/top"
 const TWITC_STREAM_GAME = "https://api.twitch.tv/helix/streams"
+const TWITC_VALIDATE_TOKEN = "https://id.twitch.tv/oauth2/validate"
+const TWITC_REFRESH_TOKEN = "https://id.twitch.tv/oauth2/token"
 
 type DataToken struct {
 	AccessToken  string `json:"access_token"`
@@ -153,7 +155,7 @@ func GetAccessTokenTwitch(code string) (*DataToken, error) {
 }
 
 func GetUserTwitchApi(accessToken string) (userResultTwitch, error) {
-	respUser, err := requestTwitchApi(accessToken, TWITCH_GET_USER)
+	respUser, err := requestTwitchApi(accessToken, TWITCH_GET_USER, "")
 
 	if err != nil {
 		return userResultTwitch{}, err
@@ -181,7 +183,7 @@ func GetUserTwitchApi(accessToken string) (userResultTwitch, error) {
 }
 
 func GetAllGameTwitch(accessToken string) ([]resultGameElement, error) {
-	respUser, err := requestTwitchApi(accessToken, TWITCH_GAME_ALL)
+	respUser, err := requestTwitchApi(accessToken, TWITCH_GAME_ALL, "")
 
 	if err != nil {
 		return []resultGameElement{}, err
@@ -211,7 +213,7 @@ func GetAllGameTwitch(accessToken string) ([]resultGameElement, error) {
 }
 
 func GetStreamingListByGame(accessToken string, id string) ([]streamingElementTwitch, error) {
-	respUser, err := requestTwitchApi(accessToken, TWITCH_GAME_ALL)
+	respUser, err := requestTwitchApi(accessToken, TWITCH_GAME_ALL, "")
 
 	if err != nil {
 		return []streamingElementTwitch{}, err
@@ -251,10 +253,55 @@ func GetStreamingListByGame(accessToken string, id string) ([]streamingElementTw
 	return res, nil
 }
 
-func requestTwitchApi(accessToken string, url string) (*http.Response, error) {
+func ValidateToken(accessToken string) (bool, error) {
+	respUser, err := requestTwitchApi(accessToken, TWITC_VALIDATE_TOKEN, "")
+
+	if err != nil {
+		return false, err
+	}
+
+	defer respUser.Body.Close()
+	if respUser.StatusCode == 200 {
+		return true, nil
+	}
+
+	return false, nil
+}
+
+func RefressToken() (oauthTokenTwitch, error) {
+	respUser, err := requestTwitchApi("", TWITC_REFRESH_TOKEN, "POST")
+
+	if err != nil {
+		return oauthTokenTwitch{}, err
+	}
+
+	defer respUser.Body.Close()
+	twitchBody, err := ioutil.ReadAll(respUser.Body)
+	streamsTwitch := oauthTokenTwitch{}
+	err = json.Unmarshal(twitchBody, streamsTwitch)
+
+	if err != nil {
+		Logger(fmt.Sprintf("%v", err))
+	}
+
+	return streamsTwitch, nil
+}
+
+func requestTwitchApi(accessToken string, url string, method string) (*http.Response, error) {
+	_method := ""
+
+	if method == "" {
+		_method = "GET"
+	} else {
+		_method = method
+	}
 	htppClient := twitchAccesstHttp()
-	reqUser, err := http.NewRequest("GET", url, nil)
-	reqUser.Header.Set("Authorization", "Bearer "+accessToken)
+	reqUser, err := http.NewRequest(_method, url, nil)
+
+	if accessToken != "" {
+		reqUser.Header.Set("Authorization", "Bearer "+accessToken)
+	}
+
 	reqUser.Header.Set("Client-Id", os.Getenv("CLIENT_ID_TWITCH"))
 	reqUser.Header.Set("Content-Type", "application/json")
 	respUser, err := htppClient.client.Do(reqUser)

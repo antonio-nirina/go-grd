@@ -101,6 +101,7 @@ const Header: React.FC = function() {
 		}
 
 		dispatch(removeDataUser())
+		if(localStorage.getItem("access_token_twitch")) localStorage.removeItem("access_token_twitch")
 		setIsDeconnect(true)
 		history.push("/")
 	}

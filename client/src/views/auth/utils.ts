@@ -93,7 +93,7 @@ export const GetCookie = function(key = "") {
 	}
 	
 	const data = decodeCookieContent(cookieData)
-	console.log("data", data)
+
 	return data
 }
 
