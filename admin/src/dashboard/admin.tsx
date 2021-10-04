@@ -11,7 +11,7 @@ const Admin: React.FC = function() {
 		const params = window.location.search
 
 		if (window.opener && process.env.REACT_UR) {
-			window.opener.postMessage(params,`${process.env.REACT_URI}/admin`)
+			window.opener.postMessage(params,`${process.env.REACT_APP_URI}`)
 			window.close()
 		}
 	},[])

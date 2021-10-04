@@ -67,7 +67,7 @@ const SetRules: React.FC = function() {
 				refresh_token:JSON.parse(strg).refresh_token
 			})
 		}
-
+console.log(data)
 		if(!loading && !error && data) {
 			setGames(data.FindAllGAmeTwitch)
 		}
