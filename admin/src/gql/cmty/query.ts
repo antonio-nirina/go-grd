@@ -1,8 +1,8 @@
 import gql from "graphql-tag"
 
 export const TwitchProfil = gql`
-    query GetAccessTokenTwitch($code: String!) {
-        GetAccessTokenTwitch(code: $code) {
+    query GetAccessTokenTwitchAdmin($code: String!) {
+        GetAccessTokenTwitchAdmin(code: $code) {
                 access_token
                 refresh_token
             }

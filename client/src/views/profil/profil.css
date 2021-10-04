@@ -1,35 +1,41 @@
 @charset "UTF-8";
-.profil.connected{
-	position: relative;
+.gamer-stats{
+	max-width: 915px;
+	width: 100%;
+	margin-left: 40px;
+	padding-top: 35px;
+
+}
+.profil .container h2{
+	text-transform: uppercase;
+	font-size: 25px;
+	/*padding: 5px;	*/
 }
 .content{	
-	width: 100%;
-	
+	width: 100%;	
 	background-position: center top;
 }
-.profil .main-content {
-	padding-left: 0px;
-	padding-right: 0px;
-}
 .main-pro{
-	/*background: url("../../assets/image/ban1.jpg") no-repeat;	*/
-	min-height: 100vh;	
-	/*width: calc(100% - 240px);*/
-	width: 100%;
-	display: inline-block;	
+	display: flex;
+	min-height: 100vh;		
+	width: 100%;	
 	vertical-align: top;
-	padding-top: 25px;	
+	padding-top: 0px !important;	
 	background-size: 100% 50%;
-	/*background: red;*/
+	
+}
+.stat-content{
+	display: flex;	
 }
 .wall-bloc{
 	background: #101010;
-	padding: 5px 3em 3em;	
+	padding: 0 !important;
 }
-.profil .wall-bloc .wall{
-	width: 94%;
-	margin: 30px auto;
-
+.wall{
+	margin-bottom: 40px;
+	background: #2c2c2c;
+	border-radius: 45px;
+	width: 280px;
 }
 .float{
 	display: inline-block;
@@ -37,20 +43,31 @@
     vertical-align: middle;
     text-align: right;
 }
-.profil .gamer-profil{
-	display: flex;	
-	align-self: center;
+.gamer-profil{
+	display: flex;
+	align-items: center;
+	padding: 0;
+	/*margin-left: 65px;*/
 }
-.profil .gamer-tag{
-	padding: 0 25px;
+.gamer-profil .users-setting a{
+	display: inline-block;
+	margin-right: 10px;
 }
-.profil .container .gamer-tag h2{
-	font-size: 20px;
+.gamer-tag{
+	padding: 0 15px;
 }
 .tabs{	
 	width: 100%;
 	text-align: center;	
 	margin-bottom: 5px;
+}
+.profil .tabs{
+	position: fixed;
+	top: 64px;
+	z-index: 9;
+}
+.profil .main-content{
+	/*padding-top: 110px;*/
 }
 .tabs li{
 	background: #1b1d26;
@@ -77,12 +94,6 @@
 	font-weight: normal;	
 }
 
-.wall{	
-	padding: 15px;
-	background: #2c2c2c;
-	border-radius: 15px;
-	display: flex;
-}
 .stat{
 	
     display: inline-block;
@@ -100,20 +111,14 @@
 	font-size: 16px;
     margin-top: 8px;
 }
-.float{
-
-}
 .float p{	
 	padding: 0;
 	font-size: 13px;
-
-
 }
 .percent{
 	width: 240px;	
 	display: inline-block;
 	vertical-align: top;
-
 }
 
 .myProgress{
@@ -125,16 +130,19 @@
 	
 	height: 5px;
 	background: green;
-	border-radius: 5px;
-	
+	border-radius: 5px;	
 }
 
 .main-pro h1{
 	text-align: left;
 }
 .main-pro .avatar{
-	width: 120px;
-	display: inline-block;
+	width: 93px;
+    display: inline-block;
+    align-self: center;
+    /*position: absolute;
+    left: 0;
+    top: 0;*/
 }
 .setavatar{	
 	position: relative;
@@ -162,22 +170,8 @@
 .uploadFile{
 	display: none;
 }
-.gamer-tag .pseudo strong{	
-	font-weight: inherit;
-	padding-top: 6px;
-	display: block;	
-}
-.profil .avatar-info{
-	width: 100%;
-	align-self: center;
-	padding-left: 15px;
-}
-.profil .avatar-info .table{
-	display: flex;	
-}
-.profil .avatar-info .table .cell{
-	width: 100%;
-	align-self: center;
+.avatar .pseudo{
+	margin-top: 10px;
 }
 .main-pro .avatar img{
 	width: 100%;
@@ -192,7 +186,7 @@
 }
 .about-me{
 	background: #000000;
-    padding: 5em 3em;
+    padding: 2em 3em;
     position: relative;
     overflow: hidden;
 }
@@ -335,14 +329,9 @@ p.lg-desc{
 	display: inline-block;
 	vertical-align: top;*/
 }
-.profil .gamer-tag h2
-{	
-	padding: 0;
-}
 .my-games h2,
 .my-teams h2,
-.mes-tournois h2,
-.profil h2
+.mes-tournois h2
 {
 	font-family: "russo one";
     font-size: 45px;
@@ -352,6 +341,13 @@ p.lg-desc{
     padding-top: 35px;
     font-weight: 200;
     
+}
+.img-container-profil{
+	display: flex;
+	padding-top: 15px;
+}
+.img-container-profil img{
+	align-self: center;
 }
 .uploadLogoteam{	
 	margin-top: 15px;
@@ -558,15 +554,10 @@ p.lg-desc{
 	background: none;
 	color: inherit;
 }
-.profil .tab-content thead tr{
-	background: #000000;
-}
-.profil .tab-content thead tr:hover{
-	background: inherit;
-}
-.profil .tab-content tr:hover{
-	background: #dd0000;
-	color: #ffffff;
+
+.tab-content tr:hover{
+	background: #f2cf1c;
+	color: #000000;
 }
 
 .tab-content{
@@ -619,9 +610,6 @@ p.lg-desc{
 	width: 100%;
 	padding: 5px 0em 3em 3em;
 }
-.prem-bloc{
-	display: flex;
-}
 .item-bloc{
 	background: #2c2c2c;
 	width: 23%;	
@@ -659,11 +647,10 @@ p.lg-desc{
 .ht75{
 	height: 75px !important;
 }
-.profil .account-name{    
+.account-name{    
     width: 250px;
     display: inline-block;
     vertical-align: top;
-    align-self: center;
 }
 .account-name span{
 	padding: 0px 0px 10px;
@@ -688,14 +675,27 @@ p.lg-desc{
 	font-size: 10px;
 	padding: 8px;
 }
-.profil .statistique{
-	padding: 0px 3em 0;
-    background: #2c2c2c;
-    justify-content: center;
+.statistique{
+	padding: 0px !important;
+    background: none !important;
 }
-.start{
-	width: 210px;
-	position: relative;	
+.with-stat{
+	width: 50%;
+	padding-left: 15px;
+	padding-right: 8px;
+}
+.with-stat p{
+	padding: 15px;
+	background: #2c2c2c;
+	font-size: 14px;
+}
+.with-stat span{
+	float: right;
+	text-transform: uppercase;
+}
+.start-game{
+	width: 50%;
+	position: relative;
 }
 .start span{
 	position: absolute;
@@ -704,7 +704,7 @@ p.lg-desc{
     text-align: center;
     text-transform: uppercase;
     font-size: 14px;
-    top: 175px;
+    bottom: 0px;
     left: 0;
     padding: 8px;    
 }
@@ -715,14 +715,18 @@ p.lg-desc{
 .start img{
 	width: 100%;
 	height: auto;
-	position: absolute;
+	position: inherit !important
 }
 .statistique{
  display: flex;
 }
 .flexbox{
-	width: 46%;	
+	width: 100%;
 	padding: 10px 15px;
+	background: #2c2c2c;
+}
+.profil .inblock span{
+	padding: 1px 5px;
 }
 .flex-items{
 	display: flex;
@@ -736,56 +740,164 @@ p.lg-desc{
 	padding: 7px;
 	width: 34%;
 	font-family: "russo one";
+	font-size: 14px;
+	font-weight: lighter;
 }
 .flex-items p span{
 	display: block;
 	font-weight: normal;
 	padding: 5px 0;
-	font-size: 15px;
+	font-size: 13px;
 	font-family: "quicksand regular";
 
 }
-/*********crop***********/
-.crop-container {
-    z-index: 999;
-    position: fixed;        
-    text-align: center;    
-    text-align: center;
-    width: 100%;
-    left: 0;
-    top: 133px;
-
+.mon-mur{
+	background: #2c2c2c;
+	margin-left: 22px;
 }
-.crop-container.close{
-	display: none;
-}
-.is-cropped{
-	width: 50%;
-	margin: auto;
+.wall-title .wall-bar-title{
 	background: #000000;
-	padding-bottom: 30px;
-	border-radius: 15px;
-	border: 1px solid #1b1d26;	
-	overflow: hidden;
+	padding: 5px 10px;	
+	border: 2px solid #dd0000;
+	border-top: none;
+	display: flex;
+}
+.wall-title .wall-bar-title p{
+	font-size: 13px;
+	font-family: "russo one";
+	align-self: center;
+	width: 310px;	
 
 }
-.crop-container .btn{
+.wall-bar-title button{
+	text-transform: inherit;
+    font-size: 12px;
+    padding: 7px;
+    display: block;        
+    margin-right: 5px;
+    align-self: center;
+}
+.wall-info{
+	clear: both;
+	padding: 5px;
+	border: 1px solid #6f6f6f;
+}
+.wall-info .flexbox-items{
+	display: flex;
+}
+
+.wall-info .upper{
+	display: block;
+	text-transform: uppercase;
+}
+.wall-info img{
+	width: 46px;
+	float: left;
+	height: auto;
+}
+.tag-info{
+	padding: 5px;
+}
+.tag-info span{
+	font-size: 12px;
+}
+.tag-info div{
+	float:left;
+}
+.tag-info .filter-right{
+	float: right;
+}
+.tag-info .filter-right span{
+	display: block;
+    align-self: center;
+    width: 50px;
+    text-align: right;
+}
+.tag-info .filter-right i{
+	font-size: 24px; 
+	align-self: center;
+	color: #dd0000;
+}
+.media{
+	display: flex;		
+}
+.social{
+	width: 260px;
+	margin-top: 15px;	
+	align-self: center;
+	margin-left: 13px;
+}
+
+.social i{
+	width: 38px;
+	text-align: center;
+	font-size: 25px;
+	margin-left: 2px;
+	align-self: center;
+	display: inline-block;
+	background: #2c2c2c;
+	border: 2px solid #6f6f6f;
+	padding: 5px;
+	color: #000000;
+}
+.teamname{
+	width: 682px;
+}
+.bloc-team-mate{
+	display: flex;
+	background: #2c2c2c;
+	margin-top: 15px;
+}
+.bloc-team-mate div{
+	align-self: center;
+}
+.bloc-team-mate .avatar-lead{
+	width: 46px;
+	height: auto;
+}
+.bloc-team-mate img{
+	width: 20px;
+	height: 20px;	
 	margin-right: 15px;
-}
-.crop-container .btn.bg-white{
-	background: none;
-}
-.crop-container .btn:last-child{
-	margin-right: 0;
-}
-.crop-container .reactEasyCrop_CropArea{
-	border-radius: 50%;
-	top: 52%;
-}
-.crop-container .reactEasyCrop_Contain{
-	position: initial !important;
-}
-.crop-container .reactEasyCrop_Container{
-	position: initial !important;
-}
 
+}
+.avatar-name, .setting-accounts{
+	display: flex;
+}
+.avatar-name{
+	width: 680px;
+	text-transform: uppercase;
+	padding: 5px;
+}
+.setting-accounts, .team-number{
+	width: 100px;
+}
+.team-number i{
+	display: inline-block;
+	background: white;
+	padding: 5px;
+	font-size: 12px;
+	border-radius: 50%;
+	color: #000000;
+}
+.profil .part{
+	padding: 0px;
+	margin: 30px 0;
+}
+.profil .waggers-link a{
+	width: 24%;
+}
+.profil .undertitle{	
+	text-transform: inherit;
+}
+.profil .undertitle h2{
+	text-transform: inherit;
+	font-size: 20px;
+	text-align: left;
+}
+.profil .undertitle p{
+	
+}
+.profil .join{
+	padding-top: 15px;
+}

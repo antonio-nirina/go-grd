@@ -80,7 +80,7 @@ const Index: React.FC = function() {
 		const params = window.location.search
 
 		if (window.opener) {
-			window.opener.postMessage(params,process.env.REACT_URI)
+			window.opener.postMessage(params,process.env.REACT_REACT_APP_URI)
 			window.close()
 		}
 	},[])

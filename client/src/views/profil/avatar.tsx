@@ -9,7 +9,8 @@ import {RootState} from "../../reducer"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faPen } from "@fortawesome/free-solid-svg-icons"
 
-
+import fr from "../../assets/image/fr.png"
+import WhiteJoystick from "../../assets/image/white-joystick.png"
 import AvatarDefault from "../../assets/image/game-tag.png"
 import {UPDATE_AVATAR} from "../../gql/user/mutation"
 import {changeProfilUserConnected} from "../auth/action/userAction"
@@ -78,7 +79,10 @@ const Avatar : React.FC = function() {
 			</div>
 			<div className="gamer-tag">
 				<h2>{userConnectedRedux.user.username}</h2>
-				<p className="pseudo"><strong>{userConnectedRedux.user.username}</strong></p>
+				<div className="img-container-profil">
+					<img src={WhiteJoystick} className="itemTag joystick" alt="" width="30" height="30" />
+					<img src={fr} alt="" width="22" height="20"/>
+				</div>
 			</div>
 			{/*<div className={!closeModal ? "crop-container" :"crop-container close"}>
 				<div className="is-cropped">

@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
+	"net/url"
 	"os"
 )
 
@@ -139,7 +140,6 @@ func GetAccessTokenTwitch(code string) (*DataToken, error) {
 	}
 
 	if resp.StatusCode == 200 {
-
 		err = json.Unmarshal(body, resSuccess)
 		if err != nil {
 			Logger(fmt.Sprintf("%v", err))
@@ -268,8 +268,16 @@ func ValidateToken(accessToken string) (bool, error) {
 	return false, nil
 }
 
-func RefressToken() (oauthTokenTwitch, error) {
-	respUser, err := requestTwitchApi("", TWITC_REFRESH_TOKEN, "POST")
+func RefressToken(refreshToken string) (oauthTokenTwitch, error) {
+	htppClient := twitchAccesstHttp()
+	req, err := http.NewRequest("POST", TWITC_REFRESH_TOKEN, nil)
+	req.Header.Set("Content-Type", "application/x-www-form-urlencoded; param=value")
+	respUser, err := htppClient.client.Do(req)
+	data := url.Values{}
+	data.Set("client_id", os.Getenv("CLIENT_ID_TWITCH"))
+	data.Add("client_secret", os.Getenv("CLIENT_SECRET_TWITCH"))
+	data.Add("grant_type", "refresh_token")
+	data.Add("refresh_token", refreshToken)
 
 	if err != nil {
 		return oauthTokenTwitch{}, err

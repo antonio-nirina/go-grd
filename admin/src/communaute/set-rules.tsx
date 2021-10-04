@@ -67,7 +67,7 @@ const SetRules: React.FC = function() {
 				refresh_token:JSON.parse(strg).refresh_token
 			})
 		}
-
+console.log(data)
 		if(!loading && !error && data) {
 			setGames(data.FindAllGAmeTwitch)
 		}
@@ -205,9 +205,11 @@ const SetRules: React.FC = function() {
 						</div>
 					</div>)
 					:
-					(<div className="content-wrapper">
-						Il faut se connecter sur twitch 
-						<div onClick={SigingAdminTwitch}><i style={{"fontSize":"41px","textAlign":"center","cursor":"pointer"}} className="platform"><FontAwesomeIcon icon={faTwitch}/></i></div>
+					(<div className="content-wrapper ctn-middle">
+						<div className="center middle">
+							<p>Connnectez-vous sur Twitch</p>
+							<p onClick={SigingAdminTwitch}><i style={{"fontSize":"41px","textAlign":"center","cursor":"pointer"}} className="platform"><FontAwesomeIcon icon={faTwitch}/></i></p>
+						</div>
 					</div>)
 				}
 			</div>

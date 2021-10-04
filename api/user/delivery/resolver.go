@@ -21,4 +21,5 @@ type Resolver interface {
 	AcceptedFriendResolver(params graphql.ResolveParams) (interface{}, error)
 	DeconnectedResolver(params graphql.ResolveParams) (interface{}, error)
 	GetAccessUserTwitchApi(params graphql.ResolveParams) (interface{}, error)
+	GetAccessTokenTwitchAdmin(params graphql.ResolveParams) (interface{}, error)
 }

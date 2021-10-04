@@ -982,3 +982,22 @@ label.entete:last-child{
 .navbar .show-drpdwn-menu li a.setWidth{
 	width: 120px;
 }
+.ctn-middle{
+	display: flex;
+}
+.middle{
+	background: #171717;
+	padding: 5px;
+	width: 250px;
+	margin: auto;
+	border-radius: 5px;	
+	top: 50%;	
+	box-shadow: 1px 1px 6px #000000;
+}
+.middle p{
+	padding-top: 5px;
+	font-size: 14px;
+}
+.middle p i{
+	color: #613e9f;
+}

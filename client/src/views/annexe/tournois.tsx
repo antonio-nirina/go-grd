@@ -205,7 +205,7 @@ const Tournois: React.FC = function() {
 							</div>
 						</div>
 		 			</div>
-		  				<div className="participate league">
+		  				<div className="participate league d-none">
 							<div className="marg">
 								<div className="part">
 									{lastTournament.length > 0 ? (
