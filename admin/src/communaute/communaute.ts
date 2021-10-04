@@ -7,17 +7,16 @@ export const SigingAdminTwitch = function(){
     const REDIRECT_URI_TWITCH = process.env.REACT_APP_URI
     let uri = `${TWITCH_OUATH}&redirect_uri=${REDIRECT_URI_TWITCH}`
 	window.open(uri,"","width=600,height=400")
-    window.addEventListener('message', event => receiveMessageCodeTwitch(event), false)
+   	window.addEventListener('message', event => receiveMessageCodeTwitch(event), false)
 }
 
 const receiveMessageCodeTwitch = function(event: any) {
 	
-	if (process.env.REACT_URI !== event.origin) {
+	if (process.env.REACT_APP_URI !== event.origin) {
 		return ""
 	}
 
 	const { data } = event
-	alert("data "+data)
 	if (data) getTokenUser(data.split("=")[1])
 }
 

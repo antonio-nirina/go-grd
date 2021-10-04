@@ -13,30 +13,10 @@ import (
 )
 
 type oauthTokenTwitch struct {
-	TokenType    string   `json:"token_type"`
-	ExpiresIn    int      `json:"expires_in"`
-	Scope        []string `json:"scope"`
 	AccessToken  string   `json:"access_token"`
 	RefreshToken string   `json:"refresh_token"`
 }
 
-type userTwitchApi struct {
-	Data []usersTwicth
-}
-
-type usersTwicth struct {
-	Id               string `json:"id"`
-	Login            string `json:"login"`
-	DisplayName      string `json:"display_name"`
-	Email            string `json:"email"`
-	Broadcaster_type string `json:"broadcaster_type"`
-	Description      string `json:"description"`
-	ProfileImageUrl  string `json:"profile_image_url"`
-	OfflineImageUrl  string `json:"offline_image_url"`
-	Type             string `json:"type"`
-	ViewCount        int    `json:"view_count"`
-	CreatedAt        string `json:"created_at"`
-}
 
 type notificationTwitchApi struct {
 	Email bool `json:"email"`
@@ -126,23 +106,29 @@ func (r *resolver) GetAccessTokenTwitchAdmin(params graphql.ResolveParams) (inte
 	if err != nil {
 		external.Logger("Error loading .env file")
 	}
-	useToken := ""
-	accessToken, _ := external.GetHmsetRedis("access_token_twitch", "key")
 
-	if len(accessToken) > 0 {
+	accessToken, _ := external.GetHmsetRedis("access_token_twitch", "key")
+	oauth := oauthTokenTwitch{}
+	fmt.Println("accessToken",accessToken)
+	if len(accessToken) > 0 && accessToken[0] != nil{
 		nAccessToken := fmt.Sprintf("%v", accessToken[0])
-		check, _ := external.ValidateToken(nAccessToken)
-		if check {
-			useToken = nAccessToken
-		} else {
-			refresh, _ := external.RefressToken()
-			useToken = refresh.AccessToken
+		json.Unmarshal([]byte(nAccessToken),&oauth)
+		check, _ := external.ValidateToken(oauth.AccessToken)
+		if !check {
+			refresh, _ := external.RefressToken(oauth.RefreshToken)
+			oauth.AccessToken = refresh.AccessToken
+			oauth.RefreshToken = refresh.RefreshToken
 		}
 	} else {
 		code, _ := params.Args["code"].(string)
+		fmt.Println("code",code)
 		newToken, _ := external.GetAccessTokenTwitch(code)
-		useToken = newToken.AccessToken
+		fmt.Println("newToken",newToken)
+		data,_:= json.Marshal(newToken)
+		external.SetHmsetRedis("access_token_twitch", "key",data)
+		oauth.AccessToken = newToken.AccessToken
+		oauth.RefreshToken = newToken.RefreshToken
 	}
-
-	return useToken, nil
+fmt.Println(oauth)
+	return oauth, nil
 }

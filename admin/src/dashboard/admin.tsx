@@ -10,8 +10,8 @@ const Admin: React.FC = function() {
 	useEffect(() => {
 		const params = window.location.search
 
-		if (window.opener && process.env.REACT_UR) {
-			window.opener.postMessage(params,`${process.env.REACT_APP_URI}`)
+		if (window.opener && process.env.REACT_APP_URI) {
+			window.opener.postMessage(params,`${process.env.REACT_APP_URI}/admin/communaute`)
 			window.close()
 		}
 	},[])
