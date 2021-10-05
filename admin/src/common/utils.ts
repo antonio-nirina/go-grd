@@ -1,5 +1,5 @@
 
-export const getAccessToken = function() {
+export const getAccessToken = function() : string {
 	const token = localStorage.getItem("access_token_twitch")
 	if(!token) return ""
 	if (token) {
@@ -7,5 +7,5 @@ export const getAccessToken = function() {
 
 		return data.access_token
 	}
-
+	return ""
 }

@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from "react"
+import React,{useState,useEffect,useLayoutEffect} from "react"
 import {useMutation,useQuery} from "@apollo/client"
 import { useForm } from "react-hook-form"
 import {useHistory } from "react-router-dom"
@@ -39,12 +39,6 @@ const SetRules: React.FC = function() {
 	const userConnectedRedux 			= useSelector((state:RootState) => state.userConnected)
 	const [Selected, setSelected] = useState<Boolean>(false)
 
-	const {loading,error,data} 	= useQuery(Twitch_GAMES,{
-		variables:{
-			access_token:getAccessToken()
-		}
-	})
-
 	const onSubmit = async function(data:Inputs){
 		const result = await createdTournament({ variables: {
 			uidUser:userConnectedRedux.user.uid,
@@ -67,12 +61,19 @@ const SetRules: React.FC = function() {
 				refresh_token:JSON.parse(strg).refresh_token
 			})
 		}
-console.log(data)
+	},[])
+	const {loading,error,data} 	= useQuery(Twitch_GAMES,{
+		variables:{
+			access_token:getAccessToken()
+		}
+	})
+	useLayoutEffect(() => {
+		console.log(data)
 		if(!loading && !error && data) {
 			setGames(data.FindAllGAmeTwitch)
 		}
-
-	},[loading,error,data])
+	},[loading,error,data,twitchToken])
+	
 
 	/*const handleFiles = function(files: Array<File>, info: object, uploadHandler: Function) {
 		try {

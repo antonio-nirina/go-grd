@@ -116,9 +116,9 @@ func twitchAccesstHttp() *hTTPClient {
 	return apiClient
 }
 
-func GetAccessTokenTwitch(code string) (*DataToken, error) {
+func GetAccessTokenTwitch(code string, redirectUri string) (*DataToken, error) {
 	htppClient := twitchAccesstHttp()
-	url := fmt.Sprintf("%s?client_id=%s&client_secret=%s&code=%s&grant_type=%s&redirect_uri=%s", TWITCH_TOKEN, os.Getenv("CLIENT_ID_TWITCH"), os.Getenv("CLIENT_SECRET_TWITCH"), code, "authorization_code", os.Getenv(("REDIRECT_URI_TWITCH")))
+	url := fmt.Sprintf("%s?client_id=%s&client_secret=%s&code=%s&grant_type=%s&redirect_uri=%s", TWITCH_TOKEN, os.Getenv("CLIENT_ID_TWITCH"), os.Getenv("CLIENT_SECRET_TWITCH"), code, "authorization_code", redirectUri)
 	req, err := http.NewRequest("POST", url, nil)
 	if err != nil {
 		return &DataToken{}, err
