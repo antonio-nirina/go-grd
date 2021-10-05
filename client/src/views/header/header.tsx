@@ -231,9 +231,8 @@ const Header: React.FC = function() {
 						</li>
 					</ul>
 				</nav>
-				<div className="bt-container">
-					<Link to="/login" className="btn bg-red">Connexion</Link>
-					<Link to="/register" className="btn bg-white">Inscription</Link>
+				<div className="bt-container right">
+					<Link to="/login" className="btn bg-red">Connecte-toi</Link>					
 				</div>
 				<div className="tag">
 					<div className="box">

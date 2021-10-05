@@ -159,12 +159,11 @@ p{
 span{
 
 }
-h1{
-  font-family: "russo one";
-  font-weight: 200;
+h1{  
+  font-weight: 700;
   font-size: 35px;
   text-transform: uppercase;
-  padding-bottom: 15px;
+  padding-bottom: 15px;  
 }
 .header{
   top: 0;

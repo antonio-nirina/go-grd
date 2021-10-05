@@ -1,81 +1,35 @@
 @charset "UTF-8";
-.inscription{
-	position: relative;
+.inscription .main{
+	background:linear-gradient( rgba(0, 5, 0, 0.9) 100%, rgba(0, 0, 0, 0.9)100%), url("../../assets/image/background.jpg") no-repeat;
+	background-position: 70% center;
+	background-size: 100%;
 }
-.containt{
-	margin-top: 50px;
-	width: 46%;
-	padding-top: 5em;
+.inscription .field-container{
+	max-width: 600px;
+}
+.sideby{
+	display: flex;
+	width: 100%;
+}
+.sideby input{
+	margin-right: 30px;
+}
+.sideby span{
+	width: 100%;
+	margin-bottom: 15px;
+}
+.sideby input:last-child{
+	margin-right: 0;
+}
+.center-width, .center-width.field-container{
+	max-width: 250px;
+	width: 100%;
 	margin: auto;
-
 }
-.group{
-	padding: 15px 45px;
-	border-radius: 15px;
-	/*position: relative;*/
-	background: #2c2c2c;
-	margin-bottom: 5em;
-}
-.group h1{
-	/*position: absolute;*/
-	/*background: #101010;*/
-    padding: 0 5px;
-    top: -20px;
-    display: inline-block;
-    vertical-align: middle;
-    width: 100%;
-}
-.group .logo{
-	width: 25%;
-}
-.group input{
-	background: none;
-    border-bottom: 1px solid #acacac !important;
-    width: 100%;
-    padding: 10px;
-    color: #ffffff;
-    font-size: 14px;
-    border: none;
-    display: block;
-    margin-bottom: 15px;
-
-}
-.group h4 img{
-	width: 8%;
-    float: right;
-    display: inline-block;
-    vertical-align: middle;
-    padding-top: 10px;
-}
-
-.other-account{
-	padding-top: 15px;
-	margin-bottom: 10px;
-	text-align: center;
-}
-.other-account div{
-	background: #383434;
-	padding: 5px 15px;
-	display: inline-block;
-	margin-right: 15px;
-	margin-top: 15px;
+.center-width button{
 	border-radius: 5px;
-	width: 75px;
-	border: 1px solid #525050;
-	cursor: pointer;
 }
-.other-account div img{
-	width: 15px;
-	height: 15px;
-}
-/*.other-account i.iconG svg{
-	width: 70px;
-	height: 18px;
-	color: #000000;
-}*/
-.infos p{
-	font-size: 13px;
-}
-button {
-	cursor: pointer;
+.center-width .birth{
+	width: 90%;
+	margin: auto;
 }
