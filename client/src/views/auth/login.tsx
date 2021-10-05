@@ -114,7 +114,7 @@ const Login: React.FC = function() {
 						<div className="field-container">
 							<div className="infos">
 								<p className="member"><Link to = "/register" title="Pas encore membre ?">Pas encore membre ?</Link></p>
-								<p><Link to ="/forgot-password" title="Mot de passe oublié ?">Mot de passe oublié ?</Link></p>							
+								<p><Link to ="#" title="Mot de passe oublié ?">Mot de passe oublié ?</Link></p>							
 							</div>
 						</div>
 					</div>
