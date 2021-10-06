@@ -50,7 +50,7 @@
 	width: 100%;
 }
 .pad15{
-	padding:0 15px;
+	padding:0 10px;
 }
 .inscription .account_type a{
 	max-width: 178px;
@@ -99,6 +99,6 @@
 	margin-top: 3px;	
 }
 .center-width .major{
-	font-size: 12px;
+	font-size: 11px;
 	font-style: italic;
 }
