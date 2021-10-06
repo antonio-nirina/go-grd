@@ -109,11 +109,10 @@ func (r *resolver) GetAccessTokenTwitchAdmin(params graphql.ResolveParams) (inte
 	}
 
 	accessToken, _ := external.GetHmsetRedis("access_token_twitch", "key")
-	oauth := oauthTokenTwitch{}
-	fmt.Println("accessToken", accessToken)
+	oauth := &oauthTokenTwitch{}
 	if len(accessToken) > 0 && accessToken[0] != nil {
 		nAccessToken := fmt.Sprintf("%v", accessToken[0])
-		json.Unmarshal([]byte(nAccessToken), &oauth)
+		json.Unmarshal([]byte(nAccessToken), oauth)
 		check, _ := external.ValidateToken(oauth.AccessToken)
 		if !check {
 			refresh, _ := external.RefressToken(oauth.RefreshToken)

@@ -1,4 +1,4 @@
-import React,{useState,useEffect,useLayoutEffect} from "react"
+import React,{useState,useEffect} from "react"
 import {useMutation,useQuery} from "@apollo/client"
 import { useForm } from "react-hook-form"
 import {useHistory } from "react-router-dom"
@@ -27,7 +27,7 @@ type TwitchToken = {
 	refresh_token:string
 }
 
-const MESS_ERR:string = "Taille de l'image est trop petite, vueillez chosir image approprié"
+//const MESS_ERR:string = "Taille de l'image est trop petite, vueillez chosir image approprié"
 
 const SetRules: React.FC = function() {
 	const history = useHistory()
@@ -64,15 +64,20 @@ const SetRules: React.FC = function() {
 	},[])
 	const {loading,error,data} 	= useQuery(Twitch_GAMES,{
 		variables:{
-			access_token:getAccessToken()
+			accessToken:getAccessToken()
 		}
 	})
-	useLayoutEffect(() => {
-		console.log(data)
+	useEffect(() => {
 		if(!loading && !error && data) {
 			setGames(data.FindAllGAmeTwitch)
 		}
 	},[loading,error,data,twitchToken])
+	/*
+		getGameTwitch(JSON.parse(strg).access_token).then(function(res:any){
+				console.log("res",res)
+			})
+	
+	*/
 	
 
 	/*const handleFiles = function(files: Array<File>, info: object, uploadHandler: Function) {
@@ -87,7 +92,7 @@ const SetRules: React.FC = function() {
 		setUidGame(event.target.value)
 	}
 
-	const resizeImage = function(files:Array<File>, uploadHandler:Function) {
+	/*const resizeImage = function(files:Array<File>, uploadHandler:Function) {
 	    const uploadFile = files[0]
 	    const img = document.createElement('img')
 	    const canvas = document.createElement('canvas')
@@ -131,7 +136,7 @@ const SetRules: React.FC = function() {
 	    }
 
 	    reader.readAsDataURL(uploadFile)
-}
+}*/
 
 	return(
 	    <div className="admin">
@@ -155,7 +160,9 @@ const SetRules: React.FC = function() {
 														<option value="">Selectionner jeux ...</option>
 														{games?.map(function(el:any,index:number){
 															return (
-																<option key={index} value={el.id}>{el.name}</option>
+																<option key={index} value={el.id}>
+																	{el.name}
+																</option>
 															)
 														})}
 													</select>
