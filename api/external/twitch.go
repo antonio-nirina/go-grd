@@ -191,7 +191,7 @@ func GetAllGameTwitch(accessToken string) ([]resultGameElement, error) {
 
 	defer respUser.Body.Close()
 	twitchBody, err := ioutil.ReadAll(respUser.Body)
-	gameTwitch := GameTwitch{}
+	gameTwitch := &GameTwitch{}
 	err = json.Unmarshal(twitchBody, gameTwitch)
 
 	if err != nil {
@@ -221,7 +221,7 @@ func GetStreamingListByGame(accessToken string, id string) ([]streamingElementTw
 
 	defer respUser.Body.Close()
 	twitchBody, err := ioutil.ReadAll(respUser.Body)
-	streamsTwitch := streamingTwitch{}
+	streamsTwitch := &streamingTwitch{}
 	err = json.Unmarshal(twitchBody, streamsTwitch)
 
 	if err != nil {
@@ -268,7 +268,7 @@ func ValidateToken(accessToken string) (bool, error) {
 	return false, nil
 }
 
-func RefressToken(refreshToken string) (oauthTokenTwitch, error) {
+func RefressToken(refreshToken string) (*oauthTokenTwitch, error) {
 	htppClient := twitchAccesstHttp()
 	req, err := http.NewRequest("POST", TWITC_REFRESH_TOKEN, nil)
 	req.Header.Set("Content-Type", "application/x-www-form-urlencoded; param=value")
@@ -280,12 +280,12 @@ func RefressToken(refreshToken string) (oauthTokenTwitch, error) {
 	data.Add("refresh_token", refreshToken)
 
 	if err != nil {
-		return oauthTokenTwitch{}, err
+		return &oauthTokenTwitch{}, err
 	}
 
 	defer respUser.Body.Close()
 	twitchBody, err := ioutil.ReadAll(respUser.Body)
-	streamsTwitch := oauthTokenTwitch{}
+	streamsTwitch := &oauthTokenTwitch{}
 	err = json.Unmarshal(twitchBody, streamsTwitch)
 
 	if err != nil {
