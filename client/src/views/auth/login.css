@@ -19,6 +19,9 @@
 	padding: 7px 10px;
 	border-radius: 5px;
 }
+.login .fieldset{
+	padding-top: 25px;
+}
 .field-container{
 	margin: auto;
 	max-width: 300px;
@@ -82,4 +85,8 @@
 }
 .account_type .ps img{
 	margin-top: 3px;
+}
+.field-container p.ft-size{
+	font-size: 12px;
+	margin-top: 15px;
 }
