@@ -1,5 +1,5 @@
 import {createApolloClient as client} from "../config/apollo-client"
-import {TwitchProfil} from "../gql/cmty/query"
+import {TwitchProfil,Twitch_STREAMING} from "../gql/cmty/query"
 
 export const TWITCH_OUATH = "https://id.twitch.tv/oauth2/authorize?client_id=hy3s04cw7m9qofg7thik89lii2inr0&response_type=code&scope=user:read:broadcast%20user:read:email"
 
@@ -34,6 +34,18 @@ export const getTokenUser = async function(code: string) {
 			window.location.reload()
 		}
 		
+	} catch(errors) {
+		console.log("errors_get_one_match", errors)
+	}
+}
+
+export const getStreamByGame = async function(accessToken:string,idGame:string) {
+	try {
+		const data = await client().query({query:Twitch_STREAMING,variables:{accessToken:accessToken,gameId:idGame}})
+		if(data.data) {
+			return data.data.FindAllStreaming
+		}
+
 	} catch(errors) {
 		console.log("errors_get_one_match", errors)
 	}

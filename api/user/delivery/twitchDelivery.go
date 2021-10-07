@@ -102,6 +102,7 @@ func (r *resolver) GetAccessUserTwitchApi(params graphql.ResolveParams) (interfa
 
 	return user, nil
 }
+
 func (r *resolver) GetAccessTokenTwitchAdmin(params graphql.ResolveParams) (interface{}, error) {
 	err := godotenv.Load()
 	if err != nil {
@@ -110,10 +111,12 @@ func (r *resolver) GetAccessTokenTwitchAdmin(params graphql.ResolveParams) (inte
 
 	accessToken, _ := external.GetHmsetRedis("access_token_twitch", "key")
 	oauth := &oauthTokenTwitch{}
+
 	if len(accessToken) > 0 && accessToken[0] != nil {
 		nAccessToken := fmt.Sprintf("%v", accessToken[0])
 		json.Unmarshal([]byte(nAccessToken), oauth)
 		check, _ := external.ValidateToken(oauth.AccessToken)
+
 		if !check {
 			refresh, _ := external.RefressToken(oauth.RefreshToken)
 			oauth.AccessToken = refresh.AccessToken
@@ -121,7 +124,7 @@ func (r *resolver) GetAccessTokenTwitchAdmin(params graphql.ResolveParams) (inte
 		}
 	} else {
 		code, _ := params.Args["code"].(string)
-		redirectAdmin := os.Getenv(("REDIRECT_URI_TWITCH_ADMIN"))
+		redirectAdmin := os.Getenv("REDIRECT_URI_TWITCH_ADMIN")
 		newToken, _ := external.GetAccessTokenTwitch(code, redirectAdmin)
 		data, _ := json.Marshal(newToken)
 		external.SetHmsetRedis("access_token_twitch", "key", data)

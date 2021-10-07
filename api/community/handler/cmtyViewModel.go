@@ -16,7 +16,8 @@ type CmtyGameTwitchViewModel struct {
 	BoxArtUrl string `json:"box_art_url"`
 }
 
-type CmtystreamingViewModelTwitch struct {
+// for list stream
+type cmtystreamingViewModelTwitch struct {
 	Id           string `json:"id"`
 	UserId       string `json:"user_id"`
 	UserLogin    string `json:"user_login"`
@@ -31,4 +32,23 @@ type CmtystreamingViewModelTwitch struct {
 	ThumbnailUrl string `json:"thumbnail_url"`
 	// TagIds       []string `json:"tag_ids"`
 	IsMature bool `json:"is_mature"`
+}
+
+// list clips
+type CmtystreamingViewModelTwitch struct {
+	Id           string   `json:"id"`
+	Url       string   `json:"url"`
+	EmbedUrl    string   `json:"embed_url"`
+	BroadcasterId     string   `json:"broadcaster_id"`
+	BroadcasterName       string   `json:"broadcaster_name"`
+	CreatorId     string   `json:"creator_id"`
+	CreatorName         string   `json:"creator_name"`
+	VideoId        string   `json:"video_id"`
+	ViewerCount  int      `json:"viewer_count"`
+	GameId    string   `json:"game_id"`
+	Language     string   `json:"language"`
+	Title string   `json:"title"`
+	CreatedAt       string `json:"created_at"`
+	ThumbnailUrl     string     `json:"thumbnail_url"`
+	Duration     int     `json:"duration"`
 }

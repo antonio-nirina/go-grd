@@ -21,7 +21,7 @@ const Register: React.FC = function() {
 							<Link to="#">Mes jeux <span></span></Link>
 							<Link to="#">Mes comptes <span></span></Link>
 						</div>
-						<Infos />						
+						<Infos />
 					</div>
 				</div>
 			</div>

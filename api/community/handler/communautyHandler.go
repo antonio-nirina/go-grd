@@ -166,20 +166,21 @@ func (c *cmtytUsecase) FindAllStreamingHandler(accessToken string, id string) ([
 
 	for _, val := range streams {
 		streamTwitchViews := CmtystreamingViewModelTwitch{
-			Id:           val.Id,
-			UserId:       val.UserId,
-			UserLogin:    val.UserLogin,
-			UserName:     val.UserName,
-			GameId:       val.GameId,
-			GameName:     val.GameName,
-			Type:         val.Type,
-			Title:        val.Title,
-			ViewerCount:  val.ViewerCount,
-			StartedAt:    val.StartedAt,
-			Language:     val.Language,
-			ThumbnailUrl: val.ThumbnailUrl,
-			//	TagIds:       val.TagIds,
-			IsMature: val.IsMature,
+			Id:val.Id,
+			Url:val.Url,
+			EmbedUrl:val.EmbedUrl,
+			BroadcasterId:val.BroadcasterId,
+			BroadcasterName:val.BroadcasterName,
+			CreatorId:val.CreatorId,
+			CreatorName:val.CreatorName,
+			VideoId:val.VideoId,
+			ViewerCount:val.ViewerCount,
+			GameId:val.GameId,
+			Language:val.Language,
+			Title:val.Title,
+			CreatedAt:val.CreatedAt,
+			ThumbnailUrl:val.ThumbnailUrl,
+			Duration:0,
 		}
 
 		res = append(res, streamTwitchViews)
