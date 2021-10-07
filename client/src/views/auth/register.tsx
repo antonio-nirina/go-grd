@@ -3,8 +3,6 @@ import { useForm } from "react-hook-form"
 import {useMutation} from "@apollo/client"
 import {useHistory } from "react-router-dom"
 import { Link } from 'react-router-dom'
-import { faTwitch } from "@fortawesome/free-brands-svg-icons"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 import Google from "../../assets/image/rss/google.png"
 import Facebook from "../../assets/image/rss/facebook.png"

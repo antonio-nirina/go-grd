@@ -14,7 +14,7 @@ import {RootState} from "../reducer"
 import Nav from "../header/nav"
 import {CREATE_PUBLICATION} from "../gql/cmty/mutation"
 import {Twitch_GAMES} from "../gql/cmty/query"
-import {SigingAdminTwitch} from "./communaute"
+import {SigingAdminTwitch,getStreamByGame} from "./communaute"
 import {getAccessToken} from "../common/utils"
 
 type Inputs = {
@@ -34,13 +34,15 @@ const SetRules: React.FC = function() {
 	const [uidGame, setUidGame] 		= useState<string>("")
 	const [twitchToken,setTwitchToken] = useState<TwitchToken>({type:"",access_token:"",refresh_token:""})
 	const [games, setGames] = useState<any>([])
+
+	const [streams, setStreams] = useState<any>([])
 	const { register, handleSubmit } 	= useForm<Inputs>()
-	const [createdTournament]  			= useMutation(CREATE_PUBLICATION)
+	const [createdPub]  			= useMutation(CREATE_PUBLICATION)
 	const userConnectedRedux 			= useSelector((state:RootState) => state.userConnected)
 	const [Selected, setSelected] = useState<Boolean>(false)
 
 	const onSubmit = async function(data:Inputs){
-		const result = await createdTournament({ variables: {
+		const result = await createdPub({ variables: {
 			uidUser:userConnectedRedux.user.uid,
 			uidGame:uidGame
 		} })
@@ -88,8 +90,11 @@ const SetRules: React.FC = function() {
 	    }
 	}*/
 
-	const handleGame = function(event:any){
+	const handleGame = async function(event:any){
 		setUidGame(event.target.value)
+		const streams = await getStreamByGame(twitchToken.access_token,event.target.value)
+		console.log("streams", streams)
+		setStreams(streams)
 	}
 
 	/*const resizeImage = function(files:Array<File>, uploadHandler:Function) {
@@ -177,9 +182,14 @@ const SetRules: React.FC = function() {
 												<div className="list-video">
 													<div className="video-check">
 														<input type="checkbox" className="v-check" onClick={onSelected}/>
-														<video controls poster={thumbnail} width="477" height="268" className={!Selected ? "notSelected" :"selected"}>
-															<source src="https://media.w3.org/2010/05/sintel/trailer_hd.mp4" type="video/mp4"/>
-														</video>
+															{
+																streams?.map(function(el:any,index:number) {
+																	return (
+																		<img style={{"width":"477", "height":"268"}} src={el.thumbnail_url} className={!Selected ? "notSelected" :"selected"} />
+																	)
+																})
+															}
+
 													</div>																						
 												</div>
 												<div className="btn-container full-w">
