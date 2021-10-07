@@ -159,7 +159,8 @@ p{
 span{
 
 }
-h1{  
+h1{ 
+  font-family: arial;
   font-weight: 700;
   font-size: 35px;
   text-transform: uppercase;

@@ -1,8 +1,65 @@
 @charset "UTF-8";
 .inscription .main{
-	background:linear-gradient( rgba(0, 5, 0, 0.9) 100%, rgba(0, 0, 0, 0.9)100%), url("../../assets/image/background.jpg") no-repeat;
-	background-position: 70% center;
+	background:linear-gradient( rgba(0, 5, 0, 0.7) 100%, rgba(0, 0, 0, 0.7)100%), url("../../assets/image/redblack.jpg") no-repeat;
+	background-position: top center;
 	background-size: 100%;
+	padding-bottom: 40px;
+}
+.step a{
+	display: inline-block;	
+	max-width: 150px;
+	padding: 7px;
+}
+.step a.current{
+	font-weight: 700;
+}
+.step a.current span{
+	background: #dd0000;
+}
+.step span{
+	display: block;
+	width: 100px;
+	height: 5px;
+	margin-top: 2px;
+	border-radius: 10px;
+	background: gray;	
+}
+.fieldset{
+	width: 100%;	
+}
+.field-container span{
+	display: block;
+	padding-bottom: 10px;
+	font-family: arial;
+}
+.register-field{
+	display: flex;
+	max-width: 570px;
+	padding: 15px 40px;
+	background: rgba(74, 74, 74, 0.5);
+	border-radius: 15px;	
+	margin: 20px auto;
+}
+.choice{
+	align-self: center;
+	width: 48%;
+}
+.inscription .account_type{
+	padding-top: 25px;
+	max-width: 180px;
+	width: 100%;
+}
+.pad15{
+	padding:0 10px;
+}
+.inscription .account_type a{
+	max-width: 178px;
+	width: 100%;
+	display: block;
+	margin-bottom: 20px;
+}
+.inscription .account_type img{
+	margin-right: 0;
 }
 .inscription .field-container{
 	max-width: 600px;
@@ -26,10 +83,22 @@
 	width: 100%;
 	margin: auto;
 }
+.input-field{
+	margin: 0 10px;
+}
 .center-width button{
 	border-radius: 5px;
 }
 .center-width .birth{
 	width: 90%;
 	margin: auto;
+}
+.center-width .check{
+	width: 6%;
+	float: left;
+	margin-top: 3px;	
+}
+.center-width .major{
+	font-size: 11px;
+	font-style: italic;
 }
