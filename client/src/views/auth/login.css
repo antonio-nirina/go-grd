@@ -1,80 +1,85 @@
 @charset "UTF-8";
-.login, .inscription, .initpass
-{
-	position: relative;
-	height: 100vh;
+.login .main{
+	background:linear-gradient( rgba(0, 5, 0, 0.7) 100%, rgba(0, 0, 0, 0.7)100%), url("../../assets/image/redblack.jpg") no-repeat;
+	background-position: 70% center;
+	background-size: 100%;
 }
-.containt{
-	margin-top: 50px;
-	width: 46%;
+.main .containt{	
 	padding-top: 5em;
-	margin: auto;
-
-}
-.group{
-	padding: 15px 45px;
-	border-radius: 15px;
-	/*position: relative;*/
-	background: #2c2c2c
-}
-.group h1{
-	/*position: absolute;*/
-	/*background: #101010;*/
-    padding: 0 5px;
-    top: -20px;
-    display: inline-block;
-    vertical-align: middle;
-    width: 100%;
-}
-.group .logo{
-	width: 25%;
-}
-.group input{
-	background: none;
-    border-bottom: 1px solid #acacac !important;
-    width: 100%;
-    padding: 10px;
-    color: #ffffff;
-    font-size: 14px;
-    border: none;
-    display: block;
-    margin-bottom: 15px;
-
-}
-.group h1 img{
-	width: 8%;
-    float: right;
-    display: inline-block;
-    vertical-align: middle;
-    padding-top: 10px;
-}
-
-.other-account{
-	padding-top: 15px;
-	margin-bottom: 10px;
 	text-align: center;
 }
-.other-account span{
-	background: #383434;
-	padding: 5px 15px;
-	display: inline-block;
+.account_type{
+	margin-top: 25px;
+	padding-bottom: 20px;
+}
+.account_type a{
+	font-weight: 500;
+	font-size: 12px;
 	margin-right: 15px;
-	margin-top: 15px;
+	padding: 7px 10px;
 	border-radius: 5px;
-	width: 85px;
-	border: 1px solid #525050;
+}
+.field-container{
+	margin: auto;
+	max-width: 300px;
+	width: 100%;
+}
+.fieldset input{
+	display: block;
+	padding: 12px;
+	width: 100%;
+	margin-bottom: 15px;
+	border-radius: 5px;
+	border: none;
+}
+.fieldset button{
+	width: 100%;
+	background: rgba(0,0,0,0.6);
+	color: #ffffff;
+	border-radius: 0;
+	font-size: 12px;
 	cursor: pointer;
 }
-.other-account span img{
-	width: 15px;
-	height: 15px;
-}
-/*.other-account i.iconG svg{
-	width: 70px;
-	height: 18px;
-	color: #000000;
+.field-container .infos .member{
+	width: 100%;	
+	color: gray;
+	border-radius: 0;
+	font-size: 14px;
+	border: 1px solid gray;
+	border-radius: 5px;
+	padding: 7px;
+	margin-top: 20px;
+	margin-bottom: 25px;
 
-}*/
-.infos p{
-	font-size: 13px;
+}
+.field-container p{
+	font-size: 14px;	
+}
+.account_type img{
+	float: left;
+	margin-right: 15px;	
+}
+.account_type .gg{
+	color: gray;
+	background: #ffffff;
+}
+.account_type .ds{
+	background: #2f67b1;	
+}
+.account_type .ds img{
+	margin-top: 3px;
+}
+.account_type .xbox{
+	background: #27c612
+}
+.account_type .xbox i{
+	font-size: 20px;
+	float: left;
+	color: #000000;
+}
+.account_type .ps{
+	background: #0058ff
+}
+.account_type .ps img{
+	margin-top: 3px;
 }

@@ -3,6 +3,7 @@ package delivery
 import (
 	"encoding/json"
 	"fmt"
+	"os"
 
 	"github.com/graphql-go/graphql"
 	"github.com/joho/godotenv"
@@ -13,10 +14,9 @@ import (
 )
 
 type oauthTokenTwitch struct {
-	AccessToken  string   `json:"access_token"`
-	RefreshToken string   `json:"refresh_token"`
+	AccessToken  string `json:"access_token"`
+	RefreshToken string `json:"refresh_token"`
 }
-
 
 type notificationTwitchApi struct {
 	Email bool `json:"email"`
@@ -30,7 +30,8 @@ func (r *resolver) GetAccessTokenTwitchApi(params graphql.ResolveParams) (interf
 	}
 
 	code, _ := params.Args["code"].(string)
-	accesTokens, err := external.GetAccessTokenTwitch(code)
+	redirect := os.Getenv(("REDIRECT_URI_TWITCH"))
+	accesTokens, err := external.GetAccessTokenTwitch(code, redirect)
 
 	if err != nil {
 		return nil, err
@@ -101,6 +102,7 @@ func (r *resolver) GetAccessUserTwitchApi(params graphql.ResolveParams) (interfa
 
 	return user, nil
 }
+
 func (r *resolver) GetAccessTokenTwitchAdmin(params graphql.ResolveParams) (interface{}, error) {
 	err := godotenv.Load()
 	if err != nil {
@@ -108,12 +110,13 @@ func (r *resolver) GetAccessTokenTwitchAdmin(params graphql.ResolveParams) (inte
 	}
 
 	accessToken, _ := external.GetHmsetRedis("access_token_twitch", "key")
-	oauth := oauthTokenTwitch{}
-	fmt.Println("accessToken",accessToken)
-	if len(accessToken) > 0 && accessToken[0] != nil{
+	oauth := &oauthTokenTwitch{}
+
+	if len(accessToken) > 0 && accessToken[0] != nil {
 		nAccessToken := fmt.Sprintf("%v", accessToken[0])
-		json.Unmarshal([]byte(nAccessToken),&oauth)
+		json.Unmarshal([]byte(nAccessToken), oauth)
 		check, _ := external.ValidateToken(oauth.AccessToken)
+
 		if !check {
 			refresh, _ := external.RefressToken(oauth.RefreshToken)
 			oauth.AccessToken = refresh.AccessToken
@@ -121,14 +124,13 @@ func (r *resolver) GetAccessTokenTwitchAdmin(params graphql.ResolveParams) (inte
 		}
 	} else {
 		code, _ := params.Args["code"].(string)
-		fmt.Println("code",code)
-		newToken, _ := external.GetAccessTokenTwitch(code)
-		fmt.Println("newToken",newToken)
-		data,_:= json.Marshal(newToken)
-		external.SetHmsetRedis("access_token_twitch", "key",data)
+		redirectAdmin := os.Getenv("REDIRECT_URI_TWITCH_ADMIN")
+		newToken, _ := external.GetAccessTokenTwitch(code, redirectAdmin)
+		data, _ := json.Marshal(newToken)
+		external.SetHmsetRedis("access_token_twitch", "key", data)
 		oauth.AccessToken = newToken.AccessToken
 		oauth.RefreshToken = newToken.RefreshToken
 	}
-fmt.Println(oauth)
+
 	return oauth, nil
 }

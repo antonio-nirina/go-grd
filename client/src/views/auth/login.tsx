@@ -5,20 +5,20 @@ import {useMutation} from "@apollo/client"
 import {useHistory } from "react-router-dom"
 import Loader from "react-loader-spinner"
 import { useDispatch } from "react-redux"
-import { faTwitch,faDiscord } from "@fortawesome/free-brands-svg-icons"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+
+import Google from "../../assets/image/rss/google.png"
+import Facebook from "../../assets/image/rss/facebook.png"
+import Twitter from "../../assets/image/rss/twitter.png"
 
 import {TokenType,SendToken} from "./utils"
 import {sendUserConectedAction} from "./action/userAction"
 
 import Header0 from "../header/header0"
 import {checkValidEmail} from "./utils"
-import {SigingTwitch} from "./twitch"
-import {AuthDiscord} from "./discord"
+// import {SigingTwitch} from "./twitch"
 import {Translation} from "../../lang/translation"
 import {LOGIN} from "../../gql/user/auth"
 import Footer from "../footer/footer"
-import joystick from "../../assets/image/joystick.png"
 import "../auth/login.css"
 import "../../assets/css/style.css"
 
@@ -80,8 +80,7 @@ const Login: React.FC = function() {
 				<div className="containt">
 					<div className="group">
 					<h1>
-						Connexion
-						<img src={joystick} alt=""/>
+						Login
 					</h1>
 						<div>
 							<span style={style}>{errorForm ? Translation("fr").login.errorForm : ""}</span>
@@ -89,26 +88,30 @@ const Login: React.FC = function() {
 						<div>
 							{passwd ? <span style={style}>Password or username invalid </span> : ""}
 						</div>
-						<form onSubmit={handleSubmit(onSubmit)}>
+						<div className="account_type">
+							<Link to="#" className="gg"><img src={Google} alt="Google" width="20" height="20"/><span>Sign in with Google</span></Link>
+							<Link to="#" className="fb"><img src={Facebook} alt="Facebook" /><span>Sign in with Facebook</span></Link>
+							<Link to="#" className="tw"><img src={Twitter} alt="Twitter" width="20" height="20"/><span>Sign in with Twitter</span></Link>
+						</div>
+						<form onSubmit={handleSubmit(onSubmit)} className="fieldset">
 							<div className={isLoader ? "loader-spinner":"d-none"} style={{"textAlign":"center"}}>
 								<Loader
 									type="Oval"
 									color="#dd0000"
 								/>
 							</div>
-							<input className="mgt10" type = "email" placeholder = "Ton email" {...register("email", { required: true })} name="email" />
-							<input type ="password" placeholder ={Translation("fr").login.password}  {...register("password", { required: true })} name="password" />
-							<button className="btn bg-red mg15">
-								Se connecter
-							</button>
+							<div className="field-container">
+								<input className="mgt10" type = "email" placeholder = "Ton email" {...register("email", { required: true })} name="email" />
+								<input type ="password" placeholder ={Translation("fr").login.password}  {...register("password", { required: true })} name="password" />
+								<button className="btn">
+									Se connecter
+								</button>
+							</div>
 						</form>
-						<div className="infos">
-							<p className="mb15">Vous n'avez pas encore de compte ? <Link to = "/register" title="Inscrivez-vous" className="italic cl-red">Inscrivez-vous !</Link></p>
-							<p className="mb15"><Link to ="/forgot-password" title="Mot de passe oublié ?" className="italic cl-red">Mot de passe oublié ?</Link></p>
-							<div className="other-account">
-								<p>Connectez-vous avec votre compte : </p>
-								<span onClick={SigingTwitch}><i className="platform"><FontAwesomeIcon icon={faTwitch}/></i></span>
-								<span onClick={AuthDiscord}><i className="discord"><FontAwesomeIcon icon={faDiscord}/></i></span>
+						<div className="field-container">
+							<div className="infos">
+								<p className="member"><Link to = "/register" title="Pas encore membre ?">Pas encore membre ?</Link></p>
+								<p><Link to ="#" title="Mot de passe oublié ?">Mot de passe oublié ?</Link></p>							
 							</div>
 						</div>
 					</div>

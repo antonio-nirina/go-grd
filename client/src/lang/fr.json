@@ -8,7 +8,7 @@
 		"send":"envoyer"
 	},
 	"login":{
-		"password":"Ton mot de passe",
+		"password":"Mot de passe",
 		"errorForm":"Email n'est pas valide"
 	},
 	"register":{
@@ -55,7 +55,7 @@
 		"follow": "Suivez l'actualité des RLCS.",
 		"all": "Toutes les infos, résumés de match, et bien plus",
 		"join": "rejoins la communauté gratuitement",
-		"email": "Ton email",
+		"email": "Email",
 		"create": "creer ton compte gratuit"
 	},
 	"profil":{

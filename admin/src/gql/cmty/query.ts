@@ -27,14 +27,12 @@ export const Twitch_STREAMING = gql`
         FindAllStreaming(accessToken: $accessToken,gameId:$gameId) {
                 uid
                 id
-                user_name
-                box_art_url
-                game_name
+                video_id
+                game_id
                 title
                 viewer_count
-                started_at
+                created_at
                 thumbnail_url
-                type
             }
 
     }

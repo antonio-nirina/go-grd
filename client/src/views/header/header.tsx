@@ -69,6 +69,7 @@ const Header: React.FC = function() {
 	const [friendsConnect, setFriendsConnect] = useState<numberConnected>({total:0})
 	const [dataNotifications, setDataNotifications] = useState<Array<any>>([])
 	const [groupFriends,setGroupFriends] = useState<FriendsGroup>({friendGroup:[]})
+	const [isLoader, setIsLoader] = useState<Boolean>(false)
 
 	const {loading:subLoading,error:errSub,data:subData}  = useSubscription(NOTIFICATIONS_SUBSCRIBE)
 	const {loading,error,data} = useQuery(GET_ALL_NOTIFICATIONS, {
@@ -94,8 +95,10 @@ const Header: React.FC = function() {
 	}
 
 	const onDeconnect = async function() {
+		setIsLoader(true)
 		try {
 			await deconnect({ variables: { id: userConnectedRedux.user.uid }})
+			setIsLoader(false)
 		} catch (e) {
 			console.log(e)
 		}
@@ -109,7 +112,6 @@ const Header: React.FC = function() {
 	const backAdmin = function() {
 		if(process.env.REACT_APP_URL_ADMIN) window.location.href = process.env.REACT_APP_URL_ADMIN
 	}
-	const [isLoader, setIsLoader] = useState<Boolean>(false)
 
 	useEffect(() => {
 		let array:Array<Notif> = []
@@ -231,9 +233,8 @@ const Header: React.FC = function() {
 						</li>
 					</ul>
 				</nav>
-				<div className="bt-container">
-					<Link to="/login" className="btn bg-red">Connexion</Link>
-					<Link to="/register" className="btn bg-white">Inscription</Link>
+				<div className="bt-container right">
+					<Link to="/login" className="btn bg-red">Connecte-toi</Link>					
 				</div>
 				<div className="tag">
 					<div className="box">

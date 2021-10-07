@@ -14,7 +14,7 @@ import {RootState} from "../reducer"
 import Nav from "../header/nav"
 import {CREATE_PUBLICATION} from "../gql/cmty/mutation"
 import {Twitch_GAMES} from "../gql/cmty/query"
-import {SigingAdminTwitch} from "./communaute"
+import {SigingAdminTwitch,getStreamByGame} from "./communaute"
 import {getAccessToken} from "../common/utils"
 
 type Inputs = {
@@ -27,26 +27,22 @@ type TwitchToken = {
 	refresh_token:string
 }
 
-const MESS_ERR:string = "Taille de l'image est trop petite, vueillez chosir image approprié"
+//const MESS_ERR:string = "Taille de l'image est trop petite, vueillez chosir image approprié"
 
 const SetRules: React.FC = function() {
 	const history = useHistory()
 	const [uidGame, setUidGame] 		= useState<string>("")
 	const [twitchToken,setTwitchToken] = useState<TwitchToken>({type:"",access_token:"",refresh_token:""})
 	const [games, setGames] = useState<any>([])
+
+	const [streams, setStreams] = useState<any>([])
 	const { register, handleSubmit } 	= useForm<Inputs>()
-	const [createdTournament]  			= useMutation(CREATE_PUBLICATION)
+	const [createdPub]  			= useMutation(CREATE_PUBLICATION)
 	const userConnectedRedux 			= useSelector((state:RootState) => state.userConnected)
 	const [Selected, setSelected] = useState<Boolean>(false)
 
-	const {loading,error,data} 	= useQuery(Twitch_GAMES,{
-		variables:{
-			access_token:getAccessToken()
-		}
-	})
-
 	const onSubmit = async function(data:Inputs){
-		const result = await createdTournament({ variables: {
+		const result = await createdPub({ variables: {
 			uidUser:userConnectedRedux.user.uid,
 			uidGame:uidGame
 		} })
@@ -67,12 +63,24 @@ const SetRules: React.FC = function() {
 				refresh_token:JSON.parse(strg).refresh_token
 			})
 		}
-console.log(data)
+	},[])
+	const {loading,error,data} 	= useQuery(Twitch_GAMES,{
+		variables:{
+			accessToken:getAccessToken()
+		}
+	})
+	useEffect(() => {
 		if(!loading && !error && data) {
 			setGames(data.FindAllGAmeTwitch)
 		}
-
-	},[loading,error,data])
+	},[loading,error,data,twitchToken])
+	/*
+		getGameTwitch(JSON.parse(strg).access_token).then(function(res:any){
+				console.log("res",res)
+			})
+	
+	*/
+	
 
 	/*const handleFiles = function(files: Array<File>, info: object, uploadHandler: Function) {
 		try {
@@ -82,11 +90,14 @@ console.log(data)
 	    }
 	}*/
 
-	const handleGame = function(event:any){
+	const handleGame = async function(event:any){
 		setUidGame(event.target.value)
+		const streams = await getStreamByGame(twitchToken.access_token,event.target.value)
+		console.log("streams", streams)
+		setStreams(streams)
 	}
 
-	const resizeImage = function(files:Array<File>, uploadHandler:Function) {
+	/*const resizeImage = function(files:Array<File>, uploadHandler:Function) {
 	    const uploadFile = files[0]
 	    const img = document.createElement('img')
 	    const canvas = document.createElement('canvas')
@@ -130,7 +141,7 @@ console.log(data)
 	    }
 
 	    reader.readAsDataURL(uploadFile)
-}
+}*/
 
 	return(
 	    <div className="admin">
@@ -154,7 +165,9 @@ console.log(data)
 														<option value="">Selectionner jeux ...</option>
 														{games?.map(function(el:any,index:number){
 															return (
-																<option key={index} value={el.id}>{el.name}</option>
+																<option key={index} value={el.id}>
+																	{el.name}
+																</option>
 															)
 														})}
 													</select>
@@ -169,9 +182,14 @@ console.log(data)
 												<div className="list-video">
 													<div className="video-check">
 														<input type="checkbox" className="v-check" onClick={onSelected}/>
-														<video controls poster={thumbnail} width="477" height="268" className={!Selected ? "notSelected" :"selected"}>
-															<source src="https://media.w3.org/2010/05/sintel/trailer_hd.mp4" type="video/mp4"/>
-														</video>
+															{
+																streams?.map(function(el:any,index:number) {
+																	return (
+																		<img style={{"width":"477", "height":"268"}} src={el.thumbnail_url} className={!Selected ? "notSelected" :"selected"} />
+																	)
+																})
+															}
+
 													</div>																						
 												</div>
 												<div className="btn-container full-w">

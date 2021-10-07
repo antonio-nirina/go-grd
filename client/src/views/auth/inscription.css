@@ -1,81 +1,104 @@
 @charset "UTF-8";
-.inscription{
-	position: relative;
+.inscription .main{
+	background:linear-gradient( rgba(0, 5, 0, 0.7) 100%, rgba(0, 0, 0, 0.7)100%), url("../../assets/image/redblack.jpg") no-repeat;
+	background-position: top center;
+	background-size: 100%;
+	padding-bottom: 40px;
 }
-.containt{
-	margin-top: 50px;
-	width: 46%;
-	padding-top: 5em;
+.step a{
+	display: inline-block;	
+	max-width: 150px;
+	padding: 7px;
+}
+.step a.current{
+	font-weight: 700;
+}
+.step a.current span{
+	background: #dd0000;
+}
+.step span{
+	display: block;
+	width: 100px;
+	height: 5px;
+	margin-top: 2px;
+	border-radius: 10px;
+	background: gray;	
+}
+.fieldset{
+	width: 100%;	
+}
+.field-container span{
+	display: block;
+	padding-bottom: 10px;
+	font-family: arial;
+}
+.register-field{
+	display: flex;
+	max-width: 570px;
+	padding: 15px 40px;
+	background: rgba(74, 74, 74, 0.5);
+	border-radius: 15px;	
+	margin: 20px auto;
+}
+.choice{
+	align-self: center;
+	width: 48%;
+}
+.inscription .account_type{
+	padding-top: 25px;
+	max-width: 180px;
+	width: 100%;
+}
+.pad15{
+	padding:0 10px;
+}
+.inscription .account_type a{
+	max-width: 178px;
+	width: 100%;
+	display: block;
+	margin-bottom: 20px;
+}
+.inscription .account_type img{
+	margin-right: 0;
+}
+.inscription .field-container{
+	max-width: 600px;
+}
+.sideby{
+	display: flex;
+	width: 100%;
+}
+.sideby input{
+	margin-right: 30px;
+}
+.sideby span{
+	width: 100%;
+	margin-bottom: 15px;
+}
+.sideby input:last-child{
+	margin-right: 0;
+}
+.center-width, .center-width.field-container{
+	max-width: 250px;
+	width: 100%;
 	margin: auto;
-
 }
-.group{
-	padding: 15px 45px;
-	border-radius: 15px;
-	/*position: relative;*/
-	background: #2c2c2c;
-	margin-bottom: 5em;
+.input-field{
+	margin: 0 10px;
 }
-.group h1{
-	/*position: absolute;*/
-	/*background: #101010;*/
-    padding: 0 5px;
-    top: -20px;
-    display: inline-block;
-    vertical-align: middle;
-    width: 100%;
-}
-.group .logo{
-	width: 25%;
-}
-.group input{
-	background: none;
-    border-bottom: 1px solid #acacac !important;
-    width: 100%;
-    padding: 10px;
-    color: #ffffff;
-    font-size: 14px;
-    border: none;
-    display: block;
-    margin-bottom: 15px;
-
-}
-.group h4 img{
-	width: 8%;
-    float: right;
-    display: inline-block;
-    vertical-align: middle;
-    padding-top: 10px;
-}
-
-.other-account{
-	padding-top: 15px;
-	margin-bottom: 10px;
-	text-align: center;
-}
-.other-account div{
-	background: #383434;
-	padding: 5px 15px;
-	display: inline-block;
-	margin-right: 15px;
-	margin-top: 15px;
+.center-width button{
 	border-radius: 5px;
-	width: 75px;
-	border: 1px solid #525050;
-	cursor: pointer;
 }
-.other-account div img{
-	width: 15px;
-	height: 15px;
+.center-width .birth{
+	width: 90%;
+	margin: auto;
 }
-/*.other-account i.iconG svg{
-	width: 70px;
-	height: 18px;
-	color: #000000;
-}*/
-.infos p{
-	font-size: 13px;
+.center-width .check{
+	width: 6%;
+	float: left;
+	margin-top: 3px;	
 }
-button {
-	cursor: pointer;
+.center-width .major{
+	font-size: 11px;
+	font-style: italic;
 }

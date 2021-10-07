@@ -3,15 +3,18 @@ import { useForm } from "react-hook-form"
 import {useMutation} from "@apollo/client"
 import {useHistory } from "react-router-dom"
 import { Link } from 'react-router-dom'
-import { faTwitch } from "@fortawesome/free-brands-svg-icons"
+import { faTwitch, faXbox, faDiscord } from "@fortawesome/free-brands-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import Google from "../../assets/image/rss/google.png"
+import Discord from "../../assets/image/discord-logo.png"
+import Ps from "../../assets/image/playstation.png"
 
 import {CREATED_USER} from "../../gql/user/mutation"
 import {checkValidEmail} from "../auth/utils"
 
 import Header0 from "../header/header0"
+import Infos from "./infos"
 import Footer from "../footer/footer"
-import joystick from "../../assets/image/joystick.png"
 import "../auth/inscription.css"
 import "../../assets/css/style.css"
 
@@ -58,27 +61,15 @@ const Register: React.FC = function() {
 			<div className="main">
 				<div className="containt">
 					<div className="group">
-					<h1>Inscription <img src={joystick} alt=""/></h1>
+					<h1>Inscription</h1>
 						<div style={{"color":"red","fontSize":"16px"}} >{ errorForm ? "Email not valid" : ""}</div>
 						<div style={{"color":"red","fontSize":"16px"}} >{errorMessage ? errorMessage : ""}</div>
-						<form onSubmit={handleSubmit(onSubmit)}>
-							{errors.username && <span style={{"color":"red"}}>Username ne peut être vide</span>}
-							<input className="mgt10" type="text" placeholder = "Username" {...register("username",{ required: true })} name="username"/>
-							{errors.email && <span style={{"color":"red"}}>Email ne peut être vide</span>}
-							<input className="mgt10" type="email" placeholder = "Email" {...register("email", { required: true })} name="email"/>
-							{errors.password && <span style={{"color":"red"}}>Password ne peut être vide</span>}
-							<input className="mgt10" type="password" placeholder = "Mot de passe" {...register("password", { required: true })} name="password"/>
-							<button className="btn bg-red mg15" type="submit">
-								Inscription
-							</button>
-						</form>
-						<div className="infos">
-							<p className="mb15">Vous avez déjà un compte ? <Link className="italic cl-red" to="/communaute">Connectez-vous !</Link></p>
-							<div className="other-account">
-								<p>Connectez-vous avec votre compte : </p>
-								<span><i className="platform"><FontAwesomeIcon icon={faTwitch}/></i></span>
-							</div>
+						<div className="step">
+							<Link to="#" className="current">Mes infos <span></span></Link>
+							<Link to="#">Mes jeux <span></span></Link>
+							<Link to="#">Mes comptes <span></span></Link>
 						</div>
+						<Infos />
 					</div>
 				</div>
 			</div>
