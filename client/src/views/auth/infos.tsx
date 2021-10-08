@@ -21,6 +21,7 @@ import "../../assets/css/style.css"
 
 type Inputs = {
 	password: string,
+	cpassword:string,
 	email:string
 	username: string
 }
@@ -30,14 +31,17 @@ const StepOne: React.FC = function() {
 	const [createdUser]  = useMutation(CREATED_USER)
 	const { register, handleSubmit, formState: { errors } } = useForm<Inputs>()
 	const [errorForm,setErrorForm] = useState<boolean>(false)
+	const [errorCpwd,setErrorCpwd] = useState<boolean>(false)
 	const [errorMessage,setErrorMessage] = useState<string>("")
 
 	const onSubmit = async function(data:Inputs){
 		const email: string = data.email
 		const password: string = data.password
 		const username: string = data.username
+		const cpassword:string = data.cpassword
+		if(cpassword !== password && cpassword && password) setErrorCpwd(true)
 
-		if(checkValidEmail(email)) {
+		if(checkValidEmail(email) && (cpassword === password && cpassword && password)) {
 			try {
 				const userInput = {
 					username:username,
@@ -47,7 +51,7 @@ const StepOne: React.FC = function() {
 
 				const result = await createdUser({ variables: { userInput: userInput } })
 				if (result && result.data) history.push("/login")
-			} catch (e) {
+			} catch (e:any) {
 				setErrorMessage(e.graphQLErrors[0].message)
 			}
 
@@ -71,17 +75,19 @@ const StepOne: React.FC = function() {
 				<div className="field-container">
 					<span className="bold">Remplis tes informations</span>
 					<div className="input-field">																							
-						{errors.email && <span style={{"color":"red"}}>Email ne peut être vide</span>}
+						{errors.email && <span style={{"color":"red","fontSize":"11px"}}>Email ne peut être vide</span>}
 						<input type="email" placeholder = "Ton Email" {...register("email", { required: true })} name="email"/>
 					</div>
 					<div className="input-field">																							
-						{errors.username && <span style={{"color":"red"}}>Pseudo ne peut être vide</span>}
+						{errors.username && <span style={{"color":"red","fontSize":"11px"}}>Pseudo ne peut être vide</span>}
 						<input type="text" placeholder = "Ton pseudo" {...register("username",{ required: true })} name="username"/>																																				
 					</div>
 					<div className="input-field">																							
 						<input type="password" placeholder = "Ton mot de passe" {...register("password", { required: true })} name="password"/>
-						<input type="password" placeholder = "Confirme ton mot de passe" {...register("password", { required: true })} name="password"/>
-						{errors.password && <span style={{"color":"red"}}>Password ne peut être vide</span>}									
+						{errors.password && <span style={{"color":"red","fontSize":"11px"}}>Password ne peut être vide</span>}	
+						<input type="password" placeholder = "Confirme ton mot de passe" {...register("cpassword", { required: true })} name="cpassword"/>
+						{errors.cpassword && <span style={{"color":"red","fontSize":"11px"}}>Ce champ ne peut être vide</span>}
+						{errorCpwd ? <span style={{"color":"red","fontSize":"11px"}}>Password n'est pas compatible</span> : <></>}
 					</div>
 					<div className="center-width pad15">
 						<input type="checkbox" className="check"/><span className="major">Je confirme avoir plus de 13 ans.*</span>

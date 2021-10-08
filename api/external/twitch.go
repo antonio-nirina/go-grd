@@ -6,7 +6,6 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
-	"net/url"
 	"os"
 )
 
@@ -28,6 +27,12 @@ type DataToken struct {
 type oauthTokenTwitch struct {
 	TokenType    string   `json:"token_type"`
 	ExpiresIn    int      `json:"expires_in"`
+	Scope        []string `json:"scope"`
+	AccessToken  string   `json:"access_token"`
+	RefreshToken string   `json:"refresh_token"`
+}
+type oauthRefreshTokenTwitch struct {
+	TokenType    string   `json:"token_type"`
 	Scope        []string `json:"scope"`
 	AccessToken  string   `json:"access_token"`
 	RefreshToken string   `json:"refresh_token"`
@@ -81,20 +86,20 @@ type streamingTwitch struct {
 }
 
 type streamingElementTwitch struct {
-	Id           string   `json:"id"`
-	Url       string   `json:"url"`
-	EmbedUrl    string   `json:"embed_url"`
-	BroadcasterId     string   `json:"broadcaster_id"`
-	BroadcasterName       string   `json:"broadcaster_name"`
-	CreatorId     string   `json:"creator_id"`
-	CreatorName         string   `json:"creator_name"`
-	VideoId        string   `json:"video_id"`
-	ViewerCount  int      `json:"viewer_count"`
-	GameId    string   `json:"game_id"`
-	Language     string   `json:"language"`
-	Title string   `json:"title"`
+	Id              string `json:"id"`
+	Url             string `json:"url"`
+	EmbedUrl        string `json:"embed_url"`
+	BroadcasterId   string `json:"broadcaster_id"`
+	BroadcasterName string `json:"broadcaster_name"`
+	CreatorId       string `json:"creator_id"`
+	CreatorName     string `json:"creator_name"`
+	VideoId         string `json:"video_id"`
+	ViewerCount     int    `json:"viewer_count"`
+	GameId          string `json:"game_id"`
+	Language        string `json:"language"`
+	Title           string `json:"title"`
 	CreatedAt       string `json:"created_at"`
-	ThumbnailUrl     string     `json:"thumbnail_url"`
+	ThumbnailUrl    string `json:"thumbnail_url"`
 }
 
 /*
@@ -253,24 +258,24 @@ func GetStreamingListByGame(accessToken string, id string) ([]streamingElementTw
 
 	for _, val := range streamsTwitch.Data {
 		// if val.ViewerCount > 0 {
-			ares := streamingElementTwitch{
-				Id:val.Id,
-				Url:val.Url,
-				EmbedUrl:val.EmbedUrl,
-				BroadcasterId:val.BroadcasterId,
-				BroadcasterName:val.BroadcasterName,
-				CreatorId:val.CreatorId,
-				CreatorName:val.CreatorName,
-				VideoId:val.VideoId,
-				ViewerCount:val.ViewerCount,
-				GameId:val.GameId,
-				Language:val.Language,
-				Title:val.Title,
-				CreatedAt:val.CreatedAt,
-				ThumbnailUrl:val.ThumbnailUrl,
-			}
-			res = append(res, ares)
-		//}		
+		ares := streamingElementTwitch{
+			Id:              val.Id,
+			Url:             val.Url,
+			EmbedUrl:        val.EmbedUrl,
+			BroadcasterId:   val.BroadcasterId,
+			BroadcasterName: val.BroadcasterName,
+			CreatorId:       val.CreatorId,
+			CreatorName:     val.CreatorName,
+			VideoId:         val.VideoId,
+			ViewerCount:     val.ViewerCount,
+			GameId:          val.GameId,
+			Language:        val.Language,
+			Title:           val.Title,
+			CreatedAt:       val.CreatedAt,
+			ThumbnailUrl:    val.ThumbnailUrl,
+		}
+		res = append(res, ares)
+		//}
 	}
 
 	return res, nil
@@ -291,24 +296,21 @@ func ValidateToken(accessToken string) (bool, error) {
 	return false, nil
 }
 
-func RefressToken(refreshToken string) (*oauthTokenTwitch, error) {
+func RefressToken(refreshToken string) (*oauthRefreshTokenTwitch, error) {
 	htppClient := twitchAccesstHttp()
-	req, err := http.NewRequest("POST", TWITC_REFRESH_TOKEN, nil)
+	uri := TWITC_REFRESH_TOKEN + "?grant_type=refresh_token&refresh_token=" + refreshToken + "&client_id=" + os.Getenv("CLIENT_ID_TWITCH") + "&client_secret=" + os.Getenv("CLIENT_SECRET_TWITCH")
+	req, err := http.NewRequest("POST", uri, nil)
 	req.Header.Set("Content-Type", "application/x-www-form-urlencoded; param=value")
+
 	respUser, err := htppClient.client.Do(req)
-	data := url.Values{}
-	data.Set("client_id", os.Getenv("CLIENT_ID_TWITCH"))
-	data.Add("client_secret", os.Getenv("CLIENT_SECRET_TWITCH"))
-	data.Add("grant_type", "refresh_token")
-	data.Add("refresh_token", refreshToken)
 
 	if err != nil {
-		return &oauthTokenTwitch{}, err
+		return &oauthRefreshTokenTwitch{}, err
 	}
 
 	defer respUser.Body.Close()
 	twitchBody, err := ioutil.ReadAll(respUser.Body)
-	streamsTwitch := &oauthTokenTwitch{}
+	streamsTwitch := &oauthRefreshTokenTwitch{}
 	err = json.Unmarshal(twitchBody, streamsTwitch)
 
 	if err != nil {

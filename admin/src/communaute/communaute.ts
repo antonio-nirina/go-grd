@@ -39,9 +39,9 @@ export const getTokenUser = async function(code: string) {
 	}
 }
 
-export const getStreamByGame = async function(accessToken:string,idGame:string) {
+export const getStreamByGame = async function(accessToken:string,idGame:string,refresh_token:string) {
 	try {
-		const data = await client().query({query:Twitch_STREAMING,variables:{accessToken:accessToken,gameId:idGame}})
+		const data = await client().query({query:Twitch_STREAMING,variables:{accessToken:accessToken,gameId:idGame,refreshToken:refresh_token}})
 		if(data.data) {
 			return data.data.FindAllStreaming
 		}

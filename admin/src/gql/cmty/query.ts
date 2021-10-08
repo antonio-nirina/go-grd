@@ -11,8 +11,8 @@ export const TwitchProfil = gql`
 `
 
 export const Twitch_GAMES = gql`
-    query FindAllGAmeTwitch($accessToken: String!) {
-        FindAllGAmeTwitch(accessToken: $accessToken) {
+    query FindAllGAmeTwitch($accessToken: String!,$refreshToken:String) {
+        FindAllGAmeTwitch(accessToken: $accessToken,refreshToken:$refreshToken) {
                 uid
                 id
                 name
@@ -23,8 +23,8 @@ export const Twitch_GAMES = gql`
 `
 
 export const Twitch_STREAMING = gql`
-    query FindAllStreaming($accessToken: String,$gameId:String) {
-        FindAllStreaming(accessToken: $accessToken,gameId:$gameId) {
+    query FindAllStreaming($accessToken: String,$gameId:String,$refreshToken:String) {
+        FindAllStreaming(accessToken: $accessToken,gameId:$gameId,refreshToken:$refreshToken) {
                 uid
                 id
                 video_id
@@ -32,7 +32,9 @@ export const Twitch_STREAMING = gql`
                 title
                 viewer_count
                 created_at
+                creator_name
                 thumbnail_url
+                game_name
             }
 
     }

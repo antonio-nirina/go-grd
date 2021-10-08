@@ -6,8 +6,6 @@ import { useSelector } from "react-redux"
 import { faTwitch } from "@fortawesome/free-brands-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faPlus } from "@fortawesome/free-solid-svg-icons"
-import thumbnail from "../assets/image/thumbnail.png"
-import { faTrash } from "@fortawesome/free-solid-svg-icons"
 
 import SideBar from "../header/sidebar"
 import {RootState} from "../reducer"
@@ -16,6 +14,31 @@ import {CREATE_PUBLICATION} from "../gql/cmty/mutation"
 import {Twitch_GAMES} from "../gql/cmty/query"
 import {SigingAdminTwitch,getStreamByGame} from "./communaute"
 import {getAccessToken} from "../common/utils"
+
+type VideoClip = {
+	uid:string|undefined
+	id:string
+	video_id:string
+	game_id:string
+	title:string
+	viewer_count:number
+	created_at:string
+	thumbnail_url:string
+	creator_name:string
+	game_name:string
+}
+
+type VideoClipStreams = {
+	id:string
+	videoId:string
+	gameId:string
+	title:string
+	viewerCount:number
+	createdAt:string
+	thumbnailUrl:string
+	gameName:string
+	creatorName:string
+}
 
 type Inputs = {
 	title:string
@@ -32,26 +55,65 @@ type TwitchToken = {
 const SetRules: React.FC = function() {
 	const history = useHistory()
 	const [uidGame, setUidGame] 		= useState<string>("")
+	const [nameGame, setNameGame] 		= useState<string>("")
 	const [twitchToken,setTwitchToken] = useState<TwitchToken>({type:"",access_token:"",refresh_token:""})
 	const [games, setGames] = useState<any>([])
 
-	const [streams, setStreams] = useState<any>([])
+	const [streams, setStreams] = useState<Array<VideoClip>>([])
 	const { register, handleSubmit } 	= useForm<Inputs>()
 	const [createdPub]  			= useMutation(CREATE_PUBLICATION)
 	const userConnectedRedux 			= useSelector((state:RootState) => state.userConnected)
-	const [Selected, setSelected] = useState<Boolean>(false)
+	const [selected, setSelected] = useState<string>("")
+	const [listStreams, setListStreams] = useState<Array<VideoClipStreams>>([])
 
 	const onSubmit = async function(data:Inputs){
+		let array:Array<VideoClipStreams> = []
+		if(listStreams.length === 0) {
+			streams.forEach(function(en:VideoClip){
+				array.push(
+					{
+						id:en.id,
+						createdAt:en.created_at,
+						videoId:en.video_id,
+						viewerCount:en.viewer_count,
+						creatorName:en.creator_name,
+						title:en.title,
+						gameId:en.game_id,
+						gameName:en.game_name,
+						thumbnailUrl:en.thumbnail_url
+					}
+				)
+			})
+		} else {
+			array = listStreams
+		}
 		const result = await createdPub({ variables: {
-			uidUser:userConnectedRedux.user.uid,
-			uidGame:uidGame
+			nameGame:nameGame,
+			uidGame:uidGame,
+			streaming:array
 		} })
 		if (result.data.createPublication) {
 			history.push("/admin/communaute")
 		}
 	}
-	const onSelected = function(){
-		setSelected(!Selected)
+	const onSelected = function(el:VideoClip){
+		const newStreams = streams.filter((e:VideoClip) => {return (e.id !== el.id)})
+		setStreams(newStreams)
+		newStreams.forEach(function(en:VideoClip){
+			setListStreams([...listStreams,{
+				id:en.id,
+				createdAt:en.created_at,
+				videoId:en.video_id,
+				viewerCount:en.viewer_count,
+				creatorName:en.creator_name,
+				title:en.title,
+				gameId:en.game_id,
+				gameName:en.game_name,
+				thumbnailUrl:en.thumbnail_url
+			}])
+		})
+		
+		setSelected(el.id)
 	}
 
 	useEffect(() => {
@@ -66,7 +128,8 @@ const SetRules: React.FC = function() {
 	},[])
 	const {loading,error,data} 	= useQuery(Twitch_GAMES,{
 		variables:{
-			accessToken:getAccessToken()
+			accessToken:getAccessToken()?.access_token,
+			refreshToken:getAccessToken()?.refresh_token 
 		}
 	})
 	useEffect(() => {
@@ -81,7 +144,6 @@ const SetRules: React.FC = function() {
 	
 	*/
 	
-
 	/*const handleFiles = function(files: Array<File>, info: object, uploadHandler: Function) {
 		try {
         	resizeImage(files, uploadHandler)
@@ -91,8 +153,10 @@ const SetRules: React.FC = function() {
 	}*/
 
 	const handleGame = async function(event:any){
-		setUidGame(event.target.value)
-		const streams = await getStreamByGame(twitchToken.access_token,event.target.value)
+		const val = event.target.value.split("_")
+		setUidGame(val[0])
+		setNameGame(val[1])
+		const streams = await getStreamByGame(twitchToken.access_token,val[0],twitchToken.refresh_token)
 		console.log("streams", streams)
 		setStreams(streams)
 	}
@@ -165,56 +229,40 @@ const SetRules: React.FC = function() {
 														<option value="">Selectionner jeux ...</option>
 														{games?.map(function(el:any,index:number){
 															return (
-																<option key={index} value={el.id}>
+																<option key={index} value={el.id+"_"+el.name}>
 																	{el.name}
 																</option>
 															)
 														})}
 													</select>
 												</div>
-												<div className="guide">
-													<p>Les streaming à afficher :</p>
-													<p>
-														<span>- Selectionner la ou les vidéos que vous voulez afficher</span>
-														<span>- Ajouter</span>
-													</p>
-												</div>
-												<div className="list-video">
-													<div className="video-check">
-														<input type="checkbox" className="v-check" onClick={onSelected}/>
-															{
-																streams?.map(function(el:any,index:number) {
-																	return (
-																		<img style={{"width":"477", "height":"268"}} src={el.thumbnail_url} className={!Selected ? "notSelected" :"selected"} />
-																	)
-																})
-															}
-
-													</div>																						
-												</div>
-												<div className="btn-container full-w">
-													<button className="btn bg-red center clear" style={{"cursor":"pointer"}}><FontAwesomeIcon icon={faPlus} /> Ajouter</button>                                        
-												</div>
-												<div className="video-checked">
-													<div className="guide">
+												<div className={streams.length > 0 ? "guide" : "d-none"}>
 														<p>Liste de vidéo à afficher dans communauté  :</p>
 														<p>
 															<span>- Appuyer sur l'icone supprimer pour effacer la vidéo</span>
 															<span>- Valider</span>
 														</p>
 													</div>
-													<div className="list-video">
-														<div className="video-check">
-															<i><FontAwesomeIcon icon={faTrash} /></i>
-															<video controls poster={thumbnail} width="477" height="268">
-																<source src="https://media.w3.org/2010/05/sintel/trailer_hd.mp4" type="video/mp4"/>												
-															</video>
-														</div>
-													</div>
-													<div className="btn-container full-w">
-														<button className="btn bg-red center clear" style={{"cursor":"pointer"}}><FontAwesomeIcon icon={faPlus} /> Valider</button>                                        
-													</div>
-												</div>	    									
+												<div className="list-video">
+													<div className="video-check">														
+															{
+																streams.length > 0 ?
+																streams?.map(function(el:VideoClip,index:number) {
+																	return (
+																		<div  key={index} className="list-clip-stream"> 
+																			<input type="checkbox" className="v-check" onChange={() => onSelected(el)} checked={selected && selected === el.id ? false:true} />
+																			<img style={{"width":"100%", "height":"268"}} src={el.thumbnail_url} className={!selected ? "notSelected" :"selected"} alt={el.id} />
+																		</div>
+																	)
+																})
+																: <>Accune video disponible pour l'instant </>
+															}
+
+													</div>																						
+												</div>
+												<div className="btn-container full-w">
+													<button className="btn bg-red center clear" type="submit" style={{"cursor":"pointer"}}><FontAwesomeIcon icon={faPlus} /> Valider</button>                                        
+												</div>
 											</form>
 										</div>
 									</div>
