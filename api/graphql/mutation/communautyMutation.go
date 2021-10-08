@@ -4,17 +4,37 @@ import (
 	"github.com/graphql-go/graphql"
 )
 
-var streamingInputType  = graphql.NewInputObject(
+var streamingInputType = graphql.NewInputObject(
 	graphql.InputObjectConfig{
-		Name:"StreamingInput",
+		Name: "StreamingInput",
 		Fields: graphql.InputObjectConfigFieldMap{
-			"stream": &graphql.InputObjectFieldConfig{
+			"videoId": &graphql.InputObjectFieldConfig{
+				Type: graphql.String,
+			},
+			"viewerCount": &graphql.InputObjectFieldConfig{
+				Type: graphql.Int,
+			},
+			"createdAt": &graphql.InputObjectFieldConfig{
+				Type: graphql.String,
+			},
+			"thumbnailUrl": &graphql.InputObjectFieldConfig{
+				Type: graphql.String,
+			},
+			"creatorName": &graphql.InputObjectFieldConfig{
+				Type: graphql.String,
+			},
+			"title": &graphql.InputObjectFieldConfig{
+				Type: graphql.String,
+			},
+			"gameId": &graphql.InputObjectFieldConfig{
+				Type: graphql.String,
+			},
+			"gameName": &graphql.InputObjectFieldConfig{
 				Type: graphql.String,
 			},
 		},
 	},
 )
-
 
 func createPublication() *graphql.Field {
 	return &graphql.Field{
@@ -23,12 +43,14 @@ func createPublication() *graphql.Field {
 		Args: graphql.FieldConfigArgument{
 			"streaming": &graphql.ArgumentConfig{
 				Type: graphql.NewList(streamingInputType),
-			},	
+			},
 			"uidGame": &graphql.ArgumentConfig{
 				Type: graphql.String,
-			},			
-		},			
+			},
+			"nameGame": &graphql.ArgumentConfig{
+				Type: graphql.String,
+			},
+		},
 		Resolve: cmtyResolver.CreatePublicationResolve,
 	}
 }
-

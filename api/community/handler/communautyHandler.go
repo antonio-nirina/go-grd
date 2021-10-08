@@ -4,7 +4,6 @@ import (
 	"github.com/thoussei/antonio/api/community/entity"
 	"github.com/thoussei/antonio/api/community/repository"
 	"github.com/thoussei/antonio/api/external"
-	gameHanlder "github.com/thoussei/antonio/api/games/handler"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
@@ -12,8 +11,10 @@ type UsecaseCmty interface {
 	CreatePublicationHandler(cmty *entity.Communauty) (interface{}, error)
 	FindCmtyHandler(idQuery string) (CmtyViewModel, error)
 	FindAllCmtyHandler(pageNumber int64, limit int64) ([]CmtyViewModel, error)
-	FindAllCmtyGameHandler(accessToken string) ([]CmtyGameTwitchViewModel, error)
-	FindAllStreamingHandler(accessToken string, id string) ([]CmtystreamingViewModelTwitch, error)
+	FindAllCmtyGameHandler(accessToken string, refreshToken string) ([]CmtyGameTwitchViewModel, error)
+	FindAllStreamingHandler(accessToken string, id string, refreshToken string) ([]CmtystreamingViewModelTwitch, error)
+	FindAllGamesTwitch() ([]CmtyGameTwitchViewModel, error)
+	FindOneGamesTwitch(id string) (entity.TwitchGame, error)
 }
 
 type cmtytUsecase struct {
@@ -50,13 +51,10 @@ func (c *cmtytUsecase) FindCmtyHandler(idQuery string) (CmtyViewModel, error) {
 		return CmtyViewModel{}, err
 	}
 
-	gameViews := gameHanlder.GameViewModel{
-		Uid:   result.Game.Uid.Hex(),
-		Name:  result.Game.Name,
-		Image: result.Game.Image,
-		Logo:  result.Game.Logo,
-		Notes: result.Game.Notes,
-		Slug:  result.Game.Slug,
+	gameViews := CmtyGameTwitchViewModel{
+		Id:        result.Game.Id,
+		BoxArtUrl: result.Game.BoxArtUrl,
+		Name:      result.Game.Name,
 	}
 
 	cmtyViewModel := CmtyViewModel{
@@ -79,13 +77,10 @@ func (c *cmtytUsecase) FindAllCmtyHandler(pageNumber int64, limit int64) ([]Cmty
 
 	for _, val := range result {
 
-		gameViews := gameHanlder.GameViewModel{
-			Uid:   val.Game.Uid.Hex(),
-			Name:  val.Game.Name,
-			Image: val.Game.Image,
-			Logo:  val.Game.Logo,
-			Notes: val.Game.Notes,
-			Slug:  val.Game.Slug,
+		gameViews := CmtyGameTwitchViewModel{
+			Id:        val.Game.Id,
+			BoxArtUrl: val.Game.BoxArtUrl,
+			Name:      val.Game.Name,
 		}
 		cmtyViewModel := CmtyViewModel{
 			Uid:       val.Uid.Hex(),
@@ -99,7 +94,19 @@ func (c *cmtytUsecase) FindAllCmtyHandler(pageNumber int64, limit int64) ([]Cmty
 	return res, nil
 }
 
-func (c *cmtytUsecase) FindAllCmtyGameHandler(accessToken string) ([]CmtyGameTwitchViewModel, error) {
+func (c *cmtytUsecase) FindAllCmtyGameHandler(accessToken string, refreshToken string) ([]CmtyGameTwitchViewModel, error) {
+	// check token if isvalid
+	nwAcces, _ := external.ValidateToken(accessToken)
+
+	if !nwAcces {
+		refr, err := external.RefressToken(refreshToken)
+
+		if err != nil {
+			return []CmtyGameTwitchViewModel{}, err
+		}
+
+		accessToken = refr.AccessToken
+	}
 	result, err := c.cmtyRepository.FindAllGAmeTwitchRepo()
 
 	if err != nil {
@@ -155,7 +162,19 @@ func (c *cmtytUsecase) FindAllCmtyGameHandler(accessToken string) ([]CmtyGameTwi
 	return res, nil
 }
 
-func (c *cmtytUsecase) FindAllStreamingHandler(accessToken string, id string) ([]CmtystreamingViewModelTwitch, error) {
+func (c *cmtytUsecase) FindAllStreamingHandler(accessToken string, id string, refreshToken string) ([]CmtystreamingViewModelTwitch, error) {
+	// check token if isvalid
+	nwAcces, _ := external.ValidateToken(accessToken)
+
+	if !nwAcces {
+		refr, err := external.RefressToken(refreshToken)
+		if err != nil {
+			return []CmtystreamingViewModelTwitch{}, err
+		}
+
+		accessToken = refr.AccessToken
+	}
+
 	streams, err := external.GetStreamingListByGame(accessToken, id)
 
 	if err != nil {
@@ -166,26 +185,56 @@ func (c *cmtytUsecase) FindAllStreamingHandler(accessToken string, id string) ([
 
 	for _, val := range streams {
 		streamTwitchViews := CmtystreamingViewModelTwitch{
-			Id:val.Id,
-			Url:val.Url,
-			EmbedUrl:val.EmbedUrl,
-			BroadcasterId:val.BroadcasterId,
-			BroadcasterName:val.BroadcasterName,
-			CreatorId:val.CreatorId,
-			CreatorName:val.CreatorName,
-			VideoId:val.VideoId,
-			ViewerCount:val.ViewerCount,
-			GameId:val.GameId,
-			Language:val.Language,
-			Title:val.Title,
-			CreatedAt:val.CreatedAt,
-			ThumbnailUrl:val.ThumbnailUrl,
-			Duration:0,
+			Id:              val.Id,
+			Url:             val.Url,
+			EmbedUrl:        val.EmbedUrl,
+			BroadcasterId:   val.BroadcasterId,
+			BroadcasterName: val.BroadcasterName,
+			CreatorId:       val.CreatorId,
+			CreatorName:     val.CreatorName,
+			VideoId:         val.VideoId,
+			ViewerCount:     val.ViewerCount,
+			GameId:          val.GameId,
+			Language:        val.Language,
+			Title:           val.Title,
+			CreatedAt:       val.CreatedAt,
+			ThumbnailUrl:    val.ThumbnailUrl,
+			Duration:        0,
 		}
 
 		res = append(res, streamTwitchViews)
 	}
 
 	return res, nil
+}
 
+func (c *cmtytUsecase) FindAllGamesTwitch() ([]CmtyGameTwitchViewModel, error) {
+	result, err := c.cmtyRepository.FindAllGAmeTwitchRepo()
+
+	if err != nil {
+		return []CmtyGameTwitchViewModel{}, err
+	}
+
+	var res []CmtyGameTwitchViewModel
+	for _, val := range result {
+		gameTwitchViews := CmtyGameTwitchViewModel{
+			Name:      val.Name,
+			Id:        val.Id,
+			BoxArtUrl: val.BoxArtUrl,
+		}
+
+		res = append(res, gameTwitchViews)
+	}
+
+	return res, nil
+}
+
+func (c *cmtytUsecase) FindOneGamesTwitch(id string) (entity.TwitchGame, error) {
+	val, err := c.cmtyRepository.FindOneGamesTwitchRepo(id)
+
+	if err != nil {
+		return entity.TwitchGame{}, err
+	}
+
+	return val, nil
 }

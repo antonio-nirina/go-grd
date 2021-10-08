@@ -939,6 +939,13 @@ label.entete:last-child{
 }
 .list-video .video-check{
 	position: relative;
+	display: flex;
+	flex-wrap: wrap;
+}
+.video-check .list-clip-stream{
+	width: 20%;
+	margin-right: 11px;
+	margin-top: 11px;
 }
 .field .group-input input.v-check{
 	position: absolute;

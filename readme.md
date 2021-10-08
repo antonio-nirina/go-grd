@@ -27,3 +27,8 @@ https://www.infoq.com/articles/build-a-container-golang/
 
 
 https://gist.github.com/jpchateau/f822e00f1c6318046125
+
+
+https://gist.github.com/sadhasivam/9d3ae068c569e92ba1efeff2a8befeed
+
+https://github.com/Devinterview-io/golang-interview-questions

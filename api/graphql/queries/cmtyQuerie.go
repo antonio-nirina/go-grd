@@ -44,6 +44,9 @@ func FindAllGAmeTwitch() *graphql.Field {
 			"accessToken": &graphql.ArgumentConfig{
 				Type: graphql.String,
 			},
+			"refreshToken": &graphql.ArgumentConfig{
+				Type: graphql.String,
+			},
 		},
 		Resolve: cmtyResolver.FindAllGameTwitchResolver,
 	}
@@ -58,6 +61,9 @@ func FindAllStreaming() *graphql.Field {
 				Type: graphql.String,
 			},
 			"gameId": &graphql.ArgumentConfig{
+				Type: graphql.String,
+			},
+			"refreshToken": &graphql.ArgumentConfig{
 				Type: graphql.String,
 			},
 		},

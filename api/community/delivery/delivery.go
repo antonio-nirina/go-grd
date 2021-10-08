@@ -43,7 +43,7 @@ func (c *cmty) CreatePublicationResolve(params graphql.ResolveParams) (interface
 		streams = append(streams, val)
 	}
 	uidGame, _ := params.Args["uidGame"].(string)
-	game, err := c.cmtyGameHandler.FindOneGameByUidHandler(uidGame)
+	game, err := c.cmtyHandler.FindOneGamesTwitch(uidGame)
 
 	if err != nil {
 		return nil, err
@@ -89,7 +89,8 @@ func (c *cmty) FindAllCmtytResolver(params graphql.ResolveParams) (interface{}, 
 
 func (c *cmty) FindAllGameTwitchResolver(params graphql.ResolveParams) (interface{}, error) {
 	accessToken, _ := params.Args["accessToken"].(string)
-	res, err := c.cmtyHandler.FindAllCmtyGameHandler(accessToken)
+	refreshToken, _ := params.Args["refreshToken"].(string)
+	res, err := c.cmtyHandler.FindAllCmtyGameHandler(accessToken, refreshToken)
 
 	if err != nil {
 		return nil, err
@@ -101,7 +102,8 @@ func (c *cmty) FindAllGameTwitchResolver(params graphql.ResolveParams) (interfac
 func (c *cmty) FindAllStreamingTwitchResolver(params graphql.ResolveParams) (interface{}, error) {
 	gameId, _ := params.Args["gameId"].(string)
 	accessToken, _ := params.Args["accessToken"].(string)
-	res, err := c.cmtyHandler.FindAllStreamingHandler(accessToken, gameId)
+	refreshToken, _ := params.Args["refreshToken"].(string)
+	res, err := c.cmtyHandler.FindAllStreamingHandler(accessToken, gameId, refreshToken)
 
 	if err != nil {
 		return nil, err

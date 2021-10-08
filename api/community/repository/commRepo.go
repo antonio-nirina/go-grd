@@ -27,6 +27,7 @@ type RepositoryCmty interface {
 	FindAllCmtyRepo(pageNumber int64, limit int64) ([]entity.Communauty, error)
 	SaveGameTwitchRepository(gameTwitcch *entity.TwitchGame) (interface{}, error)
 	FindAllGAmeTwitchRepo() ([]entity.TwitchGame, error)
+	FindOneGamesTwitchRepo(id string) (entity.TwitchGame, error)
 }
 
 func (c *driverRepository) SavedCmtyRepo(community *entity.Communauty) (interface{}, error) {
@@ -116,4 +117,17 @@ func (c *driverRepository) FindAllGAmeTwitchRepo() ([]entity.TwitchGame, error) 
 	cur.Close(context.TODO())
 
 	return results, nil
+}
+
+func (c *driverRepository) FindOneGamesTwitchRepo(id string) (entity.TwitchGame, error) {
+	var collection = c.client.Database("grd_database").Collection("games_twitch")
+	var result entity.TwitchGame
+
+	err := collection.FindOne(context.TODO(), bson.M{"id": id}).Decode(&result)
+
+	if err != nil {
+		return result, err
+	}
+
+	return result, nil
 }
