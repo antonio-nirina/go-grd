@@ -17,8 +17,8 @@ const Register: React.FC = function() {
 					<div className="group">
 					<h1>Inscription</h1>
 						<div className="step">
-							<Link to="#" className="current">Mes infos <span></span></Link>
-							<Link to="#">Mes jeux <span></span></Link>
+							<Link to="/register" className="current">Mes infos <span></span></Link>
+							<Link to="/game">Mes jeux <span></span></Link>
 							<Link to="#">Mes comptes <span></span></Link>
 						</div>
 						<Infos />

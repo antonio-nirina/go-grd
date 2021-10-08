@@ -6,9 +6,12 @@ import {useHistory } from "react-router-dom"
 import Loader from "react-loader-spinner"
 import { useDispatch } from "react-redux"
 
+import { faTwitch, faXbox, faDiscord } from "@fortawesome/free-brands-svg-icons"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+
 import Google from "../../assets/image/rss/google.png"
-import Facebook from "../../assets/image/rss/facebook.png"
-import Twitter from "../../assets/image/rss/twitter.png"
+import Discord from "../../assets/image/discord-logo.png"
+import Ps from "../../assets/image/playstation.png"
 
 import {TokenType,SendToken} from "./utils"
 import {sendUserConectedAction} from "./action/userAction"
@@ -88,30 +91,42 @@ const Login: React.FC = function() {
 						<div>
 							{passwd ? <span style={style}>Password or username invalid </span> : ""}
 						</div>
-						<div className="account_type">
-							<Link to="#" className="gg"><img src={Google} alt="Google" width="20" height="20"/><span>Sign in with Google</span></Link>
-							<Link to="#" className="fb"><img src={Facebook} alt="Facebook" /><span>Sign in with Facebook</span></Link>
-							<Link to="#" className="tw"><img src={Twitter} alt="Twitter" width="20" height="20"/><span>Sign in with Twitter</span></Link>
+						<div className="register-field">
+							<div className="account_type">
+								<Link to="#" className="gg"><img src={Google} alt="Google" width="20" height="20"/><span>Sign in with Google</span></Link>
+								<Link to="#" className="ds"><img src={Discord} alt="Discord" width="20" /><span>Discord</span></Link>
+								<Link to="#" className="xbox"><i><FontAwesomeIcon icon={faXbox} /></i><span>Sign in with Xbox</span></Link>
+								<Link to="#" className="ps"><img src={Ps} alt="Twitter" width="20" /><span>Sign in with Playstation</span></Link>
+							</div>						
+							<div className="choice">
+								OR
+							</div>
+							<form onSubmit={handleSubmit(onSubmit)} className="fieldset">
+								<div className={isLoader ? "loader-spinner":"d-none"} style={{"textAlign":"center"}}>
+									<Loader
+										type="Oval"
+										color="#dd0000"
+									/>
+								</div>
+								<div className="field-container">
+									<div className="input-field">
+										<input className="mgt10" type = "email" placeholder = "Email" {...register("email", { required: true })} name="email" />
+									</div>
+									<div className="input-field">
+										<input type ="password" placeholder ={Translation("fr").login.password}  {...register("password", { required: true })} name="password" />
+									</div>
+									<div className="input-field">
+										<button className="btn">
+											Se connecter
+										</button>
+										<p className="ft-size"><Link to ="#" title="Mot de passe oublié ?">Mot de passe oublié ?</Link></p>
+									</div>
+								</div>
+							</form>							
 						</div>
-						<form onSubmit={handleSubmit(onSubmit)} className="fieldset">
-							<div className={isLoader ? "loader-spinner":"d-none"} style={{"textAlign":"center"}}>
-								<Loader
-									type="Oval"
-									color="#dd0000"
-								/>
-							</div>
-							<div className="field-container">
-								<input className="mgt10" type = "email" placeholder = "Ton email" {...register("email", { required: true })} name="email" />
-								<input type ="password" placeholder ={Translation("fr").login.password}  {...register("password", { required: true })} name="password" />
-								<button className="btn">
-									Se connecter
-								</button>
-							</div>
-						</form>
-						<div className="field-container">
+						<div className="center-width field-container">
 							<div className="infos">
-								<p className="member"><Link to = "/register" title="Pas encore membre ?">Pas encore membre ?</Link></p>
-								<p><Link to ="#" title="Mot de passe oublié ?">Mot de passe oublié ?</Link></p>							
+								<p className="member"><Link to = "/register" title="Pas encore membre ?">Pas encore membre ?</Link></p>								
 							</div>
 						</div>
 					</div>
