@@ -2,7 +2,7 @@
 .inscription .main{
 	background:linear-gradient( rgba(0, 5, 0, 0.7) 100%, rgba(0, 0, 0, 0.7)100%), url("../../assets/image/redblack.jpg") no-repeat;
 	background-position: top center;
-	background-size: 100%;
+	background-size: 100% 100%;
 	padding-bottom: 40px;
 }
 .step a{
@@ -155,10 +155,4 @@
 }
 .account .account_type{
 	margin: auto;
-}
-.account .center-width{
-	background: red !important;
-}
-.account .account-list{
-	
 }
