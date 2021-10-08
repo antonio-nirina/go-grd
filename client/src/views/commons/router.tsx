@@ -32,6 +32,7 @@ import InitPass from "../auth/initpass"
 import UpdatePassword from "../auth/updatePassword"
 import ProtectedRoute from "./protectedRoute"
 import Register from "../auth/register"
+import Account from "../auth/account"
 import Game from "../auth/game"
 import TournamentGame from "../tournament/tournament-game"
 // import LeagueGame from "../league/league-game"
@@ -68,6 +69,7 @@ const Router = function() {
 			<Route path="/inscription" exact component={Inscription} />
 			<Route path="/register" exact component={Register} />
 			<Route path="/game" exact component={Game} />
+			<Route path="/account" exact component={Account} />
 			<Route path="/forgot-password" exact component={InitPass} />			
 		</Switch>
 	)

@@ -145,4 +145,20 @@
 .infos-text p.submit-btn:hover a{
 	color: #dd0000;
 }
-
+.account.register-field{
+	display: block;
+	background: none;
+	margin: 0px auto;
+}
+.account p{
+	font-size: 14px;
+}
+.account .account_type{
+	margin: auto;
+}
+.account .center-width{
+	background: red !important;
+}
+.account .account-list{
+	
+}

@@ -67,7 +67,7 @@ const Game: React.FC = function() {
 						<div className="step">
 							<Link to="register">Mes infos <span></span></Link>
 							<Link to="/game" className="current">Mes jeux <span></span></Link>
-							<Link to="#">Mes comptes <span></span></Link>
+							<Link to="/account">Mes comptes <span></span></Link>
 						</div>
 						<GameList />
 					</div>

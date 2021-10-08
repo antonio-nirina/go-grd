@@ -13,7 +13,7 @@ import {CREATED_USER} from "../../gql/user/mutation"
 import {checkValidEmail} from "../auth/utils"
 
 import Header0 from "../header/header0"
-import Infos from "./infos"
+import AccountList from "./account-list"
 import Footer from "../footer/footer"
 import "../auth/inscription.css"
 import "../../assets/css/style.css"
@@ -24,7 +24,7 @@ type Inputs = {
 	username: string
 }
 
-const Register: React.FC = function() {
+const Account: React.FC = function() {
 	const history = useHistory()
 	const [createdUser]  = useMutation(CREATED_USER)
 	const { register, handleSubmit, formState: { errors } } = useForm<Inputs>()
@@ -65,11 +65,11 @@ const Register: React.FC = function() {
 						<div style={{"color":"red","fontSize":"16px"}} >{ errorForm ? "Email not valid" : ""}</div>
 						<div style={{"color":"red","fontSize":"16px"}} >{errorMessage ? errorMessage : ""}</div>
 						<div className="step">
-							<Link to="/register" className="current">Mes infos <span></span></Link>
+							<Link to="/register" >Mes infos <span></span></Link>
 							<Link to="/game">Mes jeux <span></span></Link>
-							<Link to="/account">Mes comptes <span></span></Link>
+							<Link to="/account" className="current">Mes comptes<span></span></Link>
 						</div>
-						<Infos />
+						<AccountList />
 					</div>
 				</div>
 			</div>
@@ -79,4 +79,4 @@ const Register: React.FC = function() {
 	);
 }
 
-export default Register;
+export default Account;

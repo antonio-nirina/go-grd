@@ -66,10 +66,10 @@
 	color: gray;
 	background: #ffffff;
 }
-.account_type .ds{
-	background: #2f67b1;	
+.account_type .discord{
+	background: #5865f2;	
 }
-.account_type .ds img{
+.account_type .discord img{
 	margin-top: 3px;
 }
 .account_type .xbox{
