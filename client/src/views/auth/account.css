@@ -8,6 +8,10 @@
 .account-container .account_type{
 	padding-bottom: 0;
 }
+.account-container .account_type a{
+	font-weight: 700;
+	font-family: arial;
+}
 .account-container .center-width button.btn{
 	width: 100%	
 }
