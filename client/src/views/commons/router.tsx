@@ -5,6 +5,7 @@ import Index from "../version/home/index"
 // import Ligue from "../annexe/ligue"
 import Tournament from "../tournament/tournament"
 import Tournois from "../annexe/tournois"
+import Leaderboard from "../leaderboard/leaderboard"
 import Info from "../tournament/info"
 // import InfoLeague from "../annexe/info-league"
 import Matches from "../tournament/matches"
@@ -43,6 +44,7 @@ const Router = function() {
 		<Switch>
 			<Route path="/" exact component={Index} />
 			<Route path="/index" exact component={Index} />
+			<ProtectedRoute path="/Leaderboard" exact component={Leaderboard} />
 			<ProtectedRoute path="/tournois" exact component={Tournament} />
 			<ProtectedRoute path="/tournament" exact component={Tournois} />
 			<ProtectedRoute path="/tournament-game" exact component={TournamentGame} />
