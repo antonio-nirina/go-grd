@@ -6,7 +6,7 @@ import {useHistory } from "react-router-dom"
 import Loader from "react-loader-spinner"
 import { useDispatch } from "react-redux"
 
-import { faTwitch, faXbox, faDiscord } from "@fortawesome/free-brands-svg-icons"
+import { faXbox } from "@fortawesome/free-brands-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 import Google from "../../assets/image/rss/google.png"

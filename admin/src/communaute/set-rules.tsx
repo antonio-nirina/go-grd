@@ -112,7 +112,6 @@ const SetRules: React.FC = function() {
 				thumbnailUrl:en.thumbnail_url
 			}])
 		})
-		
 		setSelected(el.id)
 	}
 
