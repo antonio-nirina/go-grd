@@ -7,7 +7,6 @@ import "../../assets/css/style.css"
 import "../game/game.css"
 import ImgGame from "../commons/imgGame"
 
-
 const Game: React.FC = function() {
 	const userConnectedRedux = useSelector((state:RootState) => state.userConnected)
 	return(

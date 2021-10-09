@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form"
 import {useMutation} from "@apollo/client"
 import {useHistory } from "react-router-dom"
 import { Link } from 'react-router-dom'
-import { faTwitch, faXbox, faDiscord } from "@fortawesome/free-brands-svg-icons"
+import { faXbox } from "@fortawesome/free-brands-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 import Google from "../../assets/image/rss/google.png"
@@ -13,9 +13,6 @@ import Ps from "../../assets/image/playstation.png"
 import {CREATED_USER} from "../../gql/user/mutation"
 import {checkValidEmail} from "../auth/utils"
 
-import Header0 from "../header/header0"
-import Infos from "./infos"
-import Footer from "../footer/footer"
 import "../auth/inscription.css"
 import "../../assets/css/style.css"
 
@@ -74,6 +71,8 @@ const StepOne: React.FC = function() {
 			<form onSubmit={handleSubmit(onSubmit)} className="fieldset">
 				<div className="field-container">
 					<span className="bold">Remplis tes informations</span>
+					<div>{errorForm ? "Email n'est pas valider" : ""}</div>
+					<div>{errorMessage ? errorMessage : ""}</div>
 					<div className="input-field">																							
 						{errors.email && <span style={{"color":"red","fontSize":"11px"}}>Email ne peut être vide</span>}
 						<input type="email" placeholder = "Ton Email" {...register("email", { required: true })} name="email"/>
