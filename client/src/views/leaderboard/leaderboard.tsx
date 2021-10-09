@@ -47,26 +47,26 @@ const Leaderboard: React.FC = function() {
 					<div className="gamers-stats">
 						<span className="first">Position</span>
 						<span>Player</span>
-						<span>GG points</span>
-						<span>Events played</span>
+						<span style={{textAlign:'center'}}>GG points</span>
+						<span style={{textAlign:'center'}}>Events played</span>
 					</div>
 					<div className="classement">		
 						<div className="classement-list">
 							<span className="first">1</span>
-							<span className="lead">
+							<span style={{textAlign:'center'}} className="lead">
 								<img src={King} alt="" width="19"/>
 								<strong>Gotaga</strong>
 							</span>
-							<span>7845 pts</span>
-							<span>12541</span>
+							<span style={{textAlign:'center'}}>7845 pts</span>
+							<span style={{textAlign:'center'}}>12541</span>
 						</div>
 						<div className="classement-list">
 							<span>2</span>
 							<span>								
 								<strong>Killer1548</strong>
 							</span>
-							<span>6928 pts</span>
-							<span>11849</span>
+							<span style={{textAlign:'center'}}>6928 pts</span>
+							<span style={{textAlign:'center'}}>11849</span>
 						</div>
 					</div>
 				</div>

@@ -119,7 +119,7 @@ const Login: React.FC = function() {
 										<button className="btn">
 											Se connecter
 										</button>
-										<p className="ft-size"><Link to ="#" title="Mot de passe oublié ?">Mot de passe oublié ?</Link></p>
+										<p className="ft-size"><Link to ="/forgot-password" title="Mot de passe oublié ?">Mot de passe oublié ?</Link></p>
 									</div>
 								</div>
 							</form>							

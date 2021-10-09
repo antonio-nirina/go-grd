@@ -46,6 +46,7 @@
 	display: block;
 	width: 100%;
 	text-align: left;
+	margin-left: 5px;
 }
 .leaderboard .gamers-stats span.first{
 	text-align: left;
@@ -62,18 +63,19 @@
 }
 .leaderboard .classement{
 	background: #2c2c2c;
-	border-radius: 5px;
+	border-radius: 10px;
 }
 .leaderboard .classement-list{
 	display: flex;	
 	padding: 15px;
 	border-bottom: 1px solid #525252;
+	margin: 10px;
 }
 .leaderboard .classement-list .lead{
 	display: flex;	
 }
 .leaderboard .classement-list img{
-	margin-right: 15px;
+	margin-right: 5px;
 }
 .leaderboard .classement-list img, .leaderboard .classement-list strong{
 	align-self: center;
