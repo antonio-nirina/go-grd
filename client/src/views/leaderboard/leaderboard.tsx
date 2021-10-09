@@ -4,6 +4,8 @@ import Header from "../header/header"
 import Footer from "../footer/footer"
 import "../leaderboard/leaderboard.css"
 
+import King from "../../assets/image/icons/king.jpg"
+
 type Inputs = {
 	password: string,
 	email:string
@@ -47,13 +49,26 @@ const Leaderboard: React.FC = function() {
 						<span>Player</span>
 						<span>GG points</span>
 						<span>Events played</span>
-					</div>			
-					<div className="gamer-name-list">
-						<span className="first">1</span>
-						<span>Gotaga</span>
-						<span>7845 pts</span>
-						<span>12541</span>
-					</div>	
+					</div>
+					<div className="classement">		
+						<div className="classement-list">
+							<span className="first">1</span>
+							<span className="lead">
+								<img src={King} alt="" width="19"/>
+								<strong>Gotaga</strong>
+							</span>
+							<span>7845 pts</span>
+							<span>12541</span>
+						</div>
+						<div className="classement-list">
+							<span>2</span>
+							<span>								
+								<strong>Killer1548</strong>
+							</span>
+							<span>6928 pts</span>
+							<span>11849</span>
+						</div>
+					</div>
 				</div>
 			</div>
 			<Footer/>
