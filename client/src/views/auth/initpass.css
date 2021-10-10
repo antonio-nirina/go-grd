@@ -1,1 +1,26 @@
 @charset "UTF-8";
+.initpass h2{
+	font-family: arial;
+	font-weight: 700;
+	font-size: 35px;
+	text-transform: uppercase;
+	padding-bottom: 15px;
+}
+.initpass .fieldset{
+	padding-top: 0;
+}
+.initpass .field-container{
+	max-width: 250px;
+	width: 100%;
+}
+.initpass .register-field{
+	display: block;
+}
+.initpass .register-field .center-width{
+	width: 100%;
+	max-width: inherit;
+}
+.initpass .register-field span{
+	font-style: inherit;
+	font-size: 13px;
+}

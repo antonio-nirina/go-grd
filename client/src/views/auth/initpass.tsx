@@ -2,13 +2,12 @@ import React,{useState} from "react"
 import { useForm } from "react-hook-form"
 import {useMutation} from "@apollo/client"
 import {useHistory } from "react-router-dom"
-
+import { Link } from 'react-router-dom'
 import Header0 from "../header/header0"
 import {checkValidEmail} from "./utils"
 import {Translation} from "../../lang/translation"
 import {FORGOT_PASSWORD} from "../../gql/user/mutation"
 import Footer from "../footer/footer"
-import joystick from "../../assets/image/joystick.png"
 import "../auth/initpass.css"
 import "../../assets/css/style.css"
 
@@ -39,20 +38,35 @@ const InitPass: React.FC = function() {
 			<div className="main">
 				<div className="containt">
 					<div className="group">
-					<h1>
-						Réinitialisation mot de passe
-						<img src={joystick} alt=""/>
-					</h1>
+					<h2>
+						Réinitialisation mot de passe						
+					</h2>
 						<div>
 							<span style={{"color":"red"}}>{errorForm ? Translation("fr").login.errorForm : ""}</span>
 						</div>
-						<div className="alert alert-success text-center invisible">Un mail de changement de mot de passe vous a été envoyé</div>
-						<form onSubmit={handleSubmit(onSubmit)}>
-							<input className="mgt10" type = "email" placeholder = "Ton email" {...register("email", { required: true })} name="email" required/>
-							<button className="btn bg-red mg15">
-								Réinitialiser mon mot de passe
-							</button>
-						</form>
+						<div className="register-field">
+							<div className="alert alert-success text-center invisible">{!errorForm ? "" : "Un mail de changement de mot de passe vous a été envoyé"}</div>
+							<div className="center-width">
+								<span className="major">Entre ton email afin de réinitialiser ton mot de passe</span>
+							</div>
+							<form onSubmit={handleSubmit(onSubmit)} className="fieldset">
+								<div className="field-container">									
+									<div className="input-field">
+										<input className="mgt10" type = "email" placeholder = "Ton email" {...register("email", { required: true })} name="email" required/>
+									</div>
+									<div className="input-field">
+										<button className="btn bg-red mg15">
+											Réinitialiser mon mot de passe
+										</button>
+									</div>
+								</div>
+							</form>
+						</div>
+						<div className="center-width field-container">
+							<div className="infos">
+								<p className="member"><Link to = "/login" title="Se connecter">Se connecter</Link></p>								
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
