@@ -120,7 +120,6 @@ const ListCommunaute = function() {
 										</p>
 									</div>
 									<div className="card-title">
-
 									</div>
 								</div>
                                 <div className={isLoader ? "loader-spinner":"d-none"}>
@@ -149,7 +148,9 @@ const ListCommunaute = function() {
 													<p>{el.nameGame}</p>
 												</div>
                                                 <div className="card-result align-center">
-													<p>{el.thumbnailUrl}</p>
+													<p>
+														<img src={el.thumbnailUrl} alt="" />
+													</p>
 												</div>
 												<div className="card-result align-center">
 													<p>{el.statut?"Active":"Inactif"}</p>

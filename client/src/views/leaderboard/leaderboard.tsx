@@ -6,11 +6,6 @@ import "../leaderboard/leaderboard.css"
 
 import King from "../../assets/image/icons/king.jpg"
 
-type Inputs = {
-	password: string,
-	email:string
-	username: string
-}
 
 const Leaderboard: React.FC = function() {
 	

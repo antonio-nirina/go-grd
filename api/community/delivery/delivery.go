@@ -20,6 +20,9 @@ type CmtyResolve interface {
 	FindAllCmtytResolver(params graphql.ResolveParams) (interface{}, error)
 	FindAllGameTwitchResolver(params graphql.ResolveParams) (interface{}, error)
 	FindAllStreamingTwitchResolver(params graphql.ResolveParams) (interface{}, error)
+
+	EditStatutPublicationResolve(params graphql.ResolveParams) (interface{}, error)
+	RemovePublicationResolve(params graphql.ResolveParams) (interface{}, error)
 }
 
 type cmty struct {
@@ -105,6 +108,41 @@ func (c *cmty) FindAllStreamingTwitchResolver(params graphql.ResolveParams) (int
 	accessToken, _ := params.Args["accessToken"].(string)
 	refreshToken, _ := params.Args["refreshToken"].(string)
 	res, err := c.cmtyHandler.FindAllStreamingHandler(accessToken, gameId, refreshToken)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return res, nil
+}
+
+func (c *cmty) EditStatutPublicationResolve(params graphql.ResolveParams) (interface{}, error) {
+	uid, _ := params.Args["uid"].(string)
+	_, err := c.cmtyHandler.FindCmtyHandler(uid)
+
+	if err != nil {
+		return nil, err
+	}
+
+	res, err := c.cmtyHandler.EditPublicationHandler(uid)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return res, nil
+
+}
+
+func (c *cmty) RemovePublicationResolve(params graphql.ResolveParams) (interface{}, error) {
+	uid, _ := params.Args["uid"].(string)
+	_, err := c.cmtyHandler.FindCmtyHandler(uid)
+
+	if err != nil {
+		return nil, err
+	}
+
+	res, err := c.cmtyHandler.RemovePublicationHandler(uid)
 
 	if err != nil {
 		return nil, err

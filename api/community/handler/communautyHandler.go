@@ -15,6 +15,9 @@ type UsecaseCmty interface {
 	FindAllStreamingHandler(accessToken string, id string, refreshToken string) ([]CmtystreamingViewModelTwitch, error)
 	FindAllGamesTwitch() ([]CmtyGameTwitchViewModel, error)
 	FindOneGamesTwitch(id string) (entity.TwitchGame, error)
+
+	EditPublicationHandler(id string) (interface{}, error)
+	RemovePublicationHandler(id string) (interface{}, error)
 }
 
 type cmtytUsecase struct {
@@ -239,4 +242,26 @@ func (c *cmtytUsecase) FindOneGamesTwitch(id string) (entity.TwitchGame, error) 
 	}
 
 	return val, nil
+}
+
+func (c *cmtytUsecase) EditPublicationHandler(id string) (interface{}, error) {
+	objectId, err := primitive.ObjectIDFromHex(id)
+	_, err = c.cmtyRepository.EditCmtyRepo(objectId)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return "Ok", nil
+}
+
+func (c *cmtytUsecase) RemovePublicationHandler(id string) (interface{}, error) {
+	objectId, err := primitive.ObjectIDFromHex(id)
+	_, err = c.cmtyRepository.RemoveCmtyRepo(objectId)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return "Ok", nil
 }
