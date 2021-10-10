@@ -54,3 +54,29 @@ func createPublication() *graphql.Field {
 		Resolve: cmtyResolver.CreatePublicationResolve,
 	}
 }
+
+func EditStatutPublication() *graphql.Field {
+	return &graphql.Field{
+		Type:        graphql.String,
+		Description: "Publication edit",
+		Args: graphql.FieldConfigArgument{
+			"uid": &graphql.ArgumentConfig{
+				Type: graphql.String,
+			},
+		},
+		Resolve: cmtyResolver.EditStatutPublicationResolve,
+	}
+}
+
+func RemovePublication() *graphql.Field {
+	return &graphql.Field{
+		Type:        graphql.String,
+		Description: "Publication remove",
+		Args: graphql.FieldConfigArgument{
+			"uid": &graphql.ArgumentConfig{
+				Type: graphql.String,
+			},
+		},
+		Resolve: cmtyResolver.RemovePublicationResolve,
+	}
+}
