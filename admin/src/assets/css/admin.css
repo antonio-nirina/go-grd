@@ -948,12 +948,11 @@ label.entete:last-child{
 	margin-top: 11px;
 }
 .field .group-input input.v-check{
-	position: absolute;
-    z-index: 2;
+	
     width: 59%;
     text-align: right;
     transform: scale(1.5);    
-    left: 45px;   
+    
 }
 .list-video i{
 	position: absolute;

@@ -61,6 +61,7 @@ func (c *cmtytUsecase) FindCmtyHandler(idQuery string) (CmtyViewModel, error) {
 		Uid:       result.Uid.Hex(),
 		Streaming: result.Streaming,
 		Game:      gameViews,
+		Statut:    result.Statut,
 	}
 
 	return cmtyViewModel, nil
@@ -86,6 +87,7 @@ func (c *cmtytUsecase) FindAllCmtyHandler(pageNumber int64, limit int64) ([]Cmty
 			Uid:       val.Uid.Hex(),
 			Streaming: val.Streaming,
 			Game:      gameViews,
+			Statut:    val.Statut,
 		}
 
 		res = append(res, cmtyViewModel)

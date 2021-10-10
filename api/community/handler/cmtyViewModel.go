@@ -1,9 +1,14 @@
 package handler
 
+import (
+	cmtyEntity "github.com/thoussei/antonio/api/community/entity"
+)
+
 type CmtyViewModel struct {
-	Uid       string                  `json:"uid"`
-	Streaming []string                `json:"streaming"`
-	Game      CmtyGameTwitchViewModel `json:"game"`
+	Uid       string                     `json:"uid"`
+	Streaming []cmtyEntity.DataStreaming `json:"streaming"`
+	Game      CmtyGameTwitchViewModel    `json:"game"`
+	Statut    bool                       `json:"statut"`
 }
 
 type CmtyGameTwitchViewModel struct {

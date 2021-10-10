@@ -11,7 +11,13 @@ var CmtySchemaType = graphql.NewObject(graphql.ObjectConfig{
 			Type: graphql.String,
 		},
 		"streaming": &graphql.Field{
-			Type: graphql.String,
+			Type: graphql.NewList(CmtyClipTwitchSchemaType),
+		},
+		"game": &graphql.Field{
+			Type: CmtyGameTwitchSchemaType,
+		},
+		"statut": &graphql.Field{
+			Type: graphql.Boolean,
 		},
 	},
 })
@@ -97,25 +103,25 @@ var CmtyClipTwitchSchemaType = graphql.NewObject(graphql.ObjectConfig{
 		"url": &graphql.Field{
 			Type: graphql.String,
 		},
-		"broadcaster_id": &graphql.Field{
+		"broadcasterId": &graphql.Field{
 			Type: graphql.String,
 		},
-		"broadcaster_name": &graphql.Field{
+		"broadcasterName": &graphql.Field{
 			Type: graphql.String,
 		},
-		"creator_id": &graphql.Field{
+		"creatorId": &graphql.Field{
 			Type: graphql.String,
 		},
-		"creator_name": &graphql.Field{
+		"creatorName": &graphql.Field{
 			Type: graphql.String,
 		},
-		"video_id": &graphql.Field{
+		"videoId": &graphql.Field{
 			Type: graphql.String,
 		},
-		"viewer_count": &graphql.Field{
+		"viewerCount": &graphql.Field{
 			Type: graphql.Int,
 		},
-		"game_id": &graphql.Field{
+		"gameId": &graphql.Field{
 			Type: graphql.String,
 		},
 		"language": &graphql.Field{
@@ -124,10 +130,10 @@ var CmtyClipTwitchSchemaType = graphql.NewObject(graphql.ObjectConfig{
 		"title": &graphql.Field{
 			Type: graphql.String,
 		},
-		"created_at": &graphql.Field{
+		"createdAt": &graphql.Field{
 			Type: graphql.String,
 		},
-		"thumbnail_url": &graphql.Field{
+		"thumbnailUrl": &graphql.Field{
 			Type: graphql.String,
 		},
 	},

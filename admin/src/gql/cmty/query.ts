@@ -27,15 +27,37 @@ export const Twitch_STREAMING = gql`
         FindAllStreaming(accessToken: $accessToken,gameId:$gameId,refreshToken:$refreshToken) {
                 uid
                 id
-                video_id
-                game_id
+                videoId
+                gameId
                 title
-                viewer_count
-                created_at
-                creator_name
-                thumbnail_url
-                game_name
+                viewerCount
+                createdAt
+                creatorName
+                thumbnailUrl
             }
 
     }
 `
+
+export const GET_ALL_CMTY = gql`
+	query FindAllCmty($limit: Int!,$pageNumber:Int!) {
+		FindAllCmty(limit: $limit,pageNumber:$pageNumber){
+            uid
+            statut
+            streaming{
+                id
+                videoId
+                gameId
+                title
+                viewerCount
+                createdAt
+                creatorName
+                thumbnailUrl
+            }
+            game{
+                uid
+                name
+                box_art_url
+            }
+	}
+}`

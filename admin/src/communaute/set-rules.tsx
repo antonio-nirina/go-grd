@@ -2,13 +2,12 @@ import React,{useState,useEffect} from "react"
 import {useMutation,useQuery} from "@apollo/client"
 import { useForm } from "react-hook-form"
 import {useHistory } from "react-router-dom"
-import { useSelector } from "react-redux"
 import { faTwitch } from "@fortawesome/free-brands-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faPlus } from "@fortawesome/free-solid-svg-icons"
+import Loader from "react-loader-spinner"
 
 import SideBar from "../header/sidebar"
-import {RootState} from "../reducer"
 import Nav from "../header/nav"
 import {CREATE_PUBLICATION} from "../gql/cmty/mutation"
 import {Twitch_GAMES} from "../gql/cmty/query"
@@ -55,14 +54,14 @@ type TwitchToken = {
 const SetRules: React.FC = function() {
 	const history = useHistory()
 	const [uidGame, setUidGame] 		= useState<string>("")
-	const [nameGame, setNameGame] 		= useState<string>("")
 	const [twitchToken,setTwitchToken] = useState<TwitchToken>({type:"",access_token:"",refresh_token:""})
 	const [games, setGames] = useState<any>([])
+	const [isLoader, setIsLoader] = useState<Boolean>(true)
 
 	const [streams, setStreams] = useState<Array<VideoClip>>([])
 	const { register, handleSubmit } 	= useForm<Inputs>()
 	const [createdPub]  			= useMutation(CREATE_PUBLICATION)
-	const userConnectedRedux 			= useSelector((state:RootState) => state.userConnected)
+	// const userConnectedRedux 			= useSelector((state:RootState) => state.userConnected)
 	const [selected, setSelected] = useState<string>("")
 	const [listStreams, setListStreams] = useState<Array<VideoClipStreams>>([])
 
@@ -88,9 +87,8 @@ const SetRules: React.FC = function() {
 			array = listStreams
 		}
 		const result = await createdPub({ variables: {
-			nameGame:nameGame,
+			streaming:array,
 			uidGame:uidGame,
-			streaming:array
 		} })
 		if (result.data.createPublication) {
 			history.push("/admin/communaute")
@@ -133,6 +131,7 @@ const SetRules: React.FC = function() {
 	})
 	useEffect(() => {
 		if(!loading && !error && data) {
+			setIsLoader(false)
 			setGames(data.FindAllGAmeTwitch)
 		}
 	},[loading,error,data,twitchToken])
@@ -152,11 +151,10 @@ const SetRules: React.FC = function() {
 	}*/
 
 	const handleGame = async function(event:any){
-		const val = event.target.value.split("_")
-		setUidGame(val[0])
-		setNameGame(val[1])
-		const streams = await getStreamByGame(twitchToken.access_token,val[0],twitchToken.refresh_token)
-		console.log("streams", streams)
+		setIsLoader(true)
+		setUidGame(event.target.value)
+		const streams = await getStreamByGame(twitchToken.access_token,event.target.value,twitchToken.refresh_token)
+		if(streams) setIsLoader(false)
 		setStreams(streams)
 	}
 
@@ -228,12 +226,18 @@ const SetRules: React.FC = function() {
 														<option value="">Selectionner jeux ...</option>
 														{games?.map(function(el:any,index:number){
 															return (
-																<option key={index} value={el.id+"_"+el.name}>
+																<option key={index} value={el.id}>
 																	{el.name}
 																</option>
 															)
 														})}
 													</select>
+												</div>
+												<div className={isLoader ? "loader-spinner":"d-none"}>
+													<Loader
+														type="Oval"
+														color="#dd0000"
+													/>
 												</div>
 												<div className={streams.length > 0 ? "guide" : "d-none"}>
 														<p>Liste de vidéo à afficher dans communauté  :</p>

@@ -34,7 +34,7 @@ const SideBar : React.FC = function() {
 							</Link>
 						</li>
 		                <li>
-		                    <Link to="/admin/communaute">
+		                    <Link to="/admin/list/communaute">
 		                        <i><FontAwesomeIcon icon={faTools} size="lg"/></i>
 		                        <span>Communaute</span>
 		                    </Link>
@@ -95,7 +95,7 @@ const SideBar : React.FC = function() {
 							</Link>
 						</li>
 			            <li>
-			                <Link to="/admin/communaute">
+			                <Link to="/admin/list/communaute">
 			                    <i><FontAwesomeIcon icon={faTools} size="lg"/></i>
 			                    <span>Communaute</span>
 			                </Link>

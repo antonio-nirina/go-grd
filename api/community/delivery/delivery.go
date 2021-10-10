@@ -11,7 +11,7 @@ import (
 )
 
 type inputAdCmty struct {
-	Streaming []string `json:"streaming"`
+	Streaming []entity.DataStreaming `json:"streaming"`
 }
 
 type CmtyResolve interface {
@@ -35,7 +35,7 @@ func NewResolverCmty(cmtyUseCase handler.UsecaseCmty, cmtyGame gameHandler.Useca
 }
 
 func (c *cmty) CreatePublicationResolve(params graphql.ResolveParams) (interface{}, error) {
-	var streams []string
+	var streams []entity.DataStreaming
 	jsonString, _ := json.Marshal(params.Args)
 	inputs := inputAdCmty{}
 	json.Unmarshal([]byte(jsonString), &inputs)
@@ -53,6 +53,7 @@ func (c *cmty) CreatePublicationResolve(params graphql.ResolveParams) (interface
 		Uid:       primitive.NewObjectID(),
 		Streaming: streams,
 		Game:      game,
+		Statut:    false,
 	}
 
 	res, err := c.cmtyHandler.CreatePublicationHandler(cmty)
