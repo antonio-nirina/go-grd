@@ -2,7 +2,6 @@ import React,{useState} from "react"
 import { useForm } from "react-hook-form"
 import {useMutation} from "@apollo/client"
 import {useHistory } from "react-router-dom"
-import { Link } from 'react-router-dom'
 import Header0 from "../header/header0"
 import {checkValidEmail} from "./utils"
 import {Translation} from "../../lang/translation"
@@ -39,7 +38,7 @@ const InitPass: React.FC = function() {
 				<div className="containt">
 					<div className="group">
 					<h2>
-						Réinitialisation mot de passe						
+						Réinitialisation mot de passe
 					</h2>
 						<div>
 							<span style={{"color":"red"}}>{errorForm ? Translation("fr").login.errorForm : ""}</span>
@@ -50,7 +49,7 @@ const InitPass: React.FC = function() {
 								<span className="major">Entre ton email afin de réinitialiser ton mot de passe</span>
 							</div>
 							<form onSubmit={handleSubmit(onSubmit)} className="fieldset">
-								<div className="field-container">									
+								<div className="field-container">
 									<div className="input-field">
 										<input className="mgt10" type = "email" placeholder = "Ton email" {...register("email", { required: true })} name="email" required/>
 									</div>
@@ -61,11 +60,6 @@ const InitPass: React.FC = function() {
 									</div>
 								</div>
 							</form>
-						</div>
-						<div className="center-width field-container">
-							<div className="infos">
-								<p className="member"><Link to = "/login" title="Se connecter">Se connecter</Link></p>								
-							</div>
 						</div>
 					</div>
 				</div>

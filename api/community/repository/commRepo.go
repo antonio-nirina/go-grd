@@ -29,7 +29,7 @@ type RepositoryCmty interface {
 	FindAllGAmeTwitchRepo() ([]entity.TwitchGame, error)
 	FindOneGamesTwitchRepo(id string) (entity.TwitchGame, error)
 
-	EditCmtyRepo(idQuery primitive.ObjectID) (interface{}, error)
+	EditCmtyRepo(idQuery primitive.ObjectID,statut bool) (interface{}, error)
 	RemoveCmtyRepo(idQuery primitive.ObjectID) (interface{}, error)
 }
 
@@ -135,13 +135,13 @@ func (c *driverRepository) FindOneGamesTwitchRepo(id string) (entity.TwitchGame,
 	return result, nil
 }
 
-func (c *driverRepository) EditCmtyRepo(idQuery primitive.ObjectID) (interface{}, error) {
+func (c *driverRepository) EditCmtyRepo(idQuery primitive.ObjectID,statut bool) (interface{}, error) {
 	var collection = c.client.Database("grd_database").Collection("communauty")
 	filter := bson.D{{"uid", idQuery}}
 	update := bson.D{
 		{"$set", bson.D{
 			{
-				"statut", true,
+				"statut", statut,
 			},
 		}}}
 	updateResult, err := collection.UpdateOne(context.TODO(), filter, update)

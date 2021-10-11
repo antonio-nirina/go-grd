@@ -53,6 +53,7 @@ export const GET_ALL_CMTY = gql`
                 createdAt
                 creatorName
                 thumbnailUrl
+				createdAt
             }
             game{
                 uid
