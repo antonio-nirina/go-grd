@@ -309,10 +309,8 @@ const Header: React.FC = function() {
 						<div className={!showList ? "dropdown" :"dropdown show"}>
 							<ul>
 								<li><Link to="/profil">Profil</Link></li>
-								<li><Link to="/tournament">Tournois</Link></li>								
-								<li><Link to="/waggers">Wager</Link></li>
-								<li><Link to="/communaute">Communauté</Link></li>
-								<li><Link to="/assistance">Assistance</Link></li>
+								<li className="border"><Link to="#">Cagnote (0 GC)</Link></li>								
+								<li className="border"><Link to="#">Paramètres</Link></li>
 								{userConnectedRedux.user && userConnectedRedux.user.roles && userConnectedRedux.user.roles.includes("role_admin") ? <li>
 									<span onClick={backAdmin} style={{"cursor":"pointer"}}>
 										{
