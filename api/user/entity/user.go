@@ -33,6 +33,7 @@ type User struct {
 	ConfirmationToken string 		`json:"confirmation_token,omitempty"`
 	Friends 	[]User 				`json:"friends,omitempty"`
 	Accounts 	[]Accounts 			`json:"accounts,omitempty"`
+	Games 		[]game.Game 			`json:"games,omitempty"`
 }
 
 func (u *User) CreatedHash(plainText string) (hashText string) {

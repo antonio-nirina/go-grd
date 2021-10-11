@@ -14,18 +14,6 @@ import {Twitch_GAMES} from "../gql/cmty/query"
 import {SigingAdminTwitch,getStreamByGame} from "./communaute"
 import {getAccessToken} from "../common/utils"
 
-type VideoClip = {
-	uid:string|undefined
-	id:string
-	video_id:string
-	game_id:string
-	title:string
-	viewer_count:number
-	created_at:string
-	thumbnail_url:string
-	creator_name:string
-	game_name:string
-}
 
 type VideoClipStreams = {
 	id:string
@@ -58,58 +46,43 @@ const SetRules: React.FC = function() {
 	const [games, setGames] = useState<any>([])
 	const [isLoader, setIsLoader] = useState<Boolean>(true)
 
-	const [streams, setStreams] = useState<Array<VideoClip>>([])
+	const [streams, setStreams] = useState<VideoClipStreams[]>([])
 	const { register, handleSubmit } 	= useForm<Inputs>()
 	const [createdPub]  			= useMutation(CREATE_PUBLICATION)
 	// const userConnectedRedux 			= useSelector((state:RootState) => state.userConnected)
 	const [selected, setSelected] = useState<string>("")
-	const [listStreams, setListStreams] = useState<Array<VideoClipStreams>>([])
 
-	const onSubmit = async function(data:Inputs){
-		let array:Array<VideoClipStreams> = []
-		if(listStreams.length === 0) {
-			streams.forEach(function(en:VideoClip){
-				array.push(
-					{
-						id:en.id,
-						createdAt:en.created_at,
-						videoId:en.video_id,
-						viewerCount:en.viewer_count,
-						creatorName:en.creator_name,
-						title:en.title,
-						gameId:en.game_id,
-						gameName:en.game_name,
-						thumbnailUrl:en.thumbnail_url
-					}
-				)
+	const onSubmit = async function<T>(data:T){
+		let array:VideoClipStreams[] = []
+		streams.forEach(function(en:VideoClipStreams){
+			let title:string = en.title
+			if(!/[a-zA-Z]/.test(en.title)){
+				title = ""
+			}
+			array.push({
+				id:en.id,
+				createdAt:en.createdAt,
+				videoId:en.videoId,
+				viewerCount:en.viewerCount,
+				creatorName:en.creatorName,
+				title:title,
+				gameId:en.gameId,
+				gameName:en.gameName,
+				thumbnailUrl:en.thumbnailUrl
 			})
-		} else {
-			array = listStreams
-		}
+		})
+
 		const result = await createdPub({ variables: {
 			streaming:array,
 			uidGame:uidGame,
 		} })
 		if (result.data.createPublication) {
-			history.push("/admin/communaute")
+			history.push("/admin/list/communaute")
 		}
 	}
-	const onSelected = function(el:VideoClip){
-		const newStreams = streams.filter((e:VideoClip) => {return (e.id !== el.id)})
+	const onSelected = function(el:VideoClipStreams){
+		const newStreams = streams.filter((e:VideoClipStreams) => {return (e.id !== el.id)})
 		setStreams(newStreams)
-		newStreams.forEach(function(en:VideoClip){
-			setListStreams([...listStreams,{
-				id:en.id,
-				createdAt:en.created_at,
-				videoId:en.video_id,
-				viewerCount:en.viewer_count,
-				creatorName:en.creator_name,
-				title:en.title,
-				gameId:en.game_id,
-				gameName:en.game_name,
-				thumbnailUrl:en.thumbnail_url
-			}])
-		})
 		setSelected(el.id)
 	}
 
@@ -139,9 +112,9 @@ const SetRules: React.FC = function() {
 		getGameTwitch(JSON.parse(strg).access_token).then(function(res:any){
 				console.log("res",res)
 			})
-	
+
 	*/
-	
+
 	/*const handleFiles = function(files: Array<File>, info: object, uploadHandler: Function) {
 		try {
         	resizeImage(files, uploadHandler)
@@ -150,10 +123,10 @@ const SetRules: React.FC = function() {
 	    }
 	}*/
 
-	const handleGame = async function(event:any){
+	const handleGame = async function(event:React.FormEvent<HTMLSelectElement>){
 		setIsLoader(true)
-		setUidGame(event.target.value)
-		const streams = await getStreamByGame(twitchToken.access_token,event.target.value,twitchToken.refresh_token)
+		setUidGame(event.currentTarget.value)
+		const streams = await getStreamByGame(twitchToken.access_token,event.currentTarget.value,twitchToken.refresh_token)
 		if(streams) setIsLoader(false)
 		setStreams(streams)
 	}
@@ -208,7 +181,7 @@ const SetRules: React.FC = function() {
 	    <div className="admin">
 			<div className="layout-container">
 				<SideBar />
-				{twitchToken.access_token ? 
+				{twitchToken.access_token ?
 					(<div className="content-wrapper">
 						<nav className="navbar">
 							<div></div>
@@ -247,24 +220,24 @@ const SetRules: React.FC = function() {
 														</p>
 													</div>
 												<div className="list-video">
-													<div className="video-check">														
+													<div className="video-check">
 															{
 																streams.length > 0 ?
-																streams?.map(function(el:VideoClip,index:number) {
+																streams?.map(function(el:VideoClipStreams,index:number) {
 																	return (
-																		<div  key={index} className="list-clip-stream"> 
+																		<div  key={index} className="list-clip-stream">
 																			<input type="checkbox" className="v-check" onChange={() => onSelected(el)} checked={selected && selected === el.id ? false:true} />
-																			<img style={{"width":"100%", "height":"268"}} src={el.thumbnail_url} className={!selected ? "notSelected" :"selected"} alt={el.id} />
+																			<img style={{"width":"100%", "height":"268"}} src={el.thumbnailUrl} className={!selected ? "notSelected" :"selected"} alt={el.id} />
 																		</div>
 																	)
 																})
 																: <>Accune video disponible pour l'instant </>
 															}
 
-													</div>																						
+													</div>
 												</div>
 												<div className="btn-container full-w">
-													<button className="btn bg-red center clear" type="submit" style={{"cursor":"pointer"}}><FontAwesomeIcon icon={faPlus} /> Valider</button>                                        
+													<button className="btn bg-red center clear" type="submit" style={{"cursor":"pointer"}}><FontAwesomeIcon icon={faPlus} /> Valider</button>
 												</div>
 											</form>
 										</div>

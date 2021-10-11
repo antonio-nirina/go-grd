@@ -118,13 +118,14 @@ func (c *cmty) FindAllStreamingTwitchResolver(params graphql.ResolveParams) (int
 
 func (c *cmty) EditStatutPublicationResolve(params graphql.ResolveParams) (interface{}, error) {
 	uid, _ := params.Args["uid"].(string)
+	statut, _ := params.Args["statut"].(bool)
 	_, err := c.cmtyHandler.FindCmtyHandler(uid)
 
 	if err != nil {
 		return nil, err
 	}
 
-	res, err := c.cmtyHandler.EditPublicationHandler(uid)
+	res, err := c.cmtyHandler.EditPublicationHandler(uid,statut)
 
 	if err != nil {
 		return nil, err
