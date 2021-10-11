@@ -21,7 +21,9 @@ const Nav = function() {
     }
 
     const onDeconnect = function() {
+        setIsLoader(true)
 		dispatch(removeDataUser())
+        localStorage.removeItem("access_token_twitch")
 		history.push("/admin/login")
 	}
 

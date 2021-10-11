@@ -2,7 +2,7 @@
 .inscription .main{
 	background:linear-gradient( rgba(0, 5, 0, 0.7) 100%, rgba(0, 0, 0, 0.7)100%), url("../../assets/image/redblack.jpg") no-repeat;
 	background-position: top center;
-	background-size: 100%;
+	background-size: 100% 100%;
 	padding-bottom: 40px;
 }
 .step a{
@@ -44,7 +44,7 @@
 	align-self: center;
 	width: 48%;
 }
-.inscription .account_type{
+.account_type{
 	padding-top: 25px;
 	max-width: 180px;
 	width: 100%;
@@ -52,16 +52,16 @@
 .pad15{
 	padding:0 10px;
 }
-.inscription .account_type a{
+.account_type a{
 	max-width: 178px;
 	width: 100%;
 	display: block;
 	margin-bottom: 20px;
 }
-.inscription .account_type img{
+.account_type img{
 	margin-right: 0;
 }
-.inscription .field-container{
+.field-container{
 	max-width: 600px;
 }
 .sideby{
@@ -101,4 +101,58 @@
 .center-width .major{
 	font-size: 11px;
 	font-style: italic;
+}
+.game-list-container{
+	margin-top: 7px;
+}
+.game-list-container p{
+	margin-bottom: 15px;
+}
+.favorite-game, .platform-content{
+	display: flex;
+	justify-content: center;
+}
+.favorite-game{
+	margin-bottom: 15px;
+}
+.favorite-game a, .platform-content a{
+	margin-right: 25px;
+}
+.platform p{
+	margin-bottom: 20px;
+}
+.infos-text p{
+	font-size: 13px;
+	margin-top: 10px;
+}
+.infos-text p.submit-btn a{
+	text-transform: uppercase;
+	font-size: 15px;	
+	background: #dd0000;
+	padding: 10px;
+	max-width: 340px;
+	width: 100%;
+	margin: 15px auto;
+	display: block;
+	border-radius: 5px;
+	border-radius: 5px;
+	border: 1px solid transparent;	
+}
+.infos-text p.submit-btn:hover a{
+	border: 1px solid #dd0000;
+	background: #000000;	
+}
+.infos-text p.submit-btn:hover a{
+	color: #dd0000;
+}
+.account.register-field{
+	display: block;
+	background: none;
+	margin: 0px auto;
+}
+.account p{
+	font-size: 14px;
+}
+.account .account_type{
+	margin: auto;
 }

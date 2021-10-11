@@ -1,0 +1,30 @@
+@charset "UTF-8";
+.account-container p{
+	margin-bottom: 5px;
+}
+.account-container p a{
+	font-size: 13px;	
+}
+.account-container .account_type{
+	padding-bottom: 0;
+}
+.account-container .account_type a{
+	font-weight: 700;
+	font-family: arial;
+}
+.account-container .center-width button.btn{
+	width: 100%	
+}
+.account .account_type .origin{
+	background: #ffffff;
+	color: #000000;
+}
+.account .account_type .uplay{
+	background: #1070ff;
+}
+.account .account_type .battlenet{
+	background: #1474e0;
+}
+.account .account_type .epicgame{
+	background: #313131;
+}

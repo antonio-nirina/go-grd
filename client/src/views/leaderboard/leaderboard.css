@@ -1,0 +1,82 @@
+.leaderboard .main .containt{
+	padding-top: 2em;	
+	width: 60%;
+	margin: auto;
+	text-align: inherit;	
+}
+.leaderboard h2{
+	text-transform: inherit;	
+	text-align: left;
+	width: 100%;
+	border-bottom: 1px solid #ffffff;
+	padding-bottom: 25px;
+	padding-right: 15px;
+}
+.leaderboard .title-lead{
+	margin-top: 25px;	
+}
+.leaderboard .title-game-list{
+	display: flex;
+}
+.leaderboard .game-list-name{
+	align-self: center;	
+	width: 100%;
+	text-align: center;
+}
+.leaderboard .game-list-name:first-child{
+	text-align: left;
+}
+.leaderboard .game-list-name span{
+	display: block;
+	align-self:center;
+	color: #797979;
+}
+.leaderboard .game-list-name.go span{
+	color: #ffffff;
+}
+.leaderboard .gamers-stats{
+	margin-top: 15px;
+	display: flex;
+}
+.leaderboard .gamers-stats span{
+	color: #646464;
+	font-size: 12px; 
+}
+.leaderboard .gamers-stats span, .leaderboard .classement-list span{
+	display: block;
+	width: 100%;
+	text-align: left;
+	margin-left: 5px;
+}
+.leaderboard .gamers-stats span.first{
+	text-align: left;
+}
+.leaderboard .classement-list span{
+
+}
+.leaderboard .classement-list span.first{
+	color: #dd0000;
+}
+
+.leaderboard .gamer-name-list span{
+	font-weight: 700;
+}
+.leaderboard .classement{
+	background: #2c2c2c;
+	border-radius: 10px;
+}
+.leaderboard .classement-list{
+	display: flex;	
+	padding: 15px;
+	border-bottom: 1px solid #525252;
+	margin: 10px;
+}
+.leaderboard .classement-list .lead{
+	display: flex;	
+}
+.leaderboard .classement-list img{
+	margin-right: 5px;
+}
+.leaderboard .classement-list img, .leaderboard .classement-list strong{
+	align-self: center;
+}

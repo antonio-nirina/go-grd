@@ -25,6 +25,7 @@ import ListAssist from "../assistance/list-assist"
 import DetailAssist from "../assistance/detail-assist"
 import CreateTitle from "../assistance/create-titre"
 import ListSubject from "../assistance/list-subject"
+import ListCommunaute from "../communaute/list-communaute"
 
 const Router = function() {
 	return (
@@ -51,6 +52,7 @@ const Router = function() {
 			<ProtectedRoute path="/admin/detail/assist/:id" exact component={DetailAssist} />
 			<ProtectedRoute path="/admin/create/subject" exact component={CreateTitle} />
 			<ProtectedRoute path="/admin/list/subject" exact component={ListSubject} />
+			<ProtectedRoute path="/admin/list/communaute" exact component={ListCommunaute} />
 		</Switch>
 	)
 }

@@ -1,13 +1,14 @@
 package handler
 
 import (
-	game "github.com/thoussei/antonio/api/games/handler"
+	cmtyEntity "github.com/thoussei/antonio/api/community/entity"
 )
 
 type CmtyViewModel struct {
-	Uid       string             `json:"uid"`
-	Streaming []string           `json:"streaming"`
-	Game      game.GameViewModel `json:"game"`
+	Uid       string                     `json:"uid"`
+	Streaming []cmtyEntity.DataStreaming `json:"streaming"`
+	Game      CmtyGameTwitchViewModel    `json:"game"`
+	Statut    bool                       `json:"statut"`
 }
 
 type CmtyGameTwitchViewModel struct {
@@ -36,19 +37,19 @@ type cmtystreamingViewModelTwitch struct {
 
 // list clips
 type CmtystreamingViewModelTwitch struct {
-	Id           string   `json:"id"`
-	Url       string   `json:"url"`
-	EmbedUrl    string   `json:"embed_url"`
-	BroadcasterId     string   `json:"broadcaster_id"`
-	BroadcasterName       string   `json:"broadcaster_name"`
-	CreatorId     string   `json:"creator_id"`
-	CreatorName         string   `json:"creator_name"`
-	VideoId        string   `json:"video_id"`
-	ViewerCount  int      `json:"viewer_count"`
-	GameId    string   `json:"game_id"`
-	Language     string   `json:"language"`
-	Title string   `json:"title"`
+	Id              string `json:"id"`
+	Url             string `json:"url"`
+	EmbedUrl        string `json:"embed_url"`
+	BroadcasterId   string `json:"broadcaster_id"`
+	BroadcasterName string `json:"broadcaster_name"`
+	CreatorId       string `json:"creator_id"`
+	CreatorName     string `json:"creator_name"`
+	VideoId         string `json:"video_id"`
+	ViewerCount     int    `json:"viewer_count"`
+	GameId          string `json:"game_id"`
+	Language        string `json:"language"`
+	Title           string `json:"title"`
 	CreatedAt       string `json:"created_at"`
-	ThumbnailUrl     string     `json:"thumbnail_url"`
-	Duration     int     `json:"duration"`
+	ThumbnailUrl    string `json:"thumbnail_url"`
+	Duration        int    `json:"duration"`
 }

@@ -5,6 +5,7 @@ import Index from "../version/home/index"
 // import Ligue from "../annexe/ligue"
 import Tournament from "../tournament/tournament"
 import Tournois from "../annexe/tournois"
+import Leaderboard from "../leaderboard/leaderboard"
 import Info from "../tournament/info"
 // import InfoLeague from "../annexe/info-league"
 import Matches from "../tournament/matches"
@@ -32,6 +33,8 @@ import InitPass from "../auth/initpass"
 import UpdatePassword from "../auth/updatePassword"
 import ProtectedRoute from "./protectedRoute"
 import Register from "../auth/register"
+import Account from "../auth/account"
+import Game from "../auth/game"
 import TournamentGame from "../tournament/tournament-game"
 // import LeagueGame from "../league/league-game"
 
@@ -41,6 +44,7 @@ const Router = function() {
 		<Switch>
 			<Route path="/" exact component={Index} />
 			<Route path="/index" exact component={Index} />
+			<ProtectedRoute path="/Leaderboard" exact component={Leaderboard} />
 			<ProtectedRoute path="/tournois" exact component={Tournament} />
 			<ProtectedRoute path="/tournament" exact component={Tournois} />
 			<ProtectedRoute path="/tournament-game" exact component={TournamentGame} />
@@ -66,6 +70,8 @@ const Router = function() {
 			<Route path="/login" exact component={Login} />
 			<Route path="/inscription" exact component={Inscription} />
 			<Route path="/register" exact component={Register} />
+			<Route path="/game" exact component={Game} />
+			<Route path="/account" exact component={Account} />
 			<Route path="/forgot-password" exact component={InitPass} />			
 		</Switch>
 	)

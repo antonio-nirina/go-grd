@@ -27,6 +27,10 @@ type RepositoryCmty interface {
 	FindAllCmtyRepo(pageNumber int64, limit int64) ([]entity.Communauty, error)
 	SaveGameTwitchRepository(gameTwitcch *entity.TwitchGame) (interface{}, error)
 	FindAllGAmeTwitchRepo() ([]entity.TwitchGame, error)
+	FindOneGamesTwitchRepo(id string) (entity.TwitchGame, error)
+
+	EditCmtyRepo(idQuery primitive.ObjectID) (interface{}, error)
+	RemoveCmtyRepo(idQuery primitive.ObjectID) (interface{}, error)
 }
 
 func (c *driverRepository) SavedCmtyRepo(community *entity.Communauty) (interface{}, error) {
@@ -116,4 +120,48 @@ func (c *driverRepository) FindAllGAmeTwitchRepo() ([]entity.TwitchGame, error) 
 	cur.Close(context.TODO())
 
 	return results, nil
+}
+
+func (c *driverRepository) FindOneGamesTwitchRepo(id string) (entity.TwitchGame, error) {
+	var collection = c.client.Database("grd_database").Collection("games_twitch")
+	var result entity.TwitchGame
+
+	err := collection.FindOne(context.TODO(), bson.M{"id": id}).Decode(&result)
+
+	if err != nil {
+		return result, err
+	}
+
+	return result, nil
+}
+
+func (c *driverRepository) EditCmtyRepo(idQuery primitive.ObjectID) (interface{}, error) {
+	var collection = c.client.Database("grd_database").Collection("communauty")
+	filter := bson.D{{"uid", idQuery}}
+	update := bson.D{
+		{"$set", bson.D{
+			{
+				"statut", true,
+			},
+		}}}
+	updateResult, err := collection.UpdateOne(context.TODO(), filter, update)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return updateResult.ModifiedCount, nil
+}
+
+func (c *driverRepository) RemoveCmtyRepo(idQuery primitive.ObjectID) (interface{}, error) {
+	var collection = c.client.Database("grd_database").Collection("communauty")
+	filter := bson.D{{"uid", idQuery}}
+
+	updateResult, err := collection.DeleteOne(context.TODO(), filter)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return updateResult.DeletedCount, nil
 }

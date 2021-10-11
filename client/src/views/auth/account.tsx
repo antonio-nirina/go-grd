@@ -2,12 +2,12 @@ import React from "react"
 import { Link } from 'react-router-dom'
 
 import Header0 from "../header/header0"
-import Infos from "./infos"
+import AccountList from "./account-list"
 import Footer from "../footer/footer"
 import "../auth/inscription.css"
 import "../../assets/css/style.css"
 
-const Register: React.FC = function() {
+const Account: React.FC = function() {
   return(
 	<div className="inscription">
 		<div className="container">
@@ -17,11 +17,11 @@ const Register: React.FC = function() {
 					<div className="group">
 					<h1>Inscription</h1>
 						<div className="step">
-							<Link to="/register" className="current">Mes infos <span></span></Link>
+							<Link to="/register" >Mes infos <span></span></Link>
 							<Link to="/game">Mes jeux <span></span></Link>
-							<Link to="/account">Mes comptes <span></span></Link>
+							<Link to="/account" className="current">Mes comptes<span></span></Link>
 						</div>
-						<Infos />
+						<AccountList />
 					</div>
 				</div>
 			</div>
@@ -31,4 +31,4 @@ const Register: React.FC = function() {
 	);
 }
 
-export default Register;
+export default Account;

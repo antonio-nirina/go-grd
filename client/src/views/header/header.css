@@ -79,6 +79,9 @@
     margin-right: 3px;
     position: relative;
 }
+.add-team img{
+	border-radius: 50%;
+}
 .lang{
  width: 28px;
  display: inline-block;

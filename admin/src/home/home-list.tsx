@@ -16,7 +16,6 @@ const HomeList : React.FC = function(props:any) {
 		if(!loading && !error && data) {
 			setListHome(data.FindAllHome)
 		}
-
 	},[loading,error,data,props])
 
 	return (
