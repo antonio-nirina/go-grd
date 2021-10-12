@@ -44,8 +44,8 @@ import {LIMIT,PAGE_NUMBER} from "../commons/constante"
 const Tournois: React.FC = function() {
 	const history = useHistory()
 	const userConnectedRedux = useSelector((state:RootState) => state.userConnected)
-	const [tournament, setTournament] = useState<Array<Tournament>>([])
-	const [lastTournament, setLastTournament] = useState<Array<any>>([])
+	const [tournament, setTournament] = useState<Tournament[]>([])
+	const [lastTournament, setLastTournament] = useState<Tournament[]>([])
 	const {loading,error,data} 	= useQuery(GET_ALL_TOURNAMENT, {
 		variables: {
 			limit:LIMIT,

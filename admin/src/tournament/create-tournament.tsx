@@ -53,20 +53,25 @@ const CreateTournament: React.FC = function() {
 			setIsValid(true)
 		}
 
-		const result = await createdTournament({ variables: {
-			date:startDate,
-			title:data.title,
-			uidGame:uiGame,
-			uidPalteforme:uidPlateform,
-			description:info,
-			numberParticipate:Math.pow(2,(Math.ceil(Math.log2(Number(data.participant))))),
-			numberTeam:data.numberTeam,
-			price:data.price,
-			deadlineDate:lastDate,
-			priceParticipate:data.priceParticipate,
-			rules:rules
-		} })
-		if (result.data.saveTournament) history.push("/admin/tournament")
+		try {
+			const result = await createdTournament({ variables: {
+				date:startDate,
+				title:data.title,
+				uidGame:uiGame,
+				uidPalteforme:uidPlateform,
+				description:info,
+				numberParticipate:Math.pow(2,(Math.ceil(Math.log2(Number(data.participant))))),
+				numberTeam:data.numberTeam,
+				price:data.price,
+				deadlineDate:lastDate,
+				priceParticipate:data.priceParticipate,
+				rules:rules
+			} })
+			if (result.data.saveTournament) history.push("/admin/tournament")
+		} catch(e:unknown) {
+			console.log("error", e)
+		}
+
 	}
 
 	const handleGame = function(event:any) {
@@ -115,12 +120,12 @@ const CreateTournament: React.FC = function() {
 	                                    <div className="group-input">
 	                                        <form onSubmit={handleSubmit(onSubmit)}>
 	                                        	<div className="premium">
-		                                        	<label className="switch">		                                        		
+		                                        	<label className="switch">
 		                                        		<input type="checkbox" value="false" />
-		                                        		<span className="slider">Premium</span>		                                        		
+		                                        		<span className="slider">Premium</span>
 		                                        	</label>
 	                                        	</div>
-	                                        	<input type="text" placeholder="Titre tournois" {...register("title")} name="title"/>	                                        	
+	                                        	<input type="text" placeholder="Titre tournois" {...register("title")} name="title"/>
 	                                            <select id="jeux" onChange={handleGame}>
 	                                                <option value="">Selectionnez le jeux...</option>
 	                                                {

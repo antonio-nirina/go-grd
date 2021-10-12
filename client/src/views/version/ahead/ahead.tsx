@@ -39,10 +39,6 @@ const Ahead: React.FC = function() {
 	      		</div>
       		</div>
       		<div className="Right">
-	      		<div className="annonce undertitle">
-	      			<h2>En ce moment (1225 tournois ce mois-ci)</h2>
-	      			<p>Les prochains tournois à venir</p>
-	      		</div>
 	      		<TournamentInc />
 	      		<div className="annonce undertitle">
 	      			<h2>Les meilleurs joueurs de la saison</h2>
