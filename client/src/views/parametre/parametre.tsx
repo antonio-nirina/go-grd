@@ -85,7 +85,7 @@ const Settings: React.FC = function() {
 											<i><FontAwesomeIcon icon={faYoutube} /></i>
 											<p>									
 												<strong>Youtube</strong>
-												<span>Skouinar</span>
+												<span>Non connecté</span>
 											</p>
 										</div>									
 									</div>
@@ -94,7 +94,7 @@ const Settings: React.FC = function() {
 											<i><FontAwesomeIcon icon={faFacebook} /></i>
 											<p>									
 												<strong>Facebook</strong>
-												<span>Skouinar</span>
+												<span>Non connecté</span>
 											</p>
 										</div>									
 									</div>
@@ -114,7 +114,7 @@ const Settings: React.FC = function() {
 											<i><FontAwesomeIcon icon={faPlaystation} /></i>
 											<p>									
 												<strong>Playstation</strong>
-												<span>Skouinar</span>
+												<span>Non connecté</span>
 											</p>
 										</div>									
 									</div>
@@ -123,7 +123,7 @@ const Settings: React.FC = function() {
 											<i><FontAwesomeIcon icon={faTwitter} /></i>
 											<p>									
 												<strong>Twiiter</strong>
-												<span>Skouinar</span>
+												<span>@Skouinar</span>
 											</p>
 										</div>									
 									</div>
