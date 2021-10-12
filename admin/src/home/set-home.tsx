@@ -37,7 +37,7 @@ const SetHome: React.FC = function() {
 	const onSubmit1 = async function(){
 		// let array:Array<any> = []
 		let nIncontent:Array<any> = []
-		
+
 		for(let i=0;i<titleUnder.length;i++) {
 			nIncontent.push({
 				title:title[i],
@@ -46,6 +46,10 @@ const SetHome: React.FC = function() {
 			})
 		}
 		console.log(nIncontent)
+		console.log(image)
+		console.log(imageGame)
+		console.log(imageType)
+		console.log(imageGameType)
 		/*const result = await createdHomePage({ variables: {
 			name:"",
 			title:title,
@@ -118,18 +122,18 @@ const SetHome: React.FC = function() {
         								<button onClick={addForm} className="btn bg-red"><i><FontAwesomeIcon icon={faPlus} size="lg"/></i>Ajouter Nouveau bloc</button>
         							</div>
         						</div>
-	        					<div className="group-input">	        						
+	        					<div className="group-input">
                                     <div className="input-group">
                                     	<label htmlFor="sliderImg" className="entete">Importer une image header</label>
-                                    	<label htmlFor="bg-game" className="entete">Importer une image de fond du jeux</label>		                                            	
+                                    	<label htmlFor="bg-game" className="entete">Importer une image de fond du jeux</label>
                                     </div>
                                     <div className="input-group">
                                         <input type="file" id="sliderImg" onChange={(e)=>{handleUpload(e,true)}} />
                                         <input type="file" id="bg-game" onChange={(e)=>{handleUpload(e)}} className="no-margin" />
-                                    </div>	        						
+                                    </div>
                                     <form className="wysiwyg-container" onSubmit={handleSubmit(onSubmit1)}>
                                     	{/*Classe line pour la ligne, class both pour la colonne
-	                                    	Nb : 1 ligne = 2 colonne*/}                                   	
+	                                    	Nb : 1 ligne = 2 colonne*/}
                                     	<div className="line">
 		                                    <div className="both">
 		                                    	<div className="bloc">
@@ -166,7 +170,7 @@ const SetHome: React.FC = function() {
 																}
 														} />
 	    											</div>
-		    									</div>		    									
+		    									</div>
 		    								</div>
 		    							</div>
 		    							{

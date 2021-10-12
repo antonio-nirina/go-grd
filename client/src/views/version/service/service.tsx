@@ -11,13 +11,32 @@ const Service: React.FC = function() {
   return(
     <div className="service">
     	<div className="service-container">
-    		<div className="bloc-items light-gray">
-    			<div className="service-img light-gray">
-    				<img src={waggers} alt="" width="100%"/>
-    			</div>
+            <h2>C'est quoi GO GRIND ?</h2>
+            <div className="bloc-items light-gray">
+                <div className="service-img light-gray">
+                    <img src={tournament} alt="" width="325"/>
+                </div>
+                <div className="service-modal dark-gray">
+                    <div className="undertitle">
+                        <h3>Participer à des tournois / ligues</h3>
+                        <span>Joue en ligne contre dʼautres joueurs du monde entier et gagne des prix</span>
+                        <p>
+                        Créez un match de défi pour PlayStation,Xbox ici et devenez un grand joueur en
+                        fixant votre propre taux de rémunération et en montrant au monde que vous avez
+                        les compétences nécessaires pour affronter le meilleur. Nos défis offrent une vaste
+                        gamme de personnalisations que vous pouvez utiliser pour vous assurer que vous
+                        jouez le type de match qui, selon vous, affiche le plus précisément vos
+                        compétences, quʼil sʼagisse dʼun match terminé, du meilleur des trois ou même du
+                        meilleur des cinq. Nous proposons actuellement des défis sur Call of Duty :
+                        Modern Warfare, Fortnite, Rocket League et plus encore !
+                        </p>
+                    </div>
+                </div>                
+            </div>
+    		<div className="bloc-items light-gray">    			
     			<div className="service-modal dark-gray">
     				<div className="undertitle">
-    					<h2>Waggers</h2>
+    					<h3>Waggers</h3>
     					<span>Affronte des joueurs du monde entier</span>
     					<p>
 							Créez un match de défi pour PlayStation,Xbox ici et devenez un grand joueur en
@@ -31,35 +50,17 @@ const Service: React.FC = function() {
     					</p>
     				</div>
     			</div>
-    		</div>
-    		<div className="bloc-items light-gray">
-    			<div className="service-modal dark-gray">
-    				<div className="undertitle">
-    					<h2>Participer à des tournois / ligues</h2>
-    					<span>Joue en ligne contre dʼautres joueurs du monde entier et gagne des prix</span>
-    					<p>
-						Créez un match de défi pour PlayStation,Xbox ici et devenez un grand joueur en
-						fixant votre propre taux de rémunération et en montrant au monde que vous avez
-						les compétences nécessaires pour affronter le meilleur. Nos défis offrent une vaste
-						gamme de personnalisations que vous pouvez utiliser pour vous assurer que vous
-						jouez le type de match qui, selon vous, affiche le plus précisément vos
-						compétences, quʼil sʼagisse dʼun match terminé, du meilleur des trois ou même du
-						meilleur des cinq. Nous proposons actuellement des défis sur Call of Duty :
-						Modern Warfare, Fortnite, Rocket League et plus encore !
-    					</p>
-    				</div>
-    			</div>
-    			<div className="service-img light-gray">
-    				<img src={tournament} alt="" width="325"/>
-    			</div>
-    		</div>
+                <div className="service-img light-gray">
+                    <img src={waggers} alt="" width="100%"/>
+                </div>
+    		</div>    		
     		<div className="bloc-items light-gray">
     			<div className="service-img light-gray">
     				<img src={commu} alt="" width="325"/>
     			</div>
     			<div className="service-modal dark-gray">
     				<div className="undertitle">
-    					<h2>Joue avec la communautés</h2>
+    					<h3>Joue avec la communautés</h3>
     					<span>Des centaines de joueurs en ligne pour trouver</span>
     					<p>
 						Créez un match de défi pour PlayStation,Xbox ici et devenez un grand joueur en
@@ -82,7 +83,7 @@ const Service: React.FC = function() {
     			</div>
     			<div className="service-modal dark-gray">
     				<div className="undertitle">
-    					<h2>Waggers</h2>
+    					<h3>Waggers</h3>
     					<span>Affronte des joueurs du monde entier</span>
     					<p>
     						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus euismod ante

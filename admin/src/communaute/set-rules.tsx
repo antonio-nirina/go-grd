@@ -47,7 +47,7 @@ const SetRules: React.FC = function() {
 	const [isLoader, setIsLoader] = useState<Boolean>(true)
 
 	const [streams, setStreams] = useState<VideoClipStreams[]>([])
-	const { register, handleSubmit } 	= useForm<Inputs>()
+	const { handleSubmit } 	= useForm<Inputs>()
 	const [createdPub]  			= useMutation(CREATE_PUBLICATION)
 	// const userConnectedRedux 			= useSelector((state:RootState) => state.userConnected)
 	const [selected, setSelected] = useState<string>("")
@@ -99,7 +99,7 @@ const SetRules: React.FC = function() {
 	const {loading,error,data} 	= useQuery(Twitch_GAMES,{
 		variables:{
 			accessToken:getAccessToken()?.access_token,
-			refreshToken:getAccessToken()?.refresh_token 
+			refreshToken:getAccessToken()?.refresh_token
 		}
 	})
 	useEffect(() => {
