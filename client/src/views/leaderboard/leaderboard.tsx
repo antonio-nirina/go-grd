@@ -4,7 +4,7 @@ import Header from "../header/header"
 import Footer from "../footer/footer"
 import "../leaderboard/leaderboard.css"
 
-import King from "../../assets/image/icons/king.jpg"
+import King from "../../assets/image/icons/king.png"
 
 
 const Leaderboard: React.FC = function() {

@@ -260,7 +260,6 @@ const SetRules: React.FC = function() {
 																})
 																: <>Accune video disponible pour l'instant </>
 															}
-
 													</div>																						
 												</div>
 												<div className="btn-container full-w">

@@ -66,6 +66,8 @@ const ListCommunaute = function() {
                     })
                 });
             })
+			console.log("data", data)
+			console.log("array", array)
 			setCmty(array)
 		}
 	},[loading,error,data,isLoader])
