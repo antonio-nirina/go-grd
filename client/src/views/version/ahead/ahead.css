@@ -1,0 +1,169 @@
+@charset "UTF-8";
+
+.Imgresp{
+	width: 100%;	
+}
+.slick-track{
+	width: inherit !Important;
+}
+.full{
+	position: absolute;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	display: flex;
+}
+.full .Left{
+	width: 55%;
+	text-align: center;
+	align-self:center;
+}
+.full .Right{
+	width: 45%;
+	background: rgba(0,0,0,0.1);
+	padding: 5px;
+}
+.full .annonce.undertitle{
+	margin-bottom: 0px;
+	margin: 6px;
+}
+.full .annonce.undertitle:before{
+	content: "";
+	display: inline-block;
+	width: 10px;
+	height: 40px;
+	background: #dd0000;
+	float: left;
+	margin-right: 10px;
+}
+.full .annonce.undertitle h2{
+	font-family: "arial";
+	font-weight: normal;
+	font-size: 15px; 
+}
+.annonce.undertitle p{
+	font-size: 13px;
+}
+.slider{
+	position: relative;
+}
+.slogan{
+	
+}
+p.title{	
+	font-size: 25px;
+}
+.slogan a{
+	font-weight: bold;
+    display: block;
+    font-size: 18px;
+}
+.slogan .btn{
+	font-family: "quicksand regular";
+	text-transform: uppercase;
+	padding: 7px 20px;
+	font-size: 20px;    
+    border: none;
+    margin-top: 15px;
+    background: #dd0000;
+    color: #fff;
+}
+.carousel-status{
+	display: none !Important;
+}
+.list_tournament{
+	display: flex;
+	padding: 0px;
+	background: #2c2c2c;
+	margin-bottom: 5px;
+}
+.list_tournament img{
+	margin: 0 10px;
+}
+.list_tournament p{
+	font-size: 12px; 
+	align-self: center;		
+	margin-right: 20px;
+	text-align: center;
+}
+.list_tournament img{
+	align-self: center;
+}
+.list_tournament span{
+	display: block;
+}
+.list_tournament .game_name{
+	text-transform: uppercase;
+	font-weight: bold;
+	font-family: arial;
+	font-size: 12px;	
+}
+.list_tournament .game_name span{
+	font-weight: normal;	
+	font-size: 12px;
+}
+.list_tournament .cashprize{
+	font-size: 10px;
+	color: gray;	
+}
+.list_tournament .cashprize span{
+	color: #ffffff;
+	font-size: 12px;
+}
+.list_tournament .place span{
+	color: gray;
+}
+.list_tournament i{
+	font-size: 17px;
+}
+.best-gamer{
+	display: flex;
+}
+.global{
+	width: 100%;	
+	margin-right: 20px;	
+	
+}
+.global:last-child{
+	margin-right: 0;
+}
+.global .best_content{
+	background: #2c2c2c;
+	border-radius: 7px;	
+}
+
+.global .best_content div{
+	display: flex;
+	border-bottom: 1px solid gray;
+	margin: 0 15px;
+}
+.global .best_content div:last-child{
+	border-bottom: 0;
+}
+.global p{
+	font-size: 12px;
+	font-weight: bold;
+	text-align: center;
+	margin-bottom: 5px;
+}
+.global span{
+	font-size: 12px;
+	align-self: center;
+	width: 100%;
+	text-align: center;
+	padding: 5px 0;	
+	font-family: arial;
+}
+.global span img{
+	align-self: center;
+	margin-top: 5px;
+}
+.global .middle{
+	font-weight: bold;
+}
+.global .self{
+	width: 50px;
+}
+.first{
+	color: #dd0000;
+}

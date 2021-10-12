@@ -16,7 +16,7 @@ type UsecaseCmty interface {
 	FindAllGamesTwitch() ([]CmtyGameTwitchViewModel, error)
 	FindOneGamesTwitch(id string) (entity.TwitchGame, error)
 
-	EditPublicationHandler(id string) (interface{}, error)
+	EditPublicationHandler(id string,statut bool) (interface{}, error)
 	RemovePublicationHandler(id string) (interface{}, error)
 }
 
@@ -244,9 +244,9 @@ func (c *cmtytUsecase) FindOneGamesTwitch(id string) (entity.TwitchGame, error) 
 	return val, nil
 }
 
-func (c *cmtytUsecase) EditPublicationHandler(id string) (interface{}, error) {
+func (c *cmtytUsecase) EditPublicationHandler(id string,statut bool) (interface{}, error) {
 	objectId, err := primitive.ObjectIDFromHex(id)
-	_, err = c.cmtyRepository.EditCmtyRepo(objectId)
+	_, err = c.cmtyRepository.EditCmtyRepo(objectId,statut)
 
 	if err != nil {
 		return nil, err

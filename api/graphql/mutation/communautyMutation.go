@@ -63,6 +63,9 @@ func EditStatutPublication() *graphql.Field {
 			"uid": &graphql.ArgumentConfig{
 				Type: graphql.String,
 			},
+			"statut": &graphql.ArgumentConfig{
+				Type: graphql.Boolean,
+			},
 		},
 		Resolve: cmtyResolver.EditStatutPublicationResolve,
 	}
