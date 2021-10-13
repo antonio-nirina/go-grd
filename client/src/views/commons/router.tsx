@@ -49,11 +49,11 @@ const Router = function() {
 			<ProtectedRoute path="/tournois" exact component={Tournament} />
 			<ProtectedRoute path="/tournament" exact component={Tournois} />
 			<ProtectedRoute path="/tournament-game" exact component={TournamentGame} />
-			<ProtectedRoute path="/info" exact component={Info} />			
+			<ProtectedRoute path="/info" exact component={Info} />
 			<ProtectedRoute path="/bracket" exact component={Bracket} />
 			<ProtectedRoute path="/matches" exact component={Matches} />
 			<ProtectedRoute path="/teams" exact component={Teams} />
-			<ProtectedRoute path="/rules" exact component={Rules} />			
+			<ProtectedRoute path="/rules" exact component={Rules} />
 			<ProtectedRoute path="/wager" exact component={Wager} />
 			<ProtectedRoute path="/joingame" exact component={Joingame} />
 			<ProtectedRoute path="/waggers" exact component={Waggers} />
@@ -62,19 +62,19 @@ const Router = function() {
 			<ProtectedRoute path="/waggers-game" exact component={WaggersGame} />
 			<ProtectedRoute path="/view" exact component={View} />
 			<ProtectedRoute path="/lobby" exact component={Lobby} />
-			<ProtectedRoute path="/communaute" exact component={Communaute} />			
+			<ProtectedRoute path="/communaute" exact component={Communaute} />
 			<ProtectedRoute path="/assistant" exact component={Assistant} />
-			<ProtectedRoute path="/assistance" exact component={Assistance} />			
+			<ProtectedRoute path="/assistance" exact component={Assistance} />
 			<ProtectedRoute path="/contact" exact component={Contact} />
 			<ProtectedRoute path="/profil" exact component={Profil} />
 			<ProtectedRoute path="/parametre" exact component={Parametre} />
-			<ProtectedRoute path="/update-password" exact component={UpdatePassword} />						
+			<ProtectedRoute path="/update-password" exact component={UpdatePassword} />
 			<Route path="/login" exact component={Login} />
 			<Route path="/inscription" exact component={Inscription} />
 			<Route path="/register" exact component={Register} />
-			<Route path="/game" exact component={Game} />
-			<Route path="/account" exact component={Account} />
-			<Route path="/forgot-password" exact component={InitPass} />			
+			<ProtectedRoute path="/game" exact component={Game} />
+			<ProtectedRoute path="/account" exact component={Account} />
+			<Route path="/forgot-password" exact component={InitPass} />
 		</Switch>
 	)
 }

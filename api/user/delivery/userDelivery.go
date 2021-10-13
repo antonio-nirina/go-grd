@@ -100,13 +100,28 @@ func (r *resolver) SavedUserResolver(params graphql.ResolveParams) (interface{},
 		BirtDate:      "",
 	}
 
-	res, err := r.userHandler.SavedUser(userSaved)
+	_, err := r.userHandler.SavedUser(userSaved)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return res, nil
+	res, err := r.userHandler.FindUserByUsername(input.UserInput.Email)
+	if err != nil {
+		return "", errors.New("Email or username not found")
+	}
+	var wg sync.WaitGroup
+	token, err := GetToken(res)
+
+	if err != nil {
+		return "", errors.New("Error interne try after an moment")
+	}
+
+	wg.Add(1)
+	go r.userHandler.NotifConnected(&res, &wg)
+	wg.Wait()
+	
+	return token, nil
 }
 
 func (r *resolver) FindOneUserResolver(params graphql.ResolveParams) (interface{}, error) {
