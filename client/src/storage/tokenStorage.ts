@@ -19,7 +19,6 @@ export const getAccessTokenTwitch = function() {
 
 		return data.access_token
 	}
-
 }
 
 export const getDataByToken = function() {

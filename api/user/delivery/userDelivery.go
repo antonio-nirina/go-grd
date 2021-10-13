@@ -96,6 +96,8 @@ func (r *resolver) SavedUserResolver(params graphql.ResolveParams) (interface{},
 		TypeConnexion: "site",
 		Created:       time.Now().Format(time.RFC3339),
 		Friends:       []entity.User{},
+		Country:       "France",
+		BirtDate:      "",
 	}
 
 	res, err := r.userHandler.SavedUser(userSaved)
@@ -301,6 +303,16 @@ func GetToken(user entity.User) (interface{}, error) {
 		return "", errors.New("Error interne")
 	}
 
+	dateBirth := ""
+	country := "France"
+	if user.BirtDate != "" {
+		dateBirth = user.BirtDate
+	}
+
+	if user.Country != "" {
+		country = user.Country
+	}
+
 	var frd = []string{}
 	claims := _jwt.MapClaims{}
 	claims["uid"] = user.Uid.Hex()
@@ -312,6 +324,8 @@ func GetToken(user entity.User) (interface{}, error) {
 	claims["username"] = user.Username
 	claims["created"] = user.Created
 	claims["roles"] = user.Roles
+	claims["birtDate"] = dateBirth
+	claims["country"] = country
 
 	if len(user.Friends) > 0 {
 		for _, v := range user.Friends {
