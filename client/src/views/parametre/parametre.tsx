@@ -24,13 +24,13 @@ const Settings: React.FC = function() {
 						<div className="menu-left">
 							<ul>
 								<li className="active_link">
-									<Link to="#">Mes infos</Link>
+									<Link to="/parametre">Mes infos</Link>
 								</li>
 								<li>
-									<Link to="#">Ma cagnotte</Link>
+									<Link to="/jackpot">Ma cagnotte</Link>
 								</li>
 								<li>
-									<Link to="#">Mes jeux</Link>
+									<Link to="/mygames">Mes jeux</Link>
 								</li>
 								<li>
 									<Link to="#">Assistance</Link>
