@@ -1,14 +1,14 @@
 import React from "react"
 import { Link } from 'react-router-dom'
 
-import { useSelector } from "react-redux"
+// import { useSelector } from "react-redux"
 import Header from "../header/header"
 import Footer from "../footer/footer"
 import "../parametre/parametre.css"
-
+// import {RootState} from "../../reducer"
 
 const Jackpot: React.FC = function() {
-	const userConnectedRedux = useSelector((state:RootState) => state.userConnected)
+	// const userConnectedRedux = useSelector((state:RootState) => state.userConnected)
   return(
 	<div className="leaderboard settings jackpot">
 		<div className="container">
@@ -16,7 +16,7 @@ const Jackpot: React.FC = function() {
 			<div className="main">
 				<div className="containt">
 					<h2>Paramètres</h2>
-					<div className="title-lead">						
+					<div className="title-lead">
 						<div className="menu-left">
 							<ul>
 								<li>
@@ -50,7 +50,7 @@ const Jackpot: React.FC = function() {
 								<button className="btn bg-red">Acheter des G-coins</button>
 							</div>
 						</div>
-					</div>					
+					</div>
 				</div>
 			</div>
 			<Footer/>
