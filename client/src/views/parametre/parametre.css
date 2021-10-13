@@ -111,3 +111,106 @@
 	line-height: 14px;
 	margin-bottom: 8px;
 }
+/****************************************************************/
+.jackpot .personal{
+	display: flex;
+	width: 100%;
+}
+.jackpot .historical{
+	width: 58%;
+	margin-right: 15px
+}
+.jackpot .pay{
+	width: 40%;
+}
+.jackpot .pay h3{
+	
+}
+.jackpot .total{
+	display: flex;
+	padding: 5px 0;
+	border-bottom: 1px solid #797979;
+	margin-bottom: 5px;
+}
+.jackpot .total span{
+	width: 100%;
+	color: #ffffff;
+	font-size: 13px;
+}
+.jackpot .historical p{
+	text-align: center;
+	font-size: 14px;
+	color: #797979;
+}
+.jackpot .credit{
+	padding: 7px 0px;
+}
+
+.jackpot .personal-infos p{
+	color: #ffffff;
+	text-align: left;
+	font-size: 14px;
+	padding-top: 15px;
+	margin-bottom: 10px;
+}
+.jackpot .personal-infos p span{
+	display: block;
+	color: #797979;
+	border-bottom: 1px solid #797979;	
+}
+/******************************************/
+.mygames .personal{
+	display: block;
+}
+.mygames h3{
+	width: 93%;
+}
+.mygames .personal-infos{
+	display: block;
+	width: 100%;
+}
+.mygames .historical{
+	width: 93%;
+}
+.mygames .historical span{
+	border-bottom: 1px solid #797979;
+	display: block;
+}
+.mygames .data-perso p{
+	font-size: 13px;
+}
+.mygames .data-perso span{
+	font-size: 12px;
+}
+.mygames .personal-infos p:last-child{
+	padding-top: 0;
+}
+.mygames .account-games{
+	display: flex;
+}
+.mygames .account-games .data-perso{
+	margin-right: 15px;
+}
+.mygames .account-games div{
+	width: 250px;
+	align-self: top;	
+}
+.mygames .mygame-list{
+	display: flex;
+	align-self: center;
+	margin-top: 20px;
+}
+.mygames .mygame-list img{
+	margin-right: 15px;
+	width: 115px;
+	border: 1px solid #797979;
+}
+.mygames .mygame-list img:last-child{
+	margin-right: 0;
+}
+.personal-infos button{
+	margin-top: 20px;
+}
+.personal-account{
+	margin-bottom: 20px;
+}

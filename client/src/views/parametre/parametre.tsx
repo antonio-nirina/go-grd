@@ -1,16 +1,18 @@
 import React from "react"
 import { Link } from 'react-router-dom'
 
+import { useSelector } from "react-redux"
 import Header from "../header/header"
 import Footer from "../footer/footer"
 import "../parametre/parametre.css"
 
 import { faTwitch, faYoutube, faFacebook, faXbox, faPlaystation, faTwitter } from "@fortawesome/free-brands-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import {RootState} from "../../reducer"
 
 
 const Settings: React.FC = function() {
-	
+	const userConnectedRedux = useSelector((state:RootState) => state.userConnected)
   return(
 	<div className="leaderboard settings">
 		<div className="container">
@@ -22,13 +24,13 @@ const Settings: React.FC = function() {
 						<div className="menu-left">
 							<ul>
 								<li className="active_link">
-									<Link to="#">Mes infos</Link>
+									<Link to="/parametre">Mes infos</Link>
 								</li>
 								<li>
-									<Link to="#">Ma cagnotte</Link>
+									<Link to="/jackpot">Ma cagnotte</Link>
 								</li>
 								<li>
-									<Link to="#">Mes jeux</Link>
+									<Link to="/mygames">Mes jeux</Link>
 								</li>
 								<li>
 									<Link to="#">Assistance</Link>
@@ -40,32 +42,29 @@ const Settings: React.FC = function() {
 							<form className="personal-field">
 								<div className="field-container">
 									<label htmlFor="email">E-mail</label>
-									<input id="email" type="email" value="skouinar@gmail.com"/>
+									<input id="email" type="email" value={userConnectedRedux.user.email} />
 								</div>
 								<div className="field-middle">
 									<div className="field-container">										
-										<input type="text" value="Prénom" />
+										<input type="text" value={userConnectedRedux.user.firstname} />
 									</div>
 									<div className="field-container">										
-										<input type="text" value="Nom" />
+										<input type="text" value={userConnectedRedux.user.lastname} />
 									</div>									
 								</div>
 								<div className="field-middle">
 									<div className="field-container">
 										<label htmlFor="pseudo">Pseudo</label>
-										<input id="pseudo" type="text" value="Skouinar" />
+										<input id="pseudo" type="text" value={userConnectedRedux.user.username} />
 									</div>
 									<div className="field-container">
-										<label htmlFor="pays">Pays</label>										
-										<select>
-											<option id="pays">France</option>
-											<option>Madagascar</option>
-										</select>
+										<label htmlFor="pays">Pays</label>
+										<input id="pays" type="text" value={userConnectedRedux.user.country} />										
 									</div>
 								</div>
 								<div className="field-container">
 									<label htmlFor="date">Date de naissance</label>
-									<input type="text" value="11/04/1997" />
+									<input type="text" value={userConnectedRedux.user.birtDate} />
 								</div>
 							</form>							
 							<h3>Réseaux sociaux</h3>							

@@ -82,7 +82,7 @@ var argsUpated = graphql.FieldConfigArgument{
 
 func createdUser() *graphql.Field {
 	return &graphql.Field{
-		Type:        types.UserSchemaType,
+		Type:        graphql.String,
 		Description: "Created user",
 		Args:        args,
 		Resolve:     UserRolve.SavedUserResolver,

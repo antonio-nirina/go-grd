@@ -56,8 +56,6 @@ const ListGame : React.FC = function() {
 					    			</Link>
                         		)
                             })}
-
-
 			    		</div>
 			    	</div>
 		    	</div>

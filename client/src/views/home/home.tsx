@@ -25,7 +25,7 @@ const GetProfilUser = function ({token}:any) {
 	})
 	useEffect(() => {
 		if(!loading && !error && data) {
-			const name:Array<string> = data.GetProfilUserXbox.DisplayName.split(" ")
+			const name:string[] = data.GetProfilUserXbox.DisplayName.split(" ")
 			const user:UserType = {
 				uid:"",
 				username:name[0],
@@ -47,26 +47,26 @@ const GetProfilUser = function ({token}:any) {
 
 const Home: React.FC = function() {
 	const userConnectedRedux = useSelector((state:RootState) => state.userConnected)
-  return(
-    <div className="home" >
-      <div className="container">
-	      <Header/>
-	      <div className="main">
-	        <div className="slider">
-	        	<Slider/>
-				{getAccessToken() && Object.keys(userConnectedRedux.user).length === 0 ? <GetProfilUser token={getAccessToken()} /> : <></>}
-	        </div>
-	        <div className="participate">
-	        	<Participate/>
-	        </div>
-	      </div>
-	      <Game/>
-	      <Community/>
-		  {Object.keys(userConnectedRedux.user).length === 0 ? <Join/> : null}
-	      <Footer/>
-	  </div>
-    </div>
-  )
+  	return(
+		<div className="home" >
+		<div className="container">
+			<Header/>
+			<div className="main">
+				<div className="slider">
+					<Slider/>
+					{getAccessToken() && Object.keys(userConnectedRedux.user).length === 0 ? <GetProfilUser token={getAccessToken()} /> : <></>}
+				</div>
+				<div className="participate">
+					<Participate/>
+				</div>
+			</div>
+			<Game/>
+			<Community/>
+			{Object.keys(userConnectedRedux.user).length === 0 ? <Join/> : null}
+			<Footer/>
+		</div>
+		</div>
+  	)
 }
 
 export default Home

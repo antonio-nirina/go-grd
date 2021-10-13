@@ -96,15 +96,32 @@ func (r *resolver) SavedUserResolver(params graphql.ResolveParams) (interface{},
 		TypeConnexion: "site",
 		Created:       time.Now().Format(time.RFC3339),
 		Friends:       []entity.User{},
+		Country:       "France",
+		BirtDate:      "",
 	}
 
-	res, err := r.userHandler.SavedUser(userSaved)
+	_, err := r.userHandler.SavedUser(userSaved)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return res, nil
+	res, err := r.userHandler.FindUserByUsername(input.UserInput.Email)
+	if err != nil {
+		return "", errors.New("Email or username not found")
+	}
+	var wg sync.WaitGroup
+	token, err := GetToken(res)
+
+	if err != nil {
+		return "", errors.New("Error interne try after an moment")
+	}
+
+	wg.Add(1)
+	go r.userHandler.NotifConnected(&res, &wg)
+	wg.Wait()
+	
+	return token, nil
 }
 
 func (r *resolver) FindOneUserResolver(params graphql.ResolveParams) (interface{}, error) {
@@ -301,6 +318,16 @@ func GetToken(user entity.User) (interface{}, error) {
 		return "", errors.New("Error interne")
 	}
 
+	dateBirth := ""
+	country := "France"
+	if user.BirtDate != "" {
+		dateBirth = user.BirtDate
+	}
+
+	if user.Country != "" {
+		country = user.Country
+	}
+
 	var frd = []string{}
 	claims := _jwt.MapClaims{}
 	claims["uid"] = user.Uid.Hex()
@@ -312,6 +339,8 @@ func GetToken(user entity.User) (interface{}, error) {
 	claims["username"] = user.Username
 	claims["created"] = user.Created
 	claims["roles"] = user.Roles
+	claims["birtDate"] = dateBirth
+	claims["country"] = country
 
 	if len(user.Friends) > 0 {
 		for _, v := range user.Friends {
