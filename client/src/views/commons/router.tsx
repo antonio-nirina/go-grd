@@ -29,6 +29,8 @@ import Communaute from "../communaute/communaute"
 import Login from "../auth/login"
 import Profil from "../profil/profil"
 import Parametre from "../parametre/parametre"
+import Jackpot from "../parametre/jackpot"
+import Mygames from "../parametre/mygames"
 import Inscription from "../auth/inscription"
 import InitPass from "../auth/initpass"
 import UpdatePassword from "../auth/updatePassword"
@@ -68,6 +70,8 @@ const Router = function() {
 			<ProtectedRoute path="/contact" exact component={Contact} />
 			<ProtectedRoute path="/profil" exact component={Profil} />
 			<ProtectedRoute path="/parametre" exact component={Parametre} />
+			<ProtectedRoute path="/jackpot" exact component={Jackpot} />
+			<ProtectedRoute path="/mygames" exact component={Mygames} />
 			<ProtectedRoute path="/update-password" exact component={UpdatePassword} />						
 			<Route path="/login" exact component={Login} />
 			<Route path="/inscription" exact component={Inscription} />
