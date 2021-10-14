@@ -11,6 +11,7 @@
 	width: 95%;
 	margin: auto;	
 	margin-bottom: 30px;
+	position: relative;
 }
 .aside-left{
 	width: 20%;	
@@ -233,12 +234,11 @@
 	display: block;
 }
 .streaming{
-	/*max-width: 60px;*/
-	/*width: 100%;*/
-	/*height: 153px;*/
 	display: inline-block;
 	border: 1px solid gray;
 	margin-right: 9px;
+	width: 130px;
+	height: 83px;
 }
 .streaming img{	
 	/*max-width: 65px;
@@ -253,8 +253,8 @@
     width: 100%;
 }
 .stream-info p{
-	font-size: 13px;    
-    padding: 5px 0px;
+	font-size: 10px;    
+    padding: 0px 0px;
 
 }
 .streamgame{
@@ -464,5 +464,22 @@
 	display: block;
 }
 /*****************************************************/
-
-
+.communaute .loader-spinner {
+    position: absolute;
+    height: 100%;
+    background: rgba(0,0,0,0.9);
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 2;
+}
+.communaute .loader-spinner div {
+    position: absolute;
+    top: 15%;
+    margin: auto;
+    width: 100%;
+    text-align: center;
+}
+.communaute .loader-spinner div svg{
+	width: 30px;
+}
