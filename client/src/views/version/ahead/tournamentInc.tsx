@@ -1,4 +1,5 @@
 import React,{useState,useEffect} from "react"
+import { Link } from "react-router-dom"
 import {useQuery} from "@apollo/client"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faUsers } from "@fortawesome/free-solid-svg-icons"
@@ -44,11 +45,16 @@ const TournamentInc = function() {
 					tournament.map(function(element:Tournament,index:number){
 						return (
 							<div className="list_tournament" key={index}>
-								<img src={element.game.logo} width="40" height="30" alt=""/>
-								<p className="game_name">{element.title}<span>{dateStringToDY(element.date)} - 6 jours</span></p>
-								<p className="cashprize">Cashprize<span>{element.price} G-Coins</span></p>
-								<p className="arena">{element.numberTeam > 0 ? `${element.numberTeam}v${element.numberTeam}`: "1v1"} Arène</p>
-								<p className="place"><i><FontAwesomeIcon icon={faUsers}/></i><span>{element.numberParticipate} places restantes</span></p>
+								<Link to="#">
+									<img src={element.game.logo} width="40" height="30" alt=""/>
+									<p className="game_name">{element.title}<span>{dateStringToDY(element.date)} - 6 jours</span></p>
+									<p className="cashprize">Cashprize<span>{element.price} G-Coins</span></p>
+									<p className="arena">{element.numberTeam > 0 ? `${element.numberTeam}v${element.numberTeam}`: "1v1"} Arène</p>
+									<p className="place">
+										<i><FontAwesomeIcon icon={faUsers}/></i><span>{element.numberParticipate} places restantes</span>
+										<button className="btn bg-red">Rejoindre</button>
+									</p>
+								</Link>								
 							</div>
 						)
 					}) : <></>

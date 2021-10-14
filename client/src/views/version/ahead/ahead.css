@@ -77,6 +77,9 @@ p.title{
 	background: #2c2c2c;
 	margin-bottom: 5px;
 }
+.list_tournament a{
+	display: flex
+}
 .list_tournament img{
 	margin: 0 10px;
 }
@@ -85,6 +88,9 @@ p.title{
 	align-self: center;		
 	margin-right: 20px;
 	text-align: center;
+}
+.list_tournament p:last-child{
+	margin-right: 0;
 }
 .list_tournament img{
 	align-self: center;
@@ -129,7 +135,8 @@ p.title{
 }
 .global .best_content{
 	background: #2c2c2c;
-	border-radius: 7px;	
+	border-radius: 7px;
+	display: block;
 }
 
 .global .best_content div{
@@ -166,4 +173,23 @@ p.title{
 }
 .first{
 	color: #dd0000;
+}
+.list_tournament .place{
+	width: 130px;	
+	text-align: center;
+}
+.list_tournament:hover .place{
+	padding:8.5px 0;
+}
+.list_tournament .place button{
+	display: none;	
+	font-size: 9px;
+	padding: 6px;
+	margin: auto;
+}
+.list_tournament:hover .place button{
+	display: block;
+}
+.list_tournament:hover .place i, .list_tournament:hover .place span{
+	display: none;
 }
