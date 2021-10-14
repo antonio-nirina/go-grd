@@ -68,6 +68,7 @@ const Login: React.FC = function() {
 
 			} catch(e) {
 				console.log(e)
+				setIsLoader(false)
 				setPasswd(true)
 			}
 		} else {
@@ -97,7 +98,7 @@ const Login: React.FC = function() {
 								<Link to="#" className="discord"><img src={Discord} alt="Discord" width="20" /><span>Discord</span></Link>
 								<Link to="#" className="xbox"><i><FontAwesomeIcon icon={faXbox} /></i><span>Sign in with Xbox</span></Link>
 								<Link to="#" className="ps"><img src={Ps} alt="Twitter" width="20" /><span>Sign in with Playstation</span></Link>
-							</div>						
+							</div>
 							<div className="choice">
 								OR
 							</div>
@@ -122,11 +123,11 @@ const Login: React.FC = function() {
 										<p className="ft-size"><Link to ="/forgot-password" title="Mot de passe oublié ?">Mot de passe oublié ?</Link></p>
 									</div>
 								</div>
-							</form>							
+							</form>
 						</div>
 						<div className="center-width field-container">
 							<div className="infos">
-								<p className="member"><Link to = "/register" title="Pas encore membre ?">Pas encore membre ?</Link></p>								
+								<p className="member"><Link to = "/register" title="Pas encore membre ?">Pas encore membre ?</Link></p>
 							</div>
 						</div>
 					</div>

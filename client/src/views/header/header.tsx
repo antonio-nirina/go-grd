@@ -1,4 +1,4 @@
-import React,{useState, useEffect} from "react"
+import React,{useState, useEffect,useMemo} from "react"
 import { Link } from "react-router-dom"
 import { useSelector,useDispatch } from "react-redux"
 import {useHistory } from "react-router-dom"
@@ -113,7 +113,7 @@ const Header: React.FC = function() {
 		if(process.env.REACT_APP_URL_ADMIN) window.location.href = process.env.REACT_APP_URL_ADMIN
 	}
 
-	useEffect(() => {
+	useMemo(() => {
 		let array:Array<Notif> = []
 		let notif:Notif
 		let isSubscribed:boolean = true
@@ -234,7 +234,7 @@ const Header: React.FC = function() {
 					</ul>
 				</nav>
 				<div className="bt-container right">
-					<Link to="/login" className="btn bg-red">Connecte-toi</Link>					
+					<Link to="/login" className="btn bg-red">Connecte-toi</Link>
 				</div>
 				<div className="tag">
 					<div className="box">
@@ -281,10 +281,10 @@ const Header: React.FC = function() {
 									: <></>
 								}
 							</div>
-							<>								
+							<>
 								<i className="relative bell" onClick={onShowNotif}>
 									<FontAwesomeIcon icon={faBell} size="lg" />
-									<span className={notification > 0 ? "number" : ""}>{notification > 0 ? notification : ""}</span>								
+									<span className={notification > 0 ? "number" : ""}>{notification > 0 ? notification : ""}</span>
 									<span className="tooltip">Notification</span>
 								</i>
 								<i className="relative member">
@@ -309,7 +309,7 @@ const Header: React.FC = function() {
 						<div className={!showList ? "dropdown" :"dropdown show"}>
 							<ul>
 								<li><Link to="/profil">Profil</Link></li>
-								<li className="border"><Link to="#">Cagnote (0 GC)</Link></li>								
+								<li className="border"><Link to="#">Cagnote (0 GC)</Link></li>
 								<li className="border"><Link to="/parametre">Paramètres</Link></li>
 								{userConnectedRedux.user && userConnectedRedux.user.roles && userConnectedRedux.user.roles.includes("role_admin") ? <li>
 									<span onClick={backAdmin} style={{"cursor":"pointer"}}>
