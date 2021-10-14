@@ -12,6 +12,7 @@
 .initpass .field-container{
 	max-width: 250px;
 	width: 100%;
+	margin: auto;
 }
 .initpass .register-field{
 	display: block;

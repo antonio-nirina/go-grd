@@ -77,8 +77,8 @@ const Router = function() {
 			<Route path="/login" exact component={Login} />
 			<Route path="/inscription" exact component={Inscription} />
 			<Route path="/register" exact component={Register} />
-			<ProtectedRoute path="/game" exact component={Game} />
-			<ProtectedRoute path="/account" exact component={Account} />
+			<Route path="/game" exact component={Game} />
+			<Route path="/account" exact component={Account} />
 			<Route path="/forgot-password" exact component={InitPass} />
 		</Switch>
 	)

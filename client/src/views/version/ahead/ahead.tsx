@@ -146,7 +146,6 @@ const Ahead: React.FC = function() {
 					:
 					<></>
 				}
-
       		</div>
       	</div>
     </div>
