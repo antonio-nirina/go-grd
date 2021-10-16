@@ -211,7 +211,7 @@ const Header: React.FC = function() {
 							</Link>
 						</li>
 						<li>
-							<Link to="/waggers">
+							<Link to="/wager">
 								{
 									Translation(userConnectedRedux.user.language).header.wagers
 								}
