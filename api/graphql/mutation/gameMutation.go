@@ -2,7 +2,6 @@ package mutation
 
 import (
 	"github.com/graphql-go/graphql"
-	"github.com/thoussei/antonio/api/graphql/types"
 )
 
 /*var gameInputType = graphql.NewInputObject(
@@ -73,13 +72,19 @@ func createdGame() *graphql.Field {
 
 func createdPlateform() *graphql.Field {
 	return &graphql.Field{
-		Type:        types.GameSchemaType,
+		Type:        graphql.String,
 		Description: "Plateform game",
 		Args: graphql.FieldConfigArgument{
 			"name": &graphql.ArgumentConfig{
 				Type: graphql.String,
 			},
 			"description": &graphql.ArgumentConfig{
+				Type: graphql.String,
+			},
+			"logo": &graphql.ArgumentConfig{
+				Type: graphql.String,
+			},
+			"typeLogo": &graphql.ArgumentConfig{
 				Type: graphql.String,
 			},
 		},

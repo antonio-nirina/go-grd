@@ -26,6 +26,8 @@ import DetailAssist from "../assistance/detail-assist"
 import CreateTitle from "../assistance/create-titre"
 import ListSubject from "../assistance/list-subject"
 import ListCommunaute from "../communaute/list-communaute"
+import CreatePlateform from "../plateform/create-plateform"
+import ListPlateform from "../plateform/list-platform"
 
 const Router = function() {
 	return (
@@ -53,6 +55,8 @@ const Router = function() {
 			<ProtectedRoute path="/admin/create/subject" exact component={CreateTitle} />
 			<ProtectedRoute path="/admin/list/subject" exact component={ListSubject} />
 			<ProtectedRoute path="/admin/list/communaute" exact component={ListCommunaute} />
+			<ProtectedRoute path="/admin/list-plateform" exact component={ListPlateform} />
+			<ProtectedRoute path="/admin/create-plateform" exact component={CreatePlateform} />
 		</Switch>
 	)
 }

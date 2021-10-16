@@ -135,3 +135,23 @@ func (r *resolver) UpdateAvatarResolver(params graphql.ResolveParams) (interface
 	return res,nil
 
 }
+
+func (r *resolver) UpdatedGameResolver(params graphql.ResolveParams) (interface{}, error) {
+	jsonString, _ := json.Marshal(params.Args)
+	input := inputAvatar{}
+	json.Unmarshal([]byte(jsonString), &input)
+	user, err := r.userHandler.FindOneUserByUid(input.AvatarInput.Email)
+	
+	if err != nil {
+		return nil, err
+	}
+
+	res, err := r.userHandler.UpdateAvatar(user,input.AvatarInput.Data,input.AvatarInput.Type)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return res,nil
+
+}

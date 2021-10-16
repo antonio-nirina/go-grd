@@ -5,39 +5,30 @@ import {useQuery} from "@apollo/client"
 
 import SideBar from "../header/sidebar"
 import Nav from "../header/nav"
-import {GET_ALL_GAMES} from "../gql/games/query"
+import {GET_ALL_PLATEFORM} from "../gql/games/query"
 
-type GameType = {
+type PLType = {
 	uid:string,
-	image:string,
 	name:string,
-	slug:string,
 	logo:string,
-	notes:string
+	description:string
 }
 
 
-
-const ListGame : React.FC = function() {
+const ListPlateform = function () {
 	const history = useHistory()
-	const [games, setGames] = useState<GameType[]>([])
-	//const [showList, setShowList] = useState<Boolean>(false)
+	const [plateform, setPlateform] = useState<PLType[]>([])
 
-    //const onShow = function(){
-	//	setShowList(!showList)
-	//}
-
-	const {loading,error,data} 	= useQuery(GET_ALL_GAMES)
+	const {loading,error,data} 	= useQuery(GET_ALL_PLATEFORM)
 
 	useEffect(() => {
 		if(!loading && !error && data) {
-			setGames(data.FindAllGame)
+			setPlateform(data.FindAllPlateform)
 		}
 
 	},[loading,error,data])
-
 	return (
-	<div className="layout-container">
+		<div className="layout-container">
 		<SideBar />
 		<div className="content-wrapper">
 			<nav className="navbar">
@@ -51,17 +42,16 @@ const ListGame : React.FC = function() {
 		    				<h1>Liste de jeux</h1>
 		    			</div>
 		    			<div className="create-tournament-game">
-		    				<button className="btn bg-red" onClick={()=> {history.push("/admin/create-game")}}>
-		    					Créer jeux
+		    				<button className="btn bg-red" onClick={()=> {history.push("/admin/create-plateform")}}>
+		    					Créer plateform
 	    					</button>
 		    			</div>
 			    		<div className="dashboard list-game">
-			    			{games?.map(function(el:GameType,index:number){
+			    			{plateform?.map(function(el:PLType,index:number){
                             	return (
                             		<Link key={index} to ="#" className="grid league-board" >
-					    				<span className="img-games" style={{ background: `url(${el.image})`}}></span>
+					    				<span className="img-games" style={{ background: `url(${el.logo})`}}></span>
 					    				<strong className="game-name">
-					    					<span className="logo-game"><img src={el.logo} alt="" /></span>
 					    					<span className="grid-title">{el.name}</span>
 					    				</strong>
 					    			</Link>
@@ -76,4 +66,4 @@ const ListGame : React.FC = function() {
 	)
 }
 
-export default ListGame
+export default ListPlateform

@@ -2,18 +2,18 @@ import React from 'react'
 import { Link } from "react-router-dom"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-import { faUsers, faTools, faDesktop, faTrophy, faStar, faGamepad, faHome, faHandsHelping,faUser,faCheck} from "@fortawesome/free-solid-svg-icons"
+import { faUsers, faTools, faDesktop, faTrophy, faStar, faGamepad, faHome, faHandsHelping,faUser,faCheck,faHeadSideMask} from "@fortawesome/free-solid-svg-icons"
 
 import logo from "../assets/image/gogrind-joystick.png"
 
 const SideBar : React.FC = function() {
-	return (		
-		<aside className="main-sidebar ps">					
+	return (
+		<aside className="main-sidebar ps">
 			<div className="logo-container">
 				<Link to ="/" className="logo">
-					<img src={logo} alt="logo" />					
-				</Link>				
-				<div className="mobile-menu">					
+					<img src={logo} alt="logo" />
+				</Link>
+				<div className="mobile-menu">
 					<ul>
 						<li>
 							<Link to="/">
@@ -56,7 +56,7 @@ const SideBar : React.FC = function() {
 								<i><FontAwesomeIcon icon={faGamepad} size="lg"/></i>
 								<span>Jeux</span>
 							</Link>
-							
+
 						</li>
 						<li>
 							<Link to="/admin/teams">
@@ -117,7 +117,14 @@ const SideBar : React.FC = function() {
 								<i><FontAwesomeIcon icon={faGamepad} size="lg"/></i>
 								<span>Jeux</span>
 							</Link>
-							
+
+						</li>
+						<li>
+							<Link to="/admin/list-plateform">
+								<i><FontAwesomeIcon icon={faHeadSideMask} size="lg"/></i>
+								<span>Plateforme de jeux</span>
+							</Link>
+
 						</li>
 						<li>
 							<Link to="/admin/users">
@@ -140,7 +147,7 @@ const SideBar : React.FC = function() {
 					</ul>
 				</nav>
 			</div>
-		</aside>		
+		</aside>
 	)
 }
 

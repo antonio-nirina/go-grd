@@ -5,6 +5,17 @@ import (
 	"github.com/thoussei/antonio/api/graphql/types"
 )
 
+var GameInputType = graphql.NewInputObject(
+	graphql.InputObjectConfig{
+		Name: "GameInputType",
+		Fields: graphql.InputObjectConfigFieldMap{
+			"uid": &graphql.InputObjectFieldConfig{
+				Type: graphql.String,
+			},
+		},
+	},
+)
+
 var inputType = graphql.NewInputObject(
 	graphql.InputObjectConfig{
 		Name: "userInputType",
@@ -195,5 +206,21 @@ func Deconnected() *graphql.Field {
 			},	
 		},			
 		Resolve: UserRolve.DeconnectedResolver,
+	}
+}
+
+func updatedGameUser() *graphql.Field {
+	return &graphql.Field{
+		Type:        graphql.String,
+		Description: "Update user  game",
+		Args: graphql.FieldConfigArgument{
+			"games": &graphql.ArgumentConfig{
+				Type: graphql.NewList(GameInputType),
+			},
+			"uidUser": &graphql.ArgumentConfig{
+				Type: graphql.String,
+			},
+		},
+		Resolve: UserRolve.UpdatedGameResolver,
 	}
 }

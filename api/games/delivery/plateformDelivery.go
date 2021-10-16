@@ -3,9 +3,9 @@ package delivery
 import (
 	"errors"
 
+	"github.com/graphql-go/graphql"
 	"github.com/thoussei/antonio/api/games/entity"
 	"github.com/thoussei/antonio/api/games/handler"
-	"github.com/graphql-go/graphql"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
@@ -22,10 +22,13 @@ func NewResolverPlateform(plateformUseCase handler.UsecasePlateformInterface) Re
 // var gameEntity = entity.Game{}
 
 func (r *resolverPlateform) SavedGamePlateformResolver(params graphql.ResolveParams) (interface{}, error) {
+	urlLogo, _ := r.plateformHandler.HandleFilePlateform(params.Args["logo"].(string), params.Args["typeLogo"].(string))
+	
 	plateformSaved := &entity.GamePlatform{
 		Uid:         primitive.NewObjectID(),
 		Name:        params.Args["name"].(string),
 		Description: params.Args["description"].(string),
+		Logo: urlLogo,
 	}
 
 	res, err := r.plateformHandler.SavedPlateformRepository(plateformSaved)
