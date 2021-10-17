@@ -1,6 +1,6 @@
 import React,{useEffect,useState} from "react"
 import { Link } from 'react-router-dom'
-import {useMutation,useQuery} from "@apollo/client"
+import {useQuery} from "@apollo/client"
 
 import Playstation from "../../assets/image/jeux/playstation.jpg"
 import Xbox from "../../assets/image/jeux/xbox.jpg"
@@ -9,14 +9,8 @@ import { GET_ALL_GAMES } from "../../gql/games/query"
 
 import "../auth/inscription.css"
 import "../../assets/css/style.css"
+import {GameType} from "../models/game"
 
-type GameType = {
-	uid:string,
-	image:string,
-	name:string,
-	slug:string,
-	logo:string
-}
 
 const GameList: React.FC = function() {
 	const [games,setGames] = useState<GameType[]>([])

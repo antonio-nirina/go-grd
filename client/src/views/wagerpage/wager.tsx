@@ -1,24 +1,12 @@
-import React from "react"
+import React,{useState,useEffect} from "react"
 import { Link } from 'react-router-dom'
+import {useQuery} from "@apollo/client"
 
 import Header from "../header/header"
 import Footer from "../footer/footer"
-
-import Apex from "../../assets/image/jeux/apex.jpg"
-import Fortnite from "../../assets/image/jeux/fortnite.jpg"
-import Rainbow from "../../assets/image/jeux/rainbow.jpg"
-import Rocket from "../../assets/image/jeux/rocket.jpg"
-import Vanguard from "../../assets/image/jeux/vanguard.jpg"
-import Warzone from "../../assets/image/jeux/warzone.jpg"
-import Coldwar from "../../assets/image/jeux/coldwar.jpg"
-import Fifa22 from "../../assets/image/jeux/fifa22.jpg"
-
-import Playstation from "../../assets/image/jeux/playstation.jpg"
-import Xbox from "../../assets/image/jeux/xbox.jpg"
-import Switch from "../../assets/image/jeux/switch.jpg"
+import { GET_ALL_GAMES } from "../../gql/games/query"
+import {GameType} from "../models/game"
 import Joystick from "../../assets/image/white-joystick.png"
-
-
 import { faUser} from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
@@ -27,6 +15,15 @@ import "../../assets/css/style.css"
 
 
 const WagerPage: React.FC = function() {
+	const [games,setGames] = useState<GameType[]>([])
+	const {loading,error,data} 	= useQuery(GET_ALL_GAMES)
+	
+	useEffect(() => {
+		console.log(data)
+		if(!loading && !error && data) {
+			setGames(data.FindAllGame)
+		}
+	},[loading,error,data])
   return(
 	<div className="tournois">
 		<div className="container">
@@ -40,18 +37,13 @@ const WagerPage: React.FC = function() {
 					<p>Choisis ton jeux</p>					
 					<div className="favorite">
 						<div className="game-list-container">					
-							<div className="favorite-game">
-								<Link to ="#"><img src={Apex} alt="" width="200"/></Link>
-								<Link to ="#"><img src={Fortnite} alt="" width="200"/></Link>
-								<Link to ="#"><img src={Rainbow} alt="" width="200"/></Link>
-								<Link to ="#"><img src={Rocket} alt="" width="200"/></Link>
-							</div>
-							<div className="favorite-game">
-								<Link to ="#"><img src={Vanguard} alt="" width="200"/></Link>
-								<Link to ="#"><img src={Warzone} alt="" width="200"/></Link>
-								<Link to ="#"><img src={Coldwar} alt="" width="200"/></Link>
-								<Link to ="#"><img src={Fifa22} alt="" width="200"/></Link>
-							</div>
+						<div className="favorite-game" >
+								{games.map(function(e:GameType,index:number){
+									return(
+										<Link to ={`/tournament-game?game=${e.name.replace(" ","_")}&slug=${e.slug}`} key={index}><img src={e.image} alt={e.slug} width="200"/></Link>
+									)
+								})}
+						</div>
 						</div>			
 					</div>			
 				</div>
@@ -125,4 +117,4 @@ const WagerPage: React.FC = function() {
 	);
 }
 
-export default WagerPage;
+export default WagerPage
