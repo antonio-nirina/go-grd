@@ -1,55 +1,55 @@
-import React from "react"
+import React,{useEffect,useState} from "react"
 import { Link } from 'react-router-dom'
-
-import Apex from "../../assets/image/jeux/apex.jpg"
-import Fortnite from "../../assets/image/jeux/fortnite.jpg"
-import Rainbow from "../../assets/image/jeux/rainbow.jpg"
-import Rocket from "../../assets/image/jeux/rocket.jpg"
-import Vanguard from "../../assets/image/jeux/vanguard.jpg"
-import Warzone from "../../assets/image/jeux/warzone.jpg"
-import Coldwar from "../../assets/image/jeux/coldwar.jpg"
-import Fifa22 from "../../assets/image/jeux/fifa22.jpg"
+import {useQuery} from "@apollo/client"
 
 import Playstation from "../../assets/image/jeux/playstation.jpg"
 import Xbox from "../../assets/image/jeux/xbox.jpg"
 import Switch from "../../assets/image/jeux/switch.jpg"
+import { GET_ALL_GAMES } from "../../gql/games/query"
 
 import "../auth/inscription.css"
 import "../../assets/css/style.css"
+import {GameType} from "../models/game"
 
 
 const GameList: React.FC = function() {
+	const [games,setGames] = useState<GameType[]>([])
+
+	const {loading,error,data} 	= useQuery(GET_ALL_GAMES)
+
+	useEffect(() => {
+		console.log(data)
+		if(!loading && !error && data) {
+			setGames(data.FindAllGame)
+		}
+	},[loading,error,data])
+
   return(
 	<div>
 		<div className="favorite">
 			<div className="game-list-container">
-				<p>1. Choisis tes jeux favoris</p>			
-				<div className="favorite-game">
-					<Link to ="#"><img src={Apex} alt="" width="200"/></Link>
-					<Link to ="#"><img src={Fortnite} alt="" width="200"/></Link>
-					<Link to ="#"><img src={Rainbow} alt="" width="200"/></Link>
-					<Link to ="#"><img src={Rocket} alt="" width="200"/></Link>
-				</div>
-				<div className="favorite-game">
-					<Link to ="#"><img src={Vanguard} alt="" width="200"/></Link>
-					<Link to ="#"><img src={Warzone} alt="" width="200"/></Link>
-					<Link to ="#"><img src={Coldwar} alt="" width="200"/></Link>
-					<Link to ="#"><img src={Fifa22} alt="" width="200"/></Link>
+				<p>1. Choisis tes jeux favoris</p>
+				<div className="favorite-game" >
+					{games.map(function(e:GameType,index:number){
+						return(
+							<Link to ="#" key={index}><img src={e.image} alt={e.slug} width="200"/></Link>
+						)
+					})}
 				</div>
 			</div>
 			<div className="platform">
 				<p>2. Choisis la plateforme sur laquelle tu veux jouer</p>
 				<div className="platform-content">
-					<Link to ="#"><img src={Playstation} alt="" width="200"/></Link>
-					<Link to ="#"><img src={Xbox} alt="" width="200"/></Link>
-					<Link to ="#"><img src={Switch} alt="" width="200"/></Link>
+					<Link to ="#"><img src={Playstation} alt="playstation" width="200"/></Link>
+					<Link to ="#"><img src={Xbox} alt="xbox" width="200"/></Link>
+					<Link to ="#"><img src={Switch} alt="switch" width="200"/></Link>
 				</div>
 			</div>
 		</div>
 		<div className="infos-text">
 			<p>Ne t'inquiète pas, tu pourras mettre à jour cette liste après ton inscription</p>
-			<p className="submit-btn"><Link to="#">Valider mes choix</Link></p>							
-		</div>		
+			<p className="submit-btn"><Link to="#">Valider mes choix</Link></p>
+		</div>
 	</div>
 	);
 }

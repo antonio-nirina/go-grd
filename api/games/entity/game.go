@@ -20,6 +20,7 @@ type GamePlatform struct {
 	Uid         primitive.ObjectID `bson:"uid"`
 	Name        string             `json:"name"`
 	Description string             `json:"description"`
+	Logo       string             `json:"logo,omitempty"`
 }
 
 type AccountGame struct {

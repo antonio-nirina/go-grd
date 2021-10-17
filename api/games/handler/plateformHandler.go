@@ -1,6 +1,13 @@
 package handler
 
 import (
+	"fmt"
+	"os"
+	"path/filepath"
+
+	"github.com/joho/godotenv"
+	uuid "github.com/satori/go.uuid"
+	"github.com/thoussei/antonio/api/external"
 	"github.com/thoussei/antonio/api/games/entity"
 	"github.com/thoussei/antonio/api/games/repository"
 	"go.mongodb.org/mongo-driver/bson/primitive"
@@ -84,4 +91,35 @@ func (g *plateformUsecase) FindOnePlateformByUidHandler(uidQuery string) (entity
 	}
 
 	return plateform, nil
+}
+
+func (g *plateformUsecase) HandleFilePlateform(files string,typeFile string) (string,error) {
+	err := godotenv.Load()
+	
+	if err != nil {
+		return "",err
+	}
+
+	upl := &external.FileUpload{}
+	path := fmt.Sprintf("%s%s", filepath.Dir(""), "/tmpFile")
+	upl.Path = path
+
+	if !upl.DirectoryExists() {
+		err := upl.CreateDirectory()
+		if err != nil {
+			return "",err
+		}
+	}
+	
+	upl.Filename = (uuid.NewV4()).String()+"."+typeFile
+	upl.Data = files
+	
+	upl.ApiKey = os.Getenv("BB_IMAGE_KEY")
+	url,err := upl.SenderFile()
+
+	if err != nil {
+		return "",err
+	}
+
+	return url,nil
 }

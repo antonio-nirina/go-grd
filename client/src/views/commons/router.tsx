@@ -39,6 +39,8 @@ import Register from "../auth/register"
 import Account from "../auth/account"
 import Game from "../auth/game"
 import TournamentGame from "../tournament/tournament-game"
+import PageTournois from "../tournois/tournois"
+import WagerPage from "../wagerpage/wager"
 // import LeagueGame from "../league/league-game"
 
 
@@ -48,7 +50,7 @@ const Router = function() {
 			<Route path="/" exact component={Index} />
 			<Route path="/index" exact component={Index} />
 			<ProtectedRoute path="/Leaderboard" exact component={Leaderboard} />
-			<ProtectedRoute path="/tournois" exact component={Tournament} />
+			<ProtectedRoute path="#" exact component={Tournament} />
 			<ProtectedRoute path="/tournament" exact component={Tournois} />
 			<ProtectedRoute path="/tournament-game" exact component={TournamentGame} />
 			<ProtectedRoute path="/info" exact component={Info} />
@@ -56,7 +58,7 @@ const Router = function() {
 			<ProtectedRoute path="/matches" exact component={Matches} />
 			<ProtectedRoute path="/teams" exact component={Teams} />
 			<ProtectedRoute path="/rules" exact component={Rules} />
-			<ProtectedRoute path="/wager" exact component={Wager} />
+			<ProtectedRoute path="#" exact component={Wager} />
 			<ProtectedRoute path="/joingame" exact component={Joingame} />
 			<ProtectedRoute path="/waggers" exact component={Waggers} />
 			<ProtectedRoute path="/tableau" exact component={Tableau} />
@@ -74,6 +76,8 @@ const Router = function() {
 			<ProtectedRoute path="/jackpot" exact component={Jackpot} />
 			<ProtectedRoute path="/mygames" exact component={Mygames} />
 			<ProtectedRoute path="/update-password" exact component={UpdatePassword} />
+			<ProtectedRoute path="/tournois" exact component={PageTournois} />
+			<ProtectedRoute path="/wager" exact component={WagerPage} />
 			<Route path="/login" exact component={Login} />
 			<Route path="/inscription" exact component={Inscription} />
 			<Route path="/register" exact component={Register} />

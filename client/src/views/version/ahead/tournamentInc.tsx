@@ -1,5 +1,6 @@
 import React,{useState,useEffect} from "react"
 import { Link } from "react-router-dom"
+import {useHistory } from "react-router-dom"
 import {useQuery} from "@apollo/client"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faUsers } from "@fortawesome/free-solid-svg-icons"
@@ -9,6 +10,7 @@ import {GET_ALL_TOURNAMENT} from "../../../gql/tournament/query"
 import {dateStringToDY} from "../../tools/dateConvert"
 
 const TournamentInc = function() {
+	const history = useHistory()
 	const [tournament, setTournament] = useState<Tournament[]>([])
 	const [tournamentMonth, setTournamentMonth] = useState<number>(0)
 	const {loading,error,data} 	= useQuery(GET_ALL_TOURNAMENT, {
@@ -45,14 +47,14 @@ const TournamentInc = function() {
 					tournament.map(function(element:Tournament,index:number){
 						return (
 							<div className="list_tournament" key={index}>
-								<Link to="#">
+								<Link to={`/info?uid=${element.uid}`} >
 									<img src={element.game.logo} width="40" height="30" alt=""/>
 									<p className="game_name">{element.title}<span>{dateStringToDY(element.date)} - 6 jours</span></p>
 									<p className="cashprize">Cashprize<span>{element.price} G-Coins</span></p>
 									<p className="arena">{element.numberTeam > 0 ? `${element.numberTeam}v${element.numberTeam}`: "1v1"} Arène</p>
 									<p className="place">
 										<i><FontAwesomeIcon icon={faUsers}/></i><span>{element.numberParticipate} places restantes</span>
-										<button className="btn bg-red">Rejoindre</button>
+										<button style={{"cursor":"pointer"}} onClick={()=>{history.push(`/info?uid=${element.uid}`)}} className="btn bg-red">Rejoindre</button>
 									</p>
 								</Link>								
 							</div>

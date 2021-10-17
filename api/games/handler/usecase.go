@@ -18,5 +18,6 @@ type UsecasePlateformInterface interface {
 	FindOnePlateformRepository(idQuery string) (interface{}, error)
 	FindOnePlateformByUidHandler(idQuery string) (entity.GamePlatform, error)
 	FindAllPlateformRepository() (interface{}, error)
+	HandleFilePlateform(files string,typeFile string) (string,error)
 }
 

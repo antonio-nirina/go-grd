@@ -1,0 +1,79 @@
+@charset "UTF-8";
+.tournois h2{
+	font-family: "arial"
+}
+.tournois .undertitle{
+	margin-top: 2em;
+}
+.tournois .containt p{
+	font-size: 35px;
+	margin-bottom: 30px;
+}
+.tournois .main{
+	width: 87%;
+	margin: 0 auto;	
+}
+.tournois .right-list a{
+	display: block;
+	width: 100%;
+	margin-bottom: 5px;
+}
+.tournois .right-list p{
+	font-size: 12px !important;
+}
+.tournois .right-list .block{
+	background: #2C2C2C;
+	height: auto;
+}
+.tournois .right-list .block p{
+	font-weight: bold;
+}
+.tournois .right-list span,
+.tournois .right-list .block p
+{
+	font-family: arial;	
+}
+.tournois .right-list span{
+	font-weight: normal;
+}
+.tournois .right-list i{
+	font-size: 13px;
+	align-self: center;
+}
+.tournois .block .info{
+	position: inherit;
+}
+.tournois .block .info p{
+	padding: 0;
+}
+.tournois .top-icon p{
+	font-size: 11px !important;
+}
+.tournois .inblock span{
+	padding: 3px 5px;
+	font-size: 10px;
+}
+.tournois .main{
+	position: relative;
+}
+.tournois .iconGame img{
+	margin-top: 7px;
+}
+.tournois .right-list{
+	position: fixed;	
+	right:0;
+	top: 76px;
+	z-index: 1;
+	height: 100%;
+	overflow: scroll;
+}
+.tournois .sprite{
+	background-size: 15px;
+}
+.tournois .sprite.ticket{
+	background-position: 0px -52px;
+}
+.tournois .right-list{
+  scrollbar-color: transparent #000000 !important;
+  scrollbar-width: thin !important;  
+}

@@ -204,14 +204,14 @@ const Header: React.FC = function() {
 				<nav className="navmenu">
 					<ul>
 						<li>
-							<Link to="/tournament">
+							<Link to="/tournois">
 								{
 									Translation(userConnectedRedux.user.language).header.tournaments
 								}
 							</Link>
 						</li>
 						<li>
-							<Link to="/waggers">
+							<Link to="/wager">
 								{
 									Translation(userConnectedRedux.user.language).header.wagers
 								}
