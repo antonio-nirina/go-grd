@@ -15,7 +15,7 @@ const Jackpot: React.FC = function() {
 		<div className="container">
 			<Header/>
 			<div className="main">
-				<div className="containt">
+				<div className="containt cagnotte">
 					<h2>Paramètres</h2>
 					<div className="title-lead">
 						<Sidebar />

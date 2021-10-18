@@ -9,7 +9,7 @@
 	padding: 15px;	
 }
 .search-container h2{
-	font-family: "Russo One";
+	font-family: arial;
 	font-weight: 500;
 	font-size: 30px;
 	color: #ffffff;
@@ -26,8 +26,8 @@
 	border-radius: 5px;
 }	
 .aside-menu{
-	font-family: "Russo One";
-	font-weight: 500;
+	font-family: "arial";
+	font-weight: 700;
 	background: #101010;	
 	display: table-cell;
 	vertical-align: top;
@@ -42,7 +42,7 @@
 	display: table-cell;
 	vertical-align: top;
 	color: #ffffff;
-	font-family: "Russo One";
+	font-family: arial;
 	padding: 30px;
 	font-weight: lighter;
 	border-radius: 0px 5px 5px 0px;

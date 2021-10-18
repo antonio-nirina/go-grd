@@ -127,7 +127,7 @@
    -moz-transform: translateY(0px);
    -o-transform: translateY(0px);
    transition: 200ms ease-in-out;
-   filter: brightness(0.9);
+   filter: contrast(0.9);
 }
 .favorite-game a:hover, .platform-content a:hover
 
