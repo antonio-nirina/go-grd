@@ -64,8 +64,8 @@ var repositoryGame = gameRepo.NewGameRepository(database)
 
 var usecaseNotif = notifHandler.NewUsecaseNotif(repositoryNotif)
 var usecase = handler.NewUsecaseUser(repUser)
-var UserRolve = delivery.NewResolver(usecase, usecaseNotif)
 var usecaseGame = gameHandler.NewUsecaseGame(repositoryGame)
+var UserRolve = delivery.NewResolver(usecase, usecaseNotif, usecaseGame)
 var gameResolver = gameDelivery.NewResolverGame(usecaseGame)
 
 var repositoryPlateform = gameRepo.NewPlateformRepository(database)

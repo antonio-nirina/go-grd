@@ -57,14 +57,14 @@ var database = config.ConfigMongo()
 var rep = repository.NewUserRepository(database)
 var repositoryNotif = notifRepo.NewRepository(database)
 
-// Usecase
-var usecaseNotif = notifHandler.NewUsecaseNotif(repositoryNotif)
-var usecase = handler.NewUsecaseUser(rep)
-var UserRolve = delivery.NewResolver(usecase, usecaseNotif)
-
 var repositoryGame = gameRepo.NewGameRepository(database)
 var usecaseGame = gameHandler.NewUsecaseGame(repositoryGame)
 var gameResolver = gameDelivery.NewResolverGame(usecaseGame)
+
+// Usecase
+var usecaseNotif = notifHandler.NewUsecaseNotif(repositoryNotif)
+var usecase = handler.NewUsecaseUser(rep)
+var UserRolve = delivery.NewResolver(usecase, usecaseNotif, usecaseGame)
 
 var repositoryPlateform = gameRepo.NewPlateformRepository(database)
 var usecasePlateform = gameHandler.NewUsecasePlateform(repositoryPlateform)

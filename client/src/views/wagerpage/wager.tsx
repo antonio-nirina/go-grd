@@ -19,7 +19,6 @@ const WagerPage: React.FC = function() {
 	const {loading,error,data} 	= useQuery(GET_ALL_GAMES)
 	
 	useEffect(() => {
-		console.log(data)
 		if(!loading && !error && data) {
 			setGames(data.FindAllGame)
 		}
