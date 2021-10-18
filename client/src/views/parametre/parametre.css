@@ -7,6 +7,7 @@
 }
 .settings .personal{
 	width: 100%;
+	padding-bottom: 25px;
 }
 .settings .menu-left li a{
 	display: block;
@@ -115,6 +116,7 @@
 .jackpot .personal{
 	display: flex;
 	width: 100%;
+
 }
 .jackpot .historical{
 	width: 58%;
@@ -160,7 +162,7 @@
 }
 /******************************************/
 .mygames .personal{
-	display: block;
+	display: block;	
 }
 .mygames h3{
 	width: 93%;
@@ -213,4 +215,24 @@
 }
 .personal-account{
 	margin-bottom: 20px;
+}
+/******Active link****************/
+#infos,
+#cagnotte,
+#jeux
+{
+	position: relative;	
+}
+.mes_infos #infos:before,
+.cagnotte #cagnotte:before,
+.mes_jeux #jeux:before
+{
+	content:"";
+	display: inline-block;
+	height: 24px;
+	width: 3px;
+	background: #dd0000;
+	position: absolute;
+	top: 7px;
+	left: -10px;
 }

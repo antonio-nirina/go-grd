@@ -5,17 +5,17 @@ const Sidebar = function() {
     return (
         <div className="menu-left">
             <ul>
-                <li>
+                <li id="infos">
                     <Link to="/parametre">Mes infos</Link>
                 </li>
-                <li>
+                <li id="cagnotte">
                     <Link to="/jackpot">Ma cagnotte</Link>
                 </li>
-                <li className="active_link">
+                <li id="jeux">
                     <Link to="/mygames">Mes jeux</Link>
                 </li>
                 <li>
-                    <Link to="#">Assistance</Link>
+                    <Link to="/assistance">Assistance</Link>
                 </li>
             </ul>
         </div>

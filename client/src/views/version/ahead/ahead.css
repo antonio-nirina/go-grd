@@ -14,18 +14,20 @@
 	display: flex;
 }
 .full .Left{
-	width: 55%;
+	width: 56%;
 	text-align: center;
 	align-self:center;
 }
 .full .Right{
-	width: 45%;
+	width: 44%;
 	background: rgba(0,0,0,0.1);
-	padding: 5px;
+	padding: 0 7px;
+	position: relative;
+	right: 0px;
 }
 .full .annonce.undertitle{
 	margin-bottom: 0px;
-	margin: 6px;
+	margin: 6px 0;
 }
 .full .annonce.undertitle:before{
 	content: "";

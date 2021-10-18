@@ -18,7 +18,7 @@ const Mygames: React.FC = function() {
 		<div className="container">
 			<Header/>
 			<div className="main">
-				<div className="containt">
+				<div className="containt mes_jeux">
 					<h2>Paramètres</h2>
 					<div className="title-lead">
 						<Sidebar />

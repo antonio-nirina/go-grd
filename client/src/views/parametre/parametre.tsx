@@ -30,7 +30,7 @@ const Settings: React.FC = function() {
 		<div className="container">
 			<Header/>
 			<div className="main">
-				<div className="containt">
+				<div className="containt mes_infos">
 					<h2>Paramètres</h2>
 					<div className="title-lead">						
 						<Sidebar />
@@ -125,12 +125,11 @@ const Settings: React.FC = function() {
 									</div>
 								</div>	
 							</div>
+							<div className="btn-container">
+								<button className="btn bg-red">Enregistre les modifications</button>
+							</div>
 						</div>
-					</div>
-					<div style={{"textAlign":"center"}}>
-						<button className="btn bg-red">Enregistre les modifications</button>
-					</div>
-										
+					</div>				
 				</div>
 			</div>
 			<Footer/>
