@@ -483,3 +483,7 @@
 .communaute .loader-spinner div svg{
 	width: 30px;
 }
+.stream{
+  scrollbar-color: #dd0000 #000000 !important;
+  scrollbar-width: thin !important;  
+}
