@@ -25,5 +25,5 @@ type Usecase interface {
 	NotifConnected(user *entity.User, wg *sync.WaitGroup)
 	NotifDisConnected(user *entity.User, wg *sync.WaitGroup)
 	CountUserHandler() int
-	UpdateGameUser(uidUser string, uidGame string) (interface{}, error)
+	UpdateGameUser(uidUser string, uidGame []string,uidPlateform []string) (interface{}, error)
 }

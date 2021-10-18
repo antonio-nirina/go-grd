@@ -227,10 +227,10 @@ func (u *UserUsecase) CountUserHandler() int {
 	return records
 }
 
-func (u *UserUsecase) UpdateGameUser(uidUser string, uidGame string) (interface{}, error) {
+func (u *UserUsecase) UpdateGameUser(uidUser string, uidGame []string,uidPlateform []string) (interface{}, error) {
 	objectId, _ := primitive.ObjectIDFromHex(uidUser)
 
-	result, err := u.userRepository.UpdatedGameUserRepo(objectId, uidGame)
+	result, err := u.userRepository.UpdatedGameUserRepo(objectId, uidGame,uidPlateform)
 
 	if err != nil {
 		return nil, err

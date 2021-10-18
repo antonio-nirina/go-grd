@@ -223,13 +223,16 @@ func (c *driverRepository) CountUserRepository() (int, error) {
 	return int(records), nil
 }
 
-func (c *driverRepository) UpdatedGameUserRepo(uidUser primitive.ObjectID, uidGame string) (interface{}, error) {
+func (c *driverRepository) UpdatedGameUserRepo(uidUser primitive.ObjectID, uidGame []string,uidPlateform [] string) (interface{}, error) {
 	var collection = c.client.Database("grd_database").Collection("users")
 	filter := bson.D{{"uid", uidUser}}
 	update := bson.D{
 		{"$set", bson.D{
 			{
 				"games", uidGame,
+			},
+			{
+				"plateforms",uidPlateform,
 			},
 		}}}
 	updateResult, err := collection.UpdateOne(context.TODO(), filter, update)
@@ -240,6 +243,7 @@ func (c *driverRepository) UpdatedGameUserRepo(uidUser primitive.ObjectID, uidGa
 
 	return updateResult.ModifiedCount, nil
 }
+
 
 /*func (c *driverRepository) UpdateAccountGame(email string) (entity.User, error) {
 	var collection = c.client.Database("grd_database").Collection("users")

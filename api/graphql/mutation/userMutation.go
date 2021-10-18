@@ -217,6 +217,9 @@ func updatedGameUser() *graphql.Field {
 			"games": &graphql.ArgumentConfig{
 				Type: graphql.NewList(GameInputType),
 			},
+			"plateforms": &graphql.ArgumentConfig{
+				Type: graphql.NewList(GameInputType),
+			},
 			"uidUser": &graphql.ArgumentConfig{
 				Type: graphql.String,
 			},

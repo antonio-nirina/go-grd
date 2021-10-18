@@ -35,6 +35,7 @@ type User struct {
 	Friends           []User             `json:"friends,omitempty"`
 	Accounts          []Accounts         `json:"accounts,omitempty"`
 	Games             []game.Game        `json:"games,omitempty"`
+	Plateforms        []game.GamePlatform        `json:"plateforms,omitempty"`
 	BirtDate          string             `json:"birtDate,omitempty"`
 }
 

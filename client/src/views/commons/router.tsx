@@ -49,7 +49,7 @@ const Router = function() {
 		<Switch>
 			<Route path="/" exact component={Index} />
 			<Route path="/index" exact component={Index} />
-			<ProtectedRoute path="/Leaderboard" exact component={Leaderboard} />
+			<ProtectedRoute path="/leaderboard" exact component={Leaderboard} />
 			<ProtectedRoute path="#" exact component={Tournament} />
 			<ProtectedRoute path="/tournament" exact component={Tournois} />
 			<ProtectedRoute path="/tournament-game" exact component={TournamentGame} />

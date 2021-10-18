@@ -57,6 +57,10 @@ var database = config.ConfigMongo()
 var rep = repository.NewUserRepository(database)
 var repositoryNotif = notifRepo.NewRepository(database)
 
+var repositoryPlateform = gameRepo.NewPlateformRepository(database)
+var usecasePlateform = gameHandler.NewUsecasePlateform(repositoryPlateform)
+var plateformResolver = gameDelivery.NewResolverPlateform(usecasePlateform)
+
 var repositoryGame = gameRepo.NewGameRepository(database)
 var usecaseGame = gameHandler.NewUsecaseGame(repositoryGame)
 var gameResolver = gameDelivery.NewResolverGame(usecaseGame)
@@ -64,12 +68,7 @@ var gameResolver = gameDelivery.NewResolverGame(usecaseGame)
 // Usecase
 var usecaseNotif = notifHandler.NewUsecaseNotif(repositoryNotif)
 var usecase = handler.NewUsecaseUser(rep)
-var UserRolve = delivery.NewResolver(usecase, usecaseNotif, usecaseGame)
-
-var repositoryPlateform = gameRepo.NewPlateformRepository(database)
-var usecasePlateform = gameHandler.NewUsecasePlateform(repositoryPlateform)
-var plateformResolver = gameDelivery.NewResolverPlateform(usecasePlateform)
-
+var UserRolve = delivery.NewResolver(usecase, usecaseNotif, usecaseGame,usecasePlateform)
 var tournamentRepository = tournamentRepo.NewTournamentRepository(database)
 var tournamentUsecase = tournamentHandler.NewUsecaseTournament(tournamentRepository)
 var tournamentResolver = tournamentDelivery.NewResolverTournament(tournamentUsecase, usecaseGame, usecasePlateform)

@@ -29,7 +29,9 @@ type avatarElement struct {
 }
 
 type inputGame struct {
-	Uid []string `json:"uid"`
+	UidGame []string `json:"uidgame"`
+	UidPlateform []string `json:"uidPlateform"`
+	UidUser string `json:"uidUser"`
 }
 
 func (r *resolver) UpdatedUserResolver(params graphql.ResolveParams) (interface{}, error) {
@@ -143,19 +145,30 @@ func (r *resolver) UpdatedGameResolver(params graphql.ResolveParams) (interface{
 	jsonString, _ := json.Marshal(params.Args)
 	input := inputGame{}
 	json.Unmarshal([]byte(jsonString), &input)
-	var res interface{}
+	var listGameUid [] string
+	var listPlateformUid [] string
 
-	for _, val := range input.Uid {
+	for _, val := range input.UidGame {
 		game, err := r.gameHandler.FindOneGameByUidHandler(val)
 		if err != nil {
 			return nil, err
 		}
+		listGameUid = append(listGameUid, game.Uid.Hex())
+	}
 
-		res, err = r.userHandler.UpdateGameUser(params.Args["uidUser"].(string), game.Uid.Hex())
 
+	for _, val := range input.UidGame {
+		plateform, err := r.plateformHandler.FindOnePlateformByUidHandler(val)
 		if err != nil {
 			return nil, err
 		}
+		listPlateformUid = append(listPlateformUid, plateform.Uid.Hex())
+	}
+
+	res, err := r.userHandler.UpdateGameUser(input.UidUser,listGameUid,listPlateformUid)
+
+	if err != nil {
+		return nil, err
 	}
 
 	return res, nil

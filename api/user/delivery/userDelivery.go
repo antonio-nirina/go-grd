@@ -45,6 +45,7 @@ type resolver struct {
 	userHandler  handler.Usecase
 	notifHandler notifH.UsecaseNotif
 	gameHandler  gameHandler.UsecaseGameInterface
+	plateformHandler gameHandler.UsecasePlateformInterface
 }
 
 type AuthType struct {
@@ -55,11 +56,15 @@ type AccountUsers struct {
 	profilAccount string
 }
 
-func NewResolver(userUseCase handler.Usecase, usecaseNotif notifH.UsecaseNotif, userGame gameHandler.UsecaseGameInterface) Resolver {
+func NewResolver(userUseCase handler.Usecase, 
+	usecaseNotif notifH.UsecaseNotif,
+	userGame gameHandler.UsecaseGameInterface,
+	userPlateform gameHandler.UsecasePlateformInterface) Resolver {
 	return &resolver{
 		userHandler:  userUseCase,
 		notifHandler: usecaseNotif,
 		gameHandler:  userGame,
+		plateformHandler: userPlateform,
 	}
 }
 
