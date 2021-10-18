@@ -30,7 +30,7 @@ func (r *resolver) GetAccessTokenTwitchApi(params graphql.ResolveParams) (interf
 	}
 
 	code, _ := params.Args["code"].(string)
-	redirect := os.Getenv(("REDIRECT_URI_TWITCH"))
+	redirect := os.Getenv("REDIRECT_URI_TWITCH")
 	accesTokens, err := external.GetAccessTokenTwitch(code, redirect)
 
 	if err != nil {

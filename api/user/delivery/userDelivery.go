@@ -16,6 +16,7 @@ import (
 	uuid "github.com/satori/go.uuid"
 	"github.com/thoussei/antonio/api/external"
 	game "github.com/thoussei/antonio/api/games/entity"
+	gameHandler "github.com/thoussei/antonio/api/games/handler"
 	notifH "github.com/thoussei/antonio/api/notification/handler"
 	"github.com/thoussei/antonio/api/user/entity"
 	"github.com/thoussei/antonio/api/user/handler"
@@ -43,16 +44,27 @@ type UserResponse struct {
 type resolver struct {
 	userHandler  handler.Usecase
 	notifHandler notifH.UsecaseNotif
+	gameHandler  gameHandler.UsecaseGameInterface
+	plateformHandler gameHandler.UsecasePlateformInterface
 }
 
 type AuthType struct {
 	token interface{}
 }
+type AccountUsers struct {
+	nameAccount   string
+	profilAccount string
+}
 
-func NewResolver(userUseCase handler.Usecase, usecaseNotif notifH.UsecaseNotif) Resolver {
+func NewResolver(userUseCase handler.Usecase, 
+	usecaseNotif notifH.UsecaseNotif,
+	userGame gameHandler.UsecaseGameInterface,
+	userPlateform gameHandler.UsecasePlateformInterface) Resolver {
 	return &resolver{
 		userHandler:  userUseCase,
 		notifHandler: usecaseNotif,
+		gameHandler:  userGame,
+		plateformHandler: userPlateform,
 	}
 }
 
@@ -120,7 +132,7 @@ func (r *resolver) SavedUserResolver(params graphql.ResolveParams) (interface{},
 	wg.Add(1)
 	go r.userHandler.NotifConnected(&res, &wg)
 	wg.Wait()
-	
+
 	return token, nil
 }
 
@@ -329,6 +341,7 @@ func GetToken(user entity.User) (interface{}, error) {
 	}
 
 	var frd = []string{}
+	var userAcc []AccountUsers
 	claims := _jwt.MapClaims{}
 	claims["uid"] = user.Uid.Hex()
 	claims["email"] = user.Email
@@ -349,6 +362,16 @@ func GetToken(user entity.User) (interface{}, error) {
 	}
 
 	claims["friends"] = frd
+	if len(user.Accounts) > 0 {
+		for _, acc := range user.Accounts {
+			accUser := AccountUsers{
+				nameAccount:   acc.Name,
+				profilAccount: acc.Profil,
+			}
+			userAcc = append(userAcc, accUser)
+		}
+	}
+	claims["acountGame"] = userAcc
 	// claims["exp"] = time.Now().Add(time.Hour * 1).Unix() //Token expires after 1 hour
 	token := _jwt.NewWithClaims(_jwt.SigningMethodHS256, claims)
 	result, err := token.SignedString([]byte(os.Getenv("SECRET")))

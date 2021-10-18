@@ -6,6 +6,7 @@ import Header from "../header/header"
 import Footer from "../footer/footer"
 import "../parametre/parametre.css"
 // import {RootState} from "../../reducer"
+import Sidebar from "./sidebar"
 
 const Jackpot: React.FC = function() {
 	// const userConnectedRedux = useSelector((state:RootState) => state.userConnected)
@@ -14,25 +15,10 @@ const Jackpot: React.FC = function() {
 		<div className="container">
 			<Header/>
 			<div className="main">
-				<div className="containt">
+				<div className="containt cagnotte">
 					<h2>Paramètres</h2>
 					<div className="title-lead">
-						<div className="menu-left">
-							<ul>
-								<li>
-									<Link to="/parametre">Mes infos</Link>
-								</li>
-								<li className="active_link">
-									<Link to="/jackpot">Ma cagnotte</Link>
-								</li>
-								<li>
-									<Link to="/mygames">Mes jeux</Link>
-								</li>
-								<li>
-									<Link to="#">Assistance</Link>
-								</li>
-							</ul>
-						</div>
+						<Sidebar />
 						<div className="personal">
 							<div className="historical">
 								<h3>Historique de transactions</h3>

@@ -1,5 +1,5 @@
 import React from "react"
-import { Link } from 'react-router-dom'
+
 
 // import { useSelector } from "react-redux"
 import Header from "../header/header"
@@ -9,6 +9,7 @@ import "../parametre/parametre.css"
 import Fortnite from "../../assets/image/game/fortnite.jpg"
 import RocketLeague from "../../assets/image/game/rocketleague.jpg"
 // import {RootState} from "../../reducer"
+import Sidebar from "./sidebar"
 
 const Mygames: React.FC = function() {
 	// const userConnectedRedux = useSelector((state:RootState) => state.userConnected)
@@ -17,25 +18,10 @@ const Mygames: React.FC = function() {
 		<div className="container">
 			<Header/>
 			<div className="main">
-				<div className="containt">
+				<div className="containt mes_jeux">
 					<h2>Paramètres</h2>
 					<div className="title-lead">
-						<div className="menu-left">
-							<ul>
-								<li>
-									<Link to="/parametre">Mes infos</Link>
-								</li>
-								<li>
-									<Link to="/jackpot">Ma cagnotte</Link>
-								</li>
-								<li className="active_link">
-									<Link to="mygames">Mes jeux</Link>
-								</li>
-								<li>
-									<Link to="#">Assistance</Link>
-								</li>
-							</ul>
-						</div>
+						<Sidebar />
 						<div className="personal-infos">
 							<div className="personal">
 								<h3>Mes jeux</h3>

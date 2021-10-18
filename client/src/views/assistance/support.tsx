@@ -4,7 +4,7 @@ import thumbnail from "../../assets/image/video.png"
 import { faSortDown } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 const Support: React.FC = function() {	
-	const [showDrop, setShowDrop] = useState<Boolean>(true)
+	const [showDrop, setShowDrop] = useState<Boolean>(false)
 	const onShowDrop = function(){
 	    setShowDrop(!showDrop)
 	}	
