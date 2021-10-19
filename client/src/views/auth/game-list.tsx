@@ -11,10 +11,14 @@ import "../auth/inscription.css"
 import "../../assets/css/style.css"
 import {GameType} from "../models/game"
 
+interface SelectImg {
+	isChecked:boolean
+	uid:string
+}
 
 const GameList: React.FC = function() {
 	const [games,setGames] = useState<GameType[]>([])
-	const [selected, setSelected] = useState<Boolean>(false)
+	const [selected, setSelected] = useState<SelectImg>({isChecked:false,uid:""})
 
 	const {loading,error,data} 	= useQuery(GET_ALL_GAMES)
 
@@ -24,8 +28,8 @@ const GameList: React.FC = function() {
 			setGames(data.FindAllGame)
 		}
 	},[loading,error,data])
-	const onSelected = function(){
-		setSelected(!selected)
+	const onSelected = function(uid:string){
+		setSelected({isChecked:!selected,uid:uid})
 	}
   return(
 	<div>
@@ -35,7 +39,9 @@ const GameList: React.FC = function() {
 				<div className="favorite-game" >
 					{games.map(function(e:GameType,index:number){
 						return(
-							<Link to ="#" key={index} onClick={()=>onSelected()}  className={!selected ? "" : "selected"}><img src={e.image} alt={e.slug} width="200"/></Link>
+							<Link to ="#" key={index} onClick={()=>onSelected(e.uid)}  className={!selected.isChecked && selected.uid !== e.uid  ? "" : "selected"}>
+								<img src={e.image} alt={e.slug} width="200"/>
+							</Link>
 						)
 					})}
 				</div>
