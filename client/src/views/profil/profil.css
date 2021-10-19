@@ -922,15 +922,17 @@ p.lg-desc{
 	padding-top: 15px;
 }
 .content.waggers-link{
-	background: #2c2c2c;
-	height: 240px;
-	overflow: auto;
+	background: #2c2c2c;	
 }
 .fixed{
 	display: flex;
 	background: #333333;
 	padding: 7px 0px;
 	box-shadow: 0px 3px 3px #201f1f;
+}
+.row-container{
+	height: 240px;
+	overflow: auto;
 }
 .fixed span, .row span{
 	margin-right: 15px;

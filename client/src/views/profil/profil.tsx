@@ -154,45 +154,47 @@ const Profile: React.FC = function() {
 								<span>Nombre de Joueurs</span>
 								<span>Date</span>
 							</div>
-							<div className="row">
-								<span>Apex Daily Cup</span>
-								<span>1rd</span>
-								<span>100€</span>
-								<span>3V3</span>
-								<span>16 Equipes</span>
-								<span>04/04/2021 - 5:00PM</span>
-							</div>
-							<div className="row">
-								<span>Apex Daily Cup</span>
-								<span>1rd</span>
-								<span>100€</span>
-								<span>3V3</span>
-								<span>16 Equipes</span>
-								<span>04/04/2021 - 5:00PM</span>
-							</div>
-							<div className="row">
-								<span>Apex Daily Cup</span>
-								<span>1rd</span>
-								<span>100€</span>
-								<span>3V3</span>
-								<span>16 Equipes</span>
-								<span>04/04/2021 - 5:00PM</span>
-							</div>
-							<div className="row">
-								<span>Apex Daily Cup</span>
-								<span>1rd</span>
-								<span>100€</span>
-								<span>3V3</span>
-								<span>16 Equipes</span>
-								<span>04/04/2021 - 5:00PM</span>
-							</div>
-							<div className="row">
-								<span>Apex Daily Cup</span>
-								<span>1rd</span>
-								<span>100€</span>
-								<span>3V3</span>
-								<span>16 Equipes</span>
-								<span>04/04/2021 - 5:00PM</span>
+							<div className="row-container">
+								<div className="row">
+									<span>Apex Daily Cup</span>
+									<span>1rd</span>
+									<span>100€</span>
+									<span>3V3</span>
+									<span>16 Equipes</span>
+									<span>04/04/2021 - 5:00PM</span>
+								</div>
+								<div className="row">
+									<span>Apex Daily Cup</span>
+									<span>1rd</span>
+									<span>100€</span>
+									<span>3V3</span>
+									<span>16 Equipes</span>
+									<span>04/04/2021 - 5:00PM</span>
+								</div>
+								<div className="row">
+									<span>Apex Daily Cup</span>
+									<span>1rd</span>
+									<span>100€</span>
+									<span>3V3</span>
+									<span>16 Equipes</span>
+									<span>04/04/2021 - 5:00PM</span>
+								</div>
+								<div className="row">
+									<span>Apex Daily Cup</span>
+									<span>1rd</span>
+									<span>100€</span>
+									<span>3V3</span>
+									<span>16 Equipes</span>
+									<span>04/04/2021 - 5:00PM</span>
+								</div>
+								<div className="row">
+									<span>Apex Daily Cup</span>
+									<span>1rd</span>
+									<span>100€</span>
+									<span>3V3</span>
+									<span>16 Equipes</span>
+									<span>04/04/2021 - 5:00PM</span>
+								</div>
 							</div>
 
 						</div>								
@@ -211,47 +213,48 @@ const Profile: React.FC = function() {
 								<span>Nombre de Joueurs</span>
 								<span>Date</span>
 							</div>
-							<div className="row">
-								<span>Apex Daily Cup</span>
-								<span>1rd</span>
-								<span>100€</span>
-								<span>3V3</span>
-								<span>16 Equipes</span>
-								<span>04/04/2021 - 5:00PM</span>
+							<div className="row-container">
+								<div className="row">
+									<span>Apex Daily Cup</span>
+									<span>1rd</span>
+									<span>100€</span>
+									<span>3V3</span>
+									<span>16 Equipes</span>
+									<span>04/04/2021 - 5:00PM</span>
+								</div>
+								<div className="row">
+									<span>Apex Daily Cup</span>
+									<span>1rd</span>
+									<span>100€</span>
+									<span>3V3</span>
+									<span>16 Equipes</span>
+									<span>04/04/2021 - 5:00PM</span>
+								</div>
+								<div className="row">
+									<span>Apex Daily Cup</span>
+									<span>1rd</span>
+									<span>100€</span>
+									<span>3V3</span>
+									<span>16 Equipes</span>
+									<span>04/04/2021 - 5:00PM</span>
+								</div>
+								<div className="row">
+									<span>Apex Daily Cup</span>
+									<span>1rd</span>
+									<span>100€</span>
+									<span>3V3</span>
+									<span>16 Equipes</span>
+									<span>04/04/2021 - 5:00PM</span>
+								</div>
+								<div className="row">
+									<span>Apex Daily Cup</span>
+									<span>1rd</span>
+									<span>100€</span>
+									<span>3V3</span>
+									<span>16 Equipes</span>
+									<span>04/04/2021 - 5:00PM</span>
+								</div>
 							</div>
-							<div className="row">
-								<span>Apex Daily Cup</span>
-								<span>1rd</span>
-								<span>100€</span>
-								<span>3V3</span>
-								<span>16 Equipes</span>
-								<span>04/04/2021 - 5:00PM</span>
-							</div>
-							<div className="row">
-								<span>Apex Daily Cup</span>
-								<span>1rd</span>
-								<span>100€</span>
-								<span>3V3</span>
-								<span>16 Equipes</span>
-								<span>04/04/2021 - 5:00PM</span>
-							</div>
-							<div className="row">
-								<span>Apex Daily Cup</span>
-								<span>1rd</span>
-								<span>100€</span>
-								<span>3V3</span>
-								<span>16 Equipes</span>
-								<span>04/04/2021 - 5:00PM</span>
-							</div>
-							<div className="row">
-								<span>Apex Daily Cup</span>
-								<span>1rd</span>
-								<span>100€</span>
-								<span>3V3</span>
-								<span>16 Equipes</span>
-								<span>04/04/2021 - 5:00PM</span>
-							</div>
-
 						</div>								
 					</div>
 				 	{/*<div className="mon-mur">
