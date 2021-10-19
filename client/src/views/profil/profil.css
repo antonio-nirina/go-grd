@@ -1,9 +1,9 @@
 @charset "UTF-8";
 .gamer-stats{
-	max-width: 915px;
-	width: 100%;
-	margin-left: 40px;
+	max-width: 1152px;
+	width: 100%;	
 	padding-top: 35px;
+	margin: auto;
 
 }
 .profil .container h2{
@@ -25,7 +25,8 @@
 	
 }
 .stat-content{
-	display: flex;	
+	display: flex;
+	width: 100%;
 }
 .wall-bloc{
 	background: #101010;
@@ -679,22 +680,34 @@ p.lg-desc{
 	padding: 0px !important;
     background: none !important;
 }
-.with-stat{
-	width: 50%;
+.with-stat{	
 	padding-left: 15px;
 	padding-right: 8px;
+	
+}
+.with-stat div{
+	position: relative
 }
 .with-stat p{
+	position: absolute;;
+	top: 0;
 	padding: 15px;
-	background: #2c2c2c;
+	background: rgba(0,0,0,0.7);
 	font-size: 14px;
+	width: 100%;
+	font-weight: bold;
+	font-family: arial;
+	text-transform: uppercase;
+}
+.with-stat img{
+
 }
 .with-stat span{
 	float: right;
 	text-transform: uppercase;
 }
 .start-game{
-	width: 50%;
+	width: 17%;
 	position: relative;
 }
 .start span{
@@ -706,7 +719,7 @@ p.lg-desc{
     font-size: 14px;
     bottom: 0px;
     left: 0;
-    padding: 8px;    
+    padding: 6px;    
 }
 .start span svg{
 	margin-right: 5px;
@@ -718,15 +731,20 @@ p.lg-desc{
 	position: inherit !important
 }
 .statistique{
- display: flex;
+ 
 }
 .flexbox{
-	width: 100%;
-	padding: 10px 15px;
+	display: flex;
+	width: 100%;	
 	background: #2c2c2c;
 }
 .profil .inblock span{
 	padding: 1px 5px;
+}
+.info-container{
+	width: 70%;
+	margin-left: 16px;
+	align-self: center;
 }
 .flex-items{
 	display: flex;
@@ -738,8 +756,7 @@ p.lg-desc{
 }
 .flex-items p{
 	padding: 7px;
-	width: 34%;
-	font-family: "russo one";
+	width: 34%;	
 	font-size: 14px;
 	font-weight: lighter;
 }
@@ -821,27 +838,30 @@ p.lg-desc{
 .media{
 	display: flex;		
 }
-.social{
-	width: 260px;
-	margin-top: 15px;	
-	align-self: center;
+.social{	
+	margin-top: 15px;		
 	margin-left: 13px;
+	display: flex;
 }
-
-.social i{
-	width: 38px;
+.social a{
+	background: #2c2c2c;
+	width: 44.5px;	
+	display: block;	
 	text-align: center;
-	font-size: 25px;
+	margin-right: 5px;
+}
+.social i{	
+	text-align: center;
+	font-size: 17px;
 	margin-left: 2px;
 	align-self: center;
-	display: inline-block;
-	background: #2c2c2c;
-	border: 2px solid #6f6f6f;
+	display: block;	
 	padding: 5px;
-	color: #000000;
+	color: #ffffff;
+	line-height: 34px;
 }
-.teamname{
-	width: 682px;
+.teamname{	
+	display: flex;
 }
 .bloc-team-mate{
 	display: flex;
@@ -852,7 +872,7 @@ p.lg-desc{
 	align-self: center;
 }
 .bloc-team-mate .avatar-lead{
-	width: 46px;
+	width: 30px;
 	height: auto;
 }
 .bloc-team-mate img{
@@ -870,7 +890,7 @@ p.lg-desc{
 	padding: 5px;
 }
 .setting-accounts, .team-number{
-	width: 100px;
+	width: 79px;
 }
 .team-number i{
 	display: inline-block;
@@ -900,4 +920,24 @@ p.lg-desc{
 }
 .profil .join{
 	padding-top: 15px;
+}
+.content.waggers-link{
+	background: #2c2c2c;
+	height: 240px;
+	overflow: auto;
+}
+.fixed{
+	display: flex;
+	background: #333333;
+	padding: 7px 0px;
+	box-shadow: 0px 3px 3px #201f1f;
+}
+.fixed span, .row span{
+	margin-right: 15px;
+	width: 100%;
+	text-align: center;
+}
+.row{
+	display: flex;
+	padding: 15px;
 }
