@@ -27,11 +27,11 @@ const CreatePlateform: React.FC = function() {
 	const onSubmit = async function(data:Inputs){
 		const result = await createdPlateform({ variables: {
 			name:data.name,
-			description:data.description,
+			description:data.description ? data.description : "",
 			logo:logo,
 			typeLogo:logoType,
 		} })
-		if (result.data.createdGame) {
+		if (result.data.createdPlateform) {
 			history.push("/admin/list-plateform")
 		}
 	}

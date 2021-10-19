@@ -18,5 +18,6 @@ export const GET_ALL_PLATEFORM = gql`
 		uid
 		description
 		name
+		logo
 	}
 }`

@@ -57,3 +57,8 @@ export const ACCETEPED_FRIENDS = gql`
 		AcceptedRequestFriend(idRequest:$idRequest,idSender:$idSender)
 	}
 `
+export const UPDATED_USER_GAME = gql`
+	mutation updatedGameUser($games:GameInputType,$plateforms:GameInputType,$uidUser:String) {
+		updatedGameUser(games:$games,plateforms:$plateforms,uidUser:$uidUser)
+	}
+`

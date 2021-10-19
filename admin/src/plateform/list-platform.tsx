@@ -22,6 +22,7 @@ const ListPlateform = function () {
 	const {loading,error,data} 	= useQuery(GET_ALL_PLATEFORM)
 
 	useEffect(() => {
+		console.log("data", data)
 		if(!loading && !error && data) {
 			setPlateform(data.FindAllPlateform)
 		}
