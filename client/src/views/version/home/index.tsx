@@ -36,7 +36,9 @@ const GetProfilUser = function ({token}:paramToken) {
 				language:data.GetProfilUserXbox.PreferredLanguage? data.GetProfilUserXbox.PreferredLanguage : "fr",
 				lastname:name[1],
 				id:data.GetProfilUserXbox.Id,
-				created:""
+				created:"",
+				birtDate:"", 
+				country:""
 			}
 			dispatch(sendProfilXboxOrPsn(user))
 		}
@@ -64,7 +66,9 @@ const GetProfilTwitchuser = function({token}:paramToken) {
 				language: "fr",
 				lastname:"",
 				id:data.GetAccessUserTwitchApi.Id,
-				created:data.GetAccessUserTwitchApi.created_at
+				created:data.GetAccessUserTwitchApi.created_at,
+				birtDate:"", 
+				country:""
 			}
 			dispatch(sendUserConnectedTwitchAction(user))
 		}

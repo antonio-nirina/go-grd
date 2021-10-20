@@ -40,6 +40,12 @@ var UserSchemaType = graphql.NewObject(graphql.ObjectConfig{
 		"created": &graphql.Field{
 			Type: graphql.String,
 		},
+		"country": &graphql.Field{
+			Type: graphql.String,
+		},
+		"birtDate": &graphql.Field{
+			Type: graphql.String,
+		},
 		"records": &graphql.Field{
 			Type: graphql.Int,
 		},

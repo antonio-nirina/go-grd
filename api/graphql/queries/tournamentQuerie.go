@@ -5,7 +5,6 @@ import (
 	"github.com/thoussei/antonio/api/graphql/types"
 )
 
-
 func FindOneTournament() *graphql.Field {
 	return &graphql.Field{
 		Type:        types.TournamentSchemaType,
@@ -15,7 +14,7 @@ func FindOneTournament() *graphql.Field {
 				Type: graphql.String,
 			},
 		},
-		
+
 		Resolve: tournamentResolver.FindTournamentResolver,
 	}
 }
@@ -32,7 +31,7 @@ func FindAllTournament() *graphql.Field {
 				Type: graphql.Int,
 			},
 		},
-		
+
 		Resolve: tournamentResolver.FindAllTournamentResolver,
 	}
 }
@@ -52,8 +51,8 @@ func FindTournamentByGame() *graphql.Field {
 				Type: graphql.Int,
 			},
 		},
-		
+
 		Resolve: tournamentResolver.FindTournamentGameResolver,
 	}
-}
 
+}

@@ -52,6 +52,12 @@ var userUpatedType = graphql.NewInputObject(
 			"email": &graphql.InputObjectFieldConfig{
 				Type: graphql.String,
 			},
+			"country": &graphql.InputObjectFieldConfig{
+				Type: graphql.String,
+			},
+			"birtDate": &graphql.InputObjectFieldConfig{
+				Type: graphql.String,
+			},
 		},
 	},
 )
@@ -115,7 +121,8 @@ func login() *graphql.Field {
 		Resolve: UserRolve.AuthUserResolver,
 	}
 }
-// 
+
+//
 func updatedUser() *graphql.Field {
 	return &graphql.Field{
 		Type:        types.UserSchemaType,
@@ -133,7 +140,6 @@ func forgotPassword() *graphql.Field {
 			"email": &graphql.ArgumentConfig{
 				Type: graphql.String,
 			},
-			
 		},
 		Resolve: UserRolve.ForgotResolver,
 	}
@@ -149,7 +155,7 @@ func updatedPasswordUser() *graphql.Field {
 			},
 			"newPassword": &graphql.ArgumentConfig{
 				Type: graphql.String,
-			},			
+			},
 		},
 		Resolve: UserRolve.UpdatePasswordResolver,
 	}
@@ -159,8 +165,8 @@ func updatedAvatar() *graphql.Field {
 	return &graphql.Field{
 		Type:        types.UserSchemaType,
 		Description: "Update avatar",
-		Args: argsAvatar,
-		Resolve: UserRolve.UpdateAvatarResolver,
+		Args:        argsAvatar,
+		Resolve:     UserRolve.UpdateAvatarResolver,
 	}
 }
 
@@ -174,8 +180,8 @@ func requestFriend() *graphql.Field {
 			},
 			"idSender": &graphql.ArgumentConfig{
 				Type: graphql.String,
-			},			
-		},			
+			},
+		},
 		Resolve: UserRolve.RequestFriendResolver,
 	}
 }
@@ -190,8 +196,8 @@ func AcceptedRequestFriend() *graphql.Field {
 			},
 			"idSender": &graphql.ArgumentConfig{
 				Type: graphql.String,
-			},				
-		},			
+			},
+		},
 		Resolve: UserRolve.AcceptedFriendResolver,
 	}
 }
@@ -203,8 +209,8 @@ func Deconnected() *graphql.Field {
 		Args: graphql.FieldConfigArgument{
 			"id": &graphql.ArgumentConfig{
 				Type: graphql.String,
-			},	
-		},			
+			},
+		},
 		Resolve: UserRolve.DeconnectedResolver,
 	}
 }

@@ -49,11 +49,11 @@ const Me : React.FC = function() {
 			email:userConnectedRedux.user.email
 		}
 
-		const result = await updatedUser({ variables: { userUpated: userUpated } })
+			const result = await updatedUser({ variables: { userUpated: userUpated } })
 			if (result.data.updatedUser) {
 				dispatch(changeProfilUserConnected(result.data.updatedUser))
 			}
-	}
+		}
 	return (
 		<div className="about-bloc">
 			<div className="about-me">

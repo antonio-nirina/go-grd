@@ -14,8 +14,8 @@ import Rocketleague from "../../assets/image/profil/rocketleague.png"
 
 
 // import Popup from "reactjs-popup"
-import { faXbox, faPlaystation, faTwitch, faYoutube, faFacebook, faTwitter, faDiscord } from "@fortawesome/free-brands-svg-icons"
-import { faChartBar, faGamepad, faStar, faUsers} from "@fortawesome/free-solid-svg-icons"
+import { faXbox, faPlaystation, faTwitch, faYoutube, faFacebook, faTwitter } from "@fortawesome/free-brands-svg-icons"
+import { faChartBar, faUsers} from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import Header from "../header/header"
