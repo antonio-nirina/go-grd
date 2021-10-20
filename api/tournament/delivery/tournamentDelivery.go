@@ -8,6 +8,7 @@ import (
 	gameHandler "github.com/thoussei/antonio/api/games/handler"
 	"github.com/thoussei/antonio/api/tournament/entity"
 	"github.com/thoussei/antonio/api/tournament/handler"
+	userHandler "github.com/thoussei/antonio/api/user/handler"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
@@ -23,6 +24,7 @@ type tournament struct {
 	tournamentHandler          handler.UsecaseTournament
 	gameTournamentHandler      gameHandler.UsecaseGameInterface
 	plateformTournamentHandler gameHandler.UsecasePlateformInterface
+	tournamentUserHandler      userHandler.Usecase
 }
 
 type inputUpdatedTournament struct {
@@ -131,10 +133,6 @@ func (t *tournament) FindAllTournamentResolver(params graphql.ResolveParams) (in
 func (t *tournament) FindTournamentGameResolver(params graphql.ResolveParams) (interface{}, error) {
 	limit, _ := params.Args["limit"].(int)
 	pageNumber, _ := params.Args["pageNumber"].(int)
-
-	if pageNumber == 0 && limit > 0 {
-		pageNumber = 1
-	}
 
 	gameUid, _ := params.Args["slugGame"].(string)
 	game, err := t.gameTournamentHandler.FindOneGameBySlugHandler(gameUid)

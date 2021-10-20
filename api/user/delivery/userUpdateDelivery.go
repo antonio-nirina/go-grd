@@ -17,6 +17,8 @@ type updatedElements struct {
 	Lastname  string `json:"lastname"`
 	Language  string `json:"language"`
 	Email     string `json:"email"`
+	Country   string `json:"country"`
+	BirtDate  string `json:"birtDate"`
 }
 
 type inputAvatar struct {
@@ -61,6 +63,16 @@ func (r *resolver) UpdatedUserResolver(params graphql.ResolveParams) (interface{
 		lastnameUp = input.UserUpated.Lastname
 	}
 
+	country := res.Country
+	if input.UserUpated.Country != "" {
+		country = input.UserUpated.Country
+	}
+
+	birtDate := res.BirtDate
+	if input.UserUpated.BirtDate != "" {
+		country = input.UserUpated.BirtDate
+	}
+
 	userToUpdated := &entity.User{
 		Uid:           res.Uid,
 		FirstName:     firtsnameUp,
@@ -76,6 +88,8 @@ func (r *resolver) UpdatedUserResolver(params graphql.ResolveParams) (interface{
 		Roles:         res.Roles,
 		TypeConnexion: res.TypeConnexion,
 		Created:       res.Created,
+		Country:       country,
+		BirtDate:      birtDate,
 	}
 	_, err := r.userHandler.UpdatedUser(userToUpdated)
 	newRes, _ := r.userHandler.FindUserByEmail(input.UserUpated.Email)
