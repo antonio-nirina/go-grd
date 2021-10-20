@@ -12,8 +12,8 @@ import Fortnite from "../../assets/image/profil/fortnite.png"
 import Warzone from "../../assets/image/profil/warzone.png"
 import Rocketleague from "../../assets/image/profil/rocketleague.png"
 // import Popup from "reactjs-popup"
-import { faXbox, faPlaystation, faTwitch, faYoutube, faFacebook, faTwitter } from "@fortawesome/free-brands-svg-icons"
-import { faChartBar, faUsers} from "@fortawesome/free-solid-svg-icons"
+import { faXbox, faPlaystation, faTwitch, faYoutube, faFacebook, faTwitter} from "@fortawesome/free-brands-svg-icons"
+import { faChartBar, faStar, faUsers} from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Header from "../header/header"
 import Join from "../join/join"
@@ -67,7 +67,6 @@ const Profile: React.FC = function() {
 		}
 
 	},[loading,error,data,ldgWagger,errWagger,dataWagger])
-
 
   return(
 	<div className="profil connected">
@@ -168,7 +167,7 @@ const Profile: React.FC = function() {
 			      	<div className="part">
 						<div className="undertitle">
 							<h2>Tournois</h2>
-							<p>Derniers résultats en Wagers</p>
+							<p>Derniers résultats en tournois de {userConnectedRedux.user.username}</p>
 						</div>
 						{participateTournament.length > 0 ?
 							<div className="content waggers-link">
@@ -240,6 +239,61 @@ const Profile: React.FC = function() {
 							:
 							<></>
 						}
+					</div>
+					<div className="part mur">
+						<div className="undertitle">
+							<h2>Mur</h2>
+							<p>Toutes les dernières actualités de {userConnectedRedux.user.username}</p>
+						</div>
+						<div className="content waggers-link">
+							<div className="fixed">
+								<span>Succès</span>
+								<span className="center">Commentaires</span>
+								<span className="aright">1-4 &gt;</span>
+							</div>
+							<div className="row-container">
+								<div className="row">
+									<div className="note">
+										<img src={AvatarDefault} alt="" width="45"/>
+										<p>
+											<span>Défi</span>
+											TonioPlancha a réussi l0 top 1 sur Apex...
+										</p>
+										<div className="icon">
+											<span><i><FontAwesomeIcon icon={faStar} /></i></span>
+										</div>
+									</div>
+									<div className="note">
+										<img src={AvatarDefault} alt="" width="45"/>
+										<p>
+											<span>Défi</span>
+											TonioPlancha a réussi l0 top 1 sur Apex...
+										</p>
+										<div className="icon">
+											<span><i><FontAwesomeIcon icon={faStar} /></i></span>
+										</div>
+									</div>
+								</div>
+
+								<div className="comment-container">
+									<div className="comments">
+										<img src={AvatarDefault} alt="" width="50"/>
+										<p>
+											<span>{userConnectedRedux.user.username}</span>
+											<input type="text" placeholder="Ajouter un commentaire..." />
+										</p>
+									</div>
+									<div className="comments">
+										<img src={AvatarDefault} alt="" width="50"/>
+										<p>
+											<span>CAPELAJR <i>21 Juillet à 3:54 PM</i></span>
+											+ rep Funny Booooooy
+										</p>
+
+									</div>
+								</div>
+							</div>
+						</div>
 					</div>
 			    </div>
 	      	</div>
