@@ -40,5 +40,8 @@ var PlateformSchemaType = graphql.NewObject(graphql.ObjectConfig{
 		"description": &graphql.Field{
 			Type: graphql.String,
 		},
+		"logo": &graphql.Field{
+			Type: graphql.String,
+		},
 	},
 })

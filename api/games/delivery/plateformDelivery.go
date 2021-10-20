@@ -23,12 +23,12 @@ func NewResolverPlateform(plateformUseCase handler.UsecasePlateformInterface) Re
 
 func (r *resolverPlateform) SavedGamePlateformResolver(params graphql.ResolveParams) (interface{}, error) {
 	urlLogo, _ := r.plateformHandler.HandleFilePlateform(params.Args["logo"].(string), params.Args["typeLogo"].(string))
-	
+
 	plateformSaved := &entity.GamePlatform{
 		Uid:         primitive.NewObjectID(),
 		Name:        params.Args["name"].(string),
 		Description: params.Args["description"].(string),
-		Logo: urlLogo,
+		Logo:        urlLogo,
 	}
 
 	res, err := r.plateformHandler.SavedPlateformRepository(plateformSaved)

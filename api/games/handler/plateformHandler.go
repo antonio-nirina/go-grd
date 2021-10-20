@@ -24,9 +24,10 @@ func NewUsecasePlateform(r repository.PlateformRepositoryInterface) UsecasePlate
 }
 
 type gamePlatformViewModel struct {
-	Uid         string 				`json:"uid"`
-	Name        string             `json:"name"`
-	Description string             `json:"description"`
+	Uid         string `json:"uid"`
+	Name        string `json:"name"`
+	Description string `json:"description"`
+	Logo        string `json:logo"`
 }
 
 func (g *plateformUsecase) SavedPlateformRepository(plateform *entity.GamePlatform) (interface{}, error) {
@@ -57,18 +58,19 @@ func (g *plateformUsecase) FindOnePlateformRepository(idQuery string) (interface
 
 func (g *plateformUsecase) FindAllPlateformRepository() (interface{}, error) {
 	result, err := g.plateformRepository.FindAllPlateformRepository()
-	
+
 	if err != nil {
 		return nil, err
 	}
 
-	var res [] gamePlatformViewModel
+	var res []gamePlatformViewModel
 
-	for _,val := range result {
+	for _, val := range result {
 		plateform := gamePlatformViewModel{
-			Uid:val.Uid.Hex(),     
-			Name:val.Name,      
-			Description:val.Description,
+			Uid:         val.Uid.Hex(),
+			Name:        val.Name,
+			Description: val.Description,
+			Logo:        val.Logo,
 		}
 
 		res = append(res, plateform)
@@ -93,11 +95,11 @@ func (g *plateformUsecase) FindOnePlateformByUidHandler(uidQuery string) (entity
 	return plateform, nil
 }
 
-func (g *plateformUsecase) HandleFilePlateform(files string,typeFile string) (string,error) {
+func (g *plateformUsecase) HandleFilePlateform(files string, typeFile string) (string, error) {
 	err := godotenv.Load()
-	
+
 	if err != nil {
-		return "",err
+		return "", err
 	}
 
 	upl := &external.FileUpload{}
@@ -107,19 +109,19 @@ func (g *plateformUsecase) HandleFilePlateform(files string,typeFile string) (st
 	if !upl.DirectoryExists() {
 		err := upl.CreateDirectory()
 		if err != nil {
-			return "",err
+			return "", err
 		}
 	}
-	
-	upl.Filename = (uuid.NewV4()).String()+"."+typeFile
+
+	upl.Filename = (uuid.NewV4()).String() + "." + typeFile
 	upl.Data = files
-	
+
 	upl.ApiKey = os.Getenv("BB_IMAGE_KEY")
-	url,err := upl.SenderFile()
+	url, err := upl.SenderFile()
 
 	if err != nil {
-		return "",err
+		return "", err
 	}
 
-	return url,nil
+	return url, nil
 }
