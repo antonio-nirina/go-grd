@@ -1,23 +1,20 @@
-import React,{useEffect} from "react"
-// import { useSelector } from "react-redux"
+import React,{useEffect,useState} from "react"
+import { useSelector } from "react-redux"
+import {useQuery} from "@apollo/client"
 import { Link } from 'react-router-dom'
 
 import fr from "../../assets/image/fr.png"
 import ps from "../../assets/image/playstation.png"
 import AvatarDefault from "../../assets/image/game-tag.png"
 import Game from "../../assets/image/game.png"
-
 import Fifa from "../../assets/image/profil/fifa.png"
 import Fortnite from "../../assets/image/profil/fortnite.png"
 import Warzone from "../../assets/image/profil/warzone.png"
 import Rocketleague from "../../assets/image/profil/rocketleague.png"
-
-
 // import Popup from "reactjs-popup"
 import { faXbox, faPlaystation, faTwitch, faYoutube, faFacebook, faTwitter } from "@fortawesome/free-brands-svg-icons"
 import { faChartBar, faUsers} from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-
 import Header from "../header/header"
 import Join from "../join/join"
 import Footer from "../footer/footer"
@@ -26,13 +23,33 @@ import Avatar from "./avatar"
 import "../../assets/css/style.css"
 import "react-responsive-carousel/lib/styles/carousel.min.css"
 import 'reactjs-popup/dist/index.css'
+import {GET_PART_USER,GET_PART_USER_WAGGER} from "../../gql/participate/query"
+import {LIMIT,PAGE_NUMBER} from "../commons/constante"
 // import {Translation} from "../../lang/translation"
-
-// import {RootState} from "../../reducer"
-
+import {RootState} from "../../reducer"
+import {ParticipateTournament,ParticipateWagger} from "../models/participate"
+import {dateStringToDY} from "../tools/dateConvert"
 
 const Profile: React.FC = function() {
-	//const userConnectedRedux = useSelector((state:RootState) => state.userConnected)
+	const [participateTournament,setParticipateTournament] = useState<ParticipateTournament[]>([])
+	const [participateWagger,setParticipateWagger] = useState<ParticipateWagger[]>([])
+	const userConnectedRedux = useSelector((state:RootState) => state.userConnected)
+	const {loading,error,data} 	= useQuery(GET_PART_USER, {
+		variables: {
+			uidUser:userConnectedRedux.user.Uid,
+			limit:LIMIT,
+			pageNumber:PAGE_NUMBER
+		},
+	})
+
+	const {loading:ldgWagger,error:errWagger,data:dataWagger} 	= useQuery(GET_PART_USER_WAGGER, {
+		variables: {
+			uidUser:userConnectedRedux.user.Uid,
+			limit:LIMIT,
+			pageNumber:PAGE_NUMBER
+		},
+	})
+
 	useEffect(() => {
 		const params = window.location.search
 
@@ -40,7 +57,16 @@ const Profile: React.FC = function() {
 			window.opener.postMessage(params,"")
 		   	window.close()
 		}
-	},[])
+
+		if(!loading && !error && data) {
+			setParticipateTournament(data.FindPartByUser)
+		}
+
+		if(!ldgWagger && !errWagger && dataWagger) {
+			setParticipateWagger(dataWagger.FindPartByUserWagger)
+		}
+
+	},[loading,error,data,ldgWagger,errWagger,dataWagger])
 
 
   return(
@@ -57,7 +83,6 @@ const Profile: React.FC = function() {
 			      	</div>
 			      	<div className="statistique">
 			      		<div className="stat-content">
-				      		
 				      		<div className="flexbox">
 				      			<div className="start-game">
 					      			<div className="start">
@@ -100,7 +125,7 @@ const Profile: React.FC = function() {
 				      				<img src={Rocketleague} alt="" height="50"/>
 			      					<p>Rocket League <span><i><FontAwesomeIcon icon={faChartBar} /></i> statistiques</span></p>
 			      				</div>
-			      				
+
 			      			</div>
 				      	</div>
 				      	<div className="stat-content">
@@ -126,7 +151,7 @@ const Profile: React.FC = function() {
 					      				<span>25 <i><FontAwesomeIcon icon={faUsers} /></i></span>
 					      			</div>
 					      		</div>
-					      		<div className="media">				      	
+					      		<div className="media">
 							      	<div className="social">
 					      				<Link to="#"><i><FontAwesomeIcon icon={faTwitch} /></i></Link>
 					      				<Link to="#"><i><FontAwesomeIcon icon={faYoutube} /></i></Link>
@@ -136,388 +161,87 @@ const Profile: React.FC = function() {
 					      				<Link to="#"><i><FontAwesomeIcon icon={faPlaystation} /></i></Link>
 							      	</div>
 	    						</div>
-				      		</div>					      		
+				      		</div>
 				      	</div>
-					      		      		
-			      	</div>			      	
+
+			      	</div>
 			      	<div className="part">
 						<div className="undertitle">
 							<h2>Tournois</h2>
 							<p>Derniers résultats en Wagers</p>
 						</div>
-						<div className="content waggers-link">
-							<div className="fixed">
-								<span>Nom</span>
-								<span>Place</span>
-								<span>Cashprize</span>
-								<span>Format</span>
-								<span>Nombre de Joueurs</span>
-								<span>Date</span>
-							</div>
-							<div className="row-container">
-								<div className="row">
-									<span>Apex Daily Cup</span>
-									<span>1rd</span>
-									<span>100€</span>
-									<span>3V3</span>
-									<span>16 Equipes</span>
-									<span>04/04/2021 - 5:00PM</span>
+						{participateTournament.length > 0 ?
+							<div className="content waggers-link">
+								<div className="fixed">
+									<span>Nom</span>
+									<span>Place</span>
+									<span>Cashprize</span>
+									<span>Format</span>
+									<span>Nombre de Joueurs</span>
+									<span>Date</span>
 								</div>
-								<div className="row">
-									<span>Apex Daily Cup</span>
-									<span>1rd</span>
-									<span>100€</span>
-									<span>3V3</span>
-									<span>16 Equipes</span>
-									<span>04/04/2021 - 5:00PM</span>
-								</div>
-								<div className="row">
-									<span>Apex Daily Cup</span>
-									<span>1rd</span>
-									<span>100€</span>
-									<span>3V3</span>
-									<span>16 Equipes</span>
-									<span>04/04/2021 - 5:00PM</span>
-								</div>
-								<div className="row">
-									<span>Apex Daily Cup</span>
-									<span>1rd</span>
-									<span>100€</span>
-									<span>3V3</span>
-									<span>16 Equipes</span>
-									<span>04/04/2021 - 5:00PM</span>
-								</div>
-								<div className="row">
-									<span>Apex Daily Cup</span>
-									<span>1rd</span>
-									<span>100€</span>
-									<span>3V3</span>
-									<span>16 Equipes</span>
-									<span>04/04/2021 - 5:00PM</span>
-								</div>
-							</div>
+								<div className="row-container">
+									{
+										participateTournament.map(function(el:ParticipateTournament,index:number){
+											return (
+												<div className="row" key={index}>
+													<span>{el.tournament.title}</span>
+													<span> {el.isWin ? "1rd" : "2rd"} </span>
+													<span>{el.tournament.price+" €"}</span>
+													<span>{el.tournament.isTeam ? `${el.tournament.numberTeam}V${el.tournament.numberTeam}`: "1V1"}</span>
+													<span>{el.tournament.numberParticipate}</span>
+													<span>{dateStringToDY(el.tournament.date)}</span>
+												</div>
+											)
+										})
+									}
 
-						</div>								
+								</div>
+
+							</div>
+							:
+							<></>
+						}
 					</div>
 					<div className="part">
 						<div className="undertitle">
 							<h2>Wagers</h2>
-							<p>Derniers résultats de GAMETAG</p>
+							<p>Derniers résultats de {userConnectedRedux.user.username}</p>
 						</div>
-						<div className="content waggers-link">
-							<div className="fixed">
-								<span>Nom</span>
-								<span>Place</span>
-								<span>Cashprize</span>
-								<span>Format</span>
-								<span>Nombre de Joueurs</span>
-								<span>Date</span>
+						{participateWagger.length > 0 ?
+							<div className="content waggers-link">
+								<div className="fixed">
+									<span>Nom</span>
+									<span>Place</span>
+									<span>Cashprize</span>
+									<span>Format</span>
+									<span>Nombre de Joueurs</span>
+									<span>Date</span>
+								</div>
+								<div className="row-container">
+									{
+										participateWagger.map(function(el:ParticipateWagger,index:number){
+											return (
+												<div className="row" key={index}>
+													<span>{el.wagger.title}</span>
+													<span> {el.isWin ? "1rd" : "2rd"} </span>
+													<span>{el.wagger.price+" €"}</span>
+													<span>{el.wagger.format}</span>
+													<span>{el.wagger.participant}</span>
+													<span>{dateStringToDY(el.wagger.date)}</span>
+												</div>
+											)
+										})
+									}
+
+								</div>
+
 							</div>
-							<div className="row-container">
-								<div className="row">
-									<span>Apex Daily Cup</span>
-									<span>1rd</span>
-									<span>100€</span>
-									<span>3V3</span>
-									<span>16 Equipes</span>
-									<span>04/04/2021 - 5:00PM</span>
-								</div>
-								<div className="row">
-									<span>Apex Daily Cup</span>
-									<span>1rd</span>
-									<span>100€</span>
-									<span>3V3</span>
-									<span>16 Equipes</span>
-									<span>04/04/2021 - 5:00PM</span>
-								</div>
-								<div className="row">
-									<span>Apex Daily Cup</span>
-									<span>1rd</span>
-									<span>100€</span>
-									<span>3V3</span>
-									<span>16 Equipes</span>
-									<span>04/04/2021 - 5:00PM</span>
-								</div>
-								<div className="row">
-									<span>Apex Daily Cup</span>
-									<span>1rd</span>
-									<span>100€</span>
-									<span>3V3</span>
-									<span>16 Equipes</span>
-									<span>04/04/2021 - 5:00PM</span>
-								</div>
-								<div className="row">
-									<span>Apex Daily Cup</span>
-									<span>1rd</span>
-									<span>100€</span>
-									<span>3V3</span>
-									<span>16 Equipes</span>
-									<span>04/04/2021 - 5:00PM</span>
-								</div>
-							</div>
-						</div>								
+							:
+							<></>
+						}
 					</div>
-				 	{/*<div className="mon-mur">
-				    	<div className="wall-title">
-				    		<div className="wall-bar-title">
-				    			<p>Mon Mur</p>
-				    			<button className="btn bg-red">Filter</button>
-				    		</div>
-				    		<div className="wall-info">
-				    			<div className="flexbox-items">
-				    				<img src={AvatarDefault} alt=""/>
-				    				<div className="tag-info">
-				    					<div>
-				    						<p className="upper">Défi</p>
-				    						<span><strong>GameTag</strong> a réussi le défi Survivre au Goulag...</span>			    						
-				    					</div>
-				    					<div className="filter-right">
-				    						<span><i><FontAwesomeIcon icon={faStar} /></i></span>
-				    					</div>
-				    				</div>
-				    			</div>			    			
-				    		</div>
-				    		<div className="wall-info">
-				    			<div className="flexbox-items">
-				    				<img src={AvatarDefault} alt=""/>
-				    				<div className="tag-info">
-				    					<div>
-				    						<p className="upper">Défi</p>
-				    						<span><strong>GameTag</strong> a réussi le défi Survivre au Goulag...</span>			    						
-				    					</div>
-				    					<div className="filter-right">
-				    						<span><i><FontAwesomeIcon icon={faStar} /></i></span>
-				    					</div>
-				    				</div>
-				    			</div>			    			
-				    		</div>
-				    		<div className="wall-info">
-				    			<div className="flexbox-items">
-				    				<img src={AvatarDefault} alt=""/>
-				    				<div className="tag-info">
-				    					<div>
-				    						<p className="upper">Défi</p>
-				    						<span><strong>GameTag</strong> a réussi le défi Survivre au Goulag...</span>			    						
-				    					</div>
-				    					<div className="filter-right">
-				    						<span><i><FontAwesomeIcon icon={faStar} /></i></span>
-				    					</div>
-				    				</div>
-				    			</div>			    			
-				    		</div>
-				    		<div className="wall-info">
-				    			<div className="flexbox-items">
-				    				<img src={AvatarDefault} alt=""/>
-				    				<div className="tag-info">
-				    					<div>
-				    						<p className="upper">Défi</p>
-				    						<span><strong>GameTag</strong> a réussi le défi Survivre au Goulag...</span>			    						
-				    					</div>
-				    					<div className="filter-right">
-				    						<span><i><FontAwesomeIcon icon={faStar} /></i></span>
-				    					</div>
-				    				</div>
-				    			</div>			    			
-				    		</div>
-				    		<div className="wall-info">
-				    			<div className="flexbox-items">
-				    				<img src={AvatarDefault} alt=""/>
-				    				<div className="tag-info">
-				    					<div>
-				    						<p className="upper">Défi</p>
-				    						<span><strong>GameTag</strong> a réussi le défi Survivre au Goulag...</span>			    						
-				    					</div>
-				    					<div className="filter-right">
-				    						<span><i><FontAwesomeIcon icon={faStar} /></i></span>
-				    					</div>
-				    				</div>
-				    			</div>			    			
-				    		</div>
-				    		<div className="wall-info">
-				    			<div className="flexbox-items">
-				    				<img src={AvatarDefault} alt=""/>
-				    				<div className="tag-info">
-				    					<div>
-				    						<p className="upper">Défi</p>
-				    						<span><strong>GameTag</strong> a réussi le défi Survivre au Goulag...</span>			    						
-				    					</div>
-				    					<div className="filter-right">
-				    						<span><i><FontAwesomeIcon icon={faStar} /></i></span>
-				    					</div>
-				    				</div>
-				    			</div>			    			
-				    		</div>
-				    		<div className="wall-info">
-				    			<div className="flexbox-items">
-				    				<img src={AvatarDefault} alt=""/>
-				    				<div className="tag-info">
-				    					<div>
-				    						<p className="upper">Défi</p>
-				    						<span><strong>GameTag</strong> a réussi le défi Survivre au Goulag...</span>			    						
-				    					</div>
-				    					<div className="filter-right">
-				    						<span><i><FontAwesomeIcon icon={faStar} /></i></span>
-				    					</div>
-				    				</div>
-				    			</div>			    			
-				    		</div>
-				    		<div className="wall-info">
-				    			<div className="flexbox-items">
-				    				<img src={AvatarDefault} alt=""/>
-				    				<div className="tag-info">
-				    					<div>
-				    						<p className="upper">Défi</p>
-				    						<span><strong>GameTag</strong> a réussi le défi Survivre au Goulag...</span>			    						
-				    					</div>
-				    					<div className="filter-right">
-				    						<span><i><FontAwesomeIcon icon={faStar} /></i></span>
-				    					</div>
-				    				</div>
-				    			</div>			    			
-				    		</div>
-				    		<div className="wall-info">
-				    			<div className="flexbox-items">
-				    				<img src={AvatarDefault} alt=""/>
-				    				<div className="tag-info">
-				    					<div>
-				    						<p className="upper">Défi</p>
-				    						<span><strong>GameTag</strong> a réussi le défi Survivre au Goulag...</span>			    						
-				    					</div>
-				    					<div className="filter-right">
-				    						<span><i><FontAwesomeIcon icon={faStar} /></i></span>
-				    					</div>
-				    				</div>
-				    			</div>			    			
-				    		</div>
-				    		<div className="wall-info">
-				    			<div className="flexbox-items">
-				    				<img src={AvatarDefault} alt=""/>
-				    				<div className="tag-info">
-				    					<div>
-				    						<p className="upper">Défi</p>
-				    						<span><strong>GameTag</strong> a réussi le défi Survivre au Goulag...</span>			    						
-				    					</div>
-				    					<div className="filter-right">
-				    						<span><i><FontAwesomeIcon icon={faStar} /></i></span>
-				    					</div>
-				    				</div>
-				    			</div>			    			
-				    		</div>
-				    		<div className="wall-info">
-				    			<div className="flexbox-items">
-				    				<img src={AvatarDefault} alt=""/>
-				    				<div className="tag-info">
-				    					<div>
-				    						<p className="upper">Défi</p>
-				    						<span><strong>GameTag</strong> a réussi le défi Survivre au Goulag...</span>			    						
-				    					</div>
-				    					<div className="filter-right">
-				    						<span><i><FontAwesomeIcon icon={faStar} /></i></span>
-				    					</div>
-				    				</div>
-				    			</div>			    			
-				    		</div>
-				    		<div className="wall-info">
-				    			<div className="flexbox-items">
-				    				<img src={AvatarDefault} alt=""/>
-				    				<div className="tag-info">
-				    					<div>
-				    						<p className="upper">Défi</p>
-				    						<span><strong>GameTag</strong> a réussi le défi Survivre au Goulag...</span>			    						
-				    					</div>
-				    					<div className="filter-right">
-				    						<span><i><FontAwesomeIcon icon={faStar} /></i></span>
-				    					</div>
-				    				</div>
-				    			</div>			    			
-				    		</div>
-				    		<div className="wall-info">
-				    			<div className="flexbox-items">
-				    				<img src={AvatarDefault} alt=""/>
-				    				<div className="tag-info">
-				    					<div>
-				    						<p className="upper">Défi</p>
-				    						<span><strong>GameTag</strong> a réussi le défi Survivre au Goulag...</span>			    						
-				    					</div>
-				    					<div className="filter-right">
-				    						<span><i><FontAwesomeIcon icon={faStar} /></i></span>
-				    					</div>
-				    				</div>
-				    			</div>			    			
-				    		</div>
-				    		<div className="wall-info">
-				    			<div className="flexbox-items">
-				    				<img src={AvatarDefault} alt=""/>
-				    				<div className="tag-info">
-				    					<div>
-				    						<p className="upper">Défi</p>
-				    						<span><strong>GameTag</strong> a réussi le défi Survivre au Goulag...</span>			    						
-				    					</div>
-				    					<div className="filter-right">
-				    						<span><i><FontAwesomeIcon icon={faStar} /></i></span>
-				    					</div>
-				    				</div>
-				    			</div>			    			
-				    		</div>
-				    		<div className="wall-info">
-				    			<div className="flexbox-items">
-				    				<img src={AvatarDefault} alt=""/>
-				    				<div className="tag-info">
-				    					<div>
-				    						<p className="upper">Défi</p>
-				    						<span><strong>GameTag</strong> a réussi le défi Survivre au Goulag...</span>			    						
-				    					</div>
-				    					<div className="filter-right">
-				    						<span><i><FontAwesomeIcon icon={faStar} /></i></span>
-				    					</div>
-				    				</div>
-				    			</div>			    			
-				    		</div>
-				    		<div className="wall-info">
-				    			<div className="flexbox-items">
-				    				<img src={AvatarDefault} alt=""/>
-				    				<div className="tag-info">
-				    					<div>
-				    						<p className="upper">Défi</p>
-				    						<span><strong>GameTag</strong> a réussi le défi Survivre au Goulag...</span>			    						
-				    					</div>
-				    					<div className="filter-right">
-				    						<span><i><FontAwesomeIcon icon={faStar} /></i></span>
-				    					</div>
-				    				</div>
-				    			</div>			    			
-				    		</div>
-				    		<div className="wall-info">
-				    			<div className="flexbox-items">
-				    				<img src={AvatarDefault} alt=""/>
-				    				<div className="tag-info">
-				    					<div>
-				    						<p className="upper">Défi</p>
-				    						<span><strong>GameTag</strong> a réussi le défi Survivre au Goulag...</span>			    						
-				    					</div>
-				    					<div className="filter-right">
-				    						<span><i><FontAwesomeIcon icon={faStar} /></i></span>
-				    					</div>
-				    				</div>
-				    			</div>			    			
-				    		</div>
-				    		<div className="wall-info">
-				    			<div className="flexbox-items">
-				    				<img src={AvatarDefault} alt=""/>
-				    				<div className="tag-info">
-				    					<div>
-				    						<p className="upper">Défi</p>
-				    						<span><strong>GameTag</strong> a réussi le défi Survivre au Goulag...</span>			    						
-				    					</div>
-				    					<div className="filter-right">
-				    						<span><i><FontAwesomeIcon icon={faStar} /></i></span>
-				    					</div>
-				    				</div>
-				    			</div>			    			
-				    		</div>
-				    	</div>
-			    	</div>*/}	      					
-			    </div>			   
+			    </div>
 	      	</div>
 	      </div>
 	      <Join/>
