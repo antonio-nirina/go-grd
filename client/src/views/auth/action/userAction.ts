@@ -15,6 +15,8 @@ export interface UserType {
 	lastname:string|""
 	id:string|""
 	created:string|""
+	birtDate:string|""
+	country:string | ""
 }
 
 export const sendUserConectedAction = function(data:string) {
@@ -36,7 +38,9 @@ export const sendUserConnectedXboxAction = function(user:any) {
 		language:user.PreferredLanguage,
 		lastname:user.DisplayName,
 		id:user.Id,
-		created:user.created
+		created:user.created,
+		country:"",
+		birtDate:""
 	}
 	return {
 		type:USER_CONNECTED,
@@ -55,6 +59,8 @@ export const changeLanguageUserConnected = function(user:UserType,lang:string) {
 		lastname:user.lastname,
 		id:user.id,
 		created:user.created,
+		country:"",
+		birtDate:""
 	}
 	return {
 		type:USER_CONNECTED,
@@ -72,7 +78,9 @@ export const changeProfilUserConnected = function(user:any) {
 		language:user.language,
 		lastname:user.lastname,
 		id:user.id,
-		created:user.created
+		created:user.created,
+		country:"",
+		birtDate:""
 	}
 	return {
 		type:USER_CONNECTED,
@@ -108,7 +116,9 @@ export const sendUserConnectedTwitchAction = function(user:any) {
 		language:user.PreferredLanguage,
 		lastname:user.DisplayName,
 		id:user.Id,
-		created:user.created
+		created:user.created,
+		country:"",
+		birtDate:""
 	}
 	return {
 		type:USER_CONNECTED,

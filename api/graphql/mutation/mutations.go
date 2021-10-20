@@ -69,7 +69,7 @@ var plateformResolver = gameDelivery.NewResolverPlateform(usecasePlateform)
 var usecaseNotif = notifHandler.NewUsecaseNotif(repositoryNotif)
 var usecase = handler.NewUsecaseUser(repUser)
 var usecaseGame = gameHandler.NewUsecaseGame(repositoryGame)
-var UserRolve = delivery.NewResolver(usecase, usecaseNotif, usecaseGame,usecasePlateform)
+var UserRolve = delivery.NewResolver(usecase, usecaseNotif, usecaseGame, usecasePlateform)
 var gameResolver = gameDelivery.NewResolverGame(usecaseGame)
 
 var tournamentRepository = tournamentRepo.NewTournamentRepository(database)
@@ -148,6 +148,6 @@ func GetRootFields() graphql.Fields {
 		"saveGroup":             saveGroup(),
 		"EditStatutPublication": EditStatutPublication(),
 		"RemovePublication":     RemovePublication(),
-		"updatedGameUser":updatedGameUser(),
+		"updatedGameUser":       updatedGameUser(),
 	}
 }
