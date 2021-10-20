@@ -35,7 +35,9 @@ const GetProfilUser = function ({token}:any) {
 				language:data.GetProfilUserXbox.PreferredLanguage? data.GetProfilUserXbox.PreferredLanguage : "fr",
 				lastname:name[1],
 				id:data.GetProfilUserXbox.Id,
-				created:""
+				created:"",
+				birtDate:"", 
+				country:""
 			}
 			dispatch(sendProfilXboxOrPsn(user))
 		}

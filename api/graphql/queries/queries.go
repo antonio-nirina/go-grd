@@ -68,7 +68,8 @@ var gameResolver = gameDelivery.NewResolverGame(usecaseGame)
 // Usecase
 var usecaseNotif = notifHandler.NewUsecaseNotif(repositoryNotif)
 var usecase = handler.NewUsecaseUser(rep)
-var UserRolve = delivery.NewResolver(usecase, usecaseNotif, usecaseGame,usecasePlateform)
+var UserRolve = delivery.NewResolver(usecase, usecaseNotif, usecaseGame, usecasePlateform)
+
 var tournamentRepository = tournamentRepo.NewTournamentRepository(database)
 var tournamentUsecase = tournamentHandler.NewUsecaseTournament(tournamentRepository)
 var tournamentResolver = tournamentDelivery.NewResolverTournament(tournamentUsecase, usecaseGame, usecasePlateform)

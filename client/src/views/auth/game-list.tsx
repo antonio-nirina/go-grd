@@ -24,6 +24,7 @@ interface SelectPlateform {
 
 
 const GameList: React.FC = function() {
+	const history = useHistory()
 	const userConnectedRedux = useSelector((state:RootState) => state.userConnected)
 	const [games,setGames] = useState<GameType[]>([])
 	const [plateforms,setPlateforms] = useState<SelectPlateform[]>([])
@@ -58,7 +59,7 @@ const GameList: React.FC = function() {
 	}
 
 	const sendGamePlateform = async function() {
-		const history = useHistory()
+
 		const result = await updatedUserGame({ variables: {
 			games:games,
 			plateforms:plateforms,
