@@ -1,6 +1,10 @@
 import React,{useEffect} from "react"
 // import { useSelector } from "react-redux"
 import { Link } from 'react-router-dom'
+import { useSelector, useDispatch } from "react-redux"
+import {UPDATE_AVATAR} from "../../gql/user/mutation"
+import {useMutation} from "@apollo/client"
+import {RootState} from "../../reducer"
 
 import fr from "../../assets/image/fr.png"
 import ps from "../../assets/image/playstation.png"
@@ -14,8 +18,8 @@ import Rocketleague from "../../assets/image/profil/rocketleague.png"
 
 
 // import Popup from "reactjs-popup"
-import { faXbox, faPlaystation, faTwitch, faYoutube, faFacebook, faTwitter, faDiscord } from "@fortawesome/free-brands-svg-icons"
-import { faChartBar, faGamepad, faStar, faUsers} from "@fortawesome/free-solid-svg-icons"
+import { faXbox, faPlaystation, faTwitch, faYoutube, faFacebook, faTwitter} from "@fortawesome/free-brands-svg-icons"
+import { faChartBar, faStar, faUsers} from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import Header from "../header/header"
@@ -41,6 +45,9 @@ const Profile: React.FC = function() {
 		   	window.close()
 		}
 	},[])
+	const [updatedAvatar] = useMutation(UPDATE_AVATAR)
+	const dispatch = useDispatch()
+	const userConnectedRedux = useSelector((state:RootState) => state.userConnected)
 
 
   return(
@@ -143,7 +150,7 @@ const Profile: React.FC = function() {
 			      	<div className="part">
 						<div className="undertitle">
 							<h2>Tournois</h2>
-							<p>Derniers résultats en Wagers</p>
+							<p>Derniers résultats en tournois de {userConnectedRedux.user.username}</p>
 						</div>
 						<div className="content waggers-link">
 							<div className="fixed">
@@ -202,7 +209,7 @@ const Profile: React.FC = function() {
 					<div className="part">
 						<div className="undertitle">
 							<h2>Wagers</h2>
-							<p>Derniers résultats de GAMETAG</p>
+							<p>Derniers résultats de {userConnectedRedux.user.username}</p>
 						</div>
 						<div className="content waggers-link">
 							<div className="fixed">
@@ -257,266 +264,61 @@ const Profile: React.FC = function() {
 							</div>
 						</div>								
 					</div>
-				 	{/*<div className="mon-mur">
-				    	<div className="wall-title">
-				    		<div className="wall-bar-title">
-				    			<p>Mon Mur</p>
-				    			<button className="btn bg-red">Filter</button>
-				    		</div>
-				    		<div className="wall-info">
-				    			<div className="flexbox-items">
-				    				<img src={AvatarDefault} alt=""/>
-				    				<div className="tag-info">
-				    					<div>
-				    						<p className="upper">Défi</p>
-				    						<span><strong>GameTag</strong> a réussi le défi Survivre au Goulag...</span>			    						
-				    					</div>
-				    					<div className="filter-right">
-				    						<span><i><FontAwesomeIcon icon={faStar} /></i></span>
-				    					</div>
-				    				</div>
-				    			</div>			    			
-				    		</div>
-				    		<div className="wall-info">
-				    			<div className="flexbox-items">
-				    				<img src={AvatarDefault} alt=""/>
-				    				<div className="tag-info">
-				    					<div>
-				    						<p className="upper">Défi</p>
-				    						<span><strong>GameTag</strong> a réussi le défi Survivre au Goulag...</span>			    						
-				    					</div>
-				    					<div className="filter-right">
-				    						<span><i><FontAwesomeIcon icon={faStar} /></i></span>
-				    					</div>
-				    				</div>
-				    			</div>			    			
-				    		</div>
-				    		<div className="wall-info">
-				    			<div className="flexbox-items">
-				    				<img src={AvatarDefault} alt=""/>
-				    				<div className="tag-info">
-				    					<div>
-				    						<p className="upper">Défi</p>
-				    						<span><strong>GameTag</strong> a réussi le défi Survivre au Goulag...</span>			    						
-				    					</div>
-				    					<div className="filter-right">
-				    						<span><i><FontAwesomeIcon icon={faStar} /></i></span>
-				    					</div>
-				    				</div>
-				    			</div>			    			
-				    		</div>
-				    		<div className="wall-info">
-				    			<div className="flexbox-items">
-				    				<img src={AvatarDefault} alt=""/>
-				    				<div className="tag-info">
-				    					<div>
-				    						<p className="upper">Défi</p>
-				    						<span><strong>GameTag</strong> a réussi le défi Survivre au Goulag...</span>			    						
-				    					</div>
-				    					<div className="filter-right">
-				    						<span><i><FontAwesomeIcon icon={faStar} /></i></span>
-				    					</div>
-				    				</div>
-				    			</div>			    			
-				    		</div>
-				    		<div className="wall-info">
-				    			<div className="flexbox-items">
-				    				<img src={AvatarDefault} alt=""/>
-				    				<div className="tag-info">
-				    					<div>
-				    						<p className="upper">Défi</p>
-				    						<span><strong>GameTag</strong> a réussi le défi Survivre au Goulag...</span>			    						
-				    					</div>
-				    					<div className="filter-right">
-				    						<span><i><FontAwesomeIcon icon={faStar} /></i></span>
-				    					</div>
-				    				</div>
-				    			</div>			    			
-				    		</div>
-				    		<div className="wall-info">
-				    			<div className="flexbox-items">
-				    				<img src={AvatarDefault} alt=""/>
-				    				<div className="tag-info">
-				    					<div>
-				    						<p className="upper">Défi</p>
-				    						<span><strong>GameTag</strong> a réussi le défi Survivre au Goulag...</span>			    						
-				    					</div>
-				    					<div className="filter-right">
-				    						<span><i><FontAwesomeIcon icon={faStar} /></i></span>
-				    					</div>
-				    				</div>
-				    			</div>			    			
-				    		</div>
-				    		<div className="wall-info">
-				    			<div className="flexbox-items">
-				    				<img src={AvatarDefault} alt=""/>
-				    				<div className="tag-info">
-				    					<div>
-				    						<p className="upper">Défi</p>
-				    						<span><strong>GameTag</strong> a réussi le défi Survivre au Goulag...</span>			    						
-				    					</div>
-				    					<div className="filter-right">
-				    						<span><i><FontAwesomeIcon icon={faStar} /></i></span>
-				    					</div>
-				    				</div>
-				    			</div>			    			
-				    		</div>
-				    		<div className="wall-info">
-				    			<div className="flexbox-items">
-				    				<img src={AvatarDefault} alt=""/>
-				    				<div className="tag-info">
-				    					<div>
-				    						<p className="upper">Défi</p>
-				    						<span><strong>GameTag</strong> a réussi le défi Survivre au Goulag...</span>			    						
-				    					</div>
-				    					<div className="filter-right">
-				    						<span><i><FontAwesomeIcon icon={faStar} /></i></span>
-				    					</div>
-				    				</div>
-				    			</div>			    			
-				    		</div>
-				    		<div className="wall-info">
-				    			<div className="flexbox-items">
-				    				<img src={AvatarDefault} alt=""/>
-				    				<div className="tag-info">
-				    					<div>
-				    						<p className="upper">Défi</p>
-				    						<span><strong>GameTag</strong> a réussi le défi Survivre au Goulag...</span>			    						
-				    					</div>
-				    					<div className="filter-right">
-				    						<span><i><FontAwesomeIcon icon={faStar} /></i></span>
-				    					</div>
-				    				</div>
-				    			</div>			    			
-				    		</div>
-				    		<div className="wall-info">
-				    			<div className="flexbox-items">
-				    				<img src={AvatarDefault} alt=""/>
-				    				<div className="tag-info">
-				    					<div>
-				    						<p className="upper">Défi</p>
-				    						<span><strong>GameTag</strong> a réussi le défi Survivre au Goulag...</span>			    						
-				    					</div>
-				    					<div className="filter-right">
-				    						<span><i><FontAwesomeIcon icon={faStar} /></i></span>
-				    					</div>
-				    				</div>
-				    			</div>			    			
-				    		</div>
-				    		<div className="wall-info">
-				    			<div className="flexbox-items">
-				    				<img src={AvatarDefault} alt=""/>
-				    				<div className="tag-info">
-				    					<div>
-				    						<p className="upper">Défi</p>
-				    						<span><strong>GameTag</strong> a réussi le défi Survivre au Goulag...</span>			    						
-				    					</div>
-				    					<div className="filter-right">
-				    						<span><i><FontAwesomeIcon icon={faStar} /></i></span>
-				    					</div>
-				    				</div>
-				    			</div>			    			
-				    		</div>
-				    		<div className="wall-info">
-				    			<div className="flexbox-items">
-				    				<img src={AvatarDefault} alt=""/>
-				    				<div className="tag-info">
-				    					<div>
-				    						<p className="upper">Défi</p>
-				    						<span><strong>GameTag</strong> a réussi le défi Survivre au Goulag...</span>			    						
-				    					</div>
-				    					<div className="filter-right">
-				    						<span><i><FontAwesomeIcon icon={faStar} /></i></span>
-				    					</div>
-				    				</div>
-				    			</div>			    			
-				    		</div>
-				    		<div className="wall-info">
-				    			<div className="flexbox-items">
-				    				<img src={AvatarDefault} alt=""/>
-				    				<div className="tag-info">
-				    					<div>
-				    						<p className="upper">Défi</p>
-				    						<span><strong>GameTag</strong> a réussi le défi Survivre au Goulag...</span>			    						
-				    					</div>
-				    					<div className="filter-right">
-				    						<span><i><FontAwesomeIcon icon={faStar} /></i></span>
-				    					</div>
-				    				</div>
-				    			</div>			    			
-				    		</div>
-				    		<div className="wall-info">
-				    			<div className="flexbox-items">
-				    				<img src={AvatarDefault} alt=""/>
-				    				<div className="tag-info">
-				    					<div>
-				    						<p className="upper">Défi</p>
-				    						<span><strong>GameTag</strong> a réussi le défi Survivre au Goulag...</span>			    						
-				    					</div>
-				    					<div className="filter-right">
-				    						<span><i><FontAwesomeIcon icon={faStar} /></i></span>
-				    					</div>
-				    				</div>
-				    			</div>			    			
-				    		</div>
-				    		<div className="wall-info">
-				    			<div className="flexbox-items">
-				    				<img src={AvatarDefault} alt=""/>
-				    				<div className="tag-info">
-				    					<div>
-				    						<p className="upper">Défi</p>
-				    						<span><strong>GameTag</strong> a réussi le défi Survivre au Goulag...</span>			    						
-				    					</div>
-				    					<div className="filter-right">
-				    						<span><i><FontAwesomeIcon icon={faStar} /></i></span>
-				    					</div>
-				    				</div>
-				    			</div>			    			
-				    		</div>
-				    		<div className="wall-info">
-				    			<div className="flexbox-items">
-				    				<img src={AvatarDefault} alt=""/>
-				    				<div className="tag-info">
-				    					<div>
-				    						<p className="upper">Défi</p>
-				    						<span><strong>GameTag</strong> a réussi le défi Survivre au Goulag...</span>			    						
-				    					</div>
-				    					<div className="filter-right">
-				    						<span><i><FontAwesomeIcon icon={faStar} /></i></span>
-				    					</div>
-				    				</div>
-				    			</div>			    			
-				    		</div>
-				    		<div className="wall-info">
-				    			<div className="flexbox-items">
-				    				<img src={AvatarDefault} alt=""/>
-				    				<div className="tag-info">
-				    					<div>
-				    						<p className="upper">Défi</p>
-				    						<span><strong>GameTag</strong> a réussi le défi Survivre au Goulag...</span>			    						
-				    					</div>
-				    					<div className="filter-right">
-				    						<span><i><FontAwesomeIcon icon={faStar} /></i></span>
-				    					</div>
-				    				</div>
-				    			</div>			    			
-				    		</div>
-				    		<div className="wall-info">
-				    			<div className="flexbox-items">
-				    				<img src={AvatarDefault} alt=""/>
-				    				<div className="tag-info">
-				    					<div>
-				    						<p className="upper">Défi</p>
-				    						<span><strong>GameTag</strong> a réussi le défi Survivre au Goulag...</span>			    						
-				    					</div>
-				    					<div className="filter-right">
-				    						<span><i><FontAwesomeIcon icon={faStar} /></i></span>
-				    					</div>
-				    				</div>
-				    			</div>			    			
-				    		</div>
-				    	</div>
-			    	</div>*/}	      					
+					<div className="part mur">
+						<div className="undertitle">
+							<h2>Mur</h2>
+							<p>Toutes les dernières actualités de {userConnectedRedux.user.username}</p>
+						</div>
+						<div className="content waggers-link">
+							<div className="fixed">
+								<span>Succès</span>
+								<span className="center">Commentaires</span>
+								<span className="aright">1-4 &gt;</span>							
+							</div>
+							<div className="row-container">
+								<div className="row">
+									<div className="note">
+										<img src={AvatarDefault} alt="" width="45"/>
+										<p>
+											<span>Défi</span>
+											TonioPlancha a réussi l0 top 1 sur Apex...
+										</p>
+										<div className="icon">
+											<span><i><FontAwesomeIcon icon={faStar} /></i></span>
+										</div>
+									</div>
+									<div className="note">
+										<img src={AvatarDefault} alt="" width="45"/>
+										<p>
+											<span>Défi</span>
+											TonioPlancha a réussi l0 top 1 sur Apex...
+										</p>
+										<div className="icon">
+											<span><i><FontAwesomeIcon icon={faStar} /></i></span>
+										</div>
+									</div>
+								</div>
+
+								<div className="comment-container">
+									<div className="comments">										
+										<img src={AvatarDefault} alt="" width="50"/>										
+										<p>
+											<span>{userConnectedRedux.user.username}</span>											
+											<input type="text" placeholder="Ajouter un commentaire..." />
+										</p>
+									</div>
+									<div className="comments">									
+										<img src={AvatarDefault} alt="" width="50"/>
+										<p>
+											<span>CAPELAJR <i>21 Juillet à 3:54 PM</i></span>
+											+ rep Funny Booooooy
+										</p>
+										
+									</div>
+								</div>	
+							</div>													
+						</div>
+					</div>				 	  					
 			    </div>			   
 	      	</div>
 	      </div>
