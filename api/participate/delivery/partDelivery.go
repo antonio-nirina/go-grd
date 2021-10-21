@@ -225,11 +225,6 @@ func (p *participate) FindAllPartResolver(params graphql.ResolveParams) (interfa
 func (p *participate) FindPartByUseResolver(params graphql.ResolveParams) (interface{}, error) {
 	limit, _ := params.Args["limit"].(int)
 	pageNumber, _ := params.Args["pageNumber"].(int)
-
-	if pageNumber == 0 && limit > 0 {
-		pageNumber = 1
-	}
-
 	userUid, _ := params.Args["uidUser"].(string)
 	user, err := p.user.FindOneUserByUid(userUid)
 
@@ -379,3 +374,4 @@ func (p *participate) FindPartByUserWaggerResolver(params graphql.ResolveParams)
 
 	return res, nil
 }
+

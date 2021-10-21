@@ -18,6 +18,15 @@ type partViewModel struct {
 	NumberPartConfirmed bool                         `json:"numberPartConfirmed"`
 }
 
+type partViewModelTournament struct {
+	Uid                 string                       `json:"uid"`
+	Date                string                       `json:"date"`
+	User                user.UserViewModel           `json:"user"`
+	IsWin               bool                         `json:"isWin"`
+	Tournament          thandler.TournamentViewModel `json:"tournament"`
+	NumberPartConfirmed bool                         `json:"numberPartConfirmed"`
+}
+
 type ReacordsPartModel struct {
 	RecordsPart                 int `json:"recordsPart"`
 	ReacordsnumberPartConfirmed int `json:"reacordsnumberPartConfirmed"`

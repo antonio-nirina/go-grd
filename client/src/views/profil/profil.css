@@ -8,8 +8,20 @@
 }
 .profil .container h2{
 	text-transform: uppercase;
-	font-size: 25px;
+	font-size: 20px;
 	/*padding: 5px;	*/
+	margin-bottom: 5px;
+}
+.profil .container h2 img{
+	margin: 0 15px;
+}
+.profil .container h2 i{
+	font-size: 17px;
+	align-self: top;
+	position: absolute;	
+	top: 0;
+    top: 7px;
+    right: 25px;
 }
 .content{	
 	width: 100%;	
@@ -36,7 +48,8 @@
 	margin-bottom: 40px;
 	background: #2c2c2c;
 	border-radius: 45px;
-	width: 280px;
+	width: 320px;
+	position: relative;
 }
 .float{
 	display: inline-block;
@@ -308,7 +321,7 @@ p.lg-desc{
 
 }
 .field h2{
-	font-family: "russo one";
+	font-family: arial;	
     font-size: 45px;
     width: 100%;
     text-align: center;
@@ -346,6 +359,29 @@ p.lg-desc{
 .img-container-profil{
 	display: flex;
 	padding-top: 15px;
+	width: 180px;
+}
+.img-container-profil p{
+	height: 10px;
+	background: #707070;
+	width: 100%;
+	border-radius: 5px;
+	align-self: center;
+}
+.invisible, .visible{
+	width: 20px;
+	height: 15px;
+	border-radius: 50%;
+	display: inline-block;	
+	align-self: center;
+}
+.visible{
+	background :#27c612;
+	margin-left: 5px;
+}
+.invisible{
+	background: #00ceff;
+	margin-right: 5px;
 }
 .img-container-profil img{
 	align-self: center;
@@ -916,7 +952,7 @@ p.lg-desc{
 	text-align: left;
 }
 .profil .undertitle p{
-	
+	font-size: 13px;
 }
 .profil .join{
 	padding-top: 15px;
@@ -933,6 +969,7 @@ p.lg-desc{
 .row-container{
 	height: 240px;
 	overflow: auto;
+	
 }
 .fixed span, .row span{
 	margin-right: 15px;
@@ -942,4 +979,67 @@ p.lg-desc{
 .row{
 	display: flex;
 	padding: 15px;
+}
+.mur .row-container{
+	display: flex;
+	height: auto;
+}
+.mur .fixed span{
+	text-align: left;
+	width:100%;
+}
+.mur .fixed span:first-child{
+	margin-left: 15px;
+}
+.mur .comments{
+	display: flex;
+}
+.mur .row{
+	display: block;
+	width: 50%
+}
+.mur .note{
+	display: flex;
+	margin-bottom: 15px;
+}
+.mur .row-container .note p, .mur .comments p{
+	text-align: left;
+	font-size: 13px;
+	margin-left: 15px;
+	width: 100%;
+}
+.mur .row-container .note span, .mur .comments span{
+	display: block;
+	text-align: left;
+	text-transform: uppercase;
+}
+.mur .icon{
+	width: 15%;
+	text-align: right;
+	align-self: center;
+}
+.mur .icon i{
+	font-size: 24px;
+	color: #dd0000;
+
+}
+
+.comment-container{
+	
+}
+.mur .comments{
+	margin: 10px 0;
+}
+.mur .comments input{
+	padding: 7px;
+	font-size: 12px;
+	background: #4b4b4b;
+	border: none;
+	color: #999999;
+}
+.mur .comments i{
+	font-style: inherit;
+	font-size: 10px;
+	margin-left: 10px;
+	text-transform: inherit important;
 }

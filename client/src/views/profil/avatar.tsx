@@ -7,10 +7,9 @@ import {useMutation} from "@apollo/client"
 import {RootState} from "../../reducer"
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faPen } from "@fortawesome/free-solid-svg-icons"
+import { faPen, faExternalLinkAlt } from "@fortawesome/free-solid-svg-icons"
 
 import fr from "../../assets/image/fr.png"
-import WhiteJoystick from "../../assets/image/white-joystick.png"
 import AvatarDefault from "../../assets/image/game-tag.png"
 import {UPDATE_AVATAR} from "../../gql/user/mutation"
 import {changeProfilUserConnected} from "../auth/action/userAction"
@@ -78,10 +77,17 @@ const Avatar : React.FC = function() {
 
 			</div>
 			<div className="gamer-tag">
-				<h2>{userConnectedRedux.user.username}</h2>
-				<div className="img-container-profil">
-					<img src={WhiteJoystick} className="itemTag joystick" alt="" width="30" height="30" />
+				<h2>
+					{userConnectedRedux.user.username}
 					<img src={fr} alt="" width="22" height="20"/>
+					<i><FontAwesomeIcon icon={faExternalLinkAlt} /></i>
+				</h2>
+
+				<span>Membre depuis 11 2021</span>
+				<div className="img-container-profil">
+					<span className="invisible"></span>				
+					<p></p>
+					<span className="visible"></span>
 				</div>
 			</div>
 			{/*<div className={!closeModal ? "crop-container" :"crop-container close"}>

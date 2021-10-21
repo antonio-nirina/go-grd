@@ -48,7 +48,6 @@ const Post = function() {
 
 	useMemo(() => {
 		if(!loading && !error && data) {
-			console.log("data", data)
 			setPosts(data.FindAllPost)
 		}
 	},[loading,error,data])
@@ -154,7 +153,7 @@ const Post = function() {
 			} else {
 				if(!contentPost.current.textContent) contentPost.current.innerHTML = contentPost.current.innerHTML+`<img src=${url} style="width:12px" alt=${e} />`
 			}
-			
+
 		}
 	}
 
@@ -301,7 +300,7 @@ const Post = function() {
 								</div>
 							</div>
 						</div>
-						</div>						
+						</div>
 					</div>
 			</div>
 			{
@@ -316,13 +315,13 @@ const Post = function() {
 	  						<div className="actus-content">
 	  							{parse(e.content)}
 	  						</div>
-							  {e.files ? 
+							  {e.files ?
 							  	<div className="actus-content">
 								  {e.imageType !== "video/mp4" ? <img src={e.files} style={{"width":"100%"}} alt={e.uid} /> :  <video src={e.files} width="100%" height="240" controls></video>}
 								</div>
 							  : <></>
 							  }
-	  						
+
 	  					</div>
 					)
 				})
