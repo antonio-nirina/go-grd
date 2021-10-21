@@ -107,7 +107,7 @@ const ListCommunaute = function() {
 							/>
 						</div>
 						{
-							cmty?.map(function(el:Stremings,index:number){
+							cmty.length > 0 ? cmty.map(function(el:Stremings,index:number){
 								return (
 									<div key={index}>
 										<div style={{"float":"right"}}>
@@ -134,6 +134,10 @@ const ListCommunaute = function() {
 									</div>
 								)
 							})
+							: 
+							<>
+								Accune stream selectionner
+							</>
 						}
 					</div>
 				</div>

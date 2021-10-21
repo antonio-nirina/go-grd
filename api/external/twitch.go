@@ -239,6 +239,7 @@ func GetAllGameTwitch(accessToken string) ([]resultGameElement, error) {
 }
 
 func GetStreamingListByGame(accessToken string, id string) ([]streamingElementTwitch, error) {
+	fmt.Println("accessToken", accessToken)
 	respUser, err := requestTwitchApi(accessToken, TWITC_STREAM_GAME+"?game_id="+id, "")
 
 	if err != nil {
