@@ -12,6 +12,7 @@ import (
 	"github.com/joho/godotenv"
 	uuid "github.com/satori/go.uuid"
 	"github.com/thoussei/antonio/api/external"
+	gameEntity "github.com/thoussei/antonio/api/games/entity"
 	"github.com/thoussei/antonio/api/user/entity"
 	"github.com/thoussei/antonio/api/user/repository"
 	"go.mongodb.org/mongo-driver/bson/primitive"
@@ -227,7 +228,7 @@ func (u *UserUsecase) CountUserHandler() int {
 	return records
 }
 
-func (u *UserUsecase) UpdateGameUser(uidUser string, uidGame []string,uidPlateform []string) (interface{}, error) {
+func (u *UserUsecase) UpdateGameUser(uidUser string, uidGame []gameEntity.Game,uidPlateform []gameEntity.GamePlatform) (interface{}, error) {
 	objectId, _ := primitive.ObjectIDFromHex(uidUser)
 
 	result, err := u.userRepository.UpdatedGameUserRepo(objectId, uidGame,uidPlateform)

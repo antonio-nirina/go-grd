@@ -1,6 +1,7 @@
 package repository
 
 import (
+	gameEntity "github.com/thoussei/antonio/api/games/entity"
 	"github.com/thoussei/antonio/api/user/entity"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
@@ -19,5 +20,5 @@ type Repository interface {
 	AddFriend(req *entity.Friends) (interface{}, error)
 	FindOneUserByUid(objectId primitive.ObjectID) (entity.User, error)
 	CountUserRepository() (int, error)
-	UpdatedGameUserRepo(uidUser primitive.ObjectID, uidGame []string,uidPlateform []string) (interface{}, error)
+	UpdatedGameUserRepo(uidUser primitive.ObjectID, uidGame []gameEntity.Game,uidPlateform []gameEntity.GamePlatform) (interface{}, error)
 }

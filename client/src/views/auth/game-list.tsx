@@ -19,6 +19,10 @@ interface SelectPlateform {
 	logo:string
 }
 
+interface SelectImg {
+	uid:string
+}
+
 
 const GameList: React.FC = function() {
 	const history = useHistory()
@@ -66,7 +70,7 @@ const GameList: React.FC = function() {
 
 	const onSelectedPlateform = function(event:SyntheticEvent) {
 		const elementPlat = event.currentTarget.getAttribute("data-uid")
-		
+
 		if(elementPlat) {
 			if(selectedPl.length > 0 && selectedPl.includes(elementPlat.valueOf())) {
 				let arrayUidPl:string[] = []
@@ -85,12 +89,24 @@ const GameList: React.FC = function() {
 	}
 
 	const sendGamePlateform = async function() {
+		let arrayGames:SelectImg[] = []
+		let arrayPlateformes:SelectImg[] = []
+		gamesSelected.forEach(function(gselected:string){
+			arrayGames.push({
+				uid:gselected
+			})
+		})
+		plateformSelected.forEach(function(plselected:string){
+			arrayPlateformes.push({
+				uid:plselected
+			})
+		})
 		const result = await updatedUserGame({ variables: {
-			games:gamesSelected,
-			plateforms:plateformSelected,
+			games:arrayGames,
+			plateforms:arrayPlateformes,
 			uidUser:userConnectedRedux.user.uid,
 		} })
-		if (result.data.createdPlateform) {
+		if (result.data.updatedGameUser) {
 			history.push("/account")
 		}
 	}
@@ -99,7 +115,7 @@ const GameList: React.FC = function() {
 			<div className="favorite">
 				<div className="game-list-container">
 					<p>1. Choisis tes jeux favoris</p>
-					
+
 					<div className="favorite-game" >
 					<div className={isLoader ? "loader-spinner":"d-none"}>
 						<Loader

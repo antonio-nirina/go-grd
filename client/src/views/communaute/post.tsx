@@ -166,7 +166,7 @@ const Post = function() {
 					}
 				</div>
 				<div className="content-profil">
-					<div><img className="img-post" src={userConnectedRedux.user.avatar} alt="avatar-user-post" /></div>
+					<div><img className="img-post" src={userConnectedRedux.user.avatar ? userConnectedRedux.user.avatar : AvatarDefault} alt="avatar-user-post" /></div>
 					<div className={isTitlePost ? "title-expr" : "d-none"} onClick={handlePost}>
 						{
 							Translation(userConnectedRedux.user.language).communauty.express
