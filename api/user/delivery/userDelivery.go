@@ -118,7 +118,7 @@ func (r *resolver) SavedUserResolver(params graphql.ResolveParams) (interface{},
 		return nil, err
 	}
 
-	res, err := r.userHandler.FindUserByUsername(input.UserInput.Email)
+	res, err := r.userHandler.FindUserByEmail(input.UserInput.Email)
 	if err != nil {
 		return "", errors.New("Email or username not found")
 	}

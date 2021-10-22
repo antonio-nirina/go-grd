@@ -3,6 +3,7 @@ package handler
 import (
 	"sync"
 
+	gameEntity "github.com/thoussei/antonio/api/games/entity"
 	"github.com/thoussei/antonio/api/user/entity"
 )
 
@@ -25,5 +26,5 @@ type Usecase interface {
 	NotifConnected(user *entity.User, wg *sync.WaitGroup)
 	NotifDisConnected(user *entity.User, wg *sync.WaitGroup)
 	CountUserHandler() int
-	UpdateGameUser(uidUser string, uidGame []string,uidPlateform []string) (interface{}, error)
+	UpdateGameUser(uidUser string, uidGame []gameEntity.Game,uidPlateform []gameEntity.GamePlatform) (interface{}, error)
 }

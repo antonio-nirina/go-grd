@@ -3,10 +3,7 @@ import gql from "graphql-tag"
 
 export const CREATED_USER = gql`
 	mutation createdUser($userInput: userInputType) {
-		createdUser(userInput: $userInput){
-		uid
-		email
-	}
+		createdUser(userInput: $userInput)
 }
 `
 export const UPDATED_USER = gql`
@@ -60,7 +57,7 @@ export const ACCETEPED_FRIENDS = gql`
 	}
 `
 export const UPDATED_USER_GAME = gql`
-	mutation updatedGameUser($games:GameInputType,$plateforms:GameInputType,$uidUser:String) {
+	mutation updatedGameUser($games:[GameInputType],$plateforms:[GameInputType],$uidUser:String) {
 		updatedGameUser(games:$games,plateforms:$plateforms,uidUser:$uidUser)
 	}
 `

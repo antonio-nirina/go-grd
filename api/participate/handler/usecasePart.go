@@ -22,6 +22,7 @@ type UsecasePart interface {
 	UpdatedPartNumberConfirmedHandler(userPartUid string, numberConf bool) (interface{}, error)
 	GetNumberPartHandler(userPartUid string) (interface{}, error)
 	FindPartUserWaggerHandler(userUid primitive.ObjectID, uidWagger primitive.ObjectID) (interface{}, error)
+
 }
 type partUsecase struct {
 	partRepository repository.RepositoryPart

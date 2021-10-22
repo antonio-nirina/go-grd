@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 
 	"github.com/graphql-go/graphql"
+	gameEntity "github.com/thoussei/antonio/api/games/entity"
 	"github.com/thoussei/antonio/api/user/entity"
 )
 
@@ -31,9 +32,13 @@ type avatarElement struct {
 }
 
 type inputGame struct {
-	UidGame      []string `json:"uidgame"`
-	UidPlateform []string `json:"uidPlateform"`
+	Games      []gamElements `json:"games"`
+	Plateforms []gamElements `json:"plateforms"`
 	UidUser      string   `json:"uidUser"`
+}
+
+type gamElements struct {
+	Uid string   `json:"uid"`
 }
 
 func (r *resolver) UpdatedUserResolver(params graphql.ResolveParams) (interface{}, error) {
@@ -159,23 +164,23 @@ func (r *resolver) UpdatedGameResolver(params graphql.ResolveParams) (interface{
 	jsonString, _ := json.Marshal(params.Args)
 	input := inputGame{}
 	json.Unmarshal([]byte(jsonString), &input)
-	var listGameUid []string
-	var listPlateformUid []string
+	var listGameUid []gameEntity.Game
+	var listPlateformUid []gameEntity.GamePlatform
 
-	for _, val := range input.UidGame {
-		game, err := r.gameHandler.FindOneGameByUidHandler(val)
+	for _, val := range input.Games {
+		game, err := r.gameHandler.FindOneGameByUidHandler(val.Uid)
 		if err != nil {
 			return nil, err
 		}
-		listGameUid = append(listGameUid, game.Uid.Hex())
+		listGameUid = append(listGameUid, game)
 	}
 
-	for _, val := range input.UidGame {
-		plateform, err := r.plateformHandler.FindOnePlateformByUidHandler(val)
+	for _, val := range input.Plateforms {
+		plateform, err := r.plateformHandler.FindOnePlateformByUidHandler(val.Uid)
 		if err != nil {
 			return nil, err
 		}
-		listPlateformUid = append(listPlateformUid, plateform.Uid.Hex())
+		listPlateformUid = append(listPlateformUid, plateform)
 	}
 
 	res, err := r.userHandler.UpdateGameUser(input.UidUser, listGameUid, listPlateformUid)
