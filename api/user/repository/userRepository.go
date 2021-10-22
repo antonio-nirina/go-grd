@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 
+	gameEntity "github.com/thoussei/antonio/api/games/entity"
 	"github.com/thoussei/antonio/api/user/entity"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
@@ -229,7 +230,7 @@ func (c *driverRepository) CountUserRepository() (int, error) {
 	return int(records), nil
 }
 
-func (c *driverRepository) UpdatedGameUserRepo(uidUser primitive.ObjectID, uidGame []string, uidPlateform []string) (interface{}, error) {
+func (c *driverRepository) UpdatedGameUserRepo(uidUser primitive.ObjectID, uidGame []gameEntity.Game, uidPlateform []gameEntity.GamePlatform) (interface{}, error) {
 	var collection = c.client.Database("grd_database").Collection("users")
 	filter := bson.D{{"uid", uidUser}}
 	update := bson.D{

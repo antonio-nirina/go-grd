@@ -32,6 +32,7 @@ const StepOne: React.FC = function() {
 	const [errorForm,setErrorForm] = useState<boolean>(false)
 	const [errorCpwd,setErrorCpwd] = useState<boolean>(false)
 	const [errorMessage,setErrorMessage] = useState<string>("")
+	const [errorOld,setErrorOld] = useState<string>("")
 	const [isAdult,setIsAdult] = useState<boolean>(false)
 
 	const onSubmit = async function(data:Inputs){
@@ -40,7 +41,7 @@ const StepOne: React.FC = function() {
 		const username: string = data.username
 		const cpassword:string = data.cpassword
 		if(cpassword !== password && cpassword && password) setErrorCpwd(true)
-		if(!isAdult) setErrorMessage("Veuillez valider que vous avez 13 ans plus")
+		if(!isAdult) setErrorOld("Veuillez confirmer que vous plus de 13 ans.")
 
 		if(checkValidEmail(email) && (cpassword === password && cpassword && password) && isAdult) {
 			try {
@@ -64,7 +65,6 @@ const StepOne: React.FC = function() {
 			} catch (e:any) {
 				setErrorMessage(e.graphQLErrors[0].message)
 			}
-
 		} else {
 			setErrorForm(true)
 		}
@@ -87,8 +87,8 @@ const StepOne: React.FC = function() {
 			<form onSubmit={handleSubmit(onSubmit)} className="fieldset">
 				<div className="field-container">
 					<span className="bold">Remplis tes informations</span>
-					<div>{errorForm ? "Email n'est pas valider" : ""}</div>
-					<div>{errorMessage ? errorMessage : ""}</div>
+					<div style={{"fontSize":"13px","color":"#dd0000","fontWeight":"bold"}}>{errorForm ? "Email n'est pas valider" : ""}</div>
+					<div style={{"fontSize":"13px","color":"#dd0000","fontWeight":"bold"}}>{errorMessage ? errorMessage : ""}</div>
 					<div className="input-field">
 						{errors.email && <span style={{"color":"red","fontSize":"11px"}}>Email ne peut être vide</span>}
 						<input type="email" placeholder = "Ton Email" {...register("email", { required: true })} name="email"/>
@@ -108,8 +108,11 @@ const StepOne: React.FC = function() {
 						<input type="checkbox" className="check" onChange={handleOld}  />
 						<span className="major">Je confirme avoir plus de 13 ans.*</span>
 					</div>
+					<div style={{"fontSize":"9px","color":"#dd0000","fontWeight":"bold"}}>
+						{!isAdult ? errorOld : ""}
+					</div>
 					<div className="center-width">
-						<button className="btn bg-red" type="submit" disabled={!isAdult ? true : false} >
+						<button className="btn bg-red" type="submit" >
 							Je valide
 						</button>
 					</div>
