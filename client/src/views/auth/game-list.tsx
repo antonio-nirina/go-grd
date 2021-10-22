@@ -12,6 +12,9 @@ import "../auth/inscription.css"
 import "../../assets/css/style.css"
 import {GameType} from "../models/game"
 
+import { faCheckCircle} from "@fortawesome/free-solid-svg-icons"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
 interface SelectPlateform {
 	uid:string
 	description:string
@@ -127,6 +130,7 @@ const GameList: React.FC = function() {
 							return(
 								<Link to ="#" key={index} data-uid={e.uid} onClick={onSelected} className={selected.includes(e.uid) ? "selected" : ""}>
 									<img src={e.image} alt={e.slug} width="200"/>
+									<i className={selected.includes(e.uid) ? "checked" : "notVisible"}><FontAwesomeIcon icon={faCheckCircle} /></i>
 								</Link>
 							)
 						})}

@@ -78,7 +78,7 @@ const Matches: React.FC = function(props:any) {
 							<img src={AvatarDefault} alt="default" />
 						</div>
 						<div className="live">
-							<p><span>Live</span>9:22</p>
+							<p><span>Live</span><strong>9:22</strong></p>
 							<div className="mise"><button className="btn bg-red">Voir le match</button></div>
 						</div>
 						<div className="team">
