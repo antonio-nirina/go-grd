@@ -84,7 +84,7 @@ const Resultat: React.FC = function(props:any) {
             <div className="item-all-content">
               <div className="item-all-info">
                 <p><span>Vainqueur</span></p>
-                <p className="item-text-left">Skouinar - TonioPlancha</p>
+                <p className="item-text-left bold">Skouinar - TonioPlancha</p>
                 <p><span></span></p>
                 <p></p>
               </div>

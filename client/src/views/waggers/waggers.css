@@ -107,7 +107,6 @@
     top: -25px;       
     z-index: 3;
 }
-
 .joingame .join-title{	
 	padding: 25px;
 	background: #2c2c2c;
@@ -200,13 +199,13 @@
     position: relative;  
 }
 .item-all-info p{	
-	max-width: 170px;
-	width: 100%;
+	width: 170px;	
     padding-top: 30px;
     margin-left: 26px;
     display: table-cell;
     padding-left: 47px;
-    font-size: 14px;    
+    font-size: 13px;
+    font-family: arial;    
 }
 p.item-text-right{
 	text-align: right;
