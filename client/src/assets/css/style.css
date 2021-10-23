@@ -249,6 +249,33 @@ h1{
         url('../../assets/fonts/quicksand/static/Quicksand-Regular.svg#RussoOne') format('svg');
 }
 /*********  Media query ***************/
+@media screen and (max-width: 1240px) {
+  .container .full .Right{
+    width: 100%;
+  }
+}
+@media screen and (max-width: 1130px) {
+  .container .full{
+    position: initial;
+    display: block;
+  } 
+  .container .full .Left{
+    position: absolute;
+    width: 100%;    
+    top: 40%;
+  }
+  .container .full.connected .Left{
+    width: 100%;
+    position: absolute;
+    top: 20%;    
+  }
+  .container .main{
+    min-height: inherit;
+  }
+  .container .full .slogan p.title, .full.connected .slogan p.title{
+    font-size: 30px !important;
+  }   
+}
 @media screen and (max-width: 1000px) {
   .container .center-block {
     width: 46%;
