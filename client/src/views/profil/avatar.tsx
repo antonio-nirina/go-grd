@@ -77,18 +77,35 @@ const Avatar : React.FC = function() {
 
 			</div>
 			<div className="gamer-tag">
-				<h2>
-					{userConnectedRedux.user.username}
-					<img src={fr} alt="" width="22" height="20"/>
-					<i><FontAwesomeIcon icon={faExternalLinkAlt} /></i>
-				</h2>
-
-				<span>Membre depuis 11 2021</span>
-				<div className="img-container-profil">
-					<span className="invisible"></span>				
-					<p></p>
-					<span className="visible"></span>
+				<div className="grid">
+					<h2>
+						{userConnectedRedux.user.username}					
+					</h2>
+					<span>Membre depuis 11 2021</span>
+					<div className="img-container-profil">
+						<span className="invisible"></span>				
+						<p></p>
+						<span className="visible"></span>						
+					</div>
 				</div>
+				<div className="grid">
+					<div className="full-w">
+						<div className="flag-container">				
+							<img src={fr} alt="" width="27" height="auto"/>
+						</div>
+						<div className="external">
+							<i><FontAwesomeIcon icon={faExternalLinkAlt} /></i>
+						</div>
+					</div>
+					<div className="option-friend">
+						<select className="d-none"/*className="ami"*/>
+							<option>Ami(e)</option>
+						</select>
+						<select /*className="d-none"*/ className="dmd">
+							<option>Demande d'ami</option>
+						</select>
+					</div>
+				</div>					
 			</div>
 			{/*<div className={!closeModal ? "crop-container" :"crop-container close"}>
 				<div className="is-cropped">
