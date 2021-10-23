@@ -1,5 +1,7 @@
 import React from "react"
-import "react-responsive-carousel/lib/styles/carousel.min.css"
+//import "react-responsive-carousel/lib/styles/carousel.min.css"
+import { Link } from "react-router-dom"
+
 import { useSelector } from "react-redux"
 
 import {Translation} from "../../../lang/translation"
@@ -51,7 +53,7 @@ const Ahead: React.FC = function() {
 							<div className="best-gamer">
 								<div className="global">
 									<p>Classement mondial (Général)</p>
-									<div className="best_content">
+									<Link to="/leaderboard" className="best_content">
 										<div>
 											<span className="first">1</span>
 											<span className="self"><img src={Lead} alt="#" width="15"/></span>
@@ -93,11 +95,11 @@ const Ahead: React.FC = function() {
 											<span className="middle">Hugoteh</span>
 											<span>4265 pts</span>
 										</div>
-									</div>
+									</Link>
 								</div>
 								<div className="global">
 									<p>Classement de la semaine</p>
-									<div className="best_content">
+									<Link to="/leaderboard" className="best_content">
 										<div>
 											<span className="first">1</span>
 											<span className="self"><img src={Lead} alt="#" width="15"/></span>
@@ -139,7 +141,7 @@ const Ahead: React.FC = function() {
 											<span className="middle">Hugoteh</span>
 											<span>4265 pts</span>
 										</div>
-									</div>
+									</Link>
 								</div>
 							</div>
 						</>

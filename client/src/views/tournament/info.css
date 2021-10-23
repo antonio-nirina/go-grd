@@ -67,13 +67,19 @@ p.group-title{
 	padding: 15px;
 
 }
+.tableau .state{
+	display: flex;
+}
 .tableau .state p{
 	text-transform: uppercase;
-	font-size: 40px;
-	text-align: center;
-	display: inline-block;	
-	max-width: 106px;
+	font-size: 30px;
+	text-align: center;	
     width: 100%;
+}
+.tableau .state p strong{
+	display: block;
+	font-weight: normal;
+	padding-bottom: 15px;
 }
 .tableau .state p span{	
 	font-size: 14px;
@@ -87,6 +93,7 @@ p.group-title{
 }
 .info-target p{
 	text-transform: uppercase;		
+	font-size: 15px;
 	align-self: center;
 	float: left;
 	width: 40%;
@@ -99,7 +106,7 @@ p.group-title{
 	text-align: right;
 	width: 60%;	
 	padding: 15px 0;
-	font-size: 16px;
+	font-size: 15px;
 }
 .line{
 	border-bottom: 1px solid #2d2d2d;

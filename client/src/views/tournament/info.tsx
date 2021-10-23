@@ -76,7 +76,7 @@ const Info: React.FC = function(props:any) {
   	<div className="Tournament info">
 		<div className="container">
 			<Header/>
-			<div className="full-container test">
+			<div className="full-container">
 				<div className="details">
 					<p className="name-target">Tournois : <span>{tournament?.game.name}</span></p>
 					<p className="starting">

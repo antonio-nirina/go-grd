@@ -44,7 +44,7 @@ const InitPass: React.FC = function() {
 							<span style={{"color":"red"}}>{errorForm ? Translation("fr").login.errorForm : ""}</span>
 						</div>
 						<div className="register-field">
-							<div className="alert alert-success text-center invisible">{!errorForm ? "" : "Un mail de changement de mot de passe vous a été envoyé"}</div>
+							<div className="alert alert-success text-center">{!errorForm ? "" : "Un mail de changement de mot de passe vous a été envoyé"}</div>
 							<div className="center-width">
 								<span className="major">Entre ton email afin de réinitialiser ton mot de passe</span>
 							</div>
