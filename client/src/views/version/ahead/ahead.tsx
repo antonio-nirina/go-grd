@@ -21,7 +21,7 @@ const Ahead: React.FC = function() {
   return(
     <div className="ahead">
     	<img src={home} alt="Grid" className="Imgresp"/>
-    	<div className="full">
+    	<div className = {Object.keys(userConnectedRedux.user).length > 0 ? "full connected" : "full"}>
 	    	<div className="Left">
 	      		<div className="slogan">
 	      			<p className="title">{
