@@ -20,6 +20,7 @@ import Tableau from "../waggers/tableau"
 import WaggersRules from "../waggers/waggersrules"
 import WaggersGame from "../waggers/waggersgame"
 import Joingame from "../waggers/joingame"
+import Resultat from "../waggers/resultat"
 import View from "../wager/view"
 import Lobby from "../wager/lobby"
 import Assistant from "../assistant/assistant"
@@ -60,6 +61,7 @@ const Router = function() {
 			<ProtectedRoute path="/rules" exact component={Rules} />
 			<ProtectedRoute path="#" exact component={Wager} />
 			<ProtectedRoute path="/joingame" exact component={Joingame} />
+			<ProtectedRoute path="/resultat" exact component={Resultat} />
 			<ProtectedRoute path="/waggers" exact component={Waggers} />
 			<ProtectedRoute path="/tableau" exact component={Tableau} />
 			<ProtectedRoute path="/waggers-rules" exact component={WaggersRules} />

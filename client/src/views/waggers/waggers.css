@@ -3,7 +3,7 @@
 	margin-top: 50px;
 }
 .joingame .part{
-	padding: 6em 0em 3em 2em;
+	padding: 6em 0em 3em 7em;
 }
 .waggers .undertitle{
 	margin-top: 25px;
@@ -86,7 +86,7 @@
 	width: 25px;
 }
 .joingame h2{
-	font-size: 38px;
+	font-size: 35px;
 }
 .joingame{
 	background-image: url("../../assets/image/apex-legends-arena.jpg");	
@@ -98,9 +98,9 @@
 	width: 80%;
 }
 .joingame .header-part img.item-left{
-	max-width: 185px;
+	max-width: 180px;
 	width: 100%;
-	height: 190px;
+	height: 180px;
     border-radius: 50%;    
     float: left;
     position: relative;
@@ -114,11 +114,14 @@
 	position: relative;
     z-index: 2;
     left: 27px;
-    border-radius: 47px;
+    border-radius: 30px;
 }
-.joingame .join-title h2{	
-	font-family: "russo one";
+.joingame .join-title h2{
+	font-family: arial;	
 	font-weight: lighter;
+}
+.joingame .join-title p{
+	margin: 15px 0;
 }
 .joingame .join-title .img-bot-setting p{
 	display: inline-block;
@@ -136,14 +139,15 @@
 	clear: both;
 	width: 100%;
 	display: flex;
-	padding-left: 25px;
-	margin-bottom: 25px;
+	padding-left: 5em;
+	margin-bottom: 20px;
 
 }
 .bar-menu-top li{
 	margin-right: 50px;
 }
 .bar-menu-top li a{
+	font-family: arial;
 	text-transform: uppercase;
 	padding: 15px 25px;
 	display: inline-block;		
@@ -155,15 +159,28 @@
 .information-game{
 	padding: 0 25px 15px;
 	display: flex;
-	margin-bottom: 30px;
+	margin-bottom: 5px;
+	width: 90%;
+	margin: auto;
+}
+.information-game.apart{
+
 }
 .item-info-left{
 	padding: 20px 7px;	
 	background: #2c2c2c;
 	display: flex;
+	width: 71%;
+}
+.item-info-left.apart{
+	padding-top: 0;
+}
+.item-info-left.apart .item-all-info p{
+	padding-top: 20px;
 }
 .item-img-info{
 	float: left;
+	width: 16%;
 }
 .item-info-left img{
 	width: 118px;
@@ -200,7 +217,7 @@ p.item-text-left{
 }
 .join-all .team-bar-title{
 	font-size: 13px;
-	padding: 15px;
+	padding: 10px;
 	background: #2c2c2c;
 	margin-bottom: 0px;
 	text-align: inherit;
@@ -212,14 +229,30 @@ p.item-text-left{
 	padding: 7px;
 	display: block;
 	float: right;
+	margin-top: 5px;
+	margin-right: 5px;
+	border-radius: 10px;
+}
+.join-all.join-canal{
+	display:flex;
 	margin-top: 10px;
+}
+.join-all.join-canal p{
+	width: 78%;
+}
+.join-all.join-canal button{
+	float: none;
+	clear: both;
+	align-self: center;
+	margin: 0;
+	width: 22%;
 	margin-right: 5px;
 
 }
 .join-all p{
 	font-size: 13px;
 	text-align: center;
-	padding: 15px;
+	padding: 10px;
 	margin-bottom: 3px;
 	background: #7b7b7b;
 	text-align: center;

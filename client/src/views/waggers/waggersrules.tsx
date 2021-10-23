@@ -17,7 +17,8 @@ import {RegisterLeagueAction,Input} from "../league/action/leagueAction"
 import {checkInTeam} from "../league/utils"
 import fr from "../../assets/image/fr.png"
 import discord from "../../assets/image/discord.png"
-
+import Game from "../../assets/image/game.png"
+import Apex from "../../assets/image/apex-legends.png"
 
 const WaggersRules: React.FC = function(props:any) {
   const dispatch = useDispatch()
@@ -80,20 +81,23 @@ const WaggersRules: React.FC = function(props:any) {
   		<Header />
   		<div className="participate league joingame">
 			<div className="marg">
-				<div className="part">
-            <div className="header-part">
-              <img className="item-left" src="#" alt="" />
-              <div className="join-title">
-                <h2>Waggers</h2>
-                <div className="img-bot-setting">
-                  <p><img src={discord} alt=""/></p>
-                  <p><img src={fr} alt=""/></p>
-                </div>
-              </div>
-            </div>            
+				<div className="part">            
+          <div className="header-part">
+            <img className="item-left" src={Game} alt="" />
+            <div className="join-title">
+              <h2>Wager Apex Legends - 2v2 Arène - Master</h2>                
+              <p>
+                <span>23 Juillet 2021 - 12h30</span>
+                <span>2v2 Arène</span>
+                <span>Apex Legends</span>
+                <span>Cross-Play</span>
+              </p>
+            </div>                    
+          </div>            
         </div>
         <div className="bar-menu-top">
-          <li><Link to="/joingame">Général</Link></li>
+          <li><Link to="/resultat">Résultats</Link></li>
+          <li><Link to="/joingame">Général</Link></li>          
           <li><Link to="/waggers-rules" className="active">Règles</Link></li>
         </div>
         <div className="information-game">
