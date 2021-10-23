@@ -20,5 +20,5 @@ type Repository interface {
 	AddFriend(req *entity.Friends) (interface{}, error)
 	FindOneUserByUid(objectId primitive.ObjectID) (entity.User, error)
 	CountUserRepository() (int, error)
-	UpdatedGameUserRepo(uidUser primitive.ObjectID, uidGame []gameEntity.Game,uidPlateform []gameEntity.GamePlatform) (interface{}, error)
+	UpdatedGameUserRepo(uidUser primitive.ObjectID, uidGame []gameEntity.Game,uidPlateform []gameEntity.GamePlatform) (interface{}, error)	
 }

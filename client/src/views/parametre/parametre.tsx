@@ -1,6 +1,6 @@
-import React, { useEffect } from "react"
+import React, { useEffect,useState } from "react"
 import { useForm } from "react-hook-form"
-import {useMutation} from "@apollo/client"
+import {useMutation,useQuery} from "@apollo/client"
 import { useSelector,useDispatch } from "react-redux"
 
 import Header from "../header/header"
@@ -12,6 +12,8 @@ import {RootState} from "../../reducer"
 import Sidebar from "./sidebar"
 import {Translation} from "../../lang/translation"
 import {changeProfilUserConnected} from "../auth/action/userAction"
+import {GET_GAME_USER} from "../../gql/user/query"
+import {GameUserModel} from "../models/user"
 
 type Inputs = {
 	email:string,
@@ -25,15 +27,16 @@ type Inputs = {
 const Settings: React.FC = function() {
 	const dispatch = useDispatch()
 	const { register, handleSubmit,setValue } 	= useForm<Inputs>()
+	const [choixGames,setChoixGames] = useState<GameUserModel[]>([])
 	const [updatedUser]  = useMutation(UPDATED_USER)
 	const userConnectedRedux = useSelector((state:RootState) => state.userConnected)
-	
+
 	const onSubmit = async function(data:Inputs){
 		const username: string = data.username
 		const firstname: string = data.firstname
 		const lastname: string = data.lastname
 		let lang:string = ""
-	
+
 		const userUpated = {
 			username:username,
 			firstname:firstname,
@@ -49,6 +52,12 @@ const Settings: React.FC = function() {
 		}
 	}
 
+	const {loading:ldgGame,error:errGame,data:dataGame} 	= useQuery(GET_GAME_USER, {
+		variables: {
+			uid:userConnectedRedux.user.Uid,
+		},
+	})
+
 	useEffect(() => {
 		setValue("email",userConnectedRedux.user.email)
 		setValue("firstname",userConnectedRedux.user.firstname)
@@ -56,9 +65,15 @@ const Settings: React.FC = function() {
 		setValue("country",userConnectedRedux.user.country)
 		setValue("birtDate",userConnectedRedux.user.birtDate)
 		setValue("lastname",userConnectedRedux.user.lastname)
-	},[setValue,userConnectedRedux])
 
-	
+		if(!ldgGame && !errGame && dataGame) {
+			setChoixGames(dataGame.GetGameOneUserQuery)
+		}
+
+
+	},[setValue,userConnectedRedux,,ldgGame,errGame,dataGame])
+
+
   return(
 	<div className="leaderboard settings">
 		<div className="container">
@@ -66,7 +81,7 @@ const Settings: React.FC = function() {
 			<div className="main">
 				<div className="containt mes_infos">
 					<h2>Paramètres</h2>
-					<div className="title-lead">						
+					<div className="title-lead">
 						<Sidebar />
 						<div className="personal">
 							<h3>informations personnelles</h3>
@@ -76,12 +91,12 @@ const Settings: React.FC = function() {
 									<input id="email" type="email" {...register("email")} name="email" />
 								</div>
 								<div className="field-middle">
-									<div className="field-container">										
+									<div className="field-container">
 										<input type="text" {...register("firstname")} name="firstname" placeholder={Translation(userConnectedRedux.user.language).profil.firstname} />
 									</div>
-									<div className="field-container">										
+									<div className="field-container">
 										<input type="text" {...register("lastname")} name="lastname" placeholder={Translation(userConnectedRedux.user.language).profil.lastname}  />
-									</div>									
+									</div>
 								</div>
 								<div className="field-middle">
 									<div className="field-container">
@@ -90,22 +105,22 @@ const Settings: React.FC = function() {
 									</div>
 									<div className="field-container">
 										<label htmlFor="pays">Pays</label>
-										<input id="pays" type="text" {...register("country")} name="country" />										
+										<input id="pays" type="text" {...register("country")} name="country" />
 									</div>
 								</div>
 								<div className="field-container">
 									<label htmlFor="date">Date de naissance</label>
 									<input type="text" {...register("birtDate")} name="birtDate" />
 								</div>
-								<h3>Réseaux sociaux</h3>							
+								<h3>Réseaux sociaux</h3>
 								<SocialNetwork />
 								<div className="btn-container">
 									<button type="submit" className="btn bg-red">Enregistre les modifications</button>
 								</div>
-							</form>							
-							
+							</form>
+
 						</div>
-					</div>				
+					</div>
 				</div>
 			</div>
 			<Footer/>

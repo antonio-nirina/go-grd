@@ -28,11 +28,14 @@ import {LIMIT,PAGE_NUMBER} from "../commons/constante"
 // import {Translation} from "../../lang/translation"
 import {RootState} from "../../reducer"
 import {ParticipateTournament,ParticipateWagger} from "../models/participate"
+import {GameUserModel} from "../models/user"
 import {dateStringToDY} from "../tools/dateConvert"
+import {GET_GAME_USER} from "../../gql/user/query"
 
 const Profile: React.FC = function() {
 	const [participateTournament,setParticipateTournament] = useState<ParticipateTournament[]>([])
 	const [participateWagger,setParticipateWagger] = useState<ParticipateWagger[]>([])
+	const [choixGames,setChoixGames] = useState<GameUserModel[]>([])
 	const userConnectedRedux = useSelector((state:RootState) => state.userConnected)
 	const {loading,error,data} 	= useQuery(GET_PART_USER, {
 		variables: {
@@ -47,6 +50,12 @@ const Profile: React.FC = function() {
 			uidUser:userConnectedRedux.user.Uid,
 			limit:LIMIT,
 			pageNumber:PAGE_NUMBER
+		},
+	})
+
+	const {loading:ldgGame,error:errGame,data:dataGame} 	= useQuery(GET_GAME_USER, {
+		variables: {
+			uid:userConnectedRedux.user.Uid,
 		},
 	})
 
@@ -66,7 +75,11 @@ const Profile: React.FC = function() {
 			setParticipateWagger(dataWagger.FindPartByUserWagger)
 		}
 
-	},[loading,error,data,ldgWagger,errWagger,dataWagger])
+		if(!ldgGame && !errGame && dataGame) {
+			setChoixGames(dataGame.GetGameOneUserQuery)
+		}
+
+	},[loading,error,data,ldgWagger,errWagger,dataWagger,ldgGame,errGame,dataGame])
 
   return(
 	<div className="profil connected">
@@ -108,22 +121,12 @@ const Profile: React.FC = function() {
 					      		</div>
 				      		</div>
 				      		<div className="with-stat">
-				      			<div>
-				      				<img src={Fifa} alt="" height="50"/>
-			      					<p>Fifa 21 <span><i><FontAwesomeIcon icon={faChartBar} /></i> statistiques</span></p>
-			      				</div>
-			      				<div>
-				      				<img src={Fortnite} alt="" height="50"/>
-			      					<p>Fortnite <span><i><FontAwesomeIcon icon={faChartBar} /></i> statistiques</span></p>
-			      				</div>
-			      				<div>
-				      				<img src={Warzone} alt="" height="50"/>
-			      					<p>COD : Warzone <span><i><FontAwesomeIcon icon={faChartBar} /></i> statistiques</span></p>
-			      				</div>
-			      				<div>
-				      				<img src={Rocketleague} alt="" height="50"/>
-			      					<p>Rocket League <span><i><FontAwesomeIcon icon={faChartBar} /></i> statistiques</span></p>
-			      				</div>
+			      				{choixGames.map(function(e:GameUserModel,index:number) {
+									<div key={index}>
+										<img src={e.Gmaes.image} alt="" height="50"/>
+										<p>{e.Gmaes.name} <span><i><FontAwesomeIcon icon={faChartBar} /></i> statistiques</span></p>
+									</div>
+								  })}
 
 			      			</div>
 				      	</div>
