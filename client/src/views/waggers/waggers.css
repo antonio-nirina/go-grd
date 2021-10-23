@@ -123,6 +123,14 @@
 .joingame .join-title p{
 	margin: 15px 0;
 }
+.joingame .join-title p span{
+	font-size: 13px;
+	border-right: 1px solid #ffffff;
+	padding: 0 5px;
+}
+.joingame .join-title p span:last-child{
+	border-right: none;
+}
 .joingame .join-title .img-bot-setting p{
 	display: inline-block;
 	margin-right: 15px;
