@@ -192,7 +192,8 @@
     position: relative;  
 }
 .item-all-info p{	
-	width: 195px;
+	max-width: 170px;
+	width: 100%;
     padding-top: 30px;
     margin-left: 26px;
     display: table-cell;
