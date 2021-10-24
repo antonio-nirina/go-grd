@@ -13,6 +13,7 @@ import (
 	uuid "github.com/satori/go.uuid"
 	"github.com/thoussei/antonio/api/external"
 	gameEntity "github.com/thoussei/antonio/api/games/entity"
+	gameHandler "github.com/thoussei/antonio/api/games/handler"
 	"github.com/thoussei/antonio/api/user/entity"
 	"github.com/thoussei/antonio/api/user/repository"
 	"go.mongodb.org/mongo-driver/bson/primitive"
@@ -238,4 +239,36 @@ func (u *UserUsecase) UpdateGameUser(uidUser string, uidGame []gameEntity.Game,u
 	}
 
 	return result, nil
+}
+
+func (u *UserUsecase) FindGameOneUser(uid string) (interface{}, error) {
+	objectId, _ := primitive.ObjectIDFromHex(uid)
+
+	result, err := u.userRepository.FindOneUserByUid(objectId)
+
+	if err != nil {
+		return nil, err
+	}
+	
+	var gameUserRes []gameHandler.GameViewModel
+
+	for _,val := range result.Games {
+		resGame := gameHandler.GameViewModel{
+			Uid: val.Uid.Hex(),
+			Logo: val.Logo,
+			Name: val.Name,
+			Notes: val.Notes,
+			Slug: val.Slug,
+			Image: val.Image,
+		}
+		gameUserRes = append(gameUserRes, resGame)
+	}
+	
+	userGame := UserViewModelGame{
+		Uid: result.Uid.Hex(),
+		Email: result.Email,
+		Game: gameUserRes,
+	}
+
+	return userGame, nil
 }

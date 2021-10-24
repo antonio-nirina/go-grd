@@ -27,4 +27,5 @@ type Usecase interface {
 	NotifDisConnected(user *entity.User, wg *sync.WaitGroup)
 	CountUserHandler() int
 	UpdateGameUser(uidUser string, uidGame []gameEntity.Game,uidPlateform []gameEntity.GamePlatform) (interface{}, error)
+	FindGameOneUser(uid string) (interface{}, error)
 }

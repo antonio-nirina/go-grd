@@ -1,3 +1,4 @@
+import {GameType} from "./game"
 export interface USerModel {
     uid:string
     firstname:string
@@ -8,4 +9,10 @@ export interface USerModel {
     roles:Array<string>
     language:string
     Friends:Array<USerModel>
+}
+
+export interface GameUserModel {
+	uid:string
+	Email:string
+	Games:GameType
 }

@@ -50,11 +50,14 @@
 	border-radius: 0;
 	font-size: 14px;
 	border: 1px solid gray;
-	border-radius: 5px;
-	padding: 7px;
+	border-radius: 5px;	
 	margin-top: 20px;
 	margin-bottom: 25px;
 
+}
+.field-container .infos .member a{
+	padding: 7px;
+	display: block;
 }
 .field-container p{
 	font-size: 14px;	
