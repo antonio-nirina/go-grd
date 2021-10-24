@@ -42,9 +42,9 @@ type UserResponse struct {
 }
 
 type resolver struct {
-	userHandler  handler.Usecase
-	notifHandler notifH.UsecaseNotif
-	gameHandler  gameHandler.UsecaseGameInterface
+	userHandler      handler.Usecase
+	notifHandler     notifH.UsecaseNotif
+	gameHandler      gameHandler.UsecaseGameInterface
 	plateformHandler gameHandler.UsecasePlateformInterface
 }
 
@@ -56,14 +56,14 @@ type AccountUsers struct {
 	profilAccount string
 }
 
-func NewResolver(userUseCase handler.Usecase, 
+func NewResolver(userUseCase handler.Usecase,
 	usecaseNotif notifH.UsecaseNotif,
 	userGame gameHandler.UsecaseGameInterface,
 	userPlateform gameHandler.UsecasePlateformInterface) Resolver {
 	return &resolver{
-		userHandler:  userUseCase,
-		notifHandler: usecaseNotif,
-		gameHandler:  userGame,
+		userHandler:      userUseCase,
+		notifHandler:     usecaseNotif,
+		gameHandler:      userGame,
 		plateformHandler: userPlateform,
 	}
 }
@@ -365,6 +365,7 @@ func GetToken(user entity.User) (interface{}, error) {
 	claims["roles"] = user.Roles
 	claims["birtDate"] = dateBirth
 	claims["country"] = country
+	claims["account"] = user.Accounts
 
 	if len(user.Friends) > 0 {
 		for _, v := range user.Friends {
