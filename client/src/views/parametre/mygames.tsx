@@ -1,17 +1,34 @@
-import React from "react"
+import React,{useState,useEffect} from "react"
 
-// import { useSelector } from "react-redux"
+import { useSelector } from "react-redux"
+import {useQuery} from "@apollo/client"
 import Header from "../header/header"
 import Footer from "../footer/footer"
 import "../parametre/parametre.css"
 
 import Fortnite from "../../assets/image/game/fortnite.jpg"
 import RocketLeague from "../../assets/image/game/rocketleague.jpg"
-// import {RootState} from "../../reducer"
+import {RootState} from "../../reducer"
+import {GET_GAME_USER} from "../../gql/user/query"
+import {GameUserModel} from "../models/user"
 import Sidebar from "./sidebar"
 
 const Mygames: React.FC = function() {
-	// const userConnectedRedux = useSelector((state:RootState) => state.userConnected)
+	const userConnectedRedux = useSelector((state:RootState) => state.userConnected)
+	const [choixGames,setChoixGames] = useState<GameUserModel[]>([])
+	const {loading:ldgGame,error:errGame,data:dataGame} 	= useQuery(GET_GAME_USER, {
+		variables: {
+			uid:userConnectedRedux?.user.Uid,
+		},
+	})
+
+	useEffect(() => {
+		console.log("dataGame", dataGame)
+		if(!ldgGame && !errGame && dataGame) {
+			setChoixGames(dataGame.GetGameOneUserQuery)
+		}
+	},[ldgGame,errGame,dataGame])
+
   return(
 	<div className="leaderboard settings jackpot mygames">
 		<div className="container">

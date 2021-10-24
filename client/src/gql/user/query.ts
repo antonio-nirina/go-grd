@@ -32,3 +32,18 @@ export const GET_ALL_USER = gql`
 		email
 	}
 }`
+
+export const GET_GAME_USER = gql`
+query GetGameOneUserQuery($uid: String!) {
+	GetGameOneUserQuery(uid: $uid){
+		uid
+		email
+		game {
+			uid
+			image
+			logo
+			slug
+			name
+		}
+}
+}`

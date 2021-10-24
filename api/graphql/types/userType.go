@@ -157,3 +157,18 @@ var TwitchUserSchemaType = graphql.NewObject(graphql.ObjectConfig{
 		},
 	},
 })
+
+var UserSchemaTypeGame = graphql.NewObject(graphql.ObjectConfig{
+	Name: "UserTypeGame",
+	Fields: graphql.Fields{
+		"uid": &graphql.Field{
+			Type: graphql.String,
+		},
+		"email": &graphql.Field{
+			Type: graphql.String,
+		},
+		"game": &graphql.Field{
+			Type: graphql.NewList(GameSchemaType),
+		},
+	},
+})

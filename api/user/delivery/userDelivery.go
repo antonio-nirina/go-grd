@@ -152,6 +152,17 @@ func (r *resolver) FindOneUserResolver(params graphql.ResolveParams) (interface{
 	return res, nil
 }
 
+func (r *resolver) FindGameUserResolver(params graphql.ResolveParams) (interface{}, error) {
+	uid, _ := params.Args["uid"].(string)
+	res, err := r.userHandler.FindGameOneUser(uid)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return res, nil
+}
+
 func (r *resolver) ValidateUserResolver(input *inputRegister) (bool, error) {
 	email := input.UserInput.Email
 	username := input.UserInput.Username

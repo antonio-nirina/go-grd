@@ -15,8 +15,7 @@ import "../../assets/css/style.css"
 import { Link } from "react-router-dom"
 // import {RegisterLeagueAction,Input} from "../league/action/leagueAction"
 // import {checkInTeam} from "../league/utils"
-import fr from "../../assets/image/fr.png"
-import discord from "../../assets/image/discord.png"
+import Game from "../../assets/image/game.png"
 
 
 const Tableau: React.FC = function(props:any) {
@@ -74,7 +73,7 @@ const Tableau: React.FC = function(props:any) {
     })
 
   }*/
-  
+
     return(
   	<div className="container">
   		<Header />
@@ -82,27 +81,29 @@ const Tableau: React.FC = function(props:any) {
 			<div className="marg">
 				<div className="part">
             <div className="header-part">
-              <img className="item-left" src="#" alt="" />
+              <img className="item-left" src={Game} alt="" />
               <div className="join-title">
-                <h2>Waggers</h2>
-                <div className="img-bot-setting">
-                  <p><img src={discord} alt=""/></p>
-                  <p><img src={fr} alt=""/></p>
-                </div>
+                <h2>Wager Apex Legends - 2v2 Arène - Master</h2>
+                <p>
+                  <span>23 Juillet 2021 - 12h30</span>
+                  <span>2v2 Arène</span>
+                  <span>Apex Legends</span>
+                  <span>Cross-Play</span>
+                </p>
               </div>
-            </div>            
+            </div>
         </div>
         <div className="bar-menu-top">
           <li><Link to="/joingame">Général</Link></li>
-          <li><Link to="/tableau" className="active">Tableau</Link></li>
+          <li><Link to="/tableau" className="active">Général</Link></li>
           <li><Link to="/waggers-rules">Règles</Link></li>
         </div>
-        <div className="information-game">          
+        <div className="information-game">
           <div className="tab-container">
             <Tree />
           </div>
-        </div>        
-        <div className="clear"></div>        
+        </div>
+        <div className="clear"></div>
 				<Footer/>
   			</div>
   		</div>

@@ -22,11 +22,12 @@ const Stat = function({tournament}:any) {
 	},[userSingupTournament,userConnectedRedux,tournament,setPartTournament,setConfirmed])
 	return (
 		<div className="state">
-			<p>{tournament?.numberParticipate}
+			<p>
+				<strong>{tournament?.numberParticipate}</strong>
 				<span>slots</span>
 			</p>
 			<p>
-				{partTournament}
+				<strong>{partTournament}</strong>
 				<span>
 					{
 						Translation(userConnectedRedux.user.language).tournament.pending
@@ -34,7 +35,7 @@ const Stat = function({tournament}:any) {
 				</span>
 			</p>
 			<p>
-				{confirmed}
+				<strong>{confirmed}</strong>
 				<span className="confirm">
 					{
 						Translation(userConnectedRedux.user.language).tournament.confirmed

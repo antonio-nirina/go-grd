@@ -24,7 +24,7 @@ import {Wagger} from "../models/wagger"
 import {GET_ONE_WAGGER} from "../../gql/wagger/query"
 
 
-const Joingame: React.FC = function(props:any) {
+const Resultat: React.FC = function(props:any) {
   	const [showSalon, setShowSalon] = useState(false)
   	const [showTchat, setShowTchat] = useState(false)
   	const [wagger, setWagger] = useState<Wagger>()
@@ -70,8 +70,8 @@ const Joingame: React.FC = function(props:any) {
             </div>
         </div>
         <div className="bar-menu-top">
-          <li><Link to="/resultat">Résultats</Link></li>
-          <li><Link to="/joingame" className="active">Général</Link></li>
+          <li><Link to="/resultat" className="active">Résultats</Link></li>
+          <li><Link to="/joingame">Général</Link></li>
           <li><Link to="/waggers-rules">Règles</Link></li>
         </div>
         <div className="information-game">
@@ -81,32 +81,32 @@ const Joingame: React.FC = function(props:any) {
             </div>
             <div className="item-all-content">
               <div className="item-all-info">
-                <p><span>Format</span></p>
-                <p className="item-text-left">BO3</p>
-                <p><span>Frais d'entrée</span></p>
-                <p>15€/Joueur</p>
+                <p><span>Vainqueur</span></p>
+                <p className="item-text-left bold">Skouinar - TonioPlancha</p>
+                <p><span></span></p>
+                <p></p>
               </div>
               <div className="item-all-info">
-                <p><span>Spectateurs</span></p>
-                <p className="item-text-left">{wagger?.isPublic ? "Oui" : "Non"}</p>
-                <p><span>Région</span></p>
-                <p>EU</p>
+                <p><span>Score</span></p>
+                <p className="item-text-left">2 - 1</p>
+                <p><span></span></p>
+                <p></p>
               </div>
               <div className="item-all-info">
-                <p><span>Map(s)</span></p>
-                <p className="item-text-left">Map(s)</p>
+                <p><span>Game 1</span></p>
+                <p className="item-text-left">0 - 3</p>
                 <p><span>Tchat Vocal</span></p>
-                <p>Discord</p>
+                <p>Autorisé</p>
               </div>
               <div className="item-all-info">
-                <p><span>Serveur</span></p>
-                <p className="item-text-left">Paris, France</p>
+                <p><span>Game 2</span></p>
+                <p className="item-text-left">3 - 1</p>
                 <p><span>Cash prize</span></p>
                 <p>60€</p>
               </div>
               <div className="item-all-info">
-                <p><span>Console(s)</span></p>
-                <p className="item-text-left">Xbox / PS4</p>
+                <p><span>Game 3</span></p>
+                <p className="item-text-left">3 - 2</p>
                 <p><span>Vainqueur</span></p>
                 <p>60€</p>
               </div>
@@ -121,10 +121,6 @@ const Joingame: React.FC = function(props:any) {
                 <p className="free-emplacement"><span>Emplacement Libre</span></p>
               </div>
             </div>
-             <div className="join-all join-canal">
-              <p className="team-bar-title">Rejoindre le canal discord</p>
-              <button className="btn bg-red">Rejoindre</button>
-            </div>
             <div className={!showTchat ? "salon-chat" :"salon-chat show"} >
               <Chat />
             </div>
@@ -137,32 +133,6 @@ const Joingame: React.FC = function(props:any) {
             </div>
           </div>
         </div>
-        <div className="information-game">
-          <div className="d-none /*item-info-left apart*/">
-            <div className="item-img-info">
-            </div>
-            <div className="item-all-content">
-              <div className="item-all-info">
-                <p><span>Frais d'entrée</span></p>
-                <p className="item-text-left">Invitation</p>
-                <p><span>Cash prize</span></p>
-                <p>900€</p>
-              </div>
-              <div className="item-all-info">
-                <p><span>Région</span></p>
-                <p className="item-text-left">EU</p>
-                <p><span>Position 1</span></p>
-                <p>600€</p>
-              </div>
-              <div className="item-all-info">
-                <p><span>Tchat Vocal</span></p>
-                <p className="item-text-left">Discord</p>
-                <p><span>Position 2</span></p>
-                <p>300€</p>
-              </div>
-            </div>
-          </div>
-        </div>
         <div className="clear"></div>
 				<Footer/>
   			</div>
@@ -171,4 +141,4 @@ const Joingame: React.FC = function(props:any) {
   )
 }
 
-export default Joingame
+export default Resultat

@@ -4,16 +4,14 @@ import {useQuery} from "@apollo/client"
 import { Link } from 'react-router-dom'
 
 import fr from "../../assets/image/fr.png"
-import ps from "../../assets/image/playstation.png"
+import Js from "../../assets/image/white-joystick.png"
 import AvatarDefault from "../../assets/image/game-tag.png"
 import Game from "../../assets/image/game.png"
-import Fifa from "../../assets/image/profil/fifa.png"
-import Fortnite from "../../assets/image/profil/fortnite.png"
-import Warzone from "../../assets/image/profil/warzone.png"
-import Rocketleague from "../../assets/image/profil/rocketleague.png"
+import Ts from "../../assets/image/icons/ts.png"
+import Ws from "../../assets/image/icons/ws.png"
 // import Popup from "reactjs-popup"
 import { faXbox, faPlaystation, faTwitch, faYoutube, faFacebook, faTwitter} from "@fortawesome/free-brands-svg-icons"
-import { faChartBar, faStar, faUsers} from "@fortawesome/free-solid-svg-icons"
+import { faChartBar, faStar, faUsers, faHeart} from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Header from "../header/header"
 import Join from "../join/join"
@@ -28,11 +26,14 @@ import {LIMIT,PAGE_NUMBER} from "../commons/constante"
 // import {Translation} from "../../lang/translation"
 import {RootState} from "../../reducer"
 import {ParticipateTournament,ParticipateWagger} from "../models/participate"
+import {GameUserModel} from "../models/user"
 import {dateStringToDY} from "../tools/dateConvert"
+import {GET_GAME_USER} from "../../gql/user/query"
 
 const Profile: React.FC = function() {
 	const [participateTournament,setParticipateTournament] = useState<ParticipateTournament[]>([])
 	const [participateWagger,setParticipateWagger] = useState<ParticipateWagger[]>([])
+	const [choixGames,setChoixGames] = useState<GameUserModel[]>([])
 	const userConnectedRedux = useSelector((state:RootState) => state.userConnected)
 	const {loading,error,data} 	= useQuery(GET_PART_USER, {
 		variables: {
@@ -47,6 +48,12 @@ const Profile: React.FC = function() {
 			uidUser:userConnectedRedux.user.Uid,
 			limit:LIMIT,
 			pageNumber:PAGE_NUMBER
+		},
+	})
+
+	const {loading:ldgGame,error:errGame,data:dataGame} 	= useQuery(GET_GAME_USER, {
+		variables: {
+			uid:userConnectedRedux.user.Uid,
 		},
 	})
 
@@ -66,7 +73,11 @@ const Profile: React.FC = function() {
 			setParticipateWagger(dataWagger.FindPartByUserWagger)
 		}
 
-	},[loading,error,data,ldgWagger,errWagger,dataWagger])
+		if(!ldgGame && !errGame && dataGame) {
+			setChoixGames(dataGame.GetGameOneUserQuery)
+		}
+
+	},[loading,error,data,ldgWagger,errWagger,dataWagger,ldgGame,errGame,dataGame])
 
   return(
 	<div className="profil connected">
@@ -108,23 +119,12 @@ const Profile: React.FC = function() {
 					      		</div>
 				      		</div>
 				      		<div className="with-stat">
-				      			<div>
-				      				<img src={Fifa} alt="" height="50"/>
-			      					<p>Fifa 21 <span><i><FontAwesomeIcon icon={faChartBar} /></i> statistiques</span></p>
-			      				</div>
-			      				<div>
-				      				<img src={Fortnite} alt="" height="50"/>
-			      					<p>Fortnite <span><i><FontAwesomeIcon icon={faChartBar} /></i> statistiques</span></p>
-			      				</div>
-			      				<div>
-				      				<img src={Warzone} alt="" height="50"/>
-			      					<p>COD : Warzone <span><i><FontAwesomeIcon icon={faChartBar} /></i> statistiques</span></p>
-			      				</div>
-			      				<div>
-				      				<img src={Rocketleague} alt="" height="50"/>
-			      					<p>Rocket League <span><i><FontAwesomeIcon icon={faChartBar} /></i> statistiques</span></p>
-			      				</div>
-
+			      				{choixGames.map(function(e:GameUserModel,index:number) {
+									return (<div key={index}>
+										<img src={e.Games.image} alt="" height="50"/>
+										<p>{e.Games.name} <span><i><FontAwesomeIcon icon={faChartBar} /></i> statistiques</span></p>
+									</div>)
+								  })}
 			      			</div>
 				      	</div>
 				      	<div className="stat-content">
@@ -140,10 +140,10 @@ const Profile: React.FC = function() {
 					      			</div>
 					      			<div className="setting-accounts">
 						      			<div>
-						      				<img src={ps} alt=""/>
+						      				<img src={Js} alt="" width="20" height="15"/>
 						      			</div>
 						      			<div>
-						      				<img src={fr} alt=""/>
+						      				<img src={fr} alt="" width="20" height="20"/>
 						      			</div>
 						      		</div>
 					      			<div className="team-number">
@@ -162,7 +162,6 @@ const Profile: React.FC = function() {
 	    						</div>
 				      		</div>
 				      	</div>
-
 			      	</div>
 			      	<div className="part">
 						<div className="undertitle">
@@ -273,6 +272,36 @@ const Profile: React.FC = function() {
 											<span><i><FontAwesomeIcon icon={faStar} /></i></span>
 										</div>
 									</div>
+									<div className="note">
+										<img src={AvatarDefault} alt="" width="45"/>
+										<p>
+											<span>Tournoi</span>
+											TonioPlancha a réussi l0 top 1 sur Apex...
+										</p>
+										<div className="icon">
+											<span><img src={Ts} alt="" width="27"/></span>
+										</div>
+									</div>
+									<div className="note">
+										<img src={AvatarDefault} alt="" width="45"/>
+										<p>
+											<span>Wagers</span>
+											TonioPlancha a réussi l0 top 1 sur Apex...
+										</p>
+										<div className="icon">
+											<span><img src={Ws} alt="" width="27"/></span>
+										</div>
+									</div>
+									<div className="note">
+										<img src={AvatarDefault} alt="" width="45"/>
+										<p>
+											<span>Défi</span>
+											TonioPlancha a réussi l0 top 1 sur Apex...
+										</p>
+										<div className="icon">
+											<span><i><FontAwesomeIcon icon={faHeart} /></i></span>
+										</div>
+									</div>
 								</div>
 
 								<div className="comment-container">
@@ -289,7 +318,27 @@ const Profile: React.FC = function() {
 											<span>CAPELAJR <i>21 Juillet à 3:54 PM</i></span>
 											+ rep Funny Booooooy
 										</p>
-
+									</div>
+									<div className="comments">
+										<img src={AvatarDefault} alt="" width="50"/>
+										<p>
+											<span>CAPELAJR <i>21 Juillet à 3:54 PM</i></span>
+											+ rep Funny Booooooy
+										</p>
+									</div>
+									<div className="comments">
+										<img src={AvatarDefault} alt="" width="50"/>
+										<p>
+											<span>CAPELAJR <i>21 Juillet à 3:54 PM</i></span>
+											+ rep Funny Booooooy
+										</p>
+									</div>
+									<div className="comments">
+										<img src={AvatarDefault} alt="" width="50"/>
+										<p>
+											<span>CAPELAJR <i>21 Juillet à 3:54 PM</i></span>
+											+ rep Funny Booooooy
+										</p>
 									</div>
 								</div>
 							</div>

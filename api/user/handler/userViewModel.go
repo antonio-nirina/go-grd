@@ -1,5 +1,8 @@
 package handler
 
+import (
+	"github.com/thoussei/antonio/api/games/handler"
+)
 type UserViewModel struct {
 	Uid           string 			`json:"uid"`
 	FirstName     string             `json:"firstname"`
@@ -13,4 +16,10 @@ type UserViewModel struct {
 	Roles      	 []string             `json:"roles"`
 	TypeConnexion   string            `json:"type_connexion"`
 	Created 		string 			`json:"created"`
+}
+
+type UserViewModelGame struct {
+	Uid string 			`json:"uid"`
+	Email         string             `json:"email"`
+	Game 	[]handler.GameViewModel `json:"game"`
 }

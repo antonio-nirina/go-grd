@@ -121,3 +121,17 @@ func GetAccessTokenTwitchAdmin() *graphql.Field {
 		Resolve: UserRolve.GetAccessTokenTwitchAdmin,
 	}
 }
+
+func GetGameOneUserQuery() *graphql.Field {
+	return &graphql.Field{
+		Type:        types.UserSchemaTypeGame,
+		Description: "Get game user",
+		Args: graphql.FieldConfigArgument{
+			"uid": &graphql.ArgumentConfig{
+				Type: graphql.String,
+			},
+		},
+
+		Resolve: UserRolve.FindGameUserResolver,
+	}
+}

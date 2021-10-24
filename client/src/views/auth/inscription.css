@@ -146,10 +146,30 @@
    -moz-transform: translateY(0px);
    -o-transform: translateY(0px);
     box-shadow: 4px 4px 20px #dd0000;
-   border: 1px solid #dd0000;
+   border: 1px solid transparent;
    filter: brightness(1);
 }
+.favorite-game a.selected:hover{
+	border-color: #dd0000;
+}
 
+.favorite-game a{
+	position: relative
+}
+.favorite-game a i{
+	display: block;
+	position: absolute;
+	top: -8px;
+	right: -8px;
+	font-size: 20px;
+	color: #ffffff;
+}
+.favorite-game a i.notVisible{
+	display: none;
+}
+.favorite-game a i.checked{
+	display: block;
+}
 
 .platform p{
 	margin-bottom: 20px;
