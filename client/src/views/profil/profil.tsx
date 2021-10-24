@@ -7,10 +7,6 @@ import fr from "../../assets/image/fr.png"
 import Js from "../../assets/image/white-joystick.png"
 import AvatarDefault from "../../assets/image/game-tag.png"
 import Game from "../../assets/image/game.png"
-import Fifa from "../../assets/image/profil/fifa.png"
-import Fortnite from "../../assets/image/profil/fortnite.png"
-import Warzone from "../../assets/image/profil/warzone.png"
-import Rocketleague from "../../assets/image/profil/rocketleague.png"
 import Ts from "../../assets/image/icons/ts.png"
 import Ws from "../../assets/image/icons/ws.png"
 // import Popup from "reactjs-popup"
@@ -124,12 +120,11 @@ const Profile: React.FC = function() {
 				      		</div>
 				      		<div className="with-stat">
 			      				{choixGames.map(function(e:GameUserModel,index:number) {
-									<div key={index}>
-										<img src={e.Gmaes.image} alt="" height="50"/>
-										<p>{e.Gmaes.name} <span><i><FontAwesomeIcon icon={faChartBar} /></i> statistiques</span></p>
-									</div>
+									return (<div key={index}>
+										<img src={e.Games.image} alt="" height="50"/>
+										<p>{e.Games.name} <span><i><FontAwesomeIcon icon={faChartBar} /></i> statistiques</span></p>
+									</div>)
 								  })}
-
 			      			</div>
 				      	</div>
 				      	<div className="stat-content">
@@ -167,7 +162,6 @@ const Profile: React.FC = function() {
 	    						</div>
 				      		</div>
 				      	</div>
-
 			      	</div>
 			      	<div className="part">
 						<div className="undertitle">

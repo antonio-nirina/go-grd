@@ -16,8 +16,6 @@ import "../../assets/css/style.css"
 import "../annexe/tournois.css"
 import "../waggers/waggers.css"
 import "../participate/participate.css"
-import fr from "../../assets/image/fr.png"
-import discord from "../../assets/image/discord.png"
 import AvatarDefault from "../../assets/image/game-tag.png"
 import Game from "../../assets/image/game.png"
 import Apex from "../../assets/image/apex-legends.png"
@@ -61,7 +59,7 @@ const Joingame: React.FC = function(props:any) {
             <div className="header-part">
               <img className="item-left" src={Game} alt="" />
               <div className="join-title">
-                <h2>Wager Apex Legends - 2v2 Arène - Master</h2>                
+                <h2>Wager Apex Legends - 2v2 Arène - Master</h2>
                 <p>
                   <span>23 Juillet 2021 - 12h30</span>
                   <span>2v2 Arène</span>
@@ -69,11 +67,11 @@ const Joingame: React.FC = function(props:any) {
                   <span>Cross-Play</span>
                 </p>
               </div>
-            </div>            
+            </div>
         </div>
         <div className="bar-menu-top">
           <li><Link to="/resultat">Résultats</Link></li>
-          <li><Link to="/joingame" className="active">Général</Link></li>          
+          <li><Link to="/joingame" className="active">Général</Link></li>
           <li><Link to="/waggers-rules">Règles</Link></li>
         </div>
         <div className="information-game">
@@ -113,7 +111,7 @@ const Joingame: React.FC = function(props:any) {
                 <p>60€</p>
               </div>
             </div>
-          </div>          
+          </div>
           <div className="item-info-right">
             <div className="join-all">
               <p className="team-bar-title">Equipes 1/2</p>
@@ -125,8 +123,8 @@ const Joingame: React.FC = function(props:any) {
             </div>
              <div className="join-all join-canal">
               <p className="team-bar-title">Rejoindre le canal discord</p>
-              <button className="btn bg-red">Rejoindre</button>              
-            </div>           
+              <button className="btn bg-red">Rejoindre</button>
+            </div>
             <div className={!showTchat ? "salon-chat" :"salon-chat show"} >
               <Chat />
             </div>
@@ -137,11 +135,11 @@ const Joingame: React.FC = function(props:any) {
                 <p>{wagger?.game.logo} - <span>{wagger?.gameWay}<i><FontAwesomeIcon icon={faCommentDots} size="xs"/></i></span></p>
               </div>
             </div>
-          </div>          
+          </div>
         </div>
         <div className="information-game">
           <div className="d-none /*item-info-left apart*/">
-            <div className="item-img-info">             
+            <div className="item-img-info">
             </div>
             <div className="item-all-content">
               <div className="item-all-info">
@@ -161,11 +159,11 @@ const Joingame: React.FC = function(props:any) {
                 <p className="item-text-left">Discord</p>
                 <p><span>Position 2</span></p>
                 <p>300€</p>
-              </div>              
+              </div>
             </div>
-          </div>               
+          </div>
         </div>
-        <div className="clear"></div>        
+        <div className="clear"></div>
 				<Footer/>
   			</div>
   		</div>

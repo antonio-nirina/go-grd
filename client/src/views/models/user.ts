@@ -14,5 +14,5 @@ export interface USerModel {
 export interface GameUserModel {
 	uid:string
 	Email:string
-	Gmaes:GameType
+	Games:GameType
 }

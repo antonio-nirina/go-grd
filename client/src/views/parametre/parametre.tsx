@@ -1,6 +1,6 @@
-import React, { useEffect,useState } from "react"
+import React, { useEffect } from "react"
 import { useForm } from "react-hook-form"
-import {useMutation,useQuery} from "@apollo/client"
+import {useMutation} from "@apollo/client"
 import { useSelector,useDispatch } from "react-redux"
 
 import Header from "../header/header"
@@ -12,8 +12,7 @@ import {RootState} from "../../reducer"
 import Sidebar from "./sidebar"
 import {Translation} from "../../lang/translation"
 import {changeProfilUserConnected} from "../auth/action/userAction"
-import {GET_GAME_USER} from "../../gql/user/query"
-import {GameUserModel} from "../models/user"
+
 
 type Inputs = {
 	email:string,
@@ -27,7 +26,6 @@ type Inputs = {
 const Settings: React.FC = function() {
 	const dispatch = useDispatch()
 	const { register, handleSubmit,setValue } 	= useForm<Inputs>()
-	const [choixGames,setChoixGames] = useState<GameUserModel[]>([])
 	const [updatedUser]  = useMutation(UPDATED_USER)
 	const userConnectedRedux = useSelector((state:RootState) => state.userConnected)
 
@@ -52,12 +50,6 @@ const Settings: React.FC = function() {
 		}
 	}
 
-	const {loading:ldgGame,error:errGame,data:dataGame} 	= useQuery(GET_GAME_USER, {
-		variables: {
-			uid:userConnectedRedux.user.Uid,
-		},
-	})
-
 	useEffect(() => {
 		setValue("email",userConnectedRedux.user.email)
 		setValue("firstname",userConnectedRedux.user.firstname)
@@ -66,13 +58,7 @@ const Settings: React.FC = function() {
 		setValue("birtDate",userConnectedRedux.user.birtDate)
 		setValue("lastname",userConnectedRedux.user.lastname)
 
-		if(!ldgGame && !errGame && dataGame) {
-			setChoixGames(dataGame.GetGameOneUserQuery)
-		}
-
-
-	},[setValue,userConnectedRedux,,ldgGame,errGame,dataGame])
-
+	},[setValue,userConnectedRedux])
 
   return(
 	<div className="leaderboard settings">
