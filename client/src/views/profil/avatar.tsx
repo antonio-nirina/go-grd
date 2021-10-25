@@ -79,25 +79,25 @@ const Avatar : React.FC = function() {
 			<div className="gamer-tag">
 				<div className="grid">
 					<h2>
-						{userConnectedRedux.user.username}					
+						{userConnectedRedux.user.username}
 					</h2>
 					<span>Membre depuis 11 2021</span>
 					<div className="img-container-profil">
-						<span className="invisible"></span>				
+						<span className="invisible"></span>
 						<p></p>
-						<span className="visible"></span>						
+						<span className="visible"></span>
 					</div>
 				</div>
 				<div className="grid">
 					<div className="full-w">
-						<div className="flag-container">				
+						<div className="flag-container">
 							<img src={fr} alt="" width="27" height="auto"/>
 						</div>
 						<div className="external">
 							<i><FontAwesomeIcon icon={faExternalLinkAlt} /></i>
 						</div>
 					</div>
-					<div className="option-friend">
+					<div className="option-friend d-none">
 						<select className="d-none"/*className="ami"*/>
 							<option>Ami(e)</option>
 						</select>
@@ -105,7 +105,7 @@ const Avatar : React.FC = function() {
 							<option>Demande d'ami</option>
 						</select>
 					</div>
-				</div>					
+				</div>
 			</div>
 			{/*<div className={!closeModal ? "crop-container" :"crop-container close"}>
 				<div className="is-cropped">
@@ -117,8 +117,8 @@ const Avatar : React.FC = function() {
 						aspect={1 / 1}
 						onCropChange={setCrop}
 						onCropComplete={onCropComplete}
-						onZoomChange={setZoom}						
-    				/>					
+						onZoomChange={setZoom}
+    				/>
 					<div className="btn-container">
 						<button className="btn bg-white" onClick={onClose}>Annuler</button>
 						<button className="btn bg-red">Valider</button>

@@ -1,18 +1,18 @@
 import {Game,Platform} from "./tournament"
 
 export interface Wagger {
-	uid:string
-	title:string
-	statut:boolean
-	description:string
-	deadlineDate:string
-	format:string
-	date:string
-	price:number
-	priceParticipate:number
-	participant:number
+	uid:string|undefined
+	title:string|undefined
+	statut:boolean|undefined
+	description:string|undefined
+	deadlineDate:string|""
+	format:string|undefined
+	date:string|""
+	price:number|undefined
+	priceParticipate:number|undefined
+	participant:number|undefined
 	isPublic:boolean|undefined
 	game:Game
 	plateform:Platform
-	gameWay:string
+	gameWay:string|undefined
 }

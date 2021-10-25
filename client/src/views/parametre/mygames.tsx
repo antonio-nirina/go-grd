@@ -6,11 +6,8 @@ import Header from "../header/header"
 import Footer from "../footer/footer"
 import "../parametre/parametre.css"
 
-import Fortnite from "../../assets/image/game/fortnite.jpg"
-import RocketLeague from "../../assets/image/game/rocketleague.jpg"
 import {RootState} from "../../reducer"
 import {GET_GAME_USER} from "../../gql/user/query"
-import {GameUserModel} from "../models/user"
 import Sidebar from "./sidebar"
 
 interface MayGame {
@@ -50,7 +47,7 @@ const Mygames: React.FC = function() {
 							<div className="personal">
 								<h3>Mes jeux</h3>
 								{choixGames.length > 0 ? choixGames.map(function(element:MayGame,index:number) {
-									return( 
+									return(
 										<div className="personal-account">
 											<div className="historical">
 												<span>{element.name}</span>
@@ -67,7 +64,7 @@ const Mygames: React.FC = function() {
 										</div>
 									)
 								}) : <></>}
-								
+
 							</div>
 						</div>
 					</div>
