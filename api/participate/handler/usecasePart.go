@@ -6,7 +6,6 @@ import (
 	teamH "github.com/thoussei/antonio/api/teams/handler"
 	tHandler "github.com/thoussei/antonio/api/tournament/handler"
 	userH "github.com/thoussei/antonio/api/user/handler"
-	waggerH "github.com/thoussei/antonio/api/wagger/handler"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
@@ -652,60 +651,4 @@ func (p *partUsecase) GetNumberPartHandler(userPartUid string) (interface{}, err
 	return rec, nil
 }
 
-func (p *partUsecase) FindPartUserWaggerHandler(userUid primitive.ObjectID, uidWagger primitive.ObjectID) (interface{}, error) {
-	result, err := p.partRepository.FindPartByWaggerRepo(userUid, uidWagger)
 
-	if err != nil {
-		return 0, err
-	}
-	var teamView []teamH.TeamViewModel
-	partViewModel := partViewModel{
-		Uid:   result.Uid.Hex(),
-		Date:  result.Date,
-		Team:  teamView,
-		IsWin: false,
-		User: userH.UserViewModel{
-			Uid:           result.User.Uid.Hex(),
-			FirstName:     result.User.FirstName,
-			LastName:      result.User.LastName,
-			Email:         result.User.Email,
-			Username:      result.User.Username,
-			IsBanned:      result.User.IsBanned,
-			Avatar:        result.User.Avatar,
-			Language:      result.User.Language,
-			Point:         result.User.Point,
-			Roles:         result.User.Roles,
-			TypeConnexion: result.User.TypeConnexion,
-			Created:       result.User.Created,
-		},
-		Wagger: waggerH.WaggerViewModel{
-			Uid:              result.Wagger.Uid.Hex(),
-			Date:             result.Wagger.Date,
-			Title:            result.Wagger.Title,
-			Description:      result.Wagger.Description,
-			Price:            result.Wagger.Price,
-			DeadlineDate:     result.Wagger.DeadlineDate,
-			GameWay:          result.Wagger.GameWay,
-			PriceParticipate: result.Wagger.PriceParticipate,
-			Game: tHandler.GameViewModel{
-				result.Wagger.Game.Uid.Hex(),
-				result.Wagger.Game.Name,
-				result.Wagger.Game.Image,
-				result.Wagger.Game.Logo,
-				result.Wagger.Game.Slug,
-			},
-			Plateform: tHandler.PlateformViewModel{
-				result.Wagger.Plateform.Uid.Hex(),
-				result.Wagger.Plateform.Description,
-				result.Wagger.Plateform.Name,
-			},
-			Format:      result.Wagger.Format,
-			Statut:      result.Wagger.Statut,
-			Records:     0,
-			Participant: result.Wagger.Participant,
-			IsPublic:    result.Wagger.IsPublic,
-		},
-	}
-
-	return partViewModel, nil
-}
