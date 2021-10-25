@@ -1,4 +1,5 @@
 import React,{useMemo,useState,useEffect} from "react"
+import { Link } from "react-router-dom"
 import { useSelector } from "react-redux"
 import {useQuery} from "@apollo/client"
 import { faEye } from "@fortawesome/free-solid-svg-icons"
@@ -14,8 +15,11 @@ import "./post.css"
 import {GET_ALL_STREAMING} from "../../gql/user/query"
 import {GET_ALL_CMTY} from "../../gql/cmty/query"
 import Friend from "./friends"
-
 import Post from "./post"
+
+import Warz from "../../assets/image/profil/warzone.png"
+import Rl from "../../assets/image/profil/rocketleague.png"
+import Fortnite from "../../assets/image/profil/fortnite.png"
 
 type Stremings = {
     uid:string
@@ -74,14 +78,13 @@ const Communaute: React.FC = function() {
 	  		<Header/>
 	  		<div className="main">
 	  			<div className="auto">
-	  				<div className="aside-left">
-	  					{/*
+	  				<div className="aside-left">	  					
 	  					<div className="game-select">
 	  						<Link to="#">
 			  					<div className="game-bg wz">
-			  						<p>Warzone</p>
+			  						<p>COD : Warzone</p>
 			  						<div className="seek">
-			  							<img src={warz} className="imgresp" alt=""/>
+			  							<img src={Warz} className="imgresp" alt=""/>
 			  						</div>
 			  					</div>
 			  				</Link>
@@ -89,7 +92,7 @@ const Communaute: React.FC = function() {
 			  					<div className="game-bg rl">
 			  						<p>Rocket League</p>
 			  						<div className="seek">
-			  							<img src={championship} className="imgresp" alt=""/>
+			  							<img src={Rl} className="imgresp" alt=""/>
 			  						</div>
 			  					</div>
 		  					</Link>
@@ -97,12 +100,11 @@ const Communaute: React.FC = function() {
 			  					<div className="game-bg ft">
 			  						<p>Fortnite</p>
 			  						<div className="seek">
-			  							<img src={fortnite1} className="imgresp" alt="" />
+			  							<img src={Fortnite} className="imgresp" alt="" />
 			  						</div>
 			  					</div>
 			  				</Link>
-		  				</div>
-		  				*/}
+		  				</div>		  				
 		  				<div className="stream">
 						  	{cmty.map(function(e:Stremings){
 								return(
