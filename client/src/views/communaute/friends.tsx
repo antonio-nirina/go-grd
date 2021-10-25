@@ -204,6 +204,29 @@ const Friend: React.FC = function() {
 					</div>)
 				}
 			</div>
+			<p className="bold mg-10">Leaderboard (Tous les jeux)</p>
+			<Link to="/leaderboard" className="leader">				
+				<div className="ld-container">					
+					<p className="lead">1</p>
+					<p className="bold">Gotaga</p>
+					<p className="aright">7845 pts</p>
+				</div>
+				<div className="ld-container">					
+					<p>2</p>
+					<p className="bold">Killer1548</p>
+					<p className="aright">6928 pts</p>
+				</div>
+				<div className="ld-container">					
+					<p>3</p>
+					<p className="bold">Skouinar</p>
+					<p className="aright">6751 pts</p>
+				</div>
+				<div className="ld-container">					
+					<p>4</p>
+					<p className="bold">Shad_BD</p>
+					<p className="aright">5942 pts</p>
+				</div>
+			</Link>
 			<p className="bold mg-10">Hubs</p>
 			<div className="forum-container">
 				<div className="subjectforum">
