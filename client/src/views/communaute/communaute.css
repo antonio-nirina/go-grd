@@ -39,6 +39,7 @@
 	padding-left: 15px;
 	vertical-align: top;
 	position: relative;
+	font-family: arial;
 }
 .aside-right p{
 	margin-bottom: 5px;
@@ -167,54 +168,37 @@
 }
 
 .game-select p{
+	font-family: arial;
 	text-transform: uppercase;
-	font-size: 12px;
-	font-weight: bold;
-	margin-left: 10px;	
+	font-size: 12px;	
+	background: rgba(0,0,0,0.5);
+	position: absolute;
+    width: 100%;    
+    padding: 11px;
 }
 
 .aside-left .game-bg:last-child{
 	border-bottom: none;
 }
 .game-select a {
-    display: block;
-    padding: 7px 0;
-    background: #2c2c2c;
-    margin-bottom: 2px;
-    height: 39px;
-    overflow: hidden;
-    transition: 500ms ease-in-out;
+	position: relative;
+	display: block;
+	height: 42px; 
 }
-.game-select a:hover{
+/*.game-select a:hover{
 	background: #4a4949;
 	transition: 500ms ease-in-out;
 	height: 171px;	
-}
+}*/
 .game-bg{	
     margin: auto;
-    position: relative;
-    margin-top: 5px;
+    position: relative;    
 }
 .seek{
-	position: absolute;
+	/*position: absolute;
     width: 100%;    
-    top: 27px;
+    top: 27px;*/
 }
-/*.bg-cod{	
-	background: url("../../assets/image/warzone-logo.jpg") no-repeat;
-	background-size: 100%;
-	background-position-y: -26px;
-}
-.bg-rl{
-	background: url("../../assets/image/rocketleague.jpg") no-repeat;
-	background-size: 100%;
-	background-position-y: -41px;
-}
-.bg-ft{
-	background: url("../../assets/image/fortnite.jpg") no-repeat;
-	background-size: 100%;
-	background-position-y: -13px;
-}*/
 .stream-container{
 	margin-bottom: 15px;
 	display: flex;
@@ -225,7 +209,7 @@
 
 .stream{
 	background: #2c2c2c;
-	/*margin-top: 15px;*/
+	margin-top: 15px;
 	padding: 12px;
 	height: 260px;
 	overflow: auto;	
@@ -486,4 +470,23 @@
 .stream{
   scrollbar-color: #dd0000 #000000 !important;
   scrollbar-width: thin !important;  
+}
+.leader{
+	background: #2c2c2c;	
+	padding: 15px;
+	display: block;
+}
+.ld-container{
+	display: flex;	
+	border-bottom: 1px solid gray;	
+	margin-bottom: 5px;
+}
+.ld-container:last-child{
+	border: none;
+}
+.ld-container p.lead{
+	color: #dd0000;
+}
+.ld-container p{
+	width: 100%;
 }

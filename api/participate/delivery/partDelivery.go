@@ -33,6 +33,7 @@ type PartResolver interface {
 	UpdatedNumberPartConfResolver(params graphql.ResolveParams) (interface{}, error)
 	GetNumberPartByResolver(params graphql.ResolveParams) (interface{}, error)
 	FindPartByUserWaggerResolver(params graphql.ResolveParams) (interface{}, error)
+	FindPartUserAllWaggerByAdvers(params graphql.ResolveParams) (interface{}, error)
 }
 
 type participate struct {
@@ -375,3 +376,21 @@ func (p *participate) FindPartByUserWaggerResolver(params graphql.ResolveParams)
 	return res, nil
 }
 
+func(p *participate) FindPartUserAllWaggerByAdvers(params graphql.ResolveParams) (interface{}, error) {
+	limit, _ := params.Args["limit"].(int)
+	pageNumber, _ := params.Args["pageNumber"].(int)
+	userUid, _ := params.Args["uidUser"].(string)
+	user, err := p.user.FindOneUserByUid(userUid)
+
+	if err != nil {
+		return nil, err
+	}
+
+	res, err := p.partHandler.FindPartUserHandler(int64(pageNumber), int64(limit), user.Uid)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return res, nil
+}
