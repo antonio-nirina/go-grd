@@ -39,6 +39,15 @@ html{
   color: #ffffff;
   border: 1px solid transparent;
 }
+.bg-green-light{
+ background: #27C612;
+ color: #ffffff !important;
+ width: 55px;
+}
+.bg-green-light:hover{
+  background: #ffffff;
+  color: #000000 !important;
+}
 .btn-container div{
   margin-top: 15px;
 }
@@ -229,6 +238,9 @@ h1{
 .inscription .loader-spinner svg
 {
   width: 40px;
+}
+.d-none{
+  display: none !important;
 }
 
 /********** Fonts ********/

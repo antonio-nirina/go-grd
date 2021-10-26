@@ -490,3 +490,24 @@
 .ld-container p{
 	width: 100%;
 }
+.icon-msg img{
+	width: 25px;
+}
+.icon-msg{
+	position: fixed;
+	right: 2px;
+	bottom: 0px;
+	background: #2C2C2C;
+	padding: 10px;
+	z-index: 999999999;
+}
+.icon-msg .counter{
+	width: 20px;
+	height: 20px;
+	text-align: center;
+	top: -3px;
+	left: 26px;
+	display: flex;
+	justify-content: center;
+	padding: 0;
+}

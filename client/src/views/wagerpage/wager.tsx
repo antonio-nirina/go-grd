@@ -1,8 +1,6 @@
 import React,{useState,useEffect} from "react"
 import { Link } from 'react-router-dom'
 import {useQuery} from "@apollo/client"
-import { useSelector } from "react-redux"
-
 import Header from "../header/header"
 import Footer from "../footer/footer"
 import { GET_ALL_GAMES } from "../../gql/games/query"
@@ -14,13 +12,11 @@ import "../wagerpage/wager.css"
 import "../../assets/css/style.css"
 import {Wagger} from "../models/wagger"
 import {LIMIT,PAGE_NUMBER} from "../commons/constante"
-import {RootState} from "../../reducer"
 import {dateStringToDHStringEN} from "../tools/dateConvert"
 import {GET_PART_ALL_USER_WAGGER} from "../../gql/participate/query"
 
 
-const WagerPage: React.FC = function() {
-	const userConnectedRedux = useSelector((state:RootState) => state.userConnected)
+const WagerPage: React.FC = function() {	
 	const [waggers, setWaggers] = useState<Wagger[]>([])
 	const [games,setGames] = useState<GameType[]>([])
 	const {loading:ldPart,error:errPart,data:dataPart} 	= useQuery(GET_PART_ALL_USER_WAGGER, {

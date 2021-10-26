@@ -1,5 +1,5 @@
 import React,{ useRef,useState,useCallback, useMemo} from "react"
-import {faPaperclip,faTimes } from "@fortawesome/free-solid-svg-icons"
+import {faTimes } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useSelector } from "react-redux"
 import {useMutation,useQuery} from "@apollo/client"
@@ -206,13 +206,13 @@ const Post = function() {
 						<div className="post-icon">
 						<div className="icon-lists">
 							<div className="f-icons" onClick={handleUpload}>
-								<i><img src={Img} /></i>
+								<i><img src={Img} alt=""/></i>
 							</div>
 							<div className="f-icons">
-								<i><img src={Jointe} /></i>
+								<i><img src={Jointe} alt=""/></i>
 								</div>
 							<div className={!isEmoij ? "f-icons" :"f-icons active"} onClick={handleEmoji}>
-								<i><img src={Emoji} /></i>
+								<i><img src={Emoji} alt=""/></i>
 							</div>
 							</div>
 						</div>

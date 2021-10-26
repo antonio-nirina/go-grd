@@ -44,26 +44,35 @@
 	position: fixed;
 	background: #2c2c2c;
 	right: 0px;
-	bottom: 26px;
-	max-width: 460px;
+	bottom: 0px;
+	max-width: 570px;
 	width: 100%;
-	height: 40%;	
+	height: 60%;	
 	display: block;
 	border: 1px solid #4a4949;
 }
 .group-tchat{
 	display: flex;
 }
-.group-tchat.tchat.show{
-	display: none;
-}
-
 .tchat i{
 	font-size: 20px;
 	padding: 5px;
 }
 .tchat-header{	
-	padding: 4px 6px 10px;
+	padding: 4px 5px 10px;	
+	text-align: right;
+}
+.tchat-header p{
+	font-size: 12px;
+	text-align: right;
+}
+.tchat-header strong{
+	font-family: arial;
+	text-align: right;
+	font-size: 12px;
+	font-weight: bold;
+	text-transform: uppercase;
+
 }
 .tchat-icon{	
 	display: inline-block;
@@ -80,14 +89,11 @@
 .tchat-content{
 	padding: 15px;
 }
-.msg-received, .msg-send{
-	display: flex;
-}
 .msg-received{
-
+	text-align: right;
 }
 .msg-send{
-
+	text-align: left;
 }
 .tchat-bar-dialog{
 	position: absolute;
@@ -98,6 +104,7 @@
 }
 .tchat-bar-dialog form{
 	display: flex;
+	width: 100%;
 }
 
 .tchat-content .message{
@@ -114,7 +121,7 @@
 	color: gray;
 }
 .tchat-bar-dialog input{
-	width: 60%;
+	width: 100%;
 	padding: 10px;
 }
 .tchat-bar-dialog button{
@@ -127,10 +134,47 @@
 	display: none;
 }
 .tchat-salon{
-	width: 50%;
+	width: 210px
 }
 .tchat-container{
-	width: 50%;
+	width: 367px;
+	border: 1px solid gray;
+}
+.tchat-header-title p{	
+	padding: 5px;
+	font-size: 14px;
+	text-align: center;
+	font-weight: bold;
+}
+.salon-body .counter{
+	top: 0px;
+	left: 18px;
+	display: inline-block;
+	width: 15px;	
+	height: 15px;
+	line-height: 15px;
+	font-size: 10px;
+	padding: 0px;	
+	display: flex;
+	justify-content: center;
+}
+.salon-body p{
+	display: flex;
+	font-size: 11px;	
+	padding: 5px;
+	background: #393939;
+	margin-bottom: 2px;
+	position: relative;
+}
+.salon-body p:hover{
+	background: #646464;
+}
+.salon-body p span, .salon-body p img{
+	align-self: center;	
+	margin-right: 5px;
+}
+.message .content p{
+	font-size: 12px;
 }
 
 

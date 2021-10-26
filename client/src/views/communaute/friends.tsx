@@ -148,11 +148,7 @@ const Friend: React.FC = function() {
 	}
 	const onShowChat = function(){
 		setShowChat(!showChat)
-	}
-
-	const openTchat = function() {
-		setShowChat(!showChat)
-	}
+	}	
 
 	return (
 		<div className="aside-right">
