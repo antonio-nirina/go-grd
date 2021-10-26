@@ -6,6 +6,7 @@ import (
 	teamH "github.com/thoussei/antonio/api/teams/handler"
 	tHandler "github.com/thoussei/antonio/api/tournament/handler"
 	userH "github.com/thoussei/antonio/api/user/handler"
+	wHandler "github.com/thoussei/antonio/api/wagger/handler"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
@@ -21,7 +22,6 @@ type UsecasePart interface {
 	UpdatedPartNumberConfirmedHandler(userPartUid string, numberConf bool) (interface{}, error)
 	GetNumberPartHandler(userPartUid string) (interface{}, error)
 	FindPartUserWaggerHandler(userUid primitive.ObjectID, uidWagger primitive.ObjectID) (interface{}, error)
-
 }
 type partUsecase struct {
 	partRepository repository.RepositoryPart
@@ -651,4 +651,77 @@ func (p *partUsecase) GetNumberPartHandler(userPartUid string) (interface{}, err
 	return rec, nil
 }
 
+func (p *partUsecase) FindPartUserWaggerHandler(userUid primitive.ObjectID, uidWagger primitive.ObjectID) (interface{}, error) {
+	result, err := p.partRepository.FindPartByTournamentRepo(userUid, uidWagger, false)
+
+	if err != nil {
+		return partViewModel{}, err
+	}
+
+	if len(result.Team) > 0 {
+		var userView []userH.UserViewModel
+
+		for _, val := range result.Team {
+			for _, item := range val.Players {
+				resUser := userH.UserViewModel{
+					Uid:           item.Uid.Hex(),
+					FirstName:     item.FirstName,
+					LastName:      item.LastName,
+					Email:         item.Email,
+					Username:      item.Username,
+					IsBanned:      item.IsBanned,
+					Avatar:        item.Avatar,
+					Language:      item.Language,
+					Point:         item.Point,
+					Roles:         item.Roles,
+					TypeConnexion: item.TypeConnexion,
+					Created:       item.Created,
+				}
+				userView = append(userView, resUser)
+			}
+		
+		}
+	}
+
+	partViewModel := partViewModel{
+		Uid:   result.Uid.Hex(),
+		Date:  result.Date,
+		IsWin: false,
+		User: userH.UserViewModel{
+			Uid:           result.User.Uid.Hex(),
+			FirstName:     result.User.FirstName,
+			LastName:      result.User.LastName,
+			Email:         result.User.Email,
+			Username:      result.User.Username,
+			IsBanned:      result.User.IsBanned,
+			Avatar:        result.User.Avatar,
+			Language:      result.User.Language,
+			Point:         result.User.Point,
+			Roles:         result.User.Roles,
+			TypeConnexion: result.User.TypeConnexion,
+			Created:       result.User.Created,
+		},
+		Wagger: wHandler.WaggerViewModel{
+			Uid: result.Wagger.Uid.Hex(),
+			Date:result.Wagger.Date,
+			Title:result.Wagger.Title,
+			Price:result.Wagger.Price,
+			DeadlineDate:result.Wagger.DeadlineDate,
+			Statut:result.Wagger.Statut,
+			/*GameWay:
+			PriceParticipate:
+			Description:result.Wagger.Date,
+			Game:
+			Plateform:
+			Format:     
+			IsPublic:
+			Statut:
+			Records:
+			Participant:
+			Rules:*/
+		},
+	}
+
+	return partViewModel, nil
+}
 
