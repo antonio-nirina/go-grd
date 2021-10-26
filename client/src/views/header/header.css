@@ -460,8 +460,7 @@
 }
 .dropdown li a{
 	display: block;
-	padding: 0 5px;
-	font-size: 12px;
+	padding: 0 5px;	
 }
 .dropdown.show .border{
 	padding: 7px 0;
