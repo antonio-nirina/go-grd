@@ -22,6 +22,7 @@ type UsecasePart interface {
 	UpdatedPartNumberConfirmedHandler(userPartUid string, numberConf bool) (interface{}, error)
 	GetNumberPartHandler(userPartUid string) (interface{}, error)
 	FindPartUserWaggerHandler(userUid primitive.ObjectID, uidWagger primitive.ObjectID) (interface{}, error)
+	FindAllPartUserWaggerHandler(userUid primitive.ObjectID, pageNumber int64, limit int64) ([]partWaggerViewModel, error)
 }
 type partUsecase struct {
 	partRepository repository.RepositoryPart
@@ -679,7 +680,7 @@ func (p *partUsecase) FindPartUserWaggerHandler(userUid primitive.ObjectID, uidW
 				}
 				userView = append(userView, resUser)
 			}
-		
+
 		}
 	}
 
@@ -702,18 +703,18 @@ func (p *partUsecase) FindPartUserWaggerHandler(userUid primitive.ObjectID, uidW
 			Created:       result.User.Created,
 		},
 		Wagger: wHandler.WaggerViewModel{
-			Uid: result.Wagger.Uid.Hex(),
-			Date:result.Wagger.Date,
-			Title:result.Wagger.Title,
-			Price:result.Wagger.Price,
-			DeadlineDate:result.Wagger.DeadlineDate,
-			Statut:result.Wagger.Statut,
+			Uid:          result.Wagger.Uid.Hex(),
+			Date:         result.Wagger.Date,
+			Title:        result.Wagger.Title,
+			Price:        result.Wagger.Price,
+			DeadlineDate: result.Wagger.DeadlineDate,
+			Statut:       result.Wagger.Statut,
 			/*GameWay:
 			PriceParticipate:
 			Description:result.Wagger.Date,
 			Game:
 			Plateform:
-			Format:     
+			Format:
 			IsPublic:
 			Statut:
 			Records:
@@ -725,3 +726,60 @@ func (p *partUsecase) FindPartUserWaggerHandler(userUid primitive.ObjectID, uidW
 	return partViewModel, nil
 }
 
+func (p *partUsecase) FindAllPartUserWaggerHandler(userUid primitive.ObjectID, pageNumber int64, limit int64) ([]partWaggerViewModel, error) {
+	results, err := p.partRepository.FindPartUserRepo(pageNumber, limit, userUid)
+
+	if err != nil {
+		return []partWaggerViewModel{}, err
+	}
+
+	var res []partWaggerViewModel
+	var userView []userH.UserViewModel
+
+	for _, result := range results {
+		onePart, _ := p.partRepository.FindPartRepo(result.Uid)
+		user := userH.UserViewModel{
+			Uid:           onePart.User.Uid.Hex(),
+			FirstName:     onePart.User.FirstName,
+			LastName:      onePart.User.LastName,
+			Email:         onePart.User.Email,
+			Username:      onePart.User.Username,
+			IsBanned:      onePart.User.IsBanned,
+			Avatar:        onePart.User.Avatar,
+			Language:      onePart.User.Language,
+			Point:         onePart.User.Point,
+			Roles:         onePart.User.Roles,
+			TypeConnexion: onePart.User.TypeConnexion,
+			Created:       onePart.User.Created,
+		}
+		userView := append(userView, user)
+		partWagger := partWaggerViewModel{
+			Uid:   result.Uid.Hex(),
+			Date:  result.Date,
+			User:  userView,
+			IsWin: result.IsWin,
+			Wagger: wHandler.WaggerViewModel{
+				Uid:              result.Wagger.Uid.Hex(),
+				Date:             result.Wagger.Date,
+				Title:            result.Wagger.Title,
+				Description:      result.Wagger.Description,
+				Price:            result.Wagger.Price,
+				DeadlineDate:     result.Wagger.DeadlineDate,
+				GameWay:          result.Wagger.GameWay,
+				PriceParticipate: result.Wagger.PriceParticipate,
+				Game:             tHandler.GameViewModel{},
+				Plateform:        tHandler.PlateformViewModel{},
+				Format:           result.Wagger.Format,
+				IsPublic:         result.Wagger.IsPublic,
+				Statut:           result.Wagger.Statut,
+				Records:          0,
+				Participant:      result.Wagger.Participant,
+				Rules:            result.Wagger.Rules,
+			},
+			NumberPartConfirmed: result.NumberPartConfirmed,
+		}
+		res = append(res, partWagger)
+	}
+
+	return res, nil
+}

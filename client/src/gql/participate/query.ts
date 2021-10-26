@@ -120,32 +120,27 @@ export const GET_PART_USER_WAGGER = gql`
 	}
 `
 export const GET_PART_ALL_USER_WAGGER = gql`
-query FindPartByUser($uidUser:String,$limit:Int!,$pageNumber:Int!) {
-	FindPartByUser(uidUser:$uidUser,limit: $limit,pageNumber:$pageNumber){
+query FindAllPart($limit:Int!,$pageNumber:Int!) {
+	FindAllPart(limit: $limit,pageNumber:$pageNumber){
 			uid
 			date
 			isWin
 			user{
 				uid
 				username
-				avatar
+				email
 			}
 			wagger{
 				uid
 				title
 				date
+				price
 				game{
 					uid
 				}
 				plateform{
 					uid
 					name
-				}
-			}
-			team{
-				uid
-				players{
-					uid
 				}
 			}
 		}

@@ -13,14 +13,14 @@ import (
 func RunCmdScheduler() {
 	logrus.Info("Create cron log.....")
 	c := cron.New()
-	c.AddFunc("*/1 * * * * *", func() { 
+	c.AddFunc("*/1 * * * * *", func() {
 		fmt.Println("Every hour on the half hour")
 	})
 	fn := logOutput()
 	defer fn()
 	logrus.Info("End cron *****")
-	
-	c.Start()
+
+	c.Stop()
 }
 
 func logOutput() func() {
@@ -35,7 +35,7 @@ func logOutput() func() {
 	exit := make(chan bool)
 
 	go func() {
-		_,_ = io.Copy(mw, r)
+		_, _ = io.Copy(mw, r)
 		exit <- true
 	}()
 

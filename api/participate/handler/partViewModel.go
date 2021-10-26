@@ -31,3 +31,12 @@ type ReacordsPartModel struct {
 	RecordsPart                 int `json:"recordsPart"`
 	ReacordsnumberPartConfirmed int `json:"reacordsnumberPartConfirmed"`
 }
+
+type partWaggerViewModel struct {
+	Uid                 string                   `json:"uid"`
+	Date                string                   `json:"date"`
+	User                []user.UserViewModel     `json:"user"`
+	IsWin               bool                     `json:"isWin"`
+	Wagger              whandler.WaggerViewModel `json:"wagger"`
+	NumberPartConfirmed bool                     `json:"numberPartConfirmed"`
+}

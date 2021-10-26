@@ -12,7 +12,6 @@ import { faUser} from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import "../wagerpage/wager.css"
 import "../../assets/css/style.css"
-import {GET_ALL_WAGER} from "../../gql/wagger/query"
 import {Wagger} from "../models/wagger"
 import {LIMIT,PAGE_NUMBER} from "../commons/constante"
 import {RootState} from "../../reducer"
@@ -26,7 +25,6 @@ const WagerPage: React.FC = function() {
 	const [games,setGames] = useState<GameType[]>([])
 	const {loading:ldPart,error:errPart,data:dataPart} 	= useQuery(GET_PART_ALL_USER_WAGGER, {
 		variables: {
-			uidUser:userConnectedRedux.user.uid,
 			limit:LIMIT,
 			pageNumber:PAGE_NUMBER
 		},
@@ -38,9 +36,10 @@ const WagerPage: React.FC = function() {
 		if(!loading && !error && data) {
 			setGames(data.FindAllGame)
 		}
+		console.log("dataPart", dataPart)
 		if(!ldPart && !errPart && dataPart) {
-			if(dataPart && dataPart.FindPartByUser.length > 0) {
-				setWaggers(dataPart.FindPartByUser.wagger)
+			if(dataPart && dataPart.FindAllPart > 0) {
+				setWaggers(dataPart.FindAllPart)
 			}
 		}
 
