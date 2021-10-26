@@ -153,10 +153,10 @@
 	border-color: #dd0000;
 }
 
-.favorite-game a{
+.favorite-game a, .platform-content a{
 	position: relative
 }
-.favorite-game a i{
+.favorite-game a i, .platform-content a i{
 	display: block;
 	position: absolute;
 	top: -8px;
@@ -164,10 +164,10 @@
 	font-size: 20px;
 	color: #ffffff;
 }
-.favorite-game a i.notVisible{
+.favorite-game a i.notVisible, .platform-content a i.notVisible{
 	display: none;
 }
-.favorite-game a i.checked{
+.favorite-game a i.checked, .platform-content a i.checked{
 	display: block;
 }
 

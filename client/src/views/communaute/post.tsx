@@ -1,5 +1,5 @@
 import React,{ useRef,useState,useCallback, useMemo} from "react"
-import { faImage,faLaugh,faPaperclip,faTimes } from "@fortawesome/free-solid-svg-icons"
+import {faPaperclip,faTimes } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useSelector } from "react-redux"
 import {useMutation,useQuery} from "@apollo/client"
@@ -14,6 +14,9 @@ import imgDefault from "../../assets/image/image.png"
 import {LIMIT,PAGE_NUMBER} from "../commons/constante"
 import {PostModel} from "../models/post"
 import AvatarDefault from "../../assets/image/game-tag.png"
+import Img from "../../assets/image/picto/img.png"
+import Jointe from "../../assets/image/picto/jointe.png"
+import Emoji from "../../assets/image/picto/emoji.png"
 import {dateDefault} from "../tools/dateConvert"
 
 const mimeTypeValid = [
@@ -203,13 +206,13 @@ const Post = function() {
 						<div className="post-icon">
 						<div className="icon-lists">
 							<div className="f-icons" onClick={handleUpload}>
-								<i><FontAwesomeIcon icon={faImage} color={isUpload?"#000":""} /></i>
+								<i><img src={Img} /></i>
 							</div>
 							<div className="f-icons">
-								<i><FontAwesomeIcon icon={faPaperclip} rotation={90} /></i>
+								<i><img src={Jointe} /></i>
 								</div>
 							<div className={!isEmoij ? "f-icons" :"f-icons active"} onClick={handleEmoji}>
-								<i><FontAwesomeIcon icon={faLaugh} /></i>
+								<i><img src={Emoji} /></i>
 							</div>
 							</div>
 						</div>

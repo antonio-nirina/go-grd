@@ -2,7 +2,7 @@ import React,{useMemo,useState,useEffect} from "react"
 import { Link } from "react-router-dom"
 import { useSelector } from "react-redux"
 import {useQuery} from "@apollo/client"
-import { faEye } from "@fortawesome/free-solid-svg-icons"
+import { faEye, faCommentDots } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Loader from "react-loader-spinner"
 import Header from "../header/header"
@@ -16,10 +16,12 @@ import {GET_ALL_STREAMING} from "../../gql/user/query"
 import {GET_ALL_CMTY} from "../../gql/cmty/query"
 import Friend from "./friends"
 import Post from "./post"
+import Chat from "./chat"
 
 import Warz from "../../assets/image/profil/warzone.png"
 import Rl from "../../assets/image/profil/rocketleague.png"
 import Fortnite from "../../assets/image/profil/fortnite.png"
+import AvatarDefault from "../../assets/image/game-tag.png"
 
 type Stremings = {
     uid:string
@@ -140,6 +142,9 @@ const Communaute: React.FC = function() {
 
 	  				<Friend />
 	  			</div>
+				<div className="salon-chat show" >
+              		<Chat />
+            	</div>            	
 	  		</div>
 			<Footer/>
 	  	</div>
