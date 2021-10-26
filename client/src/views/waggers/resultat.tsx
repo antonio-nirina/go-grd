@@ -4,7 +4,6 @@ import {useQuery} from "@apollo/client"
 
 import Header from "../header/header"
 import Footer from "../footer/footer"
-import Chat from "./chat"
 
 import { faCommentDots } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
@@ -120,17 +119,7 @@ const Resultat: React.FC = function(props:any) {
                 <p>Skouinar - <span>TonioPlancha</span> - <span>Shad_BD</span></p>
                 <p className="free-emplacement"><span>Emplacement Libre</span></p>
               </div>
-            </div>
-            <div className={!showTchat ? "salon-chat" :"salon-chat show"} >
-              <Chat />
-            </div>
-            <div className={!showSalon ? "salon" :"salon show"}>
-              <div className="salon-titre">Salon de tchat</div>
-              <div className="salon-team" onClick={onShowTchat}>
-                <img src={AvatarDefault} width="30" height="30" alt="joingame" />
-                <p>{wagger?.game.logo} - <span>{wagger?.gameWay}<i><FontAwesomeIcon icon={faCommentDots} size="xs"/></i></span></p>
-              </div>
-            </div>
+            </div>                        
           </div>
         </div>
         <div className="clear"></div>

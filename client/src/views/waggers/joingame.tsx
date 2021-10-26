@@ -4,7 +4,6 @@ import {useQuery} from "@apollo/client"
 
 import Header from "../header/header"
 import Footer from "../footer/footer"
-import Chat from "./chat"
 
 import { faCommentDots } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
@@ -124,16 +123,6 @@ const Joingame: React.FC = function(props:any) {
              <div className="join-all join-canal">
               <p className="team-bar-title">Rejoindre le canal discord</p>
               <button className="btn bg-red">Rejoindre</button>
-            </div>
-            <div className={!showTchat ? "salon-chat" :"salon-chat show"} >
-              <Chat />
-            </div>
-            <div className={!showSalon ? "salon" :"salon show"}>
-              <div className="salon-titre">Salon de tchat</div>
-              <div className="salon-team" onClick={onShowTchat}>
-                <img src={AvatarDefault} width="30" height="30" alt="joingame" />
-                <p>{wagger?.game.logo} - <span>{wagger?.gameWay}<i><FontAwesomeIcon icon={faCommentDots} size="xs"/></i></span></p>
-              </div>
             </div>
           </div>
         </div>
