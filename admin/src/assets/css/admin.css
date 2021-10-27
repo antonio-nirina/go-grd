@@ -638,9 +638,9 @@ form .se-btn.se-btn-select.se-btn-tool-font.se-tooltip.on{
 	border-bottom: 1px solid #9c9c9e;	
 }
 .grid-title{
-	font-family: "russo one";
+	font-family: arial;
 	display: block;
-	font-size: 24px;
+	font-size: 16px;
 	color: #ffffff;
 	padding: 15px 5px;
 	text-align: center;
@@ -702,8 +702,8 @@ label.entete:last-child{
 	align-self: center;
 }
 .list-game .logo-game img{
-    width: 100%;
-    height: 82px;
+    width: 52%;
+    height: 40px;
     border-radius: 50%;  
 }
 .column div.create-game{
@@ -716,11 +716,11 @@ label.entete:last-child{
 .game-name{		
 	display: flex;
 	width: 100%;
-	height: 50%;
+	height: 20%;
     justify-content: center;
     position: absolute;
     bottom: 0px;
-    background: rgba(0,0,0,0.8);    
+    background: rgba(0,0,0,0.4);    
     border-radius: 0 0 5px 5px;
     transition: ease-in-out 500ms;  
 }
