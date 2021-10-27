@@ -546,6 +546,19 @@ h1{
     position: initial;
     margin-top: 15px;
   }  
+  .container .full.connected .Left{
+    top: 13%;
+  }
+  .container .full .slogan p.title, .full.connected .slogan p.title{
+    font-size: 20px !important;
+  }
+  .full.connected .slogan .btn, .full .slogan .btn{
+    font-size: 15px;
+  }
+  .container .slogan .btn{
+    margin-top: 15px;
+  }
+
 }
 @media screen and (max-width: 600px) {
   .container{
@@ -586,6 +599,9 @@ h1{
   }
   .login .main, .inscription .main, .profil .main-content, .main{
     padding-top: 8em;
+  }
+  .home .main{
+    padding-top: 25px;
   }
   .home p.title{
     font-size: 25px;
@@ -714,6 +730,35 @@ h1{
     display: block;
     padding: 15px 0;
   }
+  .container .full.connected .Left{
+    top: 2.5%;
+  }  
+  .container .list_tournament{
+    margin-bottom: 15px;
+    padding: 10px 0px;
+  }
+  .container .list_tournament p{
+    margin-right: 0;
+  }
+  .container .list_tournament a{
+    display: block;
+    width: 100%;
+    text-align: center;
+  }
+  .container .list_tournament .place{
+    text-align: center;
+    width: 100%;
+  }
+  .container .best-gamer{
+    display: block;
+  }
+  .container .best-gamer .global{
+    margin-bottom: 15px;
+  }
+  .container .full .Left{
+    position: absolute !important;
+    width: 100%;
+  }
 }
 
 @media screen and (max-width: 380px) {
@@ -820,5 +865,12 @@ h1{
   }
   .profil #wall .avatar-info .table{
     display: block;
+  }
+  .container .full.connected .Left{
+    position: initial;
+    padding: 15px;
+  }
+  .container .full .Left{
+    top: 10%;
   }
 }
