@@ -28,7 +28,6 @@ const Mygames: React.FC = function() {
 	})
 
 	useEffect(() => {
-		console.log("dataGame", dataGame)
 		if(!ldgGame && !errGame && dataGame) {
 			setChoixGames(dataGame.GetGameOneUserQuery.game)
 		}
@@ -73,7 +72,7 @@ const Mygames: React.FC = function() {
 			<Footer/>
 		</div>
 	</div>
-	);
+	)
 }
 
-export default Mygames;
+export default Mygames

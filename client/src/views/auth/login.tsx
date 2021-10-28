@@ -18,7 +18,7 @@ import {sendUserConectedAction} from "./action/userAction"
 
 import Header0 from "../header/header0"
 import {checkValidEmail} from "./utils"
-// import {SigingTwitch} from "./twitch"
+import {AuthDiscord} from "./discord"
 import {Translation} from "../../lang/translation"
 import {LOGIN} from "../../gql/user/auth"
 import Footer from "../footer/footer"
@@ -94,10 +94,18 @@ const Login: React.FC = function() {
 						</div>
 						<div className="register-field">
 							<div className="account_type">
-								<Link to="#" className="gg"><img src={Google} alt="Google" width="20" height="20"/><span>Sign in with Google</span></Link>
-								<Link to="#" className="discord"><img src={Discord} alt="Discord" width="20" /><span>Discord</span></Link>
-								<Link to="#" className="xbox"><i><FontAwesomeIcon icon={faXbox} /></i><span>Sign in with Xbox</span></Link>
-								<Link to="#" className="ps"><img src={Ps} alt="Twitter" width="20" /><span>Sign in with Playstation</span></Link>
+								<Link to="#" className="gg">
+									<img src={Google} alt="Google" width="20" height="20"/><span>Sign in with Google</span>
+								</Link>
+								<Link to="#" className="discord">
+									<img src={Discord} alt="Discord" width="20" onClick={AuthDiscord} /><span>Discord</span>
+								</Link>
+								<Link to="#" className="xbox">
+									<i><FontAwesomeIcon icon={faXbox} /></i><span>Sign in with Xbox</span>
+								</Link>
+								<Link to="#" className="ps"><img src={Ps} alt="Twitter" width="20" />
+									<span>Sign in with Playstation</span>
+								</Link>
 							</div>
 							<div className="choice">
 								OR
