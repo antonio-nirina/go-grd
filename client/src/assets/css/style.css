@@ -281,12 +281,17 @@ h1{
     position: absolute;
     top: 20%;    
   }
-  .container .main{
+  .home .container .main{
     min-height: inherit;
   }
   .container .full .slogan p.title, .full.connected .slogan p.title{
     font-size: 30px !important;
-  }   
+  }
+  .login .container footer, .inscription .container footer{
+    position: absolute;
+    width: 100%;
+    bottom: 0
+  }
 }
 @media screen and (max-width: 1000px) {
   .container .center-block {
@@ -387,10 +392,7 @@ h1{
   }
   .container footer{
     position: initial !important;
-  }
-  .container .containt{
-    width: 92%;
-  }
+  }  
   .container .group h1{
     font-size: 25px;
   }
@@ -461,7 +463,10 @@ h1{
     background-position: top !important;
     padding-bottom: 0 !important;
     min-height: inherit !important;
-
+  }
+  .container .favorite-game a, .container .platform-content a{
+    
+    margin: 5px;
   }
 }
 @media screen and (max-width: 800px){
@@ -512,15 +517,15 @@ h1{
   .container .waggers-title, .container .waggers-data{
     width: 96%;
     margin: 5px 0;
-  }
-  .container .jeux h2{
-    font-size: 30px;
-  }
+  }  
   .container .logo-game{
     margin-right: 15px;
   }
   .container .bg-game{
     width: 100%;    
+  }
+  .leaderboard .container .main .containt{
+    width: 86%;
   }
 }
 @media screen and (max-width: 700px) {
@@ -557,6 +562,9 @@ h1{
   }
   .container .slogan .btn{
     margin-top: 15px;
+  }
+  .home .container h2{
+    font-size: 20px !important;
   }
 
 }
@@ -597,8 +605,11 @@ h1{
   .tag{
     text-align: center;
   }
-  .login .main, .inscription .main, .profil .main-content, .main{
+  .profil .main-content, .home .main{
     padding-top: 8em;
+  }
+  .leaderboard .main{
+    padding-top: 4em;
   }
   .home .main{
     padding-top: 25px;
@@ -721,6 +732,15 @@ h1{
   .container .full-container{
     margin-top: 11em !important;
   }
+  .leaderboard .mes_infos{
+    margin: 5px;
+  }
+  .leaderboard.settings .title-lead{
+    display: block;
+  }
+  .leaderboard .container .main .containt{
+    width: 90%;
+  }
 }
 @media screen and (max-width: 520px) {
   .view .ban{
@@ -758,6 +778,23 @@ h1{
   .container .full .Left{
     position: absolute !important;
     width: 100%;
+  }
+  .container .register-field{
+    display: block;
+    padding: 15px;
+  }
+  .container .group{
+    margin: 0 15px;
+  }
+  .container .input-field{
+    margin: 0;
+  }
+  .container .account_type, .container .account_type a, .container .choice{
+    max-width: inherit;
+    width: 100%;
+  }
+  .container .field-middle, .container .rss-view{
+    display: block;
   }
 }
 

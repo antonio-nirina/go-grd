@@ -8,10 +8,14 @@ import Footer from "../footer/footer"
 //import {Translation} from "../../lang/translation"
 //import {RootState} from "../../reducer"
 
+import { faChevronCircleUp} from "@fortawesome/free-solid-svg-icons"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
 import "../../assets/css/style.css"
 import "../annexe/tournois.css"
 import "../waggers/waggers.css"
 import "../participate/participate.css"
+
 import Game from "../../assets/image/game.png"
 import Apex from "../../assets/image/apex-legends.png"
 import {Wagger} from "../models/wagger"
@@ -48,6 +52,9 @@ const Joingame: React.FC = function(props:any) {
   		<div className="participate league joingame">
 			<div className="marg">
 				<div className="part">
+            <div className="back">
+              <Link to="#"><i><FontAwesomeIcon icon={faChevronCircleUp} size="xs" /></i>Retour</Link>
+            </div>
             <div className="header-part">
               <img className="item-left" src={Game} alt="" />
               <div className="join-title">
