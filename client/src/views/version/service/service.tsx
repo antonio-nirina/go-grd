@@ -10,8 +10,7 @@ const Service: React.FC = function() {
 	// const userConnectedRedux = useSelector((state:RootState) => state.userConnected)
   return(
     <div className="service">
-    	<div className="service-container">
-            <h2>C'est quoi GO GRIND ?</h2>
+    	<div className="service-container">            
             <div className="bloc-items light-gray">
                 <div className="service-img light-gray">
                     <img src={tournament} alt="" width="325"/>

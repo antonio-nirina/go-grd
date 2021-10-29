@@ -38,7 +38,7 @@ const TournamentInc = function() {
 	return (
 		<>
 			<div className="annonce undertitle">
-				<h2>En ce moment {tournamentMonth > 0 ? (tournamentMonth+" tournois ce mois-ci") : "Accun tournois pour l'instant"} </h2>
+				<h2>En ce moment {tournamentMonth > 0 ? '('+tournamentMonth+" tournois ce mois-ci"+')' : "Accun tournois pour l'instant"} </h2>
 				<p>{tournamentMonth > 0 ? "Les prochains tournois à venir" : ""} </p>
 			</div>
 			<div className="tournament_wall">

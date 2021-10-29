@@ -123,7 +123,7 @@ const Joingame: React.FC = function(props:any) {
             </div>
              <div className="join-all join-canal">
               <p className="team-bar-title">Rejoindre le canal discord</p>
-              <button className="btn bg-red">Rejoindre</button>
+              <button className="btn bg-red discolor">Rejoindre</button>
             </div>
           </div>
         </div>

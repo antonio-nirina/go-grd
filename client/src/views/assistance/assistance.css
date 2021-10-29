@@ -38,12 +38,12 @@
 }
 .support{
 	background: #101010;	
-	width: 940px;
+	width: 913px;
 	display: table-cell;
 	vertical-align: top;
 	color: #ffffff;
 	font-family: arial;
-	padding: 30px;
+	padding: 30px 18px;
 	font-weight: lighter;
 	border-radius: 0px 5px 5px 0px;
 	height: 100vh;

@@ -41,7 +41,7 @@ const WagerPage: React.FC = function() {
 
 	},[loading,error,data,ldPart,errPart,dataPart])
   return(
-	<div className="tournois">
+	<div className="wager">
 		<div className="container">
 			<Header/>
 			<div className="main">

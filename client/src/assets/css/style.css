@@ -39,6 +39,9 @@ html{
   color: #ffffff;
   border: 1px solid transparent;
 }
+.btn.discolor{
+  background: #7289DA;
+}
 .bg-green-light{
  background: #27C612;
  color: #ffffff !important;
@@ -196,6 +199,11 @@ h1{
 .container .league .tab-league{
   overflow: auto; 
 }
+.tournois .navmenu a[href="/tournois"], .wager .navmenu a[href="/wager"], 
+.communaute .navmenu a[href="/communaute"], .assistance .navmenu a[href="/assistance"]{
+  color: #dd0000;
+}
+
 /**************scrollbar style***********************/
 
 ::-webkit-scrollbar {

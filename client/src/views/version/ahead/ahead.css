@@ -44,8 +44,8 @@
 }
 .full .annonce.undertitle h2{
 	font-family: "arial";
-	font-weight: normal;
-	font-size: 15px; 
+	font-weight: bold;
+	font-size: 16px; 
 }
 .annonce.undertitle p{
 	font-size: 13px;
@@ -53,8 +53,15 @@
 .slider{
 	position: relative;
 }
-.slogan{
-	
+.slogan h2{	
+    font-family: "arial", sans-serif;
+    font-size: 28px; 
+    margin-bottom: 10px;
+}
+.slogan p{
+	font-size: 18px;	
+	font-family: arial;
+	margin-bottom: 10px;
 }
 
 .slogan a{

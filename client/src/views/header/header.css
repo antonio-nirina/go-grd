@@ -37,7 +37,13 @@
 	padding: 0 18px;
 }
 .navmenu li a{
-	font-size: 17px;	
+	font-size: 17px;
+	font-family: "russo one";
+	transition: 100ms ease-in-out;
+}
+.navmenu li a:hover, .dropdown li a:hover, .loader span:hover{
+	color: #dd0000;
+	transition: 100ms ease-in-out;
 }
 .v-align{
 	vertical-align: middle;
@@ -135,6 +141,7 @@
 	width: 100%;
 	text-align: right;
 	padding-right: 4px;
+	font-family: "russo one"
 }
 .bg-gametag a{
 	display: inline-block;
@@ -457,11 +464,12 @@
 
 .dropdown li a{
 	margin-bottom: 5px;
-}
-.dropdown li a{
+	font-family: "russo one";
 	display: block;
 	padding: 0 5px;	
+	transition: 100ms ease-in-out;
 }
+
 .dropdown.show .border{
 	padding: 7px 0;
 	margin: 5px 0; 
@@ -500,4 +508,5 @@ i.u-connected{
 }
 .loader span{
 	display: inline-block;
+	font-family: "russo one"
 }

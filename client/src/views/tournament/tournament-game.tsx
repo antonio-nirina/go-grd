@@ -45,7 +45,7 @@ const TournamentGame = function(props:any) {
 			<div className="marg">
 				<div className="part">
 					<div className="undertitle">
-						<h2>Tournois - {params?.replace("_"," ")}</h2>
+						<h2>Mes Tournois - {params?.replace("_"," ")}</h2>
 						<p>
 							Retrouve les derniers défis proposés par la communauté
 						</p>
@@ -54,8 +54,8 @@ const TournamentGame = function(props:any) {
 						<div className="waggers-content">
 							<div className="waggers-title">
 								<p>Horaire</p>
-								<p>Rank</p>
-								<p>Format</p>
+								<p>Organisateur</p>
+								<p>Schéma tournoi</p>
 								<p>Inscription</p>
 								<p>Mode de jeu</p>
 								<p>Entréee</p>
@@ -70,12 +70,12 @@ const TournamentGame = function(props:any) {
 													{userConnectedRedux.user.language === "fr" ? dateStringToDY(el.date) : dateStringToDYEn(el.date)}
 												</span>
 											</p>
-											<p>{el.game.name}</p>
-											<p>{el.numberTeam > 0 ? `B0${el.numberTeam}` : "B01" }</p>
-											<p>{`${el.price} € `}</p>
-											<p>{el.numberTeam > 0 ? `${el.numberTeam}v${el.numberTeam} Arène` : "1v1" }</p>
-											<p>{!el.isPublic ? "Public": "Prenimum"}</p>
-											<p><i><FontAwesomeIcon icon={faUsers}/></i>{`0/${el.priceParticipate}`}</p>
+											<p>Go GRIND</p>
+											<p className="italic">{el.numberTeam > 0 ? `B0${el.numberTeam}` : "Tableau simple" }</p>
+											<p className="italic">{`${el.price} € `}</p>
+											<p className="italic">{el.numberTeam > 0 ? `${el.numberTeam}v${el.numberTeam} Arène` : "1v1" }</p>
+											<p className="italic">{!el.isPublic ? "Public": "Invitation"}</p>
+											<p className="italic"><i><FontAwesomeIcon icon={faUsers}/></i>{`0/${el.priceParticipate}`}</p>
 										</Link>
 									)
 								})
