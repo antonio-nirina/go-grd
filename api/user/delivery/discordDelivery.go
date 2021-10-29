@@ -1,8 +1,6 @@
 package delivery
 
 import (
-	"encoding/json"
-
 	"github.com/graphql-go/graphql"
 	"github.com/joho/godotenv"
 	"github.com/thoussei/antonio/api/external"
@@ -15,13 +13,16 @@ func (r *resolver) GetAccessTokenDiscordApi(params graphql.ResolveParams) (inter
 	}
 
 	code, _ := params.Args["code"].(string)
-	accesTokens, err := external.GetAccessTokenDiscord(code)
+	accesTokens, err := external.GetAccessTokenAndRefreshDiscord(code, "", false)
 
 	if err != nil {
 		return nil, err
 	}
 
-	data, _ := json.Marshal(accesTokens)
+	user, err := external.GetUserConnectedDiscord(accesTokens.AccessToken)
+	if err != nil {
+		return nil, err
+	}
 
-	return data, nil
+	return user, nil
 }

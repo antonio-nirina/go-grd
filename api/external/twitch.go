@@ -302,7 +302,6 @@ func RefressToken(refreshToken string) (*oauthRefreshTokenTwitch, error) {
 	uri := TWITC_REFRESH_TOKEN + "?grant_type=refresh_token&refresh_token=" + refreshToken + "&client_id=" + os.Getenv("CLIENT_ID_TWITCH") + "&client_secret=" + os.Getenv("CLIENT_SECRET_TWITCH")
 	req, err := http.NewRequest("POST", uri, nil)
 	req.Header.Set("Content-Type", "application/x-www-form-urlencoded; param=value")
-
 	respUser, err := htppClient.client.Do(req)
 
 	if err != nil {

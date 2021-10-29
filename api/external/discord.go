@@ -10,14 +10,14 @@ import (
 	"os"
 )
 
-const URI_OAUTH_DISCORD = "https://discord.com/api/v8"
+const URI_OAUTH_DISCORD = "https://discord.com/api/v8/"
 
 type oauthTokenDiscord struct {
 	AccessToken  string `json:"access_token"`
 	RefreshToken string `json:"refresh_token"`
 	// TokenType    string `json:"token_type"`
 	// Scope        string `json:"scope"`
-	// ExpiresIn    int    `json:"expires_in"`
+	ExpiresIn int `json:"expires_in"`
 }
 
 type dataDiscord struct {
@@ -28,14 +28,38 @@ type dataDiscord struct {
 	RedirectUri  string `json:"redirect_uri"`
 }
 
-func GetAccessTokenDiscord(code string) (*oauthTokenDiscord, error) {
+type dataUserResponseDiscord struct {
+	Id            string `json:"id"`
+	Username      string `json:"username"`
+	Discriminator string `json:"discriminator"`
+	Avatar        string `json:"avatar"`
+	Verified      string `json:"verified"`
+	Email         string `json:"email"`
+	Flags         int    `json:"flags"`
+	Banner        string `json:"banner"`
+	AccentColor   int    `json:"accent_color"`
+	PremiumType   int    `json:"premium_type"`
+	PublicFlags   int    `json:"public_flags"`
+}
+
+func GetAccessTokenAndRefreshDiscord(code string, refreshToken string, isRefressh bool) (*oauthTokenDiscord, error) {
+	authorize := "authorization_code"
+	if isRefressh {
+		authorize = "refresh_token"
+	}
 	httpClient := AccesstHttp()
 	data := url.Values{}
 	data.Set("client_id", os.Getenv("DISCORD_CLIENT_ID"))
 	data.Add("client_secret", os.Getenv("DISCORD_KEY_SECRET"))
-	data.Add("grant_type", "authorization_code")
-	data.Add("redirect_uri", os.Getenv(("REDIRECT_URI_DISCORD")))
-	data.Add("code", code)
+	data.Add("grant_type", authorize)
+	data.Add("redirect_uri", os.Getenv("REDIRECT_URI_DISCORD"))
+
+	if isRefressh && refreshToken != "" {
+		data.Add("refresh_token", refreshToken)
+	} else {
+		data.Add("code", code)
+	}
+
 	/*dataDiscordVal := dataDiscord{
 		ClientId: os.Getenv("DISCORD_CLIENT_ID"),
 		ClientSecret: os.Getenv("DISCORD_KEY_SECRET"),
@@ -47,7 +71,7 @@ func GetAccessTokenDiscord(code string) (*oauthTokenDiscord, error) {
 		"data": queryN,
 	}*/
 
-	req, err := http.NewRequest("POST", URI_OAUTH_DISCORD, bytes.NewBufferString(data.Encode()))
+	req, err := http.NewRequest("POST", URI_OAUTH_DISCORD+"oauth2/authorize", bytes.NewBufferString(data.Encode()))
 	req.Header.Set("Content-Type", "application/x-www-form-urlencoded; param=value")
 
 	if err != nil {
@@ -61,6 +85,36 @@ func GetAccessTokenDiscord(code string) (*oauthTokenDiscord, error) {
 	}
 
 	res := &oauthTokenDiscord{}
+	defer resp.Body.Close()
+	body, err := ioutil.ReadAll(resp.Body)
+
+	if resp.StatusCode == 200 {
+		err = json.Unmarshal(body, res)
+		if err != nil {
+			Logger(fmt.Sprintf("%v", err))
+		}
+
+		return res, nil
+	}
+
+	return res, nil
+}
+
+func GetUserConnectedDiscord(accesToken string) (*dataUserResponseDiscord, error) {
+	httpClient := AccesstHttp()
+	req, err := http.NewRequest("GET", URI_OAUTH_DISCORD+"users/@me", nil)
+
+	if err != nil {
+		return nil, err
+	}
+
+	resp, err := httpClient.client.Do(req)
+
+	if err != nil {
+		return nil, err
+	}
+
+	res := &dataUserResponseDiscord{}
 	defer resp.Body.Close()
 	body, err := ioutil.ReadAll(resp.Body)
 
