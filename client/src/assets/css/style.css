@@ -476,6 +476,9 @@ h1{
     
     margin: 5px;
   }
+  .container .mobile-menu{
+    display: block;
+  }
 }
 @media screen and (max-width: 800px){
   .container .tchat{

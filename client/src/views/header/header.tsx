@@ -311,6 +311,14 @@ const Header: React.FC = function() {
 						<div className={!showList ? "dropdown" :"dropdown show"}>
 							<ul>
 								<li><Link to="/profil">Profil</Link></li>
+								<li className="mobile-menu">
+									<ul>
+										<li><Link to="/tournois">Tournois</Link></li>
+										<li><Link to="/wager">wagers</Link></li>
+										<li><Link to="/communaute">communauté</Link></li>
+										<li><Link to="/assistance">assistance</Link></li>
+									</ul>
+								</li>
 								<li className="border"><Link to="#">Cagnote (0 GC)</Link></li>
 								<li className="border"><Link to="/parametre">Paramètres</Link></li>
 								{userConnectedRedux.user && userConnectedRedux.user.roles && userConnectedRedux.user.roles.includes("role_admin") ? <li>

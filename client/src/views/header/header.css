@@ -515,3 +515,6 @@ i.u-connected{
 	display: inline-block;
 	font-family: "russo one"
 }
+.mobile-menu{
+	display: none;
+}
