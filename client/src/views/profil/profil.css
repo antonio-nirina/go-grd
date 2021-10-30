@@ -1,6 +1,6 @@
 @charset "UTF-8";
 .gamer-stats{
-	max-width: 1152px;
+	max-width: 92.8%;
 	width: 100%;	
 	padding-top: 35px;
 	margin: auto;
@@ -48,7 +48,8 @@
 	margin-bottom: 40px;
 	background: #2c2c2c;
 	border-radius: 20px;
-	width: 440px;
+	max-width: 440px;
+	width: 100%;
 	position: relative;
 }
 .float{
@@ -753,8 +754,7 @@ p.lg-desc{
 	padding: 0px !important;
     background: none !important;
 }
-.with-stat{	
-	padding-left: 15px;
+.with-stat{		
 	padding-right: 8px;
 	
 }
@@ -780,7 +780,8 @@ p.lg-desc{
 	text-transform: uppercase;
 }
 .start-game{
-	width: 17%;
+	max-width: 183px;
+	width: 100%;
 	position: relative;
 }
 .start span{
@@ -808,8 +809,9 @@ p.lg-desc{
 }
 .flexbox{
 	display: flex;
-	width: 100%;	
+	width: 100%;
 	background: #2c2c2c;
+	padding-right: 15px;
 }
 .profil .inblock span{
 	padding: 1px 5px;
@@ -935,11 +937,13 @@ p.lg-desc{
 }
 .teamname{	
 	display: flex;
+	width: 100%;
 }
 .bloc-team-mate{
 	display: flex;
 	background: #2c2c2c;
 	margin-top: 15px;
+	width: 100%;
 }
 .bloc-team-mate div{
 	display: flex;
@@ -957,12 +961,14 @@ p.lg-desc{
 	display: flex;
 }
 .avatar-name{
-	width: 680px;
+	max-width: 680px;
+	width: 100%;
 	text-transform: uppercase;
 	padding: 5px;
 }
 .setting-accounts, .team-number{
-	width: 79px;
+	max-width: 79px;
+	width: 100%;
 }
 .team-number i{
 	display: inline-block;
@@ -1019,6 +1025,7 @@ p.lg-desc{
 .mur .row-container{
 	display: flex;
 	height: 250px;
+	overflow: scroll;
 }
 .mur .fixed span{
 	text-align: left;
