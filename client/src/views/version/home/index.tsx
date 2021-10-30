@@ -14,9 +14,11 @@ import {UserType,sendProfilXboxOrPsn,sendUserConnectedTwitchAction} from "../../
 import {RootState} from "../../../reducer"
 import "../home/index.css"
 import "../../../assets/css/style.css"
+
 type paramToken = {
 	token:string
 }
+
 const GetProfilUser = function ({token}:paramToken) {
 	const dispatch = useDispatch()
 	const {loading,error,data} = useQuery(XboxProfil, {

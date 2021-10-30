@@ -71,15 +71,15 @@ func GetAccessTokenAndRefreshDiscord(code string, refreshToken string, isRefress
 		"data": queryN,
 	}*/
 
-	req, err := http.NewRequest("POST", URI_OAUTH_DISCORD+"oauth2/authorize", bytes.NewBufferString(data.Encode()))
+	req, err := http.NewRequest("POST", URI_OAUTH_DISCORD+"oauth2/token", bytes.NewBufferString(data.Encode()))
 	req.Header.Set("Content-Type", "application/x-www-form-urlencoded; param=value")
-
+	fmt.Println("req ", err)
 	if err != nil {
 		return nil, err
 	}
 
 	resp, err := httpClient.client.Do(req)
-
+	fmt.Println(err)
 	if err != nil {
 		return nil, err
 	}

@@ -1,6 +1,8 @@
 package delivery
 
 import (
+	"fmt"
+
 	"github.com/graphql-go/graphql"
 	"github.com/joho/godotenv"
 	"github.com/thoussei/antonio/api/external"
@@ -13,6 +15,7 @@ func (r *resolver) GetAccessTokenDiscordApi(params graphql.ResolveParams) (inter
 	}
 
 	code, _ := params.Args["code"].(string)
+	fmt.Println(code)
 	accesTokens, err := external.GetAccessTokenAndRefreshDiscord(code, "", false)
 
 	if err != nil {

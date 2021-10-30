@@ -97,8 +97,8 @@ const Login: React.FC = function() {
 								<Link to="#" className="gg">
 									<img src={Google} alt="Google" width="20" height="20"/><span>Sign in with Google</span>
 								</Link>
-								<Link to="#" className="discord">
-									<img src={Discord} alt="Discord" width="20" onClick={AuthDiscord} /><span>Discord</span>
+								<Link onClick={AuthDiscord} to="#" className="discord">
+									<img src={Discord} alt="Discord" width="20"  /><span>Discord</span>
 								</Link>
 								<Link to="#" className="xbox">
 									<i><FontAwesomeIcon icon={faXbox} /></i><span>Sign in with Xbox</span>

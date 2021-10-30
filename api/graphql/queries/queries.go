@@ -156,5 +156,6 @@ func GetRootFields() graphql.Fields {
 		"GetAccessTokenTwitchAdmin": GetAccessTokenTwitchAdmin(),
 		"GetGameOneUserQuery":       GetGameOneUserQuery(),
 		"FindAllPartUserWagger":     FindAllPartUserWagger(),
+		"GetAccessTokenDiscord":     GetAccessTokenDiscord(),
 	}
 }

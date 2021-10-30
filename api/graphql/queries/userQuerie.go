@@ -146,6 +146,6 @@ func GetAccessTokenDiscord() *graphql.Field {
 			},
 		},
 
-		Resolve: UserRolve.GetAccessTokenTwitchApi,
+		Resolve: UserRolve.GetAccessTokenDiscordApi,
 	}
 }

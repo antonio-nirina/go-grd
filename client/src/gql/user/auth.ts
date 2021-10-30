@@ -53,3 +53,12 @@ export const Deconnect = gql`
 		Deconnected(id:$id)
 	}
 `
+export const DiscordProfil = gql`
+	query GetAccessTokenDiscord($code: String!) {
+		GetAccessTokenDiscord(code: $code) {
+				access_token
+				refresh_token
+			}
+
+	}
+`
