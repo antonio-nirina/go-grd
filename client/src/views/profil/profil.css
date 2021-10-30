@@ -826,6 +826,23 @@ p.lg-desc{
 	width: 100%;
 	border-bottom: 1px solid #ffffff;
 }
+.flex-items p strong{
+	display: flex;
+}
+.flex-items p strong span{
+	font-weight: bold;
+	margin-right: 5px;
+}
+.flex-items p strong span.lose{
+	color: #dd0000;
+}
+.flex-items p strong span.win{
+	color: #27c612;
+}
+.flex-items p strong span:last-child{
+	margin-right: 0;
+}
+
 .flex-items:last-child{
 	border-bottom: none;
 }
