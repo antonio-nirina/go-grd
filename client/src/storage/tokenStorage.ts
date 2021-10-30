@@ -21,6 +21,16 @@ export const getAccessTokenTwitch = function() {
 	}
 }
 
+export const getAccessTokenDiscord = function() {
+	const token = localStorage.getItem("access_token_discord")
+	if(!token) return ""
+	if (token) {
+		const data = JSON.parse(token)
+
+		return data.access_token
+	}
+}
+
 export const getDataByToken = function() {
 	const user:string|null = localStorage.getItem("userConnected")
 	if(!user) return undefined

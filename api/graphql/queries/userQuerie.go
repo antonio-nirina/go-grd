@@ -149,3 +149,17 @@ func GetAccessTokenDiscord() *graphql.Field {
 		Resolve: UserRolve.GetAccessTokenDiscordApi,
 	}
 }
+
+func GetAccessUserDiscordApi() *graphql.Field {
+	return &graphql.Field{
+		Type:        types.DiscordserSchemaType,
+		Description: "Get User twicth",
+		Args: graphql.FieldConfigArgument{
+			"accessToken": &graphql.ArgumentConfig{
+				Type: graphql.String,
+			},
+		},
+
+		Resolve: UserRolve.GetAccessUserDiscordApi,
+	}
+}

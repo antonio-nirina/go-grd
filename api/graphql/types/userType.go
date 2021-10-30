@@ -172,3 +172,24 @@ var UserSchemaTypeGame = graphql.NewObject(graphql.ObjectConfig{
 		},
 	},
 })
+
+var DiscordserSchemaType = graphql.NewObject(graphql.ObjectConfig{
+	Name: "DiscordUserType",
+	Fields: graphql.Fields{
+		"id": &graphql.Field{
+			Type: graphql.String,
+		},
+		"username": &graphql.Field{
+			Type: graphql.String,
+		},
+		"email": &graphql.Field{
+			Type: graphql.String,
+		},
+		"avatar": &graphql.Field{
+			Type: graphql.String,
+		},
+		"locale": &graphql.Field{
+			Type: graphql.String,
+		},
+	},
+})

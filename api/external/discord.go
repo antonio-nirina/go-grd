@@ -32,8 +32,7 @@ type dataUserResponseDiscord struct {
 	Id            string `json:"id"`
 	Username      string `json:"username"`
 	Discriminator string `json:"discriminator"`
-	Avatar        string `json:"avatar"`
-	Verified      string `json:"verified"`
+	Avatar        string `json:"avatar,omitempty"`
 	Email         string `json:"email"`
 	Flags         int    `json:"flags"`
 	Banner        string `json:"banner"`
@@ -73,13 +72,13 @@ func GetAccessTokenAndRefreshDiscord(code string, refreshToken string, isRefress
 
 	req, err := http.NewRequest("POST", URI_OAUTH_DISCORD+"oauth2/token", bytes.NewBufferString(data.Encode()))
 	req.Header.Set("Content-Type", "application/x-www-form-urlencoded; param=value")
-	fmt.Println("req ", err)
+
 	if err != nil {
 		return nil, err
 	}
 
 	resp, err := httpClient.client.Do(req)
-	fmt.Println(err)
+
 	if err != nil {
 		return nil, err
 	}
@@ -103,7 +102,7 @@ func GetAccessTokenAndRefreshDiscord(code string, refreshToken string, isRefress
 func GetUserConnectedDiscord(accesToken string) (*dataUserResponseDiscord, error) {
 	httpClient := AccesstHttp()
 	req, err := http.NewRequest("GET", URI_OAUTH_DISCORD+"users/@me", nil)
-
+	req.Header.Set("Authorization", "Bearer "+accesToken)
 	if err != nil {
 		return nil, err
 	}

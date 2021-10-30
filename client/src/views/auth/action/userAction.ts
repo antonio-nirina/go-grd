@@ -125,3 +125,23 @@ export const sendUserConnectedTwitchAction = function(user:any) {
 		res:newUserObject??""
   	}
 }
+
+export const sendUserConnectedDiscordAction = function(user:any) {
+	const newUserObject:UserType = {
+		uid:user.uid,
+		username:user.username,
+		email:user.email,
+		avatar:user.avatar,
+		firstname:"",
+		language:user.locale,
+		lastname:"",
+		id:user.id,
+		created:"",
+		country:"",
+		birtDate:""
+	}
+	return {
+		type:USER_CONNECTED,
+		res:newUserObject??""
+  	}
+}

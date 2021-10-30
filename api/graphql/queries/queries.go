@@ -157,5 +157,6 @@ func GetRootFields() graphql.Fields {
 		"GetGameOneUserQuery":       GetGameOneUserQuery(),
 		"FindAllPartUserWagger":     FindAllPartUserWagger(),
 		"GetAccessTokenDiscord":     GetAccessTokenDiscord(),
+		"GetAccessUserDiscordApi":   GetAccessUserDiscordApi(),
 	}
 }

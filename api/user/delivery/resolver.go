@@ -25,4 +25,5 @@ type Resolver interface {
 	UpdatedGameResolver(params graphql.ResolveParams) (interface{}, error)
 	FindGameUserResolver(params graphql.ResolveParams) (interface{}, error)
 	GetAccessTokenDiscordApi(params graphql.ResolveParams) (interface{}, error)
+	GetAccessUserDiscordApi(params graphql.ResolveParams) (interface{}, error)
 }

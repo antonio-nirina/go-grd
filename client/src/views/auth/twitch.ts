@@ -48,8 +48,7 @@ export const getTokenUser = async function(code: string,isTwitch:boolean,isDisco
 		if(isTwitch) {
 			data = await client().query({query:TwitchProfil,variables:{code:code}})
 		}
-		console.log("data", data)
-		alert(isDiscord.toString())
+
 		if(data.data) {
 			token.type = type
 			if(isDiscord){

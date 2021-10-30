@@ -62,3 +62,16 @@ export const DiscordProfil = gql`
 
 	}
 `
+
+
+export const DiscordUserConnected = gql`
+	query GetAccessUserDiscordApi($accessToken:String) {
+		GetAccessUserDiscordApi(accessToken:$accessToken) {
+			id
+			username
+			email
+			avatar
+			locale
+		}
+	}
+`
