@@ -538,6 +538,9 @@ h1{
   .leaderboard .container .main .containt{
     width: 86%;
   }
+  .container .tuto-video video{
+    width: 100%;
+  }
 }
 @media screen and (max-width: 700px) {
   .container .card .upcomming.side{    

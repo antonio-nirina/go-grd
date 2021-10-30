@@ -49,6 +49,9 @@
 	height: 100vh;
 	overflow: auto;
 }
+.assistance .support{
+	height: auto;
+}
 .support-content{
 	height: 54px;
     overflow: hidden;
