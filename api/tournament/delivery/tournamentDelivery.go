@@ -70,9 +70,11 @@ func (t *tournament) SavedTournamentResolver(params graphql.ResolveParams) (inte
 	priceParticipate, _ := params.Args["priceParticipate"].(float64)
 	rules, _ := params.Args["rules"].(string)
 	spectateur, _ := params.Args["spectateur"].(string)
+	laps, _ := params.Args["laps"].(string)
 	game, err := t.gameTournamentHandler.FindOneGameByUidHandler(gameUid)
 	var plateforms []gameEntity.GamePlatform
 	arrayPlateforms := strings.Split(plateformUid, "-")
+	arrayLaps := strings.Split(laps, "_")
 	for _, value := range arrayPlateforms {
 		plateform, err := t.plateformTournamentHandler.FindOnePlateformByUidHandler(value)
 		if err != nil {
@@ -104,6 +106,7 @@ func (t *tournament) SavedTournamentResolver(params graphql.ResolveParams) (inte
 		Rules:             rules,
 		IsPublic:          true,
 		Spectateur:        spectateur,
+		Laps:              arrayLaps,
 	}
 
 	res, err := t.tournamentHandler.SavedTournamentHandler(tournament)

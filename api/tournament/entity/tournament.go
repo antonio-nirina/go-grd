@@ -27,4 +27,5 @@ type Tournament struct {
 	Winners           []string            `json:"winners,omitempty"`
 	Region            string              `json:"region,omitempty"`
 	Spectateur        string              `json:"spectateur,omitempty"`
+	Laps              []string            `json:"laps,omitempty"`
 }

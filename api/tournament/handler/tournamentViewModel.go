@@ -24,6 +24,7 @@ type tournamentViewModel struct {
 	Winners           []string             `json:"winners"`
 	Region            string               `json:"region,omitempty"`
 	Spectateur        string               `json:"spectateur"`
+	Laps              []string             `json:"laps,omitempty"`
 }
 
 type GameViewModel struct {
@@ -61,4 +62,5 @@ type TournamentViewModel struct {
 	Winners           []string             `json:"winners"`
 	Region            string               `json:"region,omitempty"`
 	Spectateur        string               `json:"spectateur"`
+	Laps              []string             `json:"laps,omitempty"`
 }
