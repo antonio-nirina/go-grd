@@ -40,8 +40,8 @@ var TournamentSchemaType = graphql.NewObject(graphql.ObjectConfig{
 		"game": &graphql.Field{
 			Type: GameSchemaType,
 		},
-		"plateform":&graphql.Field{
-			Type:PlateformSchemaType,
+		"plateform": &graphql.Field{
+			Type: graphql.NewList(PlateformSchemaType),
 		},
 		"rules": &graphql.Field{
 			Type: graphql.String,
@@ -54,6 +54,21 @@ var TournamentSchemaType = graphql.NewObject(graphql.ObjectConfig{
 		},
 		"records": &graphql.Field{
 			Type: graphql.Int,
+		},
+		"format": &graphql.Field{
+			Type: graphql.String,
+		},
+		"server": &graphql.Field{
+			Type: graphql.String,
+		},
+		"tchat": &graphql.Field{
+			Type: graphql.String,
+		},
+		"winners": &graphql.Field{
+			Type: graphql.NewList(graphql.String),
+		},
+		"region": &graphql.Field{
+			Type: graphql.String,
 		},
 	},
 })

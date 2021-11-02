@@ -2,6 +2,7 @@ import Cookies from 'js-cookie'
 
 import {createApolloClient as client} from "../../config/apollo-client"
 import {XBoxToken} from "../../gql/user/auth"
+import {ACCESS_TOKEN_DISCORD} from "../../storage/tokenStorage"
 
 const URL_REDIRECT = "http://localhost:3000"
 
@@ -73,7 +74,7 @@ export const encodeCookieContent = (data:any) => {
  * @param { string } data - The string to decode
  * @returns { object } the JSON parsed data
  */
-export const decodeCookieContent = (data:any) => {
+export const decodeCookieContent = function(data:any):TokenType {
     try {
         return JSON.parse(data)
     } catch (e) {
@@ -86,13 +87,17 @@ export const decodeCookieContent = (data:any) => {
 }
 
 export const GetCookie = function(key = "") {
+	let data
 	var k = key ? key : ACCESS_TOKEN
+	var discordToken = localStorage.getItem(ACCESS_TOKEN_DISCORD)
 	let cookieData = Cookies.get(k)
-	if (!cookieData) {
+	
+	if (!cookieData && !discordToken) {
 		return null
 	}
-	
-	const data = decodeCookieContent(cookieData)
+
+	if(cookieData) data = decodeCookieContent(cookieData)
+	if(discordToken) data = JSON.parse(discordToken)
 
 	return data
 }

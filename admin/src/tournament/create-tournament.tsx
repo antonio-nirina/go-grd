@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 import {useHistory } from "react-router-dom"
 import {useMutation,useQuery} from "@apollo/client"
 import { useForm } from "react-hook-form"
-import { faPlus} from "@fortawesome/free-solid-svg-icons"
+import { faPlus,faTimes} from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import "react-datetime/css/react-datetime.css"
 import Datetime from "react-datetime"
@@ -37,7 +37,9 @@ const CreateTournament: React.FC = function() {
 	const [startDate, setStartDate] 	= useState<String>("")
 	const [lastDate, setLastDate] 		= useState<String>("")
 	const [rules, setRules] 	= useState<String>("")
-	const [info, setInfo] 		= useState<String>("")
+	// const [info, setInfo] 		= useState<String>("")
+	const [arrayForm, setArrayForm] 		= useState<number[]>([1])
+	const [number, setNumber] 		= useState<number>(1)
 	const [createdTournament]  			= useMutation(CREATED_TOURNAMENT)
 
 	const {loading,error,data} = useQuery(GET_ALL_GAMES)
@@ -59,7 +61,7 @@ const CreateTournament: React.FC = function() {
 				title:data.title,
 				uidGame:uiGame,
 				uidPalteforme:uidPlateform,
-				description:info,
+				description:"",//info
 				numberParticipate:Math.pow(2,(Math.ceil(Math.log2(Number(data.participant))))),
 				numberTeam:data.numberTeam,
 				price:data.price,
@@ -94,10 +96,24 @@ const CreateTournament: React.FC = function() {
 		setRules(content)
 	}
 
-	const handleInfoText = function(content: string) {
-		setInfo(content)
+	/*
+		const handleInfoText = function(content: string) {
+			setInfo(content)
+		}
+	*/
+
+	const addForm = function() {
+		setNumber(number+1)
+		setArrayForm([...arrayForm,number+1])
 	}
 
+	const removeLine = function(index:number) {
+		if(number > 1) {
+			const arr = arrayForm.splice(1,index)
+			setArrayForm(arr)
+			setNumber(number-1)
+		}
+	}
 
 	return(
 	    <div className="admin create-tournament">
@@ -187,26 +203,17 @@ const CreateTournament: React.FC = function() {
 	                                                <input type="number" placeholder="Frais de participation" {...register("priceParticipate")} name="priceParticipate" className="no-margin"/>
 	                                            </div>
 	                                            <Datetime locale="fr" onChange={handleDateLast} inputProps={{placeholder:"Deadline date tournois"}} />
-	                                            <div className="wysiwyg">
-		                                            <SunEditor
-														placeholder="Info sur le jeux"
-														onChange={handleInfoText}
-													 	setOptions={
-															{
-																buttonList:[
-																	['undo', 'redo',
-																		'font', 'fontSize', 'formatBlock',
-																		'bold', 'italic',
-																		'fontColor', 'hiliteColor', 'textStyle',
-																		'removeFormat',
-																		'outdent', 'indent',
-																		'align', 'horizontalRule', 'list', 'lineHeight',
-																		'link', 'image',
-																	]
-																]
-															}
-													} />
-												</div>
+												{
+													arrayForm.map(function(el:number,index:number) {
+														return (
+															<div className="input-group" key={index}>
+																<Datetime locale="fr" onChange={handleDateLast} inputProps={{placeholder:`Date du tour ${index+1}`}} />
+																<div onClick={addForm} className="btn bg-red"><i><FontAwesomeIcon icon={faPlus} size="lg"/></i>Ajouter Nouveau tour</div>
+																<div onClick={() => removeLine(index)} className= {index === 0 || arrayForm.length === 1 ? "d-none":"btn bg-white"}><i><FontAwesomeIcon icon={faTimes} size="lg"/></i>Supprimer</div>
+															</div>
+														)
+													})
+												}
 												<div className="create-tournament-game">
 	        										<Link to="/admin"><button className="btn bg-white"> Annuler</button></Link>
                                 					<button type="submit" className="btn bg-red"><FontAwesomeIcon icon={faPlus} /> Enregistrer</button>

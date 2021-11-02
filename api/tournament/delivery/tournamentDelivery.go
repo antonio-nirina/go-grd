@@ -3,8 +3,10 @@ package delivery
 import (
 	"encoding/json"
 	"strconv"
+	"strings"
 
 	"github.com/graphql-go/graphql"
+	gameEntity "github.com/thoussei/antonio/api/games/entity"
 	gameHandler "github.com/thoussei/antonio/api/games/handler"
 	"github.com/thoussei/antonio/api/tournament/entity"
 	"github.com/thoussei/antonio/api/tournament/handler"
@@ -28,13 +30,13 @@ type tournament struct {
 }
 
 type inputUpdatedTournament struct {
-	trUpated updatedTournament `json:"trUpated"`
+	TrUpated updatedTournament `json:"trUpated"`
 }
 
 type updatedTournament struct {
 	Uid               string `json:"uid"`
 	Title             string `json:"title"`
-	Date              string `json:"date"`
+	DateDebut         string `json:"dateDebut"`
 	NumberParticipate string `json:"numberParticipate"`
 	NumberTeam        string `json:"numberTeam"`
 	Price             string `json:"price"`
@@ -67,11 +69,16 @@ func (t *tournament) SavedTournamentResolver(params graphql.ResolveParams) (inte
 	deadlineDate, _ := params.Args["deadlineDate"].(string)
 	priceParticipate, _ := params.Args["priceParticipate"].(float64)
 	rules, _ := params.Args["rules"].(string)
+	spectateur, _ := params.Args["spectateur"].(string)
 	game, err := t.gameTournamentHandler.FindOneGameByUidHandler(gameUid)
-	plateform, err := t.plateformTournamentHandler.FindOnePlateformByUidHandler(plateformUid)
-
-	if err != nil {
-		return nil, err
+	var plateforms []gameEntity.GamePlatform
+	arrayPlateforms := strings.Split(plateformUid, "-")
+	for _, value := range arrayPlateforms {
+		plateform, err := t.plateformTournamentHandler.FindOnePlateformByUidHandler(value)
+		if err != nil {
+			return nil, err
+		}
+		plateforms = append(plateforms, plateform)
 	}
 
 	IsTeam := false
@@ -83,9 +90,9 @@ func (t *tournament) SavedTournamentResolver(params graphql.ResolveParams) (inte
 	tournament := &entity.Tournament{
 		Uid:               primitive.NewObjectID(),
 		Title:             title,
-		Date:              date,
+		DateDebut:         date,
 		Game:              game,
-		Plateform:         plateform,
+		Plateform:         plateforms,
 		NumberParticipate: numberParticipate,
 		NumberTeam:        numberTeam,
 		Price:             price,
@@ -96,6 +103,7 @@ func (t *tournament) SavedTournamentResolver(params graphql.ResolveParams) (inte
 		Info:              description,
 		Rules:             rules,
 		IsPublic:          true,
+		Spectateur:        spectateur,
 	}
 
 	res, err := t.tournamentHandler.SavedTournamentHandler(tournament)
@@ -155,14 +163,14 @@ func (t *tournament) UpdatedTournamentResolver(params graphql.ResolveParams) (in
 	jsonString, _ := json.Marshal(params.Args)
 	input := inputUpdatedTournament{}
 	json.Unmarshal([]byte(jsonString), &input)
-	tournament, err := t.tournamentHandler.FindOneTournamentHandler(input.trUpated.Uid)
+	tournament, err := t.tournamentHandler.FindOneTournamentHandler(input.TrUpated.Uid)
 
 	if err != nil {
 		return nil, err
 	}
 
 	title := tournament.Title
-	date := tournament.Date
+	date := tournament.DateDebut
 	numberParticipate := tournament.NumberParticipate
 	numberTeam := tournament.NumberTeam
 	price := tournament.Price
@@ -174,58 +182,58 @@ func (t *tournament) UpdatedTournamentResolver(params graphql.ResolveParams) (in
 	isTeam := tournament.IsTeam
 	isPublic := tournament.IsPublic
 
-	if input.trUpated.Date != "" {
-		date = input.trUpated.Date
+	if input.TrUpated.DateDebut != "" {
+		date = input.TrUpated.DateDebut
 	}
 
-	if input.trUpated.Title != "" {
-		title = input.trUpated.Title
+	if input.TrUpated.Title != "" {
+		title = input.TrUpated.Title
 	}
 
-	if input.trUpated.NumberParticipate != "" {
-		numberParticipate, _ = strconv.Atoi(input.trUpated.NumberParticipate)
+	if input.TrUpated.NumberParticipate != "" {
+		numberParticipate, _ = strconv.Atoi(input.TrUpated.NumberParticipate)
 	}
 
-	if input.trUpated.NumberTeam != "" {
-		numberTeam, _ = strconv.Atoi(input.trUpated.NumberTeam)
+	if input.TrUpated.NumberTeam != "" {
+		numberTeam, _ = strconv.Atoi(input.TrUpated.NumberTeam)
 	}
 
-	if input.trUpated.Price != "" {
-		price, _ = strconv.ParseFloat(input.trUpated.Price, 64)
+	if input.TrUpated.Price != "" {
+		price, _ = strconv.ParseFloat(input.TrUpated.Price, 64)
 	}
 
-	if input.trUpated.DeadlineDate != "" {
-		deadlineDate = input.trUpated.DeadlineDate
+	if input.TrUpated.DeadlineDate != "" {
+		deadlineDate = input.TrUpated.DeadlineDate
 	}
 
-	if input.trUpated.PriceParticipate != "" {
-		priceParticipate, _ = strconv.ParseFloat(input.trUpated.PriceParticipate, 64)
+	if input.TrUpated.PriceParticipate != "" {
+		priceParticipate, _ = strconv.ParseFloat(input.TrUpated.PriceParticipate, 64)
 	}
 
-	if input.trUpated.Statut != "" {
-		statut, _ = strconv.ParseBool(input.trUpated.Statut)
+	if input.TrUpated.Statut != "" {
+		statut, _ = strconv.ParseBool(input.TrUpated.Statut)
 	}
 
-	if input.trUpated.Info != "" {
-		info = input.trUpated.Info
+	if input.TrUpated.Info != "" {
+		info = input.TrUpated.Info
 	}
 
-	if input.trUpated.Rules != "" {
-		rules = input.trUpated.Rules
+	if input.TrUpated.Rules != "" {
+		rules = input.TrUpated.Rules
 	}
 
-	if input.trUpated.IsTeam != "" {
-		isTeam, _ = strconv.ParseBool(input.trUpated.IsTeam)
+	if input.TrUpated.IsTeam != "" {
+		isTeam, _ = strconv.ParseBool(input.TrUpated.IsTeam)
 	}
 
-	if input.trUpated.IsPublic != "" {
-		isPublic, _ = strconv.ParseBool(input.trUpated.IsPublic)
+	if input.TrUpated.IsPublic != "" {
+		isPublic, _ = strconv.ParseBool(input.TrUpated.IsPublic)
 	}
 
 	tournamentUpdated := &entity.Tournament{
 		Uid:               tournament.Uid,
 		Title:             title,
-		Date:              date,
+		DateDebut:         date,
 		Game:              tournament.Game,
 		Plateform:         tournament.Plateform,
 		NumberParticipate: numberParticipate,

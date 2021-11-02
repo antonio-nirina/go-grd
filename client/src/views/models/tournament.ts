@@ -5,7 +5,10 @@ export interface Tournament {
 	description:string
 	numberParticipate:number
 	numberTeam:number
+	format:string
 	deadlineDate:string
+	Winners:string[]
+	tchat:string
 	date:string
 	price:number
 	priceParticipate:number

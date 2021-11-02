@@ -13,18 +13,17 @@ import (
 func RunCmdScheduler() {
 	logrus.Info("Create cron log.....")
 	c := cron.New()
-	c.AddFunc("*/1 * * * * *", func() {
+	c.AddFunc("@every 1s", func() {
 		fmt.Println("Every hour on the half hour")
 	})
 	fn := logOutput()
 	defer fn()
+	c.Start()
 	logrus.Info("End cron *****")
-
-	c.Stop()
 }
 
 func logOutput() func() {
-	logfile := `logfile`
+	logfile := `logfile.txt`
 	f, _ := os.OpenFile(logfile, os.O_RDWR|os.O_CREATE|os.O_TRUNC, 0666)
 	out := os.Stdout
 	mw := io.MultiWriter(out, f)

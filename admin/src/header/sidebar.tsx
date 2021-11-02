@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from "react-router-dom"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-import { faUsers, faTools, faDesktop, faDatabase,faTrophy, faStar, faGamepad, faHome, faHandsHelping,faUser,faCheck,faHeadSideMask} from "@fortawesome/free-solid-svg-icons"
+import { faUsers, faTools, faDesktop, faDatabase,faTrophy, faStar, faGamepad, faHome, faHandsHelping,faUser,faCheck} from "@fortawesome/free-solid-svg-icons"
 
 import logo from "../assets/image/gogrind-joystick.png"
 

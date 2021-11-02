@@ -47,14 +47,14 @@ const TournamentInc = function() {
 					tournament.map(function(element:Tournament,index:number){
 						return (
 							<div className="list_tournament" key={index}>
-								<Link to={`/info?uid=${element.uid}`} >
+								<Link to={`/join-tournament?uid=${element.uid}`} >
 									<img src={element.game.logo} width="40" height="30" alt=""/>
 									<p className="game_name">{element.title}<span>{dateStringToDY(element.date)} - 6 jours</span></p>
 									<p className="cashprize">Cashprize<span>{element.price} G-Coins</span></p>
 									<p className="arena">{element.numberTeam > 0 ? `${element.numberTeam}v${element.numberTeam}`: "1v1"} Arène</p>
 									<p className="place">
 										<i><FontAwesomeIcon icon={faUsers}/></i><span>{element.numberParticipate} places restantes</span>
-										<button style={{"cursor":"pointer"}} onClick={()=>{history.push(`/info?uid=${element.uid}`)}} className="btn bg-red">Rejoindre</button>
+										<button style={{"cursor":"pointer"}} onClick={()=>{history.push(`/joingame?uid=${element.uid}`)}} className="btn bg-red">Rejoindre</button>
 									</p>
 								</Link>								
 							</div>
