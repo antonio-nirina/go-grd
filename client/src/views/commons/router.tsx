@@ -42,7 +42,7 @@ import Game from "../auth/game"
 import TournamentGame from "../tournament/tournament-game"
 import PageTournois from "../tournois/tournois"
 import WagerPage from "../wagerpage/wager"
-import JoinTournament from "../tournois/join-tournament"
+import JoinTournament from "../tournament/join-tournament"
 // import LeagueGame from "../league/league-game"
 
 

@@ -183,13 +183,13 @@ const CreateTournament: React.FC = function() {
                                                 			)
 	                                                	})
 	                                                }
-	                                            </select>
+	                                            </select>	                                            
 												<Datetime
 												 	locale="fr"
 													onChange={handleDate}
 													inputProps={{placeholder:"Date debut tournois"}}
-												/>
-												<Select id="platform" onChange={handlePlateform} options={plateforms} />	                                            
+												/>		
+												<Select id="platform" onChange={handlePlateform} options={plateforms} />										                                            
 	                                            <div className="wysiwyg">
 		                                            <SunEditor
 														placeholder="Règle du jeux"
@@ -232,9 +232,9 @@ const CreateTournament: React.FC = function() {
 												{
 													arrayForm.map(function(el:number,index:number) {
 														return (
-															<div className="input-group" key={index}>
+															<div className="tour" key={index}>
 																<Datetime locale="fr" onChange={handleDateLaps} inputProps={{placeholder:`Date du tour ${index+1}`}} />
-																<div onClick={addForm} className="btn bg-red"><i><FontAwesomeIcon icon={faPlus} size="lg"/></i>Ajouter Nouveau tour</div>
+																<div onClick={addForm} id="add-tour" className="btn bg-red"><i><FontAwesomeIcon icon={faPlus} size="lg"/></i>Ajouter Nouveau tour</div>
 																<div onClick={() => removeLine(index)} className= {index === 0 || arrayForm.length === 1 ? "d-none":"btn bg-white"}><i><FontAwesomeIcon icon={faTimes} size="lg"/></i>Supprimer</div>
 															</div>
 														)
