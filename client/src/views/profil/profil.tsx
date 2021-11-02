@@ -107,7 +107,9 @@ const Profile: React.FC = function() {
 					      				<p>35% <span>Taux de victoires</span></p>
 					      			</div>
 					      			<div className="flex-items">
-					      				<p>L L W L<span>Score recents</span></p>
+					      				<p>
+					      					<strong><span className="lose">L </span><span className="lose">L</span><span className="win">W </span><span className="lose">L </span></strong>
+					      					Score recents</p>
 					      				<p>2.75<span>K/D</span></p>
 					      				<p>923<span>Placement FR</span></p>
 					      			</div>

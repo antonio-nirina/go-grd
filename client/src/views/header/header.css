@@ -118,7 +118,7 @@
     justify-content: right;
 }
 .gametag{
-	max-width: 143px;
+	max-width: 150px;
 	width: 100%;
 	display: inline-block;
 	position: relative;
@@ -126,6 +126,7 @@
 	vertical-align: middle;
 	border-radius: 36px;
 	background-position: -2px;
+	padding-left: 54px;
 }
 .bg-gametag .avatar{
 	width: 57px;
@@ -141,7 +142,11 @@
 	width: 100%;
 	text-align: right;
 	padding-right: 4px;
-	font-family: "russo one"
+	font-family: "russo one";
+	font-size: 12px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 .bg-gametag a{
 	display: inline-block;
@@ -442,7 +447,7 @@
 }
 .bg-gametag{
 	text-align: right;
-	padding: 3px 10px;
+	padding: 3px 5px;
 	height: 48px;
 }
 .dropdown{
@@ -509,4 +514,7 @@ i.u-connected{
 .loader span{
 	display: inline-block;
 	font-family: "russo one"
+}
+.mobile-menu{
+	display: none;
 }

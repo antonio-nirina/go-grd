@@ -476,6 +476,9 @@ h1{
     
     margin: 5px;
   }
+  .container .mobile-menu{
+    display: block;
+  }
 }
 @media screen and (max-width: 800px){
   .container .tchat{
@@ -535,6 +538,12 @@ h1{
   .leaderboard .container .main .containt{
     width: 86%;
   }
+  .container .tuto-video video{
+    width: 100%;
+  }
+  .container .content.waggers-link{
+    overflow: scroll;
+  }  
 }
 @media screen and (max-width: 700px) {
   .container .card .upcomming.side{    
@@ -573,6 +582,15 @@ h1{
   }
   .home .container h2{
     font-size: 20px !important;
+  }
+  .container .wall{
+    margin: 20px auto;
+  }
+  .container .teamname{
+    display: block;
+  }
+  .container .social{
+    margin: 15px auto;
   }
 
 }
@@ -613,7 +631,7 @@ h1{
   .tag{
     text-align: center;
   }
-  .profil .main-content, .home .main{
+  .home .main{
     padding-top: 8em;
   }
   .leaderboard .main{
@@ -748,7 +766,12 @@ h1{
   }
   .leaderboard .container .main .containt{
     width: 90%;
-  }
+  }  
+  .container .mur .row-container,
+  .container .fixed
+  {
+    width: 560px;
+  }  
 }
 @media screen and (max-width: 520px) {
   .view .ban{
@@ -804,6 +827,47 @@ h1{
   .container .field-middle, .container .rss-view{
     display: block;
   }
+  .container .gamer-profil{
+    display: block;
+  }
+  .container .main-pro .avatar{
+    position: initial;
+    width: 100%;
+    text-align: center;
+  }
+  .container .gamer-profil .gamer-tag{
+    text-align: center;
+    margin-left: 0;
+  }
+  .container .main-pro .avatar img{
+    width: 25%;
+    margin-bottom: 15px;
+  }
+  .container .setavatar label{    
+    top: -10px;
+    left: 0;
+    border-radius: 0;
+    width: 40%;
+    left: 30%;
+    margin: auto;
+    height: 120px;    
+  }
+  .container .setavatar:hover label{
+    display: block;
+    opacity: 0;
+  }
+  .stat-content .flexbox{
+    display: block;
+  }
+  .stat-content .start-game{
+    margin: auto;
+  }
+  .stat-content .info-container{
+    width: 100%;
+    margin-top: 10px;
+    padding-right: 15px;
+  }
+
 }
 
 @media screen and (max-width: 380px) {
@@ -917,5 +981,8 @@ h1{
   }
   .container .full .Left{
     top: 10%;
+  }
+  .container .setavatar label{
+    height: 98px;
   }
 }
