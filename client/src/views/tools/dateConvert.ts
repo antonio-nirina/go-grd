@@ -35,7 +35,7 @@ export const dateStringToDHStringLong = function(date: string){
 				minute:"numeric"
 			})
 }
-export const dateStringToDY = function(date:any){
+export const dateStringToDY = function(date = ""){
 	return new Date(date).toLocaleTimeString('fr-Fr', {
 				day : 'numeric',
 				month : 'short',

@@ -103,8 +103,7 @@ const Header: React.FC = function() {
 			console.log(e)
 		}
 
-		dispatch(removeDataUser())
-		if(localStorage.getItem("access_token_twitch")) localStorage.removeItem("access_token_twitch")
+		dispatch(removeDataUser())		
 		setIsDeconnect(true)
 		history.push("/")
 	}
@@ -297,7 +296,9 @@ const Header: React.FC = function() {
 					<div className="gametag">
 						<div className="itemsTag">
 							<div className="bg-gametag">
-								<p><img src={userConnectedRedux.user && userConnectedRedux.user.avatar ? userConnectedRedux.user.avatar : avatar} className="avatar" alt=""/></p>
+								<p>
+									<img src={userConnectedRedux.user && userConnectedRedux.user.avatar ? userConnectedRedux.user.avatar : avatar} className="avatar" alt=""/>
+								</p>
 								<p className="user">{userConnectedRedux.user.username}</p>
 								<p className="user-setting">
 									<><img src={WhiteJoystick} className="itemTag joystick" alt="" width="18" height="14" /></>
@@ -309,6 +310,14 @@ const Header: React.FC = function() {
 						<div className={!showList ? "dropdown" :"dropdown show"}>
 							<ul>
 								<li><Link to="/profil">Profil</Link></li>
+								<li className="mobile-menu">
+									<ul>
+										<li><Link to="/tournois">Tournois</Link></li>
+										<li><Link to="/wager">wagers</Link></li>
+										<li><Link to="/communaute">communauté</Link></li>
+										<li><Link to="/assistance">assistance</Link></li>
+									</ul>
+								</li>
 								<li className="border"><Link to="#">Cagnote (0 GC)</Link></li>
 								<li className="border"><Link to="/parametre">Paramètres</Link></li>
 								{userConnectedRedux.user && userConnectedRedux.user.roles && userConnectedRedux.user.roles.includes("role_admin") ? <li>

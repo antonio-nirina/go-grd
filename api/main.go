@@ -13,7 +13,6 @@ import (
 	"github.com/thoussei/antonio/api/graphql/queries"
 )
 
-
 func main() {
 	cmd.RunCmdScheduler()
 	schemaConfig := graphql.SchemaConfig{

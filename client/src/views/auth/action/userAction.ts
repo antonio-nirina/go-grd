@@ -98,6 +98,7 @@ export const sendProfilXboxOrPsn = function(user:UserType) {
 export const removeDataUser = function() {
 	Cookies.remove(ACCESS_TOKEN)
 	Cookies.remove("userConnected")
+	if(localStorage.getItem("access_token_discord")) localStorage.removeItem("access_token_discord")
 	// localStorage.removeItem(ACCESS_TOKEN)
 	// localStorage.removeItem("userConnected")
 	return {
@@ -117,6 +118,26 @@ export const sendUserConnectedTwitchAction = function(user:any) {
 		lastname:user.DisplayName,
 		id:user.Id,
 		created:user.created,
+		country:"",
+		birtDate:""
+	}
+	return {
+		type:USER_CONNECTED,
+		res:newUserObject??""
+  	}
+}
+
+export const sendUserConnectedDiscordAction = function(user:any) {
+	const newUserObject:UserType = {
+		uid:user.uid,
+		username:user.username,
+		email:user.email,
+		avatar:user.avatar,
+		firstname:"",
+		language:user.locale,
+		lastname:"",
+		id:user.id,
+		created:"",
 		country:"",
 		birtDate:""
 	}

@@ -1,5 +1,11 @@
-const uriDisc = "https://id.twitch.tv/oauth2/authorize?client_id=hy3s04cw7m9qofg7thik89lii2inr0&redirect_uri=http://localhost:3000&response_type=token&scope=user:read:broadcast%20user:read:email"
+import {receiveMessageCode} from "./twitch"
 
+export const DISCORD_TOKEN = "discord_token"
+
+
+const uriDisc = "https://discord.com/api/oauth2/authorize?client_id=849049427200049202&redirect_uri=http%3A%2F%2Flocalhost%3A3000&response_type=code&scope=identify%20email%20connections"
 export const AuthDiscord = function() {
-    window.open(uriDisc,"")
+    //const REDIRECT_URI_TWITCH = process.env.NODE_ENV === "development" ? encodeURI(URI_REDIRECT) : encodeURI(URI_REDIRECT_PR)
+	window.open(uriDisc,"","width=600,height=400")
+	window.addEventListener('message', event => receiveMessageCode(event,false,true), false)
 }

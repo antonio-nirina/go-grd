@@ -135,3 +135,31 @@ func GetGameOneUserQuery() *graphql.Field {
 		Resolve: UserRolve.FindGameUserResolver,
 	}
 }
+
+func GetAccessTokenDiscord() *graphql.Field {
+	return &graphql.Field{
+		Type:        types.TwitchSchemaType,
+		Description: "Get token access discord",
+		Args: graphql.FieldConfigArgument{
+			"code": &graphql.ArgumentConfig{
+				Type: graphql.String,
+			},
+		},
+
+		Resolve: UserRolve.GetAccessTokenDiscordApi,
+	}
+}
+
+func GetAccessUserDiscordApi() *graphql.Field {
+	return &graphql.Field{
+		Type:        types.DiscordserSchemaType,
+		Description: "Get User twicth",
+		Args: graphql.FieldConfigArgument{
+			"accessToken": &graphql.ArgumentConfig{
+				Type: graphql.String,
+			},
+		},
+
+		Resolve: UserRolve.GetAccessUserDiscordApi,
+	}
+}

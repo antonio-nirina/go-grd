@@ -7,16 +7,18 @@ import Ahead from "../ahead/ahead"
 import Game from "../game/game"
 import Service from "../service/service"
 import Join from "../../join/join"
-import {XboxProfil,TwitchUserConnected} from "../../../gql/user/auth"
+import {XboxProfil,TwitchUserConnected,DiscordUserConnected} from "../../../gql/user/auth"
 import Footer from "../../footer/footer"
-import {getAccessToken,getAccessTokenTwitch} from "../../../storage/tokenStorage"
-import {UserType,sendProfilXboxOrPsn,sendUserConnectedTwitchAction} from "../../auth/action/userAction"
+import {getAccessToken,getAccessTokenTwitch,getAccessTokenDiscord} from "../../../storage/tokenStorage"
+import {UserType,sendProfilXboxOrPsn,sendUserConnectedTwitchAction,sendUserConnectedDiscordAction} from "../../auth/action/userAction"
 import {RootState} from "../../../reducer"
 import "../home/index.css"
 import "../../../assets/css/style.css"
+
 type paramToken = {
 	token:string
 }
+
 const GetProfilUser = function ({token}:paramToken) {
 	const dispatch = useDispatch()
 	const {loading,error,data} = useQuery(XboxProfil, {
@@ -78,6 +80,36 @@ const GetProfilTwitchuser = function({token}:paramToken) {
 	)
 }
 
+const GetProfilDiscorduser = function({token}:paramToken) {
+	const dispatch = useDispatch()
+	const {loading,error,data} = useQuery(DiscordUserConnected, {
+		variables: {
+			accessToken:token
+		},
+	})
+	useEffect(() => {
+		if(!loading && !error && data) {
+			const user:UserType = {
+				uid:"",
+				username:data.GetAccessUserDiscordApi.username,
+				email:data.GetAccessUserDiscordApi.email,
+				avatar:data.GetAccessUserDiscordApi.avatar,
+				firstname:"",
+				language: data.GetAccessUserDiscordApi.locale,
+				lastname:"",
+				id:data.GetAccessUserDiscordApi.id,
+				created:"",
+				birtDate:"", 
+				country:""
+			}
+			dispatch(sendUserConnectedDiscordAction(user))
+		}
+	},[loading,error,data,dispatch])
+	return (
+		<></>
+	)
+}
+
 const Index: React.FC = function() {
 	const userConnectedRedux = useSelector((state:RootState) => state.userConnected)
 	useEffect(() => {
@@ -100,6 +132,8 @@ const Index: React.FC = function() {
 				 : 
 				 getAccessTokenTwitch() && Object.keys(userConnectedRedux.user).length === 0 ? 
 				 <GetProfilTwitchuser token={getAccessTokenTwitch()}  /> : 
+				 getAccessTokenDiscord() && Object.keys(userConnectedRedux.user).length === 0 ? 
+				 <GetProfilDiscorduser token={getAccessTokenDiscord()}  /> :
 				 
 				 <></>
 				}

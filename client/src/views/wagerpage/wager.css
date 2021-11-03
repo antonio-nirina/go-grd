@@ -1,1 +1,80 @@
 @charset "UTF-8";
+@charset "UTF-8";
+.wager h2{
+	font-family: "arial"
+}
+.wager .undertitle{
+	margin-top: 2em;
+}
+.wager .containt p{
+	font-size: 35px;
+	margin-bottom: 30px;
+}
+.wager .main{
+	width: 87%;
+	margin: 0 auto;	
+}
+.wager .right-list a{
+	display: block;
+	width: 100%;
+	margin-bottom: 5px;
+}
+.wager .right-list p{
+	font-size: 12px !important;
+}
+.wager .right-list .block{
+	background: #2C2C2C;
+	height: auto;
+}
+.wager .right-list .block p{
+	font-weight: bold;
+}
+.wager .right-list span,
+.wager .right-list .block p
+{
+	font-family: arial;	
+}
+.wager .right-list span{
+	font-weight: normal;
+}
+.wager .right-list i{
+	font-size: 13px;
+	align-self: center;
+}
+.wager .block .info{
+	position: inherit;
+}
+.wager .block .info p{
+	padding: 0;
+}
+.wager .top-icon p{
+	font-size: 11px !important;
+}
+.wager .inblock span{
+	padding: 3px 5px;
+	font-size: 10px;
+}
+.wager .main{
+	position: relative;
+}
+.wager .iconGame img{
+	margin-top: 7px;
+}
+.wager .right-list{
+	position: fixed;	
+	right:0;
+	top: 76px;
+	z-index: 1;
+	height: 100%;
+	overflow: scroll;
+}
+.wager .sprite{
+	background-size: 15px;
+}
+.wager .sprite.ticket{
+	background-position: 0px -52px;
+}
+.wager .right-list{
+  scrollbar-color: transparent #000000 !important;
+  scrollbar-width: thin !important;  
+}

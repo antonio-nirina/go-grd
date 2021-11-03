@@ -4,10 +4,6 @@ import {useQuery} from "@apollo/client"
 
 import Header from "../header/header"
 import Footer from "../footer/footer"
-import Chat from "./chat"
-
-import { faCommentDots } from "@fortawesome/free-solid-svg-icons"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 //import {Translation} from "../../lang/translation"
 //import {RootState} from "../../reducer"
@@ -16,7 +12,7 @@ import "../../assets/css/style.css"
 import "../annexe/tournois.css"
 import "../waggers/waggers.css"
 import "../participate/participate.css"
-import AvatarDefault from "../../assets/image/game-tag.png"
+
 import Game from "../../assets/image/game.png"
 import Apex from "../../assets/image/apex-legends.png"
 import {Wagger} from "../models/wagger"
@@ -24,10 +20,8 @@ import {Wagger} from "../models/wagger"
 import {GET_ONE_WAGGER} from "../../gql/wagger/query"
 
 
-const Resultat: React.FC = function(props:any) {
-  	const [showSalon, setShowSalon] = useState(false)
-  	const [showTchat, setShowTchat] = useState(false)
-  	const [wagger, setWagger] = useState<Wagger>()
+const Resultat: React.FC = function(props:any) {  	
+  const [wagger, setWagger] = useState<Wagger>()
 	const params = new URLSearchParams(props.location.search)
 	const uid:string|null = params.get("uid")
 
@@ -43,13 +37,7 @@ const Resultat: React.FC = function(props:any) {
 		}
 
 	},[loading,error,data])
-
-  	const onShowSalon = function(){
-    	setShowSalon(!showSalon)
-  	}
-  	const onShowTchat = function(){
-    	setShowTchat(!showTchat)
-  	}
+  	
   return(
   	<div className="container">
   		<Header />
@@ -120,17 +108,7 @@ const Resultat: React.FC = function(props:any) {
                 <p>Skouinar - <span>TonioPlancha</span> - <span>Shad_BD</span></p>
                 <p className="free-emplacement"><span>Emplacement Libre</span></p>
               </div>
-            </div>
-            <div className={!showTchat ? "salon-chat" :"salon-chat show"} >
-              <Chat />
-            </div>
-            <div className={!showSalon ? "salon" :"salon show"}>
-              <div className="salon-titre">Salon de tchat</div>
-              <div className="salon-team" onClick={onShowTchat}>
-                <img src={AvatarDefault} width="30" height="30" alt="joingame" />
-                <p>{wagger?.game.logo} - <span>{wagger?.gameWay}<i><FontAwesomeIcon icon={faCommentDots} size="xs"/></i></span></p>
-              </div>
-            </div>
+            </div>                        
           </div>
         </div>
         <div className="clear"></div>

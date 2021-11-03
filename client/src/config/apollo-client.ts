@@ -33,8 +33,8 @@ export const createApolloClient = () => {
 	let token = ""
 
 	if (GetCookie()) {
-		const type  = GetCookie().type
-		token = `${type}=${GetCookie().access_token}`
+		const type  = GetCookie()?.type
+		token = `${type}=${GetCookie()?.access_token}`
 	}
 	const authLink = setContext((_, { headers }) => {
 		return {

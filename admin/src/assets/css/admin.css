@@ -570,6 +570,8 @@ input:checked + .slider:before {
 /***************************admin waggers******************/
 .wysiwyg{
 	margin-top: 15px;
+	position: relative;
+	z-index: 0
 }
 .wysiwyg .sun-editor .se-toolbar{
 	background: #000000;
@@ -638,9 +640,9 @@ form .se-btn.se-btn-select.se-btn-tool-font.se-tooltip.on{
 	border-bottom: 1px solid #9c9c9e;	
 }
 .grid-title{
-	font-family: "russo one";
+	font-family: arial;
 	display: block;
-	font-size: 24px;
+	font-size: 16px;
 	color: #ffffff;
 	padding: 15px 5px;
 	text-align: center;
@@ -702,8 +704,8 @@ label.entete:last-child{
 	align-self: center;
 }
 .list-game .logo-game img{
-    width: 100%;
-    height: 82px;
+    width: 52%;
+    height: 40px;
     border-radius: 50%;  
 }
 .column div.create-game{
@@ -716,11 +718,11 @@ label.entete:last-child{
 .game-name{		
 	display: flex;
 	width: 100%;
-	height: 50%;
+	height: 20%;
     justify-content: center;
     position: absolute;
     bottom: 0px;
-    background: rgba(0,0,0,0.8);    
+    background: rgba(0,0,0,0.4);    
     border-radius: 0 0 5px 5px;
     transition: ease-in-out 500ms;  
 }
@@ -1006,4 +1008,28 @@ label.entete:last-child{
 }
 .middle p i{
 	color: #613e9f;
+}
+#platform  .css-1s2u09g-control, #platform  .css-1pahdxg-control{
+	padding: 7px;
+	border: 1px solid #9c9c9e;
+	background: #272727;
+	margin-top: 15px;
+}
+#platform .css-26l3qy-menu{
+	background: #272727;
+}
+#platform .css-26l3qy-menu span:hover{
+	background: blue !important;
+}
+.tour #add-tour{
+	float: none;
+}
+.tour #add-tour i{
+	margin-right: 5px;
+	font-size: 12px
+}
+.tour #add-tour{
+	max-width: 220px;
+	width: 100%;
+	margin: 15px auto;
 }

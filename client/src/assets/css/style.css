@@ -39,6 +39,18 @@ html{
   color: #ffffff;
   border: 1px solid transparent;
 }
+.btn.discolor{
+  background: #7289DA;
+}
+.bg-green-light{
+ background: #27C612;
+ color: #ffffff !important;
+ width: 55px;
+}
+.bg-green-light:hover{
+  background: #ffffff;
+  color: #000000 !important;
+}
 .btn-container div{
   margin-top: 15px;
 }
@@ -187,6 +199,11 @@ h1{
 .container .league .tab-league{
   overflow: auto; 
 }
+.tournois .navmenu a[href="/tournois"], .wager .navmenu a[href="/wager"], 
+.communaute .navmenu a[href="/communaute"], .assistance .navmenu a[href="/assistance"]{
+  color: #dd0000;
+}
+
 /**************scrollbar style***********************/
 
 ::-webkit-scrollbar {
@@ -230,6 +247,9 @@ h1{
 {
   width: 40px;
 }
+.d-none{
+  display: none !important;
+}
 
 /********** Fonts ********/
 @font-face {
@@ -269,12 +289,17 @@ h1{
     position: absolute;
     top: 20%;    
   }
-  .container .main{
+  .home .container .main{
     min-height: inherit;
   }
   .container .full .slogan p.title, .full.connected .slogan p.title{
     font-size: 30px !important;
-  }   
+  }
+  .login .container footer, .inscription .container footer{
+    position: absolute;
+    width: 100%;
+    bottom: 0
+  }
 }
 @media screen and (max-width: 1000px) {
   .container .center-block {
@@ -375,10 +400,7 @@ h1{
   }
   .container footer{
     position: initial !important;
-  }
-  .container .containt{
-    width: 92%;
-  }
+  }  
   .container .group h1{
     font-size: 25px;
   }
@@ -449,7 +471,13 @@ h1{
     background-position: top !important;
     padding-bottom: 0 !important;
     min-height: inherit !important;
-
+  }
+  .container .favorite-game a, .container .platform-content a{
+    
+    margin: 5px;
+  }
+  .container .mobile-menu{
+    display: block;
   }
 }
 @media screen and (max-width: 800px){
@@ -500,16 +528,22 @@ h1{
   .container .waggers-title, .container .waggers-data{
     width: 96%;
     margin: 5px 0;
-  }
-  .container .jeux h2{
-    font-size: 30px;
-  }
+  }  
   .container .logo-game{
     margin-right: 15px;
   }
   .container .bg-game{
     width: 100%;    
   }
+  .leaderboard .container .main .containt{
+    width: 86%;
+  }
+  .container .tuto-video video{
+    width: 100%;
+  }
+  .container .content.waggers-link{
+    overflow: scroll;
+  }  
 }
 @media screen and (max-width: 700px) {
   .container .card .upcomming.side{    
@@ -534,6 +568,31 @@ h1{
     position: initial;
     margin-top: 15px;
   }  
+  .container .full.connected .Left{
+    top: 13%;
+  }
+  .container .full .slogan p.title, .full.connected .slogan p.title{
+    font-size: 20px !important;
+  }
+  .full.connected .slogan .btn, .full .slogan .btn{
+    font-size: 15px;
+  }
+  .container .slogan .btn{
+    margin-top: 15px;
+  }
+  .home .container h2{
+    font-size: 20px !important;
+  }
+  .container .wall{
+    margin: 20px auto;
+  }
+  .container .teamname{
+    display: block;
+  }
+  .container .social{
+    margin: 15px auto;
+  }
+
 }
 @media screen and (max-width: 600px) {
   .container{
@@ -572,8 +631,14 @@ h1{
   .tag{
     text-align: center;
   }
-  .login .main, .inscription .main, .profil .main-content, .main{
+  .home .main{
     padding-top: 8em;
+  }
+  .leaderboard .main{
+    padding-top: 4em;
+  }
+  .home .main{
+    padding-top: 25px;
   }
   .home p.title{
     font-size: 25px;
@@ -693,6 +758,20 @@ h1{
   .container .full-container{
     margin-top: 11em !important;
   }
+  .leaderboard .mes_infos{
+    margin: 5px;
+  }
+  .leaderboard.settings .title-lead{
+    display: block;
+  }
+  .leaderboard .container .main .containt{
+    width: 90%;
+  }  
+  .container .mur .row-container,
+  .container .fixed
+  {
+    width: 560px;
+  }  
 }
 @media screen and (max-width: 520px) {
   .view .ban{
@@ -702,6 +781,93 @@ h1{
     display: block;
     padding: 15px 0;
   }
+  .container .full.connected .Left{
+    top: 2.5%;
+  }  
+  .container .list_tournament{
+    margin-bottom: 15px;
+    padding: 10px 0px;
+  }
+  .container .list_tournament p{
+    margin-right: 0;
+  }
+  .container .list_tournament a{
+    display: block;
+    width: 100%;
+    text-align: center;
+  }
+  .container .list_tournament .place{
+    text-align: center;
+    width: 100%;
+  }
+  .container .best-gamer{
+    display: block;
+  }
+  .container .best-gamer .global{
+    margin-bottom: 15px;
+  }
+  .container .full .Left{
+    position: absolute !important;
+    width: 100%;
+  }
+  .container .register-field{
+    display: block;
+    padding: 15px;
+  }
+  .container .group{
+    margin: 0 15px;
+  }
+  .container .input-field{
+    margin: 0;
+  }
+  .container .account_type, .container .account_type a, .container .choice{
+    max-width: inherit;
+    width: 100%;
+  }
+  .container .field-middle, .container .rss-view{
+    display: block;
+  }
+  .container .gamer-profil{
+    display: block;
+  }
+  .container .main-pro .avatar{
+    position: initial;
+    width: 100%;
+    text-align: center;
+  }
+  .container .gamer-profil .gamer-tag{
+    text-align: center;
+    margin-left: 0;
+  }
+  .container .main-pro .avatar img{
+    width: 25%;
+    margin-bottom: 15px;
+  }
+  .container .setavatar label{    
+    top: -10px;
+    left: 0;
+    border-radius: 0;
+    width: 40%;
+    left: 30%;
+    margin: auto;
+    height: 120px;    
+  }
+  .container .setavatar:hover label{
+    display: block;
+    opacity: 0;
+  }
+  .stat-content .flexbox{
+    display: block;
+  }
+  .stat-content .start-game{
+    margin: auto;
+  }
+  .stat-content .info-container{
+    width: 100%;
+    margin-top: 10px;
+    padding-right: 15px;
+  }
+
 }
 
 @media screen and (max-width: 380px) {
@@ -808,5 +974,15 @@ h1{
   }
   .profil #wall .avatar-info .table{
     display: block;
+  }
+  .container .full.connected .Left{
+    position: initial;
+    padding: 15px;
+  }
+  .container .full .Left{
+    top: 10%;
+  }
+  .container .setavatar label{
+    height: 98px;
   }
 }

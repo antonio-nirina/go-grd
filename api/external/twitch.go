@@ -134,7 +134,7 @@ var tr = &http.Transport{
 	},
 }
 
-func twitchAccesstHttp() *hTTPClient {
+func AccesstHttp() *hTTPClient {
 	apiClient := &hTTPClient{}
 	apiClient.client = http.DefaultClient
 	apiClient.client.Transport = tr
@@ -143,7 +143,7 @@ func twitchAccesstHttp() *hTTPClient {
 }
 
 func GetAccessTokenTwitch(code string, redirectUri string) (*DataToken, error) {
-	htppClient := twitchAccesstHttp()
+	htppClient := AccesstHttp()
 	url := fmt.Sprintf("%s?client_id=%s&client_secret=%s&code=%s&grant_type=%s&redirect_uri=%s", TWITCH_TOKEN, os.Getenv("CLIENT_ID_TWITCH"), os.Getenv("CLIENT_SECRET_TWITCH"), code, "authorization_code", redirectUri)
 	req, err := http.NewRequest("POST", url, nil)
 	if err != nil {
@@ -298,11 +298,10 @@ func ValidateToken(accessToken string) (bool, error) {
 }
 
 func RefressToken(refreshToken string) (*oauthRefreshTokenTwitch, error) {
-	htppClient := twitchAccesstHttp()
+	htppClient := AccesstHttp()
 	uri := TWITC_REFRESH_TOKEN + "?grant_type=refresh_token&refresh_token=" + refreshToken + "&client_id=" + os.Getenv("CLIENT_ID_TWITCH") + "&client_secret=" + os.Getenv("CLIENT_SECRET_TWITCH")
 	req, err := http.NewRequest("POST", uri, nil)
 	req.Header.Set("Content-Type", "application/x-www-form-urlencoded; param=value")
-
 	respUser, err := htppClient.client.Do(req)
 
 	if err != nil {
@@ -329,7 +328,7 @@ func requestTwitchApi(accessToken string, url string, method string) (*http.Resp
 	} else {
 		_method = method
 	}
-	htppClient := twitchAccesstHttp()
+	htppClient := AccesstHttp()
 	reqUser, err := http.NewRequest(_method, url, nil)
 
 	if accessToken != "" {

@@ -16,10 +16,13 @@ import {GET_ALL_STREAMING} from "../../gql/user/query"
 import {GET_ALL_CMTY} from "../../gql/cmty/query"
 import Friend from "./friends"
 import Post from "./post"
+import Chat from "./chat"
 
 import Warz from "../../assets/image/profil/warzone.png"
 import Rl from "../../assets/image/profil/rocketleague.png"
 import Fortnite from "../../assets/image/profil/fortnite.png"
+
+import TchatIcon from "../../assets/image/picto/tchat-icon.png"
 
 type Stremings = {
     uid:string
@@ -45,6 +48,7 @@ const Communaute: React.FC = function() {
 	const userConnectedRedux 	= useSelector((state:RootState) => state.userConnected)
 	const [cmty, setCmty] = useState<Stremings[]>([])
 	const [isLoader, setIsLoader] = useState<boolean>(true)
+	const [showClose, setShowClose] = useState(false)
 	// const {loading,error,data}  = useSubscription(COUNT_SUBSCRIBE)
 
 	const {loading:loadingTwitch,error:errorTwitch,data:dataTwitch} = useQuery(GET_ALL_STREAMING, {
@@ -59,6 +63,11 @@ const Communaute: React.FC = function() {
 			pageNumber:1, //(item.item)*NUMBER_PER_PAGE - NUMBER_PER_PAGE
         }
     })
+
+  
+	  const onShowClose = function(){
+	    setShowClose(!showClose)
+	  }
 
 	useMemo(() => {
 		if(!loadingTwitch && !errorTwitch && dataTwitch) console.log("dataTwitch", dataTwitch)
@@ -127,7 +136,7 @@ const Communaute: React.FC = function() {
 								)
 							})}
 		  				</div>
-	  				</div>
+	  				</div>	  				
 	  				<div className="center-block">
 	  					<Post />
 						  <div className={isLoader ? "loader-spinner":"d-none"}>
@@ -140,6 +149,13 @@ const Communaute: React.FC = function() {
 
 	  				<Friend />
 	  			</div>
+	  			<div className="icon-msg" onClick={onShowClose}>
+	  				<img src={TchatIcon} alt=""/>
+	  				<span className="counter">2</span>
+	  			</div>
+				<div className={!showClose ? "d-none": "tchat"} >
+              		<Chat />
+            	</div>           	
 	  		</div>
 			<Footer/>
 	  	</div>

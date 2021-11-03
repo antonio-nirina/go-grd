@@ -119,7 +119,10 @@ const SetHome: React.FC = function() {
         						<div className="title">
         							<h1>Dynamisation de la page d'accueil</h1>
         							<div className="create-game">
-        								<button onClick={addForm} className="btn bg-red"><i><FontAwesomeIcon icon={faPlus} size="lg"/></i>Ajouter Nouveau bloc</button>
+        								<button onClick={addForm} className="btn bg-red">
+											<i><FontAwesomeIcon icon={faPlus} size="lg"/></i>
+											Ajouter Nouveau bloc
+										</button>
         							</div>
         						</div>
 	        					<div className="group-input">

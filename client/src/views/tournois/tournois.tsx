@@ -28,7 +28,6 @@ const PageTournois: React.FC = function() {
 	})
 
 	useEffect(() => {
-		console.log(data)
 		if(!loading && !error && data) {
 			setGames(data.FindAllGame)
 		}
@@ -50,13 +49,15 @@ const PageTournois: React.FC = function() {
 					<p>Choisis ton jeux</p>
 					<div className="favorite">
 						<div className="game-list-container">
-						<div className="favorite-game" >
+							<div className="favorite-game" >
 								{games.map(function(e:GameType,index:number){
 									return(
-										<Link to ={`/tournament-game?game=${e.name.replace(" ","_")}&slug=${e.slug}`} key={index}><img src={e.image} alt={e.slug} width="200"/></Link>
+										<Link to ={`/tournament-game?game=${e.name.replace(" ","_")}&slug=${e.slug}`} key={index}>
+											<img src={e.image} alt={e.slug} width="200"/>
+										</Link>
 									)
 								})}
-						</div>
+							</div>
 						</div>
 					</div>
 				</div>

@@ -6,6 +6,7 @@ import (
 	teamH "github.com/thoussei/antonio/api/teams/handler"
 	tHandler "github.com/thoussei/antonio/api/tournament/handler"
 	userH "github.com/thoussei/antonio/api/user/handler"
+	wHandler "github.com/thoussei/antonio/api/wagger/handler"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
@@ -21,7 +22,7 @@ type UsecasePart interface {
 	UpdatedPartNumberConfirmedHandler(userPartUid string, numberConf bool) (interface{}, error)
 	GetNumberPartHandler(userPartUid string) (interface{}, error)
 	FindPartUserWaggerHandler(userUid primitive.ObjectID, uidWagger primitive.ObjectID) (interface{}, error)
-
+	FindAllPartUserWaggerHandler(userUid primitive.ObjectID, pageNumber int64, limit int64) ([]partWaggerViewModel, error)
 }
 type partUsecase struct {
 	partRepository repository.RepositoryPart
@@ -105,6 +106,16 @@ func (p *partUsecase) FindPartHandler(idQuery string) (partViewModel, error) {
 		teamView = append(teamView, resTeam)
 	}
 
+	var plateform []tHandler.PlateformViewModel
+	for _, value := range result.Tournament.Plateform {
+		arrayPl := tHandler.PlateformViewModel{
+			value.Uid.Hex(),
+			value.Name,
+			value.Description,
+		}
+		plateform = append(plateform, arrayPl)
+	}
+
 	partViewModel := partViewModel{
 		Uid:   result.Uid.Hex(),
 		Date:  result.Date,
@@ -127,7 +138,7 @@ func (p *partUsecase) FindPartHandler(idQuery string) (partViewModel, error) {
 		Tournament: tHandler.TournamentViewModel{
 			result.Tournament.Uid.Hex(),
 			result.Tournament.Title,
-			result.Tournament.Date,
+			result.Tournament.DateDebut,
 			result.Tournament.Info,
 			result.Tournament.Statut,
 			result.Tournament.NumberParticipate,
@@ -142,13 +153,16 @@ func (p *partUsecase) FindPartHandler(idQuery string) (partViewModel, error) {
 				result.Tournament.Game.Logo,
 				result.Tournament.Game.Slug,
 			},
-			tHandler.PlateformViewModel{
-				result.Tournament.Plateform.Uid.Hex(),
-				result.Tournament.Plateform.Description,
-				result.Tournament.Plateform.Name,
-			},
+			plateform,
 			result.Tournament.Rules,
 			result.Tournament.IsPublic,
+			result.Tournament.Format,
+			result.Tournament.Server,
+			result.Tournament.Tchat,
+			result.Tournament.Winners,
+			result.Tournament.Region,
+			result.Tournament.Spectateur,
+			result.Tournament.Laps,
 		},
 	}
 
@@ -212,6 +226,16 @@ func (p *partUsecase) FindAllPartHandler(pageNumber int64, limit int64) ([]partV
 			teamView = append(teamView, resTeam)
 		}
 
+		var plateform []tHandler.PlateformViewModel
+		for _, value := range result.Tournament.Plateform {
+			arrayPl := tHandler.PlateformViewModel{
+				value.Uid.Hex(),
+				value.Name,
+				value.Description,
+			}
+			plateform = append(plateform, arrayPl)
+		}
+
 		partView := partViewModel{
 			Uid:   result.Uid.Hex(),
 			Date:  result.Date,
@@ -234,7 +258,7 @@ func (p *partUsecase) FindAllPartHandler(pageNumber int64, limit int64) ([]partV
 			Tournament: tHandler.TournamentViewModel{
 				result.Tournament.Uid.Hex(),
 				result.Tournament.Title,
-				result.Tournament.Date,
+				result.Tournament.DateDebut,
 				result.Tournament.Info,
 				result.Tournament.Statut,
 				result.Tournament.NumberParticipate,
@@ -249,13 +273,16 @@ func (p *partUsecase) FindAllPartHandler(pageNumber int64, limit int64) ([]partV
 					result.Tournament.Game.Logo,
 					result.Tournament.Game.Slug,
 				},
-				tHandler.PlateformViewModel{
-					result.Tournament.Plateform.Uid.Hex(),
-					result.Tournament.Plateform.Description,
-					result.Tournament.Plateform.Name,
-				},
+				plateform,
 				result.Tournament.Rules,
 				result.Tournament.IsPublic,
+				result.Tournament.Format,
+				result.Tournament.Server,
+				result.Tournament.Tchat,
+				result.Tournament.Winners,
+				result.Tournament.Region,
+				result.Tournament.Spectateur,
+				result.Tournament.Laps,
 			},
 		}
 
@@ -322,6 +349,16 @@ func (p *partUsecase) FindPartUserHandler(pageNumber int64, limit int64, userUid
 			teamView = append(teamView, resTeam)
 		}
 
+		var plateform []tHandler.PlateformViewModel
+		for _, value := range result.Tournament.Plateform {
+			arrayPl := tHandler.PlateformViewModel{
+				value.Uid.Hex(),
+				value.Name,
+				value.Description,
+			}
+			plateform = append(plateform, arrayPl)
+		}
+
 		partView := partViewModel{
 			Uid:   result.Uid.Hex(),
 			Date:  result.Date,
@@ -344,7 +381,7 @@ func (p *partUsecase) FindPartUserHandler(pageNumber int64, limit int64, userUid
 			Tournament: tHandler.TournamentViewModel{
 				result.Tournament.Uid.Hex(),
 				result.Tournament.Title,
-				result.Tournament.Date,
+				result.Tournament.DateDebut,
 				result.Tournament.Info,
 				result.Tournament.Statut,
 				result.Tournament.NumberParticipate,
@@ -359,13 +396,16 @@ func (p *partUsecase) FindPartUserHandler(pageNumber int64, limit int64, userUid
 					result.Tournament.Game.Logo,
 					result.Tournament.Game.Slug,
 				},
-				tHandler.PlateformViewModel{
-					result.Tournament.Plateform.Uid.Hex(),
-					result.Tournament.Plateform.Description,
-					result.Tournament.Plateform.Name,
-				},
+				plateform,
 				result.Tournament.Rules,
 				result.Tournament.IsPublic,
+				result.Tournament.Format,
+				result.Tournament.Server,
+				result.Tournament.Tchat,
+				result.Tournament.Winners,
+				result.Tournament.Region,
+				result.Tournament.Spectateur,
+				result.Tournament.Laps,
 			},
 		}
 
@@ -452,6 +492,15 @@ func (p *partUsecase) FindPartUserLeagueHandler(userUid primitive.ObjectID, leag
 
 		teamView = append(teamView, resTeam)
 	}
+	var plateform []tHandler.PlateformViewModel
+	for _, value := range result.Tournament.Plateform {
+		arrayPl := tHandler.PlateformViewModel{
+			value.Uid.Hex(),
+			value.Name,
+			value.Description,
+		}
+		plateform = append(plateform, arrayPl)
+	}
 
 	partViewModel := partViewModel{
 		Uid:   result.Uid.Hex(),
@@ -475,7 +524,7 @@ func (p *partUsecase) FindPartUserLeagueHandler(userUid primitive.ObjectID, leag
 		Tournament: tHandler.TournamentViewModel{
 			result.Tournament.Uid.Hex(),
 			result.Tournament.Title,
-			result.Tournament.Date,
+			result.Tournament.DateDebut,
 			result.Tournament.Info,
 			result.Tournament.Statut,
 			result.Tournament.NumberParticipate,
@@ -490,13 +539,16 @@ func (p *partUsecase) FindPartUserLeagueHandler(userUid primitive.ObjectID, leag
 				result.Tournament.Game.Logo,
 				result.Tournament.Game.Slug,
 			},
-			tHandler.PlateformViewModel{
-				result.Tournament.Plateform.Uid.Hex(),
-				result.Tournament.Plateform.Description,
-				result.Tournament.Plateform.Name,
-			},
+			plateform,
 			result.Tournament.Rules,
 			result.Tournament.IsPublic,
+			result.Tournament.Format,
+			result.Tournament.Server,
+			result.Tournament.Tchat,
+			result.Tournament.Winners,
+			result.Tournament.Region,
+			result.Tournament.Spectateur,
+			result.Tournament.Laps,
 		},
 	}
 
@@ -568,6 +620,16 @@ func (p *partUsecase) FindPartUserTournamentHandler(uidUser primitive.ObjectID, 
 		}
 	}
 
+	var plateform []tHandler.PlateformViewModel
+	for _, value := range result.Tournament.Plateform {
+		arrayPl := tHandler.PlateformViewModel{
+			value.Uid.Hex(),
+			value.Name,
+			value.Description,
+		}
+		plateform = append(plateform, arrayPl)
+	}
+
 	partViewModel := partViewModel{
 		Uid:   result.Uid.Hex(),
 		Date:  result.Date,
@@ -590,7 +652,7 @@ func (p *partUsecase) FindPartUserTournamentHandler(uidUser primitive.ObjectID, 
 		Tournament: tHandler.TournamentViewModel{
 			result.Tournament.Uid.Hex(),
 			result.Tournament.Title,
-			result.Tournament.Date,
+			result.Tournament.DateDebut,
 			result.Tournament.Info,
 			result.Tournament.Statut,
 			result.Tournament.NumberParticipate,
@@ -605,13 +667,16 @@ func (p *partUsecase) FindPartUserTournamentHandler(uidUser primitive.ObjectID, 
 				result.Tournament.Game.Logo,
 				result.Tournament.Game.Slug,
 			},
-			tHandler.PlateformViewModel{
-				result.Tournament.Plateform.Uid.Hex(),
-				result.Tournament.Plateform.Description,
-				result.Tournament.Plateform.Name,
-			},
+			plateform,
 			result.Tournament.Rules,
 			result.Tournament.IsPublic,
+			result.Tournament.Format,
+			result.Tournament.Server,
+			result.Tournament.Tchat,
+			result.Tournament.Winners,
+			result.Tournament.Region,
+			result.Tournament.Spectateur,
+			result.Tournament.Laps,
 		},
 	}
 
@@ -651,4 +716,134 @@ func (p *partUsecase) GetNumberPartHandler(userPartUid string) (interface{}, err
 	return rec, nil
 }
 
+func (p *partUsecase) FindPartUserWaggerHandler(userUid primitive.ObjectID, uidWagger primitive.ObjectID) (interface{}, error) {
+	result, err := p.partRepository.FindPartByTournamentRepo(userUid, uidWagger, false)
 
+	if err != nil {
+		return partViewModel{}, err
+	}
+
+	if len(result.Team) > 0 {
+		var userView []userH.UserViewModel
+
+		for _, val := range result.Team {
+			for _, item := range val.Players {
+				resUser := userH.UserViewModel{
+					Uid:           item.Uid.Hex(),
+					FirstName:     item.FirstName,
+					LastName:      item.LastName,
+					Email:         item.Email,
+					Username:      item.Username,
+					IsBanned:      item.IsBanned,
+					Avatar:        item.Avatar,
+					Language:      item.Language,
+					Point:         item.Point,
+					Roles:         item.Roles,
+					TypeConnexion: item.TypeConnexion,
+					Created:       item.Created,
+				}
+				userView = append(userView, resUser)
+			}
+
+		}
+	}
+
+	partViewModel := partViewModel{
+		Uid:   result.Uid.Hex(),
+		Date:  result.Date,
+		IsWin: false,
+		User: userH.UserViewModel{
+			Uid:           result.User.Uid.Hex(),
+			FirstName:     result.User.FirstName,
+			LastName:      result.User.LastName,
+			Email:         result.User.Email,
+			Username:      result.User.Username,
+			IsBanned:      result.User.IsBanned,
+			Avatar:        result.User.Avatar,
+			Language:      result.User.Language,
+			Point:         result.User.Point,
+			Roles:         result.User.Roles,
+			TypeConnexion: result.User.TypeConnexion,
+			Created:       result.User.Created,
+		},
+		Wagger: wHandler.WaggerViewModel{
+			Uid:          result.Wagger.Uid.Hex(),
+			Date:         result.Wagger.Date,
+			Title:        result.Wagger.Title,
+			Price:        result.Wagger.Price,
+			DeadlineDate: result.Wagger.DeadlineDate,
+			Statut:       result.Wagger.Statut,
+			/*GameWay:
+			PriceParticipate:
+			Description:result.Wagger.Date,
+			Game:
+			Plateform:
+			Format:
+			IsPublic:
+			Statut:
+			Records:
+			Participant:
+			Rules:*/
+		},
+	}
+
+	return partViewModel, nil
+}
+
+func (p *partUsecase) FindAllPartUserWaggerHandler(userUid primitive.ObjectID, pageNumber int64, limit int64) ([]partWaggerViewModel, error) {
+	results, err := p.partRepository.FindPartUserRepo(pageNumber, limit, userUid)
+
+	if err != nil {
+		return []partWaggerViewModel{}, err
+	}
+
+	var res []partWaggerViewModel
+	var userView []userH.UserViewModel
+
+	for _, result := range results {
+		onePart, _ := p.partRepository.FindPartRepo(result.Uid)
+		user := userH.UserViewModel{
+			Uid:           onePart.User.Uid.Hex(),
+			FirstName:     onePart.User.FirstName,
+			LastName:      onePart.User.LastName,
+			Email:         onePart.User.Email,
+			Username:      onePart.User.Username,
+			IsBanned:      onePart.User.IsBanned,
+			Avatar:        onePart.User.Avatar,
+			Language:      onePart.User.Language,
+			Point:         onePart.User.Point,
+			Roles:         onePart.User.Roles,
+			TypeConnexion: onePart.User.TypeConnexion,
+			Created:       onePart.User.Created,
+		}
+		userView := append(userView, user)
+		partWagger := partWaggerViewModel{
+			Uid:   result.Uid.Hex(),
+			Date:  result.Date,
+			User:  userView,
+			IsWin: result.IsWin,
+			Wagger: wHandler.WaggerViewModel{
+				Uid:              result.Wagger.Uid.Hex(),
+				Date:             result.Wagger.Date,
+				Title:            result.Wagger.Title,
+				Description:      result.Wagger.Description,
+				Price:            result.Wagger.Price,
+				DeadlineDate:     result.Wagger.DeadlineDate,
+				GameWay:          result.Wagger.GameWay,
+				PriceParticipate: result.Wagger.PriceParticipate,
+				Game:             tHandler.GameViewModel{},
+				Plateform:        tHandler.PlateformViewModel{},
+				Format:           result.Wagger.Format,
+				IsPublic:         result.Wagger.IsPublic,
+				Statut:           result.Wagger.Statut,
+				Records:          0,
+				Participant:      result.Wagger.Participant,
+				Rules:            result.Wagger.Rules,
+			},
+			NumberPartConfirmed: result.NumberPartConfirmed,
+		}
+		res = append(res, partWagger)
+	}
+
+	return res, nil
+}

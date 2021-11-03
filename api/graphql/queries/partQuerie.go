@@ -120,3 +120,23 @@ func FindPartByUserWagger() *graphql.Field {
 		Resolve: partResolver.FindPartByUserWaggerResolver,
 	}
 }
+
+func FindAllPartUserWagger() *graphql.Field {
+	return &graphql.Field{
+		Type:        graphql.NewList(types.PartAllWaggerSchemaType),
+		Description: "Get part all wagger user",
+		Args: graphql.FieldConfigArgument{
+			"uidUser": &graphql.ArgumentConfig{
+				Type: graphql.String,
+			},
+			"limit": &graphql.ArgumentConfig{
+				Type: graphql.Int,
+			},
+			"pageNumber": &graphql.ArgumentConfig{
+				Type: graphql.Int,
+			},
+		},
+
+		Resolve: partResolver.FindAllPartUserWaggerHandler,
+	}
+}

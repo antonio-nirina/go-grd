@@ -143,6 +143,7 @@ const GameList: React.FC = function() {
 							return (
 								<Link to ="#" key={index} data-uid={el.uid} onClick={onSelectedPlateform} className={selectedPl.includes(el.uid) ? "selected" : ""}>
 									<img src={el.logo} alt="playstation" width="200" />
+									<i className={selectedPl.includes(el.uid) ? "checked" : "notVisible"}><FontAwesomeIcon icon={faCheckCircle} /></i>
 								</Link>
 							)
 						})}

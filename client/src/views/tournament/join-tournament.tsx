@@ -58,10 +58,10 @@ const Joingame: React.FC = function(props:any) {
             <div className="header-part">
               <img className="item-left" src={Game} alt="" />
               <div className="join-title">
-                <h2>Wager Apex Legends - 2v2 Arène - Master</h2>
+                <h2>GO GRIND CUP - 3v3 Arène - Apex Legends</h2>
                 <p>
                   <span>23 Juillet 2021 - 12h30</span>
-                  <span>2v2 Arène</span>
+                  <span>3v3 Arène</span>
                   <span>Apex Legends</span>
                   <span>Cross-Play</span>
                 </p>
@@ -69,8 +69,8 @@ const Joingame: React.FC = function(props:any) {
             </div>
         </div>
         <div className="bar-menu-top">
-          <li><Link to="/resultat">Résultats</Link></li>
-          <li><Link to="/joingame" className="active">Général</Link></li>
+        <li><Link to="/join-tournament" className="active">Général</Link></li>
+          <li><Link to="/tableau">Tableau</Link></li>          
           <li><Link to="/waggers-rules">Règles</Link></li>
         </div>
         <div className="information-game">
@@ -81,33 +81,33 @@ const Joingame: React.FC = function(props:any) {
             <div className="item-all-content">
               <div className="item-all-info">
                 <p><span>Format</span></p>
-                <p className="item-text-left">BO3</p>
-                <p><span>Frais d'entrée</span></p>
-                <p>15€/Joueur</p>
+                <p className="item-text-left">Tableau unique</p>
+                <p><span>Début des inscriptions</span></p>
+                <p>15/07 - 12h30</p>
               </div>
               <div className="item-all-info">
                 <p><span>Spectateurs</span></p>
-                <p className="item-text-left">{wagger?.isPublic ? "Oui" : "Non"}</p>
-                <p><span>Région</span></p>
-                <p>EU</p>
+                <p className="item-text-left">Admins War Legends</p>
+                <p><span>Fin des inscriptions</span></p>
+                <p>22/07 - 22h30</p>
               </div>
               <div className="item-all-info">
                 <p><span>Map(s)</span></p>
                 <p className="item-text-left">Map(s)</p>
-                <p><span>Tchat Vocal</span></p>
-                <p>Discord</p>
+                <p><span>Tour 1</span></p>
+                <p>23:07 - 12h30</p>
               </div>
               <div className="item-all-info">
                 <p><span>Serveur</span></p>
-                <p className="item-text-left">Paris, France</p>
-                <p><span>Cash prize</span></p>
-                <p>60€</p>
+                <p className="item-text-left">Strasbourg, France</p>
+                <p><span>Tour 2</span></p>
+                <p>23:07 - 13h00</p>
               </div>
               <div className="item-all-info">
                 <p><span>Console(s)</span></p>
                 <p className="item-text-left">Xbox / PS4</p>
-                <p><span>Vainqueur</span></p>
-                <p>60€</p>
+                <p><span>Tour 3</span></p>
+                <p>23/07 - 13h30</p>
               </div>
             </div>
           </div>
@@ -128,7 +128,7 @@ const Joingame: React.FC = function(props:any) {
           </div>
         </div>
         <div className="information-game">
-          <div className="d-none /*item-info-left apart*/">
+          <div className="item-info-left apart">
             <div className="item-img-info">
             </div>
             <div className="item-all-content">

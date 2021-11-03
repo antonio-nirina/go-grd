@@ -1,7 +1,6 @@
 @charset "UTF-8";
 .home .jeux{		
-	background-repeat: no-repeat !important;
-	background-attachment: fixed !important;
+	background-repeat: no-repeat !important;	
     background-position: center !important;    
     background-size: cover !important;
     min-height: 400px !important;

@@ -1,9 +1,7 @@
 input,textarea:focus{
 	outline: none;
 }
-.d-none{
-	display: none;
-}
+
 .contact-assist input,textarea {
 	border:none;
 	outline: none;

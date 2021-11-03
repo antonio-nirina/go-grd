@@ -48,3 +48,28 @@ var PartRecords = graphql.NewObject(graphql.ObjectConfig{
 		},
 	},
 })
+
+var PartAllWaggerSchemaType = graphql.NewObject(graphql.ObjectConfig{
+	Name: "PartWaggerType",
+	Fields: graphql.Fields{
+		"uid": &graphql.Field{
+			Type: graphql.String,
+		},
+		"date": &graphql.Field{
+			Type: graphql.String,
+		},
+		"user": &graphql.Field{
+			Type: UserSchemaType,
+		},
+
+		"wagger": &graphql.Field{
+			Type: WaggerSchemaType,
+		},
+		"numberPartConfirmed": &graphql.Field{
+			Type: graphql.Boolean,
+		},
+		"isWin": &graphql.Field{
+			Type: graphql.Boolean,
+		},
+	},
+})

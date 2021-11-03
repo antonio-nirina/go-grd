@@ -25,7 +25,7 @@ type RepositoryPart interface {
 	SavedPartRepo(part *entity.Participate) (interface{}, error)
 	FindPartRepo(idQuery primitive.ObjectID) (entity.Participate, error)
 	FindAllPartRepo(pageNumber int64, limit int64) ([]entity.Participate, error)
-	FindPartUserRepo(pageNumber int64, limit int64, game primitive.ObjectID) ([]entity.Participate, error)
+	FindPartUserRepo(pageNumber int64, limit int64, user primitive.ObjectID) ([]entity.Participate, error)
 	UpdatedPartUserRepo(objectId primitive.ObjectID) (interface{}, error)
 	FindPartByTournamentRepo(userUid primitive.ObjectID, objectId primitive.ObjectID, isTeam bool) (entity.Participate, error)
 	FindPartByLeagueRepo(userUid primitive.ObjectID, objectId primitive.ObjectID) (entity.Participate, error)
@@ -73,11 +73,9 @@ func (c *DriverRepository) FindPartRepo(idQuery primitive.ObjectID) (entity.Part
 }
 
 func (c *DriverRepository) FindAllPartRepo(pageNumber int64, limit int64) ([]entity.Participate, error) {
-	var skp int64
-	skp = (pageNumber - 1) * limit
 	var collection = c.client.Database("grd_database").Collection("participate")
 	var results []entity.Participate
-	cur, err := collection.Find(context.TODO(), bson.D{{}}, options.Find().SetLimit(limit).SetSkip(skp).SetSort(bson.M{"_id": -1}))
+	cur, err := collection.Find(context.TODO(), bson.D{{}}, options.Find().SetLimit(limit).SetSkip(pageNumber).SetSort(bson.M{"_id": -1}))
 
 	if err != nil {
 		return nil, err
@@ -99,11 +97,9 @@ func (c *DriverRepository) FindAllPartRepo(pageNumber int64, limit int64) ([]ent
 }
 
 func (c *DriverRepository) FindPartUserRepo(pageNumber int64, limit int64, user primitive.ObjectID) ([]entity.Participate, error) {
-	var skp int64
-	skp = (pageNumber - 1) * limit
 	var collection = c.client.Database("grd_database").Collection("participate")
 	var results []entity.Participate
-	cur, err := collection.Find(context.TODO(), bson.D{{"user.uid", user}}, options.Find().SetLimit(limit).SetSkip(skp).SetSort(bson.M{"_id": -1}))
+	cur, err := collection.Find(context.TODO(), bson.D{{"user.uid", user}}, options.Find().SetLimit(limit).SetSkip(pageNumber).SetSort(bson.M{"_id": -1}))
 
 	if err != nil {
 		return nil, err
@@ -232,5 +228,3 @@ func (c *DriverRepository) FindPartByWaggerRepo(userUid primitive.ObjectID, uidW
 
 	return result, nil
 }
-
-

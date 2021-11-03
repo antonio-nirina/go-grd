@@ -24,12 +24,13 @@ const Ahead: React.FC = function() {
     	<div className = {Object.keys(userConnectedRedux.user).length > 0 ? "full connected" : "full"}>
 	    	<div className="Left">
 	      		<div className="slogan">
-	      			<p className="title">{
+	      			<h2 className="title">{
 						Object.keys(userConnectedRedux.user).length > 0 ?
 						Translation(userConnectedRedux.user.language).participHome.plateform
 						:
 						Translation("fr").participHome.plateform
-					}</p>
+					}</h2>
+					<p>Rejoins plus de 10 000 joueurs quotidien</p>
 	      			<button className="btn bg-red">
 					  {
 						Object.keys(userConnectedRedux.user).length > 0 ?

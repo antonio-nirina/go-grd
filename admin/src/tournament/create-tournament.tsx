@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 import {useHistory } from "react-router-dom"
 import {useMutation,useQuery} from "@apollo/client"
 import { useForm } from "react-hook-form"
-import { faPlus} from "@fortawesome/free-solid-svg-icons"
+import { faPlus,faTimes} from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import "react-datetime/css/react-datetime.css"
 import Datetime from "react-datetime"
@@ -11,12 +11,14 @@ import moment from 'moment'
 import 'moment/locale/fr'
 import SunEditor from 'suneditor-react'
 import 'suneditor/dist/css/suneditor.min.css'
+import Select from 'react-select'
 
 import SideBar from "../header/sidebar"
 import Nav from "../header/nav"
 import {CREATED_TOURNAMENT} from "../gql/tournament/mutation"
 import {GET_ALL_GAMES,GET_ALL_PLATEFORM} from "../gql/games/query"
 import "./tournament.css"
+import { type } from "os"
 
 type Inputs = {
 	participant: number,
@@ -24,28 +26,55 @@ type Inputs = {
 	price:number,
 	numberTeam:number,
 	priceParticipate:number,
+	spectateur:string,
+	format:string,
+	region:string,
+	server:string
+}
+type PlateformSelect = {
+	label:string,
+	value:string
+}
+type Plateforms = {
+	uid:string,
+	name:string,
+	logo:string,
+	description:string
 }
 
 const CreateTournament: React.FC = function() {
 	const history = useHistory()
 	const { register, handleSubmit } 	= useForm<Inputs>()
 	const [games,setGames] 				= useState<Array<any>>([])
-	const [plateforms,setPlateforms] 	= useState<Array<any>>([])
-	const [isValid,setIsValid] 			= useState<Boolean>(false)
-	const [uiGame,setUiGame] 			= useState<String>("")
-	const [uidPlateform,setUidPlateform] = useState<String>("")
-	const [startDate, setStartDate] 	= useState<String>("")
-	const [lastDate, setLastDate] 		= useState<String>("")
+	const [plateforms,setPlateforms] 	= useState<PlateformSelect[]>([])
+	const [isValid,setIsValid] 			= useState<boolean>(false)
+	const [uiGame,setUiGame] 			= useState<string>("")
+	const [uidPlateform,setUidPlateform] = useState<string>("")
+	const [startDate, setStartDate] 	= useState<string>("")
+	const [lastDate, setLastDate] 		= useState<string>("")
+	const [lapsDate, setLapsDate] 		= useState<string[]>([])
 	const [rules, setRules] 	= useState<String>("")
-	const [info, setInfo] 		= useState<String>("")
+	// const [info, setInfo] 		= useState<String>("")
+	const [arrayForm, setArrayForm] 		= useState<number[]>([1])
+	const [number, setNumber] 		= useState<number>(1)
 	const [createdTournament]  			= useMutation(CREATED_TOURNAMENT)
 
 	const {loading,error,data} = useQuery(GET_ALL_GAMES)
 	const {loading:loadingP,error:errorP,data:dataP} = useQuery(GET_ALL_PLATEFORM)
 
 	useMemo(() => {
+		console.log(dataP)
 		if(!loading && !error && data) setGames(data.FindAllGame)
-		if(!loadingP && !errorP && dataP) setPlateforms(dataP.FindAllPlateform)
+		if(!loadingP && !errorP && dataP) {
+			let arrayPl:PlateformSelect[] = []
+			dataP.FindAllPlateform.forEach(function(pl:Plateforms) {
+				arrayPl.push({
+					label:pl.uid,
+					value:pl.name
+				})
+			})
+			setPlateforms(arrayPl)
+		}
 	},[loading,error,data,loadingP,errorP,dataP])
 
 	const onSubmit = async function(data:Inputs){
@@ -53,24 +82,25 @@ const CreateTournament: React.FC = function() {
 			setIsValid(true)
 		}
 
-		try {
+		/*try {
 			const result = await createdTournament({ variables: {
 				date:startDate,
 				title:data.title,
 				uidGame:uiGame,
 				uidPalteforme:uidPlateform,
-				description:info,
+				description:"",//info
 				numberParticipate:Math.pow(2,(Math.ceil(Math.log2(Number(data.participant))))),
 				numberTeam:data.numberTeam,
 				price:data.price,
 				deadlineDate:lastDate,
 				priceParticipate:data.priceParticipate,
-				rules:rules
+				rules:rules,
+				laps:lapsDate.join("_")
 			} })
 			if (result.data.saveTournament) history.push("/admin/tournament")
 		} catch(e:unknown) {
 			console.log("error", e)
-		}
+		}*/
 
 	}
 
@@ -90,14 +120,32 @@ const CreateTournament: React.FC = function() {
 		setLastDate(moment(date._d).toString())
 	}
 
+	const handleDateLaps = function(date:any) {
+		setLapsDate([...lapsDate,moment(date._d).toString()])
+	}
+
 	const handleRulesText = function(content: string) {
 		setRules(content)
 	}
 
-	const handleInfoText = function(content: string) {
-		setInfo(content)
+	/*
+		const handleInfoText = function(content: string) {
+			setInfo(content)
+		}
+	*/
+
+	const addForm = function() {
+		setNumber(number+1)
+		setArrayForm([...arrayForm,number+1])
 	}
 
+	const removeLine = function(index:number) {
+		if(number > 1) {
+			const arr = arrayForm.splice(1,index)
+			setArrayForm(arr)
+			setNumber(number-1)
+		}
+	}
 
 	return(
 	    <div className="admin create-tournament">
@@ -135,23 +183,13 @@ const CreateTournament: React.FC = function() {
                                                 			)
 	                                                	})
 	                                                }
-	                                            </select>
+	                                            </select>	                                            
 												<Datetime
 												 	locale="fr"
 													onChange={handleDate}
 													inputProps={{placeholder:"Date debut tournois"}}
-												/>
-	                                            <select id="platform" onChange={handlePlateform}>
-	                                                <option value="">Selectionnez les plateformes...</option>
-	                                                {
-	                                                	plateforms?.map(function(el:any,index:number) {
-	                                                		return(
-	                                                			<option key={index} value={el.uid}>{el.name}</option>
-                                                			)
-	                                                	})
-	                                                }
-
-	                                            </select>
+												/>		
+												<Select id="platform" onChange={handlePlateform} options={plateforms} />										                                            
 	                                            <div className="wysiwyg">
 		                                            <SunEditor
 														placeholder="Règle du jeux"
@@ -184,29 +222,24 @@ const CreateTournament: React.FC = function() {
 	                                            </div>
 	                                            <div className="input-group">
 	                                                <input type="number" placeholder="Prix à gagner" {...register("price")} name="price" />
-	                                                <input type="number" placeholder="Frais de participation" {...register("priceParticipate")} name="priceParticipate" className="no-margin"/>
+	                                                <input type="text" placeholder="Frais de participation" {...register("priceParticipate")} name="priceParticipate" className="no-margin"/>
 	                                            </div>
-	                                            <Datetime locale="fr" onChange={handleDateLast} inputProps={{placeholder:"Deadline date tournois"}} />
-	                                            <div className="wysiwyg">
-		                                            <SunEditor
-														placeholder="Info sur le jeux"
-														onChange={handleInfoText}
-													 	setOptions={
-															{
-																buttonList:[
-																	['undo', 'redo',
-																		'font', 'fontSize', 'formatBlock',
-																		'bold', 'italic',
-																		'fontColor', 'hiliteColor', 'textStyle',
-																		'removeFormat',
-																		'outdent', 'indent',
-																		'align', 'horizontalRule', 'list', 'lineHeight',
-																		'link', 'image',
-																	]
-																]
-															}
-													} />
-												</div>
+	                                            <Datetime locale="fr" onChange={handleDateLast} inputProps={{placeholder:"Fin d'inscription"}} />
+												<input type="text" placeholder="Format" {...register("format")} name="format" className="no-margin"/>
+												<input type="text" placeholder="Serveur" {...register("server")} name="format" className="no-margin"/>
+												<input type="text" placeholder="Spectateur" {...register("spectateur")} name="format" className="no-margin"/>
+												<input type="text" placeholder="Region" {...register("region")} name="format" className="no-margin"/>
+												{
+													arrayForm.map(function(el:number,index:number) {
+														return (
+															<div className="tour" key={index}>
+																<Datetime locale="fr" onChange={handleDateLaps} inputProps={{placeholder:`Date du tour ${index+1}`}} />
+																<div onClick={addForm} id="add-tour" className="btn bg-red"><i><FontAwesomeIcon icon={faPlus} size="lg"/></i>Ajouter Nouveau tour</div>
+																<div onClick={() => removeLine(index)} className= {index === 0 || arrayForm.length === 1 ? "d-none":"btn bg-white"}><i><FontAwesomeIcon icon={faTimes} size="lg"/></i>Supprimer</div>
+															</div>
+														)
+													})
+												}
 												<div className="create-tournament-game">
 	        										<Link to="/admin"><button className="btn bg-white"> Annuler</button></Link>
                                 					<button type="submit" className="btn bg-red"><FontAwesomeIcon icon={faPlus} /> Enregistrer</button>
