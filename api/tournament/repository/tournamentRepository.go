@@ -127,7 +127,7 @@ func (c *DriverRepository) UpdatedTournament(tournament *entity.Tournament) (int
 				"title", tournament.Title,
 			},
 			{
-				"dateDebut", tournament.DateDebut,
+				"dateDebut", tournament.DateStart,
 			},
 			{
 				"game", tournament.Game,

@@ -77,3 +77,13 @@ export const dateDefault = function(){
 				minute:"numeric"
 			})
 }
+
+export const dateStringToJoinT = function(date = ""){
+	return new Date(date).toLocaleTimeString('fr-Fr', {
+				day : 'numeric',
+				month : 'long',
+				year : 'numeric',
+				hour:"2-digit",
+				minute:"numeric"
+	}).split("à").join("-")
+}

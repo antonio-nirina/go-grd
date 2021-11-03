@@ -3,7 +3,7 @@ package handler
 type tournamentViewModel struct {
 	Uid               string               `json:"uid"`
 	Title             string               `json:"title"`
-	DateDebut         string               `json:"dateDebut"`
+	DateStart         string               `json:"dateStart"`
 	Description       string               `json:"description"`
 	Statut            bool                 `json:"statut"`
 	NumberParticipate int                  `json:"numberParticipate"`
@@ -44,7 +44,7 @@ type PlateformViewModel struct {
 type TournamentViewModel struct {
 	Uid               string               `json:"uid"`
 	Title             string               `json:"title"`
-	DateDebut         string               `json:"dateDebut"`
+	DateStart         string               `json:"dateStart"`
 	Description       string               `json:"description"`
 	Statut            bool                 `json:"statut"`
 	NumberParticipate int                  `json:"numberParticipate"`

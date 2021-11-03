@@ -63,7 +63,6 @@ const CreateTournament: React.FC = function() {
 	const {loading:loadingP,error:errorP,data:dataP} = useQuery(GET_ALL_PLATEFORM)
 
 	useMemo(() => {
-		console.log(dataP)
 		if(!loading && !error && data) setGames(data.FindAllGame)
 		if(!loadingP && !errorP && dataP) {
 			let arrayPl:PlateformSelect[] = []
@@ -93,6 +92,10 @@ const CreateTournament: React.FC = function() {
 				numberTeam:data.numberTeam ? data.numberTeam  : 0,
 				price:data.price,
 				deadlineDate:lastDate,
+				server:data.server,
+				format:data.format,
+				spectateur:data.spectateur,
+				region:data.region,
 				priceParticipate:data.priceParticipate ? data.priceParticipate : "Invitation",
 				rules:rules,
 				laps:lapsDate.join("_")
@@ -110,8 +113,8 @@ const CreateTournament: React.FC = function() {
 
 	const handlePlateform = function(event:any) {
 		let uids:string[] = []
-		event.forEach(function(e:string) {
-			uids.push(e)
+		event.forEach(function(e:PlateformSelect) {
+			uids.push(e.value)
 		})
 		setUidPlateform(uids)
 	}
@@ -187,13 +190,13 @@ const CreateTournament: React.FC = function() {
                                                 			)
 	                                                	})
 	                                                }
-	                                            </select>	                                            
+	                                            </select>
 												<Datetime
 												 	locale="fr"
 													onChange={handleDate}
 													inputProps={{placeholder:"Date debut tournois"}}
-												/>		
-												<Select isMulti id="platform" onChange={handlePlateform} options={plateforms} />										                                            
+												/>
+												<Select isMulti id="platform" onChange={handlePlateform} options={plateforms} />
 	                                            <div className="wysiwyg">
 		                                            <SunEditor
 														placeholder="Règle du jeux"

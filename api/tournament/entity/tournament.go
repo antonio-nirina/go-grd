@@ -8,7 +8,7 @@ import (
 type Tournament struct {
 	Uid               primitive.ObjectID  `bson:"uid"`
 	Title             string              `json:"title"`
-	DateDebut         string              `json:"dateDebut"`
+	DateStart         string              `json:"dateStart"`
 	Game              game.Game           `json:"game,omitempty"`
 	Plateform         []game.GamePlatform `json:"plateform,omitempty"`
 	NumberParticipate int                 `json:"numberParticipate"`

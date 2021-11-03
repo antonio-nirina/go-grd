@@ -64,7 +64,7 @@ const TournamentGame = function(props:any) {
 							{
 								tournament && tournament.length > 0 ? tournament.map(function(el:Tournament,index:number){
 									return (
-										<Link to="/joingame" className="waggers-data" key={index}>
+										<Link to={`/join-tournament?uid=${el.uid}`} className="waggers-data" key={index}>
 											<p>
 												<span>
 													{userConnectedRedux.user.language === "fr" ? dateStringToDY(el.date) : dateStringToDYEn(el.date)}

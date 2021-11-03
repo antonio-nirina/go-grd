@@ -11,12 +11,12 @@ export interface Tournament {
 	tchat:string
 	date:string
 	price:number
-	priceParticipate:number
+	priceParticipate:string
 	rules:string
 	isTeam:boolean
 	isPublic:Boolean|undefined
 	game:Game
-	plateform:Platform
+	plateform:Platform[]
 }
 
 export interface Game {

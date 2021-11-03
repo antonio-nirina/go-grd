@@ -64,7 +64,7 @@ func (t *tournamentUsecase) FindTournamentHandler(idQuery string) (tournamentVie
 		Title:             result.Title,
 		Description:       result.Info,
 		Statut:            result.Statut,
-		DateDebut:         result.DateDebut,
+		DateStart:         result.DateStart,
 		NumberParticipate: result.NumberParticipate,
 		NumberTeam:        result.NumberTeam,
 		Price:             result.Price,
@@ -115,7 +115,7 @@ func (t *tournamentUsecase) FindAllTournamentHandler(pageNumber int64, limit int
 		tournamentViewModel := tournamentViewModel{
 			Uid:               val.Uid.Hex(),
 			Title:             val.Title,
-			DateDebut:         val.DateDebut,
+			DateStart:         val.DateStart,
 			Description:       val.Info,
 			Statut:            val.Statut,
 			NumberParticipate: val.NumberParticipate,
@@ -167,7 +167,7 @@ func (t *tournamentUsecase) FindTournamentGameHandler(pageNumber int64, limit in
 		tournamentViewModel := tournamentViewModel{
 			Uid:               val.Uid.Hex(),
 			Title:             val.Title,
-			DateDebut:         val.DateDebut,
+			DateStart:         val.DateStart,
 			Description:       val.Info,
 			Statut:            val.Statut,
 			NumberParticipate: val.NumberParticipate,
