@@ -15,7 +15,7 @@ type Tournament struct {
 	NumberTeam        int                 `json:"numberTeam"`
 	Price             float64             `json:"price"`
 	DeadlineDate      string              `json:"deadlineDate"`
-	PriceParticipate  float64             `json:"priceParticipate"`
+	PriceParticipate  string              `json:"priceParticipate"`
 	Statut            bool                `json:"statut"`
 	Info              string              `json:"info"`
 	Rules             string              `json:"rules"`

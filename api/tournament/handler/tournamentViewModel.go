@@ -10,7 +10,7 @@ type tournamentViewModel struct {
 	NumberTeam        int                  `json:"numberTeam"`
 	Price             float64              `json:"price"`
 	DeadlineDate      string               `json:"deadlineDate"`
-	PriceParticipate  float64              `json:"priceParticipate"`
+	PriceParticipate  string               `json:"priceParticipate"`
 	Game              GameViewModel        `json:"game"`
 	Plateform         []PlateformViewModel `json:"plateform"`
 	Info              string               `json:"info"`
@@ -51,7 +51,7 @@ type TournamentViewModel struct {
 	NumberTeam        int                  `json:"numberTeam"`
 	Price             float64              `json:"price"`
 	DeadlineDate      string               `json:"deadlineDate"`
-	PriceParticipate  float64              `json:"priceParticipate"`
+	PriceParticipate  string               `json:"priceParticipate"`
 	Game              GameViewModel        `json:"game"`
 	Plateform         []PlateformViewModel `json:"plateform"`
 	Rules             string               `json:"rules"`
