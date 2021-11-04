@@ -39,7 +39,7 @@ const InitPass: React.FC = function() {
 				<div className="containt">
 					<div className="group">
 					<h2>
-						Réinitialisation mot de passe
+						Mot de passe oublié
 					</h2>
 						<div>
 							<span style={{"color":"red"}}>{errorForm ? Translation("fr").login.errorForm : ""}</span>
@@ -47,26 +47,18 @@ const InitPass: React.FC = function() {
 						<div className="register-field">
 							<div className="alert alert-success text-center">{!errorForm ? "" : "Un mail de changement de mot de passe vous a été envoyé"}</div>
 							<div className="center-width">
-								<span className="major">Entre ton email afin de réinitialiser ton mot de passe</span>
+								<span className="major">Mot de passe changé avec succès</span>
 							</div>
-							<form onSubmit={handleSubmit(onSubmit)} className="fieldset">
-								<div className="field-container">
-									<div className="input-field">
-										<input className="mgt10" type = "email" placeholder = "Ton email" {...register("email", { required: true })} name="email" required/>
-									</div>
-									<div className="input-field">
-										<button className="btn bg-red mg15">
-											Réinitialiser mon mot de passe
-										</button>
+							<div className="fieldset changed">
+								<div className="field-container">									
+									<div className="center-width field-container">
+										<div className="infos">
+											<p className="member"><Link to = "/login" title="Se connecter">Se connecter</Link></p>
+										</div>
 									</div>
 								</div>
-							</form>							
-						</div>
-						<div className="center-width field-container">
-							<div className="infos">
-								<p className="member"><Link to = "/login" title="Pas encore membre ?">Se connecter</Link></p>
-							</div>
-						</div>
+							</div>							
+						</div>						
 					</div>
 				</div>
 			</div>

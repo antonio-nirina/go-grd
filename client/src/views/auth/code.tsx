@@ -10,12 +10,14 @@ import {FORGOT_PASSWORD} from "../../gql/user/mutation"
 import Footer from "../footer/footer"
 import "../auth/initpass.css"
 import "../../assets/css/style.css"
+import {faArrowLeft} from "@fortawesome/free-solid-svg-icons"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 type Inputs = {
 	email:string
 }
 
-const InitPass: React.FC = function() {
+const Code: React.FC = function() {
 	const history = useHistory()
 	const { register, handleSubmit } = useForm<Inputs>()
 	const [errorForm,setErrorForm] = useState<boolean>(false)
@@ -39,34 +41,31 @@ const InitPass: React.FC = function() {
 				<div className="containt">
 					<div className="group">
 					<h2>
-						Réinitialisation mot de passe
+						Mot de passe oublié
 					</h2>
 						<div>
 							<span style={{"color":"red"}}>{errorForm ? Translation("fr").login.errorForm : ""}</span>
 						</div>
 						<div className="register-field">
-							<div className="alert alert-success text-center">{!errorForm ? "" : "Un mail de changement de mot de passe vous a été envoyé"}</div>
+							<div className="alert alert-success text-center">{!errorForm ? "" : "Le code saisie est erroné"}</div>
 							<div className="center-width">
-								<span className="major">Entre ton email afin de réinitialiser ton mot de passe</span>
+								<span className="major">Un email à été envoyé au jhon3@gmail.com, veuillez recopier le code à 6 chiffres</span>
 							</div>
 							<form onSubmit={handleSubmit(onSubmit)} className="fieldset">
 								<div className="field-container">
-									<div className="input-field">
-										<input className="mgt10" type = "email" placeholder = "Ton email" {...register("email", { required: true })} name="email" required/>
+									<div className="input-field code-field">
+										<label htmlFor="code">Code</label>
+										<input id="code" className="mgt10" type = "text" required/>
 									</div>
-									<div className="input-field">
-										<button className="btn bg-red mg15">
-											Réinitialiser mon mot de passe
+									<div className="input-field code-btn">
+										<i><FontAwesomeIcon icon={faArrowLeft} /></i>
+										<button className="btn bg-transparent mg15">
+											Verifier
 										</button>
 									</div>
 								</div>
 							</form>							
-						</div>
-						<div className="center-width field-container">
-							<div className="infos">
-								<p className="member"><Link to = "/login" title="Pas encore membre ?">Se connecter</Link></p>
-							</div>
-						</div>
+						</div>						
 					</div>
 				</div>
 			</div>
@@ -76,4 +75,4 @@ const InitPass: React.FC = function() {
 	)
 }
 
-export default InitPass;
+export default Code;
