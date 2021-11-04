@@ -34,6 +34,9 @@ import Jackpot from "../parametre/jackpot"
 import Mygames from "../parametre/mygames"
 import Inscription from "../auth/inscription"
 import InitPass from "../auth/initpass"
+import Code from "../auth/code"
+import NewPassword from "../auth/new-password"
+import Change from "../auth/change"
 import UpdatePassword from "../auth/updatePassword"
 import ProtectedRoute from "./protectedRoute"
 import Register from "../auth/register"
@@ -88,6 +91,9 @@ const Router = function() {
 			<Route path="/game" exact component={Game} />
 			<Route path="/account" exact component={Account} />
 			<Route path="/forgot-password" exact component={InitPass} />
+			<Route path="/code" exact component={Code} />
+			<Route path="/new-password" exact component={NewPassword} />
+			<Route path="/change" exact component={Change} />
 		</Switch>
 	)
 }
