@@ -24,7 +24,7 @@ func saveTournament() *graphql.Field {
 			"description": &graphql.ArgumentConfig{
 				Type: graphql.String,
 			},
-			"numberParticipate":&graphql.ArgumentConfig{
+			"numberParticipate": &graphql.ArgumentConfig{
 				Type: graphql.Int,
 			},
 			"numberTeam": &graphql.ArgumentConfig{
@@ -37,12 +37,27 @@ func saveTournament() *graphql.Field {
 				Type: graphql.String,
 			},
 			"priceParticipate": &graphql.ArgumentConfig{
-				Type: graphql.Float,
+				Type: graphql.String,
 			},
 			"rules": &graphql.ArgumentConfig{
 				Type: graphql.String,
 			},
+			"laps": &graphql.ArgumentConfig{
+				Type: graphql.String,
+			},
+			"server": &graphql.ArgumentConfig{
+				Type: graphql.String,
+			},
+			"format": &graphql.ArgumentConfig{
+				Type: graphql.String,
+			},
+			"spectateur": &graphql.ArgumentConfig{
+				Type: graphql.String,
+			},
+			"region": &graphql.ArgumentConfig{
+				Type: graphql.String,
+			},
 		},
-		Resolve:     tournamentResolver.SavedTournamentResolver,
+		Resolve: tournamentResolver.SavedTournamentResolver,
 	}
 }

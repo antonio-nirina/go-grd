@@ -49,7 +49,7 @@ const CreateTournament: React.FC = function() {
 	const [plateforms,setPlateforms] 	= useState<PlateformSelect[]>([])
 	const [isValid,setIsValid] 			= useState<boolean>(false)
 	const [uiGame,setUiGame] 			= useState<string>("")
-	const [uidPlateform,setUidPlateform] = useState<string>("")
+	const [uidPlateform,setUidPlateform] = useState<string[]>([])
 	const [startDate, setStartDate] 	= useState<string>("")
 	const [lastDate, setLastDate] 		= useState<string>("")
 	const [lapsDate, setLapsDate] 		= useState<string[]>([])
@@ -63,14 +63,13 @@ const CreateTournament: React.FC = function() {
 	const {loading:loadingP,error:errorP,data:dataP} = useQuery(GET_ALL_PLATEFORM)
 
 	useMemo(() => {
-		console.log(dataP)
 		if(!loading && !error && data) setGames(data.FindAllGame)
 		if(!loadingP && !errorP && dataP) {
 			let arrayPl:PlateformSelect[] = []
 			dataP.FindAllPlateform.forEach(function(pl:Plateforms) {
 				arrayPl.push({
-					label:pl.uid,
-					value:pl.name
+					label:pl.name,
+					value:pl.uid
 				})
 			})
 			setPlateforms(arrayPl)
@@ -82,25 +81,29 @@ const CreateTournament: React.FC = function() {
 			setIsValid(true)
 		}
 
-		/*try {
+		try {
 			const result = await createdTournament({ variables: {
 				date:startDate,
 				title:data.title,
 				uidGame:uiGame,
-				uidPalteforme:uidPlateform,
+				uidPalteforme:uidPlateform.join("_"),
 				description:"",//info
 				numberParticipate:Math.pow(2,(Math.ceil(Math.log2(Number(data.participant))))),
-				numberTeam:data.numberTeam,
+				numberTeam:data.numberTeam ? data.numberTeam  : 0,
 				price:data.price,
 				deadlineDate:lastDate,
-				priceParticipate:data.priceParticipate,
+				server:data.server,
+				format:data.format,
+				spectateur:data.spectateur,
+				region:data.region,
+				priceParticipate:data.priceParticipate ? data.priceParticipate : "Invitation",
 				rules:rules,
 				laps:lapsDate.join("_")
 			} })
 			if (result.data.saveTournament) history.push("/admin/tournament")
 		} catch(e:unknown) {
 			console.log("error", e)
-		}*/
+		}
 
 	}
 
@@ -109,7 +112,11 @@ const CreateTournament: React.FC = function() {
 	}
 
 	const handlePlateform = function(event:any) {
-		setUidPlateform(event.target.value)
+		let uids:string[] = []
+		event.forEach(function(e:PlateformSelect) {
+			uids.push(e.value)
+		})
+		setUidPlateform(uids)
 	}
 
 	const handleDate = function(date:any) {
@@ -183,13 +190,13 @@ const CreateTournament: React.FC = function() {
                                                 			)
 	                                                	})
 	                                                }
-	                                            </select>	                                            
+	                                            </select>
 												<Datetime
 												 	locale="fr"
 													onChange={handleDate}
 													inputProps={{placeholder:"Date debut tournois"}}
-												/>		
-												<Select id="platform" onChange={handlePlateform} options={plateforms} />										                                            
+												/>
+												<Select isMulti id="platform" onChange={handlePlateform} options={plateforms} />
 	                                            <div className="wysiwyg">
 		                                            <SunEditor
 														placeholder="Règle du jeux"

@@ -138,7 +138,7 @@ func (p *partUsecase) FindPartHandler(idQuery string) (partViewModel, error) {
 		Tournament: tHandler.TournamentViewModel{
 			result.Tournament.Uid.Hex(),
 			result.Tournament.Title,
-			result.Tournament.DateDebut,
+			result.Tournament.DateStart,
 			result.Tournament.Info,
 			result.Tournament.Statut,
 			result.Tournament.NumberParticipate,
@@ -258,7 +258,7 @@ func (p *partUsecase) FindAllPartHandler(pageNumber int64, limit int64) ([]partV
 			Tournament: tHandler.TournamentViewModel{
 				result.Tournament.Uid.Hex(),
 				result.Tournament.Title,
-				result.Tournament.DateDebut,
+				result.Tournament.DateStart,
 				result.Tournament.Info,
 				result.Tournament.Statut,
 				result.Tournament.NumberParticipate,
@@ -381,7 +381,7 @@ func (p *partUsecase) FindPartUserHandler(pageNumber int64, limit int64, userUid
 			Tournament: tHandler.TournamentViewModel{
 				result.Tournament.Uid.Hex(),
 				result.Tournament.Title,
-				result.Tournament.DateDebut,
+				result.Tournament.DateStart,
 				result.Tournament.Info,
 				result.Tournament.Statut,
 				result.Tournament.NumberParticipate,
@@ -524,7 +524,7 @@ func (p *partUsecase) FindPartUserLeagueHandler(userUid primitive.ObjectID, leag
 		Tournament: tHandler.TournamentViewModel{
 			result.Tournament.Uid.Hex(),
 			result.Tournament.Title,
-			result.Tournament.DateDebut,
+			result.Tournament.DateStart,
 			result.Tournament.Info,
 			result.Tournament.Statut,
 			result.Tournament.NumberParticipate,
@@ -652,7 +652,7 @@ func (p *partUsecase) FindPartUserTournamentHandler(uidUser primitive.ObjectID, 
 		Tournament: tHandler.TournamentViewModel{
 			result.Tournament.Uid.Hex(),
 			result.Tournament.Title,
-			result.Tournament.DateDebut,
+			result.Tournament.DateStart,
 			result.Tournament.Info,
 			result.Tournament.Statut,
 			result.Tournament.NumberParticipate,

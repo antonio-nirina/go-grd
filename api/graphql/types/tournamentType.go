@@ -13,7 +13,7 @@ var TournamentSchemaType = graphql.NewObject(graphql.ObjectConfig{
 		"title": &graphql.Field{
 			Type: graphql.String,
 		},
-		"date": &graphql.Field{
+		"dateStart": &graphql.Field{
 			Type: graphql.String,
 		},
 		"statut": &graphql.Field{

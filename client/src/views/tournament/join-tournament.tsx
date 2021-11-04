@@ -10,7 +10,7 @@ import Footer from "../footer/footer"
 
 import { faChevronCircleUp} from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-
+import {GET_ONE_TOURNAMENT} from "../../gql/tournament/query"
 import "../../assets/css/style.css"
 import "../annexe/tournois.css"
 import "../waggers/waggers.css"
@@ -18,26 +18,25 @@ import "../participate/participate.css"
 
 import Game from "../../assets/image/game.png"
 import Apex from "../../assets/image/apex-legends.png"
-import {Wagger} from "../models/wagger"
-
-import {GET_ONE_WAGGER} from "../../gql/wagger/query"
-
+import {dateStringToJoinT} from "../tools/dateConvert"
+import {Tournament} from "../models/tournament"
 
 const Joingame: React.FC = function(props:any) {
-  	const [showClose, setShowClose] = useState(false)  	
-  	const [wagger, setWagger] = useState<Wagger>()
+  	const [showClose, setShowClose] = useState(false)
+  	const [tournament, setTournament] = useState<Tournament>()
 	const params = new URLSearchParams(props.location.search)
 	const uid:string|null = params.get("uid")
 
-	const {loading,error,data} 	= useQuery(GET_ONE_WAGGER, {
+	const {loading,error,data} 	= useQuery(GET_ONE_TOURNAMENT, {
 		variables: {
 			uid:uid,
 		},
 	})
 
 	useEffect(() => {
+		console.log(data)
 		if(!loading && !error && data) {
-			setWagger(data.FindOneWagger)
+			setTournament(data.FindOneTournament)
 		}
 
 	},[loading,error,data])
@@ -45,7 +44,7 @@ const Joingame: React.FC = function(props:any) {
   	const onShowClose = function(){
     	setShowClose(!showClose)
   	}
-  	
+
   return(
   	<div className="container">
   		<Header />
@@ -58,25 +57,25 @@ const Joingame: React.FC = function(props:any) {
             <div className="header-part">
               <img className="item-left" src={Game} alt="" />
               <div className="join-title">
-                <h2>GO GRIND CUP - 3v3 Arène - Apex Legends</h2>
+                <h2>{tournament?.title} - {tournament?.isTeam ? `${tournament.numberTeam}v${tournament.numberTeam}`:"1v1" } - {tournament?.game.name}</h2>
                 <p>
-                  <span>23 Juillet 2021 - 12h30</span>
-                  <span>3v3 Arène</span>
-                  <span>Apex Legends</span>
-                  <span>Cross-Play</span>
+                  <span>{dateStringToJoinT(tournament?.date)}</span>
+                  <span>{tournament?.isTeam ? `${tournament.numberTeam}v${tournament.numberTeam}`:"1v1" }</span>
+                  <span>{tournament?.game.name}</span>
+                  <span>{tournament?.plateform && tournament?.plateform.length > 0 ? "Cross-Play" : ""} </span>
                 </p>
               </div>
             </div>
         </div>
         <div className="bar-menu-top">
         <li><Link to="/join-tournament" className="active">Général</Link></li>
-          <li><Link to="/tableau">Tableau</Link></li>          
+          <li><Link to="/tableau">Tableau</Link></li>
           <li><Link to="/waggers-rules">Règles</Link></li>
         </div>
         <div className="information-game">
           <div className="item-info-left">
             <div className="item-img-info">
-              <img src={Apex} alt=""/>
+              <img src={tournament?.game.logo} alt=""/>
             </div>
             <div className="item-all-content">
               <div className="item-all-info">
@@ -113,7 +112,7 @@ const Joingame: React.FC = function(props:any) {
           </div>
           <div className="item-info-right">
             <div className="join-all">
-              <p className="team-bar-title">{!showClose! ? "Equipes 1/2" : "Equipes 2/2"}</p>              
+              <p className="team-bar-title">{!showClose! ? "Equipes 1/2" : "Equipes 2/2"}</p>
               <button className="btn bg-red" onClick={onShowClose}>{!showClose ? "Rejoindre" : "Quitter"}</button>
               <button className={showClose ? "btn bg-green-light":"d-none"}>Lancer</button>
               <div className="profil-join">
@@ -155,7 +154,7 @@ const Joingame: React.FC = function(props:any) {
         </div>
         <div className="clear"></div>
 				<Footer/>
-  			</div>
+		</div>
   		</div>
   	</div>
   )

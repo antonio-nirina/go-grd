@@ -11,7 +11,12 @@ export const CREATED_TOURNAMENT = gql`
 		$numberTeam:Int,
 		$price:Float,
 		$deadlineDate:String,
-		$priceParticipate:Float,
+		$priceParticipate:String,
+		$laps:String,
+		$server:String,
+		$format:String,
+		$spectateur:String,
+		$region:String,
 		$rules:String){
 		saveTournament(
 			date:$date,
@@ -24,6 +29,11 @@ export const CREATED_TOURNAMENT = gql`
 			price:$price,
 			rules:$rules,
 			deadlineDate:$deadlineDate,
+			laps:$laps,
+			server:$server,
+			format:$format,
+			spectateur:$spectateur,
+			region:$region,
 			priceParticipate:$priceParticipate)
 	}
 `
