@@ -13,7 +13,7 @@ type Tournament struct {
 	Plateform         []game.GamePlatform `json:"plateform,omitempty"`
 	NumberParticipate int                 `json:"numberParticipate"`
 	NumberTeam        int                 `json:"numberTeam"`
-	Price             float64             `json:"price"`
+	Price             []string             `json:"price"`
 	DeadlineDate      string              `json:"deadlineDate"`
 	PriceParticipate  string              `json:"priceParticipate"`
 	Statut            bool                `json:"statut"`
@@ -25,6 +25,7 @@ type Tournament struct {
 	Server            string              `json:"server,omitempty"`
 	Tchat             string              `json:"tchat,omitempty"`
 	Winners           []string            `json:"winners,omitempty"`
+	Maps             string              `json:"maps,omitempty"`
 	Region            string              `json:"region,omitempty"`
 	Spectateur        string              `json:"spectateur,omitempty"`
 	Laps              []string            `json:"laps,omitempty"`

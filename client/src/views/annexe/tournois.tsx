@@ -127,7 +127,7 @@ const Tournois: React.FC = function() {
 																</thead>
 																<tbody>
 																	<tr>
-																		<td>{userConnectedRedux.user.language === "fr" ? dateStringToDY(el.date) : dateStringToDY(el.date)}</td>
+																		<td>{userConnectedRedux.user.language === "fr" ? dateStringToDY(el.dateStart) : dateStringToDY(el.dateStart)}</td>
 																		<td>{`0/${el.numberParticipate}`}</td>
 																		<td>{el.numberTeam > 0 ? `${el.numberTeam} ON ${el.numberTeam}` : "1 ON 1" }</td>
 																	</tr>
@@ -233,7 +233,7 @@ const Tournois: React.FC = function() {
 															<div><p className="legend">{el.tournament.title}</p><i className="iconGame"><FontAwesomeIcon icon={faGamepad}/></i></div>
 															<div className="info">
 																<p className="price inblock"><i className="sprite cup"></i><span>{el.tournament.title}</span></p>
-																<p className="date inblock"><i className="sprite calendar"></i>{userConnectedRedux.user.language === "fr" ? dateStringToDY(el.date) : dateStringToDY(el.date)}</p>
+																<p className="date inblock"><i className="sprite calendar"></i>{userConnectedRedux.user.language === "fr" ? dateStringToDY(el.dateStart) : dateStringToDY(el.dateStart)}</p>
 															</div>
 														</div>
 													)
@@ -244,7 +244,7 @@ const Tournois: React.FC = function() {
 															<div className="info">
 																<p className="price inblock"><i className="sprite ticket"></i><span>{el.tournament.participate}</span></p>
 																<p className="price inblock"><i className="sprite cup"></i><span>{el.tournament.price}</span></p>
-																<p className="date inblock"><i className="sprite calendar"></i>{userConnectedRedux.user.language === "fr" ? dateStringToDY(el.date) : dateStringToDY(el.date)}</p>
+																<p className="date inblock"><i className="sprite calendar"></i>{userConnectedRedux.user.language === "fr" ? dateStringToDY(el.dateStart) : dateStringToDY(el.dateStart)}</p>
 															</div>
 														</div>
 													)

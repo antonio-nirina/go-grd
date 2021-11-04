@@ -72,12 +72,12 @@ const Rules: React.FC = function(props:any) {
 			<div className="full-container">
 				<div className="details">
 					<p className="name-target">Tournament : <span>{tournament?.game.name}</span></p>
-					<p className="starting"><span>{userConnectedRedux.user.language === "fr" ? dateStringToDY(tournament?.date) : dateStringToDY(tournament?.date)}</span></p>
+					<p className="starting"><span>{userConnectedRedux.user.language === "fr" ? dateStringToDY(tournament?.dateStart) : dateStringToDY(tournament?.dateStart)}</span></p>
 					<p className="status">Status : <span>
 						{isOpen ? Translation(userConnectedRedux.user.language).tournament.open : Translation(userConnectedRedux.user.language).tournament.close }
 					</span></p>
 				</div>
-				
+
 				<div className="banniere"></div>
 				<div className="tabs">
 					<ul>
@@ -100,7 +100,7 @@ const Rules: React.FC = function(props:any) {
 										Translation(userConnectedRedux.user.language).tournament.start
 									}
 								</p>
-								<span>{dateStringToDY(tournament?.date)}</span>
+								<span>{dateStringToDY(tournament?.dateStart)}</span>
 							</div>
 							<div className="line">
 								<p>
@@ -124,7 +124,7 @@ const Rules: React.FC = function(props:any) {
 						</div>
 					</div>
 				</div>
-			</div>			
+			</div>
 			<Footer/>
 		</div>
     </div>

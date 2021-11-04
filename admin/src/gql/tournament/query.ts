@@ -12,7 +12,7 @@ export const GET_ALL_TOURNAMENT= gql`
 		numberParticipate
 		numberTeam
 		deadlineDate
-		date
+		dateStart
 		price
 		priceParticipate
 		records

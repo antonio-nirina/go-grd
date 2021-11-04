@@ -50,7 +50,7 @@ const MatchesLeague: React.FC = function(props:any) {
 				<div className="details">
 					<p className="name-target">Tournois : <span>Rocket League</span></p>
 					<p className="starting">Date de commencement : <span>
-						{userConnectedRedux.user.language === "fr" ? dateStringToDY(tournament?.date) : dateStringToDY(tournament?.date)}
+						{userConnectedRedux.user.language === "fr" ? dateStringToDY(tournament?.dateStart) : dateStringToDY(tournament?.dateStart)}
 					</span></p>
 					<p className="status">Status : <span>
 						{isOpen ? Translation(userConnectedRedux.user.language).tournament.open : Translation(userConnectedRedux.user.language).tournament.close }
@@ -89,13 +89,13 @@ const MatchesLeague: React.FC = function(props:any) {
 						</div>
 					</div>
 				</div>
-				
-				<div className="banniere"></div>							
+
+				<div className="banniere"></div>
 				<div className="matches">
 					<h2>Horaires</h2>
 					<p><strong>{Translation(userConnectedRedux.user.language).tournament.starttimes}</strong></p>
 				</div>
-			</div>			
+			</div>
 			<Footer/>
 		</div>
     </div>

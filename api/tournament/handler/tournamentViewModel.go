@@ -8,7 +8,7 @@ type tournamentViewModel struct {
 	Statut            bool                 `json:"statut"`
 	NumberParticipate int                  `json:"numberParticipate"`
 	NumberTeam        int                  `json:"numberTeam"`
-	Price             float64              `json:"price"`
+	Price             []string              `json:"price"`
 	DeadlineDate      string               `json:"deadlineDate"`
 	PriceParticipate  string               `json:"priceParticipate"`
 	Game              GameViewModel        `json:"game"`
@@ -25,6 +25,7 @@ type tournamentViewModel struct {
 	Region            string               `json:"region,omitempty"`
 	Spectateur        string               `json:"spectateur"`
 	Laps              []string             `json:"laps,omitempty"`
+	Maps             string              `json:"maps,omitempty"`
 }
 
 type GameViewModel struct {
@@ -49,7 +50,7 @@ type TournamentViewModel struct {
 	Statut            bool                 `json:"statut"`
 	NumberParticipate int                  `json:"numberParticipate"`
 	NumberTeam        int                  `json:"numberTeam"`
-	Price             float64              `json:"price"`
+	Price             []string              `json:"price"`
 	DeadlineDate      string               `json:"deadlineDate"`
 	PriceParticipate  string               `json:"priceParticipate"`
 	Game              GameViewModel        `json:"game"`
@@ -63,4 +64,5 @@ type TournamentViewModel struct {
 	Region            string               `json:"region,omitempty"`
 	Spectateur        string               `json:"spectateur"`
 	Laps              []string             `json:"laps,omitempty"`
+	Maps             string              `json:"maps,omitempty"`
 }

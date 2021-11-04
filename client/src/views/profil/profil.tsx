@@ -190,7 +190,7 @@ const Profile: React.FC = function() {
 													<span>{el.tournament.price+" €"}</span>
 													<span>{el.tournament.isTeam ? `${el.tournament.numberTeam}V${el.tournament.numberTeam}`: "1V1"}</span>
 													<span>{el.tournament.numberParticipate}</span>
-													<span>{dateStringToDY(el.tournament.date)}</span>
+													<span>{dateStringToDY(el.tournament.dateStart)}</span>
 												</div>
 											)
 										})

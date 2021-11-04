@@ -23,13 +23,13 @@ import { type } from "os"
 type Inputs = {
 	participant: number,
 	title:string,
-	price:number,
 	numberTeam:number,
 	priceParticipate:number,
 	spectateur:string,
 	format:string,
 	region:string,
-	server:string
+	server:string,
+	map:string
 }
 type PlateformSelect = {
 	label:string,
@@ -53,10 +53,15 @@ const CreateTournament: React.FC = function() {
 	const [startDate, setStartDate] 	= useState<string>("")
 	const [lastDate, setLastDate] 		= useState<string>("")
 	const [lapsDate, setLapsDate] 		= useState<string[]>([])
-	const [rules, setRules] 	= useState<String>("")
+	const [lapsCash, setLapsCash] 		= useState<string[]>([])
+	const [rules, setRules] 	= useState<string>("")
 	// const [info, setInfo] 		= useState<String>("")
 	const [arrayForm, setArrayForm] 		= useState<number[]>([1])
 	const [number, setNumber] 		= useState<number>(1)
+
+	const [arrayFormCash, setArrayFormCash] 		= useState<number[]>([1])
+	const [numberCash, setNumberCash] 		= useState<number>(1)
+
 	const [createdTournament]  			= useMutation(CREATED_TOURNAMENT)
 
 	const {loading,error,data} = useQuery(GET_ALL_GAMES)
@@ -90,12 +95,13 @@ const CreateTournament: React.FC = function() {
 				description:"",//info
 				numberParticipate:Math.pow(2,(Math.ceil(Math.log2(Number(data.participant))))),
 				numberTeam:data.numberTeam ? data.numberTeam  : 0,
-				price:data.price,
+				price:lapsCash.join("_"),
 				deadlineDate:lastDate,
 				server:data.server,
 				format:data.format,
 				spectateur:data.spectateur,
 				region:data.region,
+				maps:data.map,
 				priceParticipate:data.priceParticipate ? data.priceParticipate : "Invitation",
 				rules:rules,
 				laps:lapsDate.join("_")
@@ -135,12 +141,6 @@ const CreateTournament: React.FC = function() {
 		setRules(content)
 	}
 
-	/*
-		const handleInfoText = function(content: string) {
-			setInfo(content)
-		}
-	*/
-
 	const addForm = function() {
 		setNumber(number+1)
 		setArrayForm([...arrayForm,number+1])
@@ -152,6 +152,23 @@ const CreateTournament: React.FC = function() {
 			setArrayForm(arr)
 			setNumber(number-1)
 		}
+	}
+
+	const addFormCash = function() {
+		setNumberCash(numberCash+1)
+		setArrayFormCash([...arrayFormCash,numberCash+1])
+	}
+
+	const removeLineCash = function(index:number) {
+		if(numberCash > 1) {
+			const arrCash = arrayFormCash.splice(1,index)
+			setArrayFormCash(arrCash)
+			setNumberCash(numberCash-1)
+		}
+	}
+
+	const handleCashLaps = function(cash:React.FormEvent<HTMLInputElement>) {
+		setLapsCash([...lapsCash,cash.currentTarget.value])
 	}
 
 	return(
@@ -227,15 +244,26 @@ const CreateTournament: React.FC = function() {
 														{...register("numberTeam")} name="numberTeam"
 														className="no-margin"/>
 	                                            </div>
+												<input type="text" placeholder="Frais de participation" {...register("priceParticipate")} name="priceParticipate" className="no-margin"/>
 	                                            <div className="input-group">
-	                                                <input type="number" placeholder="Prix à gagner" {...register("price")} name="price" />
-	                                                <input type="text" placeholder="Frais de participation" {...register("priceParticipate")} name="priceParticipate" className="no-margin"/>
+													{
+														arrayFormCash.map(function(el:number,index:number) {
+															return (
+																<div className="tour" key={index}>
+																	<input onBlur={handleCashLaps} placeholder={`Prix à gagner position ${index+1}`} />
+																	<div onClick={addFormCash} id="add-tour" className="btn bg-red"><i><FontAwesomeIcon icon={faPlus} size="lg"/></i>Ajouter Nouveau position</div>
+																	<div onClick={() => removeLineCash(index)} className= {index === 0 || arrayFormCash.length === 1 ? "d-none":"btn bg-white"}><i><FontAwesomeIcon icon={faTimes} size="lg"/></i>Supprimer</div>
+																</div>
+															)
+														})
+													}
 	                                            </div>
 	                                            <Datetime locale="fr" onChange={handleDateLast} inputProps={{placeholder:"Fin d'inscription"}} />
 												<input type="text" placeholder="Format" {...register("format")} name="format" className="no-margin"/>
 												<input type="text" placeholder="Serveur" {...register("server")} name="format" className="no-margin"/>
-												<input type="text" placeholder="Spectateur" {...register("spectateur")} name="format" className="no-margin"/>
+												<input type="text" placeholder="Spectateur" {...register("spectateur")} name="spectateur" className="no-margin"/>
 												<input type="text" placeholder="Region" {...register("region")} name="format" className="no-margin"/>
+												<input type="text" placeholder="Map" {...register("map")} name="map" className="no-margin"/>
 												{
 													arrayForm.map(function(el:number,index:number) {
 														return (

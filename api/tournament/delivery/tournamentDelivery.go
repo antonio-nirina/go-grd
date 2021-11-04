@@ -39,7 +39,6 @@ type updatedTournament struct {
 	DateDebut         string `json:"dateDebut"`
 	NumberParticipate string `json:"numberParticipate"`
 	NumberTeam        string `json:"numberTeam"`
-	Price             string `json:"price"`
 	DeadlineDate      string `json:"deadlineDate"`
 	PriceParticipate  string `json:"priceParticipate"`
 	Statut            string `json:"statut"`
@@ -65,7 +64,7 @@ func (t *tournament) SavedTournamentResolver(params graphql.ResolveParams) (inte
 	description, _ := params.Args["description"].(string)
 	numberParticipate, _ := params.Args["numberParticipate"].(int)
 	numberTeam, _ := params.Args["numberTeam"].(int)
-	price, _ := params.Args["price"].(float64)
+	price, _ := params.Args["price"].(string)
 	deadlineDate, _ := params.Args["deadlineDate"].(string)
 	priceParticipate, _ := params.Args["priceParticipate"].(string)
 	rules, _ := params.Args["rules"].(string)
@@ -74,10 +73,12 @@ func (t *tournament) SavedTournamentResolver(params graphql.ResolveParams) (inte
 	format, _ := params.Args["format"].(string)
 	region, _ := params.Args["region"].(string)
 	server, _ := params.Args["server"].(string)
+	maps, _ := params.Args["maps"].(string)
 	game, err := t.gameTournamentHandler.FindOneGameByUidHandler(gameUid)
 	var plateforms []gameEntity.GamePlatform
 	arrayPlateforms := strings.Split(plateformUid, "_")
 	arrayLaps := strings.Split(laps, "_")
+	arrayPrices := strings.Split(price, "_")
 	for _, value := range arrayPlateforms {
 		plateform, err := t.plateformTournamentHandler.FindOnePlateformByUidHandler(value)
 		if err != nil {
@@ -100,7 +101,7 @@ func (t *tournament) SavedTournamentResolver(params graphql.ResolveParams) (inte
 		Plateform:         plateforms,
 		NumberParticipate: numberParticipate,
 		NumberTeam:        numberTeam,
-		Price:             price,
+		Price:             arrayPrices,
 		IsTeam:            IsTeam,
 		DeadlineDate:      deadlineDate,
 		PriceParticipate:  priceParticipate,
@@ -113,6 +114,7 @@ func (t *tournament) SavedTournamentResolver(params graphql.ResolveParams) (inte
 		Format: 			format,
 		Server: 			server,
 		Region: 			region,
+		Maps:maps,
 	}
 
 	res, err := t.tournamentHandler.SavedTournamentHandler(tournament)
@@ -205,10 +207,6 @@ func (t *tournament) UpdatedTournamentResolver(params graphql.ResolveParams) (in
 
 	if input.TrUpated.NumberTeam != "" {
 		numberTeam, _ = strconv.Atoi(input.TrUpated.NumberTeam)
-	}
-
-	if input.TrUpated.Price != "" {
-		price, _ = strconv.ParseFloat(input.TrUpated.Price, 64)
 	}
 
 	if input.TrUpated.DeadlineDate != "" {

@@ -9,8 +9,8 @@ export interface Tournament {
 	deadlineDate:string
 	Winners:string[]
 	tchat:string
-	date:string
-	price:number
+	dateStart:string
+	price:string
 	priceParticipate:string
 	rules:string
 	isTeam:boolean
