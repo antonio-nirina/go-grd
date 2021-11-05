@@ -67,7 +67,7 @@ const TournamentGame = function(props:any) {
 										<Link to={`/join-tournament?uid=${el.uid}`} className="waggers-data" key={index}>
 											<p>
 												<span>
-													{userConnectedRedux.user.language === "fr" ? dateStringToDY(el.date) : dateStringToDYEn(el.date)}
+													{userConnectedRedux.user.language === "fr" ? dateStringToDY(el.dateStart) : dateStringToDYEn(el.dateStart)}
 												</span>
 											</p>
 											<p>Go GRIND</p>

@@ -48,7 +48,7 @@ const Bracket: React.FC = function(props:any) {
 						{
 							Translation(userConnectedRedux.user.language).tournament.starttimes
 						}:
-						<span> {userConnectedRedux.user.language === "fr" ? dateStringToDY(tournament?.date) : dateStringToDY(tournament?.date)}</span></p>
+						<span> {userConnectedRedux.user.language === "fr" ? dateStringToDY(tournament?.dateStart) : dateStringToDY(tournament?.dateStart)}</span></p>
 					<p className="status">Status : <span>
 						{isOpen ? Translation(userConnectedRedux.user.language).tournament.open : Translation(userConnectedRedux.user.language).tournament.close }
 					</span>
@@ -63,7 +63,7 @@ const Bracket: React.FC = function(props:any) {
 						{
 							Translation(userConnectedRedux.user.language).tournament.rules
 						}
-						</Link></li>						
+						</Link></li>
 					</ul>
 				</div>
 				<div className="container-rules">
@@ -71,7 +71,7 @@ const Bracket: React.FC = function(props:any) {
 						<Tree />
 					</div>
 				</div>
-			</div>			
+			</div>
 			<Footer/>
 		</div>
     </div>

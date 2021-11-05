@@ -21,11 +21,13 @@ const TournamentInc = function() {
 	})
 
 	useEffect(() => {
+
 		if(!loading && !error && data) {
+
 			let month = new Date().toLocaleDateString().split("/")[1]
 			let count = 0
 			data.FindAllTournament.forEach(function(e:Tournament) {
-				if(new Date(e.date).toLocaleDateString().split("/")[1] === month) {
+				if(new Date(e.dateStart).toLocaleDateString().split("/")[1] === month) {
 					count++
 				}
 			})
@@ -49,14 +51,14 @@ const TournamentInc = function() {
 							<div className="list_tournament" key={index}>
 								<Link to={`/join-tournament?uid=${element.uid}`} >
 									<img src={element.game.logo} width="40" height="30" alt=""/>
-									<p className="game_name">{element.title}<span>{dateStringToDY(element.date)} - 6 jours</span></p>
-									<p className="cashprize">Cashprize<span>{element.price} G-Coins</span></p>
+									<p className="game_name">{element.title}<span>{dateStringToDY(element.dateStart)} - 6 jours</span></p>
+									<p className="cashprize">Cashprize<span>{(element.price[0])} G-Coins</span></p>
 									<p className="arena">{element.numberTeam > 0 ? `${element.numberTeam}v${element.numberTeam}`: "1v1"} Arène</p>
 									<p className="place">
 										<i><FontAwesomeIcon icon={faUsers}/></i><span>{element.numberParticipate} places restantes</span>
 										<button style={{"cursor":"pointer"}} onClick={()=>{history.push(`/joingame?uid=${element.uid}`)}} className="btn bg-red">Rejoindre</button>
 									</p>
-								</Link>								
+								</Link>
 							</div>
 						)
 					}) : <></>

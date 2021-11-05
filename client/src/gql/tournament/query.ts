@@ -12,7 +12,7 @@ export const GET_ALL_TOURNAMENT= gql`
 		numberParticipate
 		numberTeam
 		deadlineDate
-		date
+		dateStart
 		price
 		priceParticipate
 		isPublic
@@ -42,7 +42,7 @@ export const GET_ONE_TOURNAMENT = gql`
 		numberParticipate
 		numberTeam
 		deadlineDate
-		date
+		dateStart
 		price
 		isTeam
 		priceParticipate
@@ -72,7 +72,7 @@ export const GET_TOURNAMENT_GAME = gql`
 		numberParticipate
 		numberTeam
 		deadlineDate
-		date
+		dateStart
 		price
 		priceParticipate
 		rules

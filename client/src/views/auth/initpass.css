@@ -25,3 +25,37 @@
 	font-style: inherit;
 	font-size: 13px;
 }
+.code-field{
+	position: relative;
+}
+.code-field input{
+	padding-top: 17px;
+	border-bottom: 2px solid #dd0000;
+}
+.code-field label{
+	position: absolute;
+    z-index: 999999;
+    top: 1px;
+    color: #d00;
+    font-family: "russo one";
+    left: 5px;						
+    font-size: 12px;    
+    display: block;
+    margin-bottom: 5px;
+}
+.code-btn{
+	display: flex;
+}
+.code-btn i{
+	display: block;
+	align-self: center;
+	background: #dd0000;
+	padding: 8px;
+	border-radius: 5px;
+	margin-right: 5px;
+}
+.code-btn .bg-transparent{
+	background: rgba(0,0,0,0.3);
+	font-family: "russo one";
+	border-radius: 5px;
+}
