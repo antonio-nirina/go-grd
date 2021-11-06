@@ -1035,7 +1035,7 @@ label.entete:last-child{
 .tour .add-tour{
 	max-width: 300px;
 	width: 100%;
-	margin: 15px auto;
+	align-self: center;	
 }
 .field .input-group.no-flex{
 	display: block;
@@ -1057,7 +1057,7 @@ label.entete:last-child{
 }
 .flexible{
 	display: flex;
-	margin-top: 4px;
+	margin-top: 15px;
 }
 .flexible .d-block{
 	display: flex;

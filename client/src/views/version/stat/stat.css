@@ -1,0 +1,190 @@
+@charset "UTF-8";
+.participate{
+	padding: 25px 0px 0px;
+}
+.marg{
+	
+}
+.part{
+	padding: 3em 0em 3em 2em;
+}
+.undertitle{
+	display: inline-block;
+	width: 100%;
+	margin-bottom: 25px;
+}
+.undertitle h2{	
+	font-weight: 100;
+}
+.undertitle:before{
+	content:"";
+	display: inline-block;
+	width: 15px;
+	height: 42px;
+	background: #dd0000;
+	float: left;
+	margin-right: 10px;
+}
+.game-stat-list{
+	width: 80%;
+	margin: auto;
+}
+.content{
+	display: flex;	
+	margin: auto;
+}
+.clear{
+	display: none;
+}
+.block{	 
+	display: inline-block;
+	width: 100%;  
+    height: 170px;
+    padding: 10px;    
+    vertical-align: top;
+    border-radius: 15px;    
+    position: relative;
+    margin-right: 15px;
+}
+
+.block p{
+	font-family: "russo one";
+}
+.block p.legend{
+	font-size: 12px;
+	text-align: left;	
+	display: inline-block;	
+	padding: 5px 0;
+	width: 81%;
+	vertical-align: middle;
+}
+.block .info{
+	position: absolute;
+	bottom: 0;
+	width: 92%;	
+	padding-bottom: 9px;
+}
+.block .info p{
+	display: flex;
+	font-size: 11px;
+	font-weight: 200;
+	padding: 3px 0;
+}
+.block.last{
+	width: 100%;
+    margin-right: 0;
+    border-radius: 15px 0px 0px 15px;
+}
+.last p{
+	text-transform: uppercase;
+	font-size: 13px;
+}
+.gamecash{
+	padding-top: 20px;
+	display: flex;
+}
+.gamecash .lot{
+	width: 60%;
+	display: flex;
+	vertical-align: top;
+	
+}
+.gamecash .lot p{	
+	margin-right: 13px;
+	width: 28.5%;
+	text-align: center;
+	align-self: center;
+}
+.gamecash .more{	
+	width: 35%;
+	text-align: right;
+	margin-right: 5px;
+	align-self: center;
+}
+.gamecash .more a{
+	font-size: 15px;
+	text-transform: uppercase;
+	background: #f2cf1c;
+	padding: 10px 15px;
+	border-radius: 15px;
+	color: #010101;
+	display: inline-block;
+	margin-top: 12px;
+}
+.gamecash strong{
+	font-family: "russo one";
+	font-size: 30px;
+	font-weight: 200;
+}
+.gamecash span{
+	display: block;
+}
+.block-tournois{
+	margin-top: 2em;
+	padding: 3em 0em 3em 2em ;	
+	background: #2c2c2c;
+	
+}
+.block-tournois .block{
+	background: #101010;
+}
+.block-tournois .undertitle{
+	text-align: right
+}
+.block-tournois .undertitle:before{
+	float: right;
+	margin-left: 15px;
+}
+.iconGame{
+	display: inline-block;
+	vertical-align: middle;
+	display: inline-block;
+	float: right;
+	margin-top: 2px;
+}
+.iconGame svg{	
+	
+	height: 19px;	
+}
+.sprite {
+	background: url("../../../assets/image/sprite.png") no-repeat;	
+	display: inline-block;
+	width: 20px;
+	height: 20px;    
+    background-size: 20px 75px;
+}
+.inblock span{	
+	padding: 0px 5px;
+}
+
+.inblock i, .inblock span{
+	display: inline-block;
+	vertical-align: top;
+	align-self: center;
+}
+.sprite.ticket{
+	background-position: 0px -56px;
+}
+.sprite.cup{
+	background-position: 0 0;
+}
+.sprite.calendar{
+	background-position: 0px -27px;
+}
+.participate .undertitle p{
+	font-size: 14px;
+}
+.participate .undertitle h2{
+	font-family: arial;
+	font-weight: bold;
+	font-size: 18px;
+}
+.conf{
+	display: flex;
+}
+.conf img{
+	margin-right: 15px;
+}
+.stats.joingame .header-part{
+	width: 45%;
+}
