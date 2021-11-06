@@ -69,7 +69,7 @@ const PageTournois: React.FC = function() {
 									<div className="top-icon"><p className="legend">{el.title}</p><i className="iconGame"><img src={Joystick} alt="" width="15"/></i></div>
 									<div className="info">
 										<p className="price inblock"><i><FontAwesomeIcon icon={faUser}/></i><span>JP_FUT12 & Kek37000</span></p>
-										<p className="price inblock"><i className="sprite cup"></i><span>{el.price[0]}€ Cash Prize</span></p>
+										<p className="price inblock"><i className="sprite cup"></i><span>{el.price[0]} € Cash Prize</span></p>
 										<p className="date inblock"><i className="sprite ticket"></i><span>{el.dateStart}</span></p>
 									</div>
 								</div>

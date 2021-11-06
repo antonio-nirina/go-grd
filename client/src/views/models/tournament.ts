@@ -7,14 +7,18 @@ export interface Tournament {
 	numberTeam:number
 	format:string
 	deadlineDate:string
-	Winners:string[]
+	winners:string[]
 	tchat:string
 	dateStart:string
-	price:string
+	price:string[]
 	priceParticipate:string
 	rules:string
 	isTeam:boolean
+	maps:string
+	laps:string[]
+	server:string
 	isPublic:Boolean|undefined
+	region:string
 	game:Game
 	plateform:Platform[]
 }

@@ -70,5 +70,8 @@ var TournamentSchemaType = graphql.NewObject(graphql.ObjectConfig{
 		"region": &graphql.Field{
 			Type: graphql.String,
 		},
+		"laps": &graphql.Field{
+			Type: graphql.NewList(graphql.String),
+		},
 	},
 })

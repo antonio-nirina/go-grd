@@ -7,7 +7,7 @@ export const dateStringToStringEn = function(date: string){
 		return new Date(date).toLocaleDateString("en").toString()
 }
 
-export const dateStringToDHString = function(date: string){
+export const dateStringToDHString = function(date=""){
 	return new Date(date).toLocaleTimeString('fr-Fr', {
 				day : 'numeric',
 				month : 'numeric',
