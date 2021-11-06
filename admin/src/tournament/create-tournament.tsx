@@ -85,7 +85,7 @@ const CreateTournament: React.FC = function() {
 		if(!uiGame && !uiGame && !data.title) {
 			setIsValid(true)
 		}
-
+console.log(lapsDate)
 		try {
 			const result = await createdTournament({ variables: {
 				date:startDate,
@@ -95,7 +95,7 @@ const CreateTournament: React.FC = function() {
 				description:"",//info
 				numberParticipate:Math.pow(2,(Math.ceil(Math.log2(Number(data.participant))))),
 				numberTeam:data.numberTeam ? data.numberTeam  : 0,
-				price:lapsCash.join("_"),
+				price:lapsCash.filter((e) => e).join("_"),
 				deadlineDate:lastDate,
 				server:data.server,
 				format:data.format,
@@ -151,6 +151,7 @@ const CreateTournament: React.FC = function() {
 			const arr = arrayForm.splice(1,index)
 			setArrayForm(arr)
 			setNumber(number-1)
+			setLapsDate(lapsDate.splice(1,index))
 		}
 	}
 
@@ -164,6 +165,7 @@ const CreateTournament: React.FC = function() {
 			const arrCash = arrayFormCash.splice(1,index)
 			setArrayFormCash(arrCash)
 			setNumberCash(numberCash-1)
+			setLapsCash(lapsCash.splice(1,index))
 		}
 	}
 
@@ -262,9 +264,9 @@ const CreateTournament: React.FC = function() {
 	                                            </div>
 	                                            <Datetime locale="fr" onChange={handleDateLast} inputProps={{placeholder:"Fin d'inscription"}} />
 												<input type="text" placeholder="Format" {...register("format")} name="format" className="no-margin"/>
-												<input type="text" placeholder="Serveur" {...register("server")} name="format" className="no-margin"/>
+												<input type="text" placeholder="Serveur" {...register("server")} name="server" className="no-margin"/>
 												<input type="text" placeholder="Spectateur" {...register("spectateur")} name="spectateur" className="no-margin"/>
-												<input type="text" placeholder="Region" {...register("region")} name="format" className="no-margin"/>
+												<input type="text" placeholder="Region" {...register("region")} name="region" className="no-margin"/>
 												<input type="text" placeholder="Map" {...register("map")} name="map" className="no-margin"/>
 												{
 													arrayForm.map(function(el:number,index:number) {

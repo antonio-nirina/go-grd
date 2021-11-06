@@ -9,7 +9,7 @@ const style = {
 }
 
 type TypeRecords = {
-	records:number,
+	records:number|undefined,
 	handlePage:Function
 }
 
@@ -34,7 +34,7 @@ const Pagination = function({records,handlePage}:TypeRecords) {
 	},[records])
 
 	const handleClick = function(item:number) {
-		if(item === Math.ceil(records/NUMBER_PER_PAGE)) {
+		if(records && item === Math.ceil(records/NUMBER_PER_PAGE)) {
 			setIsActivedNext(true)
 		} else {
 			setIsActivedNext(false)
@@ -55,7 +55,7 @@ const Pagination = function({records,handlePage}:TypeRecords) {
 
 	const handleNext = function() {
 		setIsActive(currentPage)
-		if(currentPage  < Math.ceil(records/NUMBER_PER_PAGE)) {
+		if(records && currentPage  < Math.ceil(records/NUMBER_PER_PAGE)) {
 			setCurrentPage(currentPage + 1)
 			handlePage(currentPage + 1)
 			if(currentPage === Math.ceil(records/NUMBER_PER_PAGE) - 1) setIsActivedNext(true)
