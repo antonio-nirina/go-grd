@@ -245,14 +245,16 @@ const CreateTournament: React.FC = function() {
 														className="no-margin"/>
 	                                            </div>
 												<input type="text" placeholder="Frais de participation" {...register("priceParticipate")} name="priceParticipate" className="no-margin"/>
-	                                            <div className="input-group">
+	                                            <div className="input-group no-flex">
 													{
 														arrayFormCash.map(function(el:number,index:number) {
 															return (
 																<div className="tour" key={index}>
-																	<input onBlur={handleCashLaps} placeholder={`Prix à gagner position ${index+1}`} />
-																	<div onClick={addFormCash} id="add-tour" className="btn bg-red"><i><FontAwesomeIcon icon={faPlus} size="lg"/></i>Ajouter Nouveau position</div>
-																	<div onClick={() => removeLineCash(index)} className= {index === 0 || arrayFormCash.length === 1 ? "d-none":"btn bg-white"}><i><FontAwesomeIcon icon={faTimes} size="lg"/></i>Supprimer</div>
+																	<div className="new-position"><input onBlur={handleCashLaps} placeholder={`Prix à gagner position ${index+1}`} /></div>
+																	<div className="flexible">
+																		<div onClick={addFormCash} className="add-tour"><button className="btn bg-red"><i><FontAwesomeIcon icon={faPlus} size="lg"/></i>Ajouter Nouveau position</button></div>
+																		<div onClick={() => removeLineCash(index)} className= {index === 0 || arrayFormCash.length === 1 ? "d-none":"d-block"}><button className="btn bg-white"><i><FontAwesomeIcon icon={faTimes} size="lg"/></i>Supprimer</button></div>
+																	</div>
 																</div>
 															)
 														})
@@ -268,9 +270,13 @@ const CreateTournament: React.FC = function() {
 													arrayForm.map(function(el:number,index:number) {
 														return (
 															<div className="tour" key={index}>
-																<Datetime locale="fr" onChange={handleDateLaps} inputProps={{placeholder:`Date du tour ${index+1}`}} />
-																<div onClick={addForm} id="add-tour" className="btn bg-red"><i><FontAwesomeIcon icon={faPlus} size="lg"/></i>Ajouter Nouveau tour</div>
-																<div onClick={() => removeLine(index)} className= {index === 0 || arrayForm.length === 1 ? "d-none":"btn bg-white"}><i><FontAwesomeIcon icon={faTimes} size="lg"/></i>Supprimer</div>
+																<div className="new-position">
+																	<Datetime locale="fr" onChange={handleDateLaps} inputProps={{placeholder:`Date du tour ${index+1}`}} />
+																</div>
+																<div className="flexible">
+																	<div onClick={addForm} className="add-tour"><button className="btn bg-red"><i><FontAwesomeIcon icon={faPlus} size="lg"/></i>Ajouter Nouveau tour</button></div>
+																	<div onClick={() => removeLine(index)} className= {index === 0 || arrayForm.length === 1 ? "d-none":"d-block"}><button className="btn bg-white"><i><FontAwesomeIcon icon={faTimes} size="lg"/></i>Supprimer</button></div>
+																</div>
 															</div>
 														)
 													})

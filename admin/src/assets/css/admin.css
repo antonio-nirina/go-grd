@@ -1021,15 +1021,45 @@ label.entete:last-child{
 #platform .css-26l3qy-menu span:hover{
 	background: blue !important;
 }
-.tour #add-tour{
+.tour{
+	display: flex;
+	width: 100%;
+}
+.tour .add-tour{
 	float: none;
 }
-.tour #add-tour i{
+.tour .add-tour i{
 	margin-right: 5px;
 	font-size: 12pxgit 
 }
-.tour #add-tour{
-	max-width: 220px;
+.tour .add-tour{
+	max-width: 300px;
 	width: 100%;
 	margin: 15px auto;
+}
+.field .input-group.no-flex{
+	display: block;
+}
+.field .group-input .tour .btn{
+	float: none;
+	margin-top: 0;
+	width: 250px;
+	margin-left: 15px;
+	font-size: 12px;
+}
+.field .group-input .tour .btn i{
+	font-size: 10px;
+	margin-right: 5px;
+	margin-bottom: 5px;
+}
+.field .new-position{
+	width: 100%;	
+}
+.flexible{
+	display: flex;
+	margin-top: 4px;
+}
+.flexible .d-block{
+	display: flex;
+	align-self: center;
 }
