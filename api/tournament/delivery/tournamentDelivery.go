@@ -111,10 +111,10 @@ func (t *tournament) SavedTournamentResolver(params graphql.ResolveParams) (inte
 		IsPublic:          true,
 		Spectateur:        spectateur,
 		Laps:              arrayLaps,
-		Format: 			format,
-		Server: 			server,
-		Region: 			region,
-		Maps:maps,
+		Format:            format,
+		Server:            server,
+		Region:            region,
+		Maps:              maps,
 	}
 
 	res, err := t.tournamentHandler.SavedTournamentHandler(tournament)
