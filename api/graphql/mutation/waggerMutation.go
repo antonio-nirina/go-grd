@@ -72,7 +72,7 @@ func createWagger() *graphql.Field {
 				Type: graphql.String,
 			},
 			"price": &graphql.ArgumentConfig{
-				Type: graphql.Float,
+				Type: graphql.String,
 			},
 			"deadlineDate": &graphql.ArgumentConfig{
 				Type: graphql.String,
@@ -87,16 +87,13 @@ func createWagger() *graphql.Field {
 				Type: graphql.String,
 			},
 			"priceParticipate": &graphql.ArgumentConfig{
-				Type: graphql.Float,
+				Type: graphql.String,
 			},
 			"format": &graphql.ArgumentConfig{
 				Type: graphql.String,
 			},
 			"isPublic": &graphql.ArgumentConfig{
 				Type: graphql.Boolean,
-			},
-			"participant": &graphql.ArgumentConfig{
-				Type: graphql.Int,
 			},
 			"rules": &graphql.ArgumentConfig{
 				Type: graphql.String,

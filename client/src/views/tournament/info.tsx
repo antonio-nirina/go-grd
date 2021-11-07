@@ -129,7 +129,7 @@ const Info: React.FC = function(props:any) {
 							</div>
 							<div>
 								<p>Mode</p>
-								<span>{tournament && tournament.numberTeam > 0 ? `${tournament?.numberTeam} V ${tournament?.numberTeam}` : "1 V 1" }</span>
+								<span>{tournament ? tournament.gameWay : <></> }</span>
 							</div>
 						</div>
 						<div className="btn-container">

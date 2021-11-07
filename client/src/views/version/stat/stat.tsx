@@ -1,5 +1,4 @@
 import React,{useState,useEffect} from "react"
-import { Link } from "react-router-dom"
 import {useQuery} from "@apollo/client"
 
 import Header from "../../header/header"
@@ -14,13 +13,11 @@ import "../stat/stat.css"
 import "../../waggers/waggers.css"
 import "../../participate/participate.css"
 
-import { faXbox, faPlaystation } from "@fortawesome/free-brands-svg-icons"
-import { faGamepad } from "@fortawesome/free-solid-svg-icons"
+import { faXbox } from "@fortawesome/free-brands-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 
 import Game from "../../../assets/image/game.png"
-import Apex from "../../../assets/image/apex-legends.png"
 import {Wagger} from "../../models/wagger"
 import Discord from "../../../assets/image/discord.png"
 import Flag from "../../../assets/image/fr.png"
@@ -28,7 +25,7 @@ import Flag from "../../../assets/image/fr.png"
 import {GET_ONE_WAGGER} from "../../../gql/wagger/query"
 
 
-const Stat: React.FC = function(props:any) {  	
+const Stat: React.FC = function(props:any) {
   const [wagger, setWagger] = useState<Wagger>()
 	const params = new URLSearchParams(props.location.search)
 	const uid:string|null = params.get("uid")
@@ -45,7 +42,7 @@ const Stat: React.FC = function(props:any) {
 		}
 
 	},[loading,error,data])
-  	
+
   return(
   	<div className="container">
   		<Header />
@@ -61,16 +58,16 @@ const Stat: React.FC = function(props:any) {
                   <img src={Flag} width="25"/>
                 </p>
               </div>
-            </div>            
-        </div>        
-        <div className="clear"></div>				
+            </div>
+        </div>
+        <div className="clear"></div>
 			</div>
   		</div>
       <div className="game-stat-list">
         <div className="undertitle">
           <h2>Tournois</h2>
-          <p>Derniers résultats en tournois</p>          
-        </div>        
+          <p>Derniers résultats en tournois</p>
+        </div>
         <div className="content">
           <div className="apex block green">
             <div>
@@ -95,8 +92,8 @@ const Stat: React.FC = function(props:any) {
       <div className="game-stat-list">
         <div className="undertitle">
           <h2>wagers</h2>
-          <p>Derniers résultats en wager</p>          
-        </div>        
+          <p>Derniers résultats en wager</p>
+        </div>
         <div className="content">
           <div className="apex block green">
             <div>

@@ -18,7 +18,6 @@ export const GET_ALL_WAGER = gql`
 			participant
 			isPublic
 			records
-			gameWay
 			rules
 			game{
 				uid

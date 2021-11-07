@@ -10,13 +10,11 @@ export const GET_ALL_TOURNAMENT= gql`
 		statut
 		description
 		numberParticipate
-		numberTeam
 		deadlineDate
 		dateStart
 		price
 		priceParticipate
 		isPublic
-		isTeam
 		laps
 		game{
 			uid
@@ -40,15 +38,13 @@ export const GET_ONE_TOURNAMENT = gql`
 		title
 		statut
 		description
-		numberParticipate
-		numberTeam
 		deadlineDate
 		dateStart
 		price
-		isTeam
 		priceParticipate
 		rules
 		laps
+		gameWay
 		game{
 			uid
 			name
@@ -72,13 +68,11 @@ export const GET_TOURNAMENT_GAME = gql`
 		statut
 		description
 		numberParticipate
-		numberTeam
 		deadlineDate
 		dateStart
 		price
 		priceParticipate
 		rules
-		isTeam
 		isPublic
 		laps
 		game{

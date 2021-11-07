@@ -30,11 +30,11 @@ type Inputs = {
 	server:string,
 	map:string
 }
-type PlateformSelect = {
+export type PlateformSelect = {
 	label:string,
 	value:string
 }
-type Plateforms = {
+export type Plateforms = {
 	uid:string,
 	name:string,
 	logo:string,
@@ -53,12 +53,13 @@ const CreateTournament: React.FC = function() {
 	const [lastDate, setLastDate] 		= useState<string>("")
 	const [lapsDate, setLapsDate] 		= useState<string[]>([])
 	const [lapsCash, setLapsCash] 		= useState<string[]>([])
-	const [rules, setRules] 	= useState<string>("")
+	const [rules, setRules] 			= useState<string>("")
 	// const [info, setInfo] 		= useState<String>("")
 	const [arrayForm, setArrayForm] 		= useState<number[]>([1])
-	const [number, setNumber] 		= useState<number>(1)
+	const [number, setNumber] 			= useState<number>(1)
 	const [arrayFormCash, setArrayFormCash] 		= useState<number[]>([1])
-	const [numberCash, setNumberCash] 		= useState<number>(1)
+	const [numberCash, setNumberCash] 				= useState<number>(1)
+	const [gameWay,setGameWay] 						= useState<string>("")
 
 	const [createdTournament]  			= useMutation(CREATED_TOURNAMENT)
 	const {loading,error,data} = useQuery(GET_ALL_GAMES)
@@ -91,10 +92,10 @@ const CreateTournament: React.FC = function() {
 				uidPalteforme:uidPlateform.join("_"),
 				description:"",//info
 				numberParticipate:Math.pow(2,(Math.ceil(Math.log2(Number(data.participant))))),
-				numberTeam:data.numberTeam ? data.numberTeam  : 0,
 				price:lapsCash.filter((e) => e).join("_"),
 				deadlineDate:lastDate,
 				server:data.server,
+				gameWay:gameWay,
 				format:data.format,
 				spectateur:data.spectateur,
 				region:data.region,
@@ -170,6 +171,11 @@ const CreateTournament: React.FC = function() {
 		setLapsCash([...lapsCash,cash.currentTarget.value])
 	}
 
+	const handleGameWay = function(event:any){
+		setGameWay(event.target.value)
+	}
+
+
 	return(
 	    <div className="admin create-tournament">
 			<div className="layout-container">
@@ -214,7 +220,14 @@ const CreateTournament: React.FC = function() {
 												/>
 												<Datetime locale="fr" onChange={handleDateLast} inputProps={{placeholder:"Fin d'inscription"}} />
 												<Select isMulti id="platform" onChange={handlePlateform} options={plateforms} />
-	                                            <div className="wysiwyg">
+	                                            <select id="select-mode" onChange={handleGameWay}>
+	                                                <option value="">Selectionnez le mode de jeux...</option>
+	                                                <option value="1v1">1v1</option>
+	                                                <option value="2v2">2v2</option>
+													<option value="3v3">3v3</option>
+	                                                <option value="4v4">4v4</option>
+	                                            </select>
+												<div className="wysiwyg">
 		                                            <SunEditor
 														placeholder="Règle du jeux"
 														onChange={handleRulesText}
@@ -239,10 +252,6 @@ const CreateTournament: React.FC = function() {
 	                                                	type="number"
 	                                                	{...register("participant")} name="participant"
 	                                                	placeholder="Nombre de participant"/>
-	                                                <input type="number"
-														placeholder="Nombre d'equipes"
-														{...register("numberTeam")} name="numberTeam"
-														className="no-margin"/>
 	                                            </div>
 												<input type="text" placeholder="Frais de participation" {...register("priceParticipate")} name="priceParticipate" className="no-margin"/>
 	                                            <div className="input-group no-flex">

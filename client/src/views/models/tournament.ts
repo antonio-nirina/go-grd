@@ -4,7 +4,7 @@ export interface Tournament {
 	statut:Boolean
 	description:string
 	numberParticipate:number
-	numberTeam:number
+	gameWay:string
 	format:string
 	deadlineDate:string
 	winners:string[]

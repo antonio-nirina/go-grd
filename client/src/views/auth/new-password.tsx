@@ -1,5 +1,4 @@
 import React,{useState} from "react"
-import { Link } from 'react-router-dom'
 import { useForm } from "react-hook-form"
 import {useMutation} from "@apollo/client"
 import {useHistory } from "react-router-dom"
@@ -56,7 +55,7 @@ const NewPassword: React.FC = function() {
 									<div className="input-field code-field">
 										<input id="newpass" className="mgt10" type = "text" required/>
 									</div>
-									<div className="input-field code-field">										
+									<div className="input-field code-field">
 										<input id="repass" className="mgt10" type = "text" required/>
 									</div>
 									<div className="input-field code-btn">
@@ -66,8 +65,8 @@ const NewPassword: React.FC = function() {
 										</button>
 									</div>
 								</div>
-							</form>							
-						</div>						
+							</form>
+						</div>
 					</div>
 				</div>
 			</div>

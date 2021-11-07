@@ -78,10 +78,10 @@ const Joingame: React.FC = function(props:any) {
             <div className="header-part">
               <img className="item-left" src={Game} alt="" />
               <div className="join-title">
-                <h2>{tournament?.title} - {tournament?.isTeam ? `${tournament.numberTeam}v${tournament.numberTeam}`:"1v1" } - {tournament?.game.name}</h2>
+                <h2>{tournament?.title} - {tournament?.gameWay} - {tournament?.game.name}</h2>
                 <p>
                   <span>{dateStringToJoinT(tournament?.dateStart)}</span>
-                  <span>{tournament?.isTeam ? `${tournament.numberTeam}v${tournament.numberTeam}`:"1v1" }</span>
+                  <span>{tournament?.gameWay}</span>
                   <span>{tournament?.game.name}</span>
                   <span>{tournament?.plateform && tournament?.plateform.length > 0 ? "Cross-Play" : ""} </span>
                 </p>

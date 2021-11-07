@@ -28,7 +28,6 @@ const TournamentInc = function() {
 			let sum = 0
 			let month = new Date().toLocaleDateString().split("/")[1]
 			let count = 0
-			setIsLoader(false)
 			data.FindAllTournament.forEach(function(tournament:Tournament) {
 				if(new Date(tournament.dateStart).toLocaleDateString().split("/")[1] === month) {
 					count++
@@ -43,12 +42,11 @@ const TournamentInc = function() {
 				if (diff < 10 || diff <= 0) setIsOpen(false)
 			})
 
-
 			setSumPrice(sum)
 			setTournamentMonth(count)
 			setTournament(data.FindAllTournament)
 		}
-
+		setIsLoader(false)
 	},[loading,error,data])
 
 	return (
@@ -73,7 +71,7 @@ const TournamentInc = function() {
 									<img src={element.game.logo} width="40" height="30" alt=""/>
 									<p className="game_name">{element.title}<span>{dateStringToDY(element.dateStart)} - 6 jours</span></p>
 									<p className="cashprize">Cashprize<span>{sumPrice} G-Coins</span></p>
-									<p className="arena">{element.numberTeam > 0 ? `${element.numberTeam}v${element.numberTeam}`: "1v1"} Arène</p>
+									<p className="arena">{element.gameWay} Arène</p>
 									<p className="place">
 										<i><FontAwesomeIcon icon={faUsers}/></i><span>{element.numberParticipate} places restantes</span>
 										<button style={{"cursor":"pointer"}} onClick={()=>{history.push(`/joingame?uid=${element.uid}`)}} className="btn bg-red">Rejoindre</button>
