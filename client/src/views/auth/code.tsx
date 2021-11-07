@@ -1,5 +1,4 @@
 import React,{useState} from "react"
-import { Link } from 'react-router-dom'
 import { useForm } from "react-hook-form"
 import {useMutation} from "@apollo/client"
 import {useHistory } from "react-router-dom"
@@ -64,8 +63,8 @@ const Code: React.FC = function() {
 										</button>
 									</div>
 								</div>
-							</form>							
-						</div>						
+							</form>
+						</div>
 					</div>
 				</div>
 			</div>

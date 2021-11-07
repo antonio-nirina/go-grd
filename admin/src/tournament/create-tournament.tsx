@@ -18,7 +18,6 @@ import Nav from "../header/nav"
 import {CREATED_TOURNAMENT} from "../gql/tournament/mutation"
 import {GET_ALL_GAMES,GET_ALL_PLATEFORM} from "../gql/games/query"
 import "./tournament.css"
-import { type } from "os"
 
 type Inputs = {
 	participant: number,
@@ -58,12 +57,10 @@ const CreateTournament: React.FC = function() {
 	// const [info, setInfo] 		= useState<String>("")
 	const [arrayForm, setArrayForm] 		= useState<number[]>([1])
 	const [number, setNumber] 		= useState<number>(1)
-
 	const [arrayFormCash, setArrayFormCash] 		= useState<number[]>([1])
 	const [numberCash, setNumberCash] 		= useState<number>(1)
 
 	const [createdTournament]  			= useMutation(CREATED_TOURNAMENT)
-
 	const {loading,error,data} = useQuery(GET_ALL_GAMES)
 	const {loading:loadingP,error:errorP,data:dataP} = useQuery(GET_ALL_PLATEFORM)
 
@@ -85,7 +82,7 @@ const CreateTournament: React.FC = function() {
 		if(!uiGame && !uiGame && !data.title) {
 			setIsValid(true)
 		}
-console.log(lapsDate)
+
 		try {
 			const result = await createdTournament({ variables: {
 				date:startDate,
@@ -215,6 +212,7 @@ console.log(lapsDate)
 													onChange={handleDate}
 													inputProps={{placeholder:"Date debut tournois"}}
 												/>
+												<Datetime locale="fr" onChange={handleDateLast} inputProps={{placeholder:"Fin d'inscription"}} />
 												<Select isMulti id="platform" onChange={handlePlateform} options={plateforms} />
 	                                            <div className="wysiwyg">
 		                                            <SunEditor
@@ -262,7 +260,7 @@ console.log(lapsDate)
 														})
 													}
 	                                            </div>
-	                                            <Datetime locale="fr" onChange={handleDateLast} inputProps={{placeholder:"Fin d'inscription"}} />
+
 												<input type="text" placeholder="Format" {...register("format")} name="format" className="no-margin"/>
 												<input type="text" placeholder="Serveur" {...register("server")} name="server" className="no-margin"/>
 												<input type="text" placeholder="Spectateur" {...register("spectateur")} name="spectateur" className="no-margin"/>
@@ -273,7 +271,7 @@ console.log(lapsDate)
 														return (
 															<div className="tour" key={index}>
 																<div className="new-position">
-																	<Datetime locale="fr" onChange={handleDateLaps} inputProps={{placeholder:`Date du tour ${index+1}`}} />
+																	<Datetime onClose={handleDateLaps} className="date-laps" locale="fr" inputProps={{placeholder:`Date du tour ${index+1}`}} />
 																</div>
 																<div className="flexible">
 																	<div onClick={addForm} className="add-tour btn bg-red"><i><FontAwesomeIcon icon={faPlus} size="lg"/></i>Ajouter Nouveau tour</div>

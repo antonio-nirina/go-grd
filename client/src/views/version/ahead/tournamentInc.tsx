@@ -14,7 +14,8 @@ const TournamentInc = function() {
 	const [tournament, setTournament] = useState<Tournament[]>([])
 	const [sumPrice, setSumPrice] = useState<number>(0)
 	const [tournamentMonth, setTournamentMonth] = useState<number>(0)
-	const [isLoader, setIsLoader] = useState<boolean>(false)
+	const [isLoader, setIsLoader] = useState<boolean>(true)
+	const [isOpen, setIsOpen] = useState<boolean>(true)
 	const {loading,error,data} 	= useQuery(GET_ALL_TOURNAMENT, {
 		variables: {
 			limit:4,
@@ -23,11 +24,11 @@ const TournamentInc = function() {
 	})
 
 	useEffect(() => {
-
 		if(!loading && !error && data) {
 			let sum = 0
 			let month = new Date().toLocaleDateString().split("/")[1]
 			let count = 0
+			setIsLoader(false)
 			data.FindAllTournament.forEach(function(tournament:Tournament) {
 				if(new Date(tournament.dateStart).toLocaleDateString().split("/")[1] === month) {
 					count++
@@ -35,7 +36,13 @@ const TournamentInc = function() {
 				tournament.price.forEach(function(price:string){
 					sum = sum + parseInt(price)
 				})
+				const date1 = new Date()
+				const date2 = new Date(tournament.deadlineDate)
+				const diff = (date2.getTime() - date1.getTime())/1000/60
+				console.log(diff)
+				if (diff < 10 || diff <= 0) setIsOpen(false)
 			})
+
 
 			setSumPrice(sum)
 			setTournamentMonth(count)
@@ -53,12 +60,12 @@ const TournamentInc = function() {
 						color="#dd0000"
 					/>
 				</div>
-				<h2>En ce moment {tournamentMonth > 0 ? '('+tournamentMonth+" tournois ce mois-ci"+')' : "Accun tournois pour l'instant"} </h2>
-				<p>{tournamentMonth > 0 ? "Les prochains tournois à venir" : ""} </p>
+				<h2>En ce moment {tournamentMonth > 0 && isOpen ? '('+tournamentMonth+" tournois ce mois-ci"+')' : "Accun tournois pour l'instant"} </h2>
+				<p>{tournamentMonth > 0 && isOpen ? "Les prochains tournois à venir" : ""} </p>
 			</div>
 			<div className="tournament_wall">
 			{
-				tournament.length > 0 ?
+				tournament.length > 0 && isOpen ?
 					tournament.map(function(element:Tournament,index:number){
 						return (
 							<div className="list_tournament" key={index}>
