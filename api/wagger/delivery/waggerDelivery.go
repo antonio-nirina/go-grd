@@ -3,8 +3,10 @@ package delivery
 import (
 	"encoding/json"
 	"strconv"
+	"strings"
 
 	"github.com/graphql-go/graphql"
+	gameEntity "github.com/thoussei/antonio/api/games/entity"
 	gameHandler "github.com/thoussei/antonio/api/games/handler"
 	"github.com/thoussei/antonio/api/wagger/entity"
 	"github.com/thoussei/antonio/api/wagger/handler"
@@ -56,18 +58,32 @@ func (w *wagger) SavedWaggerResolver(params graphql.ResolveParams) (interface{},
 	title, _ := params.Args["title"].(string)
 	date, _ := params.Args["date"].(string)
 	description, _ := params.Args["description"].(string)
-	price, _ := params.Args["price"].(float64)
+	price, _ := params.Args["price"].(string)
 	deadlineDate, _ := params.Args["deadlineDate"].(string)
 	gameUid, _ := params.Args["uidGame"].(string)
 	plateformUid, _ := params.Args["uidPalteforme"].(string)
-	priceParticipate, _ := params.Args["priceParticipate"].(float64)
+	priceParticipate, _ := params.Args["priceParticipate"].(string)
 	gameWay, _ := params.Args["gameWay"].(string)
 	format, _ := params.Args["format"].(string)
 	isPublic, _ := params.Args["isPublic"].(bool)
-	participant, _ := params.Args["participant"].(int)
 	rules, _ := params.Args["rules"].(string)
+	spectateur, _ := params.Args["spectateur"].(string)
+	region, _ := params.Args["region"].(string)
+	server, _ := params.Args["server"].(string)
+	maps, _ := params.Args["maps"].(string)
+
 	game, err := w.gameWaggerHandler.FindOneGameByUidHandler(gameUid)
-	plateform, err := w.plateformWaggerHandler.FindOnePlateformByUidHandler(plateformUid)
+	var plateforms []gameEntity.GamePlatform
+	arrayPlateforms := strings.Split(plateformUid, "_")
+	// arrayPrices := strings.Split(price, "_")
+
+	for _, value := range arrayPlateforms {
+		plateform, err := w.plateformWaggerHandler.FindOnePlateformByUidHandler(value)
+		if err != nil {
+			return nil, err
+		}
+		plateforms = append(plateforms, plateform)
+	}
 
 	if err != nil {
 		return nil, err
@@ -77,9 +93,8 @@ func (w *wagger) SavedWaggerResolver(params graphql.ResolveParams) (interface{},
 		Uid:              primitive.NewObjectID(),
 		Title:            title,
 		Date:             date,
-		Participant:      participant,
 		Game:             game,
-		Plateform:        plateform,
+		Plateform:        plateforms,
 		Price:            price,
 		DeadlineDate:     deadlineDate,
 		PriceParticipate: priceParticipate,
@@ -89,6 +104,11 @@ func (w *wagger) SavedWaggerResolver(params graphql.ResolveParams) (interface{},
 		Format:           format,
 		IsPublic:         isPublic,
 		Rules:            rules,
+		Spectateur:        spectateur,
+		Server: 			server,
+		Region: 			region,
+		Maps:maps,
+		TchatVocal: true,
 	}
 
 	res, err := w.waggerHandler.SavedWaggerHandle(wagger)
@@ -158,9 +178,6 @@ func (w *wagger) UpdatedWaggerResolver(params graphql.ResolveParams) (interface{
 		description = input.WaggerUpated.Description
 	}
 
-	if input.WaggerUpated.Price != "" {
-		price, _ = strconv.ParseFloat(input.WaggerUpated.Price, 64)
-	}
 
 	if input.WaggerUpated.DeadlineDate != "" {
 		deadlineDate = input.WaggerUpated.DeadlineDate
@@ -171,7 +188,7 @@ func (w *wagger) UpdatedWaggerResolver(params graphql.ResolveParams) (interface{
 	}
 
 	if input.WaggerUpated.PriceParticipate != "" {
-		priceParticipate, _ = strconv.ParseFloat(input.WaggerUpated.PriceParticipate, 64)
+		priceParticipate = input.WaggerUpated.PriceParticipate
 	}
 
 	if input.WaggerUpated.Format != "" {

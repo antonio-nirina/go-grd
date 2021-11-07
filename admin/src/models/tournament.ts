@@ -4,7 +4,7 @@ export interface Tournament {
 	statut:Boolean
 	description:string
 	numberParticipate:number
-	gameWay:string
+	numberTeam:number
 	format:string
 	deadlineDate:string
 	winners:string[]
@@ -19,6 +19,7 @@ export interface Tournament {
 	server:string
 	isPublic:Boolean|undefined
 	region:string
+	records:number
 	game:Game
 	plateform:Platform[]
 }
@@ -35,15 +36,4 @@ export interface Platform {
 	uid:string
 	description:string
 	name:string
-}
-
-export interface User {
-	uid:string
-	firstname:string
-	lastname:string
-	email:string
-	username:string
-	avatar:string
-	language:string
-	point:number
 }

@@ -12,14 +12,13 @@ type Tournament struct {
 	Game              game.Game           `json:"game,omitempty"`
 	Plateform         []game.GamePlatform `json:"plateform,omitempty"`
 	NumberParticipate int                 `json:"numberParticipate"`
-	NumberTeam        int                 `json:"numberTeam"`
+	GameWay          string             `json:"gameWay"`
 	Price             []string             `json:"price"`
 	DeadlineDate      string              `json:"deadlineDate"`
 	PriceParticipate  string              `json:"priceParticipate"`
 	Statut            bool                `json:"statut"`
 	Info              string              `json:"info"`
 	Rules             string              `json:"rules"`
-	IsTeam            bool                `json:"isTeam"`
 	IsPublic          bool                `json:"isPublic"`
 	Format            string              `json:"format,omitempty"`
 	Server            string              `json:"server,omitempty"`

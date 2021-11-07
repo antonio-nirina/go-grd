@@ -70,9 +70,9 @@ const LeagueGame = function(props:any) {
 												</span>
 											</p>
 											<p>{el.game.name}</p>
-											<p>{el.numberTeam > 0 ? `B0${el.numberTeam}` : "B01" }</p>
+											<p>{el.format }</p>
 											<p>{`${el.price} € `}</p>
-											<p>{el.numberTeam > 0 ? `${el.numberTeam}v${el.numberTeam} Arène` : "1v1" }</p>
+											<p>{el.gameWay}</p>
 											<p>{!el.isPublic ? "Public": "Prenimum"}</p>
 											<p><i><FontAwesomeIcon icon={faUsers}/></i>{`0/${el.priceParticipate}`}</p>
 										</Link>

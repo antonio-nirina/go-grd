@@ -1,4 +1,5 @@
 import React from "react"
+import { Link } from 'react-router-dom'
 import { useSelector } from "react-redux"
 
 import {Translation} from "../../../lang/translation"
@@ -31,7 +32,7 @@ const Game: React.FC = function() {
   	<div className="bg-game">
       <div className="firstblock w100">
         <div className="logo-game">
-            <><img src={apexlegends} alt="Apex Legends" /></>
+            <><Link to="stat"><img src={apexlegends} alt="Apex Legends" /></Link></>
         </div>
         <div className="logo-game">
             <><img src={fortnite} alt="Fortnite" /></>

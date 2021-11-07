@@ -142,7 +142,6 @@ func (p *partUsecase) FindPartHandler(idQuery string) (partViewModel, error) {
 			result.Tournament.Info,
 			result.Tournament.Statut,
 			result.Tournament.NumberParticipate,
-			result.Tournament.NumberTeam,
 			result.Tournament.Price,
 			result.Tournament.DeadlineDate,
 			result.Tournament.PriceParticipate,
@@ -164,6 +163,7 @@ func (p *partUsecase) FindPartHandler(idQuery string) (partViewModel, error) {
 			result.Tournament.Spectateur,
 			result.Tournament.Laps,
 			result.Tournament.Maps,
+			result.Tournament.GameWay,
 		},
 	}
 
@@ -263,7 +263,6 @@ func (p *partUsecase) FindAllPartHandler(pageNumber int64, limit int64) ([]partV
 				result.Tournament.Info,
 				result.Tournament.Statut,
 				result.Tournament.NumberParticipate,
-				result.Tournament.NumberTeam,
 				result.Tournament.Price,
 				result.Tournament.DeadlineDate,
 				result.Tournament.PriceParticipate,
@@ -285,6 +284,7 @@ func (p *partUsecase) FindAllPartHandler(pageNumber int64, limit int64) ([]partV
 				result.Tournament.Spectateur,
 				result.Tournament.Laps,
 				result.Tournament.Maps,
+				result.Tournament.GameWay,
 			},
 		}
 
@@ -387,7 +387,6 @@ func (p *partUsecase) FindPartUserHandler(pageNumber int64, limit int64, userUid
 				result.Tournament.Info,
 				result.Tournament.Statut,
 				result.Tournament.NumberParticipate,
-				result.Tournament.NumberTeam,
 				result.Tournament.Price,
 				result.Tournament.DeadlineDate,
 				result.Tournament.PriceParticipate,
@@ -409,6 +408,7 @@ func (p *partUsecase) FindPartUserHandler(pageNumber int64, limit int64, userUid
 				result.Tournament.Spectateur,
 				result.Tournament.Laps,
 				result.Tournament.Maps,
+				result.Tournament.GameWay,
 			},
 		}
 
@@ -531,7 +531,6 @@ func (p *partUsecase) FindPartUserLeagueHandler(userUid primitive.ObjectID, leag
 			result.Tournament.Info,
 			result.Tournament.Statut,
 			result.Tournament.NumberParticipate,
-			result.Tournament.NumberTeam,
 			result.Tournament.Price,
 			result.Tournament.DeadlineDate,
 			result.Tournament.PriceParticipate,
@@ -553,6 +552,7 @@ func (p *partUsecase) FindPartUserLeagueHandler(userUid primitive.ObjectID, leag
 			result.Tournament.Spectateur,
 			result.Tournament.Laps,
 			result.Tournament.Maps,
+			result.Tournament.GameWay,
 		},
 	}
 
@@ -660,7 +660,6 @@ func (p *partUsecase) FindPartUserTournamentHandler(uidUser primitive.ObjectID, 
 			result.Tournament.Info,
 			result.Tournament.Statut,
 			result.Tournament.NumberParticipate,
-			result.Tournament.NumberTeam,
 			result.Tournament.Price,
 			result.Tournament.DeadlineDate,
 			result.Tournament.PriceParticipate,
@@ -682,6 +681,7 @@ func (p *partUsecase) FindPartUserTournamentHandler(uidUser primitive.ObjectID, 
 			result.Tournament.Spectateur,
 			result.Tournament.Laps,
 			result.Tournament.Maps,
+			result.Tournament.GameWay,
 		},
 	}
 
@@ -837,13 +837,19 @@ func (p *partUsecase) FindAllPartUserWaggerHandler(userUid primitive.ObjectID, p
 				GameWay:          result.Wagger.GameWay,
 				PriceParticipate: result.Wagger.PriceParticipate,
 				Game:             tHandler.GameViewModel{},
-				Plateform:        tHandler.PlateformViewModel{},
+				Plateform:        []tHandler.PlateformViewModel{},
 				Format:           result.Wagger.Format,
 				IsPublic:         result.Wagger.IsPublic,
 				Statut:           result.Wagger.Statut,
 				Records:          0,
 				Participant:      result.Wagger.Participant,
 				Rules:            result.Wagger.Rules,
+
+				Server:            result.Wagger.Server,
+				TchatVocal:        result.Wagger.TchatVocal,
+				Region:            result.Wagger.Region,
+				Spectateur:        result.Wagger.Spectateur,
+				Maps: 				result.Wagger.Maps,
 			},
 			NumberPartConfirmed: result.NumberPartConfirmed,
 		}

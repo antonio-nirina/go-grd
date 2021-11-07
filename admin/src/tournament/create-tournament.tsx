@@ -18,7 +18,6 @@ import Nav from "../header/nav"
 import {CREATED_TOURNAMENT} from "../gql/tournament/mutation"
 import {GET_ALL_GAMES,GET_ALL_PLATEFORM} from "../gql/games/query"
 import "./tournament.css"
-import { type } from "os"
 
 type Inputs = {
 	participant: number,
@@ -31,11 +30,11 @@ type Inputs = {
 	server:string,
 	map:string
 }
-type PlateformSelect = {
+export type PlateformSelect = {
 	label:string,
 	value:string
 }
-type Plateforms = {
+export type Plateforms = {
 	uid:string,
 	name:string,
 	logo:string,
@@ -54,16 +53,15 @@ const CreateTournament: React.FC = function() {
 	const [lastDate, setLastDate] 		= useState<string>("")
 	const [lapsDate, setLapsDate] 		= useState<string[]>([])
 	const [lapsCash, setLapsCash] 		= useState<string[]>([])
-	const [rules, setRules] 	= useState<string>("")
+	const [rules, setRules] 			= useState<string>("")
 	// const [info, setInfo] 		= useState<String>("")
 	const [arrayForm, setArrayForm] 		= useState<number[]>([1])
-	const [number, setNumber] 		= useState<number>(1)
-
+	const [number, setNumber] 			= useState<number>(1)
 	const [arrayFormCash, setArrayFormCash] 		= useState<number[]>([1])
-	const [numberCash, setNumberCash] 		= useState<number>(1)
+	const [numberCash, setNumberCash] 				= useState<number>(1)
+	const [gameWay,setGameWay] 						= useState<string>("")
 
 	const [createdTournament]  			= useMutation(CREATED_TOURNAMENT)
-
 	const {loading,error,data} = useQuery(GET_ALL_GAMES)
 	const {loading:loadingP,error:errorP,data:dataP} = useQuery(GET_ALL_PLATEFORM)
 
@@ -94,10 +92,10 @@ const CreateTournament: React.FC = function() {
 				uidPalteforme:uidPlateform.join("_"),
 				description:"",//info
 				numberParticipate:Math.pow(2,(Math.ceil(Math.log2(Number(data.participant))))),
-				numberTeam:data.numberTeam ? data.numberTeam  : 0,
-				price:lapsCash.join("_"),
+				price:lapsCash.filter((e) => e).join("_"),
 				deadlineDate:lastDate,
 				server:data.server,
+				gameWay:gameWay,
 				format:data.format,
 				spectateur:data.spectateur,
 				region:data.region,
@@ -151,6 +149,7 @@ const CreateTournament: React.FC = function() {
 			const arr = arrayForm.splice(1,index)
 			setArrayForm(arr)
 			setNumber(number-1)
+			setLapsDate(lapsDate.splice(1,index))
 		}
 	}
 
@@ -164,12 +163,18 @@ const CreateTournament: React.FC = function() {
 			const arrCash = arrayFormCash.splice(1,index)
 			setArrayFormCash(arrCash)
 			setNumberCash(numberCash-1)
+			setLapsCash(lapsCash.splice(1,index))
 		}
 	}
 
 	const handleCashLaps = function(cash:React.FormEvent<HTMLInputElement>) {
 		setLapsCash([...lapsCash,cash.currentTarget.value])
 	}
+
+	const handleGameWay = function(event:any){
+		setGameWay(event.target.value)
+	}
+
 
 	return(
 	    <div className="admin create-tournament">
@@ -213,8 +218,16 @@ const CreateTournament: React.FC = function() {
 													onChange={handleDate}
 													inputProps={{placeholder:"Date debut tournois"}}
 												/>
+												<Datetime locale="fr" onChange={handleDateLast} inputProps={{placeholder:"Fin d'inscription"}} />
 												<Select isMulti id="platform" onChange={handlePlateform} options={plateforms} />
-	                                            <div className="wysiwyg">
+	                                            <select id="select-mode" onChange={handleGameWay}>
+	                                                <option value="">Selectionnez le mode de jeux...</option>
+	                                                <option value="1v1">1v1</option>
+	                                                <option value="2v2">2v2</option>
+													<option value="3v3">3v3</option>
+	                                                <option value="4v4">4v4</option>
+	                                            </select>
+												<div className="wysiwyg">
 		                                            <SunEditor
 														placeholder="Règle du jeux"
 														onChange={handleRulesText}
@@ -239,38 +252,40 @@ const CreateTournament: React.FC = function() {
 	                                                	type="number"
 	                                                	{...register("participant")} name="participant"
 	                                                	placeholder="Nombre de participant"/>
-	                                                <input type="number"
-														placeholder="Nombre d'equipes"
-														{...register("numberTeam")} name="numberTeam"
-														className="no-margin"/>
 	                                            </div>
 												<input type="text" placeholder="Frais de participation" {...register("priceParticipate")} name="priceParticipate" className="no-margin"/>
-	                                            <div className="input-group">
+	                                            <div className="input-group no-flex">
 													{
 														arrayFormCash.map(function(el:number,index:number) {
 															return (
 																<div className="tour" key={index}>
-																	<input onBlur={handleCashLaps} placeholder={`Prix à gagner position ${index+1}`} />
-																	<div onClick={addFormCash} id="add-tour" className="btn bg-red"><i><FontAwesomeIcon icon={faPlus} size="lg"/></i>Ajouter Nouveau position</div>
-																	<div onClick={() => removeLineCash(index)} className= {index === 0 || arrayFormCash.length === 1 ? "d-none":"btn bg-white"}><i><FontAwesomeIcon icon={faTimes} size="lg"/></i>Supprimer</div>
+																	<div className="new-position"><input onBlur={handleCashLaps} placeholder={`Prix à gagner position ${index+1}`} /></div>
+																	<div className="flexible">
+																		<div onClick={addFormCash} className="add-tour btn bg-red"><i><FontAwesomeIcon icon={faPlus} size="lg"/></i>Ajouter Nouveau position</div>
+																		<div onClick={() => removeLineCash(index)} className= {index === 0 || arrayFormCash.length === 1 ? "d-none":"d-block"}><button className="btn bg-white"><i><FontAwesomeIcon icon={faTimes} size="lg"/></i>Supprimer</button></div>
+																	</div>
 																</div>
 															)
 														})
 													}
 	                                            </div>
-	                                            <Datetime locale="fr" onChange={handleDateLast} inputProps={{placeholder:"Fin d'inscription"}} />
+
 												<input type="text" placeholder="Format" {...register("format")} name="format" className="no-margin"/>
-												<input type="text" placeholder="Serveur" {...register("server")} name="format" className="no-margin"/>
+												<input type="text" placeholder="Serveur" {...register("server")} name="server" className="no-margin"/>
 												<input type="text" placeholder="Spectateur" {...register("spectateur")} name="spectateur" className="no-margin"/>
-												<input type="text" placeholder="Region" {...register("region")} name="format" className="no-margin"/>
+												<input type="text" placeholder="Region" {...register("region")} name="region" className="no-margin"/>
 												<input type="text" placeholder="Map" {...register("map")} name="map" className="no-margin"/>
 												{
 													arrayForm.map(function(el:number,index:number) {
 														return (
 															<div className="tour" key={index}>
-																<Datetime locale="fr" onChange={handleDateLaps} inputProps={{placeholder:`Date du tour ${index+1}`}} />
-																<div onClick={addForm} id="add-tour" className="btn bg-red"><i><FontAwesomeIcon icon={faPlus} size="lg"/></i>Ajouter Nouveau tour</div>
-																<div onClick={() => removeLine(index)} className= {index === 0 || arrayForm.length === 1 ? "d-none":"btn bg-white"}><i><FontAwesomeIcon icon={faTimes} size="lg"/></i>Supprimer</div>
+																<div className="new-position">
+																	<Datetime onClose={handleDateLaps} className="date-laps" locale="fr" inputProps={{placeholder:`Date du tour ${index+1}`}} />
+																</div>
+																<div className="flexible">
+																	<div onClick={addForm} className="add-tour btn bg-red"><i><FontAwesomeIcon icon={faPlus} size="lg"/></i>Ajouter Nouveau tour</div>
+																	<div onClick={() => removeLine(index)} className= {index === 0 || arrayForm.length === 1 ? "d-none":"d-block"}><button className="btn bg-white"><i><FontAwesomeIcon icon={faTimes} size="lg"/></i>Supprimer</button></div>
+																</div>
 															</div>
 														)
 													})

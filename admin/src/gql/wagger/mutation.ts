@@ -7,13 +7,12 @@ export const CREATED_WAGGER = gql`
 		$description:String,
 		$uidGame:String,
 		$uidPalteforme:String,
-		$price:Float,
+		$price:String,
 		$deadlineDate:String,
 		$gameWay:String,
-		$priceParticipate:Float,
+		$priceParticipate:String,
 		$format:String,
 		$isPublic:Boolean
-		$participant:Int
 		$rules:String
 		){
 		createWagger(
@@ -27,7 +26,6 @@ export const CREATED_WAGGER = gql`
 			gameWay:$gameWay,
 			priceParticipate:$priceParticipate,
 			isPublic:$isPublic,
-			participant:$participant,
 			rules:$rules,
 			format:$format)
 	}

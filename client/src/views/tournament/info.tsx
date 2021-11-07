@@ -51,7 +51,6 @@ const Info: React.FC = function(props:any) {
 		const date1 = new Date()
 		const date2 = new Date(data?.FindOneTournament.deadlineDate)
 		const diff = (date2.getTime() - date1.getTime())/1000/60
-
 		if (diff < 10 || diff <= 0) setIsOpen(false)
 
 		if(!loadTrnmt && !errTrnmt && dataTrnmt) {
@@ -130,7 +129,7 @@ const Info: React.FC = function(props:any) {
 							</div>
 							<div>
 								<p>Mode</p>
-								<span>{tournament && tournament.numberTeam > 0 ? `${tournament?.numberTeam} V ${tournament?.numberTeam}` : "1 V 1" }</span>
+								<span>{tournament ? tournament.gameWay : <></> }</span>
 							</div>
 						</div>
 						<div className="btn-container">
