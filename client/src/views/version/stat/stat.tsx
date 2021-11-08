@@ -54,8 +54,8 @@ const Stat: React.FC = function(props:any) {
               <div className="join-title">
                 <h2>Wager Apex Legends</h2>
                 <p className="conf">
-                  <img src={Discord} width="25"/>
-                  <img src={Flag} width="25"/>
+                  <img src={Discord} width="25" alt=""/>
+                  <img src={Flag} width="25" alt=""/>
                 </p>
               </div>
             </div>

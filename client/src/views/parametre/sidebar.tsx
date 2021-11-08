@@ -14,8 +14,8 @@ const Sidebar = function() {
                 <li id="jeux">
                     <Link to="/mygames">Mes jeux</Link>
                 </li>
-                <li>
-                    <Link to="/assistance">Assistance</Link>
+                <li id="team">
+                    <Link to="/team">Mes équipes</Link>
                 </li>
             </ul>
         </div>

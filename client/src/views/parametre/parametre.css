@@ -34,6 +34,11 @@
 	font-family: arial;
 	font-weight: lighter;
 }
+.settings .personal h2{
+	font-family: "russo one";
+	font-weight: lighter;
+	padding-bottom: 10px;
+}
 .personal-field{
 	margin-bottom: 20px;
 }
@@ -219,13 +224,15 @@
 /******Active link****************/
 #infos,
 #cagnotte,
-#jeux
+#jeux,
+#team
 {
 	position: relative;	
 }
 .mes_infos #infos:before,
 .cagnotte #cagnotte:before,
-.mes_jeux #jeux:before
+.mes_jeux #jeux:before,
+.mes_equipes #team:before
 {
 	content:"";
 	display: inline-block;
@@ -235,4 +242,110 @@
 	position: absolute;
 	top: 7px;
 	left: -10px;
+}
+/***************************************/
+.my_team{
+	background: #dd0000;
+	margin-top: 25px;
+	padding: 15px;
+	text-align: center;
+	max-width: 235px;
+	width: 100%;
+	border-radius: 5px;
+}
+.my_team strong{
+	font-family: "russo one";
+	color: #000000;
+	display: block;
+	padding: 15px;
+}
+.my_team p{
+	color: #000000;
+	font-family: "russo one";
+}
+.info_title{
+	display: flex;
+	justify-content: space-between;
+}
+.team_data{
+	display: flex;
+	justify-content: stretch;
+}
+.team_data p{
+	width: 65px;
+	font-size: 11px;
+	text-align: right;
+}
+.info_title p{
+	font-size: 11px;
+	text-align: right;
+}
+.my_team{
+	display: inline-block;
+	vertical-align: middle;
+}
+.add_team{	
+	width: 180px;
+	display: inline-block;
+	vertical-align: middle;
+	margin-top: 25px;
+	margin-left: 25px;
+	padding: 15px;
+	text-align: center;
+	cursor: pointer;
+}
+.add_team i{
+	font-size: 40px;
+	margin-left: 15px;
+	display: block;
+	margin-bottom: 15px;
+}
+.add_team p{
+	font-family: "russo one";
+	text-transform: uppercase;
+}
+.popup_team{
+	position: fixed;
+	background: #101010;
+	padding: 25px;
+	top: 35%;
+	left: 35%;
+	width: 35%;
+	text-transform: center;
+	margin: auto;
+	text-transform: uppercase;
+	font-family: "russo one";
+}
+.popup_team h3{
+	text-align: center;
+	text-transform: uppercase;
+	margin-bottom: 15px;
+	float: left;
+	width: 96%
+}
+.title_popup i{
+	float: right;
+	cursor: pointer;
+}
+.popup_team p{
+	text-align: center;
+	margin-bottom: 15px;
+}
+.name_popup{
+	clear: both;
+}
+.name_popup form{
+	text-align: center;
+}
+.name_popup .btn{
+	font-family: "russo one";
+	cursor: pointer;
+}
+.popup_team input{
+	border: none;
+	width: 100%;
+	padding: 15px;
+	display: block;
+	margin-bottom: 15px;
+	border-radius: 5px;
 }
