@@ -10,7 +10,7 @@ export const GET_ALL_TOURNAMENT= gql`
 		statut
 		description
 		numberParticipate
-		numberTeam
+		gameWay,
 		deadlineDate
 		dateStart
 		price

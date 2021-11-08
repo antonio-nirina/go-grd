@@ -25,9 +25,6 @@ var TournamentSchemaType = graphql.NewObject(graphql.ObjectConfig{
 		"numberParticipate": &graphql.Field{
 			Type: graphql.Int,
 		},
-		"numberTeam": &graphql.Field{
-			Type: graphql.Int,
-		},
 		"price": &graphql.Field{
 			Type: graphql.NewList(graphql.String),
 		},
@@ -49,8 +46,8 @@ var TournamentSchemaType = graphql.NewObject(graphql.ObjectConfig{
 		"isPublic": &graphql.Field{
 			Type: graphql.Boolean,
 		},
-		"isTeam": &graphql.Field{
-			Type: graphql.Boolean,
+		"gameWay": &graphql.Field{
+			Type: graphql.String,
 		},
 		"records": &graphql.Field{
 			Type: graphql.Int,
@@ -69,6 +66,9 @@ var TournamentSchemaType = graphql.NewObject(graphql.ObjectConfig{
 		},
 		"region": &graphql.Field{
 			Type: graphql.String,
+		},
+		"laps": &graphql.Field{
+			Type: graphql.NewList(graphql.String),
 		},
 	},
 })

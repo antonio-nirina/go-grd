@@ -135,7 +135,7 @@ const Post = function() {
 	const handleUpload = function() {
 		setIsUpload(true)
 	}
-	const handleClose = function(event:any) {
+	const handleClose = function(event:React.FormEvent<HTMLSpanElement>) {
 		setIsUpload(false)
 		event.stopPropagation()
 

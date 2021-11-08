@@ -11,20 +11,21 @@ import moment from 'moment'
 import 'moment/locale/fr'
 import SunEditor from 'suneditor-react'
 import 'suneditor/dist/css/suneditor.min.css'
+import Select from 'react-select'
 
 import SideBar from "../header/sidebar"
 import {CREATED_WAGGER} from "../gql/wagger/mutation"
 import Nav from "../header/nav"
 import {GET_ALL_GAMES,GET_ALL_PLATEFORM} from "../gql/games/query"
+import {PlateformSelect,Plateforms} from "../tournament/create-tournament"
 
 type Inputs = {
 	title:string,
-	price:number,
+	price:string,
 	format:string,
 	priceParticipate:number,
 	description:string,
 	isPublic:boolean,
-	participant:number
 }
 
 
@@ -34,9 +35,9 @@ const CreateWaggers: React.FC = function() {
 	const [lastDate, setLastDate] 		= useState<string>("")
 	const [gameWay,setGameWay] 			= useState<string>("")
 	const [uiGame,setUiGame] 			= useState<string>("")
-	const [uidPlateform,setUidPlateform] = useState<string>("")
+	const [uidPlateform,setUidPlateform] = useState<string[]>([])
+	const [plateforms,setPlateforms] 	= useState<PlateformSelect[]>([])
 	const [games,setGames] 				= useState<Array<any>>([])
-	const [plateforms,setPlateforms] 	= useState<Array<any>>([])
 	const [isPub,setIsPub] 				= useState<boolean>(false)
 	const [rules, setRules] 	= useState<String>("")
 	const { register, handleSubmit } 	= useForm<Inputs>()
@@ -47,7 +48,16 @@ const CreateWaggers: React.FC = function() {
 
 	useMemo(() => {
 		if(!loading && !error && data) setGames(data.FindAllGame)
-		if(!loadingP && !errorP && dataP) setPlateforms(dataP.FindAllPlateform)
+		if(!loadingP && !errorP && dataP) {
+			let arrayPl:PlateformSelect[] = []
+			dataP.FindAllPlateform.forEach(function(pl:Plateforms) {
+				arrayPl.push({
+					label:pl.name,
+					value:pl.uid
+				})
+			})
+			setPlateforms(arrayPl)
+		}
 	},[loading,error,data,loadingP,errorP,dataP])
 
 	const onSubmit = async function(data:Inputs){
@@ -55,16 +65,15 @@ const CreateWaggers: React.FC = function() {
 			date:startDate,
 			title:data.title,
 			uidGame:uiGame,
-			uidPalteforme:uidPlateform,
+			uidPalteforme:uidPlateform.join("_"),
 			description:data.description ? data.description : "",
 			price:data.price,
 			format:data.format ? data.format : "",
-			gameWay:gameWay, 
+			gameWay:gameWay,
 			deadlineDate:lastDate,
-			priceParticipate:data.priceParticipate,
+			priceParticipate:data.priceParticipate?data.priceParticipate:"",
 			isPublic:data.isPublic,
-			rules:rules,
-			participant:Math.pow(2,(Math.ceil(Math.log2(Number(data.participant))))),
+			rules:rules
 		} })
 		if (result.data.createWagger) history.push("/admin/wagger")
 	}
@@ -74,7 +83,11 @@ const CreateWaggers: React.FC = function() {
 	}
 
 	const handlePlateform = function(event:any) {
-		setUidPlateform(event.target.value)
+		let uids:string[] = []
+		event.forEach(function(e:PlateformSelect) {
+			uids.push(e.value)
+		})
+		setUidPlateform(uids)
 	}
 
 	const handleDate = function(date:any) {
@@ -112,23 +125,24 @@ const CreateWaggers: React.FC = function() {
 	        					<div className="title">
 	                                <h1>Crée wagger</h1>
 	                            </div>
-	        					
+
 	                            <div className="setting-tournament">
 	                                <div className="field">
 	                                    <div className="group-input">
 	                                        <form onSubmit={handleSubmit(onSubmit)}>
 	                                        	<div className="premium">
-		                                        	<label className="switch">		                                        		
+		                                        	<label className="switch">
 		                                        		<input type="checkbox" {...register("isPublic")} name="isPublic" onChange={handleTextPub} />
-		                                        		<span className="slider">{isPub ? "Public" : "Privé"}</span>		                                        		
+		                                        		<span className="slider">{isPub ? "Public" : "Privé"}</span>
 		                                        	</label>
 	                                        	</div>
-	                                        	<input type="text" placeholder="Titre wagger" {...register("title")} name="title" />	                                      		                                        	
+	                                        	<input type="text" placeholder="Titre wagger" {...register("title")} name="title" />
 	                                        	<select id="select-mode" onChange={handleGameWay}>
 	                                                <option value="">Selectionnez le mode de jeux...</option>
 	                                                <option value="1v1">1v1</option>
 	                                                <option value="2v2">2v2</option>
-	                                                <option value="4v4">4v4</option>	                                                
+													<option value="3v3">3v3</option>
+	                                                <option value="4v4">4v4</option>
 	                                            </select>
 	                                            <select id="jeux" onChange={handleGame}>
 	                                                <option value="">Selectionnez le jeux...</option>
@@ -140,18 +154,7 @@ const CreateWaggers: React.FC = function() {
 	                                                	})
 	                                                }
 	                                            </select>
-	                                            <select id="platform" onChange={handlePlateform}>
-	                                                <option value="">Selectionnez les plateformes...</option>
-	                                                {
-	                                                	plateforms?.map(function(el:any,index:number) {
-	                                                		return(
-	                                                			<option key={index} value={el.uid}>{el.name}</option>
-                                                			)
-	                                                	})
-	                                                }
-
-	                                            </select>
-												<input type="text" placeholder="Participant" {...register("participant")} name="participant" />                                         
+												<Select isMulti id="platform" onChange={handlePlateform} options={plateforms} />
 	                                            <input type="text" placeholder="Format game" {...register("format")} name="format" />
 
 	                                            <Datetime

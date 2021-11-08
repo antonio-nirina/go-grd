@@ -139,7 +139,7 @@ func (c *DriverRepository) UpdatedTournament(tournament *entity.Tournament) (int
 				"numberParticipate", tournament.NumberParticipate,
 			},
 			{
-				"numberTeam", tournament.NumberTeam,
+				"gameWay", tournament.GameWay,
 			},
 			{
 				"price", tournament.Price,
@@ -158,9 +158,6 @@ func (c *DriverRepository) UpdatedTournament(tournament *entity.Tournament) (int
 			},
 			{
 				"rules", tournament.Rules,
-			},
-			{
-				"isTeam", tournament.IsTeam,
 			},
 			{
 				"isPublic", tournament.IsPublic,

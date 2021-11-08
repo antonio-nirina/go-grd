@@ -71,9 +71,9 @@ const TournamentGame = function(props:any) {
 												</span>
 											</p>
 											<p>Go GRIND</p>
-											<p className="italic">{el.numberTeam > 0 ? `B0${el.numberTeam}` : "Tableau simple" }</p>
+											<p className="italic">{el.format }</p>
 											<p className="italic">{`${el.price} € `}</p>
-											<p className="italic">{el.numberTeam > 0 ? `${el.numberTeam}v${el.numberTeam} Arène` : "1v1" }</p>
+											<p className="italic">{el.gameWay}</p>
 											<p className="italic">{!el.isPublic ? "Public": "Invitation"}</p>
 											<p className="italic"><i><FontAwesomeIcon icon={faUsers}/></i>{`0/${el.priceParticipate}`}</p>
 										</Link>

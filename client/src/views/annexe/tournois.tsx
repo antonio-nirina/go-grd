@@ -117,9 +117,7 @@ const Tournois: React.FC = function() {
 																		</td>
 																		<td>
 																			{
-																				el.numberTeam > 0 ?
-																				Translation(userConnectedRedux.user.language).tournament.team :
-																				Translation(userConnectedRedux.user.language).tournament.player
+																				Translation(userConnectedRedux.user.language).tournament.team
 																			}
 																		</td>
 																		<td>Type</td>
@@ -129,7 +127,7 @@ const Tournois: React.FC = function() {
 																	<tr>
 																		<td>{userConnectedRedux.user.language === "fr" ? dateStringToDY(el.dateStart) : dateStringToDY(el.dateStart)}</td>
 																		<td>{`0/${el.numberParticipate}`}</td>
-																		<td>{el.numberTeam > 0 ? `${el.numberTeam} ON ${el.numberTeam}` : "1 ON 1" }</td>
+																		<td>{el.gameWay }</td>
 																	</tr>
 																</tbody>
 															</table>

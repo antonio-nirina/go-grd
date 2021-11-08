@@ -10,6 +10,7 @@ import Pagination from "../common/pagination"
 import SideBar from "../header/sidebar"
 import Nav from "../header/nav"
 import {NUMBER_PER_PAGE} from "../common/constante"
+import {Tournament,Platform} from "../models/tournament"
 
 interface Item {
 	item:number
@@ -17,9 +18,11 @@ interface Item {
 
 const ListTournament : React.FC = function(props:any) {
 	const [showList, setShowList] = useState<Boolean>(false)
-	const [tournament, setTournament] = useState<any>([])
+	const [tournament, setTournament] = useState<Tournament[]>([])
 	const [item, setItem] = useState<Item>({item:1})
+	const [sumPrice, setSumPrice] = useState<number>(0)
 	const [isLoader, setIsLoader] = useState<Boolean>(true)
+	const [plateform, setPlateform] = useState<string>()
 
 	//const [limit, setLimit] = useState<Number>(0)
 	//const [pageNumber, setPageNumber] = useState<Number>(0)
@@ -33,8 +36,21 @@ const ListTournament : React.FC = function(props:any) {
 	useEffect(() => {
 		//let init = true
 		if(!loading && !error && data) {
+			let arrayPl:string[] = []
+			let sum = 0
 			setIsLoader(false)
 			setTournament(data.FindAllTournament)
+			data.FindAllTournament.forEach(function(tournois:Tournament){
+				tournois.price.forEach(function(price:string) {
+					sum = sum + parseInt(price)
+				})
+				tournois.plateform.forEach(function(platef:Platform){
+					arrayPl.push(platef.name)
+				})
+
+			})
+			setPlateform(arrayPl.length > 0 ? arrayPl.join("/") : arrayPl[0])
+			setSumPrice(sum)
 		}
 
 		// return () => init = false
@@ -135,13 +151,13 @@ const ListTournament : React.FC = function(props:any) {
 									</div>
 								</div>
 								{
-									tournament?.map(function(el:any,index:number){
+									tournament?.map(function(el:Tournament,index:number){
 										return (
 
 											<div className="body-card" key={index}>
 												<div className="card-result">
 													<p>{
-														new Date(el.date).toLocaleTimeString('fr-Fr', {
+														new Date(el.dateStart).toLocaleTimeString('fr-Fr', {
 															day : 'numeric',
 															month : 'long',
 															year : 'numeric',
@@ -157,10 +173,10 @@ const ListTournament : React.FC = function(props:any) {
 													<p>{el.game.name}</p>
 												</div>
 												<div className="card-result">
-													<p>{el.plateform.name}</p>
+													<p>{plateform}</p>
 												</div>
 												<div className="card-result">
-													<p>{`${el.price} €`}</p>
+													<p>{`${sumPrice} €`}</p>
 												</div>
 												<div className="card-result">
 													<p>{el.numberParticipate}</p>
@@ -176,7 +192,7 @@ const ListTournament : React.FC = function(props:any) {
 						</div>
 						<Pagination
 							handlePage={handleItemsPage}
-							records={tournament.length > 0 ? tournament[0].records : 0}
+							records={tournament && tournament.length > 0 ? tournament[0]?.records : 0}
 						/>
 					</div>
 				</div>

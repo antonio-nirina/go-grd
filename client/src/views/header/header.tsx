@@ -69,7 +69,7 @@ const Header: React.FC = function() {
 	const [friendsConnect, setFriendsConnect] = useState<numberConnected>({total:0})
 	const [dataNotifications, setDataNotifications] = useState<Array<any>>([])
 	const [groupFriends,setGroupFriends] = useState<FriendsGroup>({friendGroup:[]})
-	const [isLoader, setIsLoader] = useState<Boolean>(false)
+	const [isLoader, setIsLoader] = useState<boolean>(false)
 
 	const {loading:subLoading,error:errSub,data:subData}  = useSubscription(NOTIFICATIONS_SUBSCRIBE)
 	const {loading,error,data} = useQuery(GET_ALL_NOTIFICATIONS, {
@@ -103,7 +103,7 @@ const Header: React.FC = function() {
 			console.log(e)
 		}
 
-		dispatch(removeDataUser())		
+		dispatch(removeDataUser())
 		setIsDeconnect(true)
 		history.push("/")
 	}

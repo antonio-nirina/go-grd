@@ -20,18 +20,23 @@ type WaggerViewModel struct {
 	Date             string                        `json:"date"`
 	Title            string                        `json:"title"`
 	Description      string                        `json:"description"`
-	Price            float64                       `json:"price"`
+	Price            string                       `json:"price"`
 	DeadlineDate     string                        `json:"deadlineDate"`
 	GameWay          string                        `json:"gameWay"`
-	PriceParticipate float64                       `json:"priceParticipate"`
+	PriceParticipate string                       `json:"priceParticipate"`
 	Game             tournament.GameViewModel      `json:"game"`
-	Plateform        tournament.PlateformViewModel `json:"plateform"`
+	Plateform        []tournament.PlateformViewModel `json:"plateform"`
 	Format           string                        `json:"format"`
 	IsPublic         bool                          `json:"IsPublic"`
 	Statut           bool                          `json:"statut"`
 	Records          int                           `json:"records"`
 	Participant      int                           `json:"participant"`
 	Rules            string                        `json:"rules"`
+	Server            string               `json:"server"`
+	TchatVocal             bool               `json:"tchatVocal"`
+	Region            string               `json:"region,omitempty"`
+	Spectateur        string               `json:"spectateur"`
+	Maps             string              `json:"maps,omitempty"`
 }
 
 type waggerUsecase struct {
@@ -67,6 +72,18 @@ func (w *waggerUsecase) FindWaggerHandler(idQuery string) (WaggerViewModel, erro
 		return WaggerViewModel{}, err
 	}
 
+	var plateform []tournament.PlateformViewModel
+
+	for _, value := range result.Plateform {
+		arrayPl := tournament.PlateformViewModel{
+			value.Uid.Hex(),
+			value.Name,
+			value.Description,
+		}
+		plateform = append(plateform, arrayPl)
+	}
+
+
 	waggerViewModel := WaggerViewModel{
 		Uid:              result.Uid.Hex(),
 		Date:             result.Date,
@@ -77,12 +94,18 @@ func (w *waggerUsecase) FindWaggerHandler(idQuery string) (WaggerViewModel, erro
 		GameWay:          result.GameWay,
 		PriceParticipate: result.PriceParticipate,
 		Game:             tournament.GameViewModel{result.Game.Uid.Hex(), result.Game.Name, result.Game.Image, result.Game.Logo, result.Game.Slug},
-		Plateform:        tournament.PlateformViewModel{result.Plateform.Uid.Hex(), result.Plateform.Name, result.Plateform.Description},
+		Plateform:        plateform,
 		Format:           result.Format,
 		IsPublic:         result.IsPublic,
 		Statut:           result.Statut,
 		Participant:      result.Participant,
 		Rules:            result.Rules,
+
+		Server:            result.Server,
+		TchatVocal:        result.TchatVocal,
+		Region:            result.Region,
+		Spectateur:        result.Spectateur,
+		Maps: 				result.Maps,
 	}
 
 	return waggerViewModel, nil
@@ -101,9 +124,21 @@ func (w *waggerUsecase) FindAllWaggerHandler(pageNumber int64, limit int64) ([]W
 		return []WaggerViewModel{}, err
 	}
 
+	var plateform []tournament.PlateformViewModel
+
+	
 	var res []WaggerViewModel
 
 	for _, result := range results {
+		for _, value := range result.Plateform {
+			arrayPl := tournament.PlateformViewModel{
+				value.Uid.Hex(),
+				value.Name,
+				value.Description,
+			}
+			plateform = append(plateform, arrayPl)
+		}
+	
 		waggerViewModel := WaggerViewModel{
 			Uid:              result.Uid.Hex(),
 			Date:             result.Date,
@@ -114,13 +149,18 @@ func (w *waggerUsecase) FindAllWaggerHandler(pageNumber int64, limit int64) ([]W
 			GameWay:          result.GameWay,
 			PriceParticipate: result.PriceParticipate,
 			Game:             tournament.GameViewModel{result.Game.Uid.Hex(), result.Game.Name, result.Game.Image, result.Game.Logo, result.Game.Slug},
-			Plateform:        tournament.PlateformViewModel{result.Plateform.Uid.Hex(), result.Plateform.Name, result.Plateform.Description},
+			Plateform:        plateform,
 			Format:           result.Format,
 			IsPublic:         result.IsPublic,
 			Statut:           result.Statut,
 			Records:          records,
 			Participant:      result.Participant,
 			Rules:            result.Rules,
+			Server:            result.Server,
+			TchatVocal:        result.TchatVocal,
+			Region:            result.Region,
+			Spectateur:        result.Spectateur,
+			Maps: 				result.Maps,
 		}
 
 		res = append(res, waggerViewModel)
