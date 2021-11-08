@@ -8,11 +8,12 @@ import (
 
 type UsecaseTournament interface {
 	SavedTournamentHandler(*entity.Tournament) (interface{}, error)
-	FindTournamentHandler(idQuery string) (tournamentViewModel, error)
+	FindTournamentHandler(idQuery string) (TournamentViewModel, error)
 	FindOneTournamentHandler(idQuery string) (entity.Tournament, error)
 	FindAllTournamentHandler(pageNumber int64, limit int64) ([]tournamentViewModel, error)
 	FindTournamentGameHandler(pageNumber int64, limit int64, gameUid primitive.ObjectID) ([]tournamentViewModel, error)
 	UpdatedTournamentHandler(tournament *entity.Tournament) (interface{}, error)
+	FindTournamentCreatedHandler(pageNumber int64, limit int64)([]tournamentViewModel, error)
 }
 
 type tournamentUsecase struct {
@@ -35,17 +36,17 @@ func (t *tournamentUsecase) SavedTournamentHandler(tournament *entity.Tournament
 	return "Ok", nil
 }
 
-func (t *tournamentUsecase) FindTournamentHandler(idQuery string) (tournamentViewModel, error) {
+func (t *tournamentUsecase) FindTournamentHandler(idQuery string) (TournamentViewModel, error) {
 	objectId, err := primitive.ObjectIDFromHex(idQuery)
 
 	if err != nil {
-		return tournamentViewModel{}, err
+		return TournamentViewModel{}, err
 	}
 
 	result, err := t.tournamentRepository.FindTournamentRepo(objectId)
 
 	if err != nil {
-		return tournamentViewModel{}, err
+		return TournamentViewModel{}, err
 	}
 
 	var plateform []PlateformViewModel
@@ -59,7 +60,7 @@ func (t *tournamentUsecase) FindTournamentHandler(idQuery string) (tournamentVie
 		plateform = append(plateform, arrayPl)
 	}
 
-	tournamentViewModel := tournamentViewModel{
+	tournamentViewModel := TournamentViewModel{
 		Uid:               result.Uid.Hex(),
 		Title:             result.Title,
 		Description:       result.Info,
@@ -229,4 +230,55 @@ func (t *tournamentUsecase) UpdatedTournamentHandler(tournament *entity.Tourname
 	}
 
 	return result, nil
+}
+
+func (t *tournamentUsecase) FindTournamentCreatedHandler(pageNumber int64, limit int64)([]tournamentViewModel, error) {
+	result, err := t.tournamentRepository.FindTournamentCreatedRepo(pageNumber, limit)
+
+	if err != nil {
+		return []tournamentViewModel{}, err
+	}
+
+	var res []tournamentViewModel
+	var plateforms []PlateformViewModel
+
+	for _, val := range result {
+		for _, value := range val.Plateform {
+			arrayPl := PlateformViewModel{
+				value.Uid.Hex(),
+				value.Name,
+				value.Description,
+			}
+			plateforms = append(plateforms, arrayPl)
+		}
+
+		tournamentViewModel := tournamentViewModel{
+			Uid:               val.Uid.Hex(),
+			Title:             val.Title,
+			DateStart:         val.DateStart,
+			Description:       val.Info,
+			Statut:            val.Statut,
+			NumberParticipate: val.NumberParticipate,
+			GameWay: 			val.GameWay,
+			Price:             val.Price,
+			DeadlineDate:      val.DeadlineDate,
+			PriceParticipate:  val.PriceParticipate,
+			Game:              GameViewModel{val.Game.Uid.Hex(), val.Game.Name, val.Game.Image, val.Game.Logo, val.Game.Slug},
+			Plateform:         plateforms,
+			Rules:             val.Rules,
+			IsPublic:          val.IsPublic,
+			Format:            val.Format,
+			Server:            val.Server,
+			Tchat:             val.Tchat,
+			Winners:           val.Winners,
+			Region:            val.Region,
+			Spectateur:        val.Spectateur,
+			Laps:              val.Laps,
+			Maps: 				val.Maps,
+		}
+
+		res = append(res, tournamentViewModel)
+	}
+
+	return res, nil
 }

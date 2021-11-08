@@ -140,3 +140,17 @@ func FindAllPartUserWagger() *graphql.Field {
 		Resolve: partResolver.FindAllPartUserWaggerHandler,
 	}
 }
+
+func FindTournamentParticipate() * graphql.Field {
+	return &graphql.Field{
+		Type:        graphql.NewList(types.PartAllTournamentSchemaType),
+		Description: "Get all tournament by participate",
+		Args: graphql.FieldConfigArgument{
+			"uid": &graphql.ArgumentConfig{
+				Type: graphql.String,
+			},
+		},
+
+		Resolve: partResolver.FindPartByTournamentResolver,
+	} 
+}

@@ -20,6 +20,7 @@ type TournamentResolver interface {
 	FindAllTournamentResolver(params graphql.ResolveParams) (interface{}, error)
 	FindTournamentGameResolver(params graphql.ResolveParams) (interface{}, error)
 	UpdatedTournamentResolver(params graphql.ResolveParams) (interface{}, error)
+	FindTournamentCreated(params graphql.ResolveParams) (interface{}, error)
 }
 
 type tournament struct {
@@ -97,7 +98,7 @@ func (t *tournament) SavedTournamentResolver(params graphql.ResolveParams) (inte
 		Price:             arrayPrices,
 		DeadlineDate:      deadlineDate,
 		PriceParticipate:  priceParticipate,
-		Statut:            true,
+		Statut:            "created",
 		Info:              description,
 		Rules:             rules,
 		IsPublic:          true,
@@ -209,7 +210,7 @@ func (t *tournament) UpdatedTournamentResolver(params graphql.ResolveParams) (in
 	}
 
 	if input.TrUpated.Statut != "" {
-		statut, _ = strconv.ParseBool(input.TrUpated.Statut)
+		statut = input.TrUpated.Statut
 	}
 
 	if input.TrUpated.Info != "" {
@@ -242,6 +243,18 @@ func (t *tournament) UpdatedTournamentResolver(params graphql.ResolveParams) (in
 	}
 
 	res, err := t.tournamentHandler.UpdatedTournamentHandler(tournamentUpdated)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return res, nil
+}
+
+func (t *tournament) FindTournamentCreated(params graphql.ResolveParams) (interface{}, error) {
+	limit, _ := params.Args["limit"].(int)
+	pageNumber, _ := params.Args["pageNumber"].(int)
+	res, err := t.tournamentHandler.FindTournamentCreatedHandler(int64(pageNumber), int64(limit))
 
 	if err != nil {
 		return nil, err
