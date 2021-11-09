@@ -4,13 +4,12 @@ import {useQuery} from "@apollo/client"
 
 import Header from "../header/header"
 import Footer from "../footer/footer"
-
 //import {Translation} from "../../lang/translation"
 //import {RootState} from "../../reducer"
-
 import { faChevronCircleUp} from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {GET_PART_ONE_TOURNAMENT} from "../../gql/participate/query"
+
 import "../../assets/css/style.css"
 import "../annexe/tournois.css"
 import "../waggers/waggers.css"
@@ -27,9 +26,9 @@ import Rocketleague from "../../assets/image/rocketleague.png"
 import Rainbowsix from "../../assets/image/rainbowsix.png"
 import {dateStringToJoinT,dateStringToDHString} from "../tools/dateConvert"
 import {Tournament,Platform} from "../models/tournament"
+import PartTournament,{PartTournamentType} from "./part-tournament"
 
 const Joingame: React.FC = function(props:any) {
-  	const [showClose, setShowClose] = useState(false)
   	const [tournament, setTournament] = useState<Tournament>()
 	const [plateform, setPlateform] = useState<string>()
 	const [sumPrice, setSumPrice] = useState<number>(0)
@@ -41,6 +40,7 @@ const Joingame: React.FC = function(props:any) {
 			uid:uid,
 		},
 	})
+
 
 	useEffect(() => {
 		if(!loading && !error && data) {
@@ -56,15 +56,13 @@ const Joingame: React.FC = function(props:any) {
 
 			setSumPrice(sum)
 			setPlateform(arrayPl.length > 0 ? arrayPl.join("/") : arrayPl[0])
-
 		}
-
 	},[loading,error,data])
 
-  	const onShowClose = function(){
-    	setShowClose(!showClose)
-  	}
-
+	const partTournament:PartTournamentType = {
+		tournament:tournament,
+		uid:uid
+	}
   return(
   	<div className="container">
   		<Header />
@@ -133,21 +131,7 @@ const Joingame: React.FC = function(props:any) {
               </div>
             </div>
           </div>
-          	<div className="item-info-right">
-				<div className="join-all">
-					<p className="team-bar-title">{!showClose! ? "Equipes 1/2" : "Equipes 2/2"}</p>
-					<button className="btn bg-red" onClick={onShowClose}>{!showClose ? "Rejoindre" : "Quitter"}</button>
-					<button className={showClose ? "btn bg-green-light":"d-none"}>Lancer</button>
-					<div className="profil-join">
-						<p>Skouinar - <span>TonioPlancha</span></p>
-						<p className="free-emplacement"><span>{!showClose ? "Emplacement Libre" : "Gotaga - CapelaJr"}</span></p>
-					</div>
-				</div>
-				<div className="join-all join-canal">
-					<p className="team-bar-title">Rejoindre le canal discord</p>
-					<button className="btn bg-red discolor">Rejoindre</button>
-				</div>
-          	</div>
+          	<PartTournament {...partTournament} />
         </div>
         <div className="information-game">
           <div className="item-info-left apart">

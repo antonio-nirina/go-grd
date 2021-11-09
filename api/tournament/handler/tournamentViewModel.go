@@ -66,4 +66,5 @@ type TournamentViewModel struct {
 	Laps              []string             `json:"laps,omitempty"`
 	Maps             string              `json:"maps,omitempty"`
 	GameWay          string             `json:"gameWay"`
+	IsTeam          bool                `json:"isTeam"`
 }
