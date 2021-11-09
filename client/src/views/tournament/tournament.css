@@ -92,3 +92,88 @@
 	text-transform: uppercase;	
 	text-align: center;
 }
+.in-container{
+	position: relative;
+}
+.entry{
+	position: fixed;
+	z-index: 2;
+	width: 40%;
+	top: 25%;
+	left: 28%;
+	background: #7b7b7b;
+	padding: 25px;
+	margin: auto;
+	border-radius: 5px;
+	box-shadow: 0px 0px 22px #000000;
+}
+.entry h3{
+	font-family: "russo one";
+	font-size: 24px;	
+}
+.entry-step{
+	padding: 20px;
+}
+.step-container{
+	width: 73%;	
+	margin: 25px auto;
+}
+.entry-step, .step-name{
+	display: flex;
+	justify-content: space-between;
+}
+.entry-step span{
+	font-family: "russo one";
+	background: #dd0000;
+	display: block;
+	width: 50px;
+	height: 36px;	
+	text-align: center;	
+	border-radius: 50%;
+	margin-left: 5px;
+	text-align: center;
+	padding-top: 7px;
+}
+.entry-step span:last-child{
+	background: #2c2c2c;
+}
+.step-name span{
+	font-family: "russo one";
+}
+.entry-step .separator{
+	border-radius: 0;
+	padding: 0;
+	background: none;
+	border-bottom: 1px solid #ffffff;
+	width: 100%;
+	height: 0;
+	align-self: center;
+}
+.entry-price{
+	display: flex;
+	justify-content: space-between;
+	width: 30%;
+	margin-top: 15px;
+}
+.entry-price span{	
+	font-size: 16px;
+}
+.entry-price span:last-child{
+	color: #dd0000;
+	font-family: "russo one"
+}
+.next-btn{
+	width: 100%;
+	text-align: right;
+	margin-top: 15px;
+}
+.next-btn .btn:first-child{
+	color: #000000;
+	margin-right: 15px;
+}
+.next-btn .btn:first-child:hover{
+	color: #ffffff;
+}
+.next-btn .btn{
+	font-family: "russo one";
+}
