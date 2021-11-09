@@ -166,7 +166,7 @@ const Joingame: React.FC = function(props:any) {
 				{tournament?.price.map(function(price:string,index:number) {
 					return (
 						<div key={index}>
-							<p><span>Position {index}+1</span></p>
+							<p><span>Position {index+1}</span></p>
 							<p>{price} €</p>
 						</div>
 					)
