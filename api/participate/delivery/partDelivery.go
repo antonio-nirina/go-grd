@@ -34,6 +34,8 @@ type PartResolver interface {
 	GetNumberPartByResolver(params graphql.ResolveParams) (interface{}, error)
 	FindPartByUserWaggerResolver(params graphql.ResolveParams) (interface{}, error)
 	FindAllPartUserWaggerHandler(params graphql.ResolveParams) (interface{}, error)
+
+	FindPartByTournamentResolver(params graphql.ResolveParams) (interface{}, error)
 }
 
 type participate struct {
@@ -293,13 +295,13 @@ func (p *participate) FindPartByUseTournamentResolver(params graphql.ResolvePara
 		return nil, err
 	}
 
-	tournament, err := p.tournament.FindTournamentHandler(tournamentUid)
+	_, err = p.tournament.FindTournamentHandler(tournamentUid)
 
 	if err != nil {
 		return nil, err
 	}
 
-	res, err := p.partHandler.FindPartUserTournamentHandler(user.Uid, tournamentUid, tournament.IsTeam)
+	res, err := p.partHandler.FindPartUserTournamentHandler(user.Uid, tournamentUid)
 
 	if err != nil {
 		return nil, err
@@ -389,4 +391,20 @@ func (p *participate) FindAllPartUserWaggerHandler(params graphql.ResolveParams)
 	part, err := p.partHandler.FindAllPartUserWaggerHandler(user.Uid, int64(pageNumber), int64(limit))
 
 	return part, nil
+}
+
+func (p *participate) FindPartByTournamentResolver(params graphql.ResolveParams) (interface{}, error) {
+	uid, _ := params.Args["uid"].(string)
+	tournament, err := p.tournament.FindTournamentHandler(uid)
+
+	if err != nil {
+		return nil, err
+	}
+	part,err := p.partHandler.FindPartTournamentHandler(tournament)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return part,nil
 }

@@ -10,7 +10,7 @@ import Footer from "../footer/footer"
 
 import { faChevronCircleUp} from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {GET_ONE_TOURNAMENT} from "../../gql/tournament/query"
+import {GET_PART_ONE_TOURNAMENT} from "../../gql/participate/query"
 import "../../assets/css/style.css"
 import "../annexe/tournois.css"
 import "../waggers/waggers.css"
@@ -36,22 +36,21 @@ const Joingame: React.FC = function(props:any) {
 	const params = new URLSearchParams(props.location.search)
 	const uid:string|null = params.get("uid")
 
-	const {loading,error,data} 	= useQuery(GET_ONE_TOURNAMENT, {
+	const {loading,error,data} 	= useQuery(GET_PART_ONE_TOURNAMENT, {
 		variables: {
 			uid:uid,
 		},
 	})
 
 	useEffect(() => {
-		console.log(data)
 		if(!loading && !error && data) {
 			let arrayPl:string[] = []
 			let sum = 0
-			setTournament(data.FindOneTournament)
-			data.FindOneTournament?.plateform.forEach(function(platef:Platform){
+			setTournament(data.FindTournamentParticipate[0].tournament)
+			data.FindTournamentParticipate[0].tournament?.plateform.forEach(function(platef:Platform){
 				arrayPl.push(platef.name)
 			})
-			data.FindOneTournament.price.forEach(function(price:string){
+			data.FindTournamentParticipate[0].tournament.price.forEach(function(price:string){
 				sum = sum + parseInt(price)
 			})
 

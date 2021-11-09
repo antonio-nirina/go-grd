@@ -5,7 +5,7 @@ type tournamentViewModel struct {
 	Title             string               `json:"title"`
 	DateStart         string               `json:"dateStart"`
 	Description       string               `json:"description"`
-	Statut            bool                 `json:"statut"`
+	Statut            string                 `json:"statut"`
 	NumberParticipate int                  `json:"numberParticipate"`
 	NumberTeam        int                  `json:"numberTeam"`
 	Price             []string              `json:"price"`
@@ -48,7 +48,7 @@ type TournamentViewModel struct {
 	Title             string               `json:"title"`
 	DateStart         string               `json:"dateStart"`
 	Description       string               `json:"description"`
-	Statut            bool                 `json:"statut"`
+	Statut            string                 `json:"statut"`
 	NumberParticipate int                  `json:"numberParticipate"`
 	Price             []string              `json:"price"`
 	DeadlineDate      string               `json:"deadlineDate"`
