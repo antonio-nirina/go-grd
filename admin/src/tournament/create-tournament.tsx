@@ -102,7 +102,9 @@ const CreateTournament: React.FC = function() {
 				maps:data.map,
 				priceParticipate:data.priceParticipate ? data.priceParticipate : "Invitation",
 				rules:rules,
-				laps:lapsDate.join("_")
+				laps:lapsDate.join("_"),
+				isTeam:false,
+				isPublic:false,
 			} })
 			if (result.data.saveTournament) history.push("/admin/tournament")
 		} catch(e:unknown) {
@@ -200,6 +202,12 @@ const CreateTournament: React.FC = function() {
 		                                        	<label className="switch">
 		                                        		<input type="checkbox" value="false" />
 		                                        		<span className="slider">Premium</span>
+		                                        	</label>
+	                                        	</div>
+												<div className="premium">
+		                                        	<label className="switch">
+		                                        		<input type="checkbox" value="false" />
+		                                        		<span className="slider">Team</span>
 		                                        	</label>
 	                                        	</div>
 	                                        	<input type="text" placeholder="Titre tournois" {...register("title")} name="title"/>

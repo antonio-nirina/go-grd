@@ -173,6 +173,9 @@
 .information-game.apart{
 
 }
+.item-all-content{
+	padding-left: 35px;
+}
 .item-info-left{
 	padding: 20px 7px;	
 	background: #2c2c2c;
@@ -202,8 +205,7 @@
 	width: 170px;	
     padding-top: 30px;
     margin-left: 26px;
-    display: table-cell;
-    padding-left: 47px;
+    display: table-cell;    
     font-size: 13px;
     font-family: arial;    
 }

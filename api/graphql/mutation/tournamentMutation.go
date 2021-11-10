@@ -60,6 +60,12 @@ func saveTournament() *graphql.Field {
 			"maps": &graphql.ArgumentConfig{
 				Type: graphql.String,
 			},
+			"isTeam": &graphql.ArgumentConfig{
+				Type: graphql.Boolean,
+			},
+			"isPublic": &graphql.ArgumentConfig{
+				Type: graphql.Boolean,
+			},
 		},
 		Resolve: tournamentResolver.SavedTournamentResolver,
 	}

@@ -26,6 +26,7 @@ type Tournament struct {
 	Info              string              `json:"info"`
 	Rules             string              `json:"rules"`
 	IsPublic          bool                `json:"isPublic"`
+	IsTeam          bool                `json:"isTeam"`
 	Format            string              `json:"format,omitempty"`
 	Server            string              `json:"server,omitempty"`
 	Tchat             string              `json:"tchat,omitempty"`

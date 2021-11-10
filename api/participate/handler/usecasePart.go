@@ -165,6 +165,7 @@ func (p *partUsecase) FindPartHandler(idQuery string) (partViewModel, error) {
 			result.Tournament.Laps,
 			result.Tournament.Maps,
 			result.Tournament.GameWay,
+			result.Tournament.IsTeam,
 		},
 	}
 
@@ -286,6 +287,7 @@ func (p *partUsecase) FindAllPartHandler(pageNumber int64, limit int64) ([]partV
 				result.Tournament.Laps,
 				result.Tournament.Maps,
 				result.Tournament.GameWay,
+				result.Tournament.IsTeam,
 			},
 		}
 
@@ -410,6 +412,7 @@ func (p *partUsecase) FindPartUserHandler(pageNumber int64, limit int64, userUid
 				result.Tournament.Laps,
 				result.Tournament.Maps,
 				result.Tournament.GameWay,
+				result.Tournament.IsTeam,
 			},
 		}
 
@@ -554,6 +557,7 @@ func (p *partUsecase) FindPartUserLeagueHandler(userUid primitive.ObjectID, leag
 			result.Tournament.Laps,
 			result.Tournament.Maps,
 			result.Tournament.GameWay,
+			result.Tournament.IsTeam,
 		},
 	}
 
@@ -683,6 +687,7 @@ func (p *partUsecase) FindPartUserTournamentHandler(uidUser primitive.ObjectID, 
 			result.Tournament.Laps,
 			result.Tournament.Maps,
 			result.Tournament.GameWay,
+			result.Tournament.IsTeam,
 		},
 	}
 
