@@ -84,7 +84,7 @@ const Joingame: React.FC = function(props:any) {
   return(
   	<div className="container">
       <Header />
-      <div style={{ backgroundImage: 'url(' + Background + ')', backgroundSize: 'auto', backgroundRepeat: 'no-repeat' }} className="participate league joingame">
+      <div style={{ backgroundImage: 'url(' + tournament?.game.image + ')', backgroundSize: 'auto', backgroundRepeat: 'no-repeat' }} className="participate league joingame">
         <div className="marg">
           <div className="part">
             <div className="back">
