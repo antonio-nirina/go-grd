@@ -86,13 +86,10 @@
 	width: 25px;
 }
 .joingame h2{
-	font-size: 35px;
+	font-size: 30px;
 }
 .joingame{
-	background-image: url("../../assets/image/apex-legends-arena.jpg");	
-  	background-position: top left;
-  	background-repeat: no-repeat;  	
-	border-radius: 15px 15px 0px 0px;
+	
 }
 .joingame .header-part{
 	width: 80%;
