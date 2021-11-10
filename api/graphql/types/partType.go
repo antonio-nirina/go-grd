@@ -73,3 +73,27 @@ var PartAllWaggerSchemaType = graphql.NewObject(graphql.ObjectConfig{
 		},
 	},
 })
+
+var PartAllTournamentSchemaType = graphql.NewObject(graphql.ObjectConfig{
+	Name: "PartTournamentType",
+	Fields: graphql.Fields{
+		"uid": &graphql.Field{
+			Type: graphql.String,
+		},
+		"date": &graphql.Field{
+			Type: graphql.String,
+		},
+		"user": &graphql.Field{
+			Type: UserSchemaType,
+		},
+		"numberPartConfirmed": &graphql.Field{
+			Type: graphql.Boolean,
+		},
+		"isWin": &graphql.Field{
+			Type: graphql.Boolean,
+		},
+		"tournament": &graphql.Field{
+			Type: TournamentSchemaType,
+		},
+	},
+})

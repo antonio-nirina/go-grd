@@ -158,5 +158,6 @@ func GetRootFields() graphql.Fields {
 		"FindAllPartUserWagger":     FindAllPartUserWagger(),
 		"GetAccessTokenDiscord":     GetAccessTokenDiscord(),
 		"GetAccessUserDiscordApi":   GetAccessUserDiscordApi(),
+		"FindTournamentParticipate": FindTournamentParticipate(),
 	}
 }

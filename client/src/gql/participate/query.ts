@@ -146,3 +146,41 @@ query FindAllPart($limit:Int!,$pageNumber:Int!) {
 		}
 	}
 `
+export const GET_PART_ONE_TOURNAMENT = gql`
+	query FindTournamentParticipate($uid:String) {
+		FindTournamentParticipate(uid:$uid){
+			uid
+			date
+			isWin
+			user{
+				uid
+				username
+				avatar
+			}
+			tournament{
+				uid
+				title
+				statut
+				description
+				deadlineDate
+				dateStart
+				price
+				priceParticipate
+				rules
+				laps
+				gameWay
+				game{
+					uid
+					name
+					image
+					logo
+					slug
+				}
+				plateform{
+					uid
+					description
+					name
+				}
+			}
+		}
+	}`

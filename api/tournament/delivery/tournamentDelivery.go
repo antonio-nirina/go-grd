@@ -20,6 +20,7 @@ type TournamentResolver interface {
 	FindAllTournamentResolver(params graphql.ResolveParams) (interface{}, error)
 	FindTournamentGameResolver(params graphql.ResolveParams) (interface{}, error)
 	UpdatedTournamentResolver(params graphql.ResolveParams) (interface{}, error)
+	FindTournamentCreated(params graphql.ResolveParams) (interface{}, error)
 }
 
 type tournament struct {
@@ -38,7 +39,7 @@ type updatedTournament struct {
 	Title             string `json:"title"`
 	DateDebut         string `json:"dateDebut"`
 	NumberParticipate string `json:"numberParticipate"`
-	GameWay          string             `json:"gameWay"`
+	GameWay           string `json:"gameWay"`
 	DeadlineDate      string `json:"deadlineDate"`
 	PriceParticipate  string `json:"priceParticipate"`
 	Statut            string `json:"statut"`
@@ -73,6 +74,8 @@ func (t *tournament) SavedTournamentResolver(params graphql.ResolveParams) (inte
 	region, _ := params.Args["region"].(string)
 	server, _ := params.Args["server"].(string)
 	maps, _ := params.Args["maps"].(string)
+	isteam, _ := params.Args["isteam"].(bool)
+	isPub, _ := params.Args["isPublic"].(bool)
 	game, err := t.gameTournamentHandler.FindOneGameByUidHandler(gameUid)
 	var plateforms []gameEntity.GamePlatform
 	arrayPlateforms := strings.Split(plateformUid, "_")
@@ -93,20 +96,21 @@ func (t *tournament) SavedTournamentResolver(params graphql.ResolveParams) (inte
 		Game:              game,
 		Plateform:         plateforms,
 		NumberParticipate: numberParticipate,
-		GameWay:        gameWay,
+		GameWay:           gameWay,
 		Price:             arrayPrices,
 		DeadlineDate:      deadlineDate,
 		PriceParticipate:  priceParticipate,
-		Statut:            true,
+		Statut:            "created",
 		Info:              description,
 		Rules:             rules,
-		IsPublic:          true,
+		IsPublic:          isPub,
 		Spectateur:        spectateur,
 		Laps:              arrayLaps,
 		Format:            format,
 		Server:            server,
 		Region:            region,
 		Maps:              maps,
+		IsTeam:            isteam,
 	}
 
 	res, err := t.tournamentHandler.SavedTournamentHandler(tournament)
@@ -209,7 +213,7 @@ func (t *tournament) UpdatedTournamentResolver(params graphql.ResolveParams) (in
 	}
 
 	if input.TrUpated.Statut != "" {
-		statut, _ = strconv.ParseBool(input.TrUpated.Statut)
+		statut = input.TrUpated.Statut
 	}
 
 	if input.TrUpated.Info != "" {
@@ -231,7 +235,7 @@ func (t *tournament) UpdatedTournamentResolver(params graphql.ResolveParams) (in
 		Game:              tournament.Game,
 		Plateform:         tournament.Plateform,
 		NumberParticipate: numberParticipate,
-		GameWay:        gameWay,
+		GameWay:           gameWay,
 		Price:             price,
 		DeadlineDate:      deadlineDate,
 		PriceParticipate:  priceParticipate,
@@ -242,6 +246,18 @@ func (t *tournament) UpdatedTournamentResolver(params graphql.ResolveParams) (in
 	}
 
 	res, err := t.tournamentHandler.UpdatedTournamentHandler(tournamentUpdated)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return res, nil
+}
+
+func (t *tournament) FindTournamentCreated(params graphql.ResolveParams) (interface{}, error) {
+	limit, _ := params.Args["limit"].(int)
+	pageNumber, _ := params.Args["pageNumber"].(int)
+	res, err := t.tournamentHandler.FindTournamentCreatedHandler(int64(pageNumber), int64(limit))
 
 	if err != nil {
 		return nil, err

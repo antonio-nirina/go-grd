@@ -72,10 +72,10 @@ const TournamentGame = function(props:any) {
 											</p>
 											<p>Go GRIND</p>
 											<p className="italic">{el.format }</p>
-											<p className="italic">{`${el.price} € `}</p>
+											<p className="italic">{`${el.priceParticipate} € `}</p>
 											<p className="italic">{el.gameWay}</p>
 											<p className="italic">{!el.isPublic ? "Public": "Invitation"}</p>
-											<p className="italic"><i><FontAwesomeIcon icon={faUsers}/></i>{`0/${el.priceParticipate}`}</p>
+											<p className="italic"><i><FontAwesomeIcon icon={faUsers}/></i>{`0/${el.numberParticipate}`}</p>
 										</Link>
 									)
 								})

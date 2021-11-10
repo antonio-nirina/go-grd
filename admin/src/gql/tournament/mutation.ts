@@ -17,6 +17,8 @@ export const CREATED_TOURNAMENT = gql`
 		$spectateur:String,
 		$region:String,
 		$maps:String,
+		$isPublic:Boolean,
+		$isTeam:Boolean,
 		$gameWay:String,
 		$rules:String){
 		saveTournament(
@@ -36,6 +38,8 @@ export const CREATED_TOURNAMENT = gql`
 			region:$region,
 			gameWay:$gameWay,
 			maps:$maps,
+			isTeam:$isTeam,
+			isPublic:$isPublic,
 			priceParticipate:$priceParticipate)
 	}
 `
