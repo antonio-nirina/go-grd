@@ -1,7 +1,7 @@
 import gql from "graphql-tag"
 
 export const SAVED_PART = gql`
-mutation createPartMatch($uidUser:String,$date:String,$tournamentUid:String,$teamsUid:uidTeamsInput){
+mutation createPartMatch($uidUser:String,$date:String,$tournamentUid:String,$teamsUid:String){
 		createPartMatch(uidUser:$uidUser,date:$date,tournamentUid:$tournamentUid,teamsUid:$teamsUid)
 	}
 `

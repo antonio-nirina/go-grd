@@ -24,12 +24,14 @@ import Rocketleague from "../../assets/image/rocketleague.png"
 import Rainbowsix from "../../assets/image/rainbowsix.png"
 import {dateStringToJoinT,dateStringToDHString} from "../tools/dateConvert"
 import {Tournament,Platform} from "../models/tournament"
+import {ParticipateTournament} from "../models/participate"
 import PartTournament,{PartTournamentType} from "./part-tournament"
 
 const Joingame: React.FC = function(props:any) {
   	const [showClose, setShowClose] = useState(false)
     const [next, setNext] = useState(false)
   	const [tournament, setTournament] = useState<Tournament>()
+	  const [parts, setParts] = useState<ParticipateTournament[]>()
 	const [plateform, setPlateform] = useState<string>()
 	const [sumPrice, setSumPrice] = useState<number>(0)
 	const params = new URLSearchParams(props.location.search)
@@ -45,6 +47,7 @@ const Joingame: React.FC = function(props:any) {
 		if(!loading && !error && data) {
 			let arrayPl:string[] = []
 			let sum = 0
+			setParts(data.FindTournamentParticipate)
 			setTournament(data.FindTournamentParticipate[0].tournament)
 			data.FindTournamentParticipate[0].tournament?.plateform.forEach(function(platef:Platform){
 				arrayPl.push(platef.name)
@@ -68,7 +71,7 @@ const Joingame: React.FC = function(props:any) {
     }
 	const partTournament:PartTournamentType = {
 		tournament:tournament,
-		uid:uid
+		parts:parts,
 	}
   return(
   	<div className="container">
@@ -139,7 +142,6 @@ const Joingame: React.FC = function(props:any) {
               </div>
             </div>
 			<PartTournament {...partTournament} />
-
           </div>
           <div className="information-game">
             <div className="item-info-left apart">

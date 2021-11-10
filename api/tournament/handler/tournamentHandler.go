@@ -83,6 +83,7 @@ func (t *tournamentUsecase) FindTournamentHandler(idQuery string) (TournamentVie
 		Spectateur:        result.Spectateur,
 		Laps:              result.Laps,
 		Maps: 				result.Maps,
+		IsTeam: 			result.IsTeam,
 	}
 
 	return tournamentViewModel, nil
@@ -137,6 +138,7 @@ func (t *tournamentUsecase) FindAllTournamentHandler(pageNumber int64, limit int
 			Spectateur:        val.Spectateur,
 			Laps:              val.Laps,
 			Maps: 				val.Maps,
+			IsTeam: 			val.IsTeam,
 		}
 
 		res = append(res, tournamentViewModel)
@@ -188,6 +190,7 @@ func (t *tournamentUsecase) FindTournamentGameHandler(pageNumber int64, limit in
 			Spectateur:        val.Spectateur,
 			Laps:              val.Laps,
 			Maps: 				val.Maps,
+			IsTeam: 			val.IsTeam,
 		}
 
 		res = append(res, tournamentViewModel)
@@ -275,6 +278,7 @@ func (t *tournamentUsecase) FindTournamentCreatedHandler(pageNumber int64, limit
 			Spectateur:        val.Spectateur,
 			Laps:              val.Laps,
 			Maps: 				val.Maps,
+			IsTeam: 			val.IsTeam,
 		}
 
 		res = append(res, tournamentViewModel)

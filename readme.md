@@ -38,3 +38,5 @@ https://astaxie.gitbooks.io/build-web-application-with-golang/content/en/
 https://github.com/victorsteven?tab=repositories
 
 https://golangbot.com/learn-golang-series/
+
+https://github.com/manosriram-youtube/ecommerce-microservice
