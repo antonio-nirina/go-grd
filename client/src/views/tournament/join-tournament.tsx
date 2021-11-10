@@ -87,7 +87,7 @@ const Joingame: React.FC = function(props:any) {
                   <span>{dateStringToJoinT(tournament?.dateStart)}</span>
                   <span>{tournament?.gameWay}</span>
                   <span>{tournament?.game.name}</span>
-                  <span>{tournament?.plateform && tournament?.plateform.length > 0 ? "Cross-Play" : ""} </span>
+                  <span>{tournament?.plateform && tournament?.plateform.length > 0 ? "Cross-Play" : tournament?.plateform[0]} </span>
                 </p>
               </div>
             </div>
