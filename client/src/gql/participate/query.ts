@@ -168,6 +168,8 @@ export const GET_PART_ONE_TOURNAMENT = gql`
 				priceParticipate
 				rules
 				laps
+				isTeam
+				isPublic
 				gameWay
 				game{
 					uid

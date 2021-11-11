@@ -55,11 +55,12 @@ const CreateTournament: React.FC = function() {
 	const [lapsCash, setLapsCash] 		= useState<string[]>([])
 	const [rules, setRules] 			= useState<string>("")
 	// const [info, setInfo] 		= useState<String>("")
-	const [arrayForm, setArrayForm] 		= useState<number[]>([1])
+	const [arrayForm, setArrayForm] 	= useState<number[]>([1])
 	const [number, setNumber] 			= useState<number>(1)
-	const [arrayFormCash, setArrayFormCash] 		= useState<number[]>([1])
-	const [numberCash, setNumberCash] 				= useState<number>(1)
-	const [gameWay,setGameWay] 						= useState<string>("")
+	const [arrayFormCash, setArrayFormCash] = useState<number[]>([1])
+	const [numberCash, setNumberCash] 	= useState<number>(1)
+	const [gameWay,setGameWay] 			= useState<string>("")
+	const [isPrenimum,setIsPrenimum] 	= useState<boolean>(false)
 
 	const [createdTournament]  			= useMutation(CREATED_TOURNAMENT)
 	const {loading,error,data} = useQuery(GET_ALL_GAMES)
@@ -80,35 +81,42 @@ const CreateTournament: React.FC = function() {
 	},[loading,error,data,loadingP,errorP,dataP])
 
 	const onSubmit = async function(data:Inputs){
-		if(!uiGame && !uiGame && !data.title) {
+		if(!uiGame && !data.title) {
 			setIsValid(true)
+			return
 		}
 
-		try {
-			const result = await createdTournament({ variables: {
-				date:startDate,
-				title:data.title,
-				uidGame:uiGame,
-				uidPalteforme:uidPlateform.join("_"),
-				description:"",//info
-				numberParticipate:Math.pow(2,(Math.ceil(Math.log2(Number(data.participant))))),
-				price:lapsCash.filter((e) => e).join("_"),
-				deadlineDate:lastDate,
-				server:data.server,
-				gameWay:gameWay,
-				format:data.format,
-				spectateur:data.spectateur,
-				region:data.region,
-				maps:data.map,
-				priceParticipate:data.priceParticipate ? data.priceParticipate : "Invitation",
-				rules:rules,
-				laps:lapsDate.join("_"),
-				isTeam:false,
-				isPublic:false,
-			} })
-			if (result.data.saveTournament) history.push("/admin/tournament")
-		} catch(e:unknown) {
-			console.log("error", e)
+		if(isPrenimum && isNaN(data.priceParticipate)) {
+			setIsValid(true)
+			return
+		}
+		if(uiGame && data.title && startDate && gameWay && uidPlateform) {
+			try {
+				const result = await createdTournament({ variables: {
+					date:startDate,
+					title:data.title,
+					uidGame:uiGame,
+					uidPalteforme:uidPlateform.join("_"),
+					description:"",//info
+					numberParticipate:Math.pow(2,(Math.ceil(Math.log2(Number(data.participant))))),
+					price:lapsCash.filter((e) => e).join("_"),
+					deadlineDate:lastDate,
+					server:data.server,
+					gameWay:gameWay,
+					format:data.format,
+					spectateur:data.spectateur,
+					region:data.region,
+					maps:data.map,
+					priceParticipate:data.priceParticipate ? data.priceParticipate : "Invitation",
+					rules:rules,
+					laps:lapsDate.join("_"),
+					isTeam:gameWay === "1v1" ? true : false,
+					isPublic:isPrenimum,
+				} })
+				if (result.data.saveTournament) history.push("/admin/tournament")
+			} catch(e:unknown) {
+				console.log("error", e)
+			}
 		}
 
 	}
@@ -173,10 +181,13 @@ const CreateTournament: React.FC = function() {
 		setLapsCash([...lapsCash,cash.currentTarget.value])
 	}
 
-	const handleGameWay = function(event:any){
-		setGameWay(event.target.value)
+	const handleGameWay = function(event:React.FormEvent<HTMLSelectElement>){
+		setGameWay(event.currentTarget.value)
 	}
 
+	const setPremium = function(event:React.FormEvent<HTMLInputElement>) {
+		setIsPrenimum(event.currentTarget.checked)
+	}
 
 	return(
 	    <div className="admin create-tournament">
@@ -200,14 +211,8 @@ const CreateTournament: React.FC = function() {
 	                                        <form onSubmit={handleSubmit(onSubmit)}>
 	                                        	<div className="premium">
 		                                        	<label className="switch">
-		                                        		<input type="checkbox" value="false" />
+		                                        		<input type="checkbox" onChange={setPremium} defaultChecked={isPrenimum} />
 		                                        		<span className="slider">Premium</span>
-		                                        	</label>
-	                                        	</div>
-												<div className="premium">
-		                                        	<label className="switch">
-		                                        		<input type="checkbox" value="false" />
-		                                        		<span className="slider">Team</span>
 		                                        	</label>
 	                                        	</div>
 	                                        	<input type="text" placeholder="Titre tournois" {...register("title")} name="title"/>

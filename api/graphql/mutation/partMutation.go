@@ -33,7 +33,7 @@ func createPartMatch() *graphql.Field {
 				Type: graphql.String,
 			},*/
 			"teamsUid": &graphql.ArgumentConfig{
-				Type: teamsInputType,
+				Type: graphql.String,
 			},
 			"waggerUid": &graphql.ArgumentConfig{
 				Type: graphql.String,

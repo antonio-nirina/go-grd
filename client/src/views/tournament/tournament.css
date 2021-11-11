@@ -97,11 +97,11 @@
 }
 .entry{
 	position: fixed;
-	z-index: 2;
-	width: 40%;
-	top: 25%;
+	z-index: 999;
+	width: 45%;
+	top: 0%;
 	left: 28%;
-	background: #7b7b7b;
+	background: #444444;
 	padding: 25px;
 	margin: auto;
 	border-radius: 5px;
@@ -114,8 +114,8 @@
 .entry-step{
 	padding: 20px;
 }
-.step-container{
-	width: 73%;	
+.middle{
+	width: 80%;
 	margin: 25px auto;
 }
 .entry-step, .step-name{
@@ -136,6 +136,13 @@
 }
 .entry-step span:last-child{
 	background: #2c2c2c;
+}
+.step-2 .entry-step span:last-child{
+	background: #dd0000;
+}
+.payment-method{
+	margin-top: 15px;
+	text-align: center;
 }
 .step-name span{
 	font-family: "russo one";
@@ -176,4 +183,84 @@
 }
 .next-btn .btn{
 	font-family: "russo one";
+}
+.card-container{
+	margin-top: 15px;
+	display: flex;
+	justify-content: center;
+	text-align: center;
+}
+.card-container img{
+	width: 50px;
+	margin-right: 15px;
+}
+.select-method{
+	text-align: left;
+	font-family: "russo one";
+	font-size: 14px;
+	margin-top: 25px;
+}
+.select-method label{
+	display: block;
+	font-size: 13px;
+}
+.select-method select#card{
+	font-size: 16px;
+	font-family: "russo one";
+	border-bottom: 1px solid #000;
+	width: 100%;
+	background: #444444;
+	padding: 10px 0;
+	margin-bottom: 10px;
+}
+.payment input{
+	padding: 12px;
+	background: #444444;
+	border: 1px solid #ffffff;
+	width: 48%;
+	margin: 10px 5px;
+	border-radius: 5px;
+	color: #ffffff;
+}
+.payment .input-group{
+	display: flex;	
+}
+.payment .input-group input:first-child{
+	margin-left: 0;
+}
+.payment input::placeholder{
+	font-family: "russo one";
+	
+}
+.card-number{
+	position: relative;
+}	
+.card-number input{
+	width: 100%;
+	color: #ffffff;
+	font-size: 14px;
+}
+.card-number input::-webkit-input-placeholder{
+	font-family: arial;
+	color: #ffffff;
+}
+.card-number label{
+	position: absolute;
+	font-family: arial;
+	right: 18px;
+	top: 24px;
+}
+.entry-total{
+	text-align: left;
+}
+.entry-total p{
+	font-family: "russo one";
+	padding: 5px 0;
+}
+.entry-total p{
+	display: flex;
+	justify-content: space-between;
+}
+.entry-total p:first-child{
+	border-bottom: 1px solid #ffffff;
 }

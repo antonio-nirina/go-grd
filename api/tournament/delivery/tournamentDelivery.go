@@ -39,7 +39,7 @@ type updatedTournament struct {
 	Title             string `json:"title"`
 	DateDebut         string `json:"dateDebut"`
 	NumberParticipate string `json:"numberParticipate"`
-	GameWay          string             `json:"gameWay"`
+	GameWay           string `json:"gameWay"`
 	DeadlineDate      string `json:"deadlineDate"`
 	PriceParticipate  string `json:"priceParticipate"`
 	Statut            string `json:"statut"`
@@ -96,7 +96,7 @@ func (t *tournament) SavedTournamentResolver(params graphql.ResolveParams) (inte
 		Game:              game,
 		Plateform:         plateforms,
 		NumberParticipate: numberParticipate,
-		GameWay:        gameWay,
+		GameWay:           gameWay,
 		Price:             arrayPrices,
 		DeadlineDate:      deadlineDate,
 		PriceParticipate:  priceParticipate,
@@ -106,11 +106,11 @@ func (t *tournament) SavedTournamentResolver(params graphql.ResolveParams) (inte
 		IsPublic:          isPub,
 		Spectateur:        spectateur,
 		Laps:              arrayLaps,
-		Format: 			format,
-		Server: 			server,
-		Region: 			region,
-		Maps:maps,
-		IsTeam: isteam,
+		Format:            format,
+		Server:            server,
+		Region:            region,
+		Maps:              maps,
+		IsTeam:            isteam,
 	}
 
 	res, err := t.tournamentHandler.SavedTournamentHandler(tournament)
@@ -235,7 +235,7 @@ func (t *tournament) UpdatedTournamentResolver(params graphql.ResolveParams) (in
 		Game:              tournament.Game,
 		Plateform:         tournament.Plateform,
 		NumberParticipate: numberParticipate,
-		GameWay:        gameWay,
+		GameWay:           gameWay,
 		Price:             price,
 		DeadlineDate:      deadlineDate,
 		PriceParticipate:  priceParticipate,
