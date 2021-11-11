@@ -2,14 +2,18 @@ import React,{useState} from "react"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 
-import { faChevronCircleUp, faCheck } from "@fortawesome/free-solid-svg-icons"
+import { faCheck } from "@fortawesome/free-solid-svg-icons"
 import Visa from "../../assets/image/card/visa.png"
 import Mastercard from "../../assets/image/card/mastercard.png"
 import Discover from "../../assets/image/card/discover.png"
 import Jcb from "../../assets/image/card/jcb.png"
 import Express from "../../assets/image/card/a-express.png"
 
-const Paiement = function() {
+type TypePaiement = {
+	isShow:boolean
+}
+
+const Paiement = function({isShow}:TypePaiement) {
 	const [showClose, setShowClose] = useState(false)
     const [next, setNext] = useState(false)
 	const onShowClose = function(){
@@ -19,7 +23,7 @@ const Paiement = function() {
       setNext(!next)
     }
 	return (
-		<div className={showClose ? "entry popup" : "d-none"} >
+		<div className={isShow ? "entry popup" : "d-none"} >
 			<h3>Rejoindre Fortnite Daily Cup</h3>
 			<div className="step-container">
 			<div className="step-1 d-none">

@@ -26,7 +26,7 @@ import {Tournament,Platform} from "../models/tournament"
 import {ParticipateTournament} from "../models/participate"
 import PartTournament,{PartTournamentType} from "./part-tournament"
 
-import Paiement from "../commons/paiement"
+
 
 const Joingame: React.FC = function(props:any) {
   	const [tournament, setTournament] = useState<Tournament>()
@@ -58,16 +58,15 @@ const Joingame: React.FC = function(props:any) {
 
 			setSumPrice(sum)
 			setPlateform(arrayPl.length > 0 ? arrayPl.join("/") : arrayPl[0])
-
 		}
 
 	},[loading,error,data])
-
 
 	const partTournament:PartTournamentType = {
 		tournament:tournament,
 		parts:parts,
 	}
+
   return(
   	<div className="container">
       <Header />
@@ -166,7 +165,7 @@ const Joingame: React.FC = function(props:any) {
                 </div>
               </div>
             </div>
-            <Paiement />
+
           </div>
           </div>
           <div className="clear"></div>

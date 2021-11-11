@@ -8,6 +8,7 @@ import {ParticipateTournament} from "../models/participate"
 import {RootState} from "../../reducer"
 import {checkInTeam} from "../league/utils"
 import {Translation} from "../../lang/translation"
+import Paiement from "../commons/paiement"
 
 export type PartTournamentType = {
 	tournament:Tournament|undefined,
@@ -20,6 +21,7 @@ const PartTournament:React.FC<PartTournamentType> = function ({tournament,parts}
 	const [teamPart,setTeamPart] = useState<string>("")
 	const [message,setMessage] = useState<string>("")
 	const [teamUserPart,setTeamUserPart] = useState<string[]>([])
+	const [showPaiement, setShowPaiement] = useState<boolean>(false)
 
 	useEffect(() => {
 		if(tournament?.isTeam) {
@@ -38,6 +40,7 @@ const PartTournament:React.FC<PartTournamentType> = function ({tournament,parts}
 	const [leavePartTournament]  = useMutation(LEAVE_PART_TOURNAMENT)
 	const onShowClose = async function(){
     	setShowClose(!showClose)
+		setShowPaiement(!showPaiement)
 		let isError:boolean = false
 		let arrayUidTeam:string[] = []
 		if(tournament?.isTeam) {
@@ -73,6 +76,7 @@ const PartTournament:React.FC<PartTournamentType> = function ({tournament,parts}
 					<p className="team-bar-title">Rejoindre le canal discord</p>
 					<button className="btn bg-red discolor">Rejoindre</button>
 				</div>
+				<Paiement isShow={showPaiement} />
 		</div>
 	)
 }
