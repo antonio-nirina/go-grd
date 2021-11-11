@@ -44,35 +44,6 @@ const Tableau: React.FC = function(props:any) {
     if (diff < 10 || diff <= 0) setIsOpen(false)
 
   },[loading,error,data])
- // let message:string = Translation(userConnectedRedux.user.language).tournament.notify ?? ""
-
-  /*const notify = async function(){
-    const param:Input = {
-      uidLeague:uid,
-      userUid:userConnectedRedux.user.uid,
-      part:true
-    }
-
-    if(league?.isTeam) {
-      const check = await checkInTeam(userConnectedRedux.user.uid)
-      if(check) {
-        dispatch(RegisterLeagueAction(param))
-      }
-      if(!check) message = Translation(userConnectedRedux.user.language).tournament.notifyError
-    }
-
-    toast(message,{
-      className: 'light-blue',
-      position: "top-left",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-    })
-
-  }*/
 
     return(
   	<div className="container">
