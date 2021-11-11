@@ -6,14 +6,13 @@ import Header from "../header/header"
 import Footer from "../footer/footer"
 //import {Translation} from "../../lang/translation"
 //import {RootState} from "../../reducer"
-import { faChevronCircleUp, faCheck } from "@fortawesome/free-solid-svg-icons"
+import { faChevronCircleUp } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {GET_PART_ONE_TOURNAMENT} from "../../gql/participate/query"
 import "../../assets/css/style.css"
 import "../tournament/tournament.css"
 import "../waggers/waggers.css"
 import "../participate/participate.css"
-import Game from "../../assets/image/game.png"
 import Apex from "../../assets/image/apex-legends.png"
 import Fifa21 from "../../assets/image/fifa21.png"
 import Fortnite from "../../assets/image/fortnite.png"
@@ -27,16 +26,9 @@ import {Tournament,Platform} from "../models/tournament"
 import {ParticipateTournament} from "../models/participate"
 import PartTournament,{PartTournamentType} from "./part-tournament"
 
-import Background from "../../assets/image/apex-legends-arena.jpg"
-import Visa from "../../assets/image/card/visa.png"
-import Mastercard from "../../assets/image/card/mastercard.png"
-import Discover from "../../assets/image/card/discover.png"
-import Jcb from "../../assets/image/card/jcb.png"
-import Express from "../../assets/image/card/a-express.png"
+import Paiement from "../commons/paiement"
 
 const Joingame: React.FC = function(props:any) {
-  	const [showClose, setShowClose] = useState(false)
-    const [next, setNext] = useState(false)
   	const [tournament, setTournament] = useState<Tournament>()
 	const [parts, setParts] = useState<ParticipateTournament[]>()
 
@@ -71,12 +63,7 @@ const Joingame: React.FC = function(props:any) {
 
 	},[loading,error,data])
 
-  	const onShowClose = function(){
-    	setShowClose(!showClose)
-  	}
-    const onNext = function(){
-      setNext(!next)
-    }
+
 	const partTournament:PartTournamentType = {
 		tournament:tournament,
 		parts:parts,
@@ -179,84 +166,7 @@ const Joingame: React.FC = function(props:any) {
                 </div>
               </div>
             </div>
-            <div className="entry popup">
-              <h3>Rejoindre Fortnite Daily Cup</h3>
-              <div className="step-container">
-                <div className="step-1 d-none">
-                  <div className="middle">
-                    <div className="entry-step">
-                      <span>1</span>
-                      <span className="separator"></span>
-                      <span>2</span>
-                    </div>
-                    <div className="step-name">
-                      <span>Information</span>
-                      <span>Payment</span>
-                    </div>
-                  </div>
-                  <div className="entry-price">
-                    <span>Entrée</span>
-                    <span>€27</span>
-                  </div>
-                </div>
-                <div className="step-2">
-                  <div className="middle">
-                    <div className="entry-step">
-                      <span><FontAwesomeIcon icon={faCheck}/></span>
-                      <span className="separator"></span>
-                      <span>2</span>
-                    </div>
-                    <div className="step-name">
-                      <span>Information</span>
-                      <span>Payment</span>
-                    </div>
-                  </div>
-                  <div className="payment-method">
-                    <p>Nous acceptons les moyens de paiement sécurisé suivants :</p>
-                    <div className="card-container">
-                      <img src={Visa} alt=""/>
-                      <img src={Mastercard} alt=""/>
-                      <img src={Discover} alt=""/>
-                      <img src={Jcb} alt=""/>
-                      <img src={Express} alt=""/>
-                    </div>
-                    <div className="payment-container">
-                      <form className="payment">
-                        <div className="select-method">
-                          <label>Methode de payment</label>
-                          <select id="card">
-                            <option>visa</option>
-                            <option>Mastercard</option>
-                            <option>Discover</option>
-                            <option>Jcb</option>
-                            <option>Express</option>
-                          </select>
-                          <div className="input-group">
-                            <input type="text" placeholder="Nom *"/>
-                            <input type="e-mail" placeholder="E-mail *"/>
-                          </div>
-                          <div className="input-group">
-                            <input type="text" placeholder="Télephone *"/>
-                          </div>
-                          <div className="input-group card-number">
-                            <input type="text" placeholder="Numéro de carte*"/>
-                            <label>MM / AA CVC</label>
-                          </div>
-                        </div>
-                        <div className="entry-total">
-                          <p><span>Entrée</span><span>27$</span></p>
-                          <p><span>Total</span><span>27$</span></p>
-                        </div>
-                      </form>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="next-btn">
-                <button className="btn bg-white" onClick={onShowClose}>Annuler</button>
-                <button className="btn bg-red" onClick={onNext}>Suivant</button>
-              </div>
-            </div>
+            <Paiement />
           </div>
           </div>
           <div className="clear"></div>
