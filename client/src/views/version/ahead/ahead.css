@@ -177,16 +177,16 @@
 	font-size: 12px;
 	align-self: center;
 	width: 100%;
-	text-align: center;
-	padding: 5px 0;	
+	text-align: center;	
 	font-family: arial;
 }
 .global span img{
 	align-self: center;
 	margin-top: 5px;
 }
-.global .middle{
+.best_content div span.middle{
 	font-weight: bold;
+	margin: 12px;
 }
 .global .self{
 	width: 50px;
