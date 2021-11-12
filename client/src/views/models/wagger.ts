@@ -13,6 +13,6 @@ export interface Wagger {
 	participant:number|undefined
 	isPublic:boolean|undefined
 	game:Game
-	plateform:Platform
+	plateform:Platform[]
 	gameWay:string|undefined
 }

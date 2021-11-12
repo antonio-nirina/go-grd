@@ -1,17 +1,30 @@
-import React from "react"
+import React,{useEffect,useState} from "react"
 import { Link } from "react-router-dom"
 import { faChevronCircleUp } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {Tournament} from "../../models/tournament"
+// import {Tournament} from "../../models/tournament"
 import {dateStringToJoinT,dateStringToDHString} from "../../tools/dateConvert"
+// import { Wagger } from "../../models/wagger"
 
 
-type HeaderTournamentType = {
-	tournament:Tournament|undefined,
-	isTournament:boolean
+export type HeaderTournamentType = {
+	data:any,//Tournament|Wagger|undefined,
+	isTournament:boolean,
+	isWagger:boolean
 }
 
-const HeaderTournament = function({tournament,isTournament}:HeaderTournamentType) {
+const HeaderTournament = function({data,isTournament,isWagger}:HeaderTournamentType) {
+	const [uriJoin, setUriJoin] = useState<string>("")
+	const [uriRules, setUriRules] = useState<string>("")
+	useEffect(() =>{
+		if(isTournament) {
+			setUriJoin("join-tournament")
+			setUriRules("tournament-rules")
+		} else if(isWagger) {
+			setUriJoin("joingame")
+			setUriRules("waggers-rules")
+		}
+	},[])
 	return (
 		<>
 			<div className="part">
@@ -19,22 +32,22 @@ const HeaderTournament = function({tournament,isTournament}:HeaderTournamentType
 				<Link to="#"><i><FontAwesomeIcon icon={faChevronCircleUp} size="xs" /></i>Retour</Link>
 				</div>
 				<div className="header-part">
-				<img className="item-left" src={tournament?.game.logo} alt={tournament?.game.slug} />
+				<img className="item-left" src={data?.game.logo} alt={data?.game.slug} />
 				<div className="join-title">
-					<h2>{tournament?.title} - {tournament?.gameWay} - {tournament?.game.name}</h2>
+					<h2>{data?.title} - {data?.gameWay} - {data?.game.name}</h2>
 					<p>
-					<span>{dateStringToJoinT(tournament?.dateStart)}</span>
-					<span>{tournament?.gameWay}</span>
-					<span>{tournament?.game.name}</span>
-					<span>{tournament?.plateform && tournament?.plateform.length > 0 ? "Cross-Play" : tournament?.plateform[0]} </span>
+						<span>{isTournament ? dateStringToJoinT(data?.dateStart) : dateStringToJoinT(data?.date)}</span>
+						<span>{isTournament || isWagger ? data?.gameWay : ""}</span>
+						<span>{isTournament || isWagger ?data?.game.name : ""}</span>
+						<span>{ isTournament || isWagger ? (data?.plateform && data?.plateform.length > 0 ? "Cross-Play" : data?.plateform[0]) : ""} </span>
 					</p>
 				</div>
 				</div>
 			</div>
 			<div className="bar-menu-top">
-				<li><Link to={`/join-tournament?uid=${tournament?.uid}`} className={isTournament ? "active":""}>Général</Link></li>
-				<li><Link to="/tableau">Tableau</Link></li>
-				<li><Link to="/waggers-rules">Règles</Link></li>
+				<li><Link to={`${uriJoin}/?uid=${data?.uid}`} className={isTournament ? "active":""}>Général</Link></li>
+				<li><Link to={`/tableaut?uid=${data?.uid}`}>Tableau</Link></li>
+				<li><Link to={`/${uriRules}?uid=${data?.uid}`}>Règles</Link></li>
 			</div>
 		</>
 	)

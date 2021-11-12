@@ -24,14 +24,14 @@ import {dateStringToDHString} from "../tools/dateConvert"
 import {Tournament,Platform} from "../models/tournament"
 import {ParticipateTournament} from "../models/participate"
 import PartTournament,{PartTournamentType} from "./part-tournament"
-import HeaderTournament from "./common/headerTournament"
+import HeaderTournament,{HeaderTournamentType} from "./common/headerTournament"
 
 
 const Joingame: React.FC = function(props:any) {
   	const [tournament, setTournament] = useState<Tournament>()
 	const [parts, setParts] = useState<ParticipateTournament[]>()
 
-	const [plateform, setPlateform] = useState<string>()
+	const [plateform, setPlateform] = useState<string>("")
 	const [sumPrice, setSumPrice] = useState<number>(0)
 	const params = new URLSearchParams(props.location.search)
 	const uid:string|null = params.get("uid")
@@ -66,15 +66,18 @@ const Joingame: React.FC = function(props:any) {
 		parts:parts,
 	}
 
+	const HeaderProps:HeaderTournamentType = {
+		data:tournament,
+		isTournament:true,
+		isWagger:false
+	}
+
   return(
   	<div className="container">
       <Header />
       	<div style={{ backgroundImage: 'url(' + tournament?.game.image + ')', backgroundSize: 'auto', backgroundRepeat: 'no-repeat' }} className="participate league joingame">
         <div className="marg">
-			<HeaderTournament
-				tournament={tournament}
-				isTournament={true}
-			/>
+			<HeaderTournament {...HeaderProps} />
           	<div className="in-container">
           	<div className="information-game">
             <div className="item-info-left">
