@@ -1,5 +1,4 @@
 import React,{useState,useEffect} from "react"
-
 import {useQuery} from "@apollo/client"
 
 import Header from "../header/header"
@@ -154,8 +153,8 @@ const Joingame: React.FC = function(props:any) {
           </div>
           </div>
           <div className="clear"></div>
-          <Footer/>
-		    </div>
+          	<Footer/>
+		</div>
       </div>
   	</div>
   )
