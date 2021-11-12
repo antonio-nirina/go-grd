@@ -89,13 +89,13 @@ const Waggers: React.FC = function() {
 													<td>Format</td>
 													<td>Console</td>
 													<td>Participation</td>
-													<td>Prix à gagner</td>												
+													<td>Prix à gagner</td>
 												</tr>
 											</thead>
 											<tbody>
 												<tr>
 													<td>{el.format}</td>
-													<td>{el.plateform.name}</td>
+													<td>{el.plateform[0].name}</td>
 													<td>{`${el.priceParticipate} €`}</td>
 													<td>{`${el.price} €`}</td>
 												</tr>
@@ -108,12 +108,12 @@ const Waggers: React.FC = function() {
 									<div className="name-section">
 										<p>
 											<span>{el.game.name}</span>
-											<span className="platform-logo">{el.plateform.name}</span>
+											<span className="platform-logo">{el.plateform[0].name}</span>
 										</p>
 									</div>
 									<div className="prize-section">
 										<div className="prize-warp">
-											<i className="awesome"><FontAwesomeIcon icon={faTrophy}/></i>												
+											<i className="awesome"><FontAwesomeIcon icon={faTrophy}/></i>
 											prix
 										</div>
 										<div className="prize" style={{"fontWeight":"bold"}}>
@@ -125,7 +125,7 @@ const Waggers: React.FC = function() {
 									<Link to={`/joingame?uid=${el.uid}`} className="signup-btn bg-red">Inscrivez-vous</Link>
 								</div>
 								</div>
-							</div>	
+							</div>
 						)
 					})}
 
