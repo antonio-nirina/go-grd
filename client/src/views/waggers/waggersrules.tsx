@@ -26,6 +26,7 @@ const WaggersRules: React.FC = function(props:any) {
 		<div className="container">
 			<Header />
 			<div className="participate league joingame">
+				<div className="obj"></div>
 				<div className="marg">
 				<HeaderTournament {...HeaderProps} />
 			<div className="information-game">
