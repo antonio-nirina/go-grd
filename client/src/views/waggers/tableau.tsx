@@ -1,17 +1,15 @@
 import React from "react"
-import {GET_ONE_LEAGUE} from "../../gql/league/query"
 import Tree from "./tree"
 import Header from "../header/header"
 import Footer from "../footer/footer"
 import "../tournament/info.css"
 import "../../assets/css/style.css"
-import { Link } from "react-router-dom"
 // import {RegisterLeagueAction,Input} from "../league/action/leagueAction"
 // import {checkInTeam} from "../league/utils"
 import HeaderTournament,{HeaderTournamentType} from "../tournament/common/headerTournament"
+// import {Link,useHistory } from "react-router-dom"
 
-
-const Tableau: React.FC = function(props:any) {
+const Tableau: React.FC = function() {
   // const userConnectedRedux = useSelector((state:RootState) => state.userConnected)
   // const userSingupLeague = useSelector((state:RootState) => state.leagueSingin)
 
@@ -22,22 +20,22 @@ const Tableau: React.FC = function(props:any) {
 	}
 
     return(
-  	<div className="container">
-  		<Header />
-  		<div className="participate league joingame">
-			<div className="marg">
-				<HeaderTournament {...HeaderProps} />
-				<div className="information-game">
-					<div className="tab-container">
-						<Tree />
+		<div className="container">
+			<Header />
+			<div className="participate league joingame">
+				<div className="marg">
+					<HeaderTournament {...HeaderProps} />
+					<div className="information-game">
+						<div className="tab-container">
+							<Tree />
+						</div>
 					</div>
+					<div className="clear"></div>
+					<Footer/>
 				</div>
-        		<div className="clear"></div>
-				<Footer/>
 			</div>
-  		</div>
-  	</div>
-  )
+		</div>
+  	)
 }
 
 export default Tableau

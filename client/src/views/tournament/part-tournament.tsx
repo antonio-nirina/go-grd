@@ -3,15 +3,14 @@ import {useMutation} from "@apollo/client"
 
 import {SAVED_PART,LEAVE_PART_TOURNAMENT} from "../../gql/participate/mutation"
 import {Tournament} from "../models/tournament"
-
 import {ParticipateTournament} from "../models/participate"
-
 import Paiement from "../commons/paiement"
 
 export type PartTournamentType = {
 	tournament:Tournament|undefined,
-	parts:ParticipateTournament[]|undefined
+	parts:ParticipateTournament[]|undefined,
 }
+
 
 const PartTournament:React.FC<PartTournamentType> = function ({tournament,parts}) {
 	const [showClose, setShowClose] = useState(false)
@@ -39,7 +38,9 @@ const PartTournament:React.FC<PartTournamentType> = function ({tournament,parts}
 	}
 
 	const [leavePartTournament]  = useMutation(LEAVE_PART_TOURNAMENT)
-
+	const handleLeave = function(isClosed:boolean) {
+		setShowPaiement(!isClosed)
+	}
 	return (
 		<div className="item-info-right">
 			<div className="join-all">
@@ -59,6 +60,7 @@ const PartTournament:React.FC<PartTournamentType> = function ({tournament,parts}
 			<Paiement
 				isShow={showPaiement}
 				tournament={tournament}
+				handleClose={handleLeave}
 			/>
 		</div>
 	)

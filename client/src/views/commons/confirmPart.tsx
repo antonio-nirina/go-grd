@@ -11,10 +11,11 @@ import {Team} from "../models/team"
 
 type TypeConfirmed = {
 	tournament: Tournament|undefined
+	handleClosePayement:Function
 }
 
 
-const ConfirmPart = function({tournament}:TypeConfirmed) {
+const ConfirmPart = function({tournament,handleClosePayement}:TypeConfirmed) {
 	const [showClose, setShowClose] = useState(true)
 	const [teamPart,setTeamPart] = useState<string>("")
 	const [message,setMessage] = useState<string>("")
@@ -48,6 +49,9 @@ const ConfirmPart = function({tournament}:TypeConfirmed) {
 	const onShowClose = function(){
     	setShowClose(false)
   	}
+
+	handleClosePayement(showClose)
+
 	return (
 		<div className={!showClose ? "d-none" :"next-btn"}>
 			<button onClick={handlePartTournament} className="btn bg-white">Confirme la page pour participer au tournois</button>

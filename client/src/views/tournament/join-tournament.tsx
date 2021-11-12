@@ -60,17 +60,16 @@ const Joingame: React.FC = function(props:any) {
 
 	},[loading,error,data])
 
-	const partTournament:PartTournamentType = {
-		tournament:tournament,
-		parts:parts,
-	}
-
 	const HeaderProps:HeaderTournamentType = {
 		data:tournament,
 		isTournament:true,
 		isWagger:false
 	}
 
+	const partTournament:PartTournamentType = {
+		tournament:tournament,
+		parts:parts,
+	}
   return(
   	<div className="container">
       <Header />

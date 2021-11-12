@@ -8,8 +8,11 @@ import Discover from "../../assets/image/card/discover.png"
 import Jcb from "../../assets/image/card/jcb.png"
 import Express from "../../assets/image/card/a-express.png"
 
+type TypePayement = {
+	handleClosePayement:Function
+}
 
-const ContentPaiement = function() {
+const ContentPaiement = function({handleClosePayement}:TypePayement) {
 	const [showClose, setShowClose] = useState(false)
     const [next, setNext] = useState(false)
 	const onShowClose = function(){
@@ -18,6 +21,7 @@ const ContentPaiement = function() {
     const onNext = function(){
       setNext(!next)
     }
+	handleClosePayement(showClose)
 	return (
 		<div className={!showClose ? "d-none" : "entry popup"}>
 			<h3>Rejoindre Fortnite Daily Cup</h3>
