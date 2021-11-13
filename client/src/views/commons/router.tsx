@@ -71,6 +71,7 @@ const Router = function() {
 			<ProtectedRoute path="/waggers" exact component={Waggers} />
 			<ProtectedRoute path="/tableau" exact component={Tableau} />
 			<ProtectedRoute path="/waggers-rules" exact component={WaggersRules} />
+			<ProtectedRoute path="/tournament-rules" exact component={WaggersRules} />
 			<ProtectedRoute path="/waggers-game" exact component={WaggersGame} />
 			<ProtectedRoute path="/view" exact component={View} />
 			<ProtectedRoute path="/lobby" exact component={Lobby} />

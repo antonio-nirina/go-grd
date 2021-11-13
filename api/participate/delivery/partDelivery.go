@@ -203,7 +203,6 @@ func (p *participate) SavedPartResolver(params graphql.ResolveParams) (interface
 }
 
 func (p *participate) FindPartResolver(params graphql.ResolveParams) (interface{}, error) {
-
 	uid, _ := params.Args["uid"].(string)
 	res, err := p.partHandler.FindPartHandler(uid)
 

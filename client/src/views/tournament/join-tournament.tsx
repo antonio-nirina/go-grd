@@ -1,13 +1,10 @@
 import React,{useState,useEffect} from "react"
-import { Link } from "react-router-dom"
 import {useQuery} from "@apollo/client"
 
 import Header from "../header/header"
 import Footer from "../footer/footer"
 //import {Translation} from "../../lang/translation"
 //import {RootState} from "../../reducer"
-import { faChevronCircleUp } from "@fortawesome/free-solid-svg-icons"
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {GET_PART_ONE_TOURNAMENT} from "../../gql/participate/query"
 import "../../assets/css/style.css"
 import "../tournament/tournament.css"
@@ -21,18 +18,18 @@ import CodVanguard from "../../assets/image/cod-vanguard.png"
 import Warzone from "../../assets/image/warzone.png"
 import Rocketleague from "../../assets/image/rocketleague.png"
 import Rainbowsix from "../../assets/image/rainbowsix.png"
-import {dateStringToJoinT,dateStringToDHString} from "../tools/dateConvert"
+import {dateStringToDHString} from "../tools/dateConvert"
 import {Tournament,Platform} from "../models/tournament"
 import {ParticipateTournament} from "../models/participate"
 import PartTournament,{PartTournamentType} from "./part-tournament"
+import HeaderTournament,{HeaderTournamentType} from "./common/headerTournament"
 
-import Paiement from "../commons/paiement"
 
 const Joingame: React.FC = function(props:any) {
   	const [tournament, setTournament] = useState<Tournament>()
 	const [parts, setParts] = useState<ParticipateTournament[]>()
 
-	const [plateform, setPlateform] = useState<string>()
+	const [plateform, setPlateform] = useState<string>("")
 	const [sumPrice, setSumPrice] = useState<number>(0)
 	const params = new URLSearchParams(props.location.search)
 	const uid:string|null = params.get("uid")
@@ -58,11 +55,15 @@ const Joingame: React.FC = function(props:any) {
 
 			setSumPrice(sum)
 			setPlateform(arrayPl.length > 0 ? arrayPl.join("/") : arrayPl[0])
-
 		}
 
 	},[loading,error,data])
 
+	const HeaderProps:HeaderTournamentType = {
+		data:tournament,
+		isTournament:true,
+		isWagger:false
+	}
 
 	const partTournament:PartTournamentType = {
 		tournament:tournament,
@@ -70,37 +71,17 @@ const Joingame: React.FC = function(props:any) {
 	}
   return(
   	<div className="container">
-      <Header />
-      <div style={{ backgroundImage: 'url(' + tournament?.game.image + ')', backgroundSize: 'auto', backgroundRepeat: 'no-repeat' }} className="participate league joingame">
+      	<Header />
+      	<div className="participate league joingame">
+        <div style={{ backgroundImage: 'url(' + tournament?.game.image + ')', backgroundPosition: 'center', backgroundSize: '100%', backgroundRepeat: 'no-repeat' }} className="obj"></div>
         <div className="marg">
-          <div className="part">
-            <div className="back">
-              <Link to="#"><i><FontAwesomeIcon icon={faChevronCircleUp} size="xs" /></i>Retour</Link>
-            </div>
-            <div className="header-part">
-              <img className="item-left" src={tournament?.game.logo} alt={tournament?.game.slug} />
-              <div className="join-title">
-                <h2>{tournament?.title} - {tournament?.gameWay} - {tournament?.game.name}</h2>
-                <p>
-                  <span>{dateStringToJoinT(tournament?.dateStart)}</span>
-                  <span>{tournament?.gameWay}</span>
-                  <span>{tournament?.game.name}</span>
-                  <span>{tournament?.plateform && tournament?.plateform.length > 0 ? "Cross-Play" : tournament?.plateform[0]} </span>
-                </p>
-              </div>
-            </div>
-          </div>
-          <div className="bar-menu-top">
-          <li><Link to="/join-tournament" className="active">Général</Link></li>
-          <li><Link to="/tableau">Tableau</Link></li>
-          <li><Link to="/waggers-rules">Règles</Link></li>
-          </div>
-          <div className="in-container">
-          <div className="information-game">
+			<HeaderTournament {...HeaderProps} />
+          	<div className="in-container">
+          	<div className="information-game">
             <div className="item-info-left">
-              <div className="item-img-info">
-                <img src={tournament?.game.slug === "vanguard" ? CodVanguard : (tournament?.game.slug === "fortnite" ? Fortnite : (tournament?.game.slug ==="fifa21" ? Fifa21 : (tournament?.game.slug ==="ops" ? CodL : (tournament?.game.slug ==="warzone" ? Warzone : (tournament?.game.slug ==="rainbows" ? Rainbowsix : (tournament?.game.slug ==="apexlegends"?Apex:Rocketleague))))) )} alt=""/>
-              </div>
+              	<div className="item-img-info">
+                	<img src={tournament?.game.slug === "vanguard" ? CodVanguard : (tournament?.game.slug === "fortnite" ? Fortnite : (tournament?.game.slug ==="fifa21" ? Fifa21 : (tournament?.game.slug ==="ops" ? CodL : (tournament?.game.slug ==="warzone" ? Warzone : (tournament?.game.slug ==="rainbows" ? Rainbowsix : (tournament?.game.slug ==="apexlegends"?Apex:Rocketleague))))) )} alt=""/>
+              	</div>
             	<div className="item-all-content">
                 <div className="item-all-info">
                   	<p><span>Format</span></p>
@@ -115,16 +96,16 @@ const Joingame: React.FC = function(props:any) {
                   	<p>{dateStringToDHString(tournament?.deadlineDate).replace(","," -")}</p>
                 </div>
                 <div className="item-all-info">
-                  <p><span>Map(s)</span></p>
-                  <p className="item-text-left">Map(s)</p>
-                  {tournament?.laps.map(function(lap:string,index:number){
-                  	return (
-                  		<div key={index}>
-                  			<p><span>Tour {index+1}</span></p>
-                  			<p>{dateStringToDHString(lap).replace(","," -")}</p>
-                  		</div>
-                  	)
-                  })}
+                  	<p><span>Map(s)</span></p>
+                  	<p className="item-text-left">Map(s)</p>
+					{tournament?.laps.map(function(lap:string,index:number){
+						return (
+							<div key={index}>
+								<p><span>Tour {index+1}</span></p>
+								<p>{dateStringToDHString(lap).replace(","," -")}</p>
+							</div>
+						)
+					})}
                 </div>
                 <div className="item-all-info">
                   <p><span>Serveur</span></p>
@@ -166,12 +147,12 @@ const Joingame: React.FC = function(props:any) {
                 </div>
               </div>
             </div>
-            <Paiement />
+
           </div>
           </div>
           <div className="clear"></div>
-          <Footer/>
-		    </div>
+          	<Footer/>
+		</div>
       </div>
   	</div>
   )
