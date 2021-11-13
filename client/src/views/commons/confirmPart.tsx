@@ -61,14 +61,14 @@ const ConfirmPart = function() {
 			if(!check) {
 				isError = true
 				setMessage(Translation(userConnectedRedux.user.language).tournament.notifyError)
+			} else {
+				check.forEach(function(team:Team) {
+					arrayUidTeam.push(team.uid)
+				})
 			}
-
-			check.forEach(function(team:Team) {
-				arrayUidTeam.push(team.uid)
-			})
 		}
 		if(!isError) {
-			// const saved = await savedPartTournament({ variables: { uidUser: userConnectedRedux.user.uid,date:(new Date().toLocaleString()),tournamentUid:tournament?.uid,teamsUid:{uid:arrayUidTeam.length > 0 ? arrayUidTeam[0] : ""} } })
+			const saved = await savedPartTournament({ variables: { uidUser: userConnectedRedux.user.uid,date:(new Date().toLocaleString()),tournamentUid:tournament?.uid,teamsUid:{uid:arrayUidTeam.length > 0 ? arrayUidTeam[0] : ""} } })
 			// console.log("saved", saved)
 		}
 	}

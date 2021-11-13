@@ -1,7 +1,8 @@
 import React,{ useState} from "react"
-
+import {useHistory } from "react-router-dom"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheck } from "@fortawesome/free-solid-svg-icons"
+
 import Visa from "../../assets/image/card/visa.png"
 import Mastercard from "../../assets/image/card/mastercard.png"
 import Discover from "../../assets/image/card/discover.png"
@@ -14,13 +15,14 @@ type TypePayement = {
 
 const ContentPaiement = function({handleClosePayement}:TypePayement) {
 	const [showClose, setShowClose] = useState(true)
-    const [next, setNext] = useState(false)
+	const params = useHistory<any>()
+
 	const onShowClose = function(){
     	setShowClose(false)
 		handleClosePayement(false)
   	}
     const onNext = function(){
-      setNext(!next)
+      params.push("/confirmed-join/tournament")
     }
 
 	return (

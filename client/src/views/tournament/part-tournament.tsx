@@ -1,11 +1,17 @@
 import React,{useState,useEffect} from "react"
 import {useMutation} from "@apollo/client"
 import { Link } from "react-router-dom"
+import { useSelector } from "react-redux"
 
 import {SAVED_PART,LEAVE_PART_TOURNAMENT} from "../../gql/participate/mutation"
 import {Tournament} from "../models/tournament"
 import {ParticipateTournament} from "../models/participate"
 import ContentPaiement from "../commons/contentPaiement"
+import {checkInTeam} from "../league/utils"
+import {RootState} from "../../reducer"
+import {Translation} from "../../lang/translation"
+
+
 
 export type PartTournamentType = {
 	tournament:Tournament|undefined,
@@ -14,6 +20,7 @@ export type PartTournamentType = {
 
 
 const PartTournament:React.FC<PartTournamentType> = function ({tournament,parts}) {
+	const userConnectedRedux = useSelector((state:RootState) => state.userConnected)
 	const [showClose, setShowClose] = useState(false)
 	const [teamPart,setTeamPart] = useState<string>("")
 	const [message,setMessage] = useState<string>("")
@@ -34,8 +41,14 @@ const PartTournament:React.FC<PartTournamentType> = function ({tournament,parts}
 
 	},[])
 
-	const onShowConfirmed = function() {
-		setShowPaiement(!showPaiement)
+	const onShowConfirmed = async function() {
+		const check = await checkInTeam(userConnectedRedux.user.uid)
+		if(!check && tournament?.isTeam) {
+			setMessage(Translation(userConnectedRedux.user.language).tournament.notifyError)
+		} else {
+			setShowPaiement(!showPaiement)
+		}
+
 	}
 
 	const handleClose = function() {
