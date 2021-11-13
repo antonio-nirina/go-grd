@@ -7,7 +7,7 @@ import Sidebar from "./sidebar"
 
 import AvatarDefault from "../../assets/image/game-tag.png"
 
-import { faPlusCircle, faTimes, faPen } from "@fortawesome/free-solid-svg-icons"
+import { faPlusCircle, faTimes, faCamera, faPen, faSync } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 const Team: React.FC = function() {	
@@ -27,14 +27,14 @@ const Team: React.FC = function() {
 							<div className="my_account">
 								<div className="img_account">
 									<img src= {AvatarDefault} alt="" width="150" height="150"/>
-									<i onClick={onPopup}><FontAwesomeIcon icon={faPen} /></i>
-									<p className="d-none">
-										<i><FontAwesomeIcon icon={faPlusCircle} /></i>
-										<i><FontAwesomeIcon icon={faPlusCircle} /></i>
-										<i><FontAwesomeIcon icon={faPlusCircle} /></i>
+									<i className={showPopup ? "d-none" :"set"} onClick={onPopup}><FontAwesomeIcon icon={faPen} /></i>
+									<p className="icon-settings">
+										<i><FontAwesomeIcon icon={faCamera} /></i>
+										<i><FontAwesomeIcon icon={faTimes} /></i>
+										<i><FontAwesomeIcon icon={faSync} /></i>
 									</p>
 								</div>
-								<div className="actual_account">																		
+								<div className={showPopup ? "d-none" :"actual_account"}>																		
 									<p className="account_name">TESTOSTAZ</p>
 									<p className="account_name">#6177DED78FB09800502913E4</p>
 									<p className="adhesion">Membre depuis 26 Octobre 2021</p>																		
@@ -44,7 +44,7 @@ const Team: React.FC = function() {
 										<span>Langue : fr</span>
 									</p>
 								</div>
-								<div className="edit_account d-none">
+								<div className={!showPopup ? "d-none" :"edit_account"}>
 									<form>
 										<div className="input_group">
 											<label htmlFor="Pseudo">Pseudo</label>
