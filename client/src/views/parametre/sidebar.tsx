@@ -5,8 +5,11 @@ const Sidebar = function() {
     return (
         <div className="menu-left">
             <ul>
-                <li id="infos">
+                {/*<li id="infos">
                     <Link to="/parametre">Mes infos</Link>
+                </li>*/}
+                <li id="compte">
+                    <Link to="/compte">Mon compte</Link>
                 </li>
                 <li id="cagnotte">
                     <Link to="/jackpot">Ma cagnotte</Link>

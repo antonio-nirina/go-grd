@@ -26,7 +26,7 @@ const Team: React.FC = function() {
 						<div className="personal">							
 							<h2>Mes équipes</h2>
 							<div className="my_team">
-								<img src= {AvatarDefault} alt="" width="100" height="100"/>
+								<img src= {AvatarDefault} alt="" width="150" height="150"/>
 								<strong>GROWTHMARKET</strong>
 								<div className="team_infos">
 									<div className="info_title">

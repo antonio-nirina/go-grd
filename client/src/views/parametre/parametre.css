@@ -12,6 +12,7 @@
 .settings .menu-left li a{
 	display: block;
 	padding: 10px  0;
+	font-size: 15px;
 }
 .settings .menu-left li.active_link{
 	position: relative;
@@ -225,14 +226,16 @@
 #infos,
 #cagnotte,
 #jeux,
-#team
+#team,
+#compte
 {
 	position: relative;	
 }
 .mes_infos #infos:before,
 .cagnotte #cagnotte:before,
 .mes_jeux #jeux:before,
-.mes_equipes #team:before
+.mes_equipes #team:before,
+.mon_compte #compte:before
 {
 	content:"";
 	display: inline-block;
@@ -245,23 +248,25 @@
 }
 /***************************************/
 .my_team{
-	background: #dd0000;
+	background: #2c2c2c;
 	margin-top: 25px;
 	padding: 15px;
 	text-align: center;
-	max-width: 235px;
+	max-width: 300px;
 	width: 100%;
 	border-radius: 5px;
 	margin-right: 15px;
+	display: inline-block;
+	vertical-align: middle;
 }
 .my_team strong{
 	font-family: "russo one";
-	color: #000000;
+	color: #ffffff;
 	display: block;
 	padding: 15px;
 }
 .my_team p{
-	color: #000000;
+	color: #ffffff;
 	font-family: "russo one";
 }
 .info_title{
@@ -272,18 +277,14 @@
 	display: flex;
 	justify-content: stretch;
 }
-.team_data p{
-	width: 65px;
-	font-size: 11px;
-	text-align: right;
+.team_data p{	
+	font-size: 13px;
+	width: 170px;
+	text-align: center;
 }
 .info_title p{
-	font-size: 11px;
+	font-size: 13px;
 	text-align: right;
-}
-.my_team{
-	display: inline-block;
-	vertical-align: middle;
 }
 .add_team{	
 	width: 180px;
@@ -352,4 +353,111 @@
 }
 .settings .main .containt{
 	width: 93%;
+}
+.my_account{
+	text-align: center;
+	background: #2c2c2c;
+	padding: 15px;
+	max-width: 300px;
+	width: 100%;
+	border-radius: 5px;
+}
+.my_account .img_account{
+	position: relative;	
+}
+.img_account i.set{
+	position: absolute;	
+	top: 18px;
+	font-size: 16px;
+	color: #d00;
+	right: 15px;
+	cursor: pointer;
+}
+.account_name{
+	font-family: "russo one";	
+}
+.adhesion{	
+	padding: 15px 0;
+	font-size: 13px;
+	font-weight: bold;
+}
+.account_info{
+	font-family: "russo one"
+}
+.account_info span{
+	display: block;	
+	padding: 5px 0;
+}
+.actual_account{
+	margin-top: 15px;
+}
+.edit_account{
+	text-align: left;
+	font-family: "russo one"
+}
+.edit_account label{
+	display: block;
+	color: gray;
+	font-size: 11px;
+}
+.edit_account .input_group{
+	margin-bottom: 10px;
+}
+.edit_account input{
+	background: none;
+	border: none;	
+	font-family: "russo one";
+	color: gray;
+	font-size: 14px;
+	width: 100%;
+	padding: 10px 0;
+	border-bottom: 2px dotted #dd0000;
+}
+.edit_account select{
+	width: 100%;
+	background: #2c2c2c;
+	padding: 10px;
+	border: none;
+	color: gray;
+	font-family: "russo one";
+	text-align: center;
+	border-bottom: 2px dotted #dd0000;
+}
+.edit_account .btn-select{
+	text-align: center;
+	margin-top: 20px;
+}
+.edit_account .btn{
+	padding: 7px;
+	font-size: 12px;
+	font-family: "russo one";
+	text-align: center;
+}
+.edit_account .btn.bg-white{
+	color: #000000;
+	margin-left: 7px;
+}
+.edit_account .btn.bg-white:hover{
+	color: #ffffff;
+}
+.img_account img{
+	border: 2px solid #7878e6;
+	border-radius: 50%;
+}
+.icon-settings{
+	position: absolute;
+	top: 66px;
+	text-align: center;		
+	background: red;
+	margin: auto;
+	left: 35%;
+	padding: 5px;
+	background: rgba(120,120,230, 0.5);
+}
+.icon-settings i{
+	display: inline-block;
+	margin-right: 15px;
+}
+.icon-settings i:last-child{
+	margin-right: 0;	
 }
