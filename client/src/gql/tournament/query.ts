@@ -15,6 +15,7 @@ export const GET_ALL_TOURNAMENT= gql`
 		price
 		priceParticipate
 		isPublic
+		spectateur
 		laps
 		game{
 			uid
@@ -45,6 +46,7 @@ export const GET_ONE_TOURNAMENT = gql`
 		rules
 		laps
 		gameWay
+		spectateur
 		game{
 			uid
 			name
@@ -74,6 +76,7 @@ export const GET_TOURNAMENT_GAME = gql`
 		priceParticipate
 		rules
 		isPublic
+		spectateur
 		laps
 		game{
 			uid

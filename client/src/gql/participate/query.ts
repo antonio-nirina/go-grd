@@ -171,6 +171,8 @@ export const GET_PART_ONE_TOURNAMENT = gql`
 				isTeam
 				isPublic
 				gameWay
+				spectateur
+				server
 				game{
 					uid
 					name

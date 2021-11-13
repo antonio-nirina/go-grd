@@ -1,4 +1,4 @@
-import React,{useState} from "react"
+import React,{ useState} from "react"
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheck } from "@fortawesome/free-solid-svg-icons"
@@ -13,15 +13,16 @@ type TypePayement = {
 }
 
 const ContentPaiement = function({handleClosePayement}:TypePayement) {
-	const [showClose, setShowClose] = useState(false)
+	const [showClose, setShowClose] = useState(true)
     const [next, setNext] = useState(false)
 	const onShowClose = function(){
     	setShowClose(false)
+		handleClosePayement(false)
   	}
     const onNext = function(){
       setNext(!next)
     }
-	handleClosePayement(showClose)
+
 	return (
 		<div className={!showClose ? "d-none" : "entry popup"}>
 			<h3>Rejoindre Fortnite Daily Cup</h3>

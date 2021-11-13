@@ -73,5 +73,8 @@ var TournamentSchemaType = graphql.NewObject(graphql.ObjectConfig{
 		"isTeam": &graphql.Field{
 			Type: graphql.Boolean,
 		},
+		"spectateur": &graphql.Field{
+			Type: graphql.String,
+		},
 	},
 })
