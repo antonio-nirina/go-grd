@@ -8,9 +8,7 @@ import Footer from "../footer/footer"
 import {League} from "../models/league"
 import "../tournament/info.css"
 import "../../assets/css/style.css"
-import { Link } from "react-router-dom"
 import {dateStringToDY} from "../tools/dateConvert"
-import Game from "../../assets/image/game.png"
 import HeaderTournament,{HeaderTournamentType} from "../tournament/common/headerTournament"
 
 const WaggersRules: React.FC = function(props:any) {

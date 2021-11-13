@@ -16,11 +16,11 @@ import "../participate/participate.css"
 import Game from "../../assets/image/game.png"
 import Apex from "../../assets/image/apex-legends.png"
 import {Wagger} from "../models/wagger"
-
+import {dateStringToDHString} from "../tools/dateConvert"
 import {GET_ONE_WAGGER} from "../../gql/wagger/query"
 
 
-const Resultat: React.FC = function(props:any) {  	
+const Resultat: React.FC = function(props:any) {
   const [wagger, setWagger] = useState<Wagger>()
 	const params = new URLSearchParams(props.location.search)
 	const uid:string|null = params.get("uid")
@@ -37,7 +37,7 @@ const Resultat: React.FC = function(props:any) {
 		}
 
 	},[loading,error,data])
-  	
+
   return(
   	<div className="container">
   		<Header />
@@ -47,9 +47,9 @@ const Resultat: React.FC = function(props:any) {
             <div className="header-part">
               <img className="item-left" src={Game} alt="" />
               <div className="join-title">
-                <h2>Wager Apex Legends - 2v2 Arène - Master</h2>
+                <h2>{`${wagger?.title} ${wagger?.game.name} - ${wagger?.gameWay}` }</h2>
                 <p>
-                  <span>23 Juillet 2021 - 12h30</span>
+                  <span>{dateStringToDHString(wagger?.date).replace(","," -")}</span>
                   <span>2v2 Arène</span>
                   <span>Apex Legends</span>
                   <span>Cross-Play</span>
@@ -108,7 +108,7 @@ const Resultat: React.FC = function(props:any) {
                 <p>Skouinar - <span>TonioPlancha</span> - <span>Shad_BD</span></p>
                 <p className="free-emplacement"><span>Emplacement Libre</span></p>
               </div>
-            </div>                        
+            </div>
           </div>
         </div>
         <div className="clear"></div>

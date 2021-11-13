@@ -5,7 +5,6 @@ import Header from "../header/header"
 import Footer from "../footer/footer"
 //import {Translation} from "../../lang/translation"
 //import {RootState} from "../../reducer"
-
 import {GET_PART_ONE_TOURNAMENT} from "../../gql/participate/query"
 import "../../assets/css/style.css"
 import "../tournament/tournament.css"
@@ -72,7 +71,7 @@ const Joingame: React.FC = function(props:any) {
 	}
   return(
   	<div className="container">
-      <Header />
+      	<Header />
       	<div className="participate league joingame">
         <div style={{ backgroundImage: 'url(' + tournament?.game.image + ')', backgroundPosition: 'center', backgroundSize: '100%', backgroundRepeat: 'no-repeat' }} className="obj"></div>
         <div className="marg">
@@ -92,7 +91,7 @@ const Joingame: React.FC = function(props:any) {
                 </div>
                 <div className="item-all-info">
                   	<p><span>Spectateurs</span></p>
-                  	<p className="item-text-left">Admins War Legends</p>
+                  	<p className="item-text-left">{tournament?.spectateur}</p>
                   	<p><span>Fin des inscriptions</span></p>
                   	<p>{dateStringToDHString(tournament?.deadlineDate).replace(","," -")}</p>
                 </div>

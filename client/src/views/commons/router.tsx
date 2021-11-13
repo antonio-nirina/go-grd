@@ -47,6 +47,8 @@ import PageTournois from "../tournois/tournois"
 import WagerPage from "../wagerpage/wager"
 import JoinTournament from "../tournament/join-tournament"
 import Stat from "../version/stat/stat"
+import ConfirmPart from "./confirmPart"
+import ContentPaiement from "./contentPaiement"
 // import LeagueGame from "../league/league-game"
 
 
@@ -88,6 +90,8 @@ const Router = function() {
 			<ProtectedRoute path="/tournois" exact component={PageTournois} />
 			<ProtectedRoute path="/wager" exact component={WagerPage} />
 			<ProtectedRoute path="/stat" exact component={Stat} />
+			<ProtectedRoute path="/confirmed-join/tournament" exact component={ConfirmPart} />
+			<ProtectedRoute path="/paiement/tournament" exact component={ContentPaiement} />
 			<Route path="/login" exact component={Login} />
 			<Route path="/inscription" exact component={Inscription} />
 			<Route path="/register" exact component={Register} />

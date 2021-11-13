@@ -1,8 +1,10 @@
-import React,{useState} from "react"
-import {useMutation} from "@apollo/client"
+import React,{useState,useEffect} from "react"
+import {useMutation,useQuery} from "@apollo/client"
+import {useHistory } from "react-router-dom"
 import { useSelector } from "react-redux"
 
 import {SAVED_PART,LEAVE_PART_TOURNAMENT} from "../../gql/participate/mutation"
+import {GET_ONE_TOURNAMENT} from "../../gql/tournament/query"
 import {RootState} from "../../reducer"
 import {checkInTeam} from "../league/utils"
 import {Translation} from "../../lang/translation"
@@ -15,13 +17,27 @@ type TypeConfirmed = {
 }
 
 
-const ConfirmPart = function({tournament,handleClosePayement}:TypeConfirmed) {
+const ConfirmPart = function() {
 	const [showClose, setShowClose] = useState(true)
 	const [teamPart,setTeamPart] = useState<string>("")
 	const [message,setMessage] = useState<string>("")
+	const [tournament, setTournament] = useState<Tournament>()
 	const [teamUserPart,setTeamUserPart] = useState<string[]>([])
 	const [showPaiement, setShowPaiement] = useState<boolean>(false)
 	const userConnectedRedux = useSelector((state:RootState) => state.userConnected)
+	const params = useHistory<any>()
+
+	const {loading,error,data} 	= useQuery(GET_ONE_TOURNAMENT, {
+		variables: {
+			uid:params.location.search.split("=")[1],
+		},
+	})
+
+	useEffect(() => {
+		if(!loading && !error && data) {
+			setTournament(data.FindOneTournament)
+		}
+	},[loading,error,data])
 
 	const [savedPartTournament]  = useMutation(SAVED_PART)
 
@@ -50,7 +66,7 @@ const ConfirmPart = function({tournament,handleClosePayement}:TypeConfirmed) {
     	setShowClose(false)
   	}
 
-	handleClosePayement(showClose)
+	// handleClosePayement(showClose)
 
 	return (
 		<div className={!showClose ? "d-none" :"next-btn"}>
