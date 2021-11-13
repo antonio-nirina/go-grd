@@ -324,3 +324,21 @@ p.item-text-left{
 	margin-right: 7px;
 	font-size: 17px;
 }
+.rules-container{
+	text-align: center;
+	margin: auto;
+}
+.info_sup h3{
+	font-family: "russo one";
+	text-transform: uppercase;
+	padding: 15px;
+	border-bottom: 2px solid #dd0000;
+	max-width: 320px;
+	margin: auto;	
+}
+.info_sup p{
+	padding: 25px;
+	font-family: "russo one";
+	font-weight: lighter;
+	font-size: 12px;
+}
