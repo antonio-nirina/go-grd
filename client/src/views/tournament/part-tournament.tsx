@@ -52,7 +52,7 @@ const PartTournament:React.FC<PartTournamentType> = function ({tournament,parts}
 				{tournament && parseInt(tournament?.priceParticipate) ?
 					<button className="btn bg-red" onClick={onShowConfirmed}>{!showPaiement ? "Rejoindre" : "Quitter"}</button>
 					:
-					<Link className="btn bg-red" to={`/confirmed-join/tournament}?uid=${tournament?.uid}`} >
+					<Link className="btn bg-red" to={`/confirmed-join/tournament?uid=${tournament?.uid}`} >
 						Rejoindre
 					</Link>
 				}

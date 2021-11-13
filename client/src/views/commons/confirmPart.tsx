@@ -11,6 +11,16 @@ import {Translation} from "../../lang/translation"
 import {Tournament} from "../models/tournament"
 import {Team} from "../models/team"
 
+import Apex from "../../assets/image/apex-legends.png"
+import Fifa21 from "../../assets/image/fifa21.png"
+import Fortnite from "../../assets/image/fortnite.png"
+import CodL from "../../assets/image/cod-coldwar.png"
+import CodVanguard from "../../assets/image/cod-vanguard.png"
+import Warzone from "../../assets/image/warzone.png"
+import Rocketleague from "../../assets/image/rocketleague.png"
+import Rainbowsix from "../../assets/image/rainbowsix.png"
+import {dateStringToDHString} from "../tools/dateConvert"
+
 type TypeConfirmed = {
 	tournament: Tournament|undefined
 	handleClosePayement:Function
@@ -69,7 +79,35 @@ const ConfirmPart = function() {
 	// handleClosePayement(showClose)
 
 	return (
-		<div className={!showClose ? "d-none" :"next-btn"}>
+		<div>
+			<div className="item-info-left">
+              	<div className="item-img-info">
+                	<img src={tournament?.game.slug === "vanguard" ? CodVanguard : (tournament?.game.slug === "fortnite" ? Fortnite : (tournament?.game.slug ==="fifa21" ? Fifa21 : (tournament?.game.slug ==="ops" ? CodL : (tournament?.game.slug ==="warzone" ? Warzone : (tournament?.game.slug ==="rainbows" ? Rainbowsix : (tournament?.game.slug ==="apexlegends"?Apex:Rocketleague))))) )} alt=""/>
+              	</div>
+            	<div className="item-all-content">
+                <div className="item-all-info">
+                  	<p><span>Format</span></p>
+                  	<p><span>Début des inscriptions</span></p>
+                  	<p>{dateStringToDHString(tournament?.dateStart).replace(","," -")}</p>
+                </div>
+                <div className="item-all-info">
+                  	<p><span>Spectateurs</span></p>
+                  	<p className="item-text-left">{tournament?.spectateur}</p>
+                  	<p><span>Fin des inscriptions</span></p>
+                  	<p>{dateStringToDHString(tournament?.deadlineDate).replace(","," -")}</p>
+                </div>
+                <div className="item-all-info">
+					{tournament?.laps.map(function(lap:string,index:number){
+						return (
+							<div key={index}>
+								<p><span>Tour {index+1}</span></p>
+								<p>{dateStringToDHString(lap).replace(","," -")}</p>
+							</div>
+						)
+					})}
+                </div>
+              </div>
+            </div>
 			<button onClick={handlePartTournament} className="btn bg-white">Confirme la page pour participer au tournois</button>
 			<button onClick={onShowClose} className="btn bg-red">Annuler</button>
 		</div>
