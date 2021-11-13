@@ -134,6 +134,9 @@ html{
   float: none;
   padding: 5px 0px;
 }
+.home .main{
+  min-height: inherit;
+}
 .login .main,.inscription .main,
 .profil .main-content, .main
 {
