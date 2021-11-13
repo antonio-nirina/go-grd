@@ -28,7 +28,7 @@ const Team: React.FC = function() {
 								<div className="img_account">
 									<img src= {AvatarDefault} alt="" width="150" height="150"/>
 									<i className={showPopup ? "d-none" :"set"} onClick={onPopup}><FontAwesomeIcon icon={faPen} /></i>
-									<p className="icon-settings">
+									<p className={showPopup ? "d-none" :"icon-settings"}>
 										<i><FontAwesomeIcon icon={faCamera} /></i>
 										<i><FontAwesomeIcon icon={faTimes} /></i>
 										<i><FontAwesomeIcon icon={faSync} /></i>
@@ -60,14 +60,7 @@ const Team: React.FC = function() {
 												<option>Népal</option>
 												<option>France</option>
 											</select>											
-										</div>
-										<div className="input_group">
-											<label htmlFor="country">Pays</label>
-											<select id="country">
-												<option>Népal</option>
-												<option>France</option>
-											</select>											
-										</div>
+										</div>										
 										<div className="input_group">
 											<label htmlFor="language">Langue</label>
 											<select id="language">
