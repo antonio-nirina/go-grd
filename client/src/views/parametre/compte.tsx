@@ -10,7 +10,7 @@ import AvatarDefault from "../../assets/image/game-tag.png"
 import { faPlusCircle, faTimes, faCamera, faPen, faSync } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-const Team: React.FC = function() {	
+const Team: React.FC = function() {
   	const [showPopup, setShowPopup] = useState<Boolean>(false)
 	const onPopup = function(){
 		setShowPopup(!showPopup)
@@ -20,24 +20,24 @@ const Team: React.FC = function() {
 		<div className="container">
 			<Header/>
 			<div className="main">
-				<div className="containt mon_compte">					
+				<div className="containt mon_compte">
 					<div className="title-lead">
 						<Sidebar />
-						<div className="personal">														
+						<div className="personal">
 							<div className="my_account">
 								<div className="img_account">
 									<img src= {AvatarDefault} alt="" width="150" height="150"/>
 									<i className={showPopup ? "d-none" :"set"} onClick={onPopup}><FontAwesomeIcon icon={faPen} /></i>
-									<p className={showPopup ? "d-none" :"icon-settings"}>
+									<p className={showPopup ? "icon-settings" :"d-none"}>
 										<i><FontAwesomeIcon icon={faCamera} /></i>
 										<i><FontAwesomeIcon icon={faTimes} /></i>
 										<i><FontAwesomeIcon icon={faSync} /></i>
 									</p>
 								</div>
-								<div className={showPopup ? "d-none" :"actual_account"}>																		
+								<div className={showPopup ? "d-none" :"actual_account"}>
 									<p className="account_name">TESTOSTAZ</p>
 									<p className="account_name">#6177DED78FB09800502913E4</p>
-									<p className="adhesion">Membre depuis 26 Octobre 2021</p>																		
+									<p className="adhesion">Membre depuis 26 Octobre 2021</p>
 									<p className="account_info">
 										<span>Age : 51</span>
 										<span>Pays : Albanie</span>
@@ -59,14 +59,14 @@ const Team: React.FC = function() {
 											<select id="country">
 												<option>Népal</option>
 												<option>France</option>
-											</select>											
-										</div>										
+											</select>
+										</div>
 										<div className="input_group">
 											<label htmlFor="language">Langue</label>
 											<select id="language">
 												<option>Français</option>
 												<option>Anglais</option>
-											</select>											
+											</select>
 										</div>
 										<div className="btn-select">
 											<button className="btn bg-red">Mettre à jour</button>
@@ -74,8 +74,8 @@ const Team: React.FC = function() {
 										</div>
 									</form>
 								</div>
-							</div>							
-						</div>						
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
