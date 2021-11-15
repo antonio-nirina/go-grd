@@ -1,16 +1,22 @@
 import React, {useState} from "react"
 
+import { useSelector } from "react-redux"
+import {useQuery} from "@apollo/client"
+
 import Header from "../header/header"
 import Footer from "../footer/footer"
 import "../parametre/parametre.css"
 import Sidebar from "./sidebar"
-
+import {RootState} from "../../reducer"
 import AvatarDefault from "../../assets/image/game-tag.png"
-
 import { faPlusCircle, faTimes } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {Team} from "../models/team"
 
-const Team: React.FC = function() {	
+
+const Team: React.FC = function() {
+
+	const userConnectedRedux = useSelector((state:RootState) => state.userConnected)
   	const [showPopup, setShowPopup] = useState<Boolean>(false)
 	const onPopup = function(){
 		setShowPopup(!showPopup)
@@ -20,13 +26,13 @@ const Team: React.FC = function() {
 		<div className="container">
 			<Header/>
 			<div className="main">
-				<div className="containt mes_equipes">					
+				<div className="containt mes_equipes">
 					<div className="title-lead">
 						<Sidebar />
-						<div className="personal">							
+						<div className="personal">
 							<h2>Mes équipes</h2>
 							<div className="my_team">
-								<img src= {AvatarDefault} alt="" width="150" height="150"/>
+								<img src={userConnectedRedux.user.avatar ? userConnectedRedux.user.avatar :AvatarDefault} alt="" width="150" height="150"/>
 								<strong>GROWTHMARKET</strong>
 								<div className="team_infos">
 									<div className="info_title">
@@ -39,7 +45,7 @@ const Team: React.FC = function() {
 										<p>Testostaz</p>
 										<p>1</p>
 									</div>
-								</div>								
+								</div>
 							</div>
 							<div className="add_team" onClick={onPopup}>
 								<i><FontAwesomeIcon icon={faPlusCircle} /></i>

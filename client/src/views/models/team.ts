@@ -6,6 +6,4 @@ export interface Team {
 	creator:User
 	players:User[]
 	records:number
-
-
 }
