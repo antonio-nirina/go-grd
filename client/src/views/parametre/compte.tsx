@@ -89,7 +89,7 @@ const Compte: React.FC = function() {
 								<div className="img_account">
 									<img src= {userConnectedRedux.user.avatar ? userConnectedRedux.user.avatar :AvatarDefault} alt="" width="150" height="150"/>
 									<i className={showPopup ? "d-none" :"set"} onClick={onPopup}><FontAwesomeIcon icon={faPen} /></i>
-									<p className={showPopup ? "icon-setting" :"d-none"}>
+									<p className={showPopup ? "icon-settings" :"d-none"}>
 										<i><FontAwesomeIcon icon={faCamera} /></i>
 										<i><FontAwesomeIcon icon={faTimes} /></i>
 										<i><FontAwesomeIcon icon={faSync} /></i>
