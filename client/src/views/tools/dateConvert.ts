@@ -87,3 +87,18 @@ export const dateStringToJoinT = function(date = ""){
 				minute:"numeric"
 	}).split("à").join("-")
 }
+
+export const OldUserConnected = function(date = "") {
+	let birth = (new Date(date)).getFullYear()
+	const now = new Date().getFullYear()
+
+	return now - birth
+}
+
+export const dateLongCreated = function(date = "") {
+	return new Date(date).toLocaleString('fr-Fr', {
+		day : 'numeric',
+		month : 'long',
+		year : 'numeric',
+	})
+}
