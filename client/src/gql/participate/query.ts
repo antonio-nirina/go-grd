@@ -46,6 +46,7 @@ export const GET_PART_TOURNAMENT = gql`
 				uid
 				title
 				date
+				numberParticipate
 				game{
 					uid
 				}
@@ -171,6 +172,7 @@ export const GET_PART_ONE_TOURNAMENT = gql`
 				isTeam
 				isPublic
 				gameWay
+				numberParticipate
 				spectateur
 				server
 				game{

@@ -20,9 +20,7 @@ const ListTournament : React.FC = function(props:any) {
 	const [showList, setShowList] = useState<Boolean>(false)
 	const [tournament, setTournament] = useState<Tournament[]>([])
 	const [item, setItem] = useState<Item>({item:1})
-	const [sumPrice, setSumPrice] = useState<number>(0)
 	const [isLoader, setIsLoader] = useState<Boolean>(true)
-	const [plateform, setPlateform] = useState<string>()
 
 	//const [limit, setLimit] = useState<Number>(0)
 	//const [pageNumber, setPageNumber] = useState<Number>(0)
@@ -36,25 +34,11 @@ const ListTournament : React.FC = function(props:any) {
 	useEffect(() => {
 		//let init = true
 		if(!loading && !error && data) {
-			let arrayPl:string[] = []
-			let sum = 0
 			setIsLoader(false)
 			setTournament(data.FindAllTournament)
-			data.FindAllTournament.forEach(function(tournois:Tournament){
-				tournois.price.forEach(function(price:string) {
-					sum = sum + parseInt(price)
-				})
-				tournois.plateform.forEach(function(platef:Platform){
-					arrayPl.push(platef.name)
-				})
 
-			})
-			setPlateform(arrayPl.length > 0 ? arrayPl.join("/") : arrayPl[0])
-			setSumPrice(sum)
 		}
-
 		// return () => init = false
-
 	},[loading,error,data,props,isLoader])
 
     const onShow = function(){
@@ -173,10 +157,10 @@ const ListTournament : React.FC = function(props:any) {
 													<p>{el.game.name}</p>
 												</div>
 												<div className="card-result">
-													<p>{plateform}</p>
+													<p>{ el.plateform.map((e:Platform)=>e.name).join("/")}</p>
 												</div>
 												<div className="card-result">
-													<p>{`${sumPrice} €`}</p>
+													<p>{`${el.price.reduce((prev,cur)=>(parseInt(prev.toString())+parseInt(cur)),0)} €`}</p>
 												</div>
 												<div className="card-result">
 													<p>{el.numberParticipate}</p>

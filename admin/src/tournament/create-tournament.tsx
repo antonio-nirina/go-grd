@@ -110,7 +110,7 @@ const CreateTournament: React.FC = function() {
 					priceParticipate:data.priceParticipate ? data.priceParticipate : "Invitation",
 					rules:rules,
 					laps:lapsDate.join("_"),
-					isTeam:gameWay === "1v1" ? true : false,
+					isTeam:gameWay === "1v1" ? false : true,
 					isPublic:isPrenimum,
 				} })
 				if (result.data.saveTournament) history.push("/admin/tournament")

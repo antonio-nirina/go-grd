@@ -53,6 +53,7 @@ const PartTournament:React.FC<PartTournamentType> = function ({tournament,parts}
 
 	const handleClose = function() {
 		setShowPaiement(false)
+		setMessage("")
 	}
 
 	const [leavePartTournament]  = useMutation(LEAVE_PART_TOURNAMENT)
@@ -61,7 +62,7 @@ const PartTournament:React.FC<PartTournamentType> = function ({tournament,parts}
 		<div className="item-info-right">
 			<div className="join-all">
 				<p className="team-bar-title">{teamPart}</p>
-				<span style={{"color":"#dd0000"}}>{message}</span>
+				<span style={{"color":"#dd0000","fontSize":"11px","fontWeight":"bold"}}>{message}</span>
 				{tournament && parseInt(tournament?.priceParticipate) ?
 					<button className="btn bg-red" onClick={onShowConfirmed}>{!showPaiement ? "Rejoindre" : "Quitter"}</button>
 					:
