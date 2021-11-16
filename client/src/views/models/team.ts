@@ -1,8 +1,9 @@
 import {User} from "./tournament"
 
-export interface Team {
+export interface TeamModel {
 	uid:string
 	name:string
+	creationDate:string
 	creator:User
 	players:User[]
 	records:number

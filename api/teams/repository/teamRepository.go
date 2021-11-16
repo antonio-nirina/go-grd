@@ -100,6 +100,12 @@ func (c *driverRepository) UpdatedRepoTeam(team *entity.Team) (interface{}, erro
 				"logo",team.Logo,
 			},
 			{
+				"tag",team.Tag,
+			},
+			{
+				"description",team.Description,
+			},
+			{
 				"creator",team.Creator,
 			},  
 			

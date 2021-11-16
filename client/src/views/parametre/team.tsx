@@ -1,7 +1,13 @@
+<<<<<<< HEAD
 import React, {useState} from "react"
 import { Link } from "react-router-dom"
+=======
+import React, {useState,useEffect} from "react"
+import { useForm } from "react-hook-form"
+>>>>>>> 4659be0f1b512c9b165c23ef697d385a87d4623e
 import { useSelector } from "react-redux"
 import {useQuery} from "@apollo/client"
+import {useMutation} from "@apollo/client"
 
 import Header from "../header/header"
 import Footer from "../footer/footer"
@@ -11,16 +17,58 @@ import {RootState} from "../../reducer"
 import AvatarDefault from "../../assets/image/game-tag.png"
 import { faPlusCircle, faTimes } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {Team} from "../models/team"
+import {TeamModel} from "../models/team"
+import {GET_ONE_TEAM_BY_USER} from ".././../gql/team/query"
+import { dateLongCreated } from "../tools/dateConvert"
+import {SAVED_NEW_TEAM} from "../../gql/team/mutation"
 
+type Inputs = {
+	name:string,
+	tag:string,
+	description:string,
 
-const Teams: React.FC = function() {
+}
 
+const Team: React.FC = function() {
+	const { register, handleSubmit } 	= useForm<Inputs>()
+	const [teams, setTeams] = useState<TeamModel[]>([])
 	const userConnectedRedux = useSelector((state:RootState) => state.userConnected)
-  	const [showPopup, setShowPopup] = useState<Boolean>(false)
+  	const [showPopup, setShowPopup] = useState<boolean>(false)
 	const onPopup = function(){
 		setShowPopup(!showPopup)
 	}
+	const [createdTeam]  = useMutation(SAVED_NEW_TEAM)
+
+	const {loading,error,data} 	= useQuery(GET_ONE_TEAM_BY_USER, {
+		variables: {
+			uid:userConnectedRedux.user.uid,
+		},
+	})
+
+	useEffect(() => {
+		if(!loading && !error && data) {
+			setTeams(data.FindTeamByUser)
+		}
+	},[loading,error,data])
+
+	const onSubmit = async function(data:Inputs){
+		const teamCreated = await createdTeam({ variables: {
+			name: data.name,
+			creationDate:(new Date()).toISOString(),
+			players:"",
+			logo:"",
+			description:data.description,
+			tag:data.tag,
+			logoType:"",
+			creator:userConnectedRedux.user.uid
+		} })
+
+		if(teamCreated.data.createTeam) {
+			setShowPopup(false)
+			setTeams([...teams,teamCreated.data.createTeam])
+		}
+	}
+
   return(
 	<div className="leaderboard settings">
 		<div className="container">
@@ -31,21 +79,27 @@ const Teams: React.FC = function() {
 						<Sidebar />
 						<div className="personal">
 							<h2>Mes équipes</h2>
-							<Link to="/edit-team" className="my_team">								<img src={userConnectedRedux.user.avatar ? userConnectedRedux.user.avatar :AvatarDefault} alt="" width="150" height="150"/>
+								<img src={userConnectedRedux.user.avatar ? userConnectedRedux.user.avatar :AvatarDefault} alt="" width="150" height="150"/>
 								<strong>GROWTHMARKET</strong>
-								<div className="team_infos">
-									<div className="info_title">
-										<p>Created</p>
-										<p>Team Owner</p>
-										<p>players</p>
-									</div>
-									<div className="team_data">
-										<p>25 Oct 2021</p>
-										<p>Testostaz</p>
-										<p>1</p>
-									</div>
-								</div>
-							</Link>
+								<Link to="/edit-team" className="my_team">
+									{
+										teams?.map(function(tem:TeamModel,index:number) {
+											<div className="team_infos">
+												<div className="info_title">
+													<p>{tem.creator}</p>
+													<p>Team Owner</p>
+													<p>{tem.players}</p>
+												</div>
+												<div className="team_data">
+													<p>{dateLongCreated(tem.creationDate)}</p>
+													<p>{tem.creator}</p>
+													<p>{tem.players.length === 0 ? 1 : tem.players.length}</p>
+												</div>
+											</div>
+										})
+									}
+								</Link>
+							</div>
 							<div className="add_team" onClick={onPopup}>
 								<i><FontAwesomeIcon icon={faPlusCircle} /></i>
 								<p>Create a team</p>
@@ -58,14 +112,13 @@ const Teams: React.FC = function() {
 							</div>
 							<div className="name_popup">
 								<p>Give a name to your team :</p>
-								<form>
-									<input type="text" placeholder="Team Name"/>
-									<input type="text" placeholder="Team Tag"/>
-									<input type="text" placeholder="Team Description"/>
+								<form  onSubmit={handleSubmit(onSubmit)}>
+									<input id="name" type="text" {...register("name")} name="name" placeholder="Team Name" />
+									<input id="tag" type="text" {...register("tag")} name="tag" placeholder="Team Tag" />
+									<input id="description" type="text" {...register("description")} name="description" placeholder="Team Description" />
 									<button className="btn bg-red">Create the team</button>
 								</form>
 							</div>
-
 						</div>
 					</div>
 				</div>
@@ -76,4 +129,4 @@ const Teams: React.FC = function() {
 	)
 }
 
-export default Teams
+export default Team
