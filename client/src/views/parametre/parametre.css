@@ -3,7 +3,7 @@
 }
 .settings .menu-left{
 	max-width: 200px;
-	width: 100%;	
+	width: 100%;
 }
 .settings .personal{
 	width: 100%;
@@ -61,7 +61,7 @@
 }
 .field-middle .field-container{
 	margin-right: 5em;
-	width: 100%;	
+	width: 100%;
 }
 .field-container{
 	margin: 10px 0;
@@ -81,7 +81,7 @@
 	margin-right: 0;
 }
 .reseau-container{
-	display: flex;	
+	display: flex;
 }
 .rss-container{
 	display: flex;
@@ -104,13 +104,13 @@
 .rss-container p{
 	font-family: arial;
 	align-self: center;
-	width: 100%;	
+	width: 100%;
 }
 .rss-container p strong{
 	font-size: 10px;
 	font-weight: inherit;
 }
-.rss-container p span{	
+.rss-container p span{
 	display: block;
 	font-size: 12px;
 	color: #797979;
@@ -132,11 +132,11 @@
 	width: 40%;
 }
 .jackpot .pay h3{
-	
+
 }
 .jackpot .total{
 	display: flex;
-	padding: 5px 0;
+	padding: 15px 0;
 	border-bottom: 1px solid #797979;
 	margin-bottom: 5px;
 }
@@ -144,6 +144,7 @@
 	width: 100%;
 	color: #ffffff;
 	font-size: 13px;
+	text-transform: uppercase;
 }
 .jackpot .historical p{
 	text-align: center;
@@ -152,6 +153,10 @@
 }
 .jackpot .credit{
 	padding: 7px 0px;
+	text-align: center;
+}
+.jackpot .credit span{
+	text-transform: inherit;
 }
 
 .jackpot .personal-infos p{
@@ -164,11 +169,11 @@
 .jackpot .personal-infos p span{
 	display: block;
 	color: #797979;
-	border-bottom: 1px solid #797979;	
+	border-bottom: 1px solid #797979;
 }
 /******************************************/
 .mygames .personal{
-	display: block;	
+	display: block;
 }
 .mygames h3{
 	width: 93%;
@@ -201,7 +206,7 @@
 }
 .mygames .account-games div{
 	width: 250px;
-	align-self: top;	
+	align-self: top;
 }
 .mygames .mygame-list{
 	display: flex;
@@ -229,7 +234,7 @@
 #team,
 #compte
 {
-	position: relative;	
+	position: relative;
 }
 .mes_infos #infos:before,
 .cagnotte #cagnotte:before,
@@ -245,6 +250,13 @@
 	position: absolute;
 	top: 7px;
 	left: -10px;
+}
+.mes_infos #infos a,
+.cagnotte #cagnotte a,
+.mes_jeux #jeux a,
+.mes_equipes #team a,
+.mon_compte #compte a{
+	color: #ffffff;
 }
 /***************************************/
 .my_team{
@@ -277,7 +289,7 @@
 	display: flex;
 	justify-content: stretch;
 }
-.team_data p{	
+.team_data p{
 	font-size: 13px;
 	width: 170px;
 	text-align: center;
@@ -286,7 +298,7 @@
 	font-size: 13px;
 	text-align: right;
 }
-.add_team{	
+.add_team{
 	width: 180px;
 	display: inline-block;
 	vertical-align: middle;
@@ -363,10 +375,10 @@
 	border-radius: 5px;
 }
 .my_account .img_account{
-	position: relative;	
+	position: relative;
 }
 .img_account i.set{
-	position: absolute;	
+	position: absolute;
 	top: 18px;
 	font-size: 16px;
 	color: #d00;
@@ -374,9 +386,9 @@
 	cursor: pointer;
 }
 .account_name{
-	font-family: "russo one";	
+	font-family: "russo one";
 }
-.adhesion{	
+.adhesion{
 	padding: 15px 0;
 	font-size: 13px;
 	font-weight: bold;
@@ -385,7 +397,7 @@
 	font-family: "russo one"
 }
 .account_info span{
-	display: block;	
+	display: block;
 	padding: 5px 0;
 }
 .actual_account{
@@ -405,7 +417,7 @@
 }
 .edit_account input{
 	background: none;
-	border: none;	
+	border: none;
 	font-family: "russo one";
 	color: gray;
 	font-size: 14px;
@@ -447,7 +459,7 @@
 .icon-settings{
 	position: absolute;
 	top: 66px;
-	text-align: center;		
+	text-align: center;
 	background: red;
 	margin: auto;
 	left: 35%;
@@ -459,5 +471,77 @@
 	margin-right: 15px;
 }
 .icon-settings i:last-child{
-	margin-right: 0;	
+	margin-right: 0;
+}
+.cagnotte{
+	font-family: "russo one";
+}
+.settings .cagnotte .personal h3{
+	font-family: "russo one";
+	border-bottom: 3px solid #ffffff;
+}
+.settings .menu-left li a{
+	color: #797979;
+	font-family: "russo one"
+}
+.pay button{
+	font-family: "russo one";
+}
+.pay button i{
+	font-size: 9px;
+	margin-right: 10px;
+}
+.pay h3{
+	font-size: 16px;
+	text-align: center;
+	border-bottom: 0 !important;
+}
+.coin-info span{
+	font-family: arial;
+	font-weight: 700;
+	display: block;
+	text-align: center;
+	padding: 15px;
+}
+.add-coin p{
+	text-align: center;
+	font-family: "quicksand regular";
+	font-size: 13px;
+}
+.add-coin p:first-child{
+	padding: 0px 15px 15px;
+}
+.block-coin{
+	display: flex;
+	justify-content: space-between;
+	background: #575D60;
+	margin-bottom: 10px;
+	padding: 7px;
+}
+.buy-coin p{
+	align-self: center;
+}
+.buy-coin p span{
+	display: block;
+	font-family: "quicksand regular";
+	font-size: 12px;
+}
+.buy-coin p span:first-child{
+	font-family: arial;
+	font-weight: bold;
+	font-size: 14px;
+}
+.buy-coin strong{
+	font-family: "quicksand regular";
+	align-self: center;
+	font-weight: inherit;
+	padding: 10px;
+	font-size: 12px;
+}
+.buy-coin button{
+	font-size: 12px;
+}
+.bg-0{
+	background: #000000;
+	padding: 3px;
 }

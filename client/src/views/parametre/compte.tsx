@@ -27,7 +27,7 @@ type Inputs = {
 	language:string
 }
 
-const Team: React.FC = function() {
+const Compte: React.FC = function() {
   	const [showPopup, setShowPopup] = useState<boolean>(false)
 	const { register, handleSubmit,setValue } 	= useForm<Inputs>()
 	const dispatch = useDispatch()
@@ -89,7 +89,7 @@ const Team: React.FC = function() {
 								<div className="img_account">
 									<img src= {userConnectedRedux.user.avatar ? userConnectedRedux.user.avatar :AvatarDefault} alt="" width="150" height="150"/>
 									<i className={showPopup ? "d-none" :"set"} onClick={onPopup}><FontAwesomeIcon icon={faPen} /></i>
-									<p className={showPopup ? "d-none" :"icon-settings"}>
+									<p className={showPopup ? "icon-settings" :"d-none"}>
 										<i><FontAwesomeIcon icon={faCamera} /></i>
 										<i><FontAwesomeIcon icon={faTimes} /></i>
 										<i><FontAwesomeIcon icon={faSync} /></i>
@@ -140,4 +140,4 @@ const Team: React.FC = function() {
 	)
 }
 
-export default Team
+export default Compte

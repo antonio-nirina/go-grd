@@ -17,7 +17,6 @@ import {GET_ONE_TEAM_BY_USER} from ".././../gql/team/query"
 import { dateLongCreated } from "../tools/dateConvert"
 import {SAVED_NEW_TEAM} from "../../gql/team/mutation"
 
-
 type Inputs = {
 	name:string,
 	tag:string,
