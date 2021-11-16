@@ -446,7 +446,7 @@
 	text-align: center;
 }
 .edit_account .btn.bg-white{
-	color: #000000;
+	color: #ffffff;
 	margin-left: 7px;
 }
 .edit_account .btn.bg-white:hover{
@@ -544,4 +544,82 @@
 .bg-0{
 	background: #000000;
 	padding: 3px;
+}
+.my_team img{
+	border-radius: 50%;
+}
+.bg-team{
+	height: 310px;
+
+}
+.logo-team{
+	text-align: center;
+	height: 100%;
+	position: relative;
+	width: 100%;
+
+}
+.logo-team img{
+	border-radius: 50%;
+	max-width: 150px;
+	width: 100%;
+	border: 4px solid #7E3F92;
+	height: auto;
+	display: flex;
+	justify-content: end;
+	position: absolute;
+	margin: auto;
+	left: 43%;
+	bottom: -63px;
+}
+.add_team.edit{
+	width: 100%;
+	margin-left: 0;
+}
+.add_team.edit .center{
+
+}
+.edit .name{
+	margin-top: 25px;
+}
+.edit .info_team{
+	display: flex;
+	justify-content: center;
+	margin-top: 15px;
+}
+.edit .info_team span{
+	text-transform: inherit;
+	font-size: 12px;
+	border: 1px solid #ffffff;
+	padding: 5px 15px;
+	align-self: center;
+	border-radius: 5px;
+}
+.edit .info_team i{
+	align-self: center;
+	font-size: 12px;
+	display: block;
+	margin-bottom: 0;
+}
+.edit .team-list{
+	margin-top: 15px;
+}
+.edit .team-list p{
+	text-align: left;
+	margin-right: 15px;
+}
+.edit .team-list p img{
+	border-radius: 5px;
+}
+
+.edit input{
+	font-family: "russo one";
+	font-family: 16px;
+	color: #212121;
+}
+.edit .next-btn button.btn{
+	color: #ffffff;
+}
+.EditTeam .popup_team{
+	left: 39%;
 }

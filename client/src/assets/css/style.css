@@ -1,6 +1,6 @@
 /*
-  - Description:  Grid
-  - Version:    1.0
+	- Description:  Grid
+	- Version:    1.0
 */
 
 @charset "UTF-8";
@@ -11,36 +11,44 @@ html{
 }
 
 * {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
 }
 .clear{
-    clear: both;
+		clear: both;
 }
 .bg-red.btn:hover, .bg-white.btn:hover{
-  background: #000000;
-  border-color: #dd0000;
-  color: #dd0000;
+	background: #000000;
+	border-color: #dd0000;
+	color: #dd0000;
+}
+.bg-green{
+	background: #266025;
+	border: 1px solid transparent !important;
+}
+.bg-green.btn:hover{
+	border: 1px solid #266025 !important;
+	background: none;
 }
 .bg-white.btn:hover{
-    border: 1px solid #ffffff !important;
-    color: #ffffff;
+		border: 1px solid #ffffff !important;
+		color: #ffffff;
 }
 .bg-white{
-  border: 1px solid #ffffff !important;
+	border: 1px solid #ffffff !important;
 }
 .bg-yellow{
-  background: #f2cf1c;
-  border: 1px solid #f2cf1c !important;
+	background: #f2cf1c;
+	border: 1px solid #f2cf1c !important;
 }
 .btn.bg-red{
-  background: #dd0000;
-  color: #ffffff;
-  border: 1px solid transparent;
+	background: #dd0000;
+	color: #ffffff;
+	border: 1px solid transparent;
 }
 .btn.discolor{
-  background: #7289DA;
+	background: #7289DA;
 }
 .bg-green-light{
  background: #27C612;
@@ -48,122 +56,122 @@ html{
  width: 55px;
 }
 .bg-green-light:hover{
-  background: #ffffff;
-  color: #000000 !important;
+	background: #ffffff;
+	color: #000000 !important;
 }
 .btn-container div{
-  margin-top: 15px;
+	margin-top: 15px;
 }
 .light-gray{
-  background: #131313;
+	background: #131313;
 }
 .dark-gray{
-  background: #101010;
+	background: #101010;
 }
 .cl-yellow{
-  color: yellow;
+	color: yellow;
 }
 .cl-red{
-  color: #dd0000;  
+	color: #dd0000;
 }
 .dark-red{
-  background: #602020;
+	background: #602020;
 }
 
 .new-red {
 	background: #cf0023
 }
 .green{
-  background: #266025;
+	background: #266025;
 }
 .new-green {
 	background: #96b900;
 }
 .light-green{
-  background: #216026
+	background: #216026
 }
 .light-blue{
-  background: #0d94c0;
+	background: #0d94c0;
 }
 .btn{
-  font-size: 14px;
-  text-transform: uppercase;
-  padding: 10px 15px;
-  border-radius: 5px;
-  color: #010101;
-  border:none;
+	font-size: 14px;
+	text-transform: uppercase;
+	padding: 10px 15px;
+	border-radius: 5px;
+	color: #010101;
+	border:none;
 }
 .mg15{
-  margin: 15px 0;
+	margin: 15px 0;
 }
 .italic{
-  font-style: italic;
+	font-style: italic;
 }
 .bloc{
-  display: block;
+	display: block;
 }
 .center{
-  text-align: center !important;
+	text-align: center !important;
 }
 .aright{
-   text-align: right !important;
+	 text-align: right !important;
 }
 .mb15{
-  margin-bottom: 15px;
+	margin-bottom: 15px;
 }
 .mgt10{
-  margin-top: 15px;
+	margin-top: 15px;
 }
 .link-btn{
-  color: #010101;
+	color: #010101;
 }
 .connected .tag{
-  display: flex;  
+	display: flex;
 }
 .connected .bt-container{
-  display: none;
+	display: none;
 }
 .connected .join{
-  display: none;
+	display: none;
 }
 .join{
-  display: block;
+	display: block;
 }
 .bt-container{
-  display: inline-block;
-  float: none;
-  padding: 5px 0px;
+	display: inline-block;
+	float: none;
+	padding: 5px 0px;
 }
 .home .main{
-  min-height: inherit;
+	min-height: inherit;
 }
 .login .main,.inscription .main,
 .profil .main-content, .main
 {
-  position: relative;
-  padding-top: 66px;
-  min-height: 100vh;
+	position: relative;
+	padding-top: 66px;
+	min-height: 100vh;
 }
 .tag{
-  display: none;
+	display: none;
 }
 .imgresp{
-  width: 100%;
+	width: 100%;
 }
 .awesome{
-  margin-right: 5px;
+	margin-right: 5px;
 }
 .white{
-  color: #ffffff !important;
+	color: #ffffff !important;
 }
 .bold{
-  font-weight: 600;
+	font-weight: 600;
 }
 .mg-10{
-  margin-top: 10px;
+	margin-top: 10px;
 }
 a{
-   text-decoration:none;
+	 text-decoration:none;
 }
 a:hover{
 
@@ -175,820 +183,820 @@ textarea{
 
 }
 p{
-    font-size: 16px;
+		font-size: 16px;
  }
 span{
 
 }
-h1{ 
-  font-family: arial;
-  font-weight: 700;
-  font-size: 35px;
-  text-transform: uppercase;
-  padding-bottom: 15px;  
+h1{
+	font-family: arial;
+	font-weight: 700;
+	font-size: 35px;
+	text-transform: uppercase;
+	padding-bottom: 15px;
 }
 .header{
-  top: 0;
+	top: 0;
 }
 .header h1{
-  padding-bottom: inherit;
+	padding-bottom: inherit;
 }
 .header{
-  position: fixed;
-  z-index: 99;
-  width: 100%;
+	position: fixed;
+	z-index: 99;
+	width: 100%;
 }
 
 .container .service-container.mobile{
-  display: none;
+	display: none;
 }
 .container .league .tab-league{
-  overflow: auto; 
+	overflow: auto;
 }
-.tournois .navmenu a[href="/tournois"], .wager .navmenu a[href="/wager"], 
+.tournois .navmenu a[href="/tournois"], .wager .navmenu a[href="/wager"],
 .communaute .navmenu a[href="/communaute"], .assistance .navmenu a[href="/assistance"]{
-  color: #dd0000;
+	color: #dd0000;
 }
 
 /**************scrollbar style***********************/
 
 ::-webkit-scrollbar {
-  width: 7px;
+	width: 7px;
 }
 ::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 5px gray; 
-  border-radius: 10px;
+	box-shadow: inset 0 0 5px gray;
+	border-radius: 10px;
 }
 ::-webkit-scrollbar-thumb {
-  background: #dd0000; 
-  border-radius: 10px;
+	background: #dd0000;
+	border-radius: 10px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #dd0000; 
+	background: #dd0000;
 }
 *{
-  scrollbar-color: #dd0000 #000000 !important;
-  scrollbar-width: thin !important;  
+	scrollbar-color: #dd0000 #000000 !important;
+	scrollbar-width: thin !important;
 }
 /**********************************************************/
 .login .loader-spinner,
 .inscription .loader-spinner{
-  text-align: center;
-  background: #000;
-  width: 100%;
-  position: absolute;
-  left: 0;
-  height: 100%;
-  top: 67px;
-  opacity: 0.5;
+	text-align: center;
+	background: #000;
+	width: 100%;
+	position: absolute;
+	left: 0;
+	height: 100%;
+	top: 67px;
+	opacity: 0.5;
 }
 .login .loader-spinner div,
 .inscription .loader-spinner div
 {
-  position: relative;
-  top: 33%;
+	position: relative;
+	top: 33%;
 }
 .login .loader-spinner svg,
 .inscription .loader-spinner svg
 {
-  width: 40px;
+	width: 40px;
 }
 .d-none{
-  display: none !important;
+	display: none !important;
 }
 
 /********** Fonts ********/
 @font-face {
 	font-family: 'Russo One';
-    src: url('../../assets/fonts/russoone/RussoOne.eot');
-    src: url('../../assets/fonts/russoone/RussoOne.eot?#iefix') format('embedded-opentype'),
-        url('../../assets/fonts/russoone/RussoOne.woff2') format('woff2'),
-        url('../../assets/fonts/russoone/RussoOne.woff') format('woff'),
-        url('../../assets/fonts/russoone/RussoOne.svg#RussoOne') format('svg');
+		src: url('../../assets/fonts/russoone/RussoOne.eot');
+		src: url('../../assets/fonts/russoone/RussoOne.eot?#iefix') format('embedded-opentype'),
+				url('../../assets/fonts/russoone/RussoOne.woff2') format('woff2'),
+				url('../../assets/fonts/russoone/RussoOne.woff') format('woff'),
+				url('../../assets/fonts/russoone/RussoOne.svg#RussoOne') format('svg');
 }
 @font-face {
 	font-family: 'quicksand regular';
-    src: url('../../assets/fonts/quicksand/static/Quicksand-Regular.eot');
-    src: url('../../assets/fonts/quicksand/static/Quicksand-Regular.eot?#iefix') format('embedded-opentype'),
-        url('../../assets/fonts/quicksand/static/Quicksand-Regular.woff2') format('woff2'),
-        url('../../assets/fonts/quicksand/static/Quicksand-Regular.woff') format('woff'),
-        url('../../assets/fonts/quicksand/static/Quicksand-Regular.svg#RussoOne') format('svg');
+		src: url('../../assets/fonts/quicksand/static/Quicksand-Regular.eot');
+		src: url('../../assets/fonts/quicksand/static/Quicksand-Regular.eot?#iefix') format('embedded-opentype'),
+				url('../../assets/fonts/quicksand/static/Quicksand-Regular.woff2') format('woff2'),
+				url('../../assets/fonts/quicksand/static/Quicksand-Regular.woff') format('woff'),
+				url('../../assets/fonts/quicksand/static/Quicksand-Regular.svg#RussoOne') format('svg');
 }
 /*********  Media query ***************/
 @media screen and (max-width: 1240px) {
-  .container .full .Right{
-    width: 100%;
-  }
+	.container .full .Right{
+		width: 100%;
+	}
 }
 @media screen and (max-width: 1130px) {
-  .container .full{
-    position: initial;
-    display: block;
-  } 
-  .container .full .Left{
-    position: absolute;
-    width: 100%;    
-    top: 40%;
-  }
-  .container .full.connected .Left{
-    width: 100%;
-    position: absolute;
-    top: 20%;    
-  }
-  .home .container .main{
-    min-height: inherit;
-  }
-  .container .full .slogan p.title, .full.connected .slogan p.title{
-    font-size: 30px !important;
-  }
-  .login .container footer, .inscription .container footer{
-    position: absolute;
-    width: 100%;
-    bottom: 0
-  }
+	.container .full{
+		position: initial;
+		display: block;
+	}
+	.container .full .Left{
+		position: absolute;
+		width: 100%;
+		top: 40%;
+	}
+	.container .full.connected .Left{
+		width: 100%;
+		position: absolute;
+		top: 20%;
+	}
+	.home .container .main{
+		min-height: inherit;
+	}
+	.container .full .slogan p.title, .full.connected .slogan p.title{
+		font-size: 30px !important;
+	}
+	.login .container footer, .inscription .container footer{
+		position: absolute;
+		width: 100%;
+		bottom: 0
+	}
 }
 @media screen and (max-width: 1000px) {
-  .container .center-block {
-    width: 46%;
-  }
+	.container .center-block {
+		width: 46%;
+	}
 }
 
 @media screen and (max-width: 940px) {
-  .home p.title{
-    font-size: 32px;
-  }
-  .navmenu{
-    display: none;
-  }
-  .container .tag{    
-    text-align: right;
-    max-width: inherit;
-  }  
-  .header .bt-container{
-    width: 100%;
-    max-width: inherit;
-    text-align: right;
-  }
-  .container .content{
-    display: block;
-  }
-  .container .block, .container .block.last{
-    margin-bottom: 15px;
-    width: 46%
-  }
-  .container .block.last{
-    border-radius: 15px;
-  }
-  .container .actuality{
-    width: 100%;
-  }
-  .container .full-container h2{
-    font-size: 25px;
-  }
-  .container .full-container .txt, .container .full-container .tableau{
-    max-width: inherit;
-  }
-  .container .clip, .shop{
-    margin-left: 0;
-    width: 100%;
-    margin-bottom: 15px;
-    max-width: inherit;
-  }
-  .shop img{
-    width: 100%;
-  }
-  .container .aside-left, .container .center-block, .container .aside-right{
-    display: block;
-    width: 80%;
-    margin: auto;
-    margin-bottom: 15px;
-    padding: 0;
-  }
-  .container .artContent{
-    display: block;
-  }
-  .container .center-block .article{
-    padding: 0px;
-    margin: 0px;
-  }
-  .container .center-block .article .text{
-    padding: 20px 0;
-  }
-  .container .center-block .article .text, .container .center-block .article img{    
-    clear: both;
-    width: 100%;
-  }  
-  .container .tchat .rcw-widget-container{
-    position: initial;
-  } 
- 
-  .container .service-img img{
-    width: 100%;
-  }
-  .assistance .aside-menu{
-    display: block;
-    width: 100%;
-    max-width: inherit;
-    border-radius: 5px 5px 0px 0px
-  }
-  .assistance .support{
-    display: block;
-    width: 100%;
-    max-width: inherit;
-    border-radius: 0px 0px 5px 5px;
-  }
-  .assistance .search-box input{
-    margin-top: 15px;
-    width: 100%;
-  }
-  .tuto-video video{
-    width: 100%;
-  }
-  .container footer{
-    position: initial !important;
-  }  
-  .container .group h1{
-    font-size: 25px;
-  }
-  .container .waggers-link a{
-    width: 31.5%;
-  }
-  .container .waggers-link .block, .container .waggers-link .block.last{
-    width: 100%;
-  }
-  .container .flex-upcoming{
-    display: block;
-    text-align: center;
-  }
-  .container .card .upcomming.side{
-    max-width: inherit;
-    width: 46%;
-  }
-  .aside-menu.social{
-    margin-left: 0;
-  }
-  .profil .tournois{
-    width: 430px;
-    overflow: scroll;
-    margin: auto;
-  }
-  .profil .tab-content{
-    width: 510px;
-    margin-bottom: 15px;
-    overflow: scroll;
-  }
-  .profil .mes-resultats{
-    overflow: scroll;
-  }
-  .profil .premium{
-    width: 87%;
-  }
-  .profil .prem-bloc{
-    display: block;
-  }
-  .profil .prem-bloc .item-bloc{
-    width: 100%;
-    display: block;
-  }  
-  .premium .btn-container .btn{
-    display: block;
-  }
-  .profil .mes-resultats .tab-content{
-    width: 510px;
-  }
-  .profil .mes-resultats{
-    padding: 5px 1em 0em;
-  }
-  .container .jeux{
-    background-repeat: no-repeat !important;
-    background-attachment: scroll !important;
-    background-size: inherit !important;
-    background-size: cover !important;
-    min-height: inherit !important;    
-    padding-top: 0em !important;
-    padding-bottom: 0em !important;
-  }
-  .home .main{
-    min-height: inherit;
-    padding-top: 50px;
-  }
-  .home .container .jeux{
-    background-attachment: initial !important;
-    background-position: top !important;
-    padding-bottom: 0 !important;
-    min-height: inherit !important;
-  }
-  .container .favorite-game a, .container .platform-content a{
-    
-    margin: 5px;
-  }
-  .container .mobile-menu{
-    display: block;
-  }
+	.home p.title{
+		font-size: 32px;
+	}
+	.navmenu{
+		display: none;
+	}
+	.container .tag{
+		text-align: right;
+		max-width: inherit;
+	}
+	.header .bt-container{
+		width: 100%;
+		max-width: inherit;
+		text-align: right;
+	}
+	.container .content{
+		display: block;
+	}
+	.container .block, .container .block.last{
+		margin-bottom: 15px;
+		width: 46%
+	}
+	.container .block.last{
+		border-radius: 15px;
+	}
+	.container .actuality{
+		width: 100%;
+	}
+	.container .full-container h2{
+		font-size: 25px;
+	}
+	.container .full-container .txt, .container .full-container .tableau{
+		max-width: inherit;
+	}
+	.container .clip, .shop{
+		margin-left: 0;
+		width: 100%;
+		margin-bottom: 15px;
+		max-width: inherit;
+	}
+	.shop img{
+		width: 100%;
+	}
+	.container .aside-left, .container .center-block, .container .aside-right{
+		display: block;
+		width: 80%;
+		margin: auto;
+		margin-bottom: 15px;
+		padding: 0;
+	}
+	.container .artContent{
+		display: block;
+	}
+	.container .center-block .article{
+		padding: 0px;
+		margin: 0px;
+	}
+	.container .center-block .article .text{
+		padding: 20px 0;
+	}
+	.container .center-block .article .text, .container .center-block .article img{
+		clear: both;
+		width: 100%;
+	}
+	.container .tchat .rcw-widget-container{
+		position: initial;
+	}
+
+	.container .service-img img{
+		width: 100%;
+	}
+	.assistance .aside-menu{
+		display: block;
+		width: 100%;
+		max-width: inherit;
+		border-radius: 5px 5px 0px 0px
+	}
+	.assistance .support{
+		display: block;
+		width: 100%;
+		max-width: inherit;
+		border-radius: 0px 0px 5px 5px;
+	}
+	.assistance .search-box input{
+		margin-top: 15px;
+		width: 100%;
+	}
+	.tuto-video video{
+		width: 100%;
+	}
+	.container footer{
+		position: initial !important;
+	}
+	.container .group h1{
+		font-size: 25px;
+	}
+	.container .waggers-link a{
+		width: 31.5%;
+	}
+	.container .waggers-link .block, .container .waggers-link .block.last{
+		width: 100%;
+	}
+	.container .flex-upcoming{
+		display: block;
+		text-align: center;
+	}
+	.container .card .upcomming.side{
+		max-width: inherit;
+		width: 46%;
+	}
+	.aside-menu.social{
+		margin-left: 0;
+	}
+	.profil .tournois{
+		width: 430px;
+		overflow: scroll;
+		margin: auto;
+	}
+	.profil .tab-content{
+		width: 510px;
+		margin-bottom: 15px;
+		overflow: scroll;
+	}
+	.profil .mes-resultats{
+		overflow: scroll;
+	}
+	.profil .premium{
+		width: 87%;
+	}
+	.profil .prem-bloc{
+		display: block;
+	}
+	.profil .prem-bloc .item-bloc{
+		width: 100%;
+		display: block;
+	}
+	.premium .btn-container .btn{
+		display: block;
+	}
+	.profil .mes-resultats .tab-content{
+		width: 510px;
+	}
+	.profil .mes-resultats{
+		padding: 5px 1em 0em;
+	}
+	.container .jeux{
+		background-repeat: no-repeat !important;
+		background-attachment: scroll !important;
+		background-size: inherit !important;
+		background-size: cover !important;
+		min-height: inherit !important;
+		padding-top: 0em !important;
+		padding-bottom: 0em !important;
+	}
+	.home .main{
+		min-height: inherit;
+		padding-top: 50px;
+	}
+	.home .container .jeux{
+		background-attachment: initial !important;
+		background-position: top !important;
+		padding-bottom: 0 !important;
+		min-height: inherit !important;
+	}
+	.container .favorite-game a, .container .platform-content a{
+
+		margin: 5px;
+	}
+	.container .mobile-menu{
+		display: block;
+	}
 }
 @media screen and (max-width: 800px){
-  .container .tchat{
-    width: 72%;
-    margin: auto;
-    z-index: 9999;
-  }
-  .rcw-conversation-container .rcw-title{
-    padding: 15px 0px !important;
-  }
-  .tchat .rcw-header{
-    padding: 3px !important;
-  }
-  .tchat .rcw-conversation-container .rcw-close-button{
-    background: none;
-    top: 24px;
-    width: 30px;
-  }
-  .tchat .rcw-conversation-container .rcw-close{
-    width: 12px;
-    height: 12px;
-  }  
-  .container .tchat .rcw-conversation-container{
-    box-shadow: none;
-  }
-  .container .tchat .rcw-widget-container{
-    height: auto;
-    display: block;
-    margin-bottom: 30px;
-  }
-  .container .bloc-items{
-    display: block;
-  }
-  .container .service-img,  .container .service-modal{
-    margin: auto;
-    width: 100%;
-  }
-  .container .service-img img{
-    width: 70%;
-  }
-  .container .service-container{
-    display: none;
-  }
-  .container .service-container.mobile{
-    display: block;
-  }
-  .container .waggers-title, .container .waggers-data{
-    width: 96%;
-    margin: 5px 0;
-  }  
-  .container .logo-game{
-    margin-right: 15px;
-  }
-  .container .bg-game{
-    width: 100%;    
-  }
-  .leaderboard .container .main .containt{
-    width: 86%;
-  }
-  .container .tuto-video video{
-    width: 100%;
-  }
-  .container .content.waggers-link{
-    overflow: scroll;
-  }  
+	.container .tchat{
+		width: 72%;
+		margin: auto;
+		z-index: 9999;
+	}
+	.rcw-conversation-container .rcw-title{
+		padding: 15px 0px !important;
+	}
+	.tchat .rcw-header{
+		padding: 3px !important;
+	}
+	.tchat .rcw-conversation-container .rcw-close-button{
+		background: none;
+		top: 24px;
+		width: 30px;
+	}
+	.tchat .rcw-conversation-container .rcw-close{
+		width: 12px;
+		height: 12px;
+	}
+	.container .tchat .rcw-conversation-container{
+		box-shadow: none;
+	}
+	.container .tchat .rcw-widget-container{
+		height: auto;
+		display: block;
+		margin-bottom: 30px;
+	}
+	.container .bloc-items{
+		display: block;
+	}
+	.container .service-img,  .container .service-modal{
+		margin: auto;
+		width: 100%;
+	}
+	.container .service-img img{
+		width: 70%;
+	}
+	.container .service-container{
+		display: none;
+	}
+	.container .service-container.mobile{
+		display: block;
+	}
+	.container .waggers-title, .container .waggers-data{
+		width: 96%;
+		margin: 5px 0;
+	}
+	.container .logo-game{
+		margin-right: 15px;
+	}
+	.container .bg-game{
+		width: 100%;
+	}
+	.leaderboard .container .main .containt{
+		width: 86%;
+	}
+	.container .tuto-video video{
+		width: 100%;
+	}
+	.container .content.waggers-link{
+		overflow: scroll;
+	}
 }
 @media screen and (max-width: 700px) {
-  .container .card .upcomming.side{    
-    width: 100%;
-  }
-  .container .container-rules .txt-infos{
-    width: 550px;
-    overflow: scroll;
-  }
-  .container .container-rules .container-infos{
-    width: 1024px;
-  }
-  .container .information-game{
-    display: block;
-  }
-  .container .item-info-right{
-    margin-top: 15px;
-    margin-left: 0px;
-    width: 100%;    
-  }
-  .container .icon-tchat{
-    position: initial;
-    margin-top: 15px;
-  }  
-  .container .full.connected .Left{
-    top: 13%;
-  }
-  .container .full .slogan p.title, .full.connected .slogan p.title{
-    font-size: 20px !important;
-  }
-  .full.connected .slogan .btn, .full .slogan .btn{
-    font-size: 15px;
-  }
-  .container .slogan .btn{
-    margin-top: 15px;
-  }
-  .home .container h2{
-    font-size: 20px !important;
-  }
-  .container .wall{
-    margin: 20px auto;
-  }
-  .container .teamname{
-    display: block;
-  }
-  .container .social{
-    margin: 15px auto;
-  }
+	.container .card .upcomming.side{
+		width: 100%;
+	}
+	.container .container-rules .txt-infos{
+		width: 550px;
+		overflow: scroll;
+	}
+	.container .container-rules .container-infos{
+		width: 1024px;
+	}
+	.container .information-game{
+		display: block;
+	}
+	.container .item-info-right{
+		margin-top: 15px;
+		margin-left: 0px;
+		width: 100%;
+	}
+	.container .icon-tchat{
+		position: initial;
+		margin-top: 15px;
+	}
+	.container .full.connected .Left{
+		top: 13%;
+	}
+	.container .full .slogan p.title, .full.connected .slogan p.title{
+		font-size: 20px !important;
+	}
+	.full.connected .slogan .btn, .full .slogan .btn{
+		font-size: 15px;
+	}
+	.container .slogan .btn{
+		margin-top: 15px;
+	}
+	.home .container h2{
+		font-size: 20px !important;
+	}
+	.container .wall{
+		margin: 20px auto;
+	}
+	.container .teamname{
+		display: block;
+	}
+	.container .social{
+		margin: 15px auto;
+	}
 
 }
 @media screen and (max-width: 600px) {
-  .container{
-    margin-top: 5em;
-  }
-  .view .container{
-    margin-top: 10em;
-  }
-  .assistance .container, .container .waggers .part{
-    margin-top: 0;
-  }
-  .full-container h1{
-    font-size: 23px;
-  }
-  .wrap, .container .wrap.red{
-    display: block;
-    text-align: center;
-  }   
-  .header h1{
-    text-align: center;
-  }
-  .logo{
-    max-width: inherit;
-    width: 100%;
-  }
-  .header .bt-container{
-    text-align: center; 
-  }
-  .imglogo{
-    width: 50%;
-    text-align: center;
-  }
-  .home .slogan{
-    top: 30%;
-  }
-  .tag{
-    text-align: center;
-  }
-  .home .main{
-    padding-top: 8em;
-  }
-  .leaderboard .main{
-    padding-top: 4em;
-  }
-  .home .main{
-    padding-top: 25px;
-  }
-  .home p.title{
-    font-size: 25px;
-  }
-  .container .block, .container .block.last{  
-    width: 95%;
-  }
-  .container .gamecash, .container .gamecash .lot{
-    display: block;
-    margin-bottom: 15px;
-  }
-  .container .gamecash .lot{
-    width: 100%;
-  }
-  .container .gamecash .lot p{
-    width: 100%;
-    margin-bottom: 15px;
-  }
-  .container .gamecash .more{
-    width: 100%;
-    text-align: center;
-  }
-  .container .join{
-    padding: 0px 15px;
-  }
-  .container .join .email{
-    padding-bottom: 15px;
-  }
-  .container .join input{
-    margin-bottom: 15px;
-  }
-  .container .block-tournois{
-    padding: 3em 2em 3em 2em;
-  }
-  .container footer .wrap{
-    text-align: center;
-  }
-  .container footer .rss{
-    padding: 15px 0;
-  }
-  .popup-content{
-    width: 90% !important;
-  }
-  .rcw-launcher{
-    display: block !important;
-  }
-  .container .part{
-    margin-top: 5em;
-  }
-  .wagers .container .full-container{
-    margin-top: 10em;
-  }
-  .container .tabs-content{
-    overflow: auto;
-  }
-  .container  .tab-league{
-    display: block;
-    width: 510px;
-  } 
-  .wagers .info p{
-    font-size: 17px !important;
-  }
-  .container .waggers-content{    
-    width: 540px;    
-    overflow: scroll;
-  }
-  .container .waggers-list{    
-    overflow: scroll;
-  }
-  .container .waggers-title, .container .waggers-data{
-    width: inherit;
-  }
-  .container .waggers-link a{
-    width: 95%;
-  }
-  .container .item-info-left{
-    display: block;
-  }
-  .wall#wall{
-    display: block;
-    margin-top: 15px;
-  }
-  .profil .avatar-info{
-    margin-top: 15px;
-  }
-  .profil .tabs li{
-    display: block;
-  }
-  .profil .statistique{
-    display: block;
-  }
-  .profil .start{
-    margin: auto;
-  }
-  .profil .flexbox{
-    width: 100%
-  }
-  .profil .is-cropped{
-    width: 100%;
-  }
-  .profil .itemGame{
-    max-width: inherit;
-    margin-bottom: 15px;
-  } 
-  .profil .team-bloc{
-    max-width: inherit;
-  }
-  .container .logo{
-    margin-right: 0;
-  }
-  .container .box{
-    width: 50%;
-  }
-  .container .header .invitation{
-    top: 122px;
-  }
-  .container .full-container{
-    margin-top: 11em !important;
-  }
-  .leaderboard .mes_infos{
-    margin: 5px;
-  }
-  .leaderboard.settings .title-lead{
-    display: block;
-  }
-  .leaderboard .container .main .containt{
-    width: 90%;
-  }  
-  .container .mur .row-container,
-  .container .fixed
-  {
-    width: 560px;
-  }  
+	.container{
+		margin-top: 5em;
+	}
+	.view .container{
+		margin-top: 10em;
+	}
+	.assistance .container, .container .waggers .part{
+		margin-top: 0;
+	}
+	.full-container h1{
+		font-size: 23px;
+	}
+	.wrap, .container .wrap.red{
+		display: block;
+		text-align: center;
+	}
+	.header h1{
+		text-align: center;
+	}
+	.logo{
+		max-width: inherit;
+		width: 100%;
+	}
+	.header .bt-container{
+		text-align: center;
+	}
+	.imglogo{
+		width: 50%;
+		text-align: center;
+	}
+	.home .slogan{
+		top: 30%;
+	}
+	.tag{
+		text-align: center;
+	}
+	.home .main{
+		padding-top: 8em;
+	}
+	.leaderboard .main{
+		padding-top: 4em;
+	}
+	.home .main{
+		padding-top: 25px;
+	}
+	.home p.title{
+		font-size: 25px;
+	}
+	.container .block, .container .block.last{
+		width: 95%;
+	}
+	.container .gamecash, .container .gamecash .lot{
+		display: block;
+		margin-bottom: 15px;
+	}
+	.container .gamecash .lot{
+		width: 100%;
+	}
+	.container .gamecash .lot p{
+		width: 100%;
+		margin-bottom: 15px;
+	}
+	.container .gamecash .more{
+		width: 100%;
+		text-align: center;
+	}
+	.container .join{
+		padding: 0px 15px;
+	}
+	.container .join .email{
+		padding-bottom: 15px;
+	}
+	.container .join input{
+		margin-bottom: 15px;
+	}
+	.container .block-tournois{
+		padding: 3em 2em 3em 2em;
+	}
+	.container footer .wrap{
+		text-align: center;
+	}
+	.container footer .rss{
+		padding: 15px 0;
+	}
+	.popup-content{
+		width: 90% !important;
+	}
+	.rcw-launcher{
+		display: block !important;
+	}
+	.container .part{
+		margin-top: 5em;
+	}
+	.wagers .container .full-container{
+		margin-top: 10em;
+	}
+	.container .tabs-content{
+		overflow: auto;
+	}
+	.container  .tab-league{
+		display: block;
+		width: 510px;
+	}
+	.wagers .info p{
+		font-size: 17px !important;
+	}
+	.container .waggers-content{
+		width: 540px;
+		overflow: scroll;
+	}
+	.container .waggers-list{
+		overflow: scroll;
+	}
+	.container .waggers-title, .container .waggers-data{
+		width: inherit;
+	}
+	.container .waggers-link a{
+		width: 95%;
+	}
+	.container .item-info-left{
+		display: block;
+	}
+	.wall#wall{
+		display: block;
+		margin-top: 15px;
+	}
+	.profil .avatar-info{
+		margin-top: 15px;
+	}
+	.profil .tabs li{
+		display: block;
+	}
+	.profil .statistique{
+		display: block;
+	}
+	.profil .start{
+		margin: auto;
+	}
+	.profil .flexbox{
+		width: 100%
+	}
+	.profil .is-cropped{
+		width: 100%;
+	}
+	.profil .itemGame{
+		max-width: inherit;
+		margin-bottom: 15px;
+	}
+	.profil .team-bloc{
+		max-width: inherit;
+	}
+	.container .logo{
+		margin-right: 0;
+	}
+	.container .box{
+		width: 50%;
+	}
+	.container .header .invitation{
+		top: 122px;
+	}
+	.container .full-container{
+		margin-top: 11em !important;
+	}
+	.leaderboard .mes_infos{
+		margin: 5px;
+	}
+	.leaderboard.settings .title-lead{
+		display: block;
+	}
+	.leaderboard .container .main .containt{
+		width: 90%;
+	}
+	.container .mur .row-container,
+	.container .fixed
+	{
+		width: 560px;
+	}
 }
 @media screen and (max-width: 520px) {
-  .view .ban{
-    height: 100% !important;
-  }
-  .view .container .versus-container{
-    display: block;
-    padding: 15px 0;
-  }
-  .container .full.connected .Left{
-    top: 2.5%;
-  }  
-  .container .list_tournament{
-    margin-bottom: 15px;
-    padding: 10px 0px;
-  }
-  .container .list_tournament p{
-    margin-right: 0;
-  }
-  .container .list_tournament a{
-    display: block;
-    width: 100%;
-    text-align: center;
-  }
-  .container .list_tournament .place{
-    text-align: center;
-    width: 100%;
-  }
-  .container .best-gamer{
-    display: block;
-  }
-  .container .best-gamer .global{
-    margin-bottom: 15px;
-  }
-  .container .full .Left{
-    position: absolute !important;
-    width: 100%;
-  }
-  .container .register-field{
-    display: block;
-    padding: 15px;
-  }
-  .container .group{
-    margin: 0 15px;
-  }
-  .container .input-field{
-    margin: 0;
-  }
-  .container .account_type, .container .account_type a, .container .choice{
-    max-width: inherit;
-    width: 100%;
-  }
-  .container .field-middle, .container .rss-view{
-    display: block;
-  }
-  .container .gamer-profil{
-    display: block;
-  }
-  .container .main-pro .avatar{
-    position: initial;
-    width: 100%;
-    text-align: center;
-  }
-  .container .gamer-profil .gamer-tag{
-    text-align: center;
-    margin-left: 0;
-  }
-  .container .main-pro .avatar img{
-    width: 25%;
-    margin-bottom: 15px;
-  }
-  .container .setavatar label{    
-    top: -10px;
-    left: 0;
-    border-radius: 0;
-    width: 40%;
-    left: 30%;
-    margin: auto;
-    height: 120px;    
-  }
-  .container .setavatar:hover label{
-    display: block;
-    opacity: 0;
-  }
-  .stat-content .flexbox{
-    display: block;
-  }
-  .stat-content .start-game{
-    margin: auto;
-  }
-  .stat-content .info-container{
-    width: 100%;
-    margin-top: 10px;
-    padding-right: 15px;
-  }
+	.view .ban{
+		height: 100% !important;
+	}
+	.view .container .versus-container{
+		display: block;
+		padding: 15px 0;
+	}
+	.container .full.connected .Left{
+		top: 2.5%;
+	}
+	.container .list_tournament{
+		margin-bottom: 15px;
+		padding: 10px 0px;
+	}
+	.container .list_tournament p{
+		margin-right: 0;
+	}
+	.container .list_tournament a{
+		display: block;
+		width: 100%;
+		text-align: center;
+	}
+	.container .list_tournament .place{
+		text-align: center;
+		width: 100%;
+	}
+	.container .best-gamer{
+		display: block;
+	}
+	.container .best-gamer .global{
+		margin-bottom: 15px;
+	}
+	.container .full .Left{
+		position: absolute !important;
+		width: 100%;
+	}
+	.container .register-field{
+		display: block;
+		padding: 15px;
+	}
+	.container .group{
+		margin: 0 15px;
+	}
+	.container .input-field{
+		margin: 0;
+	}
+	.container .account_type, .container .account_type a, .container .choice{
+		max-width: inherit;
+		width: 100%;
+	}
+	.container .field-middle, .container .rss-view{
+		display: block;
+	}
+	.container .gamer-profil{
+		display: block;
+	}
+	.container .main-pro .avatar{
+		position: initial;
+		width: 100%;
+		text-align: center;
+	}
+	.container .gamer-profil .gamer-tag{
+		text-align: center;
+		margin-left: 0;
+	}
+	.container .main-pro .avatar img{
+		width: 25%;
+		margin-bottom: 15px;
+	}
+	.container .setavatar label{
+		top: -10px;
+		left: 0;
+		border-radius: 0;
+		width: 40%;
+		left: 30%;
+		margin: auto;
+		height: 120px;
+	}
+	.container .setavatar:hover label{
+		display: block;
+		opacity: 0;
+	}
+	.stat-content .flexbox{
+		display: block;
+	}
+	.stat-content .start-game{
+		margin: auto;
+	}
+	.stat-content .info-container{
+		width: 100%;
+		margin-top: 10px;
+		padding-right: 15px;
+	}
 
 }
 
 @media screen and (max-width: 380px) {
-  .wrap, .container .wrap.red{
-    padding: 6px 9px;
-  }    
-  .container .undertitle:before{
-    height: 70px;
-  }
-  .home p.title{
-    font-size: 15px;
-  }
-  .slogan .btn, .slogan .btn.bg-red{
-    font-size: 13px;
-  }
-  .container footer .rss{
-    width: 100%;
-  }
-  .container .jeux{
-    padding-bottom: 2em;
-  }
-  .container .jeux h2{
-    padding-top: 20px;
-  }
-  .container .logo-game{
-    margin-right: 1em;
-    margin-bottom: 0;
-  }
-  .container .firstblock, .container .lastblock{
-    padding: 9px;
-  }
-  .versus-container{
-    display: block !important;
-    padding: 15px 0;
-  }
-  .container .ban{
-    height: auto;
-  }  
-  .mise{
-    margin-bottom: 15px;
-  }
-  .live p{
-    padding: 0px 0 !important;
-  }
-  .lobby .versus-container .team{
-    width: 100% !important;
-    text-align: center !important
-  }
-  .container .flex-container{
-    display: block;
-  }
-  .container h2{
-    font-size: 20px !important;
-  }
-  .container .full-container h2{
-    width: 100%;
-    font-size: 20px;
-  }
-  .container .tableau .state p{
-    max-width: inherit;
-    width: inherit;
-  }
-  .container .flex-container .bt-container{
-    width: 100%;
-    max-width: inherit;
-    text-align: center;
-  }
-  .container .details p{
-    font-size: 12px;
-  }
-  .container .full-container .tabs li{
-    width: 33%;
-  }
-  .container .item-img-info{
-    clear: both;
-    float: none;
-    text-align: center;
-  }
-  .container .item-all-info p{
-    padding-left: 13px;
-    display: block;
-  }
-  .container .salon{
-    right: 5px;
-  }
-  .container .tchat{
-    width: 93%;
-    left: 13px;
-  }
-  /*.mes-tournois .tab-content{
-    width: 290px;
-  }*/
-  .profil .tournois{
-    width: 350px;
-  }
-  .profil .team-img{
-    top: 15%;
-  }
-  .profil .mes-tournois{
-    padding: 0px;
-  }
-  .profil .about-me{
-    padding: 2em 0;
-  }
-  .profil #wall .avatar-info .table{
-    display: block;
-  }
-  .container .full.connected .Left{
-    position: initial;
-    padding: 15px;
-  }
-  .container .full .Left{
-    top: 10%;
-  }
-  .container .setavatar label{
-    height: 98px;
-  }
+	.wrap, .container .wrap.red{
+		padding: 6px 9px;
+	}
+	.container .undertitle:before{
+		height: 70px;
+	}
+	.home p.title{
+		font-size: 15px;
+	}
+	.slogan .btn, .slogan .btn.bg-red{
+		font-size: 13px;
+	}
+	.container footer .rss{
+		width: 100%;
+	}
+	.container .jeux{
+		padding-bottom: 2em;
+	}
+	.container .jeux h2{
+		padding-top: 20px;
+	}
+	.container .logo-game{
+		margin-right: 1em;
+		margin-bottom: 0;
+	}
+	.container .firstblock, .container .lastblock{
+		padding: 9px;
+	}
+	.versus-container{
+		display: block !important;
+		padding: 15px 0;
+	}
+	.container .ban{
+		height: auto;
+	}
+	.mise{
+		margin-bottom: 15px;
+	}
+	.live p{
+		padding: 0px 0 !important;
+	}
+	.lobby .versus-container .team{
+		width: 100% !important;
+		text-align: center !important
+	}
+	.container .flex-container{
+		display: block;
+	}
+	.container h2{
+		font-size: 20px !important;
+	}
+	.container .full-container h2{
+		width: 100%;
+		font-size: 20px;
+	}
+	.container .tableau .state p{
+		max-width: inherit;
+		width: inherit;
+	}
+	.container .flex-container .bt-container{
+		width: 100%;
+		max-width: inherit;
+		text-align: center;
+	}
+	.container .details p{
+		font-size: 12px;
+	}
+	.container .full-container .tabs li{
+		width: 33%;
+	}
+	.container .item-img-info{
+		clear: both;
+		float: none;
+		text-align: center;
+	}
+	.container .item-all-info p{
+		padding-left: 13px;
+		display: block;
+	}
+	.container .salon{
+		right: 5px;
+	}
+	.container .tchat{
+		width: 93%;
+		left: 13px;
+	}
+	/*.mes-tournois .tab-content{
+		width: 290px;
+	}*/
+	.profil .tournois{
+		width: 350px;
+	}
+	.profil .team-img{
+		top: 15%;
+	}
+	.profil .mes-tournois{
+		padding: 0px;
+	}
+	.profil .about-me{
+		padding: 2em 0;
+	}
+	.profil #wall .avatar-info .table{
+		display: block;
+	}
+	.container .full.connected .Left{
+		position: initial;
+		padding: 15px;
+	}
+	.container .full .Left{
+		top: 10%;
+	}
+	.container .setavatar label{
+		height: 98px;
+	}
 }
