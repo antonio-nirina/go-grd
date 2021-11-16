@@ -9,7 +9,7 @@ import {RootState} from "../../reducer"
 import {checkInTeam} from "../league/utils"
 import {Translation} from "../../lang/translation"
 import {Tournament} from "../models/tournament"
-import {Team} from "../models/team"
+import {TeamModel} from "../models/team"
 
 import Apex from "../../assets/image/apex-legends.png"
 import Fifa21 from "../../assets/image/fifa21.png"
@@ -62,7 +62,7 @@ const ConfirmPart = function() {
 				isError = true
 				setMessage(Translation(userConnectedRedux.user.language).tournament.notifyError)
 			} else {
-				check.forEach(function(team:Team) {
+				check.forEach(function(team:TeamModel) {
 					arrayUidTeam.push(team.uid)
 				})
 			}
