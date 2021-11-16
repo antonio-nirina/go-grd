@@ -23,6 +23,9 @@ func createTeam() *graphql.Field {
 			"logo": &graphql.ArgumentConfig{
 				Type: graphql.String,
 			},
+			"logoType": &graphql.ArgumentConfig{
+				Type: graphql.String,
+			},
 			"creator":&graphql.ArgumentConfig{
 				Type: graphql.String,
 			},
@@ -65,6 +68,15 @@ func updatedAllTeam() *graphql.Field {
 				Type: graphql.String,
 			},	
 			"logo": &graphql.ArgumentConfig{
+				Type: graphql.String,
+			},
+			"logoType": &graphql.ArgumentConfig{
+				Type: graphql.String,
+			},
+			"bann": &graphql.ArgumentConfig{
+				Type: graphql.String,
+			},
+			"bannType": &graphql.ArgumentConfig{
 				Type: graphql.String,
 			},
 			"creator":&graphql.ArgumentConfig{

@@ -13,6 +13,7 @@ type Team struct {
 	Description 		  	string            	`json:"description"`
 	IsBlocked 		  		bool 				`json:"isBlocked"`
 	Logo   					string            	`json:"logo"`
+	Banniere   					string            	`json:"banniere"`
 	Creator   				user.User            `json:"creator"`
 	Tag string            	`json:"tag"`
 }

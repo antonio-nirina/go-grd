@@ -81,6 +81,7 @@ func (t *team) SavedTeamResolver(params graphql.ResolveParams) (interface{}, err
 		Description:  description,
 		IsBlocked:    false,
 		Logo:         url,
+		Banniere:"",
 		Creator:      user,
 		Tag: tag,
 	}
@@ -197,6 +198,9 @@ func (t *team) UpdatedTeamResolver(params graphql.ResolveParams) (interface{}, e
 	players, _ := params.Args["players"].(string)
 	logo, _ := params.Args["logo"].(string)
 	logoType, _ := params.Args["logoType"].(string)
+
+	bann, _ := params.Args["bann"].(string)
+	bannType, _ := params.Args["bannType"].(string)
 	creator, _ := params.Args["creator"].(string)
 	tag, _ := params.Args["tag"].(string)
 	description, _ := params.Args["description"].(string)
@@ -219,11 +223,17 @@ func (t *team) UpdatedTeamResolver(params graphql.ResolveParams) (interface{}, e
 		return nil, err
 	}
 	var urlFile string
+	var urlBann string
 
+	upl := &external.FileUpload{}
 	if logo != "" {
-		upl := &external.FileUpload{}
 		url, _ := upl.HandleFileInBBApi(logo, logoType)
 		urlFile = url
+	}
+
+	if bann != "" {
+		urlBan, _ := upl.HandleFileInBBApi(bann, bannType)
+		urlBann = urlBan
 	}
 	
 	teamUpdated := &entity.Team{
@@ -234,6 +244,7 @@ func (t *team) UpdatedTeamResolver(params graphql.ResolveParams) (interface{}, e
 		Description:  description,
 		IsBlocked:    false,
 		Logo:         urlFile,
+		Banniere:urlBann,
 		Creator:      user,
 		Tag: tag,
 	}

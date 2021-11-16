@@ -50,10 +50,11 @@ const Team: React.FC = function() {
 		const teamCreated = await createdTeam({ variables: {
 			name: data.name,
 			creationDate:(new Date()).toISOString(),
-			players:[],
+			players:"",
 			logo:"",
 			description:data.description,
 			tag:data.tag,
+			logoType:"",
 			creator:userConnectedRedux.user.uid
 		} })
 
