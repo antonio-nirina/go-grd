@@ -1,10 +1,6 @@
-<<<<<<< HEAD
-import React, {useState} from "react"
-import { Link } from "react-router-dom"
-=======
 import React, {useState,useEffect} from "react"
+import { Link } from "react-router-dom"
 import { useForm } from "react-hook-form"
->>>>>>> 4659be0f1b512c9b165c23ef697d385a87d4623e
 import { useSelector } from "react-redux"
 import {useQuery} from "@apollo/client"
 import {useMutation} from "@apollo/client"
@@ -79,27 +75,26 @@ const Team: React.FC = function() {
 						<Sidebar />
 						<div className="personal">
 							<h2>Mes équipes</h2>
+							<Link to="/edit-team" title="" className="my_team">
 								<img src={userConnectedRedux.user.avatar ? userConnectedRedux.user.avatar :AvatarDefault} alt="" width="150" height="150"/>
 								<strong>GROWTHMARKET</strong>
-								<Link to="/edit-team" className="my_team">
-									{
-										teams?.map(function(tem:TeamModel,index:number) {
-											<div className="team_infos">
-												<div className="info_title">
-													<p>{tem.creator}</p>
-													<p>Team Owner</p>
-													<p>{tem.players}</p>
-												</div>
-												<div className="team_data">
-													<p>{dateLongCreated(tem.creationDate)}</p>
-													<p>{tem.creator}</p>
-													<p>{tem.players.length === 0 ? 1 : tem.players.length}</p>
-												</div>
+								{
+									teams?.map(function(tem:TeamModel,index:number) {
+										<div className="team_infos">
+											<div className="info_title">
+												<p>{tem.creator}</p>
+												<p>Team Owner</p>
+												<p>{tem.players}</p>
 											</div>
-										})
-									}
-								</Link>
-							</div>
+											<div className="team_data">
+												<p>{dateLongCreated(tem.creationDate)}</p>
+												<p>{tem.creator}</p>
+												<p>{tem.players.length === 0 ? 1 : tem.players.length}</p>
+											</div>
+										</div>
+									})
+								}
+							</Link>
 							<div className="add_team" onClick={onPopup}>
 								<i><FontAwesomeIcon icon={faPlusCircle} /></i>
 								<p>Create a team</p>
@@ -119,6 +114,7 @@ const Team: React.FC = function() {
 									<button className="btn bg-red">Create the team</button>
 								</form>
 							</div>
+
 						</div>
 					</div>
 				</div>

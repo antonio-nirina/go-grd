@@ -11,7 +11,7 @@ import {RootState} from "../../reducer"
 import AvatarDefault from "../../assets/image/game-tag.png"
 import { faUserPlus, faTimes } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {Team} from "../models/team"
+//import {Team} from "../models/team"
 
 import ImageTeam from "../../assets/image/team/bg-team.jpg"
 import LogoTeam from "../../assets/image/team/logo-team.jpg"
