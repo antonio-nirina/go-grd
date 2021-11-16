@@ -8,12 +8,13 @@ import (
 )
 
 type UsecaseTeam interface {
-	SavedTeamHandler(team *entity.Team) (interface{}, error)
+	SavedTeamHandler(team *entity.Team) (TeamViewModel, error)
 	FindTeamHandler(idQuery string) (TeamViewModel, error)
 	FindOneTeamHandler(idQuery string) (entity.Team, error)
 	FindAllTeamHandler(pageNumber int64,limit int64) ([]TeamViewModel, error)
 	UpdatedTeamHandler(team *entity.Team) (interface{}, error)
 	FindTeamByUserHandler(idQuery string) ([]TeamViewModel, error)
+	UpdatedAllTeamHandler(team *entity.Team) (interface{}, error)
 }
 
 type TeamViewModel struct {
@@ -24,6 +25,7 @@ type TeamViewModel struct {
 	Description 		  	string            			`json:"description"`
 	IsBlocked 		  		bool 						`json:"isBlocked"`
 	Logo   					string            			`json:"logo"`
+	Tag   					string            			`json:"tag"`
 	Creator   				userHandler.UserViewModel    `json:"creator"`
 	Records   					int            			`json:"records"`
 }
@@ -38,14 +40,41 @@ func NewUsecaseTeam(t repository.RepositoryTeam) UsecaseTeam {
 	}
 }
 
-func (t *teamUsecase) SavedTeamHandler(team *entity.Team) (interface{}, error) {
+func (t *teamUsecase) SavedTeamHandler(team *entity.Team) (TeamViewModel, error) {
 	_,err := t.teamRepository.SavedRepoTeam(team)
 
 	if err != nil {
-		return 0, err
+		return TeamViewModel{}, err
 	}
 
-	return "Ok",nil
+	user := userHandler.UserViewModel{
+		Uid:team.Creator.Uid.Hex(),
+		FirstName:team.Creator.FirstName,
+		LastName:team.Creator.LastName,
+		Email:team.Creator.Email,
+		Username:team.Creator.Username,
+		IsBanned:team.Creator.IsBanned,
+		Avatar:team.Creator.Avatar,
+		Language:team.Creator.Language,
+		Point:team.Creator.Point,
+		Roles:team.Creator.Roles,
+		TypeConnexion:team.Creator.TypeConnexion,
+		Created:team.Creator.Created,
+	}
+
+	teamViewModel := TeamViewModel{
+		Uid:team.Uid.Hex(),
+		Name:team.Name,
+		CreationDate:team.CreationDate,
+		Players: []userHandler.UserViewModel{},
+		Description:team.Description,
+		IsBlocked:team.IsBlocked,
+		Logo:team.Logo,
+		Creator:user,
+		Tag: team.Tag,      			
+	}
+
+	return teamViewModel,nil
 }
 
 func (t *teamUsecase) FindTeamHandler(idQuery string) (TeamViewModel, error) {
@@ -105,7 +134,8 @@ func (t *teamUsecase) FindTeamHandler(idQuery string) (TeamViewModel, error) {
 		Description:result.Description,
 		IsBlocked:result.IsBlocked,
 		Logo:result.Logo,
-		Creator:user,      			
+		Creator:user,
+		Tag: result.Tag,      			
 	}
 
 	return teamViewModel,nil
@@ -188,7 +218,8 @@ func (t *teamUsecase) FindAllTeamHandler(pageNumber int64,limit int64) ([]TeamVi
 			IsBlocked:val.IsBlocked,
 			Logo:val.Logo,
 			Creator:user,
-			Records:records,   		
+			Records:records,
+			Tag: val.Tag,   		
 		}
 
 		res = append(res, teamViewModel)
@@ -278,11 +309,22 @@ func (t *teamUsecase) FindTeamByUserHandler(idQuery string) ([]TeamViewModel, er
 			IsBlocked:val.IsBlocked,
 			Logo:val.Logo,
 			Creator:user,
-			Records:0,   		
+			Records:0, 
+			Tag: val.Tag,  		
 		}
 
 		res = append(res, teamViewModel)
 	}
 	
 	return res,nil
+}
+
+func (t *teamUsecase) UpdatedAllTeamHandler(team *entity.Team) (interface{}, error) {
+	_,err := t.teamRepository.UpdatedRepoTeam(team)
+	
+	if err != nil {
+		return nil, err
+	}
+
+	return "Ok",nil
 }

@@ -14,4 +14,5 @@ type Team struct {
 	IsBlocked 		  		bool 				`json:"isBlocked"`
 	Logo   					string            	`json:"logo"`
 	Creator   				user.User            `json:"creator"`
+	Tag string            	`json:"tag"`
 }
