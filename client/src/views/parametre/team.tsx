@@ -1,4 +1,5 @@
 import React, {useState,useEffect} from "react"
+import { Link } from "react-router-dom"
 import { useForm } from "react-hook-form"
 import { useSelector } from "react-redux"
 import {useQuery} from "@apollo/client"
@@ -74,7 +75,7 @@ const Team: React.FC = function() {
 						<Sidebar />
 						<div className="personal">
 							<h2>Mes équipes</h2>
-							<div className="my_team">
+							<Link to="/edit-team" title="" className="my_team">
 								<img src={userConnectedRedux.user.avatar ? userConnectedRedux.user.avatar :AvatarDefault} alt="" width="150" height="150"/>
 								<strong>GROWTHMARKET</strong>
 								{
@@ -93,8 +94,7 @@ const Team: React.FC = function() {
 										</div>
 									})
 								}
-
-							</div>
+							</Link>
 							<div className="add_team" onClick={onPopup}>
 								<i><FontAwesomeIcon icon={faPlusCircle} /></i>
 								<p>Create a team</p>
