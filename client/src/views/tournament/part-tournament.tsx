@@ -12,7 +12,6 @@ import {RootState} from "../../reducer"
 import {Translation} from "../../lang/translation"
 
 
-
 export type PartTournamentType = {
 	tournament:Tournament|undefined,
 	parts:ParticipateTournament[]|undefined,
@@ -30,7 +29,7 @@ const PartTournament:React.FC<PartTournamentType> = function ({tournament,parts}
 	useEffect(() => {
 		if(tournament?.isTeam) {
 			setTeamPart(`Equipes ${parts && parts?.length > 1 ? parts?.length : 0}/ ${tournament.numberParticipate}`)
-		} else {
+		} else if(!tournament?.isTeam) {
 			setTeamPart("One to one")
 		}
 		if(parts && parts?.length > 1) {
@@ -38,7 +37,6 @@ const PartTournament:React.FC<PartTournamentType> = function ({tournament,parts}
 
 			})
 		}
-
 	},[])
 
 	const onShowConfirmed = async function() {
@@ -48,7 +46,6 @@ const PartTournament:React.FC<PartTournamentType> = function ({tournament,parts}
 		} else {
 			setShowPaiement(!showPaiement)
 		}
-
 	}
 
 	const handleClose = function() {
