@@ -493,6 +493,31 @@ h1{
 	.container .mobile-menu{
 		display: block;
 	}
+	.container .game-select a{
+		display: flex;
+		height: auto;
+		background: blue;
+		max-width: 358px;
+		margin: auto;
+		width: 100%;
+	}
+	.container .game-select p{
+		height: 100%;
+		padding: 22px;
+	}
+	.containt.cagnotte .title-lead{
+		display: block;
+	}
+	.cagnotte .personal{
+		margin-top: 25px;
+	}
+	.mes_equipes .logo-team img{
+		position: relative;
+	}
+	.title-lead.EditTeam .popup_team, .title-lead .popup_team{
+		width: 90%;
+		left: 29px;
+	}
 }
 @media screen and (max-width: 800px){
 	.container .tchat{
@@ -785,6 +810,32 @@ h1{
 	.container .fixed
 	{
 		width: 560px;
+	}
+	.container .my_account{
+		width: 100%;
+		max-width: inherit;
+	}
+	.settings .title-lead .menu-left{
+		margin-bottom: 15px;
+	}
+	.settings .my_account .img_account{
+		display: flex;
+		justify-content: center;
+	}
+	.settings .my_account .img_account .icon-settings{
+		left: auto;
+	}
+	.jackpot .container .personal{
+		display: block;
+	}
+	.jackpot .container .personal .historical,
+	.jackpot .container .personal .pay
+	{
+		width: 100%;
+		margin-top: 15px;
+	}
+	.jackpot .container .personal .historical p{
+		margin-top: 15px;
 	}
 }
 @media screen and (max-width: 520px) {

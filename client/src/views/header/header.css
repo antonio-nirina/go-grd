@@ -69,10 +69,10 @@
 }
 .tag{
     max-width: 386px;
-    width: 100%;    
+    width: 100%;
     vertical-align: middle;
 }
-.box{	
+.box{
 	width: 100%;
     display: flex;
     align-self: center;
@@ -111,7 +111,7 @@
 	left: 0px;
 	border: 1px solid #4c4d4f;
 }
-.connex{	
+.connex{
 	display: inline-block;
     vertical-align: middle;
     display: flex;
@@ -141,7 +141,7 @@
 .bg-gametag p.user{
 	width: 100%;
 	text-align: right;
-	padding-right: 4px;
+	padding-right: 15px;
 	font-family: "russo one";
 	font-size: 12px;
 	overflow: hidden;
@@ -151,7 +151,7 @@
 .bg-gametag a{
 	display: inline-block;
 }
-.bg-gametag p{	
+.bg-gametag p{
 	font-size: 13px;
 }
 .user-setting{
@@ -177,7 +177,7 @@
 .lang span{
 	display: block;
 }
-.square{	
+.square{
     cursor: pointer;
     margin-right: 26px;
     display: inline-block;
@@ -189,7 +189,7 @@
     border: 1px solid #4c4d4f;
     padding: 0px 2px;
     height: 18px;
-    align-self: center;    
+    align-self: center;
 }
 .connex .square:hover .tooltip,
 .relative.bell:hover .tooltip,
@@ -207,16 +207,16 @@
 	top: 30px;
 	left: -45px;
     background: #101010;
-    width: 115px;    
+    width: 115px;
     z-index: 2;
-    font-size: 12px;    
+    font-size: 12px;
     padding: 7px;
-    border-radius: 4px;    
+    border-radius: 4px;
     text-align: center;
     box-shadow: 0px 0px 7px #333332;
     z-index: 9;
 }
-.tooltip:before{	
+.tooltip:before{
 	content: "";
 	width: 0;
 	height: 0;
@@ -231,10 +231,10 @@
     padding: 1px;
     cursor: pointer;
     margin-right: 7px;
-    display: inline-block;        
+    display: inline-block;
     padding: 2px;
-    position: relative;    
-    border: 1px solid #4c4d4f;    
+    position: relative;
+    border: 1px solid #4c4d4f;
 }
 .count{
 	position: absolute;
@@ -342,21 +342,21 @@
 .header .invitation.show{
 	display: block;
 	padding: 15px;
-	border-radius: 0px 0px 7px 7px;	
+	border-radius: 0px 0px 7px 7px;
 }
 .header .invitation{
 	max-width: 270px;
     width: 100%;
 	display: none;
-    background: #2c2c2c;    
+    background: #2c2c2c;
     position: absolute;
-    height: 85vh;    
+    height: 85vh;
     top: 66px;
-    z-index: 2;    
+    z-index: 2;
     cursor: auto;
-    right: 5px;    
+    right: 5px;
     box-shadow: -6px 0px 62px #000000;
-    overflow-x: auto;   
+    overflow-x: auto;
 }
 .header .invitation p{
 	font-size: 13px;
@@ -471,13 +471,13 @@
 	margin-bottom: 5px;
 	font-family: "russo one";
 	display: block;
-	padding: 0 5px;	
+	padding: 0 5px;
 	transition: 100ms ease-in-out;
 }
 
 .dropdown.show .border{
 	padding: 7px 0;
-	margin: 5px 0; 
+	margin: 5px 0;
 	border-bottom: 1px solid #dd0000
 }
 
@@ -488,7 +488,7 @@
 i.u-connected{
 	display: inline-block;
 	height: 7px;
-	width: 7px;	
+	width: 7px;
 	border-radius: 50%;
 	float: none !important;
 	clear: both !important;
@@ -497,8 +497,8 @@ i.u-connected{
 	background: #1abb3d;
 	border: 1px solid #1abb3d;
 }
-.loader div.d-none{	
-	display: none;	
+.loader div.d-none{
+	display: none;
 }
 .loader div.loader-spinner{
 	display: inline-block;

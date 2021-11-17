@@ -68,6 +68,7 @@ const Tableau: React.FC = function() {
 					<div className="information-game">
 						<div className="tab-container">
 							<Tree />
+							test
 						</div>
 					</div>
 					<div className="clear"></div>
