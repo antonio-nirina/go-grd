@@ -44,6 +44,7 @@ const Compte: React.FC = function() {
 		setValue("birtDate",userConnectedRedux.user.birtDate)
 		setValue("lastname",userConnectedRedux.user.lastname)
 		setValue("language",userConnectedRedux.user.language)
+		setShowPopup(false)
 	}
 
 	const onSubmit = async function(data:Inputs){

@@ -75,26 +75,28 @@ const Team: React.FC = function() {
 						<Sidebar />
 						<div className="personal">
 							<h2>Mes équipes</h2>
-							<Link to="/edit-team" title="" className="my_team">
-								<img src={userConnectedRedux.user.avatar ? userConnectedRedux.user.avatar :AvatarDefault} alt="" width="150" height="150"/>
-								<strong>GROWTHMARKET</strong>
-								{
-									teams?.map(function(tem:TeamModel,index:number) {
-										<div className="team_infos">
-											<div className="info_title">
-												<p>{tem.creator}</p>
-												<p>Team Owner</p>
-												<p>{tem.players}</p>
+							{
+								teams?.map(function(tem:TeamModel,index:number) {
+									return (
+										<Link to={`/edit-team/${tem.uid}`} title="" className="my_team" key={index}>
+											<img src={tem.banniere} alt={`team-gamer-${tem.name}`} />
+											<strong>{tem.name}</strong>
+											<div className="team_infos" >
+												<div className="info_title">
+													<p>{tem.creator}</p>
+													<p>Team Owner</p>
+													<p>{tem.players}</p>
+												</div>
+												<div className="team_data">
+													<p>{dateLongCreated(tem.creationDate)}</p>
+													<p>{tem.creator}</p>
+													<p>{tem.players.length === 0 ? 1 : tem.players.length}</p>
+												</div>
 											</div>
-											<div className="team_data">
-												<p>{dateLongCreated(tem.creationDate)}</p>
-												<p>{tem.creator}</p>
-												<p>{tem.players.length === 0 ? 1 : tem.players.length}</p>
-											</div>
-										</div>
-									})
-								}
-							</Link>
+										</Link>
+									)
+								})
+							}
 							<div className="add_team" onClick={onPopup}>
 								<i><FontAwesomeIcon icon={faPlusCircle} /></i>
 								<p>Create a team</p>

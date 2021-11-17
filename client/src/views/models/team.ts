@@ -7,4 +7,5 @@ export interface TeamModel {
 	creator:User
 	players:User[]
 	records:number
+	banniere:string
 }
