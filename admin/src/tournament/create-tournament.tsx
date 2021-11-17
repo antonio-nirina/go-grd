@@ -90,7 +90,7 @@ const CreateTournament: React.FC = function() {
 			setIsValid(true)
 			return
 		}
-		if(uiGame && data.title && startDate && gameWay && uidPlateform) {
+		if(uiGame && data.title && startDate && gameWay && uidPlateform && lastDate) {
 			try {
 				const result = await createdTournament({ variables: {
 					date:startDate,

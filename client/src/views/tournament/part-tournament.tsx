@@ -37,7 +37,7 @@ const PartTournament:React.FC<PartTournamentType> = function ({tournament,parts}
 
 			})
 		}
-	},[])
+	},[tournament])
 
 	const onShowConfirmed = async function() {
 		const check = await checkInTeam(userConnectedRedux.user.uid)
