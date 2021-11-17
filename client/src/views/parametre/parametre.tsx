@@ -20,7 +20,8 @@ type Inputs = {
 	username:string,
 	country:string,
 	birtDate:string,
-	lastname:string
+	lastname:string,
+	language:string
 }
 
 const Settings: React.FC = function() {
@@ -57,6 +58,7 @@ const Settings: React.FC = function() {
 		setValue("country",userConnectedRedux.user.country)
 		setValue("birtDate",userConnectedRedux.user.birtDate)
 		setValue("lastname",userConnectedRedux.user.lastname)
+		setValue("language",userConnectedRedux.user.language.toUpperCase())
 
 	},[setValue,userConnectedRedux])
 

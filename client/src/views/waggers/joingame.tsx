@@ -1,5 +1,4 @@
 import React,{useState,useEffect} from "react"
-import { Link } from "react-router-dom"
 import {useQuery} from "@apollo/client"
 
 import Header from "../header/header"
@@ -7,10 +6,6 @@ import Footer from "../footer/footer"
 
 //import {Translation} from "../../lang/translation"
 //import {RootState} from "../../reducer"
-
-import { faChevronCircleUp} from "@fortawesome/free-solid-svg-icons"
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-
 import "../../assets/css/style.css"
 import "../annexe/tournois.css"
 import "../waggers/waggers.css"

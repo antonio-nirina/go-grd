@@ -3,7 +3,7 @@
 }
 .settings .menu-left{
 	max-width: 200px;
-	width: 100%;	
+	width: 100%;
 }
 .settings .personal{
 	width: 100%;
@@ -12,6 +12,7 @@
 .settings .menu-left li a{
 	display: block;
 	padding: 10px  0;
+	font-size: 15px;
 }
 .settings .menu-left li.active_link{
 	position: relative;
@@ -60,7 +61,7 @@
 }
 .field-middle .field-container{
 	margin-right: 5em;
-	width: 100%;	
+	width: 100%;
 }
 .field-container{
 	margin: 10px 0;
@@ -80,7 +81,7 @@
 	margin-right: 0;
 }
 .reseau-container{
-	display: flex;	
+	display: flex;
 }
 .rss-container{
 	display: flex;
@@ -103,13 +104,13 @@
 .rss-container p{
 	font-family: arial;
 	align-self: center;
-	width: 100%;	
+	width: 100%;
 }
 .rss-container p strong{
 	font-size: 10px;
 	font-weight: inherit;
 }
-.rss-container p span{	
+.rss-container p span{
 	display: block;
 	font-size: 12px;
 	color: #797979;
@@ -131,11 +132,11 @@
 	width: 40%;
 }
 .jackpot .pay h3{
-	
+
 }
 .jackpot .total{
 	display: flex;
-	padding: 5px 0;
+	padding: 15px 0;
 	border-bottom: 1px solid #797979;
 	margin-bottom: 5px;
 }
@@ -143,6 +144,7 @@
 	width: 100%;
 	color: #ffffff;
 	font-size: 13px;
+	text-transform: uppercase;
 }
 .jackpot .historical p{
 	text-align: center;
@@ -151,6 +153,10 @@
 }
 .jackpot .credit{
 	padding: 7px 0px;
+	text-align: center;
+}
+.jackpot .credit span{
+	text-transform: inherit;
 }
 
 .jackpot .personal-infos p{
@@ -163,11 +169,11 @@
 .jackpot .personal-infos p span{
 	display: block;
 	color: #797979;
-	border-bottom: 1px solid #797979;	
+	border-bottom: 1px solid #797979;
 }
 /******************************************/
 .mygames .personal{
-	display: block;	
+	display: block;
 }
 .mygames h3{
 	width: 93%;
@@ -200,7 +206,7 @@
 }
 .mygames .account-games div{
 	width: 250px;
-	align-self: top;	
+	align-self: top;
 }
 .mygames .mygame-list{
 	display: flex;
@@ -225,14 +231,16 @@
 #infos,
 #cagnotte,
 #jeux,
-#team
+#team,
+#compte
 {
-	position: relative;	
+	position: relative;
 }
 .mes_infos #infos:before,
 .cagnotte #cagnotte:before,
 .mes_jeux #jeux:before,
-.mes_equipes #team:before
+.mes_equipes #team:before,
+.mon_compte #compte:before
 {
 	content:"";
 	display: inline-block;
@@ -243,25 +251,34 @@
 	top: 7px;
 	left: -10px;
 }
+.mes_infos #infos a,
+.cagnotte #cagnotte a,
+.mes_jeux #jeux a,
+.mes_equipes #team a,
+.mon_compte #compte a{
+	color: #ffffff;
+}
 /***************************************/
 .my_team{
-	background: #dd0000;
+	background: #2c2c2c;
 	margin-top: 25px;
 	padding: 15px;
 	text-align: center;
-	max-width: 235px;
+	max-width: 300px;
 	width: 100%;
 	border-radius: 5px;
 	margin-right: 15px;
+	display: inline-block;
+	vertical-align: middle;
 }
 .my_team strong{
 	font-family: "russo one";
-	color: #000000;
+	color: #ffffff;
 	display: block;
 	padding: 15px;
 }
 .my_team p{
-	color: #000000;
+	color: #ffffff;
 	font-family: "russo one";
 }
 .info_title{
@@ -273,19 +290,15 @@
 	justify-content: stretch;
 }
 .team_data p{
-	width: 65px;
-	font-size: 11px;
-	text-align: right;
+	font-size: 13px;
+	width: 170px;
+	text-align: center;
 }
 .info_title p{
-	font-size: 11px;
+	font-size: 13px;
 	text-align: right;
 }
-.my_team{
-	display: inline-block;
-	vertical-align: middle;
-}
-.add_team{	
+.add_team{
 	width: 180px;
 	display: inline-block;
 	vertical-align: middle;
@@ -352,4 +365,261 @@
 }
 .settings .main .containt{
 	width: 93%;
+}
+.my_account{
+	text-align: center;
+	background: #2c2c2c;
+	padding: 15px;
+	max-width: 300px;
+	width: 100%;
+	border-radius: 5px;
+}
+.my_account .img_account{
+	position: relative;
+}
+.img_account i.set{
+	position: absolute;
+	top: 18px;
+	font-size: 16px;
+	color: #d00;
+	right: 15px;
+	cursor: pointer;
+}
+.account_name{
+	font-family: "russo one";
+}
+.adhesion{
+	padding: 15px 0;
+	font-size: 13px;
+	font-weight: bold;
+}
+.account_info{
+	font-family: "russo one"
+}
+.account_info span{
+	display: block;
+	padding: 5px 0;
+}
+.actual_account{
+	margin-top: 15px;
+}
+.edit_account{
+	text-align: left;
+	font-family: "russo one"
+}
+.edit_account label{
+	display: block;
+	color: gray;
+	font-size: 11px;
+}
+.edit_account .input_group{
+	margin-bottom: 10px;
+}
+.edit_account input{
+	background: none;
+	border: none;
+	font-family: "russo one";
+	color: gray;
+	font-size: 14px;
+	width: 100%;
+	padding: 10px 0;
+	border-bottom: 2px dotted #dd0000;
+}
+.edit_account select{
+	width: 100%;
+	background: #2c2c2c;
+	padding: 10px;
+	border: none;
+	color: gray;
+	font-family: "russo one";
+	text-align: center;
+	border-bottom: 2px dotted #dd0000;
+}
+.edit_account .btn-select{
+	text-align: center;
+	margin-top: 20px;
+}
+.edit_account .btn{
+	padding: 7px;
+	font-size: 12px;
+	font-family: "russo one";
+	text-align: center;
+}
+.edit_account .btn.bg-white{
+	color: #ffffff;
+	margin-left: 7px;
+}
+.edit_account .btn.bg-white:hover{
+	color: #ffffff;
+}
+.img_account img{
+	border: 2px solid #7878e6;
+	border-radius: 50%;
+}
+.icon-settings{
+	position: absolute;
+	top: 62px;
+	text-align: center;
+	background: red;
+	margin: auto;
+	left: 35%;
+	padding: 5px;
+	background: rgba(120,120,230, 0.5);
+}
+.icon-settings i{
+	display: inline-block;
+	margin-right: 15px;
+}
+.icon-settings i:last-child{
+	margin-right: 0;
+}
+.cagnotte{
+	font-family: "russo one";
+}
+.settings .cagnotte .personal h3{
+	font-family: "russo one";
+	border-bottom: 3px solid #ffffff;
+}
+.settings .menu-left li a{
+	color: #797979;
+	font-family: "russo one"
+}
+.pay button{
+	font-family: "russo one";
+}
+.pay button i{
+	font-size: 9px;
+	margin-right: 10px;
+}
+.pay h3{
+	font-size: 16px;
+	text-align: center;
+	border-bottom: 0 !important;
+}
+.coin-info span{
+	font-family: arial;
+	font-weight: 700;
+	display: block;
+	text-align: center;
+	padding: 15px;
+}
+.add-coin p{
+	text-align: center;
+	font-family: "quicksand regular";
+	font-size: 13px;
+}
+.add-coin p:first-child{
+	padding: 0px 15px 15px;
+}
+.block-coin{
+	display: flex;
+	justify-content: space-between;
+	background: #575D60;
+	margin-bottom: 10px;
+	padding: 7px;
+}
+.buy-coin p{
+	align-self: center;
+}
+.buy-coin p span{
+	display: block;
+	font-family: "quicksand regular";
+	font-size: 12px;
+}
+.buy-coin p span:first-child{
+	font-family: arial;
+	font-weight: bold;
+	font-size: 14px;
+}
+.buy-coin strong{
+	font-family: "quicksand regular";
+	align-self: center;
+	font-weight: inherit;
+	padding: 10px;
+	font-size: 12px;
+}
+.buy-coin button{
+	font-size: 12px;
+}
+.bg-0{
+	background: #000000;
+	padding: 3px;
+}
+.my_team img{
+	border-radius: 50%;
+}
+.bg-team{
+	height: 310px;
+
+}
+.logo-team{
+	display: flex;
+	justify-content: center;
+	text-align: center;
+	height: 100%;
+	position: relative;
+	width: 100%;
+
+}
+.logo-team img{
+	border-radius: 50%;
+	max-width: 150px;
+	width: 100%;
+	border: 4px solid #7E3F92;
+	height: auto;
+	display: flex;
+	position: absolute;
+	margin: auto;
+	bottom: -63px;
+}
+.add_team.edit{
+	width: 100%;
+	margin-left: 0;
+}
+.add_team.edit .center{
+
+}
+.edit .name{
+	margin-top: 25px;
+}
+.edit .info_team{
+	display: flex;
+	justify-content: center;
+	margin-top: 15px;
+}
+.edit .info_team span{
+	text-transform: inherit;
+	font-size: 12px;
+	border: 1px solid #ffffff;
+	padding: 5px 15px;
+	align-self: center;
+	border-radius: 5px;
+}
+.edit .info_team i{
+	align-self: center;
+	font-size: 12px;
+	display: block;
+	margin-bottom: 0;
+}
+.edit .team-list{
+	margin-top: 25px;
+}
+.edit .team-list p{
+	text-align: left;
+	margin-right: 15px;
+}
+.edit .team-list p img{
+	border-radius: 5px;
+}
+
+.edit input{
+	font-family: "russo one";
+	font-family: 16px;
+	color: #212121;
+}
+.edit .next-btn button.btn{
+	color: #ffffff;
+}
+.EditTeam .popup_team{
+	left: 39%;
 }

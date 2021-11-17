@@ -318,8 +318,10 @@ const Header: React.FC = function() {
 										<li><Link to="/assistance">assistance</Link></li>
 									</ul>
 								</li>
-								<li className="border"><Link to="#">Cagnote (0 GC)</Link></li>
-								<li className="border"><Link to="/parametre">Paramètres</Link></li>
+								<li className="border">
+									<Link to="/jackpot">Cagnote (0 GC)</Link>
+								</li>
+								<li className="border"><Link to="/compte">Compte</Link></li>
 								{userConnectedRedux.user && userConnectedRedux.user.roles && userConnectedRedux.user.roles.includes("role_admin") ? <li>
 									<span onClick={backAdmin} style={{"cursor":"pointer"}}>
 										{

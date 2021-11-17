@@ -90,7 +90,7 @@ const CreateTournament: React.FC = function() {
 			setIsValid(true)
 			return
 		}
-		if(uiGame && data.title && startDate && gameWay && uidPlateform) {
+		if(uiGame && data.title && startDate && gameWay && uidPlateform && lastDate) {
 			try {
 				const result = await createdTournament({ variables: {
 					date:startDate,
@@ -110,7 +110,7 @@ const CreateTournament: React.FC = function() {
 					priceParticipate:data.priceParticipate ? data.priceParticipate : "Invitation",
 					rules:rules,
 					laps:lapsDate.join("_"),
-					isTeam:gameWay === "1v1" ? true : false,
+					isTeam:gameWay === "1v1" ? false : true,
 					isPublic:isPrenimum,
 				} })
 				if (result.data.saveTournament) history.push("/admin/tournament")

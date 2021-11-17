@@ -21,6 +21,7 @@ export interface Tournament {
 	region:string
 	game:Game
 	plateform:Platform[]
+	spectateur:string
 }
 
 export interface Game {

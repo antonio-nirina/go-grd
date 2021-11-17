@@ -12,7 +12,6 @@ import {dateStringToDY} from "../../tools/dateConvert"
 const TournamentInc = function() {
 	const history = useHistory()
 	const [tournament, setTournament] = useState<Tournament[]>([])
-	const [sumPrice, setSumPrice] = useState<number>(0)
 	const [tournamentMonth, setTournamentMonth] = useState<number>(0)
 	const [isLoader, setIsLoader] = useState<boolean>(true)
 	const [isOpen, setIsOpen] = useState<boolean>(true)
@@ -25,24 +24,19 @@ const TournamentInc = function() {
 
 	useEffect(() => {
 		if(!loading && !error && data) {
-			let sum = 0
+
 			let month = new Date().toLocaleDateString().split("/")[1]
 			let count = 0
 			data.FindAllTournament.forEach(function(tournament:Tournament) {
 				if(new Date(tournament.dateStart).toLocaleDateString().split("/")[1] === month) {
 					count++
 				}
-				tournament.price.forEach(function(price:string){
-					sum = sum + parseInt(price)
-				})
 				const date1 = new Date()
 				const date2 = new Date(tournament.deadlineDate)
 				const diff = (date2.getTime() - date1.getTime())/1000/60
 				console.log(diff)
 				if (diff < 10 || diff <= 0) setIsOpen(false)
 			})
-
-			setSumPrice(sum)
 			setTournamentMonth(count)
 			setTournament(data.FindAllTournament)
 		}
@@ -70,7 +64,7 @@ const TournamentInc = function() {
 								<Link to={`/join-tournament?uid=${element.uid}`} >
 									<img src={element.game.logo} width="40" height="30" alt=""/>
 									<p className="game_name">{element.title}<span>{dateStringToDY(element.dateStart)} - 6 jours</span></p>
-									<p className="cashprize">Cashprize<span>{sumPrice} G-Coins</span></p>
+									<p className="cashprize">Cashprize<span>{`${element.price.reduce((prev,cur)=>(parseInt(prev.toString())+parseInt(cur)),0)}`} G-Coins</span></p>
 									<p className="arena">{element.gameWay} Arène</p>
 									<p className="place">
 										<i><FontAwesomeIcon icon={faUsers}/></i><span>{element.numberParticipate} places restantes</span>

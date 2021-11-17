@@ -22,6 +22,7 @@ const Me : React.FC = function() {
 	const [language,setLanguage] = useState<string>("")
 	const [updatedUser]  = useMutation(UPDATED_USER)
 	const { register, handleSubmit } = useForm<Inputs>()
+
 	const onChangeLanguage = function(e:any) {
 		if(parseInt(e.target.value) === 1) {
 			dispatch(changeLanguageUserConnected(userConnectedRedux.user,"en"))
