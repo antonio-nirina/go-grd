@@ -458,7 +458,7 @@
 }
 .icon-settings{
 	position: absolute;
-	top: 66px;
+	top: 62px;
 	text-align: center;
 	background: red;
 	margin: auto;
@@ -553,6 +553,8 @@
 
 }
 .logo-team{
+	display: flex;
+	justify-content: center;
 	text-align: center;
 	height: 100%;
 	position: relative;
@@ -566,10 +568,8 @@
 	border: 4px solid #7E3F92;
 	height: auto;
 	display: flex;
-	justify-content: end;
 	position: absolute;
 	margin: auto;
-	left: 43%;
 	bottom: -63px;
 }
 .add_team.edit{
@@ -602,7 +602,7 @@
 	margin-bottom: 0;
 }
 .edit .team-list{
-	margin-top: 15px;
+	margin-top: 25px;
 }
 .edit .team-list p{
 	text-align: left;

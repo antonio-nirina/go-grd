@@ -1,6 +1,6 @@
 @charset "UTF-8";
 .full-container{
-	padding: 0 2em;    
+	padding: 0 2em;
 }
 .full-container h1{
 	width: 100%;
@@ -29,7 +29,7 @@
 .side{
 	max-width: 308px;
 	background: #2c2c2c;
-	width: 100%;	
+	width: 100%;
 	border-radius: 5px;
 	border-left: 1px solid #666666;
 	border-right: 1px solid #666666;
@@ -39,13 +39,13 @@
 
 }
 .side-img{
-	height: 210px;	
+	height: 210px;
     background-repeat: no-repeat !important;
     background-size: 100% !important;
 }
 .side img{
 	border-radius: 5px 5px 0px 0px;
-	width: 100%;	
+	width: 100%;
 }
 
 .side table{
@@ -63,8 +63,8 @@
 }
 .prize-section{
 	padding: 15px 15px;
-	position: relative;	
-}	
+	position: relative;
+}
 .prize-warp{
 	background: #dd0000;
 	max-width: 75px;
@@ -81,15 +81,15 @@
 }
 .btn-full{
 	width: 100%;
-	text-align: center;	
-	border-radius: 0px 0px 5px 5px;	
+	text-align: center;
+	border-radius: 0px 0px 5px 5px;
 }
 .btn-full .bg-red{
 	padding: 15px;
 	background: #dd0000;
 	display: block;
 	border-radius: 0px 0px 5px 5px;
-	text-transform: uppercase;	
+	text-transform: uppercase;
 	text-align: center;
 }
 .in-container{
@@ -109,7 +109,7 @@
 }
 .entry h3{
 	font-family: "russo one";
-	font-size: 24px;	
+	font-size: 24px;
 }
 .entry-step{
 	padding: 20px;
@@ -127,8 +127,8 @@
 	background: #dd0000;
 	display: block;
 	width: 50px;
-	height: 36px;	
-	text-align: center;	
+	height: 36px;
+	text-align: center;
 	border-radius: 50%;
 	margin-left: 5px;
 	text-align: center;
@@ -162,7 +162,7 @@
 	width: 30%;
 	margin-top: 15px;
 }
-.entry-price span{	
+.entry-price span{
 	font-size: 16px;
 }
 .entry-price span:last-child{
@@ -173,6 +173,7 @@
 	width: 100%;
 	text-align: right;
 	margin-top: 15px;
+	display: flex;
 }
 .next-btn .btn:first-child{
 	color: #000000;
@@ -223,18 +224,18 @@
 	color: #ffffff;
 }
 .payment .input-group{
-	display: flex;	
+	display: flex;
 }
 .payment .input-group input:first-child{
 	margin-left: 0;
 }
 .payment input::placeholder{
 	font-family: "russo one";
-	
+
 }
 .card-number{
 	position: relative;
-}	
+}
 .card-number input{
 	width: 100%;
 	color: #ffffff;

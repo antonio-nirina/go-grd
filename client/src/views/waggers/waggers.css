@@ -2,12 +2,16 @@
 .waggersgame{
 	margin-top: 50px;
 }
-.joingame .part{	
+.joingame .part{
 	position: absolute;
 	top: 97px;
 	width: 100%;
 	padding-left: 131px;
 	left: 0px;
+}
+.joingame.stats .part{
+	position: initial;
+	margin-top: 5em;
 }
 .waggers .undertitle{
 	margin-top: 25px;
@@ -35,7 +39,7 @@
 	margin-top: 5px;
 }
 .waggers-title p{
-	font-size: 13px;	
+	font-size: 13px;
 	align-self: center;
 }
 .waggers-title p span{
@@ -51,9 +55,9 @@
 }
 
 .waggers-title p, .waggers-data p{
-	padding: 3px 15px;	
+	padding: 3px 15px;
 	width: 152px;
-	text-align: center;	
+	text-align: center;
 }
 .waggers-title p:last-child{
 	padding-right: 0px;
@@ -71,7 +75,7 @@
 	text-transform: uppercase;
 }
 .waggers-data p:last-child{
-	margin-left: 15px;	
+	margin-left: 15px;
 }
 .waggers-data p:first-child span{
 	text-transform: inherit;
@@ -81,8 +85,8 @@
 	font-weight: 500;
 }
 .waggers-data i{
-	display: block;	
-	font-size: 22px; 
+	display: block;
+	font-size: 22px;
 }
 .wagger-data i svg{
 	height: 25px;
@@ -92,7 +96,7 @@
 	font-size: 30px;
 }
 .joingame{
-	
+
 }
 .joingame .header-part{
 	width: 80%;
@@ -101,13 +105,13 @@
 	max-width: 180px;
 	width: 100%;
 	height: 180px;
-    border-radius: 50%;    
+    border-radius: 50%;
     float: left;
     position: relative;
-    top: -18px;       
+    top: -18px;
     z-index: 3;
 }
-.joingame .join-title{	
+.joingame .join-title{
 	top: 13px;
 	padding: 25px;
 	background: #2c2c2c;
@@ -117,7 +121,7 @@
     border-radius: 30px;
 }
 .joingame .join-title h2{
-	font-family: arial;	
+	font-family: arial;
 	font-weight: lighter;
 }
 .joingame .join-title p{
@@ -161,7 +165,7 @@
 	font-family: arial;
 	text-transform: uppercase;
 	padding: 15px 25px;
-	display: inline-block;		
+	display: inline-block;
 }
 .bar-menu-top li a.active{
 	font-weight: 700;
@@ -181,7 +185,7 @@
 	padding-left: 35px;
 }
 .item-info-left{
-	padding: 20px 7px;	
+	padding: 20px 7px;
 	background: #2c2c2c;
 	display: flex;
 	width: 71%;
@@ -203,15 +207,15 @@
 	width: 317px;
 	height: 35vh;
     margin-left: 20px;
-    position: relative;  
+    position: relative;
 }
-.item-all-info p{	
-	width: 170px;	
+.item-all-info p{
+	width: 170px;
     padding-top: 30px;
     margin-left: 26px;
-    display: table-cell;    
+    display: table-cell;
     font-size: 13px;
-    font-family: arial;    
+    font-family: arial;
 }
 p.item-text-right{
 	text-align: right;
@@ -235,7 +239,7 @@ p.item-text-left{
 	background: #2c2c2c;
 	margin-bottom: 0px;
 	text-align: inherit;
-	float: left;	
+	float: left;
 }
 .join-all button{
 	text-transform: inherit;
@@ -276,7 +280,7 @@ p.item-text-left{
 .profil-join{
 	clear: both;
 }
-.icon-tchat{              
+.icon-tchat{
     cursor: pointer;
     margin-top: 15px;
     text-align: right;
@@ -288,7 +292,7 @@ p.item-text-left{
 	color: #7b7b7b;
 	padding: 15px;
 	display: inline-block;
-	width: 52px;	
+	width: 52px;
 }
 .salon-team{
 	cursor: pointer;
@@ -307,7 +311,7 @@ p.item-text-left{
 	width: 100%;
 }
 .rules-waggers .txt{
-	
+
 }
 .rules-waggers .tableau{
 	width: 41% !important;
@@ -334,7 +338,7 @@ p.item-text-left{
 	padding: 15px;
 	border-bottom: 2px solid #dd0000;
 	max-width: 320px;
-	margin: auto;	
+	margin: auto;
 }
 .info_sup p{
 	padding: 25px;
