@@ -17,6 +17,7 @@ import {TeamModel} from "../models/team"
 import {GET_ONE_TEAM_BY_USER} from ".././../gql/team/query"
 import { dateLongCreated } from "../tools/dateConvert"
 import {SAVED_NEW_TEAM} from "../../gql/team/mutation"
+import { User } from "../models/tournament"
 
 type Inputs = {
 	name:string,
@@ -42,7 +43,6 @@ const Team: React.FC = function() {
 	})
 
 	useEffect(() => {
-		console.log(data)
 		if(!loading && !error && data) {
 			setTeams(data.FindTeamByUser)
 		}
@@ -89,7 +89,15 @@ const Team: React.FC = function() {
 												<div className="info_title">
 													<p>{tem.creator}</p>
 													<p>Team Owner</p>
-													<p>{tem.players}</p>
+													{tem.players.map(function(user:User){
+														return (
+															<>
+																<p>{user.lastname}</p>
+																<p>{user.firstname}</p>
+															</>
+														)
+													})}
+
 												</div>
 												<div className="team_data">
 													<p>{dateLongCreated(tem.creationDate)}</p>
