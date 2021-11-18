@@ -38,8 +38,6 @@ func (t *team) SavedTeamResolver(params graphql.ResolveParams) (interface{}, err
 	name, _ := params.Args["name"].(string)
 	creationDate, _ := params.Args["creationDate"].(string)
 	players, _ := params.Args["players"].(string)
-	logo, _ := params.Args["logo"].(string)
-	logoType, _ := params.Args["logoType"].(string)
 	creator, _ := params.Args["creator"].(string)
 	tag, _ := params.Args["tag"].(string)
 	description, _ := params.Args["description"].(string)
@@ -50,7 +48,7 @@ func (t *team) SavedTeamResolver(params graphql.ResolveParams) (interface{}, err
 	}
 
 	if players != "" {
-		arrays := strings.SplitAfter(players, "-")
+		arrays := strings.SplitAfter(players, "_")
 
 		for _, val := range arrays {
 			player, err := t.teamUserHandler.FindOneUserByUid(val)
@@ -62,16 +60,6 @@ func (t *team) SavedTeamResolver(params graphql.ResolveParams) (interface{}, err
 		}
 	}
 
-	var url string
-	
-	if logo != "" {
-		upl := &external.FileUpload{}
-		url, err = upl.HandleFileInBBApi(logo, logoType)
-
-		if err != nil {
-			return nil, err
-		}
-	}
 	
 	team := &entity.Team{
 		Uid:          primitive.NewObjectID(),
@@ -80,7 +68,7 @@ func (t *team) SavedTeamResolver(params graphql.ResolveParams) (interface{}, err
 		Players:      users,
 		Description:  description,
 		IsBlocked:    false,
-		Logo:         url,
+		Logo:         "",
 		Banniere:"",
 		Creator:      user,
 		Tag: tag,

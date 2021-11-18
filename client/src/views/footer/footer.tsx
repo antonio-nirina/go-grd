@@ -38,8 +38,8 @@ const Footer: React.FC = function() {
     	 			</ul>
     	 		</div>
                 <div className="mention">
-                    <img src={Fr} width="25" height="25"/>
-                    <img src={Ang} width="25" height="25"/>
+                    <img src={Fr} width="25" height="25" alt="language-fr" />
+                    <img src={Ang} width="25" height="25" alt="language-en"/>
                     <span>Mentions Légales</span>
                 </div>
     	 	</div>

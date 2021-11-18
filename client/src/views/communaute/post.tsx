@@ -197,7 +197,6 @@ const Post = function() {
 										:
 										<img style={{"cursor":"pointer","width":"21%"}} src={imgDefault} alt="default" />
 									}
-
 								</div>
 						</div>
 					</div>

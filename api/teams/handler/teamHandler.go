@@ -62,12 +62,14 @@ func (t *teamUsecase) SavedTeamHandler(team *entity.Team) (TeamViewModel, error)
 		TypeConnexion:team.Creator.TypeConnexion,
 		Created:team.Creator.Created,
 	}
-
+	var players []userHandler.UserViewModel
+	players = append(players,user)
+	
 	teamViewModel := TeamViewModel{
 		Uid:team.Uid.Hex(),
 		Name:team.Name,
 		CreationDate:team.CreationDate,
-		Players: []userHandler.UserViewModel{},
+		Players: players,
 		Description:team.Description,
 		IsBlocked:team.IsBlocked,
 		Logo:team.Logo,

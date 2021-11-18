@@ -42,26 +42,30 @@ const Team: React.FC = function() {
 	})
 
 	useEffect(() => {
+		console.log(data)
 		if(!loading && !error && data) {
 			setTeams(data.FindTeamByUser)
 		}
-	},[loading,error,data])
+	},[loading,error,data,teams])
 
 	const onSubmit = async function(data:Inputs){
 		const teamCreated = await createdTeam({ variables: {
 			name: data.name,
 			creationDate:(new Date()).toISOString(),
-			players:"",
-			logo:"",
+			players:[userConnectedRedux.user.uid].join("_"),
 			description:data.description,
 			tag:data.tag,
-			logoType:"",
 			creator:userConnectedRedux.user.uid
 		} })
 
 		if(teamCreated.data.createTeam) {
 			setShowPopup(false)
-			setTeams([...teams,teamCreated.data.createTeam])
+			const arrayTeam:TeamModel[] = []
+			arrayTeam.push(teamCreated.data.createTeam)
+			teams.forEach(function(team:TeamModel) {
+				arrayTeam.push(team)
+			})
+			setTeams(teams)
 		}
 	}
 

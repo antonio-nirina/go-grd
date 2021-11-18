@@ -25,8 +25,11 @@ var TeamSchemaType = graphql.NewObject(graphql.ObjectConfig{
 		"tag": &graphql.Field{
 			Type: graphql.String,
 		},
-		"players": &graphql.Field{
+		"banniere": &graphql.Field{
 			Type: graphql.String,
+		},
+		"players": &graphql.Field{
+			Type: graphql.NewList(UserSchemaType),
 		},
 		"creator": &graphql.Field{
 			Type: UserSchemaType,

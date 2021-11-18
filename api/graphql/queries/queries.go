@@ -135,6 +135,7 @@ func GetRootFields() graphql.Fields {
 		"FindAllHome":               FindAllHome(),
 		"FindOneTeam":               FindOneTeam(),
 		"FindAllTeam":               FindAllTeam(),
+		"FindTeamByUser":			 FindTeamByUser(),
 		"FindOneAsist":              FindOneAsist(),
 		"FindAllAsist":              FindAllAsist(),
 		"FindOneSubject":            FindOneSubject(),
