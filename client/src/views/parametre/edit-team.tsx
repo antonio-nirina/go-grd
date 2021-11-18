@@ -36,7 +36,7 @@ const EditTeam: React.FC = function() {
 					<div className="title-lead EditTeam">
 						<Sidebar />
 						<div className="personal">
-							<div className="bg-team">
+							<div style={{ backgroundImage: 'url(' + ImageTeam + ')', backgroundPosition: 'center', backgroundSize: '100%', backgroundRepeat: 'no-repeat' }} className="bg-team">
 								<div className="logoteam_container">
 									<div className="logo-team">
 										<img src={LogoTeam} alt="" className="logo-team"/>
