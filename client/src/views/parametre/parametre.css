@@ -553,6 +553,7 @@
 	position: relative;
 	background-color: #1F132B;
 	background: url("../../assets/image/team/bg-team.jpg") no-repeat;
+	background-size: 100%;
 }
 .logo-team{
 	display: flex;
