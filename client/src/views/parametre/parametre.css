@@ -549,8 +549,10 @@
 	border-radius: 50%;
 }
 .bg-team{
-	height: 310px;
+	height: 286px;
 	position: relative;
+	background-color: #1F132B;
+	background: url("../../assets/image/team/bg-team.jpg") no-repeat;
 }
 .logo-team{
 	display: flex;
