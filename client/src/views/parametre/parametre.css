@@ -549,28 +549,38 @@
 	border-radius: 50%;
 }
 .bg-team{
-	height: 310px;
-
+	height: 286px;
+	position: relative;
+	background-color: #1F132B;
+	background: url("../../assets/image/team/bg-team.jpg") no-repeat;
 }
 .logo-team{
 	display: flex;
 	justify-content: center;
 	text-align: center;
-	height: 100%;
-	position: relative;
 	width: 100%;
-
+	max-width: 150px;
+	height: 150px;
+	position: relative;
+	border: 2px solid #7E3F92;
+	background: #1F132B;
+	border-radius: 50%;
+}
+.logoteam_container{
+	width: 100%;
+	text-align: center;
+	display: flex;
+	justify-content: center;
+	position: absolute;
+	margin: auto;
+	bottom: -63px;
 }
 .logo-team img{
 	border-radius: 50%;
 	max-width: 150px;
 	width: 100%;
-	border: 4px solid #7E3F92;
 	height: auto;
 	display: flex;
-	position: absolute;
-	margin: auto;
-	bottom: -63px;
 }
 .add_team.edit{
 	width: 100%;
