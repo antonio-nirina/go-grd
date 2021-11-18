@@ -1,0 +1,68 @@
+
+.streams-container{
+	display: flex;
+	padding: 15px;
+	border: 1px solid gray;
+	border-radius: 5px;
+	justify-content: center;
+}
+.streams .main h2{
+	font-family: "russo one";
+	padding: 15px;
+}
+.streams-container .stream-video{
+	width: 75%;
+}
+.streams-container video{
+	width: 100%;
+}
+.live-tchat{
+	background: #2c2c2c;
+	width: 250px;
+	margin-left: 5px;
+}
+.live-stream{
+	padding: 0 15px;
+}
+.live-tchat .header-live p{
+	padding: 15px;
+	text-align: center;
+	text-transform: uppercase;
+	border-bottom: 1px solid #cccccc;
+	margin-bottom: 15px;
+}
+.live-content{
+	height: 50vh;
+	overflow-y: auto;
+}
+.live-content p{
+	color: #dd0000;
+}
+.live-content p span{
+	color: #ffffff;
+}
+.edit-msg{
+	margin: 15px 0;
+}
+.edit-msg input{
+	width: 90%;
+	padding: 10px;
+	border: none;
+	background: gray;
+	color: #ffffff;
+}
+.footer-live{
+	display: flex;
+	justify-content: space-between;
+}
+.footer-live span{
+	align-self: center;
+}
+.footer-live button{
+	background: #8E47FF;
+	border: none;
+	color: #ffffff;
+	padding: 7px;
+	border-radius: 5px;
+	align-self: center;
+}
