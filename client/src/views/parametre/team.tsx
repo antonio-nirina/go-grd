@@ -46,6 +46,7 @@ const Team: React.FC = function() {
 		if(!loading && !error && data) {
 			setTeams(data.FindTeamByUser)
 		}
+		console.log(teams)
 	},[loading,error,data,teams])
 
 	const onSubmit = async function(data:Inputs){
@@ -80,7 +81,7 @@ const Team: React.FC = function() {
 						<div className="personal">
 							<h2>Mes équipes</h2>
 							{
-								teams?.map(function(tem:TeamModel,index:number) {
+								teams.length > 0 ? teams?.map(function(tem:TeamModel,index:number) {
 									return (
 										<Link to={`/edit-team/${tem.uid}`} title="" className="my_team" key={index}>
 											<img src={tem.banniere} alt={`team-gamer-${tem.name}`} />
@@ -107,7 +108,7 @@ const Team: React.FC = function() {
 											</div>
 										</Link>
 									)
-								})
+								}) : <>Hello</>
 							}
 							<div className="add_team" onClick={onPopup}>
 								<i><FontAwesomeIcon icon={faPlusCircle} /></i>
