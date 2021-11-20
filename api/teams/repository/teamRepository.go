@@ -134,7 +134,7 @@ func (c *driverRepository) CountTeamRepository()(int,error) {
 func (c *driverRepository) FindTeamByUserRepo(idQuery primitive.ObjectID) ([]entity.Team, error) {
 	var collection = c.client.Database("grd_database").Collection("team")
 	var results []entity.Team
-	cur, err := collection.Find(context.TODO(), bson.M{"players": idQuery},options.Find().SetSort(bson.M{"_id": -1}))
+	cur, err := collection.Find(context.TODO(), bson.M{"players.uid": idQuery},options.Find().SetSort(bson.M{"_id": -1}))
 
 	if err != nil {
 		return nil, err

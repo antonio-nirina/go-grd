@@ -29,6 +29,7 @@ import Assistant from "../assistant/assistant"
 import Assistance from "../assistance/assistance"
 import Contact from "../assistance/contact"
 import Communaute from "../communaute/communaute"
+import Stream from "../stream/stream"
 import Login from "../auth/login"
 import Profil from "../profil/profil"
 import Parametre from "../parametre/parametre"
@@ -82,6 +83,7 @@ const Router = function() {
 			<ProtectedRoute path="/view" exact component={View} />
 			<ProtectedRoute path="/lobby" exact component={Lobby} />
 			<ProtectedRoute path="/communaute" exact component={Communaute} />
+			<ProtectedRoute path="/stream" exact component={Stream} />
 			<ProtectedRoute path="/assistant" exact component={Assistant} />
 			<ProtectedRoute path="/assistance" exact component={Assistance} />
 			<ProtectedRoute path="/contact" exact component={Contact} />

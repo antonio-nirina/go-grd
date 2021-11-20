@@ -5,24 +5,38 @@ mutation createTeam(
 	$name:String,
 	$creationDate:String,
 	$players:String,
-	$logo:String,
 	$creator:String,
 	$tag:String,
-	$bann:String,
-	$bannType:String,
-	$logoType:String,
 	$description:String){
 	createTeam(
 		name:$name,
 		creationDate:$creationDate,
 		players:$players,
-		logo:$logo,
 		creator:$creator,
 		tag:$tag,
-		bann:$bann,
-		bannType:$bannType,
-		description:$description,
-		logoType:$logoType)
+		description:$description) {
+			uid
+			name
+			logo
+			banniere
+			creationDate
+			description
+			logo
+			tag
+			players{
+				uid
+				email
+				username
+				avatar
+			}
+			records
+			creator{
+				uid
+				email
+				username
+				avatar
+			}
+		}
 	}
 `
 

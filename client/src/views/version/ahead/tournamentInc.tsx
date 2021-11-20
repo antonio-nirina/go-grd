@@ -15,6 +15,7 @@ const TournamentInc = function() {
 	const [tournamentMonth, setTournamentMonth] = useState<number>(0)
 	const [isLoader, setIsLoader] = useState<boolean>(true)
 	const [isOpen, setIsOpen] = useState<boolean>(true)
+	// const [dateDiff,setDateDiff] = useState<string[]>([])
 	const {loading,error,data} 	= useQuery(GET_ALL_TOURNAMENT, {
 		variables: {
 			limit:4,
@@ -24,7 +25,6 @@ const TournamentInc = function() {
 
 	useEffect(() => {
 		if(!loading && !error && data) {
-
 			let month = new Date().toLocaleDateString().split("/")[1]
 			let count = 0
 			data.FindAllTournament.forEach(function(tournament:Tournament) {
@@ -34,7 +34,7 @@ const TournamentInc = function() {
 				const date1 = new Date()
 				const date2 = new Date(tournament.deadlineDate)
 				const diff = (date2.getTime() - date1.getTime())/1000/60
-				console.log(diff)
+				// setDateDiff([...dateDiff,diff.toString()])
 				if (diff < 10 || diff <= 0) setIsOpen(false)
 			})
 			setTournamentMonth(count)

@@ -37,9 +37,10 @@ const EditTeam: React.FC = function() {
 						<Sidebar />
 						<div className="personal">
 							<div style={{ backgroundImage: 'url(' + ImageTeam + ')', backgroundPosition: 'center', backgroundSize: '100%', backgroundRepeat: 'no-repeat' }} className="bg-team">
-								<label htmlFor="Imgteam"></label>
-								<div className="logo-team">
-									<img src={LogoTeam} alt="" className="logo-team"/>
+								<div className="logoteam_container">
+									<div className="logo-team">
+										<img src={LogoTeam} alt="" className="logo-team"/>
+									</div>
 								</div>
 							</div>
 							<div className="add_team edit">

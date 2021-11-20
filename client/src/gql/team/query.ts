@@ -6,7 +6,9 @@ export const GET_ALL_TEAMS = gql`
 		uid
 		name
 		logo
+		banniere
 		creationDate
+		logo
 		records
 		creator{
 			uid
@@ -24,6 +26,7 @@ export const GET_ONE_TEAM = gql`
 		uid
 		name
 		logo
+		banniere
 		creationDate
 		creator{
 			uid
@@ -42,11 +45,13 @@ export const GET_ONE_TEAM_BY_USER = gql`
 		name
 		logo
 		creationDate
-		creator{
+		players{
 			uid
 			email
 			username
 			avatar
 		}
+		banniere
+		creator
 	}
 }`

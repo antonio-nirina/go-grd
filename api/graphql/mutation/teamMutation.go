@@ -9,7 +9,7 @@ import (
 func createTeam() *graphql.Field {
 	return &graphql.Field{
 		Type:        types.TeamSchemaType,
-		Description: "Home content create",
+		Description: "Team content create",
 		Args: graphql.FieldConfigArgument{
 			"name": &graphql.ArgumentConfig{
 				Type: graphql.String,
@@ -20,12 +20,6 @@ func createTeam() *graphql.Field {
 			"players": &graphql.ArgumentConfig{
 				Type: graphql.String,
 			},	
-			"logo": &graphql.ArgumentConfig{
-				Type: graphql.String,
-			},
-			"logoType": &graphql.ArgumentConfig{
-				Type: graphql.String,
-			},
 			"creator":&graphql.ArgumentConfig{
 				Type: graphql.String,
 			},
