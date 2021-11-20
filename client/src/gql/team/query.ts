@@ -45,13 +45,13 @@ export const GET_ONE_TEAM_BY_USER = gql`
 		name
 		logo
 		creationDate
-		players
-		banniere
-		creator{
+		players{
 			uid
 			email
 			username
 			avatar
 		}
+		banniere
+		creator
 	}
 }`

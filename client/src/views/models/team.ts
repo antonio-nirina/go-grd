@@ -4,7 +4,7 @@ export interface TeamModel {
 	uid:string
 	name:string
 	creationDate:string
-	creator:User
+	creator:string
 	players:User[]
 	records:number
 	banniere:string

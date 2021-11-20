@@ -32,7 +32,7 @@ var TeamSchemaType = graphql.NewObject(graphql.ObjectConfig{
 			Type: graphql.NewList(UserSchemaType),
 		},
 		"creator": &graphql.Field{
-			Type: UserSchemaType,
+			Type: graphql.String,
 		},
 		"records": &graphql.Field{
 			Type: graphql.Int,

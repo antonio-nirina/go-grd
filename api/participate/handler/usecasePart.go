@@ -87,7 +87,8 @@ func (p *partUsecase) FindPartHandler(idQuery string) (partViewModel, error) {
 			Description:  val.Description,
 			IsBlocked:    val.IsBlocked,
 			Logo:         val.Logo,
-			Creator: userH.UserViewModel{
+			Creator: val.Creator.Username,
+			/*Creator: userH.UserViewModel{
 				Uid:           val.Creator.Uid.Hex(),
 				FirstName:     val.Creator.FirstName,
 				LastName:      val.Creator.LastName,
@@ -100,7 +101,7 @@ func (p *partUsecase) FindPartHandler(idQuery string) (partViewModel, error) {
 				Roles:         val.Creator.Roles,
 				TypeConnexion: val.Creator.TypeConnexion,
 				Created:       val.Creator.Created,
-			},
+			},*/
 			Records: 0,
 		}
 
@@ -210,7 +211,8 @@ func (p *partUsecase) FindAllPartHandler(pageNumber int64, limit int64) ([]partV
 				Description:  val.Description,
 				IsBlocked:    val.IsBlocked,
 				Logo:         val.Logo,
-				Creator: userH.UserViewModel{
+				Creator: val.Creator.Username,
+				/*Creator: userH.UserViewModel{
 					Uid:           val.Creator.Uid.Hex(),
 					FirstName:     val.Creator.FirstName,
 					LastName:      val.Creator.LastName,
@@ -223,7 +225,7 @@ func (p *partUsecase) FindAllPartHandler(pageNumber int64, limit int64) ([]partV
 					Roles:         val.Creator.Roles,
 					TypeConnexion: val.Creator.TypeConnexion,
 					Created:       val.Creator.Created,
-				},
+				},*/
 				Records: 0,
 			}
 			teamView = append(teamView, resTeam)
@@ -335,7 +337,8 @@ func (p *partUsecase) FindPartUserHandler(pageNumber int64, limit int64, userUid
 				Description:  val.Description,
 				IsBlocked:    val.IsBlocked,
 				Logo:         val.Logo,
-				Creator: userH.UserViewModel{
+				Creator: val.Creator.Username,
+				/*Creator: userH.UserViewModel{
 					Uid:           val.Creator.Uid.Hex(),
 					FirstName:     val.Creator.FirstName,
 					LastName:      val.Creator.LastName,
@@ -348,7 +351,7 @@ func (p *partUsecase) FindPartUserHandler(pageNumber int64, limit int64, userUid
 					Roles:         val.Creator.Roles,
 					TypeConnexion: val.Creator.TypeConnexion,
 					Created:       val.Creator.Created,
-				},
+				},*/
 				Records: 0,
 			}
 			teamView = append(teamView, resTeam)
@@ -480,7 +483,8 @@ func (p *partUsecase) FindPartUserLeagueHandler(userUid primitive.ObjectID, leag
 			Description:  val.Description,
 			IsBlocked:    val.IsBlocked,
 			Logo:         val.Logo,
-			Creator: userH.UserViewModel{
+			Creator: val.Creator.Username,
+			/*Creator: userH.UserViewModel{
 				Uid:           val.Creator.Uid.Hex(),
 				FirstName:     val.Creator.FirstName,
 				LastName:      val.Creator.LastName,
@@ -493,7 +497,7 @@ func (p *partUsecase) FindPartUserLeagueHandler(userUid primitive.ObjectID, leag
 				Roles:         val.Creator.Roles,
 				TypeConnexion: val.Creator.TypeConnexion,
 				Created:       val.Creator.Created,
-			},
+			},*/
 			Records: 0,
 		}
 
@@ -608,7 +612,8 @@ func (p *partUsecase) FindPartUserTournamentHandler(uidUser primitive.ObjectID, 
 				Description:  val.Description,
 				IsBlocked:    val.IsBlocked,
 				Logo:         val.Logo,
-				Creator: userH.UserViewModel{
+				Creator: val.Creator.Username,
+				/*Creator: userH.UserViewModel{
 					Uid:           val.Creator.Uid.Hex(),
 					FirstName:     val.Creator.FirstName,
 					LastName:      val.Creator.LastName,
@@ -621,7 +626,7 @@ func (p *partUsecase) FindPartUserTournamentHandler(uidUser primitive.ObjectID, 
 					Roles:         val.Creator.Roles,
 					TypeConnexion: val.Creator.TypeConnexion,
 					Created:       val.Creator.Created,
-				},
+				},*/
 				Records: 0,
 			}
 

@@ -111,7 +111,7 @@ func (t *team) UpdatedTeamByBannedResolver(params graphql.ResolveParams) (interf
 	uid, _ := params.Args["uid"].(string)
 	objectId, err := primitive.ObjectIDFromHex(uid)
 	team, err := t.teamHandler.FindTeamHandler(uid)
-	user, err := t.teamUserHandler.FindOneUserByUid(team.Creator.Uid)
+	user, err := t.teamUserHandler.FindUserByUsername(team.Creator)
 
 	if err != nil {
 		return nil, err

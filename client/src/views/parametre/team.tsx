@@ -1,4 +1,4 @@
-import React, {useState,useEffect} from "react"
+import React, {useState,useEffect,useMemo} from "react"
 import { Link } from "react-router-dom"
 import { useForm } from "react-hook-form"
 import { useSelector } from "react-redux"
@@ -10,7 +10,7 @@ import Footer from "../footer/footer"
 import "../parametre/parametre.css"
 import Sidebar from "./sidebar"
 import {RootState} from "../../reducer"
-import AvatarDefault from "../../assets/image/game-tag.png"
+// import AvatarDefault from "../../assets/image/game-tag.png"
 import { faPlusCircle, faTimes } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {TeamModel} from "../models/team"
@@ -18,6 +18,7 @@ import {GET_ONE_TEAM_BY_USER} from ".././../gql/team/query"
 import { dateLongCreated } from "../tools/dateConvert"
 import {SAVED_NEW_TEAM} from "../../gql/team/mutation"
 import { User } from "../models/tournament"
+import ImageTeam from "../../assets/image/team/bg-team.jpg"
 
 type Inputs = {
 	name:string,
@@ -42,11 +43,12 @@ const Team: React.FC = function() {
 		},
 	})
 
-	useEffect(() => {
+	useMemo(() => {
+		console.log(data)
 		if(!loading && !error && data) {
 			setTeams(data.FindTeamByUser)
 		}
-		console.log(teams)
+
 	},[loading,error,data,teams])
 
 	const onSubmit = async function(data:Inputs){
@@ -83,8 +85,7 @@ const Team: React.FC = function() {
 							{
 								teams.length > 0 ? teams?.map(function(tem:TeamModel,index:number) {
 									return (
-										<Link to={`/edit-team/${tem.uid}`} title="" className="my_team" key={index}>
-											<img src={tem.banniere} alt={`team-gamer-${tem.name}`} />
+										<Link to={`/edit-team/${tem.uid}`} style={{ backgroundImage: 'url(' + tem.banniere ? tem.banniere : ImageTeam + ')', backgroundPosition: 'center', backgroundSize: '100%', backgroundRepeat: 'no-repeat' }} title="" className="my_team" key={index}>
 											<strong>{tem.name}</strong>
 											<div className="team_infos" >
 												<div className="info_title">
@@ -108,7 +109,7 @@ const Team: React.FC = function() {
 											</div>
 										</Link>
 									)
-								}) : <>Hello</>
+								}) : <></>
 							}
 							<div className="add_team" onClick={onPopup}>
 								<i><FontAwesomeIcon icon={faPlusCircle} /></i>

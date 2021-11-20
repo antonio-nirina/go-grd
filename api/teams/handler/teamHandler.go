@@ -27,7 +27,7 @@ type TeamViewModel struct {
 	Logo   					string            			`json:"logo"`
 	Tag   					string            			`json:"tag"`
 	Banniere   					string            	`json:"banniere"`
-	Creator   				userHandler.UserViewModel    `json:"creator"`
+	Creator   				string `json:"creator"` //userHandler.UserViewModel    `json:"creator"`
 	Records   					int            			`json:"records"`
 }
 
@@ -73,7 +73,7 @@ func (t *teamUsecase) SavedTeamHandler(team *entity.Team) (TeamViewModel, error)
 		Description:team.Description,
 		IsBlocked:team.IsBlocked,
 		Logo:team.Logo,
-		Creator:user,
+		Creator:user.Username,
 		Banniere: team.Banniere,
 		Tag: team.Tag,      			
 	}
@@ -138,7 +138,7 @@ func (t *teamUsecase) FindTeamHandler(idQuery string) (TeamViewModel, error) {
 		Description:result.Description,
 		IsBlocked:result.IsBlocked,
 		Logo:result.Logo,
-		Creator:user,
+		Creator:user.Username,
 		Tag: result.Tag,   
 		Banniere: result.Banniere,   			
 	}
@@ -222,7 +222,7 @@ func (t *teamUsecase) FindAllTeamHandler(pageNumber int64,limit int64) ([]TeamVi
 			Description:val.Description,
 			IsBlocked:val.IsBlocked,
 			Logo:val.Logo,
-			Creator:user,
+			Creator:user.Username,
 			Records:records,
 			Tag: val.Tag,  
 			Banniere: val.Banniere, 		
@@ -314,7 +314,7 @@ func (t *teamUsecase) FindTeamByUserHandler(idQuery string) ([]TeamViewModel, er
 			Description:val.Description,
 			IsBlocked:val.IsBlocked,
 			Logo:val.Logo,
-			Creator:user,
+			Creator:user.Username,
 			Records:0, 
 			Tag: val.Tag,
 			Banniere: val.Banniere,   		
