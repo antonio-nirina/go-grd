@@ -50,7 +50,7 @@ const Joingame: React.FC = function(props:any) {
   return(
   	<div className="container">
   		<Header />
-  		<div className="participate league joingame">
+  		<div className="participate league joingame general">
 			<div className="marg">
 				<HeaderTournament {...HeaderProps} />
         	<div className="information-game">

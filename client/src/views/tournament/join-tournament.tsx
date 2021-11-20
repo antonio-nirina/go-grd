@@ -72,7 +72,7 @@ const Joingame: React.FC = function(props:any) {
   return(
   	<div className="container">
       	<Header />
-      	<div className="participate league joingame">
+      	<div className="participate league joingame general">
         <div style={{ backgroundImage: 'url(' + tournament?.game.image + ')', backgroundPosition: 'center', backgroundSize: '100%', backgroundRepeat: 'no-repeat' }} className="obj"></div>
         <div className="marg">
 			<HeaderTournament {...HeaderProps} />
