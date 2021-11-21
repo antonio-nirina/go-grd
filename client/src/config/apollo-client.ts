@@ -4,8 +4,8 @@ import { getMainDefinition } from '@apollo/client/utilities'
 import { WebSocketLink } from "@apollo/client/link/ws"
 import {GetCookie} from "../views/auth/utils"
 
-const URI_API = "https://api.gmrtl4.fr" //process.env.NODE_ENV === "development" ? "http://localhost:4000" : "https://api.gmrtl4.fr"
-const URI_WS  = "wss://ws.gmrtl4.fr/subscriptions" //process.env.NODE_ENV === "development" ? "ws://localhost:8080/subscriptions" : "wss://ws.gmrtl4.fr/subscriptions"
+const URI_API = process.env.NODE_ENV === "development" ? "http://localhost:4000" : "https://api.gmrtl4.fr"
+const URI_WS  = process.env.NODE_ENV === "development" ? "ws://localhost:8080/subscriptions" : "wss://ws.gmrtl4.fr/subscriptions"
 
 const httpLink = new HttpLink({
 	uri: `${URI_API}/graphql`,
@@ -46,7 +46,7 @@ export const createApolloClient = () => {
 	})
 	const client =  new ApolloClient({
 		link: authLink.concat(splitLink),
-		cache: new InMemoryCache()
+		cache: new InMemoryCache({typePolicies:{}})
 	})
 
 	return client

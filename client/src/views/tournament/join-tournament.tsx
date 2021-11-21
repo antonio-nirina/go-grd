@@ -85,7 +85,7 @@ const Joingame: React.FC = function(props:any) {
             	<div className="item-all-content">
                 <div className="item-all-info">
                   	<p><span>Format</span></p>
-                  	<p className="item-text-left">Tableau unique</p>
+                  	<p className="item-text-left">{tournament?.format}</p>
                   	<p><span>Début des inscriptions</span></p>
                   	<p>{dateStringToDHString(tournament?.dateStart).replace(","," -")}</p>
                 </div>

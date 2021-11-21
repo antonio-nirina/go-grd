@@ -52,7 +52,7 @@ const TournamentInc = function() {
 						color="#dd0000"
 					/>
 				</div>
-				<h2>En ce moment {tournamentMonth > 0 && isOpen ? '('+tournamentMonth+" tournois ce mois-ci"+')' : "Accun tournois pour l'instant"} </h2>
+				<h2>En ce moment {tournamentMonth > 0 && isOpen ? `(${tournamentMonth} tournois ce mois-ci)`: "Accun tournois pour l'instant"} </h2>
 				<p>{tournamentMonth > 0 && isOpen ? "Les prochains tournois à venir" : ""} </p>
 			</div>
 			<div className="tournament_wall">

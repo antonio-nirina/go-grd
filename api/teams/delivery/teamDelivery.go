@@ -1,6 +1,7 @@
 package delivery
 
 import (
+	"errors"
 	"strings"
 
 	"github.com/graphql-go/graphql"
@@ -19,6 +20,7 @@ type TeamResolver interface {
 	UpdatedTeamByBannedResolver(params graphql.ResolveParams) (interface{}, error)
 	TeamByUserResolver(params graphql.ResolveParams) (interface{}, error)
 	UpdatedTeamResolver(params graphql.ResolveParams) (interface{}, error)
+	DeleteTeamResolver(params graphql.ResolveParams) (interface{}, error)
 }
 
 type team struct {
@@ -199,12 +201,14 @@ func (t *team) UpdatedTeamResolver(params graphql.ResolveParams) (interface{}, e
 	var arrayPlayers []userEntity.User
 
 	for _,item := range arrayUsers {
-		userPlayers, err := t.teamUserHandler.FindOneUserByUid(item)
-		if err != nil {
-			return nil, err
-		}
+		if item != "" {
+			userPlayers, err := t.teamUserHandler.FindOneUserByUid(item)
+			if err != nil {
+				return nil, errors.New("User not found")
+			}
 
-		arrayPlayers = append(arrayPlayers, userPlayers)
+			arrayPlayers = append(arrayPlayers, userPlayers)
+		}
 	}
 
 	if err != nil {
@@ -244,4 +248,21 @@ func (t *team) UpdatedTeamResolver(params graphql.ResolveParams) (interface{}, e
 	}
 
 	return teamNew, nil
+}
+
+func (t *team) DeleteTeamResolver(params graphql.ResolveParams) (interface{}, error) {
+	uid, _ := params.Args["uid"].(string)
+	_, err := t.teamHandler.FindTeamByUserHandler(uid)
+
+	if err != nil {
+		return nil, err
+	}
+
+	res,err := t.teamHandler.DeleteTeamHandler(uid)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return res,err
 }

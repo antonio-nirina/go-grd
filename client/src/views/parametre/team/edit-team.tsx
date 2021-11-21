@@ -1,31 +1,56 @@
-import React, {useState} from "react"
-import { Link } from "react-router-dom"
+import React, {useState,useMemo,useRef} from "react"
+import { useParams } from "react-router-dom"
 import { useSelector } from "react-redux"
 import {useQuery} from "@apollo/client"
 
-import Header from "../header/header"
-import Footer from "../footer/footer"
-import "../parametre/parametre.css"
-import Sidebar from "./sidebar"
-import {RootState} from "../../reducer"
-import AvatarDefault from "../../assets/image/game-tag.png"
+import Header from "../../header/header"
+import Footer from "../../footer/footer"
+import "../../parametre/parametre.css"
+import Sidebar from "../sidebar"
+import {RootState} from "../../../reducer"
+import AvatarDefault from "../../../assets/image/game-tag.png"
 import { faUserPlus, faTimes } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-//import {Team} from "../models/team"
+import {GET_ONE_TEAM} from "../../../gql/team/query"
+import {TeamModel} from "../../models/team"
 
-import ImageTeam from "../../assets/image/team/bg-team.jpg"
-import LogoTeam from "../../assets/image/team/logo-team.jpg"
+import ImageTeam from "../../../assets/image/team/bg-team.jpg"
+import LogoTeam from "../../../assets/image/team/logo-team.jpg"
+import EditOrDelete from "./EditDelete"
+import ElementTeam from "./elementTeam"
 
 const EditTeam: React.FC = function() {
-
+	const contentFile = useRef<HTMLInputElement>(null)
+	const contentBannier = useRef<HTMLInputElement>(null)
+	const { uid } = useParams<any>()
 	const userConnectedRedux = useSelector((state:RootState) => state.userConnected)
-  	const [showPopup, setShowPopup] = useState<Boolean>(false)
+  	const [showPopup, setShowPopup] = useState<boolean>(false)
   	const [showInvitation, setInvitation] = useState<Boolean>(false)
+	const [team, setTeam] = useState<TeamModel>()
+
+	const {loading,error,data} 	= useQuery(GET_ONE_TEAM, {
+		variables: {
+			uid:uid,
+		},
+	})
+
+	useMemo(() => {
+		if(!loading && !error && data) {
+			setTeam(data.FindOneTeam)
+		}
+
+	},[loading,error,data])
 	const onPopup = function(){
 		setShowPopup(!showPopup)
 	}
 	const Invitation = function(){
 		setInvitation(!showInvitation)
+	}
+	const handleUploadLogo = function() {
+		contentFile.current?.click()
+	}
+	const handleUploadBannier = function() {
+		contentBannier.current?.click()
 	}
   return(
 	<div className="leaderboard settings">
@@ -36,16 +61,22 @@ const EditTeam: React.FC = function() {
 					<div className="title-lead EditTeam">
 						<Sidebar />
 						<div className="personal">
-							<div style={{ backgroundImage: 'url(' + ImageTeam + ')', backgroundPosition: 'center', backgroundSize: '100%', backgroundRepeat: 'no-repeat' }} className="bg-team">
+							<input type="file" name="logo" ref={contentFile} className="d-none"  />
+							<input type="file" name="banniere" className="d-none" />
+							<div
+								style={{ backgroundImage:`url(${team?team.logo : ImageTeam})`, backgroundPosition: 'center', backgroundSize: '100%', backgroundRepeat: 'no-repeat',cursor:"pointer" }}
+								className="bg-team"
+								onClick={handleUploadLogo}
+							>
 								<div className="logoteam_container">
 									<div className="logo-team">
-										<img src={LogoTeam} alt="" className="logo-team"/>
+										<img src={team?team.banniere : LogoTeam} alt="team-game" className="logo-team" onClick={handleUploadBannier}/>
 									</div>
 								</div>
 							</div>
 							<div className="add_team edit">
 								<div className="center">
-									<p className="name">Growthmarket</p>
+									<p className="name">{team?.name}</p>
 									<p className="info_team">
 										<span onClick={onPopup}>Edit Team Infos</span>
 										<i onClick={Invitation}><FontAwesomeIcon icon={faUserPlus} /></i>
@@ -63,27 +94,14 @@ const EditTeam: React.FC = function() {
 								<h3>Team Management</h3>
 								<i><FontAwesomeIcon icon={faTimes} onClick={onPopup}/></i>
 							</div>
-							<div className="name_popup edit">
-								<form>
-									<input type="text" placeholder="Team Name" value="GrowthMarket"/>
-									<input type="text" value="Oui"/>
-									<div className="next-btn">
-										<button className="btn bg-red">Edit the team</button>
-										<button className="btn bg-green">Delete the team</button>
-									</div>
-								</form>
-							</div>
+							<EditOrDelete name={team?.name} tag={team?.tag} uid={team?.uid} />
 						</div>
 						<div className={!showInvitation ? "d-none" :"popup_team"}>
 							<div className="title_popup">
 								<h3>Invite member to your team</h3>
 								<i><FontAwesomeIcon icon={faTimes} onClick={Invitation}/></i>
 							</div>
-							<div className="name_popup edit">
-								<form>
-									<input type="text" placeholder="Add name" value=""/>
-								</form>
-							</div>
+							<ElementTeam uid={team?.uid} />
 						</div>
 					</div>
 				</div>

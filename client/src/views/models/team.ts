@@ -5,7 +5,9 @@ export interface TeamModel {
 	name:string
 	creationDate:string
 	creator:string
+	logo:string
 	players:User[]
 	records:number
 	banniere:string
+	tag:string
 }

@@ -10,30 +10,28 @@ export const GET_ALL_TEAMS = gql`
 		creationDate
 		logo
 		records
-		creator{
-			uid
-			email
-			username
-			avatar
-		}
+		tag
+		creator
 	}
 }`
 
 
 export const GET_ONE_TEAM = gql`
-	query FindOneTeam($idTeam: String!) {
-		FindOneTeam(idTeam: $idTeam) {
+	query FindOneTeam($uid: String!) {
+		FindOneTeam(uid: $uid) {
 		uid
 		name
 		logo
 		banniere
-		creationDate
-		creator{
+		tag
+		players{
 			uid
 			email
 			username
 			avatar
 		}
+		creationDate
+		creator
 	}
 }`
 
@@ -44,6 +42,7 @@ export const GET_ONE_TEAM_BY_USER = gql`
 		uid
 		name
 		logo
+		tag
 		creationDate
 		players{
 			uid
