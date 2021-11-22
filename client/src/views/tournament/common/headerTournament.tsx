@@ -51,9 +51,9 @@ const HeaderTournament = function({data,isTournament,isWagger}:HeaderTournamentT
 				</div>
 			</div>
 			<div className="bar-menu-top">
-				<li><Link to={`${uriJoin}/?uid=${uid}&tournament=${isTournament}&wagger=${isWagger}`} className={isTournament ? "active":""}>Général</Link></li>
-				<li><Link to={`/tableau?uid=${uid}&tournament=${isTournament}&wagger=${isWagger}`}>Tableau</Link></li>
-				<li><Link to={`/${uriRules}?uid=${uid}&tournament=${isTournament}&wagger=${isWagger}`}>Règles</Link></li>
+				<li><Link to={`${uriJoin}/?uid=${uid}&tournament=${isTournament}&wagger=${isWagger}`} id="general">Général</Link></li>
+				<li><Link to={`/tableau?uid=${uid}&tournament=${isTournament}&wagger=${isWagger}`} id="tableau">Tableau</Link></li>
+				<li><Link to={`/${uriRules}?uid=${uid}&tournament=${isTournament}&wagger=${isWagger}`} id="rule">Règles</Link></li>
 			</div>
 		</>
 	)

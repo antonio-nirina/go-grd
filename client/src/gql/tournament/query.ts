@@ -48,6 +48,7 @@ export const GET_ONE_TOURNAMENT = gql`
 		laps
 		gameWay
 		spectateur
+		format
 		game{
 			uid
 			name

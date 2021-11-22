@@ -46,7 +46,7 @@ export const createApolloClient = () => {
 	})
 	const client =  new ApolloClient({
 		link: authLink.concat(splitLink),
-		cache: new InMemoryCache()
+		cache: new InMemoryCache({typePolicies:{}})
 	})
 
 	return client

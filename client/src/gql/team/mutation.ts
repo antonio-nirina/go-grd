@@ -30,38 +30,42 @@ mutation createTeam(
 				avatar
 			}
 			records
-			creator{
-				uid
-				email
-				username
-				avatar
-			}
+			creator
 		}
 	}
 `
 
 export const UPDATED_ALL_TEAM = gql`
-mutation updatedAllTeam(
-	$name:String,
-	$creationDate:String,
-	$players:String,
-	$logo:String,
-	$creator:String,
-	$tag:String,
-	$logoType:String,
-	$bann:String,
-	$bannType:String,
-	$description:String){
-	createTeam(
-		name:$name,
-		bann:$bann,
-		bannType:$bannType,
-		creationDate:$creationDate,
-		players:$players,
-		logo:$logo,
-		creator:$creator,
-		tag:$tag,
-		description:$description,
-		logoType:$logoType)
+	mutation updatedAllTeam(
+		$uid:String,
+		$name:String,
+		$creationDate:String,
+		$players:String,
+		$logo:String,
+		$creator:String,
+		$tag:String,
+		$logoType:String,
+		$bann:String,
+		$bannType:String,
+		$description:String){
+		updatedAllTeam(
+			uid:$uid,
+			name:$name,
+			bann:$bann,
+			bannType:$bannType,
+			creationDate:$creationDate,
+			players:$players,
+			logo:$logo,
+			creator:$creator,
+			tag:$tag,
+			description:$description,
+			logoType:$logoType)
+		}
+`
+export const DELETED_TEAM = gql`
+	mutation DeleteTeam(
+		$uid:String
+	){
+		DeleteTeam(uid:$uid)
 	}
 `

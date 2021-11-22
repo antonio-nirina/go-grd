@@ -1,7 +1,7 @@
 import React  from "react"
-import { useSelector } from "react-redux"
+// import { useSelector } from "react-redux"
 
-import {RootState} from "../../reducer"
+// import {RootState} from "../../reducer"
 // import {Translation} from "../../lang/translation"
 import Header from "../header/header"
 import Footer from "../footer/footer"
@@ -11,7 +11,7 @@ import "../../assets/css/style.css"
 import HeaderTournament,{HeaderTournamentType} from "../tournament/common/headerTournament"
 
 const WaggersRules: React.FC = function(props:any) {
-  	const userConnectedRedux = useSelector((state:RootState) => state.userConnected)
+  	// const userConnectedRedux = useSelector((state:RootState) => state.userConnected)
   	// const userSingupLeague = useSelector((state:RootState) => state.leagueSingin)
 	const HeaderProps:HeaderTournamentType = {
 		data:null,
@@ -21,7 +21,7 @@ const WaggersRules: React.FC = function(props:any) {
     return(
 		<div className="container">
 			<Header />
-			<div className="participate league joingame">
+			<div className="participate league joingame rule">
 				<div className="obj"></div>
 				<div className="marg">
 				<HeaderTournament {...HeaderProps} />

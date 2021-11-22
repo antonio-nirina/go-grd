@@ -37,7 +37,7 @@ func createTeam() *graphql.Field {
 func updatedTeamByBanned() *graphql.Field {
 	return &graphql.Field{
 		Type:        graphql.String,
-		Description: "updated home",
+		Description: "updated Team",
 		Args: graphql.FieldConfigArgument{
 			"uid": &graphql.ArgumentConfig{
 				Type: graphql.String,
@@ -52,6 +52,9 @@ func updatedAllTeam() *graphql.Field {
 		Type:        graphql.String,
 		Description: "updated all",
 		Args: graphql.FieldConfigArgument{
+			"uid": &graphql.ArgumentConfig{
+				Type: graphql.String,
+			},
 			"name": &graphql.ArgumentConfig{
 				Type: graphql.String,
 			},
@@ -84,5 +87,18 @@ func updatedAllTeam() *graphql.Field {
 			},	
 		},
 		Resolve:     teamResolver.UpdatedTeamResolver,
+	}	
+}
+
+func DeleteTeam() *graphql.Field {
+	return &graphql.Field{
+		Type:        graphql.String,
+		Description: "Deleted Team",
+		Args: graphql.FieldConfigArgument{
+			"uid": &graphql.ArgumentConfig{
+				Type: graphql.String,
+			},
+		},
+		Resolve:     teamResolver.DeleteTeamResolver,
 	}	
 }

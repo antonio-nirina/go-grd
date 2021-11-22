@@ -10,8 +10,8 @@ import Info from "../tournament/info"
 // import InfoLeague from "../annexe/info-league"
 import Matches from "../tournament/matches"
 // import MatchesLeague from "../annexe/matches-league"
-import Team from "../parametre/team"
-import EditTeam from "../parametre/edit-team"
+import Team from "../parametre/team/team"
+import EditTeam from "../parametre/team/edit-team"
 import Compte from "../parametre/compte"
 import Bracket from "../tournament/bracket"
 import Rules from "../tournament/rules"
@@ -68,7 +68,7 @@ const Router = function() {
 			<ProtectedRoute path="/bracket" exact component={Bracket} />
 			<ProtectedRoute path="/matches" exact component={Matches} />
 			<ProtectedRoute path="/team" exact component={Team} />
-			<ProtectedRoute path="/edit-team" exact component={EditTeam} />
+			<ProtectedRoute path="/edit-team/:uid" exact component={EditTeam} />
 			<ProtectedRoute path="/compte" exact component={Compte} />
 			<ProtectedRoute path="/rules" exact component={Rules} />
 			<ProtectedRoute path="#" exact component={Wager} />

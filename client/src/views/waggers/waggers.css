@@ -241,7 +241,7 @@ p.item-text-left{
 	text-align: inherit;
 	float: left;
 }
-.join-all button{
+.join-all button, .join-all a{
 	text-transform: inherit;
 	font-weight: bold;
 	text-transform: uppercase;
@@ -252,7 +252,12 @@ p.item-text-left{
 	margin-top: 5px;
 	margin-right: 5px;
 	border-radius: 10px;
+	font-family: "arial"
 }
+.join-all a{
+	padding: 4px 7px;
+}
+
 .join-all.join-canal{
 	display:flex;
 	margin-top: 10px;
@@ -345,4 +350,33 @@ p.item-text-left{
 	font-family: "russo one";
 	font-weight: lighter;
 	font-size: 12px;
+}
+.general .bar-menu-top li #general,
+.table .bar-menu-top li #tableau,
+.rule .bar-menu-top li #rule
+{
+	border-bottom: 2px solid #dd0000;
+}
+.confirm{
+	width: 65%;
+	margin: 5em auto;
+}
+.confirm h2{
+	margin-bottom: 20px;
+	color: #ffffff;
+	font-family: "russo one";
+}
+.confirm .item-info-left{
+	width: 100%;
+	margin-bottom: 15px;
+}
+.confirm .item-info-left p{
+	color: #ffffff;
+}
+.confirm .btn-container .bg-white{
+	color: #000000;
+	margin-right: 15px;
+}
+.confirm .btn-container .bg-white:hover{
+	color: #ffffff;
 }

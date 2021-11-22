@@ -15,6 +15,8 @@ type UsecaseTeam interface {
 	UpdatedTeamHandler(team *entity.Team) (interface{}, error)
 	FindTeamByUserHandler(idQuery string) ([]TeamViewModel, error)
 	UpdatedAllTeamHandler(team *entity.Team) (interface{}, error)
+	DeleteTeamHandler(idQuery string) (interface{}, error)
+
 }
 
 type TeamViewModel struct {
@@ -328,6 +330,17 @@ func (t *teamUsecase) FindTeamByUserHandler(idQuery string) ([]TeamViewModel, er
 
 func (t *teamUsecase) UpdatedAllTeamHandler(team *entity.Team) (interface{}, error) {
 	_,err := t.teamRepository.UpdatedRepoTeam(team)
+	
+	if err != nil {
+		return nil, err
+	}
+
+	return "Ok",nil
+}
+
+func (t *teamUsecase) DeleteTeamHandler(idQuery string) (interface{}, error) {
+	objectId, _ := primitive.ObjectIDFromHex(idQuery)
+	_,err := t.teamRepository.DeleteTeamByUserRepo(objectId)
 	
 	if err != nil {
 		return nil, err

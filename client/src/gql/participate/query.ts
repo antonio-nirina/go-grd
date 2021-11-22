@@ -175,6 +175,7 @@ export const GET_PART_ONE_TOURNAMENT = gql`
 				numberParticipate
 				spectateur
 				server
+				format
 				game{
 					uid
 					name

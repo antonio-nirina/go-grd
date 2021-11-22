@@ -149,5 +149,7 @@ func GetRootFields() graphql.Fields {
 		"EditStatutPublication": EditStatutPublication(),
 		"RemovePublication":     RemovePublication(),
 		"updatedGameUser":       updatedGameUser(),
+		"updatedAllTeam":		updatedAllTeam(),
+		"DeleteTeam":			 DeleteTeam(),
 	}
 }

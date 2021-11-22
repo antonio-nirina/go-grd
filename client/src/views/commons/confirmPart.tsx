@@ -3,6 +3,9 @@ import {useMutation,useQuery} from "@apollo/client"
 import {useHistory } from "react-router-dom"
 import { useSelector } from "react-redux"
 
+import Header from "../header/header"
+import Footer from "../footer/footer"
+
 import {SAVED_PART,LEAVE_PART_TOURNAMENT} from "../../gql/participate/mutation"
 import {GET_ONE_TOURNAMENT} from "../../gql/tournament/query"
 import {RootState} from "../../reducer"
@@ -80,36 +83,48 @@ const ConfirmPart = function() {
 
 	return (
 		<div>
-			<div className="item-info-left">
-              	<div className="item-img-info">
-                	<img src={tournament?.game.slug === "vanguard" ? CodVanguard : (tournament?.game.slug === "fortnite" ? Fortnite : (tournament?.game.slug ==="fifa21" ? Fifa21 : (tournament?.game.slug ==="ops" ? CodL : (tournament?.game.slug ==="warzone" ? Warzone : (tournament?.game.slug ==="rainbows" ? Rainbowsix : (tournament?.game.slug ==="apexlegends"?Apex:Rocketleague))))) )} alt=""/>
-              	</div>
-            	<div className="item-all-content">
-                <div className="item-all-info">
-                  	<p><span>Format</span></p>
-                  	<p><span>Début des inscriptions</span></p>
-                  	<p>{dateStringToDHString(tournament?.dateStart).replace(","," -")}</p>
-                </div>
-                <div className="item-all-info">
-                  	<p><span>Spectateurs</span></p>
-                  	<p className="item-text-left">{tournament?.spectateur}</p>
-                  	<p><span>Fin des inscriptions</span></p>
-                  	<p>{dateStringToDHString(tournament?.deadlineDate).replace(","," -")}</p>
-                </div>
-                <div className="item-all-info">
-					{tournament?.laps.map(function(lap:string,index:number){
-						return (
-							<div key={index}>
-								<p><span>Tour {index+1}</span></p>
-								<p>{dateStringToDHString(lap).replace(","," -")}</p>
-							</div>
-						)
-					})}
-                </div>
-              </div>
-            </div>
-			<button onClick={handlePartTournament} className="btn bg-white">Confirme la page pour participer au tournois</button>
-			<button onClick={onShowClose} className="btn bg-red">Annuler</button>
+			<div className="container">
+				<Header />
+				<div className="main">
+					<div className="participate league joingame confirm">
+						<h2>Confirmation tournois Call of Dudy Vanguard</h2>
+						<div className="item-info-left">
+		              	<div className="item-img-info">
+		                	<img src={tournament?.game.slug === "vanguard" ? CodVanguard : (tournament?.game.slug === "fortnite" ? Fortnite : (tournament?.game.slug ==="fifa21" ? Fifa21 : (tournament?.game.slug ==="ops" ? CodL : (tournament?.game.slug ==="warzone" ? Warzone : (tournament?.game.slug ==="rainbows" ? Rainbowsix : (tournament?.game.slug ==="apexlegends"?Apex:Rocketleague))))) )} alt=""/>
+		              	</div>
+		            	<div className="item-all-content">
+		                <div className="item-all-info">
+		                  	<p><span>Format</span></p>
+		                  	<p><span>Début des inscriptions</span></p>
+		                  	<p>{dateStringToDHString(tournament?.dateStart).replace(","," -")}</p>
+		                </div>
+		                <div className="item-all-info">
+		                  	<p><span>Spectateurs</span></p>
+		                  	<p className="item-text-left">{tournament?.spectateur}</p>
+		                  	<p><span>Fin des inscriptions</span></p>
+		                  	<p>{dateStringToDHString(tournament?.deadlineDate).replace(","," -")}</p>
+		                </div>
+		                <div className="item-all-info">
+							{tournament?.laps.map(function(lap:string,index:number){
+								return (
+									<div key={index}>
+										<p><span>Tour {index+1}</span></p>
+										<p>{dateStringToDHString(lap).replace(","," -")}</p>
+									</div>
+								)
+							})}
+		                </div>
+		              </div>
+		            	</div>
+		            	<div className="btn-container">
+							<button onClick={handlePartTournament} className="btn bg-white">Confirme la page pour participer au tournois</button>
+							<button onClick={onShowClose} className="btn bg-red">Annuler</button>
+						</div>
+					</div>
+				</div>
+				<Footer/>
+			</div>
+
 		</div>
 	)
 }

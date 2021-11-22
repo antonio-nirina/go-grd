@@ -10,6 +10,16 @@ import {RootState} from "../../reducer"
 import {GET_GAME_USER} from "../../gql/user/query"
 import Sidebar from "./sidebar"
 
+import Apex from "../../assets/image/game/apex.jpeg"
+import Coldwar from "../../assets/image/game/cod-coldwar.jpeg"
+import Fortnite from "../../assets/image/game/fortnite.jpg"
+import Rainbowsix from "../../assets/image/game/rainbow-six.jpg"
+import Fifa from "../../assets/image/game/fifa.jpg"
+import Warzone from "../../assets/image/game/cod-warzone.jpg"
+import Rocketleague from "../../assets/image/game/rocketleague.jpg"
+import Vanguard from "../../assets/image/game/cod-vanguard.jpg"
+
+
 interface MayGame {
 	image:string
 	logo:string
@@ -39,30 +49,59 @@ const Mygames: React.FC = function() {
 			<Header/>
 			<div className="main">
 				<div className="containt mes_jeux">
-					<h2>Paramètres</h2>
 					<div className="title-lead">
 						<Sidebar />
 						<div className="personal-infos">
 							<div className="personal">
-								<h3>Mes jeux</h3>
-								{choixGames.length > 0 ? choixGames.map(function(element:MayGame,index:number) {
-									return(
-										<div className="personal-account">
-											<div className="historical">
-												<span>{element.name}</span>
-											</div>
-											<div className="account-games">
-												<div className="data-perso">
-													<p>Compte<span></span></p>
-													<p>E-mail<span>{userConnectedRedux?.user.email}</span></p>
-												</div>
-												<div className="mygame-list">
-													<img src={element.image} alt=""/>
-												</div>
-											</div>
-										</div>
-									)
-								}) : <></>}
+								<h2>Mes jeux</h2>
+								<div className="my_game_list">
+									<div className="game_update">
+										<img src={Apex} alt="" />
+										<p>PS4 - Xbox One</p>
+									</div>
+								</div>
+								<div className="my_game_list">
+									<div className="game_update">
+										<img src={Coldwar} alt="" />
+										<p>PS4 - Xbox One</p>
+									</div>
+								</div>
+								<div className="my_game_list">
+									<div className="game_update">
+										<img src={Fortnite} alt="" />
+										<p>PS4 - Xbox One</p>
+									</div>
+								</div>
+								<div className="my_game_list">
+									<div className="game_update">
+										<img src={Rainbowsix} alt="" />
+										<p>PS4 - Xbox One</p>
+									</div>
+								</div>
+								<div className="my_game_list">
+									<div className="game_update">
+										<img src={Fifa} alt="" />
+										<p>PS4 - Xbox One</p>
+									</div>
+								</div>
+								<div className="my_game_list">
+									<div className="game_update">
+										<img src={Warzone} alt="" />
+										<p>PS4 - Xbox One</p>
+									</div>
+								</div>
+								<div className="my_game_list">
+									<div className="game_update">
+										<img src={Rocketleague} alt="" />
+										<p>PS4 - Xbox One</p>
+									</div>
+								</div>
+								<div className="my_game_list">
+									<div className="game_update">
+										<img src={Vanguard} alt="" />
+										<p>PS4 - Xbox One</p>
+									</div>
+								</div>
 
 							</div>
 						</div>

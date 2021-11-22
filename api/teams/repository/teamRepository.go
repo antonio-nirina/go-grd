@@ -29,6 +29,7 @@ type RepositoryTeam interface {
 	UpdatedRepoTeam(team *entity.Team) (interface{}, error)
 	CountTeamRepository()(int,error)
 	FindTeamByUserRepo(idQuery primitive.ObjectID) ([]entity.Team, error)
+	DeleteTeamByUserRepo(idQuery primitive.ObjectID) (interface{}, error)
 }
 
 func (c *driverRepository) SavedRepoTeam(team *entity.Team) (interface{}, error) {
@@ -153,4 +154,17 @@ func (c *driverRepository) FindTeamByUserRepo(idQuery primitive.ObjectID) ([]ent
 	cur.Close(context.TODO())
 
 	return results, nil
+}
+
+func (c *driverRepository) DeleteTeamByUserRepo(idQuery primitive.ObjectID) (interface{}, error) {
+	var collection = c.client.Database("grd_database").Collection("team")
+	filter := bson.D{{"uid", idQuery}}
+
+	updateResult, err := collection.DeleteOne(context.TODO(), filter)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return updateResult.DeletedCount, nil
 }
