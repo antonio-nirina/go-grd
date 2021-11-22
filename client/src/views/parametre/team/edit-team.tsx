@@ -70,7 +70,7 @@ const EditTeam: React.FC = function() {
 							>
 								<div className="logoteam_container">
 									<div className="logo-team">
-										<img src={team?team.banniere : LogoTeam} alt="team-game" className="logo-team" onClick={handleUploadBannier}/>
+										<img src={team ? team.banniere : LogoTeam} alt="team-game" className="logo-team" onClick={handleUploadBannier}/>
 									</div>
 								</div>
 							</div>

@@ -17,6 +17,7 @@ import { dateLongCreated } from "../../tools/dateConvert"
 
 import { User } from "../../models/tournament"
 import ImageTeam from "../../../assets/image/team/bg-team.jpg"
+import LogoTeam from "../../../assets/image/team/logo-team.jpg"
 import CreateTeam from "./create-team"
 
 
@@ -63,11 +64,12 @@ const Team: React.FC = function() {
 							{
 								teams.length > 0 ? teams?.map(function(tem:TeamModel,index:number) {
 									return (
-										<Link to={`/edit-team/${tem.uid}`} key={index} style={{ backgroundImage: 'url(' + tem.banniere ? tem.banniere : ImageTeam + ')', backgroundPosition: 'center', backgroundSize: '100%', backgroundRepeat: 'no-repeat' }} title="" className="my_team">
+										<Link to={`/edit-team/${tem.uid}`} key={index} title="" className="my_team">
+											<img src={tem.banniere ? tem.banniere : LogoTeam} width="150" height="150" alt=""/>
 											<strong>{tem.name}</strong>
 											<div className="team_infos" >
 												<div className="info_title">
-													<p>{tem.creator}</p>
+													<p>Created</p>
 													<p>Team Owner</p>
 													{tem.players.map(function(user:User,indic:number){
 														return (
@@ -77,12 +79,13 @@ const Team: React.FC = function() {
 															</span>
 														)
 													})}
+													<p>Players</p>
 
 												</div>
 												<div className="team_data">
-													<p>{dateLongCreated(tem.creationDate)}</p>
-													<p>{tem.creator}</p>
-													<p>{tem.players.length === 0 ? 1 : tem.players.length}</p>
+													<p className="left">{dateLongCreated(tem.creationDate)}</p>
+													<p className="center">{tem.creator}</p>
+													<p className="center">{tem.players.length === 0 ? 1 : tem.players.length}</p>
 												</div>
 											</div>
 										</Link>
