@@ -326,7 +326,6 @@
 }
 .info_title{
 	display: flex;
-	justify-content: space-between;
 }
 .team_data{
 	display: flex;
@@ -339,7 +338,8 @@
 }
 .info_title p{
 	font-size: 13px;
-	text-align: right;
+	width: 100%;
+	color: gray;
 }
 .add_team{
 	width: 180px;
@@ -590,6 +590,7 @@
 }
 .my_team img{
 	border-radius: 50%;
+	border: 3px solid #7E3F92;
 }
 .bg-team{
 	height: 286px;
@@ -676,4 +677,10 @@
 }
 .EditTeam .popup_team{
 	left: 39%;
+}
+.team_data .left{
+	text-align: left;
+}
+.team_data .center{
+	text-align: center;
 }
