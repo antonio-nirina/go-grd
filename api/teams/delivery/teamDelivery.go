@@ -184,61 +184,102 @@ func (t *team) TeamByUserResolver(params graphql.ResolveParams) (interface{}, er
 func (t *team) UpdatedTeamResolver(params graphql.ResolveParams) (interface{}, error) {
 	uid, _ := params.Args["uid"].(string)
 	name, _ := params.Args["name"].(string)
-	creationDate, _ := params.Args["creationDate"].(string)
 	players, _ := params.Args["players"].(string)
 	logo, _ := params.Args["logo"].(string)
 	logoType, _ := params.Args["logoType"].(string)
-
 	bann, _ := params.Args["bann"].(string)
 	bannType, _ := params.Args["bannType"].(string)
 	creator, _ := params.Args["creator"].(string)
 	tag, _ := params.Args["tag"].(string)
 	description, _ := params.Args["description"].(string)
 	team, err := t.teamHandler.FindTeamHandler(uid)
+
+	var user userEntity.User
+
+	if err != nil {
+		return nil, errors.New("team not found")
+	}
+
 	objectId, _ := primitive.ObjectIDFromHex(team.Uid)
-	user, err := t.teamUserHandler.FindOneUserByUid(creator)
-	arrayUsers := strings.Split(players, "_")
+
+	if creator != ""{
+		user, _ = t.teamUserHandler.FindOneUserByUid(creator)
+	} else {
+		user, _ = t.teamUserHandler.FindUserByUsername(team.Creator)
+	}
+
 	var arrayPlayers []userEntity.User
+	
+	if players != "" {
+		arrayUsers := strings.Split(players, "_")
+	
+		for _,item := range arrayUsers {
+			if item != "" {
+				userPlayers, err := t.teamUserHandler.FindOneUserByUid(item)
+				if err != nil {
+					return nil, errors.New("User not found")
+				}
 
-	for _,item := range arrayUsers {
-		if item != "" {
-			userPlayers, err := t.teamUserHandler.FindOneUserByUid(item)
-			if err != nil {
-				return nil, errors.New("User not found")
+				arrayPlayers = append(arrayPlayers, userPlayers)
 			}
-
-			arrayPlayers = append(arrayPlayers, userPlayers)
 		}
 	}
 
+	for _,userItem := range team.Players {
+		userPlayer, err := t.teamUserHandler.FindUserByUsername(userItem.Username)
+		if err != nil {
+			return nil, errors.New("User not found")
+		}
+
+		arrayPlayers = append(arrayPlayers, userPlayer)
+	}
+	
 	if err != nil {
 		return nil, err
 	}
 	var urlFile string
 	var urlBann string
-
+	var nameUpdated = team.Name
+	var tagUpdated = team.Tag
+	var descriptionUpdated = team.Description 
 	upl := &external.FileUpload{}
+	urlFile = team.Logo
+
 	if logo != "" {
 		url, _ := upl.HandleFileInBBApi(logo, logoType)
 		urlFile = url
 	}
+	
+	urlBann = team.Banniere
 
 	if bann != "" {
 		urlBan, _ := upl.HandleFileInBBApi(bann, bannType)
 		urlBann = urlBan
 	}
+
+	if name != "" {
+		nameUpdated = name
+	}
+
+	if tag != "" {
+		tagUpdated = tag
+	}
+
+	if description != "" {
+		descriptionUpdated = description
+	}
 	
 	teamUpdated := &entity.Team{
 		Uid:          objectId,
-		Name:         name,
-		CreationDate: creationDate,
+		Name:         nameUpdated,
+		CreationDate: team.CreationDate,
 		Players:      arrayPlayers,
-		Description:  description,
-		IsBlocked:    false,
+		Description:  descriptionUpdated,
+		IsBlocked:    team.IsBlocked,
 		Logo:         urlFile,
 		Banniere:urlBann,
 		Creator:      user,
-		Tag: tag,
+		Tag: tagUpdated,
 	}
 
 	teamNew, err := t.teamHandler.UpdatedAllTeamHandler(teamUpdated)

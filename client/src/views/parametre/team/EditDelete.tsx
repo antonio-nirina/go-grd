@@ -52,7 +52,7 @@ const EditOrDelete = function({name,tag,uid}:ManagementType) {
 				if(deleted) setMessage(`Team à été supprimer avec succèss`)
 			}
 		} catch(error:any) {
-			<div style={{textAlign:"center"}}>{messageError}</div>
+			setMessageError(error.toString())
 		}
 
 

@@ -15,5 +15,5 @@ type Team struct {
 	Logo   					string            	`json:"logo"`
 	Banniere   					string            	`json:"banniere"`
 	Creator   				user.User            `json:"creator"`
-	Tag string            	`json:"tag"`
+	Tag 					string            	`json:"tag"`
 }
