@@ -14,7 +14,7 @@ type UsecaseTeam interface {
 	FindAllTeamHandler(pageNumber int64,limit int64) ([]TeamViewModel, error)
 	UpdatedTeamHandler(team *entity.Team) (interface{}, error)
 	FindTeamByUserHandler(idQuery string) ([]TeamViewModel, error)
-	UpdatedAllTeamHandler(team *entity.Team) (interface{}, error)
+	UpdatedAllTeamHandler(team *entity.Team) (TeamViewModel, error)
 	DeleteTeamHandler(idQuery string) (interface{}, error)
 
 }
@@ -97,7 +97,7 @@ func (t *teamUsecase) FindTeamHandler(idQuery string) (TeamViewModel, error) {
 	}
 
 	user := userHandler.UserViewModel{
-		Uid:result.Uid.Hex(),
+		Uid:result.Creator.Uid.Hex(),
 		FirstName:result.Creator.FirstName,
 		LastName:result.Creator.LastName,
 		Email:result.Creator.Email,
@@ -294,7 +294,7 @@ func (t *teamUsecase) FindTeamByUserHandler(idQuery string) ([]TeamViewModel, er
 		}
 
 		user := userHandler.UserViewModel{
-			Uid:val.Uid.Hex(),
+			Uid:val.Creator.Uid.Hex(),
 			FirstName:val.Creator.FirstName,
 			LastName:val.Creator.LastName,
 			Email:val.Creator.Email,
@@ -328,14 +328,14 @@ func (t *teamUsecase) FindTeamByUserHandler(idQuery string) ([]TeamViewModel, er
 	return res,nil
 }
 
-func (t *teamUsecase) UpdatedAllTeamHandler(team *entity.Team) (interface{}, error) {
+func (t *teamUsecase) UpdatedAllTeamHandler(team *entity.Team) (TeamViewModel, error) {
 	_,err := t.teamRepository.UpdatedRepoTeam(team)
 	
 	if err != nil {
-		return nil, err
+		return TeamViewModel{}, err
 	}
 
-	return "Ok",nil
+	return handleTeamToViewModel(team),nil
 }
 
 func (t *teamUsecase) DeleteTeamHandler(idQuery string) (interface{}, error) {

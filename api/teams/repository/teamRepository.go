@@ -92,7 +92,7 @@ func (c *driverRepository) UpdatedRepoTeam(team *entity.Team) (interface{}, erro
 				"name",team.Name,
 			},
 			{
-				"players",team.Players,
+				"creationDate",team.CreationDate,
 			},
 			{
 				"isBlocked",team.IsBlocked,
@@ -108,7 +108,13 @@ func (c *driverRepository) UpdatedRepoTeam(team *entity.Team) (interface{}, erro
 			},
 			{
 				"creator",team.Creator,
-			},  
+			}, 
+			{
+				"banniere",team.Banniere,
+			}, 
+			{
+				"players",team.Players,
+			}, 
 			
 	}}}
 	updateResult, err := collection.UpdateOne(context.TODO(), filter, update)

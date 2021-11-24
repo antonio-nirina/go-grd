@@ -49,7 +49,7 @@ func updatedTeamByBanned() *graphql.Field {
 
 func updatedAllTeam() *graphql.Field {
 	return &graphql.Field{
-		Type:        graphql.String,
+		Type:        types.TeamSchemaType ,
 		Description: "updated all",
 		Args: graphql.FieldConfigArgument{
 			"uid": &graphql.ArgumentConfig{

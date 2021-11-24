@@ -59,7 +59,24 @@ export const UPDATED_ALL_TEAM = gql`
 			creator:$creator,
 			tag:$tag,
 			description:$description,
-			logoType:$logoType)
+			logoType:$logoType) {
+				uid
+				name
+				logo
+				banniere
+				creationDate
+				description
+				logo
+				tag
+				players{
+					uid
+					email
+					username
+					avatar
+				}
+				records
+				creator
+			}
 		}
 `
 export const DELETED_TEAM = gql`

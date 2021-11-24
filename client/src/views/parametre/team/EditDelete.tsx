@@ -1,6 +1,7 @@
 import React,{useEffect,useState} from "react"
 import { useForm } from "react-hook-form"
 import {useMutation} from "@apollo/client"
+import { useHistory } from "react-router-dom"
 
 import {UPDATED_ALL_TEAM,DELETED_TEAM} from "../../../gql/team/mutation"
 
@@ -16,6 +17,7 @@ type ManagementType = {
 }
 
 const EditOrDelete = function({name,tag,uid}:ManagementType) {
+	const history = useHistory()
 	const [message, setMessage] = useState<string>("")
 	const [messageError, setMessageError] = useState<string>("")
 	const { register, handleSubmit,setValue } 	= useForm<Inputs>()
@@ -49,10 +51,13 @@ const EditOrDelete = function({name,tag,uid}:ManagementType) {
 						uid:uid
 					}
 				})
-				if(deleted) setMessage(`Team à été supprimer avec succèss`)
+				if(deleted) {
+					setMessage(`Team à été supprimer avec succèss`)
+					history.push("/team")
+				}
 			}
 		} catch(error:any) {
-			<div style={{textAlign:"center"}}>{messageError}</div>
+			setMessageError(error.toString())
 		}
 
 

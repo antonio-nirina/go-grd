@@ -63,7 +63,6 @@ const Login: React.FC = function() {
 					dispatch(sendUserConectedAction(result.data.login))
 				}
 
-				// const data:Array<string|null> = getDataByToken() ? getDataByToken() : []
 				history.push("/")
 
 			} catch(e) {
