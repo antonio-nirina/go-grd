@@ -42,7 +42,7 @@ import NewPassword from "../auth/new-password"
 import Change from "../auth/change"
 import UpdatePassword from "../auth/updatePassword"
 import ProtectedRoute from "./protectedRoute"
-// import Register from "../auth/register"
+import Register from "../auth/register"
 import Account from "../auth/account"
 import Game from "../auth/game"
 import TournamentGame from "../tournament/tournament-game"
@@ -102,8 +102,7 @@ const Router = function() {
 			<ProtectedRoute path="/add/game/favorit" exact component={GameList} />
 			<Route path="/game" exact component={Game} />
 			<Route path="/login" exact component={Login} />
-			<Route path="/register" exact component={Inscription} />
-			{/*<Route path="/register" exact component={Register} />*/}
+			<Route path="/register" exact component={Register} />
 			<Route path="/account/register" exact component={Account} />
 			<Route path="/forgot-password" exact component={InitPass} />
 			<Route path="/code" exact component={Code} />

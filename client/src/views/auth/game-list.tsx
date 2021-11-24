@@ -115,18 +115,18 @@ const GameList: React.FC = function() {
 		}
 	}
   	return(
-		<div>
+		<div className="my_list">
 			<div className="favorite">
 				<div className="game-list-container">
 				{history.location.pathname === "/game" ? <p>1. Choisis tes jeux favoris</p> : ""}
 
 					<div className="favorite-game" >
-					<div className={isLoader ? "loader-spinner":"d-none"}>
-						<Loader
-							type="Oval"
-							color="#dd0000"
-						/>
-					</div>
+						<div className={isLoader ? "loader-spinner":"d-none"}>
+							<Loader
+								type="Oval"
+								color="#dd0000"
+							/>
+						</div>
 						{games.map(function(e:GameType,index:number){
 							return(
 								<Link to ="#" key={index} data-uid={e.uid} onClick={onSelected} className={selected.includes(e.uid) ? "selected" : ""}>
