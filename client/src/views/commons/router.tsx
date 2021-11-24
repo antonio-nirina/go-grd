@@ -42,7 +42,7 @@ import NewPassword from "../auth/new-password"
 import Change from "../auth/change"
 import UpdatePassword from "../auth/updatePassword"
 import ProtectedRoute from "./protectedRoute"
-import Register from "../auth/register"
+// import Register from "../auth/register"
 import Account from "../auth/account"
 import Game from "../auth/game"
 import TournamentGame from "../tournament/tournament-game"
@@ -70,14 +70,14 @@ const Router = function() {
 			<ProtectedRoute path="/matches" exact component={Matches} />
 			<ProtectedRoute path="/team" exact component={Team} />
 			<ProtectedRoute path="/edit-team/:uid" exact component={EditTeam} />
-			<ProtectedRoute path="/compte" exact component={Compte} />
+			<ProtectedRoute path="/account" exact component={Compte} />
 			<ProtectedRoute path="/rules" exact component={Rules} />
 			<ProtectedRoute path="#" exact component={Wager} />
 			<ProtectedRoute path="/joingame" exact component={Joingame} />
 			<ProtectedRoute path="/join-tournament" exact component={JoinTournament} />
-			<ProtectedRoute path="/resultat" exact component={Resultat} />
+			<ProtectedRoute path="/result" exact component={Resultat} />
 			<ProtectedRoute path="/waggers" exact component={Waggers} />
-			<ProtectedRoute path="/tableau" exact component={Tableau} />
+			<ProtectedRoute path="/board" exact component={Tableau} />
 			<ProtectedRoute path="/waggers-rules" exact component={WaggersRules} />
 			<ProtectedRoute path="/tournament-rules" exact component={WaggersRules} />
 			<ProtectedRoute path="/waggers-game" exact component={WaggersGame} />
@@ -89,7 +89,7 @@ const Router = function() {
 			<ProtectedRoute path="/assistance" exact component={Assistance} />
 			<ProtectedRoute path="/contact" exact component={Contact} />
 			<ProtectedRoute path="/profil" exact component={Profil} />
-			<ProtectedRoute path="/parametre" exact component={Parametre} />
+			<ProtectedRoute path="/setting" exact component={Parametre} />
 			<ProtectedRoute path="/update-password" exact component={UpdatePassword} />
 			<ProtectedRoute path="/jackpot" exact component={Jackpot} />
 			<ProtectedRoute path="/mygames" exact component={Mygames} />
@@ -98,13 +98,13 @@ const Router = function() {
 			<ProtectedRoute path="/wager" exact component={WagerPage} />
 			<ProtectedRoute path="/stat" exact component={Stat} />
 			<ProtectedRoute path="/confirmed-join/tournament" exact component={ConfirmPart} />
-			<ProtectedRoute path="/paiement/tournament" exact component={ContentPaiement} />
+			<ProtectedRoute path="/payement/tournament" exact component={ContentPaiement} />
 			<ProtectedRoute path="/add/game/favorit" exact component={GameList} />
 			<Route path="/game" exact component={Game} />
 			<Route path="/login" exact component={Login} />
-			<Route path="/inscription" exact component={Inscription} />
-			<Route path="/register" exact component={Register} />
-			<Route path="/account" exact component={Account} />
+			<Route path="/register" exact component={Inscription} />
+			{/*<Route path="/register" exact component={Register} />*/}
+			<Route path="/account/register" exact component={Account} />
 			<Route path="/forgot-password" exact component={InitPass} />
 			<Route path="/code" exact component={Code} />
 			<Route path="/new-password" exact component={NewPassword} />

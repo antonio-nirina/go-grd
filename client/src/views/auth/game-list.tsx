@@ -10,7 +10,7 @@ import {RootState} from "../../reducer"
 import "../auth/inscription.css"
 import "../../assets/css/style.css"
 import {GameType} from "../models/game"
-
+import { NameRoutes } from "../commons/route-list"
 import { faCheckCircle} from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
@@ -108,10 +108,10 @@ const GameList: React.FC = function() {
 			plateforms:arrayPlateformes,
 			uidUser:userConnectedRedux.user.uid,
 		} })
-		if (result.data.updatedGameUser && history.location.pathname === "/game") {
-			history.push("/account")
+		if (result.data.updatedGameUser && history.location.pathname === NameRoutes.game) {
+			history.push(NameRoutes.accountRegister)
 		} else {
-			history.push("/mygames")
+			history.push(NameRoutes.mygames)
 		}
 	}
   	return(
