@@ -92,10 +92,9 @@ const Mygames: React.FC = function() {
 										)
 									})
 									:
-
-									 <button className="btn bg-red">
-										 <Link to="/add/game/favorit" >Créer votre game favoris</Link>
-									 </button>
+									<div className="next-btn white">
+										<Link to="/add/game/favorit" className="btn bg-red">Créer ma liste de jeux</Link>
+									</div>
 								}
 
 							</div>

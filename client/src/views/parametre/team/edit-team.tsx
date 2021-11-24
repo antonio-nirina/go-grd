@@ -98,14 +98,14 @@ const EditTeam: React.FC = function() {
 								<input type="file" name="logo" ref={contentFile} onChange={(e)=>{handleUpload(e,true)}}  className="d-none"  />
 								<input type="file" name="banniere" ref={contentBannier} onChange={(e)=>{handleUpload(e)}}  className="d-none" />
 								<div
-									style={{ backgroundImage:`url(${team?team.banniere : LogoTeam})`, backgroundPosition: 'center', backgroundSize: '100%', backgroundRepeat: 'no-repeat',cursor:"pointer" }}
+									style={{ backgroundImage:`url(${team?team.banniere : ImageTeam})`, backgroundPosition: 'center', backgroundSize: '100%', backgroundRepeat: 'no-repeat',cursor:"pointer" }}
 									className="bg-team"
 									onClick={handleUploadBannier}
 								>
 									<div className="logoteam_container">
 										<div className="logo-team">
 											<img
-												src={team?team.logo : ImageTeam }
+												src={team?team.logo : LogoTeam }
 												alt="team-game" className="logo-team"
 												onClick={handleUploadLogo} />
 										</div>

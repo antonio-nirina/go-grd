@@ -9,7 +9,7 @@ const Sidebar = function() {
                     <Link to="/parametre">Mes infos</Link>
                 </li>*/}
                 <li id="compte">
-                    <Link to="/compte">Mon compte</Link>
+                    <Link to="/account">Mon compte</Link>
                 </li>
                 <li id="cagnotte">
                     <Link to="/jackpot">Ma cagnotte</Link>
