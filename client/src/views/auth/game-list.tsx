@@ -1,8 +1,7 @@
 import React,{useEffect,useState,SyntheticEvent} from "react"
-import { Link } from 'react-router-dom'
+import { Link,useHistory } from 'react-router-dom'
 import {useQuery,useMutation} from "@apollo/client"
 import { useSelector } from "react-redux"
-import {useHistory } from "react-router-dom"
 import Loader from "react-loader-spinner"
 
 import { GET_ALL_GAMES,GET_ALL_PLATEFORM } from "../../gql/games/query"
@@ -109,15 +108,17 @@ const GameList: React.FC = function() {
 			plateforms:arrayPlateformes,
 			uidUser:userConnectedRedux.user.uid,
 		} })
-		if (result.data.updatedGameUser) {
+		if (result.data.updatedGameUser && history.location.pathname === "/game") {
 			history.push("/account")
+		} else {
+			history.push("/mygames")
 		}
 	}
   	return(
 		<div>
 			<div className="favorite">
 				<div className="game-list-container">
-					<p>1. Choisis tes jeux favoris</p>
+				{history.location.pathname === "/game" ? <p>1. Choisis tes jeux favoris</p> : ""}
 
 					<div className="favorite-game" >
 					<div className={isLoader ? "loader-spinner":"d-none"}>
@@ -137,7 +138,7 @@ const GameList: React.FC = function() {
 					</div>
 				</div>
 				<div className="platform">
-					<p>2. Choisis la plateforme sur laquelle tu veux jouer</p>
+				{history.location.pathname === "/game" ? <p>2. Choisis la plateforme sur laquelle tu veux jouer</p> : ""}
 					<div className="platform-content">
 						{plateforms.map(function(el:SelectPlateform,index:number){
 							return (
@@ -151,7 +152,7 @@ const GameList: React.FC = function() {
 				</div>
 			</div>
 			<div className="infos-text">
-				<p>Ne t'inquiète pas, tu pourras mettre à jour cette liste après ton inscription</p>
+				{history.location.pathname === "/game" ? <p>Ne t'inquiète pas, tu pourras mettre à jour cette liste après ton inscription</p> : ""}
 				<p className="submit-btn">
 					<Link to="#" onClick={sendGamePlateform}>Valider mes choix</Link>
 				</p>

@@ -52,6 +52,7 @@ import JoinTournament from "../tournament/join-tournament"
 import Stat from "../version/stat/stat"
 import ConfirmPart from "./confirmPart"
 import ContentPaiement from "./contentPaiement"
+import GameList from "../auth/game-list"
 // import LeagueGame from "../league/league-game"
 
 
@@ -98,15 +99,17 @@ const Router = function() {
 			<ProtectedRoute path="/stat" exact component={Stat} />
 			<ProtectedRoute path="/confirmed-join/tournament" exact component={ConfirmPart} />
 			<ProtectedRoute path="/paiement/tournament" exact component={ContentPaiement} />
+			<ProtectedRoute path="/add/game/favorit" exact component={GameList} />
+			<Route path="/game" exact component={Game} />
 			<Route path="/login" exact component={Login} />
 			<Route path="/inscription" exact component={Inscription} />
 			<Route path="/register" exact component={Register} />
-			<Route path="/game" exact component={Game} />
 			<Route path="/account" exact component={Account} />
 			<Route path="/forgot-password" exact component={InitPass} />
 			<Route path="/code" exact component={Code} />
 			<Route path="/new-password" exact component={NewPassword} />
 			<Route path="/change" exact component={Change} />
+
 		</Switch>
 	)
 }

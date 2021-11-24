@@ -341,6 +341,8 @@ func GetToken(user entity.User) (interface{}, error) {
 		return "", errors.New("Error interne")
 	}
 
+	var games  []gameHandler.GameViewModel
+	var plateforms []gameHandler.GamePlatformViewModel
 	dateBirth := ""
 	country := "France"
 	if user.BirtDate != "" {
@@ -349,6 +351,32 @@ func GetToken(user entity.User) (interface{}, error) {
 
 	if user.Country != "" {
 		country = user.Country
+	}
+
+	if len(user.Games) > 0 {
+		for _,resultGame := range user.Games {
+			game := gameHandler.GameViewModel {
+				Uid: resultGame.Uid.Hex(),
+				Slug: resultGame.Slug,
+				Logo: resultGame.Logo,
+				Image: resultGame.Image,
+				Name: resultGame.Name,
+			}
+
+			games = append(games, game)
+		}
+	}
+
+	if len(user.Plateforms) > 0 {
+		for _,resultPlateform := range user.Plateforms {
+			plateform := gameHandler.GamePlatformViewModel {
+				Uid:         resultPlateform.Uid.Hex(),
+				Name:        resultPlateform.Name,
+				Description: resultPlateform.Description,
+				Logo:        resultPlateform.Logo,
+			}
+			plateforms = append(plateforms, plateform)
+		}
 	}
 
 	var frd = []string{}
@@ -366,6 +394,8 @@ func GetToken(user entity.User) (interface{}, error) {
 	claims["birtDate"] = dateBirth
 	claims["country"] = country
 	claims["account"] = user.Accounts
+	claims["games"] = games
+	claims["plateforms"] = plateforms
 
 	if len(user.Friends) > 0 {
 		for _, v := range user.Friends {
@@ -384,6 +414,7 @@ func GetToken(user entity.User) (interface{}, error) {
 		}
 	}
 	claims["acountGame"] = userAcc
+
 	// claims["exp"] = time.Now().Add(time.Hour * 1).Unix() //Token expires after 1 hour
 	token := _jwt.NewWithClaims(_jwt.SigningMethodHS256, claims)
 	result, err := token.SignedString([]byte(os.Getenv("SECRET")))
