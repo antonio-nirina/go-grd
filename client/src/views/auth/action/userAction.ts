@@ -98,6 +98,7 @@ export const sendProfilXboxOrPsn = function(user:UserType) {
 export const removeDataUser = function() {
 	Cookies.remove(ACCESS_TOKEN)
 	Cookies.remove("userConnected")
+	Cookies.remove("tournamentSingin")
 	if(localStorage.getItem("access_token_discord")) localStorage.removeItem("access_token_discord")
 	// localStorage.removeItem(ACCESS_TOKEN)
 	// localStorage.removeItem("userConnected")

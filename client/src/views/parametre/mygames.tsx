@@ -27,7 +27,7 @@ const Mygames: React.FC = function() {
 	useEffect(() => {
 		let arrayGame:GameType[] = []
 		let arrayPlateforms:string[] = []
-
+console.log("xxx", userConnectedRedux.user.games)
 		if(userConnectedRedux.user.games && userConnectedRedux.user.games.length > 0) {
 			userConnectedRedux.user.games.forEach((element:GameType) => {
 				let imageGame:string = ""

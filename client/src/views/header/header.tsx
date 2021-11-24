@@ -27,6 +27,7 @@ import {Deconnect} from "../../gql/user/auth"
 import Chat from "../tchat/chat"
 import { Friends } from "../../gql/types/friend"
 
+
 export interface Notif  {
 	type:number,
 	uid:string,
@@ -54,7 +55,6 @@ type FriendsGroup = {
 const Header: React.FC = function() {
 	const history = useHistory()
 	const dispatch = useDispatch()
-
 	const [showChat, setShowChat] = useState<Show>({
 		isShow:false
 	})
@@ -96,16 +96,17 @@ const Header: React.FC = function() {
 
 	const onDeconnect = async function() {
 		setIsLoader(true)
+		history.push("/")
 		try {
-			await deconnect({ variables: { id: userConnectedRedux.user.uid }})
+			const deco = await deconnect({ variables: { id: userConnectedRedux.user.uid }})
 			setIsLoader(false)
+			if(deco) {
+				dispatch(removeDataUser())
+				setIsDeconnect(true)
+			}
 		} catch (e) {
 			console.log(e)
 		}
-
-		dispatch(removeDataUser())
-		setIsDeconnect(true)
-		history.push("/")
 	}
 
 	const backAdmin = function() {
