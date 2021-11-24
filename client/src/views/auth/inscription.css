@@ -6,7 +6,7 @@
 	padding-bottom: 40px;
 }
 .step a{
-	display: inline-block;	
+	display: inline-block;
 	max-width: 150px;
 	padding: 7px;
 }
@@ -22,10 +22,10 @@
 	height: 5px;
 	margin-top: 2px;
 	border-radius: 10px;
-	background: gray;	
+	background: gray;
 }
 .fieldset{
-	width: 100%;	
+	width: 100%;
 }
 .field-container span{
 	display: block;
@@ -37,7 +37,7 @@
 	max-width: 570px;
 	padding: 15px 40px;
 	background: rgba(74, 74, 74, 0.5);
-	border-radius: 15px;	
+	border-radius: 15px;
 	margin: 20px auto;
 }
 .choice{
@@ -96,7 +96,7 @@
 .center-width .check{
 	width: 6%;
 	float: left;
-	margin-top: 3px;	
+	margin-top: 3px;
 }
 .center-width .major{
 	font-size: 11px;
@@ -109,7 +109,7 @@
 .game-list-container p{
 	margin-bottom: 15px;
 }
-.favorite-game, .platform-content{	
+.favorite-game, .platform-content{
 	justify-content: center;
 	flex-wrap: wrap;
 }
@@ -180,7 +180,7 @@
 }
 .infos-text p.submit-btn a{
 	text-transform: uppercase;
-	font-size: 15px;	
+	font-size: 15px;
 	background: #dd0000;
 	padding: 10px;
 	max-width: 340px;
@@ -189,11 +189,11 @@
 	display: block;
 	border-radius: 5px;
 	border-radius: 5px;
-	border: 1px solid transparent;	
+	border: 1px solid transparent;
 }
 .infos-text p.submit-btn:hover a{
 	border: 1px solid #dd0000;
-	background: #000000;	
+	background: #000000;
 }
 .infos-text p.submit-btn:hover a{
 	color: #dd0000;
@@ -209,3 +209,22 @@
 .account .account_type{
 	margin: auto;
 }
+.my_list{
+	width: 90%;
+	margin: auto;
+	text-align: center;
+	position: relative;
+}
+.my_list .loader-spinner{
+	position: absolute;
+	background: rgba(0,0,0,0.5);
+	width: 100%;
+	height: 100vh;
+	left: 0;
+	z-index: 3;
+}
+.my_list .loader-spinner div{
+	position: relative;
+	top: 40%;
+}
+

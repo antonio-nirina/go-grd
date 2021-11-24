@@ -101,6 +101,9 @@ html{
 	color: #010101;
 	border:none;
 }
+.next-btn.white a{
+	color: #ffffff !important;
+}
 .mg15{
 	margin: 15px 0;
 }
@@ -249,6 +252,9 @@ h1{
 	height: 100%;
 	top: 67px;
 	opacity: 0.5;
+}
+.inscription .loader-spinner{
+	top: 20px;
 }
 .login .loader-spinner div,
 .inscription .loader-spinner div
