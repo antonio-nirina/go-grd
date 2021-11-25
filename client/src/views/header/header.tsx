@@ -22,10 +22,11 @@ import Invitation from "./invitation"
 import {NOTIFICATIONS_SUBSCRIBE} from "../../gql/user/subscription"
 
 import {CREATE_GROUP} from "../../gql/group/mutation"
-
+import { NameRoutes } from "../commons/route-list"
 import {Deconnect} from "../../gql/user/auth"
 import Chat from "../tchat/chat"
 import { Friends } from "../../gql/types/friend"
+
 
 export interface Notif  {
 	type:number,
@@ -54,7 +55,6 @@ type FriendsGroup = {
 const Header: React.FC = function() {
 	const history = useHistory()
 	const dispatch = useDispatch()
-
 	const [showChat, setShowChat] = useState<Show>({
 		isShow:false
 	})
@@ -96,16 +96,17 @@ const Header: React.FC = function() {
 
 	const onDeconnect = async function() {
 		setIsLoader(true)
+		history.push("/")
 		try {
-			await deconnect({ variables: { id: userConnectedRedux.user.uid }})
+			const deco = await deconnect({ variables: { id: userConnectedRedux.user.uid }})
 			setIsLoader(false)
+			if(deco) {
+				dispatch(removeDataUser())
+				setIsDeconnect(true)
+			}
 		} catch (e) {
 			console.log(e)
 		}
-
-		dispatch(removeDataUser())
-		setIsDeconnect(true)
-		history.push("/")
 	}
 
 	const backAdmin = function() {
@@ -203,28 +204,28 @@ const Header: React.FC = function() {
 				<nav className="navmenu">
 					<ul>
 						<li>
-							<Link to="/tournois">
+							<Link to={NameRoutes.tournament}>
 								{
 									Translation(userConnectedRedux.user.language).header.tournaments
 								}
 							</Link>
 						</li>
 						<li>
-							<Link to="/wager">
+							<Link to={NameRoutes.wager}>
 								{
 									Translation(userConnectedRedux.user.language).header.wagers
 								}
 							</Link>
 						</li>
 						<li>
-							<Link to="/communaute">
+							<Link to={NameRoutes.communaute}>
 								{
 									Translation(userConnectedRedux.user.language).header.community
 								}
 							</Link>
 						</li>
 						<li>
-							<Link to="/assistance">
+							<Link to={NameRoutes.assistance}>
 								{
 									Translation(userConnectedRedux.user.language).header.assistance
 								}
@@ -312,16 +313,16 @@ const Header: React.FC = function() {
 								<li><Link to="/profil">Profil</Link></li>
 								<li className="mobile-menu">
 									<ul>
-										<li><Link to="/tournois">Tournois</Link></li>
-										<li><Link to="/wager">wagers</Link></li>
-										<li><Link to="/communaute">communauté</Link></li>
-										<li><Link to="/assistance">assistance</Link></li>
+										<li><Link to={NameRoutes.tournament}>Tournois</Link></li>
+										<li><Link to={NameRoutes.wager}>wagers</Link></li>
+										<li><Link to={NameRoutes.communaute}>communauté</Link></li>
+										<li><Link to={NameRoutes.assistance}>assistance</Link></li>
 									</ul>
 								</li>
 								<li className="border">
 									<Link to="/jackpot">Cagnote (0 GC)</Link>
 								</li>
-								<li className="border"><Link to="/compte">Compte</Link></li>
+								<li className="border"><Link to={NameRoutes.account}>Compte</Link></li>
 								{userConnectedRedux.user && userConnectedRedux.user.roles && userConnectedRedux.user.roles.includes("role_admin") ? <li>
 									<span onClick={backAdmin} style={{"cursor":"pointer"}}>
 										{

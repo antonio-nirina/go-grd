@@ -5,3 +5,10 @@ export interface  GameType  {
 	slug:string,
 	logo:string
 }
+
+export interface PlateformType {
+	uid:string,
+	image:string,
+	name:string,
+	description:string
+}

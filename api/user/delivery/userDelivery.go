@@ -342,6 +342,7 @@ func GetToken(user entity.User) (interface{}, error) {
 	}
 
 	var games  []gameHandler.GameViewModel
+	var plateforms []gameHandler.GamePlatformViewModel
 	dateBirth := ""
 	country := "France"
 	if user.BirtDate != "" {
@@ -359,9 +360,22 @@ func GetToken(user entity.User) (interface{}, error) {
 				Slug: resultGame.Slug,
 				Logo: resultGame.Logo,
 				Image: resultGame.Image,
+				Name: resultGame.Name,
 			}
 
 			games = append(games, game)
+		}
+	}
+
+	if len(user.Plateforms) > 0 {
+		for _,resultPlateform := range user.Plateforms {
+			plateform := gameHandler.GamePlatformViewModel {
+				Uid:         resultPlateform.Uid.Hex(),
+				Name:        resultPlateform.Name,
+				Description: resultPlateform.Description,
+				Logo:        resultPlateform.Logo,
+			}
+			plateforms = append(plateforms, plateform)
 		}
 	}
 
@@ -381,6 +395,7 @@ func GetToken(user entity.User) (interface{}, error) {
 	claims["country"] = country
 	claims["account"] = user.Accounts
 	claims["games"] = games
+	claims["plateforms"] = plateforms
 
 	if len(user.Friends) > 0 {
 		for _, v := range user.Friends {

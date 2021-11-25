@@ -23,7 +23,7 @@ func NewUsecasePlateform(r repository.PlateformRepositoryInterface) UsecasePlate
 	}
 }
 
-type gamePlatformViewModel struct {
+type GamePlatformViewModel struct {
 	Uid         string `json:"uid"`
 	Name        string `json:"name"`
 	Description string `json:"description"`
@@ -63,10 +63,10 @@ func (g *plateformUsecase) FindAllPlateformRepository() (interface{}, error) {
 		return nil, err
 	}
 
-	var res []gamePlatformViewModel
+	var res []GamePlatformViewModel
 
 	for _, val := range result {
-		plateform := gamePlatformViewModel{
+		plateform := GamePlatformViewModel{
 			Uid:         val.Uid.Hex(),
 			Name:        val.Name,
 			Description: val.Description,
