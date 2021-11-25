@@ -4,6 +4,7 @@ import {useQuery,useMutation} from "@apollo/client"
 import { useSelector } from "react-redux"
 import Loader from "react-loader-spinner"
 
+import Header from "../header/header"
 import { GET_ALL_GAMES,GET_ALL_PLATEFORM } from "../../gql/games/query"
 import {UPDATED_USER_GAME} from "../../gql/user/mutation"
 import {RootState} from "../../reducer"
@@ -115,47 +116,52 @@ const GameList: React.FC = function() {
 		}
 	}
   	return(
-		<div className="my_list">
-			<div className="favorite">
-				<div className="game-list-container">
-				{history.location.pathname === "/game" ? <p>1. Choisis tes jeux favoris</p> : ""}
+		<div className="leaderboard settings">
+			<div className="container">
+				<div className="my_list">
+					<Header/>
+					<div className="favorite">
+						<div className="game-list-container">
+						{history.location.pathname === NameRoutes.game ? <p>1. Choisis tes jeux favoris</p> : ""}
 
-					<div className="favorite-game" >
-						<div className={isLoader ? "loader-spinner":"d-none"}>
-							<Loader
-								type="Oval"
-								color="#dd0000"
-							/>
+							<div className="favorite-game" >
+								<div className={isLoader ? "loader-spinner":"d-none"}>
+									<Loader
+										type="Oval"
+										color="#dd0000"
+									/>
+								</div>
+								{games.map(function(e:GameType,index:number){
+									return(
+										<Link to ="#" key={index} data-uid={e.uid} onClick={onSelected} className={selected.includes(e.uid) ? "selected" : ""}>
+											<img src={e.image} alt={e.slug} width="200"/>
+											<i className={selected.includes(e.uid) ? "checked" : "notVisible"}><FontAwesomeIcon icon={faCheckCircle} /></i>
+										</Link>
+									)
+								})}
+							</div>
 						</div>
-						{games.map(function(e:GameType,index:number){
-							return(
-								<Link to ="#" key={index} data-uid={e.uid} onClick={onSelected} className={selected.includes(e.uid) ? "selected" : ""}>
-									<img src={e.image} alt={e.slug} width="200"/>
-									<i className={selected.includes(e.uid) ? "checked" : "notVisible"}><FontAwesomeIcon icon={faCheckCircle} /></i>
-								</Link>
-							)
-						})}
+						<div className="platform">
+						{history.location.pathname === NameRoutes.game ? <p>2. Choisis la plateforme sur laquelle tu veux jouer</p> : ""}
+							<div className="platform-content">
+								{plateforms.map(function(el:SelectPlateform,index:number){
+									return (
+										<Link to ="#" key={index} data-uid={el.uid} onClick={onSelectedPlateform} className={selectedPl.includes(el.uid) ? "selected" : ""}>
+											<img src={el.logo} alt="playstation" width="200" />
+											<i className={selectedPl.includes(el.uid) ? "checked" : "notVisible"}><FontAwesomeIcon icon={faCheckCircle} /></i>
+										</Link>
+									)
+								})}
+							</div>
+						</div>
+					</div>
+					<div className="infos-text">
+						{history.location.pathname === NameRoutes.game ? <p>Ne t'inquiète pas, tu pourras mettre à jour cette liste après ton inscription</p> : ""}
+						<p className="submit-btn">
+							<Link to="#" onClick={sendGamePlateform}>Valider mes choix</Link>
+						</p>
 					</div>
 				</div>
-				<div className="platform">
-				{history.location.pathname === "/game" ? <p>2. Choisis la plateforme sur laquelle tu veux jouer</p> : ""}
-					<div className="platform-content">
-						{plateforms.map(function(el:SelectPlateform,index:number){
-							return (
-								<Link to ="#" key={index} data-uid={el.uid} onClick={onSelectedPlateform} className={selectedPl.includes(el.uid) ? "selected" : ""}>
-									<img src={el.logo} alt="playstation" width="200" />
-									<i className={selectedPl.includes(el.uid) ? "checked" : "notVisible"}><FontAwesomeIcon icon={faCheckCircle} /></i>
-								</Link>
-							)
-						})}
-					</div>
-				</div>
-			</div>
-			<div className="infos-text">
-				{history.location.pathname === "/game" ? <p>Ne t'inquiète pas, tu pourras mettre à jour cette liste après ton inscription</p> : ""}
-				<p className="submit-btn">
-					<Link to="#" onClick={sendGamePlateform}>Valider mes choix</Link>
-				</p>
 			</div>
 		</div>
 	)
