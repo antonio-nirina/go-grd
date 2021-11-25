@@ -41,6 +41,9 @@ export const UPDATE_AVATAR = gql`
 			username
 			created
 			avatar
+			country
+			birtDate
+
 		}
 	}
 `
