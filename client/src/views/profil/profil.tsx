@@ -138,7 +138,7 @@ const Profile: React.FC = function() {
 												</div>
 											</div>
 											<div className="team-number">
-												<span>{team.players.length} <i><FontAwesomeIcon icon={faUsers} /></i></span>
+												<span>{team && team.players.length > 0 ? team.players.length : 0} <i><FontAwesomeIcon icon={faUsers} /></i></span>
 											</div>
 										</div>
 									  )
