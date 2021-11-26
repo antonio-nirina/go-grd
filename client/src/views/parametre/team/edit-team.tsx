@@ -119,11 +119,11 @@ const EditTeam: React.FC = function() {
 											<i onClick={Invitation}><FontAwesomeIcon icon={faUserPlus} /></i>
 										</p>
 									</div>
-									<div className="team-list">
+									{/*<div className="team-list">
 										<p>
 											<img src={userConnectedRedux.user.avatar ? userConnectedRedux.user.avatar :AvatarDefault} alt="" width="150" height="150"/>
 										</p>
-									</div>
+	  								</div>*/}
 								</div>
 							</div>
 							<div className={!showPopup ? "d-none" :"popup_team"}>

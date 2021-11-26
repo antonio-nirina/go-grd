@@ -2,17 +2,15 @@ import React from 'react'
 // import React,{useState, useCallback}  from 'react'
 // import Cropper from 'react-easy-crop'
 import { useSelector,useDispatch } from "react-redux"
-
 import {useMutation} from "@apollo/client"
 import {RootState} from "../../reducer"
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faPen, faExternalLinkAlt } from "@fortawesome/free-solid-svg-icons"
-
 import fr from "../../assets/image/fr.png"
 import AvatarDefault from "../../assets/image/game-tag.png"
 import {UPDATE_AVATAR} from "../../gql/user/mutation"
 import {changeProfilUserConnected} from "../auth/action/userAction"
+import {dateShortYearCreated} from "../tools/dateConvert"
 
 interface Input {
 	email:string
@@ -21,11 +19,6 @@ interface Input {
 }
 
 const Avatar : React.FC = function() {
-	// const [crop, setCrop] = useState({ x: 0, y: 0 })
-  	// const [zoom, setZoom] = useState()
-  	/*const onCropComplete = useCallback((croppedArea, croppedAreaPixels) => {
-    	console.log(croppedArea, croppedAreaPixels)
-  	}, [])*/
 	const dispatch 				= useDispatch()
 	const userConnectedRedux 	= useSelector((state:RootState) => state.userConnected)
 	const [updatedAvatar]  		= useMutation(UPDATE_AVATAR)
@@ -52,19 +45,6 @@ const Avatar : React.FC = function() {
 			})
         }
 	}
-	//const [crop, setCrop] = useState({ x: 0, y: 0 })
-  	//const [zoom, setZoom] = useState(1)
-  	//const onCropComplete = useCallback((croppedArea, croppedAreaPixels) => {
-    //	console.log(croppedArea, croppedAreaPixels)
-  	//}, [])
-  	/*const area = {
-		width: 276, // width of the cropped area
-		height: 276 // height of the cropped area
-	}*/
-	// const [closeModal, setCloseModal] = useState(false)
-    /*const onClose = function(){
-        setCloseModal(!closeModal)
-    }*/
 
 	return (
 		<div className="gamer-profil">
@@ -81,7 +61,7 @@ const Avatar : React.FC = function() {
 					<h2>
 						{userConnectedRedux.user.username}
 					</h2>
-					<span>Membre depuis 11 2021</span>
+					<span>Membre depuis {dateShortYearCreated(userConnectedRedux.user.created)}</span>
 					<div className="img-container-profil">
 						<span className="invisible"></span>
 						<p></p>
@@ -107,24 +87,6 @@ const Avatar : React.FC = function() {
 					</div>
 				</div>
 			</div>
-			{/*<div className={!closeModal ? "crop-container" :"crop-container close"}>
-				<div className="is-cropped">
-					<h2>Changer de photo de profil</h2>
-					<Cropper
-						image={userConnectedRedux.user.avatar ? userConnectedRedux.user.avatar : AvatarDefault}
-						crop={crop}
-						zoom={zoom}
-						aspect={1 / 1}
-						onCropChange={setCrop}
-						onCropComplete={onCropComplete}
-						onZoomChange={setZoom}
-    				/>
-					<div className="btn-container">
-						<button className="btn bg-white" onClick={onClose}>Annuler</button>
-						<button className="btn bg-red">Valider</button>
-					</div>
-				</div>
-			</div>*/}
 		</div>
 	)
 }

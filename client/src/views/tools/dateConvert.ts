@@ -102,3 +102,11 @@ export const dateLongCreated = function(date = "") {
 		year : 'numeric',
 	})
 }
+
+export const dateShortYearCreated = function(date = "") {
+	return new Date(date).toLocaleString('fr-Fr', {
+		day : 'numeric',
+		month : 'short',
+		year : 'numeric',
+	})
+}

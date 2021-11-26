@@ -16,7 +16,6 @@ import {GET_ONE_TEAM_BY_USER} from "../../../gql/team/query"
 import { dateLongCreated } from "../../tools/dateConvert"
 
 import { User } from "../../models/tournament"
-import ImageTeam from "../../../assets/image/team/bg-team.jpg"
 import LogoTeam from "../../../assets/image/team/logo-team.jpg"
 import CreateTeam from "./create-team"
 
