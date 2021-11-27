@@ -23,6 +23,7 @@ import Warzone from "../../assets/image/warzone.png"
 import Rocketleague from "../../assets/image/rocketleague.png"
 import Rainbowsix from "../../assets/image/rainbowsix.png"
 import {dateStringToDHString} from "../tools/dateConvert"
+import {NameRoutes} from "./route-list"
 
 type TypeConfirmed = {
 	tournament: Tournament|undefined
@@ -31,11 +32,8 @@ type TypeConfirmed = {
 
 
 const ConfirmPart = function() {
-	const [showClose, setShowClose] = useState(true)
-	const [teamPart,setTeamPart] = useState<string>("")
 	const [message,setMessage] = useState<string>("")
 	const [tournament, setTournament] = useState<Tournament>()
-	const [teamUserPart,setTeamUserPart] = useState<string[]>([])
 	const [showPaiement, setShowPaiement] = useState<boolean>(false)
 	const userConnectedRedux = useSelector((state:RootState) => state.userConnected)
 	const params = useHistory<any>()
@@ -55,7 +53,6 @@ const ConfirmPart = function() {
 	const [savedPartTournament]  = useMutation(SAVED_PART)
 
 	const handlePartTournament = async function(){
-		setShowClose(false)
 		setShowPaiement(!showPaiement)
 		let isError:boolean = false
 		let arrayUidTeam:string[] = []
@@ -72,11 +69,11 @@ const ConfirmPart = function() {
 		}
 		if(!isError) {
 			const saved = await savedPartTournament({ variables: { uidUser: userConnectedRedux.user.uid,date:(new Date().toLocaleString()),tournamentUid:tournament?.uid,teamsUid:{uid:arrayUidTeam.length > 0 ? arrayUidTeam[0] : ""} } })
-			// console.log("saved", saved)
+			if(saved) params.push(NameRoutes.tournament)
 		}
 	}
 	const onShowClose = function(){
-    	setShowClose(false)
+    	params.push(NameRoutes.joinTournament+"?uid="+params.location.search.split("=")[1])
   	}
 
 	// handleClosePayement(showClose)

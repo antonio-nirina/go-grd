@@ -5,9 +5,12 @@ import {useQuery} from "@apollo/client"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faUsers } from "@fortawesome/free-solid-svg-icons"
 import Loader from "react-loader-spinner"
+import Moment from "react-moment"
+
 import {Tournament} from "../../models/tournament"
 import {GET_ALL_TOURNAMENT} from "../../../gql/tournament/query"
 import {dateStringToDY} from "../../tools/dateConvert"
+import 'moment/locale/fr'
 
 const TournamentInc = function() {
 	const history = useHistory()
@@ -34,7 +37,6 @@ const TournamentInc = function() {
 				const date1 = new Date()
 				const date2 = new Date(tournament.deadlineDate)
 				const diff = (date2.getTime() - date1.getTime())/1000/60
-				// setDateDiff([...dateDiff,diff.toString()])
 				if (diff < 10 || diff <= 0) setIsOpen(false)
 			})
 			setTournamentMonth(count)
@@ -42,6 +44,14 @@ const TournamentInc = function() {
 		}
 		setIsLoader(false)
 	},[loading,error,data])
+
+	const FilterDiff = function(date:string) :string {
+		if(Math.abs(parseInt(date)) > 0) {
+			return Math.abs(parseInt(date)) > 1 ? date+" jours" : date + " jour"
+		}
+
+		return Math.abs(parseInt(date))+" heures"
+	}
 
 	return (
 		<>
@@ -63,7 +73,7 @@ const TournamentInc = function() {
 							<div className="list_tournament" key={index}>
 								<Link to={`/join-tournament?uid=${element.uid}`} >
 									<img src={element.game.logo} width="40" height="30" alt=""/>
-									<p className="game_name">{element.title}<span>{dateStringToDY(element.dateStart)} - 6 jours</span></p>
+									<p className="game_name">{element.title}<span>{dateStringToDY(element.dateStart)} {<Moment filter={FilterDiff}  diff={element.dateStart} locale={"fr"} unit="days">{new Date()}</Moment>} </span></p>
 									<p className="cashprize">Cashprize<span>{`${element.price.reduce((prev,cur)=>(parseInt(prev.toString())+parseInt(cur)),0)}`} G-Coins</span></p>
 									<p className="arena">{element.gameWay} Arène</p>
 									<p className="place">

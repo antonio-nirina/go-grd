@@ -5,24 +5,25 @@ import (
 	userHandler "github.com/thoussei/antonio/api/user/handler"
 )
 
-func handleTeamToViewModel(team *entity.Team) TeamViewModel {
+func handleTeamToViewModel(team *entity.Team,t *teamUsecase) TeamViewModel {
 	var teamRes TeamViewModel
 	var players []userHandler.UserViewModel
 
 	for _,value := range team.Players{
+		user,_ := t.userUsecase.FindOneUserByUid(value)
 		pls := userHandler.UserViewModel{
-			Uid:value.Uid.Hex(),
-			FirstName:value.FirstName,
-			LastName:value.LastName,
-			Email:value.Email,
-			Username:value.Username,
-			IsBanned:value.IsBanned,
-			Avatar:value.Avatar,
-			Language:value.Language,
-			Point:value.Point,
-			Roles:value.Roles,
-			TypeConnexion:value.TypeConnexion,
-			Created:value.Created,
+			Uid:user.Uid.Hex(),
+			FirstName:user.FirstName,
+			LastName:user.LastName,
+			Email:user.Email,
+			Username:user.Username,
+			IsBanned:user.IsBanned,
+			Avatar:user.Avatar,
+			Language:user.Language,
+			Point:user.Point,
+			Roles:user.Roles,
+			TypeConnexion:user.TypeConnexion,
+			Created:user.Created,
 		}
 
 		players = append(players,pls)

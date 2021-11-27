@@ -28,7 +28,7 @@ const EditTeam: React.FC = function() {
 	const contentFile = useRef<HTMLInputElement>(null)
 	const contentBannier = useRef<HTMLInputElement>(null)
 	const { uid } = useParams<any>()
-	const userConnectedRedux = useSelector((state:RootState) => state.userConnected)
+	// const userConnectedRedux = useSelector((state:RootState) => state.userConnected)
   	const [showPopup, setShowPopup] = useState<boolean>(false)
   	const [showInvitation, setInvitation] = useState<Boolean>(false)
 	const [team, setTeam] = useState<TeamModel>()
