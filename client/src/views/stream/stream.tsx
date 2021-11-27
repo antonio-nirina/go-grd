@@ -4,6 +4,9 @@ import Footer from "../footer/footer"
 import "./stream.css"
 
 import thumbnail from "../../assets/image/video.png"
+import Viewer from "../../assets/image/icons/viewer.png"
+import { faCog, faLaugh, faShare } from "@fortawesome/free-solid-svg-icons"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 const Stream: React.FC = function() {
 
@@ -26,16 +29,26 @@ const Stream: React.FC = function() {
 		  				</div>
 		  				<div className="live-stream">
 		  					<div className="live-content">
-		  						<p>Jhon1 : <span>Salut !</span></p>
+		  						<p>Jhon1 : <span> Salut !</span></p>
+		  					</div>
+		  					<div className="send">
+		  						<p>
+		  							<span><strong>Jhon3 :</strong> Hello again !</span>
+		  							<i><FontAwesomeIcon icon={faShare} /></i>
+		  						</p>
 		  					</div>
 		  					<div className="edit-msg">
 		  						<input type="text" placeholder="Envoyer un message" />
-		  						<i></i>
+		  						<i><FontAwesomeIcon icon={faLaugh} /></i>
 		  					</div>
 		  					<div className="footer-live">
-		  						<span>0</span>
-		  						<i></i>
-		  						<button>Chat</button>
+		  						<p>
+		  							<img src={Viewer} alt=""/>
+		  							<span>0</span></p>
+		  						<p>
+		  							<i><FontAwesomeIcon icon={faCog} /></i>
+		  							<button>Chat</button>
+		  						</p>
 		  					</div>
 		  				</div>
 	  				</div>
