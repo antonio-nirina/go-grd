@@ -6,7 +6,6 @@ import (
 	"github.com/graphql-go/graphql"
 	"github.com/thoussei/antonio/api/group/entity"
 	"github.com/thoussei/antonio/api/group/handler"
-	userEntity "github.com/thoussei/antonio/api/user/entity"
 	userHandler "github.com/thoussei/antonio/api/user/handler"
 
 	"go.mongodb.org/mongo-driver/bson/primitive"
@@ -45,7 +44,7 @@ func (g *group) SavedGroupResolver(params graphql.ResolveParams) (interface{}, e
 		return nil, err
 	}
 
-	userObject := []userEntity.User{}
+	var userObject []string
 
 	for _, val := range users.UidUser {
 		userGroup, err := g.user.FindOneUserByUid(val)
@@ -54,7 +53,7 @@ func (g *group) SavedGroupResolver(params graphql.ResolveParams) (interface{}, e
 			return nil, err
 		}
 
-		userObject = append(userObject,userGroup)
+		userObject = append(userObject,userGroup.Uid.Hex())
 	}
 
 	group := &entity.Group{

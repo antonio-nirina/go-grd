@@ -38,8 +38,8 @@ func (u *UserUsecase) AddFriend(req *entity.Friends) (interface{}, error) {
 }
 
 func (u *UserUsecase) UpdatedUserFriend(user entity.User, userReq entity.User) (interface{}, error) {
-	var friend []entity.User
-	var friendReq []entity.User
+	var friend []string
+	var friendReq []string
 	if len(user.Friends) > 0 {
 		for _, val := range user.Friends {
 			friend = append(friend, val)
@@ -52,8 +52,7 @@ func (u *UserUsecase) UpdatedUserFriend(user entity.User, userReq entity.User) (
 		}
 	}
 
-	friend = append(friend, userReq)
-	friendReq = append(friendReq, user)
+
 	userSender := &entity.User{
 		Uid:           user.Uid,
 		FirstName:     user.FirstName,

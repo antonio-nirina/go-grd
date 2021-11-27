@@ -35,7 +35,6 @@ func Handle(next http.Handler) http.Handler {
 
 		if len(arrayToken) > 1 {
 			array := strings.Split(arrayToken[1], "=")
-
 			if array[0] == "" {
 				token, _ := jwt.Parse(tokenString, func(token *jwt.Token) (interface{}, error) {
 					if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
@@ -47,7 +46,6 @@ func Handle(next http.Handler) http.Handler {
 
 				if claims, ok := token.Claims.(jwt.MapClaims); ok && token.Valid {
 					log.Printf("JWT Authenticated OK (app: %s)", claims["app"])
-
 					next.ServeHTTP(w, r)
 				}
 			}

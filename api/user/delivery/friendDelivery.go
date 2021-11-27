@@ -42,8 +42,8 @@ func (r *resolver) RequestFriendResolver(params graphql.ResolveParams) (interfac
 
 	friend := &entity.Friends{
 		Uid: primitive.NewObjectID(),
-		Request:resRequest,
-		Sender:resSender,
+		Request:resRequest.Uid.Hex(),
+		Sender:resSender.Uid.Hex(),
 		Statut:false,
 	}
 
@@ -86,16 +86,17 @@ func (r *resolver) GetAllFriendsUser(params graphql.ResolveParams) (interface{},
 		result = append(result, *res)
 	} else {
 		for _,val := range user.Friends {
-			res.Id = val.Uid.Hex()
+			frind,_ := r.userHandler.FindOneUserByUid(val)
+			res.Id = frind.Uid.Hex()
 			res.Count = len(user.Friends)
-			res.Email = val.Email
-			res.Firstname = val.FirstName
-			res.Lastname = val.LastName
-			res.Username = val.Username
-			res.Avatar = val.Avatar
-			res.IsBanned = val.IsBanned
+			res.Email = frind.Email
+			res.Firstname = frind.FirstName
+			res.Lastname = frind.LastName
+			res.Username = frind.Username
+			res.Avatar = frind.Avatar
+			res.IsBanned = frind.IsBanned
 			isConnected := false
-			cn,_ := external.GetHmsetRedis(common.CONNECTED,val.Uid.Hex())
+			cn,_ := external.GetHmsetRedis(common.CONNECTED,frind.Uid.Hex())
 
 			if cn[0] != nil {
 				isConnected = true

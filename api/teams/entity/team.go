@@ -9,7 +9,7 @@ type Team struct {
 	Uid           			primitive.ObjectID 	`bson:"uid"`
 	Name 		  			string 				`json:"name"`
 	CreationDate 		  	string            	`json:"creationDate"`
-	Players 	 	  		[]user.User 	   	`json:"players"`
+	Players 	 	  		[]string 	   	`json:"players"`
 	Description 		  	string            	`json:"description"`
 	IsBlocked 		  		bool 				`json:"isBlocked"`
 	Logo   					string            	`json:"logo"`

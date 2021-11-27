@@ -20,11 +20,13 @@ type UsecaseNotif interface {
 
 type notifUsecase struct {
 	notifRepository repository.RepositoryNotif
+	userHandler handler.Usecase
 }
 
-func NewUsecaseNotif(r repository.RepositoryNotif) UsecaseNotif {
+func NewUsecaseNotif(r repository.RepositoryNotif,u handler.Usecase) UsecaseNotif {
 	return &notifUsecase{
 		notifRepository: r,
+		userHandler: u,
 	}
 }
 
@@ -62,8 +64,8 @@ func (r *notifUsecase) SavedNotifHandler(user userEntity.User,userReq userEntity
 		Content:content,     	
 		Statut:false,
 		Type:typeNotification,
-		User:user,
-		UserRequest: userReq,			
+		User:user.Uid.Hex(),
+		UserRequest: userReq.Uid.Hex(),			
 	}
 
 	_, err := r.notifRepository.SavedNotifRepo(notify)
@@ -110,45 +112,50 @@ func (r *notifUsecase) FindAllNotifHandler(idUser string) ([]notifViewModel, err
 		return nil, err
 	}
 
-	for _,val := range result {
-		objNotif := notifViewModel{
-			Uid: val.Uid.Hex(),
-			Title: val.Title,     		
-			Type:val.Type,    		
-			Content:val.Content,     	
-			Statut:val.Statut,
-			UserRequest:userRequest{
-				Uid:val.UserRequest.Uid.Hex(),
-				FirstName:val.UserRequest.FirstName,
-				LastName:val.UserRequest.LastName,          
-				Email :val.UserRequest.Email,        
-				Username:val.UserRequest.Username,      
-				IsBanned:val.UserRequest.IsBanned,      
-				Avatar:val.UserRequest.Avatar,        
-				Language:val.UserRequest.Language,      
-				Point :val.UserRequest.Point,        
-				Roles:val.UserRequest.Roles,      	 
-				TypeConnexion:val.UserRequest.TypeConnexion,   
-				Created:val.UserRequest.Created, 		
-			} ,	
-			User:userRequest{
-				Uid:val.UserRequest.Uid.Hex(),
-				FirstName:val.User.FirstName,     
-				LastName:val.User.LastName,          
-				Email :val.User.Email,        
-				Username:val.User.Username,      
-				IsBanned:val.User.IsBanned,      
-				Avatar:val.User.Avatar,        
-				Language:val.User.Language,      
-				Point :val.User.Point,        
-				Roles:val.User.Roles,      	 
-				TypeConnexion:val.User.TypeConnexion,   
-				Created:val.User.Created, 		
-			},			
-
+	if len(result) > 0 {
+		for _,val := range result {
+			userReq,_ := r.userHandler.FindOneUserByUid(val.UserRequest)
+			user,_ := r.userHandler.FindOneUserByUid(val.User)
+			objNotif := notifViewModel{
+				Uid: val.Uid.Hex(),
+				Title: val.Title,     		
+				Type:val.Type,    		
+				Content:val.Content,     	
+				Statut:val.Statut,
+				UserRequest:userRequest{
+					Uid:userReq.Uid.Hex(),
+					FirstName:userReq.FirstName,
+					LastName:userReq.LastName,          
+					Email :userReq.Email,        
+					Username:userReq.Username,      
+					IsBanned:userReq.IsBanned,      
+					Avatar:userReq.Avatar,        
+					Language:userReq.Language,      
+					Point :userReq.Point,        
+					Roles:userReq.Roles,      	 
+					TypeConnexion:userReq.TypeConnexion,   
+					Created:userReq.Created, 		
+				} ,	
+				User:userRequest{
+					Uid:user.Uid.Hex(),
+					FirstName:user.FirstName,     
+					LastName:user.LastName,          
+					Email :user.Email,        
+					Username:user.Username,      
+					IsBanned:user.IsBanned,      
+					Avatar:user.Avatar,        
+					Language:user.Language,      
+					Point :user.Point,        
+					Roles:user.Roles,      	 
+					TypeConnexion:user.TypeConnexion,   
+					Created:user.Created, 		
+				},			
+	
+			}
+			notifs = append(notifs,objNotif)
 		}
-		notifs = append(notifs,objNotif)
 	}
+	
 	return notifs,nil
 }
 

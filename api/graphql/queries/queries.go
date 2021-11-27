@@ -66,7 +66,7 @@ var usecaseGame = gameHandler.NewUsecaseGame(repositoryGame)
 var gameResolver = gameDelivery.NewResolverGame(usecaseGame)
 
 // Usecase
-var usecaseNotif = notifHandler.NewUsecaseNotif(repositoryNotif)
+var usecaseNotif = notifHandler.NewUsecaseNotif(repositoryNotif,usecase)
 var usecase = handler.NewUsecaseUser(rep)
 var UserRolve = delivery.NewResolver(usecase, usecaseNotif, usecaseGame, usecasePlateform)
 
@@ -85,7 +85,7 @@ var homeUsecase = homeHandler.NewUsecaseHome(homeRepository)
 var homeResolver = homeDelivery.NewResolverHome(homeUsecase, usecaseGame)
 
 var teamRepository = teamRepo.NewTeamRepository(database)
-var teamUsecase = teamHandler.NewUsecaseTeam(teamRepository)
+var teamUsecase = teamHandler.NewUsecaseTeam(teamRepository,usecase)
 var teamResolver = teamDelivery.NewResolverTeam(teamUsecase, usecase)
 
 var asistRepository = asistRepo.NewAsistRepository(database)
@@ -101,11 +101,11 @@ var waggerUsecase = waggerHandler.NewUsecaseWagger(waggerRepository)
 var waggerResolver = waggerDelivery.NewResolverWagger(waggerUsecase, usecaseGame, usecasePlateform)
 
 var partRepository = partRepo.NewPartRepository(database)
-var partUsecase = partHandler.NewUsecasePart(partRepository)
+var partUsecase = partHandler.NewUsecasePart(partRepository,teamUsecase,usecase)
 var partResolver = partDelivery.NewResolverPart(partUsecase, usecase, tournamentUsecase, teamUsecase, waggerUsecase)
 
 var postRepository = postRepo.NewPostRepository(database)
-var postUsecase = postHandler.NewUsecasePost(postRepository)
+var postUsecase = postHandler.NewUsecasePost(postRepository,usecase)
 var postResolver = postDelivery.NewResolverPost(postUsecase, usecase)
 
 // GetRootFields returns all the available queries.

@@ -16,7 +16,6 @@ type UsecaseTeam interface {
 	FindTeamByUserHandler(idQuery string) ([]TeamViewModel, error)
 	UpdatedAllTeamHandler(team *entity.Team) (TeamViewModel, error)
 	DeleteTeamHandler(idQuery string) (interface{}, error)
-
 }
 
 type TeamViewModel struct {
@@ -28,18 +27,20 @@ type TeamViewModel struct {
 	IsBlocked 		  		bool 						`json:"isBlocked"`
 	Logo   					string            			`json:"logo"`
 	Tag   					string            			`json:"tag"`
-	Banniere   					string            	`json:"banniere"`
-	Creator   				string `json:"creator"` //userHandler.UserViewModel    `json:"creator"`
-	Records   					int            			`json:"records"`
+	Banniere   				string            			`json:"banniere"`
+	Creator   				string 						`json:"creator"` //userHandler.UserViewModel    `json:"creator"`
+	Records   				int            				`json:"records"`
 }
 
 type teamUsecase struct {
 	teamRepository repository.RepositoryTeam
+	userUsecase userHandler.Usecase
 }
 
-func NewUsecaseTeam(t repository.RepositoryTeam) UsecaseTeam {
+func NewUsecaseTeam(t repository.RepositoryTeam,u userHandler.Usecase) UsecaseTeam {
 	return &teamUsecase{
 		teamRepository: t,
+		userUsecase:u,
 	}
 }
 
@@ -114,19 +115,20 @@ func (t *teamUsecase) FindTeamHandler(idQuery string) (TeamViewModel, error) {
 	var players []userHandler.UserViewModel
 
 	for _,val := range result.Players{
+		user,_ := t.userUsecase.FindOneUserByUid(val)
 		pls := userHandler.UserViewModel{
-			Uid:val.Uid.Hex(),
-			FirstName:val.FirstName,
-			LastName:val.LastName,
-			Email:val.Email,
-			Username:val.Username,
-			IsBanned:val.IsBanned,
-			Avatar:val.Avatar,
-			Language:val.Language,
-			Point:val.Point,
-			Roles:val.Roles,
-			TypeConnexion:val.TypeConnexion,
-			Created:val.Created,
+			Uid:user.Uid.Hex(),
+			FirstName:user.FirstName,
+			LastName:user.LastName,
+			Email:user.Email,
+			Username:user.Username,
+			IsBanned:user.IsBanned,
+			Avatar:user.Avatar,
+			Language:user.Language,
+			Point:user.Point,
+			Roles:user.Roles,
+			TypeConnexion:user.TypeConnexion,
+			Created:user.Created,
 		}
 
 		players = append(players,pls)
@@ -183,19 +185,20 @@ func (t *teamUsecase) FindAllTeamHandler(pageNumber int64,limit int64) ([]TeamVi
 
 	for _,val := range result {
 		for _,value := range val.Players{
+			user,_ := t.userUsecase.FindOneUserByUid(value)
 			pls := userHandler.UserViewModel{
-				Uid:value.Uid.Hex(),
-				FirstName:value.FirstName,
-				LastName:value.LastName,
-				Email:value.Email,
-				Username:value.Username,
-				IsBanned:value.IsBanned,
-				Avatar:value.Avatar,
-				Language:value.Language,
-				Point:value.Point,
-				Roles:value.Roles,
-				TypeConnexion:value.TypeConnexion,
-				Created:value.Created,
+				Uid:user.Uid.Hex(),
+				FirstName:user.FirstName,
+				LastName:user.LastName,
+				Email:user.Email,
+				Username:user.Username,
+				IsBanned:user.IsBanned,
+				Avatar:user.Avatar,
+				Language:user.Language,
+				Point:user.Point,
+				Roles:user.Roles,
+				TypeConnexion:user.TypeConnexion,
+				Created:user.Created,
 			}
 
 			players = append(players,pls)
@@ -275,19 +278,20 @@ func (t *teamUsecase) FindTeamByUserHandler(idQuery string) ([]TeamViewModel, er
 
 	for _,val := range result {
 		for _,value := range val.Players{
+			user,_ := t.userUsecase.FindOneUserByUid(value)
 			pls := userHandler.UserViewModel{
-				Uid:value.Uid.Hex(),
-				FirstName:value.FirstName,
-				LastName:value.LastName,
-				Email:value.Email,
-				Username:value.Username,
-				IsBanned:value.IsBanned,
-				Avatar:value.Avatar,
-				Language:value.Language,
-				Point:value.Point,
-				Roles:value.Roles,
-				TypeConnexion:value.TypeConnexion,
-				Created:value.Created,
+				Uid:user.Uid.Hex(),
+				FirstName:user.FirstName,
+				LastName:user.LastName,
+				Email:user.Email,
+				Username:user.Username,
+				IsBanned:user.IsBanned,
+				Avatar:user.Avatar,
+				Language:user.Language,
+				Point:user.Point,
+				Roles:user.Roles,
+				TypeConnexion:user.TypeConnexion,
+				Created:user.Created,
 			}
 
 			players = append(players,pls)
@@ -335,7 +339,7 @@ func (t *teamUsecase) UpdatedAllTeamHandler(team *entity.Team) (TeamViewModel, e
 		return TeamViewModel{}, err
 	}
 
-	return handleTeamToViewModel(team),nil
+	return handleTeamToViewModel(team,t),nil
 }
 
 func (t *teamUsecase) DeleteTeamHandler(idQuery string) (interface{}, error) {

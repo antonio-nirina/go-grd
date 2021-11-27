@@ -124,10 +124,10 @@ const Joingame: React.FC = function(props:any) {
               <div className="item-img-info"></div>
               <div className="item-all-content">
                 <div className="item-all-info">
-                  <p><span>Frais d'entrée</span></p>
-                  <p className="item-text-left">Invitation</p>
-                  <p><span>Cash prize</span></p>
-                  <p>{sumPrice}</p>
+					<p><span>Frais d'entrée</span></p>
+					<p className="item-text-left">Invitation</p>
+					<p><span>Cash prize</span></p>
+					<p>{sumPrice}</p>
                 </div>
                 <div className="item-all-info">
                   <p><span>Région</span></p>

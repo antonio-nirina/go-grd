@@ -32,11 +32,13 @@ type UsecasePost interface {
 
 type postUsecase struct {
 	postRepository repository.RepositoryPost
+	userUsecase userHanlder.Usecase
 }
 
-func NewUsecasePost(r repository.RepositoryPost) UsecasePost {
+func NewUsecasePost(r repository.RepositoryPost, u userHanlder.Usecase) UsecasePost {
 	return &postUsecase{
 		postRepository: r,
+		userUsecase:u,
 	}
 }
 
@@ -62,7 +64,7 @@ func (c *postUsecase) CreatePostHandler(cmty *entity.Post) ([]PostViewModel, err
 		return []PostViewModel{}, err
 	}
 
-	return handlerAllPost(result), nil
+	return handlerAllPost(result,c), nil
 }
 
 func (c *postUsecase) FindPostHandler(idQuery string) (PostViewModel, error) {
@@ -77,20 +79,21 @@ func (c *postUsecase) FindPostHandler(idQuery string) (PostViewModel, error) {
 	if err != nil {
 		return PostViewModel{}, err
 	}
-
+	
+	user,_ := c.userUsecase.FindOneUserByUid(result.User)
 	userViews := userHanlder.UserViewModel{
-		Uid:           result.User.Uid.Hex(),
-		FirstName:     result.User.FirstName,
-		LastName:      result.User.LastName,
-		Email:         result.User.Email,
-		Username:      result.User.Username,
-		IsBanned:      result.User.IsBanned,
-		Avatar:        result.User.Avatar,
-		Language:      result.User.Language,
-		Point:         result.User.Point,
-		Roles:         result.User.Roles,
-		TypeConnexion: result.User.TypeConnexion,
-		Created:       result.User.Created,
+		Uid:           user.Uid.Hex(),
+		FirstName:     user.FirstName,
+		LastName:      user.LastName,
+		Email:         user.Email,
+		Username:      user.Username,
+		IsBanned:      user.IsBanned,
+		Avatar:        user.Avatar,
+		Language:      user.Language,
+		Point:         user.Point,
+		Roles:         user.Roles,
+		TypeConnexion: user.TypeConnexion,
+		Created:       user.Created,
 	}
 
 	cmtyViewModel := PostViewModel{
@@ -113,26 +116,27 @@ func (c *postUsecase) FindAllPostHandler(pageNumber int64, limit int64) ([]PostV
 		return []PostViewModel{}, err
 	}
 
-	return handlerAllPost(result), nil
+	return handlerAllPost(result,c), nil
 }
 
-func handlerAllPost(result []entity.Post) []PostViewModel {
+func handlerAllPost(result []entity.Post, c *postUsecase) []PostViewModel {
 	var res []PostViewModel
 
 	for _, val := range result {
+		user,_ := c.userUsecase.FindOneUserByUid(val.User)
 		userViews := userHanlder.UserViewModel{
-			Uid:           val.User.Uid.Hex(),
-			FirstName:     val.User.FirstName,
-			LastName:      val.User.LastName,
-			Email:         val.User.Email,
-			Username:      val.User.Username,
-			IsBanned:      val.User.IsBanned,
-			Avatar:        val.User.Avatar,
-			Language:      val.User.Language,
-			Point:         val.User.Point,
-			Roles:         val.User.Roles,
-			TypeConnexion: val.User.TypeConnexion,
-			Created:       val.User.Created,
+			Uid:           user.Uid.Hex(),
+			FirstName:     user.FirstName,
+			LastName:      user.LastName,
+			Email:         user.Email,
+			Username:      user.Username,
+			IsBanned:      user.IsBanned,
+			Avatar:        user.Avatar,
+			Language:      user.Language,
+			Point:         user.Point,
+			Roles:         user.Roles,
+			TypeConnexion: user.TypeConnexion,
+			Created:       user.Created,
 		}
 
 		cmtyViewModel := PostViewModel{
@@ -165,5 +169,5 @@ func (c *postUsecase) RemoveHandler(idQuery string) ([]PostViewModel, error) {
 		return []PostViewModel{}, err
 	}
 
-	return handlerAllPost(result), nil
+	return handlerAllPost(result,c), nil
 }

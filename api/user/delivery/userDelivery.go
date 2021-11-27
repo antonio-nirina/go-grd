@@ -107,7 +107,7 @@ func (r *resolver) SavedUserResolver(params graphql.ResolveParams) (interface{},
 		Roles:         roles,
 		TypeConnexion: "site",
 		Created:       time.Now().Format(time.RFC3339),
-		Friends:       []entity.User{},
+		Friends:       []string{},
 		Country:       "France",
 		BirtDate:      "",
 	}
@@ -306,7 +306,7 @@ func (r *resolver) GetAllUser(params graphql.ResolveParams) (interface{}, error)
 
 		if len(userC.Friends) > 0 {
 			for _, uc := range userC.Friends {
-				if uc.Uid.Hex() == user.Uid.Hex() {
+				if uc == user.Uid.Hex() {
 					found = true
 				}
 			}
@@ -399,7 +399,7 @@ func GetToken(user entity.User) (interface{}, error) {
 
 	if len(user.Friends) > 0 {
 		for _, v := range user.Friends {
-			frd = append(frd, v.Uid.Hex())
+			frd = append(frd, v)
 		}
 	}
 
