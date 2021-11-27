@@ -32,7 +32,7 @@ type TypeConfirmed = {
 
 const ConfirmPart = function() {
 	const [showClose, setShowClose] = useState(true)
-	const [teamPart,setTeamPart] = useState<string>("")
+
 	const [message,setMessage] = useState<string>("")
 	const [tournament, setTournament] = useState<Tournament>()
 	const [teamUserPart,setTeamUserPart] = useState<string[]>([])

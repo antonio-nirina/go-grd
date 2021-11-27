@@ -3,18 +3,19 @@
 	width: 94%;
 	padding: 30px 15px;
 	margin: auto;
-	
+
 }
 .search-container{
-	padding: 15px;	
+	padding: 15px;
 }
 .search-container h2{
-	font-family: arial;
+	font-family: "russo one";
 	font-weight: 500;
 	font-size: 30px;
 	color: #ffffff;
 	float: left;
 	margin-right: 60px;
+	padding: 7px 0;
 }
 .search-box{
 
@@ -24,11 +25,11 @@
 	padding: 10px;
 	border: 1px solid #e3e3e3;
 	border-radius: 5px;
-}	
+}
 .aside-menu{
 	font-family: "arial";
 	font-weight: 700;
-	background: #101010;	
+	background: #101010;
 	display: table-cell;
 	vertical-align: top;
 	padding: 20px;
@@ -37,7 +38,7 @@
 	border-radius: 5px 0px 0px 5px;
 }
 .support{
-	background: #101010;	
+	background: #101010;
 	width: 913px;
 	display: table-cell;
 	vertical-align: top;
@@ -74,7 +75,7 @@
 	margin-top: 7px;
 }
 .parent-link{
-	margin: 15px 0;	
+	margin: 15px 0;
 }
 .link a.active, .link a:hover, .link h3.active, .link h3:hover{
 	color: #ffffff;
@@ -82,8 +83,9 @@
 .link h3, .link h3 a{
 	color: #ffffff;
     font-size: 15px;
-    font-weight: lighter;
+    font-family: "russo one";
     position: relative;
+    font-weight: lighter;
 }
 .link li a{
 	color: #ffffff;
@@ -95,16 +97,16 @@
 	border-bottom: 2px solid #dd0000;
 }
 .under-title .clear{
-	display: block;	
+	display: block;
 }
 .under-title:last-child{
 	border-bottom: none;
 }
 .under-title p{
-	font-size: 12px;
+	font-size: 14px;
 }
 .under-title p.light{
-	font-size: 10px;
+	font-size: 14px;
 }
 .carre{
 	width: 30px;
@@ -114,7 +116,7 @@
 	float: left;
 	margin-left: 5px;
 	margin-right: 15px;
-	
+
 }
 .carre:first-child{
 	margin-bottom: 10px;
@@ -131,7 +133,8 @@
 .assistance .ingame .support-link .link:nth-child(2) h3 a:before,
 .assistance .social .support-link .link:nth-child(3) h3 a:before,
 .assistance .help-connexion .support-link .link:nth-child(4) h3 a:before,
-.assistance .contact .support-link .link:nth-child(5) h3 a:before
+.assistance .contact .support-link .link:nth-child(5) h3 a:before,
+.contact .link a[href="/contact"]:before
 {
 	content: "";
     display: inline-block;
@@ -139,14 +142,15 @@
     width: 6px;
     height: 25px;
     background: #dd0000;
-    margin-right: 5px;  
+    margin-right: 5px;
     position: absolute;
     left: -13px;
     top: -3px;
 }
+
 .didacticiel {
 	padding-top: 15px;
-	font-family: "quicksand regular";	
+	font-family: "quicksand regular";
 }
 .didacticiel p{
 	font-family: 'quicksand regular';
@@ -157,11 +161,14 @@
 	height: 77px;
 	overflow: hidden;
 }
+.support-container .btn{
+	font-family: "russo one"
+}
 .sup{
 	position: relative;
 }
 .sup.reduce{
-	
+
 }
 .sup i{
 	float: right;
@@ -172,7 +179,7 @@
 }
 .support-container.reduce
 {
-	height: auto;	
+	height: auto;
 }
 
 .img-cadre{
@@ -201,6 +208,8 @@
 .input-container label{
 	margin-top: 15px;
 	display: block;
+	text-transform: uppercase;
+	font-weight: bold;
 }
 .input-container.side-by{
 	display: flex;
@@ -226,5 +235,8 @@
 .input-container input:focus, .input-container textarea:focus{
 	background: #a2a2a2;
 	color: #000000;
+}
+#msg:placeholder{
+	font-size: 14px;
 }
 

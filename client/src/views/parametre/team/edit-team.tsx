@@ -9,7 +9,7 @@ import Footer from "../../footer/footer"
 import "../../parametre/parametre.css"
 import Sidebar from "../sidebar"
 import {RootState} from "../../../reducer"
-import AvatarDefault from "../../../assets/image/game-tag.png"
+
 import { faUserPlus, faTimes } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {GET_ONE_TEAM} from "../../../gql/team/query"
