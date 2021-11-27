@@ -9,6 +9,7 @@
 .profil .container h2{
 	font-family: "russo one";
 	text-transform: uppercase;
+	font-weight: inherit;
 	font-size: 20px;
 	/*padding: 5px;	*/
 	margin-bottom: 5px;
