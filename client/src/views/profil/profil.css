@@ -1,12 +1,13 @@
 @charset "UTF-8";
 .gamer-stats{
 	max-width: 92.8%;
-	width: 100%;	
+	width: 100%;
 	padding-top: 35px;
 	margin: auto;
 
 }
 .profil .container h2{
+	font-family: "russo one";
 	text-transform: uppercase;
 	font-size: 20px;
 	/*padding: 5px;	*/
@@ -18,23 +19,23 @@
 .profil .container h2 i{
 	font-size: 17px;
 	align-self: top;
-	position: absolute;	
+	position: absolute;
 	top: 0;
     top: 7px;
     right: 25px;
 }
-.content{	
-	width: 100%;	
+.content{
+	width: 100%;
 	background-position: center top;
 }
 .main-pro{
 	display: flex;
-	min-height: 100vh;		
-	width: 100%;	
+	min-height: 100vh;
+	width: 100%;
 	vertical-align: top;
-	padding-top: 0px !important;	
+	padding-top: 0px !important;
 	background-size: 100% 50%;
-	
+
 }
 .stat-content{
 	display: flex;
@@ -47,7 +48,7 @@
 .wall{
 	margin-bottom: 40px;
 	background: #2c2c2c;
-	border-radius: 20px;
+	border-radius: 43px;
 	max-width: 440px;
 	width: 100%;
 	position: relative;
@@ -83,18 +84,18 @@
 }
 .grid .full-w .external{
 	position: absolute;
-	right: 9px;
+	right: 30px;
 	top: 5px;
 }
 .grid .flag-container{
-	width: 100%;	
+	width: 100%;
 }
 .grid .option-friend{
 	margin-top: 15px;
 }
 .grid .option-friend select{
 	padding: 10px;
-	border-radius: 15px;	
+	border-radius: 15px;
 	border: 1px solid #ffffff;
 	color: #ffffff;
 	text-transform: uppercase;
@@ -108,9 +109,9 @@
 .grid .full-w .external i{
 	font-size: 15px;
 }
-.tabs{	
+.tabs{
 	width: 100%;
-	text-align: center;	
+	text-align: center;
 	margin-bottom: 5px;
 }
 .profil .tabs{
@@ -123,14 +124,14 @@
 }
 .tabs li{
 	background: #1b1d26;
-	display: inline-block;	
-	border-right: 1px solid #4e4e4e;	
+	display: inline-block;
+	border-right: 1px solid #4e4e4e;
 }
 .tabs li:first-child{
 	border-radius: 5px 0px 0px 5px;
 }
 .tabs li:last-child{
-	border-radius: 0px 5px 5px 0px;	
+	border-radius: 0px 5px 5px 0px;
 }
 
 .tabs li a.active{
@@ -142,12 +143,12 @@
 .tabs li a{
 	display: block;
 	padding: 10px 30px;
-	color: #ffffff;	
-	font-weight: normal;	
+	color: #ffffff;
+	font-weight: normal;
 }
 
 .stat{
-	
+
     display: inline-block;
     vertical-align: top;
     width: 380px;
@@ -163,12 +164,12 @@
 	font-size: 16px;
     margin-top: 8px;
 }
-.float p{	
+.float p{
 	padding: 0;
 	font-size: 13px;
 }
 .percent{
-	width: 240px;	
+	width: 240px;
 	display: inline-block;
 	vertical-align: top;
 }
@@ -179,10 +180,10 @@
 	border-radius: 5px;
 }
 .myBar{
-	
+
 	height: 5px;
 	background: green;
-	border-radius: 5px;	
+	border-radius: 5px;
 }
 
 .main-pro h1{
@@ -194,21 +195,21 @@
 	align-self: center;
 	position: absolute;
 	left: -22px;
-	top: -4px;
+	top: 3px;
 }
-.setavatar{	
+.setavatar{
 	position: relative;
 }
 .setavatar label{
 	display: none;
 	position: absolute;
-	width: 100%;	
+	width: 100%;
 	top: 0%;
 	height: 95%;
 	text-align: center;
 	background: rgba(0,0,0,0.5);
 	border-radius: 50%;
-	border: none;	
+	border: none;
 }
 .setavatar:hover label{
 	display: block;
@@ -231,10 +232,10 @@
 	border: 2px solid #4c4d4f;
 }
 .main-pro .premium{
-	
+
 }
 .about-bloc{
-	
+
 }
 .about-me{
 	background: #000000;
@@ -250,10 +251,10 @@
 }
 .about-me input{
 	background: none;
-    border: 2px solid #424242;      
+    border: 2px solid #424242;
     padding: 15px;
     color: #ffffff;
-    font-size: 15px;    
+    font-size: 15px;
     margin-bottom: 15px;
     width: 100%;
     border-radius: 5px;
@@ -266,7 +267,7 @@
 }
 .group-input {
     max-width: 589px;
-    width: 100%;    
+    width: 100%;
     padding: 15px 40px;
     display: inline-block;
     vertical-align: top;
@@ -279,10 +280,10 @@
 	margin-bottom: 10px;
 	display: block;
 }
-.lang-container{	
-	width: 100%;	
-	top: 0px;	
-	border-radius: 5px;	
+.lang-container{
+	width: 100%;
+	top: 0px;
+	border-radius: 5px;
 }
 .lang-setting i{
 	display: block;
@@ -291,8 +292,8 @@
 	height: 60px;
 	width: 50px !important;
 }
-.lgdrpdwn{		
-	display: block;	
+.lgdrpdwn{
+	display: block;
 }
 .little-icon{
 	position: relative;
@@ -313,11 +314,11 @@
 	background: none;
     border: 2px solid #424242;
     background: #2c2c2c;
-    width: 100%;    
+    width: 100%;
     padding: 15px;
     color: #acacac;
-    font-size: 15px;    
-    margin-bottom: 15px;    
+    font-size: 15px;
+    margin-bottom: 15px;
     border-radius: 5px;
 }
 .lgdrpdwn p{
@@ -327,7 +328,7 @@ p.lg-desc{
 	font-size: 12px;
 	font-style: italic;
 }
-.lg-opt{			
+.lg-opt{
 }
 
 .field{
@@ -340,17 +341,17 @@ p.lg-desc{
 
 .itemGame{
 	max-width: 250px;
-	width: 100%;	
+	width: 100%;
 	display: inline-block;
 	vertical-align: top;
 	padding: 19px;
 	text-align: center;
 	background: #2b2b2b;
 	margin-right: 15px;
-	border-radius: 5px;	
+	border-radius: 5px;
 }
 .itemGame img{
-	
+
 }
 .itemGame p{
 	margin-bottom: 15px;
@@ -359,7 +360,7 @@ p.lg-desc{
 
 }
 .field h2{
-	font-family: arial;	
+	font-family: arial;
     font-size: 45px;
     width: 100%;
     text-align: center;
@@ -392,7 +393,7 @@ p.lg-desc{
     padding-bottom: 1em;
     padding-top: 35px;
     font-weight: 200;
-    
+
 }
 .img-container-profil{
 	display: flex;
@@ -424,13 +425,13 @@ p.lg-desc{
 .img-container-profil img{
 	align-self: center;
 }
-.uploadLogoteam{	
+.uploadLogoteam{
 	margin-top: 15px;
 	position: relative;
 }
 .logoteam-container{
     position: absolute;
-    width: 100%;    
+    width: 100%;
     top: 73%;
     text-align: center;
     overflow: hidden;
@@ -442,8 +443,8 @@ p.lg-desc{
     vertical-align: middle;
 }
 .instruction{
-	width: 73%;    
-    padding: 15px;    
+	width: 73%;
+    padding: 15px;
     display: inline-block;
 }
 .setlogoTeam label{
@@ -452,7 +453,7 @@ p.lg-desc{
     width: 100%;
     left: 0px;
     text-align: center;
-    height: 100%;    
+    height: 100%;
     padding-top: 50%;
     opacity: 0.5;
     border-radius: 5px;
@@ -465,7 +466,7 @@ p.lg-desc{
 .uploadLogoteam img{
 	width: 100%;
 	height: auto;
-	
+
 }
 .setlogoTeam
 #setLogoTeam{
@@ -481,7 +482,7 @@ p.lg-desc{
 	clear: both;
 	margin-top: 50px;
 	margin-bottom: 50px;
-	display: block;	
+	display: block;
 	width: 100%;
 	text-align: center;
 }
@@ -502,19 +503,19 @@ p.lg-desc{
 .team-bloc{
 	background:#2c2c2c;
 	max-width: 430px;
-	width: 100%;	
+	width: 100%;
 	border-radius: 5px;
-	padding-bottom: 
+	padding-bottom:
 
 }
-.set-team{	
-	padding: 25px 5px 0px;                          	
+.set-team{
+	padding: 25px 5px 0px;
 }
 .set-team input{
 	display: block;
 	background: none;
     border-bottom: 1px solid #acacac !important;
-    width: 100%;    
+    width: 100%;
     padding: 15px;
     color: #acacac;
     font-size: 15px;
@@ -525,9 +526,9 @@ p.lg-desc{
 .imgcontainer img{
 	border-radius: 5px 5px 0px 0px;
 }
-.team-logo{	
-	width: 100%;    
-    text-align: center;    
+.team-logo{
+	width: 100%;
+    text-align: center;
     background: #101010;
     border-radius: 0px 0px 5px;
     padding: 5px;
@@ -540,8 +541,8 @@ p.lg-desc{
 	position: absolute;
 	top: 30%;
 }
-.team-name{	
-	display: inline-block;	
+.team-name{
+	display: inline-block;
 	vertical-align: top;
 	width: 100%;
 	padding: 10px;
@@ -567,7 +568,7 @@ p.lg-desc{
 .popup-content{
 	border-radius: 8px !important;
     padding: 15px !important;
-}	
+}
 .popup-content .btn{
 	margin-right: 15px;
 	cursor: pointer;
@@ -595,11 +596,11 @@ p.lg-desc{
 	color: #ffffff;
 
 }
-.filter p span{	
+.filter p span{
 	display: inline-block;
 	margin: 0 25px;
 }
-.filter i{	
+.filter i{
 	margin-left: 15px;
 	color: #888888;
 }
@@ -613,13 +614,13 @@ p.lg-desc{
 .mes-tournois table,
 .mes-resultats table
 {
-	width: 100%;	
+	width: 100%;
 	border-collapse: collapse;
 }
 .tab-content thead
 {
-	color: #888888;	
-	font-style: italic;	
+	color: #888888;
+	font-style: italic;
 }
 
 .mes-resultats .tab-content thead{
@@ -640,7 +641,7 @@ p.lg-desc{
 	display: inline-block;
 	margin-right: 18px;
 	background: #000000;
-	border-radius: 5px;	
+	border-radius: 5px;
 	vertical-align: top;
 
 }
@@ -660,7 +661,7 @@ p.lg-desc{
 }
 .mes-resultats table{
 	background: #2c2c2c;
-	border-radius: 5px;	
+	border-radius: 5px;
 }
 .mes-resultats .tab-content{
 	width: 100%;
@@ -681,13 +682,13 @@ p.lg-desc{
 .CircularProgressbar-background {
   fill: green;
 }
-.premium{	
+.premium{
 	width: 100%;
 	padding: 5px 0em 3em 3em;
 }
 .item-bloc{
 	background: #2c2c2c;
-	width: 23%;	
+	width: 23%;
 	margin-right: 20px;
 	padding: 20px;
 	text-align: center;
@@ -702,9 +703,9 @@ p.lg-desc{
 	transition: 300ms ease-in-out;
 }
 .img-prem img{
-	width: 75px;	
+	width: 75px;
 	display: block;
-	height: auto;	
+	height: auto;
 	margin:auto;
 	margin-bottom: 15px;
 }
@@ -722,7 +723,7 @@ p.lg-desc{
 .ht75{
 	height: 75px !important;
 }
-.account-name{    
+.account-name{
     width: 250px;
     display: inline-block;
     vertical-align: top;
@@ -735,7 +736,7 @@ p.lg-desc{
 }
 .account-name p .account-title{
 	display: inline-block;
-	vertical-align: top;	
+	vertical-align: top;
 	padding: 10px;
 	font-weight: 500;
 	text-transform: uppercase;
@@ -754,9 +755,9 @@ p.lg-desc{
 	padding: 0px !important;
     background: none !important;
 }
-.with-stat{		
+.with-stat{
 	padding-right: 8px;
-	
+
 }
 .with-stat div{
 	position: relative
@@ -793,7 +794,7 @@ p.lg-desc{
     font-size: 14px;
     bottom: 0px;
     left: 0;
-    padding: 6px;    
+    padding: 6px;
 }
 .start span svg{
 	margin-right: 5px;
@@ -805,7 +806,7 @@ p.lg-desc{
 	position: inherit !important
 }
 .statistique{
- 
+
 }
 .flexbox{
 	display: flex;
@@ -848,7 +849,7 @@ p.lg-desc{
 }
 .flex-items p{
 	padding: 7px;
-	width: 34%;	
+	width: 34%;
 	font-size: 14px;
 	font-weight: lighter;
 }
@@ -866,7 +867,7 @@ p.lg-desc{
 }
 .wall-title .wall-bar-title{
 	background: #000000;
-	padding: 5px 10px;	
+	padding: 5px 10px;
 	border: 2px solid #dd0000;
 	border-top: none;
 	display: flex;
@@ -875,14 +876,14 @@ p.lg-desc{
 	font-size: 13px;
 	font-family: "russo one";
 	align-self: center;
-	width: 310px;	
+	width: 310px;
 
 }
 .wall-bar-title button{
 	text-transform: inherit;
     font-size: 12px;
     padding: 7px;
-    display: block;        
+    display: block;
     margin-right: 5px;
     align-self: center;
 }
@@ -923,36 +924,36 @@ p.lg-desc{
     text-align: right;
 }
 .tag-info .filter-right i{
-	font-size: 24px; 
+	font-size: 24px;
 	align-self: center;
 	color: #dd0000;
 }
 .media{
-	display: flex;		
+	display: flex;
 }
-.social{	
-	margin-top: 15px;		
+.social{
+	margin-top: 15px;
 	margin-left: 13px;
 	display: flex;
 }
 .social a{
 	background: #2c2c2c;
-	width: 44.5px;	
-	display: block;	
+	width: 44.5px;
+	display: block;
 	text-align: center;
 	margin-right: 5px;
 }
-.social i{	
+.social i{
 	text-align: center;
 	font-size: 17px;
 	margin-left: 2px;
 	align-self: center;
-	display: block;	
+	display: block;
 	padding: 5px;
 	color: #ffffff;
 	line-height: 34px;
 }
-.teamname{	
+.teamname{
 	display: flex;
 	width: 100%;
 }
@@ -1002,7 +1003,7 @@ p.lg-desc{
 .profil .waggers-link a{
 	width: 24%;
 }
-.profil .undertitle{	
+.profil .undertitle{
 	text-transform: inherit;
 }
 .profil .undertitle h2{
@@ -1017,7 +1018,7 @@ p.lg-desc{
 	padding-top: 15px;
 }
 .content.waggers-link{
-	background: #333333;	
+	background: #333333;
 }
 .fixed{
 	display: flex;
@@ -1028,7 +1029,7 @@ p.lg-desc{
 .row-container{
 	height: 240px;
 	overflow: auto;
-	
+
 }
 .fixed span, .row span{
 	margin-right: 15px;
@@ -1085,7 +1086,7 @@ p.lg-desc{
 }
 
 .comment-container{
-	
+
 }
 .mur .comments{
 	margin: 10px 0;
