@@ -209,6 +209,9 @@
 .account .account_type{
 	margin: auto;
 }
+.game_list .loader-spinner{
+	top: 0;
+}
 .my_list{
 	width: 90%;
 	margin: auto;
