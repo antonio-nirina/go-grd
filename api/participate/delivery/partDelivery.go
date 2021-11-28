@@ -33,8 +33,8 @@ type PartResolver interface {
 	GetNumberPartByResolver(params graphql.ResolveParams) (interface{}, error)
 	FindPartByUserWaggerResolver(params graphql.ResolveParams) (interface{}, error)
 	FindAllPartUserWaggerHandler(params graphql.ResolveParams) (interface{}, error)
-
 	FindPartByTournamentResolver(params graphql.ResolveParams) (interface{}, error)
+	LeavePartTournamentResolver(params graphql.ResolveParams) (interface{}, error)
 }
 
 type participate struct {
@@ -139,11 +139,12 @@ func (p *participate) SavedPartResolver(params graphql.ResolveParams) (interface
 	}
 
 	res, err := p.partHandler.SavedPartHandler(part)
-
+	_,err = p.user.IncrementPoint(userUid)
+	
 	if err != nil {
 		return nil, err
 	}
-
+	
 	return res, nil
 }
 
@@ -351,4 +352,16 @@ func (p *participate) FindPartByTournamentResolver(params graphql.ResolveParams)
 	}
 
 	return part,nil
+}
+
+func (p *participate) LeavePartTournamentResolver(params graphql.ResolveParams) (interface{}, error) {
+	uid, _ := params.Args["uid"].(string)
+	userUId,_ := params.Args["userUid"].(string)
+	leave,err := p.partHandler.LeavePartTournamentHandler(uid,userUId)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return leave,nil
 }

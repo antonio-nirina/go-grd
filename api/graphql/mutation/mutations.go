@@ -151,5 +151,6 @@ func GetRootFields() graphql.Fields {
 		"updatedGameUser":       updatedGameUser(),
 		"updatedAllTeam":		updatedAllTeam(),
 		"DeleteTeam":			 DeleteTeam(),
+		"leavePartTournament": leavePartTournament(),
 	}
 }

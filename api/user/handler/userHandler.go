@@ -19,6 +19,7 @@ import (
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
+
 type UserUsecase struct {
 	userRepository repository.Repository
 }
@@ -243,7 +244,6 @@ func (u *UserUsecase) UpdateGameUser(uidUser string, uidGame []gameEntity.Game,u
 
 func (u *UserUsecase) FindGameOneUser(uid string) (interface{}, error) {
 	objectId, _ := primitive.ObjectIDFromHex(uid)
-
 	result, err := u.userRepository.FindOneUserByUid(objectId)
 
 	if err != nil {
@@ -271,4 +271,40 @@ func (u *UserUsecase) FindGameOneUser(uid string) (interface{}, error) {
 	}
 
 	return userGame, nil
+}
+
+func (u *UserUsecase) IncrementPoint(uid string) (interface{}, error) {
+	objectId, _ := primitive.ObjectIDFromHex(uid)
+	res, err := u.userRepository.FindOneUserByUid(objectId)
+
+	if err != nil {
+		return nil, err
+	}
+
+	userToUpdated := &entity.User{
+		Uid:           res.Uid,
+		FirstName:     res.FirstName,
+		LastName:      res.LastName,
+		Password:      res.Password,
+		Username:      res.Username,
+		Email:         res.Email,
+		IsBanned:      res.IsBanned,
+		Avatar:        res.Avatar,
+		Language:      res.Language,
+		Point:         res.Point + entity.POINT,
+		IdGameAccount: res.IdGameAccount,
+		Roles:         res.Roles,
+		TypeConnexion: res.TypeConnexion,
+		Created:       res.Created,
+		Country:       res.Country,
+		BirtDate:      res.BirtDate,
+	}
+	result, err := u.userRepository.UpdatedUser(userToUpdated)
+
+
+	if err != nil {
+		return nil, err
+	}
+
+	return result, nil
 }

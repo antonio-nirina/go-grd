@@ -8,6 +8,7 @@ export const rootReducer = combineReducers({
 	userConnected: userConnectedReducer,
 	// leagueSingin:LeagueReducer,
 	tournamentSingin:TournamentReducer,
+	partTournament:TournamentReducer,
 })
 
 export type RootState = ReturnType<typeof rootReducer>

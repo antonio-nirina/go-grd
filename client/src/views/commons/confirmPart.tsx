@@ -1,7 +1,7 @@
 import React,{useState,useEffect} from "react"
 import {useMutation,useQuery} from "@apollo/client"
 import {useHistory } from "react-router-dom"
-import { useSelector } from "react-redux"
+import { useSelector,useDispatch } from "react-redux"
 
 import Header from "../header/header"
 import Footer from "../footer/footer"
@@ -24,6 +24,9 @@ import Rocketleague from "../../assets/image/rocketleague.png"
 import Rainbowsix from "../../assets/image/rainbowsix.png"
 import {dateStringToDHString} from "../tools/dateConvert"
 import {NameRoutes} from "./route-list"
+import {SaveParticipateTournamentAction,Part_TOURNAMENT} from "../tournament/action/tournamentAction"
+
+
 
 type TypeConfirmed = {
 	tournament: Tournament|undefined
@@ -31,8 +34,9 @@ type TypeConfirmed = {
 }
 
 
-const ConfirmPart = function() {
 
+const ConfirmPart = function() {
+	const disptach = useDispatch()
 	const [showClose, setShowClose] = useState(true)
 	const [message,setMessage] = useState<string>("")
 	const [tournament, setTournament] = useState<Tournament>()
@@ -71,7 +75,15 @@ const ConfirmPart = function() {
 		}
 		if(!isError) {
 			const saved = await savedPartTournament({ variables: { uidUser: userConnectedRedux.user.uid,date:(new Date().toLocaleString()),tournamentUid:tournament?.uid,teamsUid:{uid:arrayUidTeam.length > 0 ? arrayUidTeam[0] : ""} } })
-			if(saved) params.push(NameRoutes.tournament)
+			if(saved) {
+				const dataTournament:Part_TOURNAMENT = {
+					uidTournament:tournament?.uid,
+					userUid:userConnectedRedux.user.uid,
+					confirmed:saved.data.createPartMatch
+				}
+				params.push(NameRoutes.tournament)
+				disptach(SaveParticipateTournamentAction(dataTournament))
+			}
 		}
 	}
 	const onShowClose = function(){

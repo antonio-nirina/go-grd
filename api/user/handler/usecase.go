@@ -28,4 +28,5 @@ type Usecase interface {
 	CountUserHandler() int
 	UpdateGameUser(uidUser string, uidGame []gameEntity.Game,uidPlateform []gameEntity.GamePlatform) (interface{}, error)
 	FindGameOneUser(uid string) (interface{}, error)
+	IncrementPoint(uid string) (interface{}, error)
 }

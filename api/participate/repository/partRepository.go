@@ -35,6 +35,7 @@ type RepositoryPart interface {
 	FindPartByWaggerRepo(userUid primitive.ObjectID, uidWagger primitive.ObjectID) (entity.Participate, error)
 	FindAllPartTournamentRepo(objectId primitive.ObjectID,pageNumber int64, limit int64) (interface{}, error)
 	FindAllPartByTournamentRepo(objectId primitive.ObjectID) ([]entity.Participate, error)
+	// LeavePartTournamentRepo(part *entity.Participate) (interface{},error)
 }
 
 type recordsPartModel struct {

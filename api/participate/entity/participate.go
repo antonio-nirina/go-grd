@@ -19,7 +19,7 @@ type Participate struct {
 	Wagger     wagger.Wagger         `json:"wagger,omitempty"`
 	// League 		league.League 		`json:"league,omitempty"`
 	IsWin               bool `json:"isWin"`
-	IsTournament        bool `json:"IsTournament"`
+	IsTournament        bool `json:"isTournament"`
 	IsWager             bool `json:"isWager"`
 	NumberPartConfirmed bool `json:"numberPartConfirmed"`
 }

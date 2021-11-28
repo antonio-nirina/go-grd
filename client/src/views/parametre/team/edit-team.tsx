@@ -1,6 +1,6 @@
 import React, {useState,useMemo,useRef} from "react"
 import { useParams } from "react-router-dom"
-import { useSelector } from "react-redux"
+// import { useSelector } from "react-redux"
 import {useQuery} from "@apollo/client"
 import {useMutation} from "@apollo/client"
 
@@ -8,7 +8,7 @@ import Header from "../../header/header"
 import Footer from "../../footer/footer"
 import "../../parametre/parametre.css"
 import Sidebar from "../sidebar"
-import {RootState} from "../../../reducer"
+// import {RootState} from "../../../reducer"
 
 import { faUserPlus, faTimes } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'

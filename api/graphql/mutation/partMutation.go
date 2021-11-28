@@ -71,3 +71,19 @@ func updateConfirmedPartTournament() *graphql.Field {
 		Resolve: partResolver.UpdatedNumberPartConfResolver,
 	}
 }
+
+func leavePartTournament() *graphql.Field {
+	return &graphql.Field{
+		Type:        graphql.String,
+		Description: "Confirmation to leave tournament",
+		Args: graphql.FieldConfigArgument{
+			"uid": &graphql.ArgumentConfig{
+				Type: graphql.String,
+			},
+			"userUid": &graphql.ArgumentConfig{
+				Type: graphql.String,
+			},
+		},
+		Resolve: partResolver.LeavePartTournamentResolver,
+	}
+}

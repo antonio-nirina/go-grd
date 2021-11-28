@@ -1,6 +1,9 @@
 package handler
 
 import (
+	"fmt"
+
+	"github.com/thoussei/antonio/api/external"
 	"github.com/thoussei/antonio/api/participate/entity"
 	"github.com/thoussei/antonio/api/participate/repository"
 	teamH "github.com/thoussei/antonio/api/teams/handler"
@@ -11,7 +14,7 @@ import (
 )
 
 type UsecasePart interface {
-	SavedPartHandler(*entity.Participate) (interface{}, error)
+	SavedPartHandler(part *entity.Participate) (interface{}, error)
 	FindPartHandler(idQuery string) (partViewModel, error)
 	FindAllPartHandler(pageNumber int64, limit int64) ([]partViewModel, error)
 	FindPartUserHandler(pageNumber int64, limit int64, userUid primitive.ObjectID) ([]partViewModel, error)
@@ -24,6 +27,7 @@ type UsecasePart interface {
 	FindPartUserWaggerHandler(userUid primitive.ObjectID, uidWagger primitive.ObjectID) (interface{}, error)
 	FindAllPartUserWaggerHandler(userUid primitive.ObjectID, pageNumber int64, limit int64) ([]partWaggerViewModel, error)
 	FindPartTournamentHandler(tournament tHandler.TournamentViewModel)([]partViewModelTournament,error)
+	LeavePartTournamentHandler(partUid string,userUId string)(interface{}, error)
 }
 type partUsecase struct {
 	partRepository repository.RepositoryPart
@@ -41,10 +45,32 @@ func NewUsecasePart(r repository.RepositoryPart, t teamH.UsecaseTeam,u userH.Use
 
 func (p *partUsecase) SavedPartHandler(part *entity.Participate) (interface{}, error) {
 	rec, err := p.partRepository.SavedPartRepo(part)
+	user,err := p.userUsescase.FindOneUserByUid(part.User)
 
 	if err != nil {
 		return 0, err
 	}
+
+	var plateform string
+	
+	for key,item := range part.Tournament.Plateform {
+		if key > 0 {
+			plateform = fmt.Sprintf("%s%s",item.Name,"-")
+		} else {
+			plateform = fmt.Sprintf("%s",item.Name)
+		}
+	}
+
+	message := fmt.Sprintf("%s%s%s%s%s","Ta demande de participaer au tournoi",plateform,"-",part.Tournament.Game.Name,"a bien été effectué avec succes")
+	mailer := external.ToMailer{
+		Email: user.Email,
+		Firstname: user.FirstName,
+		Lastname: user.LastName,
+		Subject: "Confirmation de participer au tournoi",
+		Message: message,
+	}
+
+	mailer.InitialeMailjet()
 
 	return rec, nil
 }
@@ -652,7 +678,7 @@ func (p *partUsecase) FindPartUserTournamentHandler(uidUser primitive.ObjectID, 
 			result.Tournament.IsTeam,
 		},
 	}
-
+	
 	return partViewModel, nil
 }
 
@@ -876,6 +902,44 @@ func (p *partUsecase) FindPartTournamentHandler(tournament tHandler.TournamentVi
 		res = append(res, viewPart)
 	}
 	
-
 	return res, nil
+}
+
+func (p *partUsecase) LeavePartTournamentHandler(partUid string,userUId string)(interface{}, error) {
+	user,err := p.userUsescase.FindOneUserByUid(userUId)
+	part,err := p.FindPartHandler(partUid)
+
+	if err != nil {
+		return 0, err
+	}
+
+	var plateform string
+
+	for key,item := range part.Tournament.Plateform {
+		if key > 0 {
+			plateform = fmt.Sprintf("%s%s",item.Name,"-")
+		} else {
+			plateform = fmt.Sprintf("%s",item.Name)
+		}
+	}
+
+	message := fmt.Sprintf("%s%s%s%s%s","Ta demande de quitter au tournoi",plateform,"-",part.Tournament.Game.Name,"a bien été effectué avec succes")
+
+	mailer := external.ToMailer{
+		Email: user.Email,
+		Firstname: user.FirstName,
+		Lastname: user.LastName,
+		Subject: "Confirmation de quitter au tournoi",
+		Message: message,
+	}
+
+	mailer.InitialeMailjet()
+	objectId, err := primitive.ObjectIDFromHex(partUid)
+	rec, err := p.partRepository.RemovedPartRepo(objectId)
+
+	if err != nil {
+		return 0, err
+	}
+
+	return rec, nil
 }

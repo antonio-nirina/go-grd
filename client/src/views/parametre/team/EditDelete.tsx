@@ -26,7 +26,7 @@ const EditOrDelete = function({name,tag,uid}:ManagementType) {
 
 	useEffect(() => {
 		setValue("name", name??"")
-	},[])
+	},[setValue])
 
 	const onSubmit = async function(data:Inputs){
 		try {
