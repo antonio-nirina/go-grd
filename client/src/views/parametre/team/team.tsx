@@ -9,14 +9,13 @@ import "../../parametre/parametre.css"
 import Sidebar from "../sidebar"
 import {RootState} from "../../../reducer"
 // import AvatarDefault from "../../assets/image/game-tag.png"
-import { faPlusCircle, faTimes } from "@fortawesome/free-solid-svg-icons"
+import { faPlusCircle } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {TeamModel} from "../../models/team"
 import {GET_ONE_TEAM_BY_USER} from "../../../gql/team/query"
 import { dateLongCreated } from "../../tools/dateConvert"
 
 import { User } from "../../models/tournament"
-import ImageTeam from "../../../assets/image/team/bg-team.jpg"
 import LogoTeam from "../../../assets/image/team/logo-team.jpg"
 import CreateTeam from "./create-team"
 

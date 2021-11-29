@@ -238,16 +238,6 @@ const Header: React.FC = function() {
 				</div>
 				<div className="tag">
 					<div className="box">
-					   {/*
-					   <div className="lang">
-							<span>
-								<>
-									<img src={fr} alt="" className={userConnectedRedux.user.language && userConnectedRedux.user.language === "fr" ? "lang show" : "hide" }  width="28" height="29"/>
-									<img src={gb} alt="" className={userConnectedRedux.user.language && userConnectedRedux.user.language === "fr" ? "hide" : "lang gb" } width="28" height="29"/>
-								</>
-							</span>
-						</div>
-					   */}
 						<div className="connex" style={{"cursor":"pointer"}}>
 							<i className="square" onClick={onShowInvitation} >
 								<FontAwesomeIcon icon={faPlus} />

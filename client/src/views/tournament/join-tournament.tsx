@@ -1,10 +1,8 @@
 import React,{useState,useEffect} from "react"
 import {useQuery} from "@apollo/client"
-
 import Header from "../header/header"
 import Footer from "../footer/footer"
 //import {Translation} from "../../lang/translation"
-//import {RootState} from "../../reducer"
 import {GET_PART_ONE_TOURNAMENT} from "../../gql/participate/query"
 import "../../assets/css/style.css"
 import "../tournament/tournament.css"
@@ -52,7 +50,6 @@ const Joingame: React.FC = function(props:any) {
 			data.FindTournamentParticipate[0].tournament.price.forEach(function(price:string){
 				sum = sum + parseInt(price)
 			})
-
 			setSumPrice(sum)
 			setPlateform(arrayPl.length > 0 ? arrayPl.join("/") : arrayPl[0])
 		}
@@ -124,10 +121,10 @@ const Joingame: React.FC = function(props:any) {
               <div className="item-img-info"></div>
               <div className="item-all-content">
                 <div className="item-all-info">
-                  <p><span>Frais d'entrée</span></p>
-                  <p className="item-text-left">Invitation</p>
-                  <p><span>Cash prize</span></p>
-                  <p>{sumPrice}</p>
+					<p><span>Frais d'entrée</span></p>
+					<p className="item-text-left">Invitation</p>
+					<p><span>Cash prize</span></p>
+					<p>{sumPrice}</p>
                 </div>
                 <div className="item-all-info">
                   <p><span>Région</span></p>

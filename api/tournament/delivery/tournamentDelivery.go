@@ -77,6 +77,7 @@ func (t *tournament) SavedTournamentResolver(params graphql.ResolveParams) (inte
 	isteam, _ := params.Args["isteam"].(bool)
 	isPub, _ := params.Args["isPublic"].(bool)
 	game, err := t.gameTournamentHandler.FindOneGameByUidHandler(gameUid)
+	
 	var plateforms []gameEntity.GamePlatform
 	arrayPlateforms := strings.Split(plateformUid, "_")
 	arrayLaps := strings.Split(laps, "_")

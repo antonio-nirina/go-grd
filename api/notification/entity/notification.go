@@ -1,7 +1,6 @@
 package entity
 
 import (
-	user "github.com/thoussei/antonio/api/user/entity"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
@@ -18,6 +17,6 @@ type Notification struct {
 	Type     		int  `json:"type"`
 	Content      	string  `json:"content"`
 	Statut 			bool `json:"statut"`
-	UserRequest 	user.User `json:"userRequest"`
-	User 			user.User `json:"user"`
+	UserRequest 	string `json:"userRequest"`
+	User 			string `json:"user"` 
 }

@@ -28,35 +28,74 @@
 	padding: 15px;
 	text-align: center;
 	text-transform: uppercase;
-	border-bottom: 1px solid #cccccc;
+	border-bottom: 1px solid gray;
+	color: gray;
 	margin-bottom: 15px;
 }
 .live-content{
 	height: 50vh;
 	overflow-y: auto;
+	word-wrap: break-word;
 }
 .live-content p{
-	color: #dd0000;
+	font-size: 13px;
+	color: #3BFF80;
 }
 .live-content p span{
 	color: #ffffff;
 }
+.send{
+	position: relative;
+}
+.send p{
+	padding: 7px;
+	background: gray;
+	border-radius: 5px;
+	position: relative;
+	font-size: 13px;
+}
+.send i{
+	position: absolute;
+	top: -18px;
+	background: #101010;
+	padding: 8px;
+	border-radius: 5px;
+	font-size: 13px;
+	right: 0;
+}
 .edit-msg{
 	margin: 15px 0;
+	position: relative;
 }
 .edit-msg input{
-	width: 90%;
+	width: 100%;
 	padding: 10px;
 	border: none;
 	background: gray;
 	color: #ffffff;
+	border-radius: 5px;
+}
+.edit-msg i{
+	position: absolute;
+	top: 8px;
+	right: 8px;
 }
 .footer-live{
 	display: flex;
 	justify-content: space-between;
 }
-.footer-live span{
+.footer-live p{
+	display: flex;
+	font-size: 12px;
+}
+.footer-live img{
 	align-self: center;
+	width: 25px;
+	margin-right: 5px;
+}
+.footer-live span, .footer-live i{
+	align-self: center;
+	margin-right: 5px;
 }
 .footer-live button{
 	background: #8E47FF;

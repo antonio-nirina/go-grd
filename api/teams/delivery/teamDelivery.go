@@ -36,7 +36,7 @@ func NewResolverTeam(teamUseCase handler.UsecaseTeam, userTeam userHandler.Useca
 }
 
 func (t *team) SavedTeamResolver(params graphql.ResolveParams) (interface{}, error) {
-	var users []userEntity.User
+	var users []string
 	name, _ := params.Args["name"].(string)
 	creationDate, _ := params.Args["creationDate"].(string)
 	players, _ := params.Args["players"].(string)
@@ -58,7 +58,7 @@ func (t *team) SavedTeamResolver(params graphql.ResolveParams) (interface{}, err
 			if err != nil {
 				return nil, err
 			}
-			users = append(users, player)
+			users = append(users, player.Uid.Hex())
 		}
 	}
 
@@ -109,7 +109,7 @@ func (t *team) FindAllTeamResolver(params graphql.ResolveParams) (interface{}, e
 }
 
 func (t *team) UpdatedTeamByBannedResolver(params graphql.ResolveParams) (interface{}, error) {
-	var users []userEntity.User
+	var users []string
 	uid, _ := params.Args["uid"].(string)
 	objectId, err := primitive.ObjectIDFromHex(uid)
 	team, err := t.teamHandler.FindTeamHandler(uid)
@@ -125,27 +125,7 @@ func (t *team) UpdatedTeamByBannedResolver(params graphql.ResolveParams) (interf
 		if err != nil {
 			return nil, err
 		}
-
-		players := userEntity.User{
-			Uid:               userPl.Uid,
-			FirstName:         userPl.FirstName,
-			LastName:          userPl.LastName,
-			Password:          userPl.Password,
-			Email:             userPl.Email,
-			Username:          userPl.Username,
-			IsBanned:          userPl.IsBanned,
-			Avatar:            userPl.Avatar,
-			Language:          userPl.Language,
-			IdGameAccount:     userPl.IdGameAccount,
-			Point:             userPl.Point,
-			Roles:             userPl.Roles,
-			TypeConnexion:     userPl.TypeConnexion,
-			Created:           userPl.Created,
-			ConfirmationToken: userPl.ConfirmationToken,
-			Friends:           userPl.Friends,
-			Accounts:          userPl.Accounts,
-		}
-		users = append(users, players)
+		users = append(users, userPl.Uid.Hex())
 	}
 
 	newTeam := &entity.Team{
@@ -208,7 +188,7 @@ func (t *team) UpdatedTeamResolver(params graphql.ResolveParams) (interface{}, e
 		user, _ = t.teamUserHandler.FindUserByUsername(team.Creator)
 	}
 
-	var arrayPlayers []userEntity.User
+	var arrayPlayers []string
 	
 	if players != "" {
 		arrayUsers := strings.Split(players, "_")
@@ -220,7 +200,7 @@ func (t *team) UpdatedTeamResolver(params graphql.ResolveParams) (interface{}, e
 					return nil, errors.New("User not found")
 				}
 
-				arrayPlayers = append(arrayPlayers, userPlayers)
+				arrayPlayers = append(arrayPlayers, userPlayers.Uid.Hex())
 			}
 		}
 	}
@@ -231,7 +211,7 @@ func (t *team) UpdatedTeamResolver(params graphql.ResolveParams) (interface{}, e
 			return nil, errors.New("User not found")
 		}
 
-		arrayPlayers = append(arrayPlayers, userPlayer)
+		arrayPlayers = append(arrayPlayers, userPlayer.Uid.Hex())
 	}
 	
 	if err != nil {

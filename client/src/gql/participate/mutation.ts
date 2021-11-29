@@ -7,7 +7,7 @@ mutation createPartMatch($uidUser:String,$date:String,$tournamentUid:String,$tea
 `
 
 export const LEAVE_PART_TOURNAMENT = gql`
-mutation removePartTournament($uid:String){
-		removePartTournament(uid:$uid)
+mutation leavePartTournament($uid:String,$userUid:String){
+	leavePartTournament(uid:$uid,userUid:$userUid)
 	}
 `

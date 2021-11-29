@@ -1,4 +1,4 @@
-import React, {useState,useEffect} from "react"
+import React, {useState,useEffect,useRef} from "react"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {useMutation} from "@apollo/client"
 import { useSelector,useDispatch } from "react-redux"
@@ -13,7 +13,7 @@ import Footer from "../footer/footer"
 import "../parametre/parametre.css"
 import Sidebar from "./sidebar"
 import AvatarDefault from "../../assets/image/game-tag.png"
-
+import {UPDATE_AVATAR} from "../../gql/user/mutation"
 import {changeProfilUserConnected} from "../auth/action/userAction"
 // import {countries} from "../tools/country"
 
@@ -27,7 +27,15 @@ type Inputs = {
 	language:string
 }
 
+type InputFiles =  {
+	email:string,
+	type: string,
+	data: string|ArrayBuffer|null
+}
+
+
 const Compte: React.FC = function() {
+	const contentFile = useRef<HTMLInputElement>(null)
   	const [showPopup, setShowPopup] = useState<boolean>(false)
 	const { register, handleSubmit,setValue } 	= useForm<Inputs>()
 	const dispatch = useDispatch()
@@ -76,6 +84,28 @@ const Compte: React.FC = function() {
 		setValue("language",userConnectedRedux.user.language)
 
 	},[setValue,userConnectedRedux])
+	const [updatedAvatar]  		= useMutation(UPDATE_AVATAR)
+
+	const handleUploadAvatar = function() {
+		contentFile.current?.click()
+	}
+
+	const handleUpload = function(e:any) {
+		const reader = new FileReader()
+		reader.readAsDataURL(e.target.files[0])
+        reader.onload = async function() {
+        	let file = typeof reader.result === "string" ? reader.result?.replace(/^data:(.*?);base64,/, "") : ""
+			file = file.replace(/ /g, '+')
+			const input:InputFiles = {
+				email:userConnectedRedux.user.email,
+				type:(e.target.files[0].type).split("/")[1],
+				data:file
+			}
+
+			const avatartUp = await updatedAvatar({variables:{ avatarInput:input }})
+			if(avatartUp) dispatch(changeProfilUserConnected(avatartUp.data.updatedAvatar))
+        }
+	}
 
   return(
 	<div className="leaderboard settings">
@@ -88,15 +118,16 @@ const Compte: React.FC = function() {
 						<div className="personal">
 							<div className="my_account">
 								<div className="img_account">
+									<input type="file" name="avatar" ref={contentFile} onChange={handleUpload}  className="d-none"  />
 									<img src= {userConnectedRedux.user.avatar ? userConnectedRedux.user.avatar :AvatarDefault} alt="" width="150" height="150"/>
 									<i className={showPopup ? "d-none" :"set"} onClick={onPopup}>
 										<FontAwesomeIcon icon={faPen} /></i>
 									<p className={showPopup ? "icon-settings" :"d-none"}>
 										<i>
-											<FontAwesomeIcon style={{"cursor":"pointer"}} icon={faCamera} />
+											<FontAwesomeIcon style={{"cursor":"pointer"}} onClick={handleUploadAvatar} icon={faCamera} />
 										</i>
 										<i>
-											<FontAwesomeIcon style={{"cursor":"pointer"}} icon={faTimes} />
+											<FontAwesomeIcon onClick={() => setShowPopup(false)} style={{"cursor":"pointer"}} icon={faTimes} />
 										</i>
 										<i><FontAwesomeIcon style={{"cursor":"pointer"}} icon={faSync} /></i>
 									</p>

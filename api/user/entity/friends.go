@@ -6,7 +6,7 @@ import (
 
 type Friends struct {
 	Uid  primitive.ObjectID `bson:"uid"`
-	Request 		User 			`json:"request"`
-	Sender 			User 			`json:"sender"`
+	Request 		string 			`json:"request"`
+	Sender 			string 			`json:"sender"`
 	Statut 			bool 			`json:"statut"`
 }

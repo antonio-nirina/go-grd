@@ -32,7 +32,7 @@ type User struct {
 	Created           string             `json:"created"`
 	Country           string             `json:"country,omitempty"`
 	ConfirmationToken string             `json:"confirmation_token,omitempty"`
-	Friends           []User             `json:"friends,omitempty"`
+	Friends           []string             `json:"friends,omitempty"`
 	Accounts          []Accounts         `json:"accounts,omitempty"`
 	Games             []game.Game        `json:"games,omitempty"`
 	Plateforms        []game.GamePlatform        `json:"plateforms,omitempty"`

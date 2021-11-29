@@ -8,14 +8,13 @@ import (
 	"github.com/thoussei/antonio/api/participate/handler"
 	tEntity "github.com/thoussei/antonio/api/tournament/entity"
 	tournamentHandler "github.com/thoussei/antonio/api/tournament/handler"
-	userEntity "github.com/thoussei/antonio/api/user/entity"
 	userHandler "github.com/thoussei/antonio/api/user/handler"
 	waggerEntity "github.com/thoussei/antonio/api/wagger/entity"
 	waggerHandler "github.com/thoussei/antonio/api/wagger/handler"
 
 	// leagueEntity "github.com/thoussei/antonio/api/league/entity"
 	// leagueHandler "github.com/thoussei/antonio/api/league/handler"
-	teamEntity "github.com/thoussei/antonio/api/teams/entity"
+
 	teamHandler "github.com/thoussei/antonio/api/teams/handler"
 
 	"go.mongodb.org/mongo-driver/bson/primitive"
@@ -34,8 +33,8 @@ type PartResolver interface {
 	GetNumberPartByResolver(params graphql.ResolveParams) (interface{}, error)
 	FindPartByUserWaggerResolver(params graphql.ResolveParams) (interface{}, error)
 	FindAllPartUserWaggerHandler(params graphql.ResolveParams) (interface{}, error)
-
 	FindPartByTournamentResolver(params graphql.ResolveParams) (interface{}, error)
+	LeavePartTournamentResolver(params graphql.ResolveParams) (interface{}, error)
 }
 
 type participate struct {
@@ -78,37 +77,19 @@ func (p *participate) SavedPartResolver(params graphql.ResolveParams) (interface
 	jsonString, _ := json.Marshal(params.Args["teamsUid"])
 	teams := teamsElements{}
 	json.Unmarshal([]byte(jsonString), &teams)
-
+	var uidUser string
+	var uidTeam []string 
 	tournamentObject := tEntity.Tournament{}
-	// leagueObject := leagueEntity.League{}
-	teamObject := []teamEntity.Team{}
-	userObject := userEntity.User{}
 	waggerObject := waggerEntity.Wagger{}
 	IsTournament := false
 	isWagger := false
+
 	if userUid != "" {
 		user, err := p.user.FindOneUserByUid(userUid)
 		if err != nil {
 			return nil, err
 		}
-
-		userObject.Uid = user.Uid
-		userObject.FirstName = user.FirstName
-		userObject.LastName = user.LastName
-		userObject.Password = user.Password
-		userObject.Email = user.Email
-		userObject.Username = user.Username
-		userObject.IsBanned = user.IsBanned
-		userObject.Avatar = user.Avatar
-		userObject.Language = user.Language
-		userObject.IdGameAccount = user.IdGameAccount
-		userObject.Point = user.Point
-		userObject.Roles = user.Roles
-		userObject.TypeConnexion = user.TypeConnexion
-		userObject.Created = user.Created
-		userObject.ConfirmationToken = user.ConfirmationToken
-		userObject.Friends = user.Friends
-		userObject.Accounts = user.Accounts
+		uidUser = user.Uid.Hex()
 	}
 
 	if tournamentUid != "" {
@@ -132,31 +113,6 @@ func (p *participate) SavedPartResolver(params graphql.ResolveParams) (interface
 		waggerObject = wagger
 	}
 
-	/*if leagueUid != "" {
-		league, err := p.league.FindOneLeagueHandler(leagueUid)
-		if err != nil {
-			return nil, err
-		}
-
-		leagueObject.Uid = league.Uid
-		leagueObject.Title = league.Title
-		leagueObject.Date = league.Date
-		leagueObject.Game = league.Game
-		leagueObject.Plateform = league.Plateform
-		leagueObject.NumberParticipate = league.NumberParticipate
-		leagueObject.NumberTeam = league.NumberTeam
-		leagueObject.Price = league.Price
-		leagueObject.DeadlineDate = league.DeadlineDate
-		leagueObject.PriceParticipate = league.PriceParticipate
-		leagueObject.Statut = league.Statut
-		leagueObject.Info = league.Info
-		leagueObject.Rules = league.Rules
-		leagueObject.IsPublic = league.IsPublic
-		leagueObject.IsTeam = league.IsTeam
-		leagueObject.NumberGroup = league.NumberGroup
-		leagueObject.Organizer = league.Organizer
-	}*/
-
 	if len(teams.Uid) > 0 {
 		for _, val := range teams.Uid {
 			team, err := p.team.FindOneTeamHandler(val)
@@ -164,27 +120,16 @@ func (p *participate) SavedPartResolver(params graphql.ResolveParams) (interface
 				return nil, err
 			}
 
-			teamInput := teamEntity.Team{
-				Uid:          team.Uid,
-				Name:         team.Name,
-				CreationDate: team.CreationDate,
-				Players:      team.Players,
-				Description:  team.Description,
-				IsBlocked:    team.IsBlocked,
-				Logo:         team.Logo,
-				Creator:      team.Creator,
-			}
-
-			teamObject = append(teamObject, teamInput)
+			uidTeam = append(uidTeam, team.Uid.Hex())
 		}
 	}
 
 	part := &entity.Participate{
 		Uid:        primitive.NewObjectID(),
 		Date:       date,
-		User:       userObject,
+		User:       uidUser,
 		Tournament: tournamentObject,
-		Team:       teamObject,
+		Team:       uidTeam,
 		//League:     leagueObject,
 		IsWin:               false,
 		IsTournament:        IsTournament,
@@ -194,11 +139,12 @@ func (p *participate) SavedPartResolver(params graphql.ResolveParams) (interface
 	}
 
 	res, err := p.partHandler.SavedPartHandler(part)
-
+	_,err = p.user.IncrementPoint(userUid)
+	
 	if err != nil {
 		return nil, err
 	}
-
+	
 	return res, nil
 }
 
@@ -406,4 +352,16 @@ func (p *participate) FindPartByTournamentResolver(params graphql.ResolveParams)
 	}
 
 	return part,nil
+}
+
+func (p *participate) LeavePartTournamentResolver(params graphql.ResolveParams) (interface{}, error) {
+	uid, _ := params.Args["uid"].(string)
+	userUId,_ := params.Args["userUid"].(string)
+	leave,err := p.partHandler.LeavePartTournamentHandler(uid,userUId)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return leave,nil
 }

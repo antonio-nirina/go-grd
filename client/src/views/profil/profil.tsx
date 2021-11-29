@@ -5,13 +5,9 @@ import { Link } from 'react-router-dom'
 
 import fr from "../../assets/image/fr.png"
 import Js from "../../assets/image/white-joystick.png"
-import AvatarDefault from "../../assets/image/game-tag.png"
-import Game from "../../assets/image/game.png"
-import Ts from "../../assets/image/icons/ts.png"
-import Ws from "../../assets/image/icons/ws.png"
-// import Popup from "reactjs-popup"
+
 import { faXbox, faPlaystation, faTwitch, faYoutube, faFacebook, faTwitter} from "@fortawesome/free-brands-svg-icons"
-import { faChartBar, faStar, faUsers, faHeart} from "@fortawesome/free-solid-svg-icons"
+import { faChartBar, faUsers} from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Header from "../header/header"
 import Join from "../join/join"
@@ -29,11 +25,18 @@ import {ParticipateTournament,ParticipateWagger} from "../models/participate"
 import {GameUserModel} from "../models/user"
 import {dateStringToDY} from "../tools/dateConvert"
 import {GET_GAME_USER} from "../../gql/user/query"
+import {GET_ONE_TEAM_BY_USER} from "../../gql/team/query"
+import {TeamModel} from "../models/team"
+import LogoTeam from "../../assets/image/team/logo-team.jpg"
+import NewsInfo from "./news/news-info"
+import Statistiques from "./news/statistique"
+
 
 const Profile: React.FC = function() {
 	const [participateTournament,setParticipateTournament] = useState<ParticipateTournament[]>([])
 	const [participateWagger,setParticipateWagger] = useState<ParticipateWagger[]>([])
 	const [choixGames,setChoixGames] = useState<GameUserModel[]>([])
+	const [teams, setTeams] = useState<TeamModel[]>([])
 	const userConnectedRedux = useSelector((state:RootState) => state.userConnected)
 	const {loading,error,data} 	= useQuery(GET_PART_USER, {
 		variables: {
@@ -57,6 +60,12 @@ const Profile: React.FC = function() {
 		},
 	})
 
+	const {loading:ldteam,error:errTeam,data:dataTeam} 	= useQuery(GET_ONE_TEAM_BY_USER, {
+		variables: {
+			uid:userConnectedRedux.user.uid,
+		},
+	})
+
 	useEffect(() => {
 		const params = window.location.search
 
@@ -77,7 +86,11 @@ const Profile: React.FC = function() {
 			setChoixGames(dataGame.GetGameOneUserQuery)
 		}
 
-	},[loading,error,data,ldgWagger,errWagger,dataWagger,ldgGame,errGame,dataGame])
+		if(!ldteam && !errTeam && dataTeam) {
+			setTeams(dataTeam.FindTeamByUser)
+		}
+
+	},[loading,error,data,ldgWagger,errWagger,dataWagger,ldgGame,errGame,dataGame,ldteam,errTeam,dataTeam])
 
   return(
 	<div className="profil connected">
@@ -93,33 +106,7 @@ const Profile: React.FC = function() {
 			      	</div>
 			      	<div className="statistique">
 			      		<div className="stat-content">
-				      		<div className="flexbox">
-				      			<div className="start-game">
-					      			<div className="start">
-					      				<img src={Game} alt="apex-legends" />
-					      				<span><FontAwesomeIcon icon={faChartBar} />Statistiques</span>
-					      			</div>
-				      			</div>
-				      			<div className="info-container">
-					      			<div className="flex-items">
-					      				<p>92 <span>Parties</span></p>
-					      				<p>32 <span>Top 1</span></p>
-					      				<p>35% <span>Taux de victoires</span></p>
-					      			</div>
-					      			<div className="flex-items">
-					      				<p>
-					      					<strong><span className="lose">L </span><span className="lose">L</span><span className="win">W </span><span className="lose">L </span></strong>
-					      					Score recents</p>
-					      				<p>2.75<span>K/D</span></p>
-					      				<p>923<span>Placement FR</span></p>
-					      			</div>
-					      			<div className="flex-items">
-					      				<p>Ligue<span>-</span></p>
-					      				<p>Placement<span>-</span></p>
-					      				<p>Score<span>-</span></p>
-					      			</div>
-					      		</div>
-				      		</div>
+							  <Statistiques />
 				      		<div className="with-stat">
 			      				{choixGames.map(function(e:GameUserModel,index:number) {
 									return (<div key={index}>
@@ -131,27 +118,32 @@ const Profile: React.FC = function() {
 				      	</div>
 				      	<div className="stat-content">
 				      		<div className="teamname">
-					      		<div className="bloc-team-mate">
-					      			<div className="avatar-name">
-					      				<div>
-					      					<img src={AvatarDefault} alt="" className="avatar-lead"/>
-					      				</div>
-					      				<div>
-					      					<span>nomdeteam</span>
-					      				</div>
-					      			</div>
-					      			<div className="setting-accounts">
-						      			<div>
-						      				<img src={Js} alt="" width="20" height="15"/>
-						      			</div>
-						      			<div>
-						      				<img src={fr} alt="" width="20" height="20"/>
-						      			</div>
-						      		</div>
-					      			<div className="team-number">
-					      				<span>25 <i><FontAwesomeIcon icon={faUsers} /></i></span>
-					      			</div>
-					      		</div>
+								  {teams.map(function(team:TeamModel,index:number){
+									  return (
+										<div className="bloc-team-mate">
+											<div className="avatar-name">
+												<div>
+													<img src={team.banniere ? team.banniere : LogoTeam} alt="" className="avatar-lead"/>
+												</div>
+												<div>
+													<span>{team.name}</span>
+												</div>
+											</div>
+											<div className="setting-accounts">
+												<div>
+													<img src={Js} alt="" width="20" height="15"/>
+												</div>
+												<div>
+													<img src={fr} alt="" width="20" height="20"/>
+												</div>
+											</div>
+											<div className="team-number">
+												<span>{team && team.players.length > 0 ? team.players.length : 0} <i><FontAwesomeIcon icon={faUsers} /></i></span>
+											</div>
+										</div>
+									  )
+								  })}
+
 					      		<div className="media">
 							      	<div className="social">
 					      				<Link to="#"><i><FontAwesomeIcon icon={faTwitch} /></i></Link>
@@ -241,111 +233,7 @@ const Profile: React.FC = function() {
 							<></>
 						}
 					</div>
-					<div className="part mur">
-						<div className="undertitle">
-							<h2>Mur</h2>
-							<p>Toutes les dernières actualités de {userConnectedRedux.user.username}</p>
-						</div>
-						<div className="content waggers-link">
-							<div className="fixed">
-								<span>Succès</span>
-								<span className="center">Commentaires</span>
-								<span className="aright">1-4 &gt;</span>
-							</div>
-							<div className="row-container">
-								<div className="row">
-									<div className="note">
-										<img src={AvatarDefault} alt="" width="45"/>
-										<p>
-											<span>Défi</span>
-											TonioPlancha a réussi l0 top 1 sur Apex...
-										</p>
-										<div className="icon">
-											<span><i><FontAwesomeIcon icon={faStar} /></i></span>
-										</div>
-									</div>
-									<div className="note">
-										<img src={AvatarDefault} alt="" width="45"/>
-										<p>
-											<span>Défi</span>
-											TonioPlancha a réussi l0 top 1 sur Apex...
-										</p>
-										<div className="icon">
-											<span><i><FontAwesomeIcon icon={faStar} /></i></span>
-										</div>
-									</div>
-									<div className="note">
-										<img src={AvatarDefault} alt="" width="45"/>
-										<p>
-											<span>Tournoi</span>
-											TonioPlancha a réussi l0 top 1 sur Apex...
-										</p>
-										<div className="icon">
-											<span><img src={Ts} alt="" width="27"/></span>
-										</div>
-									</div>
-									<div className="note">
-										<img src={AvatarDefault} alt="" width="45"/>
-										<p>
-											<span>Wagers</span>
-											TonioPlancha a réussi l0 top 1 sur Apex...
-										</p>
-										<div className="icon">
-											<span><img src={Ws} alt="" width="27"/></span>
-										</div>
-									</div>
-									<div className="note">
-										<img src={AvatarDefault} alt="" width="45"/>
-										<p>
-											<span>Défi</span>
-											TonioPlancha a réussi l0 top 1 sur Apex...
-										</p>
-										<div className="icon">
-											<span><i><FontAwesomeIcon icon={faHeart} /></i></span>
-										</div>
-									</div>
-								</div>
-
-								<div className="comment-container">
-									<div className="comments">
-										<img src={AvatarDefault} alt="" width="50"/>
-										<p>
-											<span>{userConnectedRedux.user.username}</span>
-											<input type="text" placeholder="Ajouter un commentaire..." />
-										</p>
-									</div>
-									<div className="comments">
-										<img src={AvatarDefault} alt="" width="50"/>
-										<p>
-											<span>CAPELAJR <i>21 Juillet à 3:54 PM</i></span>
-											+ rep Funny Booooooy
-										</p>
-									</div>
-									<div className="comments">
-										<img src={AvatarDefault} alt="" width="50"/>
-										<p>
-											<span>CAPELAJR <i>21 Juillet à 3:54 PM</i></span>
-											+ rep Funny Booooooy
-										</p>
-									</div>
-									<div className="comments">
-										<img src={AvatarDefault} alt="" width="50"/>
-										<p>
-											<span>CAPELAJR <i>21 Juillet à 3:54 PM</i></span>
-											+ rep Funny Booooooy
-										</p>
-									</div>
-									<div className="comments">
-										<img src={AvatarDefault} alt="" width="50"/>
-										<p>
-											<span>CAPELAJR <i>21 Juillet à 3:54 PM</i></span>
-											+ rep Funny Booooooy
-										</p>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
+					<NewsInfo />
 			    </div>
 	      	</div>
 	      </div>

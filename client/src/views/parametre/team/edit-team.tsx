@@ -1,6 +1,6 @@
 import React, {useState,useMemo,useRef} from "react"
 import { useParams } from "react-router-dom"
-import { useSelector } from "react-redux"
+// import { useSelector } from "react-redux"
 import {useQuery} from "@apollo/client"
 import {useMutation} from "@apollo/client"
 
@@ -8,8 +8,8 @@ import Header from "../../header/header"
 import Footer from "../../footer/footer"
 import "../../parametre/parametre.css"
 import Sidebar from "../sidebar"
-import {RootState} from "../../../reducer"
-import AvatarDefault from "../../../assets/image/game-tag.png"
+// import {RootState} from "../../../reducer"
+
 import { faUserPlus, faTimes } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {GET_ONE_TEAM} from "../../../gql/team/query"
@@ -28,7 +28,7 @@ const EditTeam: React.FC = function() {
 	const contentFile = useRef<HTMLInputElement>(null)
 	const contentBannier = useRef<HTMLInputElement>(null)
 	const { uid } = useParams<any>()
-	const userConnectedRedux = useSelector((state:RootState) => state.userConnected)
+	// const userConnectedRedux = useSelector((state:RootState) => state.userConnected)
   	const [showPopup, setShowPopup] = useState<boolean>(false)
   	const [showInvitation, setInvitation] = useState<Boolean>(false)
 	const [team, setTeam] = useState<TeamModel>()
@@ -119,11 +119,11 @@ const EditTeam: React.FC = function() {
 											<i onClick={Invitation}><FontAwesomeIcon icon={faUserPlus} /></i>
 										</p>
 									</div>
-									<div className="team-list">
+									{/*<div className="team-list">
 										<p>
 											<img src={userConnectedRedux.user.avatar ? userConnectedRedux.user.avatar :AvatarDefault} alt="" width="150" height="150"/>
 										</p>
-									</div>
+	  								</div>*/}
 								</div>
 							</div>
 							<div className={!showPopup ? "d-none" :"popup_team"}>

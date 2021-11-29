@@ -17,7 +17,17 @@ export const loadState 	=  function() {
 				part:false,
 				numberPart:0,
 				confirmed:0
-		}]
+				}
+			]
+		},
+		partTournament:{
+			tournament:[
+				{
+					uidTournament:"",
+					userUid:"",
+					confirmed:0
+				}
+			]
 		}
 	}
 

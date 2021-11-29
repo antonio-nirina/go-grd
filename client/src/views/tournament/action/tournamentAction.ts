@@ -2,11 +2,19 @@ import {loadState} from "../../../storage/loadstate"
 
 export const TOURNAMENT_REGISTER = "tournament_register"
 
+export const TOURNAMENT_PART = "tournament_part"
+
 export interface Input{
 	uidTournament:string|null
 	userUid:string|null
 	part:boolean
 	numberPart:number
+	confirmed:number
+}
+
+export interface Part_TOURNAMENT {
+	uidTournament:string|undefined
+	userUid:string
 	confirmed:number
 }
 
@@ -50,4 +58,39 @@ export const RegisterTournamentAction = function(data:Input) {
    		type:TOURNAMENT_REGISTER,
    		res:store??[]
  	}
+}
+
+export const SaveParticipateTournamentAction = function(data:Part_TOURNAMENT) {
+	const store = loadState().partTournament.tournament
+	if(loadState().partTournament.tournament.length > 0) {
+		store.forEach(function(el:Part_TOURNAMENT,index:number) {
+			if(el.uidTournament === "" && el.userUid === "") {
+				store[index] = {
+						uidTournament:data.uidTournament??"",
+						userUid:data.userUid??"",
+						confirmed:data.confirmed
+				}
+			} else {
+				store.push(
+					{
+						uidTournament:data.uidTournament??"",
+						userUid:data.userUid??"",
+						confirmed:data.confirmed??0
+					}
+				)
+			}
+		})
+	} else {
+		store.push(
+			{
+				uidTournament:data.uidTournament??"",
+				userUid:data.userUid??"",
+				confirmed:data.confirmed??0
+			}
+		)
+	}
+	return {
+		type:TOURNAMENT_PART,
+		res:store??[]
+  }
 }

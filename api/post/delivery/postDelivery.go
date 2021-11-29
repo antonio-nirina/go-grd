@@ -34,16 +34,11 @@ func (c *post) CreatePostResolve(params graphql.ResolveParams) (interface{}, err
 	content, _ := params.Args["content"].(string)
 	imageType, _ := params.Args["imageType"].(string)
 	files, _ := params.Args["files"].(string)
-	user, err := c.postUserHandler.FindOneUserByUid(uid)
-
-	if err != nil {
-		return nil, err
-	}
 
 	cmty := &entity.Post{
 		Uid:       primitive.NewObjectID(),
 		Title:     title,
-		User:      user,
+		User:      uid,
 		Date:      date,
 		Content:   content,
 		ImageType: imageType,

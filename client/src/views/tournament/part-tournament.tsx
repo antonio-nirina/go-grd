@@ -10,6 +10,8 @@ import ContentPaiement from "../commons/contentPaiement"
 import {checkInTeam} from "../league/utils"
 import {RootState} from "../../reducer"
 import {Translation} from "../../lang/translation"
+import { NameRoutes } from "../commons/route-list"
+
 
 
 export type PartTournamentType = {
@@ -21,10 +23,13 @@ export type PartTournamentType = {
 const PartTournament:React.FC<PartTournamentType> = function ({tournament,parts}) {
 	const userConnectedRedux = useSelector((state:RootState) => state.userConnected)
 	const [showClose, setShowClose] = useState(false)
+	const [isPart,setIsPart] = useState<boolean>(false)
 	const [teamPart,setTeamPart] = useState<string>("")
 	const [message,setMessage] = useState<string>("")
-
+	const [partUid,setPartUid] = useState<string>("")
+	const [partData,setPartData] = useState<string[]>([])
 	const [showPaiement, setShowPaiement] = useState<boolean>(false)
+	const [leavePartTournament]  = useMutation(LEAVE_PART_TOURNAMENT)
 
 	useEffect(() => {
 		if(tournament?.isTeam) {
@@ -37,6 +42,24 @@ const PartTournament:React.FC<PartTournamentType> = function ({tournament,parts}
 
 			})
 		}
+		parts?.forEach(function(part:ParticipateTournament){
+			if(part.user.uid === userConnectedRedux.user.uid) {
+				setPartUid(part.uid)
+				setIsPart(true)
+			}
+		})
+		let arrayUser:string[] = []
+		parts?.forEach(function(part:ParticipateTournament){
+			arrayUser.push(part.user.username)
+		})
+
+		if(parts && arrayUser.length < parts[0].tournament.numberParticipate){
+			for (let index = arrayUser.length; index < parts[0].tournament.numberParticipate; index++) {
+				arrayUser.push("Emplacement libre")
+			}
+		}
+		setPartData(arrayUser)
+
 	},[tournament])
 
 	const onShowConfirmed = async function() {
@@ -53,7 +76,12 @@ const PartTournament:React.FC<PartTournamentType> = function ({tournament,parts}
 		setMessage("")
 	}
 
-	const [leavePartTournament]  = useMutation(LEAVE_PART_TOURNAMENT)
+	const handleLeave = async function() {
+		const leave = await leavePartTournament({variables:{uid:partUid,userUid:userConnectedRedux.user.uid}})
+		if(leave.data) setMessage("Votre desincription a été effectué")
+		setIsPart(false)
+	}
+
 
 	return (
 		<div className="item-info-right">
@@ -61,14 +89,23 @@ const PartTournament:React.FC<PartTournamentType> = function ({tournament,parts}
 				<p className="team-bar-title">{teamPart}</p>
 				<span style={{"color":"#dd0000","fontSize":"11px","fontWeight":"bold"}}>{message}</span>
 				{tournament && parseInt(tournament?.priceParticipate) ?
-					<button className="btn bg-red" onClick={onShowConfirmed}>{!showPaiement ? "Rejoindre" : "Quitter"}</button>
+					<button className="btn bg-red" onClick={onShowConfirmed}>{!showPaiement && !isPart ? "Rejoindre" : (isPart ? "Quitter le tournois" : "Quitter")}</button>
 					:
-					<Link className="btn bg-red" to={`/confirmed-join/tournament?uid=${tournament?.uid}`} >
-						Rejoindre
-					</Link>
+					(!isPart ?
+						<Link className="btn bg-red" to={`${NameRoutes.confirmedJoinTournament}?uid=${tournament?.uid}`} >
+							{!showPaiement && !isPart ? "Rejoindre" : "Quitter"}
+						</Link>
+						:
+						<button style={{"cursor":"pointer"}} className="btn bg-red" onClick={handleLeave}>Quitter le tournois</button>
+					)
 				}
 				<div className="profil-join">
-					<p>Skouinar - <span>TonioPlancha</span></p>
+					{partData?.map(function(element:string,index:number){
+						return (
+							<p key={index}>{element}</p>
+						)
+					})}
+
 					<p className="free-emplacement"><span>{!showClose ? "Emplacement Libre" : "Gotaga - CapelaJr"}</span></p>
 				</div>
 			</div>
