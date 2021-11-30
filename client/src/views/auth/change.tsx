@@ -1,4 +1,4 @@
-import React,{useState} from "react"
+import React,{useState,useEffect} from "react"
 import { Link } from 'react-router-dom'
 
 import Header0 from "../header/header0"
@@ -10,7 +10,9 @@ import "../../assets/css/style.css"
 
 const InitPass: React.FC = function() {
 	const [errorForm,setErrorForm] = useState<boolean>(false)
-
+	useEffect(() => {
+		setErrorForm(false)
+	},[])
   return(
 	<div className="login initpass">
 		<div className="container">

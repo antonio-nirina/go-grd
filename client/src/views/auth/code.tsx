@@ -13,7 +13,7 @@ import {faArrowLeft} from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 type Inputs = {
-	email:string
+	code:string
 }
 
 const Code: React.FC = function() {
@@ -21,8 +21,9 @@ const Code: React.FC = function() {
 	const { register, handleSubmit } = useForm<Inputs>()
 	const [errorForm,setErrorForm] = useState<boolean>(false)
 	const [forgotPassword]  = useMutation(FORGOT_PASSWORD)
+
 	const onSubmit = async function(data:Inputs){
-		const email: string = data.email
+		const email: string = data.code
 
 		if(checkValidEmail(email)) {
 			const result = await forgotPassword({ variables: { email: email} })
@@ -48,13 +49,13 @@ const Code: React.FC = function() {
 						<div className="register-field">
 							<div className="alert alert-success text-center">{!errorForm ? "" : "Le code saisie est erroné"}</div>
 							<div className="center-width">
-								<span className="major">Un email à été envoyé au jhon3@gmail.com, veuillez recopier le code à 6 chiffres</span>
+								<span className="major">Un email à été envoyé au , veuillez recopier le code à 6 chiffres</span>
 							</div>
 							<form onSubmit={handleSubmit(onSubmit)} className="fieldset">
 								<div className="field-container">
 									<div className="input-field code-field">
 										<label htmlFor="code">Code</label>
-										<input id="code" className="mgt10" type = "text" required/>
+										<input id="code" className="mgt10" type = "text" {...register("code", { required: true })} />
 									</div>
 									<div className="input-field code-btn">
 										<i><FontAwesomeIcon icon={faArrowLeft} /></i>

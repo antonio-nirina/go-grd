@@ -50,7 +50,7 @@ const Tableau: React.FC = function() {
 		} else if(isTrnamnt === "false" && isWagr === "true") {
 			setIsWagger(true)
 		}
-	},[loading,error,data,ldgWg,ldgErr,ldgData])
+	},[loading,error,data,ldgWg,ldgErr,ldgData,params])
 
 
 	const HeaderProps:HeaderTournamentType = {

@@ -29,7 +29,7 @@ const HeaderTournament = function({data,isTournament,isWagger}:HeaderTournamentT
 			setUriJoin("joingame")
 			setUriRules("waggers-rules")
 		}
-	},[])
+	},[isTournament,params,isWagger])
 
 	return (
 		<>

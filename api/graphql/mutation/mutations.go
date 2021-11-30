@@ -54,6 +54,10 @@ import (
 	groupHandler "github.com/thoussei/antonio/api/group/handler"
 	groupRepo "github.com/thoussei/antonio/api/group/repository"
 
+	rateDelivery "github.com/thoussei/antonio/api/rate/delivery"
+	rateHandler "github.com/thoussei/antonio/api/rate/handler"
+	rateRepo "github.com/thoussei/antonio/api/rate/repository"
+
 	"github.com/graphql-go/graphql"
 )
 
@@ -104,7 +108,7 @@ var waggerResolver = waggerDelivery.NewResolverWagger(waggerUsecase, usecaseGame
 
 var partRepository = partRepo.NewPartRepository(database)
 var partUsecase = partHandler.NewUsecasePart(partRepository,teamUsecase,usecase)
-var partResolver = partDelivery.NewResolverPart(partUsecase, usecase, tournamentUsecase, teamUsecase, waggerUsecase)
+var partResolver = partDelivery.NewResolverPart(partUsecase, usecase, tournamentUsecase, teamUsecase, waggerUsecase,rateUsecase)
 
 var postRepository = postRepo.NewPostRepository(database)
 var postUsecase = postHandler.NewUsecasePost(postRepository,usecase)
@@ -113,6 +117,10 @@ var postResolver = postDelivery.NewResolverPost(postUsecase, usecase)
 var groupRepository = groupRepo.NewGroupRepository(database)
 var groupUsecase = groupHandler.NewUsecaseGroup(groupRepository)
 var groupResolver = groupDelivery.NewResolverGroup(groupUsecase, usecase)
+
+var rateRepository = rateRepo.NewRateRepository(database)
+var rateUsecase = rateHandler.NewUsecaseRate(rateRepository,usecase)
+var rateResolver = rateDelivery.NewResolverRate(rateUsecase, usecase)
 
 func GetRootFields() graphql.Fields {
 	return graphql.Fields{
@@ -151,6 +159,8 @@ func GetRootFields() graphql.Fields {
 		"updatedGameUser":       updatedGameUser(),
 		"updatedAllTeam":		updatedAllTeam(),
 		"DeleteTeam":			 DeleteTeam(),
-		"leavePartTournament": leavePartTournament(),
+		"leavePartTournament": 	leavePartTournament(),
+		"createRated": 			createRated(),
+		"CreatedOrUpdatedRate": CreatedOrUpdatedRate(),
 	}
 }

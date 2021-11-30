@@ -8,7 +8,7 @@ import Footer from "../../footer/footer"
 import "../../parametre/parametre.css"
 import Sidebar from "../sidebar"
 import {RootState} from "../../../reducer"
-// import AvatarDefault from "../../assets/image/game-tag.png"
+
 import { faPlusCircle } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {TeamModel} from "../../models/team"

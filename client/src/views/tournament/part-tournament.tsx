@@ -3,7 +3,7 @@ import {useMutation} from "@apollo/client"
 import { Link } from "react-router-dom"
 import { useSelector } from "react-redux"
 
-import {SAVED_PART,LEAVE_PART_TOURNAMENT} from "../../gql/participate/mutation"
+import {LEAVE_PART_TOURNAMENT} from "../../gql/participate/mutation"
 import {Tournament} from "../models/tournament"
 import {ParticipateTournament} from "../models/participate"
 import ContentPaiement from "../commons/contentPaiement"
@@ -22,7 +22,6 @@ export type PartTournamentType = {
 
 const PartTournament:React.FC<PartTournamentType> = function ({tournament,parts}) {
 	const userConnectedRedux = useSelector((state:RootState) => state.userConnected)
-	const [showClose, setShowClose] = useState(false)
 	const [isPart,setIsPart] = useState<boolean>(false)
 	const [teamPart,setTeamPart] = useState<string>("")
 	const [message,setMessage] = useState<string>("")
@@ -60,7 +59,7 @@ const PartTournament:React.FC<PartTournamentType> = function ({tournament,parts}
 		}
 		setPartData(arrayUser)
 
-	},[tournament])
+	},[tournament,parts,userConnectedRedux])
 
 	const onShowConfirmed = async function() {
 		const check = await checkInTeam(userConnectedRedux.user.uid)
@@ -105,8 +104,6 @@ const PartTournament:React.FC<PartTournamentType> = function ({tournament,parts}
 							<p key={index}>{element}</p>
 						)
 					})}
-
-					<p className="free-emplacement"><span>{!showClose ? "Emplacement Libre" : "Gotaga - CapelaJr"}</span></p>
 				</div>
 			</div>
 			<div className="join-all join-canal">

@@ -1,6 +1,5 @@
 import React, {useState,useMemo,useRef} from "react"
 import { useParams } from "react-router-dom"
-// import { useSelector } from "react-redux"
 import {useQuery} from "@apollo/client"
 import {useMutation} from "@apollo/client"
 
@@ -8,7 +7,6 @@ import Header from "../../header/header"
 import Footer from "../../footer/footer"
 import "../../parametre/parametre.css"
 import Sidebar from "../sidebar"
-// import {RootState} from "../../../reducer"
 
 import { faUserPlus, faTimes } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -22,8 +20,8 @@ import ElementTeam from "./elementTeam"
 import {UPDATED_ALL_TEAM} from "../../../gql/team/mutation"
 
 const EditTeam: React.FC = function() {
-	const [banniere, setBannier] = useState<string>("")
-	const [logo, setLogo] 	= useState<string>("")
+	// const [banniere, setBannier] = useState<string>("")
+	// const [logo, setLogo] 	= useState<string>("")
 
 	const contentFile = useRef<HTMLInputElement>(null)
 	const contentBannier = useRef<HTMLInputElement>(null)
@@ -65,11 +63,11 @@ const EditTeam: React.FC = function() {
         reader.onload = async function() {
         	let file = typeof reader.result === "string" ? reader.result?.replace(/^data:(.*?);base64,/, "") : ""
 			file = file.replace(/ /g, '+')
-			if(type) {
+			/*if(type) {
 				setLogo(file)
 			} else {
 				setBannier(file)
-			}
+			}*/
 			const teamUp = await updatedTeam({variables:{
 				uid:uid,
 				name:"",
