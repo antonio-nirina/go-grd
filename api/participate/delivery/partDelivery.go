@@ -6,6 +6,7 @@ import (
 	"github.com/graphql-go/graphql"
 	"github.com/thoussei/antonio/api/participate/entity"
 	"github.com/thoussei/antonio/api/participate/handler"
+	rateHandler "github.com/thoussei/antonio/api/rate/handler"
 	tEntity "github.com/thoussei/antonio/api/tournament/entity"
 	tournamentHandler "github.com/thoussei/antonio/api/tournament/handler"
 	userHandler "github.com/thoussei/antonio/api/user/handler"
@@ -44,6 +45,7 @@ type participate struct {
 	// league      leagueHandler.UsecaseLeague
 	team   teamHandler.UsecaseTeam
 	wagger waggerHandler.UsecaseWagger
+	rate rateHandler.UsecaseRate
 }
 
 type teamsElements struct {
@@ -56,6 +58,7 @@ func NewResolverPart(
 	tournament tournamentHandler.UsecaseTournament,
 	team teamHandler.UsecaseTeam,
 	wagger waggerHandler.UsecaseWagger,
+	rate rateHandler.UsecaseRate,
 	// league leagueHandler.UsecaseLeague,
 ) PartResolver {
 	return &participate{
@@ -65,6 +68,7 @@ func NewResolverPart(
 		// league:      league,
 		team:   team,
 		wagger: wagger,
+		rate:rate,
 	}
 }
 
@@ -139,7 +143,7 @@ func (p *participate) SavedPartResolver(params graphql.ResolveParams) (interface
 	}
 
 	res, err := p.partHandler.SavedPartHandler(part)
-	_,err = p.user.IncrementPoint(userUid)
+	_,err = p.rate.FindRateCreateOrUpdatedHandler(uidUser,"")
 	
 	if err != nil {
 		return nil, err

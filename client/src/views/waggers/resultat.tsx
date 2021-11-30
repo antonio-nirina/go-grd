@@ -21,7 +21,7 @@ import {GET_ONE_WAGGER} from "../../gql/wagger/query"
 
 
 const Resultat: React.FC = function(props:any) {
-  const [wagger, setWagger] = useState<Wagger>()
+  	const [wagger, setWagger] = useState<Wagger>()
 	const params = new URLSearchParams(props.location.search)
 	const uid:string|null = params.get("uid")
 

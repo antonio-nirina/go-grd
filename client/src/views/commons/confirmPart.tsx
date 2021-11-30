@@ -6,7 +6,7 @@ import { useSelector,useDispatch } from "react-redux"
 import Header from "../header/header"
 import Footer from "../footer/footer"
 
-import {SAVED_PART,LEAVE_PART_TOURNAMENT} from "../../gql/participate/mutation"
+import {SAVED_PART} from "../../gql/participate/mutation"
 import {GET_ONE_TOURNAMENT} from "../../gql/tournament/query"
 import {RootState} from "../../reducer"
 import {checkInTeam} from "../league/utils"
@@ -27,17 +27,9 @@ import {NameRoutes} from "./route-list"
 import {SaveParticipateTournamentAction,Part_TOURNAMENT} from "../tournament/action/tournamentAction"
 
 
-
-type TypeConfirmed = {
-	tournament: Tournament|undefined
-	handleClosePayement:Function
-}
-
-
-
 const ConfirmPart = function() {
 	const disptach = useDispatch()
-	const [showClose, setShowClose] = useState(true)
+	// const [showClose, setShowClose] = useState(true)
 	const [message,setMessage] = useState<string>("")
 	const [tournament, setTournament] = useState<Tournament>()
 	const [showPaiement, setShowPaiement] = useState<boolean>(false)
@@ -104,27 +96,28 @@ const ConfirmPart = function() {
 		                	<img src={tournament?.game.slug === "vanguard" ? CodVanguard : (tournament?.game.slug === "fortnite" ? Fortnite : (tournament?.game.slug ==="fifa21" ? Fifa21 : (tournament?.game.slug ==="ops" ? CodL : (tournament?.game.slug ==="warzone" ? Warzone : (tournament?.game.slug ==="rainbows" ? Rainbowsix : (tournament?.game.slug ==="apexlegends"?Apex:Rocketleague))))) )} alt=""/>
 		              	</div>
 		            	<div className="item-all-content">
-		                <div className="item-all-info">
-		                  	<p><span>Format</span></p>
-		                  	<p><span>Début des inscriptions</span></p>
-		                  	<p>{dateStringToDHString(tournament?.dateStart).replace(","," -")}</p>
-		                </div>
-		                <div className="item-all-info">
-		                  	<p><span>Spectateurs</span></p>
-		                  	<p className="item-text-left">{tournament?.spectateur}</p>
-		                  	<p><span>Fin des inscriptions</span></p>
-		                  	<p>{dateStringToDHString(tournament?.deadlineDate).replace(","," -")}</p>
-		                </div>
-		                <div className="item-all-info">
-							{tournament?.laps.map(function(lap:string,index:number){
-								return (
-									<div key={index}>
-										<p><span>Tour {index+1}</span></p>
-										<p>{dateStringToDHString(lap).replace(","," -")}</p>
-									</div>
-								)
-							})}
-		                </div>
+							{message ? <div style={{color:"#dd0000;"}} >{message}</div>: <></>}
+							<div className="item-all-info">
+								<p><span>Format</span></p>
+								<p><span>Début des inscriptions</span></p>
+								<p>{dateStringToDHString(tournament?.dateStart).replace(","," -")}</p>
+							</div>
+							<div className="item-all-info">
+								<p><span>Spectateurs</span></p>
+								<p className="item-text-left">{tournament?.spectateur}</p>
+								<p><span>Fin des inscriptions</span></p>
+								<p>{dateStringToDHString(tournament?.deadlineDate).replace(","," -")}</p>
+							</div>
+							<div className="item-all-info">
+								{tournament?.laps.map(function(lap:string,index:number){
+									return (
+										<div key={index}>
+											<p><span>Tour {index+1}</span></p>
+											<p>{dateStringToDHString(lap).replace(","," -")}</p>
+										</div>
+									)
+								})}
+							</div>
 		              </div>
 		            	</div>
 		            	<div className="btn-container">

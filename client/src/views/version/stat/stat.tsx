@@ -1,5 +1,5 @@
-import React,{useState,useEffect} from "react"
-import {useQuery} from "@apollo/client"
+import React from "react"
+// import {useQuery} from "@apollo/client"
 
 import Header from "../../header/header"
 import Footer from "../../footer/footer"
@@ -18,19 +18,19 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 
 import Game from "../../../assets/image/game.png"
-import {Wagger} from "../../models/wagger"
+// import {Wagger} from "../../models/wagger"
 import Discord from "../../../assets/image/discord.png"
 import Flag from "../../../assets/image/fr.png"
 
-import {GET_ONE_WAGGER} from "../../../gql/wagger/query"
+// import {GET_ONE_WAGGER} from "../../../gql/wagger/query"
 
 
 const Stat: React.FC = function(props:any) {
-  const [wagger, setWagger] = useState<Wagger>()
-	const params = new URLSearchParams(props.location.search)
-	const uid:string|null = params.get("uid")
+  	// const [wagger, setWagger] = useState<Wagger>()
+	// const params = new URLSearchParams(props.location.search)
+	// const uid:string|null = params.get("uid")
 
-	const {loading,error,data} 	= useQuery(GET_ONE_WAGGER, {
+	/*const {loading,error,data} 	= useQuery(GET_ONE_WAGGER, {
 		variables: {
 			uid:uid,
 		},
@@ -41,7 +41,7 @@ const Stat: React.FC = function(props:any) {
 			setWagger(data.FindOneWagger)
 		}
 
-	},[loading,error,data])
+	},[loading,error,data])*/
 
   return(
   	<div className="container">

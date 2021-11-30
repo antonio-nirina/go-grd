@@ -65,7 +65,7 @@ const Mygames: React.FC = function() {
 			setPlateforms(arrayPlateforms.join("-"))
 		}
 
-	},[])
+	},[userConnectedRedux])
 
   return(
 	<div className="leaderboard settings jackpot mygames">
