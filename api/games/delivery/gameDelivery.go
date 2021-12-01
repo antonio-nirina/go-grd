@@ -72,3 +72,14 @@ func (r *resolverGame) FindAllGameResolver(params graphql.ResolveParams) (interf
 
 	return res, nil
 }
+
+func (r *resolverGame) FindGameTwicthResolver(params graphql.ResolveParams) (interface{}, error) {
+	name, _ := params.Args["nameGame"].(string)
+	res, err := r.gameHandler.FindGameTwitchHandler(name)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return res, nil
+}

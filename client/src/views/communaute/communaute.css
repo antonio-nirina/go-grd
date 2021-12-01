@@ -513,6 +513,7 @@
 }
 .stream .tools-stream {
 	text-transform: none;
+	display: flex;
 }
 
 .stream .tools-stream button{

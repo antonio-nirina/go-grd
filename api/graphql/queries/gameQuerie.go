@@ -1,8 +1,8 @@
 package queries
 
 import (
-	"github.com/thoussei/antonio/api/graphql/types"
 	"github.com/graphql-go/graphql"
+	"github.com/thoussei/antonio/api/graphql/types"
 )
 
 func GetOneGameQuery() *graphql.Field {
@@ -37,7 +37,7 @@ func GetAllGameQuery() *graphql.Field {
 	return &graphql.Field{
 		Type:        graphql.NewList(types.GameSchemaType),
 		Description: "Get all games",
-		Resolve: gameResolver.FindAllGameResolver,
+		Resolve:     gameResolver.FindAllGameResolver,
 	}
 }
 
@@ -45,6 +45,19 @@ func GetAllPlateformQuery() *graphql.Field {
 	return &graphql.Field{
 		Type:        graphql.NewList(types.PlateformSchemaType),
 		Description: "Get all plateforms",
-		Resolve: plateformResolver.FindAllGamePlateformResolver,
+		Resolve:     plateformResolver.FindAllGamePlateformResolver,
+	}
+}
+
+func FindGameTwicth() *graphql.Field {
+	return &graphql.Field{
+		Type:        graphql.NewList(types.GameSchemaType),
+		Description: "Get all game twitch",
+		Args: graphql.FieldConfigArgument{
+			"nameGame": &graphql.ArgumentConfig{
+				Type: graphql.String,
+			},
+		},
+		Resolve: gameResolver.FindGameTwicthResolver,
 	}
 }

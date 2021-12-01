@@ -18,10 +18,12 @@ import Friend from "./friends"
 import Post from "./post"
 import Chat from "./chat"
 import Warz from "../../assets/image/profil/warzone.png"
-import Rl from "../../assets/image/profil/rocketleague.png"
+// import Rl from "../../assets/image/profil/rocketleague.png"
 import Fortnite from "../../assets/image/profil/fortnite.png"
 import TchatIcon from "../../assets/image/picto/tchat-icon.png"
 import {NameRoutes} from "../commons/route-list"
+import {GameType} from "../models/game"
+import {GET_ALL_GAME_TWITCH} from "../../gql/games/query"
 
 type Stremings = {
     uid:string
@@ -44,10 +46,11 @@ type Stremings = {
 }
 
 const Communaute: React.FC = function() {
-	const userConnectedRedux 	= useSelector((state:RootState) => state.userConnected)
-	const [cmty, setCmty] = useState<Stremings[]>([])
-	const [isLoader, setIsLoader] = useState<boolean>(true)
-	const [showClose, setShowClose] = useState(false)
+	const userConnectedRedux 			= useSelector((state:RootState) => state.userConnected)
+	const [cmty, setCmty] 				= useState<Stremings[]>([])
+	const [isLoader, setIsLoader] 		= useState<boolean>(true)
+	const [showClose, setShowClose] 	= useState(false)
+	const [gameTwitch,setGameTwitch] 	= useState<GameType>()
 	// const {loading,error,data}  = useSubscription(COUNT_SUBSCRIBE)
 
 	const {loading:loadingTwitch,error:errorTwitch,data:dataTwitch} = useQuery(GET_ALL_STREAMING, {
@@ -63,8 +66,14 @@ const Communaute: React.FC = function() {
         }
     })
 
+	const {loading:loadingTwitchGame,error:errorTwitchGame,data:dataTwitchGame} = useQuery(GET_ALL_GAME_TWITCH, {
+		variables: {
+			nameGame: userConnectedRedux.user.games && userConnectedRedux.user.games.length > 0 ? userConnectedRedux.user.games[0] : "Warzone"
+		},
+	})
+
 	const onShowClose = function(){
-	setShowClose(!showClose)
+		setShowClose(!showClose)
 	}
 
 	useMemo(() => {
@@ -77,40 +86,55 @@ const Communaute: React.FC = function() {
 			const newData = data.FindAllCmty.filter((el:Stremings) => {return el.statut})
 			setCmty(newData)
 		}
-	},[loading,error,data,isLoader])
+		console.log("cccc", dataTwitchGame)
+		if(!loadingTwitchGame && !errorTwitchGame && dataTwitchGame) {
+			setGameTwitch(dataTwitchGame.FindGameTwicth)
+		}
+	},[loading,error,data,isLoader,loadingTwitchGame,errorTwitchGame,dataTwitchGame])
 
   return(
 	<div className="communaute">
 	    <div className="container">
-	  		<Header/>
+	  		<Header />
 	  		<div className="main">
 	  			<div className="auto">
 	  				<div className="aside-left">
 	  					<div className="game-select">
-	  						<Link to={NameRoutes.mygames}>
-			  					<div className="game-bg wz">
-			  						<p>COD : Warzone</p>
-			  						<div className="seek">
-			  							<img src={Warz} className="imgresp" alt=""/>
-			  						</div>
-			  					</div>
-			  				</Link>
-			  				<Link to={NameRoutes.mygames}>
-			  					<div className="game-bg rl">
-			  						<p>Rocket League</p>
-			  						<div className="seek">
-			  							<img src={Rl} className="imgresp" alt=""/>
-			  						</div>
-			  					</div>
-		  					</Link>
-		  					<Link to={NameRoutes.mygames}>
-			  					<div className="game-bg ft">
-			  						<p>Fortnite</p>
-			  						<div className="seek">
-			  							<img src={Fortnite} className="imgresp" alt="" />
-			  						</div>
-			  					</div>
-			  				</Link>
+							{userConnectedRedux.user.games && userConnectedRedux.user.games.length > 0
+								?
+									userConnectedRedux.user.games.map(function(game:GameType,index:number){
+										return (
+											<Link to={NameRoutes.mygames} key={index}>
+												<div className="game-bg rl">
+													<p>Rocket League</p>
+													<div className="seek">
+														<img src={game.image} className="imgresp" alt=""/>
+													</div>
+												</div>
+											</Link>
+										)
+									})
+								:
+								<>
+									<Link to={NameRoutes.mygames}>
+										<div className="game-bg wz">
+											<p>COD : Warzone</p>
+											<div className="seek">
+												<img src={Warz} className="imgresp" alt=""/>
+											</div>
+										</div>
+			  						</Link>
+									<Link to={NameRoutes.mygames}>
+										<div className="game-bg ft">
+											<p>Fortnite</p>
+											<div className="seek">
+												<img src={Fortnite} className="imgresp" alt="" />
+											</div>
+										</div>
+									</Link>
+								</>
+							}
+
 		  				</div>
 		  				<div className="stream">
 							  	<div className="tools-stream">

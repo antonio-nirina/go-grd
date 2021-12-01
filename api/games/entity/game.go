@@ -20,7 +20,7 @@ type GamePlatform struct {
 	Uid         primitive.ObjectID `bson:"uid"`
 	Name        string             `json:"name"`
 	Description string             `json:"description"`
-	Logo       string             `json:"logo,omitempty"`
+	Logo        string             `json:"logo,omitempty"`
 }
 
 type AccountGame struct {
@@ -55,4 +55,11 @@ type GameAccount struct {
 	Uid       primitive.ObjectID
 	IdAccount string
 	Account   AccountGameSchema
+}
+
+type Twitch struct {
+	Uid       primitive.ObjectID
+	Id        string `json:"id"`
+	Name      string `json:"name"`
+	BoxArtUrl string `json:"box_art_url"`
 }

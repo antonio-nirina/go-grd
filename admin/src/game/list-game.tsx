@@ -16,8 +16,6 @@ type GameType = {
 	notes:string
 }
 
-
-
 const ListGame : React.FC = function() {
 	const history = useHistory()
 	const [games, setGames] = useState<GameType[]>([])
@@ -55,19 +53,21 @@ const ListGame : React.FC = function() {
 		    					Créer jeux
 	    					</button>
 		    			</div>
-			    		<div className="dashboard list-game">
-			    			{games?.map(function(el:GameType,index:number){
-                            	return (
-                            		<Link key={index} to ="#" className="grid league-board" >
-					    				<span className="img-games" style={{ background: `url(${el.image})`}}></span>
-					    				<strong className="game-name">
-					    					<span className="logo-game"><img src={el.logo} alt="" /></span>
-					    					<span className="grid-title">{el.name}</span>
-					    				</strong>
-					    			</Link>
-                        		)
-                            })}
-			    		</div>
+			    		<div className="containt">
+							<div className="favorite">
+								<div className="game-list-container">
+									<div className="favorite-game" >
+										{games.map(function(e:GameType,index:number){
+											return(
+												<Link to ="#" key={index}>
+													<img src={e.image} alt={e.slug} width="200"/>
+												</Link>
+											)
+										})}
+									</div>
+								</div>
+							</div>
+						</div>
 			    	</div>
 		    	</div>
 			</div>

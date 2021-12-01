@@ -8,6 +8,7 @@ type ResolverGame interface {
 	SavedGameResolver(params graphql.ResolveParams) (interface{}, error)
 	FindOneGameResolver(params graphql.ResolveParams) (interface{}, error)
 	FindAllGameResolver(params graphql.ResolveParams) (interface{}, error)
+	FindGameTwicthResolver(params graphql.ResolveParams) (interface{}, error)
 }
 
 type ResolvePlateform interface {
@@ -15,4 +16,3 @@ type ResolvePlateform interface {
 	FindOneGamePlateformResolver(params graphql.ResolveParams) (interface{}, error)
 	FindAllGamePlateformResolver(params graphql.ResolveParams) (interface{}, error)
 }
-
