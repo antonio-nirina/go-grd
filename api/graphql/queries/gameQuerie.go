@@ -51,7 +51,7 @@ func GetAllPlateformQuery() *graphql.Field {
 
 func FindGameTwicth() *graphql.Field {
 	return &graphql.Field{
-		Type:        graphql.NewList(types.GameSchemaType),
+		Type:       types.GameSchemaType,
 		Description: "Get all game twitch",
 		Args: graphql.FieldConfigArgument{
 			"nameGame": &graphql.ArgumentConfig{

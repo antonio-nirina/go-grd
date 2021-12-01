@@ -118,6 +118,10 @@ func (c *cmty) FindAllStreamingTwitchResolver(params graphql.ResolveParams) (int
 
 	gameView,err := c.cmtyGameHandler.FindGameTwitchHandler(gameName)
 	
+	if err != nil {
+		return nil, err
+	}
+
 	res, err := c.cmtyHandler.FindAllStreamingHandler(accessToken, gameView.Slug, refreshToken)
 
 	if err != nil {

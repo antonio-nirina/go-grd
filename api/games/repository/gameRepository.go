@@ -96,9 +96,8 @@ func (c *driverRepository) FindOneGameBySlugdRepository(slug string) (entity.Gam
 func (c *driverRepository) FindGameTwitchRepository(nameGame string) (cmtyEntity.TwitchGame, error) {
 	var collection = c.client.Database("grd_database").Collection("games_twitch")
 	var result cmtyEntity.TwitchGame
-	// err := collection.FindOne(context.TODO(), bson.M{"name": bson.M{"$regex": "/.*" + nameGame + ".*/i"}}).Decode(&result)
-	err := collection.FindOne(context.TODO(), bson.M{"id": "514974"}).Decode(&result)
-	fmt.Println(err)
+	err := collection.FindOne(context.TODO(), bson.M{"name": primitive.Regex{Pattern: ".*"+nameGame+".*", Options: "i"}}).Decode(&result)
+
 	if err != nil {
 		return result, err
 	}

@@ -151,7 +151,7 @@ func (g *gameUsecase) FindGameTwitchHandler(nameGame string) (GameViewModel, err
 		Uid:   game.Uid.Hex(),
 		Name:  game.Name,
 		Image: "",
-		Logo:  "",
+		Logo:  game.BoxArtUrl,
 		Notes: 0,
 		Slug:  game.Id,
 	}
