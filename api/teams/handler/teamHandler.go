@@ -261,13 +261,7 @@ func (t *teamUsecase) CountTeamHandler()(int) {
 }
 
 func (t *teamUsecase) FindTeamByUserHandler(idQuery string) ([]TeamViewModel, error) {
-	objectId, err := primitive.ObjectIDFromHex(idQuery)
-	
-	if err != nil {
-		return []TeamViewModel{}, err
-	}
-
-	result, err := t.teamRepository.FindTeamByUserRepo(objectId)
+	result, err := t.teamRepository.FindTeamByUserRepo(idQuery)
 
 	if err != nil {
 		return []TeamViewModel{}, err
