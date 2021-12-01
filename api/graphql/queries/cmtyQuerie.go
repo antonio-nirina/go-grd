@@ -60,7 +60,7 @@ func FindAllStreaming() *graphql.Field {
 			"accessToken": &graphql.ArgumentConfig{
 				Type: graphql.String,
 			},
-			"gameId": &graphql.ArgumentConfig{
+			"gameName": &graphql.ArgumentConfig{
 				Type: graphql.String,
 			},
 			"refreshToken": &graphql.ArgumentConfig{

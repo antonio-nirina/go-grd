@@ -1,5 +1,6 @@
 import {createApolloClient as client} from "../config/apollo-client"
 import {TwitchProfil,Twitch_STREAMING} from "../gql/cmty/query"
+import {SetTokenCookies} from "../common/utils"
 
 export const TWITCH_OUATH = "https://id.twitch.tv/oauth2/authorize?client_id=hy3s04cw7m9qofg7thik89lii2inr0&response_type=code&scope=user:read:broadcast%20user:read:email"
 
@@ -11,7 +12,7 @@ export const SigingAdminTwitch = function(){
 }
 
 const receiveMessageCodeTwitch = function(event: any) {
-	
+
 	if (process.env.REACT_APP_URI !== event.origin) {
 		return ""
 	}
@@ -30,10 +31,11 @@ export const getTokenUser = async function(code: string) {
 				type:"twitch"
 			}
 
-			localStorage.setItem("access_token_twitch",JSON.stringify(token))
+			// localStorage.setItem("access_token_twitch",JSON.stringify(token))
+			SetTokenCookies(token)
 			window.location.reload()
 		}
-		
+
 	} catch(errors) {
 		console.log("errors_get_one_match", errors)
 	}

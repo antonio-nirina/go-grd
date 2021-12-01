@@ -13,11 +13,6 @@ import (
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
-type oauthTokenTwitch struct {
-	AccessToken  string `json:"access_token"`
-	RefreshToken string `json:"refresh_token"`
-}
-
 type notificationTwitchApi struct {
 	Email bool `json:"email"`
 	Push  bool `json:"push"`
@@ -110,18 +105,10 @@ func (r *resolver) GetAccessTokenTwitchAdmin(params graphql.ResolveParams) (inte
 	}
 
 	accessToken, _ := external.GetHmsetRedis("access_token_twitch", "key")
-	oauth := &oauthTokenTwitch{}
+	oauth := &external.OauthTokenTwitch{}
 
 	if len(accessToken) > 0 && accessToken[0] != nil {
-		nAccessToken := fmt.Sprintf("%v", accessToken[0])
-		json.Unmarshal([]byte(nAccessToken), oauth)
-		check, _ := external.ValidateToken(oauth.AccessToken)
-
-		if !check {
-			refresh, _ := external.RefressToken(oauth.RefreshToken)
-			oauth.AccessToken = refresh.AccessToken
-			oauth.RefreshToken = refresh.RefreshToken
-		}
+		oauth = external.HandleTokenInRedis(accessToken)
 	} else {
 		code, _ := params.Args["code"].(string)
 		redirectAdmin := os.Getenv("REDIRECT_URI_TWITCH_ADMIN")
@@ -134,3 +121,4 @@ func (r *resolver) GetAccessTokenTwitchAdmin(params graphql.ResolveParams) (inte
 
 	return oauth, nil
 }
+

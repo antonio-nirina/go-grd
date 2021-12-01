@@ -19,6 +19,11 @@ const TWITC_STREAM_GAME = "https://api.twitch.tv/helix/clips"
 const TWITC_VALIDATE_TOKEN = "https://id.twitch.tv/oauth2/validate"
 const TWITC_REFRESH_TOKEN = "https://id.twitch.tv/oauth2/token"
 
+type OauthTokenTwitch struct {
+	AccessToken  string `json:"access_token"`
+	RefreshToken string `json:"refresh_token"`
+}
+
 type DataToken struct {
 	AccessToken  string `json:"access_token"`
 	RefreshToken string `json:"refresh_token"`
@@ -327,7 +332,7 @@ func requestTwitchApi(accessToken string, url string, method string) (*http.Resp
 	} else {
 		_method = method
 	}
-	htppClient := AccesstHttp()
+	httpClient := AccesstHttp()
 	reqUser, err := http.NewRequest(_method, url, nil)
 
 	if accessToken != "" {
@@ -336,7 +341,7 @@ func requestTwitchApi(accessToken string, url string, method string) (*http.Resp
 
 	reqUser.Header.Set("Client-Id", os.Getenv("CLIENT_ID_TWITCH"))
 	reqUser.Header.Set("Content-Type", "application/json")
-	respUser, err := htppClient.client.Do(reqUser)
+	respUser, err := httpClient.client.Do(reqUser)
 
 	if err != nil {
 		return nil, err
@@ -344,4 +349,20 @@ func requestTwitchApi(accessToken string, url string, method string) (*http.Resp
 
 	return respUser, nil
 
+}
+
+func HandleTokenInRedis(accessToken []interface{}) *OauthTokenTwitch {
+	var oauth = &OauthTokenTwitch{}
+
+	nAccessToken := fmt.Sprintf("%v", accessToken[0])
+	json.Unmarshal([]byte(nAccessToken), oauth)
+	check, _ := ValidateToken(oauth.AccessToken)
+
+	if !check {
+		refresh, _ := RefressToken(oauth.RefreshToken)
+		oauth.AccessToken = refresh.AccessToken
+		oauth.RefreshToken = refresh.RefreshToken
+	}
+
+	return oauth
 }

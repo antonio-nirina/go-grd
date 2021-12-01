@@ -15,8 +15,8 @@ export const GET_ALL_FRIENDS= gql`
 }`
 
 export const GET_ALL_STREAMING = gql`
-	query GetStreaming($uid: String!) {
-		GetStreaming(uid: $uid){
+	query FindAllStreaming($uid: String,$gameName:String,$refreshToken:String,$accessToken:String) {
+		FindAllStreaming(uid: $uid,gameName:$gameName,refreshToken:$refreshToken,accessToken:$accessToken){
 		count
 		email
 		id
@@ -34,16 +34,16 @@ export const GET_ALL_USER = gql`
 }`
 
 export const GET_GAME_USER = gql`
-query GetGameOneUserQuery($uid: String!) {
-	GetGameOneUserQuery(uid: $uid){
-		uid
-		email
-		game {
+	query GetGameOneUserQuery($uid: String!) {
+		GetGameOneUserQuery(uid: $uid){
 			uid
-			image
-			logo
-			slug
-			name
-		}
-}
+			email
+			game {
+				uid
+				image
+				logo
+				slug
+				name
+			}
+	}
 }`

@@ -23,7 +23,7 @@ import Fortnite from "../../assets/image/profil/fortnite.png"
 import TchatIcon from "../../assets/image/picto/tchat-icon.png"
 import {NameRoutes} from "../commons/route-list"
 import {GameType} from "../models/game"
-import {GET_ALL_GAME_TWITCH} from "../../gql/games/query"
+
 
 type Stremings = {
     uid:string
@@ -55,7 +55,10 @@ const Communaute: React.FC = function() {
 
 	const {loading:loadingTwitch,error:errorTwitch,data:dataTwitch} = useQuery(GET_ALL_STREAMING, {
 		variables: {
-			limit: userConnectedRedux.user.uid
+			uid: userConnectedRedux.user.uid,
+			nameGame: userConnectedRedux.user.games && userConnectedRedux.user.games.length > 0 ? userConnectedRedux.user.games[0] : "Warzone",
+			accessToken:"",
+			refreshToken:""
 		},
 	})
 
@@ -65,12 +68,6 @@ const Communaute: React.FC = function() {
 			pageNumber:1, //(item.item)*NUMBER_PER_PAGE - NUMBER_PER_PAGE
         }
     })
-
-	const {loading:loadingTwitchGame,error:errorTwitchGame,data:dataTwitchGame} = useQuery(GET_ALL_GAME_TWITCH, {
-		variables: {
-			nameGame: userConnectedRedux.user.games && userConnectedRedux.user.games.length > 0 ? userConnectedRedux.user.games[0] : "Warzone"
-		},
-	})
 
 	const onShowClose = function(){
 		setShowClose(!showClose)
@@ -86,11 +83,7 @@ const Communaute: React.FC = function() {
 			const newData = data.FindAllCmty.filter((el:Stremings) => {return el.statut})
 			setCmty(newData)
 		}
-		console.log("cccc", dataTwitchGame)
-		if(!loadingTwitchGame && !errorTwitchGame && dataTwitchGame) {
-			setGameTwitch(dataTwitchGame.FindGameTwicth)
-		}
-	},[loading,error,data,isLoader,loadingTwitchGame,errorTwitchGame,dataTwitchGame])
+	},[loading,error,data,isLoader])
 
   return(
 	<div className="communaute">
