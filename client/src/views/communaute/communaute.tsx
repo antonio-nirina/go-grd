@@ -17,12 +17,11 @@ import {GET_ALL_CMTY} from "../../gql/cmty/query"
 import Friend from "./friends"
 import Post from "./post"
 import Chat from "./chat"
-
 import Warz from "../../assets/image/profil/warzone.png"
 import Rl from "../../assets/image/profil/rocketleague.png"
 import Fortnite from "../../assets/image/profil/fortnite.png"
-
 import TchatIcon from "../../assets/image/picto/tchat-icon.png"
+import {NameRoutes} from "../commons/route-list"
 
 type Stremings = {
     uid:string
@@ -64,10 +63,9 @@ const Communaute: React.FC = function() {
         }
     })
 
-  
-	  const onShowClose = function(){
-	    setShowClose(!showClose)
-	  }
+	const onShowClose = function(){
+	setShowClose(!showClose)
+	}
 
 	useMemo(() => {
 		if(!loadingTwitch && !errorTwitch && dataTwitch) console.log("dataTwitch", dataTwitch)
@@ -87,9 +85,9 @@ const Communaute: React.FC = function() {
 	  		<Header/>
 	  		<div className="main">
 	  			<div className="auto">
-	  				<div className="aside-left">	  					
+	  				<div className="aside-left">
 	  					<div className="game-select">
-	  						<Link to="#">
+	  						<Link to={NameRoutes.mygames}>
 			  					<div className="game-bg wz">
 			  						<p>COD : Warzone</p>
 			  						<div className="seek">
@@ -97,7 +95,7 @@ const Communaute: React.FC = function() {
 			  						</div>
 			  					</div>
 			  				</Link>
-			  				<Link to="#">
+			  				<Link to={NameRoutes.mygames}>
 			  					<div className="game-bg rl">
 			  						<p>Rocket League</p>
 			  						<div className="seek">
@@ -105,7 +103,7 @@ const Communaute: React.FC = function() {
 			  						</div>
 			  					</div>
 		  					</Link>
-		  					<Link to ="#">
+		  					<Link to={NameRoutes.mygames}>
 			  					<div className="game-bg ft">
 			  						<p>Fortnite</p>
 			  						<div className="seek">
@@ -113,8 +111,14 @@ const Communaute: React.FC = function() {
 			  						</div>
 			  					</div>
 			  				</Link>
-		  				</div>		  				
+		  				</div>
 		  				<div className="stream">
+							  	<div className="tools-stream">
+									<button  className="btn">Toutes</button>
+								  	<div>
+								  		<input type="text" placeholder="search" />
+								  	</div>
+							  	</div>
 						  	{cmty.map(function(e:Stremings){
 								return(
 									e.streaming.map(function(ev:any,index:number) {
@@ -136,7 +140,7 @@ const Communaute: React.FC = function() {
 								)
 							})}
 		  				</div>
-	  				</div>	  				
+	  				</div>
 	  				<div className="center-block">
 	  					<Post />
 						  <div className={isLoader ? "loader-spinner":"d-none"}>
@@ -155,7 +159,7 @@ const Communaute: React.FC = function() {
 	  			</div>
 				<div className={!showClose ? "d-none": "tchat"} >
               		<Chat />
-            	</div>           	
+            	</div>
 	  		</div>
 			<Footer/>
 	  	</div>

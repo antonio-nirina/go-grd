@@ -169,8 +169,8 @@ func GetRootFields() graphql.Fields {
 		"GetAccessTokenDiscord":     GetAccessTokenDiscord(),
 		"GetAccessUserDiscordApi":   GetAccessUserDiscordApi(),
 		"FindTournamentParticipate": FindTournamentParticipate(),
-		"FindOneRate":FindOneRate(),
-		"FindAllRate":FindAllRate(),
-		"FindRateByUser":FindRateByUser(),
+		"FindOneRate":				 FindOneRate(),
+		"FindAllRate":				 FindAllRate(),
+		"FindRateByUser":			 FindRateByUser(),
 	}
 }
