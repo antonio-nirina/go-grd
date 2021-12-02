@@ -14,15 +14,6 @@ export const GET_ALL_FRIENDS= gql`
 	}
 }`
 
-export const GET_ALL_STREAMING = gql`
-	query FindAllStreaming($uid: String,$gameName:String,$refreshToken:String,$accessToken:String) {
-		FindAllStreaming(uid: $uid,gameName:$gameName,refreshToken:$refreshToken,accessToken:$accessToken){
-		count
-		email
-		id
-	}
-}`
-
 export const GET_ALL_USER = gql`
 	query GetUsers($idUserConnected: String!,$limit: Int!,$pageNumber:Int!) {
 		GetUsers(idUserConnected: $idUserConnected,limit: $limit,pageNumber:$pageNumber){

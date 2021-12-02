@@ -221,7 +221,7 @@
 	display: inline-block;
 	border: 1px solid gray;
 	margin-right: 9px;
-	width: 130px;
+	width: 221px;
 	height: 83px;
 }
 .streaming img{
@@ -514,6 +514,7 @@
 .stream .tools-stream {
 	text-transform: none;
 	display: flex;
+	margin-bottom: 15px;
 }
 
 .stream .tools-stream button{

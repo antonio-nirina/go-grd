@@ -1,24 +1,23 @@
-import React,{useMemo,useState,useEffect} from "react"
+import React,{useState,useEffect} from "react"
 import { Link } from "react-router-dom"
 import { useSelector } from "react-redux"
 import {useQuery} from "@apollo/client"
 import { faEye } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Loader from "react-loader-spinner"
+
+
 import Header from "../header/header"
 import {RootState} from "../../reducer"
-
 import Footer from "../footer/footer"
 import "./communaute.css"
 import "./post.css"
 // import {COUNT_SUBSCRIBE} from "../../gql/user/subscription"
-import {GET_ALL_STREAMING} from "../../gql/user/query"
-import {GET_ALL_CMTY} from "../../gql/cmty/query"
+import {GET_ALL_STREAMING} from "../../gql/cmty/query"
 import Friend from "./friends"
 import Post from "./post"
 import Chat from "./chat"
 import Warz from "../../assets/image/profil/warzone.png"
-// import Rl from "../../assets/image/profil/rocketleague.png"
 import Fortnite from "../../assets/image/profil/fortnite.png"
 import TchatIcon from "../../assets/image/picto/tchat-icon.png"
 import {NameRoutes} from "../commons/route-list"
@@ -26,23 +25,13 @@ import {GameType} from "../models/game"
 
 
 type Stremings = {
-    uid:string
-    statut:string
-    streaming:[{
-        id:string
-        videoId:string
-        gameId:string
-        title:string
-        viewerCount:number
-        createdAt:string
-        creatorName:string
-        thumbnailUrl:string
-    }]
-    game:{
-        uid:string
-        name:string
-        box_art_url:string
-    }
+    id:string
+	userName:string
+	thumbnailUrl:string
+	title:string
+	viewerCount:number
+	StartedAt:string
+	gameName:string
 }
 
 const Communaute: React.FC = function() {
@@ -50,37 +39,38 @@ const Communaute: React.FC = function() {
 	const [cmty, setCmty] 				= useState<Stremings[]>([])
 	const [isLoader, setIsLoader] 		= useState<boolean>(true)
 	const [showClose, setShowClose] 	= useState(false)
-	const [gameTwitch,setGameTwitch] 	= useState<GameType>()
+	// const [gameTwitch,setGameTwitch] 	= useState<GameType>()
 	// const {loading,error,data}  = useSubscription(COUNT_SUBSCRIBE)
 
-	const {loading:loadingTwitch,error:errorTwitch,data:dataTwitch} = useQuery(GET_ALL_STREAMING, {
+	const {loading,error,data} = useQuery(GET_ALL_STREAMING, {
 		variables: {
-			uid: userConnectedRedux.user.uid,
-			nameGame: userConnectedRedux.user.games && userConnectedRedux.user.games.length > 0 ? userConnectedRedux.user.games[0] : "Warzone",
+			gameName: userConnectedRedux.user.games && userConnectedRedux.user.games.length > 0 ? userConnectedRedux.user.games[0] : "Warzone",
 			accessToken:"",
 			refreshToken:""
 		},
 	})
 
-	const {loading,error,data} 	= useQuery(GET_ALL_CMTY,{
-        variables:{
-            limit:5,
-			pageNumber:1, //(item.item)*NUMBER_PER_PAGE - NUMBER_PER_PAGE
-        }
-    })
-
 	const onShowClose = function(){
 		setShowClose(!showClose)
 	}
 
-	useMemo(() => {
-		if(!loadingTwitch && !errorTwitch && dataTwitch) console.log("dataTwitch", dataTwitch)
-	},[loadingTwitch,errorTwitch,dataTwitch])
-
 	useEffect(() => {
 		if(!loading && !error && data) {
 			setIsLoader(false)
-			const newData = data.FindAllCmty.filter((el:Stremings) => {return el.statut})
+			let newData:Stremings[] = []
+			data.FindAllStreaming.forEach((element:Stremings) => {
+				let url = element.thumbnailUrl.replace(/{width}/,"500").replace(/{height}/,"500")
+				newData.push({
+					id:element.id,
+					userName:element.userName,
+					thumbnailUrl:url,
+					title:element.title,
+					viewerCount:element.viewerCount,
+					StartedAt:element.StartedAt,
+					gameName:element.gameName
+
+				})
+			})
 			setCmty(newData)
 		}
 	},[loading,error,data,isLoader])
@@ -136,24 +126,21 @@ const Communaute: React.FC = function() {
 								  		<input type="text" placeholder="search" />
 								  	</div>
 							  	</div>
-						  	{cmty.map(function(e:Stremings){
+						  	{cmty.map(function(e:Stremings,index:number){
 								return(
-									e.streaming.map(function(ev:any,index:number) {
-										return(
-											<span key={index}>
-												<div className="stream-container">
-													<div className="streaming">
-													<img src={ev.thumbnailUrl} style={{"width":"100%"}} alt={ev.nameGame} />
-													</div>
-													<div className="stream-info">
-														<p className="streamer">{ev.creatorName}</p>
-														<p className="streamgame">{e.game.name} <span className="stream-type">Arena</span></p>
-														<p className="view">{ev.viewerCount}<i><i><FontAwesomeIcon icon={faEye} size="xs"/></i></i></p>
-													</div>
-												</div>
-											</span>
-										)
-									})
+									<span key={index} style={{cursor:"pointer"}}>
+										<div className="stream-container">
+											<div className="streaming">
+											<img src={e.thumbnailUrl} style={{"width":"100%"}} alt={e.gameName} />
+											</div>
+											<div className="stream-info">
+												<p className="streamer">{e.title}</p>
+												<p className="streamer">{e.userName}</p>
+												<p className="streamgame">{e.gameName}</p>
+												<p className="view">{e.viewerCount}<i><i><FontAwesomeIcon icon={faEye} size="xs"/></i></i></p>
+											</div>
+										</div>
+									</span>
 								)
 							})}
 		  				</div>

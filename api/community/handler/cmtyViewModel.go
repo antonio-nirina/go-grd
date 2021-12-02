@@ -52,4 +52,5 @@ type CmtystreamingViewModelTwitch struct {
 	CreatedAt       string `json:"created_at"`
 	ThumbnailUrl    string `json:"thumbnail_url"`
 	Duration        int    `json:"duration"`
+	GameName 		string `json:"gameName"`
 }

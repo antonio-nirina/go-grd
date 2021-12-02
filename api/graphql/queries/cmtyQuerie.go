@@ -54,7 +54,7 @@ func FindAllGAmeTwitch() *graphql.Field {
 
 func FindAllStreaming() *graphql.Field {
 	return &graphql.Field{
-		Type:        graphql.NewList(types.CmtyClipTwitchSchemaType),
+		Type:        graphql.NewList(types.CmtyStreamSchemaType),
 		Description: "Get all clip community",
 		Args: graphql.FieldConfigArgument{
 			"accessToken": &graphql.ArgumentConfig{

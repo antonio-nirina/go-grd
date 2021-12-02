@@ -12,7 +12,7 @@ type UsecaseCmty interface {
 	FindCmtyHandler(idQuery string) (CmtyViewModel, error)
 	FindAllCmtyHandler(pageNumber int64, limit int64) ([]CmtyViewModel, error)
 	FindAllCmtyGameHandler(accessToken string, refreshToken string) ([]CmtyGameTwitchViewModel, error)
-	FindAllStreamingHandler(accessToken string, id string, refreshToken string) ([]CmtystreamingViewModelTwitch, error)
+	FindAllStreamingHandler(accessToken string, id string, refreshToken string) ([]cmtystreamingViewModelTwitch, error)
 	FindAllGamesTwitch() ([]CmtyGameTwitchViewModel, error)
 	FindOneGamesTwitch(id string) (entity.TwitchGame, error)
 
@@ -167,14 +167,14 @@ func (c *cmtytUsecase) FindAllCmtyGameHandler(accessToken string, refreshToken s
 	return res, nil
 }
 
-func (c *cmtytUsecase) FindAllStreamingHandler(accessToken string, id string, refreshToken string) ([]CmtystreamingViewModelTwitch, error) {
+func (c *cmtytUsecase) FindAllStreamingHandler(accessToken string, id string, refreshToken string) ([]cmtystreamingViewModelTwitch, error) {
 	// check token if isvalid
 	nwAcces, _ := external.ValidateToken(accessToken)
 
 	if !nwAcces {
 		refr, err := external.RefressToken(refreshToken)
 		if err != nil {
-			return []CmtystreamingViewModelTwitch{}, err
+			return []cmtystreamingViewModelTwitch{}, err
 		}
 
 		accessToken = refr.AccessToken
@@ -183,28 +183,21 @@ func (c *cmtytUsecase) FindAllStreamingHandler(accessToken string, id string, re
 	streams, err := external.GetStreamingListByGame(accessToken, id)
 
 	if err != nil {
-		return []CmtystreamingViewModelTwitch{}, err
+		return []cmtystreamingViewModelTwitch{}, err
 	}
 
-	var res []CmtystreamingViewModelTwitch
+	var res []cmtystreamingViewModelTwitch
 
 	for _, val := range streams {
-		streamTwitchViews := CmtystreamingViewModelTwitch{
+		streamTwitchViews := cmtystreamingViewModelTwitch{
 			Id:              val.Id,
-			Url:             val.Url,
-			EmbedUrl:        val.EmbedUrl,
-			BroadcasterId:   val.BroadcasterId,
-			BroadcasterName: val.BroadcasterName,
-			CreatorId:       val.CreatorId,
-			CreatorName:     val.CreatorName,
-			VideoId:         val.VideoId,
 			ViewerCount:     val.ViewerCount,
-			GameId:          val.GameId,
 			Language:        val.Language,
 			Title:           val.Title,
-			CreatedAt:       val.CreatedAt,
 			ThumbnailUrl:    val.ThumbnailUrl,
-			Duration:        0,
+			GameName:		 val.GameName,
+			UserName: 		 val.UserName,
+			StartedAt: 		 val.StartedAt,
 		}
 
 		res = append(res, streamTwitchViews)

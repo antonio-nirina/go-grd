@@ -12,7 +12,7 @@ import (
 const TWITCH_TOKEN = "https://id.twitch.tv/oauth2/token"
 const TWITCH_TOKEN_USER = "https://api.twitch.tv/helix/user"
 const TWITC_USER_ID = "https://api.twitch.tv/helix/users?id="       // GET
-const TWITCH_STREAMING_USER = "https://api.twitch.tv/helix/streams" // GET
+const TWITCH_STREAMING = "https://api.twitch.tv/helix/streams" // GET
 const TWITCH_GET_USER = "https://api.twitch.tv/helix/users"
 const TWITCH_GAME_ALL = "https://api.twitch.tv/helix/games/top"
 const TWITC_STREAM_GAME = "https://api.twitch.tv/helix/clips"
@@ -87,7 +87,7 @@ type resultGameElement struct {
 }
 
 type streamingTwitch struct {
-	Data []streamingElementTwitch
+	Data []streamingGameTwitch
 }
 
 type streamingElementTwitch struct {
@@ -107,26 +107,24 @@ type streamingElementTwitch struct {
 	ThumbnailUrl    string `json:"thumbnail_url"`
 }
 
-/*
 
-	type streamingElementTwitch struct {
-		Id           string   `json:"id"`
-		UserId       string   `json:"user_id"`
-		UserLogin    string   `json:"user_login"`
-		UserName     string   `json:"user_name"`
-		GameId       string   `json:"game_id"`
-		GameName     string   `json:"game_name"`
-		Type         string   `json:"type"`
-		Title        string   `json:"title"`
-		ViewerCount  int      `json:"viewer_count"`
-		StartedAt    string   `json:"started_at"`
-		Language     string   `json:"language"`
-		ThumbnailUrl string   `json:"thumbnail_url"`
-		TagIds       []string `json:"tag_ids"`
-		IsMature     bool     `json:"is_mature"`
-	}
 
-*/
+type streamingGameTwitch struct {
+	Id           string   `json:"id"`
+	UserId       string   `json:"user_id"`
+	UserLogin    string   `json:"user_login"`
+	UserName     string   `json:"user_name"`
+	GameId       string   `json:"game_id"`
+	GameName     string   `json:"game_name"`
+	Type         string   `json:"type"`
+	Title        string   `json:"title"`
+	ViewerCount  int      `json:"viewer_count"`
+	StartedAt    string   `json:"started_at"`
+	Language     string   `json:"language"`
+	ThumbnailUrl string   `json:"thumbnail_url"`
+	TagIds       []string `json:"tag_ids"`
+	IsMature     bool     `json:"is_mature"`
+}
 
 type hTTPClient struct {
 	client *http.Client
@@ -243,11 +241,11 @@ func GetAllGameTwitch(accessToken string) ([]resultGameElement, error) {
 	return res, nil
 }
 
-func GetStreamingListByGame(accessToken string, id string) ([]streamingElementTwitch, error) {
-	respUser, err := requestTwitchApi(accessToken, TWITC_STREAM_GAME+"?game_id="+id, "")
+func GetStreamingListByGame(accessToken string, id string) ([]streamingGameTwitch, error) {
+	respUser, err := requestTwitchApi(accessToken, TWITCH_STREAMING+"?game_id="+id, "")
 
 	if err != nil {
-		return []streamingElementTwitch{}, err
+		return []streamingGameTwitch{}, err
 	}
 
 	defer respUser.Body.Close()
@@ -259,28 +257,21 @@ func GetStreamingListByGame(accessToken string, id string) ([]streamingElementTw
 		Logger(fmt.Sprintf("%v", err))
 	}
 
-	var res []streamingElementTwitch
+	var res []streamingGameTwitch
 
 	for _, val := range streamsTwitch.Data {
-		// if val.ViewerCount > 0 {
-		ares := streamingElementTwitch{
+		ares := streamingGameTwitch{
 			Id:              val.Id,
-			Url:             val.Url,
-			EmbedUrl:        val.EmbedUrl,
-			BroadcasterId:   val.BroadcasterId,
-			BroadcasterName: val.BroadcasterName,
-			CreatorId:       val.CreatorId,
-			CreatorName:     val.CreatorName,
-			VideoId:         val.VideoId,
 			ViewerCount:     val.ViewerCount,
 			GameId:          val.GameId,
 			Language:        val.Language,
 			Title:           val.Title,
-			CreatedAt:       val.CreatedAt,
+			StartedAt:       val.StartedAt,
 			ThumbnailUrl:    val.ThumbnailUrl,
+			GameName: 		 val.GameName,
+			UserName: 		 val.UserName,
 		}
 		res = append(res, ares)
-		//}
 	}
 
 	return res, nil
