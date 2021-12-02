@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 
+	cmtyEntity "github.com/thoussei/antonio/api/community/entity"
 	"github.com/thoussei/antonio/api/external"
 	"github.com/thoussei/antonio/api/games/entity"
 	"go.mongodb.org/mongo-driver/bson"
@@ -16,7 +17,7 @@ func NewGameRepository(client *mongo.Client) *driverRepository {
 	return &driverRepository{client}
 }
 
-func (c *driverRepository) SavedGameRepository(game *entity.Game) (interface{}, error){
+func (c *driverRepository) SavedGameRepository(game *entity.Game) (interface{}, error) {
 	var collection = c.client.Database("grd_database").Collection("game")
 	insertResult, err := collection.InsertOne(context.TODO(), game)
 
@@ -29,7 +30,7 @@ func (c *driverRepository) SavedGameRepository(game *entity.Game) (interface{}, 
 	return game, nil
 }
 
-func (c *driverRepository) FindOneGameRepository(objectId primitive.ObjectID) (interface{}, error){
+func (c *driverRepository) FindOneGameRepository(objectId primitive.ObjectID) (interface{}, error) {
 	var collection = c.client.Database("grd_database").Collection("game")
 	var result entity.Game
 
@@ -42,7 +43,7 @@ func (c *driverRepository) FindOneGameRepository(objectId primitive.ObjectID) (i
 	return result, nil
 }
 
-func (c *driverRepository) FindAllGameRepository() ([]entity.Game, error){
+func (c *driverRepository) FindAllGameRepository() ([]entity.Game, error) {
 	var collection = c.client.Database("grd_database").Collection("game")
 	var results []entity.Game
 	cur, err := collection.Find(context.TODO(), bson.D{{}})
@@ -79,11 +80,23 @@ func (c *driverRepository) FindOneGameByuidRepository(objectId primitive.ObjectI
 	return result, nil
 }
 
-func (c *driverRepository) FindOneGameBySlugdRepository(slug string) (entity.Game, error){
+func (c *driverRepository) FindOneGameBySlugdRepository(slug string) (entity.Game, error) {
 	var collection = c.client.Database("grd_database").Collection("game")
 	var result entity.Game
 
 	err := collection.FindOne(context.TODO(), bson.M{"slug": slug}).Decode(&result)
+
+	if err != nil {
+		return result, err
+	}
+
+	return result, nil
+}
+
+func (c *driverRepository) FindGameTwitchRepository(nameGame string) (cmtyEntity.TwitchGame, error) {
+	var collection = c.client.Database("grd_database").Collection("games_twitch")
+	var result cmtyEntity.TwitchGame
+	err := collection.FindOne(context.TODO(), bson.M{"name": primitive.Regex{Pattern: ".*"+nameGame+".*", Options: "i"}}).Decode(&result)
 
 	if err != nil {
 		return result, err

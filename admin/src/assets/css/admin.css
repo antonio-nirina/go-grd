@@ -49,7 +49,7 @@ body{
 .navbar .show-drpdwn-menu li a{
 	display: block;
 	padding: 5px;
-	width: 140px;	
+	width: 140px;
 	font-size: 13px;
 }
 .mobile-version{
@@ -68,7 +68,7 @@ body{
 }
 .navbar .show-drpdwn-menu li:last-child a{
 	border-top: 1px solid #dd0000;
-	padding-bottom: 10px;	
+	padding-bottom: 10px;
 }
 .admin a{
 	max-width: inherit;
@@ -78,14 +78,14 @@ body{
 	display: flex;
 	flex: auto;
 	flex-direction: row;
-	width: 100%;	
+	width: 100%;
 	margin: 0 auto;
 }
 .layout-container .main-sidebar{
 	position: sticky;
 	height: 100vh;
-	top: 0px;	
-	width: 12%;	
+	top: 0px;
+	width: 12%;
 	background: #000000
 }
 .side-menu{
@@ -134,7 +134,7 @@ body{
 }
 .main-sidebar .logo{
 	display: block;
-	height: 86px;	
+	height: 86px;
 	text-align: center;
 }
 .main-sidebar .logo img{
@@ -545,7 +545,7 @@ input:checked + .slider {
     transition: .4s;
     border-radius: 34px;
     text-indent: 67px;
-    padding-top: 5px;    
+    padding-top: 5px;
     text-transform: uppercase;
     color: #9c9c9e;
     border: 1px solid #9c9c9e;
@@ -628,16 +628,16 @@ form .se-btn.se-btn-select.se-btn-tool-font.se-tooltip.on{
 	margin-bottom: 15px;
 	display: inline-block;
 	margin-right: 10px;
-	border: 1px solid #232328;	
+	border: 1px solid #232328;
 	background: #3a3838;
 	border-radius: 5px;
 	align-self: center;
-	overflow: hidden;	
+	overflow: hidden;
 }
 .grid img{
 	width: 100%;
 	height: 210px;
-	border-bottom: 1px solid #9c9c9e;	
+	border-bottom: 1px solid #9c9c9e;
 }
 .grid-title{
 	font-family: arial;
@@ -688,17 +688,17 @@ label.entete:last-child{
 .list-game .img-games{
 	display: block;
 	border-radius: 5px;
-	background-size: 100% 100% !important; 
+	background-size: 100% 100% !important;
 	height: 250px;
 	background-repeat: no-repeat !important;
 }
-.list-game .logo-game{   
-    display: block;   
+.list-game .logo-game{
+    display: block;
     padding: 0;
-    bottom: 37px;    
+    bottom: 37px;
     width: 100%;
     max-width: 75px;
-    text-align: center;    
+    text-align: center;
 }
 .list-game span{
 	align-self: center;
@@ -706,25 +706,25 @@ label.entete:last-child{
 .list-game .logo-game img{
     width: 52%;
     height: 40px;
-    border-radius: 50%;  
+    border-radius: 50%;
 }
 .column div.create-game{
-    width: 100%;    
+    width: 100%;
 }
 .create-game button svg{
 	margin-right: 5px;
 }
 
-.game-name{		
+.game-name{
 	display: flex;
 	width: 100%;
 	height: 20%;
     justify-content: center;
     position: absolute;
     bottom: 0px;
-    background: rgba(0,0,0,0.4);    
+    background: rgba(0,0,0,0.4);
     border-radius: 0 0 5px 5px;
-    transition: ease-in-out 500ms;  
+    transition: ease-in-out 500ms;
 }
 .game-name span{
 	align-self: center;
@@ -748,7 +748,7 @@ label.entete:last-child{
 /******************USER********************/
 .user .response-filter, .team .response-filter{
 	display: block;
-	background: none;	
+	background: none;
 }
 .user .response-filter-search, .team .response-filter-search{
 	border-right: none;
@@ -763,7 +763,7 @@ label.entete:last-child{
     height: 36px;
     margin-top: 3px;
     border-radius: 50%;
-    border: 1px solid #000000;	
+    border: 1px solid #000000;
 }
 .sm-width .card-result{
 	align-self: center;
@@ -778,10 +778,10 @@ label.entete:last-child{
 	position: fixed;
 	top: 0;
     text-align: center;
-    border-radius: 5px;    
+    border-radius: 5px;
     width: 84%;
     text-align: center;
-    height: 100%;    
+    height: 100%;
     z-index: 2;
     display: none;
 }
@@ -820,7 +820,7 @@ label.entete:last-child{
 	background: #3d3d40;
 	height: 75%;
 	z-index: 999;
-	border-radius: 15px;	
+	border-radius: 15px;
 }
 .loader-spinner div{
 	position: relative;
@@ -842,7 +842,7 @@ label.entete:last-child{
 .assistance .btn-container{
 	text-align: right;
 }
-.assistance .clear button{	
+.assistance .clear button{
 	float: none !important;
 }
 .assistance h1{
@@ -857,7 +857,7 @@ label.entete:last-child{
 }
 .line{
 	display: flex;
-	
+
 }
 .both{
 	width: 100%;
@@ -886,7 +886,7 @@ label.entete:last-child{
 	display: flex;
 }
 .infos-user{
-	width: 50%;	
+	width: 50%;
 	align-self: center;
 	padding-left: 30px;
 }
@@ -899,7 +899,7 @@ label.entete:last-child{
 	font-size: 24px;
 }
 .avatarDefault .btn-container{
-	align-self: center;	
+	align-self: center;
 }
 .avatarDefault .btn-container .btn{
 	font-size: 25px;
@@ -916,7 +916,7 @@ label.entete:last-child{
 }
 /**************/
 .guide{
-	padding-top: 15px;	
+	padding-top: 15px;
 }
 .guide p{
 	padding: 5px;
@@ -950,11 +950,11 @@ label.entete:last-child{
 	margin-top: 11px;
 }
 .field .group-input input.v-check{
-	
+
     width: 59%;
     text-align: right;
-    transform: scale(1.5);    
-    
+    transform: scale(1.5);
+
 }
 .list-video i{
 	position: absolute;
@@ -969,7 +969,7 @@ label.entete:last-child{
 .btn-container .btn.center.clear{
 	clear: both;
 	float: none;
-	margin-top: 0;	
+	margin-top: 0;
 }
 .navbar .d-none{
 	display: none;
@@ -998,8 +998,8 @@ label.entete:last-child{
 	padding: 5px;
 	width: 250px;
 	margin: auto;
-	border-radius: 5px;	
-	top: 50%;	
+	border-radius: 5px;
+	top: 50%;
 	box-shadow: 1px 1px 6px #000000;
 }
 .middle p{
@@ -1030,12 +1030,12 @@ label.entete:last-child{
 }
 .tour .add-tour i{
 	margin-right: 5px;
-	font-size: 12pxgit 
+	font-size: 12pxgit
 }
 .tour .add-tour{
 	max-width: 300px;
 	width: 100%;
-	align-self: center;	
+	align-self: center;
 }
 .field .input-group.no-flex{
 	display: block;
@@ -1053,7 +1053,7 @@ label.entete:last-child{
 	margin-bottom: 5px;
 }
 .field .new-position{
-	width: 100%;	
+	width: 100%;
 }
 .flexible{
 	display: flex;
@@ -1062,4 +1062,16 @@ label.entete:last-child{
 .flexible .d-block{
 	display: flex;
 	align-self: center;
+}
+
+.body-content .containt {
+	padding-top: 5em;
+	text-align: center;
+}
+
+.favorite-game a{
+	margin-right: 25px;
+	border: 1px solid transparent;
+	display: inline-block;
+	margin-bottom: 12px;
 }

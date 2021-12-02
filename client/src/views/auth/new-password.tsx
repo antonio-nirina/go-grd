@@ -54,10 +54,10 @@ const NewPassword: React.FC = function() {
 							<form onSubmit={handleSubmit(onSubmit)} className="fieldset">
 								<div className="field-container">
 									<div className="input-field code-field">
-										<input id="newpass" className="mgt10" type = "text" {...register("newPassword", { required: true })} name="newPassword" />
+										<input id="newpass" className="mgt10" placeholder="New password" type = "password" {...register("newPassword", { required: true })} name="newPassword" />
 									</div>
 									<div className="input-field code-field">
-										<input id="repass" className="mgt10" type = "text" {...register("cNewPaswd", { required: true })} name="cNewPaswd"/>
+										<input id="repass" className="mgt10" placeholder="Confirmed" type = "password" {...register("cNewPaswd", { required: true })} name="cNewPaswd"/>
 									</div>
 									<div className="input-field code-btn">
 										<i><FontAwesomeIcon icon={faArrowLeft} /></i>

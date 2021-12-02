@@ -9,83 +9,83 @@ import (
 )
 
 type ToMailer struct {
-	Email       string
-	Firstname   string 
-	Lastname    string 
-    Subject     string 
-    Message     string 
+	Email     string
+	Firstname string
+	Lastname  string
+	Subject   string
+	Message   string
 }
 
-func (mailer *ToMailer) InitialeMailjet() (bool,error) {
+func (mailer *ToMailer) InitialeMailjet() (bool, error) {
 	err := godotenv.Load()
-	
+
 	if err != nil {
 		Logger(fmt.Sprintf("%v", err))
 	}
-	
+
 	mailjetClient := mailjet.NewMailjetClient(os.Getenv("MJ_APIKEY_PUBLIC"), os.Getenv("MJ_APIKEY_PRIVATE"))
-	messagesInfo := []mailjet.InfoMessagesV31 {
+	messagesInfo := []mailjet.InfoMessagesV31{
 		mailjet.InfoMessagesV31{
 			From: &mailjet.RecipientV31{
 				Email: os.Getenv("USER_EMAIL"),
-				Name: "Go grind",
+				Name:  "Go grind",
 			},
 			To: &mailjet.RecipientsV31{
-				mailjet.RecipientV31 {
-					Email:mailer.Email,
-					Name: fmt.Sprintf("%s%s", mailer.Firstname, mailer.Lastname),
+				mailjet.RecipientV31{
+					Email: mailer.Email,
+					Name:  fmt.Sprintf("%s%s", mailer.Firstname, mailer.Lastname),
 				},
 			},
-			Subject: mailer.Subject,
+			Subject:  mailer.Subject,
 			TextPart: "",
 			HTMLPart: mailer.Message,
 		},
 	}
-	messages := mailjet.MessagesV31{Info: messagesInfo }
+	messages := mailjet.MessagesV31{Info: messagesInfo}
 	res, err := mailjetClient.SendMailV31(&messages)
 
 	if err != nil {
-		return false,err
+		return false, err
 	}
 
 	fmt.Println(res)
-	return true,nil
+	return true, nil
 }
 
-func (e *ToMailer) Sender (data map[string]string) (bool,error) {
+func (e *ToMailer) Sender(data map[string]string) (bool, error) {
 	err := godotenv.Load()
-	
+
 	if err != nil {
 		Logger(fmt.Sprintf("%v", err))
 	}
-	
-    uri := fmt.Sprintf("%s%s%s",os.Getenv("REDIRECT_URI"),"/update-password?token=",data["token"])
+
+	uri := fmt.Sprintf("%s%s%s", os.Getenv("REDIRECT_URI"), "/new-password?token=", data["token"])
 	mailjetClient := mailjet.NewMailjetClient(os.Getenv("MJ_APIKEY_PUBLIC"), os.Getenv("MJ_APIKEY_PRIVATE"))
 
-	messagesInfo := []mailjet.InfoMessagesV31 {
+	messagesInfo := []mailjet.InfoMessagesV31{
 		mailjet.InfoMessagesV31{
 			From: &mailjet.RecipientV31{
 				Email: os.Getenv("USER_EMAIL"),
-				Name: "Grind",
+				Name:  "Grind",
 			},
 			To: &mailjet.RecipientsV31{
-				mailjet.RecipientV31 {
-					Email:e.Email,
-					Name: fmt.Sprintf("%s%s", e.Lastname, e.Lastname),
+				mailjet.RecipientV31{
+					Email: e.Email,
+					Name:  fmt.Sprintf("%s%s", e.Lastname, e.Lastname),
 				},
 			},
-			Subject: e.Subject,
+			Subject:  e.Subject,
 			TextPart: "",
-			HTMLPart: "<p>"+e.Message+"</p><p><a href="+uri+">"+data["msg"]+"</a></p>",
+			HTMLPart: "<p>" + e.Message + "</p><p><a href=" + uri + ">" + data["msg"] + "</a></p>",
 		},
 	}
-	messages := mailjet.MessagesV31{Info: messagesInfo }
+	messages := mailjet.MessagesV31{Info: messagesInfo}
 	res, err := mailjetClient.SendMailV31(&messages)
 	if err != nil {
-		return false,err
+		return false, err
 	}
-	
+
 	fmt.Println(res)
-	
-	return true,nil
+
+	return true, nil
 }

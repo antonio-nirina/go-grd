@@ -70,14 +70,13 @@ var usecaseGame = gameHandler.NewUsecaseGame(repositoryGame)
 var gameResolver = gameDelivery.NewResolverGame(usecaseGame)
 
 // Usecase
-var usecaseNotif = notifHandler.NewUsecaseNotif(repositoryNotif,usecase)
+var usecaseNotif = notifHandler.NewUsecaseNotif(repositoryNotif, usecase)
 var usecase = handler.NewUsecaseUser(rep)
 var UserRolve = delivery.NewResolver(usecase, usecaseNotif, usecaseGame, usecasePlateform)
 
 var tournamentRepository = tournamentRepo.NewTournamentRepository(database)
 var tournamentUsecase = tournamentHandler.NewUsecaseTournament(tournamentRepository)
 var tournamentResolver = tournamentDelivery.NewResolverTournament(tournamentUsecase, usecaseGame, usecasePlateform)
-
 var notifResolver = notifDelivery.NewNotifResolver(usecaseNotif, usecase)
 
 var cmtyRepository = cmtyRepo.NewCmtyRepository(database)
@@ -89,7 +88,7 @@ var homeUsecase = homeHandler.NewUsecaseHome(homeRepository)
 var homeResolver = homeDelivery.NewResolverHome(homeUsecase, usecaseGame)
 
 var teamRepository = teamRepo.NewTeamRepository(database)
-var teamUsecase = teamHandler.NewUsecaseTeam(teamRepository,usecase)
+var teamUsecase = teamHandler.NewUsecaseTeam(teamRepository, usecase)
 var teamResolver = teamDelivery.NewResolverTeam(teamUsecase, usecase)
 
 var asistRepository = asistRepo.NewAsistRepository(database)
@@ -105,17 +104,16 @@ var waggerUsecase = waggerHandler.NewUsecaseWagger(waggerRepository)
 var waggerResolver = waggerDelivery.NewResolverWagger(waggerUsecase, usecaseGame, usecasePlateform)
 
 var partRepository = partRepo.NewPartRepository(database)
-var partUsecase = partHandler.NewUsecasePart(partRepository,teamUsecase,usecase)
-var partResolver = partDelivery.NewResolverPart(partUsecase, usecase, tournamentUsecase, teamUsecase, waggerUsecase,rateUsecase)
+var partUsecase = partHandler.NewUsecasePart(partRepository, teamUsecase, usecase)
+var partResolver = partDelivery.NewResolverPart(partUsecase, usecase, tournamentUsecase, teamUsecase, waggerUsecase, rateUsecase)
 
 var postRepository = postRepo.NewPostRepository(database)
-var postUsecase = postHandler.NewUsecasePost(postRepository,usecase)
+var postUsecase = postHandler.NewUsecasePost(postRepository, usecase)
 var postResolver = postDelivery.NewResolverPost(postUsecase, usecase)
 
 var rateRepository = rateRepo.NewRateRepository(database)
-var rateUsecase = rateHandler.NewUsecaseRate(rateRepository,usecase)
+var rateUsecase = rateHandler.NewUsecaseRate(rateRepository, usecase)
 var rateResolver = rateDelivery.NewResolverRate(rateUsecase, usecase)
-
 
 // GetRootFields returns all the available queries.
 func GetRootFields() graphql.Fields {
@@ -144,7 +142,7 @@ func GetRootFields() graphql.Fields {
 		"FindAllHome":               FindAllHome(),
 		"FindOneTeam":               FindOneTeam(),
 		"FindAllTeam":               FindAllTeam(),
-		"FindTeamByUser":			 FindTeamByUser(),
+		"FindTeamByUser":            FindTeamByUser(),
 		"FindOneAsist":              FindOneAsist(),
 		"FindAllAsist":              FindAllAsist(),
 		"FindOneSubject":            FindOneSubject(),
@@ -169,8 +167,9 @@ func GetRootFields() graphql.Fields {
 		"GetAccessTokenDiscord":     GetAccessTokenDiscord(),
 		"GetAccessUserDiscordApi":   GetAccessUserDiscordApi(),
 		"FindTournamentParticipate": FindTournamentParticipate(),
-		"FindOneRate":FindOneRate(),
-		"FindAllRate":FindAllRate(),
-		"FindRateByUser":FindRateByUser(),
+		"FindOneRate":               FindOneRate(),
+		"FindAllRate":               FindAllRate(),
+		"FindRateByUser":            FindRateByUser(),
+		"FindGameTwicth":            FindGameTwicth(),
 	}
 }

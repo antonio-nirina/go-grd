@@ -136,5 +136,35 @@ var CmtyClipTwitchSchemaType = graphql.NewObject(graphql.ObjectConfig{
 		"thumbnailUrl": &graphql.Field{
 			Type: graphql.String,
 		},
+		"gameName": &graphql.Field{
+			Type: graphql.String,
+		},
+	},
+})
+
+var CmtyStreamSchemaType = graphql.NewObject(graphql.ObjectConfig{
+	Name: "StreamTwitchType",
+	Fields: graphql.Fields{
+		"id": &graphql.Field{
+			Type: graphql.String,
+		},
+		"userName": &graphql.Field{
+			Type: graphql.String,
+		},
+		"gameName": &graphql.Field{
+			Type: graphql.String,
+		},
+		"StartedAt": &graphql.Field{
+			Type: graphql.String,
+		},
+		"thumbnailUrl": &graphql.Field{
+			Type: graphql.String,
+		},
+		"title": &graphql.Field{
+			Type: graphql.String,
+		},
+		"viewerCount": &graphql.Field{
+			Type: graphql.Int,
+		},
 	},
 })

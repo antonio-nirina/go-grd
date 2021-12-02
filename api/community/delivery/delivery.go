@@ -6,6 +6,7 @@ import (
 	"github.com/graphql-go/graphql"
 	"github.com/thoussei/antonio/api/community/entity"
 	"github.com/thoussei/antonio/api/community/handler"
+	"github.com/thoussei/antonio/api/external"
 	gameHandler "github.com/thoussei/antonio/api/games/handler"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
@@ -104,10 +105,24 @@ func (c *cmty) FindAllGameTwitchResolver(params graphql.ResolveParams) (interfac
 }
 
 func (c *cmty) FindAllStreamingTwitchResolver(params graphql.ResolveParams) (interface{}, error) {
-	gameId, _ := params.Args["gameId"].(string)
+	gameName, _ := params.Args["gameName"].(string)
 	accessToken, _ := params.Args["accessToken"].(string)
 	refreshToken, _ := params.Args["refreshToken"].(string)
-	res, err := c.cmtyHandler.FindAllStreamingHandler(accessToken, gameId, refreshToken)
+
+	if accessToken == "" && refreshToken == "" {
+		token, _ := external.GetHmsetRedis("access_token_twitch", "key")
+		oauth := external.HandleTokenInRedis(token)
+		accessToken = oauth.AccessToken
+		refreshToken = oauth.RefreshToken
+	}
+
+	gameView,err := c.cmtyGameHandler.FindGameTwitchHandler(gameName)
+	
+	if err != nil {
+		return nil, err
+	}
+
+	res, err := c.cmtyHandler.FindAllStreamingHandler(accessToken, gameView.Slug, refreshToken)
 
 	if err != nil {
 		return nil, err

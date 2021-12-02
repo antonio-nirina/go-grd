@@ -24,12 +24,12 @@ func NewUsecaseGame(r repository.GameRepositoryInterface) UsecaseGameInterface {
 }
 
 type GameViewModel struct {
-	Uid        string 			 `json:"uid"`
-	Name 	   string             `json:"name"`
-	Image      string             `json:"image,omitempty"`
-	Logo       string             `json:"logo,omitempty"`
-	Notes      int                `json:"notes"`
-	Slug       string             `json:"slug"`
+	Uid   string `json:"uid"`
+	Name  string `json:"name"`
+	Image string `json:"image,omitempty"`
+	Logo  string `json:"logo,omitempty"`
+	Notes int    `json:"notes"`
+	Slug  string `json:"slug"`
 }
 
 func (g *gameUsecase) SavedGameHandle(game *entity.Game) (string, error) {
@@ -65,16 +65,16 @@ func (g *gameUsecase) FindAllGameRepository() (interface{}, error) {
 		return nil, err
 	}
 
-	var res [] GameViewModel
+	var res []GameViewModel
 
-	for _,val := range result {
+	for _, val := range result {
 		game := GameViewModel{
-			Uid:val.Uid.Hex(),     
-			Name:val.Name,
-			Image:val.Image,
-			Logo:val.Logo,
-			Notes:val.Notes,
-			Slug:val.Slug,
+			Uid:   val.Uid.Hex(),
+			Name:  val.Name,
+			Image: val.Image,
+			Logo:  val.Logo,
+			Notes: val.Notes,
+			Slug:  val.Slug,
 		}
 
 		res = append(res, game)
@@ -89,7 +89,7 @@ func (g *gameUsecase) FindOneGameByUidHandler(uid string) (entity.Game, error) {
 	if err != nil {
 		return entity.Game{}, err
 	}
-	
+
 	game, err := g.gameRepository.FindOneGameByuidRepository(objectId)
 
 	if err != nil {
@@ -109,11 +109,11 @@ func (g *gameUsecase) FindOneGameBySlugHandler(slug string) (entity.Game, error)
 	return game, nil
 }
 
-func (g *gameUsecase) HandleFileGame(files string,typeFile string) (string,error) {
+func (g *gameUsecase) HandleFileGame(files string, typeFile string) (string, error) {
 	err := godotenv.Load()
-	
+
 	if err != nil {
-		return "",err
+		return "", err
 	}
 
 	upl := &external.FileUpload{}
@@ -123,20 +123,38 @@ func (g *gameUsecase) HandleFileGame(files string,typeFile string) (string,error
 	if !upl.DirectoryExists() {
 		err := upl.CreateDirectory()
 		if err != nil {
-			return "",err
+			return "", err
 		}
 	}
-	
-	upl.Filename = (uuid.NewV4()).String()+"."+typeFile
+
+	upl.Filename = (uuid.NewV4()).String() + "." + typeFile
 	upl.Data = files
-	
+
 	upl.ApiKey = os.Getenv("BB_IMAGE_KEY")
-	url,err := upl.SenderFile()
+	url, err := upl.SenderFile()
 
 	if err != nil {
-		return "",err
+		return "", err
 	}
 
-	return url,nil
+	return url, nil
 }
 
+func (g *gameUsecase) FindGameTwitchHandler(nameGame string) (GameViewModel, error) {
+	game, err := g.gameRepository.FindGameTwitchRepository(nameGame)
+
+	if err != nil {
+		return GameViewModel{}, err
+	}
+
+	gameView := GameViewModel{
+		Uid:   game.Uid.Hex(),
+		Name:  game.Name,
+		Image: "",
+		Logo:  game.BoxArtUrl,
+		Notes: 0,
+		Slug:  game.Id,
+	}
+
+	return gameView, nil
+}

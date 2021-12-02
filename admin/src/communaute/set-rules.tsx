@@ -12,7 +12,7 @@ import Nav from "../header/nav"
 import {CREATE_PUBLICATION} from "../gql/cmty/mutation"
 import {Twitch_GAMES} from "../gql/cmty/query"
 import {SigingAdminTwitch,getStreamByGame} from "./communaute"
-import {getAccessToken} from "../common/utils"
+import {getAccessToken,GetCookie} from "../common/utils"
 
 
 type VideoClipStreams = {
@@ -87,12 +87,12 @@ const SetRules: React.FC = function() {
 	}
 
 	useEffect(() => {
-		const strg = localStorage.getItem("access_token_twitch")
+		const strg = GetCookie()
 		if(strg) {
 			setTwitchToken({
-				type:JSON.parse(strg).type,
-				access_token:JSON.parse(strg).access_token,
-				refresh_token:JSON.parse(strg).refresh_token
+				type:strg.type,
+				access_token:strg.access_token,
+				refresh_token:strg.refresh_token
 			})
 		}
 	},[])
@@ -250,7 +250,11 @@ const SetRules: React.FC = function() {
 					(<div className="content-wrapper ctn-middle">
 						<div className="center middle">
 							<p>Connnectez-vous sur Twitch</p>
-							<p onClick={SigingAdminTwitch}><i style={{"fontSize":"41px","textAlign":"center","cursor":"pointer"}} className="platform"><FontAwesomeIcon icon={faTwitch}/></i></p>
+							<p onClick={SigingAdminTwitch}>
+								<i style={{"fontSize":"41px","textAlign":"center","cursor":"pointer"}} className="platform">
+									<FontAwesomeIcon icon={faTwitch}/>
+								</i>
+							</p>
 						</div>
 					</div>)
 				}

@@ -39,3 +39,16 @@ export const GET_ALL_CMTY = gql`
             }
 	}
 }`
+
+export const GET_ALL_STREAMING = gql`
+	query FindAllStreaming($gameName:String,$refreshToken:String,$accessToken:String) {
+		FindAllStreaming(gameName:$gameName,refreshToken:$refreshToken,accessToken:$accessToken){
+			id
+			userName
+			thumbnailUrl
+			title
+			viewerCount
+			StartedAt
+			gameName
+	}
+}`

@@ -89,16 +89,15 @@ const Router = function() {
 			<ProtectedRoute path="/contact" exact component={Contact} />
 			<ProtectedRoute path="/profil" exact component={Profil} />
 			<ProtectedRoute path="/setting" exact component={Parametre} />
-			<ProtectedRoute path="/update-password" exact component={UpdatePassword} />
 			<ProtectedRoute path="/jackpot" exact component={Jackpot} />
 			<ProtectedRoute path="/mygames" exact component={Mygames} />
-			<ProtectedRoute path="/update-password" exact component={UpdatePassword} />
 			<ProtectedRoute path="/tournois" exact component={PageTournois} />
 			<ProtectedRoute path="/wager" exact component={WagerPage} />
 			<ProtectedRoute path="/stat" exact component={Stat} />
 			<ProtectedRoute path="/confirmed-join/tournament" exact component={ConfirmPart} />
 			<ProtectedRoute path="/payement/tournament" exact component={ContentPaiement} />
 			<ProtectedRoute path="/add/game/favorit" exact component={GameList} />
+			<Route path="/update-password" exact component={UpdatePassword} />
 			<Route path="/game" exact component={Game} />
 			<Route path="/login" exact component={Login} />
 			<Route path="/register" exact component={Register} />
