@@ -22,6 +22,7 @@ import Fortnite from "../../assets/image/profil/fortnite.png"
 import TchatIcon from "../../assets/image/picto/tchat-icon.png"
 import {NameRoutes} from "../commons/route-list"
 import {GameType} from "../models/game"
+import LiveTwitch from "./live-twitch"
 
 
 type Stremings = {
@@ -126,23 +127,23 @@ const Communaute: React.FC = function() {
 								  		<input type="text" placeholder="search" />
 								  	</div>
 							  	</div>
-						  	{cmty.map(function(e:Stremings,index:number){
-								return(
-									<span key={index} style={{cursor:"pointer"}}>
-										<div className="stream-container">
-											<div className="streaming">
-											<img src={e.thumbnailUrl} style={{"width":"100%"}} alt={e.gameName} />
+								{cmty.map(function(e:Stremings,index:number){
+									return(
+										<span key={index} style={{cursor:"pointer"}}>
+											<div className="stream-container">
+												<div className="streaming">
+												<img src={e.thumbnailUrl} style={{"width":"100%"}} alt={e.gameName} />
+												</div>
+												<div className="stream-info">
+													<p className="streamer">{e.title}</p>
+													<p className="streamer">{e.userName}</p>
+													<p className="streamgame">{e.gameName}</p>
+													<p className="view">{e.viewerCount}<i><i><FontAwesomeIcon icon={faEye} size="xs"/></i></i></p>
+												</div>
 											</div>
-											<div className="stream-info">
-												<p className="streamer">{e.title}</p>
-												<p className="streamer">{e.userName}</p>
-												<p className="streamgame">{e.gameName}</p>
-												<p className="view">{e.viewerCount}<i><i><FontAwesomeIcon icon={faEye} size="xs"/></i></i></p>
-											</div>
-										</div>
-									</span>
-								)
-							})}
+										</span>
+									)
+								})}
 		  				</div>
 	  				</div>
 	  				<div className="center-block">
@@ -152,7 +153,8 @@ const Communaute: React.FC = function() {
 								type="Oval"
 								color="#dd0000"
 							/>
-						</div>
+							</div>
+							<LiveTwitch />
 	  				</div>
 	  				<Friend />
 	  			</div>

@@ -287,20 +287,20 @@ const Header: React.FC = function() {
 					<div className="gametag">
 						<div className="itemsTag">
 							<div className="bg-gametag">
-								<p>
+								<p style={{"cursor":"pointer"}} onClick={() => history.push(NameRoutes.profil)}>
 									<img src={userConnectedRedux.user && userConnectedRedux.user.avatar ? userConnectedRedux.user.avatar : avatar} className="avatar" alt=""/>
 								</p>
 								<p className="user">{userConnectedRedux.user.username}</p>
 								<p className="user-setting">
 									<><img src={WhiteJoystick} className="itemTag joystick" alt="" width="18" height="14" /></>
 									<><img src={userConnectedRedux.user.language && userConnectedRedux.user.language === "fr" ? fr : gb} className="itemTag" alt="" width="15" height="14"/></>
-								<i className="itemTag drop" onClick={onShow}><FontAwesomeIcon icon={faBars} /></i>
+									<i className="itemTag drop" onClick={onShow}><FontAwesomeIcon icon={faBars} /></i>
 								</p>
 							</div>
 						</div>
 						<div className={!showList ? "dropdown" :"dropdown show"}>
 							<ul>
-								<li><Link to="/profil">Profil</Link></li>
+								<li><Link to={NameRoutes.profil}>Profil</Link></li>
 								<li className="mobile-menu">
 									<ul>
 										<li><Link to={NameRoutes.tournament}>Tournois</Link></li>
@@ -310,7 +310,7 @@ const Header: React.FC = function() {
 									</ul>
 								</li>
 								<li className="border">
-									<Link to="/jackpot">Cagnote (0 GC)</Link>
+									<Link to={NameRoutes.jackpot}>Cagnote (0 GC)</Link>
 								</li>
 								<li className="border"><Link to={NameRoutes.account}>Compte</Link></li>
 								{userConnectedRedux.user && userConnectedRedux.user.roles && userConnectedRedux.user.roles.includes("role_admin") ? <li>

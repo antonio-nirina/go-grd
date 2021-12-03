@@ -28,6 +28,7 @@ export const NameRoutes = {
 	game:"/game",
 	contact:"/contact",
 	profil:"/profil",
-	assistance:"/assistance"
+	assistance:"/assistance",
+	jackpot:"/jackpot"
 
 }
