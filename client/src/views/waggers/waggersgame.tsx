@@ -1,19 +1,37 @@
-import React from "react"
-import { Link } from "react-router-dom"
+import React,{useState,useEffect} from "react"
+import { Link,useLocation } from "react-router-dom"
+import {useQuery} from "@apollo/client"
 import Header from "../header/header"
 import Footer from "../footer/footer"
 
 import { faUsers } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-//import {Translation} from "../../lang/translation"
-//import {RootState} from "../../reducer"
+import {GET_ALL_WAGER_GAME} from "../../gql/wagger/query"
+import {Wagger} from "../models/wagger"
+import {LIMIT,PAGE_NUMBER} from "../commons/constante"
 import "../waggers/waggers.css"
 import "../../assets/css/style.css"
 import "../annexe/tournois.css"
 
 
-const WaggersGame = function(props:any) {
-	const params:string|null = (new URLSearchParams(props.location.search)).get("game")
+const WaggersGame = function() {
+	const params = useLocation<any>()
+	const [waggers,setWaggers] = useState<Wagger[]>([])
+	const {loading,error,data} 	= useQuery(GET_ALL_WAGER_GAME, {
+		variables: {
+			slugGame:params.search.split("?")[0],
+			limit:LIMIT,
+			pageNumber:PAGE_NUMBER
+		},
+	})
+
+	useEffect(() => {
+		if(!loading && !error && data) {
+			setWaggers(data.FindTournamentByGame)
+		}
+
+	},[loading,error,data])
+	// const params:string|null = (new URLSearchParams(props.location.search)).get("game")
 
   return(
   	<div className="container">
@@ -22,7 +40,7 @@ const WaggersGame = function(props:any) {
 			<div className="marg">
 				<div className="part test">
 					<div className="undertitle">
-						<h2>Waggers - {params?.replace("_"," ")}</h2>
+						<h2>Waggers - {params.search?.replace("_"," ")}</h2>
 						<p>Retrouve les derniers défis proposés par la communauté</p>
 					</div>
 					<div className="waggers-list">
@@ -94,7 +112,7 @@ const WaggersGame = function(props:any) {
 					</div>
 				</div>
 			</div>
- 		</div>		
+ 		</div>
 		<Footer/>
   	</div>
   )

@@ -1,9 +1,9 @@
 package handler
 
 import (
+	"github.com/thoussei/antonio/api/common"
 	"github.com/thoussei/antonio/api/league/entity"
 	"github.com/thoussei/antonio/api/league/repository"
-	tournament "github.com/thoussei/antonio/api/tournament/handler"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
@@ -59,8 +59,8 @@ func (l *leagueUsecase) FindLeagueHandler(idQuery string) (LeagueViewModel, erro
 		Price:result.Price,     			
 		DeadlineDate:result.DeadlineDate,    	
 		PriceParticipate:result.PriceParticipate,  
-		Game:tournament.GameViewModel{result.Game.Uid.Hex(),result.Game.Name,result.Game.Image,result.Game.Logo,result.Game.Slug},				
-		Plateform:tournament.PlateformViewModel{result.Plateform.Uid.Hex(),result.Plateform.Name,result.Plateform.Description},
+		Game:common.GameViewModel{result.Game.Uid.Hex(),result.Game.Name,result.Game.Image,result.Game.Logo,result.Game.Slug},				
+		Plateform:common.PlateformViewModel{result.Plateform.Uid.Hex(),result.Plateform.Name,result.Plateform.Description},
 		Rules:result.Rules,
 		IsPublic:result.IsPublic,
 		IsTeam:result.IsTeam,
@@ -114,8 +114,8 @@ func (l *leagueUsecase) FindAllLeagueHandler(pageNumber int64, limit int64) ([]L
 			Price:val.Price,     			
 			DeadlineDate:val.DeadlineDate,    	
 			PriceParticipate:val.PriceParticipate,  
-			Game:tournament.GameViewModel{val.Game.Uid.Hex(),val.Game.Name,val.Game.Image,val.Game.Logo,val.Game.Slug},				
-			Plateform:tournament.PlateformViewModel{val.Plateform.Uid.Hex(),val.Plateform.Name,val.Plateform.Description},
+			Game:common.GameViewModel{val.Game.Uid.Hex(),val.Game.Name,val.Game.Image,val.Game.Logo,val.Game.Slug},				
+			Plateform:common.PlateformViewModel{val.Plateform.Uid.Hex(),val.Plateform.Name,val.Plateform.Description},
 			Rules:val.Rules, 
 			IsPublic:val.IsPublic,
 			Organizer:val.Organizer,
@@ -149,8 +149,8 @@ func (l *leagueUsecase) FindLeagueGameHandler(pageNumber int64,limit int64,game 
 			Price:val.Price,     			
 			DeadlineDate:val.DeadlineDate,    	
 			PriceParticipate:val.PriceParticipate,  
-			Game:tournament.GameViewModel{val.Game.Uid.Hex(),val.Game.Name,val.Game.Image,val.Game.Logo,val.Game.Slug},				
-			Plateform:tournament.PlateformViewModel{val.Plateform.Uid.Hex(),val.Plateform.Name,val.Plateform.Description},
+			Game:common.GameViewModel{val.Game.Uid.Hex(),val.Game.Name,val.Game.Image,val.Game.Logo,val.Game.Slug},				
+			Plateform:common.PlateformViewModel{val.Plateform.Uid.Hex(),val.Plateform.Name,val.Plateform.Description},
 			Rules:val.Rules,
 			Organizer:val.Organizer,
 			IsPublic:val.IsPublic,  			

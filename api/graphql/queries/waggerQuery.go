@@ -34,3 +34,24 @@ func FindAllWagger() *graphql.Field {
 		Resolve:     waggerResolver.FindAllWaggerResolver,
 	}
 }
+
+func FindWaggerByGame() *graphql.Field {
+	return &graphql.Field{
+		Type:        graphql.NewList(types.WaggerSchemaType),
+		Description: "Get all wagger by game",
+		Args: graphql.FieldConfigArgument{
+			"slugGame": &graphql.ArgumentConfig{
+				Type: graphql.String,
+			},
+			"limit": &graphql.ArgumentConfig{
+				Type: graphql.Int,
+			},
+			"pageNumber": &graphql.ArgumentConfig{
+				Type: graphql.Int,
+			},
+		},
+
+		Resolve: waggerResolver.FindWaggerGameResolver,
+	}
+
+}

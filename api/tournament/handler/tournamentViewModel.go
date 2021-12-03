@@ -1,5 +1,9 @@
 package handler
 
+import (
+	"github.com/thoussei/antonio/api/common"
+)
+
 type tournamentViewModel struct {
 	Uid               string               `json:"uid"`
 	Title             string               `json:"title"`
@@ -11,8 +15,8 @@ type tournamentViewModel struct {
 	Price             []string              `json:"price"`
 	DeadlineDate      string               `json:"deadlineDate"`
 	PriceParticipate  string               `json:"priceParticipate"`
-	Game              GameViewModel        `json:"game"`
-	Plateform         []PlateformViewModel `json:"plateform"`
+	Game              common.GameViewModel        `json:"game"`
+	Plateform         []common.PlateformViewModel `json:"plateform"`
 	Info              string               `json:"info"`
 	Rules             string               `json:"rules"`
 	IsPublic          bool                 `json:"isPublic"`
@@ -29,20 +33,6 @@ type tournamentViewModel struct {
 	GameWay          string             `json:"gameWay"`
 }
 
-type GameViewModel struct {
-	Uid   string `json:"uid"`
-	Name  string `json:"name"`
-	Image string `json:"image"`
-	Logo  string `json:"logo"`
-	Slug  string `json:"slug"`
-}
-
-type PlateformViewModel struct {
-	Uid         string `json:"uid"`
-	Name        string `json:"name"`
-	Description string `json:"description"`
-}
-
 type TournamentViewModel struct {
 	Uid               string               `json:"uid"`
 	Title             string               `json:"title"`
@@ -53,8 +43,8 @@ type TournamentViewModel struct {
 	Price             []string              `json:"price"`
 	DeadlineDate      string               `json:"deadlineDate"`
 	PriceParticipate  string               `json:"priceParticipate"`
-	Game              GameViewModel        `json:"game"`
-	Plateform         []PlateformViewModel `json:"plateform"`
+	Game              common.GameViewModel        `json:"game"`
+	Plateform         []common.PlateformViewModel `json:"plateform"`
 	Rules             string               `json:"rules"`
 	IsPublic          bool                 `json:"isPublic"`
 	Format            string               `json:"format"`

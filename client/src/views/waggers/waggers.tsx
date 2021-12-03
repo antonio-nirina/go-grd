@@ -190,13 +190,17 @@ const Waggers: React.FC = function() {
 					<div className="bg-game">
 					<div className="firstblock w100">
 						<div className="logo-game">
-						    <Link to={`/waggers-game?game=${APEX_LEGENDE.replace(" ","_")}`}><img src={apexlegends} alt="Apex Legends" /></Link>
+						    <Link to={`/waggers-game?game=${APEX_LEGENDE.replace(" ","_")}`}>
+								<img src={apexlegends} alt="Apex Legends" />
+							</Link>
 						</div>
 						<div className="logo-game">
-						    <Link to={`/waggers-game?game=${FORTNITE.replace(" ","_")}`} ><img src={fortnite} alt="Fortnite" /></Link>
+						    <Link to={`/waggers-game?game=${FORTNITE.replace(" ","_")}`} ><img src={fortnite} alt="Fortnite" />
+							</Link>
 						</div>
 						<div className="logo-game">
-						    <Link to={`/waggers-game?game=${RNB.replace(" ","_")}`} ><img src={rainboxsix} alt="RainbowSIx Siege" /></Link>
+						    <Link to={`/waggers-game?game=${RNB.replace(" ","_")}`} ><img src={rainboxsix} alt="RainbowSIx Siege" />
+							</Link>
 						</div>
 						<div className="logo-game">
 						    <Link to={`/waggers-game?game=${RL.replace(" ","_")}`} ><img src={rocketleague} alt="Rocket League" /></Link>

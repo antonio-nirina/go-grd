@@ -27,6 +27,7 @@ type RepositoryWagger interface {
 	FindAllWaggerRepo(pageNumber int64, limit int64) ([]entity.Wagger, error)
 	CountWaggerRepository() (int, error)
 	UpdatedWagger(wagger *entity.Wagger) (interface{}, error)
+	FindWaggerGameRepo(pageNumber int64, limit int64, game primitive.ObjectID) ([]entity.Wagger, error)
 }
 
 func (c *DriverRepository) SavedWaggerRepo(wagger *entity.Wagger) (interface{}, error) {
@@ -137,4 +138,28 @@ func (c *DriverRepository) UpdatedWagger(wagger *entity.Wagger) (interface{}, er
 	}
 
 	return updateResult.ModifiedCount, nil
+}
+
+func (c *DriverRepository) FindWaggerGameRepo(pageNumber int64, limit int64, game primitive.ObjectID) ([]entity.Wagger, error) {
+	var collection = c.client.Database("grd_database").Collection("wagger")
+	var results []entity.Wagger
+	cur, err := collection.Find(context.TODO(), bson.D{{"game.uid", game}}, options.Find().SetLimit(limit).SetSkip(pageNumber).SetSort(bson.M{"_id": -1}))
+
+	if err != nil {
+		return results, err
+	}
+
+	for cur.Next(context.TODO()) {
+		var elem entity.Wagger
+		err := cur.Decode(&elem)
+		if err != nil {
+			external.Logger(fmt.Sprintf("%v", err))
+		}
+
+		results = append(results, elem)
+	}
+
+	cur.Close(context.TODO())
+
+	return results, nil
 }

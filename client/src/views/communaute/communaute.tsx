@@ -154,7 +154,6 @@ const Communaute: React.FC = function() {
 							/>
 						</div>
 	  				</div>
-
 	  				<Friend />
 	  			</div>
 	  			<div className="icon-msg" onClick={onShowClose}>

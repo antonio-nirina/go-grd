@@ -66,3 +66,35 @@ export const GET_ONE_WAGGER = gql`
 			}
 	}
 }`
+
+export const GET_ALL_WAGER_GAME = gql`
+	query FindWaggerByGame($limit: Int!,$pageNumber:Int!) {
+		FindWaggerByGame(limit: $limit,pageNumber:$pageNumber){
+			uid
+			date,
+			title,
+			description,
+			price,
+			deadlineDate,
+			gameWay,
+			priceParticipate,
+			format
+			statut
+			participant
+			isPublic
+			records
+			rules
+			game{
+				uid
+				name
+				image
+				logo
+				slug
+			}
+			plateform{
+				uid
+				description
+				name
+			}
+	}
+}`
