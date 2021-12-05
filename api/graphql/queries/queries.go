@@ -171,5 +171,6 @@ func GetRootFields() graphql.Fields {
 		"FindAllRate":               FindAllRate(),
 		"FindRateByUser":            FindRateByUser(),
 		"FindGameTwicth":            FindGameTwicth(),
+		"FindWaggerByGame": 	 	 FindWaggerByGame(),
 	}
 }

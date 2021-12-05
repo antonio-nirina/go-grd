@@ -120,7 +120,7 @@ const Profile: React.FC = function() {
 				      		<div className="teamname">
 								  {teams.map(function(team:TeamModel,index:number){
 									  return (
-										<div className="bloc-team-mate">
+										<div className="bloc-team-mate" key={index}>
 											<div className="avatar-name">
 												<div>
 													<img src={team.banniere ? team.banniere : LogoTeam} alt="" className="avatar-lead"/>

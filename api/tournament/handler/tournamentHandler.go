@@ -1,6 +1,7 @@
 package handler
 
 import (
+	"github.com/thoussei/antonio/api/common"
 	"github.com/thoussei/antonio/api/tournament/entity"
 	"github.com/thoussei/antonio/api/tournament/repository"
 	"go.mongodb.org/mongo-driver/bson/primitive"
@@ -49,10 +50,10 @@ func (t *tournamentUsecase) FindTournamentHandler(idQuery string) (TournamentVie
 		return TournamentViewModel{}, err
 	}
 
-	var plateform []PlateformViewModel
+	var plateform []common.PlateformViewModel
 
 	for _, value := range result.Plateform {
-		arrayPl := PlateformViewModel{
+		arrayPl := common.PlateformViewModel{
 			value.Uid.Hex(),
 			value.Name,
 			value.Description,
@@ -71,7 +72,7 @@ func (t *tournamentUsecase) FindTournamentHandler(idQuery string) (TournamentVie
 		Price:             result.Price,
 		DeadlineDate:      result.DeadlineDate,
 		PriceParticipate:  result.PriceParticipate,
-		Game:              GameViewModel{result.Game.Uid.Hex(), result.Game.Name, result.Game.Image, result.Game.Logo, result.Game.Slug},
+		Game:              common.GameViewModel{result.Game.Uid.Hex(), result.Game.Name, result.Game.Image, result.Game.Logo, result.Game.Slug},
 		Plateform:         plateform,
 		Rules:             result.Rules,
 		IsPublic:          result.IsPublic,
@@ -103,10 +104,10 @@ func (t *tournamentUsecase) FindAllTournamentHandler(pageNumber int64, limit int
 	}
 
 	var res []tournamentViewModel
-	var plateform []PlateformViewModel
+	var plateform []common.PlateformViewModel
 	for _, val := range result {
 		for _, value := range val.Plateform {
-			arrayPl := PlateformViewModel{
+			arrayPl := common.PlateformViewModel{
 				value.Uid.Hex(),
 				value.Name,
 				value.Description,
@@ -125,7 +126,7 @@ func (t *tournamentUsecase) FindAllTournamentHandler(pageNumber int64, limit int
 			Price:             val.Price,
 			DeadlineDate:      val.DeadlineDate,
 			PriceParticipate:  val.PriceParticipate,
-			Game:              GameViewModel{val.Game.Uid.Hex(), val.Game.Name, val.Game.Image, val.Game.Logo, val.Game.Slug},
+			Game:              common.GameViewModel{val.Game.Uid.Hex(), val.Game.Name, val.Game.Image, val.Game.Logo, val.Game.Slug},
 			Plateform:         plateform,
 			Rules:             val.Rules,
 			IsPublic:          val.IsPublic,
@@ -155,11 +156,11 @@ func (t *tournamentUsecase) FindTournamentGameHandler(pageNumber int64, limit in
 	}
 
 	var res []tournamentViewModel
-	var plateforms []PlateformViewModel
+	var plateforms []common.PlateformViewModel
 
 	for _, val := range result {
 		for _, value := range val.Plateform {
-			arrayPl := PlateformViewModel{
+			arrayPl := common.PlateformViewModel{
 				value.Uid.Hex(),
 				value.Name,
 				value.Description,
@@ -178,7 +179,7 @@ func (t *tournamentUsecase) FindTournamentGameHandler(pageNumber int64, limit in
 			Price:             val.Price,
 			DeadlineDate:      val.DeadlineDate,
 			PriceParticipate:  val.PriceParticipate,
-			Game:              GameViewModel{val.Game.Uid.Hex(), val.Game.Name, val.Game.Image, val.Game.Logo, val.Game.Slug},
+			Game:              common.GameViewModel{val.Game.Uid.Hex(), val.Game.Name, val.Game.Image, val.Game.Logo, val.Game.Slug},
 			Plateform:         plateforms,
 			Rules:             val.Rules,
 			IsPublic:          val.IsPublic,
@@ -243,11 +244,11 @@ func (t *tournamentUsecase) FindTournamentCreatedHandler(pageNumber int64, limit
 	}
 
 	var res []tournamentViewModel
-	var plateforms []PlateformViewModel
+	var plateforms []common.PlateformViewModel
 
 	for _, val := range result {
 		for _, value := range val.Plateform {
-			arrayPl := PlateformViewModel{
+			arrayPl := common.PlateformViewModel{
 				value.Uid.Hex(),
 				value.Name,
 				value.Description,
@@ -266,7 +267,7 @@ func (t *tournamentUsecase) FindTournamentCreatedHandler(pageNumber int64, limit
 			Price:             val.Price,
 			DeadlineDate:      val.DeadlineDate,
 			PriceParticipate:  val.PriceParticipate,
-			Game:              GameViewModel{val.Game.Uid.Hex(), val.Game.Name, val.Game.Image, val.Game.Logo, val.Game.Slug},
+			Game:              common.GameViewModel{val.Game.Uid.Hex(), val.Game.Name, val.Game.Image, val.Game.Logo, val.Game.Slug},
 			Plateform:         plateforms,
 			Rules:             val.Rules,
 			IsPublic:          val.IsPublic,

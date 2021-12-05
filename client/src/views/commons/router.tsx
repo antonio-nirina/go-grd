@@ -54,7 +54,6 @@ import ContentPaiement from "./contentPaiement"
 import GameList from "../auth/game-list"
 // import LeagueGame from "../league/league-game"
 
-
 const Router = function() {
 	return (
 		<Switch>
@@ -83,7 +82,6 @@ const Router = function() {
 			<ProtectedRoute path="/view" exact component={View} />
 			<ProtectedRoute path="/lobby" exact component={Lobby} />
 			<ProtectedRoute path="/communaute" exact component={Communaute} />
-			<ProtectedRoute path="/stream" exact component={Stream} />
 			<ProtectedRoute path="/assistant" exact component={Assistant} />
 			<ProtectedRoute path="/assistance" exact component={Assistance} />
 			<ProtectedRoute path="/contact" exact component={Contact} />
@@ -92,11 +90,12 @@ const Router = function() {
 			<ProtectedRoute path="/jackpot" exact component={Jackpot} />
 			<ProtectedRoute path="/mygames" exact component={Mygames} />
 			<ProtectedRoute path="/tournois" exact component={PageTournois} />
-			<ProtectedRoute path="/wager" exact component={WagerPage} />
+			<ProtectedRoute path="/wagger" exact component={WagerPage} />
 			<ProtectedRoute path="/stat" exact component={Stat} />
 			<ProtectedRoute path="/confirmed-join/tournament" exact component={ConfirmPart} />
 			<ProtectedRoute path="/payement/tournament" exact component={ContentPaiement} />
 			<ProtectedRoute path="/add/game/favorit" exact component={GameList} />
+			<ProtectedRoute path="/stream/twitch/:username/:game" exact component={Stream} />
 			<Route path="/update-password" exact component={UpdatePassword} />
 			<Route path="/game" exact component={Game} />
 			<Route path="/login" exact component={Login} />

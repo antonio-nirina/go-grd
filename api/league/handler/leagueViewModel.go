@@ -1,7 +1,7 @@
 package handler
 
 import (
-	tournament "github.com/thoussei/antonio/api/tournament/handler"
+	"github.com/thoussei/antonio/api/common"
 )
 
 
@@ -16,8 +16,8 @@ type LeagueViewModel struct {
 	Price     			float64  `json:"price"`
 	DeadlineDate     	string  `json:"deadlineDate"`
 	PriceParticipate    float64  `json:"priceParticipate"`
-	Game 				tournament.GameViewModel `json:"game"`
-	Plateform  			tournament.PlateformViewModel `json:"plateform"`
+	Game 				common.GameViewModel `json:"game"`
+	Plateform  			common.PlateformViewModel `json:"plateform"`
 	Info				string            	`json:"info"`
 	Rules   			string            	`json:"rules"`
 	IsPublic 			bool `json:"isPublic"`

@@ -31,8 +31,8 @@ func (r *resolver) GetAccessTokenTwitchApi(params graphql.ResolveParams) (interf
 	if err != nil {
 		return nil, err
 	}
-	data, _ := json.Marshal(accesTokens)
-	external.SetHmsetRedis("access_token_twitch", "key", data)
+	// data, _ := json.Marshal(accesTokens)
+	// external.SetHmsetRedis("access_token_twitch", "key", data)
 	userTwitch, err := external.GetUserTwitchApi(accesTokens.AccessToken)
 	user, err := r.userHandler.FindUserByEmail(userTwitch.Email)
 
@@ -47,6 +47,8 @@ func (r *resolver) GetAccessTokenTwitchApi(params graphql.ResolveParams) (interf
 		Name:   "Twitch",
 		Profil: userTwitch.DisplayName,
 		Logo:   "",
+		AccessToken: accesTokens.AccessToken,
+		RefreshToken: accesTokens.RefreshToken,
 	}
 
 	twitchAccount = append(twitchAccount, accounts)
@@ -104,20 +106,14 @@ func (r *resolver) GetAccessTokenTwitchAdmin(params graphql.ResolveParams) (inte
 		external.Logger("Error loading .env file")
 	}
 
-	accessToken, _ := external.GetHmsetRedis("access_token_twitch", "key")
 	oauth := &external.OauthTokenTwitch{}
-
-	if len(accessToken) > 0 && accessToken[0] != nil {
-		oauth = external.HandleTokenInRedis(accessToken)
-	} else {
-		code, _ := params.Args["code"].(string)
-		redirectAdmin := os.Getenv("REDIRECT_URI_TWITCH_ADMIN")
-		newToken, _ := external.GetAccessTokenTwitch(code, redirectAdmin)
-		data, _ := json.Marshal(newToken)
-		external.SetHmsetRedis("access_token_twitch", "key", data)
-		oauth.AccessToken = newToken.AccessToken
-		oauth.RefreshToken = newToken.RefreshToken
-	}
+	code, _ := params.Args["code"].(string)
+	redirectAdmin := os.Getenv("REDIRECT_URI_TWITCH_ADMIN")
+	newToken, _ := external.GetAccessTokenTwitch(code, redirectAdmin)
+	data, _ := json.Marshal(newToken)
+	external.SetHmsetRedis("access_token_twitch", "key", data)
+	oauth.AccessToken = newToken.AccessToken
+	oauth.RefreshToken = newToken.RefreshToken
 
 	return oauth, nil
 }

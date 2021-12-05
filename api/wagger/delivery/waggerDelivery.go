@@ -18,6 +18,7 @@ type WaggerResolver interface {
 	FindWaggerResolver(params graphql.ResolveParams) (interface{}, error)
 	FindAllWaggerResolver(params graphql.ResolveParams) (interface{}, error)
 	UpdatedWaggerResolver(params graphql.ResolveParams) (interface{}, error)
+	FindWaggerGameResolver(params graphql.ResolveParams) (interface{}, error)
 }
 
 type wagger struct {
@@ -230,6 +231,26 @@ func (w *wagger) UpdatedWaggerResolver(params graphql.ResolveParams) (interface{
 	}
 
 	res, err := w.waggerHandler.UpdatedWaggerHandler(waggerToupdated)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return res, nil
+}
+
+func (w * wagger) FindWaggerGameResolver(params graphql.ResolveParams) (interface{}, error) {
+	limit, _ := params.Args["limit"].(int)
+	pageNumber, _ := params.Args["pageNumber"].(int)
+
+	gameUid, _ := params.Args["slugGame"].(string)
+	game, err := w.gameWaggerHandler.FindOneGameBySlugHandler(gameUid)
+
+	if err != nil {
+		return nil, err
+	}
+
+	res, err := w.waggerHandler.FindWaggerGameHandler(int64(pageNumber), int64(limit),game.Uid)
 
 	if err != nil {
 		return nil, err

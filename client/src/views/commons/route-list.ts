@@ -7,7 +7,7 @@ export const NameRoutes = {
 	joingame:"/joingame",
 	joinTournament:"/join-tournament",
 	waggers:"/waggers",
-	wager:"/wager",
+	wager:"/wagger",
 	result:"/result",
 	board:"/board",
 	tournamentRules:"/tournament-rules",
@@ -28,6 +28,8 @@ export const NameRoutes = {
 	game:"/game",
 	contact:"/contact",
 	profil:"/profil",
-	assistance:"/assistance"
+	assistance:"/assistance",
+	jackpot:"/jackpot",
+	liveTwitch:"/stream/twitch/"
 
 }

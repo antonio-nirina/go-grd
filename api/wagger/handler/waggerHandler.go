@@ -1,7 +1,7 @@
 package handler
 
 import (
-	tournament "github.com/thoussei/antonio/api/tournament/handler"
+	"github.com/thoussei/antonio/api/common"
 	"github.com/thoussei/antonio/api/wagger/entity"
 	"github.com/thoussei/antonio/api/wagger/repository"
 	"go.mongodb.org/mongo-driver/bson/primitive"
@@ -13,6 +13,7 @@ type UsecaseWagger interface {
 	FindAllWaggerHandler(pageNumber int64, limit int64) ([]WaggerViewModel, error)
 	UpdatedWaggerHandler(wagger *entity.Wagger) (interface{}, error)
 	FindOneWaggerHandler(idQuery string) (entity.Wagger, error)
+	FindWaggerGameHandler(pageNumber int64, limit int64,game primitive.ObjectID) ([]WaggerViewModel, error)
 }
 
 type WaggerViewModel struct {
@@ -24,8 +25,8 @@ type WaggerViewModel struct {
 	DeadlineDate     string                        `json:"deadlineDate"`
 	GameWay          string                        `json:"gameWay"`
 	PriceParticipate string                       `json:"priceParticipate"`
-	Game             tournament.GameViewModel      `json:"game"`
-	Plateform        []tournament.PlateformViewModel `json:"plateform"`
+	Game             common.GameViewModel      `json:"game"`
+	Plateform        []common.PlateformViewModel `json:"plateform"`
 	Format           string                        `json:"format"`
 	IsPublic         bool                          `json:"IsPublic"`
 	Statut           bool                          `json:"statut"`
@@ -72,10 +73,10 @@ func (w *waggerUsecase) FindWaggerHandler(idQuery string) (WaggerViewModel, erro
 		return WaggerViewModel{}, err
 	}
 
-	var plateform []tournament.PlateformViewModel
+	var plateform []common.PlateformViewModel
 
 	for _, value := range result.Plateform {
-		arrayPl := tournament.PlateformViewModel{
+		arrayPl := common.PlateformViewModel{
 			value.Uid.Hex(),
 			value.Name,
 			value.Description,
@@ -93,7 +94,7 @@ func (w *waggerUsecase) FindWaggerHandler(idQuery string) (WaggerViewModel, erro
 		DeadlineDate:     result.DeadlineDate,
 		GameWay:          result.GameWay,
 		PriceParticipate: result.PriceParticipate,
-		Game:             tournament.GameViewModel{result.Game.Uid.Hex(), result.Game.Name, result.Game.Image, result.Game.Logo, result.Game.Slug},
+		Game:             common.GameViewModel{result.Game.Uid.Hex(), result.Game.Name, result.Game.Image, result.Game.Logo, result.Game.Slug},
 		Plateform:        plateform,
 		Format:           result.Format,
 		IsPublic:         result.IsPublic,
@@ -124,14 +125,14 @@ func (w *waggerUsecase) FindAllWaggerHandler(pageNumber int64, limit int64) ([]W
 		return []WaggerViewModel{}, err
 	}
 
-	var plateform []tournament.PlateformViewModel
+	var plateform []common.PlateformViewModel
 
 	
 	var res []WaggerViewModel
 
 	for _, result := range results {
 		for _, value := range result.Plateform {
-			arrayPl := tournament.PlateformViewModel{
+			arrayPl := common.PlateformViewModel{
 				value.Uid.Hex(),
 				value.Name,
 				value.Description,
@@ -148,7 +149,7 @@ func (w *waggerUsecase) FindAllWaggerHandler(pageNumber int64, limit int64) ([]W
 			DeadlineDate:     result.DeadlineDate,
 			GameWay:          result.GameWay,
 			PriceParticipate: result.PriceParticipate,
-			Game:             tournament.GameViewModel{result.Game.Uid.Hex(), result.Game.Name, result.Game.Image, result.Game.Logo, result.Game.Slug},
+			Game:             common.GameViewModel{result.Game.Uid.Hex(), result.Game.Name, result.Game.Image, result.Game.Logo, result.Game.Slug},
 			Plateform:        plateform,
 			Format:           result.Format,
 			IsPublic:         result.IsPublic,
@@ -193,4 +194,50 @@ func (w *waggerUsecase) FindOneWaggerHandler(idQuery string) (entity.Wagger, err
 	}
 
 	return result, nil
+}
+
+func (w *waggerUsecase) FindWaggerGameHandler(pageNumber int64, limit int64,game primitive.ObjectID) ([]WaggerViewModel, error) {
+	result, err := w.waggerRepository.FindWaggerGameRepo(pageNumber, limit, game)
+
+	if err != nil {
+		return []WaggerViewModel{}, err
+	}
+
+	var res []WaggerViewModel
+	var plateforms []common.PlateformViewModel
+
+	for _, val := range result {
+		for _, value := range val.Plateform {
+			arrayPl := common.PlateformViewModel{
+				value.Uid.Hex(),
+				value.Name,
+				value.Description,
+			}
+			plateforms = append(plateforms, arrayPl)
+		}
+
+		waggerViewModel := WaggerViewModel{
+			Uid:               val.Uid.Hex(),
+			Title:             val.Title,
+			Description:       val.Description,
+			Statut:            val.Statut,
+			GameWay: 			val.GameWay,
+			Price:             val.Price,
+			DeadlineDate:      val.DeadlineDate,
+			PriceParticipate:  val.PriceParticipate,
+			Game:              common.GameViewModel{val.Game.Uid.Hex(), val.Game.Name, val.Game.Image, val.Game.Logo, val.Game.Slug},
+			Plateform:         plateforms,
+			Rules:             val.Rules,
+			IsPublic:          val.IsPublic,
+			Format:            val.Format,
+			Server:            val.Server,
+			Region:            val.Region,
+			Spectateur:        val.Spectateur,
+			Maps: 				val.Maps,
+		}
+
+		res = append(res, waggerViewModel)
+	}
+
+	return res, nil
 }

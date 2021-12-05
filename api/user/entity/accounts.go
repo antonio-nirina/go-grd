@@ -10,4 +10,6 @@ type Accounts struct {
 	Name 			string 	 `json:"name"`
 	Profil 			string 	 `json:"profil"` //display_name
 	Logo 			string    `json:"logo"`
+	AccessToken 	string     `json:"accessToken,omitempty"`
+	RefreshToken 	string     `json:"refreshToken,omitempty"`
 }

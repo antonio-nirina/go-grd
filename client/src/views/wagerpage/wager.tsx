@@ -1,6 +1,7 @@
 import React,{useState,useEffect} from "react"
 import { Link } from 'react-router-dom'
 import {useQuery} from "@apollo/client"
+
 import Header from "../header/header"
 import Footer from "../footer/footer"
 import { GET_ALL_GAMES } from "../../gql/games/query"
@@ -16,9 +17,11 @@ import {dateStringToDHStringEN} from "../tools/dateConvert"
 import {GET_PART_ALL_USER_WAGGER} from "../../gql/participate/query"
 
 
-const WagerPage: React.FC = function() {	
+
+const WagerPage: React.FC = function() {
 	const [waggers, setWaggers] = useState<Wagger[]>([])
 	const [games,setGames] = useState<GameType[]>([])
+
 	const {loading:ldPart,error:errPart,data:dataPart} 	= useQuery(GET_PART_ALL_USER_WAGGER, {
 		variables: {
 			limit:LIMIT,
@@ -32,7 +35,7 @@ const WagerPage: React.FC = function() {
 		if(!loading && !error && data) {
 			setGames(data.FindAllGame)
 		}
-		console.log("dataPart", dataPart)
+
 		if(!ldPart && !errPart && dataPart) {
 			if(dataPart && dataPart.FindAllPart > 0) {
 				setWaggers(dataPart.FindAllPart)
@@ -56,7 +59,7 @@ const WagerPage: React.FC = function() {
 						<div className="favorite-game" >
 								{games.map(function(e:GameType,index:number){
 									return(
-										<Link to ={`/tournament-game?game=${e.name.replace(" ","_")}&slug=${e.slug}`} key={index}><img src={e.image} alt={e.slug} width="200"/></Link>
+										<Link to ={`/waggers-game?game=${e.name}&slug=${e.slug}`} key={index}><img src={e.image} alt={e.slug} width="200"/></Link>
 									)
 								})}
 						</div>
@@ -71,7 +74,7 @@ const WagerPage: React.FC = function() {
 								<div className="top-icon"><p className="legend">{el.title}</p><i className="iconGame">
 									<img src={Joystick} alt="" width="15"/></i></div>
 								<div className="info">
-									<p className="price inblock"><i><FontAwesomeIcon icon={faUser}/></i><span>JP_FUT12 & Kek37000</span></p>
+									<p className="price inblock"><i><FontAwesomeIcon icon={faUser}/></i><span></span></p>
 									<p className="price inblock"><i className="sprite cup"></i><span>{el.price} Cash Prize</span></p>
 									<p className="date inblock"><i className="sprite ticket"></i><span>{dateStringToDHStringEN(el.date)}</span></p>
 								</div>

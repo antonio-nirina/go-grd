@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from "react"
-import { Link } from "react-router-dom"
+import { Link,useHistory } from "react-router-dom"
 import { useSelector } from "react-redux"
 import {useQuery} from "@apollo/client"
 import { faEye } from "@fortawesome/free-solid-svg-icons"
@@ -23,7 +23,6 @@ import TchatIcon from "../../assets/image/picto/tchat-icon.png"
 import {NameRoutes} from "../commons/route-list"
 import {GameType} from "../models/game"
 
-
 type Stremings = {
     id:string
 	userName:string
@@ -35,6 +34,7 @@ type Stremings = {
 }
 
 const Communaute: React.FC = function() {
+	const history 						= useHistory()
 	const userConnectedRedux 			= useSelector((state:RootState) => state.userConnected)
 	const [cmty, setCmty] 				= useState<Stremings[]>([])
 	const [isLoader, setIsLoader] 		= useState<boolean>(true)
@@ -68,7 +68,6 @@ const Communaute: React.FC = function() {
 					viewerCount:element.viewerCount,
 					StartedAt:element.StartedAt,
 					gameName:element.gameName
-
 				})
 			})
 			setCmty(newData)
@@ -126,23 +125,23 @@ const Communaute: React.FC = function() {
 								  		<input type="text" placeholder="search" />
 								  	</div>
 							  	</div>
-						  	{cmty.map(function(e:Stremings,index:number){
-								return(
-									<span key={index} style={{cursor:"pointer"}}>
-										<div className="stream-container">
-											<div className="streaming">
-											<img src={e.thumbnailUrl} style={{"width":"100%"}} alt={e.gameName} />
+								{cmty.map(function(e:Stremings,index:number){
+									return(
+										<span key={index} style={{cursor:"pointer"}}>
+											<div className="stream-container" onClick={()=>{history.push(`${NameRoutes.liveTwitch}${e.userName}/${e.gameName}`, '_blank')} }>
+												<div className="streaming">
+												<img src={e.thumbnailUrl} style={{"width":"100%"}} alt={e.gameName} />
+												</div>
+												<div className="stream-info">
+													<p className="streamer">{e.title}</p>
+													<p className="streamer">{e.userName}</p>
+													<p className="streamgame">{e.gameName}</p>
+													<p className="view">{e.viewerCount}<i><i><FontAwesomeIcon icon={faEye} size="xs"/></i></i></p>
+												</div>
 											</div>
-											<div className="stream-info">
-												<p className="streamer">{e.title}</p>
-												<p className="streamer">{e.userName}</p>
-												<p className="streamgame">{e.gameName}</p>
-												<p className="view">{e.viewerCount}<i><i><FontAwesomeIcon icon={faEye} size="xs"/></i></i></p>
-											</div>
-										</div>
-									</span>
-								)
-							})}
+										</span>
+									)
+								})}
 		  				</div>
 	  				</div>
 	  				<div className="center-block">
@@ -152,9 +151,8 @@ const Communaute: React.FC = function() {
 								type="Oval"
 								color="#dd0000"
 							/>
-						</div>
+							</div>
 	  				</div>
-
 	  				<Friend />
 	  			</div>
 	  			<div className="icon-msg" onClick={onShowClose}>

@@ -3,6 +3,7 @@ package handler
 import (
 	"fmt"
 
+	"github.com/thoussei/antonio/api/common"
 	"github.com/thoussei/antonio/api/external"
 	"github.com/thoussei/antonio/api/participate/entity"
 	"github.com/thoussei/antonio/api/participate/repository"
@@ -127,9 +128,9 @@ func (p *partUsecase) FindPartHandler(idQuery string) (partViewModel, error) {
 		teamView = append(teamView, resTeam)
 	}
 
-	var plateform []tHandler.PlateformViewModel
+	var plateform []common.PlateformViewModel
 	for _, value := range result.Tournament.Plateform {
-		arrayPl := tHandler.PlateformViewModel{
+		arrayPl := common.PlateformViewModel{
 			value.Uid.Hex(),
 			value.Name,
 			value.Description,
@@ -166,7 +167,7 @@ func (p *partUsecase) FindPartHandler(idQuery string) (partViewModel, error) {
 			result.Tournament.Price,
 			result.Tournament.DeadlineDate,
 			result.Tournament.PriceParticipate,
-			tHandler.GameViewModel{
+			common.GameViewModel{
 				result.Tournament.Game.Uid.Hex(),
 				result.Tournament.Game.Name,
 				result.Tournament.Game.Image,
@@ -241,9 +242,9 @@ func (p *partUsecase) FindAllPartHandler(pageNumber int64, limit int64) ([]partV
 		}
 		
 
-		var plateform []tHandler.PlateformViewModel
+		var plateform []common.PlateformViewModel
 		for _, value := range result.Tournament.Plateform {
-			arrayPl := tHandler.PlateformViewModel{
+			arrayPl := common.PlateformViewModel{
 				value.Uid.Hex(),
 				value.Name,
 				value.Description,
@@ -282,7 +283,7 @@ func (p *partUsecase) FindAllPartHandler(pageNumber int64, limit int64) ([]partV
 				result.Tournament.Price,
 				result.Tournament.DeadlineDate,
 				result.Tournament.PriceParticipate,
-				tHandler.GameViewModel{
+				common.GameViewModel{
 					result.Tournament.Game.Uid.Hex(),
 					result.Tournament.Game.Name,
 					result.Tournament.Game.Image,
@@ -359,9 +360,9 @@ func (p *partUsecase) FindPartUserHandler(pageNumber int64, limit int64, userUid
 			}
 		}
 		
-		var plateform []tHandler.PlateformViewModel
+		var plateform []common.PlateformViewModel
 		for _, value := range result.Tournament.Plateform {
-			arrayPl := tHandler.PlateformViewModel{
+			arrayPl := common.PlateformViewModel{
 				value.Uid.Hex(),
 				value.Name,
 				value.Description,
@@ -400,7 +401,7 @@ func (p *partUsecase) FindPartUserHandler(pageNumber int64, limit int64, userUid
 				result.Tournament.Price,
 				result.Tournament.DeadlineDate,
 				result.Tournament.PriceParticipate,
-				tHandler.GameViewModel{
+				common.GameViewModel{
 					result.Tournament.Game.Uid.Hex(),
 					result.Tournament.Game.Name,
 					result.Tournament.Game.Image,
@@ -497,9 +498,9 @@ func (p *partUsecase) FindPartUserLeagueHandler(userUid primitive.ObjectID, leag
 
 		teamView = append(teamView, resTeam)
 	}
-	var plateform []tHandler.PlateformViewModel
+	var plateform []common.PlateformViewModel
 	for _, value := range result.Tournament.Plateform {
-		arrayPl := tHandler.PlateformViewModel{
+		arrayPl := common.PlateformViewModel{
 			value.Uid.Hex(),
 			value.Name,
 			value.Description,
@@ -536,7 +537,7 @@ func (p *partUsecase) FindPartUserLeagueHandler(userUid primitive.ObjectID, leag
 			result.Tournament.Price,
 			result.Tournament.DeadlineDate,
 			result.Tournament.PriceParticipate,
-			tHandler.GameViewModel{
+			common.GameViewModel{
 				result.Tournament.Game.Uid.Hex(),
 				result.Tournament.Game.Name,
 				result.Tournament.Game.Image,
@@ -616,9 +617,9 @@ func (p *partUsecase) FindPartUserTournamentHandler(uidUser primitive.ObjectID, 
 		}
 	}
 
-	var plateform []tHandler.PlateformViewModel
+	var plateform []common.PlateformViewModel
 	for _, value := range result.Tournament.Plateform {
-		arrayPl := tHandler.PlateformViewModel{
+		arrayPl := common.PlateformViewModel{
 			value.Uid.Hex(),
 			value.Name,
 			value.Description,
@@ -656,7 +657,7 @@ func (p *partUsecase) FindPartUserTournamentHandler(uidUser primitive.ObjectID, 
 			result.Tournament.Price,
 			result.Tournament.DeadlineDate,
 			result.Tournament.PriceParticipate,
-			tHandler.GameViewModel{
+			common.GameViewModel{
 				result.Tournament.Game.Uid.Hex(),
 				result.Tournament.Game.Name,
 				result.Tournament.Game.Image,
@@ -822,8 +823,8 @@ func (p *partUsecase) FindAllPartUserWaggerHandler(userUid primitive.ObjectID, p
 				DeadlineDate:     result.Wagger.DeadlineDate,
 				GameWay:          result.Wagger.GameWay,
 				PriceParticipate: result.Wagger.PriceParticipate,
-				Game:             tHandler.GameViewModel{},
-				Plateform:        []tHandler.PlateformViewModel{},
+				Game:             common.GameViewModel{},
+				Plateform:        []common.PlateformViewModel{},
 				Format:           result.Wagger.Format,
 				IsPublic:         result.Wagger.IsPublic,
 				Statut:           result.Wagger.Statut,
@@ -856,11 +857,11 @@ func (p *partUsecase) FindPartTournamentHandler(tournament tHandler.TournamentVi
 	var viewPart partViewModelTournament
 	
 	if len(results) > 0 {
-		var plateform []tHandler.PlateformViewModel
+		var plateform []common.PlateformViewModel
 	
 		for _, result := range results {
 			for _, value := range result.Tournament.Plateform {
-				arrayPl := tHandler.PlateformViewModel{
+				arrayPl := common.PlateformViewModel{
 					value.Uid.Hex(),
 					value.Name,
 					value.Description,

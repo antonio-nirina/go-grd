@@ -237,8 +237,9 @@
     width: 100%;
 }
 .stream-info p{
-	font-size: 10px;
+	font-size: 13px;
     padding: 0px 0px;
+	font-weight: bold;
 
 }
 .streamgame{
@@ -526,4 +527,5 @@
 	border-radius: 5px;
 	border-radius: 5px;
 	margin-left: 4px;
+	border: none;
 }
