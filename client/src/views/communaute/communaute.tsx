@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from "react"
-import { Link } from "react-router-dom"
+import { Link,useHistory } from "react-router-dom"
 import { useSelector } from "react-redux"
 import {useQuery} from "@apollo/client"
 import { faEye } from "@fortawesome/free-solid-svg-icons"
@@ -22,8 +22,6 @@ import Fortnite from "../../assets/image/profil/fortnite.png"
 import TchatIcon from "../../assets/image/picto/tchat-icon.png"
 import {NameRoutes} from "../commons/route-list"
 import {GameType} from "../models/game"
-import LiveTwitch from "./live-twitch"
-
 
 type Stremings = {
     id:string
@@ -36,6 +34,7 @@ type Stremings = {
 }
 
 const Communaute: React.FC = function() {
+	const history 						= useHistory()
 	const userConnectedRedux 			= useSelector((state:RootState) => state.userConnected)
 	const [cmty, setCmty] 				= useState<Stremings[]>([])
 	const [isLoader, setIsLoader] 		= useState<boolean>(true)
@@ -69,7 +68,6 @@ const Communaute: React.FC = function() {
 					viewerCount:element.viewerCount,
 					StartedAt:element.StartedAt,
 					gameName:element.gameName
-
 				})
 			})
 			setCmty(newData)
@@ -130,7 +128,7 @@ const Communaute: React.FC = function() {
 								{cmty.map(function(e:Stremings,index:number){
 									return(
 										<span key={index} style={{cursor:"pointer"}}>
-											<div className="stream-container">
+											<div className="stream-container" onClick={()=>{history.push(`${NameRoutes.liveTwitch}${e.userName}/${e.gameName}`, '_blank')} }>
 												<div className="streaming">
 												<img src={e.thumbnailUrl} style={{"width":"100%"}} alt={e.gameName} />
 												</div>
@@ -154,7 +152,6 @@ const Communaute: React.FC = function() {
 								color="#dd0000"
 							/>
 							</div>
-							<LiveTwitch />
 	  				</div>
 	  				<Friend />
 	  			</div>

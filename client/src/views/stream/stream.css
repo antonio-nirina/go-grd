@@ -1,10 +1,12 @@
 
 .streams-container{
 	display: flex;
-	padding: 15px;
 	border: 1px solid gray;
 	border-radius: 5px;
 	justify-content: center;
+	margin-left: 12px;
+	margin-right: 12px;
+	height: 67.25vh;
 }
 .streams .main h2{
 	font-family: "russo one";
@@ -12,14 +14,17 @@
 }
 .streams-container .stream-video{
 	width: 75%;
+	height: 100%;
 }
 .streams-container video{
 	width: 100%;
+	height: 100%;
 }
 .live-tchat{
 	background: #2c2c2c;
 	width: 250px;
 	margin-left: 5px;
+	overflow: scroll;
 }
 .live-stream{
 	padding: 0 15px;
@@ -33,7 +38,7 @@
 	margin-bottom: 15px;
 }
 .live-content{
-	height: 50vh;
+	height: 41vh;
 	overflow-y: auto;
 	word-wrap: break-word;
 }
@@ -70,7 +75,6 @@
 .edit-msg input{
 	width: 100%;
 	padding: 10px;
-	border: none;
 	background: gray;
 	color: #ffffff;
 	border-radius: 5px;
@@ -80,6 +84,7 @@
 	top: 8px;
 	right: 8px;
 }
+
 .footer-live{
 	display: flex;
 	justify-content: space-between;
@@ -104,4 +109,12 @@
 	padding: 7px;
 	border-radius: 5px;
 	align-self: center;
+}
+
+.edit-msg .none-message {
+	border:none;
+}
+.edit-msg .enter-message{
+	border-color: #8E47FF;
+	background-color: #101010;
 }
