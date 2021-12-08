@@ -205,9 +205,10 @@
 }
 .item-info-right{
 	width: 317px;
-	height: 35vh;
+	height: 54vh;
     margin-left: 20px;
     position: relative;
+	overflow: scroll;
 }
 .item-all-info p{
 	width: 170px;

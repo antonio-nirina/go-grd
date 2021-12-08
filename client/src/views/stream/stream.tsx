@@ -6,9 +6,9 @@ import Header from "../header/header"
 import Footer from "../footer/footer"
 import "./stream.css"
 import Viewer from "../../assets/image/icons/viewer.png"
-import { faCog, faLaugh, faShare } from "@fortawesome/free-solid-svg-icons"
+import { faCog, faLaugh } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import thumbnail from "../../assets/image/video.png"
+// import thumbnail from "../../assets/image/video.png"
 
 
 const Stream: React.FC = function() {
@@ -23,15 +23,13 @@ const Stream: React.FC = function() {
 	  			<h2>{`${game} / ${username}`}</h2>
 	  			<div className="streams-container">
 	  				<div className="stream-video">
-					  {/*<iframe
+					  <iframe
 						src={`https://player.twitch.tv/?channel=${username}&parent=${process.env.REACT_APP_URL_PARENT}`}
 						height="100%"
 						width="100%"
+						title={username}
 						>
-					  </iframe>*/}
-						<video controls poster={thumbnail}>
-							<source src="https://media.w3.org/2010/05/sintel/trailer_hd.mp4" type="video/mp4"  />
-						</video>
+					  </iframe>
 	  				</div>
 	  				<div className="live-tchat">
 		  				<div className="header-live">
