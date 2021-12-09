@@ -2,7 +2,7 @@ import {createApolloClient as client} from "../config/apollo-client"
 import {TwitchProfil,Twitch_STREAMING} from "../gql/cmty/query"
 import {SetTokenCookies} from "../common/utils"
 
-export const TWITCH_OUATH = "https://id.twitch.tv/oauth2/authorize?client_id=hy3s04cw7m9qofg7thik89lii2inr0&response_type=code&scope=user:read:broadcast%20user:read:email"
+export const TWITCH_OUATH = "https://id.twitch.tv/oauth2/authorize?client_id=hy3s04cw7m9qofg7thik89lii2inr0&response_type=code&scope=user:read:broadcast%20user:read:email%20chat:read:email%20chat:edit"
 
 export const SigingAdminTwitch = function(){
     const REDIRECT_URI_TWITCH = process.env.REACT_APP_URI

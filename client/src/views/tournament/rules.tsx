@@ -1,5 +1,6 @@
 import React,{useEffect,useState} from "react"
 import parse from 'html-react-parser'
+import {useHistory } from "react-router-dom"
 import {useQuery} from "@apollo/client"
 import { useSelector } from "react-redux"
 import {RootState} from "../../reducer"
@@ -17,24 +18,24 @@ import {dateStringToDY} from "../tools/dateConvert"
 import RegisterTournament,{RegisterType} from "./tournament-register"
 import Stat from "./stat"
 
-const Rules: React.FC = function(props:any) {
-	const params = new URLSearchParams(props.location.search)
-	const uid:string|null = params.get("uid")
+const Rules: React.FC = function() {
+	const params = useHistory<any>()
 	const [tournament, setTournament] = useState<Tournament>()
 	const [isOpen, setIsOpen] = useState<boolean>(true)
 	const [part, setPart] = useState<string>("")
 	const [isUserSingup,setIsUserSingup] = useState<boolean>(false)
 	const userConnectedRedux = useSelector((state:RootState) => state.userConnected)
+
 	const {loading,error,data} 	= useQuery(GET_ONE_TOURNAMENT, {
 			variables: {
-				uid:uid,
+				uid:(params.location.search.split("=")[1]).split("&")[0],
 			},
 	})
 
 	const {loading:loadTrnmt,error:errTrnmt,data:dataTrnmt} = useQuery(GET_PART_TOURNAMENT, {
 		variables: {
 			uidUser:userConnectedRedux.user.uid,
-			uidTournament:uid,
+			uidTournament:(params.location.search.split("=")[1]).split("&")[0],
 		},
 	})
 
@@ -56,7 +57,7 @@ const Rules: React.FC = function(props:any) {
 	},[loading,error,data,loadTrnmt,errTrnmt,dataTrnmt])
 
 	const RegisterData:RegisterType = {
-		uid:uid,
+		uid:(params.location.search.split("=")[1]).split("&")[0],
 		tournament:tournament,
 		isUserSingup:isUserSingup,
 		part:part,
@@ -81,10 +82,10 @@ const Rules: React.FC = function(props:any) {
 				<div className="banniere"></div>
 				<div className="tabs">
 					<ul>
-						<li><Link to={`/info?uid=${params.get('uid')}`}>Info</Link></li>
-						<li><Link to={`/matches?uid=${params.get('uid')}`}>Match</Link></li>
-						<li><Link to={`/bracket?uid=${params.get('uid')}`}>Bracket</Link></li>
-						<li><Link to={`/rules?uid=${params.get('uid')}`} className="active">Règles</Link></li>
+						<li><Link to={`/info?uid=${(params.location.search.split("=")[1]).split("&")[0]}`}>Info</Link></li>
+						<li><Link to={`/matches?uid=${(params.location.search.split("=")[1]).split("&")[0]}`}>Match</Link></li>
+						<li><Link to={`/bracket?uid=${(params.location.search.split("=")[1]).split("&")[0]}`}>Bracket</Link></li>
+						<li><Link to={`/rules?uid=${(params.location.search.split("=")[1]).split("&")[0]}`} className="active">Règles</Link></li>
 					</ul>
 				</div>
 				<div className="container-rules">

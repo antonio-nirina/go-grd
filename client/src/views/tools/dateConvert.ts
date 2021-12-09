@@ -110,3 +110,13 @@ export const dateShortYearCreated = function(date = "") {
 		year : 'numeric',
 	})
 }
+
+export const LongMonthDate = function(date = "") {
+	return new Date(date).toLocaleTimeString('fr-Fr', {
+		day : 'numeric',
+		month : 'long',
+		year : 'numeric',
+		hour:"numeric",
+		minute:"numeric"
+	})
+}

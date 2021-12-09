@@ -1,8 +1,9 @@
 import React,{useEffect,useState} from "react"
 import {useHistory } from "react-router-dom"
 import {useQuery} from "@apollo/client"
+import parse from 'html-react-parser'
 
-import Tree from "./tree"
+import HeaderTournament,{HeaderTournamentType} from "../tournament/common/headerTournament"
 import Header from "../header/header"
 import Footer from "../footer/footer"
 import "../tournament/info.css"
@@ -11,11 +12,9 @@ import {GET_ONE_TOURNAMENT} from "../../gql/tournament/query"
 import {Tournament} from "../models/tournament"
 import {Wagger} from "../models/wagger"
 import {GET_ONE_WAGGER} from "../../gql/wagger/query"
-// import {checkInTeam} from "../league/utils"
-import HeaderTournament,{HeaderTournamentType} from "../tournament/common/headerTournament"
-// import {Link,useHistory } from "react-router-dom"
 
-const Tableau: React.FC = function() {
+
+const TournamentRules = function() {
 	const [tournament, setTournament] = useState<Tournament>()
 	const params = useHistory<any>()
 	const [isTournament,setIsTournament] = useState(false)
@@ -62,21 +61,27 @@ const Tableau: React.FC = function() {
     return(
 		<div className="container">
 			<Header />
-			<div className="participate league joingame table">
-				<div style={{ backgroundImage: 'url(' + tournament?.game.image + ')', backgroundPosition: 'center', backgroundSize: '100%', backgroundRepeat: 'no-repeat' }} className="obj"></div>
+			<div className="participate league joingame rule">
+				<div className="obj"></div>
 				<div className="marg">
-					<HeaderTournament {...HeaderProps} />
-					<div className="information-game">
-						<div className="tab-container">
-							<Tree />
-						</div>
+				<HeaderTournament {...HeaderProps} />
+			<div className="information-game">
+				<div className="rules-container">
+					<div className="info_sup">
+						<h3>Information supplémentaire</h3>
+						<p>Au début du tournoi, n'oubliez pas de rafraîchir votre page pour faire apparaître le 'bouton prêt' vous permettant d'entrer dans le tournoi</p>
 					</div>
-					<div className="clear"></div>
-					<Footer/>
+					<div className="info_sup">
+						{tournament && tournament.rules ? parse(tournament.rules) : <h3>Aucune règle</h3>}
+					</div>
 				</div>
 			</div>
+			<div className="clear"></div>
+			<Footer/>
+			</div>
+			</div>
 		</div>
-  	)
+	)
 }
 
-export default Tableau
+export default TournamentRules

@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 // import {Tournament} from "../../models/tournament"
 import {dateStringToJoinT} from "../../tools/dateConvert"
 // import { Wagger } from "../../models/wagger"
-
+import { NameRoutes } from "../../commons/route-list"
 
 export type HeaderTournamentType = {
 	data:any,//Tournament|Wagger|undefined,
@@ -16,19 +16,28 @@ export type HeaderTournamentType = {
 const HeaderTournament = function({data,isTournament,isWagger}:HeaderTournamentType) {
 	const [uriJoin, setUriJoin] = useState<string>("")
 	const [uriRules, setUriRules] = useState<string>("")
-	const [uid, setUid] = useState<string>("")
+	const [match, setMatch] = useState<string>("")
+	const [board, setUriBoard] = useState<string>("")
 	const params = useHistory<any>()
 
 	useEffect(() => {
-		if(params) setUid(params.location.search.split("=")[1])
-
-		if(isTournament) {
-			setUriJoin("join-tournament")
-			setUriRules("tournament-rules")
-		} else if(isWagger) {
-			setUriJoin("joingame")
-			setUriRules("waggers-rules")
+		let uid = params.location.search.split("=")[1]
+		if(!/tournament/.test(params.location.search) && isTournament) {
+			uid = `${params.location.search.split("=")[1]}&tournament`
 		}
+		if(!/wagger/.test(params.location.search) && isWagger) {
+			uid = `${params.location.search.split("=")[1]}&wagger`
+		}
+		if(isTournament) {
+			setUriJoin(`${NameRoutes.joinTournament}?uid=${uid}=${isTournament}&wagger=${isWagger}`)
+			setUriRules(`${NameRoutes.tournamentRules}?uid=${uid}=${isTournament}&wagger=${isWagger}`)
+		} else if(isWagger) {
+			setUriJoin(`${NameRoutes.joingame}?uid=${uid}=${isTournament}&wagger=${isWagger}`)
+			setUriRules(`${NameRoutes.waggerRules}?uid=${uid}=${isTournament}&wagger=${isWagger}`)
+		}
+		setUriBoard(`${NameRoutes.board}?uid=${uid}=${isTournament}&wagger=${isWagger}`)
+		setMatch(`${NameRoutes.matchTournament}?uid=${uid}=${isTournament}&wagger=${isWagger}`)
+
 	},[isTournament,params,isWagger])
 
 	return (
@@ -51,9 +60,10 @@ const HeaderTournament = function({data,isTournament,isWagger}:HeaderTournamentT
 				</div>
 			</div>
 			<div className="bar-menu-top">
-				<li><Link to={`${uriJoin}/?uid=${uid}&tournament=${isTournament}&wagger=${isWagger}`} id="general">Général</Link></li>
-				<li><Link to={`/tableau?uid=${uid}&tournament=${isTournament}&wagger=${isWagger}`} id="tableau">Tableau</Link></li>
-				<li><Link to={`/${uriRules}?uid=${uid}&tournament=${isTournament}&wagger=${isWagger}`} id="rule">Règles</Link></li>
+				<li><Link to={uriJoin} id="general">Général</Link></li>
+				<li><Link to={board} id="tableau">Tableau</Link></li>
+				<li><Link to={uriRules} id="rule">Règles</Link></li>
+				<li><Link to={match} id="match">Matchs</Link></li>
 			</div>
 		</>
 	)

@@ -30,6 +30,7 @@ export const NameRoutes = {
 	profil:"/profil",
 	assistance:"/assistance",
 	jackpot:"/jackpot",
-	liveTwitch:"/stream/twitch/"
+	liveTwitch:"/stream/twitch/",
+	matchTournament:"/match-tournament"
 
 }

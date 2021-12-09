@@ -59,7 +59,7 @@ const Joingame: React.FC = function(props:any) {
 	const HeaderProps:HeaderTournamentType = {
 		data:tournament,
 		isTournament:true,
-		isWagger:false
+		isWagger:false,
 	}
 
 	const partTournament:PartTournamentType = {

@@ -14,7 +14,6 @@ import Team from "../parametre/team/team"
 import EditTeam from "../parametre/team/edit-team"
 import Compte from "../parametre/compte"
 import Bracket from "../tournament/bracket"
-import Rules from "../tournament/rules"
 // import RulesLeague from "../annexe/rules-league"
 import Wager from "../wager/wager"
 import Waggers from "../waggers/waggers"
@@ -52,6 +51,8 @@ import Stat from "../version/stat/stat"
 import ConfirmPart from "./confirmPart"
 import ContentPaiement from "./contentPaiement"
 import GameList from "../auth/game-list"
+import TournamentRules from "../tournament/tournament-rules"
+import MatchTournament from "../tournament/match-tournament"
 // import LeagueGame from "../league/league-game"
 
 const Router = function() {
@@ -69,7 +70,6 @@ const Router = function() {
 			<ProtectedRoute path="/team" exact component={Team} />
 			<ProtectedRoute path="/edit-team/:uid" exact component={EditTeam} />
 			<ProtectedRoute path="/account" exact component={Compte} />
-			<ProtectedRoute path="/rules" exact component={Rules} />
 			<ProtectedRoute path="#" exact component={Wager} />
 			<ProtectedRoute path="/joingame" exact component={Joingame} />
 			<ProtectedRoute path="/join-tournament" exact component={JoinTournament} />
@@ -77,7 +77,7 @@ const Router = function() {
 			<ProtectedRoute path="/waggers" exact component={Waggers} />
 			<ProtectedRoute path="/board" exact component={Tableau} />
 			<ProtectedRoute path="/waggers-rules" exact component={WaggersRules} />
-			<ProtectedRoute path="/tournament-rules" exact component={WaggersRules} />
+			<ProtectedRoute path="/tournament-rules" exact component={TournamentRules} />
 			<ProtectedRoute path="/waggers-game" exact component={WaggersGame} />
 			<ProtectedRoute path="/view" exact component={View} />
 			<ProtectedRoute path="/lobby" exact component={Lobby} />
@@ -96,6 +96,7 @@ const Router = function() {
 			<ProtectedRoute path="/payement/tournament" exact component={ContentPaiement} />
 			<ProtectedRoute path="/add/game/favorit" exact component={GameList} />
 			<ProtectedRoute path="/stream/twitch/:username/:game" exact component={Stream} />
+			<ProtectedRoute path="/match-tournament" component={MatchTournament} />
 			<Route path="/update-password" exact component={UpdatePassword} />
 			<Route path="/game" exact component={Game} />
 			<Route path="/login" exact component={Login} />
