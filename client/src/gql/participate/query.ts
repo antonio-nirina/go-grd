@@ -45,20 +45,32 @@ export const GET_PART_TOURNAMENT = gql`
 			tournament{
 				uid
 				title
-				date
+				statut
+				description
+				deadlineDate
+				dateStart
+				price
+				priceParticipate
+				rules
+				laps
+				isTeam
+				isPublic
+				gameWay
 				numberParticipate
+				spectateur
+				server
+				format
 				game{
 					uid
+					name
+					image
+					logo
+					slug
 				}
 				plateform{
 					uid
+					description
 					name
-				}
-			}
-			team{
-				uid
-				players{
-					uid
 				}
 			}
 		}
