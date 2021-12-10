@@ -40,3 +40,5 @@ https://github.com/victorsteven?tab=repositories
 https://golangbot.com/learn-golang-series/
 
 https://github.com/manosriram-youtube/ecommerce-microservice
+
+[Cheat sheat] https://lzone.de/cheat-sheet/nginx

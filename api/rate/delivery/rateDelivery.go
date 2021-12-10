@@ -20,13 +20,13 @@ type RateResolver interface {
 }
 
 type rate struct {
-	rateHandler     handler.UsecaseRate
+	rateHandler handler.UsecaseRate
 	userHandler userHandler.Usecase
 }
 
 func NewResolverRate(rateHandler handler.UsecaseRate, userHandler userHandler.Usecase) RateResolver {
 	return &rate{
-		rateHandler:     rateHandler,
+		rateHandler: rateHandler,
 		userHandler: userHandler,
 	}
 }
@@ -38,11 +38,11 @@ func (r *rate) CreatedRateResolver(params graphql.ResolveParams) (interface{}, e
 	score, _ := params.Args["score"].(int)
 
 	rate := &entity.Rate{
-		Uid: primitive.NewObjectID(),
+		Uid:     primitive.NewObjectID(),
 		Created: created,
 		Updated: updated,
-		User: user,
-		Score: score,
+		User:    user,
+		Score:   score,
 	}
 
 	res, err := r.rateHandler.SavedRateHandler(rate)
@@ -78,15 +78,12 @@ func (r *rate) FindAllRateResolver(params graphql.ResolveParams) (interface{}, e
 }
 
 func (r *rate) FindRateInWeekResolver(params graphql.ResolveParams) (interface{}, error) {
-	uidUser, _ := params.Args["uid"].(string)
-	date := time.Date(time.Now().Year(),time.Now().Month(),time.Now().Day() - 7,0,0,0,0,time.Local) // params.Args["date"].(string)
-	_, err := r.rateHandler.FindRateByUserHandler(uidUser)
+	date := time.Date(time.Now().Year(), time.Now().Month(), time.Now().Day()-7, 0, 0, 0, 0, time.Local) // params.Args["date"].(string)
+	rate, err := r.rateHandler.FindRateInWeekHandler(date)
 
 	if err != nil {
 		return nil, err
 	}
-	rate, err := r.rateHandler.FindRateInWeekHandler(uidUser,date)
-	
 
 	return rate, nil
 }
@@ -94,8 +91,8 @@ func (r *rate) FindRateInWeekResolver(params graphql.ResolveParams) (interface{}
 func (r *rate) CreatedOrUpdatedRateResolver(params graphql.ResolveParams) (interface{}, error) {
 	uid, _ := params.Args["uid"].(string)
 	uidUser, _ := params.Args["uidUser"].(string)
-	newRate, err := r.rateHandler.FindRateCreateOrUpdatedHandler(uidUser,uid)
-	
+	newRate, err := r.rateHandler.FindRateCreateOrUpdatedHandler(uidUser, uid)
+
 	if err != nil {
 		return nil, err
 	}
