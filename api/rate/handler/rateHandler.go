@@ -39,7 +39,7 @@ type UsecaseRate interface {
 	FindOneRateHandler(idQuery string) (entity.Rate, error)
 	FindAllRateHandler(pageNumber int64,limit int64) ([]RateViewModel, error)
 	FindRateByUserHandler(uidUser string) (entity.Rate, error)
-	FindRateInWeekHandler(idUser string,date string) (RateViewModel, error)
+	FindRateInWeekHandler(idUser string,date time.Time) (RateViewModel, error)
 	FindRateCreateOrUpdatedHandler(uidUser string,uid string) (interface{}, error)
 }
 
@@ -153,7 +153,7 @@ func (r *rateUsecase) FindRateByUserHandler(uidUser string) (entity.Rate, error)
 	return rate, nil
 }
 
-func (r *rateUsecase) FindRateInWeekHandler(idUser string,date string) (RateViewModel, error) {
+func (r *rateUsecase) FindRateInWeekHandler(idUser string,date time.Time) (RateViewModel, error) {
 	rate, err := r.rateRepository.FindRateInWeekRepo(idUser,date)
 
 	if err != nil {

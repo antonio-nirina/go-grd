@@ -27,7 +27,7 @@ type RepositoryRate interface {
 	FindRateRepo(idQuery primitive.ObjectID) (entity.Rate, error)
 	FindAllRateRepo(pageNumber int64,limit int64)([]entity.Rate, error)
 	FindRateByUserRepo(uidUser string)(entity.Rate, error)
-	FindRateInWeekRepo(uidUser string,date string)(entity.Rate, error)
+	FindRateInWeekRepo(uidUser string,date time.Time)(entity.Rate, error)
 	FindRateCreateOrUpdatedRepo(objectId primitive.ObjectID,rate *entity.Rate)(interface{}, error)
 }
 
@@ -94,7 +94,7 @@ func (c *driverRepository) FindRateByUserRepo(uidUser string)(entity.Rate, error
 	return result, nil
 }
 
-func (c *driverRepository) FindRateInWeekRepo(uidUser string,date string)(entity.Rate, error) {
+func (c *driverRepository) FindRateInWeekRepo(uidUser string,date time.Time)(entity.Rate, error) {
 	var collection = c.client.Database("grd_database").Collection("rate")
 	var result entity.Rate
 	err := collection.FindOne(context.TODO(), bson.M{"user": uidUser,"updated": bson.M{ "$gte": date, "$lte": time.Now().Format(time.RFC3339)}}).Decode(&result)

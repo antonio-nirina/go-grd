@@ -1,6 +1,8 @@
 package delivery
 
 import (
+	"time"
+
 	"github.com/graphql-go/graphql"
 	"github.com/thoussei/antonio/api/rate/entity"
 	"github.com/thoussei/antonio/api/rate/handler"
@@ -14,6 +16,7 @@ type RateResolver interface {
 	FindAllRateResolver(params graphql.ResolveParams) (interface{}, error)
 	CreatedOrUpdatedRateResolver(params graphql.ResolveParams) (interface{}, error)
 	FindRateByUserResolver(params graphql.ResolveParams) (interface{}, error)
+	FindRateInWeekResolver(params graphql.ResolveParams) (interface{}, error)
 }
 
 type rate struct {
@@ -76,7 +79,7 @@ func (r *rate) FindAllRateResolver(params graphql.ResolveParams) (interface{}, e
 
 func (r *rate) FindRateInWeekResolver(params graphql.ResolveParams) (interface{}, error) {
 	uidUser, _ := params.Args["uid"].(string)
-	date, _ := params.Args["date"].(string)
+	date := time.Date(time.Now().Year(),time.Now().Month(),time.Now().Day() - 7,0,0,0,0,time.Local) // params.Args["date"].(string)
 	_, err := r.rateHandler.FindRateByUserHandler(uidUser)
 
 	if err != nil {

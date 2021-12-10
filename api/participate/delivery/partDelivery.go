@@ -95,7 +95,8 @@ func (p *participate) SavedPartResolver(params graphql.ResolveParams) (interface
 		}
 		uidUser = user.Uid.Hex()
 	}
-
+	
+	// IsTournament
 	if tournamentUid != "" {
 		IsTournament = true
 		tournament, err := p.tournament.FindOneTournamentHandler(tournamentUid)
@@ -106,7 +107,7 @@ func (p *participate) SavedPartResolver(params graphql.ResolveParams) (interface
 
 		tournamentObject = tournament
 	}
-
+	// IsWager
 	if waggerUid != "" {
 		isWagger = true
 		wagger, err := p.wagger.FindOneWaggerHandler(waggerUid)
@@ -116,7 +117,7 @@ func (p *participate) SavedPartResolver(params graphql.ResolveParams) (interface
 		}
 		waggerObject = wagger
 	}
-
+		// IsTeam
 	if len(teams.Uid) > 0 {
 		for _, val := range teams.Uid {
 			team, err := p.team.FindOneTeamHandler(val)
