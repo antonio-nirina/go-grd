@@ -273,7 +273,7 @@ const Header: React.FC = function() {
 							</div>
 							<>
 								<i className="relative bell" onClick={onShowNotif}>
-									<FontAwesomeIcon icon={faBell} size="lg" />
+									<FontAwesomeIcon icon={faBell} size="sm" />
 									<span className={notification > 0 ? "number" : ""}>{notification > 0 ? notification : ""}</span>
 									<span className="tooltip">Notification</span>
 								</i>

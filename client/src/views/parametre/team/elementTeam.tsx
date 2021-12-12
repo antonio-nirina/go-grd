@@ -1,6 +1,8 @@
 import React,{useState} from "react"
 import { useForm } from "react-hook-form"
 import {useMutation} from "@apollo/client"
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 import {GetUserFilter} from "../../commons/common-query"
 import {UPDATED_ALL_TEAM} from "../../../gql/team/mutation"
@@ -21,7 +23,6 @@ type UserSelect = {
 }
 
 const ElementTeam = function({uid}:ElementType) {
-	const [message, setMessage] = useState<string>("")
 	const [messageError, setMessageError] = useState<string>("")
 	const [usernames, setUsernames] = useState<User[]>([])
 	const [listUsername, setListUsername] = useState<string>("")
@@ -46,13 +47,17 @@ const ElementTeam = function({uid}:ElementType) {
 				description:"",
 				logoType:""
 			}})
-			if(updated) setMessage(`${listUsername}} a été inviter dans votre team`)
+			if(updated) {
+				toast(`${listUsername} a été inviter dans votre team`)
+				setUsernames([])
+				setUserSelected([])
+			}
 		} catch(error:any) {
 			setMessageError(error.Error)
 		}
 	}
 	const handleUsername = async function(event:React.FormEvent<HTMLInputElement>) {
-		if(event.currentTarget.value.split("").length === 3) {
+		if(event.currentTarget.value.split("").length >= 3) {
 			const usernames = await GetUserFilter(event.currentTarget.value)
 			if(usernames) {
 				let array:User[] = []
@@ -70,8 +75,10 @@ const ElementTeam = function({uid}:ElementType) {
 					})
 				})
 				setUsernames(array)
-
 			}
+		} else {
+			setUsernames([])
+			setUserSelected([])
 		}
 	}
 
@@ -80,12 +87,14 @@ const ElementTeam = function({uid}:ElementType) {
 		if(!checked) {
 			let listArray:string[] = []
 			let listUidArray:string[] = []
+			let selectedUser:UserSelect[] = []
 			let element:UserSelect = {
 				uid:user.uid,
 				username:user.username
 			}
-			setUserSelected([...userSelected,element])
-			userSelected.forEach(function(selected:UserSelect) {
+			selectedUser = [...userSelected,element]
+			setUserSelected(selectedUser)
+			selectedUser.forEach(function(selected:UserSelect) {
 				listArray.push(selected.username)
 				listUidArray.push(selected.uid)
 			})
@@ -101,7 +110,6 @@ const ElementTeam = function({uid}:ElementType) {
 
 	return (
 		<div className="name_popup edit">
-			<div style={{textAlign:"center"}}>{message}</div>
 			<div style={{textAlign:"center","color":"#dd0000"}}>{messageError}</div>
 			<div style={{"fontSize":"10px","textAlign":"center"}}>Tu peux ajouter des utilisateurs sur Go-Grind</div>
 			<div className="group-team">
@@ -130,6 +138,7 @@ const ElementTeam = function({uid}:ElementType) {
 						)
 					})}
 				</div>
+				<ToastContainer position="bottom-left" />
 				<div className="next-btn">
 					<button type="submit" className="btn bg-green">Ajouter</button>
 					<div className="btn bg-red">Annuler</div>
