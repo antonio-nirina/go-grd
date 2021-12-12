@@ -2,6 +2,7 @@ package delivery
 
 import (
 	"encoding/json"
+	"fmt"
 
 	"github.com/graphql-go/graphql"
 	"github.com/thoussei/antonio/api/participate/entity"
@@ -145,7 +146,7 @@ func (p *participate) SavedPartResolver(params graphql.ResolveParams) (interface
 
 	res, err := p.partHandler.SavedPartHandler(part)
 	_,err = p.rate.FindRateCreateOrUpdatedHandler(uidUser,"")
-	
+	fmt.Println("err", err)
 	if err != nil {
 		return nil, err
 	}

@@ -38,3 +38,12 @@ export const GET_GAME_USER = gql`
 			}
 	}
 }`
+
+export const GET_ALL_USER_FILTER = gql`
+	query GetUserByUsername($username: String!) {
+		GetUserByUsername(username: $username){
+		username
+		avatar
+		uid
+	}
+}`

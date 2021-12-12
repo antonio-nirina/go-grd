@@ -173,5 +173,6 @@ func GetRootFields() graphql.Fields {
 		"FindGameTwicth":            FindGameTwicth(),
 		"FindWaggerByGame":          FindWaggerByGame(),
 		"FindRateInWeek":            FindRateInWeek(),
+		"GetUserByUsername":		GetUserByUsername(),
 	}
 }

@@ -67,7 +67,7 @@ const Router = function() {
 			<ProtectedRoute path="/info" exact component={Info} />
 			<ProtectedRoute path="/bracket" exact component={Bracket} />
 			<ProtectedRoute path="/matches" exact component={Matches} />
-			<ProtectedRoute path="/team" exact component={Team} />
+			<ProtectedRoute path="/acount/team" exact component={Team} />
 			<ProtectedRoute path="/edit-team/:uid" exact component={EditTeam} />
 			<ProtectedRoute path="/account" exact component={Compte} />
 			<ProtectedRoute path="#" exact component={Wager} />
@@ -87,8 +87,8 @@ const Router = function() {
 			<ProtectedRoute path="/contact" exact component={Contact} />
 			<ProtectedRoute path="/profil" exact component={Profil} />
 			<ProtectedRoute path="/setting" exact component={Parametre} />
-			<ProtectedRoute path="/jackpot" exact component={Jackpot} />
-			<ProtectedRoute path="/mygames" exact component={Mygames} />
+			<ProtectedRoute path="/acount/jackpot" exact component={Jackpot} />
+			<ProtectedRoute path="/acount/mygames" exact component={Mygames} />
 			<ProtectedRoute path="/tournois" exact component={PageTournois} />
 			<ProtectedRoute path="/wagger" exact component={WagerPage} />
 			<ProtectedRoute path="/stat" exact component={Stat} />

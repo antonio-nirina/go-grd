@@ -1,5 +1,7 @@
 import React,{useState,useEffect} from "react"
 import {useQuery} from "@apollo/client"
+
+
 import Header from "../header/header"
 import Footer from "../footer/footer"
 //import {Translation} from "../../lang/translation"
@@ -21,6 +23,8 @@ import {Tournament,Platform} from "../models/tournament"
 import {ParticipateTournament} from "../models/participate"
 import PartTournament,{PartTournamentType} from "./part-tournament"
 import HeaderTournament,{HeaderTournamentType} from "./common/headerTournament"
+
+
 
 
 const Joingame: React.FC = function(props:any) {

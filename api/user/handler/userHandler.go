@@ -308,3 +308,33 @@ func (u *UserUsecase) IncrementPoint(uid string) (interface{}, error) {
 
 	return result, nil
 }
+
+func (u *UserUsecase) FindUsernameFilter(username string)([]UserViewModel, error) {
+	users, err := u.userRepository.FindUsernameFilterRepository(username)
+
+	if err != nil {
+		return []UserViewModel{}, err
+	}
+
+	var results []UserViewModel
+
+	for _,user := range users {
+		userview := UserViewModel {
+			Uid: user.Uid.Hex(),
+			Username: user.Username,
+			Email: user.Email,
+			Avatar:user.Avatar,
+			FirstName:user.FirstName,
+			LastName:user.LastName,
+			IsBanned:user.IsBanned,
+			Language:user.Language,
+			Point:0,
+			Roles:user.Roles,
+			TypeConnexion:"",
+			Created:"", 
+		}
+		results = append(results, userview)
+	}
+
+	return results, nil
+}

@@ -9,7 +9,6 @@ import {useHistory } from "react-router-dom"
 import SideBar from "../header/sidebar"
 import Nav from "../header/nav"
 import {CREATE_PLATEFORM} from "../gql/games/mutation"
-import { InputFiles } from "typescript"
 
 type Inputs = {
 	name:string,

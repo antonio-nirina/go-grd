@@ -163,3 +163,17 @@ func GetAccessUserDiscordApi() *graphql.Field {
 		Resolve: UserRolve.GetAccessUserDiscordApi,
 	}
 }
+
+func GetUserByUsername() *graphql.Field {
+	return &graphql.Field{
+		Type:        graphql.NewList(types.UserSchemaType),
+		Description: "Get User username",
+		Args: graphql.FieldConfigArgument{
+			"username": &graphql.ArgumentConfig{
+				Type: graphql.String,
+			},
+		},
+
+		Resolve: UserRolve.GetUserByUsernameResolver,
+	}
+}

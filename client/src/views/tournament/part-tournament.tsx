@@ -1,7 +1,9 @@
 import React,{useState,useEffect} from "react"
 import {useMutation} from "@apollo/client"
-import { Link } from "react-router-dom"
+import { useHistory } from "react-router-dom"
 import { useSelector } from "react-redux"
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 import {LEAVE_PART_TOURNAMENT} from "../../gql/participate/mutation"
 import {Tournament} from "../models/tournament"
@@ -9,9 +11,8 @@ import {ParticipateTournament} from "../models/participate"
 import ContentPaiement from "../commons/contentPaiement"
 import {checkInTeam} from "../league/utils"
 import {RootState} from "../../reducer"
-import {Translation} from "../../lang/translation"
 import { NameRoutes } from "../commons/route-list"
-
+import PopupTeam from "../commons/check-team"
 
 
 export type PartTournamentType = {
@@ -21,25 +22,23 @@ export type PartTournamentType = {
 
 
 const PartTournament:React.FC<PartTournamentType> = function ({tournament,parts}) {
+	const history = useHistory()
 	const userConnectedRedux = useSelector((state:RootState) => state.userConnected)
 	const [isPart,setIsPart] = useState<boolean>(false)
 	const [teamPart,setTeamPart] = useState<string>("")
-	const [message,setMessage] = useState<string>("")
 	const [partUid,setPartUid] = useState<string>("")
 	const [partData,setPartData] = useState<string[]>([])
 	const [showPaiement, setShowPaiement] = useState<boolean>(false)
+	const[isOpen,setIsOpen] =useState<boolean>(false)
+	const [content,setContent] = useState<string>("")
+
 	const [leavePartTournament]  = useMutation(LEAVE_PART_TOURNAMENT)
 
 	useEffect(() => {
 		if(tournament?.isTeam) {
-			setTeamPart(`Equipes ${parts && parts?.length > 1 ? parts?.length : 0}/ ${tournament.numberParticipate}`)
+			setTeamPart(`Equipes ${parts && parts?.length > 1 ? parts?.length : 0} / ${tournament.numberParticipate}`)
 		} else if(!tournament?.isTeam) {
 			setTeamPart("One to one")
-		}
-		if(parts && parts?.length > 1) {
-			parts.forEach(function(part:ParticipateTournament) {
-
-			})
 		}
 		parts?.forEach(function(part:ParticipateTournament){
 			if(part.user.uid === userConnectedRedux.user.uid) {
@@ -64,38 +63,61 @@ const PartTournament:React.FC<PartTournamentType> = function ({tournament,parts}
 	const onShowConfirmed = async function() {
 		const check = await checkInTeam(userConnectedRedux.user.uid)
 		if(!check && tournament?.isTeam) {
-			setMessage(Translation(userConnectedRedux.user.language).tournament.notifyError)
-		} else {
-			setShowPaiement(!showPaiement)
+			setIsOpen(true)
+			setContent("Vérifie que tu as une équipe")
+		} else if(check  && tournament?.isTeam && check === 1) {
+			setIsOpen(true)
+			setContent("Vérifie que tu as assez de membres")
 		}
 	}
 
 	const handleClose = function() {
 		setShowPaiement(false)
-		setMessage("")
 	}
 
 	const handleLeave = async function() {
 		const leave = await leavePartTournament({variables:{uid:partUid,userUid:userConnectedRedux.user.uid}})
-		if(leave.data) setMessage("Votre desincription a été effectué")
+		if(leave.data) {
+			toast("Votre desincription a été effectué!")
+		}
 		setIsPart(false)
 	}
 
+	const handleTeam = async function() {
+		const check = await checkInTeam(userConnectedRedux.user.uid)
+		if(!check && tournament?.isTeam) {
+			setIsOpen(true)
+			setContent("Vérifie que tu as une équipe")
+		} else if(check  && tournament?.isTeam && check === 1) {
+			setIsOpen(true)
+			setContent("Vérifie que tu as assez de membres")
+		} else {
+			history.push(`${NameRoutes.confirmedJoinTournament}?uid=${tournament?.uid}`)
+		}
+	}
+
+	const handlePopup = function(isclose:boolean) {
+		setIsOpen(false)
+	}
 
 	return (
 		<div className="item-info-right">
 			<div className="join-all">
 				<p className="team-bar-title">{teamPart}</p>
-				<span style={{"color":"#dd0000","fontSize":"11px","fontWeight":"bold"}}>{message}</span>
+				<ToastContainer />
 				{tournament && parseInt(tournament?.priceParticipate) ?
 					<button className="btn bg-red" onClick={onShowConfirmed}>{!showPaiement && !isPart ? "Rejoindre" : (isPart ? "Quitter le tournois" : "Quitter")}</button>
 					:
 					(!isPart ?
-						<Link className="btn bg-red" to={`${NameRoutes.confirmedJoinTournament}?uid=${tournament?.uid}`} >
+						<span className="btn bg-red" onClick={handleTeam} >
 							{!showPaiement && !isPart ? "Rejoindre" : "Quitter"}
-						</Link>
+						</span>
 						:
-						<button style={{"cursor":"pointer"}} className="btn bg-red" onClick={handleLeave}>Quitter le tournois</button>
+						<button
+							style={{"cursor":"pointer"}}
+							className="btn bg-red"
+							onClick={handleLeave}>Quitter le tournois
+						</button>
 					)
 				}
 				<div className="profil-join">
@@ -106,11 +128,12 @@ const PartTournament:React.FC<PartTournamentType> = function ({tournament,parts}
 					})}
 				</div>
 			</div>
+			{isOpen ? <PopupTeam handleOpen={handlePopup} isShow={isOpen} content={content} /> : <></>}
 			<div className="join-all join-canal">
 				<p className="team-bar-title">Rejoindre le canal discord</p>
 				<button className="btn bg-red discolor">Rejoindre</button>
 			</div>
-				{showPaiement ? <ContentPaiement handleClosePayement={handleClose}  /> : <></>}
+			{showPaiement ? <ContentPaiement handleClosePayement={handleClose}  /> : <></>}
 		</div>
 	)
 }

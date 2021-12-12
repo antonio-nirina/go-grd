@@ -425,3 +425,14 @@ func GetToken(user entity.User) (interface{}, error) {
 
 	return result, nil
 }
+
+func (r *resolver) GetUserByUsernameResolver(params graphql.ResolveParams) (interface{}, error) {
+	username, _ := params.Args["username"].(string)
+	res, err := r.userHandler.FindUsernameFilter(username)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return res, nil
+}
