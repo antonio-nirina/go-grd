@@ -148,17 +148,17 @@ const Friend: React.FC = function() {
 	}
 	const onShowChat = function(){
 		setShowChat(!showChat)
-	}	
+	}
 
 	return (
 		<div className="aside-right">
-			<p className="bold">Mes amis</p>	
+			<p className="bold">Mes amis</p>
 			<div className="friend-list-container">
 				{nbFriends
 					?
 					friends.map(function(el:any,index:number) {
 						let img = el.avatar ? el.avatar : AvatarDefault
-						return(							
+						return(
 							<div className="friend-list"key={el.id}>
 								<div key={index}>
 									<img src={img} className="friend-avatar" alt=""/>
@@ -169,10 +169,10 @@ const Friend: React.FC = function() {
 									</i>
 									<RenderPopup users={users} isOpen={isOpen} />
 								</div>
-							</div>							
+							</div>
 						)
 					})
-				
+
 				: (<div className="friend-list noborder">
 						<p className="title">
 							{
@@ -200,23 +200,23 @@ const Friend: React.FC = function() {
 				}
 			</div>
 			<p className="bold mg-10">Leaderboard (Tous les jeux)</p>
-			<Link to="/leaderboard" className="leader">				
-				<div className="ld-container">					
+			<Link to="/leaderboard" className="leader">
+				<div className="ld-container">
 					<p className="lead">1</p>
 					<p className="bold">Gotaga</p>
 					<p className="aright">7845 pts</p>
 				</div>
-				<div className="ld-container">					
+				<div className="ld-container">
 					<p>2</p>
 					<p className="bold">Killer1548</p>
 					<p className="aright">6928 pts</p>
 				</div>
-				<div className="ld-container">					
+				<div className="ld-container">
 					<p>3</p>
 					<p className="bold">Skouinar</p>
 					<p className="aright">6751 pts</p>
 				</div>
-				<div className="ld-container">					
+				<div className="ld-container">
 					<p>4</p>
 					<p className="bold">Shad_BD</p>
 					<p className="aright">5942 pts</p>
@@ -242,7 +242,7 @@ const Friend: React.FC = function() {
 				<div className="subjectforum">
 					<p>Impossible de rejoindre sur.. <i><FontAwesomeIcon icon={faQuestionCircle} size="xs"/></i></p>
 				</div>
-			</div>			
+			</div>
 		</div>
 	)
 }

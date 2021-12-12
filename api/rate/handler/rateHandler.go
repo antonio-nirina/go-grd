@@ -10,37 +10,34 @@ import (
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
-
 type RateViewModel struct {
-	Uid      	string 		`json:"uid"`
-	Created  	string    	`json:"created"`
-	Updated  	string    	`json:"updated"`
-	User  		userHandler.UserViewModel    `json:"user"`
-	Score  		int    		`json:"score"`
+	Uid     string                    `json:"uid"`
+	Created string                    `json:"created"`
+	Updated string                    `json:"updated"`
+	User    userHandler.UserViewModel `json:"user"`
+	Score   int                       `json:"score"`
 }
 
 type rateUsecase struct {
 	rateRepository repository.RepositoryRate
-	userUsecase userHandler.Usecase
+	userUsecase    userHandler.Usecase
 }
 
-func NewUsecaseRate(r repository.RepositoryRate,u userHandler.Usecase) UsecaseRate {
+func NewUsecaseRate(r repository.RepositoryRate, u userHandler.Usecase) UsecaseRate {
 	return &rateUsecase{
 		rateRepository: r,
-		userUsecase:u,
+		userUsecase:    u,
 	}
 }
-
-
 
 type UsecaseRate interface {
 	SavedRateHandler(rate *entity.Rate) (interface{}, error)
 	FindRateHandler(idQuery string) (RateViewModel, error)
 	FindOneRateHandler(idQuery string) (entity.Rate, error)
-	FindAllRateHandler(pageNumber int64,limit int64) ([]RateViewModel, error)
+	FindAllRateHandler(pageNumber int64, limit int64) ([]RateViewModel, error)
 	FindRateByUserHandler(uidUser string) (entity.Rate, error)
-	FindRateInWeekHandler(idUser string,date string) (RateViewModel, error)
-	FindRateCreateOrUpdatedHandler(uidUser string,uid string) (interface{}, error)
+	FindRateInWeekHandler(date time.Time) ([]RateViewModel, error)
+	FindRateCreateOrUpdatedHandler(uidUser string, uid string) (interface{}, error)
 }
 
 func (r *rateUsecase) SavedRateHandler(rate *entity.Rate) (interface{}, error) {
@@ -61,29 +58,29 @@ func (r *rateUsecase) FindRateHandler(idQuery string) (RateViewModel, error) {
 	}
 
 	rate, err := r.rateRepository.FindRateRepo(objectId)
-	user,err := r.userUsecase.FindOneUserByUid(rate.User)
+	user, err := r.userUsecase.FindOneUserByUid(rate.User)
 
 	if err != nil {
 		return RateViewModel{}, err
 	}
-	
+
 	rateViewModel := RateViewModel{
-		Uid: rate.Uid.Hex(),
+		Uid:     rate.Uid.Hex(),
 		Created: rate.Created,
 		Updated: rate.Updated,
 		User: userHandler.UserViewModel{
-			Uid:user.Uid.Hex(),
-			FirstName:user.FirstName,
-			LastName:user.LastName,
-			Email:user.Email,
-			Username:user.Username,
-			IsBanned:user.IsBanned,
-			Avatar:user.Avatar,
-			Language:user.Language,
-			Point:user.Point,
-			Roles:user.Roles,
-			TypeConnexion:user.TypeConnexion,
-			Created:user.Created,
+			Uid:           user.Uid.Hex(),
+			FirstName:     user.FirstName,
+			LastName:      user.LastName,
+			Email:         user.Email,
+			Username:      user.Username,
+			IsBanned:      user.IsBanned,
+			Avatar:        user.Avatar,
+			Language:      user.Language,
+			Point:         user.Point,
+			Roles:         user.Roles,
+			TypeConnexion: user.TypeConnexion,
+			Created:       user.Created,
 		},
 	}
 
@@ -106,8 +103,8 @@ func (r *rateUsecase) FindOneRateHandler(idQuery string) (entity.Rate, error) {
 	return rate, nil
 }
 
-func (r *rateUsecase) FindAllRateHandler(pageNumber int64,limit int64) ([]RateViewModel, error) {
-	result, err := r.rateRepository.FindAllRateRepo(pageNumber,limit)
+func (r *rateUsecase) FindAllRateHandler(pageNumber int64, limit int64) ([]RateViewModel, error) {
+	result, err := r.rateRepository.FindAllRateRepo(pageNumber, limit)
 
 	if err != nil {
 		return []RateViewModel{}, err
@@ -115,32 +112,32 @@ func (r *rateUsecase) FindAllRateHandler(pageNumber int64,limit int64) ([]RateVi
 
 	var res []RateViewModel
 
-	for _,item := range result {
-		user,_ := r.userUsecase.FindOneUserByUid(item.User)
+	for _, item := range result {
+		user, _ := r.userUsecase.FindOneUserByUid(item.User)
 		rateViewModel := RateViewModel{
-			Uid: item.Uid.Hex(),
+			Uid:     item.Uid.Hex(),
 			Created: item.Created,
 			Updated: item.Updated,
 			User: userHandler.UserViewModel{
-				Uid:user.Uid.Hex(),
-				FirstName:user.FirstName,
-				LastName:user.LastName,
-				Email:user.Email,
-				Username:user.Username,
-				IsBanned:user.IsBanned,
-				Avatar:user.Avatar,
-				Language:user.Language,
-				Point:user.Point,
-				Roles:user.Roles,
-				TypeConnexion:user.TypeConnexion,
-				Created:user.Created,
+				Uid:           user.Uid.Hex(),
+				FirstName:     user.FirstName,
+				LastName:      user.LastName,
+				Email:         user.Email,
+				Username:      user.Username,
+				IsBanned:      user.IsBanned,
+				Avatar:        user.Avatar,
+				Language:      user.Language,
+				Point:         user.Point,
+				Roles:         user.Roles,
+				TypeConnexion: user.TypeConnexion,
+				Created:       user.Created,
 			},
 		}
 
 		res = append(res, rateViewModel)
 	}
 
-	return res,nil
+	return res, nil
 }
 
 func (r *rateUsecase) FindRateByUserHandler(uidUser string) (entity.Rate, error) {
@@ -153,38 +150,42 @@ func (r *rateUsecase) FindRateByUserHandler(uidUser string) (entity.Rate, error)
 	return rate, nil
 }
 
-func (r *rateUsecase) FindRateInWeekHandler(idUser string,date string) (RateViewModel, error) {
-	rate, err := r.rateRepository.FindRateInWeekRepo(idUser,date)
+func (r *rateUsecase) FindRateInWeekHandler(date time.Time) ([]RateViewModel, error) {
+	rate, err := r.rateRepository.FindRateInWeekRepo(date)
 
 	if err != nil {
-		return RateViewModel{}, err
+		return []RateViewModel{}, err
 	}
+	var rateViewModel []RateViewModel
 
-	user,_ := r.userUsecase.FindOneUserByUid(idUser)
-	rateViewModel := RateViewModel{
-		Uid: rate.Uid.Hex(),
-		Created: rate.Created,
-		Updated: rate.Updated,
-		User: userHandler.UserViewModel{
-			Uid:user.Uid.Hex(),
-			FirstName:user.FirstName,
-			LastName:user.LastName,
-			Email:user.Email,
-			Username:user.Username,
-			IsBanned:user.IsBanned,
-			Avatar:user.Avatar,
-			Language:user.Language,
-			Point:user.Point,
-			Roles:user.Roles,
-			TypeConnexion:user.TypeConnexion,
-			Created:user.Created,
-		},
+	for _, val := range rate {
+		user, _ := r.userUsecase.FindOneUserByUid(val.User)
+		rateview := RateViewModel{
+			Uid:     val.Uid.Hex(),
+			Created: val.Created,
+			Updated: val.Updated,
+			User: userHandler.UserViewModel{
+				Uid:           user.Uid.Hex(),
+				FirstName:     user.FirstName,
+				LastName:      user.LastName,
+				Email:         user.Email,
+				Username:      user.Username,
+				IsBanned:      user.IsBanned,
+				Avatar:        user.Avatar,
+				Language:      user.Language,
+				Point:         user.Point,
+				Roles:         user.Roles,
+				TypeConnexion: user.TypeConnexion,
+				Created:       user.Created,
+			},
+		}
+		rateViewModel = append(rateViewModel, rateview)
 	}
 
 	return rateViewModel, nil
 }
 
-func (r *rateUsecase) FindRateCreateOrUpdatedHandler(uidUser string,uid string) (interface{}, error) {
+func (r *rateUsecase) FindRateCreateOrUpdatedHandler(uidUser string, uid string) (interface{}, error) {
 	var objectId primitive.ObjectID
 	rateUser, err := r.FindRateByUserHandler(uidUser)
 	var rate entity.Rate
@@ -194,25 +195,25 @@ func (r *rateUsecase) FindRateCreateOrUpdatedHandler(uidUser string,uid string) 
 
 	if uid != "" && rateUser.User != "" {
 		rate = entity.Rate{
-			Uid: primitive.NewObjectID(),
+			Uid:     primitive.NewObjectID(),
 			Created: time.Now().Format(time.RFC1123Z),
 			Updated: time.Now().Format(time.RFC1123Z),
-			User: uidUser,
-			Score: userEntity.POINT,
+			User:    uidUser,
+			Score:   userEntity.POINT,
 		}
 		objectId = rate.Uid
 	} else {
 		objectId, _ = primitive.ObjectIDFromHex(uid)
 		rate = entity.Rate{
-			Uid: rateUser.Uid,
+			Uid:     rateUser.Uid,
 			Created: rateUser.Created,
 			Updated: rateUser.Updated,
-			User: rateUser.User,
-			Score: rateUser.Score + userEntity.POINT,
+			User:    rateUser.User,
+			Score:   rateUser.Score + userEntity.POINT,
 		}
 	}
 
-	_,err = r.rateRepository.FindRateCreateOrUpdatedRepo(objectId,&rate)
+	_, err = r.rateRepository.FindRateCreateOrUpdatedRepo(objectId, &rate)
 
-	return "Ok",nil
+	return "Ok", nil
 }

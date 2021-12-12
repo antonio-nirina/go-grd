@@ -1,0 +1,18 @@
+ .actions .body{
+	text-align: center;
+}
+.actions .content {
+	margin: 15px 0;
+	border-top: 1px solid gray;
+	overflow-y: auto;
+}
+
+.body .handle-team{
+	padding-top: 29px;
+	padding-bottom: 29px;
+}
+
+.handle-team a{
+	background-color: #dd0000;
+	padding: 10px;
+}

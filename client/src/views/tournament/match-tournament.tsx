@@ -5,13 +5,14 @@ import {useQuery} from "@apollo/client"
 import HeaderTournament,{HeaderTournamentType} from "../tournament/common/headerTournament"
 import Header from "../header/header"
 import Footer from "../footer/footer"
-import "../tournament/info.css"
-import "../../assets/css/style.css"
 import {GET_ONE_TOURNAMENT} from "../../gql/tournament/query"
 import {Tournament} from "../models/tournament"
 import {Wagger} from "../models/wagger"
 import {GET_ONE_WAGGER} from "../../gql/wagger/query"
 import CommonMatch from "../commons/common-match"
+import "../tournament/info.css"
+import "../../assets/css/style.css"
+import "./css/match.css"
 
 const MatchTournament = function() {
 	const [tournament, setTournament] = useState<Tournament>()
@@ -61,10 +62,10 @@ const MatchTournament = function() {
 		<div className="container">
 			<Header />
 			<div className="participate league joingame match">
-				<div className="obj"></div>
+				<div className="obj cnt-blank"></div>
 				<div className="marg">
 				<HeaderTournament {...HeaderProps} />
-			<div className="information-game">
+			<div className="information-game info-match">
 				<div className="rules-container">
 					<div className="info_sup">
 						{tournament || wagger ? <CommonMatch {...HeaderProps} /> : <></>}

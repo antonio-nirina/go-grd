@@ -2,6 +2,7 @@ package delivery
 
 import (
 	"encoding/json"
+	"fmt"
 
 	"github.com/graphql-go/graphql"
 	"github.com/thoussei/antonio/api/participate/entity"
@@ -95,7 +96,8 @@ func (p *participate) SavedPartResolver(params graphql.ResolveParams) (interface
 		}
 		uidUser = user.Uid.Hex()
 	}
-
+	
+	// IsTournament
 	if tournamentUid != "" {
 		IsTournament = true
 		tournament, err := p.tournament.FindOneTournamentHandler(tournamentUid)
@@ -106,7 +108,7 @@ func (p *participate) SavedPartResolver(params graphql.ResolveParams) (interface
 
 		tournamentObject = tournament
 	}
-
+	// IsWager
 	if waggerUid != "" {
 		isWagger = true
 		wagger, err := p.wagger.FindOneWaggerHandler(waggerUid)
@@ -116,7 +118,7 @@ func (p *participate) SavedPartResolver(params graphql.ResolveParams) (interface
 		}
 		waggerObject = wagger
 	}
-
+		// IsTeam
 	if len(teams.Uid) > 0 {
 		for _, val := range teams.Uid {
 			team, err := p.team.FindOneTeamHandler(val)
@@ -144,7 +146,7 @@ func (p *participate) SavedPartResolver(params graphql.ResolveParams) (interface
 
 	res, err := p.partHandler.SavedPartHandler(part)
 	_,err = p.rate.FindRateCreateOrUpdatedHandler(uidUser,"")
-	
+	fmt.Println("err", err)
 	if err != nil {
 		return nil, err
 	}

@@ -9,7 +9,6 @@ import {LongMonthDate} from "../tools/dateConvert"
 import {HeaderTournamentType} from "../tournament/common/headerTournament"
 
 
-
 const CommonMatch = function({data,isTournament,isWagger}:HeaderTournamentType) {
 	const [parts, setParts] = useState<ParticipateTournament[]>()
 	const userConnectedRedux = useSelector((state:RootState) => state.userConnected)

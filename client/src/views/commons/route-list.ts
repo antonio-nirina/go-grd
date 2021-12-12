@@ -1,7 +1,8 @@
 export const NameRoutes = {
+	home:"/",
 	tournament:"/tournois",
 	tournamentGame:"/tournament-game",
-	team:"team",
+	team:"/acount/team",
 	editTeam:"/edit-team/",
 	account:"/account",
 	joingame:"/joingame",
@@ -17,7 +18,7 @@ export const NameRoutes = {
 	stream:"/stream",
 	setting:"/setting",
 	updatePassword:"/update-password",
-	mygames:"/mygames",
+	mygames:"/acount/mygames",
 	stat:"/stat",
 	confirmedJoinTournament:"/confirmed-join/tournament",
 	payementTournament:"/payement/tournament",
@@ -29,7 +30,7 @@ export const NameRoutes = {
 	contact:"/contact",
 	profil:"/profil",
 	assistance:"/assistance",
-	jackpot:"/jackpot",
+	jackpot:"/acount/jackpot",
 	liveTwitch:"/stream/twitch/",
 	matchTournament:"/match-tournament"
 
