@@ -12,7 +12,7 @@ import Footer from "../footer/footer"
 import {SAVED_PART} from "../../gql/participate/mutation"
 import {GET_ONE_TOURNAMENT} from "../../gql/tournament/query"
 import {RootState} from "../../reducer"
-import {GetTeamUtils} from "../league/utils"
+import {GetTeamUtils,SavedPartTournament,PartTournament} from "../league/utils"
 import {Translation} from "../../lang/translation"
 import {Tournament} from "../models/tournament"
 import Apex from "../../assets/image/apex-legends.png"
@@ -67,43 +67,47 @@ const ConfirmPart = function() {
 	},[loading,error,data])
 
 	const [savedPartTournament]  = useMutation(SAVED_PART)
+	let variables:PartTournament = {
+		uidUser: userConnectedRedux.user.uid.toString(),
+		date:(new Date().toLocaleString()),
+		tournamentUid:tournament ? tournament.uid : "",
+		teamsUid: "",
+	}
 
 	const handlePartTournament = async function(){
 		setShowPaiement(!showPaiement)
 		let isError:boolean = false
+		let saved:number = 0
 
 		if(tournament?.isTeam) {
 			const teams = await GetTeamUtils(userConnectedRedux.user.uid)
+			console.log(teams)
 			if(!teams) {
 				isError = true
 				toast(Translation(userConnectedRedux.user.language).tournament.notifyError)
-
 			} else if(teams && teams.length > 1) {
 				setIsOpen(true)
 				setTeam(teams)
-			} else {
-				setSelectedTeam(teams[0].uid)
+				if(selectedTeam) {
+					variables.teamsUid = selectedTeam
+					saved = await SavedPartTournament(variables)
+				}
+			} else if(teams && teams.length == 1) {
+				variables.teamsUid = teams[0].uid
+				saved = await SavedPartTournament(variables)
 			}
+		} else if(!tournament?.isTeam && !isError) {
+			saved = await SavedPartTournament(variables)
 		}
 
-		if(!isError) {
-			const saved = await savedPartTournament({
-				variables: {
-					uidUser: userConnectedRedux.user.uid,
-					date:(new Date().toLocaleString()),
-					tournamentUid:tournament?.uid,
-					teamsUid:tournament?.isTeam && team.length > 0 ? selectedTeam : "",
-				}
-			})
-			if(saved) {
-				const dataTournament:Part_TOURNAMENT = {
-					uidTournament:tournament?.uid,
-					userUid:userConnectedRedux.user.uid,
-					confirmed:saved.data.createPartMatch
-				}
-				params.push(NameRoutes.tournament)
-				disptach(SaveParticipateTournamentAction(dataTournament))
+		if(saved) {
+			const dataTournament:Part_TOURNAMENT = {
+				uidTournament:tournament?.uid,
+				userUid:userConnectedRedux.user.uid,
+				confirmed:saved
 			}
+			params.push(NameRoutes.tournament)
+			disptach(SaveParticipateTournamentAction(dataTournament))
 		}
 	}
 	const onShowClose = function(){
