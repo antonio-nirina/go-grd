@@ -1,7 +1,6 @@
 package delivery
 
 import (
-	"encoding/json"
 	"fmt"
 
 	"github.com/graphql-go/graphql"
@@ -79,11 +78,8 @@ func (p *participate) SavedPartResolver(params graphql.ResolveParams) (interface
 	tournamentUid, _ := params.Args["tournamentUid"].(string)
 	waggerUid, _ := params.Args["waggerUid"].(string)
 	// leagueUid, _ := params.Args["leagueUid"].(string)
-	jsonString, _ := json.Marshal(params.Args["teamsUid"])
-	teams := teamsElements{}
-	json.Unmarshal([]byte(jsonString), &teams)
+	teams := params.Args["teamsUid"].(string)
 	var uidUser string
-	var uidTeam []string 
 	tournamentObject := tEntity.Tournament{}
 	waggerObject := waggerEntity.Wagger{}
 	IsTournament := false
@@ -119,15 +115,11 @@ func (p *participate) SavedPartResolver(params graphql.ResolveParams) (interface
 		waggerObject = wagger
 	}
 		// IsTeam
-	if len(teams.Uid) > 0 {
-		for _, val := range teams.Uid {
-			team, err := p.team.FindOneTeamHandler(val)
+	if teams != "" {
+		_, err := p.team.FindOneTeamHandler(teams)
 			if err != nil {
 				return nil, err
 			}
-
-			uidTeam = append(uidTeam, team.Uid.Hex())
-		}
 	}
 
 	part := &entity.Participate{
@@ -135,7 +127,7 @@ func (p *participate) SavedPartResolver(params graphql.ResolveParams) (interface
 		Date:       date,
 		User:       uidUser,
 		Tournament: tournamentObject,
-		Team:       uidTeam,
+		Team:       teams,
 		//League:     leagueObject,
 		IsWin:               false,
 		IsTournament:        IsTournament,
@@ -150,7 +142,7 @@ func (p *participate) SavedPartResolver(params graphql.ResolveParams) (interface
 	if err != nil {
 		return nil, err
 	}
-	
+
 	return res, nil
 }
 

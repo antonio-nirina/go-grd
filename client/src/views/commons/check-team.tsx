@@ -5,13 +5,12 @@ import "reactjs-popup/dist/index.css"
 
 import { NameRoutes } from "../commons/route-list"
 import "./css/popup.css"
+import {TeamModel} from "../models/team"
 
 
-
-
-type TeamPopup = {
+export interface TeamPopup {
 	handleOpen:Function,
-	content:string
+	content:string|TeamModel[]
 	isShow:boolean
 }
 

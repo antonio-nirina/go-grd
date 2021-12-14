@@ -16,3 +16,10 @@
 	background-color: #dd0000;
 	padding: 10px;
 }
+
+.list-team .team-name-popup:hover {
+	background-color: #fff;
+	color: initial;
+	border-radius: 5px;
+	cursor: pointer;
+}

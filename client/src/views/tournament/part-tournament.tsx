@@ -104,7 +104,7 @@ const PartTournament:React.FC<PartTournamentType> = function ({tournament,parts}
 		<div className="item-info-right">
 			<div className="join-all">
 				<p className="team-bar-title">{teamPart}</p>
-				<ToastContainer />
+				<ToastContainer position="bottom-left" />
 				{tournament && parseInt(tournament?.priceParticipate) ?
 					<button className="btn bg-red" onClick={onShowConfirmed}>{!showPaiement && !isPart ? "Rejoindre" : (isPart ? "Quitter le tournois" : "Quitter")}</button>
 					:
