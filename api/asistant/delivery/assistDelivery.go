@@ -1,23 +1,15 @@
 package delivery
 
 import (
-	"strings"
-	"unicode"
-
 	"github.com/graphql-go/graphql"
 	"github.com/thoussei/antonio/api/asistant/entity"
 	"github.com/thoussei/antonio/api/asistant/handler"
 	"go.mongodb.org/mongo-driver/bson/primitive"
-
-	"golang.org/x/text/runes"
-	"golang.org/x/text/transform"
-	"golang.org/x/text/unicode/norm"
 )
 
 
 type AsistResolver interface {
 	SavedAsistResolver(params graphql.ResolveParams) (interface{}, error)
-	SavedSubjectResolver(params graphql.ResolveParams) (interface{}, error)
 	FindAsistResolver(params graphql.ResolveParams) (interface{}, error)
 	FindSubjectResolver(params graphql.ResolveParams) (interface{}, error)
 	FindAllAsistResolver(params graphql.ResolveParams) (interface{}, error)
@@ -37,57 +29,24 @@ func NewResolverAsist(asistUseCase handler.UsecaseAsist) AsistResolver {
 }
 
 func (h *asist) SavedAsistResolver(params graphql.ResolveParams) (interface{}, error){
-	titleUid, _ := params.Args["title"].(string)
-	content, _ := params.Args["content"].(string)
+	title, _ := params.Args["title"].(string)
 	underTitle, _ := params.Args["underTitle"].(string)
-	locationHome, _ := params.Args["location"].(string)
-	title,err := h.asistHandler.FindSubjectHandler(titleUid)
-
-	if err != nil {
-		return nil,err
-	}
-
-	uid,_:= primitive.ObjectIDFromHex(title.Uid)
+	
 	newTitle := entity.Subject{
-		Uid:uid,       
+		Uid:primitive.NewObjectID(),       
 		Title:title.Title,
-		Description:title.Description,
+		Content:title.Description,
 		Tag:title.Tag,
 	}
 
 	asist := &entity.Asistant{
 		Uid: primitive.NewObjectID(),
-		Title:newTitle,
-		Location:locationHome,
-		Content:content, 
-		UnderTitle:underTitle,
+		Title:title,
+		UnderTitle:newTitle,
 		Statut:true,    			
 	}
 
 	res,err := h.asistHandler.SavedAsistHandler(asist)
-
-	if err != nil {
-		return nil, err
-	}
-
-	return res,nil
-}
-
-func (h *asist) SavedSubjectResolver(params graphql.ResolveParams) (interface{}, error) {
-	title, _ := params.Args["title"].(string)
-	description, _ := params.Args["description"].(string)
-	t := transform.Chain(norm.NFD, runes.Remove(runes.In(unicode.Mn)), norm.NFC)
-	result, _, _ := transform.String(t, title)
-
-	subject := &entity.Subject{
-		Uid: primitive.NewObjectID(),
-		Title:title,
-		Description:description,
-		Statut:true, 
-		Tag:strings.Replace(result," ","_",-1),			
-	}
-
-	res,err := h.asistHandler.SavedSubjectHandler(subject)
 
 	if err != nil {
 		return nil, err

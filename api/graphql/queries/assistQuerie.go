@@ -65,19 +65,3 @@ func FindAllSubject() *graphql.Field {
 		Resolve: asistResolver.FindAllSubjectResolver,
 	}
 }
-
-func FindAssistBySubject() *graphql.Field {
-	return &graphql.Field{
-		Type:        graphql.NewList(types.SubjectAssistSchemaType),
-		Args: graphql.FieldConfigArgument{
-			"limit": &graphql.ArgumentConfig{
-				Type: graphql.Int,
-			},
-			"pageNumber": &graphql.ArgumentConfig{
-				Type: graphql.Int,
-			},
-		},
-		Description: "Get all page assist by subject",
-		Resolve: asistResolver.FindAssistBySubjectResolver,
-	}
-}

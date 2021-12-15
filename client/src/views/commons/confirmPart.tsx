@@ -1,19 +1,19 @@
 import React,{useState,useEffect} from "react"
-import {useMutation,useQuery} from "@apollo/client"
+import {useQuery} from "@apollo/client"
 import {useHistory } from "react-router-dom"
 import { useSelector,useDispatch } from "react-redux"
+import { ToastContainer, toast } from 'react-toastify'
+import Popup from "reactjs-popup"
+import 'react-toastify/dist/ReactToastify.css'
+import "reactjs-popup/dist/index.css"
 
 import Header from "../header/header"
 import Footer from "../footer/footer"
-
-import {SAVED_PART} from "../../gql/participate/mutation"
 import {GET_ONE_TOURNAMENT} from "../../gql/tournament/query"
 import {RootState} from "../../reducer"
-import {GetTeamUtils} from "../league/utils"
+import {GetTeamUtils,SavedPartTournament,PartTournament} from "../league/utils"
 import {Translation} from "../../lang/translation"
 import {Tournament} from "../models/tournament"
-import {User} from "../models/tournament"
-
 import Apex from "../../assets/image/apex-legends.png"
 import Fifa21 from "../../assets/image/fifa21.png"
 import Fortnite from "../../assets/image/fortnite.png"
@@ -25,15 +25,31 @@ import Rainbowsix from "../../assets/image/rainbowsix.png"
 import {dateStringToDHString} from "../tools/dateConvert"
 import {NameRoutes} from "./route-list"
 import {SaveParticipateTournamentAction,Part_TOURNAMENT} from "../tournament/action/tournamentAction"
-import PopupTeam from "../commons/check-team"
+import {TeamPopup} from "../commons/check-team"
+import {TeamModel} from "../models/team"
+import "../parametre/team/team.css"
+import "./css/popup.css"
 
+
+interface ElementTeam {
+	uid:string,
+	name:string,
+	creationDate:string,
+	creator:string,
+	logo:string
+}
+
+interface NewTeamPopup extends TeamPopup  {
+	handleTeamSelected:Function
+}
 
 const ConfirmPart = function() {
 	const disptach = useDispatch()
 	const [isOpen, setIsOpen] = useState(false)
-	const [message,setMessage] = useState<string>("")
 	const [tournament, setTournament] = useState<Tournament>()
+	const [team,setTeam] = useState<TeamModel[]>([])
 	const [showPaiement, setShowPaiement] = useState<boolean>(false)
+	const [selectedTeam,setSelectedTeam] = useState<string>("")
 	const userConnectedRedux = useSelector((state:RootState) => state.userConnected)
 	const params = useHistory<any>()
 
@@ -49,32 +65,47 @@ const ConfirmPart = function() {
 		}
 	},[loading,error,data])
 
-	const [savedPartTournament]  = useMutation(SAVED_PART)
+	let variables:PartTournament = {
+		uidUser: userConnectedRedux.user.uid.toString(),
+		date:(new Date().toLocaleString()),
+		tournamentUid:tournament ? tournament.uid : "",
+		teamsUid: "",
+	}
 
 	const handlePartTournament = async function(){
 		setShowPaiement(!showPaiement)
 		let isError:boolean = false
-		let arrayUidTeam:string[] = []
+		let saved:number = 0
+
 		if(tournament?.isTeam) {
-			const check = await GetTeamUtils(userConnectedRedux.user.uid)
-			if(!check) {
+			const teams = await GetTeamUtils(userConnectedRedux.user.uid)
+			console.log(teams)
+			if(!teams) {
 				isError = true
-				setMessage(Translation(userConnectedRedux.user.language).tournament.notifyError)
-			} else if(check && check.length === 0) {
-				isError = true
-			}
-		}
-		if(!isError) {
-			const saved = await savedPartTournament({ variables: { uidUser: userConnectedRedux.user.uid,date:(new Date().toLocaleString()),tournamentUid:tournament?.uid,teamsUid:{uid:arrayUidTeam.length > 0 ? arrayUidTeam[0] : ""} } })
-			if(saved) {
-				const dataTournament:Part_TOURNAMENT = {
-					uidTournament:tournament?.uid,
-					userUid:userConnectedRedux.user.uid,
-					confirmed:saved.data.createPartMatch
+				toast(Translation(userConnectedRedux.user.language).tournament.notifyError)
+			} else if(teams && teams.length > 1) {
+				setIsOpen(true)
+				setTeam(teams)
+				if(selectedTeam) {
+					variables.teamsUid = selectedTeam
+					saved = await SavedPartTournament(variables)
 				}
-				params.push(NameRoutes.tournament)
-				disptach(SaveParticipateTournamentAction(dataTournament))
+			} else if(teams && teams.length === 1) {
+				variables.teamsUid = teams[0].uid
+				saved = await SavedPartTournament(variables)
 			}
+		} else if(!tournament?.isTeam && !isError) {
+			saved = await SavedPartTournament(variables)
+		}
+
+		if(saved) {
+			const dataTournament:Part_TOURNAMENT = {
+				uidTournament:tournament?.uid,
+				userUid:userConnectedRedux.user.uid,
+				confirmed:saved
+			}
+			params.push(NameRoutes.tournament)
+			disptach(SaveParticipateTournamentAction(dataTournament))
 		}
 	}
 	const onShowClose = function(){
@@ -83,6 +114,10 @@ const ConfirmPart = function() {
 
 	const handlePopup = function(isclose:boolean) {
 		setIsOpen(false)
+	}
+
+	const handleTeamselect = function(params:string) {
+		setSelectedTeam(params)
 	}
 
 	// handleClosePayement(showClose)
@@ -94,18 +129,24 @@ const ConfirmPart = function() {
 				<div className="main">
 					<div className="participate league joingame confirm">
 						<h2>{tournament?.game.name}</h2>
+						<ToastContainer position="bottom-left" />
 						<div className="item-info-left">
 		              	<div className="item-img-info">
 		                	<img src={tournament?.game.slug === "vanguard" ? CodVanguard : (tournament?.game.slug === "fortnite" ? Fortnite : (tournament?.game.slug ==="fifa21" ? Fifa21 : (tournament?.game.slug ==="ops" ? CodL : (tournament?.game.slug ==="warzone" ? Warzone : (tournament?.game.slug ==="rainbows" ? Rainbowsix : (tournament?.game.slug ==="apexlegends"?Apex:Rocketleague))))) )} alt=""/>
 		              	</div>
 		            	<div className="item-all-content">
-							{message ? <div style={{color:"#dd0000;"}} >{message}</div>: <></>}
 							<div className="item-all-info">
 								<p><span>Format</span></p>
 								<p><span>Début des inscriptions</span></p>
 								<p>{dateStringToDHString(tournament?.dateStart).replace(","," -")}</p>
 							</div>
-							<PopupTeam handleOpen={handlePopup} isShow={isOpen} content="" />
+							{isOpen ? <PoupListTeam
+											handleOpen={handlePopup}
+											isShow={isOpen}
+											content={team}
+											handleTeamSelected={handleTeamselect}
+										/>
+									: <></>}
 							<div className="item-all-info">
 								<p><span>Spectateurs</span></p>
 								<p className="item-text-left">{tournament?.spectateur}</p>
@@ -134,6 +175,90 @@ const ConfirmPart = function() {
 			</div>
 
 		</div>
+	)
+}
+
+const PoupListTeam = function({handleOpen,isShow,content,handleTeamSelected}:NewTeamPopup) {
+	const [isOpen,setIsOpen] = useState<boolean>(true)
+	const [teamSelected, setTeamSelected] = useState<ElementTeam[]>([])
+
+	useEffect(()=> {
+		setIsOpen(isShow)
+	},[isShow])
+
+	const handleClose = function() {
+		setIsOpen(false)
+		handleOpen(false)
+	}
+	const handleSelected = function(team:TeamModel) {
+		const checked = teamSelected.find((e:ElementTeam) => team.uid === e.uid)
+		if(!checked && teamSelected.length === 0 && team.players.length > 1) {
+			let selectedUser:ElementTeam[] = []
+			let element:ElementTeam = {
+				uid:team.uid,
+				name:team.name,
+				creationDate:team.creationDate,
+				creator:team.creator,
+				logo:team.logo
+			}
+			handleTeamSelected(team.uid)
+			selectedUser = [...teamSelected,element]
+			setTeamSelected(selectedUser)
+		}
+	}
+
+	const handleRemoved = function(uid:string) {
+		let newElement = teamSelected.filter((el:ElementTeam) => el.uid !== uid )
+		setTeamSelected(newElement)
+	}
+
+	return (
+		<Popup
+			open={isOpen}
+			modal
+			nested
+			onClose={handleClose}
+			closeOnDocumentClick>
+			{(close:any) => (
+				<div className="modal">
+					<button className="close-popup" onClick={()=> handleClose()}>
+						&times;
+					</button>
+					<div className="bar-title">
+						<h2>Choissiez votre équipe</h2>
+					</div>
+					<div className="actions">
+						<div className="body">
+						<div className="group-team">
+							{teamSelected.map(function(params:ElementTeam,index:number) {
+								return(
+									<div className="choice-team" key={index}>
+										<div className="username-choice">{params.name}</div>
+										<div className="close-rem" onClick={()=>handleRemoved(params.uid)}>
+											&times;
+										</div>
+									</div>
+								)
+							})}
+						</div>
+							<div className="content">
+								{typeof content === "object"
+								?
+								content.map(function(el:TeamModel,index:number){
+									return (
+										<div className="list-team"  key={index} onClick={() => handleSelected(el)}>
+											<div className="team-name-popup" style={{"textAlign":"left"}}>{el.name}</div>
+										</div>
+									)
+								})
+								: content
+								}
+							</div>
+						</div>
+					</div>
+				</div>
+			)}
+		</Popup>
 	)
 }
 

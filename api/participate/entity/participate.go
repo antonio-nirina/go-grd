@@ -14,7 +14,7 @@ type Participate struct {
 	Uid        primitive.ObjectID    `bson:"uid"`
 	Date       string                `json:"date"`
 	User       string             `json:"user,omitempty"`
-	Team       []string           `json:"team,omitempty"`
+	Team       string           `json:"team,omitempty"`
 	Tournament tournament.Tournament `json:"tournament,omitempty"`
 	Wagger     wagger.Wagger         `json:"wagger,omitempty"`
 	// League 		league.League 		`json:"league,omitempty"`

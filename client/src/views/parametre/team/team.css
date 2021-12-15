@@ -1,0 +1,38 @@
+.edit .list-user{
+	display: flex;
+	margin-bottom: 3px;
+}
+.edit .list-user .username{
+	margin-left: 4px;
+}
+
+.edit .list-user:hover{
+	background-color: #ffff;
+	border-radius: 5px;
+	cursor: pointer;
+	padding-top: 2px;
+	padding-bottom: 2px;
+	color: #dd0000;
+}
+.group-team{
+	display: flex;
+	margin-top: 12px;
+	margin-bottom: 12px;
+}
+
+.group-team .choice-team {
+	display: flex;
+	border: 1px solid #dd0000;
+	box-sizing: border-box;
+	border-radius: 16px;
+	color: #d8d8d8;
+	padding: 0 20px;
+	margin-right: 11px;
+	position: relative;
+}
+
+.choice-team .close-rem {
+	position: absolute;
+	right: 7px;
+	cursor: pointer;
+}

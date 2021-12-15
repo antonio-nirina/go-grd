@@ -251,8 +251,25 @@ func (c *driverRepository) UpdatedGameUserRepo(uidUser primitive.ObjectID, uidGa
 	return updateResult.ModifiedCount, nil
 }
 
-/*func (c *driverRepository) UpdateAccountGame(email string) (entity.User, error) {
+func (c *driverRepository) FindUsernameFilterRepository(username string) ([]entity.User, error) {
 	var collection = c.client.Database("grd_database").Collection("users")
-	var result entity.User
+	var results []entity.User
+	regex := primitive.Regex{Pattern: ".*"+username+".*", Options: "i"}
+	cur, err := collection.Find(context.TODO(), bson.D{{"username",regex}}, options.Find().SetSort(bson.M{"_id": -1}))
+	if err != nil {
+		return nil, err
+	}
 
-}*/
+	for cur.Next(context.TODO()) {
+		var elem entity.User
+		err := cur.Decode(&elem)
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		results = append(results, elem)
+	}
+	cur.Close(context.TODO())
+
+	return results, nil
+}

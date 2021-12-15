@@ -355,7 +355,7 @@ p.item-text-left{
 }
 .general .bar-menu-top li #general,
 .table .bar-menu-top li #tableau,
-.rule .bar-menu-top li #rule
+.rule .bar-menu-top li #rule,
 .match .bar-menu-top li #match
 {
 	border-bottom: 2px solid #dd0000;

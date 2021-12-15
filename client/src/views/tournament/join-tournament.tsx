@@ -1,6 +1,5 @@
 import React,{useState,useEffect} from "react"
 import {useQuery} from "@apollo/client"
-import { useHistory } from "react-router-dom"
 
 
 import Header from "../header/header"
@@ -24,12 +23,11 @@ import {Tournament,Platform} from "../models/tournament"
 import {ParticipateTournament} from "../models/participate"
 import PartTournament,{PartTournamentType} from "./part-tournament"
 import HeaderTournament,{HeaderTournamentType} from "./common/headerTournament"
-import { NameRoutes } from "../commons/route-list"
+
 
 
 
 const Joingame: React.FC = function(props:any) {
-	const history = useHistory()
   	const [tournament, setTournament] = useState<Tournament>()
 	const [parts, setParts] = useState<ParticipateTournament[]>()
 
@@ -45,7 +43,6 @@ const Joingame: React.FC = function(props:any) {
 	})
 
 	useEffect(() => {
-		if(!params) history.push(NameRoutes.home)
 		if(!loading && !error && data) {
 			let arrayPl:string[] = []
 			let sum = 0

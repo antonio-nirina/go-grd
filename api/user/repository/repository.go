@@ -21,4 +21,5 @@ type Repository interface {
 	FindOneUserByUid(objectId primitive.ObjectID) (entity.User, error)
 	CountUserRepository() (int, error)
 	UpdatedGameUserRepo(uidUser primitive.ObjectID, uidGame []gameEntity.Game,uidPlateform []gameEntity.GamePlatform) (interface{}, error)	
+	FindUsernameFilterRepository(username string) ([]entity.User, error)
 }

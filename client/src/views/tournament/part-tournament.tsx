@@ -1,7 +1,9 @@
 import React,{useState,useEffect} from "react"
 import {useMutation} from "@apollo/client"
-import { Link } from "react-router-dom"
+import { useHistory } from "react-router-dom"
 import { useSelector } from "react-redux"
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 import {LEAVE_PART_TOURNAMENT} from "../../gql/participate/mutation"
 import {Tournament} from "../models/tournament"
@@ -10,8 +12,8 @@ import ContentPaiement from "../commons/contentPaiement"
 import {checkInTeam} from "../league/utils"
 import {RootState} from "../../reducer"
 import { NameRoutes } from "../commons/route-list"
-import {TeamModel} from "../models/team"
 import PopupTeam from "../commons/check-team"
+
 
 export type PartTournamentType = {
 	tournament:Tournament|undefined,
@@ -20,10 +22,10 @@ export type PartTournamentType = {
 
 
 const PartTournament:React.FC<PartTournamentType> = function ({tournament,parts}) {
+	const history = useHistory()
 	const userConnectedRedux = useSelector((state:RootState) => state.userConnected)
 	const [isPart,setIsPart] = useState<boolean>(false)
 	const [teamPart,setTeamPart] = useState<string>("")
-	const [message,setMessage] = useState<string>("")
 	const [partUid,setPartUid] = useState<string>("")
 	const [partData,setPartData] = useState<string[]>([])
 	const [showPaiement, setShowPaiement] = useState<boolean>(false)
@@ -34,9 +36,9 @@ const PartTournament:React.FC<PartTournamentType> = function ({tournament,parts}
 
 	useEffect(() => {
 		if(tournament?.isTeam) {
-			setTeamPart(`Equipes ${parts && parts?.length > 1 ? parts?.length : 0} / ${tournament.numberParticipate}`)
-		} else if(!tournament?.isTeam) {
-			setTeamPart("One to one")
+			setTeamPart(`Equipes ${parts && parts?.length > 0 ? parts?.length : 0} / ${tournament.numberParticipate}`)
+		} else if(tournament && !tournament?.isTeam) {
+			setTeamPart(`${parts && parts?.length > 0 ? parts?.length : 0} / ${tournament.numberParticipate}`)
 		}
 		parts?.forEach(function(part:ParticipateTournament){
 			if(part.user.uid === userConnectedRedux.user.uid) {
@@ -71,17 +73,17 @@ const PartTournament:React.FC<PartTournamentType> = function ({tournament,parts}
 
 	const handleClose = function() {
 		setShowPaiement(false)
-		setMessage("")
 	}
 
 	const handleLeave = async function() {
 		const leave = await leavePartTournament({variables:{uid:partUid,userUid:userConnectedRedux.user.uid}})
-		if(leave.data) setMessage("Votre desincription a été effectué")
+		if(leave.data) {
+			toast("Votre desincription a été effectué!")
+		}
 		setIsPart(false)
 	}
 
 	const handleTeam = async function() {
-		// `${NameRoutes.confirmedJoinTournament}?uid=${tournament?.uid}`
 		const check = await checkInTeam(userConnectedRedux.user.uid)
 		if(!check && tournament?.isTeam) {
 			setIsOpen(true)
@@ -89,6 +91,8 @@ const PartTournament:React.FC<PartTournamentType> = function ({tournament,parts}
 		} else if(check  && tournament?.isTeam && check === 1) {
 			setIsOpen(true)
 			setContent("Vérifie que tu as assez de membres")
+		} else {
+			history.push(`${NameRoutes.confirmedJoinTournament}?uid=${tournament?.uid}`)
 		}
 	}
 
@@ -100,6 +104,7 @@ const PartTournament:React.FC<PartTournamentType> = function ({tournament,parts}
 		<div className="item-info-right">
 			<div className="join-all">
 				<p className="team-bar-title">{teamPart}</p>
+				<ToastContainer position="bottom-left" />
 				{tournament && parseInt(tournament?.priceParticipate) ?
 					<button className="btn bg-red" onClick={onShowConfirmed}>{!showPaiement && !isPart ? "Rejoindre" : (isPart ? "Quitter le tournois" : "Quitter")}</button>
 					:
@@ -108,7 +113,11 @@ const PartTournament:React.FC<PartTournamentType> = function ({tournament,parts}
 							{!showPaiement && !isPart ? "Rejoindre" : "Quitter"}
 						</span>
 						:
-						<button style={{"cursor":"pointer"}} className="btn bg-red" onClick={handleLeave}>Quitter le tournois</button>
+						<button
+							style={{"cursor":"pointer"}}
+							className="btn bg-red"
+							onClick={handleLeave}>Quitter le tournois
+						</button>
 					)
 				}
 				<div className="profil-join">
