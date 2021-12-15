@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from "react"
-import {useMutation,useQuery} from "@apollo/client"
+import {useQuery} from "@apollo/client"
 import {useHistory } from "react-router-dom"
 import { useSelector,useDispatch } from "react-redux"
 import { ToastContainer, toast } from 'react-toastify'
@@ -9,7 +9,6 @@ import "reactjs-popup/dist/index.css"
 
 import Header from "../header/header"
 import Footer from "../footer/footer"
-import {SAVED_PART} from "../../gql/participate/mutation"
 import {GET_ONE_TOURNAMENT} from "../../gql/tournament/query"
 import {RootState} from "../../reducer"
 import {GetTeamUtils,SavedPartTournament,PartTournament} from "../league/utils"
@@ -66,7 +65,6 @@ const ConfirmPart = function() {
 		}
 	},[loading,error,data])
 
-	const [savedPartTournament]  = useMutation(SAVED_PART)
 	let variables:PartTournament = {
 		uidUser: userConnectedRedux.user.uid.toString(),
 		date:(new Date().toLocaleString()),
@@ -92,7 +90,7 @@ const ConfirmPart = function() {
 					variables.teamsUid = selectedTeam
 					saved = await SavedPartTournament(variables)
 				}
-			} else if(teams && teams.length == 1) {
+			} else if(teams && teams.length === 1) {
 				variables.teamsUid = teams[0].uid
 				saved = await SavedPartTournament(variables)
 			}

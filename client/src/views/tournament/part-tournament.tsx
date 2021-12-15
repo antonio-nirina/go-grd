@@ -36,9 +36,9 @@ const PartTournament:React.FC<PartTournamentType> = function ({tournament,parts}
 
 	useEffect(() => {
 		if(tournament?.isTeam) {
-			setTeamPart(`Equipes ${parts && parts?.length > 1 ? parts?.length : 0} / ${tournament.numberParticipate}`)
-		} else if(!tournament?.isTeam) {
-			setTeamPart("One to one")
+			setTeamPart(`Equipes ${parts && parts?.length > 0 ? parts?.length : 0} / ${tournament.numberParticipate}`)
+		} else if(tournament && !tournament?.isTeam) {
+			setTeamPart(`${parts && parts?.length > 0 ? parts?.length : 0} / ${tournament.numberParticipate}`)
 		}
 		parts?.forEach(function(part:ParticipateTournament){
 			if(part.user.uid === userConnectedRedux.user.uid) {

@@ -22,7 +22,7 @@ func NewRateRepository(client *mongo.Client) *driverRepository {
 }
 
 type RepositoryRate interface {
-	SavedRepoRate(team *entity.Rate) (interface{}, error)
+	SavedRepoRate(rate *entity.Rate) (interface{}, error)
 	FindRateRepo(idQuery primitive.ObjectID) (entity.Rate, error)
 	FindAllRateRepo(pageNumber int64, limit int64) ([]entity.Rate, error)
 	FindRateByUserRepo(uidUser string) (entity.Rate, error)

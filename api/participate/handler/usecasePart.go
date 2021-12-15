@@ -62,6 +62,7 @@ func (p *partUsecase) SavedPartHandler(part *entity.Participate) (interface{}, e
 		}
 	}
 
+	
 	message := fmt.Sprintf("%s%s%s%s%s","Ta demande de participaer au tournoi",plateform,"-",part.Tournament.Game.Name,"a bien été effectué avec succes")
 	mailer := external.ToMailer{
 		Email: user.Email,
@@ -72,7 +73,8 @@ func (p *partUsecase) SavedPartHandler(part *entity.Participate) (interface{}, e
 	}
 
 	mailer.InitialeMailjet()
-
+	
+	
 	return rec, nil
 }
 

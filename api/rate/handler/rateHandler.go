@@ -186,38 +186,38 @@ func (r *rateUsecase) FindRateInWeekHandler(date time.Time) ([]RateViewModel, er
 }
 
 func (r *rateUsecase) FindRateCreateOrUpdatedHandler(uidUser string, uid string) (interface{}, error) {
-	var rate entity.Rate
-	var objectId primitive.ObjectID
-
-	if uid != "" {
-		rate = entity.Rate{
+	var rate *entity.Rate
+	
+	if uid == "" {
+		rate = &entity.Rate{
 			Uid:     primitive.NewObjectID(),
 			Created: time.Now().Format(time.RFC1123Z),
 			Updated: time.Now().Format(time.RFC1123Z),
 			User:    uidUser,
 			Score:   userEntity.POINT,
 		}
-		objectId = rate.Uid
-		_, err := r.rateRepository.SavedRepoRate(&rate)
-	
+		_, err := r.rateRepository.SavedRepoRate(rate)
+
 		if err != nil {
 			return nil, err
 		}
+		
 	} else {
 		rateUser, err := r.FindRateByUserHandler(uidUser)
 		
 		if err != nil {
 			return nil, err
 		}
+		var objectId primitive.ObjectID
 		objectId, _ = primitive.ObjectIDFromHex(uid)
-		rate = entity.Rate{
+		rate = &entity.Rate{
 			Uid:     rateUser.Uid,
 			Created: rateUser.Created,
 			Updated: rateUser.Updated,
 			User:    rateUser.User,
 			Score:   rateUser.Score + userEntity.POINT,
 		}
-		_, err = r.rateRepository.FindRateCreateOrUpdatedRepo(objectId, &rate)
+		_, err = r.rateRepository.FindRateCreateOrUpdatedRepo(objectId, rate)
 	
 		if err != nil {
 			return nil, err

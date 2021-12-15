@@ -4,6 +4,7 @@ import (
 	"github.com/thoussei/antonio/api/external"
 	"github.com/thoussei/antonio/api/post/entity"
 	"github.com/thoussei/antonio/api/post/repository"
+	rateHandler "github.com/thoussei/antonio/api/rate/handler"
 	userHanlder "github.com/thoussei/antonio/api/user/handler"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
@@ -33,12 +34,14 @@ type UsecasePost interface {
 type postUsecase struct {
 	postRepository repository.RepositoryPost
 	userUsecase userHanlder.Usecase
+	rateUsecase rateHandler.UsecaseRate
 }
 
-func NewUsecasePost(r repository.RepositoryPost, u userHanlder.Usecase) UsecasePost {
+func NewUsecasePost(r repository.RepositoryPost, u userHanlder.Usecase,rate rateHandler.UsecaseRate) UsecasePost {
 	return &postUsecase{
 		postRepository: r,
 		userUsecase:u,
+		rateUsecase:rate,
 	}
 }
 
@@ -59,6 +62,12 @@ func (c *postUsecase) CreatePostHandler(cmty *entity.Post) ([]PostViewModel, err
 	}
 
 	result, err := c.postRepository.FindAllPostRepo(PAGE_NUMBER, LIMIT)
+
+	if err != nil {
+		return []PostViewModel{}, err
+	}
+
+	_,err = c.rateUsecase.FindRateCreateOrUpdatedHandler(cmty.User,"")
 
 	if err != nil {
 		return []PostViewModel{}, err
