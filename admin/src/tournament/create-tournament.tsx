@@ -231,7 +231,11 @@ const CreateTournament: React.FC = function() {
 													onChange={handleDate}
 													inputProps={{placeholder:"Date debut tournois"}}
 												/>
-												<Datetime locale="fr" onChange={handleDateLast} inputProps={{placeholder:"Fin d'inscription"}} />
+												<Datetime
+													locale="fr"
+													onChange={handleDateLast}
+													inputProps={{placeholder:"Fin d'inscription"}}
+												 />
 												<Select isMulti id="platform" onChange={handlePlateform} options={plateforms} />
 	                                            <select id="select-mode" onChange={handleGameWay}>
 	                                                <option value="">Selectionnez le mode de jeux...</option>
@@ -263,7 +267,8 @@ const CreateTournament: React.FC = function() {
 	                                            <div className="input-group">
 	                                                <input
 	                                                	type="number"
-	                                                	{...register("participant")} name="participant"
+	                                                	{...register("participant")}
+														name="participant"
 	                                                	placeholder="Nombre de participant"/>
 	                                            </div>
 												<input type="text" placeholder="Frais de participation" {...register("priceParticipate")} name="priceParticipate" className="no-margin"/>
@@ -272,10 +277,18 @@ const CreateTournament: React.FC = function() {
 														arrayFormCash.map(function(el:number,index:number) {
 															return (
 																<div className="tour" key={index}>
-																	<div className="new-position"><input onBlur={handleCashLaps} placeholder={`Prix à gagner position ${index+1}`} /></div>
+																	<div className="new-position">
+																		<input onBlur={handleCashLaps} placeholder={`Prix à gagner position ${index+1}`} /></div>
 																	<div className="flexible">
-																		<div onClick={addFormCash} className="add-tour btn bg-red"><i><FontAwesomeIcon icon={faPlus} size="lg"/></i>Ajouter Nouveau position</div>
-																		<div onClick={() => removeLineCash(index)} className= {index === 0 || arrayFormCash.length === 1 ? "d-none":"d-block"}><button className="btn bg-white"><i><FontAwesomeIcon icon={faTimes} size="lg"/></i>Supprimer</button></div>
+																		<div onClick={addFormCash} className="add-tour btn bg-red"><i>
+																			<FontAwesomeIcon icon={faPlus} size="lg"/></i>
+																			Ajouter Nouveau position
+																		</div>
+																		<div onClick={() => removeLineCash(index)} className= {index === 0 || arrayFormCash.length === 1 ? "d-none":"d-block"}>
+																			<button className="btn bg-white"><i><FontAwesomeIcon icon={faTimes} size="lg"/></i>
+																				Supprimer
+																			</button>
+																		</div>
 																	</div>
 																</div>
 															)
@@ -297,7 +310,8 @@ const CreateTournament: React.FC = function() {
 																</div>
 																<div className="flexible">
 																	<div onClick={addForm} className="add-tour btn bg-red"><i><FontAwesomeIcon icon={faPlus} size="lg"/></i>Ajouter Nouveau tour</div>
-																	<div onClick={() => removeLine(index)} className= {index === 0 || arrayForm.length === 1 ? "d-none":"d-block"}><button className="btn bg-white"><i><FontAwesomeIcon icon={faTimes} size="lg"/></i>Supprimer</button></div>
+																	<div onClick={() => removeLine(index)} className= {index === 0 || arrayForm.length === 1 ? "d-none":"d-block"}><button className="btn bg-white"><i>
+																		<FontAwesomeIcon icon={faTimes} size="lg"/></i>Supprimer</button></div>
 																</div>
 															</div>
 														)

@@ -29,11 +29,6 @@ const Admin: React.FC = function() {
 		        			<h1>Tableau de bord</h1>
 		        		</div>
 		        		<div className="dashboard">
-		        			<Link to ="/admin/league" className="grid league-board">
-		        				<img src="https://i.ibb.co/Vw39G5b/championship-rl.jpg" alt="#" />
-		        				<span className="grid-title">Ligue :</span>
-		        				<span className="grid-desc">Voir la liste des ligues disponibles</span>
-		        			</Link>
 		        			<Link to ="/admin/tournament" className="grid tournament-board no-mg-right">
 		        				<img src="https://i.ibb.co/TKD3yZT/apex-legends.webp" alt="#" />
 		        				<span className="grid-title">Tournois :</span>
@@ -46,8 +41,13 @@ const Admin: React.FC = function() {
 		        			</Link>
 		        			<Link to="/admin/communaute" className="grid community-board no-mg-right">
 		        				<img src={Community} alt="#" />
-		        				<span className="grid-title">Communauté</span>
+		        				<span className="grid-title">Communauté:</span>
 		        				<span className="grid-desc">Voir les derniers articles en vogue</span>
+		        			</Link>
+							<Link to ="/admin/list-assist" className="grid league-board">
+		        				<img src="https://i.ibb.co/Vw39G5b/championship-rl.jpg" alt="#" />
+		        				<span className="grid-title">Assistant :</span>
+		        				<span className="grid-desc">Voir les listes des questions </span>
 		        			</Link>
 		        		</div>
 	        		</div>
