@@ -18,14 +18,13 @@ type AsistResolver interface {
 }
 
 type inputAddAssist struct {
-	Title string         `json:"title"`
-	AssistInput []assistInputEl `json:"assistInputEl"`
+	AssistInput []assistInputEl `json:"assistInput"`
 }
 
 type assistInputEl struct {
 	Title string         `json:"title"`
-	Content string         `json:"Content"`
-	Tag string         `json:"Tag"`
+	Content string         `json:"content"`
+	Tag string         `json:"tag"`
 }
 
 type asist struct {
@@ -39,6 +38,7 @@ func NewResolverAsist(asistUseCase handler.UsecaseAsist) AsistResolver {
 }
 
 func (h *asist) SavedAsistResolver(params graphql.ResolveParams) (interface{}, error){
+	title, _ := params.Args["title"].(string)
 	jsonString, _ := json.Marshal(params.Args)
 	inputs := inputAddAssist{}
 	json.Unmarshal([]byte(jsonString), &inputs)
@@ -55,7 +55,7 @@ func (h *asist) SavedAsistResolver(params graphql.ResolveParams) (interface{}, e
 	
 	asist := &entity.Asistant{
 		Uid: primitive.NewObjectID(),
-		Title:inputs.Title,
+		Title:title,
 		UnderTitle:subj,
 		Statut:true,    			
 	}

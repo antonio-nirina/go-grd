@@ -9,7 +9,7 @@ import 'suneditor/dist/css/suneditor.min.css'
 
 import SideBar from "../header/sidebar"
 import Nav from "../header/nav"
-import {CREATE_SUBJECT} from "../gql/assist/mutation"
+import {CREATE_ASSIST} from "../gql/assist/mutation"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 interface Inputs {
@@ -23,23 +23,57 @@ interface ContentUnderTitle {
 	content:string
 }
 
+interface SubjectTitle {
+	title:string
+	content:string
+	tag:string
+}
+
 
 const CreateTitle = function() {
 	const history = useHistory()
 	const [arrayForm, setArrayForm] 	= useState<number[]>([1])
 	const [underTilte,setUnderTilte] 	= useState<ContentUnderTitle[]>([])
+	const [content,setContent] 	= useState<ContentUnderTitle[]>([])
 	const [number, setNumber] 			= useState<number>(1)
+	const [isErrorMax, setIsErrorMax] 			= useState<boolean>(false)
+	const [isErrorCnt, setIsErrorCnt] 			= useState<boolean>(false)
 	const [lapsDate, setLapsDate] 		= useState<string[]>([])
 	const { register, handleSubmit } 	= useForm<Inputs>()
-	const [createdTitle]   				= useMutation(CREATE_SUBJECT)
+	const [createdTitle]   				= useMutation(CREATE_ASSIST)
 
 	const onSubmit = async function(data:Inputs){
 		console.log("underTilte",underTilte)
+		console.log("content", content)
+		let array:SubjectTitle[] = []
+		underTilte.forEach(function(e:ContentUnderTitle){
+			let cnt = content.find((cnt:ContentUnderTitle) => {return cnt.key === e.key})
+			array.push({
+				title:e.title,
+				content:cnt?.content ? cnt.content : "",
+				tag:e.title.replace(" ","_").toLowerCase()
+			})
+		})
+		const result = await createdTitle({ variables: {
+			assistInput:array,
+			title:data.title,
+		} })
+		if (result.data.createPublication) {
+			history.push("/admin/list-assist")
+		}
 	}
 
 	const addForm = function() {
-		setNumber(number+1)
-		setArrayForm([...arrayForm,number+1])
+		let val = number+1
+		if(val > 4)setIsErrorMax(true)
+		if(content.length === 0) setIsErrorCnt(true)
+		if(val <= 4 && content.length > 0) {
+			setIsErrorCnt(false)
+			setIsErrorMax(false)
+			setNumber(val)
+			setArrayForm([...arrayForm,number+1])
+		}
+
 	}
 
 	const removeLine = function(index:number) {
@@ -52,27 +86,24 @@ const CreateTitle = function() {
 	}
 
 	const handleUnderTitle = function(index:number,cash:React.FormEvent<HTMLInputElement>) {
-		let array:ContentUnderTitle[] = []
 		let content:ContentUnderTitle = {
 			key:index,
 			title:cash.currentTarget.value,
 			content:""
 		}
-		array.push(content)
-
-		setUnderTilte([...underTilte,content])
+		let newTitle = [...underTilte,content]
+		setUnderTilte(newTitle)
 	}
 
-	const handleContentText = function(content: string) {
+	const handleContentText = function(index:number,contentData: string) {
 		let contentText:ContentUnderTitle = {
-			key:0,
+			key:index,
 			title:"",
-			content:content
+			content:contentData
 		}
-console.log("underTilte", underTilte)
-console.log("content", content)
-		setUnderTilte([...underTilte,contentText])
-		//setContent(content) (event) => handleContentText(index,event)
+
+		let newContent = [...content,contentText]
+		setContent(newContent)
 	}
 
 	return (
@@ -90,6 +121,8 @@ console.log("content", content)
 	        					<div className="field">
 		        					<div className="group-input">
 	                                    <form onSubmit={handleSubmit(onSubmit)}>
+											{isErrorMax ? <h2 style={{color:"#dd0000"}}>Vous pouvez pas depassé 4 contenu:</h2> : <></>}
+											{isErrorCnt ? <h2 style={{color:"#dd0000"}}>Il faut d'abord remplissez la première colonne:</h2> : <></>}
 	    									<label htmlFor="title-rules">Titre publication : </label>
 											<div></div>
 	    									<div className="input-group">
@@ -129,7 +162,7 @@ console.log("content", content)
 															</div>
 															<SunEditor
 																placeholder="Règle du jeux"
-																onChange={handleContentText}
+																onChange={(event) => handleContentText(index,event)}
 																setOptions={
 																	{
 																		buttonList:[
@@ -145,7 +178,7 @@ console.log("content", content)
 																		]
 																	}
 															} />
-													</div>
+														</div>
 
 													)
 												})
