@@ -24,8 +24,7 @@ import Joingame from "../waggers/joingame"
 import Resultat from "../waggers/resultat"
 import View from "../wager/view"
 import Lobby from "../wager/lobby"
-import Assistant from "../assistant/assistant"
-import Assistance from "../assistance/assistance"
+import NextAssistance from "../assistance/nextAssistant"
 import Contact from "../assistance/contact"
 import Communaute from "../communaute/communaute"
 import Stream from "../stream/stream"
@@ -82,8 +81,6 @@ const Router = function() {
 			<ProtectedRoute path="/view" exact component={View} />
 			<ProtectedRoute path="/lobby" exact component={Lobby} />
 			<ProtectedRoute path="/communaute" exact component={Communaute} />
-			<ProtectedRoute path="/assistant" exact component={Assistant} />
-			<ProtectedRoute path="/assistance" exact component={Assistance} />
 			<ProtectedRoute path="/contact" exact component={Contact} />
 			<ProtectedRoute path="/profil" exact component={Profil} />
 			<ProtectedRoute path="/setting" exact component={Parametre} />
@@ -106,6 +103,7 @@ const Router = function() {
 			<Route path="/code" exact component={Code} />
 			<Route path="/new-password" exact component={NewPassword} />
 			<Route path="/change" exact component={Change} />
+			<Route path="/assistance" exact component={NextAssistance} />
 
 		</Switch>
 	)

@@ -4,32 +4,23 @@ import {useQuery} from "@apollo/client"
 import Header from "../header/header"
 import Footer from "../footer/footer"
 import Aside from "../assistance/aside"
-import Support from "../assistance/support"
 
 import "../../assets/css/style.css"
 import "../assistance/assistance.css"
-import { faSortDown } from "@fortawesome/free-solid-svg-icons"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import {GET_ALL_ASSIST} from "../../gql/assist/query"
 import {Assist} from "../models/assist"
 
-const Assistance: React.FC = function() {
-	const [showDrop, setShowDrop] = useState<boolean>(false)
-	// const [showContent, setShowContent] = useState<Boolean>(false)
+const NextAssistance: React.FC = function() {
 	const [assists, setAssists] = useState<Assist[]>([])
 	const {loading,error,data} 	= useQuery(GET_ALL_ASSIST)
 
 	useEffect(() => {
-		console.log(data)
 		if(!loading && !error && data) {
-			setAssists(data.FindAssistBySubject)
+			console.log(data.FindAllAsist)
+			setAssists(data.FindAllAsist)
 		}
 
 	},[loading,error,data])
-
-	const onShowDrop = function(){
-	    setShowDrop(!showDrop)
-	}
 
   return(
   	<div className="assistance">
@@ -47,19 +38,13 @@ const Assistance: React.FC = function() {
 		  				<Aside assists={assists} />
 		  			</div>
 		  			<div className="support">
-		  				<Support/>
-		  				<div className="max-height" id="apex-legends">
-			  				<div onClick={onShowDrop} className= {!showDrop ? "support-container" :"support-container reduce"}>
-			  					<div className="under-title">
-			  						<p className="medium">Titre</p>
-			  						<p><span className="game-name">Sous titre</span></p>
-			  						<i><FontAwesomeIcon icon={faSortDown} /></i>
-			  					</div>
-			  					<div className="didacticiel">
-			  						content
-			  					</div>
-			  				</div>
-			  			</div>
+		  				{assists ? assists.map(function(el:Assist,index:number){
+							  return (
+								  <div key={index}>
+									  <div style={{"color":"#dd0000"}}>{el.underTitle[0].title}</div>
+								  </div>
+							  )
+						  }): <></>}
 		  			</div>
 	  			</div>
 	  		</div>
@@ -69,5 +54,5 @@ const Assistance: React.FC = function() {
   );
 }
 
-export default Assistance;
+export default NextAssistance
 

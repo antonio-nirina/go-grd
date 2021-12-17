@@ -14,7 +14,7 @@ type AsistResolver interface {
 	SavedAsistResolver(params graphql.ResolveParams) (interface{}, error)
 	FindAsistResolver(params graphql.ResolveParams) (interface{}, error)
 	FindAllAsistResolver(params graphql.ResolveParams) (interface{}, error)
-	// UpdatedAsistByUseResolver(params graphql.ResolveParams) (interface{}, error)
+	UpdatedStatutAsistResolver(params graphql.ResolveParams) (interface{}, error)
 }
 
 type inputAddAssist struct {
@@ -89,15 +89,17 @@ func (h *asist) FindAllAsistResolver(params graphql.ResolveParams) (interface{},
 
 	return assists,nil
 }
-/*func (h *home) UpdatedHomeByUseResolver(params graphql.ResolveParams) (interface{}, error){
+
+func (h *asist) UpdatedStatutAsistResolver(params graphql.ResolveParams) (interface{}, error){
 	uid, _ := params.Args["uid"].(string)
-	home,err :=  h.homeHandler.FindHomeHandler(uid)
+	statut, _ := params.Args["statut"].(bool)
+	_,err :=  h.asistHandler.FindAsistHandler(uid)
 
 	if err != nil {
 		return nil,err
 	}
 
-	_,err = h.homeHandler.UpdatedHomeHandler(uid)
+	resp,err := h.asistHandler.UpdatedStatutAsistHandler(uid,statut)
 
-	return home,nil
-}*/
+	return resp,nil
+}

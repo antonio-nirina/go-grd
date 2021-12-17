@@ -11,40 +11,13 @@ var AssistSchemaType = graphql.NewObject(graphql.ObjectConfig{
 			Type: graphql.String,
 		},
 		"title": &graphql.Field{
-			Type: SubjectSchemaType,
-		},
-		"location": &graphql.Field{
-			Type: graphql.String,
-		},
-		"content": &graphql.Field{
 			Type: graphql.String,
 		},
 		"underTitle":&graphql.Field{
-			Type: graphql.String,
+			Type:graphql.NewList(SubjectAssistSchemaType) ,
 		},
 		"statut":&graphql.Field{
 			Type:  graphql.Boolean,
-		},
-	},
-})
-
-var SubjectSchemaType = graphql.NewObject(graphql.ObjectConfig{
-	Name: "SubjectType",
-	Fields: graphql.Fields{
-		"uid": &graphql.Field{
-			Type: graphql.String,
-		},
-		"title": &graphql.Field{
-			Type: graphql.String,
-		},
-		"description": &graphql.Field{
-			Type: graphql.String,
-		},
-		"statut":&graphql.Field{
-			Type: graphql.Boolean,
-		},
-		"tag": &graphql.Field{
-			Type: graphql.String,
 		},
 	},
 })
@@ -55,8 +28,11 @@ var SubjectAssistSchemaType = graphql.NewObject(graphql.ObjectConfig{
 		"title": &graphql.Field{
 			Type: graphql.String, 
 		},
-		"assist": &graphql.Field{
-			Type: graphql.NewList(AssistSchemaType), 
+		"content": &graphql.Field{
+			Type: graphql.String,
+		},
+		"tag": &graphql.Field{
+			Type: graphql.String,
 		},
 	},
 })

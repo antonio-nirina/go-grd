@@ -10,6 +10,7 @@ type UsecaseAsist interface {
 	SavedAsistHandler(home *entity.Asistant) (interface{}, error)
 	FindAsistHandler(idQuery string) (AsistViewModel, error)
 	FindAllAsistHandler() ([]AsistViewModel, error)
+	UpdatedStatutAsistHandler(idQuery string,statut bool) (interface{}, error)
 }
 
 type SubjectAssistModel struct {
@@ -116,11 +117,11 @@ func (h *asistUsecase) FindAllAsistHandler() ([]AsistViewModel, error) {
 
 		res = append(res, asistViewModel)
 	}
-	
+
 	return res,nil
 }
 
-/*func (h *asistUsecase) UpdatedAsistHandler(uid string) (interface{}, error) {
+func (h *asistUsecase) UpdatedStatutAsistHandler(uid string,statut bool) (interface{}, error) {
 	objectId, err := primitive.ObjectIDFromHex(uid)
 
 	if err != nil {
@@ -133,20 +134,12 @@ func (h *asistUsecase) FindAllAsistHandler() ([]AsistViewModel, error) {
 		return AsistViewModel{}, err
 	}
 
-	home := &entity.Asistant{
-		Uid: result.Uid,
-		Title:result.Title,
-		Location:result.Location,
-		Content:result.Content,
-		UnderTitle:result.UnderTitle,
-		Statut:result.Statut,   	     			
-	}
-	 
-	_,err = h.asistRepository.UpdatedRepoAsist(home)
+	result.Statut = statut
+	_,err = h.asistRepository.UpdatedRepoAsist(&result)
 	
 	if err != nil {
 		return nil, err
 	}
 
 	return "Ok",nil
-}*/
+}

@@ -3,6 +3,7 @@ import { Link } from "react-router-dom"
 
 import "../../assets/css/style.css"
 import "../assistance/assistance.css"
+// import {Assist} from "../models/assist"
 
 const ChildList = function({el}:any) {
 	return (
@@ -27,17 +28,17 @@ const Aside = function({assists}:any) {
 				<h3><Link to ="/assistance">Accueil</Link></h3>
 			</div>
 			{
-				assists?.map(function(el:any,index:number){
+				assists ? assists?.map(function(el:any,index:number){
 					return (
 						<div className="link" key={index}>
 							<div className="parent-link">
-								<h3>{el.assist.length > 0 ? el.title : <></>}</h3>
-								{el.assist.length > 0 ? <ChildList el={el} /> : <></>}
+								<h3>{el.assist && el.assist.length > 0 ? el.title : <></>}</h3>
+								{el.assist && el.assist.length > 0 ? <ChildList el={el} /> : <></>}
 							</div>
 						</div>
 					)
 				})
-			}
+			: <></>}
 			<div className="link">
 				<h3><Link to ="/contact">Contact</Link></h3>
 			</div>
