@@ -12,7 +12,6 @@ type Asistant struct {
 }
 
 type Subject struct {
-	Uid       primitive.ObjectID 	`bson:"uid"`
 	Title     string             	`json:"title"`
 	Content  string             `json:"description"`
 	Tag 		string 				`json:"tag"`

@@ -31,16 +31,10 @@ const ListAssist : React.FC = function() {
 					<div className="body-content list-assist">
 						<div className="column">
 							<div className="create-game">
-								<Link to="/admin/set-assist">
+								<Link to="/admin/create/subject">
 									<button className="btn bg-red" style={{"cursor":"pointer"}}>
 										<FontAwesomeIcon icon={faPlus} />
-											Créer contenu
-									</button>
-								</Link>
-								<Link to="/admin/list/subject">
-									<button className="btn bg-red" style={{"cursor":"pointer"}}>
-										<FontAwesomeIcon icon={faPlus} />
-											Liste titre publication
+											Créer titre des questions
 									</button>
 								</Link>
 							</div>

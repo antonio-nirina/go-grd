@@ -21,7 +21,7 @@ var contentInputType  = graphql.NewInputObject(
 	},
 )
 
-var inputAssistType = graphql.NewInputObject(
+var inputHomeType = graphql.NewInputObject(
 	graphql.InputObjectConfig{
 		Name: "HomeInputType",
 		Fields: graphql.InputObjectConfigFieldMap{
@@ -47,9 +47,9 @@ var inputAssistType = graphql.NewInputObject(
 	},
 )
 
-var argsAssist = graphql.FieldConfigArgument{
+var argsHome = graphql.FieldConfigArgument{
 	"homeInput": &graphql.ArgumentConfig{
-		Type: inputAssistType,
+		Type: inputHomeType,
 	},
 }
 
@@ -57,7 +57,7 @@ func createdHome() *graphql.Field {
 	return &graphql.Field{
 		Type:        graphql.String,
 		Description: "Home create",
-		Args:argsAssist,		
+		Args:argsHome,		
 		Resolve: homeResolver.SavedHomeResolver,
 	}
 }

@@ -1,6 +1,8 @@
 package delivery
 
 import (
+	"encoding/json"
+
 	"github.com/graphql-go/graphql"
 	"github.com/thoussei/antonio/api/asistant/entity"
 	"github.com/thoussei/antonio/api/asistant/handler"
@@ -11,11 +13,18 @@ import (
 type AsistResolver interface {
 	SavedAsistResolver(params graphql.ResolveParams) (interface{}, error)
 	FindAsistResolver(params graphql.ResolveParams) (interface{}, error)
-	FindSubjectResolver(params graphql.ResolveParams) (interface{}, error)
 	FindAllAsistResolver(params graphql.ResolveParams) (interface{}, error)
-	FindAllSubjectResolver(params graphql.ResolveParams) (interface{}, error)
-	FindAssistBySubjectResolver(params graphql.ResolveParams) (interface{}, error)
-	// UpdatedAsistByUseResolver(params graphql.ResolveParams) (interface{}, error)
+	UpdatedStatutAsistResolver(params graphql.ResolveParams) (interface{}, error)
+}
+
+type inputAddAssist struct {
+	AssistInput []assistInputEl `json:"assistInput"`
+}
+
+type assistInputEl struct {
+	Title string         `json:"title"`
+	Content string         `json:"content"`
+	Tag string         `json:"tag"`
 }
 
 type asist struct {
@@ -30,19 +39,24 @@ func NewResolverAsist(asistUseCase handler.UsecaseAsist) AsistResolver {
 
 func (h *asist) SavedAsistResolver(params graphql.ResolveParams) (interface{}, error){
 	title, _ := params.Args["title"].(string)
-	underTitle, _ := params.Args["underTitle"].(string)
-	
-	newTitle := entity.Subject{
-		Uid:primitive.NewObjectID(),       
-		Title:title.Title,
-		Content:title.Description,
-		Tag:title.Tag,
-	}
+	jsonString, _ := json.Marshal(params.Args)
+	inputs := inputAddAssist{}
+	json.Unmarshal([]byte(jsonString), &inputs)
+	var subj []entity.Subject
 
+	for _,val := range inputs.AssistInput{
+		newTitle := entity.Subject{   
+			Title:val.Title,
+			Content:val.Content,
+			Tag:val.Tag,
+		}
+		subj = append(subj, newTitle)
+	}
+	
 	asist := &entity.Asistant{
 		Uid: primitive.NewObjectID(),
 		Title:title,
-		UnderTitle:newTitle,
+		UnderTitle:subj,
 		Statut:true,    			
 	}
 
@@ -66,17 +80,6 @@ func (h *asist) FindAsistResolver(params graphql.ResolveParams) (interface{}, er
 	return home,nil
 }
 
-func (h *asist) FindSubjectResolver(params graphql.ResolveParams) (interface{}, error){
-	id, _ := params.Args["uid"].(string)
-	subject,err := h.asistHandler.FindSubjectHandler(id)
-
-	if err != nil {
-		return nil,err
-	}
-
-	return subject,nil
-}
-
 func (h *asist) FindAllAsistResolver(params graphql.ResolveParams) (interface{}, error){
 	assists,err :=  h.asistHandler.FindAllAsistHandler()
 
@@ -87,35 +90,16 @@ func (h *asist) FindAllAsistResolver(params graphql.ResolveParams) (interface{},
 	return assists,nil
 }
 
-func (h *asist) FindAllSubjectResolver(params graphql.ResolveParams) (interface{}, error){
-	subjects,err :=  h.asistHandler.FindAllSubjectHandler()
-
-	if err != nil {
-		return nil,err
-	}
-
-	return subjects,nil
-}
-
-func (h *asist) FindAssistBySubjectResolver(params graphql.ResolveParams) (interface{}, error) {
-	assists,err :=  h.asistHandler.FindAllAsistBySubjectHandler()
-
-	if err != nil {
-		return nil,err
-	}
-
-	return assists,nil
-}
-
-/*func (h *home) UpdatedHomeByUseResolver(params graphql.ResolveParams) (interface{}, error){
+func (h *asist) UpdatedStatutAsistResolver(params graphql.ResolveParams) (interface{}, error){
 	uid, _ := params.Args["uid"].(string)
-	home,err :=  h.homeHandler.FindHomeHandler(uid)
+	statut, _ := params.Args["statut"].(bool)
+	_,err :=  h.asistHandler.FindAsistHandler(uid)
 
 	if err != nil {
 		return nil,err
 	}
 
-	_,err = h.homeHandler.UpdatedHomeHandler(uid)
+	resp,err := h.asistHandler.UpdatedStatutAsistHandler(uid,statut)
 
-	return home,nil
-}*/
+	return resp,nil
+}

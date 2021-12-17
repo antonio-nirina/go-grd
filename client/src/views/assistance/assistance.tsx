@@ -12,8 +12,8 @@ import { faSortDown } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import {GET_ASSIST_BY_SUBJECT} from "../../gql/assist/query"
 
-const Assistance: React.FC = function() {	
-	const [showDrop, setShowDrop] = useState<Boolean>(false)
+const Assistance: React.FC = function() {
+	const [showDrop, setShowDrop] = useState<boolean>(false)
 	// const [showContent, setShowContent] = useState<Boolean>(false)
 	const [assists, setAssists] = useState<any>([])
 	const {loading,error,data} 	= useQuery(GET_ASSIST_BY_SUBJECT)
@@ -32,7 +32,7 @@ const Assistance: React.FC = function() {
   return(
   	<div className="assistance">
 	    <div className="container">
-	  		<Header/>	  		
+	  		<Header/>
 	  		<div className="main">
 	  			<div className="block-center">
 			  		<div className="search-container">
@@ -54,13 +54,13 @@ const Assistance: React.FC = function() {
 			  						<i><FontAwesomeIcon icon={faSortDown} /></i>
 			  					</div>
 			  					<div className="didacticiel">
-			  						content			  						
+			  						content
 			  					</div>
-			  				</div>	 	
-			  			</div>		  				  					
+			  				</div>
+			  			</div>
 		  			</div>
 	  			</div>
-	  		</div>			
+	  		</div>
 			<Footer/>
 	  	</div>
 	</div>

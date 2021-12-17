@@ -2,8 +2,8 @@ import gql from "graphql-tag"
 
 
 export const CREATE_ASSIST = gql`
-	mutation createAssistContent($location:String,$title:String,$content:String){
-		createAssistContent(location:$location,title:$title,content:$content)
+	mutation createAssistContent($title:String,$assistInput:[SubjectAssistInput]){
+		createAssistContent(title:$title,assistInput:$assistInput)
 	}
 `
 
