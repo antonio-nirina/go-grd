@@ -3,7 +3,7 @@ import {useQuery} from "@apollo/client"
 
 import Header from "../header/header"
 import Footer from "../footer/footer"
-import Aside from "../assistance/aside"
+// import Aside from "../assistance/aside"
 import Support from "../assistance/support"
 
 import "../../assets/css/style.css"
@@ -43,9 +43,7 @@ const Assistance: React.FC = function() {
 			  				<input type = "text" placeholder ="Rechercher un sujet"/>
 			  			</div>
 			  		</div>
-		  			<div className="aside-menu accueil">
-		  				<Aside assists={assists} />
-		  			</div>
+		  			<div className="aside-menu accueil"></div>
 		  			<div className="support">
 		  				<Support/>
 		  				<div className="max-height" id="apex-legends">

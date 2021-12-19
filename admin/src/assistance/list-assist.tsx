@@ -2,7 +2,7 @@ import React,{useState,useEffect} from 'react'
 import { Link } from "react-router-dom"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {useQuery} from "@apollo/client"
-import { faPlus, faSort,faEdit,faTrash } from "@fortawesome/free-solid-svg-icons"
+import { faPlus, faSort,faTrash } from "@fortawesome/free-solid-svg-icons"
 
 import {GET_ALL_ASSIST} from "../gql/assist/query"
 import SideBar from "../header/sidebar"
@@ -46,29 +46,24 @@ const ListAssist : React.FC = function() {
 										<p>Titre<i><FontAwesomeIcon icon={faSort} size="lg"/></i></p>
 									</div>
 									<div className="card-title">
-										<p>Sous-titre<i><FontAwesomeIcon icon={faSort} size="lg"/></i></p>
-									</div>
-									<div className="card-title">
 										<p>Statut <i><FontAwesomeIcon icon={faSort} size="lg"/></i></p>
 									</div>
-									<div className="card-title"></div>
+									<div className="card-title">
+										Action
+									</div>
 								</div>
 								{
 									assists?.map(function(el:any,index:number){
 										return (
 											<div className="body-card" key={index} style={{"cursor":"pointer"}}>
 												<div className="card-result">
-													<p>{el.title.title}</p>
-												</div>
-												<div className="card-result">
-													<p>{el.underTitle}</p>
+													<p>{el.title}</p>
 												</div>
 												<div className="card-result">
 													<p>{el.statut?"Actif":"Inactif"}</p>
 												</div>
 												<div className="card-result">
 													<>
-														<Link to={`/admin/detail/assist/${el.uid}`}><i><FontAwesomeIcon icon={faEdit} /></i></Link>
 														<i><FontAwesomeIcon icon={faTrash} /></i>
 													</>
 												</div>

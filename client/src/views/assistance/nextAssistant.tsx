@@ -10,17 +10,27 @@ import "../assistance/assistance.css"
 import {GET_ALL_ASSIST} from "../../gql/assist/query"
 import {Assist} from "../models/assist"
 
+interface SubjectTitle {
+	title:string
+	content:string
+	tag:string
+}
+
 const NextAssistance: React.FC = function() {
 	const [assists, setAssists] = useState<Assist[]>([])
+	const [item, setItem] = useState<number>(0)
 	const {loading,error,data} 	= useQuery(GET_ALL_ASSIST)
 
 	useEffect(() => {
 		if(!loading && !error && data) {
-			console.log(data.FindAllAsist)
 			setAssists(data.FindAllAsist)
 		}
 
 	},[loading,error,data])
+
+	const handleActive = function(item:number) {
+		setItem(item)
+	}
 
   return(
   	<div className="assistance">
@@ -30,21 +40,20 @@ const NextAssistance: React.FC = function() {
 	  			<div className="block-center">
 			  		<div className="search-container">
 			  			<h2>Assistance</h2>
-			  			<div className="search-box">
-			  				<input type = "text" placeholder ="Rechercher un sujet"/>
-			  			</div>
 			  		</div>
 		  			<div className="aside-menu accueil">
-		  				<Aside assists={assists} />
+		  				<Aside
+							handleList={handleActive}
+						   	assists={assists}
+						/>
 		  			</div>
 		  			<div className="support">
-		  				{assists ? assists.map(function(el:Assist,index:number){
-							  return (
-								  <div key={index}>
-									  <div style={{"color":"#dd0000"}}>{el.underTitle[0].title}</div>
-								  </div>
-							  )
-						  }): <></>}
+						<div>
+							{assists && assists.length > 0 ? assists[item].underTitle.map(function(subject:SubjectTitle,i:number){
+								return (<div style={{"color":"#dd0000","marginBottom":"20px"}} key={i}>{subject.title}</div>)
+							}): <></>}
+						</div>
+
 		  			</div>
 	  			</div>
 	  		</div>

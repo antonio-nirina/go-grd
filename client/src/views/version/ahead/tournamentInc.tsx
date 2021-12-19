@@ -16,7 +16,7 @@ import {NameRoutes} from "../../commons/route-list"
 import 'moment/locale/fr'
 
 
-const TournamentInc = function() {
+const TournamentInc: React.FC  = function() {
 	const history = useHistory()
 	const [tournament, setTournament] = useState<Tournament[]>([])
 	const [tournamentMonth, setTournamentMonth] = useState<number>(0)

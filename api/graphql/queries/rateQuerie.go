@@ -21,15 +21,7 @@ func FindOneRate() *graphql.Field {
 
 func FindAllRate() *graphql.Field {
 	return &graphql.Field{
-		Type: graphql.NewList(types.RateSchemaType),
-		Args: graphql.FieldConfigArgument{
-			"limit": &graphql.ArgumentConfig{
-				Type: graphql.Int,
-			},
-			"pageNumber": &graphql.ArgumentConfig{
-				Type: graphql.Int,
-			},
-		},
+		Type: graphql.NewList(types.RateUserSchemaType),
 		Description: "Get all page rate",
 		Resolve:     rateResolver.FindAllRateResolver,
 	}

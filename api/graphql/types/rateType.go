@@ -13,9 +13,6 @@ var RateSchemaType = graphql.NewObject(graphql.ObjectConfig{
 		"created": &graphql.Field{
 			Type: graphql.String,
 		},
-		"logo": &graphql.Field{
-			Type: graphql.String,
-		},
 		"updated": &graphql.Field{
 			Type: graphql.String,
 		},
@@ -26,5 +23,18 @@ var RateSchemaType = graphql.NewObject(graphql.ObjectConfig{
 			Type: graphql.Int,
 		},
 		
+	},
+})
+
+
+var RateUserSchemaType = graphql.NewObject(graphql.ObjectConfig{
+	Name: "RateUserType",
+	Fields: graphql.Fields{
+		"user": &graphql.Field{
+			Type: UserSchemaType,
+		},
+		"score": &graphql.Field{
+			Type: graphql.Int,
+		},
 	},
 })

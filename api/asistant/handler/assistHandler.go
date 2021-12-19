@@ -96,9 +96,9 @@ func (h *asistUsecase) FindAllAsistHandler() ([]AsistViewModel, error) {
 	}
 
 	var res []AsistViewModel
-	var subject []SubjectViewModel
-
+	
 	for _,val := range result {
+		var subject []SubjectViewModel
 		for _,itemSubject := range val.UnderTitle {
 			under := SubjectViewModel {
 				Title:itemSubject.Title,

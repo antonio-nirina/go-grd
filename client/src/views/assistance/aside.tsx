@@ -1,39 +1,33 @@
-import React from "react"
+import React,{useState} from "react"
 import { Link } from "react-router-dom"
 
 import "../../assets/css/style.css"
 import "../assistance/assistance.css"
-// import {Assist} from "../models/assist"
+import {Assist} from "../models/assist"
 
-const ChildList = function({el}:any) {
-	return (
-		<>
-			{el.assist.map(function(e:any,aIndex:number){
-				return (
-					<div className="link" key={aIndex}>
-						<li><Link to ={`#${e.underTitle.toLowerCase()}`}>{e.underTitle}</Link></li>
-					</div>
-				)
-			})}
-		</>
-	)
+export interface AsideInterface {
+	assists:Assist[]
+	handleList:Function
 }
 
 
-const Aside = function({assists}:any) {
+const Aside = function({assists,handleList}:AsideInterface) {
+	const [item, setItem] = useState<number>(0)
 
+	const handleMenu = function(index:number) {
+		setItem(index)
+		handleList(index)
+	}
 	return(
 	  	<div className="support-link">
-			<div className="link">
-				<h3><Link to ="/assistance">Accueil</Link></h3>
-			</div>
 			{
-				assists ? assists?.map(function(el:any,index:number){
+				assists ? assists?.map(function(el:Assist,index:number){
 					return (
-						<div className="link" key={index}>
-							<div className="parent-link">
-								<h3>{el.assist && el.assist.length > 0 ? el.title : <></>}</h3>
-								{el.assist && el.assist.length > 0 ? <ChildList el={el} /> : <></>}
+						<div className={index === item ? "list-link link" : "link"}
+							style={{"cursor":"pointer"}}
+							onClick={() => handleMenu(index)} key={index}>
+							<div className="parent-link title-list">
+								<h3>{el.title}</h3>
 							</div>
 						</div>
 					)

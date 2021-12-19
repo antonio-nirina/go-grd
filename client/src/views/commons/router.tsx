@@ -81,7 +81,7 @@ const Router = function() {
 			<ProtectedRoute path="/view" exact component={View} />
 			<ProtectedRoute path="/lobby" exact component={Lobby} />
 			<ProtectedRoute path="/communaute" exact component={Communaute} />
-			<ProtectedRoute path="/contact" exact component={Contact} />
+
 			<ProtectedRoute path="/profil" exact component={Profil} />
 			<ProtectedRoute path="/setting" exact component={Parametre} />
 			<ProtectedRoute path="/acount/jackpot" exact component={Jackpot} />
@@ -104,6 +104,7 @@ const Router = function() {
 			<Route path="/new-password" exact component={NewPassword} />
 			<Route path="/change" exact component={Change} />
 			<Route path="/assistance" exact component={NextAssistance} />
+			<Route path="/contact" exact component={Contact} />
 
 		</Switch>
 	)
