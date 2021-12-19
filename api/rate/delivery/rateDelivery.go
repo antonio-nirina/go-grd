@@ -66,9 +66,7 @@ func (r *rate) FindRateResolver(params graphql.ResolveParams) (interface{}, erro
 }
 
 func (r *rate) FindAllRateResolver(params graphql.ResolveParams) (interface{}, error) {
-	limit, _ := params.Args["limit"].(int)
-	pageNumber, _ := params.Args["pageNumber"].(int)
-	rate, err := r.rateHandler.FindAllRateHandler(int64(pageNumber), int64(limit))
+	rate, err := r.rateHandler.FindAllRateHandler()
 
 	if err != nil {
 		return nil, err

@@ -24,7 +24,7 @@ func NewRateRepository(client *mongo.Client) *driverRepository {
 type RepositoryRate interface {
 	SavedRepoRate(rate *entity.Rate) (interface{}, error)
 	FindRateRepo(idQuery primitive.ObjectID) (entity.Rate, error)
-	FindAllRateRepo(pageNumber int64, limit int64) ([]entity.Rate, error)
+	FindAllRateRepo() ([]primitive.M, error)
 	FindRateByUserRepo(uidUser string) (entity.Rate, error)
 	FindRateInWeekRepo(date time.Time) ([]entity.Rate, error)
 	FindRateCreateOrUpdatedRepo(objectId primitive.ObjectID, rate *entity.Rate) (interface{}, error)
@@ -56,28 +56,21 @@ func (c *driverRepository) FindRateRepo(idQuery primitive.ObjectID) (entity.Rate
 	return result, nil
 }
 
-func (c *driverRepository) FindAllRateRepo(pageNumber int64, limit int64) ([]entity.Rate, error) {
+/*
+* https://www.mongodb.com/blog/post/quick-start-golang--mongodb--data-aggregation-pipeline
+*/
+func (c *driverRepository) FindAllRateRepo() ([]primitive.M, error) {
 	var collection = c.client.Database("grd_database").Collection("rate")
-	var results []entity.Rate
-	cur, err := collection.Find(context.TODO(), bson.D{{}}, options.Find().SetLimit(limit).SetSkip(pageNumber).SetSort(bson.M{"_id": -1}))
+	groupStage := bson.D{{"$group", bson.D{{"_id", "$user"},{"scoreTotal", bson.D{{"$sum", "$score"}}}}}}
+	cur, err := collection.Aggregate(context.TODO(), mongo.Pipeline{groupStage})
 
-	if err != nil {
+	var rateInfo []bson.M
+
+	if err = cur.All(context.TODO(), &rateInfo); err != nil {
 		return nil, err
 	}
 
-	for cur.Next(context.TODO()) {
-		var elem entity.Rate
-		err := cur.Decode(&elem)
-		if err != nil {
-			external.Logger(fmt.Sprintf("%v", err))
-		}
-
-		results = append(results, elem)
-	}
-
-	cur.Close(context.TODO())
-
-	return results, nil
+	return rateInfo, nil
 }
 
 func (c *driverRepository) FindRateByUserRepo(uidUser string) (entity.Rate, error) {

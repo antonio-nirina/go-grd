@@ -43,31 +43,57 @@ const CreateTitle = function() {
 	const [createdTitle]   				= useMutation(CREATE_ASSIST)
 
 	const onSubmit = async function(data:Inputs){
-		console.log("underTilte",underTilte)
-		console.log("content", content)
+		let newArr:any = []
+		let lastArr:ContentUnderTitle[] = []
+		if(underTilte){
+			newArr.push({
+				key:underTilte[0]?.key,
+				title:underTilte[0]?.title,
+				content:underTilte[0]?.content
+			})
+		}
+
+		underTilte?.forEach(function(e:ContentUnderTitle,i:number){
+			if(i > 0){
+				newArr.forEach(function(el:ContentUnderTitle){
+					if(el.key === e.key) {
+						el.title = e.title
+					}
+				})
+				newArr.push(e)
+			}
+		})
+		newArr.forEach(function(e:any){
+			let check = lastArr.find((el) =>  {return e.key === el.key})
+			if(!check)lastArr.push(e)
+		})
+
 		let array:SubjectTitle[] = []
-		underTilte.forEach(function(e:ContentUnderTitle){
+		lastArr.forEach(function(e:ContentUnderTitle){
 			let cnt = content.find((cnt:ContentUnderTitle) => {return cnt.key === e.key})
 			array.push({
 				title:e.title,
 				content:cnt?.content ? cnt.content : "",
-				tag:e.title.replace(" ","_").toLowerCase()
+				tag:e.title.split(" ").join("_")
 			})
 		})
+
 		const result = await createdTitle({ variables: {
 			assistInput:array,
 			title:data.title,
 		} })
-		if (result.data.createPublication) {
+		if (result.data.createAssistContent) {
 			history.push("/admin/list-assist")
 		}
 	}
 
 	const addForm = function() {
 		let val = number+1
+		console.log(val)
+		console.log("content", content.length)
 		if(val > 4)setIsErrorMax(true)
-		if(content.length === 0) setIsErrorCnt(true)
-		if(val <= 4 && content.length > 0) {
+		if(val - content.length > 1) setIsErrorCnt(true)
+		if(val <= 4 && val - content.length === 1) {
 			setIsErrorCnt(false)
 			setIsErrorMax(false)
 			setNumber(val)

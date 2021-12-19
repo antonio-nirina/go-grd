@@ -3,22 +3,24 @@ import {useQuery} from "@apollo/client"
 
 import Header from "../header/header"
 import Footer from "../footer/footer"
-import Aside from "../assistance/aside"
+// import Aside from "../assistance/aside"
 import Support from "../assistance/support"
 
 import "../../assets/css/style.css"
 import "../assistance/assistance.css"
 import { faSortDown } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import {GET_ASSIST_BY_SUBJECT} from "../../gql/assist/query"
+import {GET_ALL_ASSIST} from "../../gql/assist/query"
+import {Assist} from "../models/assist"
 
 const Assistance: React.FC = function() {
 	const [showDrop, setShowDrop] = useState<boolean>(false)
 	// const [showContent, setShowContent] = useState<Boolean>(false)
-	const [assists, setAssists] = useState<any>([])
-	const {loading,error,data} 	= useQuery(GET_ASSIST_BY_SUBJECT)
+	const [assists, setAssists] = useState<Assist[]>([])
+	const {loading,error,data} 	= useQuery(GET_ALL_ASSIST)
 
 	useEffect(() => {
+		console.log(data)
 		if(!loading && !error && data) {
 			setAssists(data.FindAssistBySubject)
 		}
@@ -41,9 +43,7 @@ const Assistance: React.FC = function() {
 			  				<input type = "text" placeholder ="Rechercher un sujet"/>
 			  			</div>
 			  		</div>
-		  			<div className="aside-menu accueil">
-		  				<Aside assists={assists} />
-		  			</div>
+		  			<div className="aside-menu accueil"></div>
 		  			<div className="support">
 		  				<Support/>
 		  				<div className="max-height" id="apex-legends">

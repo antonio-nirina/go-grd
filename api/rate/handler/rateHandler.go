@@ -1,6 +1,8 @@
 package handler
 
 import (
+	"fmt"
+	"strconv"
 	"time"
 
 	"github.com/thoussei/antonio/api/rate/entity"
@@ -14,6 +16,11 @@ type RateViewModel struct {
 	Uid     string                    `json:"uid"`
 	Created string                    `json:"created"`
 	Updated string                    `json:"updated"`
+	User    userHandler.UserViewModel `json:"user"`
+	Score   int                       `json:"score"`
+}
+
+type RateUserModel struct {
 	User    userHandler.UserViewModel `json:"user"`
 	Score   int                       `json:"score"`
 }
@@ -34,7 +41,7 @@ type UsecaseRate interface {
 	SavedRateHandler(rate *entity.Rate) (interface{}, error)
 	FindRateHandler(idQuery string) (RateViewModel, error)
 	FindOneRateHandler(idQuery string) (entity.Rate, error)
-	FindAllRateHandler(pageNumber int64, limit int64) ([]RateViewModel, error)
+	FindAllRateHandler() ([]RateUserModel, error)
 	FindRateByUserHandler(uidUser string) (entity.Rate, error)
 	FindRateInWeekHandler(date time.Time) ([]RateViewModel, error)
 	FindRateCreateOrUpdatedHandler(uidUser string, uid string) (interface{}, error)
@@ -103,40 +110,37 @@ func (r *rateUsecase) FindOneRateHandler(idQuery string) (entity.Rate, error) {
 	return rate, nil
 }
 
-func (r *rateUsecase) FindAllRateHandler(pageNumber int64, limit int64) ([]RateViewModel, error) {
-	result, err := r.rateRepository.FindAllRateRepo(pageNumber, limit)
+func (r *rateUsecase) FindAllRateHandler() ([]RateUserModel, error) {
+	result, err := r.rateRepository.FindAllRateRepo()
 
 	if err != nil {
-		return []RateViewModel{}, err
+		return []RateUserModel{}, err
 	}
-
-	var res []RateViewModel
-
-	for _, item := range result {
-		user, _ := r.userUsecase.FindOneUserByUid(item.User)
-		rateViewModel := RateViewModel{
-			Uid:     item.Uid.Hex(),
-			Created: item.Created,
-			Updated: item.Updated,
-			User: userHandler.UserViewModel{
-				Uid:           user.Uid.Hex(),
-				FirstName:     user.FirstName,
-				LastName:      user.LastName,
-				Email:         user.Email,
-				Username:      user.Username,
-				IsBanned:      user.IsBanned,
-				Avatar:        user.Avatar,
-				Language:      user.Language,
-				Point:         user.Point,
-				Roles:         user.Roles,
-				TypeConnexion: user.TypeConnexion,
-				Created:       user.Created,
-			},
+	
+	var res []RateUserModel
+	
+	for _,val := range result {
+		view := RateUserModel{}
+		user, _ := r.userUsecase.FindOneUserByUid(fmt.Sprintf("%v", val["_id"]))
+		score,_ := strconv.Atoi(fmt.Sprintf("%v", val["scoreTotal"]))
+		view.Score = score
+		view.User = userHandler.UserViewModel{
+			Uid:           user.Uid.Hex(),
+			FirstName:     user.FirstName,
+			LastName:      user.LastName,
+			Email:         user.Email,
+			Username:      user.Username,
+			IsBanned:      user.IsBanned,
+			Avatar:        user.Avatar,
+			Language:      user.Language,
+			Point:         user.Point,
+			Roles:         user.Roles,
+			TypeConnexion: user.TypeConnexion,
+			Created:       user.Created,
 		}
-
-		res = append(res, rateViewModel)
+		res = append(res, view)
 	}
-
+	
 	return res, nil
 }
 

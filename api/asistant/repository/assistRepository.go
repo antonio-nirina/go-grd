@@ -26,7 +26,6 @@ type RepositoryAsist interface {
 	SavedRepoAsistRepo(asist *entity.Asistant) (interface{}, error)
 	FindAsistRepo(idQuery primitive.ObjectID) (entity.Asistant, error)
 	FindAllAsistRepo()([]entity.Asistant, error)
-	FindAllAsistBySubjectRepo(uid primitive.ObjectID)([]entity.Asistant, error)
 	UpdatedRepoAsist(asist *entity.Asistant) (interface{}, error)
 	// RemovedRepoAsist(home *entity.Asistant) (interface{}, error)
 }

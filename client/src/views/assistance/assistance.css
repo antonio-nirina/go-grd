@@ -1,7 +1,7 @@
 @charset "UTF-8";
 .block-center{
-	width: 94%;
-	padding: 30px 15px;
+	width: 100%;
+	padding: 30px 9px;
 	margin: auto;
 
 }
@@ -16,6 +16,11 @@
 	float: left;
 	margin-right: 60px;
 	padding: 7px 0;
+	border: 3px solid;
+	border-left: none;
+	border-right: none;
+	border-top: none;
+	width: 100%;
 }
 .search-box{
 
@@ -42,8 +47,8 @@
 	width: 913px;
 	display: table-cell;
 	vertical-align: top;
-	color: #ffffff;
-	font-family: arial;
+	color: #ccb0b0;
+	font-family: "russo one";
 	padding: 30px 18px;
 	font-weight: lighter;
 	border-radius: 0px 5px 5px 0px;
@@ -72,11 +77,16 @@
 	font-size: 14px;
 }
 .link{
-	margin-top: 7px;
+	margin-top: 15px;
+	margin-bottom: 15px;
+}
+.list-link{
+	border-right: 2px solid #dd0000;
 }
 .parent-link{
 	margin: 15px 0;
 }
+
 .link a.active, .link a:hover, .link h3.active, .link h3:hover{
 	color: #ffffff;
 }

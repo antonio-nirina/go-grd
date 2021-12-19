@@ -14,7 +14,7 @@ var AssistSchemaType = graphql.NewObject(graphql.ObjectConfig{
 			Type: graphql.String,
 		},
 		"underTitle":&graphql.Field{
-			Type:SubjectAssistSchemaType ,
+			Type:graphql.NewList(SubjectAssistSchemaType) ,
 		},
 		"statut":&graphql.Field{
 			Type:  graphql.Boolean,
