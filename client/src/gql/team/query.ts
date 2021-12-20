@@ -54,3 +54,23 @@ export const GET_ONE_TEAM_BY_USER = gql`
 		creator
 	}
 }`
+
+export const GET_PART_TEAM_Tournament = gql`
+	query FindTournamentParticipate($uid: String!) {
+		FindTournamentParticipate(uid!$uid)
+			uid
+			name
+			logo
+			tag
+			creationDate
+			players{
+				uid
+				email
+				username
+				avatar
+			}
+			team
+			banniere
+			creator
+	}
+}`

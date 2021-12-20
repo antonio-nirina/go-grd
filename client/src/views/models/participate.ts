@@ -7,6 +7,7 @@ export interface ParticipateTournament {
 	isWin:string
 	tournament:Tournament
 	user:User
+	team:string
 }
 
 export interface ParticipateWagger {

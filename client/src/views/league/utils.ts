@@ -1,7 +1,8 @@
 import {createApolloClient as client} from "../../config/apollo-client"
-import {GET_ONE_TEAM_BY_USER} from "../../gql/team/query"
+import {GET_ONE_TEAM_BY_USER,GET_PART_TEAM_Tournament} from "../../gql/team/query"
 import {TeamModel} from "../models/team"
 import {SAVED_PART} from "../../gql/participate/mutation"
+import { ParticipateTournament } from "../models/participate"
 
 export interface PartTournament  {
 	uidUser:string
@@ -10,16 +11,36 @@ export interface PartTournament  {
 	teamsUid:string
 }
 
-export const checkInTeam = async function(userId:string) : Promise<number|null> {
+
+export const checkInTeam = async function(uidTournament:string|undefined,userId:string) : Promise<number|null> {
 	let count:number = 0
+
 	try {
 		const data = await client().query({query:GET_ONE_TEAM_BY_USER,variables:{uid:userId}})
-		if(data) {
+		const partTeam = await client().query({query:GET_PART_TEAM_Tournament,variables:{uid:uidTournament}})
+		if(data && partTeam) {
+			let isPart = false
+			let uidTeam:string[] 		= []
+			let uidTeamPart:string[] 	= []
+
 			data.data.FindTeamByUser.forEach(function(part:TeamModel){
+				uidTeam.push(part.uid)
 				for (let index = 0; index < part.players.length; index++) {
 					count++
 				}
 			})
+			partTeam.data.FindTournamentParticipate.forEach(function(element:ParticipateTournament) {
+				uidTeamPart.push(element.team)
+			})
+			uidTeamPart.forEach(function(uid:string){
+				if(uidTeam.includes(uid)){
+					isPart = true
+				}
+			})
+
+			if(count > 0 && isPart){
+				count = 2
+			}
 
 			return count
 		}
@@ -33,6 +54,7 @@ export const checkInTeam = async function(userId:string) : Promise<number|null> 
 export const GetTeamUtils = async function(userId:string): Promise<TeamModel[]|null>{
 	try {
 		const data = await client().query({query:GET_ONE_TEAM_BY_USER,variables:{uid:userId}})
+
 		if(data) {
 			return data.data.FindTeamByUser
 		}

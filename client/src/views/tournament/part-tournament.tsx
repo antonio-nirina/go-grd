@@ -61,13 +61,16 @@ const PartTournament:React.FC<PartTournamentType> = function ({tournament,parts}
 	},[tournament,parts,userConnectedRedux])
 
 	const onShowConfirmed = async function() {
-		const check = await checkInTeam(userConnectedRedux.user.uid)
+		const check = await checkInTeam(tournament?.uid,userConnectedRedux.user.uid)
 		if(!check && tournament?.isTeam) {
 			setIsOpen(true)
 			setContent("Vérifie que tu as une équipe")
 		} else if(check  && tournament?.isTeam && check === 1) {
 			setIsOpen(true)
 			setContent("Vérifie que tu as assez de membres")
+		} else if(check  && tournament?.isTeam && check === 2) {
+			setIsOpen(true)
+			setContent("Veuillez vérifier car tu appartient à une équipe qui participe à cette tournois.")
 		}
 	}
 
@@ -84,7 +87,7 @@ const PartTournament:React.FC<PartTournamentType> = function ({tournament,parts}
 	}
 
 	const handleTeam = async function() {
-		const check = await checkInTeam(userConnectedRedux.user.uid)
+		const check = await checkInTeam(tournament?.uid,userConnectedRedux.user.uid)
 		if(!check && tournament?.isTeam) {
 			setIsOpen(true)
 			setContent("Vérifie que tu as une équipe")
