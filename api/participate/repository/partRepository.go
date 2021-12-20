@@ -33,8 +33,9 @@ type RepositoryPart interface {
 	UpdateNumberConfirmedRepo(objectId primitive.ObjectID, numberConf bool) (interface{}, error)
 	GetNumberPartRepo(objectId primitive.ObjectID) (interface{}, error)
 	FindPartByWaggerRepo(userUid primitive.ObjectID, uidWagger primitive.ObjectID) (entity.Participate, error)
-	FindAllPartTournamentRepo(objectId primitive.ObjectID,pageNumber int64, limit int64) (interface{}, error)
+	FindAllPartTournamentRepo(objectId primitive.ObjectID, pageNumber int64, limit int64) (interface{}, error)
 	FindAllPartByTournamentRepo(objectId primitive.ObjectID) ([]entity.Participate, error)
+	FindAllPartTeamTournamentRepo(uidTournament primitive.ObjectID, teamUid string) (entity.Participate, error)
 	// LeavePartTournamentRepo(part *entity.Participate) (interface{},error)
 }
 
@@ -228,7 +229,7 @@ func (c *DriverRepository) FindPartByWaggerRepo(userUid primitive.ObjectID, uidW
 	return result, nil
 }
 
-func (c *DriverRepository) FindAllPartTournamentRepo(objectId primitive.ObjectID,pageNumber int64, limit int64) (interface{}, error) {
+func (c *DriverRepository) FindAllPartTournamentRepo(objectId primitive.ObjectID, pageNumber int64, limit int64) (interface{}, error) {
 	var collection = c.client.Database("grd_database").Collection("participate")
 	var results []entity.Participate
 	cur, err := collection.Find(context.TODO(), bson.D{{"tournament.uid", objectId}}, options.Find().SetLimit(limit).SetSkip(pageNumber).SetSort(bson.M{"_id": -1}))
@@ -274,4 +275,17 @@ func (c *DriverRepository) FindAllPartByTournamentRepo(objectId primitive.Object
 	cur.Close(context.TODO())
 
 	return results, nil
+}
+
+func (c *DriverRepository) FindAllPartTeamTournamentRepo(uidTournament primitive.ObjectID, teamUid string) (entity.Participate, error) {
+	var collection = c.client.Database("grd_database").Collection("Participate")
+	var result entity.Participate
+
+	err := collection.FindOne(context.TODO(), bson.M{"team": teamUid, "tournament.uid": uidTournament}).Decode(&result)
+
+	if err != nil {
+		return result, err
+	}
+
+	return result, nil
 }

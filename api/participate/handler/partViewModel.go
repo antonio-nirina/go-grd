@@ -25,6 +25,7 @@ type partViewModelTournament struct {
 	IsWin               bool                         `json:"isWin"`
 	Tournament          thandler.TournamentViewModel `json:"tournament"`
 	NumberPartConfirmed bool                         `json:"numberPartConfirmed"`
+	Team                string                       `json:"team"`
 }
 
 type ReacordsPartModel struct {

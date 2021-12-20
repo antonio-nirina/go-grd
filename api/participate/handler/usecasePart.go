@@ -27,54 +27,53 @@ type UsecasePart interface {
 	GetNumberPartHandler(userPartUid string) (interface{}, error)
 	FindPartUserWaggerHandler(userUid primitive.ObjectID, uidWagger primitive.ObjectID) (interface{}, error)
 	FindAllPartUserWaggerHandler(userUid primitive.ObjectID, pageNumber int64, limit int64) ([]partWaggerViewModel, error)
-	FindPartTournamentHandler(tournament tHandler.TournamentViewModel)([]partViewModelTournament,error)
-	LeavePartTournamentHandler(partUid string,userUId string)(interface{}, error)
+	FindPartTournamentHandler(tournament tHandler.TournamentViewModel) ([]partViewModelTournament, error)
+	LeavePartTournamentHandler(partUid string, userUId string) (interface{}, error)
+	FindPartTeamTournamentHandler(uidTournament primitive.ObjectID, uidTeam string) (string, error)
 }
 type partUsecase struct {
 	partRepository repository.RepositoryPart
-	teamUsecase teamH.UsecaseTeam
-	userUsescase userH.Usecase
+	teamUsecase    teamH.UsecaseTeam
+	userUsescase   userH.Usecase
 }
 
-func NewUsecasePart(r repository.RepositoryPart, t teamH.UsecaseTeam,u userH.Usecase) UsecasePart {
+func NewUsecasePart(r repository.RepositoryPart, t teamH.UsecaseTeam, u userH.Usecase) UsecasePart {
 	return &partUsecase{
 		partRepository: r,
-		teamUsecase: t,
-		userUsescase:u,
+		teamUsecase:    t,
+		userUsescase:   u,
 	}
 }
 
 func (p *partUsecase) SavedPartHandler(part *entity.Participate) (interface{}, error) {
 	rec, err := p.partRepository.SavedPartRepo(part)
-	user,err := p.userUsescase.FindOneUserByUid(part.User)
+	user, err := p.userUsescase.FindOneUserByUid(part.User)
 
 	if err != nil {
 		return 0, err
 	}
 
 	var plateform string
-	
-	for key,item := range part.Tournament.Plateform {
+
+	for key, item := range part.Tournament.Plateform {
 		if key > 0 {
-			plateform = fmt.Sprintf("%s%s",item.Name,"-")
+			plateform = fmt.Sprintf("%s%s", item.Name, "-")
 		} else {
-			plateform = fmt.Sprintf("%s",item.Name)
+			plateform = fmt.Sprintf("%s", item.Name)
 		}
 	}
 
-	
-	message := fmt.Sprintf("%s%s%s%s%s","Ta demande de participaer au tournoi",plateform,"-",part.Tournament.Game.Name,"a bien été effectué avec succes")
+	message := fmt.Sprintf("%s%s%s%s%s", "Ta demande de participaer au tournoi", plateform, "-", part.Tournament.Game.Name, "a bien été effectué avec succes")
 	mailer := external.ToMailer{
-		Email: user.Email,
+		Email:     user.Email,
 		Firstname: user.FirstName,
-		Lastname: user.LastName,
-		Subject: "Confirmation de participer au tournoi",
-		Message: message,
+		Lastname:  user.LastName,
+		Subject:   "Confirmation de participer au tournoi",
+		Message:   message,
 	}
 
 	mailer.InitialeMailjet()
-	
-	
+
 	return rec, nil
 }
 
@@ -94,9 +93,9 @@ func (p *partUsecase) FindPartHandler(idQuery string) (partViewModel, error) {
 	var teamView []teamH.TeamViewModel
 	var userView []userH.UserViewModel
 	user, _ := p.userUsescase.FindOneUserByUid(result.User)
-	teamRes,_ := p.teamUsecase.FindOneTeamHandler(result.Team)
+	teamRes, _ := p.teamUsecase.FindOneTeamHandler(result.Team)
 	for _, item := range teamRes.Players {
-		userPlayesr,_ := p.userUsescase.FindOneUserByUid(item)
+		userPlayesr, _ := p.userUsescase.FindOneUserByUid(item)
 		resUser := userH.UserViewModel{
 			Uid:           userPlayesr.Uid.Hex(),
 			FirstName:     userPlayesr.FirstName,
@@ -121,12 +120,11 @@ func (p *partUsecase) FindPartHandler(idQuery string) (partViewModel, error) {
 		Description:  teamRes.Description,
 		IsBlocked:    teamRes.IsBlocked,
 		Logo:         teamRes.Logo,
-		Creator: 	 teamRes.Creator.Username,
-		Records: 0,
+		Creator:      teamRes.Creator.Username,
+		Records:      0,
 	}
 
 	teamView = append(teamView, resTeam)
-	
 
 	var plateform []common.PlateformViewModel
 	for _, value := range result.Tournament.Plateform {
@@ -206,9 +204,9 @@ func (p *partUsecase) FindAllPartHandler(pageNumber int64, limit int64) ([]partV
 
 	for _, result := range results {
 		if result.Team != "" {
-			teamRes,_ := p.teamUsecase.FindOneTeamHandler(result.Team)
+			teamRes, _ := p.teamUsecase.FindOneTeamHandler(result.Team)
 			for _, item := range teamRes.Players {
-				userPlayesr,_ := p.userUsescase.FindOneUserByUid(item)
+				userPlayesr, _ := p.userUsescase.FindOneUserByUid(item)
 				resUser := userH.UserViewModel{
 					Uid:           userPlayesr.Uid.Hex(),
 					FirstName:     userPlayesr.FirstName,
@@ -233,13 +231,13 @@ func (p *partUsecase) FindAllPartHandler(pageNumber int64, limit int64) ([]partV
 				Description:  teamRes.Description,
 				IsBlocked:    teamRes.IsBlocked,
 				Logo:         teamRes.Logo,
-				Creator: teamRes.Creator.Username,
-				Records: 0,
+				Creator:      teamRes.Creator.Username,
+				Records:      0,
 			}
 			teamView = append(teamView, resTeam)
-			
+
 		}
-		
+
 		var plateform []common.PlateformViewModel
 		for _, value := range result.Tournament.Plateform {
 			arrayPl := common.PlateformViewModel{
@@ -250,7 +248,7 @@ func (p *partUsecase) FindAllPartHandler(pageNumber int64, limit int64) ([]partV
 			plateform = append(plateform, arrayPl)
 		}
 
-		user,_ := p.userUsescase.FindOneUserByUid(result.User)
+		user, _ := p.userUsescase.FindOneUserByUid(result.User)
 
 		partView := partViewModel{
 			Uid:   result.Uid.Hex(),
@@ -323,9 +321,9 @@ func (p *partUsecase) FindPartUserHandler(pageNumber int64, limit int64, userUid
 
 	for _, result := range results {
 		if result.Team != "" {
-			teamRes,_ := p.teamUsecase.FindOneTeamHandler(result.Team)
+			teamRes, _ := p.teamUsecase.FindOneTeamHandler(result.Team)
 			for _, item := range teamRes.Players {
-				user,_ := p.userUsescase.FindOneUserByUid(item)
+				user, _ := p.userUsescase.FindOneUserByUid(item)
 				resUser := userH.UserViewModel{
 					Uid:           user.Uid.Hex(),
 					FirstName:     user.FirstName,
@@ -350,13 +348,13 @@ func (p *partUsecase) FindPartUserHandler(pageNumber int64, limit int64, userUid
 				Description:  teamRes.Description,
 				IsBlocked:    teamRes.IsBlocked,
 				Logo:         teamRes.Logo,
-				Creator: teamRes.Creator.Username,
-				Records: 0,
+				Creator:      teamRes.Creator.Username,
+				Records:      0,
 			}
 			teamView = append(teamView, resTeam)
-			
+
 		}
-		
+
 		var plateform []common.PlateformViewModel
 		for _, value := range result.Tournament.Plateform {
 			arrayPl := common.PlateformViewModel{
@@ -367,7 +365,7 @@ func (p *partUsecase) FindPartUserHandler(pageNumber int64, limit int64, userUid
 			plateform = append(plateform, arrayPl)
 		}
 
-		user,_ := p.userUsescase.FindOneUserByUid(result.User)
+		user, _ := p.userUsescase.FindOneUserByUid(result.User)
 
 		partView := partViewModel{
 			Uid:   result.Uid.Hex(),
@@ -458,9 +456,9 @@ func (p *partUsecase) FindPartUserLeagueHandler(userUid primitive.ObjectID, leag
 
 	var teamView []teamH.TeamViewModel
 	var userView []userH.UserViewModel
-	teamRes,_ := p.teamUsecase.FindOneTeamHandler(result.Team)
+	teamRes, _ := p.teamUsecase.FindOneTeamHandler(result.Team)
 	for _, item := range teamRes.Players {
-		user,_ := p.userUsescase.FindOneUserByUid(item)
+		user, _ := p.userUsescase.FindOneUserByUid(item)
 		resUser := userH.UserViewModel{
 			Uid:           user.Uid.Hex(),
 			FirstName:     user.FirstName,
@@ -486,13 +484,13 @@ func (p *partUsecase) FindPartUserLeagueHandler(userUid primitive.ObjectID, leag
 		Description:  teamRes.Description,
 		IsBlocked:    teamRes.IsBlocked,
 		Logo:         teamRes.Logo,
-		Creator: teamRes.Creator.Username,
-		
+		Creator:      teamRes.Creator.Username,
+
 		Records: 0,
 	}
 
 	teamView = append(teamView, resTeam)
-	
+
 	var plateform []common.PlateformViewModel
 	for _, value := range result.Tournament.Plateform {
 		arrayPl := common.PlateformViewModel{
@@ -502,7 +500,7 @@ func (p *partUsecase) FindPartUserLeagueHandler(userUid primitive.ObjectID, leag
 		}
 		plateform = append(plateform, arrayPl)
 	}
-	user,_ := p.userUsescase.FindOneUserByUid(result.User)
+	user, _ := p.userUsescase.FindOneUserByUid(result.User)
 	partViewModel := partViewModel{
 		Uid:   result.Uid.Hex(),
 		Date:  result.Date,
@@ -575,9 +573,9 @@ func (p *partUsecase) FindPartUserTournamentHandler(uidUser primitive.ObjectID, 
 
 	if result.Team != "" {
 		var userView []userH.UserViewModel
-		teamRes,_ := p.teamUsecase.FindOneTeamHandler(result.Team)
+		teamRes, _ := p.teamUsecase.FindOneTeamHandler(result.Team)
 		for _, item := range teamRes.Players {
-			user,_ := p.userUsescase.FindOneUserByUid(item)
+			user, _ := p.userUsescase.FindOneUserByUid(item)
 			resUser := userH.UserViewModel{
 				Uid:           user.Uid.Hex(),
 				FirstName:     user.FirstName,
@@ -602,12 +600,12 @@ func (p *partUsecase) FindPartUserTournamentHandler(uidUser primitive.ObjectID, 
 			Description:  teamRes.Description,
 			IsBlocked:    teamRes.IsBlocked,
 			Logo:         teamRes.Logo,
-			Creator: teamRes.Creator.Username,
-			Records: 0,
+			Creator:      teamRes.Creator.Username,
+			Records:      0,
 		}
 
 		teamView = append(teamView, resTeam)
-		
+
 	}
 
 	var plateform []common.PlateformViewModel
@@ -620,7 +618,7 @@ func (p *partUsecase) FindPartUserTournamentHandler(uidUser primitive.ObjectID, 
 		plateform = append(plateform, arrayPl)
 	}
 
-	user,_ := p.userUsescase.FindOneUserByUid(result.User)
+	user, _ := p.userUsescase.FindOneUserByUid(result.User)
 	partViewModel := partViewModel{
 		Uid:   result.Uid.Hex(),
 		Date:  result.Date,
@@ -672,7 +670,7 @@ func (p *partUsecase) FindPartUserTournamentHandler(uidUser primitive.ObjectID, 
 			result.Tournament.IsTeam,
 		},
 	}
-	
+
 	return partViewModel, nil
 }
 
@@ -718,9 +716,9 @@ func (p *partUsecase) FindPartUserWaggerHandler(userUid primitive.ObjectID, uidW
 
 	if result.Team != "" {
 		var userView []userH.UserViewModel
-		teamRes,_ := p.teamUsecase.FindOneTeamHandler(result.Team)
+		teamRes, _ := p.teamUsecase.FindOneTeamHandler(result.Team)
 		for _, item := range teamRes.Players {
-			user,_ := p.userUsescase.FindOneUserByUid(item)
+			user, _ := p.userUsescase.FindOneUserByUid(item)
 			resUser := userH.UserViewModel{
 				Uid:           user.Uid.Hex(),
 				FirstName:     user.FirstName,
@@ -739,7 +737,7 @@ func (p *partUsecase) FindPartUserWaggerHandler(userUid primitive.ObjectID, uidW
 		}
 	}
 
-	user,_ := p.userUsescase.FindOneUserByUid(result.User)
+	user, _ := p.userUsescase.FindOneUserByUid(result.User)
 	partViewModel := partViewModel{
 		Uid:   result.Uid.Hex(),
 		Date:  result.Date,
@@ -782,7 +780,7 @@ func (p *partUsecase) FindAllPartUserWaggerHandler(userUid primitive.ObjectID, p
 	var userView []userH.UserViewModel
 
 	for _, result := range results {
-		user,_ := p.userUsescase.FindOneUserByUid(result.User)
+		user, _ := p.userUsescase.FindOneUserByUid(result.User)
 		userViewmodel := userH.UserViewModel{
 			Uid:           user.Uid.Hex(),
 			FirstName:     user.FirstName,
@@ -821,11 +819,11 @@ func (p *partUsecase) FindAllPartUserWaggerHandler(userUid primitive.ObjectID, p
 				Participant:      result.Wagger.Participant,
 				Rules:            result.Wagger.Rules,
 
-				Server:            result.Wagger.Server,
-				TchatVocal:        result.Wagger.TchatVocal,
-				Region:            result.Wagger.Region,
-				Spectateur:        result.Wagger.Spectateur,
-				Maps: 				result.Wagger.Maps,
+				Server:     result.Wagger.Server,
+				TchatVocal: result.Wagger.TchatVocal,
+				Region:     result.Wagger.Region,
+				Spectateur: result.Wagger.Spectateur,
+				Maps:       result.Wagger.Maps,
 			},
 			NumberPartConfirmed: result.NumberPartConfirmed,
 		}
@@ -835,7 +833,7 @@ func (p *partUsecase) FindAllPartUserWaggerHandler(userUid primitive.ObjectID, p
 	return res, nil
 }
 
-func (p *partUsecase) FindPartTournamentHandler(tournament tHandler.TournamentViewModel)([]partViewModelTournament,error) {
+func (p *partUsecase) FindPartTournamentHandler(tournament tHandler.TournamentViewModel) ([]partViewModelTournament, error) {
 	objectId, err := primitive.ObjectIDFromHex(tournament.Uid)
 	results, err := p.partRepository.FindAllPartByTournamentRepo(objectId)
 	if err != nil {
@@ -844,10 +842,10 @@ func (p *partUsecase) FindPartTournamentHandler(tournament tHandler.TournamentVi
 
 	var res []partViewModelTournament
 	var viewPart partViewModelTournament
-	
+
 	if len(results) > 0 {
 		var plateform []common.PlateformViewModel
-	
+
 		for _, result := range results {
 			for _, value := range result.Tournament.Plateform {
 				arrayPl := common.PlateformViewModel{
@@ -857,11 +855,12 @@ func (p *partUsecase) FindPartTournamentHandler(tournament tHandler.TournamentVi
 				}
 				plateform = append(plateform, arrayPl)
 			}
-			user,_ := p.userUsescase.FindOneUserByUid(result.User)
-			viewPartSuccess := partViewModelTournament {
-				Uid: result.Uid.Hex(),
-				Date:result.Date,
-				User:userH.UserViewModel{
+			user, _ := p.userUsescase.FindOneUserByUid(result.User)
+			viewPartSuccess := partViewModelTournament{
+				Uid:  result.Uid.Hex(),
+				Date: result.Date,
+				Team: result.Team,
+				User: userH.UserViewModel{
 					Uid:           user.Uid.Hex(),
 					FirstName:     user.FirstName,
 					LastName:      user.LastName,
@@ -875,11 +874,11 @@ func (p *partUsecase) FindPartTournamentHandler(tournament tHandler.TournamentVi
 					TypeConnexion: user.TypeConnexion,
 					Created:       user.Created,
 				},
-				IsWin:result.IsWin,
-				NumberPartConfirmed:result.NumberPartConfirmed,
-				Tournament: tournament,
+				IsWin:               result.IsWin,
+				NumberPartConfirmed: result.NumberPartConfirmed,
+				Tournament:          tournament,
 			}
-	
+
 			res = append(res, viewPartSuccess)
 		}
 	} else {
@@ -891,13 +890,13 @@ func (p *partUsecase) FindPartTournamentHandler(tournament tHandler.TournamentVi
 		viewPart.Tournament = tournament
 		res = append(res, viewPart)
 	}
-	
+
 	return res, nil
 }
 
-func (p *partUsecase) LeavePartTournamentHandler(partUid string,userUId string)(interface{}, error) {
-	user,err := p.userUsescase.FindOneUserByUid(userUId)
-	part,err := p.FindPartHandler(partUid)
+func (p *partUsecase) LeavePartTournamentHandler(partUid string, userUId string) (interface{}, error) {
+	user, err := p.userUsescase.FindOneUserByUid(userUId)
+	part, err := p.FindPartHandler(partUid)
 
 	if err != nil {
 		return 0, err
@@ -905,22 +904,22 @@ func (p *partUsecase) LeavePartTournamentHandler(partUid string,userUId string)(
 
 	var plateform string
 
-	for key,item := range part.Tournament.Plateform {
+	for key, item := range part.Tournament.Plateform {
 		if key > 0 {
-			plateform = fmt.Sprintf("%s%s",item.Name,"-")
+			plateform = fmt.Sprintf("%s%s", item.Name, "-")
 		} else {
-			plateform = fmt.Sprintf("%s",item.Name)
+			plateform = fmt.Sprintf("%s", item.Name)
 		}
 	}
 
-	message := fmt.Sprintf("%s%s%s%s%s","Ta demande de quitter au tournoi",plateform,"-",part.Tournament.Game.Name,"a bien été effectué avec succes")
+	message := fmt.Sprintf("%s%s%s%s%s", "Ta demande de quitter au tournoi", plateform, "-", part.Tournament.Game.Name, "a bien été effectué avec succes")
 
 	mailer := external.ToMailer{
-		Email: user.Email,
+		Email:     user.Email,
 		Firstname: user.FirstName,
-		Lastname: user.LastName,
-		Subject: "Confirmation de quitter au tournoi",
-		Message: message,
+		Lastname:  user.LastName,
+		Subject:   "Confirmation de quitter au tournoi",
+		Message:   message,
 	}
 
 	mailer.InitialeMailjet()
@@ -932,4 +931,13 @@ func (p *partUsecase) LeavePartTournamentHandler(partUid string,userUId string)(
 	}
 
 	return rec, nil
+}
+
+func (p *partUsecase) FindPartTeamTournamentHandler(uidTournament primitive.ObjectID, teamUid string) (string, error) {
+	_, err := p.partRepository.FindAllPartTeamTournamentRepo(uidTournament, teamUid)
+	if err != nil {
+		return "", err
+	}
+
+	return "Ok", nil
 }

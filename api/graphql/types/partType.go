@@ -95,5 +95,8 @@ var PartAllTournamentSchemaType = graphql.NewObject(graphql.ObjectConfig{
 		"tournament": &graphql.Field{
 			Type: TournamentSchemaType,
 		},
+		"team": &graphql.Field{
+			Type: graphql.String,
+		},
 	},
 })
