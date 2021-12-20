@@ -6,7 +6,7 @@ import { useSelector,useDispatch } from "react-redux"
 import {SAVED_PART,LEAVE_PART_TOURNAMENT} from "../../gql/participate/mutation"
 import {Translation} from "../../lang/translation"
 import {RootState} from "../../reducer"
-import {checkInTeam} from "../league/utils"
+// import {checkInTeam} from "../league/utils"
 import {RegisterTournamentAction,Input} from "../tournament/action/tournamentAction"
 import {Tournament} from "../models/tournament"
 import {GET_RECORDS_PART} from "../../gql/participate/query"
@@ -102,7 +102,7 @@ const RegisterTournament: React.FC<RegisterType> = function({tournament,uid,isUs
 		let isError:boolean = false
 
 		if(tournament?.isTeam) {
-			const check = await checkInTeam(userConnectedRedux.user.uid)
+			const check = false // await checkInTeam(userConnectedRedux.user.uid)
 			if(!check) {
 				isError = true
 				// message = Translation(userConnectedRedux.user.language).tournament.notifyError

@@ -88,6 +88,7 @@ const PartTournament:React.FC<PartTournamentType> = function ({tournament,parts}
 
 	const handleTeam = async function() {
 		const check = await checkInTeam(tournament?.uid,userConnectedRedux.user.uid)
+		console.log("check",check)
 		if(!check && tournament?.isTeam) {
 			setIsOpen(true)
 			setContent("Vérifie que tu as une équipe")

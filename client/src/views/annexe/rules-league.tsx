@@ -15,7 +15,7 @@ import "../../assets/css/style.css"
 import { Link } from "react-router-dom"
 import {dateStringToDY} from "../tools/dateConvert"
 import {RegisterLeagueAction,Input} from "../league/action/leagueAction"
-import {checkInTeam} from "../league/utils"
+// import {checkInTeam} from "../league/utils"
 
 
 
@@ -55,7 +55,7 @@ const RulesLeague: React.FC = function(props:any) {
 		}
 
 		if(league?.isTeam) {
-			const check = await checkInTeam(userConnectedRedux.user.uid)
+			const check = false //await checkInTeam(userConnectedRedux.user.uid)
 			if(check) {
 				dispatch(RegisterLeagueAction(param))
 			}
@@ -98,7 +98,7 @@ const RulesLeague: React.FC = function(props:any) {
 						{isOpen ? Translation(userConnectedRedux.user.language).tournament.open : Translation(userConnectedRedux.user.language).tournament.close }
 					</span></p>
 				</div>
-				
+
 				<div className="banniere"></div>
 				<div className="tabs">
 					<ul>
@@ -173,7 +173,7 @@ const RulesLeague: React.FC = function(props:any) {
 						</div>
 					</div>
 				</div>
-			</div>			
+			</div>
 			<Footer/>
 		</div>
     </div>
