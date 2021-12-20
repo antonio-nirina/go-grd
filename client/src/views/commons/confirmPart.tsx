@@ -104,7 +104,7 @@ const ConfirmPart = function() {
 				userUid:userConnectedRedux.user.uid,
 				confirmed:saved
 			}
-			params.push(NameRoutes.tournament)
+			params.push(`${NameRoutes.matchTournament}?uid=${tournament?.uid}&tournament=true&wagger=false`)
 			disptach(SaveParticipateTournamentAction(dataTournament))
 		}
 	}
