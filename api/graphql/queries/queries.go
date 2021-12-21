@@ -54,6 +54,10 @@ import (
 	rateHandler "github.com/thoussei/antonio/api/rate/handler"
 	rateRepo "github.com/thoussei/antonio/api/rate/repository"
 
+	supportDelivery "github.com/thoussei/antonio/api/support/delivery"
+	supportHandler "github.com/thoussei/antonio/api/support/handler"
+	supportRepo "github.com/thoussei/antonio/api/support/repository"
+
 	"github.com/graphql-go/graphql"
 )
 
@@ -115,6 +119,10 @@ var rateRepository = rateRepo.NewRateRepository(database)
 var rateUsecase = rateHandler.NewUsecaseRate(rateRepository, usecase)
 var rateResolver = rateDelivery.NewResolverRate(rateUsecase, usecase)
 
+var supportRepository = supportRepo.NewSupportRepository(database)
+var supportUsecase = supportHandler.NewUsecaseSupport(supportRepository, usecase)
+var supportResolver = supportDelivery.NewResolverSupport(supportUsecase, usecase)
+
 // GetRootFields returns all the available queries.
 func GetRootFields() graphql.Fields {
 	return graphql.Fields{
@@ -172,5 +180,6 @@ func GetRootFields() graphql.Fields {
 		"FindRateInWeek":            FindRateInWeek(),
 		"GetUserByUsername":         GetUserByUsername(),
 		"FindAllPartTeamTournament": FindAllPartTeamTournament(),
+		"FindOneSupport":            FindOneSupport(),
 	}
 }
