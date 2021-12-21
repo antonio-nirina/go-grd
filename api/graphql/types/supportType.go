@@ -16,8 +16,11 @@ var SupportSchemaType = graphql.NewObject(graphql.ObjectConfig{
 		"updated": &graphql.Field{
 			Type: graphql.String,
 		},
-		"user": &graphql.Field{
-			Type: UserSchemaType,
+		"firstname": &graphql.Field{
+			Type: graphql.String,
+		},
+		"lastname": &graphql.Field{
+			Type: graphql.String,
 		},
 		"content": &graphql.Field{
 			Type: graphql.String,

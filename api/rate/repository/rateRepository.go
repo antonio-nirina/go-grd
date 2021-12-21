@@ -58,10 +58,10 @@ func (c *driverRepository) FindRateRepo(idQuery primitive.ObjectID) (entity.Rate
 
 /*
 * https://www.mongodb.com/blog/post/quick-start-golang--mongodb--data-aggregation-pipeline
-*/
+ */
 func (c *driverRepository) FindAllRateRepo() ([]primitive.M, error) {
 	var collection = c.client.Database("grd_database").Collection("rate")
-	groupStage := bson.D{{"$group", bson.D{{"_id", "$user"},{"scoreTotal", bson.D{{"$sum", "$score"}}}}}}
+	groupStage := bson.D{{"$group", bson.D{{"_id", "$user"}, {"scoreTotal", bson.D{{"$sum", "$score"}}}}}}
 	cur, err := collection.Aggregate(context.TODO(), mongo.Pipeline{groupStage})
 
 	var rateInfo []bson.M

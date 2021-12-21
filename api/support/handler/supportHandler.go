@@ -8,11 +8,13 @@ import (
 )
 
 type SupportViewModel struct {
-	Uid     string                    `json:"uid"`
-	Created string                    `json:"created"`
-	Updated string                    `json:"updated"`
-	User    userHandler.UserViewModel `json:"user"`
-	Content string                    `json:"content"`
+	Uid       string `json:"uid"`
+	Created   string `json:"created"`
+	Updated   string `json:"updated"`
+	FirstName string `json:"firstName"`
+	LastName  string `json:"lastName"`
+	Content   string `json:"content"`
+	Email     string `json:"email"`
 }
 
 type supportUsecase struct {
@@ -50,31 +52,19 @@ func (s *supportUsecase) FindSupportHandler(idQuery string) (SupportViewModel, e
 	}
 
 	support, err := s.supportRepository.FindSupportRepo(objectId)
-	user, err := s.userUsecase.FindOneUserByUid(support.User)
 
 	if err != nil {
 		return SupportViewModel{}, err
 	}
 
 	supportViewModel := SupportViewModel{
-		Uid:     support.Uid.Hex(),
-		Created: support.Created,
-		Updated: support.Updated,
-		User: userHandler.UserViewModel{
-			Uid:           user.Uid.Hex(),
-			FirstName:     user.FirstName,
-			LastName:      user.LastName,
-			Email:         user.Email,
-			Username:      user.Username,
-			IsBanned:      user.IsBanned,
-			Avatar:        user.Avatar,
-			Language:      user.Language,
-			Point:         user.Point,
-			Roles:         user.Roles,
-			TypeConnexion: user.TypeConnexion,
-			Created:       user.Created,
-		},
-		Content: support.Content,
+		Uid:       support.Uid.Hex(),
+		Created:   support.Created,
+		Updated:   support.Updated,
+		FirstName: support.FirstName,
+		LastName:  support.LastName,
+		Content:   support.Content,
+		Email:     support.Email,
 	}
 
 	return supportViewModel, nil

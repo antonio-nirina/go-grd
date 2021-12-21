@@ -28,15 +28,19 @@ func NewResolverSupport(supportHandler handler.UsecaseSupport, userHandler userH
 func (s *support) CreatedSupportResolver(params graphql.ResolveParams) (interface{}, error) {
 	created, _ := params.Args["created"].(string)
 	updated, _ := params.Args["updated"].(string)
-	user, _ := params.Args["user"].(string)
+	firstName, _ := params.Args["firstname"].(string)
+	lastname, _ := params.Args["lastname"].(string)
 	content, _ := params.Args["content"].(string)
+	email, _ := params.Args["email"].(string)
 
 	support := &entity.Support{
-		Uid:     primitive.NewObjectID(),
-		Created: created,
-		Updated: updated,
-		User:    user,
-		Content: content,
+		Uid:       primitive.NewObjectID(),
+		Created:   created,
+		Updated:   updated,
+		FirstName: firstName,
+		LastName:  lastname,
+		Content:   content,
+		Email:     email,
 	}
 
 	res, err := s.supportHandler.SavedSupportHandler(support)

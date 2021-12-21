@@ -15,7 +15,13 @@ func createSupport() *graphql.Field {
 			"updated": &graphql.ArgumentConfig{
 				Type: graphql.String,
 			},
-			"user": &graphql.ArgumentConfig{
+			"firstname": &graphql.ArgumentConfig{
+				Type: graphql.String,
+			},
+			"lastname": &graphql.ArgumentConfig{
+				Type: graphql.String,
+			},
+			"email": &graphql.ArgumentConfig{
 				Type: graphql.String,
 			},
 			"content": &graphql.ArgumentConfig{
