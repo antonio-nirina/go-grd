@@ -4,6 +4,7 @@ import { useHistory } from "react-router-dom"
 import { useSelector } from "react-redux"
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import Loader from "react-loader-spinner"
 
 import {LEAVE_PART_TOURNAMENT} from "../../gql/participate/mutation"
 import {Tournament} from "../models/tournament"
@@ -12,7 +13,7 @@ import ContentPaiement from "../commons/contentPaiement"
 import {checkInTeam} from "../league/utils"
 import {RootState} from "../../reducer"
 import { NameRoutes } from "../commons/route-list"
-import PopupTeam from "../commons/check-team"
+import PopupTeam,{TeamPopup} from "../commons/check-team"
 
 
 export type PartTournamentType = {
@@ -26,11 +27,13 @@ const PartTournament:React.FC<PartTournamentType> = function ({tournament,parts}
 	const userConnectedRedux = useSelector((state:RootState) => state.userConnected)
 	const [isPart,setIsPart] = useState<boolean>(false)
 	const [teamPart,setTeamPart] = useState<string>("")
+	const [checkTeam,setCheckTeam] = useState<number>(0)
 	const [partUid,setPartUid] = useState<string>("")
 	const [partData,setPartData] = useState<string[]>([])
 	const [showPaiement, setShowPaiement] = useState<boolean>(false)
 	const[isOpen,setIsOpen] =useState<boolean>(false)
 	const [content,setContent] = useState<string>("")
+	const [isLoader, setIsLoader] = useState<boolean>(false)
 
 	const [leavePartTournament]  = useMutation(LEAVE_PART_TOURNAMENT)
 
@@ -48,7 +51,12 @@ const PartTournament:React.FC<PartTournamentType> = function ({tournament,parts}
 		})
 		let arrayUser:string[] = []
 		parts?.forEach(function(part:ParticipateTournament){
-			arrayUser.push(part.user.username)
+			if(tournament?.isTeam) {
+				setIsPart(true)
+				arrayUser.push(part.team.name)
+			} else {
+				arrayUser.push(part.user.username)
+			}
 		})
 
 		if(parts && arrayUser.length < parts[0].tournament.numberParticipate){
@@ -61,13 +69,25 @@ const PartTournament:React.FC<PartTournamentType> = function ({tournament,parts}
 	},[tournament,parts,userConnectedRedux])
 
 	const onShowConfirmed = async function() {
-		const check = await checkInTeam(userConnectedRedux.user.uid)
+		setIsLoader(true)
+		const check = await checkInTeam(tournament?.uid,userConnectedRedux.user.uid)
 		if(!check && tournament?.isTeam) {
+			setIsLoader(false)
 			setIsOpen(true)
 			setContent("Vérifie que tu as une équipe")
 		} else if(check  && tournament?.isTeam && check === 1) {
 			setIsOpen(true)
+			setIsLoader(false)
+			setCheckTeam(1)
 			setContent("Vérifie que tu as assez de membres")
+		} else if(check  && tournament?.isTeam && check === 2) {
+			setIsOpen(true)
+			setCheckTeam(2)
+			setIsLoader(false)
+			setContent("Veuillez vérifier car tu appartient à une équipe qui participe à cette tournois.")
+		} else {
+			setIsLoader(false)
+			history.push(`${NameRoutes.confirmedJoinTournament}?uid=${tournament?.uid}`)
 		}
 	}
 
@@ -84,14 +104,24 @@ const PartTournament:React.FC<PartTournamentType> = function ({tournament,parts}
 	}
 
 	const handleTeam = async function() {
-		const check = await checkInTeam(userConnectedRedux.user.uid)
+		setIsLoader(true)
+		const check = await checkInTeam(tournament?.uid,userConnectedRedux.user.uid)
 		if(!check && tournament?.isTeam) {
+			setIsLoader(false)
 			setIsOpen(true)
 			setContent("Vérifie que tu as une équipe")
 		} else if(check  && tournament?.isTeam && check === 1) {
+			setIsLoader(false)
 			setIsOpen(true)
+			setCheckTeam(1)
 			setContent("Vérifie que tu as assez de membres")
+		} else if(check  && tournament?.isTeam && check === 2) {
+			setIsLoader(false)
+			setIsOpen(true)
+			setCheckTeam(2)
+			setContent("Veuillez vérifier car tu appartient à une équipe qui participe à cette tournois.")
 		} else {
+			setIsLoader(false)
 			history.push(`${NameRoutes.confirmedJoinTournament}?uid=${tournament?.uid}`)
 		}
 	}
@@ -100,8 +130,21 @@ const PartTournament:React.FC<PartTournamentType> = function ({tournament,parts}
 		setIsOpen(false)
 	}
 
+	const teamPopup:TeamPopup = {
+		handleOpen:handlePopup,
+		content:content,
+		isShow:isOpen,
+		checkTeam:checkTeam
+	}
+
 	return (
 		<div className="item-info-right">
+			<div className={isLoader ? "loader-spinner":"d-none"}>
+				<Loader
+					type="Oval"
+					color="#dd0000"
+				/>
+			</div>
 			<div className="join-all">
 				<p className="team-bar-title">{teamPart}</p>
 				<ToastContainer position="bottom-left" />
@@ -128,7 +171,7 @@ const PartTournament:React.FC<PartTournamentType> = function ({tournament,parts}
 					})}
 				</div>
 			</div>
-			{isOpen ? <PopupTeam handleOpen={handlePopup} isShow={isOpen} content={content} /> : <></>}
+			{isOpen ? <PopupTeam {...teamPopup} /> : <></>}
 			<div className="join-all join-canal">
 				<p className="team-bar-title">Rejoindre le canal discord</p>
 				<button className="btn bg-red discolor">Rejoindre</button>

@@ -1,5 +1,5 @@
-import React,{useState} from "react"
-import { Link } from "react-router-dom"
+import React,{useEffect,useState} from "react"
+import {Link,useHistory } from "react-router-dom"
 
 import "../../assets/css/style.css"
 import "../assistance/assistance.css"
@@ -13,6 +13,11 @@ export interface AsideInterface {
 
 const Aside = function({assists,handleList}:AsideInterface) {
 	const [item, setItem] = useState<number>(0)
+	const [isContact,setIsContact] = useState<boolean>(false)
+	const params = useHistory<any>()
+	useEffect(()=> {
+		if(!/contact/.test(params.location.pathname))setIsContact(true)
+	},[])
 
 	const handleMenu = function(index:number) {
 		setItem(index)
@@ -23,7 +28,7 @@ const Aside = function({assists,handleList}:AsideInterface) {
 			{
 				assists ? assists?.map(function(el:Assist,index:number){
 					return (
-						<div className={index === item ? "list-link link" : "link"}
+						<div className={!isContact && index === item ? "list-link link" : "link"}
 							style={{"cursor":"pointer"}}
 							onClick={() => handleMenu(index)} key={index}>
 							<div className="parent-link title-list">
@@ -33,7 +38,7 @@ const Aside = function({assists,handleList}:AsideInterface) {
 					)
 				})
 			: <></>}
-			<div className="link">
+			<div className={isContact ? "list-link link" : "link"}>
 				<h3><Link to ="/contact">Contact</Link></h3>
 			</div>
 		</div>

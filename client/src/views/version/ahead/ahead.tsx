@@ -20,7 +20,6 @@ const Ahead: React.FC = function() {
 	const {loading,error,data} 	= useQuery(GET_ALL_BOARD)
 
 	useEffect(() => {
-		console.log(data)
 		if(!loading && !error && data) {
 			setLeadBoard(data.FindAllRate)
 		}

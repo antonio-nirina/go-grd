@@ -104,7 +104,7 @@ const ConfirmPart = function() {
 				userUid:userConnectedRedux.user.uid,
 				confirmed:saved
 			}
-			params.push(NameRoutes.tournament)
+			params.push(`${NameRoutes.matchTournament}?uid=${tournament?.uid}&tournament=true&wagger=false`)
 			disptach(SaveParticipateTournamentAction(dataTournament))
 		}
 	}
@@ -144,7 +144,9 @@ const ConfirmPart = function() {
 											handleOpen={handlePopup}
 											isShow={isOpen}
 											content={team}
+											checkTeam={1}
 											handleTeamSelected={handleTeamselect}
+
 										/>
 									: <></>}
 							<div className="item-all-info">

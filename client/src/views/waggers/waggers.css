@@ -210,6 +210,10 @@
     position: relative;
 	overflow: scroll;
 }
+.item-info-right .loader-spinner{
+	position: absolute;
+	left: 116px;
+}
 .item-all-info p{
 	width: 170px;
     padding-top: 30px;

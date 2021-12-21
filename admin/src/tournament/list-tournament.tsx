@@ -20,7 +20,7 @@ const ListTournament : React.FC = function(props:any) {
 	const [showList, setShowList] = useState<Boolean>(false)
 	const [tournament, setTournament] = useState<Tournament[]>([])
 	const [item, setItem] = useState<Item>({item:1})
-	const [isLoader, setIsLoader] = useState<Boolean>(true)
+	const [isLoader, setIsLoader] = useState<boolean>(true)
 
 	//const [limit, setLimit] = useState<Number>(0)
 	//const [pageNumber, setPageNumber] = useState<Number>(0)

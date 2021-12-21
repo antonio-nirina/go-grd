@@ -19,7 +19,7 @@ import {League} from "../models/league"
 import {dateStringToDY} from "../tools/dateConvert"
 import AvatarDefault from "../../assets/image/game-tag.png"
 import {RegisterLeagueAction,Input} from "../league/action/leagueAction"
-import {checkInTeam} from "../league/utils"
+// import {checkInTeam} from "../league/utils"
 
 const InfoLeague: React.FC = function(props:any) {
 	const dispatch = useDispatch()
@@ -70,7 +70,7 @@ const InfoLeague: React.FC = function(props:any) {
 		}
 
 		if(league?.isTeam) {
-			const check = await checkInTeam(userConnectedRedux.user.uid)
+			const check = false // await checkInTeam(userConnectedRedux.user.uid)
 			if(!check) message = Translation(userConnectedRedux.user.language).tournament.notifyError
 		}
 
@@ -163,7 +163,7 @@ const InfoLeague: React.FC = function(props:any) {
 							<div className="btn-container">
 								<button className="btn bg-red" onClick={onShowMore}>{!showMore ? "Voir plus" :"Reduire"}</button>
 							</div>
-							</div>							
+							</div>
 						</div>
 					</div>
 					<div className="tableau">
@@ -228,7 +228,7 @@ const InfoLeague: React.FC = function(props:any) {
 						</div>
 					</div>
 				</div>
-			</div>			
+			</div>
 			<Footer/>
 		</div>
     </div>

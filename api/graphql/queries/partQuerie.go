@@ -141,7 +141,7 @@ func FindAllPartUserWagger() *graphql.Field {
 	}
 }
 
-func FindTournamentParticipate() * graphql.Field {
+func FindTournamentParticipate() *graphql.Field {
 	return &graphql.Field{
 		Type:        graphql.NewList(types.PartAllTournamentSchemaType),
 		Description: "Get all tournament by participate",
@@ -152,5 +152,21 @@ func FindTournamentParticipate() * graphql.Field {
 		},
 
 		Resolve: partResolver.FindPartByTournamentResolver,
-	} 
+	}
+}
+func FindAllPartTeamTournament() *graphql.Field {
+	return &graphql.Field{
+		Type:        graphql.NewList(types.PartAllTournamentSchemaType),
+		Description: "Get all tournament by participate",
+		Args: graphql.FieldConfigArgument{
+			"teamUid": &graphql.ArgumentConfig{
+				Type: graphql.String,
+			},
+			"uidTournament": &graphql.ArgumentConfig{
+				Type: graphql.String,
+			},
+		},
+
+		Resolve: partResolver.FindAllPartTeamTournamentResolver,
+	}
 }

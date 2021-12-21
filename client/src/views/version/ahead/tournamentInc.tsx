@@ -82,7 +82,7 @@ const TournamentInc: React.FC  = function() {
 					tournament.map(function(element:Tournament,index:number){
 						return (
 							<div className="list_tournament" key={index}>
-								<Link to={`/join-tournament?uid=${element.uid}`} >
+								<Link to={`${NameRoutes.joinTournament}?uid=${element.uid}`} >
 									<img src={element.game.logo} width="40" height="30" alt=""/>
 									<p className="game_name">{element.title}<span>{dateStringToDY(element.dateStart)} - {<Moment filter={FilterDiff}  diff={element.dateStart} locale={"fr"} unit="hours">{new Date()}</Moment>} </span></p>
 									<p className="cashprize">Cashprize<span>{`${element.price.reduce((prev,cur)=>(parseInt(prev.toString())+parseInt(cur)),0)}`} G-Coins</span></p>

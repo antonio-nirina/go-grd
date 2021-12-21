@@ -12,9 +12,10 @@ export interface TeamPopup {
 	handleOpen:Function,
 	content:string|TeamModel[]
 	isShow:boolean
+	checkTeam:number
 }
 
-const PopupTeam = function({handleOpen,isShow,content}:TeamPopup) {
+const PopupTeam = function({handleOpen,isShow,content,checkTeam}:TeamPopup) {
 	const [isOpen,setIsOpen] = useState<boolean>(true)
 	useEffect(()=> {
 		setIsOpen(isShow)
@@ -41,10 +42,10 @@ const PopupTeam = function({handleOpen,isShow,content}:TeamPopup) {
 					<div className="actions">
 						<div className="body">
 							<div className="content">
-								{content}
+								<p>{content}</p>
 							</div>
 							<div className="handle-team">
-								<Link to={NameRoutes.team}>Gérér votre équipe</Link>
+								{checkTeam === 1 ? <Link to={NameRoutes.team}>Gérér votre équipe</Link>  : <></> }
 							</div>
 						</div>
 					</div>

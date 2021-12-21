@@ -25,8 +25,6 @@ import PartTournament,{PartTournamentType} from "./part-tournament"
 import HeaderTournament,{HeaderTournamentType} from "./common/headerTournament"
 
 
-
-
 const Joingame: React.FC = function(props:any) {
   	const [tournament, setTournament] = useState<Tournament>()
 	const [parts, setParts] = useState<ParticipateTournament[]>()

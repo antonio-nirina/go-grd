@@ -1,7 +1,7 @@
 @charset "UTF-8";
 .block-center{
 	width: 100%;
-	padding: 30px 9px;
+	padding: 4px 9px;
 	margin: auto;
 
 }
@@ -103,7 +103,7 @@
 
 }
 .under-title{
-	padding: 20px 0;
+	padding: 30px 0;
 	border-bottom: 2px solid #dd0000;
 }
 .under-title .clear{
@@ -138,24 +138,6 @@
 }
 .tuto-video video{
 	width: 49%;
-}
-.assistance .accueil .support-link .link:nth-child(1) h3 a:before,
-.assistance .ingame .support-link .link:nth-child(2) h3 a:before,
-.assistance .social .support-link .link:nth-child(3) h3 a:before,
-.assistance .help-connexion .support-link .link:nth-child(4) h3 a:before,
-.assistance .contact .support-link .link:nth-child(5) h3 a:before,
-.contact .link a[href="/contact"]:before
-{
-	content: "";
-    display: inline-block;
-    vertical-align: middle;
-    width: 6px;
-    height: 25px;
-    background: #dd0000;
-    margin-right: 5px;
-    position: absolute;
-    left: -13px;
-    top: -3px;
 }
 
 .didacticiel {
@@ -250,3 +232,11 @@
 	font-size: 14px;
 }
 
+.support .list-under-title{
+	margin-top: 12px;
+	margin-left: 12px;
+}
+
+.contact .contact-support {
+	padding: 0;
+}

@@ -1,5 +1,6 @@
 import {User,Tournament} from "./tournament"
 import {Wagger} from "./wagger"
+import {TeamModel} from "./team"
 
 export interface ParticipateTournament {
 	uid:string
@@ -7,6 +8,7 @@ export interface ParticipateTournament {
 	isWin:string
 	tournament:Tournament
 	user:User
+	team:TeamModel
 }
 
 export interface ParticipateWagger {

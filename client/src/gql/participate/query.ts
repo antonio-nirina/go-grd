@@ -24,9 +24,7 @@ export const GET_PART_USER = gql`
 			}
 			team{
 				uid
-				players{
-					uid
-				}
+
 			}
 		}
 	}`
@@ -165,6 +163,11 @@ export const GET_PART_ONE_TOURNAMENT = gql`
 			uid
 			date
 			isWin
+			team{
+				name
+				tag
+				uid
+			}
 			user{
 				uid
 				username
