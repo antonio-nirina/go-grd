@@ -856,10 +856,23 @@ func (p *partUsecase) FindPartTournamentHandler(tournament tHandler.TournamentVi
 				plateform = append(plateform, arrayPl)
 			}
 			user, _ := p.userUsescase.FindOneUserByUid(result.User)
+			team,_ := p.teamUsecase.FindOneTeamHandler(result.Team)
 			viewPartSuccess := partViewModelTournament{
 				Uid:  result.Uid.Hex(),
 				Date: result.Date,
-				Team: result.Team,
+				Team: teamH.TeamViewModel{
+					Uid: team.Uid.Hex(),
+					Name:team.Name,
+					CreationDate:team.CreationDate,
+					Players:[]userH.UserViewModel{},
+					Description:team.Description,
+					IsBlocked:team.IsBlocked,
+					Logo:team.Logo,
+					Tag:team.Tag,
+					Banniere:team.Banniere,
+					Creator:team.CreationDate,
+					Records:0, 
+				},
 				User: userH.UserViewModel{
 					Uid:           user.Uid.Hex(),
 					FirstName:     user.FirstName,

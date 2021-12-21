@@ -67,7 +67,10 @@ export const GET_PART_TEAM_Tournament = gql`
 			user{uid}
 			numberPartConfirmed
 			tournament{uid}
-			team
+			team{
+				uid
+				name
+			}
 			isWin
 		}
 	}

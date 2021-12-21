@@ -144,7 +144,9 @@ const ConfirmPart = function() {
 											handleOpen={handlePopup}
 											isShow={isOpen}
 											content={team}
+											checkTeam={1}
 											handleTeamSelected={handleTeamselect}
+
 										/>
 									: <></>}
 							<div className="item-all-info">

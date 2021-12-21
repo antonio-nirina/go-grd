@@ -48,7 +48,8 @@ const NextAssistance: React.FC = function() {
 						/>
 		  			</div>
 		  			<div className="support">
-						<div>
+					  	<h3>{assists && assists.length > 0 ? assists[item].title : <></>}</h3>
+						<div className="list-under-title">
 							{assists && assists.length > 0 ? assists[item].underTitle.map(function(subject:SubjectTitle,i:number){
 								return (<div style={{"color":"#dd0000","marginBottom":"20px"}} key={i}>{subject.title}</div>)
 							}): <></>}
@@ -60,7 +61,7 @@ const NextAssistance: React.FC = function() {
 			<Footer/>
 	  	</div>
 	</div>
-  );
+  )
 }
 
 export default NextAssistance

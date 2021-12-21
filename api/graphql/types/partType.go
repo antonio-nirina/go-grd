@@ -31,9 +31,6 @@ var PartSchemaType = graphql.NewObject(graphql.ObjectConfig{
 		"isWin": &graphql.Field{
 			Type: graphql.Boolean,
 		},
-		/*"league": &graphql.Field{
-			Type: LeagueSchemaType,
-		},*/
 	},
 })
 
@@ -96,7 +93,7 @@ var PartAllTournamentSchemaType = graphql.NewObject(graphql.ObjectConfig{
 			Type: TournamentSchemaType,
 		},
 		"team": &graphql.Field{
-			Type: graphql.String,
+			Type: TeamSchemaType,
 		},
 	},
 })

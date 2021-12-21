@@ -30,7 +30,7 @@ export const checkInTeam = async function(uidTournament:string|undefined,userId:
 				}
 			})
 			partTeam.data.FindTournamentParticipate.forEach(function(element:ParticipateTournament) {
-				uidTeamPart.push(element.team)
+				uidTeamPart.push(element.team.uid)
 			})
 			uidTeamPart.forEach(function(uid:string){
 				if(uidTeam.includes(uid)){
