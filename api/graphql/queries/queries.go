@@ -181,5 +181,6 @@ func GetRootFields() graphql.Fields {
 		"GetUserByUsername":         GetUserByUsername(),
 		"FindAllPartTeamTournament": FindAllPartTeamTournament(),
 		"FindOneSupport":            FindOneSupport(),
+		"FindPartAllTournament":     FindPartAllTournament(),
 	}
 }

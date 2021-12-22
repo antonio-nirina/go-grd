@@ -30,6 +30,7 @@ type UsecasePart interface {
 	FindPartTournamentHandler(tournament tHandler.TournamentViewModel) ([]partViewModelTournament, error)
 	LeavePartTournamentHandler(partUid string, userUId string) (interface{}, error)
 	FindPartTeamTournamentHandler(uidTournament primitive.ObjectID, uidTeam string) (string, error)
+	FindPartAllTournamentHandler(tournaments []tHandler.TournamentViewModel) ([]CountpartTournament, error)
 }
 type partUsecase struct {
 	partRepository repository.RepositoryPart
@@ -856,23 +857,28 @@ func (p *partUsecase) FindPartTournamentHandler(tournament tHandler.TournamentVi
 				plateform = append(plateform, arrayPl)
 			}
 			user, _ := p.userUsescase.FindOneUserByUid(result.User)
-			team,_ := p.teamUsecase.FindOneTeamHandler(result.Team)
+			var teamView teamH.TeamViewModel
+			if result.Tournament.IsTeam {
+				team, _ := p.teamUsecase.FindOneTeamHandler(result.Team)
+				teamView = teamH.TeamViewModel{
+					Uid:          team.Uid.Hex(),
+					Name:         team.Name,
+					CreationDate: team.CreationDate,
+					Players:      []userH.UserViewModel{},
+					Description:  team.Description,
+					IsBlocked:    team.IsBlocked,
+					Logo:         team.Logo,
+					Tag:          team.Tag,
+					Banniere:     team.Banniere,
+					Creator:      team.CreationDate,
+					Records:      0,
+				}
+			}
+
 			viewPartSuccess := partViewModelTournament{
 				Uid:  result.Uid.Hex(),
 				Date: result.Date,
-				Team: teamH.TeamViewModel{
-					Uid: team.Uid.Hex(),
-					Name:team.Name,
-					CreationDate:team.CreationDate,
-					Players:[]userH.UserViewModel{},
-					Description:team.Description,
-					IsBlocked:team.IsBlocked,
-					Logo:team.Logo,
-					Tag:team.Tag,
-					Banniere:team.Banniere,
-					Creator:team.CreationDate,
-					Records:0, 
-				},
+				Team: teamView,
 				User: userH.UserViewModel{
 					Uid:           user.Uid.Hex(),
 					FirstName:     user.FirstName,
@@ -953,4 +959,37 @@ func (p *partUsecase) FindPartTeamTournamentHandler(uidTournament primitive.Obje
 	}
 
 	return "Ok", nil
+}
+
+func (p *partUsecase) FindPartAllTournamentHandler(tournaments []tHandler.TournamentViewModel) ([]CountpartTournament, error) {
+	var countPart []CountpartTournament
+
+	for _, result := range tournaments {
+		objectId, _ := primitive.ObjectIDFromHex(result.Uid)
+		recordsPart, err := p.partRepository.FindAllPartAllTournamentRepo(objectId)
+
+		if err != nil {
+			return []CountpartTournament{}, err
+		}
+
+		countView := CountpartTournament{
+			Tournament: tHandler.TournamentScortModel{
+				Uid:               result.Uid,
+				Title:             result.Title,
+				Description:       result.Description,
+				Statut:            result.Statut,
+				DateStart:         result.DateStart,
+				NumberParticipate: result.NumberParticipate,
+				Price:             result.Price,
+				DeadlineDate:      result.DeadlineDate,
+				PriceParticipate:  result.PriceParticipate,
+				IsTeam:            result.IsTeam,
+			},
+			RecordsPart: recordsPart,
+		}
+
+		countPart = append(countPart, countView)
+	}
+
+	return countPart, nil
 }

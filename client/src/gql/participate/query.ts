@@ -206,3 +206,22 @@ export const GET_PART_ONE_TOURNAMENT = gql`
 			}
 		}
 	}`
+
+	export const GET_TOURNAMENT_PART = gql`
+		query FindPartAllTournament{
+			FindPartAllTournament{
+				tournament{
+					uid
+					title
+					statut
+					description
+					deadlineDate
+					dateStart
+					price
+					priceParticipate
+					numberParticipate
+				}
+				recordsPart
+			}
+		}
+	`

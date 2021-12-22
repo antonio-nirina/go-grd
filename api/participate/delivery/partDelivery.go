@@ -1,7 +1,10 @@
 package delivery
 
 import (
+	"fmt"
+
 	"github.com/graphql-go/graphql"
+	"github.com/thoussei/antonio/api/common"
 	"github.com/thoussei/antonio/api/participate/entity"
 	"github.com/thoussei/antonio/api/participate/handler"
 	rateHandler "github.com/thoussei/antonio/api/rate/handler"
@@ -35,6 +38,7 @@ type PartResolver interface {
 	FindPartByTournamentResolver(params graphql.ResolveParams) (interface{}, error)
 	LeavePartTournamentResolver(params graphql.ResolveParams) (interface{}, error)
 	FindAllPartTeamTournamentResolver(params graphql.ResolveParams) (interface{}, error)
+	FindPartAlltournamentResolver(params graphql.ResolveParams) (interface{}, error)
 }
 
 type participate struct {
@@ -380,4 +384,53 @@ func (p *participate) FindAllPartTeamTournamentResolver(params graphql.ResolvePa
 
 	return part, nil
 
+}
+
+func (p *participate) FindPartAlltournamentResolver(params graphql.ResolveParams) (interface{}, error) {
+	var pageNumber int64 = 0
+	var limit int64 = 0
+	tournaments, err := p.tournament.FindAllTournamentHandler(pageNumber, limit)
+	fmt.Println("tournaments", tournaments)
+	if err != nil {
+		return nil, err
+	}
+	var plateform []common.PlateformViewModel
+	var tournamentRes []tournamentHandler.TournamentViewModel
+
+	for _, result := range tournaments {
+		tournamentView := tournamentHandler.TournamentViewModel{
+			Uid:               result.Uid,
+			Title:             result.Title,
+			Description:       result.Info,
+			Statut:            result.Statut,
+			DateStart:         result.DateStart,
+			NumberParticipate: result.NumberParticipate,
+			GameWay:           result.GameWay,
+			Price:             result.Price,
+			DeadlineDate:      result.DeadlineDate,
+			PriceParticipate:  result.PriceParticipate,
+			Game:              common.GameViewModel{},
+			Plateform:         plateform,
+			Rules:             result.Rules,
+			IsPublic:          result.IsPublic,
+			Format:            result.Format,
+			Server:            result.Server,
+			Tchat:             result.Tchat,
+			Winners:           result.Winners,
+			Region:            result.Region,
+			Spectateur:        result.Spectateur,
+			Laps:              result.Laps,
+			Maps:              result.Maps,
+			IsTeam:            result.IsTeam,
+		}
+		tournamentRes = append(tournamentRes, tournamentView)
+	}
+
+	part, err := p.partHandler.FindPartAllTournamentHandler(tournamentRes)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return part, nil
 }

@@ -10,6 +10,7 @@ import Moment from "react-moment"
 
 import {Tournament} from "../../models/tournament"
 import {GET_ALL_TOURNAMENT} from "../../../gql/tournament/query"
+import { GET_TOURNAMENT_PART } from "../../../gql/participate/query"
 import {dateStringToDY} from "../../tools/dateConvert"
 //import {RootState} from "../../../reducer"
 import {NameRoutes} from "../../commons/route-list"
@@ -30,6 +31,7 @@ const TournamentInc: React.FC  = function() {
 			pageNumber:0
 		},
 	})
+	const {loading:ldgPart,error:errPart,data:dataPart} 	= useQuery(GET_TOURNAMENT_PART)
 
 	useEffect(() => {
 		if(!loading && !error && data) {
@@ -47,8 +49,11 @@ const TournamentInc: React.FC  = function() {
 			setTournamentMonth(count)
 			setTournament(data.FindAllTournament)
 		}
+		if(!ldgPart && !errPart && data) {
+			console.log("data", dataPart)
+		}
 		setIsLoader(false)
-	},[loading,error,data])
+	},[loading,error,data,ldgPart,errPart,dataPart])
 
 	const FilterDiff = function(date:string) :string {
 		if(Math.abs(parseInt(date)) >= 24) {

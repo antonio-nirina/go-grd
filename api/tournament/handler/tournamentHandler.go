@@ -14,7 +14,7 @@ type UsecaseTournament interface {
 	FindAllTournamentHandler(pageNumber int64, limit int64) ([]tournamentViewModel, error)
 	FindTournamentGameHandler(pageNumber int64, limit int64, gameUid primitive.ObjectID) ([]tournamentViewModel, error)
 	UpdatedTournamentHandler(tournament *entity.Tournament) (interface{}, error)
-	FindTournamentCreatedHandler(pageNumber int64, limit int64)([]tournamentViewModel, error)
+	FindTournamentCreatedHandler(pageNumber int64, limit int64) ([]tournamentViewModel, error)
 }
 
 type tournamentUsecase struct {
@@ -68,7 +68,7 @@ func (t *tournamentUsecase) FindTournamentHandler(idQuery string) (TournamentVie
 		Statut:            result.Statut,
 		DateStart:         result.DateStart,
 		NumberParticipate: result.NumberParticipate,
-		GameWay: result.GameWay,
+		GameWay:           result.GameWay,
 		Price:             result.Price,
 		DeadlineDate:      result.DeadlineDate,
 		PriceParticipate:  result.PriceParticipate,
@@ -83,8 +83,8 @@ func (t *tournamentUsecase) FindTournamentHandler(idQuery string) (TournamentVie
 		Region:            result.Region,
 		Spectateur:        result.Spectateur,
 		Laps:              result.Laps,
-		Maps: 				result.Maps,
-		IsTeam: 			result.IsTeam,
+		Maps:              result.Maps,
+		IsTeam:            result.IsTeam,
 	}
 
 	return tournamentViewModel, nil
@@ -122,7 +122,7 @@ func (t *tournamentUsecase) FindAllTournamentHandler(pageNumber int64, limit int
 			Description:       val.Info,
 			Statut:            val.Statut,
 			NumberParticipate: val.NumberParticipate,
-			GameWay: val.GameWay,
+			GameWay:           val.GameWay,
 			Price:             val.Price,
 			DeadlineDate:      val.DeadlineDate,
 			PriceParticipate:  val.PriceParticipate,
@@ -138,8 +138,8 @@ func (t *tournamentUsecase) FindAllTournamentHandler(pageNumber int64, limit int
 			Region:            val.Region,
 			Spectateur:        val.Spectateur,
 			Laps:              val.Laps,
-			Maps: 				val.Maps,
-			IsTeam: 			val.IsTeam,
+			Maps:              val.Maps,
+			IsTeam:            val.IsTeam,
 		}
 
 		res = append(res, tournamentViewModel)
@@ -175,7 +175,7 @@ func (t *tournamentUsecase) FindTournamentGameHandler(pageNumber int64, limit in
 			Description:       val.Info,
 			Statut:            val.Statut,
 			NumberParticipate: val.NumberParticipate,
-			GameWay: 			val.GameWay,
+			GameWay:           val.GameWay,
 			Price:             val.Price,
 			DeadlineDate:      val.DeadlineDate,
 			PriceParticipate:  val.PriceParticipate,
@@ -190,8 +190,8 @@ func (t *tournamentUsecase) FindTournamentGameHandler(pageNumber int64, limit in
 			Region:            val.Region,
 			Spectateur:        val.Spectateur,
 			Laps:              val.Laps,
-			Maps: 				val.Maps,
-			IsTeam: 			val.IsTeam,
+			Maps:              val.Maps,
+			IsTeam:            val.IsTeam,
 		}
 
 		res = append(res, tournamentViewModel)
@@ -236,7 +236,7 @@ func (t *tournamentUsecase) UpdatedTournamentHandler(tournament *entity.Tourname
 	return result, nil
 }
 
-func (t *tournamentUsecase) FindTournamentCreatedHandler(pageNumber int64, limit int64)([]tournamentViewModel, error) {
+func (t *tournamentUsecase) FindTournamentCreatedHandler(pageNumber int64, limit int64) ([]tournamentViewModel, error) {
 	result, err := t.tournamentRepository.FindTournamentCreatedRepo(pageNumber, limit)
 
 	if err != nil {
@@ -263,7 +263,7 @@ func (t *tournamentUsecase) FindTournamentCreatedHandler(pageNumber int64, limit
 			Description:       val.Info,
 			Statut:            val.Statut,
 			NumberParticipate: val.NumberParticipate,
-			GameWay: 			val.GameWay,
+			GameWay:           val.GameWay,
 			Price:             val.Price,
 			DeadlineDate:      val.DeadlineDate,
 			PriceParticipate:  val.PriceParticipate,
@@ -278,8 +278,8 @@ func (t *tournamentUsecase) FindTournamentCreatedHandler(pageNumber int64, limit
 			Region:            val.Region,
 			Spectateur:        val.Spectateur,
 			Laps:              val.Laps,
-			Maps: 				val.Maps,
-			IsTeam: 			val.IsTeam,
+			Maps:              val.Maps,
+			IsTeam:            val.IsTeam,
 		}
 
 		res = append(res, tournamentViewModel)

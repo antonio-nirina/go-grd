@@ -36,6 +36,7 @@ type RepositoryPart interface {
 	FindAllPartTournamentRepo(objectId primitive.ObjectID, pageNumber int64, limit int64) (interface{}, error)
 	FindAllPartByTournamentRepo(objectId primitive.ObjectID) ([]entity.Participate, error)
 	FindAllPartTeamTournamentRepo(uidTournament primitive.ObjectID, teamUid string) (entity.Participate, error)
+	FindAllPartAllTournamentRepo(uidTournament primitive.ObjectID) (int, error)
 	// LeavePartTournamentRepo(part *entity.Participate) (interface{},error)
 }
 
@@ -278,7 +279,7 @@ func (c *DriverRepository) FindAllPartByTournamentRepo(objectId primitive.Object
 }
 
 func (c *DriverRepository) FindAllPartTeamTournamentRepo(uidTournament primitive.ObjectID, teamUid string) (entity.Participate, error) {
-	var collection = c.client.Database("grd_database").Collection("Participate")
+	var collection = c.client.Database("grd_database").Collection("participate")
 	var result entity.Participate
 
 	err := collection.FindOne(context.TODO(), bson.M{"team": teamUid, "tournament.uid": uidTournament}).Decode(&result)
@@ -288,4 +289,16 @@ func (c *DriverRepository) FindAllPartTeamTournamentRepo(uidTournament primitive
 	}
 
 	return result, nil
+}
+
+func (c *DriverRepository) FindAllPartAllTournamentRepo(uidTournament primitive.ObjectID) (int, error) {
+	var collection = c.client.Database("grd_database").Collection("participate")
+
+	records, err := collection.CountDocuments(context.TODO(), bson.D{{"tournament.uid", uidTournament}})
+
+	if err != nil {
+		return 0, err
+	}
+
+	return int(records), nil
 }
