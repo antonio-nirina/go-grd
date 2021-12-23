@@ -102,7 +102,7 @@ var PartRecordsTournament = graphql.NewObject(graphql.ObjectConfig{
 	Name: "RecordsParttournament",
 	Fields: graphql.Fields{
 		"tournament": &graphql.Field{
-			Type: TournamentShortSchemaType,
+			Type: TournamentSchemaType,
 		},
 		"recordsPart": &graphql.Field{
 			Type: graphql.Int,

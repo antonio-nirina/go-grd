@@ -43,6 +43,6 @@ type partWaggerViewModel struct {
 }
 
 type CountpartTournament struct {
-	Tournament  thandler.TournamentScortModel `json:"tournament"`
+	Tournament  thandler.TournamentViewModel `json:"tournament"`
 	RecordsPart int                           `json:"recordsPart"`
 }

@@ -1,8 +1,6 @@
 package delivery
 
 import (
-	"fmt"
-
 	"github.com/graphql-go/graphql"
 	"github.com/thoussei/antonio/api/common"
 	"github.com/thoussei/antonio/api/participate/entity"
@@ -390,7 +388,7 @@ func (p *participate) FindPartAlltournamentResolver(params graphql.ResolveParams
 	var pageNumber int64 = 0
 	var limit int64 = 0
 	tournaments, err := p.tournament.FindAllTournamentHandler(pageNumber, limit)
-	fmt.Println("tournaments", tournaments)
+
 	if err != nil {
 		return nil, err
 	}
@@ -409,7 +407,7 @@ func (p *participate) FindPartAlltournamentResolver(params graphql.ResolveParams
 			Price:             result.Price,
 			DeadlineDate:      result.DeadlineDate,
 			PriceParticipate:  result.PriceParticipate,
-			Game:              common.GameViewModel{},
+			Game:              common.GameViewModel{result.Game.Uid, result.Game.Name, result.Game.Image, result.Game.Logo, result.Game.Slug},
 			Plateform:         plateform,
 			Rules:             result.Rules,
 			IsPublic:          result.IsPublic,

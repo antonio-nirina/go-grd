@@ -93,14 +93,14 @@ const CreateTournament: React.FC = function() {
 		if(uiGame && data.title && startDate && gameWay && uidPlateform && lastDate) {
 			try {
 				const result = await createdTournament({ variables: {
-					date:startDate,
+					date: new Date(startDate).toISOString(),
 					title:data.title,
 					uidGame:uiGame,
 					uidPalteforme:uidPlateform.join("_"),
 					description:"",//info
 					numberParticipate:Math.pow(2,(Math.ceil(Math.log2(Number(data.participant))))),
 					price:lapsCash.filter((e) => e).join("_"),
-					deadlineDate:lastDate,
+					deadlineDate: new Date(lastDate).toISOString(),
 					server:data.server,
 					gameWay:gameWay,
 					format:data.format,

@@ -1,7 +1,7 @@
 export interface Tournament {
 	uid:string
 	title:string
-	statut:Boolean
+	statut:boolean
 	description:string
 	numberParticipate:number
 	gameWay:string
@@ -17,7 +17,7 @@ export interface Tournament {
 	maps:string
 	laps:string[]
 	server:string
-	isPublic:Boolean|undefined
+	isPublic:boolean
 	region:string
 	game:Game
 	plateform:Platform[]
@@ -48,3 +48,5 @@ export interface User {
 	language:string
 	point:number
 }
+
+

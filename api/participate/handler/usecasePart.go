@@ -973,16 +973,29 @@ func (p *partUsecase) FindPartAllTournamentHandler(tournaments []tHandler.Tourna
 		}
 
 		countView := CountpartTournament{
-			Tournament: tHandler.TournamentScortModel{
+			Tournament: tHandler.TournamentViewModel{
 				Uid:               result.Uid,
 				Title:             result.Title,
 				Description:       result.Description,
 				Statut:            result.Statut,
 				DateStart:         result.DateStart,
 				NumberParticipate: result.NumberParticipate,
+				GameWay:           result.GameWay,
 				Price:             result.Price,
 				DeadlineDate:      result.DeadlineDate,
 				PriceParticipate:  result.PriceParticipate,
+				Game:              common.GameViewModel{result.Game.Uid, result.Game.Name, result.Game.Image, result.Game.Logo, result.Game.Slug},
+				Plateform:         []common.PlateformViewModel{},
+				Rules:             result.Rules,
+				IsPublic:          result.IsPublic,
+				Format:            result.Format,
+				Server:            result.Server,
+				Tchat:             result.Tchat,
+				Winners:           result.Winners,
+				Region:            result.Region,
+				Spectateur:        result.Spectateur,
+				Laps:              result.Laps,
+				Maps:              result.Maps,
 				IsTeam:            result.IsTeam,
 			},
 			RecordsPart: recordsPart,

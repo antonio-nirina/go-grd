@@ -215,11 +215,23 @@ export const GET_PART_ONE_TOURNAMENT = gql`
 					title
 					statut
 					description
+					numberParticipate
 					deadlineDate
 					dateStart
+					gameWay
 					price
 					priceParticipate
-					numberParticipate
+					isPublic
+					isTeam
+					spectateur
+					laps
+					game{
+						uid
+						name
+						image
+						logo
+						slug
+					}
 				}
 				recordsPart
 			}

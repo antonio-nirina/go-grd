@@ -61,8 +61,10 @@ func (c *DriverRepository) FindTournamentRepo(idQuery primitive.ObjectID) (entit
 func (c *DriverRepository) FindAllTournamentRepo(pageNumber int64, limit int64) ([]entity.Tournament, error) {
 	var collection = c.client.Database("grd_database").Collection("tournament")
 	var results []entity.Tournament
-	fmt.Println(time.Now().Format(time.RFC3339))
-	cur, err := collection.Find(context.TODO(), bson.M{"deadlineDate": bson.M{"$gte": time.Now().Format(time.RFC3339)}}, options.Find().SetLimit(limit).SetSkip(pageNumber).SetSort(bson.M{"_id": -1}))
+
+	cur, err := collection.Find(context.TODO(), bson.M{
+		"deadlinedate": bson.M{
+			"$gte": primitive.NewDateTimeFromTime(time.Now()).Time().Format(time.RFC3339)}}, options.Find().SetLimit(limit).SetSkip(pageNumber).SetSort(bson.M{"_id": -1}))
 
 	if err != nil {
 		return nil, err

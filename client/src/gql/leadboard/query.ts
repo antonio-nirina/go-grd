@@ -13,3 +13,16 @@ query FindAllRate {
 		score
 	}
 }`
+
+export const GET_ALL_BOARD_WEEK = gql`
+query FindRateInWeek {
+	FindRateInWeek{
+		user{
+			uid
+			email
+			username
+			avatar
+		}
+		score
+	}
+}`
