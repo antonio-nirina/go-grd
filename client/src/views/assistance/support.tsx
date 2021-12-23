@@ -3,11 +3,14 @@ import React,{useState} from "react"
 import thumbnail from "../../assets/image/video.png"
 import { faSortDown } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-const Support: React.FC = function() {	
-	const [showDrop, setShowDrop] = useState<Boolean>(false)
+
+
+const Support: React.FC = function() {
+	const [showDrop, setShowDrop] = useState<boolean>(false)
 	const onShowDrop = function(){
 	    setShowDrop(!showDrop)
-	}	
+	}
+
   return(
   	<div onClick={onShowDrop} className= {!showDrop ? "sup-content" :"support-content reduce"}>
 		<div className= "sup">
@@ -21,7 +24,7 @@ const Support: React.FC = function() {
 				<div className="right">
 					<p className="medium">Problèmes populaires</p>
 					<p className="light">Retrouver les réponses aux questions les plus posées</p>
-				</div>		  					
+				</div>
 			</div>
 			<div className="clear"></div>
 			<div className="advice">
@@ -29,7 +32,7 @@ const Support: React.FC = function() {
 				<div className="right">
 					<p className="medium">Nos techniciens à votre écoute</p>
 					<p className="light">Rejoignez nos réseaux sociaux pour discuter avec nos techniciens en direct</p>
-				</div>		  					
+				</div>
 			</div>
 		</div>
 		<div className="under-title">
@@ -40,7 +43,7 @@ const Support: React.FC = function() {
 			</video>
 			</div>
 		</div>
-	</div>			
+	</div>
   );
 }
 

@@ -25,7 +25,7 @@ type partViewModelTournament struct {
 	IsWin               bool                         `json:"isWin"`
 	Tournament          thandler.TournamentViewModel `json:"tournament"`
 	NumberPartConfirmed bool                         `json:"numberPartConfirmed"`
-	Team                team.TeamViewModel           `json:"team"`
+	Team                team.TeamViewModel           `json:"team,omitempty"`
 }
 
 type ReacordsPartModel struct {
@@ -40,4 +40,9 @@ type partWaggerViewModel struct {
 	IsWin               bool                     `json:"isWin"`
 	Wagger              whandler.WaggerViewModel `json:"wagger"`
 	NumberPartConfirmed bool                     `json:"numberPartConfirmed"`
+}
+
+type CountpartTournament struct {
+	Tournament  thandler.TournamentViewModel `json:"tournament"`
+	RecordsPart int                           `json:"recordsPart"`
 }

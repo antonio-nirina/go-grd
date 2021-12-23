@@ -8,7 +8,7 @@ import {RootState} from "../../../reducer"
 import home from "../../../assets/image/gogrind-bg.jpg"
 import Lead from "../../../assets/image/icons/king.png"
 import TournamentInc from "./tournamentInc"
-import {GET_ALL_BOARD} from "../../../gql/leadboard/query"
+import {GET_ALL_BOARD,GET_ALL_BOARD_WEEK} from "../../../gql/leadboard/query"
 import { LeadBoard } from "../../models/leadboard"
 import "../../../assets/css/style.css"
 import "../ahead/ahead.css"
@@ -16,14 +16,20 @@ import "../ahead/ahead.css"
 
 const Ahead: React.FC = function() {
 	const [leadBoard, setLeadBoard] = useState<LeadBoard[]>([])
+	const [leadBoardWeek, setLeadBoardWeek] = useState<LeadBoard[]>([])
 	const userConnectedRedux = useSelector((state:RootState) => state.userConnected)
 	const {loading,error,data} 	= useQuery(GET_ALL_BOARD)
+	const {loading:ldgWeek,error:errWeek,data:dataWeek} 	= useQuery(GET_ALL_BOARD)
 
 	useEffect(() => {
 		if(!loading && !error && data) {
 			setLeadBoard(data.FindAllRate)
 		}
-	},[loading,error,data])
+
+		if(!ldgWeek && !errWeek && dataWeek) {
+			setLeadBoardWeek(data.FindRateInWeek)
+		}
+	},[loading,error,data,ldgWeek,errWeek,dataWeek])
 
   return(
     <div className="ahead">
@@ -78,47 +84,21 @@ const Ahead: React.FC = function() {
 					<div className="global">
 						<p>Classement de la semaine</p>
 						<Link to="/leaderboard" className="best_content">
-							<div>
-								<span className="first">1</span>
-								<span className="self"><img src={Lead} alt="#" width="15"/></span>
-								<span className="middle">Gotaga</span>
-								<span>7845 pts</span>
-							</div>
-							<div>
-								<span>2</span>
-								<span className="middle">Killser1548</span>
-								<span>6928 pts</span>
-							</div>
-							<div>
-								<span>3</span>
-								<span className="middle">Squinar</span>
-								<span>6751 pts</span>
-							</div>
-							<div>
-								<span>4</span>
-								<span className="middle">Shad_BD</span>
-								<span>5942 pts</span>
-							</div>
-							<div>
-								<span>5</span>
-								<span className="middle">TonioPlancha</span>
-								<span>4986 pts</span>
-							</div>
-							<div>
-								<span>6</span>
-								<span className="middle">Kat</span>
-								<span>4265 pts</span>
-							</div>
-							<div>
-								<span>7</span>
-								<span className="middle">Aizalolz</span>
-								<span>4265 pts</span>
-							</div>
-							<div>
-								<span>8</span>
-								<span className="middle">Hugoteh</span>
-								<span>4265 pts</span>
-							</div>
+							{leadBoardWeek ? leadBoardWeek.map(function(lead:LeadBoard,index:number){
+								 return (
+									<div key={index}>
+										<span className="first">{index + 1}</span>
+										<span className="self">
+											{index === 0 ? <img src={Lead} alt="#" width="15"/> : <></>}
+										</span>
+										<span className="middle">{lead.user.username}</span>
+										<span>{lead.score} pts</span>
+									</div>
+								 )
+								})
+							:
+							<></>
+							}
 						</Link>
 					</div>
 				</div>

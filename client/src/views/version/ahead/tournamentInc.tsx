@@ -9,7 +9,8 @@ import Moment from "react-moment"
 //import { useSelector } from "react-redux"
 
 import {Tournament} from "../../models/tournament"
-import {GET_ALL_TOURNAMENT} from "../../../gql/tournament/query"
+import {ParticipateTournamentAll} from "../../models/participate"
+import { GET_TOURNAMENT_PART } from "../../../gql/participate/query"
 import {dateStringToDY} from "../../tools/dateConvert"
 //import {RootState} from "../../../reducer"
 import {NameRoutes} from "../../commons/route-list"
@@ -24,28 +25,55 @@ const TournamentInc: React.FC  = function() {
 	const [isOpen, setIsOpen] = useState<boolean>(true)
 
 	// const [dateDiff,setDateDiff] = useState<string[]>([])
-	const {loading,error,data} 	= useQuery(GET_ALL_TOURNAMENT, {
-		variables: {
-			limit:4,
-			pageNumber:0
-		},
-	})
+	const {loading,error,data} 	= useQuery(GET_TOURNAMENT_PART)
 
 	useEffect(() => {
 		if(!loading && !error && data) {
 			let month = new Date().toLocaleDateString().split("/")[1]
 			let count = 0
-			data.FindAllTournament.forEach(function(tournament:Tournament) {
-				if(new Date(tournament.dateStart).toLocaleDateString().split("/")[1] === month) {
+			let array:Tournament[] = []
+			data.FindPartAllTournament.forEach(function(part:ParticipateTournamentAll) {
+				array.push({
+					uid:part.tournament.uid,
+					title:part.tournament.title,
+					statut:part.tournament.statut,
+					description:part.tournament.description,
+					numberParticipate:(part.tournament.numberParticipate - part.recordsPart),
+					gameWay:part.tournament.gameWay,
+					format:"",
+					deadlineDate:part.tournament.deadlineDate,
+					winners:[],
+					tchat:"",
+					dateStart:part.tournament.dateStart,
+					price:part.tournament.price,
+					priceParticipate:part.tournament.priceParticipate,
+					rules:"",
+					isTeam:part.tournament.isTeam,
+					maps:"",
+					laps:[],
+					server:"",
+					isPublic:part.tournament.isPublic,
+					region:"",
+					game:{
+						uid:part.tournament.game.uid,
+						name:part.tournament.game.name,
+						image:part.tournament.game.image,
+						logo:part.tournament.game.logo,
+						slug:part.tournament.game.slug
+					},
+					plateform:[],
+					spectateur:"",
+				})
+				if(new Date(part.tournament.dateStart).toLocaleDateString().split("/")[1] === month) {
 					count++
 				}
 				const date1 = new Date()
-				const date2 = new Date(tournament.deadlineDate)
+				const date2 = new Date(part.tournament.deadlineDate)
 				const diff = (date2.getTime() - date1.getTime())/1000/60
 				if (diff < 10 || diff <= 0) setIsOpen(false)
 			})
 			setTournamentMonth(count)
-			setTournament(data.FindAllTournament)
+			setTournament(array)
 		}
 		setIsLoader(false)
 	},[loading,error,data])
@@ -78,7 +106,7 @@ const TournamentInc: React.FC  = function() {
 			</div>
 			<div className="tournament_wall">
 			{
-				tournament.length > 0 && isOpen ?
+				tournament && tournament.length > 0 && isOpen ?
 					tournament.map(function(element:Tournament,index:number){
 						return (
 							<div className="list_tournament" key={index}>

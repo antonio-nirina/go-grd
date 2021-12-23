@@ -18,3 +18,8 @@ export interface ParticipateWagger {
 	wagger:Wagger
 	user:User
 }
+
+export interface ParticipateTournamentAll {
+	recordsPart:number
+	tournament:Tournament
+}

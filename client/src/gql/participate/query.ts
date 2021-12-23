@@ -206,3 +206,34 @@ export const GET_PART_ONE_TOURNAMENT = gql`
 			}
 		}
 	}`
+
+	export const GET_TOURNAMENT_PART = gql`
+		query FindPartAllTournament{
+			FindPartAllTournament{
+				tournament{
+					uid
+					title
+					statut
+					description
+					numberParticipate
+					deadlineDate
+					dateStart
+					gameWay
+					price
+					priceParticipate
+					isPublic
+					isTeam
+					spectateur
+					laps
+					game{
+						uid
+						name
+						image
+						logo
+						slug
+					}
+				}
+				recordsPart
+			}
+		}
+	`

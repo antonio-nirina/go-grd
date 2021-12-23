@@ -58,10 +58,10 @@ func (c *driverRepository) FindRateRepo(idQuery primitive.ObjectID) (entity.Rate
 
 /*
 * https://www.mongodb.com/blog/post/quick-start-golang--mongodb--data-aggregation-pipeline
-*/
+ */
 func (c *driverRepository) FindAllRateRepo() ([]primitive.M, error) {
 	var collection = c.client.Database("grd_database").Collection("rate")
-	groupStage := bson.D{{"$group", bson.D{{"_id", "$user"},{"scoreTotal", bson.D{{"$sum", "$score"}}}}}}
+	groupStage := bson.D{{"$group", bson.D{{"_id", "$user"}, {"scoreTotal", bson.D{{"$sum", "$score"}}}}}}
 	cur, err := collection.Aggregate(context.TODO(), mongo.Pipeline{groupStage})
 
 	var rateInfo []bson.M
@@ -89,7 +89,9 @@ func (c *driverRepository) FindRateByUserRepo(uidUser string) (entity.Rate, erro
 func (c *driverRepository) FindRateInWeekRepo(date time.Time) ([]entity.Rate, error) {
 	var collection = c.client.Database("grd_database").Collection("rate")
 	var results []entity.Rate
-	cur, err := collection.Find(context.TODO(), bson.M{"updated": bson.M{"$gte": date, "$lte": time.Now().Format(time.RFC3339)}}, options.Find().SetSort(bson.M{"_id": -1}))
+	cur, err := collection.Find(context.TODO(), bson.M{"created": bson.M{
+		"$gte": primitive.NewDateTimeFromTime(date).Time().Format(time.RFC3339), 
+		"$lte": primitive.NewDateTimeFromTime(time.Now()).Time().Format(time.RFC3339)}}, options.Find().SetSort(bson.M{"_id": -1}))
 
 	if err != nil {
 		return nil, err

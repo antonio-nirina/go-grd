@@ -58,6 +58,10 @@ import (
 	rateHandler "github.com/thoussei/antonio/api/rate/handler"
 	rateRepo "github.com/thoussei/antonio/api/rate/repository"
 
+	supportDelivery "github.com/thoussei/antonio/api/support/delivery"
+	supportHandler "github.com/thoussei/antonio/api/support/handler"
+	supportRepo "github.com/thoussei/antonio/api/support/repository"
+
 	"github.com/graphql-go/graphql"
 )
 
@@ -70,7 +74,7 @@ var repositoryPlateform = gameRepo.NewPlateformRepository(database)
 var usecasePlateform = gameHandler.NewUsecasePlateform(repositoryPlateform)
 var plateformResolver = gameDelivery.NewResolverPlateform(usecasePlateform)
 
-var usecaseNotif = notifHandler.NewUsecaseNotif(repositoryNotif,usecase)
+var usecaseNotif = notifHandler.NewUsecaseNotif(repositoryNotif, usecase)
 var usecase = handler.NewUsecaseUser(repUser)
 var usecaseGame = gameHandler.NewUsecaseGame(repositoryGame)
 var UserRolve = delivery.NewResolver(usecase, usecaseNotif, usecaseGame, usecasePlateform)
@@ -91,7 +95,7 @@ var homeUsecase = homeHandler.NewUsecaseHome(homeRepository)
 var homeResolver = homeDelivery.NewResolverHome(homeUsecase, usecaseGame)
 
 var teamRepository = teamRepo.NewTeamRepository(database)
-var teamUsecase = teamHandler.NewUsecaseTeam(teamRepository,usecase)
+var teamUsecase = teamHandler.NewUsecaseTeam(teamRepository, usecase)
 var teamResolver = teamDelivery.NewResolverTeam(teamUsecase, usecase)
 
 var asistRepository = asistRepo.NewAsistRepository(database)
@@ -107,11 +111,11 @@ var waggerUsecase = waggerHandler.NewUsecaseWagger(waggerRepository)
 var waggerResolver = waggerDelivery.NewResolverWagger(waggerUsecase, usecaseGame, usecasePlateform)
 
 var partRepository = partRepo.NewPartRepository(database)
-var partUsecase = partHandler.NewUsecasePart(partRepository,teamUsecase,usecase)
-var partResolver = partDelivery.NewResolverPart(partUsecase, usecase, tournamentUsecase, teamUsecase, waggerUsecase,rateUsecase)
+var partUsecase = partHandler.NewUsecasePart(partRepository, teamUsecase, usecase)
+var partResolver = partDelivery.NewResolverPart(partUsecase, usecase, tournamentUsecase, teamUsecase, waggerUsecase, rateUsecase)
 
 var postRepository = postRepo.NewPostRepository(database)
-var postUsecase = postHandler.NewUsecasePost(postRepository,usecase,rateUsecase)
+var postUsecase = postHandler.NewUsecasePost(postRepository, usecase, rateUsecase)
 var postResolver = postDelivery.NewResolverPost(postUsecase, usecase)
 
 var groupRepository = groupRepo.NewGroupRepository(database)
@@ -119,8 +123,12 @@ var groupUsecase = groupHandler.NewUsecaseGroup(groupRepository)
 var groupResolver = groupDelivery.NewResolverGroup(groupUsecase, usecase)
 
 var rateRepository = rateRepo.NewRateRepository(database)
-var rateUsecase = rateHandler.NewUsecaseRate(rateRepository,usecase)
+var rateUsecase = rateHandler.NewUsecaseRate(rateRepository, usecase)
 var rateResolver = rateDelivery.NewResolverRate(rateUsecase, usecase)
+
+var supportRepository = supportRepo.NewSupportRepository(database)
+var supportUsecase = supportHandler.NewUsecaseSupport(supportRepository, usecase)
+var supportResolver = supportDelivery.NewResolverSupport(supportUsecase, usecase)
 
 func GetRootFields() graphql.Fields {
 	return graphql.Fields{
@@ -156,10 +164,11 @@ func GetRootFields() graphql.Fields {
 		"EditStatutPublication": EditStatutPublication(),
 		"RemovePublication":     RemovePublication(),
 		"updatedGameUser":       updatedGameUser(),
-		"updatedAllTeam":		updatedAllTeam(),
-		"DeleteTeam":			 DeleteTeam(),
-		"leavePartTournament": 	leavePartTournament(),
-		"createRated": 			createRated(),
-		"CreatedOrUpdatedRate": CreatedOrUpdatedRate(),
+		"updatedAllTeam":        updatedAllTeam(),
+		"DeleteTeam":            DeleteTeam(),
+		"leavePartTournament":   leavePartTournament(),
+		"createRated":           createRated(),
+		"CreatedOrUpdatedRate":  CreatedOrUpdatedRate(),
+		"createSupport":         createSupport(),
 	}
 }

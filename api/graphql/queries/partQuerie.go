@@ -170,3 +170,11 @@ func FindAllPartTeamTournament() *graphql.Field {
 		Resolve: partResolver.FindAllPartTeamTournamentResolver,
 	}
 }
+
+func FindPartAllTournament() *graphql.Field {
+	return &graphql.Field{
+		Type:        graphql.NewList(types.PartRecordsTournament),
+		Description: "Get all participant tournament",
+		Resolve:     partResolver.FindPartAlltournamentResolver,
+	}
+}

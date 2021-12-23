@@ -16,7 +16,9 @@ const Aside = function({assists,handleList}:AsideInterface) {
 	const [isContact,setIsContact] = useState<boolean>(false)
 	const params = useHistory<any>()
 	useEffect(()=> {
-		if(!/contact/.test(params.location.pathname))setIsContact(true)
+		if(/contact/.test(params.location.pathname)) {
+			setIsContact(true)
+		}
 	},[])
 
 	const handleMenu = function(index:number) {

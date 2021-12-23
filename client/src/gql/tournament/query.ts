@@ -96,3 +96,5 @@ export const GET_TOURNAMENT_GAME = gql`
 		}
 	}
 }`
+
+
