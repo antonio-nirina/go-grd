@@ -19,7 +19,7 @@ const Aside = function({assists,handleList}:AsideInterface) {
 		if(/contact/.test(params.location.pathname)) {
 			setIsContact(true)
 		}
-	},[])
+	},[params])
 
 	const handleMenu = function(index:number) {
 		setItem(index)
