@@ -19,7 +19,7 @@ const Ahead: React.FC = function() {
 	const [leadBoardWeek, setLeadBoardWeek] = useState<LeadBoard[]>([])
 	const userConnectedRedux = useSelector((state:RootState) => state.userConnected)
 	const {loading,error,data} 	= useQuery(GET_ALL_BOARD)
-	const {loading:ldgWeek,error:errWeek,data:dataWeek} 	= useQuery(GET_ALL_BOARD)
+	const {loading:ldgWeek,error:errWeek,data:dataWeek} 	= useQuery(GET_ALL_BOARD_WEEK)
 
 	useEffect(() => {
 		if(!loading && !error && data) {

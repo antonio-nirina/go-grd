@@ -5,7 +5,7 @@ import (
 )
 
 var RateSchemaType = graphql.NewObject(graphql.ObjectConfig{
-	Name: "Rateype",
+	Name: "RateType",
 	Fields: graphql.Fields{
 		"uid": &graphql.Field{
 			Type: graphql.String,
