@@ -58,6 +58,10 @@ import (
 	supportHandler "github.com/thoussei/antonio/api/support/handler"
 	supportRepo "github.com/thoussei/antonio/api/support/repository"
 
+	historyDelivery "github.com/thoussei/antonio/api/history/delivery"
+	historyHandler "github.com/thoussei/antonio/api/history/handler"
+	historyRepo "github.com/thoussei/antonio/api/history/repository"
+
 	"github.com/graphql-go/graphql"
 )
 
@@ -123,6 +127,10 @@ var supportRepository = supportRepo.NewSupportRepository(database)
 var supportUsecase = supportHandler.NewUsecaseSupport(supportRepository, usecase)
 var supportResolver = supportDelivery.NewResolverSupport(supportUsecase, usecase)
 
+var historyRepository = historyRepo.NewHistoryRepository(database)
+var historyUsecase = historyHandler.NewUsecaseHistory(historyRepository, usecase)
+var historyResolver = historyDelivery.NewResolverHistory(historyUsecase, usecase)
+
 // GetRootFields returns all the available queries.
 func GetRootFields() graphql.Fields {
 	return graphql.Fields{
@@ -182,5 +190,6 @@ func GetRootFields() graphql.Fields {
 		"FindAllPartTeamTournament": FindAllPartTeamTournament(),
 		"FindOneSupport":            FindOneSupport(),
 		"FindPartAllTournament":     FindPartAllTournament(),
+		"FindOneHistory":            FindOneHistory(),
 	}
 }
