@@ -41,4 +41,6 @@ https://golangbot.com/learn-golang-series/
 
 https://github.com/manosriram-youtube/ecommerce-microservice
 
-[Cheat sheat] https://lzone.de/cheat-sheet/nginx
+https://github.com/hgsgtk/go-snippets/tree/e756b7f76d58a23e17d150b77bec9bb798fb2db2
+
+[Cheat sheat-nginx] (https://lzone.de/cheat-sheet/nginx)
