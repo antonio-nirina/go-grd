@@ -168,6 +168,7 @@ func (r *rateUsecase) FindRateInWeekHandler(date time.Time) ([]RateViewModel, er
 			Uid:     val.Uid.Hex(),
 			Created: val.Created,
 			Updated: val.Updated,
+			Score: val.Score,
 			User: userHandler.UserViewModel{
 				Uid:           user.Uid.Hex(),
 				FirstName:     user.FirstName,

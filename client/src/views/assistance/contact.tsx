@@ -75,7 +75,6 @@ const Contact: React.FC = function() {
 						/>
 					</div>
 					<div className="support contact-support">
-						<h3></h3>
 						<div className="block-center">
 							<div className="support auto-height contact-support">
 								<div className="support-container">

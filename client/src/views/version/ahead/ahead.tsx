@@ -19,15 +19,28 @@ const Ahead: React.FC = function() {
 	const [leadBoardWeek, setLeadBoardWeek] = useState<LeadBoard[]>([])
 	const userConnectedRedux = useSelector((state:RootState) => state.userConnected)
 	const {loading,error,data} 	= useQuery(GET_ALL_BOARD)
-	const {loading:ldgWeek,error:errWeek,data:dataWeek} 	= useQuery(GET_ALL_BOARD)
+	const {loading:ldgWeek,error:errWeek,data:dataWeek} 	= useQuery(GET_ALL_BOARD_WEEK)
 
 	useEffect(() => {
 		if(!loading && !error && data) {
 			setLeadBoard(data.FindAllRate)
 		}
-
+		let arrayLead:LeadBoard[] = []
 		if(!ldgWeek && !errWeek && dataWeek) {
-			setLeadBoardWeek(data.FindRateInWeek)
+			dataWeek.FindRateInWeek.forEach(function(lead:LeadBoard,index:number){
+				const check = arrayLead.find((e:LeadBoard) => {return e.user.uid === lead.user.uid})
+				if(check) {
+					arrayLead.forEach((e:LeadBoard,i:number) => {
+						if(e.user.uid === check.user.uid){
+							arrayLead.splice(i,1,{user:e.user,score:e.score + lead.score})
+						}
+					})
+				} else {arrayLead.push(lead)}
+			})
+			arrayLead.sort(function(a:LeadBoard,b:LeadBoard){
+				return a.score - b.score
+			})
+			setLeadBoardWeek(arrayLead)
 		}
 	},[loading,error,data,ldgWeek,errWeek,dataWeek])
 

@@ -44,7 +44,7 @@ func FindRateByUser() *graphql.Field {
 func FindRateInWeek() *graphql.Field {
 	return &graphql.Field{
 		Type:        graphql.NewList(types.RateSchemaType),
-		Description: "Get single rate by user",
+		Description: "Get single rate by user in week",
 		Resolve: rateResolver.FindRateInWeekResolver,
 	}
 }

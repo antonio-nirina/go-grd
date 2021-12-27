@@ -331,11 +331,11 @@
 	border-bottom: 1px solid gray;
 	height: 378px;
 	overflow-y: auto;
+	display: flex;
 }
 
 .found p{
 	display: inline-block;
-	width: 45%;
 	margin: 9px 13px;
 }
 .found img, .found span.profil-name{
@@ -349,7 +349,6 @@
 }
 .add-friends .found button{
 	padding: 7px 15px;
-    float: right;
     margin: 12px 0;
     border: none;
     border-radius: 5px;
