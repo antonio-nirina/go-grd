@@ -22,6 +22,7 @@ import Fortnite from "../../assets/image/profil/fortnite.png"
 import TchatIcon from "../../assets/image/picto/tchat-icon.png"
 import {NameRoutes} from "../commons/route-list"
 import {GameType} from "../models/game"
+import { setTimeout } from "timers"
 
 type Stremings = {
     id:string
@@ -71,6 +72,10 @@ const Communaute: React.FC = function() {
 				})
 			})
 			setCmty(newData)
+		} else if(!data) {
+			setTimeout(function(){
+				setIsLoader(false)
+			},500)
 		}
 	},[loading,error,data,isLoader])
 
@@ -81,6 +86,7 @@ const Communaute: React.FC = function() {
 	  		<div className="main">
 	  			<div className="auto">
 	  				<div className="aside-left">
+					  {cmty && cmty.length === 0 ? <p style={{"fontSize":"15px","fontWeight":"bold"}}>Aucun streaming disponible</p> : <></>}
 	  					<div className="game-select">
 							{userConnectedRedux.user.games && userConnectedRedux.user.games.length > 0
 								?
