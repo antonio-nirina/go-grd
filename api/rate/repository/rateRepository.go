@@ -109,6 +109,22 @@ func (c *driverRepository) FindRateInWeekRepo(date time.Time) ([]entity.Rate, er
 
 	cur.Close(context.TODO())
 
+	/*
+		groupStage := bson.D{{"$group", bson.D{{
+			"created", 
+			bson.D{
+				{
+				"$gte", primitive.NewDateTimeFromTime(date).Time().Format(time.RFC3339),
+				},
+				{
+					"$lte", primitive.NewDateTimeFromTime(time.Now()).Time().Format(time.RFC3339),
+				},
+			},
+		}, {"scoreTotal", bson.D{{"$sum", "$score"}}}}}}
+		obj, err := collection.Aggregate(context.TODO(), mongo.Pipeline{groupStage})
+		var rateInfo []bson.D
+	*/
+	
 	return results, nil
 }
 
@@ -117,7 +133,6 @@ func (c *driverRepository) FindRateCreateOrUpdatedRepo(objectId primitive.Object
 	filter := bson.D{{"uid", objectId}}
 	update := bson.D{
 		{"$set", bson.D{
-
 			{
 				"updated", rate.Updated,
 			},

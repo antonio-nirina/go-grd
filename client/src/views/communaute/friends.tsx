@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from "react"
-import { faPlus, faCommentDots, faQuestionCircle, faUserPlus } from "@fortawesome/free-solid-svg-icons"
+import { faPlus, faCommentDots, faUserPlus } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import Popup from "reactjs-popup"
 import "reactjs-popup/dist/index.css"
@@ -7,14 +7,25 @@ import { Link } from 'react-router-dom'
 import {useQuery,useMutation,useSubscription} from "@apollo/client"
 import {GET_ALL_FRIENDS,GET_ALL_USER} from "../../gql/user/query"
 import { useSelector } from "react-redux"
+
+
 import {RootState} from "../../reducer"
 import {Translation} from "../../lang/translation"
 import {Friends} from "../../gql/types/friend"
 import AvatarDefault from "../../assets/image/game-tag.png"
 import {INCOMING_FRIENDS} from "../../gql/user/mutation"
 import {USER_CONNECTED} from "../../gql/user/subscription"
+import LeaderboardCmty from "../leaderboard/leadboardCmty"
+import FaqCmty from "../assistance/faqCmty"
 
-const RenderPopup = function({users,isOpen}:any) {
+interface FriendPopup {
+	users:Friends[],
+	isOpen:boolean,
+	handleOpen:Function
+}
+
+const RenderPopup = function({users,isOpen,handleOpen}:FriendPopup) {
+	const [isShow,setIsShow] = useState<boolean>(true)
 	const [requestFriend] 			= useMutation(INCOMING_FRIENDS)
 	const userConnectedRedux 		= useSelector((state:RootState) => state.userConnected)
 	const onSendIncoming = 	async function(uid:string) {
@@ -26,15 +37,25 @@ const RenderPopup = function({users,isOpen}:any) {
 		}
 	}
 
+	useEffect(() => {
+		setIsShow(isOpen)
+	},[isOpen])
+
+	const handleClose = function() {
+		setIsShow(false)
+		handleOpen(false)
+	}
+
 	return(
 		<Popup
-			open={isOpen}
+			open={isShow}
 			modal
 			nested
+			onClose={handleClose}
 			closeOnDocumentClick>
 			{(close:any) => (
 				<div className="modal">
-					<button className="close" onClick={close}>
+					<button style={{"cursor":"pointer"}} className="clos" onClick={()=> handleClose()}>
 						&times;
 					</button>
 					<div className="bar-title">
@@ -55,21 +76,24 @@ const RenderPopup = function({users,isOpen}:any) {
 											users.map(function(el:any,index:number){
 												let img:string = el.avatar ? (el.avatar) : AvatarDefault
 												return (
-													<p key={index}>
-														<img src={img} className="avatar-found" alt="" />
-														<span className="profil-name">{el.username ? el.username : ((el.email).split("@")[0])}</span>
-														<button className="btn bg-red">
-															<i className="rect"><FontAwesomeIcon icon={faUserPlus} size="xs"/></i>
-															<span onClick={()=>{
-																onSendIncoming(el.uid)
-																close()
-																}}>
-																{
-																	Translation(userConnectedRedux.user.language).communauty.addFriend
-																}
-															</span>
-														</button>
-													</p>
+													<div>
+														<p key={index}>
+															<img src={img} className="avatar-found" alt="" />
+															<span className="profil-name">{el.username ? el.username : ((el.email).split("@")[0])}</span>
+															<button className="btn bg-red">
+																<i className="rect"><FontAwesomeIcon icon={faUserPlus} size="xs"/></i>
+																<span onClick={()=>{
+																	onSendIncoming(el.uid)
+																	close()
+																	}}>
+																	{
+																		Translation(userConnectedRedux.user.language).communauty.addFriend
+																	}
+																</span>
+															</button>
+														</p>
+													</div>
+
 												)
 											})
 											:
@@ -89,6 +113,7 @@ const RenderPopup = function({users,isOpen}:any) {
 		</Popup>
 	)
 }
+
 const Friend: React.FC = function() {
 	const userConnectedRedux 		= useSelector((state:RootState) => state.userConnected)
 	const [nbFriends, setNbFriends] = useState<number>(0)
@@ -150,6 +175,16 @@ const Friend: React.FC = function() {
 		setShowChat(!showChat)
 	}
 
+	const handleClose = function(isclose:boolean) {
+		setIsOpen(false)
+	}
+
+	const Popup:FriendPopup = {
+		users:users,
+		isOpen:isOpen,
+		handleOpen:handleClose
+	}
+
 	return (
 		<div className="aside-right">
 			<p className="bold">Mes amis</p>
@@ -167,7 +202,7 @@ const Friend: React.FC = function() {
 									<i className="square" onClick={openHandle} style={{"cursor":"pointer"}}>
 										<FontAwesomeIcon icon={faPlus} size="xs" />
 									</i>
-									<RenderPopup users={users} isOpen={isOpen} />
+									<RenderPopup {...Popup} />
 								</div>
 							</div>
 						)
@@ -194,55 +229,17 @@ const Friend: React.FC = function() {
 									}
 								</span>
 							</p>
-							<RenderPopup users={users} isOpen={isOpen} />
+							<RenderPopup {...Popup}  />
 						</div>
 					</div>)
 				}
 			</div>
 			<p className="bold mg-10">Leaderboard (Tous les jeux)</p>
 			<Link to="/leaderboard" className="leader">
-				<div className="ld-container">
-					<p className="lead">1</p>
-					<p className="bold">Gotaga</p>
-					<p className="aright">7845 pts</p>
-				</div>
-				<div className="ld-container">
-					<p>2</p>
-					<p className="bold">Killer1548</p>
-					<p className="aright">6928 pts</p>
-				</div>
-				<div className="ld-container">
-					<p>3</p>
-					<p className="bold">Skouinar</p>
-					<p className="aright">6751 pts</p>
-				</div>
-				<div className="ld-container">
-					<p>4</p>
-					<p className="bold">Shad_BD</p>
-					<p className="aright">5942 pts</p>
-				</div>
+				<LeaderboardCmty />
 			</Link>
 			<p className="bold mg-10">Hubs</p>
-			<div className="forum-container">
-				<div className="subjectforum">
-					<p className="underlined">Discord (Non-ofﬁciel) PS4.. <i><FontAwesomeIcon icon={faQuestionCircle} size="xs"/></i></p>
-					<div className="seek">
-						<Link to="#">Comment fonctionne GO Grind ?</Link>
-						<Link to="#">Comment déposer une requête support ?</Link>
-						<Link to="#">Où nous trouver ?</Link>
-						<Link to="#">Comment nous contacter ?</Link>
-					</div>
-				</div>
-				<div className="subjectforum">
-					<p>Recherche TEAM Xbox COD <i><FontAwesomeIcon icon={faQuestionCircle} size="xs"/></i></p>
-				</div>
-				<div className="subjectforum">
-					<p>Comment connecter sa play.. <i><FontAwesomeIcon icon={faQuestionCircle} size="xs"/></i></p>
-				</div>
-				<div className="subjectforum">
-					<p>Impossible de rejoindre sur.. <i><FontAwesomeIcon icon={faQuestionCircle} size="xs"/></i></p>
-				</div>
-			</div>
+			<FaqCmty />
 		</div>
 	)
 }
