@@ -19,6 +19,7 @@ const Tableau: React.FC = function() {
 	const [tournament, setTournament] = useState<Tournament>()
 	const params = useHistory<any>()
 	const [isTournament,setIsTournament] = useState(false)
+	const [isBracket,setIsBracket] = useState(false)
 	const [isWagger,setIsWagger] = useState(false)
 	const [wagger, setWagger] = useState<Wagger>()
 
@@ -39,6 +40,8 @@ const Tableau: React.FC = function() {
 
 		if(!loading && !error && data) {
 			setTournament(data.FindOneTournament)
+			const dateStart = new Date(data.FindOneTournament.dateStart)
+			if(new Date() >= dateStart) setIsBracket(true)
 		}
 
 		if(!ldgWg && !ldgErr && ldgData) {
@@ -67,8 +70,8 @@ const Tableau: React.FC = function() {
 				<div className="marg">
 					<HeaderTournament {...HeaderProps} />
 					<div className="information-game">
-						<div className="tab-container">
-							<Tree />
+						<div className={!isBracket ? "info-match tab-container bracket-container" : "tab-container"}>
+							{isBracket ? <Tree /> : <div className="btn bg-red">Bracket sera dévoilé au debut du tournois</div>}
 						</div>
 					</div>
 					<div className="clear"></div>

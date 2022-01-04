@@ -6,7 +6,6 @@ import { faEye } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Loader from "react-loader-spinner"
 
-
 import Header from "../header/header"
 import {RootState} from "../../reducer"
 import Footer from "../footer/footer"
@@ -142,7 +141,14 @@ const Communaute: React.FC = function() {
 													<p className="streamer">{e.title}</p>
 													<p className="streamer">{e.userName}</p>
 													<p className="streamgame">{e.gameName}</p>
-													<p className="view">{e.viewerCount}<i><i><FontAwesomeIcon icon={faEye} size="xs"/></i></i></p>
+													<p className="view">
+														{e.viewerCount}
+														<i>
+															<i>
+																<FontAwesomeIcon icon={faEye} size="xs"/>
+															</i>
+														</i>
+													</p>
 												</div>
 											</div>
 										</span>

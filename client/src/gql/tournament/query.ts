@@ -97,4 +97,9 @@ export const GET_TOURNAMENT_GAME = gql`
 	}
 }`
 
+export const SET_TIME_START = gql`
+	query RunTaskTournament($counterInput: CounterTypeInput) {
+		RunTaskTournament(counterInput: $counterInput)
+	}
+`
 
