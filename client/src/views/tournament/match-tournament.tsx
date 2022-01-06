@@ -44,6 +44,12 @@ const MatchTournament = function() {
 		},
 	})
 
+	const {loading:ldcount,error:errCount,data:dataCount} 	= useQuery(SET_TIME_START, {
+		variables:{
+			uid:(params.location.search.split("=")[1]).split("&")[0],
+		},
+	})
+
 	const {loading:ldSub,error:erSub,data:dataSub}  = useSubscription(COUNTER_SUBSCRIBER)
 
 	useEffect(() => {
@@ -53,14 +59,6 @@ const MatchTournament = function() {
 		if(!loading && !error && data) {
 			setTournament(data.FindOneTournament)
 			const date = new Date(data.FindOneTournament.deadlineDate)
-			const start:CounterTypeInput = {
-				sec:date.getSeconds(),
-				min:date.getMinutes(),
-				hours:date.getHours(),
-				day:date.getDate(),
-				month:date.getMonth(),
-			}
-			setStart(start)
 		}
 
 		if(!ldgWg && !ldgErr && ldgData) {
@@ -77,8 +75,6 @@ const MatchTournament = function() {
 			console.log("dataSub", dataSub)
 		}
 	},[loading,error,data,ldgWg,ldgErr,ldgData,params,ldSub,erSub,dataSub])
-
-	const {loading:ldcount,error:errCount,data:dataCount} 	= useQuery(SET_TIME_START, {variables:start})
 
 	useEffect(() => {
 		console.log(dataCount)

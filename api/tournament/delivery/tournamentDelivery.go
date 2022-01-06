@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"strconv"
 	"strings"
+	"sync"
 
 	"github.com/graphql-go/graphql"
 	gameEntity "github.com/thoussei/antonio/api/games/entity"
@@ -21,6 +22,7 @@ type TournamentResolver interface {
 	FindTournamentGameResolver(params graphql.ResolveParams) (interface{}, error)
 	UpdatedTournamentResolver(params graphql.ResolveParams) (interface{}, error)
 	FindTournamentCreated(params graphql.ResolveParams) (interface{}, error)
+	SetTimeMatchtResolver(params graphql.ResolveParams) (interface{}, error)
 }
 
 type tournament struct {
@@ -77,7 +79,7 @@ func (t *tournament) SavedTournamentResolver(params graphql.ResolveParams) (inte
 	isteam, _ := params.Args["isTeam"].(bool)
 	isPub, _ := params.Args["isPublic"].(bool)
 	game, err := t.gameTournamentHandler.FindOneGameByUidHandler(gameUid)
-	
+
 	var plateforms []gameEntity.GamePlatform
 	arrayPlateforms := strings.Split(plateformUid, "_")
 	arrayLaps := strings.Split(laps, "_")
@@ -265,4 +267,19 @@ func (t *tournament) FindTournamentCreated(params graphql.ResolveParams) (interf
 	}
 
 	return res, nil
+}
+
+func (t *tournament) SetTimeMatchtResolver(params graphql.ResolveParams) (interface{}, error) {
+	uid, _ := params.Args["uid"].(string)
+	res, err := t.tournamentHandler.FindTournamentHandler(uid)
+
+	if err != nil {
+		return nil, err
+	}
+	var wg sync.WaitGroup
+	wg.Add(1)
+	go t.tournamentHandler.TimeStartMatchHandler(&res, &wg)
+	wg.Wait()
+
+	return "Ok", nil
 }

@@ -39,9 +39,9 @@ export const typeDefs = gql`
 
 	input CounterTypeInput {
 		uid:String
-		sec:Int
-		min:Int
-		hours:Int
+		sec:String
+		min:String
+		hours:String
 		day:Int
 		month:Int
 	}

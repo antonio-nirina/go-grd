@@ -1,6 +1,8 @@
 package handler
 
 import (
+	"sync"
+
 	"github.com/thoussei/antonio/api/common"
 	"github.com/thoussei/antonio/api/tournament/entity"
 	"github.com/thoussei/antonio/api/tournament/repository"
@@ -15,6 +17,7 @@ type UsecaseTournament interface {
 	FindTournamentGameHandler(pageNumber int64, limit int64, gameUid primitive.ObjectID) ([]tournamentViewModel, error)
 	UpdatedTournamentHandler(tournament *entity.Tournament) (interface{}, error)
 	FindTournamentCreatedHandler(pageNumber int64, limit int64) ([]tournamentViewModel, error)
+	TimeStartMatchHandler(tournament *TournamentViewModel, wg *sync.WaitGroup)
 }
 
 type tournamentUsecase struct {

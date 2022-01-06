@@ -191,5 +191,6 @@ func GetRootFields() graphql.Fields {
 		"FindOneSupport":            FindOneSupport(),
 		"FindPartAllTournament":     FindPartAllTournament(),
 		"FindOneHistory":            FindOneHistory(),
+		"SetTimeMatch":              SetTimeMatch(),
 	}
 }
