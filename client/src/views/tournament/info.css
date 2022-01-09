@@ -1,8 +1,8 @@
 @charset "UTF-8";
 .info .tabs li{
-	width: 20%;	
+	width: 20%;
 }
-.info .tabs li a{	
+.info .tabs li a{
 	font-size: 15px;
 	padding: 5px;
 }
@@ -16,7 +16,7 @@
 .details p{
 	text-transform: uppercase;
 	width: 33.333%;
-	display: inline-block;	
+	display: inline-block;
 	text-align: right;
 }
 .details p.name-target{
@@ -26,7 +26,7 @@
 	color: #0d94c0;
 
 }
-.banniere{				  	
+.banniere{
 	border-radius: 15px 15px 0px 0px;
 }
 .banniere img{
@@ -38,7 +38,7 @@
 	margin: 4em 0;
 }
 .txt{
-	padding: 15px;	
+	padding: 15px;
 	border: 1px solid #1d1c1c;
 	border-radius: 5px;
 	width: 100%;
@@ -60,7 +60,7 @@ p.group-title{
 	font-size: 15px;
 	margin: 10px;
 }
-.tableau{	
+.tableau{
 	width: 41%;
 	display: inline-block;
 	vertical-align: top;
@@ -73,7 +73,7 @@ p.group-title{
 .tableau .state p{
 	text-transform: uppercase;
 	font-size: 30px;
-	text-align: center;	
+	text-align: center;
     width: 100%;
 }
 .tableau .state p strong{
@@ -81,7 +81,7 @@ p.group-title{
 	font-weight: normal;
 	padding-bottom: 15px;
 }
-.tableau .state p span{	
+.tableau .state p span{
 	font-size: 14px;
 	display: block;
 	background: #1b1d26;
@@ -92,7 +92,7 @@ p.group-title{
 	border-bottom: 1px solid #2d2d2d;
 }
 .info-target p{
-	text-transform: uppercase;		
+	text-transform: uppercase;
 	font-size: 15px;
 	align-self: center;
 	float: left;
@@ -104,7 +104,7 @@ p.group-title{
 	text-transform: initial;
 	display: inline-block;
 	text-align: right;
-	width: 60%;	
+	width: 60%;
 	padding: 15px 0;
 	font-size: 15px;
 }
@@ -122,8 +122,8 @@ p.group-title{
 .matches h2{
 	padding: 15px;
 }
-.matches{	
-	
+.matches{
+
 	border-radius: 5px;
 	width: 100%;
 	display: inline-block;
@@ -141,8 +141,8 @@ p.group-title{
 	font-weight: 700;
 	color: #dd0000;
 }
-.matches td{	
-	
+.matches td{
+
 }
 .matches .schedule{
 	/*width: 43%;*/
@@ -161,13 +161,13 @@ p.group-title{
 	font-weight: 700;
 }
 .matches span img{
-	border: 2px solid #dd0000;	
+	border: 2px solid #dd0000;
 	border-radius: 50%;
 }
-.matches .versus span{	
+.matches .versus span{
 	display: inline-block;
 	padding: 10px;
-	vertical-align: middle;	
+	vertical-align: middle;
 }
 .matches tr:nth-child(even){
 	background: #101010;
@@ -186,7 +186,7 @@ p.group-title{
 	padding: 15px 0;
 }
 .teams table td{
-	width: 246px;    
+	width: 246px;
     text-align: center;
     padding: 15px;
     vertical-align: middle;
@@ -211,7 +211,7 @@ p.group-title{
 	font-size: 25px;
 }
 .score i{
-	display: block;	
+	display: block;
 }
 .score i svg{
 	width: 30px !important;
@@ -227,7 +227,7 @@ p.group-title{
 	color: #96b900;
 }
 .score .win, .score .lose{
-	background: #373535;	
+	background: #373535;
 }
 .score .lose svg, .score .lose{
 	color: #cf0023;
@@ -248,7 +248,7 @@ tr:nth-child(odd){
 .numb{
 	display: inline-block;
 	margin-right: 15px;
-	font-weight: bold;	
+	font-weight: bold;
 	padding: 15px;
 }
 
@@ -263,4 +263,7 @@ tr:nth-child(odd){
 }
 .pointer{
 	cursor: pointer;
+}
+.container .bracket-container {
+	margin: 0 auto;
 }

@@ -26,7 +26,7 @@ var HistoryChatSchemaType = graphql.NewObject(graphql.ObjectConfig{
 })
 
 var DataContentSchemaTYpe = graphql.NewObject(graphql.ObjectConfig{
-	Name: "content data",
+	Name: "contentdata",
 	Fields: graphql.Fields{
 		"created": &graphql.Field{
 			Type: graphql.String,

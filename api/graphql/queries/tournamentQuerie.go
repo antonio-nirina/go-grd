@@ -57,3 +57,16 @@ func FindTournamentByGame() *graphql.Field {
 
 }
 
+func SetTimeMatch() *graphql.Field {
+	return &graphql.Field{
+		Type:        graphql.String,
+		Description: "Get single tournament and start match",
+		Args: graphql.FieldConfigArgument{
+			"uid": &graphql.ArgumentConfig{
+				Type: graphql.String,
+			},
+		},
+
+		Resolve: tournamentResolver.SetTimeMatchtResolver,
+	}
+}

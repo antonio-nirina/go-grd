@@ -37,11 +37,21 @@ export const typeDefs = gql`
 	    isConnected:Int
   	}
 
+	input CounterTypeInput {
+		uid:String
+		sec:String
+		min:String
+		hours:String
+		day:Int
+		month:Int
+	}
+
 
 	type Query {
   		NotifiUser(user:userInput):User
   		NotifUserConnected(user:userInput):User
   		NotifUserDisconnected(user:userInput):User
+		RunTaskTournament(counter:CounterTypeInput):String
 	}
 
 	type Mutation {

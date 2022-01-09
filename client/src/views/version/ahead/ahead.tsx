@@ -9,6 +9,7 @@ import home from "../../../assets/image/gogrind-bg.jpg"
 import Lead from "../../../assets/image/icons/king.png"
 import TournamentInc from "./tournamentInc"
 import {GET_ALL_BOARD,GET_ALL_BOARD_WEEK} from "../../../gql/leadboard/query"
+import { NameRoutes } from "../../commons/route-list"
 import { LeadBoard } from "../../models/leadboard"
 import "../../../assets/css/style.css"
 import "../ahead/ahead.css"
@@ -96,7 +97,7 @@ const Ahead: React.FC = function() {
 					</div>
 					<div className="global">
 						<p>Classement de la semaine</p>
-						<Link to="/leaderboard" className="best_content">
+						<Link to={NameRoutes.leaderboard} className="best_content">
 							{leadBoardWeek ? leadBoardWeek.map(function(lead:LeadBoard,index:number){
 								 return (
 									<div key={index}>

@@ -32,6 +32,7 @@ export const NameRoutes = {
 	assistance:"/assistance",
 	jackpot:"/acount/jackpot",
 	liveTwitch:"/stream/twitch/",
-	matchTournament:"/match-tournament"
+	matchTournament:"/match-tournament",
+	leaderboard:"/leaderboard"
 
 }
