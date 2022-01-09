@@ -44,7 +44,8 @@ const Joingame: React.FC = function(props:any) {
 	const HeaderProps:HeaderTournamentType = {
 		data:wagger,
 		isTournament:false,
-		isWagger:true
+		isWagger:true,
+		isPart:false
 	}
 
   return(

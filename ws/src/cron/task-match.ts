@@ -10,9 +10,9 @@ import { CounterType } from "src/counter/entities/counter"
 // https://github.com/node-cron/node-cron
 export const RunTaskTournament = function(counter:CounterType):string {
 	let currSec:number = 60
-	let minute:number = 1
-	console.log("counter", `${counter.sec} ${counter.min} ${counter.hours} ${counter.day} ${counter.month}`)
-	const task = cron.schedule(`* ${counter.min} ${counter.hours} ${counter.day} ${counter.month}`, async () => {
+	const deadline = new Date((new Date).getFullYear(),counter.month,counter.day,parseInt(counter.hours),parseInt(counter.hours))
+	let minute:number = Math.floor((new Date().getTime() - deadline.getTime() ) / (1000*60))
+	const task = cron.schedule("* * * * * *", async () => {
 		currSec = currSec - 1
 		if(currSec == 0 && minute > 0) {
 			currSec = 60

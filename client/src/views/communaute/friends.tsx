@@ -194,8 +194,8 @@ const Friend: React.FC = function() {
 					friends.map(function(el:any,index:number) {
 						let img = el.avatar ? el.avatar : AvatarDefault
 						return(
-							<div className="friend-list"key={el.id}>
-								<div key={index}>
+							<div className="friend-list" key={index}>
+								<div >
 									<img src={img} className="friend-avatar" alt=""/>
 									<span>{el.username}<i className={el.isConnected ? "u-connected" : ""}></i></span>
 									<i className="comments"><FontAwesomeIcon icon={faCommentDots} size="xs" onClick={onShowChat}/></i>

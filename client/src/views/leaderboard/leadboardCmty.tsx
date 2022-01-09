@@ -17,11 +17,11 @@ const LeaderboardCmty: React.FC = function() {
 		<>
 			{leadBoard ? leadBoard.map(function(lead:LeadBoard,index:number){
 					return (
-					<div className="ld-container" key={index}>
-						<p className="lead">{index + 1}</p>
-						<p className="bold">{lead.user.username}</p>
-						<p className="aright">{lead.score} pts</p>
-					</div>
+						<div className="ld-container" key={index}>
+							<p className="lead">{index + 1}</p>
+							<p className="bold">{lead.user.username}</p>
+							<p className="aright">{lead.score} pts</p>
+						</div>
 					)
 				})
 			:
