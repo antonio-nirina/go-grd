@@ -15,6 +15,7 @@ import (
 
 func main() {
 //	cmd.RunCmdScheduler()
+	// external.RunCheckTournament()
 	schemaConfig := graphql.SchemaConfig{
 		Query: graphql.NewObject(graphql.ObjectConfig{
 			Name:   "Query",

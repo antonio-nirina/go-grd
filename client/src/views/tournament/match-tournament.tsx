@@ -85,6 +85,7 @@ const MatchTournament = function() {
 		data:isTournament ? tournament :wagger,
 		isTournament:isTournament,
 		isWagger:isWagger,
+		isPart:false
 	}
 
 	return (

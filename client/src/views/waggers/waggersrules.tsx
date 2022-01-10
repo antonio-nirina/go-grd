@@ -16,7 +16,8 @@ const WaggersRules: React.FC = function(props:any) {
 	const HeaderProps:HeaderTournamentType = {
 		data:null,
 		isTournament:false,
-		isWagger:false
+		isWagger:false,
+		isPart:false,
 	}
     return(
 		<div className="container">

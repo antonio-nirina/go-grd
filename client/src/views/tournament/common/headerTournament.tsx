@@ -10,10 +10,11 @@ import { NameRoutes } from "../../commons/route-list"
 export type HeaderTournamentType = {
 	data:any,//Tournament|Wagger|undefined,
 	isTournament:boolean,
-	isWagger:boolean
+	isWagger:boolean,
+	isPart:boolean
 }
 
-const HeaderTournament = function({data,isTournament,isWagger}:HeaderTournamentType) {
+const HeaderTournament = function({data,isTournament,isWagger,isPart}:HeaderTournamentType) {
 	const [uriJoin, setUriJoin] = useState<string>("")
 	const [uriRules, setUriRules] = useState<string>("")
 	const [match, setMatch] = useState<string>("")
@@ -63,7 +64,7 @@ const HeaderTournament = function({data,isTournament,isWagger}:HeaderTournamentT
 				<li><Link to={uriJoin} id="general">Général</Link></li>
 				<li><Link to={board} id="tableau">Tableau</Link></li>
 				<li><Link to={uriRules} id="rule">Règles</Link></li>
-				<li><Link to={match} id="match">Matchs</Link></li>
+				{isPart ? <li><Link to={match} id="match">Matchs</Link></li> : <></>}
 			</div>
 		</>
 	)

@@ -28,6 +28,7 @@ import HeaderTournament,{HeaderTournamentType} from "./common/headerTournament"
 const Joingame: React.FC = function(props:any) {
   	const [tournament, setTournament] = useState<Tournament>()
 	const [parts, setParts] = useState<ParticipateTournament[]>()
+	const [isPart,setIsPart] = useState<boolean>(false)
 
 	const [plateform, setPlateform] = useState<string>("")
 	const [sumPrice, setSumPrice] = useState<number>(0)
@@ -62,11 +63,17 @@ const Joingame: React.FC = function(props:any) {
 		data:tournament,
 		isTournament:true,
 		isWagger:false,
+		isPart:isPart,
+	}
+
+	const handleCheckPart = function(isPart:boolean) {
+		setIsPart(isPart)
 	}
 
 	const partTournament:PartTournamentType = {
 		tournament:tournament,
 		parts:parts,
+		isPartHandle:handleCheckPart,
 	}
   return(
   	<div className="container">

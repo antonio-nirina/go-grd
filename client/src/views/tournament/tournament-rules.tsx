@@ -55,7 +55,8 @@ const TournamentRules = function() {
 	const HeaderProps:HeaderTournamentType = {
 		data:isTournament ? tournament :wagger,
 		isTournament:isTournament,
-		isWagger:isWagger
+		isWagger:isWagger,
+		isPart:false
 	}
 
     return(
