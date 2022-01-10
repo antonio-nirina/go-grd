@@ -11,8 +11,8 @@ import { CounterType } from "src/counter/entities/counter"
 export const RunTaskTournament = function(counter:CounterType):string {
 	let currSec:number = 60
 	let minute:number = 1
-	console.log("counter", `${counter.sec} ${counter.min} ${counter.hours} ${counter.day} ${counter.month}`)
-	const task = cron.schedule(`* ${counter.min} ${counter.hours} ${counter.day} ${counter.month}`, async () => {
+
+	const task = cron.schedule(`${counter.min} ${counter.hours} ${counter.day} ${counter.month}`, async () => {
 		currSec = currSec - 1
 		if(currSec == 0 && minute > 0) {
 			currSec = 60

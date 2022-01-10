@@ -44,7 +44,6 @@ func (t *tournamentUsecase) TimeStartMatchHandler(tournament *TournamentViewMode
 	}
 
 	queryN := fmt.Sprintf(queryStr, tournament.Uid, strconv.Itoa(date.Second()), strconv.Itoa(date.Minute()), strconv.Itoa(date.Hour()), strconv.Itoa(date.Day()), strconv.Itoa(month))
-	fmt.Println("queryN", queryN)
 	jsonData := map[string]string{
 		"query": queryN,
 	}
