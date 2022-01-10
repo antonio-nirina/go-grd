@@ -11,6 +11,7 @@ require (
 	github.com/graphql-go/graphql v0.7.9
 	github.com/graphql-go/handler v0.2.3
 	github.com/hibiken/asynq v0.20.0 // indirect
+	github.com/jasonlvhit/gocron v0.0.1 // indirect
 	github.com/joho/godotenv v1.3.0
 	github.com/mailjet/mailjet-apiv3-go/v3 v3.0.0
 	github.com/robfig/cron/v3 v3.0.1
