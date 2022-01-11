@@ -4,7 +4,7 @@ go 1.14
 
 require (
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
-	github.com/go-co-op/gocron v1.3.1
+	github.com/go-co-op/gocron v1.11.0
 	github.com/go-redis/redis/v8 v8.11.4
 	github.com/google/uuid v1.3.0 // indirect
 	github.com/gorilla/websocket v1.4.2
