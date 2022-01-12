@@ -203,7 +203,7 @@ func (c *DriverRepository) FindTournamentCreatedRepo(pageNumber int64, limit int
 func (c *DriverRepository) FindTournamentNowRepo() ([]entity.Tournament, error) {
 	var collection = c.client.Database("grd_database").Collection("tournament")
 	var results []entity.Tournament
-	cur, err := collection.Find(context.TODO(), bson.D{{"deadlineDate", time.Now().Format(time.RFC3339)}}, options.Find().SetSort(bson.M{"_id": -1}))
+	cur, err := collection.Find(context.TODO(), bson.D{{"deadlineDate", bson.D{{"$gte", time.Now().Format(time.RFC3339)}, {"$lte", time.Now().Format(time.RFC3339)}}}}, options.Find().SetSort(bson.M{"_id": -1}))
 
 	if err != nil {
 		return nil, err
@@ -223,4 +223,3 @@ func (c *DriverRepository) FindTournamentNowRepo() ([]entity.Tournament, error) 
 
 	return results, nil
 }
-
