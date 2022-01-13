@@ -36,11 +36,11 @@ func RunCheckTournament() {
 				external.Logger(err.Error())
 			}
 
-			task, _ := s.Every(1).Day().At("01:10").Do(func() {
-				external.RPushRedis("default"+tournament.Uid.Hex(), json)
+			task, _ := s.Every(1).Second().Do(func() { // s.Every(1).Day().At("01:10").Do(func() {
+				external.RPushRedis("default_"+tournament.Uid.Hex(), json)
 			})
 			fmt.Println(task.ScheduledTime())
-			fmt.Println("Tournament ", tournament.Title)
+			fmt.Println("Tournament ", tournament.Uid.Hex())
 		}
 
 		s.StartAsync()

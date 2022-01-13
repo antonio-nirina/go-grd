@@ -87,6 +87,7 @@ func RemoveHmsetRedis(key string, field string) {
 func RPushRedis(key string,value interface{}) {
 	err := Rdb.RPush(ctx,key,value).Err()
 	if err != nil {
-      Logger(fmt.Sprintf("%v", err))
+		fmt.Println("Error", err)
+      	Logger(fmt.Sprintf("%v", err))
    } 
 }
