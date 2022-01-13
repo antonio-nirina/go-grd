@@ -47,3 +47,13 @@ export const HgetRedis = async (key:string, field:string) => {
 	  return false
 	}
 }
+
+export const BloPoPRedis = async (key:string) => {
+	try {
+		const data = await redis.blpop(key)
+		console.log("data", data)
+	} catch (e) {
+		console.log("error", e)
+	  return false
+	}
+}
