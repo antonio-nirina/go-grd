@@ -12,7 +12,7 @@ import (
 )
 
 type jobTournament struct {
-	Uid          string `json:"uid"`
+	Id          string `json:"id"`
 	Title        string `json:"title"`
 	DateStart    string `json:"dateStart"`
 	DeadlineDate string `json:"deadlineDate"`
@@ -30,7 +30,7 @@ func RunCheckTournament() {
 	if len(tournamentNow) > 0 {
 		task, _ := s.Every(2).Second().Do(func() { // s.Every(1).Day().At("01:10").Do(func() {
 			for _, tournament := range tournamentNow {
-				job := &jobTournament{Uid: tournament.Uid.Hex(), Title: tournament.Title, DateStart: tournament.DateStart, DeadlineDate: tournament.DeadlineDate}
+				job := &jobTournament{Id: tournament.Uid.Hex(), Title: tournament.Title, DateStart: tournament.DateStart, DeadlineDate: tournament.DeadlineDate}
 				json, err := json.Marshal(job)
 
 				if err != nil {
