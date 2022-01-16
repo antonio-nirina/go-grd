@@ -51,7 +51,7 @@ export const typeDefs = gql`
   		NotifiUser(user:userInput):User
   		NotifUserConnected(user:userInput):User
   		NotifUserDisconnected(user:userInput):User
-		RunTaskTournament(counter:CounterTypeInput):String
+		RunTaskTournament:String
 	}
 
 	type Mutation {

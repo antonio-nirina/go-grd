@@ -70,6 +70,7 @@ const TournamentInc: React.FC  = function() {
 				const date1 = new Date()
 				const date2 = new Date(part.tournament.deadlineDate)
 				const diff = (date2.getTime() - date1.getTime())/1000/60
+				console.log(part.tournament.title,diff)
 				if (diff < 10 || diff <= 0) setIsOpen(false)
 			})
 			setTournamentMonth(count)

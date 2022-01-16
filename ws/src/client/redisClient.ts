@@ -1,3 +1,4 @@
+import exp from 'constants'
 import { RedisPubSub } from 'graphql-redis-subscriptions'
 import  Redis  from "ioredis"
 
@@ -10,7 +11,7 @@ const options = {
 	  return Math.max(options.attempt * 100, 3000)
 	}
 }
-const redis = new Redis()
+export const redis = new Redis()
 export const Pubsub = new RedisPubSub({
 	connection: options,
 	publisher: new Redis(options),
@@ -57,3 +58,6 @@ export const BloPoPRedis = async (key:string) => {
 	  return false
 	}
 }
+
+
+

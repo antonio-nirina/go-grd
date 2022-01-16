@@ -62,10 +62,11 @@ func (c *DriverRepository) FindTournamentRepo(idQuery primitive.ObjectID) (entit
 func (c *DriverRepository) FindAllTournamentRepo(pageNumber int64, limit int64) ([]entity.Tournament, error) {
 	var collection = c.client.Database("grd_database").Collection("tournament")
 	var results []entity.Tournament
-
+	now := time.Now().UTC()
+	from := time.Date(now.Year(), now.Month(), now.Day(), now.Hour(), now.Minute(), 0, 0, now.Location())
 	cur, err := collection.Find(context.TODO(), bson.M{
 		"deadlinedate": bson.M{
-			"$gte": primitive.NewDateTimeFromTime(time.Now()).Time().Format(time.RFC3339)}}, options.Find().SetLimit(limit).SetSkip(pageNumber).SetSort(bson.M{"_id": -1}))
+			"$gte": primitive.NewDateTimeFromTime(from.UTC()).Time().UTC().Format(time.RFC3339)}}, options.Find().SetLimit(limit).SetSkip(pageNumber).SetSort(bson.M{"_id": -1}))
 
 	if err != nil {
 		return nil, err
@@ -203,17 +204,16 @@ func (c *DriverRepository) FindTournamentCreatedRepo(pageNumber int64, limit int
 func (c *DriverRepository) FindTournamentNowRepo() ([]entity.Tournament, error) {
 	var collection = c.client.Database("grd_database").Collection("tournament")
 	var results []entity.Tournament
-	now := time.Now()
-	from := time.Date(now.Year(),now.Month(),now.Day(),0,0,0,0,now.Location())
-	to := time.Date(now.Year(),now.Month(),now.Day(),23,59,59,0,now.Location())
-	cur, err := collection.Find(context.TODO(), bson.M{"deadlinedate": bson.M{
-		"$gte": primitive.NewDateTimeFromTime(from).Time().Format(time.RFC3339), 
-		"$lte": primitive.NewDateTimeFromTime(to).Time().Format(time.RFC3339)}}, options.Find().SetSort(bson.M{"_id": -1}))
+	now := time.Now().UTC()
+	from := time.Date(now.Year(), now.Month(), now.Day(), 0, 0, 0, 0, now.Location())
+	to := time.Date(now.Year(), now.Month(), now.Day(), 23, 59, 59, 0, now.Location())
+	cur, err := collection.Find(context.TODO(), bson.M{"datestart": bson.M{
+		"$gte": primitive.NewDateTimeFromTime(from).Time().UTC().Format(time.RFC3339),
+		"$lte": primitive.NewDateTimeFromTime(to).Time().UTC().Format(time.RFC3339)}}, options.Find().SetSort(bson.M{"_id": -1}))
 
 	if err != nil {
 		return nil, err
 	}
-
 
 	if err != nil {
 		return nil, err

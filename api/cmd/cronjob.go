@@ -12,7 +12,11 @@ import (
 )
 
 type jobTournament struct {
-	Uid          string `json:"uid"`
+	Uid  string  `json:"uid"`
+	Data jobData `json:"data"`
+}
+
+type jobData struct {
 	Title        string `json:"title"`
 	DateStart    string `json:"dateStart"`
 	DeadlineDate string `json:"deadlineDate"`
@@ -28,15 +32,15 @@ func RunCheckTournament() {
 	s := gocron.NewScheduler(time.UTC)
 
 	if len(tournamentNow) > 0 {
-		task, _ := s.Every(2).Second().Do(func() { // s.Every(1).Day().At("01:10").Do(func() {
+		task, _ := s.Every(1).Day().At("01:10").Do(func() { //s.Every(2).Second().Do(func() { // s.Every(1).Day().At("01:10").Do(func() {
 			for _, tournament := range tournamentNow {
-				job := &jobTournament{Uid: tournament.Uid.Hex(), Title: tournament.Title, DateStart: tournament.DateStart, DeadlineDate: tournament.DeadlineDate}
+				job := &jobTournament{Uid: tournament.Uid.Hex(), Data: jobData{Title: tournament.Title, DateStart: tournament.DateStart, DeadlineDate: tournament.DeadlineDate}}
 				json, err := json.Marshal(job)
 
 				if err != nil {
 					external.Logger(err.Error())
 				}
-				external.RPushRedis("job_tournament", json)
+				external.RPublishTournamentOfDay("job_tournament", json)
 			}
 			s.Stop()
 		})

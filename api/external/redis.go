@@ -93,3 +93,11 @@ func RPushRedis(key string, value interface{}) {
 		Logger(fmt.Sprintf("%v", err))
 	}
 }
+
+func RPublishTournamentOfDay(key string, value interface{}) {
+	err := Rdb.Publish(ctx, key, value).Err()
+	if err != nil {
+		fmt.Println("Error", err)
+		Logger(fmt.Sprintf("%v", err))
+	}
+}
