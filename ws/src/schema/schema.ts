@@ -16,6 +16,13 @@ export const typeDefs = gql`
 		count:Int
 	}
 
+	type TournamentType {
+		uid:String
+		title:String,
+		dateStart:String,
+		deadlineDate:String
+	}
+
 	type User {
 		uidNotif:String
 	    uid: String
@@ -63,5 +70,6 @@ export const typeDefs = gql`
 		subscribeNotifications:Notifications
 		subscribeConnected:User
 		subscribeDisConnected:User
+		subscribeRedirectTournament:TournamentType
 	}
 `
