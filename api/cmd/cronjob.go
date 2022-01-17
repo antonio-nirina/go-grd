@@ -12,13 +12,12 @@ import (
 )
 
 type jobTournament struct {
-<<<<<<< HEAD
 	Uid  string  `json:"uid"`
 	Data jobData `json:"data"`
 }
 
 type jobData struct {
-	Id          string `json:"id"`
+	Id           string `json:"id"`
 	Title        string `json:"title"`
 	DateStart    string `json:"dateStart"`
 	DeadlineDate string `json:"deadlineDate"`
