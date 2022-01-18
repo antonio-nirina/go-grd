@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import Schedule from "node-schedule"
 import { redis } from "../client/redisClient"
 import { RunTaskTournament } from "src/cron/task-match"
@@ -43,4 +42,5 @@ export const TournamentJob = function() {
 				RunTaskTournament()
 			})
 		})
-
+	})
+}
