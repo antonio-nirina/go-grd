@@ -2,7 +2,6 @@ package handler
 
 import (
 	"fmt"
-	"strconv"
 	"sync"
 	"time"
 
@@ -10,13 +9,10 @@ import (
 )
 
 func (t *tournamentUsecase) TimeStartMatchHandler(tournament *TournamentViewModel, wg *sync.WaitGroup) {
-	queryStr := `
-	{ 
-		RunTaskTournament(counter:{uid:"%s",sec:"%s",min:"%s",hours:"%s",day:%s,month:%s}) 
-	}
-	`
+
 	date, _ := time.Parse(time.RFC3339, tournament.DeadlineDate)
 	var month int
+
 	if date.Month() == time.January {
 		month = int(time.January)
 	} else if date.Month() == time.February {
@@ -43,8 +39,12 @@ func (t *tournamentUsecase) TimeStartMatchHandler(tournament *TournamentViewMode
 		month = int(time.December)
 	}
 
-	queryN := fmt.Sprintf(queryStr, tournament.Uid, strconv.Itoa(date.Second()), strconv.Itoa(date.Minute()), strconv.Itoa(date.Hour()), strconv.Itoa(date.Day()), strconv.Itoa(month))
-	fmt.Println("queryN", queryN)
+	queryStr := `
+	{ 
+		RunTaskTournament(counter:{uid:"%s",sec:"%d",min:"%d",hours:"%d",day:%d,month:%d}) 
+	}
+	`
+	queryN := fmt.Sprintf(queryStr, tournament.Uid, date.Second(), date.Minute(), date.Hour(), date.Day(), month)
 	jsonData := map[string]string{
 		"query": queryN,
 	}

@@ -7,7 +7,7 @@ import (
 	"github.com/graphql-go/graphql"
 	"github.com/graphql-go/handler"
 
-	//	"github.com/thoussei/antonio/api/cmd"
+	"github.com/thoussei/antonio/api/cmd"
 	"github.com/thoussei/antonio/api/external"
 	"github.com/thoussei/antonio/api/graphql/mutation"
 	"github.com/thoussei/antonio/api/graphql/queries"
@@ -15,6 +15,7 @@ import (
 
 func main() {
 //	cmd.RunCmdScheduler()
+	cmd.RunCheckTournament()
 	schemaConfig := graphql.SchemaConfig{
 		Query: graphql.NewObject(graphql.ObjectConfig{
 			Name:   "Query",

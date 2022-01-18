@@ -28,6 +28,7 @@ const TournamentInc: React.FC  = function() {
 	const {loading,error,data} 	= useQuery(GET_TOURNAMENT_PART)
 
 	useEffect(() => {
+		console.log("data", data)
 		if(!loading && !error && data) {
 			let month = new Date().toLocaleDateString().split("/")[1]
 			let count = 0
@@ -78,10 +79,15 @@ const TournamentInc: React.FC  = function() {
 		setIsLoader(false)
 	},[loading,error,data])
 
-	const FilterDiff = function(date:string) :string {
+	const FilterDiff = function(date:string,dateStart:string) :string {
 		if(Math.abs(parseInt(date)) >= 24) {
 			const hours = Math.abs(parseInt(date))/24
 			return hours > 1 ? Math.floor(hours)+" jours" : Math.floor(hours) + " jour"
+		}
+
+		if(parseInt(date) === 0) {
+			const start:any = new Date(dateStart).getTime() - new Date().getTime()
+			return new Date(start).getMinutes()+" minutes"
 		}
 
 		return Math.abs(parseInt(date))+" heures"
@@ -112,7 +118,7 @@ const TournamentInc: React.FC  = function() {
 							<div className="list_tournament" key={index}>
 								<Link to={`${NameRoutes.joinTournament}?uid=${element.uid}`} >
 									<img src={element.game.logo} width="40" height="30" alt=""/>
-									<p className="game_name">{element.title}<span>{dateStringToDY(element.dateStart)} - {<Moment filter={FilterDiff}  diff={element.dateStart} locale={"fr"} unit="hours">{new Date()}</Moment>} </span></p>
+									<p className="game_name">{element.title}<span>{dateStringToDY(element.dateStart)} - {<Moment filter={(e) => FilterDiff(e,element.dateStart)}  diff={element.dateStart} locale={"fr"} unit="hours">{new Date()}</Moment>} </span></p>
 									<p className="cashprize">Cashprize<span>{`${element.price.reduce((prev,cur)=>(parseInt(prev.toString())+parseInt(cur)),0)}`} G-Coins</span></p>
 									<p className="arena">{element.gameWay} Arène</p>
 									<p className="place">

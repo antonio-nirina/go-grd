@@ -90,8 +90,8 @@ func (c *driverRepository) FindRateInWeekRepo(date time.Time) ([]entity.Rate, er
 	var collection = c.client.Database("grd_database").Collection("rate")
 	var results []entity.Rate
 	cur, err := collection.Find(context.TODO(), bson.M{"created": bson.M{
-		"$gte": primitive.NewDateTimeFromTime(date).Time().Format(time.RFC3339), 
-		"$lte": primitive.NewDateTimeFromTime(time.Now()).Time().Format(time.RFC3339)}}, options.Find().SetSort(bson.M{"_id": -1}))
+		"$gte": primitive.NewDateTimeFromTime(date).Time().Format(time.RFC3339),
+		"$lte": primitive.NewDateTimeFromTime(time.Now().UTC()).Time().Format(time.RFC3339)}}, options.Find().SetSort(bson.M{"_id": -1}))
 
 	if err != nil {
 		return nil, err
@@ -111,7 +111,7 @@ func (c *driverRepository) FindRateInWeekRepo(date time.Time) ([]entity.Rate, er
 
 	/*
 		groupStage := bson.D{{"$group", bson.D{{
-			"created", 
+			"created",
 			bson.D{
 				{
 				"$gte", primitive.NewDateTimeFromTime(date).Time().Format(time.RFC3339),
@@ -124,7 +124,7 @@ func (c *driverRepository) FindRateInWeekRepo(date time.Time) ([]entity.Rate, er
 		obj, err := collection.Aggregate(context.TODO(), mongo.Pipeline{groupStage})
 		var rateInfo []bson.D
 	*/
-	
+
 	return results, nil
 }
 

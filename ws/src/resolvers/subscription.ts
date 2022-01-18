@@ -1,4 +1,9 @@
-import {CHANNEL_ADD_FRIEND,CHANNEL_TIMMER,CHANNEL_CONNECTED,CHANNEL_DISCONNECTED} from "../common/channels"
+import {
+	CHANNEL_ADD_FRIEND,
+	CHANNEL_TIMMER,
+	CHANNEL_CONNECTED,
+	CHANNEL_DISCONNECTED,
+	CHANNEL_REDIRECT_TOURNAMENT} from "../common/channels"
 import {Pubsub} from "../client/redisClient"
 
 
@@ -14,5 +19,8 @@ export const Subscription = {
 	},
 	subscribeDisConnected: {
 		subscribe: () => Pubsub.asyncIterator(CHANNEL_DISCONNECTED)
+	},
+	subscribeRedirectTournament: {
+		subscribe: () => Pubsub.asyncIterator(CHANNEL_REDIRECT_TOURNAMENT)
 	}
 }

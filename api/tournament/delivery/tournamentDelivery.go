@@ -23,6 +23,7 @@ type TournamentResolver interface {
 	UpdatedTournamentResolver(params graphql.ResolveParams) (interface{}, error)
 	FindTournamentCreated(params graphql.ResolveParams) (interface{}, error)
 	SetTimeMatchtResolver(params graphql.ResolveParams) (interface{}, error)
+	FindTournamentDateNowResolver(params graphql.ResolveParams) (interface{}, error)
 }
 
 type tournament struct {
@@ -282,4 +283,14 @@ func (t *tournament) SetTimeMatchtResolver(params graphql.ResolveParams) (interf
 	wg.Wait()
 
 	return "Ok", nil
+}
+
+func (t *tournament) FindTournamentDateNowResolver(params graphql.ResolveParams) (interface{}, error) {
+	res, err := t.tournamentHandler.FindTournamentDateNowHandler()
+
+	if err != nil {
+		return nil, err
+	}
+
+	return res, nil
 }

@@ -30,6 +30,7 @@ type RepositoryTournament interface {
 	CountTournamentRepository() (int, error)
 	UpdatedTournament(tournament *entity.Tournament) (interface{}, error)
 	FindTournamentCreatedRepo(pageNumber int64, limit int64) ([]entity.Tournament, error)
+	FindTournamentNowRepo() ([]entity.Tournament, error)
 }
 
 func (c *DriverRepository) SavedTournamentRepo(tournament *entity.Tournament) (interface{}, error) {
@@ -61,10 +62,11 @@ func (c *DriverRepository) FindTournamentRepo(idQuery primitive.ObjectID) (entit
 func (c *DriverRepository) FindAllTournamentRepo(pageNumber int64, limit int64) ([]entity.Tournament, error) {
 	var collection = c.client.Database("grd_database").Collection("tournament")
 	var results []entity.Tournament
-
+	now := time.Now().UTC()
+	from := time.Date(now.Year(), now.Month(), now.Day(), now.Hour(), now.Minute(), 0, 0, now.Location())
 	cur, err := collection.Find(context.TODO(), bson.M{
 		"deadlinedate": bson.M{
-			"$gte": primitive.NewDateTimeFromTime(time.Now()).Time().Format(time.RFC3339)}}, options.Find().SetLimit(limit).SetSkip(pageNumber).SetSort(bson.M{"_id": -1}))
+			"$gte": primitive.NewDateTimeFromTime(from.UTC()).Time().UTC().Format(time.RFC3339)}}, options.Find().SetLimit(limit).SetSkip(pageNumber).SetSort(bson.M{"_id": -1}))
 
 	if err != nil {
 		return nil, err
@@ -179,6 +181,39 @@ func (c *DriverRepository) FindTournamentCreatedRepo(pageNumber int64, limit int
 	var collection = c.client.Database("grd_database").Collection("tournament")
 	var results []entity.Tournament
 	cur, err := collection.Find(context.TODO(), bson.D{{"statut", entity.TOURNAMENT_CREATED}}, options.Find().SetLimit(limit).SetSkip(pageNumber).SetSort(bson.M{"_id": -1}))
+
+	if err != nil {
+		return nil, err
+	}
+
+	for cur.Next(context.TODO()) {
+		var elem entity.Tournament
+		err := cur.Decode(&elem)
+		if err != nil {
+			external.Logger(fmt.Sprintf("%v", err))
+		}
+
+		results = append(results, elem)
+	}
+
+	cur.Close(context.TODO())
+
+	return results, nil
+}
+
+func (c *DriverRepository) FindTournamentNowRepo() ([]entity.Tournament, error) {
+	var collection = c.client.Database("grd_database").Collection("tournament")
+	var results []entity.Tournament
+	now := time.Now().UTC()
+	from := time.Date(now.Year(), now.Month(), now.Day(), 0, 0, 0, 0, now.Location())
+	to := time.Date(now.Year(), now.Month(), now.Day(), 23, 59, 59, 0, now.Location())
+	cur, err := collection.Find(context.TODO(), bson.M{"datestart": bson.M{
+		"$gte": primitive.NewDateTimeFromTime(from).Time().UTC().Format(time.RFC3339),
+		"$lte": primitive.NewDateTimeFromTime(to).Time().UTC().Format(time.RFC3339)}}, options.Find().SetSort(bson.M{"_id": -1}))
+
+	if err != nil {
+		return nil, err
+	}
 
 	if err != nil {
 		return nil, err

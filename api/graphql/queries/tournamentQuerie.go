@@ -70,3 +70,11 @@ func SetTimeMatch() *graphql.Field {
 		Resolve: tournamentResolver.SetTimeMatchtResolver,
 	}
 }
+
+func FindTournamentNow() *graphql.Field {
+	return &graphql.Field{
+		Type:        graphql.NewList(types.TournamentSchemaType),
+		Description: "Get single tournament and start match",
+		Resolve:     tournamentResolver.FindTournamentDateNowResolver,
+	}
+}

@@ -65,15 +65,15 @@ import (
 	"github.com/graphql-go/graphql"
 )
 
-var database = config.ConfigMongo()
-var rep = repository.NewUserRepository(database)
-var repositoryNotif = notifRepo.NewRepository(database)
+var Database = config.ConfigMongo()
+var rep = repository.NewUserRepository(Database)
+var repositoryNotif = notifRepo.NewRepository(Database)
 
-var repositoryPlateform = gameRepo.NewPlateformRepository(database)
+var repositoryPlateform = gameRepo.NewPlateformRepository(Database)
 var usecasePlateform = gameHandler.NewUsecasePlateform(repositoryPlateform)
 var plateformResolver = gameDelivery.NewResolverPlateform(usecasePlateform)
 
-var repositoryGame = gameRepo.NewGameRepository(database)
+var repositoryGame = gameRepo.NewGameRepository(Database)
 var usecaseGame = gameHandler.NewUsecaseGame(repositoryGame)
 var gameResolver = gameDelivery.NewResolverGame(usecaseGame)
 
@@ -82,52 +82,52 @@ var usecaseNotif = notifHandler.NewUsecaseNotif(repositoryNotif, usecase)
 var usecase = handler.NewUsecaseUser(rep)
 var UserRolve = delivery.NewResolver(usecase, usecaseNotif, usecaseGame, usecasePlateform)
 
-var tournamentRepository = tournamentRepo.NewTournamentRepository(database)
+var tournamentRepository = tournamentRepo.NewTournamentRepository(Database)
 var tournamentUsecase = tournamentHandler.NewUsecaseTournament(tournamentRepository)
 var tournamentResolver = tournamentDelivery.NewResolverTournament(tournamentUsecase, usecaseGame, usecasePlateform)
 var notifResolver = notifDelivery.NewNotifResolver(usecaseNotif, usecase)
 
-var cmtyRepository = cmtyRepo.NewCmtyRepository(database)
+var cmtyRepository = cmtyRepo.NewCmtyRepository(Database)
 var cmtyUsecase = cmtyHandler.NewUsecaseCmty(cmtyRepository)
 var cmtyResolver = cmtyDelivery.NewResolverCmty(cmtyUsecase, usecaseGame)
 
-var homeRepository = homeRepo.NewHomeRepository(database)
+var homeRepository = homeRepo.NewHomeRepository(Database)
 var homeUsecase = homeHandler.NewUsecaseHome(homeRepository)
 var homeResolver = homeDelivery.NewResolverHome(homeUsecase, usecaseGame)
 
-var teamRepository = teamRepo.NewTeamRepository(database)
+var teamRepository = teamRepo.NewTeamRepository(Database)
 var teamUsecase = teamHandler.NewUsecaseTeam(teamRepository, usecase)
 var teamResolver = teamDelivery.NewResolverTeam(teamUsecase, usecase)
 
-var asistRepository = asistRepo.NewAsistRepository(database)
+var asistRepository = asistRepo.NewAsistRepository(Database)
 var asistUsecase = asistHandler.NewUsecaseAsist(asistRepository)
 var asistResolver = asistDelivery.NewResolverAsist(asistUsecase)
 
-var leagueRepository = leagueRepo.NewLeagueRepository(database)
+var leagueRepository = leagueRepo.NewLeagueRepository(Database)
 var leagueUsecase = leagueHandler.NewUsecaseLeague(leagueRepository)
 var leagueResolver = leagueDelivery.NewResolverLeague(leagueUsecase, usecaseGame, usecasePlateform)
 
-var waggerRepository = waggerRepo.NewWaggerRepository(database)
+var waggerRepository = waggerRepo.NewWaggerRepository(Database)
 var waggerUsecase = waggerHandler.NewUsecaseWagger(waggerRepository)
 var waggerResolver = waggerDelivery.NewResolverWagger(waggerUsecase, usecaseGame, usecasePlateform)
 
-var partRepository = partRepo.NewPartRepository(database)
+var partRepository = partRepo.NewPartRepository(Database)
 var partUsecase = partHandler.NewUsecasePart(partRepository, teamUsecase, usecase)
 var partResolver = partDelivery.NewResolverPart(partUsecase, usecase, tournamentUsecase, teamUsecase, waggerUsecase, rateUsecase)
 
-var postRepository = postRepo.NewPostRepository(database)
+var postRepository = postRepo.NewPostRepository(Database)
 var postUsecase = postHandler.NewUsecasePost(postRepository, usecase, rateUsecase)
 var postResolver = postDelivery.NewResolverPost(postUsecase, usecase)
 
-var rateRepository = rateRepo.NewRateRepository(database)
+var rateRepository = rateRepo.NewRateRepository(Database)
 var rateUsecase = rateHandler.NewUsecaseRate(rateRepository, usecase)
 var rateResolver = rateDelivery.NewResolverRate(rateUsecase, usecase)
 
-var supportRepository = supportRepo.NewSupportRepository(database)
+var supportRepository = supportRepo.NewSupportRepository(Database)
 var supportUsecase = supportHandler.NewUsecaseSupport(supportRepository, usecase)
 var supportResolver = supportDelivery.NewResolverSupport(supportUsecase, usecase)
 
-var historyRepository = historyRepo.NewHistoryRepository(database)
+var historyRepository = historyRepo.NewHistoryRepository(Database)
 var historyUsecase = historyHandler.NewUsecaseHistory(historyRepository, usecase)
 var historyResolver = historyDelivery.NewResolverHistory(historyUsecase, usecase)
 
@@ -192,5 +192,6 @@ func GetRootFields() graphql.Fields {
 		"FindPartAllTournament":     FindPartAllTournament(),
 		"FindOneHistory":            FindOneHistory(),
 		"SetTimeMatch":              SetTimeMatch(),
+		"FindTournamentNow":         FindTournamentNow(),
 	}
 }

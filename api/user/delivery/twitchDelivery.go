@@ -65,6 +65,9 @@ func (r *resolver) GetAccessTokenTwitchApi(params graphql.ResolveParams) (interf
 	if user.Uid.Hex() != "" && !checkTwitchAccount {
 		user.Accounts = twitchAccount
 		_, err = r.userHandler.UpdatedUser(&user)
+		if err != nil {
+			external.Logger(fmt.Sprintf("%v", err))
+		}
 	} else if user.Uid.Hex() == "" && !checkTwitchAccount {
 		userTwitch := &entity.User{
 			Uid:           primitive.NewObjectID(),

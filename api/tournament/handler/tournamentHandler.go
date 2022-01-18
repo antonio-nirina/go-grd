@@ -18,6 +18,7 @@ type UsecaseTournament interface {
 	UpdatedTournamentHandler(tournament *entity.Tournament) (interface{}, error)
 	FindTournamentCreatedHandler(pageNumber int64, limit int64) ([]tournamentViewModel, error)
 	TimeStartMatchHandler(tournament *TournamentViewModel, wg *sync.WaitGroup)
+	FindTournamentDateNowHandler() ([]tournamentViewModel, error)
 }
 
 type tournamentUsecase struct {
@@ -241,6 +242,58 @@ func (t *tournamentUsecase) UpdatedTournamentHandler(tournament *entity.Tourname
 
 func (t *tournamentUsecase) FindTournamentCreatedHandler(pageNumber int64, limit int64) ([]tournamentViewModel, error) {
 	result, err := t.tournamentRepository.FindTournamentCreatedRepo(pageNumber, limit)
+
+	if err != nil {
+		return []tournamentViewModel{}, err
+	}
+
+	var res []tournamentViewModel
+	var plateforms []common.PlateformViewModel
+
+	for _, val := range result {
+		for _, value := range val.Plateform {
+			arrayPl := common.PlateformViewModel{
+				value.Uid.Hex(),
+				value.Name,
+				value.Description,
+			}
+			plateforms = append(plateforms, arrayPl)
+		}
+
+		tournamentViewModel := tournamentViewModel{
+			Uid:               val.Uid.Hex(),
+			Title:             val.Title,
+			DateStart:         val.DateStart,
+			Description:       val.Info,
+			Statut:            val.Statut,
+			NumberParticipate: val.NumberParticipate,
+			GameWay:           val.GameWay,
+			Price:             val.Price,
+			DeadlineDate:      val.DeadlineDate,
+			PriceParticipate:  val.PriceParticipate,
+			Game:              common.GameViewModel{val.Game.Uid.Hex(), val.Game.Name, val.Game.Image, val.Game.Logo, val.Game.Slug},
+			Plateform:         plateforms,
+			Rules:             val.Rules,
+			IsPublic:          val.IsPublic,
+			Format:            val.Format,
+			Server:            val.Server,
+			Tchat:             val.Tchat,
+			Winners:           val.Winners,
+			Region:            val.Region,
+			Spectateur:        val.Spectateur,
+			Laps:              val.Laps,
+			Maps:              val.Maps,
+			IsTeam:            val.IsTeam,
+		}
+
+		res = append(res, tournamentViewModel)
+	}
+
+	return res, nil
+}
+
+func (t *tournamentUsecase) FindTournamentDateNowHandler() ([]tournamentViewModel, error) {
+	result, err := t.tournamentRepository.FindTournamentNowRepo()
 
 	if err != nil {
 		return []tournamentViewModel{}, err

@@ -19,10 +19,11 @@ import PopupTeam,{TeamPopup} from "../commons/check-team"
 export type PartTournamentType = {
 	tournament:Tournament|undefined,
 	parts:ParticipateTournament[]|undefined,
+	isPartHandle:Function,
 }
 
 
-const PartTournament:React.FC<PartTournamentType> = function ({tournament,parts}) {
+const PartTournament:React.FC<PartTournamentType> = function ({tournament,parts,isPartHandle}) {
 	const history = useHistory()
 	const userConnectedRedux = useSelector((state:RootState) => state.userConnected)
 	const [isPart,setIsPart] = useState<boolean>(false)
@@ -43,16 +44,20 @@ const PartTournament:React.FC<PartTournamentType> = function ({tournament,parts}
 		} else if(tournament && !tournament?.isTeam) {
 			setTeamPart(`${parts && parts?.length > 0 ? parts?.length : 0} / ${tournament.numberParticipate}`)
 		}
+		// check part user_connected tournament oneToOne
 		parts?.forEach(function(part:ParticipateTournament){
 			if(part.user.uid === userConnectedRedux.user.uid) {
 				setPartUid(part.uid)
 				setIsPart(true)
+				isPartHandle(true)
 			}
 		})
+		// check part user_connected if in Team part this tournament
 		let arrayUser:string[] = []
 		parts?.forEach(function(part:ParticipateTournament){
-			if(tournament?.isTeam) {
+			if(tournament?.isTeam && part.user.uid === userConnectedRedux.user.uid) {
 				setIsPart(true)
+				isPartHandle(true)
 				arrayUser.push(part.team.name)
 			} else {
 				arrayUser.push(part.user.username)
@@ -159,7 +164,8 @@ const PartTournament:React.FC<PartTournamentType> = function ({tournament,parts}
 						<button
 							style={{"cursor":"pointer"}}
 							className="btn bg-red"
-							onClick={handleLeave}>Quitter le tournois
+							onClick={handleLeave}>
+								Quitter le tournois
 						</button>
 					)
 				}

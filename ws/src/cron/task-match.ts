@@ -4,15 +4,14 @@ import cron from "node-cron"
 import {Pubsub} from "../client/redisClient"
 import {CHANNEL_TIMMER} from "../common/channels"
 import { Times } from "../user/types/times"
-import { CounterType } from "src/counter/entities/counter"
+import {DURATION_START} from "../common/channels"
 
 
 // https://github.com/node-cron/node-cron
-export const RunTaskTournament = function(counter:CounterType):string {
+export const RunTaskTournament = function():string {
 	let currSec:number = 60
-	let minute:number = 1
-
-	const task = cron.schedule(`${counter.min} ${counter.hours} ${counter.day} ${counter.month}`, async () => {
+	let minute:number = DURATION_START
+	const task = cron.schedule("* * * * * *", async () => {
 		currSec = currSec - 1
 		if(currSec == 0 && minute > 0) {
 			currSec = 60
@@ -23,7 +22,6 @@ export const RunTaskTournament = function(counter:CounterType):string {
 			id: new ObjectID().toHexString(),
 			time: chrono,
 		}
-		console.log("result", result)
 		// await SetRedis(idTounament,{time: currSec*60})
 		Pubsub.publish(CHANNEL_TIMMER,{subscribeCounter:result})
 	})

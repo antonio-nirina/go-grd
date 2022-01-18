@@ -16,6 +16,13 @@ export const typeDefs = gql`
 		count:Int
 	}
 
+	type TournamentType {
+		uid:String
+		title:String,
+		dateStart:String,
+		deadlineDate:String
+	}
+
 	type User {
 		uidNotif:String
 	    uid: String
@@ -51,7 +58,7 @@ export const typeDefs = gql`
   		NotifiUser(user:userInput):User
   		NotifUserConnected(user:userInput):User
   		NotifUserDisconnected(user:userInput):User
-		RunTaskTournament(counter:CounterTypeInput):String
+		RunTaskTournament:String
 	}
 
 	type Mutation {
@@ -63,5 +70,6 @@ export const typeDefs = gql`
 		subscribeNotifications:Notifications
 		subscribeConnected:User
 		subscribeDisConnected:User
+		subscribeRedirectTournament:TournamentType
 	}
 `
