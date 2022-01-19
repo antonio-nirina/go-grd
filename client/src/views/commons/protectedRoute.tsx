@@ -23,13 +23,14 @@ const ProtectedRoute = (
   	//  when user is not logged redirect
 		useEffect(()=>{
 			async function checkPart() {
-				if(loading && error && data && GetCookie()) {
-					const isPart = await CheckPartTournament(data.uid,userConnectedRedux.user.uid)
+				if(!loading && !error && data && GetCookie()) {
+					console.log("cccc", data.data.subscribeRedirectTournament.uid)
+					const isPart = await CheckPartTournament(data.data.subscribeRedirectTournament.uid,userConnectedRedux.user.uid)
 					if(isPart) setRoutingMatch(`${NameRoutes.matchTournament}?uid=${data.uid}=${true}&wagger=${false}`)
 				}
 			}
 			checkPart()
-		},[data,error,loading])
+		},[data,error,loading,userConnectedRedux])
 		if (!GetCookie()) {
 			redirectPath = authenticationPath || '/login'
 		}

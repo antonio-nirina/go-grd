@@ -25,8 +25,9 @@ const CommonMatch = function({data,isTournament,isWagger}:HeaderTournamentType) 
 		if(!loading && !error && dataPart) {
 			setParts(dataPart.FindPartByUserTournament)
 		}
+		console.log("dataSub", dataSub)
 		if(!ldSub && !erSub && dataSub) {
-			let currentTimes:string = dataSub.subscribeRedirectTournament.time
+			let currentTimes:string = dataSub.data.subscribeRedirectTournament.time
 			setTimmer(currentTimes)
 		}
 

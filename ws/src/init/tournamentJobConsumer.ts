@@ -29,17 +29,18 @@ export const TournamentJob = function() {
 		})
 		array.forEach(function(e:JobInterface,index:number) {
 			let date = new Date(e.data.dateStart)
-			let runSchedule = new Date(date.getFullYear(),date.getMonth(),date.getDate(),date.getHours(),(date.getMinutes() - DURATION_START),0)
+			let runSchedule = new Date(date.getFullYear(),date.getMonth(),date.getDate(),date.getHours(),(date.getMinutes() - 3),0)
 
+			Pubsub.publish(CHANNEL_REDIRECT_TOURNAMENT,{
+				subscribeRedirectTournament:{
+					uid:result.data.uid,
+					title:result.data.title,
+					dateStart:result.data.dateStart,
+					deadlineDate:result.data.deadlineDate
+				}
+			})
 			Schedule.scheduleJob(runSchedule,function(){
-				Pubsub.publish(CHANNEL_REDIRECT_TOURNAMENT,{
-					subscribeRedirectTournament:{
-						uid:result.data.uid,
-						title:result.data.title,
-						dateStart:result.data.dateStart,
-						deadlineDate:result.data.deadlineDate
-					}
-				})
+
 				RunTaskTournament()
 			})
 		})
