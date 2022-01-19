@@ -30,6 +30,7 @@ export const TournamentJob = function() {
 		array.forEach(function(e:JobInterface,index:number) {
 			let date = new Date(e.data.dateStart)
 			let runSchedule = new Date(date.getFullYear(),date.getMonth(),date.getDate(),date.getHours(),(date.getMinutes() - DURATION_START),0)
+
 			Schedule.scheduleJob(runSchedule,function(){
 				Pubsub.publish(CHANNEL_REDIRECT_TOURNAMENT,{
 					subscribeRedirectTournament:{
