@@ -4,7 +4,8 @@ import { useForm } from "react-hook-form"
 import {useMutation} from "@apollo/client"
 import {useHistory } from "react-router-dom"
 import Loader from "react-loader-spinner"
-import { useDispatch } from "react-redux"
+import { useDispatch,useSelector } from "react-redux"
+import {useSubscription} from "@apollo/client"
 
 import { faXbox } from "@fortawesome/free-brands-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
@@ -12,10 +13,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import Google from "../../assets/image/rss/google.png"
 import Discord from "../../assets/image/discord-logo.png"
 import Ps from "../../assets/image/playstation.png"
-
 import {TokenType,SendToken} from "./utils"
 import {sendUserConectedAction} from "./action/userAction"
-
 import Header0 from "../header/header0"
 import {checkValidEmail} from "./utils"
 import {AuthDiscord} from "./discord"
@@ -23,6 +22,11 @@ import {Translation} from "../../lang/translation"
 import {LOGIN} from "../../gql/user/auth"
 import Footer from "../footer/footer"
 import { NameRoutes } from "../commons/route-list"
+import {RootState} from "../../reducer"
+import {SUBSCRIBER_REDIRECT} from "../../gql/tournament/subscription"
+import {CheckPartTournament} from "../tournament/common/check-part"
+import {GetCookie} from "../auth/utils"
+
 import "../auth/login.css"
 import "../../assets/css/style.css"
 
@@ -46,6 +50,8 @@ const Login: React.FC = function() {
 	const [passwd,setPasswd] = useState<boolean>(false)
 	const [isLoader, setIsLoader] = useState<Boolean>(false)
 	const [login]  = useMutation(LOGIN)
+	const {loading,error,data}  = useSubscription(SUBSCRIBER_REDIRECT)
+	const userConnectedRedux = useSelector((state:RootState) => state.userConnected)
 
 	const onSubmit = async function(data:Inputs){
 		const email: string 	= data.email
@@ -66,8 +72,8 @@ const Login: React.FC = function() {
 					SendToken(token)
 					dispatch(sendUserConectedAction(result.data.login))
 				}
-
-				history.push(NameRoutes.profil)
+				const redirect = await handleRedirectTournament()
+				redirect ? history.push(redirect) : history.push(NameRoutes.profil)
 
 			} catch(e) {
 				console.log(e)
@@ -77,6 +83,15 @@ const Login: React.FC = function() {
 		} else {
 			setErrorForm(true)
 		}
+	}
+
+	const handleRedirectTournament = async function() {
+		if(!loading && !error && data && GetCookie()) {
+			console.log("xxxx", data.data.subscribeRedirectTournament.uid)
+			const isPart = await CheckPartTournament(data.data.subscribeRedirectTournament.uid,userConnectedRedux.user.uid)
+			if(isPart) return `${NameRoutes.matchTournament}?uid=${data.uid}=${true}&wagger=${false}`
+		}
+		return ""
 	}
 
   return(
