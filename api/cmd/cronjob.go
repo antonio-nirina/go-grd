@@ -33,7 +33,9 @@ func RunCheckTournament() {
 	s := gocron.NewScheduler(time.UTC)
 
 	if len(tournamentNow) > 0 {
-		task, _ := s.Every(1).Day().At("01:10").Do(func() { //s.Every(2).Second().Do(func() { // s.Every(1).Day().At("01:10").Do(func() {
+		fmt.Println("count", len(tournamentNow))
+		task, _ := s.Every(1).Day().At("20:05").Do(func() { //s.Every(2).Second().Do(func() { // s.Every(1).Day().At("01:10").Do(func() {
+			fmt.Println("Started:cron",time.Now().Format(time.RFC822Z))
 			for _, tournament := range tournamentNow {
 				job := &jobTournament{Uid: tournament.Uid.Hex(), Data: jobData{Title: tournament.Title, DateStart: tournament.DateStart, DeadlineDate: tournament.DeadlineDate}}
 				json, err := json.Marshal(job)
@@ -44,6 +46,7 @@ func RunCheckTournament() {
 				external.RPublishTournamentOfDay("job_tournament", json)
 			}
 			s.Stop()
+			fmt.Println("Finished:cron",time.Now().Format(time.RFC822Z))
 		})
 		fmt.Println(task.ScheduledTime())
 		s.StartAsync()

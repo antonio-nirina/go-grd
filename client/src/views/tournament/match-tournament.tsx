@@ -72,7 +72,7 @@ const MatchTournament = function() {
 		}
 		console.log("dataSub", dataSub)
 		if(!ldSub && !erSub && dataSub) {
-			console.log("dataSub", dataSub)
+			console.log("dataSubcfff", dataSub)
 		}
 	},[loading,error,data,ldgWg,ldgErr,ldgData,params,ldSub,erSub,dataSub])
 

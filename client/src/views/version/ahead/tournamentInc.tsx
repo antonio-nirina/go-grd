@@ -28,7 +28,6 @@ const TournamentInc: React.FC  = function() {
 	const {loading,error,data} 	= useQuery(GET_TOURNAMENT_PART)
 
 	useEffect(() => {
-		console.log("data", data)
 		if(!loading && !error && data) {
 			let month = new Date().toLocaleDateString().split("/")[1]
 			let count = 0
@@ -68,10 +67,14 @@ const TournamentInc: React.FC  = function() {
 				if(new Date(part.tournament.dateStart).toLocaleDateString().split("/")[1] === month) {
 					count++
 				}
-				const date1 = new Date()
-				const date2 = new Date(part.tournament.deadlineDate)
-				const diff = (date2.getTime() - date1.getTime())/1000/60
-				if (diff < 10 || diff <= 0) setIsOpen(false)
+				setIsOpen(true)
+
+				/*
+					const date1 = new Date()
+					const date2 = new Date(part.tournament.deadlineDate)
+					const diff = (date2.getTime() - date1.getTime())/1000/60
+				*/
+
 			})
 			setTournamentMonth(count)
 			setTournament(array)
@@ -112,13 +115,16 @@ const TournamentInc: React.FC  = function() {
 			</div>
 			<div className="tournament_wall">
 			{
-				tournament && tournament.length > 0 && isOpen ?
+				tournament && tournament.length > 0 ?
 					tournament.map(function(element:Tournament,index:number){
 						return (
 							<div className="list_tournament" key={index}>
 								<Link to={`${NameRoutes.joinTournament}?uid=${element.uid}`} >
 									<img src={element.game.logo} width="40" height="30" alt=""/>
-									<p className="game_name">{element.title}<span>{dateStringToDY(element.dateStart)} - {<Moment filter={(e) => FilterDiff(e,element.dateStart)}  diff={element.dateStart} locale={"fr"} unit="hours">{new Date()}</Moment>} </span></p>
+									<p className="game_name">
+										{element.title}
+										{ <span>{dateStringToDY(element.dateStart)} - {<Moment filter={(e) => FilterDiff(e,element.dateStart)}  diff={element.dateStart} locale={"fr"} unit="hours">{new Date()}</Moment>} </span>}
+									</p>
 									<p className="cashprize">Cashprize<span>{`${element.price.reduce((prev,cur)=>(parseInt(prev.toString())+parseInt(cur)),0)}`} G-Coins</span></p>
 									<p className="arena">{element.gameWay} Arène</p>
 									<p className="place">
