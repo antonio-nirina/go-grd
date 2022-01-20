@@ -16,17 +16,13 @@ import {dateStringToDY} from "../../tools/dateConvert"
 import {NameRoutes} from "../../commons/route-list"
 import 'moment/locale/fr'
 
-interface OpenTournamentInterface {
-	uid:string
-	isLast:boolean
-}
+
 const TournamentInc: React.FC  = function() {
 	const history = useHistory()
 	const [tournament, setTournament] = useState<Tournament[]>([])
 	const [tournamentMonth, setTournamentMonth] = useState<number>(0)
 	const [isLoader, setIsLoader] = useState<boolean>(true)
 	const [isOpen, setIsOpen] = useState<boolean>(true)
-	const [last, setLast] = useState<OpenTournamentInterface[]>([])
 
 	// const [dateDiff,setDateDiff] = useState<string[]>([])
 	const {loading,error,data} 	= useQuery(GET_TOURNAMENT_PART)
@@ -73,11 +69,11 @@ const TournamentInc: React.FC  = function() {
 				}
 				setIsOpen(true)
 
-				const date1 = new Date()
-				const date2 = new Date(part.tournament.deadlineDate)
-				const diff = (date2.getTime() - date1.getTime())/1000/60
-
-				if (diff < 10 || diff <= 0) setLast([...last,{uid:part.tournament.uid,isLast:true}])
+				/*
+					const date1 = new Date()
+					const date2 = new Date(part.tournament.deadlineDate)
+					const diff = (date2.getTime() - date1.getTime())/1000/60
+				*/
 
 			})
 			setTournamentMonth(count)
@@ -127,9 +123,7 @@ const TournamentInc: React.FC  = function() {
 									<img src={element.game.logo} width="40" height="30" alt=""/>
 									<p className="game_name">
 										{element.title}
-									{ last[index].uid === element.uid ?  dateStringToDY(element.dateStart) :
-										<span>{dateStringToDY(element.dateStart)} - {<Moment filter={(e) => FilterDiff(e,element.dateStart)}  diff={element.dateStart} locale={"fr"} unit="hours">{new Date()}</Moment>} </span>
-									}
+										{ <span>{dateStringToDY(element.dateStart)} - {<Moment filter={(e) => FilterDiff(e,element.dateStart)}  diff={element.dateStart} locale={"fr"} unit="hours">{new Date()}</Moment>} </span>}
 									</p>
 									<p className="cashprize">Cashprize<span>{`${element.price.reduce((prev,cur)=>(parseInt(prev.toString())+parseInt(cur)),0)}`} G-Coins</span></p>
 									<p className="arena">{element.gameWay} Arène</p>

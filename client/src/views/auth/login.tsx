@@ -22,8 +22,12 @@ import {AuthDiscord} from "./discord"
 import {Translation} from "../../lang/translation"
 import {LOGIN} from "../../gql/user/auth"
 import Footer from "../footer/footer"
+import { NameRoutes } from "../commons/route-list"
 import "../auth/login.css"
 import "../../assets/css/style.css"
+
+
+
 
 const style = {
 	"color":"red"
@@ -63,7 +67,7 @@ const Login: React.FC = function() {
 					dispatch(sendUserConectedAction(result.data.login))
 				}
 
-				history.push("/")
+				history.push(NameRoutes.profil)
 
 			} catch(e) {
 				console.log(e)
