@@ -1,40 +1,40 @@
 import React,{useEffect,useState} from "react"
-import {useQuery} from "@apollo/client"
 import { useSelector } from "react-redux"
 import {useSubscription} from "@apollo/client"
 
 import {RootState} from "../../reducer"
-import {GET_PART_TOURNAMENT} from "../../gql/participate/query"
-import {ParticipateTournament} from "../models/participate"
 import {LongMonthDate} from "../tools/dateConvert"
 import {HeaderTournamentType} from "../tournament/common/headerTournament"
 import { COUNTER_SUBSCRIBER } from "../../gql/tournament/subscription"
+import { CheckPartTournament } from "../tournament/common/check-part"
 
-const CommonMatch = function({data,isTournament,isWagger}:HeaderTournamentType) {
-	const [parts, setParts] = useState<ParticipateTournament[]>()
+
+
+
+const CommonMatch = function({data:tournament,isTournament,isWagger}:HeaderTournamentType) {
+	const [isParts, setIsParts] = useState<boolean>(false)
 	const userConnectedRedux = useSelector((state:RootState) => state.userConnected)
 	const [timer, setTimmer] = useState<string>("")
-	const {loading,error,data:dataPart} = useQuery(GET_PART_TOURNAMENT, {
-		variables: {
-			uid:data.uid,
-			uidUser:userConnectedRedux.user.uid
-		},
-	})
-	const {loading:ldSub,error:erSub,data:dataSub}  = useSubscription(COUNTER_SUBSCRIBER)
-	useEffect(() => {
-		if(!loading && !error && dataPart) {
-			setParts(dataPart.FindPartByUserTournament)
-		}
-		console.log("dataSub", dataSub)
-		if(!ldSub && !erSub && dataSub) {
-			let currentTimes:string = dataSub.data.subscribeRedirectTournament.time
-			setTimmer(currentTimes)
-		}
+	const {loading,error,data}  = useSubscription(COUNTER_SUBSCRIBER)
 
-	},[loading,error,dataPart,ldSub,erSub,dataSub])
+	useEffect(() => {
+		async function checkPart() {
+			const check = await CheckPartTournament(tournament.uid,userConnectedRedux.user.uid)
+			if(check){
+				setIsParts(check)
+				console.log("dataSub", data)
+				if(!loading && !error && data && check) {
+					let currentTimes:string = data.subscribeCounter.time
+					setTimmer(currentTimes)
+				}
+			}
+		}
+		checkPart()
+
+	},[loading,error,data,timer])
 	return (
 		<div className="next-btn white">
-			{parts
+			{isParts
 				?
 					timer ? timer : <div className="btn bg-red">Votre adversaire sera devoilé</div>
 				:

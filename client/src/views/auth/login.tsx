@@ -86,8 +86,9 @@ const Login: React.FC = function() {
 	}
 
 	const handleRedirectTournament = async function() {
+		console.log("uuuu", data.userConnectedRedux.user)
 		if(!loading && !error && data && GetCookie()) {
-			console.log("xxxx", data.data.subscribeRedirectTournament.uid)
+			console.log("xxxx", data.subscribeRedirectTournament.uid)
 			const isPart = await CheckPartTournament(data.data.subscribeRedirectTournament.uid,userConnectedRedux.user.uid)
 			if(isPart) return `${NameRoutes.matchTournament}?uid=${data.uid}=${true}&wagger=${false}`
 		}
