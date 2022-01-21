@@ -1,4 +1,4 @@
-import React,{useState} from "react"
+import React,{useState,useEffect} from "react"
 import { Link } from 'react-router-dom'
 import { useForm } from "react-hook-form"
 import {useMutation} from "@apollo/client"
@@ -25,7 +25,8 @@ import { NameRoutes } from "../commons/route-list"
 import {RootState} from "../../reducer"
 import {SUBSCRIBER_REDIRECT} from "../../gql/tournament/subscription"
 import {CheckPartTournament} from "../tournament/common/check-part"
-import {GetCookie} from "../auth/utils"
+
+
 
 import "../auth/login.css"
 import "../../assets/css/style.css"
@@ -37,21 +38,39 @@ const style = {
 	"color":"red"
 }
 
-type Inputs = {
-	password: string,
+interface Inputs{
+	password: string
 	email:string
 }
+
+interface RedirectSubcribe {
+	uid:string
+	title:string
+	dateStart:string
+	deadlineDate:string
+}
+
+
 
 const Login: React.FC = function() {
 	const history = useHistory()
 	const dispatch = useDispatch()
 	const { register, handleSubmit } = useForm<Inputs>()
 	const [errorForm,setErrorForm] = useState<boolean>(false)
+	const [redirectSubscribe,setRedirectSubscribe] = useState<RedirectSubcribe>()
 	const [passwd,setPasswd] = useState<boolean>(false)
-	const [isLoader, setIsLoader] = useState<Boolean>(false)
+	const [isLoader, setIsLoader] = useState<boolean>(false)
 	const [login]  = useMutation(LOGIN)
 	const {loading,error,data}  = useSubscription(SUBSCRIBER_REDIRECT)
 	const userConnectedRedux = useSelector((state:RootState) => state.userConnected)
+
+
+	useEffect(() => {
+		console.log("reirectwww", data)
+		if(!loading && !error && data) {
+			setRedirectSubscribe(data.subscribeRedirectTournament)
+		}
+	},[loading,error,data])
 
 	const onSubmit = async function(data:Inputs){
 		const email: string 	= data.email
@@ -73,7 +92,7 @@ const Login: React.FC = function() {
 					dispatch(sendUserConectedAction(result.data.login))
 				}
 				const redirect = await handleRedirectTournament()
-				redirect ? history.push(redirect) : history.push(NameRoutes.profil)
+				// redirect ? history.push(redirect) : history.push(NameRoutes.profil)
 
 			} catch(e) {
 				console.log(e)
@@ -86,8 +105,7 @@ const Login: React.FC = function() {
 	}
 
 	const handleRedirectTournament = async function() {
-		console.log("uuuu", data.userConnectedRedux.user)
-		if(!loading && !error && data && GetCookie()) {
+		if(redirectSubscribe && userConnectedRedux.user) {
 			console.log("xxxx", data.subscribeRedirectTournament.uid)
 			const isPart = await CheckPartTournament(data.data.subscribeRedirectTournament.uid,userConnectedRedux.user.uid)
 			if(isPart) return `${NameRoutes.matchTournament}?uid=${data.uid}=${true}&wagger=${false}`

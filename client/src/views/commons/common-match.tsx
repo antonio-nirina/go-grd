@@ -8,13 +8,25 @@ import {HeaderTournamentType} from "../tournament/common/headerTournament"
 import { COUNTER_SUBSCRIBER } from "../../gql/tournament/subscription"
 import { CheckPartTournament } from "../tournament/common/check-part"
 
+interface TimmerInput {
+	timer:string
+}
+
+const Timmer = function({timer}:TimmerInput) {
+	return (
+		<div className="timmer">
+			`Temps restant ${timer}`
+		</div>
+	)
+}
+
 
 
 
 const CommonMatch = function({data:tournament,isTournament,isWagger}:HeaderTournamentType) {
 	const [isParts, setIsParts] = useState<boolean>(false)
 	const userConnectedRedux = useSelector((state:RootState) => state.userConnected)
-	const [timer, setTimmer] = useState<string>("")
+	const [timer, setTimmer] = useState<string>("12:09")
 	const {loading,error,data}  = useSubscription(COUNTER_SUBSCRIBER)
 
 	useEffect(() => {
@@ -22,7 +34,6 @@ const CommonMatch = function({data:tournament,isTournament,isWagger}:HeaderTourn
 			const check = await CheckPartTournament(tournament.uid,userConnectedRedux.user.uid)
 			if(check){
 				setIsParts(check)
-				console.log("dataSub", data)
 				if(!loading && !error && data && check) {
 					let currentTimes:string = data.subscribeCounter.time
 					setTimmer(currentTimes)
@@ -36,10 +47,10 @@ const CommonMatch = function({data:tournament,isTournament,isWagger}:HeaderTourn
 		<div className="next-btn white">
 			{isParts
 				?
-					timer ? timer : <div className="btn bg-red">Votre adversaire sera devoilé</div>
+					timer ? <Timmer timer={timer} /> : <div className="btn bg-red">Votre adversaire sera devoilé</div>
 				:
 					<div className="btn bg-red">
-						{isTournament ? `Début du tournois ${LongMonthDate(data.dateStart)}` : `Wager commence ${LongMonthDate(data.date)}`}
+						{isTournament ? `Début du tournois ${LongMonthDate(tournament.dateStart)}` : `Wager commence ${LongMonthDate(data.date)}`}
 					</div>
 			}
 		</div>

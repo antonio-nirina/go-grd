@@ -22,6 +22,7 @@ const ProtectedRoute = (
 		const userConnectedRedux = useSelector((state:RootState) => state.userConnected)
   	//  when user is not logged redirect
 		useEffect(()=>{
+			console.log("dataProtectes", data)
 			async function checkPart() {
 				if(!loading && !error && data && GetCookie()) {
 					console.log("cccc", data.data.subscribeRedirectTournament.uid)

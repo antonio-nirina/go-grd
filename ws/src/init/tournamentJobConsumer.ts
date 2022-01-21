@@ -27,7 +27,7 @@ export const TournamentJob = function() {
 				deadlineDate:result.data.deadlineDate
 			}
 		})
-		array.forEach(function(e:JobInterface,index:number) {
+		array.forEach(function(e:JobInterface) {
 			let date = new Date(e.data.dateStart)
 			let runSchedule = new Date(date.getFullYear(),date.getMonth(),date.getDate(),date.getHours(),(date.getMinutes()),0)
 
@@ -39,9 +39,9 @@ export const TournamentJob = function() {
 					deadlineDate:result.data.deadlineDate
 				}
 			})
-			Schedule.scheduleJob(runSchedule,function(){
+			/*Schedule.scheduleJob(runSchedule,function(){
 				RunTaskTournament()
-			})
+			})*/
 		})
 	})
 }
