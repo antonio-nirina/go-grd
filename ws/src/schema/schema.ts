@@ -4,6 +4,7 @@ export const typeDefs = gql`
 	type Times {
 		id:ID!
 		time:String
+		uid:String
 	}
 
 	type Notifications {

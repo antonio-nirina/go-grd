@@ -5,6 +5,7 @@ export const COUNTER_SUBSCRIBER = gql`
 		subscribeCounter {
 			id
 			time
+			uid
 		}
 	}
 `

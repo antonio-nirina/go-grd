@@ -8,7 +8,7 @@ import {DURATION_START} from "../common/channels"
 
 
 // https://github.com/node-cron/node-cron
-export const RunTaskTournament = function():string {
+export const RunTaskTournament = function(uid:string):string {
 	let currSec:number = 60
 	let minute:number = 40 //DURATION_START
 	const task = cron.schedule("* * * * * *", async () => {
@@ -21,6 +21,7 @@ export const RunTaskTournament = function():string {
 		const result:Times = {
 			id: new ObjectID().toHexString(),
 			time: chrono,
+			uid:uid,
 		}
 		console.log("result",result)
 		// await SetRedis(idTounament,{time: currSec*60})

@@ -7,6 +7,7 @@ import {LongMonthDate} from "../tools/dateConvert"
 import {HeaderTournamentType} from "../tournament/common/headerTournament"
 import { COUNTER_SUBSCRIBER } from "../../gql/tournament/subscription"
 import { CheckPartTournament } from "../tournament/common/check-part"
+import "./css/match.css"
 
 interface TimmerInput {
 	timer:string
@@ -15,18 +16,16 @@ interface TimmerInput {
 const Timmer = function({timer}:TimmerInput) {
 	return (
 		<div className="timmer">
-			`Temps restant ${timer}`
+			{`Temps restant ${timer}`}
 		</div>
 	)
 }
 
 
-
-
 const CommonMatch = function({data:tournament,isTournament,isWagger}:HeaderTournamentType) {
 	const [isParts, setIsParts] = useState<boolean>(false)
 	const userConnectedRedux = useSelector((state:RootState) => state.userConnected)
-	const [timer, setTimmer] = useState<string>("12:09")
+	const [timer, setTimmer] = useState<string>("00:00")
 	const {loading,error,data}  = useSubscription(COUNTER_SUBSCRIBER)
 
 	useEffect(() => {
@@ -42,9 +41,9 @@ const CommonMatch = function({data:tournament,isTournament,isWagger}:HeaderTourn
 		}
 		checkPart()
 
-	},[loading,error,data,timer])
+	},[loading,error,data,timer,userConnectedRedux,tournament])
 	return (
-		<div className="next-btn white">
+		<div className="next-timmer">
 			{isParts
 				?
 					timer ? <Timmer timer={timer} /> : <div className="btn bg-red">Votre adversaire sera devoilé</div>

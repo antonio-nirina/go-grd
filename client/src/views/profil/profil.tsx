@@ -2,6 +2,8 @@ import React,{useEffect,useState} from "react"
 import { useSelector } from "react-redux"
 import {useQuery} from "@apollo/client"
 import { Link } from 'react-router-dom'
+import {useSubscription} from "@apollo/client"
+import {useHistory } from "react-router-dom"
 
 import fr from "../../assets/image/fr.png"
 import Js from "../../assets/image/white-joystick.png"
@@ -30,13 +32,22 @@ import {TeamModel} from "../models/team"
 import LogoTeam from "../../assets/image/team/logo-team.jpg"
 import NewsInfo from "./news/news-info"
 import Statistiques from "./news/statistique"
+import { COUNTER_SUBSCRIBER } from "../../gql/tournament/subscription"
+import {CheckPartTournament} from "../tournament/common/check-part"
+import { NameRoutes } from "../commons/route-list"
+import {GetAcountStorage,SetAcountStorage} from "../../storage/cookieStorage"
 
 
 const Profile: React.FC = function() {
+	const history = useHistory()
 	const [participateTournament,setParticipateTournament] = useState<ParticipateTournament[]>([])
 	const [participateWagger,setParticipateWagger] = useState<ParticipateWagger[]>([])
 	const [choixGames,setChoixGames] = useState<GameUserModel[]>([])
 	const [teams, setTeams] = useState<TeamModel[]>([])
+	const [isPart, setIsPart] = useState<boolean>(false)
+
+	const {loading:loadSub,error:errSub,data:dataSub}  = useSubscription(COUNTER_SUBSCRIBER)
+
 	const userConnectedRedux = useSelector((state:RootState) => state.userConnected)
 	const {loading,error,data} 	= useQuery(GET_PART_USER, {
 		variables: {
@@ -67,30 +78,49 @@ const Profile: React.FC = function() {
 	})
 
 	useEffect(() => {
-		const params = window.location.search
+		async function checkPart(uid:string) {
+			let check:boolean|undefined = false
+			check = await CheckPartTournament(uid,userConnectedRedux.user.uid)
+			if(check) setIsPart(true)
+			if(isPart){
+				SetAcountStorage({uidUser:userConnectedRedux.user.uid,statut:true})
+				history.push(`${NameRoutes.matchTournament}?uid=${uid}&tournament=${true}&wagger=${false}`)
+			} else {
+				const params = window.location.search
 
-		if (window.opener) {
-			window.opener.postMessage(params,"")
-		   	window.close()
+				if (window.opener) {
+					window.opener.postMessage(params,"")
+					window.close()
+				}
+
+				if(!loading && !error && data) {
+					setParticipateTournament(data.FindPartByUser)
+				}
+
+				if(!ldgWagger && !errWagger && dataWagger) {
+					setParticipateWagger(dataWagger.FindPartByUserWagger)
+				}
+
+				if(!ldgGame && !errGame && dataGame) {
+					setChoixGames(dataGame.GetGameOneUserQuery)
+				}
+
+				if(!ldteam && !errTeam && dataTeam) {
+					setTeams(dataTeam.FindTeamByUser)
+				}
+			}
 		}
 
-		if(!loading && !error && data) {
-			setParticipateTournament(data.FindPartByUser)
+		if(!loadSub && !errSub && dataSub && !GetAcountStorage()) {
+			checkPart(dataSub.subscribeCounter.uid)
 		}
 
-		if(!ldgWagger && !errWagger && dataWagger) {
-			setParticipateWagger(dataWagger.FindPartByUserWagger)
-		}
-
-		if(!ldgGame && !errGame && dataGame) {
-			setChoixGames(dataGame.GetGameOneUserQuery)
-		}
-
-		if(!ldteam && !errTeam && dataTeam) {
-			setTeams(dataTeam.FindTeamByUser)
-		}
-
-	},[loading,error,data,ldgWagger,errWagger,dataWagger,ldgGame,errGame,dataGame,ldteam,errTeam,dataTeam])
+	},[
+		loading,error,data,ldgWagger,errWagger,dataWagger,
+		ldgGame,errGame,dataGame,ldteam,errTeam,dataTeam,
+		loadSub,errSub,dataSub,userConnectedRedux,isPart,
+		history
+	])
 
   return(
 	<div className="profil connected">

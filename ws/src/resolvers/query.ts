@@ -7,5 +7,5 @@ export const Query = {
 	NotifiUser: async (obj: any,{user}:{user: User}) => NotifiUser(user),
 	NotifUserConnected: async (obj: any,{user}:{user: User}) => NotifUserConnected(user),
 	NotifUserDisconnected: async (obj: any,{user}:{user: User}) => NotifUserDisconnected(user),
-	RunTaskTournament:async () => RunTaskTournament()
+	RunTaskTournament: async (obj: string,{uid}:{uid: string}) => RunTaskTournament(uid)
 }
