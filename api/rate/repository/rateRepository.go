@@ -90,8 +90,8 @@ func (c *driverRepository) FindRateInWeekRepo(date time.Time) ([]entity.Rate, er
 	var collection = c.client.Database("grd_database").Collection("rate")
 	var results []entity.Rate
 	cur, err := collection.Find(context.TODO(), bson.M{"created": bson.M{
-		"$gte": primitive.NewDateTimeFromTime(date).Time().Format(time.RFC3339),
-		"$lte": primitive.NewDateTimeFromTime(time.Now().UTC()).Time().Format(time.RFC3339)}}, options.Find().SetSort(bson.M{"_id": -1}))
+		"$gte": primitive.NewDateTimeFromTime(date.UTC()).Time().UTC().Format(time.RFC3339),
+		"$lte": primitive.NewDateTimeFromTime(time.Now().UTC()).Time().UTC().Format(time.RFC3339)}}, options.Find().SetSort(bson.M{"_id": -1}))
 
 	if err != nil {
 		return nil, err

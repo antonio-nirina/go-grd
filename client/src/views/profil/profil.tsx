@@ -85,34 +85,33 @@ const Profile: React.FC = function() {
 			if(isPart){
 				SetAcountStorage({uidUser:userConnectedRedux.user.uid,statut:true})
 				history.push(`${NameRoutes.matchTournament}?uid=${uid}&tournament=${true}&wagger=${false}`)
-			} else {
-				const params = window.location.search
-
-				if (window.opener) {
-					window.opener.postMessage(params,"")
-					window.close()
-				}
-
-				if(!loading && !error && data) {
-					setParticipateTournament(data.FindPartByUser)
-				}
-
-				if(!ldgWagger && !errWagger && dataWagger) {
-					setParticipateWagger(dataWagger.FindPartByUserWagger)
-				}
-
-				if(!ldgGame && !errGame && dataGame) {
-					setChoixGames(dataGame.GetGameOneUserQuery)
-				}
-
-				if(!ldteam && !errTeam && dataTeam) {
-					setTeams(dataTeam.FindTeamByUser)
-				}
 			}
 		}
 
 		if(!loadSub && !errSub && dataSub && !GetAcountStorage()) {
 			checkPart(dataSub.subscribeCounter.uid)
+		}
+
+		const params = window.location.search
+		if (window.opener) {
+			window.opener.postMessage(params,"")
+			window.close()
+		}
+
+		if(!loading && !error && data) {
+			setParticipateTournament(data.FindPartByUser)
+		}
+
+		if(!ldgWagger && !errWagger && dataWagger) {
+			setParticipateWagger(dataWagger.FindPartByUserWagger)
+		}
+
+		if(!ldgGame && !errGame && dataGame) {
+			setChoixGames(dataGame.GetGameOneUserQuery)
+		}
+
+		if(!ldteam && !errTeam && dataTeam) {
+			setTeams(dataTeam.FindTeamByUser)
 		}
 
 	},[

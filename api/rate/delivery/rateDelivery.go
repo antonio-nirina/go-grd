@@ -36,8 +36,8 @@ func (r *rate) CreatedRateResolver(params graphql.ResolveParams) (interface{}, e
 	updated, _ := params.Args["updated"].(string)
 	user, _ := params.Args["user"].(string)
 	score, _ := params.Args["score"].(int)
-	dateCreated,_ := time.Parse(time.RFC3339, created)
-	dateUpated,_ := time.Parse(time.RFC3339, updated)
+	dateCreated, _ := time.Parse(time.RFC3339, created)
+	dateUpated, _ := time.Parse(time.RFC3339, updated)
 
 	rate := &entity.Rate{
 		Uid:     primitive.NewObjectID(),
