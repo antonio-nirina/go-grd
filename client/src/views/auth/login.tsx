@@ -1,4 +1,4 @@
-import React,{useState} from "react"
+import React,{useState,useEffect} from "react"
 import { Link } from 'react-router-dom'
 import { useForm } from "react-hook-form"
 import {useMutation} from "@apollo/client"
@@ -6,16 +6,15 @@ import {useHistory } from "react-router-dom"
 import Loader from "react-loader-spinner"
 import { useDispatch } from "react-redux"
 
+
 import { faXbox } from "@fortawesome/free-brands-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 import Google from "../../assets/image/rss/google.png"
 import Discord from "../../assets/image/discord-logo.png"
 import Ps from "../../assets/image/playstation.png"
-
 import {TokenType,SendToken} from "./utils"
 import {sendUserConectedAction} from "./action/userAction"
-
 import Header0 from "../header/header0"
 import {checkValidEmail} from "./utils"
 import {AuthDiscord} from "./discord"
@@ -23,18 +22,17 @@ import {Translation} from "../../lang/translation"
 import {LOGIN} from "../../gql/user/auth"
 import Footer from "../footer/footer"
 import { NameRoutes } from "../commons/route-list"
+
+
 import "../auth/login.css"
 import "../../assets/css/style.css"
-
-
-
 
 const style = {
 	"color":"red"
 }
 
-type Inputs = {
-	password: string,
+interface Inputs{
+	password: string
 	email:string
 }
 
@@ -43,9 +41,11 @@ const Login: React.FC = function() {
 	const dispatch = useDispatch()
 	const { register, handleSubmit } = useForm<Inputs>()
 	const [errorForm,setErrorForm] = useState<boolean>(false)
+
 	const [passwd,setPasswd] = useState<boolean>(false)
-	const [isLoader, setIsLoader] = useState<Boolean>(false)
+	const [isLoader, setIsLoader] = useState<boolean>(false)
 	const [login]  = useMutation(LOGIN)
+
 
 	const onSubmit = async function(data:Inputs){
 		const email: string 	= data.email
@@ -66,8 +66,7 @@ const Login: React.FC = function() {
 					SendToken(token)
 					dispatch(sendUserConectedAction(result.data.login))
 				}
-
-				history.push(NameRoutes.account)
+				history.push(NameRoutes.profil)
 
 			} catch(e) {
 				console.log(e)

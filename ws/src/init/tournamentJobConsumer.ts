@@ -17,6 +17,7 @@ interface dataType {
 export const TournamentJob = function() {
 	redis.subscribe("job_tournament")
 	redis.on("message",function(ch,message) {
+		console.log("channel", ch)
 		let array:JobInterface[] = []
 		const result = JSON.parse(message)
 		array.push({
@@ -27,21 +28,11 @@ export const TournamentJob = function() {
 				deadlineDate:result.data.deadlineDate
 			}
 		})
-		array.forEach(function(e:JobInterface,index:number) {
+		array.forEach(function(e:JobInterface) {
 			let date = new Date(e.data.dateStart)
-			let runSchedule = new Date(date.getFullYear(),date.getMonth(),date.getDate(),date.getHours(),(date.getMinutes() - 3),0)
-
-			Pubsub.publish(CHANNEL_REDIRECT_TOURNAMENT,{
-				subscribeRedirectTournament:{
-					uid:result.data.uid,
-					title:result.data.title,
-					dateStart:result.data.dateStart,
-					deadlineDate:result.data.deadlineDate
-				}
-			})
+			let runSchedule = new Date(date.getFullYear(),date.getMonth(),date.getDate(),date.getHours(),(date.getMinutes()),0)
 			Schedule.scheduleJob(runSchedule,function(){
-
-				RunTaskTournament()
+				RunTaskTournament(e.uid)
 			})
 		})
 	})

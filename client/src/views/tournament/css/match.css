@@ -1,7 +1,26 @@
 .container .info-match {
 	padding: 0px 25px 128px !important;
 	height: 444px;
+	display: block !important;
 }
 .container .cnt-blank {
 	height: 254px !important;
+}
+
+.step{
+	font-weight: bold;
+	height: 24px;
+	padding-bottom: 16px;
+	font-size: 16px;
+}
+
+.adv-list {
+	display: flex;
+	margin-top: 26px;
+	margin-bottom: 42px;
+}
+
+.adv-list .element-wdth{
+	width: 30%;
+	text-align: center;
 }

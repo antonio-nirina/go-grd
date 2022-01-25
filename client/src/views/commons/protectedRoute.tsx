@@ -5,9 +5,10 @@ import {useSubscription} from "@apollo/client"
 
 import {GetCookie} from "../auth/utils"
 import {RootState} from "../../reducer"
-import {SUBSCRIBER_REDIRECT} from "../../gql/tournament/subscription"
+import { COUNTER_SUBSCRIBER } from "../../gql/tournament/subscription"
 import { NameRoutes } from "../commons/route-list"
 import {CheckPartTournament} from "../tournament/common/check-part"
+import {GetAcountStorage,SetAcountStorage} from "../../storage/cookieStorage"
 
 interface IProtectedRoute{
   authenticationPath?: string
@@ -16,17 +17,19 @@ const ProtectedRoute = (
   props: IProtectedRoute & RouteProps
 ) => {
   		let redirectPath: string = ''
-	  	const {loading,error,data}  = useSubscription(SUBSCRIBER_REDIRECT)
+	  	const {loading,error,data}  = useSubscription(COUNTER_SUBSCRIBER)
   		const { authenticationPath, path } = props
 		const [routingMatch,setRoutingMatch] = useState<string>("")
 		const userConnectedRedux = useSelector((state:RootState) => state.userConnected)
   	//  when user is not logged redirect
 		useEffect(()=>{
 			async function checkPart() {
-				if(!loading && !error && data && GetCookie()) {
-					console.log("cccc", data.data.subscribeRedirectTournament.uid)
-					const isPart = await CheckPartTournament(data.data.subscribeRedirectTournament.uid,userConnectedRedux.user.uid)
-					if(isPart) setRoutingMatch(`${NameRoutes.matchTournament}?uid=${data.uid}=${true}&wagger=${false}`)
+				if(!loading && !error && data && userConnectedRedux.user.uid && !GetAcountStorage()) {
+					const isPart = await CheckPartTournament(data.subscribeCounter.uid,userConnectedRedux.user.uid)
+					if(isPart) {
+						SetAcountStorage({uidUser:userConnectedRedux.user.uid,statut:true})
+						setRoutingMatch(`${NameRoutes.matchTournament}?uid=${data.uid}&tournament=${true}&wagger=${false}`)
+					}
 				}
 			}
 			checkPart()

@@ -1,6 +1,6 @@
 import React,{useEffect,useState} from "react"
 import {useHistory } from "react-router-dom"
-import {useQuery,useSubscription} from "@apollo/client"
+import {useQuery} from "@apollo/client"
 
 import HeaderTournament,{HeaderTournamentType} from "../tournament/common/headerTournament"
 import Header from "../header/header"
@@ -9,11 +9,10 @@ import {GET_ONE_TOURNAMENT} from "../../gql/tournament/query"
 import {Tournament} from "../models/tournament"
 import {Wagger} from "../models/wagger"
 import {GET_ONE_WAGGER} from "../../gql/wagger/query"
-import CommonMatch from "../commons/common-match"
+import CommonMatch from "./common/common-match"
 import "../tournament/info.css"
 import "../../assets/css/style.css"
 import "./css/match.css"
-import { COUNTER_SUBSCRIBER } from "../../gql/tournament/subscription"
 import { SET_TIME_START } from "../../gql/tournament/query"
 
 interface CounterTypeInput {
@@ -50,8 +49,6 @@ const MatchTournament = function() {
 		},
 	})
 
-	const {loading:ldSub,error:erSub,data:dataSub}  = useSubscription(COUNTER_SUBSCRIBER)
-
 	useEffect(() => {
 		const isTrnamnt = (params.location.search.split("&")[1]).replace("tournament=","")
 		const isWagr = (params.location.search.split("&")[2]).replace("wagger=","")
@@ -70,11 +67,7 @@ const MatchTournament = function() {
 		} else if(isTrnamnt === "false" && isWagr === "true") {
 			setIsWagger(true)
 		}
-		console.log("dataSub", dataSub)
-		if(!ldSub && !erSub && dataSub) {
-			console.log("dataSubcfff", dataSub)
-		}
-	},[loading,error,data,ldgWg,ldgErr,ldgData,params,ldSub,erSub,dataSub])
+	},[loading,error,data,ldgWg,ldgErr,ldgData,params])
 
 	useEffect(() => {
 		console.log(dataCount)
@@ -96,9 +89,21 @@ const MatchTournament = function() {
 				<div className="marg">
 				<HeaderTournament {...HeaderProps} />
 			<div className="information-game info-match">
+				<div className="step">
+					1/16 de finale
+				</div>
 				<div className="rules-container">
 					<div className="info_sup">
 						{tournament || wagger ? <CommonMatch {...HeaderProps} /> : <></>}
+					</div>
+				</div>
+				<div className="adv-list">
+					<div className="elemnt-players-dom element-wdth">
+						Dom
+					</div>
+					<div className="in-part element-wdth">Vs</div>
+					<div className="elemnt-players-ext element-wdth">
+						Adv
 					</div>
 				</div>
 			</div>
