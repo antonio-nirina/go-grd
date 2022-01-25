@@ -9,7 +9,7 @@ import {GET_ONE_TOURNAMENT} from "../../gql/tournament/query"
 import {Tournament} from "../models/tournament"
 import {Wagger} from "../models/wagger"
 import {GET_ONE_WAGGER} from "../../gql/wagger/query"
-import CommonMatch from "../commons/common-match"
+import CommonMatch from "./common/common-match"
 import "../tournament/info.css"
 import "../../assets/css/style.css"
 import "./css/match.css"
@@ -89,10 +89,25 @@ const MatchTournament = function() {
 				<div className="marg">
 				<HeaderTournament {...HeaderProps} />
 			<div className="information-game info-match">
+				<div className="step">
+					1/16 de finale
+				</div>
 				<div className="rules-container">
 					<div className="info_sup">
 						{tournament || wagger ? <CommonMatch {...HeaderProps} /> : <></>}
 					</div>
+				</div>
+				<div className="adv-list">
+					<div className="elemnt-players-dom element-wdth">
+						Dom
+					</div>
+					<div className="in-part element-wdth">Vs</div>
+					<div className="elemnt-players-ext element-wdth">
+						Adv
+					</div>
+				</div>
+				<div className="ready-match">
+					<button className="btn bg-red">Go</button>
 				</div>
 			</div>
 			<div className="clear"></div>

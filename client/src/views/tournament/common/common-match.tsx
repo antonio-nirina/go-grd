@@ -2,12 +2,12 @@ import React,{useEffect,useState} from "react"
 import { useSelector } from "react-redux"
 import {useSubscription} from "@apollo/client"
 
-import {RootState} from "../../reducer"
-import {LongMonthDate} from "../tools/dateConvert"
-import {HeaderTournamentType} from "../tournament/common/headerTournament"
-import { COUNTER_SUBSCRIBER } from "../../gql/tournament/subscription"
-import { CheckPartTournament } from "../tournament/common/check-part"
-import "./css/match.css"
+import {RootState} from "../../../reducer"
+import {LongMonthDate} from "../../tools/dateConvert"
+import {HeaderTournamentType} from "./headerTournament"
+import { COUNTER_SUBSCRIBER } from "../../../gql/tournament/subscription"
+import { CheckPartTournament } from "./check-part"
+import "./match.css"
 
 interface TimmerInput {
 	timer:string
@@ -22,7 +22,7 @@ const Timmer = function({timer}:TimmerInput) {
 }
 
 
-const CommonMatch = function({data:tournament,isTournament,isWagger}:HeaderTournamentType) {
+const CommonMatch:React.FC<HeaderTournamentType> = function({data:tournament,isTournament,isWagger}:HeaderTournamentType) {
 	const [isParts, setIsParts] = useState<boolean>(false)
 	const userConnectedRedux = useSelector((state:RootState) => state.userConnected)
 	const [timer, setTimmer] = useState<string>("00:00")
@@ -40,7 +40,6 @@ const CommonMatch = function({data:tournament,isTournament,isWagger}:HeaderTourn
 			}
 		}
 		checkPart()
-
 	},[loading,error,data,timer,userConnectedRedux,tournament])
 	return (
 		<div className="next-timmer">
