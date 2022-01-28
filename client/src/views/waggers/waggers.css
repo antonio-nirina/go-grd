@@ -387,3 +387,33 @@ p.item-text-left{
 .confirm .btn-container .bg-white:hover{
 	color: #ffffff;
 }
+
+@media (max-width: 480px){
+	.container .header-common {
+		position: absolute;
+		top: 12px;
+		width: 100%;
+		padding-left: 131px;
+		left: 0px;
+	}
+	.joingame .header-part img .item-left{
+		max-width: 180px;
+		height: 84px;
+		border-radius: 50%;
+		float: left;
+		position: relative;
+		top: -18px;
+		z-index: 3;
+		left: 98px;
+	}
+	.joingame .join-title{
+		top: 13px;
+		padding: 25px;
+		background: #2c2c2c;
+		position: relative;
+		z-index: 2;
+		border-radius: 30px;
+		width: 100%;
+		right: 61px;
+	}
+}

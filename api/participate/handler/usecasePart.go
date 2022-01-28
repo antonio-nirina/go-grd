@@ -18,15 +18,15 @@ type UsecasePart interface {
 	SavedPartHandler(part *entity.Participate) (interface{}, error)
 	FindPartHandler(idQuery string) (partViewModel, error)
 	FindAllPartHandler(pageNumber int64, limit int64) ([]partViewModel, error)
-	FindPartUserHandler(pageNumber int64, limit int64, userUid primitive.ObjectID) ([]partViewModel, error)
+	FindPartUserHandler(pageNumber int64, limit int64, userUid string) ([]partViewModel, error)
 	UpdatedPartUserHandler(partUid string, userUid primitive.ObjectID) (interface{}, error)
 	FindPartUserLeagueHandler(uidUser primitive.ObjectID, leagueUid string) (partViewModel, error)
-	FindPartUserTournamentHandler(uidUser primitive.ObjectID, tournamentUid string) (partViewModel, error)
+	FindPartUserTournamentHandler(uidUser string, tournamentUid string) (partViewModel, error)
 	RemovedPartHandler(idQuery string) (interface{}, error)
 	UpdatedPartNumberConfirmedHandler(userPartUid string, numberConf bool) (interface{}, error)
 	GetNumberPartHandler(userPartUid string) (interface{}, error)
 	FindPartUserWaggerHandler(userUid primitive.ObjectID, uidWagger primitive.ObjectID) (interface{}, error)
-	FindAllPartUserWaggerHandler(userUid primitive.ObjectID, pageNumber int64, limit int64) ([]partWaggerViewModel, error)
+	FindAllPartUserWaggerHandler(userUid string, pageNumber int64, limit int64) ([]partWaggerViewModel, error)
 	FindPartTournamentHandler(tournament tHandler.TournamentViewModel) ([]partViewModelTournament, error)
 	LeavePartTournamentHandler(partUid string, userUId string) (interface{}, error)
 	FindPartTeamTournamentHandler(uidTournament primitive.ObjectID, uidTeam string) (string, error)
@@ -309,7 +309,7 @@ func (p *partUsecase) FindAllPartHandler(pageNumber int64, limit int64) ([]partV
 	return res, nil
 }
 
-func (p *partUsecase) FindPartUserHandler(pageNumber int64, limit int64, userUid primitive.ObjectID) ([]partViewModel, error) {
+func (p *partUsecase) FindPartUserHandler(pageNumber int64, limit int64, userUid string) ([]partViewModel, error) {
 	results, err := p.partRepository.FindPartUserRepo(pageNumber, limit, userUid)
 
 	if err != nil {
@@ -557,7 +557,7 @@ func (p *partUsecase) FindPartUserLeagueHandler(userUid primitive.ObjectID, leag
 	return partViewModel, nil
 }
 
-func (p *partUsecase) FindPartUserTournamentHandler(uidUser primitive.ObjectID, tournamentUid string) (partViewModel, error) {
+func (p *partUsecase) FindPartUserTournamentHandler(uidUser string, tournamentUid string) (partViewModel, error) {
 	objectId, err := primitive.ObjectIDFromHex(tournamentUid)
 
 	if err != nil {
@@ -770,7 +770,7 @@ func (p *partUsecase) FindPartUserWaggerHandler(userUid primitive.ObjectID, uidW
 	return partViewModel, nil
 }
 
-func (p *partUsecase) FindAllPartUserWaggerHandler(userUid primitive.ObjectID, pageNumber int64, limit int64) ([]partWaggerViewModel, error) {
+func (p *partUsecase) FindAllPartUserWaggerHandler(userUid string, pageNumber int64, limit int64) ([]partWaggerViewModel, error) {
 	results, err := p.partRepository.FindPartUserRepo(pageNumber, limit, userUid)
 
 	if err != nil {

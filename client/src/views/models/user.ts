@@ -13,6 +13,6 @@ export interface USerModel {
 
 export interface GameUserModel {
 	uid:string
-	Email:string
-	Games:GameType
+	email:string
+	game:GameType[]
 }

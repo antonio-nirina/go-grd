@@ -71,7 +71,7 @@ const PartTournament:React.FC<PartTournamentType> = function ({tournament,parts,
 		}
 		setPartData(arrayUser)
 
-	},[tournament,parts,userConnectedRedux])
+	},[tournament,parts,userConnectedRedux,isPartHandle])
 
 	const onShowConfirmed = async function() {
 		setIsLoader(true)

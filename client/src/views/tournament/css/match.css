@@ -23,6 +23,7 @@
 .adv-list .element-wdth{
 	width: 32%;
 	text-align: center;
+
 }
 
 .ready-match{
@@ -32,4 +33,36 @@
 .ready-match button{
 	width: 85%;
 	cursor: pointer;
+}
+
+.players {
+	border: 1px solid;
+	border-radius: 4px;
+	height: 100px;
+}
+
+.in-part {
+	padding-top: 53px;
+	font-size: 22px;
+	font-weight: bold;
+}
+
+.adv-list .content-players {
+	display: flex;
+	padding-top: 10px;
+	margin-right: 15px;
+	margin-left: 15px;
+	vertical-align: middle;
+}
+.adv-list  .content-players img{
+	border-radius: 50px;
+	height: 77px;
+}
+
+.content-players .name-team-user{
+	margin-right: 15px;
+	margin-left: 15px;
+	vertical-align: middle;
+	padding-top: 27px;
+
 }

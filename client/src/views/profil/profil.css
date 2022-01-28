@@ -507,8 +507,7 @@ p.lg-desc{
 	max-width: 430px;
 	width: 100%;
 	border-radius: 5px;
-	padding-bottom:
-
+	padding-bottom:0
 }
 .set-team{
 	padding: 25px 5px 0px;
@@ -775,9 +774,6 @@ p.lg-desc{
 	font-family: arial;
 	text-transform: uppercase;
 }
-.with-stat img{
-
-}
 .with-stat span{
 	float: right;
 	text-transform: uppercase;
@@ -1029,7 +1025,6 @@ p.lg-desc{
 	box-shadow: 0px 3px 3px #201f1f;
 }
 .row-container{
-	height: 240px;
 	overflow: auto;
 
 }
@@ -1041,6 +1036,7 @@ p.lg-desc{
 .row{
 	display: flex;
 	padding: 15px;
+	cursor: pointer;
 }
 .mur .row-container{
 	display: flex;

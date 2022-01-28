@@ -173,13 +173,13 @@ func (p *participate) FindPartByUseResolver(params graphql.ResolveParams) (inter
 	limit, _ := params.Args["limit"].(int)
 	pageNumber, _ := params.Args["pageNumber"].(int)
 	userUid, _ := params.Args["uidUser"].(string)
-	user, err := p.user.FindOneUserByUid(userUid)
+	_, err := p.user.FindOneUserByUid(userUid)
 
 	if err != nil {
 		return nil, err
 	}
 
-	res, err := p.partHandler.FindPartUserHandler(int64(pageNumber), int64(limit), user.Uid)
+	res, err := p.partHandler.FindPartUserHandler(int64(pageNumber), int64(limit), userUid)
 
 	if err != nil {
 		return nil, err
@@ -233,7 +233,7 @@ func (p *participate) FindPartByUseLeagueResolver(params graphql.ResolveParams) 
 func (p *participate) FindPartByUseTournamentResolver(params graphql.ResolveParams) (interface{}, error) {
 	userUid, _ := params.Args["uidUser"].(string)
 	tournamentUid, _ := params.Args["uidTournament"].(string)
-	user, err := p.user.FindOneUserByUid(userUid)
+	_, err := p.user.FindOneUserByUid(userUid)
 
 	if err != nil {
 		return nil, err
@@ -245,7 +245,7 @@ func (p *participate) FindPartByUseTournamentResolver(params graphql.ResolvePara
 		return nil, err
 	}
 
-	res, err := p.partHandler.FindPartUserTournamentHandler(user.Uid, tournamentUid)
+	res, err := p.partHandler.FindPartUserTournamentHandler(userUid, tournamentUid)
 
 	if err != nil {
 		return nil, err
@@ -326,13 +326,13 @@ func (p *participate) FindAllPartUserWaggerHandler(params graphql.ResolveParams)
 	userUid, _ := params.Args["uidUser"].(string)
 	pageNumber, _ := params.Args["pageNumber"].(int)
 	limit, _ := params.Args["limit"].(int)
-	user, err := p.user.FindOneUserByUid(userUid)
+	_, err := p.user.FindOneUserByUid(userUid)
 
 	if err != nil {
 		return nil, err
 	}
 
-	part, err := p.partHandler.FindAllPartUserWaggerHandler(user.Uid, int64(pageNumber), int64(limit))
+	part, err := p.partHandler.FindAllPartUserWaggerHandler(userUid, int64(pageNumber), int64(limit))
 
 	return part, nil
 }

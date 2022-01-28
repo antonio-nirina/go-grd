@@ -2,9 +2,7 @@ import React,{useEffect,useState} from "react"
 import {Link,useHistory } from "react-router-dom"
 import { faChevronCircleUp } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-// import {Tournament} from "../../models/tournament"
 import {dateStringToJoinT} from "../../tools/dateConvert"
-// import { Wagger } from "../../models/wagger"
 import { NameRoutes } from "../../commons/route-list"
 
 export type HeaderTournamentType = {
@@ -43,7 +41,7 @@ const HeaderTournament = function({data,isTournament,isWagger,isPart}:HeaderTour
 
 	return (
 		<>
-			<div className="part">
+			<div className="part header-common">
 				<div className="back">
 				<Link to="#"><i><FontAwesomeIcon icon={faChevronCircleUp} size="xs" /></i>Retour</Link>
 				</div>

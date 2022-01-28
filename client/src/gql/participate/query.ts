@@ -13,13 +13,24 @@ export const GET_PART_USER = gql`
 				username
 				avatar
 			}
+
 			tournament{
 				uid
 				title
-				date
+				dateStart
+				deadlineDate
+				price
+				gameWay
+				format
+				numberParticipate
 				plateform{
 					uid
 					name
+				}
+				game{
+					uid
+					name
+					logo
 				}
 			}
 			team{
