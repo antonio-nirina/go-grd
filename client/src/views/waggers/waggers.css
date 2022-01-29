@@ -388,32 +388,78 @@ p.item-text-left{
 	color: #ffffff;
 }
 
-@media (max-width: 480px){
+
+@media (max-width: 576px){
 	.container .header-common {
 		position: absolute;
-		top: 12px;
+		top: 48px;
 		width: 100%;
-		padding-left: 131px;
-		left: 0px;
+		padding-left: 0px;
+		left: 45px;
 	}
-	.joingame .header-part img .item-left{
+	.joingame .header-part {
+		width: 100%;
+	}
+	.joingame .header-part img.item-left {
 		max-width: 180px;
-		height: 84px;
 		border-radius: 50%;
-		float: left;
+		float: none;
 		position: relative;
 		top: -18px;
 		z-index: 3;
-		left: 98px;
 	}
 	.joingame .join-title{
-		top: 13px;
-		padding: 25px;
+		top: -18px;
+		padding: 0;
 		background: #2c2c2c;
 		position: relative;
 		z-index: 2;
-		border-radius: 30px;
+		border-radius: 0px;
 		width: 100%;
-		right: 61px;
+		left: -43px;
+	}
+	.joingame .bar-menu-top {
+		background: #2c2c2c;
+		clear: both;
+		width: 100%;
+		display: flex;
+		padding-left: 0;
+		margin-bottom: 20px;
+	}
+	.bar-menu-top li{
+		margin-right:0;
+	}
+	.bar-menu-top li a{
+		padding: 15px 8px;
+	}
+	.information-game{
+		padding: 0px !important;
+	}
+}
+
+@media (max-width: 768px){
+	.joingame .part{
+		top: 20px;
+	}
+	.joingame .join-title{
+		top:0px;
+		padding: 0;
+		left: 0;
+	}
+	.joingame h2{
+		font-size: 13px;
+	}
+}
+
+@media (max-width: 992px){
+	.joingame .part{
+		top: 75px;
+	}
+	.joingame .join-title{
+		top:0px;
+		left: 0;
+	}
+	.joingame h2{
+		font-size: 15px;
 	}
 }

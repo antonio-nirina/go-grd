@@ -66,3 +66,56 @@
 	padding-top: 27px;
 
 }
+@media (max-width: 576px){
+	.container .info-match {
+		padding: 0px !important;
+	}
+	.adv-list .content-players{
+		display: block;
+		padding-top: 0px;
+		margin-right: 0px;
+		margin-left: 0px;
+	}
+	.content-players .name-team-user{
+		margin-right: 0px;
+		margin-left: 0px;
+		padding-top: 0px;
+	}
+	.players{
+		border: none;
+	}
+}
+
+@media (max-width: 768px){
+	.adv-list .content-players{
+		display: block;
+		padding-top: 0px;
+		margin-right: 0px;
+		margin-left: 0px;
+	}
+	.content-players .name-team-user{
+		margin-right: 0px;
+		margin-left: 0px;
+		padding-top: 0px;
+	}
+	.players{
+		border: none;
+	}
+}
+
+@media (max-width: 992px){
+	.adv-list .content-players{
+		display: block;
+		padding-top: 0px;
+		margin-right: 0px;
+		margin-left: 0px;
+	}
+	.content-players .name-team-user{
+		margin-right: 0px;
+		margin-left: 0px;
+		padding-top: 0px;
+	}
+	.players{
+		border: none;
+	}
+}
