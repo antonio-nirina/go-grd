@@ -36,8 +36,6 @@
 }
 
 .players {
-	border: 1px solid;
-	border-radius: 4px;
 	height: 100px;
 }
 
@@ -60,12 +58,25 @@
 }
 
 .content-players .name-team-user{
-	margin-right: 15px;
 	margin-left: 15px;
+	margin-right: 15px;
 	vertical-align: middle;
 	padding-top: 27px;
-
+	font-size: 21px;
+	font-weight: bold;
 }
+.element-wdth .ready img{
+	border: 3px solid #1abb3d;
+}
+.content-players .side-block {
+	margin-left: 315px;
+}
+.element-wdth .ready-text{
+	font-size: 17px;
+	font-weight: bold;
+	color: #1abb3d;
+}
+
 @media (max-width: 576px){
 	.container .info-match {
 		padding: 0px !important;

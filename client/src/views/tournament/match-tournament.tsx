@@ -40,6 +40,7 @@ const MatchTournament = function() {
 	const [wagger, setWagger] = useState<Wagger>()
 	const [team, setTeam] = useState<TeamModel>()
 	const [start,setStart] = useState<CounterTypeInput>()
+	const [isReady,setIsReady] = useState(false)
 
 	const {loading,error,data} 	= useQuery(GET_ONE_TOURNAMENT, {
 		variables: {
@@ -96,6 +97,10 @@ const MatchTournament = function() {
 		isPart:true
 	}
 
+	const HandleReady = function() {
+		setIsReady(true)
+	}
+
 	return (
 		<div className="container">
 			<Header />
@@ -117,19 +122,25 @@ const MatchTournament = function() {
 								{
 									tournament?.isTeam
 										?
-									<div className="content-players">
-										<div className="name-team-user">{team?.name}</div>
-										<div>
-											<img src={team?.logo} alt="team.logo" />
+									<>
+										<div className={isReady ? "ready content-players" : "content-players"}>
+											<div className="name-team-user side-block">{team?.name}</div>
+											<div>
+												<img src={team?.logo} alt="team.logo" />
+											</div>
 										</div>
-									</div>
+										{isReady ? <div  className="ready-text">READY</div> : <></>}
+									</>
 									:
-									<div className="content-players">
-										<div className="name-team-user">{userConnectedRedux.user.username}</div>
-										<div>
-											<img src={userConnectedRedux.user.avatar} alt="user.profil" />
+									<>
+										<div className={isReady ? "ready content-players side-block" : "content-players"}>
+											<div className="name-team-user side-block">{userConnectedRedux.user.username}</div>
+											<div>
+												<img src={userConnectedRedux.user.avatar} alt="user.profil" />
+											</div>
 										</div>
-									</div>
+										{isReady ? <div className="ready-text">READY</div> : <></>}
+									</>
 								}
 							</div>
 							<div className="in-part element-wdth">Vs</div>
@@ -137,20 +148,26 @@ const MatchTournament = function() {
 								{
 									tournament?.isTeam
 										?
-									<div className="content-players">
-										<div className="name-team-user">{team?.name}</div>
-										<img src={team?.logo} alt="team.logo" />
-									</div>
+										<>
+											<div className={isReady ? "ready content-players" : "content-players"}>
+												<div className="name-team-user">{team?.name}</div>
+												<img src={team?.logo} alt="team.logo" />
+											</div>
+											{isReady ? <div  className="ready-text">READY</div> : <></>}
+										</>
 									:
-									<div className="content-players">
-										<div className="name-team-user">{userConnectedRedux.user.username}</div>
-										<img src={userConnectedRedux.user.avatar} alt="user.profil" />
-									</div>
+									<>
+										<div className={isReady ? "ready content-players" : "content-players"}>
+											<img src={userConnectedRedux.user.avatar} alt="user.profil" />
+											<div className="name-team-user">{userConnectedRedux.user.username}</div>
+										</div>
+										{isReady ? <div className="ready-text">READY</div> : <></>}
+									</>
 								}
 							</div>
 						</div>
 						<div className="ready-match">
-							<button className="btn bg-red">Go</button>
+							<button className="btn bg-red" onClick={HandleReady}>Go</button>
 						</div>
 					</div>
 					<div className="clear"></div>
