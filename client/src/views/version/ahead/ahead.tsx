@@ -24,11 +24,19 @@ const Ahead: React.FC = function() {
 
 	useEffect(() => {
 		if(!loading && !error && data) {
-			setLeadBoard(data.FindAllRate)
+			let array:LeadBoard[] = []
+			data.FindAllRate.forEach(function(rate:LeadBoard) {
+				array.push(rate)
+			})
+			array.sort(function(a:LeadBoard,b:LeadBoard){
+				return b.score - a.score
+			})
+			setLeadBoard(array)
 		}
-		let arrayLead:LeadBoard[] = []
+
 		if(!ldgWeek && !errWeek && dataWeek) {
-			dataWeek.FindRateInWeek.forEach(function(lead:LeadBoard,index:number){
+			let arrayLead:LeadBoard[] = []
+			dataWeek.FindRateInWeek.forEach(function(lead:LeadBoard){
 				const check = arrayLead.find((e:LeadBoard) => {return e.user.uid === lead.user.uid})
 				if(check) {
 					arrayLead.forEach((e:LeadBoard,i:number) => {
@@ -41,6 +49,7 @@ const Ahead: React.FC = function() {
 			arrayLead.sort(function(a:LeadBoard,b:LeadBoard){
 				return a.score - b.score
 			})
+
 			setLeadBoardWeek(arrayLead)
 		}
 	},[loading,error,data,ldgWeek,errWeek,dataWeek])

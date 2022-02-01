@@ -12,6 +12,7 @@ import (
 
 type MatchResolver interface {
 	CreatedMatchTournamentResolver(params graphql.ResolveParams) (interface{}, error)
+	FindMatchResolver(params graphql.ResolveParams) (interface{}, error)
 }
 
 type resolverMatch struct {
@@ -59,9 +60,11 @@ func (r *resolverMatch) CreatedMatchTournamentResolver(params graphql.ResolvePar
 		return nil, err
 	}
 
+	count ,_ := r.matchHandler.CountMatchHandler()
+
 	match := &entity.Match{
 		Uid:        primitive.NewObjectID(),
-		Number:     0,
+		Number:     count + 1,
 		Tournament: tournament,
 		Wagger:     "",
 		Statut:     true,
@@ -79,4 +82,15 @@ func (r *resolverMatch) CreatedMatchTournamentResolver(params graphql.ResolvePar
 	}
 
 	return result, nil
+}
+
+func (r *resolverMatch) FindMatchResolver(params graphql.ResolveParams) (interface{}, error) {
+	uid, _ := params.Args["uid"].(string)
+	match, err := r.matchHandler.FindMatchHandler(uid)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return match, nil
 }

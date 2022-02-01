@@ -19,16 +19,21 @@
 	margin-top: 26px;
 	margin-bottom: 42px;
 }
-
+.adv-list .adv-content {
+	display: flex;
+	margin: 0 auto;
+	padding: 38px 0;
+}
 .adv-list .element-wdth{
-	width: 32%;
-	text-align: center;
+	padding-left: 19px;
 
 }
 
 .ready-match{
 	margin: 0 auto;
-	width: 29%;
+	width: 27%;
+	position: relative;
+	left: 41px;
 }
 .ready-match button{
 	width: 85%;
@@ -68,9 +73,7 @@
 .element-wdth .ready img{
 	border: 3px solid #1abb3d;
 }
-.content-players .side-block {
-	margin-left: 315px;
-}
+
 .element-wdth .ready-text{
 	font-size: 17px;
 	font-weight: bold;

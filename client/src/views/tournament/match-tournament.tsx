@@ -118,52 +118,54 @@ const MatchTournament = function() {
 							</div>
 						</div>
 						<div className="adv-list">
-							<div className="elemnt-players-dom element-wdth players">
-								{
-									tournament?.isTeam
-										?
-									<>
-										<div className={isReady ? "ready content-players" : "content-players"}>
-											<div className="name-team-user side-block">{team?.name}</div>
-											<div>
-												<img src={team?.logo} alt="team.logo" />
-											</div>
-										</div>
-										{isReady ? <div  className="ready-text">READY</div> : <></>}
-									</>
-									:
-									<>
-										<div className={isReady ? "ready content-players side-block" : "content-players"}>
-											<div className="name-team-user side-block">{userConnectedRedux.user.username}</div>
-											<div>
-												<img src={userConnectedRedux.user.avatar} alt="user.profil" />
-											</div>
-										</div>
-										{isReady ? <div className="ready-text">READY</div> : <></>}
-									</>
-								}
-							</div>
-							<div className="in-part element-wdth">Vs</div>
-							<div className="elemnt-players-ext players element-wdth">
-								{
-									tournament?.isTeam
-										?
+							<div className="adv-content">
+								<div className="elemnt-players-dom element-wdth players">
+									{
+										tournament?.isTeam
+											?
 										<>
 											<div className={isReady ? "ready content-players" : "content-players"}>
-												<div className="name-team-user">{team?.name}</div>
-												<img src={team?.logo} alt="team.logo" />
+												<div className="name-team-user side-block">{team?.name}</div>
+												<div>
+													<img src={team?.logo} alt="team.logo" />
+												</div>
 											</div>
 											{isReady ? <div  className="ready-text">READY</div> : <></>}
 										</>
-									:
-									<>
-										<div className={isReady ? "ready content-players" : "content-players"}>
-											<img src={userConnectedRedux.user.avatar} alt="user.profil" />
-											<div className="name-team-user">{userConnectedRedux.user.username}</div>
-										</div>
-										{isReady ? <div className="ready-text">READY</div> : <></>}
-									</>
-								}
+										:
+										<>
+											<div className={isReady ? "ready content-players side-block" : "content-players"}>
+												<div className="name-team-user side-block">{userConnectedRedux.user.username}</div>
+												<div>
+													<img src={userConnectedRedux.user.avatar} alt="user.profil" />
+												</div>
+											</div>
+											{isReady ? <div className="ready-text">READY</div> : <></>}
+										</>
+									}
+								</div>
+								<div className="in-part element-wdth">Vs</div>
+								<div className="elemnt-players-ext players element-wdth">
+									{
+										tournament?.isTeam
+											?
+											<>
+												<div className={isReady ? "ready content-players" : "content-players"}>
+													<div className="name-team-user">{team?.name}</div>
+													<img src={team?.logo} alt="team.logo" />
+												</div>
+												{isReady ? <div  className="ready-text">READY</div> : <></>}
+											</>
+										:
+										<>
+											<div className={isReady ? "ready content-players" : "content-players"}>
+												<img src={userConnectedRedux.user.avatar} alt="user.profil" />
+												<div className="name-team-user">{userConnectedRedux.user.username}</div>
+											</div>
+											{isReady ? <div className="ready-text">READY</div> : <></>}
+										</>
+									}
+								</div>
 							</div>
 						</div>
 						<div className="ready-match">
