@@ -33,7 +33,6 @@ func RunCheckTournament() {
 	s := gocron.NewScheduler(time.UTC)
 
 	if len(tournamentNow) > 0 {
-		fmt.Println("count", len(tournamentNow))
 		task, _ := s.Every(1).Day().At("19:00").Do(func() { //s.Every(2).Second().Do(func() { // s.Every(1).Day().At("01:10").Do(func() {
 			fmt.Println("Started:cron", time.Now().Format(time.RFC822Z))
 			for _, tournament := range tournamentNow {

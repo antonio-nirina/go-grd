@@ -1,8 +1,8 @@
 import React ,{useState,useEffect} from "react"
 import {useQuery} from "@apollo/client"
 import { useSelector } from "react-redux"
-
 import { Link } from "react-router-dom"
+
 import Tree from "../waggers/tree";
 import Header from "../header/header"
 import Footer from "../footer/footer"
@@ -11,10 +11,10 @@ import {Translation} from "../../lang/translation"
 import {RootState} from "../../reducer"
 import "../tournament/bracket.css"
 import "../../assets/css/style.css"
-
-
 import {Tournament} from "../models/tournament"
 import {dateStringToDY} from "../tools/dateConvert"
+import { NameRoutes } from "../commons/route-list"
+
 
 
 const Bracket: React.FC = function(props:any) {
@@ -25,9 +25,9 @@ const Bracket: React.FC = function(props:any) {
 	const [showMore] = useState<boolean>(false)
 	const userConnectedRedux = useSelector((state:RootState) => state.userConnected)
 	const {loading,error,data} 	= useQuery(GET_ONE_TOURNAMENT, {
-			variables: {
-				uid:uid,
-			},
+		variables: {
+			uid:uid,
+		},
 	})
 
 	useEffect(() => {
@@ -56,11 +56,11 @@ const Bracket: React.FC = function(props:any) {
 				</div>
 				<div className="tabs">
 					<ul>
-						<li><Link to={`/info?uid=${params.get('uid')}`}>Info</Link></li>
-						<li><Link to={`/matches?uid=${params.get('uid')}`}>Match</Link></li>
-						<li><Link to={`/Bracket?uid=${params.get('uid')}`} className="active">Bracket</Link></li>
-						<li><Link to={`/rules?uid=${params.get('uid')}`}>
+						<li><Link to={`${NameRoutes.matchTournament}?uid=${params.get('uid')}&tournament=${true}&wagger=${false}`}>Match</Link></li>
+						<li><Link to={`${NameRoutes.board}?uid=${params.get('uid')}&tournament=${true}&wagger=${false}`} className="active">Bracket</Link></li>
+						<li><Link to={`${NameRoutes.tournamentRules}?uid=${params.get('uid')}&tournament=${true}&wagger=${false}`}>
 						{
+
 							Translation(userConnectedRedux.user.language).tournament.rules
 						}
 						</Link></li>

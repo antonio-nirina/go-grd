@@ -54,7 +54,7 @@ const Tableau: React.FC = function() {
 		if(!loading && !error && data) {
 			setTournament(data.FindOneTournament)
 			const dateStart = new Date(data.FindOneTournament.dateStart)
-			if(new Date() >= dateStart) setIsBracket(true)
+			if(new Date() > dateStart) setIsBracket(true)
 		}
 
 		if(!ldgWg && !ldgErr && ldgData) {

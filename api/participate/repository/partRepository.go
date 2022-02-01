@@ -25,9 +25,9 @@ type RepositoryPart interface {
 	SavedPartRepo(part *entity.Participate) (interface{}, error)
 	FindPartRepo(idQuery primitive.ObjectID) (entity.Participate, error)
 	FindAllPartRepo(pageNumber int64, limit int64) ([]entity.Participate, error)
-	FindPartUserRepo(pageNumber int64, limit int64, user primitive.ObjectID) ([]entity.Participate, error)
+	FindPartUserRepo(pageNumber int64, limit int64, user string) ([]entity.Participate, error)
 	UpdatedPartUserRepo(objectId primitive.ObjectID) (interface{}, error)
-	FindPartByTournamentRepo(userUid primitive.ObjectID, objectId primitive.ObjectID) (entity.Participate, error)
+	FindPartByTournamentRepo(userUid string, objectId primitive.ObjectID) (entity.Participate, error)
 	FindPartByLeagueRepo(userUid primitive.ObjectID, objectId primitive.ObjectID) (entity.Participate, error)
 	RemovedPartRepo(idQuery primitive.ObjectID) (interface{}, error)
 	UpdateNumberConfirmedRepo(objectId primitive.ObjectID, numberConf bool) (interface{}, error)
@@ -101,10 +101,10 @@ func (c *DriverRepository) FindAllPartRepo(pageNumber int64, limit int64) ([]ent
 	return results, nil
 }
 
-func (c *DriverRepository) FindPartUserRepo(pageNumber int64, limit int64, user primitive.ObjectID) ([]entity.Participate, error) {
+func (c *DriverRepository) FindPartUserRepo(pageNumber int64, limit int64, user string) ([]entity.Participate, error) {
 	var collection = c.client.Database("grd_database").Collection("participate")
 	var results []entity.Participate
-	cur, err := collection.Find(context.TODO(), bson.D{{"user.uid", user}}, options.Find().SetLimit(limit).SetSkip(pageNumber).SetSort(bson.M{"_id": -1}))
+	cur, err := collection.Find(context.TODO(), bson.D{{"user", user}}, options.Find().SetLimit(limit).SetSkip(pageNumber).SetSort(bson.M{"_id": -1}))
 
 	if err != nil {
 		return nil, err
@@ -143,10 +143,10 @@ func (c *DriverRepository) UpdatedPartUserRepo(objectId primitive.ObjectID) (int
 	return updateResult.ModifiedCount, nil
 }
 
-func (c *DriverRepository) FindPartByTournamentRepo(userUid primitive.ObjectID, objectId primitive.ObjectID) (entity.Participate, error) {
+func (c *DriverRepository) FindPartByTournamentRepo(userUid string, objectId primitive.ObjectID) (entity.Participate, error) {
 	var collection = c.client.Database("grd_database").Collection("participate")
 	var result entity.Participate
-	err := collection.FindOne(context.TODO(), bson.M{"user.uid": userUid, "tournament.uid": objectId}).Decode(&result)
+	err := collection.FindOne(context.TODO(), bson.M{"user": userUid, "tournament.uid": objectId}).Decode(&result)
 
 	if err != nil {
 		return result, err

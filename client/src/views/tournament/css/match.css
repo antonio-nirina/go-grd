@@ -19,8 +19,117 @@
 	margin-top: 26px;
 	margin-bottom: 42px;
 }
-
+.adv-list .adv-content {
+	display: flex;
+	margin: 0 auto;
+	padding: 38px 0;
+}
 .adv-list .element-wdth{
-	width: 30%;
-	text-align: center;
+	padding-left: 19px;
+
+}
+
+.ready-match{
+	margin: 0 auto;
+	width: 27%;
+	position: relative;
+	left: 41px;
+}
+.ready-match button{
+	width: 85%;
+	cursor: pointer;
+}
+
+.players {
+	height: 100px;
+}
+
+.in-part {
+	padding-top: 53px;
+	font-size: 22px;
+	font-weight: bold;
+}
+
+.adv-list .content-players {
+	display: flex;
+	padding-top: 10px;
+	margin-right: 15px;
+	margin-left: 15px;
+	vertical-align: middle;
+}
+.adv-list  .content-players img{
+	border-radius: 50px;
+	height: 77px;
+}
+
+.content-players .name-team-user{
+	margin-left: 15px;
+	margin-right: 15px;
+	vertical-align: middle;
+	padding-top: 27px;
+	font-size: 21px;
+	font-weight: bold;
+}
+.element-wdth .ready img{
+	border: 3px solid #1abb3d;
+}
+
+.element-wdth .ready-text{
+	font-size: 17px;
+	font-weight: bold;
+	color: #1abb3d;
+}
+
+@media (max-width: 576px){
+	.container .info-match {
+		padding: 0px !important;
+	}
+	.adv-list .content-players{
+		display: block;
+		padding-top: 0px;
+		margin-right: 0px;
+		margin-left: 0px;
+	}
+	.content-players .name-team-user{
+		margin-right: 0px;
+		margin-left: 0px;
+		padding-top: 0px;
+	}
+	.players{
+		border: none;
+	}
+}
+
+@media (max-width: 768px){
+	.adv-list .content-players{
+		display: block;
+		padding-top: 0px;
+		margin-right: 0px;
+		margin-left: 0px;
+	}
+	.content-players .name-team-user{
+		margin-right: 0px;
+		margin-left: 0px;
+		padding-top: 0px;
+	}
+	.players{
+		border: none;
+	}
+}
+
+@media (max-width: 992px){
+	.adv-list .content-players{
+		display: block;
+		padding-top: 0px;
+		margin-right: 0px;
+		margin-left: 0px;
+	}
+	.content-players .name-team-user{
+		margin-right: 0px;
+		margin-left: 0px;
+		padding-top: 0px;
+	}
+	.players{
+		border: none;
+	}
 }

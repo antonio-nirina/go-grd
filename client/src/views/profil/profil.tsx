@@ -36,30 +36,23 @@ import { COUNTER_SUBSCRIBER } from "../../gql/tournament/subscription"
 import {CheckPartTournament} from "../tournament/common/check-part"
 import { NameRoutes } from "../commons/route-list"
 import {GetAcountStorage,SetAcountStorage} from "../../storage/cookieStorage"
+import { GameType } from "../models/game"
 
 
 const Profile: React.FC = function() {
 	const history = useHistory()
 	const [participateTournament,setParticipateTournament] = useState<ParticipateTournament[]>([])
 	const [participateWagger,setParticipateWagger] = useState<ParticipateWagger[]>([])
-	const [choixGames,setChoixGames] = useState<GameUserModel[]>([])
+	const [choixGames,setChoixGames] = useState<GameUserModel>()
 	const [teams, setTeams] = useState<TeamModel[]>([])
 	const [isPart, setIsPart] = useState<boolean>(false)
 
 	const {loading:loadSub,error:errSub,data:dataSub}  = useSubscription(COUNTER_SUBSCRIBER)
 
 	const userConnectedRedux = useSelector((state:RootState) => state.userConnected)
-	const {loading,error,data} 	= useQuery(GET_PART_USER, {
-		variables: {
-			uidUser:userConnectedRedux.user.Uid,
-			limit:LIMIT,
-			pageNumber:PAGE_NUMBER
-		},
-	})
-
 	const {loading:ldgWagger,error:errWagger,data:dataWagger} 	= useQuery(GET_PART_USER_WAGGER, {
 		variables: {
-			uidUser:userConnectedRedux.user.Uid,
+			uidUser:userConnectedRedux.user.uid,
 			limit:LIMIT,
 			pageNumber:PAGE_NUMBER
 		},
@@ -67,7 +60,15 @@ const Profile: React.FC = function() {
 
 	const {loading:ldgGame,error:errGame,data:dataGame} 	= useQuery(GET_GAME_USER, {
 		variables: {
-			uid:userConnectedRedux.user.Uid,
+			uid:userConnectedRedux.user.uid,
+		},
+	})
+
+	const {loading,error,data} 	= useQuery(GET_PART_USER, {
+		variables: {
+			uidUser:userConnectedRedux.user.uid,
+			limit:LIMIT,
+			pageNumber:PAGE_NUMBER
 		},
 	})
 
@@ -121,6 +122,10 @@ const Profile: React.FC = function() {
 		history
 	])
 
+	const GoTournament = function(uid:string){
+		history.push(`${NameRoutes.board}?uid=${uid}&tournament=${true}&wagger=${false}`)
+	}
+
   return(
 	<div className="profil connected">
       <div className="container">
@@ -137,40 +142,40 @@ const Profile: React.FC = function() {
 			      		<div className="stat-content">
 							  <Statistiques />
 				      		<div className="with-stat">
-			      				{choixGames.map(function(e:GameUserModel,index:number) {
+			      				{choixGames?.game.map(function(e:GameType,index:number) {
 									return (<div key={index}>
-										<img src={e.Games.image} alt="" height="50"/>
-										<p>{e.Games.name} <span><i><FontAwesomeIcon icon={faChartBar} /></i> statistiques</span></p>
+										<img src={e.image} alt="" height="50"/>
+										<p>{e.name} <span><i><FontAwesomeIcon icon={faChartBar} /></i> statistiques</span></p>
 									</div>)
 								  })}
 			      			</div>
 				      	</div>
 				      	<div className="stat-content">
 				      		<div className="teamname">
-								  {teams.map(function(team:TeamModel,index:number){
-									  return (
-										<div className="bloc-team-mate" key={index}>
-											<div className="avatar-name">
-												<div>
-													<img src={team.banniere ? team.banniere : LogoTeam} alt="" className="avatar-lead"/>
+								   {teams.map(function(team:TeamModel,index:number){
+									  	return (
+											<div className="bloc-team-mate" key={index}>
+												<div className="avatar-name">
+													<div>
+														<img src={team.banniere ? team.banniere : LogoTeam} alt="" className="avatar-lead"/>
+													</div>
+													<div>
+														<span>{team.name}</span>
+													</div>
 												</div>
-												<div>
-													<span>{team.name}</span>
+												<div className="setting-accounts">
+													<div>
+														<img src={Js} alt="" width="20" height="15"/>
+													</div>
+													<div>
+														<img src={fr} alt="" width="20" height="20"/>
+													</div>
+												</div>
+												<div className="team-number">
+													<span>{team && team.players.length > 0 ? team.players.length : 0} <i><FontAwesomeIcon icon={faUsers} /></i></span>
 												</div>
 											</div>
-											<div className="setting-accounts">
-												<div>
-													<img src={Js} alt="" width="20" height="15"/>
-												</div>
-												<div>
-													<img src={fr} alt="" width="20" height="20"/>
-												</div>
-											</div>
-											<div className="team-number">
-												<span>{team && team.players.length > 0 ? team.players.length : 0} <i><FontAwesomeIcon icon={faUsers} /></i></span>
-											</div>
-										</div>
-									  )
+									  	)
 								  })}
 
 					      		<div className="media">
@@ -205,10 +210,10 @@ const Profile: React.FC = function() {
 									{
 										participateTournament.map(function(el:ParticipateTournament,index:number){
 											return (
-												<div className="row" key={index}>
+												<div className="row" key={index} onClick={() => GoTournament(el.tournament.uid)} >
 													<span>{el.tournament.title}</span>
 													<span> {el.isWin ? "1rd" : "2rd"} </span>
-													<span>{el.tournament.price+" €"}</span>
+													<span>{el.tournament.price.join("-")+" €"}</span>
 													<span>{el.tournament.gameWay}</span>
 													<span>{el.tournament.numberParticipate}</span>
 													<span>{dateStringToDY(el.tournament.dateStart)}</span>
@@ -216,7 +221,6 @@ const Profile: React.FC = function() {
 											)
 										})
 									}
-
 								</div>
 
 							</div>
