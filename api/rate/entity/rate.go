@@ -10,5 +10,6 @@ type Rate struct {
 	Created  string    `json:"created"`
 	Updated  string    `json:"updated"`
 	User  string    `json:"user"`
+	Team  string    `json:"team"`
 	Score  int    `json:"score"`
 }

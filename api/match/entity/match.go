@@ -11,6 +11,11 @@ type Match struct {
 	Wagger     string             `json:"wagger"`
 	Statut     bool               `json:"statut"`
 	IsTeam     bool               `json:"isTeam"`
+	Brackets  []Bracket             `json:"brackets"`
+}
+
+type Bracket struct {
+	Step string `json:"Step"`
 	UserHome   string             `json:"userHome"`
 	UserGuest  string             `json:"userGuest"`
 	TeamHome   string             `json:"teamHome"`

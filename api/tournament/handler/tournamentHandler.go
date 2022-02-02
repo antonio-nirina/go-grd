@@ -19,6 +19,7 @@ type UsecaseTournament interface {
 	FindTournamentCreatedHandler(pageNumber int64, limit int64) ([]tournamentViewModel, error)
 	TimeStartMatchHandler(tournament *TournamentViewModel, wg *sync.WaitGroup)
 	FindTournamentDateNowHandler() ([]tournamentViewModel, error)
+	HandleTournamentToViewmodel(result entity.Tournament) TournamentViewModel
 }
 
 type tournamentUsecase struct {
@@ -54,42 +55,7 @@ func (t *tournamentUsecase) FindTournamentHandler(idQuery string) (TournamentVie
 		return TournamentViewModel{}, err
 	}
 
-	var plateform []common.PlateformViewModel
-
-	for _, value := range result.Plateform {
-		arrayPl := common.PlateformViewModel{
-			value.Uid.Hex(),
-			value.Name,
-			value.Description,
-		}
-		plateform = append(plateform, arrayPl)
-	}
-
-	tournamentViewModel := TournamentViewModel{
-		Uid:               result.Uid.Hex(),
-		Title:             result.Title,
-		Description:       result.Info,
-		Statut:            result.Statut,
-		DateStart:         result.DateStart,
-		NumberParticipate: result.NumberParticipate,
-		GameWay:           result.GameWay,
-		Price:             result.Price,
-		DeadlineDate:      result.DeadlineDate,
-		PriceParticipate:  result.PriceParticipate,
-		Game:              common.GameViewModel{result.Game.Uid.Hex(), result.Game.Name, result.Game.Image, result.Game.Logo, result.Game.Slug},
-		Plateform:         plateform,
-		Rules:             result.Rules,
-		IsPublic:          result.IsPublic,
-		Format:            result.Format,
-		Server:            result.Server,
-		Tchat:             result.Tchat,
-		Winners:           result.Winners,
-		Region:            result.Region,
-		Spectateur:        result.Spectateur,
-		Laps:              result.Laps,
-		Maps:              result.Maps,
-		IsTeam:            result.IsTeam,
-	}
+	tournamentViewModel := t.HandleTournamentToViewmodel(result)
 
 	return tournamentViewModel, nil
 }
@@ -342,4 +308,43 @@ func (t *tournamentUsecase) FindTournamentDateNowHandler() ([]tournamentViewMode
 	}
 
 	return res, nil
+}
+
+func (t *tournamentUsecase) HandleTournamentToViewmodel(result entity.Tournament) TournamentViewModel  {
+	var plateform []common.PlateformViewModel
+
+	for _, value := range result.Plateform {
+		arrayPl := common.PlateformViewModel{
+			value.Uid.Hex(),
+			value.Name,
+			value.Description,
+		}
+		plateform = append(plateform, arrayPl)
+	}
+
+	return TournamentViewModel{
+		Uid:               result.Uid.Hex(),
+		Title:             result.Title,
+		Description:       result.Info,
+		Statut:            result.Statut,
+		DateStart:         result.DateStart,
+		NumberParticipate: result.NumberParticipate,
+		GameWay:           result.GameWay,
+		Price:             result.Price,
+		DeadlineDate:      result.DeadlineDate,
+		PriceParticipate:  result.PriceParticipate,
+		Game:              common.GameViewModel{result.Game.Uid.Hex(), result.Game.Name, result.Game.Image, result.Game.Logo, result.Game.Slug},
+		Plateform:         plateform,
+		Rules:             result.Rules,
+		IsPublic:          result.IsPublic,
+		Format:            result.Format,
+		Server:            result.Server,
+		Tchat:             result.Tchat,
+		Winners:           result.Winners,
+		Region:            result.Region,
+		Spectateur:        result.Spectateur,
+		Laps:              result.Laps,
+		Maps:              result.Maps,
+		IsTeam:            result.IsTeam,
+	}
 }

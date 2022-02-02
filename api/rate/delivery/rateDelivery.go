@@ -36,6 +36,7 @@ func (r *rate) CreatedRateResolver(params graphql.ResolveParams) (interface{}, e
 	updated, _ := params.Args["updated"].(string)
 	user, _ := params.Args["user"].(string)
 	score, _ := params.Args["score"].(int)
+	team, _ := params.Args["team"].(string)
 	dateCreated, _ := time.Parse(time.RFC3339, created)
 	dateUpated, _ := time.Parse(time.RFC3339, updated)
 
@@ -44,6 +45,7 @@ func (r *rate) CreatedRateResolver(params graphql.ResolveParams) (interface{}, e
 		Created: dateCreated.Format(time.RFC3339),
 		Updated: dateUpated.Format(time.RFC3339),
 		User:    user,
+		Team: team,
 		Score:   score,
 	}
 

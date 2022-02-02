@@ -112,8 +112,8 @@ var waggerUsecase = waggerHandler.NewUsecaseWagger(waggerRepository)
 var waggerResolver = waggerDelivery.NewResolverWagger(waggerUsecase, usecaseGame, usecasePlateform)
 
 var partRepository = partRepo.NewPartRepository(Database)
-var partUsecase = partHandler.NewUsecasePart(partRepository, teamUsecase, usecase)
-var partResolver = partDelivery.NewResolverPart(partUsecase, usecase, tournamentUsecase, teamUsecase, waggerUsecase, rateUsecase)
+var PartUsecase = partHandler.NewUsecasePart(partRepository, teamUsecase, usecase)
+var partResolver = partDelivery.NewResolverPart(PartUsecase, usecase, tournamentUsecase, teamUsecase, waggerUsecase, rateUsecase)
 
 var postRepository = postRepo.NewPostRepository(Database)
 var postUsecase = postHandler.NewUsecasePost(postRepository, usecase, rateUsecase)
