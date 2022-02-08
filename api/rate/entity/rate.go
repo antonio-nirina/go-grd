@@ -4,6 +4,12 @@ import (
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
+const (
+	RATE_STRONG = 500
+	RATE_MEAN = 300
+	RATE_WEAK = 200
+)
+
 
 type Rate struct {
 	Uid      primitive.ObjectID `bson:"uid"`

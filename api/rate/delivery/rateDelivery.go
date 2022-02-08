@@ -17,6 +17,7 @@ type RateResolver interface {
 	CreatedOrUpdatedRateResolver(params graphql.ResolveParams) (interface{}, error)
 	FindRateByUserResolver(params graphql.ResolveParams) (interface{}, error)
 	FindRateInWeekResolver(params graphql.ResolveParams) (interface{}, error)
+	FindRateByTeamResolver(params graphql.ResolveParams) (interface{}, error)
 }
 
 type rate struct {
@@ -105,6 +106,17 @@ func (r *rate) CreatedOrUpdatedRateResolver(params graphql.ResolveParams) (inter
 func (r *rate) FindRateByUserResolver(params graphql.ResolveParams) (interface{}, error) {
 	uidUser, _ := params.Args["uidUser"].(string)
 	rate, err := r.rateHandler.FindRateByUserHandler(uidUser)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return rate, nil
+}
+
+func (r *rate) FindRateByTeamResolver(params graphql.ResolveParams) (interface{}, error) {
+	uidTeam, _ := params.Args["uidTeam"].(string)
+	rate, err := r.rateHandler.FindRateByTeamHandler(uidTeam)
 
 	if err != nil {
 		return nil, err

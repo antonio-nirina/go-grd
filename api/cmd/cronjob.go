@@ -8,8 +8,11 @@ import (
 	"github.com/go-co-op/gocron"
 	"github.com/thoussei/antonio/api/external"
 	"github.com/thoussei/antonio/api/graphql/queries"
+	rateEntity "github.com/thoussei/antonio/api/rate/entity"
+	rateRepo "github.com/thoussei/antonio/api/rate/repository"
 	tournamentHandler "github.com/thoussei/antonio/api/tournament/handler"
 	"github.com/thoussei/antonio/api/tournament/repository"
+	userHandler "github.com/thoussei/antonio/api/user/handler"
 )
 
 type jobTournament struct {
@@ -28,19 +31,20 @@ type userAdv struct {
 	Uid string `json:"uid"`
 	Username string `json:"username"`
 	Avatar string `json:"avatar"`
-	Point string `json:"point"`
+	Point int `json:"point"`
 }
 
 type teamAdv struct {
 	Uid 	string `json:"uid"`
 	Name 	string `json:"name"`
-	Players []string `json:"players"`
+	Players []userHandler.UserViewModel `json:"players"`
 	Logo   	string    `json:"logo"`
-	Point 	string `json:"point"`
+	Point 	int `json:"point"`
 }
 
 func RunCheckTournament() {
 	var tournamentRepository = repository.NewTournamentRepository(queries.Database)
+	var rateRepository =  rateRepo.NewRateRepository(queries.Database)
 	var tournamentHandler = tournamentHandler.NewUsecaseTournament(tournamentRepository)
 	tournamentNow, err := tournamentRepository.FindTournamentNowRepo()
 	// var matchRepository = matchRepository.NewRepository(queries.Database)
@@ -63,6 +67,10 @@ func RunCheckTournament() {
 				external.RPublishTournamentOfDay("job_tournament", json)
 				tournamentViewModel := tournamentHandler.HandleTournamentToViewmodel(tournament)
 				partTournament,err := queries.PartUsecase.FindPartTournamentHandler(tournamentViewModel)
+				if err != nil {
+					external.Logger(err.Error())
+				}
+
 				var teamStrong []teamAdv
 				var teamMean []teamAdv
 				var teamWeak []teamAdv
@@ -72,7 +80,33 @@ func RunCheckTournament() {
 
 				if tournament.IsTeam {
 					for _,part := range partTournament {
-						
+						rate,err := rateRepository.FindRateByTeamRepo(part.Team.Uid)
+						if err != nil {
+							external.Logger(err.Error())
+						}
+						teamS := teamAdv{part.Team.Uid,part.Team.Name,part.Team.Players,part.Team.Logo,rate.Score}
+						if rate.Score >= rateEntity.RATE_STRONG {
+							teamStrong = append(teamStrong, teamS)
+						} else if rate.Score >= rateEntity.RATE_MEAN && rate.Score < rateEntity.RATE_STRONG {
+							teamMean = append(teamMean, teamS)
+						} else {
+							teamWeak = append(teamWeak, teamS)
+						}
+					}
+				} else {
+					for _,part := range partTournament {
+						rate,err := rateRepository.FindRateByTeamRepo(part.Team.Uid)
+						if err != nil {
+							external.Logger(err.Error())
+						}
+						user := userAdv{part.User.Uid,part.User.Username,part.User.Avatar,rate.Score}
+						if rate.Score >= rateEntity.RATE_STRONG {
+							userStrong = append(userStrong, user)
+						} else if rate.Score >= rateEntity.RATE_MEAN && rate.Score < rateEntity.RATE_STRONG {
+							userMean = append(userMean, user)
+						} else {
+							userWeak = append(userWeak, user)
+						}
 					}
 				}
 				
