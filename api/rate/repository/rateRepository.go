@@ -28,6 +28,7 @@ type RepositoryRate interface {
 	FindRateByUserRepo(uidUser string) (entity.Rate, error)
 	FindRateInWeekRepo(date time.Time) ([]entity.Rate, error)
 	FindRateCreateOrUpdatedRepo(objectId primitive.ObjectID, rate *entity.Rate) (interface{}, error)
+	FindRateByTeamRepo(uidTeam string) (entity.Rate, error)
 }
 
 func (c *driverRepository) SavedRepoRate(rate *entity.Rate) (interface{}, error) {
@@ -129,7 +130,7 @@ func (c *driverRepository) FindRateInWeekRepo(date time.Time) ([]entity.Rate, er
 }
 
 func (c *driverRepository) FindRateCreateOrUpdatedRepo(objectId primitive.ObjectID, rate *entity.Rate) (interface{}, error) {
-	var collection = c.client.Database("grd_database").Collection("team")
+	var collection = c.client.Database("grd_database").Collection("rate")
 	filter := bson.D{{"uid", objectId}}
 	update := bson.D{
 		{"$set", bson.D{
@@ -153,4 +154,17 @@ func (c *driverRepository) FindRateCreateOrUpdatedRepo(objectId primitive.Object
 	}
 
 	return updateResult.ModifiedCount, nil
+}
+
+func (c *driverRepository) FindRateByTeamRepo(uidTeam string) (entity.Rate, error) {
+	var collection = c.client.Database("grd_database").Collection("rate")
+	var result entity.Rate
+
+	err := collection.FindOne(context.TODO(), bson.M{"team": uidTeam}).Decode(&result)
+
+	if err != nil {
+		return result, err
+	}
+
+	return result, nil
 }

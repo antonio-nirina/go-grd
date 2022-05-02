@@ -1,0 +1,85 @@
+version: "3.8"
+
+services:
+  server:
+    container_name: server_grd
+    build: ./api
+    volumes:
+      - ./api/:/server
+    ports:
+      - 4000:4000
+    depends_on:
+      - mongo
+      - redis
+    networks:
+      - app-network
+  redis:
+    container_name: redis_grd
+    image: redis:alpine3.14
+    volumes:
+      - ./redis/redis.conf:/etc/redis/redis.conf
+    ports:
+      - 6378:6379
+    networks:
+      - app-network
+  mongo:
+    image: mongo
+    container_name: mongo_grd
+    ports:
+      - 27018:27017
+    environment:
+      - MONGO_USERNAME=${MONGO_USERNAME}
+      - MONGO_PASSWORD=${MONGO_PASSWORD}
+      - MONGO_DATABASE=${MONGO_DATABASE}
+    volumes:
+      - ./db:/data/mongodb
+    networks:
+      - app-network
+  client:
+    build:
+      context: ./client/
+    command: npm start
+    volumes:
+      - ./client/:/usr/src/
+      - /usr/src/node_modules
+    depends_on:
+      - server
+    ports:
+      - "3000:3000"
+    networks:
+      - app-network
+  admin:
+    build:
+      context: ./admin/
+    command: npm start
+    volumes:
+      - ./admin/:/usr/admin/
+      - /usr/admin/node_modules
+    depends_on:
+      - server
+    ports:
+      - "3002:3002"
+    networks:
+      - app-network
+  ws:
+    build:
+      context: ./ws/
+    command: npm start
+    volumes:
+      - ./ws/:/usr/ws/
+      - /usr/ws/node_modules
+    depends_on:
+      - server
+      - redis
+      - mongo
+    ports:
+      - "8080:8080"
+    networks:
+    - app-network
+networks:
+  app-network:
+    driver: bridge
+  
+volumes:
+  db:
+    driver: local

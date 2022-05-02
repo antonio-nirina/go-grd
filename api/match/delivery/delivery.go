@@ -38,6 +38,7 @@ func NewMatchResolver(
 func (r *resolverMatch) CreatedMatchTournamentResolver(params graphql.ResolveParams) (interface{}, error) {
 	tournament, _ := params.Args["tournament"].(string)
 	isTeam, _ := params.Args["isTeam"].(bool)
+	step , _ := params.Args["step"].(string)
 	var userHome string
 	var userGuest string
 	var teamHomeUid string
@@ -61,7 +62,15 @@ func (r *resolverMatch) CreatedMatchTournamentResolver(params graphql.ResolvePar
 	}
 
 	count ,_ := r.matchHandler.CountMatchHandler()
-
+	var arrayBracket []entity.Bracket
+	bracket := entity.Bracket{
+		Step: step,
+		UserHome:   userHome,
+		UserGuest:  userGuest,
+		TeamHome:   teamHomeUid,
+		TeamGuest:  teamGuestUid,
+	}
+	arrayBracket = append(arrayBracket, bracket)
 	match := &entity.Match{
 		Uid:        primitive.NewObjectID(),
 		Number:     count + 1,
@@ -69,10 +78,7 @@ func (r *resolverMatch) CreatedMatchTournamentResolver(params graphql.ResolvePar
 		Wagger:     "",
 		Statut:     true,
 		IsTeam:     isTeam,
-		UserHome:   userHome,
-		UserGuest:  userGuest,
-		TeamHome:   teamHomeUid,
-		TeamGuest:  teamGuestUid,
+		Brackets: arrayBracket,
 	}
 
 	result, err := r.matchHandler.SavedMatchHandler(match)

@@ -44,6 +44,7 @@ type UsecaseRate interface {
 	FindAllRateHandler() ([]RateUserModel, error)
 	FindRateByUserHandler(uidUser string) (entity.Rate, error)
 	FindRateInWeekHandler(date time.Time) ([]RateViewModel, error)
+	FindRateByTeamHandler(uidTeam string) (entity.Rate, error)
 	FindRateCreateOrUpdatedHandler(uidUser string, uid string) (interface{}, error)
 }
 
@@ -231,4 +232,14 @@ func (r *rateUsecase) FindRateCreateOrUpdatedHandler(uidUser string, uid string)
 
 
 	return "Ok", nil
+}
+
+func (r *rateUsecase) FindRateByTeamHandler(uidTeam string) (entity.Rate, error) {
+	rate, err := r.rateRepository.FindRateByTeamRepo(uidTeam)
+
+	if err != nil {
+		return entity.Rate{}, err
+	}
+
+	return rate, nil
 }
