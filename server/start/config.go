@@ -5,17 +5,18 @@ import (
 	"log"
 	"os"
 
+	"github.com/gin-gonic/gin"
 	"github.com/jinzhu/gorm"
+
 	// _ "github.com/jinzhu/gorm/dialects/mysql"
 	"github.com/joho/godotenv"
 )
 
-func LoadEnv() {
+func loadEnv() {
 	godotenv.Load()
 }
 
-func InitMysqlConnection() {
-	LoadEnv()
+func initMysqlConnection() {
 	DbUser := os.Getenv("DB_USER")
 	DbPassword := os.Getenv("DB_PWD")
 	DbHost := os.Getenv("DB_HOST")
@@ -30,4 +31,11 @@ func InitMysqlConnection() {
 	} else {
 		fmt.Printf("We are connected to the %s database mysql")
 	}
+}
+
+func InitAppGin() *gin.RouterGroup {
+	loadEnv()
+	initMysqlConnection()
+
+	return &gin.RouterGroup
 }
