@@ -1,0 +1,47 @@
+version : "3.8"
+services:
+  app: 
+    container_name: grind_server
+    build: 
+      context: ./server
+    volumes:
+      - ./ :/usr/server
+    ports:
+      - 9090:9090
+    depends_on:
+      - db
+      - redis
+    networks:
+      - grind_network
+  redis:
+    container_name: grind_redis
+    image: redis:alpine3.14
+    #volumes:
+    #  - ./redis/redis.conf:/etc/redis/redis.conf
+    ports:
+      - 6377:6379
+  db:
+    container_name: grind_db
+    image: postgres:14.1-alpine
+    restart: always
+    environment:
+      - POSTGRES_USER=$DB_USER
+      - POSTGRES_PASSWORD=$DB_PWD
+    ports:
+      - '5433:5432'
+    volumes: 
+      - db:/var/lib/postgresql/data
+    networks:
+      - grind_network
+  pg_admin:
+    image: dpage/pgadmin4
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: root
+    ports:
+      - 5252:5252
+volumes:
+  db:
+networks:
+  grind_network:
