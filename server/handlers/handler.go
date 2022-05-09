@@ -6,10 +6,6 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-type Handler struct {
-	c *gin.Context
-}
-
-func MethodHandler(c *gin.Context) func(c *gin.Context)() {
-	return c.String(http.StatusOK,"Hello")
+func MethodHandler(ctx *gin.Context) {
+	ctx.String(http.StatusOK, "Hello")
 }
