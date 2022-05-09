@@ -8,9 +8,7 @@ import (
 func RegisterRoutingApp() *gin.RouterGroup {
 	router := gin.Default()
 	api := router.Group("/api")
-	api.GET("/", func(c *gin.Context) {
-		handlers.MethodHandler(c)
-	})
+	api.GET("/", handlers.MethodHandler)
 
 	return api
 }

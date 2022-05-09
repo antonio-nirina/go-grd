@@ -6,7 +6,6 @@ import (
 	"github.com/thoussei/antonio/server/start"
 )
 
-
 func main() {
 	svr := &start.Server{
 		route: start.InitAppGin,
