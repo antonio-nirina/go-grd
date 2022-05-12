@@ -7,10 +7,7 @@ import (
 )
 
 func main() {
-	svr := &start.Server{
-		route: start.InitAppGin,
-	}
-
+	svr := start.Server{}
 	waitforShutdownInterrupt := svr.Start()
 	<-waitforShutdownInterrupt
 

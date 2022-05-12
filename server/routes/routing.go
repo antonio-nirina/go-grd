@@ -5,10 +5,10 @@ import (
 	"github.com/thoussei/antonio/server/handlers"
 )
 
-func RegisterRoutingApp() *gin.RouterGroup {
+func RegisterRoutingApp() *gin.Engine {
 	router := gin.Default()
 	api := router.Group("/api")
 	api.GET("/", handlers.MethodHandler)
 
-	return api
+	return router
 }

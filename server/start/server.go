@@ -10,7 +10,7 @@ import (
 )
 
 type Server struct {
-	route *gin.RouterGroup
+	route *gin.Engine
 }
 
 func (s *Server) setup() {

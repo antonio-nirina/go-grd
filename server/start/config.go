@@ -33,7 +33,7 @@ func initMysqlConnection() {
 	}
 }
 
-func InitAppGin() *gin.router {
+func InitAppGin() *gin.Engine {
 	loadEnv()
 	initMysqlConnection()
 
