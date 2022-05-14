@@ -24,12 +24,13 @@ func initMysqlConnection() {
 	DbName := os.Getenv("DB_NAME")
 
 	DBURL := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?charset=utf8&parseTime=True&loc=Local", DbUser, DbPassword, DbHost, DbPort, DbName)
+	fmt.Println("DBURL=============", DBURL)
 	_, err := gorm.Open("postgres", DBURL)
 	if err != nil {
-		fmt.Printf("Cannot connect to %s database postgres")
-		log.Fatal("This is the error:", err)
+		fmt.Println("Cannot connect to database postgres")
+		log.Fatal("This is the error#############:", err)
 	} else {
-		fmt.Printf("We are connected to the %s database postgres")
+		fmt.Println("We are connected to the database postgres")
 	}
 }
 

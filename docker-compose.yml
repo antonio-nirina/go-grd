@@ -28,7 +28,7 @@ services:
       - POSTGRES_USER=$DB_USER
       - POSTGRES_PASSWORD=$DB_PWD
     ports:
-      - '5433:5432'
+      - '5432:5432' # 5432 default port postgres 
     volumes: 
       - db:/var/lib/postgresql/data
     networks:
@@ -40,7 +40,7 @@ services:
       PGADMIN_DEFAULT_EMAIL: admin@admin.com
       PGADMIN_DEFAULT_PASSWORD: root
     ports:
-      - 5252:5252
+      - 5252:80 # 80 default port postgres_admin
 volumes:
   db:
 networks:
