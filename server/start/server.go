@@ -19,6 +19,7 @@ func (s *Server) setup() {
 
 func (s *Server) Start() <-chan os.Signal {
 	s.setup()
+	// InitAppGin()
 	quit := make(chan os.Signal, 1)
 	signal.Notify(quit, os.Interrupt, syscall.SIGINT, syscall.SIGTERM)
 
