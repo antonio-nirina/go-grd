@@ -2,17 +2,27 @@ package start
 
 import (
 	"fmt"
+	"io/ioutil"
 	"log"
 	"os"
 
 	"github.com/gin-gonic/gin"
 	_ "github.com/jinzhu/gorm"
+	"gopkg.in/yaml.v2"
 	"gorm.io/gorm"
 
 	// _ "github.com/jinzhu/gorm/dialects/mysql"
 	"github.com/joho/godotenv"
 	"gorm.io/driver/postgres"
 )
+
+type DatabaseConfig struct {
+	Db *gorm.DB
+}
+
+type loadModel struct {
+	Moadles []string `yaml:"models"`
+}
 
 func loadEnv() {
 	godotenv.Load()
@@ -30,18 +40,37 @@ func initMysqlConnection() {
 
 	DBURL := "host=" + DbHost + " user=" + DbUser + " password=" + DbPassword + " dbname=" + DbName + " port=" + DbPort + " sslmode=disable"
 	fmt.Println("DBURL=============", DBURL)
-	_, err := gorm.Open(postgres.Open(DBURL), &gorm.Config{})
+	db, err := gorm.Open(postgres.Open(DBURL), &gorm.Config{})
+
 	if err != nil {
 		fmt.Println("Cannot connect to database postgres")
 		log.Fatal("This is the error#############:", err)
 	} else {
 		fmt.Println("We are connected to the database postgres")
 	}
+	var load loadModel
+	load.GetModels()
+	// db.AutoMigrate(&models.User{})
+	var dtab DatabaseConfig
+	dtab.Db = db
 }
 
 func InitAppGin() *gin.Engine {
+
 	loadEnv()
 	initMysqlConnection()
 
 	return gin.Default()
+}
+
+func (l *loadModel) GetModels() {
+	yamlFile, err := ioutil.ReadFile("load.yml")
+	if err != nil {
+		log.Printf("yamlFile.Get err   #%v ", err)
+	}
+	err = yaml.Unmarshal(yamlFile, l)
+	if err != nil {
+		log.Fatalf("Unmarshal: %v", err)
+	}
+	fmt.Println("l=file list", l)
 }
