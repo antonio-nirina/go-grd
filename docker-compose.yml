@@ -45,6 +45,8 @@ services:
       - 5252:80 # 80 default port postgres_admin
     volumes:
       - pgadmin-data:/var/lib/pgadmin
+    networks:
+      - grind_network
 volumes:
   db:
   pgadmin-data:

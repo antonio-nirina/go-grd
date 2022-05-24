@@ -1,6 +1,7 @@
 package start
 
 import (
+	"fmt"
 	"os"
 	"os/signal"
 	"syscall"
@@ -14,15 +15,15 @@ type Server struct {
 }
 
 func (s *Server) setup() {
+	InitAppGin()
 	s.route = routes.RegisterRoutingApp()
 }
 
 func (s *Server) Start() <-chan os.Signal {
 	s.setup()
-	InitAppGin()
 	quit := make(chan os.Signal, 1)
 	signal.Notify(quit, os.Interrupt, syscall.SIGINT, syscall.SIGTERM)
-
+	fmt.Println("eeeeeee")
 	go func() {
 		s.route.Run(":9090")
 	}()
