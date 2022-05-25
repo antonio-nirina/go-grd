@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"log"
 
 	"github.com/thoussei/antonio/server/start"
@@ -8,6 +9,7 @@ import (
 
 func main() {
 	svr := start.Server{}
+	fmt.Println("Debug!!!!!!!!")
 	waitforShutdownInterrupt := svr.Start()
 	<-waitforShutdownInterrupt
 

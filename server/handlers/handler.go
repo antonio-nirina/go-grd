@@ -7,5 +7,5 @@ import (
 )
 
 func MethodHandler(ctx *gin.Context) {
-	ctx.String(http.StatusOK, "Hello")
+	ctx.String(http.StatusOK, "Hello xxxxx")
 }

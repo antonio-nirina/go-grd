@@ -29,6 +29,7 @@ func loadEnv() {
 }
 
 func initMysqlConnection() {
+	godotenv.Load()
 	DbUser := os.Getenv("DB_USER")
 	DbPassword := os.Getenv("DB_PWD")
 	DbHost := os.Getenv("DB_HOST")
@@ -56,7 +57,6 @@ func initMysqlConnection() {
 }
 
 func InitAppGin() *gin.Engine {
-
 	loadEnv()
 	initMysqlConnection()
 
