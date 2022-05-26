@@ -49,6 +49,7 @@ func initMysqlConnection() {
 	} else {
 		fmt.Println("We are connected to the database postgres")
 	}
+
 	var load loadModel
 	load.GetModels()
 	// db.AutoMigrate(&models.User{})
