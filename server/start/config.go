@@ -5,6 +5,7 @@ import (
 	"io/ioutil"
 	"log"
 	"os"
+	"path/filepath"
 
 	"github.com/gin-gonic/gin"
 	_ "github.com/jinzhu/gorm"
@@ -63,7 +64,8 @@ func InitAppGin() *gin.Engine {
 }
 
 func (l *loadModel) GetModels() {
-	yamlFile, err := ioutil.ReadFile("load.yml")
+	dir, _ := filepath.Abs(filepath.Dir("load.yml"))
+	yamlFile, err := ioutil.ReadFile(dir)
 	if err != nil {
 		log.Printf("yamlFile.Get err   #%v ", err)
 	}
