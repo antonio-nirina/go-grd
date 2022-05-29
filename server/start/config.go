@@ -5,11 +5,10 @@ import (
 	"io/ioutil"
 	"log"
 	"os"
-	"path/filepath"
 
 	"github.com/gin-gonic/gin"
 	_ "github.com/jinzhu/gorm"
-	"gopkg.in/yaml.v2"
+	"gopkg.in/yaml.v3"
 	"gorm.io/gorm"
 
 	// _ "github.com/jinzhu/gorm/dialects/mysql"
@@ -64,12 +63,13 @@ func InitAppGin() *gin.Engine {
 }
 
 func (l *loadModel) GetModels() {
-	dir, _ := filepath.Abs(filepath.Dir(""))
-	fmt.Println("dir", dir)
-	yamlFile, err := ioutil.ReadFile("load.yaml")
+	pwd, _ := os.Getwd()
+	fmt.Println("dir", pwd)
+	yamlFile, err := ioutil.ReadFile(pwd + "/load.yaml")
 	if err != nil {
 		log.Printf("yamlFile.Get err   #%v ", err)
 	}
+
 	data := make(map[interface{}]interface{})
 	err = yaml.Unmarshal(yamlFile, &data)
 	if err != nil {
