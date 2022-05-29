@@ -22,7 +22,7 @@ type DatabaseConfig struct {
 }
 
 type loadModel struct {
-	Moadles []string `yaml:"models"`
+	Models []string `yaml:"models"`
 }
 
 func loadEnv() {
@@ -64,14 +64,16 @@ func InitAppGin() *gin.Engine {
 }
 
 func (l *loadModel) GetModels() {
-	dir, _ := filepath.Abs(filepath.Dir("load.yml"))
-	yamlFile, err := ioutil.ReadFile(dir)
+	dir, _ := filepath.Abs(filepath.Dir(""))
+	fmt.Println("dir", dir)
+	yamlFile, err := ioutil.ReadFile("load.yaml")
 	if err != nil {
 		log.Printf("yamlFile.Get err   #%v ", err)
 	}
-	err = yaml.Unmarshal(yamlFile, l)
+	data := make(map[interface{}]interface{})
+	err = yaml.Unmarshal(yamlFile, &data)
 	if err != nil {
 		log.Fatalf("Unmarshal: %v", err)
 	}
-	fmt.Println("l=file list", l)
+	fmt.Println("l=file list", data)
 }
