@@ -13,6 +13,7 @@ import (
 
 	// _ "github.com/jinzhu/gorm/dialects/mysql"
 	"github.com/joho/godotenv"
+	"github.com/thoussei/antonio/server/models"
 	"gorm.io/driver/postgres"
 )
 
@@ -49,10 +50,19 @@ func initMysqlConnection() {
 	}
 
 	var load loadModel
-	load.GetModels()
-	// db.AutoMigrate(&models.User{})
+	list, err := load.GetModels()
+
+	if err != nil {
+		// logrus
+		log.Printf("Error  #%v ", err)
+	}
+
 	var dtab DatabaseConfig
 	dtab.Db = db
+	for _, v := range list {
+		fmt.Println(v)
+		dtab.Db.AutoMigrate(&models.Tournaments{})
+	}
 }
 
 func InitAppGin() *gin.Engine {
@@ -62,18 +72,19 @@ func InitAppGin() *gin.Engine {
 	return gin.Default()
 }
 
-func (l *loadModel) GetModels() {
-	pwd, _ := os.Getwd()
-	fmt.Println("dir", pwd)
-	yamlFile, err := ioutil.ReadFile(pwd + "/load.yaml")
+func (l *loadModel) GetModels() ([]string, error) {
+	// exec.Command(ls) who know path load.yaml
+	yamlFile, err := ioutil.ReadFile("server/load.yaml")
 	if err != nil {
-		log.Printf("yamlFile.Get err   #%v ", err)
+		return []string{}, err
 	}
 
-	data := make(map[interface{}]interface{})
-	err = yaml.Unmarshal(yamlFile, &data)
+	listModels := make(map[string][]string)
+	err = yaml.Unmarshal(yamlFile, &listModels)
+
 	if err != nil {
-		log.Fatalf("Unmarshal: %v", err)
+		return []string{}, err
 	}
-	fmt.Println("l=file list", data)
+
+	return listModels["models"], nil
 }

@@ -1,4 +1,4 @@
 models:
-  User
-  Game
-  Tournament
+  - User
+  - Game
+  - Tournament
