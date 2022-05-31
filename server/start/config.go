@@ -5,6 +5,7 @@ import (
 	"io/ioutil"
 	"log"
 	"os"
+	"reflect"
 
 	"github.com/gin-gonic/gin"
 	_ "github.com/jinzhu/gorm"
@@ -13,7 +14,6 @@ import (
 
 	// _ "github.com/jinzhu/gorm/dialects/mysql"
 	"github.com/joho/godotenv"
-	"github.com/thoussei/antonio/server/models"
 	"gorm.io/driver/postgres"
 )
 
@@ -59,9 +59,10 @@ func initMysqlConnection() {
 
 	var dtab DatabaseConfig
 	dtab.Db = db
+
 	for _, v := range list {
 		fmt.Println(v)
-		dtab.Db.AutoMigrate(&models.Tournaments{})
+		dtab.Db.AutoMigrate()
 	}
 }
 
@@ -79,12 +80,26 @@ func (l *loadModel) GetModels() ([]string, error) {
 		return []string{}, err
 	}
 
-	listModels := make(map[string][]string)
+	listModels := make(map[string]interface{})
 	err = yaml.Unmarshal(yamlFile, &listModels)
 
 	if err != nil {
 		return []string{}, err
 	}
+	//var dataModels []reflect.Type
+	fmt.Println("listModels", listModels)
+	for _, v := range listModels {
+		fmt.Println("vvvv", v)
+	}
 
-	return listModels["models"], nil
+	typ := reflect.StructOf([]reflect.StructField{
+		{
+			Name: "Height",
+			Type: reflect.TypeOf(float64(0)),
+			Tag:  `json:"height"`,
+		},
+	})
+
+	fmt.Println(typ)
+	return []string{}, nil
 }

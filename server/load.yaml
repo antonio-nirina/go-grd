@@ -1,4 +1,26 @@
 models:
-  - User
-  - Game
-  - Tournament
+  - User:
+      FirstName: "string"
+      LastName : "string"
+      Password: "string"
+      Email : "string"
+      Username: "string"
+      IsBanned: "bool"
+      CreatedAt: "time.Time"
+      UpdatedAt: "time.Time"
+  - Game:
+      Name: "string"
+      Image: "string"
+      Logo: "string"
+      Notes: "int"
+      Slug: "string"
+      NameTWITCH: "string"
+      IdTWITCH:   "string"
+  - Tournament:
+      Title: "string"
+      DateStart: "string"
+      Plateform: "string"
+      Price: "float64"
+      DeadlineDate: "string"
+      NumberParticipate: "int"
+      Statut: "string"
