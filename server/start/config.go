@@ -5,7 +5,7 @@ import (
 	"io/ioutil"
 	"log"
 	"os"
-	"reflect"
+	_ "reflect"
 
 	"github.com/gin-gonic/gin"
 	_ "github.com/jinzhu/gorm"
@@ -86,20 +86,20 @@ func (l *loadModel) GetModels() ([]string, error) {
 	if err != nil {
 		return []string{}, err
 	}
+	// var extractModels []reflect.Type
 	//var dataModels []reflect.Type
-	fmt.Println("listModels", listModels)
-	for _, v := range listModels {
-		fmt.Println("vvvv", v)
-	}
+	fmt.Println("listModels", listModels["models"])
+	/*for k, v := range listModels {
+		typ := reflect.StructOf([]reflect.StructField{
+			{
+				Name: k,
+				Type: reflect.TypeOf(float64(0)),
+				Tag:  `json:"height"`,
+			},
+		})
+		extractModels = append(extractModels, typ)
+	}*/
 
-	typ := reflect.StructOf([]reflect.StructField{
-		{
-			Name: "Height",
-			Type: reflect.TypeOf(float64(0)),
-			Tag:  `json:"height"`,
-		},
-	})
-
-	fmt.Println(typ)
+	// fmt.Println(extractModels)
 	return []string{}, nil
 }
