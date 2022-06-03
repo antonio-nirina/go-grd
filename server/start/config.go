@@ -2,18 +2,16 @@ package start
 
 import (
 	"fmt"
-	"io/ioutil"
 	"log"
 	"os"
-	"reflect"
 
 	"github.com/gin-gonic/gin"
 	_ "github.com/jinzhu/gorm"
-	"gopkg.in/yaml.v3"
 	"gorm.io/gorm"
 
 	// _ "github.com/jinzhu/gorm/dialects/mysql"
 	"github.com/joho/godotenv"
+	"github.com/thoussei/antonio/server/models"
 	"gorm.io/driver/postgres"
 )
 
@@ -50,20 +48,7 @@ func initMysqlConnection() {
 	}
 
 	var load loadModel
-	list, err := load.GetModels()
-
-	if err != nil {
-		// logrus
-		log.Printf("Error  #%v ", err)
-	}
-
-	var dtab DatabaseConfig
-	dtab.Db = db
-
-	for _, v := range list {
-		fmt.Println(v)
-		dtab.Db.AutoMigrate()
-	}
+	load.GetModels(db)
 }
 
 func InitAppGin() *gin.Engine {
@@ -73,40 +58,15 @@ func InitAppGin() *gin.Engine {
 	return gin.Default()
 }
 
-func (l *loadModel) GetModels() ([]string, error) {
+func (l *loadModel) GetModels(db *gorm.DB) {
 	// exec.Command(ls) who know path load.yaml
-	yamlFile, err := ioutil.ReadFile("server/load.yaml")
-	if err != nil {
-		return []string{}, err
-	}
+	// yamlFile, err := ioutil.ReadFile("server/load.yaml")
+	// listModels := make(map[string](map[string]string))
+	// err = yaml.Unmarshal(yamlFile, &listModels)
+	// var extractModels []reflect.Type
+	// var dataModels []reflect.Type
 
-	listModels := make(map[string](map[string]string))
-	err = yaml.Unmarshal(yamlFile, &listModels)
-
-	if err != nil {
-		return []string{}, err
-	}
-
-	for k, value := range listModels {
-		fmt.Println(k, value)
-	}
-	var extractModels []reflect.Type
-	var dataModels []reflect.Type
-
-	for k, vals := range listModels {
-		for key, v := range vals {
-			typ := reflect.StructOf([]reflect.StructField{
-				{
-					Name: k,
-					Type: reflect.TypeOf(v),
-					Tag:  `json:"`key`"`,
-				},
-			})
-			extractModels = append(extractModels, typ)
-		}
-		
-	}
-
-	// fmt.Println(extractModels)
-	return []string{}, nil
+	var dtab DatabaseConfig
+	dtab.Db = db
+	dtab.Db.AutoMigrate(&models.User{})
 }
