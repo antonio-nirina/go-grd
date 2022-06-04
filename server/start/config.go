@@ -7,11 +7,12 @@ import (
 
 	"github.com/gin-gonic/gin"
 	_ "github.com/jinzhu/gorm"
+	"github.com/thoussei/antonio/server/models"
+	_ "gopkg.in/yaml.v3"
 	"gorm.io/gorm"
 
 	// _ "github.com/jinzhu/gorm/dialects/mysql"
 	"github.com/joho/godotenv"
-	"github.com/thoussei/antonio/server/models"
 	"gorm.io/driver/postgres"
 )
 
@@ -41,8 +42,7 @@ func initMysqlConnection() {
 	db, err := gorm.Open(postgres.Open(DBURL), &gorm.Config{})
 
 	if err != nil {
-		fmt.Println("Cannot connect to database postgres")
-		log.Fatal("This is the error#############:", err)
+		log.Fatal("Cannot connect to database postgres this is the error#############:", err)
 	} else {
 		fmt.Println("We are connected to the database postgres")
 	}
@@ -60,13 +60,12 @@ func InitAppGin() *gin.Engine {
 
 func (l *loadModel) GetModels(db *gorm.DB) {
 	// exec.Command(ls) who know path load.yaml
-	// yamlFile, err := ioutil.ReadFile("server/load.yaml")
+	// yamlFile, _ := ioutil.ReadFile("server/load.yaml")
 	// listModels := make(map[string](map[string]string))
-	// err = yaml.Unmarshal(yamlFile, &listModels)
+	// err := yaml.Unmarshal(yamlFile, &listModels)
 	// var extractModels []reflect.Type
 	// var dataModels []reflect.Type
-
-	var dtab DatabaseConfig
-	dtab.Db = db
-	dtab.Db.AutoMigrate(&models.User{})
+	db.AutoMigrate(&models.User{})
+	db.AutoMigrate(&models.Game{})
+	db.AutoMigrate(&models.Tournaments{})
 }
