@@ -7,6 +7,8 @@ import (
 
 func RegisterRoutingApp() *gin.Engine {
 	router := gin.Default()
+	router.GET("/code", handlers.CheckAndGetTokenDiscord)
+	// Group route /api
 	api := router.Group("/api")
 	api.GET("/", handlers.MethodHandler)
 
