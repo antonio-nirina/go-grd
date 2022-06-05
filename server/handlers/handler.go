@@ -25,7 +25,7 @@ func MethodHandler(ctx *gin.Context) {
 	array["4"] = "Text4"
 	response.Code = http.StatusOK
 	response.Message = "success"
-	response.Data = reflect.ValueOf(data).Interface().(newType)
+	response.Data = reflect.ValueOf(data).Interface().(reflect)
 
 	ctx.JSON(response.Code, response)
 }
