@@ -3,7 +3,6 @@ package handlers
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
 	"io/ioutil"
 	"net/http"
 	"net/url"
@@ -60,11 +59,14 @@ func CheckAndGetTokenDiscord(ctx *gin.Context) {
 	body, err := ioutil.ReadAll(resp.Body)
 	var access = make(map[string]string)
 
+	if err != nil {
+		ErrorResponse(http.StatusInternalServerError, err.Error())
+	}
+
 	if resp.StatusCode == 200 {
 		err = json.Unmarshal(body, res)
 		if err != nil {
-			// Logger(fmt.Sprintf("%v", err))
-			fmt.Sprintf("%v", err)
+			ErrorResponse(http.StatusInternalServerError, err.Error())
 		}
 		response.Code = resp.StatusCode
 		response.Message = "Success"
@@ -72,9 +74,7 @@ func CheckAndGetTokenDiscord(ctx *gin.Context) {
 		response.Data = access
 		ctx.JSON(http.StatusOK, response)
 	}
-	response.Code = resp.StatusCode
-	response.Message = "Error"
-	access["accessToken"] = ""
+	ErrorResponse(resp.StatusCode, "")
 
 	ctx.JSON(http.StatusOK, resp)
 }
