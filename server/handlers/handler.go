@@ -8,7 +8,6 @@ import (
 	"net/http"
 	"net/url"
 	"os"
-	"reflect"
 
 	"github.com/gin-gonic/gin"
 )
@@ -18,19 +17,19 @@ var response Response
 func MethodHandler(ctx *gin.Context) {
 	var array = make(map[string]interface{})
 	var data []map[string]interface{}
-	data = append(data, array)
 	array["1"] = "Text1"
 	array["2"] = "Text2"
 	array["3"] = "Text3"
 	array["4"] = "Text4"
+	data = append(data, array)
 	response.Code = http.StatusOK
 	response.Message = "success"
-	response.Data = reflect.ValueOf(data).Interface().(reflect)
+	response.Data = data //reflect.ValueOf(data).Interface().(reflect)
 
 	ctx.JSON(response.Code, response)
 }
 
-func CheckAndGetTokenDiscord(ctx *gin.Context) (*OauthTokenDiscord, error) {
+func CheckAndGetTokenDiscord(ctx *gin.Context) {
 	response.Code = http.StatusOK
 	response.Message = "success"
 	response.Data = []interface{}{}
@@ -59,15 +58,23 @@ func CheckAndGetTokenDiscord(ctx *gin.Context) (*OauthTokenDiscord, error) {
 	res := &OauthTokenDiscord{}
 	defer resp.Body.Close()
 	body, err := ioutil.ReadAll(resp.Body)
+	var access = make(map[string]string)
 
 	if resp.StatusCode == 200 {
 		err = json.Unmarshal(body, res)
 		if err != nil {
-			Logger(fmt.Sprintf("%v", err))
+			// Logger(fmt.Sprintf("%v", err))
+			fmt.Sprintf("%v", err)
 		}
-
-		ctx.JSON(http.StatusOK, resp)
+		response.Code = resp.StatusCode
+		response.Message = "Success"
+		access["accessToken"] = res.AccessToken
+		response.Data = access
+		ctx.JSON(http.StatusOK, response)
 	}
+	response.Code = resp.StatusCode
+	response.Message = "Error"
+	access["accessToken"] = ""
 
 	ctx.JSON(http.StatusOK, resp)
 }
