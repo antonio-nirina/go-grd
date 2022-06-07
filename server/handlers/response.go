@@ -1,5 +1,9 @@
 package handlers
 
+import (
+	"github.com/thoussei/antonio/server/log"
+)
+
 // Response Type
 type Response struct {
 	Code    int    `json:"code"`
@@ -12,6 +16,6 @@ func ErrorResponse(code int, message string) Response {
 	response.Code = code
 	response.Message = message
 	response.Data = []interface{}{}
-
+	log.LogFormater(message)
 	return response
 }
