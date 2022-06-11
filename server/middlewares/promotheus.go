@@ -1,6 +1,8 @@
 package middlewares
 
 import (
+	"time"
+
 	"github.com/gin-gonic/gin"
 	"github.com/prometheus/client_golang/prometheus"
 )
@@ -22,6 +24,11 @@ var latency = prometheus.NewSummaryVec(
 
 func PrometheusMiddleware() gin.HandlerFunc {
 	return func(c *gin.Context) {
-		// middleware
+		start := time.Now()
+		elapsed := time.Since(start).Seconds()
+		latency.WithLabelValues(
+			c.Request.RequestURI,
+			c.Request.Method,
+		).Observe(elapsed)
 	}
 }

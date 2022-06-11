@@ -13,6 +13,14 @@ import (
 
 var response Response
 
+func SuccessResponse() *Response {
+	response.Code = http.StatusOK
+	response.Message = "success"
+	response.Data = []interface{}{}
+
+	return &response
+}
+
 func MethodHandler(ctx *gin.Context) {
 	var array = make(map[string]interface{})
 	var data []map[string]interface{}
@@ -29,9 +37,7 @@ func MethodHandler(ctx *gin.Context) {
 }
 
 func CheckAndGetTokenDiscord(ctx *gin.Context) {
-	response.Code = http.StatusOK
-	response.Message = "success"
-	response.Data = []interface{}{}
+	response := SuccessResponse()
 	httpClient := AccessHttpClient()
 	param := url.Values{}
 	param.Set("client_id", os.Getenv("DISCORD_CLIENT_ID"))

@@ -11,6 +11,7 @@ func RegisterRoutingApp() *gin.Engine {
 	// Group route /api
 	api := router.Group("/api")
 	api.GET("/", handlers.MethodHandler)
+	api.GET("/tournament", handlers.GetListTournamentActif)
 
 	return router
 }
