@@ -12,6 +12,7 @@ func RegisterRoutingApp() *gin.Engine {
 	api := router.Group("/api")
 	api.GET("/", handlers.MethodHandler)
 	api.GET("/tournament", handlers.GetListTournamentActif)
+	api.POST("/admin/tournament", handlers.CreateAdminTournament)
 
 	return router
 }

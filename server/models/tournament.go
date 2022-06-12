@@ -23,3 +23,12 @@ type Tournaments struct {
 	NumberParticipate int
 	Statut            string
 }
+
+type TournamentDto struct {
+	Title             string
+	DateStart         string
+	Plateform         string
+	Price             float64
+	DeadlineDate      string
+	NumberParticipate int
+}
