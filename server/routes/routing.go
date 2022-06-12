@@ -3,9 +3,10 @@ package routes
 import (
 	"github.com/gin-gonic/gin"
 	"github.com/thoussei/antonio/server/handlers"
+	"gorm.io/gorm"
 )
 
-func RegisterRoutingApp() *gin.Engine {
+func RegisterRoutingApp(database *gorm.DB) *gin.Engine {
 	router := gin.Default()
 	router.GET("/code", handlers.CheckAndGetTokenDiscord)
 	// Group route /api

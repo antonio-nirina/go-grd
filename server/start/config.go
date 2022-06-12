@@ -5,8 +5,6 @@ import (
 	"log"
 	"os"
 
-	"github.com/gin-gonic/gin"
-	_ "github.com/jinzhu/gorm"
 	"github.com/thoussei/antonio/server/models"
 	_ "gopkg.in/yaml.v3"
 	"gorm.io/gorm"
@@ -47,15 +45,19 @@ func initMysqlConnection() {
 		fmt.Println("We are connected to the database postgres")
 	}
 
+	var database DatabaseConfig
+	database.Db = db
 	var load loadModel
 	load.GetModels(db)
+
 }
 
-func InitAppGin() *gin.Engine {
+func InitAppGin() *gorm.DB {
 	loadEnv()
 	initMysqlConnection()
+	var database DatabaseConfig
 
-	return gin.Default()
+	return database.Db
 }
 
 func (l *loadModel) GetModels(db *gorm.DB) {

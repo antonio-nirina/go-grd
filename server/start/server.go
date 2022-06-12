@@ -7,14 +7,16 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/thoussei/antonio/server/routes"
+	"gorm.io/gorm"
 )
 
 type Server struct {
-	route *gin.Engine
+	route    *gin.Engine
+	database *gorm.DB
 }
 
 func (s *Server) setup() {
-	InitAppGin()
+	s.database = InitAppGin()
 	s.route = routes.RegisterRoutingApp()
 }
 

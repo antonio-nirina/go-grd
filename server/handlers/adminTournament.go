@@ -18,6 +18,7 @@ func CreateAdminTournament(ctx *gin.Context) {
 	if err != nil {
 		ErrorResponse(http.StatusBadRequest, err.Error())
 	}
+
 	var array = make(map[string]interface{})
 	var data []map[string]interface{}
 	array["1"] = "Text1"
