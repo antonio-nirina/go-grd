@@ -17,7 +17,7 @@ type Server struct {
 
 func (s *Server) setup() {
 	s.database = InitAppGin()
-	s.route = routes.RegisterRoutingApp()
+	s.route = routes.RegisterRoutingApp(s.database)
 }
 
 func (s *Server) Start() <-chan os.Signal {
