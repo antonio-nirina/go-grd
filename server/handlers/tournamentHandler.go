@@ -9,3 +9,21 @@ func GetListTournamentActif(ctx *gin.Context) {
 
 	ctx.JSON(response.Code, response.Data)
 }
+
+func SuscribeTournament(ctx *gin.Context) {
+	response := SuccessResponse()
+
+	ctx.JSON(response.Code, response.Data)
+}
+
+func SendNotificationTournamentIncrease(ctx *gin.Context) {
+	response := SuccessResponse()
+
+	ctx.JSON(response.Code, response.Data)
+}
+
+func RunCounterMatch(ctx *gin.Context) {
+	response := SuccessResponse()
+
+	ctx.JSON(response.Code, response.Data)
+}
