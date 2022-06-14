@@ -6,7 +6,6 @@ import (
 
 func GetListTournamentActif(ctx *gin.Context) {
 	response := SuccessResponse()
-
 	ctx.JSON(response.Code, response.Data)
 }
 

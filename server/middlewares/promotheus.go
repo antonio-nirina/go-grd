@@ -9,7 +9,6 @@ import (
 
 func RegisterPrometheusMetrics() {
 	prometheus.Register(latency) // prometheus.MustRegister(latency)
-
 }
 
 var latency = prometheus.NewSummaryVec(
