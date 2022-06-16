@@ -44,7 +44,7 @@ func GetDataRedis(key string) (interface{}, error) {
 	if err != nil {
 		return nil, err
 	}
-
+	fmt.Println("data", data)
 	return data, nil
 }
 
