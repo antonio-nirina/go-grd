@@ -3,6 +3,7 @@ package log
 import (
 	"fmt"
 	"os"
+	"os/exec"
 	"time"
 
 	"github.com/sirupsen/logrus"
@@ -14,7 +15,9 @@ func LogFormater(message string) {
 	log.Out = os.Stdout
 	log.SetFormatter(&logrus.TextFormatter{})
 	now := time.Now().UTC().Format("2006-01-01")
-	outPath := "data/"
+	cmd := exec.Command("ls", "-a")
+	fmt.Println("lllllsss", cmd.String())
+	outPath := "/server/log/data/"
 
 	if _, err := os.Stat(outPath); os.IsNotExist(err) {
 		err = os.MkdirAll(outPath, 0755)
