@@ -26,3 +26,9 @@ func RunCounterMatch(ctx *gin.Context) {
 
 	ctx.JSON(response.Code, response.Data)
 }
+
+func WatcherPartTournament(ctx *gin.Context) {
+	response := SuccessResponse()
+
+	ctx.JSON(response.Code, response.Data)
+}

@@ -16,6 +16,7 @@ func RegisterRoutingApp(database *gorm.DB) *gin.Engine {
 	api.POST("/tournament/subscribe", handlers.SuscribeTournament)
 	api.POST("/tournament/notification", handlers.SendNotificationTournamentIncrease)
 	api.POST("/tournament/match/counter", handlers.RunCounterMatch)
+	api.POST("/tournament/participate/watcher", handlers.WatcherPartTournament)
 	api.POST("/admin/tournament", handlers.CreateAdminTournament)
 
 	return router
