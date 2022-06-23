@@ -42,7 +42,7 @@ services:
       PGADMIN_DEFAULT_EMAIL: admin@admin.com
       PGADMIN_DEFAULT_PASSWORD: root
     ports:
-      - 5252:80 # 80 default port postgres_admin
+      - 5353:80 # 80 default port postgres_admin
     volumes:
       - pgadmin-data:/var/lib/pgadmin
     networks:
