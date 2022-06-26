@@ -29,7 +29,7 @@ services:
       POSTGRES_USER: $DB_USER
       POSTGRES_PASSWORD: $DB_PWD
     ports:
-      - '5432:5432' # 5432 default port postgres 
+      - '5433:5432' # 5432 default port postgres 
     volumes: 
       - db:/var/lib/postgresql/data
     networks:
