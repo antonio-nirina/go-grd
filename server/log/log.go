@@ -28,9 +28,9 @@ func LogFormater(message string) {
 	if err != nil {
 		log.Println("error msg open file", err)
 	}
-	fmt.Println("xxxxxxxxxxx", file.Name())
+
 	log.Out = file
 	log.WithFields(logrus.Fields{
-		"Error": "[" + now + "] ",
+		"Error": "[" + file.Name() + "] ",
 	}).Error(message)
 }
