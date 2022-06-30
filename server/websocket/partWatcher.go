@@ -2,18 +2,13 @@ package websocket
 
 import (
 	"flag"
-	"os"
 	"time"
 
 	"github.com/gorilla/websocket"
 )
 
-func init() {
-	env = os.Getenv("PORT_SERVER")
-	var addr = flag.String("addr", ":+env+", "http service address")
-}
-
 var (
+	addr     = flag.String("addr", ":9090", " http service address")
 	filename string
 	upgrader = websocket.Upgrader{
 		ReadBufferSize:  1024,
